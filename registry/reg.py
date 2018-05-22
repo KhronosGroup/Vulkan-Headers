@@ -96,11 +96,11 @@ class BaseInfo:
         if selfKeys != infoKeys:
             return False
 
-        # Ignore value of 'extname', as this will inherently be different
-        # when redefining the same interface in different feature and/or
-        # extension blocks.
+        # Ignore value of 'extname' and 'extnumber', as these will inherently
+        # be different when redefining the same interface in different feature
+        # and/or extension blocks.
         for key in selfKeys:
-            if (key != 'extname' and
+            if (key != 'extname' and key != 'extnumber' and
                 (self.elem.get(key) != info.elem.get(key))):
                 return False
 
@@ -563,14 +563,21 @@ class Registry:
                     if depname:
                         self.gen.logMsg('diag', 'Generating dependent type',
                             depname, 'for', attrib, 'type', typename)
-                        self.markTypeRequired(depname, required)
+                        # Don't recurse on self-referential structures.
+                        if (typename != depname):
+                            self.markTypeRequired(depname, required)
+                        else:
+                            self.gen.logMsg('diag', 'type', typename, 'is self-referential')
                 # Tag types used in defining this type (e.g. in nested
                 # <type> tags)
                 # Look for <type> in entire <command> tree,
                 # not just immediate children
                 for subtype in type.elem.findall('.//type'):
                     self.gen.logMsg('diag', 'markRequired: type requires dependent <type>', subtype.text)
-                    self.markTypeRequired(subtype.text, required)
+                    if (typename != subtype.text):
+                        self.markTypeRequired(subtype.text, required)
+                    else:
+                        self.gen.logMsg('diag', 'type', typename, 'is self-referential')
                 # Tag enums used in defining this type, for example in
                 #   <member><name>member</name>[<enum>MEMBER_SIZE</enum>]</member>
                 for subenum in type.elem.findall('.//enum'):
