@@ -36,7 +36,7 @@
 # include <cassert>
 # define VULKAN_HPP_ASSERT   assert
 #endif
-static_assert( VK_HEADER_VERSION ==  74 , "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION ==  75 , "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
@@ -471,6 +471,11 @@ namespace VULKAN_HPP_NAMESPACE
       linkAndCopy<StructureElements...>(rhs);
     }
 
+    StructureChain(StructureElements const &... elems)
+    {
+      linkAndCopyElements<StructureElements...>(elems...);
+    }
+
     StructureChain& operator=(StructureChain const &rhs)
     {
       linkAndCopy<StructureElements...>(rhs);
@@ -512,7 +517,24 @@ namespace VULKAN_HPP_NAMESPACE
       linkAndCopy<Y, Z...>(rhs);
     }
 
-};
+    template<typename X>
+    void linkAndCopyElements(X const &xelem)
+    {
+      static_cast<X&>(*this) = xelem;
+    }
+
+    template<typename X, typename Y, typename ...Z>
+    void linkAndCopyElements(X const &xelem, Y const &yelem, Z const &... zelem)
+    {
+      static_assert(isStructureChainValid<X,Y>::value, "The structure chain is not valid!");
+      X& x = static_cast<X&>(*this);
+      Y& y = static_cast<Y&>(*this);
+      x = xelem;
+      x.pNext = &y;
+      linkAndCopyElements<Y, Z...>(yelem, zelem...);
+    }
+  };
+
   enum class Result
   {
     eSuccess = VK_SUCCESS,
@@ -4810,6 +4832,12 @@ public:
     {
     }
 
+    explicit Offset3D( Offset2D const& offset2D, int32_t z_ = 0 )
+      : x( offset2D.x )
+      , y( offset2D.y )
+      , z( z_ )
+    {}
+
     Offset3D( VkOffset3D const & rhs )
     {
       memcpy( this, &rhs, sizeof( Offset3D ) );
@@ -4920,6 +4948,12 @@ public:
       , depth( depth_ )
     {
     }
+
+    explicit Extent3D( Extent2D const& extent2D, uint32_t depth_ = 0 )
+      : width( extent2D.width )
+      , height( extent2D.height )
+      , depth( depth_ )
+    {}
 
     Extent3D( VkExtent3D const & rhs )
     {
@@ -6613,6 +6647,12 @@ public:
       , layer( layer_ )
     {
     }
+
+    explicit RectLayerKHR( Rect2D const& rect2D, uint32_t layer_ = 0 )
+      : offset( rect2D.offset )
+      , extent( rect2D.extent )
+      , layer( layer_ )
+    {}
 
     RectLayerKHR( VkRectLayerKHR const & rhs )
     {
@@ -24953,6 +24993,12 @@ public:
     {
     }
 
+    explicit ObjectTablePipelineEntryNVX( ObjectTableEntryNVX const& objectTableEntryNVX, Pipeline pipeline_ = Pipeline() )
+      : type( objectTableEntryNVX.type )
+      , flags( objectTableEntryNVX.flags )
+      , pipeline( pipeline_ )
+    {}
+
     ObjectTablePipelineEntryNVX( VkObjectTablePipelineEntryNVX const & rhs )
     {
       memcpy( this, &rhs, sizeof( ObjectTablePipelineEntryNVX ) );
@@ -25013,6 +25059,13 @@ public:
       , descriptorSet( descriptorSet_ )
     {
     }
+
+    explicit ObjectTableDescriptorSetEntryNVX( ObjectTableEntryNVX const& objectTableEntryNVX, PipelineLayout pipelineLayout_ = PipelineLayout(), DescriptorSet descriptorSet_ = DescriptorSet() )
+      : type( objectTableEntryNVX.type )
+      , flags( objectTableEntryNVX.flags )
+      , pipelineLayout( pipelineLayout_ )
+      , descriptorSet( descriptorSet_ )
+    {}
 
     ObjectTableDescriptorSetEntryNVX( VkObjectTableDescriptorSetEntryNVX const & rhs )
     {
@@ -25082,6 +25135,12 @@ public:
     {
     }
 
+    explicit ObjectTableVertexBufferEntryNVX( ObjectTableEntryNVX const& objectTableEntryNVX, Buffer buffer_ = Buffer() )
+      : type( objectTableEntryNVX.type )
+      , flags( objectTableEntryNVX.flags )
+      , buffer( buffer_ )
+    {}
+
     ObjectTableVertexBufferEntryNVX( VkObjectTableVertexBufferEntryNVX const & rhs )
     {
       memcpy( this, &rhs, sizeof( ObjectTableVertexBufferEntryNVX ) );
@@ -25142,6 +25201,13 @@ public:
       , indexType( indexType_ )
     {
     }
+
+    explicit ObjectTableIndexBufferEntryNVX( ObjectTableEntryNVX const& objectTableEntryNVX, Buffer buffer_ = Buffer(), IndexType indexType_ = IndexType::eUint16 )
+      : type( objectTableEntryNVX.type )
+      , flags( objectTableEntryNVX.flags )
+      , buffer( buffer_ )
+      , indexType( indexType_ )
+    {}
 
     ObjectTableIndexBufferEntryNVX( VkObjectTableIndexBufferEntryNVX const & rhs )
     {
@@ -25211,6 +25277,13 @@ public:
       , stageFlags( stageFlags_ )
     {
     }
+
+    explicit ObjectTablePushConstantEntryNVX( ObjectTableEntryNVX const& objectTableEntryNVX, PipelineLayout pipelineLayout_ = PipelineLayout(), ShaderStageFlags stageFlags_ = ShaderStageFlags() )
+      : type( objectTableEntryNVX.type )
+      , flags( objectTableEntryNVX.flags )
+      , pipelineLayout( pipelineLayout_ )
+      , stageFlags( stageFlags_ )
+    {}
 
     ObjectTablePushConstantEntryNVX( VkObjectTablePushConstantEntryNVX const & rhs )
     {
@@ -38437,6 +38510,92 @@ public:
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
+  struct BaseOutStructure
+  {
+    BaseOutStructure(  )
+    {
+    }
+
+    BaseOutStructure( VkBaseOutStructure const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( BaseOutStructure ) );
+    }
+
+    BaseOutStructure& operator=( VkBaseOutStructure const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( BaseOutStructure ) );
+      return *this;
+    }
+    BaseOutStructure& setPNext( struct BaseOutStructure* pNext_ )
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    operator const VkBaseOutStructure&() const
+    {
+      return *reinterpret_cast<const VkBaseOutStructure*>(this);
+    }
+
+    bool operator==( BaseOutStructure const& rhs ) const
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext );
+    }
+
+    bool operator!=( BaseOutStructure const& rhs ) const
+    {
+      return !operator==( rhs );
+    }
+
+    StructureType sType;
+    struct BaseOutStructure* pNext = nullptr;
+  };
+  static_assert( sizeof( BaseOutStructure ) == sizeof( VkBaseOutStructure ), "struct and wrapper have different size!" );
+
+  struct BaseInStructure
+  {
+    BaseInStructure(  )
+    {
+    }
+
+    BaseInStructure( VkBaseInStructure const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( BaseInStructure ) );
+    }
+
+    BaseInStructure& operator=( VkBaseInStructure const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( BaseInStructure ) );
+      return *this;
+    }
+    BaseInStructure& setPNext( const struct BaseInStructure* pNext_ )
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    operator const VkBaseInStructure&() const
+    {
+      return *reinterpret_cast<const VkBaseInStructure*>(this);
+    }
+
+    bool operator==( BaseInStructure const& rhs ) const
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext );
+    }
+
+    bool operator!=( BaseInStructure const& rhs ) const
+    {
+      return !operator==( rhs );
+    }
+
+    StructureType sType;
+    const struct BaseInStructure* pNext = nullptr;
+  };
+  static_assert( sizeof( BaseInStructure ) == sizeof( VkBaseInStructure ), "struct and wrapper have different size!" );
 
   template <> struct isStructureChainValid<PresentInfoKHR, DisplayPresentInfoKHR>{ enum { value = true }; };
   template <> struct isStructureChainValid<ImageCreateInfo, DedicatedAllocationImageCreateInfoNV>{ enum { value = true }; };
