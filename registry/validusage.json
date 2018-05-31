@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.1.75",
-    "comment": "from git branch: master commit: fae387312840c6fd6f0a57a7ecbd194aed89a2b9",
-    "date": "2018-05-22 15:11:22Z"
+    "api version": "1.1.76",
+    "comment": "from git branch: master commit: ee13fc355fae06ffcd36ee09a98f12132d95dfc0",
+    "date": "2018-05-31 21:38:44Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -12292,6 +12292,186 @@
         }
       ]
     },
+    "vkCmdDrawIndirectCountKHR": {
+      "(VK_KHR_draw_indirect_count)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-buffer-03104",
+          "text": " If <code>buffer</code> is non-sparse then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-buffer-03105",
+          "text": " <code>buffer</code> <strong class=\"purple\">must</strong> have been created with the <code>VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT</code> bit set"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-countBuffer-03106",
+          "text": " If <code>countBuffer</code> is non-sparse then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-countBuffer-03107",
+          "text": " <code>countBuffer</code> <strong class=\"purple\">must</strong> have been created with the <code>VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT</code> bit set"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-offset-03108",
+          "text": " <code>offset</code> <strong class=\"purple\">must</strong> be a multiple of <code>4</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-countBufferOffset-03109",
+          "text": " <code>countBufferOffset</code> <strong class=\"purple\">must</strong> be a multiple of <code>4</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-stride-03110",
+          "text": " <code>stride</code> <strong class=\"purple\">must</strong> be a multiple of <code>4</code> and <strong class=\"purple\">must</strong> be greater than or equal to sizeof(<code>VkDrawIndirectCommand</code>)"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-maxDrawCount-03111",
+          "text": " If <code>maxDrawCount</code> is greater than or equal to <code>1</code>, <span class=\"eq\">(<code>stride</code> {times} (<code>maxDrawCount</code> - 1) &#43; <code>offset</code> &#43; sizeof(<code>VkDrawIndirectCommand</code>))</span> <strong class=\"purple\">must</strong> be less than or equal to the size of <code>buffer</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-firstInstance-03112",
+          "text": " If the <a href=\"#features-features-drawIndirectFirstInstance\">drawIndirectFirstInstance</a> feature is not enabled, all the <code>firstInstance</code> members of the <code>VkDrawIndirectCommand</code> structures accessed by this command <strong class=\"purple\">must</strong> be <code>0</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-renderPass-03113",
+          "text": " The current render pass <strong class=\"purple\">must</strong> be <a href=\"#renderpass-compatibility\">compatible</a> with the <code>renderPass</code> member of the <code>VkGraphicsPipelineCreateInfo</code> structure specified when creating the <code>VkPipeline</code> bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code>."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-subpass-03114",
+          "text": " The subpass index of the current render pass <strong class=\"purple\">must</strong> be equal to the <code>subpass</code> member of the <code>VkGraphicsPipelineCreateInfo</code> structure specified when creating the <code>VkPipeline</code> bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code>."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-None-03115",
+          "text": " For each set <em>n</em> that is statically used by the <code>VkPipeline</code> bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code>, a descriptor set <strong class=\"purple\">must</strong> have been bound to <em>n</em> at <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code>, with a <code>VkPipelineLayout</code> that is compatible for set <em>n</em>, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-None-03116",
+          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code>, a push constant value <strong class=\"purple\">must</strong> have been set for <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code>, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-None-03117",
+          "text": " Descriptors in each bound descriptor set, specified via <code>vkCmdBindDescriptorSets</code>, <strong class=\"purple\">must</strong> be valid if they are statically used by the bound <code>VkPipeline</code> object, specified via <code>vkCmdBindPipeline</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-None-03118",
+          "text": " All vertex input bindings accessed via vertex input variables declared in the vertex shader entry point&#8217;s interface <strong class=\"purple\">must</strong> have valid buffers bound"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-None-03119",
+          "text": " A valid graphics pipeline <strong class=\"purple\">must</strong> be bound to the current command buffer with <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-None-03120",
+          "text": " If the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set on the current command buffer"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-countBuffer-03121",
+          "text": " If the count stored in <code>countBuffer</code> is equal to <code>1</code>, <span class=\"eq\">(<code>offset</code> &#43; sizeof(<code>VkDrawIndirectCommand</code>))</span> <strong class=\"purple\">must</strong> be less than or equal to the size of <code>buffer</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-countBuffer-03122",
+          "text": " If the count stored in <code>countBuffer</code> is greater than <code>1</code>, <span class=\"eq\">(<code>stride</code> {times} (<code>drawCount</code> - 1) &#43; <code>offset</code> &#43; sizeof(<code>VkDrawIndirectCommand</code>))</span> <strong class=\"purple\">must</strong> be less than or equal to the size of <code>buffer</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-countBuffer-03123",
+          "text": " The count stored in <code>countBuffer</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceLimits</code>::<code>maxDrawIndirectCount</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-None-03124",
+          "text": " Every input attachment used by the current subpass <strong class=\"purple\">must</strong> be bound to the pipeline via a descriptor set"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-None-03125",
+          "text": " If any <code>VkSampler</code> object that is accessed from a shader by the <code>VkPipeline</code> bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> uses unnormalized coordinates, it <strong class=\"purple\">must</strong> not be used to sample from any <code>VkImage</code> with a <code>VkImageView</code> of the type <code>VK_IMAGE_VIEW_TYPE_3D</code>, <code>VK_IMAGE_VIEW_TYPE_CUBE</code>, <code>VK_IMAGE_VIEW_TYPE_1D_ARRAY</code>, <code>VK_IMAGE_VIEW_TYPE_2D_ARRAY</code> or <code>VK_IMAGE_VIEW_TYPE_CUBE_ARRAY</code>, in any shader stage"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-None-03126",
+          "text": " If any <code>VkSampler</code> object that is accessed from a shader by the <code>VkPipeline</code> bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> uses unnormalized coordinates, it <strong class=\"purple\">must</strong> not be used with any of the SPIR-V <code>OpImageSample*</code> or <code>OpImageSparseSample*</code> instructions with <code>ImplicitLod</code>, <code>Dref</code> or <code>Proj</code> in their name, in any shader stage"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-None-03127",
+          "text": " If any <code>VkSampler</code> object that is accessed from a shader by the <code>VkPipeline</code> bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> uses unnormalized coordinates, it <strong class=\"purple\">must</strong> not be used with any of the SPIR-V <code>OpImageSample*</code> or <code>OpImageSparseSample*</code> instructions that includes a LOD bias or any offset values, in any shader stage"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-None-03128",
+          "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a uniform buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-None-03129",
+          "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-linearTilingFeatures-03130",
+          "text": " Any <code>VkImageView</code> being sampled with <code>VK_FILTER_LINEAR</code> as a result of this command <strong class=\"purple\">must</strong> be of a format which supports linear filtering, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code> flag in <code>VkFormatProperties</code>::<code>linearTilingFeatures</code> (for a linear image) or <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code>(for an optimally tiled image) returned by <code>vkGetPhysicalDeviceFormatProperties</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-None-03131",
+          "text": " Image subresources used as attachments in the current render pass <strong class=\"purple\">must</strong> not be accessed in any way other than as an attachment by this command."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-commandBuffer-parameter",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <code>VkCommandBuffer</code> handle"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-buffer-parameter",
+          "text": " <code>buffer</code> <strong class=\"purple\">must</strong> be a valid <code>VkBuffer</code> handle"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-countBuffer-parameter",
+          "text": " <code>countBuffer</code> <strong class=\"purple\">must</strong> be a valid <code>VkBuffer</code> handle"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-commandBuffer-recording",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be in the <a href=\"#commandbuffers-lifecycle\">recording state</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-commandBuffer-cmdpool",
+          "text": " The <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from <strong class=\"purple\">must</strong> support graphics operations"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-renderpass",
+          "text": " This command <strong class=\"purple\">must</strong> only be called inside of a render pass instance"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-commonparent",
+          "text": " Each of <code>buffer</code>, <code>commandBuffer</code>, and <code>countBuffer</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkDevice</code>"
+        }
+      ],
+      "(VK_KHR_draw_indirect_count)+(VK_IMG_filter_cubic)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-linearTilingFeatures-03169",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command <strong class=\"purple\">must</strong> be of a format which supports cubic filtering, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code> flag in <code>VkFormatProperties</code>::<code>linearTilingFeatures</code> (for a linear image) or <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code>(for an optimally tiled image) returned by <code>vkGetPhysicalDeviceFormatProperties</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-None-03170",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command <strong class=\"purple\">must</strong> not have a <a href=\"#VkImageViewType\">VkImageViewType</a> of <code>VK_IMAGE_VIEW_TYPE_3D</code>, <code>VK_IMAGE_VIEW_TYPE_CUBE</code>, or <code>VK_IMAGE_VIEW_TYPE_CUBE_ARRAY</code>"
+        }
+      ],
+      "(VK_KHR_draw_indirect_count)+(VK_VERSION_1_1,VK_KHR_multiview)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-maxMultiviewInstanceIndex-03132",
+          "text": " If the draw is recorded in a render pass instance with multiview enabled, the maximum instance index <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#VkPhysicalDeviceMultiviewProperties\">VkPhysicalDeviceMultiviewProperties</a>::<code>maxMultiviewInstanceIndex</code>."
+        }
+      ],
+      "(VK_KHR_draw_indirect_count)+(VK_VERSION_1_1)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-commandBuffer-03133",
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer, and any pipeline stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> reads from or writes to any image or buffer, that image or buffer <strong class=\"purple\">must</strong> not be a protected image or protected buffer."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-commandBuffer-03134",
+          "text": " If <code>commandBuffer</code> is a protected command buffer, and any pipeline stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> writes to any image or buffer, that image or buffer <strong class=\"purple\">must</strong> not be an unprotected image or unprotected buffer."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-commandBuffer-03135",
+          "text": " If <code>commandBuffer</code> is a protected command buffer, and any pipeline stage other than the framebuffer-space pipeline stages in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> reads from or writes to any image or buffer, the image or buffer <strong class=\"purple\">must</strong> not be a protected image or protected buffer."
+        }
+      ],
+      "(VK_KHR_draw_indirect_count)+(VK_EXT_sample_locations)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-sampleLocationsEnable-03171",
+          "text": " If the bound graphics pipeline was created with <a href=\"#VkPipelineSampleLocationsStateCreateInfoEXT\">VkPipelineSampleLocationsStateCreateInfoEXT</a>::<code>sampleLocationsEnable</code> set to <code>VK_TRUE</code> and the current subpass has a depth/stencil attachment, then that attachment <strong class=\"purple\">must</strong> have been created with the <code>VK_IMAGE_CREATE_SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_BIT_EXT</code> bit set"
+        }
+      ]
+    },
     "vkCmdDrawIndirectCountAMD": {
       "(VK_AMD_draw_indirect_count)": [
         {
@@ -12666,6 +12846,186 @@
         }
       ]
     },
+    "vkCmdDrawIndexedIndirectCountKHR": {
+      "(VK_KHR_draw_indirect_count)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-buffer-03136",
+          "text": " If <code>buffer</code> is non-sparse then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-buffer-03137",
+          "text": " <code>buffer</code> <strong class=\"purple\">must</strong> have been created with the <code>VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT</code> bit set"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-countBuffer-03138",
+          "text": " If <code>countBuffer</code> is non-sparse then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-countBuffer-03139",
+          "text": " <code>countBuffer</code> <strong class=\"purple\">must</strong> have been created with the <code>VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT</code> bit set"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-offset-03140",
+          "text": " <code>offset</code> <strong class=\"purple\">must</strong> be a multiple of <code>4</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-countBufferOffset-03141",
+          "text": " <code>countBufferOffset</code> <strong class=\"purple\">must</strong> be a multiple of <code>4</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-stride-03142",
+          "text": " <code>stride</code> <strong class=\"purple\">must</strong> be a multiple of <code>4</code> and <strong class=\"purple\">must</strong> be greater than or equal to sizeof(<code>VkDrawIndexedIndirectCommand</code>)"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-maxDrawCount-03143",
+          "text": " If <code>maxDrawCount</code> is greater than or equal to <code>1</code>, <span class=\"eq\">(<code>stride</code> {times} (<code>maxDrawCount</code> - 1) &#43; <code>offset</code> &#43; sizeof(<code>VkDrawIndexedIndirectCommand</code>))</span> <strong class=\"purple\">must</strong> be less than or equal to the size of <code>buffer</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-firstInstance-03144",
+          "text": " If the <a href=\"#features-features-drawIndirectFirstInstance\">drawIndirectFirstInstance</a> feature is not enabled, all the <code>firstInstance</code> members of the <code>VkDrawIndexedIndirectCommand</code> structures accessed by this command <strong class=\"purple\">must</strong> be <code>0</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-renderPass-03145",
+          "text": " The current render pass <strong class=\"purple\">must</strong> be <a href=\"#renderpass-compatibility\">compatible</a> with the <code>renderPass</code> member of the <code>VkGraphicsPipelineCreateInfo</code> structure specified when creating the <code>VkPipeline</code> bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code>."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-subpass-03146",
+          "text": " The subpass index of the current render pass <strong class=\"purple\">must</strong> be equal to the <code>subpass</code> member of the <code>VkGraphicsPipelineCreateInfo</code> structure specified when creating the <code>VkPipeline</code> bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code>."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-None-03147",
+          "text": " For each set <em>n</em> that is statically used by the <code>VkPipeline</code> bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code>, a descriptor set <strong class=\"purple\">must</strong> have been bound to <em>n</em> at <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code>, with a <code>VkPipelineLayout</code> that is compatible for set <em>n</em>, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-None-03148",
+          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code>, a push constant value <strong class=\"purple\">must</strong> have been set for <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code>, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-None-03149",
+          "text": " Descriptors in each bound descriptor set, specified via <code>vkCmdBindDescriptorSets</code>, <strong class=\"purple\">must</strong> be valid if they are statically used by the bound <code>VkPipeline</code> object, specified via <code>vkCmdBindPipeline</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-None-03150",
+          "text": " All vertex input bindings accessed via vertex input variables declared in the vertex shader entry point&#8217;s interface <strong class=\"purple\">must</strong> have valid buffers bound"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-None-03151",
+          "text": " A valid graphics pipeline <strong class=\"purple\">must</strong> be bound to the current command buffer with <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-None-03152",
+          "text": " If the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set on the current command buffer"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-countBuffer-03153",
+          "text": " If count stored in <code>countBuffer</code> is equal to <code>1</code>, <span class=\"eq\">(<code>offset</code> &#43; sizeof(<code>VkDrawIndexedIndirectCommand</code>))</span> <strong class=\"purple\">must</strong> be less than or equal to the size of <code>buffer</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-countBuffer-03154",
+          "text": " If count stored in <code>countBuffer</code> is greater than <code>1</code>, <span class=\"eq\">(<code>stride</code> {times} (<code>drawCount</code> - 1) &#43; <code>offset</code> &#43; sizeof(<code>VkDrawIndexedIndirectCommand</code>))</span> <strong class=\"purple\">must</strong> be less than or equal to the size of <code>buffer</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-drawCount-03155",
+          "text": " <code>drawCount</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceLimits</code>::<code>maxDrawIndirectCount</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-None-03156",
+          "text": " Every input attachment used by the current subpass <strong class=\"purple\">must</strong> be bound to the pipeline via a descriptor set"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-None-03157",
+          "text": " If any <code>VkSampler</code> object that is accessed from a shader by the <code>VkPipeline</code> bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> uses unnormalized coordinates, it <strong class=\"purple\">must</strong> not be used to sample from any <code>VkImage</code> with a <code>VkImageView</code> of the type <code>VK_IMAGE_VIEW_TYPE_3D</code>, <code>VK_IMAGE_VIEW_TYPE_CUBE</code>, <code>VK_IMAGE_VIEW_TYPE_1D_ARRAY</code>, <code>VK_IMAGE_VIEW_TYPE_2D_ARRAY</code> or <code>VK_IMAGE_VIEW_TYPE_CUBE_ARRAY</code>, in any shader stage"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-None-03158",
+          "text": " If any <code>VkSampler</code> object that is accessed from a shader by the <code>VkPipeline</code> bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> uses unnormalized coordinates, it <strong class=\"purple\">must</strong> not be used with any of the SPIR-V <code>OpImageSample*</code> or <code>OpImageSparseSample*</code> instructions with <code>ImplicitLod</code>, <code>Dref</code> or <code>Proj</code> in their name, in any shader stage"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-None-03159",
+          "text": " If any <code>VkSampler</code> object that is accessed from a shader by the <code>VkPipeline</code> bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> uses unnormalized coordinates, it <strong class=\"purple\">must</strong> not be used with any of the SPIR-V <code>OpImageSample*</code> or <code>OpImageSparseSample*</code> instructions that includes a LOD bias or any offset values, in any shader stage"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-None-03160",
+          "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a uniform buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-None-03161",
+          "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-linearTilingFeatures-03162",
+          "text": " Any <code>VkImageView</code> being sampled with <code>VK_FILTER_LINEAR</code> as a result of this command <strong class=\"purple\">must</strong> be of a format which supports linear filtering, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code> flag in <code>VkFormatProperties</code>::<code>linearTilingFeatures</code> (for a linear image) or <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code>(for an optimally tiled image) returned by <code>vkGetPhysicalDeviceFormatProperties</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-None-03163",
+          "text": " Image subresources used as attachments in the current render pass <strong class=\"purple\">must</strong> not be accessed in any way other than as an attachment by this command."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-commandBuffer-parameter",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <code>VkCommandBuffer</code> handle"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-buffer-parameter",
+          "text": " <code>buffer</code> <strong class=\"purple\">must</strong> be a valid <code>VkBuffer</code> handle"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-countBuffer-parameter",
+          "text": " <code>countBuffer</code> <strong class=\"purple\">must</strong> be a valid <code>VkBuffer</code> handle"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-commandBuffer-recording",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be in the <a href=\"#commandbuffers-lifecycle\">recording state</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-commandBuffer-cmdpool",
+          "text": " The <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from <strong class=\"purple\">must</strong> support graphics operations"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-renderpass",
+          "text": " This command <strong class=\"purple\">must</strong> only be called inside of a render pass instance"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-commonparent",
+          "text": " Each of <code>buffer</code>, <code>commandBuffer</code>, and <code>countBuffer</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkDevice</code>"
+        }
+      ],
+      "(VK_KHR_draw_indirect_count)+(VK_IMG_filter_cubic)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-linearTilingFeatures-03172",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command <strong class=\"purple\">must</strong> be of a format which supports cubic filtering, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code> flag in <code>VkFormatProperties</code>::<code>linearTilingFeatures</code> (for a linear image) or <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code>(for an optimally tiled image) returned by <code>vkGetPhysicalDeviceFormatProperties</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-None-03173",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command <strong class=\"purple\">must</strong> not have a <a href=\"#VkImageViewType\">VkImageViewType</a> of <code>VK_IMAGE_VIEW_TYPE_3D</code>, <code>VK_IMAGE_VIEW_TYPE_CUBE</code>, or <code>VK_IMAGE_VIEW_TYPE_CUBE_ARRAY</code>"
+        }
+      ],
+      "(VK_KHR_draw_indirect_count)+(VK_VERSION_1_1,VK_KHR_multiview)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-maxMultiviewInstanceIndex-03164",
+          "text": " If the draw is recorded in a render pass instance with multiview enabled, the maximum instance index <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#VkPhysicalDeviceMultiviewProperties\">VkPhysicalDeviceMultiviewProperties</a>::<code>maxMultiviewInstanceIndex</code>."
+        }
+      ],
+      "(VK_KHR_draw_indirect_count)+(VK_VERSION_1_1)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-commandBuffer-03165",
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer, and any pipeline stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> reads from or writes to any image or buffer, that image or buffer <strong class=\"purple\">must</strong> not be a protected image or protected buffer."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-commandBuffer-03166",
+          "text": " If <code>commandBuffer</code> is a protected command buffer, and any pipeline stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> writes to any image or buffer, that image or buffer <strong class=\"purple\">must</strong> not be an unprotected image or unprotected buffer."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-commandBuffer-03167",
+          "text": " If <code>commandBuffer</code> is a protected command buffer, and any pipeline stage other than the framebuffer-space pipeline stages in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> reads from or writes to any image or buffer, the image or buffer <strong class=\"purple\">must</strong> not be a protected image or protected buffer."
+        }
+      ],
+      "(VK_KHR_draw_indirect_count)+(VK_EXT_sample_locations)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-sampleLocationsEnable-03174",
+          "text": " If the bound graphics pipeline was created with <a href=\"#VkPipelineSampleLocationsStateCreateInfoEXT\">VkPipelineSampleLocationsStateCreateInfoEXT</a>::<code>sampleLocationsEnable</code> set to <code>VK_TRUE</code> and the current subpass has a depth/stencil attachment, then that attachment <strong class=\"purple\">must</strong> have been created with the <code>VK_IMAGE_CREATE_SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_BIT_EXT</code> bit set"
+        }
+      ]
+    },
     "vkCmdDrawIndexedIndirectCountAMD": {
       "(VK_AMD_draw_indirect_count)": [
         {
@@ -12694,11 +13054,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCountAMD-stride-00557",
-          "text": " <code>stride</code> <strong class=\"purple\">must</strong> be a multiple of <code>4</code> and <strong class=\"purple\">must</strong> be greater than or equal to <code>sizeof</code>(<code>VkDrawIndirectCommand</code>)"
+          "text": " <code>stride</code> <strong class=\"purple\">must</strong> be a multiple of <code>4</code> and <strong class=\"purple\">must</strong> be greater than or equal to <code>sizeof</code>(<code>VkDrawIndexedIndirectCommand</code>)"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCountAMD-maxDrawCount-00558",
-          "text": " If <code>maxDrawCount</code> is greater than or equal to <code>1</code>, <span class=\"eq\">(<code>stride</code> {times} (<code>maxDrawCount</code> - 1) &#43; <code>offset</code> &#43; <code>sizeof</code>(<code>VkDrawIndirectCommand</code>))</span> <strong class=\"purple\">must</strong> be less than or equal to the size of <code>buffer</code>"
+          "text": " If <code>maxDrawCount</code> is greater than or equal to <code>1</code>, <span class=\"eq\">(<code>stride</code> {times} (<code>maxDrawCount</code> - 1) &#43; <code>offset</code> &#43; <code>sizeof</code>(<code>VkDrawIndexedIndirectCommand</code>))</span> <strong class=\"purple\">must</strong> be less than or equal to the size of <code>buffer</code>"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCountAMD-firstInstance-00559",
@@ -15902,6 +16262,34 @@
         }
       ]
     },
+    "vkGetPhysicalDeviceDisplayProperties2KHR": {
+      "(VK_KHR_surface)+(VK_KHR_display)+(VK_KHR_get_display_properties2)": [
+        {
+          "vuid": "VUID-vkGetPhysicalDeviceDisplayProperties2KHR-physicalDevice-parameter",
+          "text": " <code>physicalDevice</code> <strong class=\"purple\">must</strong> be a valid <code>VkPhysicalDevice</code> handle"
+        },
+        {
+          "vuid": "VUID-vkGetPhysicalDeviceDisplayProperties2KHR-pPropertyCount-parameter",
+          "text": " <code>pPropertyCount</code> <strong class=\"purple\">must</strong> be a valid pointer to a <code>uint32_t</code> value"
+        },
+        {
+          "vuid": "VUID-vkGetPhysicalDeviceDisplayProperties2KHR-pProperties-parameter",
+          "text": " If the value referenced by <code>pPropertyCount</code> is not <code>0</code>, and <code>pProperties</code> is not <code>NULL</code>, <code>pProperties</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>pPropertyCount</code> <code>VkDisplayProperties2KHR</code> structures"
+        }
+      ]
+    },
+    "VkDisplayProperties2KHR": {
+      "(VK_KHR_surface)+(VK_KHR_display)+(VK_KHR_get_display_properties2)": [
+        {
+          "vuid": "VUID-VkDisplayProperties2KHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_DISPLAY_PROPERTIES_2_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkDisplayProperties2KHR-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        }
+      ]
+    },
     "vkAcquireXlibDisplayEXT": {
       "(VK_KHR_surface)+(VK_KHR_display)+(VK_EXT_direct_mode_display)+(VK_EXT_acquire_xlib_display)": [
         {
@@ -15962,6 +16350,34 @@
         }
       ]
     },
+    "vkGetPhysicalDeviceDisplayPlaneProperties2KHR": {
+      "(VK_KHR_surface)+(VK_KHR_display)+(VK_KHR_get_display_properties2)": [
+        {
+          "vuid": "VUID-vkGetPhysicalDeviceDisplayPlaneProperties2KHR-physicalDevice-parameter",
+          "text": " <code>physicalDevice</code> <strong class=\"purple\">must</strong> be a valid <code>VkPhysicalDevice</code> handle"
+        },
+        {
+          "vuid": "VUID-vkGetPhysicalDeviceDisplayPlaneProperties2KHR-pPropertyCount-parameter",
+          "text": " <code>pPropertyCount</code> <strong class=\"purple\">must</strong> be a valid pointer to a <code>uint32_t</code> value"
+        },
+        {
+          "vuid": "VUID-vkGetPhysicalDeviceDisplayPlaneProperties2KHR-pProperties-parameter",
+          "text": " If the value referenced by <code>pPropertyCount</code> is not <code>0</code>, and <code>pProperties</code> is not <code>NULL</code>, <code>pProperties</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>pPropertyCount</code> <code>VkDisplayPlaneProperties2KHR</code> structures"
+        }
+      ]
+    },
+    "VkDisplayPlaneProperties2KHR": {
+      "(VK_KHR_surface)+(VK_KHR_display)+(VK_KHR_get_display_properties2)": [
+        {
+          "vuid": "VUID-VkDisplayPlaneProperties2KHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_DISPLAY_PLANE_PROPERTIES_2_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkDisplayPlaneProperties2KHR-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        }
+      ]
+    },
     "vkGetDisplayPlaneSupportedDisplaysKHR": {
       "(VK_KHR_surface)+(VK_KHR_display)": [
         {
@@ -15999,6 +16415,38 @@
         {
           "vuid": "VUID-vkGetDisplayModePropertiesKHR-pProperties-parameter",
           "text": " If the value referenced by <code>pPropertyCount</code> is not <code>0</code>, and <code>pProperties</code> is not <code>NULL</code>, <code>pProperties</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>pPropertyCount</code> <code>VkDisplayModePropertiesKHR</code> structures"
+        }
+      ]
+    },
+    "vkGetDisplayModeProperties2KHR": {
+      "(VK_KHR_surface)+(VK_KHR_display)+(VK_KHR_get_display_properties2)": [
+        {
+          "vuid": "VUID-vkGetDisplayModeProperties2KHR-physicalDevice-parameter",
+          "text": " <code>physicalDevice</code> <strong class=\"purple\">must</strong> be a valid <code>VkPhysicalDevice</code> handle"
+        },
+        {
+          "vuid": "VUID-vkGetDisplayModeProperties2KHR-display-parameter",
+          "text": " <code>display</code> <strong class=\"purple\">must</strong> be a valid <code>VkDisplayKHR</code> handle"
+        },
+        {
+          "vuid": "VUID-vkGetDisplayModeProperties2KHR-pPropertyCount-parameter",
+          "text": " <code>pPropertyCount</code> <strong class=\"purple\">must</strong> be a valid pointer to a <code>uint32_t</code> value"
+        },
+        {
+          "vuid": "VUID-vkGetDisplayModeProperties2KHR-pProperties-parameter",
+          "text": " If the value referenced by <code>pPropertyCount</code> is not <code>0</code>, and <code>pProperties</code> is not <code>NULL</code>, <code>pProperties</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>pPropertyCount</code> <code>VkDisplayModeProperties2KHR</code> structures"
+        }
+      ]
+    },
+    "VkDisplayModeProperties2KHR": {
+      "(VK_KHR_surface)+(VK_KHR_display)+(VK_KHR_get_display_properties2)": [
+        {
+          "vuid": "VUID-VkDisplayModeProperties2KHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_DISPLAY_MODE_PROPERTIES_2_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkDisplayModeProperties2KHR-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
         }
       ]
     },
@@ -16063,6 +16511,50 @@
         {
           "vuid": "VUID-vkGetDisplayPlaneCapabilitiesKHR-pCapabilities-parameter",
           "text": " <code>pCapabilities</code> <strong class=\"purple\">must</strong> be a valid pointer to a <code>VkDisplayPlaneCapabilitiesKHR</code> structure"
+        }
+      ]
+    },
+    "vkGetDisplayPlaneCapabilities2KHR": {
+      "(VK_KHR_surface)+(VK_KHR_display)+(VK_KHR_get_display_properties2)": [
+        {
+          "vuid": "VUID-vkGetDisplayPlaneCapabilities2KHR-physicalDevice-parameter",
+          "text": " <code>physicalDevice</code> <strong class=\"purple\">must</strong> be a valid <code>VkPhysicalDevice</code> handle"
+        },
+        {
+          "vuid": "VUID-vkGetDisplayPlaneCapabilities2KHR-pDisplayPlaneInfo-parameter",
+          "text": " <code>pDisplayPlaneInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <code>VkDisplayPlaneInfo2KHR</code> structure"
+        },
+        {
+          "vuid": "VUID-vkGetDisplayPlaneCapabilities2KHR-pCapabilities-parameter",
+          "text": " <code>pCapabilities</code> <strong class=\"purple\">must</strong> be a valid pointer to a <code>VkDisplayPlaneCapabilities2KHR</code> structure"
+        }
+      ]
+    },
+    "VkDisplayPlaneInfo2KHR": {
+      "(VK_KHR_surface)+(VK_KHR_display)+(VK_KHR_get_display_properties2)": [
+        {
+          "vuid": "VUID-VkDisplayPlaneInfo2KHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_DISPLAY_PLANE_INFO_2_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkDisplayPlaneInfo2KHR-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkDisplayPlaneInfo2KHR-mode-parameter",
+          "text": " <code>mode</code> <strong class=\"purple\">must</strong> be a valid <code>VkDisplayModeKHR</code> handle"
+        }
+      ]
+    },
+    "VkDisplayPlaneCapabilities2KHR": {
+      "(VK_KHR_surface)+(VK_KHR_display)+(VK_KHR_get_display_properties2)": [
+        {
+          "vuid": "VUID-VkDisplayPlaneCapabilities2KHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_DISPLAY_PLANE_CAPABILITIES_2_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkDisplayPlaneCapabilities2KHR-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
         }
       ]
     },
