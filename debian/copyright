@@ -1,0 +1,10 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: spirv-headers
+Source: https://github.com/KhronosGroup/Vulkan-Headers
+
+Files: *
+Copyright: 2015-2018 The Khronos Group Inc.
+License: Apache 2.0
+
+License: Apache 2.0
+ http://www.apache.org/licenses/LICENSE-2.0

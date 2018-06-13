@@ -1,0 +1,14 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@ 
+
+override_dh_auto_configure:
+override_dh_auto_build:
+
+gentarball: SOURCE=vulkan-headers
+gentarball: UV=$(shell dpkg-parsechangelog|awk '/^Version:/ {print $$2}'|sed 's/-.*$$//')
+gentarball:
+	git archive --format=tar upstream-unstable --prefix=$(SOURCE)-$(UV)/ | gzip -9 > \
+		../$(SOURCE)_$(UV).orig.tar.gz
+

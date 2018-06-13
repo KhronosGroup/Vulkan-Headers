@@ -1,0 +1,14 @@
+Source: vulkan-headers
+Section: libdevel
+Priority: optional
+Maintainer: Brett Johnson <brett@lunarg.com>
+Build-Depends: debhelper (>=10),
+Standards-Version: 4.1.3
+Homepage: https://github.com/KhronosGroup/Vulkan-Headers
+Vcs-Git: 
+Vcs-Browser: 
+
+Package: vulkan-headers
+Architecture: all
+Depends: ${misc:Depends}
+Description: Vulkan Header files and API registry
