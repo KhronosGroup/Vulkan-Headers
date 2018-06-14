@@ -4,6 +4,12 @@
 	dh $@ 
 
 override_dh_auto_configure:
+	dh_auto_configure -- \
+	-DCMAKE_BUILD_TYPE=Release
+
+override_dh_auto_install:
+	dh_auto_install --destdir=debian/tmp
+
 override_dh_auto_build:
 
 gentarball: SOURCE=vulkan-headers

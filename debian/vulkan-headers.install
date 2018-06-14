@@ -1,2 +1,2 @@
-include/		usr/
-share/			usr/
+usr/include/
+usr/share/
