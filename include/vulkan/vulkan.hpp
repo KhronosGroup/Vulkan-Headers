@@ -53,7 +53,7 @@
 # include <cassert>
 # define VULKAN_HPP_ASSERT   assert
 #endif
-static_assert( VK_HEADER_VERSION ==  78 , "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION ==  79 , "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
@@ -30548,6 +30548,13 @@ public:
   };
   static_assert( sizeof( DescriptorSetLayoutBindingFlagsCreateInfoEXT ) == sizeof( VkDescriptorSetLayoutBindingFlagsCreateInfoEXT ), "struct and wrapper have different size!" );
 
+  enum class VendorId
+  {
+    eViv = VK_VENDOR_ID_VIV,
+    eVsi = VK_VENDOR_ID_VSI,
+    eKazan = VK_VENDOR_ID_KAZAN
+  };
+
   template<typename Dispatch = DispatchLoaderStatic>
   Result enumerateInstanceVersion( uint32_t* pApiVersion, Dispatch const &d = Dispatch() );
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
@@ -43112,6 +43119,17 @@ public:
     if (value & DescriptorBindingFlagBitsEXT::ePartiallyBound) result += "PartiallyBound | ";
     if (value & DescriptorBindingFlagBitsEXT::eVariableDescriptorCount) result += "VariableDescriptorCount | ";
     return "{" + result.substr(0, result.size() - 3) + "}";
+  }
+
+  VULKAN_HPP_INLINE std::string to_string(VendorId value)
+  {
+    switch (value)
+    {
+    case VendorId::eViv: return "Viv";
+    case VendorId::eVsi: return "Vsi";
+    case VendorId::eKazan: return "Kazan";
+    default: return "invalid";
+    }
   }
 
   class DispatchLoaderDynamic
