@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.1.78",
-    "comment": "from git branch: master commit: 9582bcb54e2cd0ea9441664fa6563e2687a9e32d",
-    "date": "2018-06-26 18:07:14Z"
+    "api version": "1.1.79",
+    "comment": "from git branch: master commit: ff9357a4bad5fa49b99b9d3f69d254e2a3f0f575",
+    "date": "2018-07-02 20:23:28Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -5797,10 +5797,6 @@
         {
           "vuid": "VUID-vkGetDeviceGroupPeerMemoryFeatures-pPeerMemoryFeatures-parameter",
           "text": " <code>pPeerMemoryFeatures</code> <strong class=\"purple\">must</strong> be a valid pointer to a <a href=\"#VkPeerMemoryFeatureFlags\">VkPeerMemoryFeatureFlags</a> value"
-        },
-        {
-          "vuid": "VUID-vkGetDeviceGroupPeerMemoryFeatures-pPeerMemoryFeatures-requiredbitmask",
-          "text": " <code>pPeerMemoryFeatures</code> <strong class=\"purple\">must</strong> not be <code>0</code>"
         }
       ]
     },
@@ -8964,6 +8960,10 @@
         }
       ],
       "core": [
+        {
+          "vuid": "VUID-VkDescriptorImageInfo-imageView-01976",
+          "text": " If <code>imageView</code> is created from a depth/stencil image, the <code>aspectMask</code> used to create the <code>imageView</code> <strong class=\"purple\">must</strong> include either <code>VK_IMAGE_ASPECT_DEPTH_BIT</code> or <code>VK_IMAGE_ASPECT_STENCIL_BIT</code> but not both."
+        },
         {
           "vuid": "VUID-VkDescriptorImageInfo-imageLayout-00344",
           "text": " <code>imageLayout</code> <strong class=\"purple\">must</strong> match the actual <a href=\"#VkImageLayout\">VkImageLayout</a> of each subresource accessible from <code>imageView</code> at the time this descriptor is accessed"
