@@ -1,4 +1,4 @@
-# Configuration for cmake-format (v0.3.6, circa Apr 2018)
+# Configuration for cmake-format (v0.4.1, circa Jul 2018)
 # https://github.com/cheshirekow/cmake_format
 
 # How wide to allow formatted cmake files
