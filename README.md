@@ -15,4 +15,4 @@ The projects for these repositories are:
   - C++ Bindings for Vulkan
 
 Please visit the appropriate project in the above list for obtaining additional information,
-asking questions, or opening issues. 
+asking questions, or opening issues.
