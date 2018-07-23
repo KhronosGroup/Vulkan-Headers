@@ -1,5 +1,5 @@
-vulkan-headers (1.1.76~1lunarg1) UNRELEASED; urgency=medium
+vulkan-headers (1.1.79.0) UNRELEASED; urgency=medium
 
-  * First try
+  * New upstream version
 
- -- Brett Johnson <brett@linuxturtle.net>  Wed, 13 Jun 2018 13:57:32 -0600
+ -- Brett Johnson <brett@linuxturtle.net>  Mon, 16 Jul 2018 11:30:03 -0600
