@@ -53,7 +53,24 @@
 # include <cassert>
 # define VULKAN_HPP_ASSERT   assert
 #endif
-static_assert( VK_HEADER_VERSION ==  80 , "Wrong VK_HEADER_VERSION!" );
+
+// <tuple> includes <sys/sysmacros.h> through some other header
+// this results in major(x) being resolved to gnu_dev_major(x)
+// which is an expression in a constructor initializer list.
+#if defined(major)
+  #undef major
+#endif
+#if defined(minor)
+  #undef minor
+#endif
+
+// Windows defines MemoryBarrier which is deprecated and collides
+// with the vk::MemoryBarrier struct.
+#ifdef MemoryBarrier
+  #undef MemoryBarrier
+#endif
+
+static_assert( VK_HEADER_VERSION ==  81 , "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
@@ -6982,27 +6999,6 @@ public:
 
   struct RefreshCycleDurationGOOGLE
   {
-    RefreshCycleDurationGOOGLE( uint64_t refreshDuration_ = 0 )
-      : refreshDuration( refreshDuration_ )
-    {
-    }
-
-    RefreshCycleDurationGOOGLE( VkRefreshCycleDurationGOOGLE const & rhs )
-    {
-      memcpy( this, &rhs, sizeof( RefreshCycleDurationGOOGLE ) );
-    }
-
-    RefreshCycleDurationGOOGLE& operator=( VkRefreshCycleDurationGOOGLE const & rhs )
-    {
-      memcpy( this, &rhs, sizeof( RefreshCycleDurationGOOGLE ) );
-      return *this;
-    }
-    RefreshCycleDurationGOOGLE& setRefreshDuration( uint64_t refreshDuration_ )
-    {
-      refreshDuration = refreshDuration_;
-      return *this;
-    }
-
     operator const VkRefreshCycleDurationGOOGLE&() const
     {
       return *reinterpret_cast<const VkRefreshCycleDurationGOOGLE*>(this);
@@ -7024,59 +7020,6 @@ public:
 
   struct PastPresentationTimingGOOGLE
   {
-    PastPresentationTimingGOOGLE( uint32_t presentID_ = 0,
-                                  uint64_t desiredPresentTime_ = 0,
-                                  uint64_t actualPresentTime_ = 0,
-                                  uint64_t earliestPresentTime_ = 0,
-                                  uint64_t presentMargin_ = 0 )
-      : presentID( presentID_ )
-      , desiredPresentTime( desiredPresentTime_ )
-      , actualPresentTime( actualPresentTime_ )
-      , earliestPresentTime( earliestPresentTime_ )
-      , presentMargin( presentMargin_ )
-    {
-    }
-
-    PastPresentationTimingGOOGLE( VkPastPresentationTimingGOOGLE const & rhs )
-    {
-      memcpy( this, &rhs, sizeof( PastPresentationTimingGOOGLE ) );
-    }
-
-    PastPresentationTimingGOOGLE& operator=( VkPastPresentationTimingGOOGLE const & rhs )
-    {
-      memcpy( this, &rhs, sizeof( PastPresentationTimingGOOGLE ) );
-      return *this;
-    }
-    PastPresentationTimingGOOGLE& setPresentID( uint32_t presentID_ )
-    {
-      presentID = presentID_;
-      return *this;
-    }
-
-    PastPresentationTimingGOOGLE& setDesiredPresentTime( uint64_t desiredPresentTime_ )
-    {
-      desiredPresentTime = desiredPresentTime_;
-      return *this;
-    }
-
-    PastPresentationTimingGOOGLE& setActualPresentTime( uint64_t actualPresentTime_ )
-    {
-      actualPresentTime = actualPresentTime_;
-      return *this;
-    }
-
-    PastPresentationTimingGOOGLE& setEarliestPresentTime( uint64_t earliestPresentTime_ )
-    {
-      earliestPresentTime = earliestPresentTime_;
-      return *this;
-    }
-
-    PastPresentationTimingGOOGLE& setPresentMargin( uint64_t presentMargin_ )
-    {
-      presentMargin = presentMargin_;
-      return *this;
-    }
-
     operator const VkPastPresentationTimingGOOGLE&() const
     {
       return *reinterpret_cast<const VkPastPresentationTimingGOOGLE*>(this);
@@ -25884,7 +25827,7 @@ public:
   struct ValidationFlagsEXT
   {
     ValidationFlagsEXT( uint32_t disabledValidationCheckCount_ = 0,
-                        ValidationCheckEXT* pDisabledValidationChecks_ = nullptr )
+                        const ValidationCheckEXT* pDisabledValidationChecks_ = nullptr )
       : disabledValidationCheckCount( disabledValidationCheckCount_ )
       , pDisabledValidationChecks( pDisabledValidationChecks_ )
     {
@@ -25912,7 +25855,7 @@ public:
       return *this;
     }
 
-    ValidationFlagsEXT& setPDisabledValidationChecks( ValidationCheckEXT* pDisabledValidationChecks_ )
+    ValidationFlagsEXT& setPDisabledValidationChecks( const ValidationCheckEXT* pDisabledValidationChecks_ )
     {
       pDisabledValidationChecks = pDisabledValidationChecks_;
       return *this;
@@ -25942,7 +25885,7 @@ public:
   public:
     const void* pNext = nullptr;
     uint32_t disabledValidationCheckCount;
-    ValidationCheckEXT* pDisabledValidationChecks;
+    const ValidationCheckEXT* pDisabledValidationChecks;
   };
   static_assert( sizeof( ValidationFlagsEXT ) == sizeof( VkValidationFlagsEXT ), "struct and wrapper have different size!" );
 
