@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.1.81",
-    "comment": "from git branch: master commit: 6377124f371f9d8b1d9761b1116fac647222a13d",
-    "date": "2018-07-23 17:38:42Z"
+    "api version": "1.1.82",
+    "comment": "from git branch: master commit: ff0c2339083b76aba0414afafdb195bba15c78d8",
+    "date": "2018-07-30 16:08:24Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -254,7 +254,7 @@
         },
         {
           "vuid": "VUID-VkQueueFamilyProperties2-pNext-pNext",
-          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkQueueFamilyCheckpointPropertiesNV\">VkQueueFamilyCheckpointPropertiesNV</a>"
         }
       ]
     },
@@ -915,6 +915,10 @@
         {
           "vuid": "VUID-vkQueueSubmit-pCommandBuffers-00074",
           "text": " Each element of the <code>pCommandBuffers</code> member of each element of <code>pSubmits</code> <strong class=\"purple\">must</strong> have been allocated from a <code>VkCommandPool</code> that was created for the same queue family <code>queue</code> belongs to."
+        },
+        {
+          "vuid": "VUID-vkQueueSubmit-pCommandBuffers",
+          "text": " If any element of <code>pSubmits</code>&#8594;<code>pCommandBuffers</code> includes a <a href=\"#synchronization-queue-transfers-acquire\">Queue Family Transfer Acquire Operation</a>, there <strong class=\"purple\">must</strong> exist a previously submitted <a href=\"#synchronization-queue-transfers-release\">Queue Family Transfer Release Operation</a> on a queue in the queue family identified by the acquire operation, with parameters matching the acquire operation as defined in the definition of such <a href=\"#synchronization-queue-transfers-acquire\">acquire operations</a>, and which happens before the acquire operation."
         },
         {
           "vuid": "VUID-vkQueueSubmit-queue-parameter",
@@ -2453,28 +2457,8 @@
           "text": " If the <a href=\"#features-features-tessellationShader\">tessellation shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
         },
         {
-          "vuid": "VUID-vkCmdPipelineBarrier-pDependencies-01172",
-          "text": " If <code>vkCmdPipelineBarrier</code> is called within a render pass instance, the render pass <strong class=\"purple\">must</strong> have been created with a <code>VkSubpassDependency</code> instance in <code>pDependencies</code> that expresses a dependency from the current subpass to itself."
-        },
-        {
-          "vuid": "VUID-vkCmdPipelineBarrier-srcStageMask-01173",
-          "text": " If <code>vkCmdPipelineBarrier</code> is called within a render pass instance, <code>srcStageMask</code> <strong class=\"purple\">must</strong> contain a subset of the bit values in the <code>srcStageMask</code> member of that instance of <code>VkSubpassDependency</code>"
-        },
-        {
-          "vuid": "VUID-vkCmdPipelineBarrier-dstStageMask-01174",
-          "text": " If <code>vkCmdPipelineBarrier</code> is called within a render pass instance, <code>dstStageMask</code> <strong class=\"purple\">must</strong> contain a subset of the bit values in the <code>dstStageMask</code> member of that instance of <code>VkSubpassDependency</code>"
-        },
-        {
-          "vuid": "VUID-vkCmdPipelineBarrier-srcAccessMask-01175",
-          "text": " If <code>vkCmdPipelineBarrier</code> is called within a render pass instance, the <code>srcAccessMask</code> of any element of <code>pMemoryBarriers</code> or <code>pImageMemoryBarriers</code> <strong class=\"purple\">must</strong> contain a subset of the bit values the <code>srcAccessMask</code> member of that instance of <code>VkSubpassDependency</code>"
-        },
-        {
-          "vuid": "VUID-vkCmdPipelineBarrier-dstAccessMask-01176",
-          "text": " If <code>vkCmdPipelineBarrier</code> is called within a render pass instance, the <code>dstAccessMask</code> of any element of <code>pMemoryBarriers</code> or <code>pImageMemoryBarriers</code> <strong class=\"purple\">must</strong> contain a subset of the bit values the <code>dstAccessMask</code> member of that instance of <code>VkSubpassDependency</code>"
-        },
-        {
-          "vuid": "VUID-vkCmdPipelineBarrier-dependencyFlags-01177",
-          "text": " If <code>vkCmdPipelineBarrier</code> is called within a render pass instance, <code>dependencyFlags</code> <strong class=\"purple\">must</strong> be equal to the <code>dependencyFlags</code> member of that instance of <code>VkSubpassDependency</code>"
+          "vuid": "VUID-vkCmdPipelineBarrier-pDependencies-02024",
+          "text": " If <code>vkCmdPipelineBarrier</code> is called within a render pass instance, the render pass <strong class=\"purple\">must</strong> have been created with at least one <code>VkSubpassDependency</code> instance in <code>VkRenderPassCreateInfo</code>::<code>pDependencies</code> that expresses a dependency from the current subpass to itself, and for which <code>srcStageMask</code> contains a subset of the bit values in <code>VkSubpassDependency</code>::<code>srcStageMask</code>, <code>dstStageMask</code> contains a subset of the bit values in <code>VkSubpassDependency</code>::<code>dstStageMask</code>, and <code>dependencyFlags</code> is equal to <code>VkSubpassDependency</code>::<code>dependencyFlags</code>."
         },
         {
           "vuid": "VUID-vkCmdPipelineBarrier-bufferMemoryBarrierCount-01178",
@@ -4813,8 +4797,8 @@
           "text": " The shader code for the entry points identified by <code>pStages</code>, and the rest of the state identified by this structure <strong class=\"purple\">must</strong> adhere to the pipeline linking rules described in the <a href=\"#interfaces\">Shader Interfaces</a> chapter"
         },
         {
-          "vuid": "VUID-VkGraphicsPipelineCreateInfo-subpass-00745",
-          "text": " If rasterization is not disabled and the subpass uses color attachments, then for each color attachment in the subpass the <code>blendEnable</code> member of the corresponding element of the <code>pAttachment</code> member of <code>pColorBlendState</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code> if the <code>format</code> of the attachment does not support color blend operations, as specified by the <code>VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BLEND_BIT</code> flag in <code>VkFormatProperties</code>::<code>linearTilingFeatures</code> or <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code>"
+          "vuid": "VUID-VkGraphicsPipelineCreateInfo-blendEnable-02023",
+          "text": " If rasterization is not disabled and the subpass uses color attachments, then for each color attachment in the subpass the <code>blendEnable</code> member of the corresponding element of the <code>pAttachment</code> member of <code>pColorBlendState</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code> if the attached image&#8217;s <a href=\"#resources-image-format-features\">format features</a> does not contain the <code>VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BLEND_BIT</code>."
         },
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-attachmentCount-00746",
@@ -9055,6 +9039,10 @@
           "text": " If no <code>VkAllocationCallbacks</code> were provided when <code>pipelineLayout</code> was created, <code>pAllocator</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
         },
         {
+          "vuid": "VUID-vkDestroyPipelineLayout-pipelineLayout-02004",
+          "text": " <code>pipelineLayout</code> <strong class=\"purple\">must</strong> not have been passed to any vkCmd* command for any command buffers that are still in the <a href=\"#commandbuffers-lifecycle\">recording state</a> when <code>vkDestroyPipelineLayout</code> is called"
+        },
+        {
           "vuid": "VUID-vkDestroyPipelineLayout-device-parameter",
           "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <code>VkDevice</code> handle"
         },
@@ -10363,16 +10351,10 @@
       ]
     },
     "vkCmdClearColorImage": {
-      "!(VK_ANDROID_external_memory_android_hardware_buffer)+(VK_VERSION_1_1,VK_KHR_maintenance1)": [
+      "(VK_VERSION_1_1,VK_KHR_maintenance1)": [
         {
-          "vuid": "VUID-vkCmdClearColorImage-image-00001",
-          "text": " <code>image</code> <strong class=\"purple\">must</strong> use a format that supports <code>VK_FORMAT_FEATURE_TRANSFER_DST_BIT</code>, which is indicated by <code>VkFormatProperties</code>::<code>linearTilingFeatures</code> or <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code> for linearly or optimally tiled images, respectively"
-        }
-      ],
-      "(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-vkCmdClearColorImage-image-01935",
-          "text": " <code>image</code> <strong class=\"purple\">must</strong> use a format that supports <code>VK_FORMAT_FEATURE_TRANSFER_DST_BIT</code>, which is indicated by <a href=\"#VkAndroidHardwareBufferFormatPropertiesANDROID\">VkAndroidHardwareBufferFormatPropertiesANDROID</a>::<code>formatFeatures</code> returned by <a href=\"#vkGetAndroidHardwareBufferPropertiesANDROID\">vkGetAndroidHardwareBufferPropertiesANDROID</a> for external format images, or by <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>linearTilingFeatures</code> or <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>optimalTilingFeatures</code> returned by <a href=\"#vkGetPhysicalDeviceFormatProperties\">vkGetPhysicalDeviceFormatProperties</a> for non-external format linearly or optimally tiled images, respectively"
+          "vuid": "VUID-vkCmdClearColorImage-image-01993",
+          "text": " The <a href=\"#resources-image-format-features\">format features</a> of <code>image</code> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_TRANSFER_DST_BIT</code>."
         }
       ],
       "core": [
@@ -10479,16 +10461,10 @@
       ]
     },
     "vkCmdClearDepthStencilImage": {
-      "!(VK_ANDROID_external_memory_android_hardware_buffer)+(VK_VERSION_1_1,VK_KHR_maintenance1)": [
+      "(VK_VERSION_1_1,VK_KHR_maintenance1)": [
         {
-          "vuid": "VUID-vkCmdClearDepthStencilImage-image-00008",
-          "text": " <code>image</code> <strong class=\"purple\">must</strong> use a format that supports <code>VK_FORMAT_FEATURE_TRANSFER_DST_BIT</code>, which is indicated by <code>VkFormatProperties</code>::<code>linearTilingFeatures</code> or <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code> for linearly or optimally tiled images, respectively"
-        }
-      ],
-      "(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-vkCmdClearDepthStencilImage-image-01936",
-          "text": " <code>image</code> <strong class=\"purple\">must</strong> use a format that supports <code>VK_FORMAT_FEATURE_TRANSFER_DST_BIT</code>, which is indicated by <a href=\"#VkAndroidHardwareBufferFormatPropertiesANDROID\">VkAndroidHardwareBufferFormatPropertiesANDROID</a>::<code>formatFeatures</code> returned by <a href=\"#vkGetAndroidHardwareBufferPropertiesANDROID\">vkGetAndroidHardwareBufferPropertiesANDROID</a> for external format images, or by <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>linearTilingFeatures</code> or <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>optimalTilingFeatures</code> returned by <a href=\"#vkGetPhysicalDeviceFormatProperties\">vkGetPhysicalDeviceFormatProperties</a> for non-external format linearly or optimally tiled images, respectively"
+          "vuid": "VUID-vkCmdClearDepthStencilImage-image-01994",
+          "text": " The <a href=\"#resources-image-format-features\">format features</a> of <code>image</code> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_TRANSFER_DST_BIT</code>."
         }
       ],
       "core": [
@@ -11033,24 +11009,14 @@
           "text": " Each of <code>commandBuffer</code>, <code>dstImage</code>, and <code>srcImage</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkDevice</code>"
         }
       ],
-      "!(VK_ANDROID_external_memory_android_hardware_buffer)+(VK_VERSION_1_1,VK_KHR_maintenance1)": [
+      "(VK_VERSION_1_1,VK_KHR_maintenance1)": [
         {
-          "vuid": "VUID-vkCmdCopyImage-srcImage-00125",
-          "text": " <code>srcImage</code> <strong class=\"purple\">must</strong> use a format that supports <code>VK_FORMAT_FEATURE_TRANSFER_SRC_BIT</code>, which is indicated by <code>VkFormatProperties</code>::<code>linearTilingFeatures</code> or <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code> for linearly or optimally tiled images, respectively"
+          "vuid": "VUID-vkCmdCopyImage-srcImage-01995",
+          "text": " The <a href=\"#resources-image-format-features\">format features</a> of <code>srcImage</code> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_TRANSFER_SRC_BIT</code>."
         },
         {
-          "vuid": "VUID-vkCmdCopyImage-dstImage-00130",
-          "text": " <code>dstImage</code> <strong class=\"purple\">must</strong> use a format that supports <code>VK_FORMAT_FEATURE_TRANSFER_DST_BIT</code>, which is indicated by <code>VkFormatProperties</code>::<code>linearTilingFeatures</code> or <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code> for linearly or optimally tiled images, respectively"
-        }
-      ],
-      "(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-vkCmdCopyImage-srcImage-01938",
-          "text": " <code>srcImage</code> <strong class=\"purple\">must</strong> use a format that supports <code>VK_FORMAT_FEATURE_TRANSFER_SRC_BIT</code>, which is indicated by <a href=\"#VkAndroidHardwareBufferFormatPropertiesANDROID\">VkAndroidHardwareBufferFormatPropertiesANDROID</a>::<code>formatFeatures</code> returned by <a href=\"#vkGetAndroidHardwareBufferPropertiesANDROID\">vkGetAndroidHardwareBufferPropertiesANDROID</a> for external format images, or by <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>linearTilingFeatures</code> or <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>optimalTilingFeatures</code> returned by <a href=\"#vkGetPhysicalDeviceFormatProperties\">vkGetPhysicalDeviceFormatProperties</a> for non-external format linearly or optimally tiled images, respectively"
-        },
-        {
-          "vuid": "VUID-vkCmdCopyImage-dstImage-01939",
-          "text": " <code>dstImage</code> <strong class=\"purple\">must</strong> use a format that supports <code>VK_FORMAT_FEATURE_TRANSFER_DST_BIT</code>, which is indicated by <a href=\"#VkAndroidHardwareBufferFormatPropertiesANDROID\">VkAndroidHardwareBufferFormatPropertiesANDROID</a>::<code>formatFeatures</code> returned by <a href=\"#vkGetAndroidHardwareBufferPropertiesANDROID\">vkGetAndroidHardwareBufferPropertiesANDROID</a> for external format images, or by <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>linearTilingFeatures</code> or <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>optimalTilingFeatures</code> returned by <a href=\"#vkGetPhysicalDeviceFormatProperties\">vkGetPhysicalDeviceFormatProperties</a> for non-external format linearly or optimally tiled images, respectively"
+          "vuid": "VUID-vkCmdCopyImage-dstImage-01996",
+          "text": " The <a href=\"#resources-image-format-features\">format features</a> of <code>dstImage</code> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_TRANSFER_DST_BIT</code>."
         }
       ],
       "!(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
@@ -11443,16 +11409,10 @@
           "text": " Each of <code>commandBuffer</code>, <code>dstImage</code>, and <code>srcBuffer</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkDevice</code>"
         }
       ],
-      "!(VK_ANDROID_external_memory_android_hardware_buffer)+(VK_VERSION_1_1,VK_KHR_maintenance1)": [
+      "(VK_VERSION_1_1,VK_KHR_maintenance1)": [
         {
-          "vuid": "VUID-vkCmdCopyBufferToImage-dstImage-00175",
-          "text": " <code>dstImage</code> <strong class=\"purple\">must</strong> use a format that supports <code>VK_FORMAT_FEATURE_TRANSFER_DST_BIT</code>, which is indicated by <code>VkFormatProperties</code>::<code>linearTilingFeatures</code> or <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code> for linearly or optimally tiled images, respectively"
-        }
-      ],
-      "(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-vkCmdCopyBufferToImage-dstImage-01940",
-          "text": " <code>dstImage</code> <strong class=\"purple\">must</strong> use a format that supports <code>VK_FORMAT_FEATURE_TRANSFER_DST_BIT</code>, which is indicated by <a href=\"#VkAndroidHardwareBufferFormatPropertiesANDROID\">VkAndroidHardwareBufferFormatPropertiesANDROID</a>::<code>formatFeatures</code> returned by <a href=\"#vkGetAndroidHardwareBufferPropertiesANDROID\">vkGetAndroidHardwareBufferPropertiesANDROID</a> for external format images, or by <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>linearTilingFeatures</code> or <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>optimalTilingFeatures</code> returned by <a href=\"#vkGetPhysicalDeviceFormatProperties\">vkGetPhysicalDeviceFormatProperties</a> for non-external format linearly or optimally tiled images, respectively"
+          "vuid": "VUID-vkCmdCopyBufferToImage-dstImage-01997",
+          "text": " The <a href=\"#resources-image-format-features\">format features</a> of <code>dstImage</code> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_TRANSFER_DST_BIT</code>."
         }
       ],
       "!(VK_KHR_shared_presentable_image)": [
@@ -11573,16 +11533,10 @@
           "text": " Each of <code>commandBuffer</code>, <code>dstBuffer</code>, and <code>srcImage</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkDevice</code>"
         }
       ],
-      "!(VK_ANDROID_external_memory_android_hardware_buffer)+(VK_VERSION_1_1,VK_KHR_maintenance1)": [
+      "(VK_VERSION_1_1,VK_KHR_maintenance1)": [
         {
-          "vuid": "VUID-vkCmdCopyImageToBuffer-srcImage-00185",
-          "text": " <code>srcImage</code> <strong class=\"purple\">must</strong> use a format that supports <code>VK_FORMAT_FEATURE_TRANSFER_SRC_BIT</code>, which is indicated by <code>VkFormatProperties</code>::<code>linearTilingFeatures</code> or <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code> for linearly or optimally tiled images, respectively"
-        }
-      ],
-      "(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-vkCmdCopyImageToBuffer-srcImage-01941",
-          "text": " <code>srcImage</code> <strong class=\"purple\">must</strong> use a format that supports <code>VK_FORMAT_FEATURE_TRANSFER_SRC_BIT</code>, which is indicated by <a href=\"#VkAndroidHardwareBufferFormatPropertiesANDROID\">VkAndroidHardwareBufferFormatPropertiesANDROID</a>::<code>formatFeatures</code> returned by <a href=\"#vkGetAndroidHardwareBufferPropertiesANDROID\">vkGetAndroidHardwareBufferPropertiesANDROID</a> for external format images, or by <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>linearTilingFeatures</code> or <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>optimalTilingFeatures</code> returned by <a href=\"#vkGetPhysicalDeviceFormatProperties\">vkGetPhysicalDeviceFormatProperties</a> for non-external format linearly or optimally tiled images, respectively"
+          "vuid": "VUID-vkCmdCopyImageToBuffer-srcImage-01998",
+          "text": " The <a href=\"#resources-image-format-features\">format features</a> of <code>srcImage</code> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_TRANSFER_SRC_BIT</code>."
         }
       ],
       "!(VK_KHR_shared_presentable_image)": [
@@ -11759,6 +11713,10 @@
           "text": " The union of all destination regions, specified by the elements of <code>pRegions</code>, <strong class=\"purple\">must</strong> not overlap in memory with any texel that <strong class=\"purple\">may</strong> be sampled during the blit operation"
         },
         {
+          "vuid": "VUID-vkCmdBlitImage-srcImage-01999",
+          "text": " The <a href=\"#resources-image-format-features\">format features</a> of <code>srcImage</code> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_BLIT_SRC_BIT</code>."
+        },
+        {
           "vuid": "VUID-vkCmdBlitImage-srcImage-00219",
           "text": " <code>srcImage</code> <strong class=\"purple\">must</strong> have been created with <code>VK_IMAGE_USAGE_TRANSFER_SRC_BIT</code> usage flag"
         },
@@ -11769,6 +11727,10 @@
         {
           "vuid": "VUID-vkCmdBlitImage-srcImageLayout-00221",
           "text": " <code>srcImageLayout</code> <strong class=\"purple\">must</strong> specify the layout of the image subresources of <code>srcImage</code> specified in <code>pRegions</code> at the time this command is executed on a <code>VkDevice</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdBlitImage-dstImage-02000",
+          "text": " The <a href=\"#resources-image-format-features\">format features</a> of <code>dstImage</code> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_BLIT_DST_BIT</code>."
         },
         {
           "vuid": "VUID-vkCmdBlitImage-dstImage-00224",
@@ -11809,6 +11771,10 @@
         {
           "vuid": "VUID-vkCmdBlitImage-dstImage-00234",
           "text": " <code>dstImage</code> <strong class=\"purple\">must</strong> have been created with a <code>samples</code> value of <code>VK_SAMPLE_COUNT_1_BIT</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdBlitImage-filter-02001",
+          "text": " If <code>filter</code> is <code>VK_FILTER_LINEAR</code>, then the <a href=\"#resources-image-format-features\">format features</a> of <code>srcImage</code> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code>."
         },
         {
           "vuid": "VUID-vkCmdBlitImage-srcSubresource-01705",
@@ -11875,34 +11841,6 @@
           "text": " Each of <code>commandBuffer</code>, <code>dstImage</code>, and <code>srcImage</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkDevice</code>"
         }
       ],
-      "!(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-vkCmdBlitImage-srcImage-00218",
-          "text": " <code>srcImage</code> <strong class=\"purple\">must</strong> use a format that supports <code>VK_FORMAT_FEATURE_BLIT_SRC_BIT</code>, which is indicated by <code>VkFormatProperties</code>::<code>linearTilingFeatures</code> or <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code> for linearly or optimally tiled images, respectively"
-        },
-        {
-          "vuid": "VUID-vkCmdBlitImage-dstImage-00223",
-          "text": " <code>dstImage</code> <strong class=\"purple\">must</strong> use a format that supports <code>VK_FORMAT_FEATURE_BLIT_DST_BIT</code>, which is indicated by <code>VkFormatProperties</code>::<code>linearTilingFeatures</code> or <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code> for linearly or optimally tiled images, respectively"
-        },
-        {
-          "vuid": "VUID-vkCmdBlitImage-filter-00235",
-          "text": " If <code>filter</code> is <code>VK_FILTER_LINEAR</code>, <code>srcImage</code> <strong class=\"purple\">must</strong> be of a format which supports linear filtering, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code> flag in <code>VkFormatProperties</code>::<code>linearTilingFeatures</code> or <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code> for linearly or optimally tiled images, respectively"
-        }
-      ],
-      "(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-vkCmdBlitImage-srcImage-01942",
-          "text": " <code>srcImage</code> <strong class=\"purple\">must</strong> use a format that supports <code>VK_FORMAT_FEATURE_TRANSFER_SRC_BIT</code>, which is indicated by <a href=\"#VkAndroidHardwareBufferFormatPropertiesANDROID\">VkAndroidHardwareBufferFormatPropertiesANDROID</a>::<code>formatFeatures</code> returned by <a href=\"#vkGetAndroidHardwareBufferPropertiesANDROID\">vkGetAndroidHardwareBufferPropertiesANDROID</a> for external format images, or by <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>linearTilingFeatures</code> or <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>optimalTilingFeatures</code> returned by <a href=\"#vkGetPhysicalDeviceFormatProperties\">vkGetPhysicalDeviceFormatProperties</a> for non-external format linearly or optimally tiled images, respectively"
-        },
-        {
-          "vuid": "VUID-vkCmdBlitImage-dstImage-01943",
-          "text": " <code>dstImage</code> <strong class=\"purple\">must</strong> use a format that supports <code>VK_FORMAT_FEATURE_TRANSFER_DST_BIT</code>, which is indicated by <a href=\"#VkAndroidHardwareBufferFormatPropertiesANDROID\">VkAndroidHardwareBufferFormatPropertiesANDROID</a>::<code>formatFeatures</code> returned by <a href=\"#vkGetAndroidHardwareBufferPropertiesANDROID\">vkGetAndroidHardwareBufferPropertiesANDROID</a> for external format images, or by <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>linearTilingFeatures</code> or <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>optimalTilingFeatures</code> returned by <a href=\"#vkGetPhysicalDeviceFormatProperties\">vkGetPhysicalDeviceFormatProperties</a> for non-external format linearly or optimally tiled images, respectively"
-        },
-        {
-          "vuid": "VUID-vkCmdBlitImage-filter-01944",
-          "text": " If <code>filter</code> is <code>VK_FILTER_LINEAR</code>, <code>srcImage</code> <strong class=\"purple\">must</strong> be of a format which supports linear filtering, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code> flag in <a href=\"#VkAndroidHardwareBufferFormatPropertiesANDROID\">VkAndroidHardwareBufferFormatPropertiesANDROID</a>::<code>formatFeatures</code> returned by <a href=\"#vkGetAndroidHardwareBufferPropertiesANDROID\">vkGetAndroidHardwareBufferPropertiesANDROID</a> for external format images, or by <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>linearTilingFeatures</code> or <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>optimalTilingFeatures</code> returned by <a href=\"#vkGetPhysicalDeviceFormatProperties\">vkGetPhysicalDeviceFormatProperties</a> for non-external format linearly or optimally tiled images, respectively"
-        }
-      ],
       "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
         {
           "vuid": "VUID-vkCmdBlitImage-srcImage-01561",
@@ -11933,19 +11871,11 @@
           "text": " <code>dstImageLayout</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_LAYOUT_SHARED_PRESENT_KHR</code>, <code>VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL</code> or <code>VK_IMAGE_LAYOUT_GENERAL</code>"
         }
       ],
-      "(VK_IMG_filter_cubic)+!(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-vkCmdBlitImage-filter-00236",
-          "text": " If <code>filter</code> is <code>VK_FILTER_CUBIC_IMG</code>, <code>srcImage</code> <strong class=\"purple\">must</strong> be of a format which supports cubic filtering, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code> flag in <code>VkFormatProperties</code>::<code>linearTilingFeatures</code> or <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code> for linearly or optimally tiled images, respectively"
-        }
-      ],
-      "(VK_IMG_filter_cubic)+(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-vkCmdBlitImage-filter-01945",
-          "text": " If <code>filter</code> is <code>VK_FILTER_CUBIC_IMG</code>, <code>srcImage</code> <strong class=\"purple\">must</strong> be of a format which supports cubic filtering, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code> flag in <a href=\"#VkAndroidHardwareBufferFormatPropertiesANDROID\">VkAndroidHardwareBufferFormatPropertiesANDROID</a>::<code>formatFeatures</code> returned by<a href=\"#vkGetAndroidHardwareBufferPropertiesANDROID\">vkGetAndroidHardwareBufferPropertiesANDROID</a> for external format images, or by <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>linearTilingFeatures</code> or <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>optimalTilingFeatures</code> returned by <a href=\"#vkGetPhysicalDeviceFormatProperties\">vkGetPhysicalDeviceFormatProperties</a> for non-external format linearly or optimally tiled images, respectively"
-        }
-      ],
       "(VK_IMG_filter_cubic)": [
+        {
+          "vuid": "VUID-vkCmdBlitImage-filter-02002",
+          "text": " If <code>filter</code> is <code>VK_FILTER_CUBIC_IMG</code>, then the <a href=\"#resources-image-format-features\">format features</a> of <code>srcImage</code> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code>."
+        },
         {
           "vuid": "VUID-vkCmdBlitImage-filter-00237",
           "text": " If <code>filter</code> is <code>VK_FILTER_CUBIC_IMG</code>, <code>srcImage</code> <strong class=\"purple\">must</strong> have a <a href=\"#VkImageType\">VkImageType</a> of <code>VK_IMAGE_TYPE_2D</code>"
@@ -12077,12 +12007,8 @@
           "text": " <code>dstImageLayout</code> <strong class=\"purple\">must</strong> specify the layout of the image subresources of <code>dstImage</code> specified in <code>pRegions</code> at the time this command is executed on a <code>VkDevice</code>"
         },
         {
-          "vuid": "VUID-vkCmdResolveImage-dstImage-00264",
-          "text": " If <code>dstImage</code> was created with <code>tiling</code> equal to <code>VK_IMAGE_TILING_LINEAR</code>, <code>dstImage</code> <strong class=\"purple\">must</strong> have been created with a <code>format</code> that supports being a color attachment, as specified by the <code>VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT</code> flag in <code>VkFormatProperties</code>::<code>linearTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code>"
-        },
-        {
-          "vuid": "VUID-vkCmdResolveImage-dstImage-00265",
-          "text": " If <code>dstImage</code> was created with <code>tiling</code> equal to <code>VK_IMAGE_TILING_OPTIMAL</code>, <code>dstImage</code> <strong class=\"purple\">must</strong> have been created with a <code>format</code> that supports being a color attachment, as specified by the <code>VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT</code> flag in <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code>"
+          "vuid": "VUID-vkCmdResolveImage-dstImage-02003",
+          "text": " The <a href=\"#resources-image-format-features\">format features</a> of <code>dstImage</code> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT</code>."
         },
         {
           "vuid": "VUID-vkCmdResolveImage-srcImage-01386",
@@ -12435,6 +12361,10 @@
           "text": " Image subresources used as attachments in the current render pass <strong class=\"purple\">must</strong> not be accessed in any way other than as an attachment by this command."
         },
         {
+          "vuid": "VUID-vkCmdDraw-None-02009",
+          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_LINEAR</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code>."
+        },
+        {
           "vuid": "VUID-vkCmdDraw-commandBuffer-parameter",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <code>VkCommandBuffer</code> handle"
         },
@@ -12451,31 +12381,11 @@
           "text": " This command <strong class=\"purple\">must</strong> only be called inside of a render pass instance"
         }
       ],
-      "!(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-vkCmdDraw-linearTilingFeatures-00450",
-          "text": " Any <code>VkImageView</code> being sampled with <code>VK_FILTER_LINEAR</code> as a result of this command <strong class=\"purple\">must</strong> be of a format which supports linear filtering, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code> flag in <code>VkFormatProperties</code>::<code>linearTilingFeatures</code> or <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code> for linearly or optimally tiled images, respectively"
-        }
-      ],
-      "(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-vkCmdDraw-formatFeatures-01953",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_LINEAR</code> as a result of this command <strong class=\"purple\">must</strong> be of a format which supports linear filtering, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code> flag in <a href=\"#VkAndroidHardwareBufferFormatPropertiesANDROID\">VkAndroidHardwareBufferFormatPropertiesANDROID</a>::<code>formatFeatures</code> returned by <a href=\"#vkGetAndroidHardwareBufferPropertiesANDROID\">vkGetAndroidHardwareBufferPropertiesANDROID</a> for external format images, or by <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>linearTilingFeatures</code> or <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>optimalTilingFeatures</code> returned by <a href=\"#vkGetPhysicalDeviceFormatProperties\">vkGetPhysicalDeviceFormatProperties</a> for non-external format linearly or optimally tiled images, respectively"
-        }
-      ],
-      "(VK_IMG_filter_cubic)+!(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-vkCmdDraw-linearTilingFeatures-00451",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command <strong class=\"purple\">must</strong> be of a format which supports cubic filtering, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code> flag in <code>VkFormatProperties</code>::<code>linearTilingFeatures</code> or <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code> for linearly or optimally tiled images, respectively"
-        }
-      ],
-      "(VK_IMG_filter_cubic)+(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-vkCmdDraw-formatFeatures-01954",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command <strong class=\"purple\">must</strong> be of a format which supports cubic filtering, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code> flag in <a href=\"#VkAndroidHardwareBufferFormatPropertiesANDROID\">VkAndroidHardwareBufferFormatPropertiesANDROID</a>::<code>formatFeatures</code> returned by <a href=\"#vkGetAndroidHardwareBufferPropertiesANDROID\">vkGetAndroidHardwareBufferPropertiesANDROID</a> for external format images, or by <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>linearTilingFeatures</code> or <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>optimalTilingFeatures</code> returned by <a href=\"#vkGetPhysicalDeviceFormatProperties\">vkGetPhysicalDeviceFormatProperties</a> for non-external format linearly or optimally tiled images, respectively"
-        }
-      ],
       "(VK_IMG_filter_cubic)": [
+        {
+          "vuid": "VUID-vkCmdDraw-None-02010",
+          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code>."
+        },
         {
           "vuid": "VUID-vkCmdDraw-None-00452",
           "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command <strong class=\"purple\">must</strong> not have a <a href=\"#VkImageViewType\">VkImageViewType</a> of <code>VK_IMAGE_VIEW_TYPE_3D</code>, <code>VK_IMAGE_VIEW_TYPE_CUBE</code>, or <code>VK_IMAGE_VIEW_TYPE_CUBE_ARRAY</code>"
@@ -12575,6 +12485,10 @@
           "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
         },
         {
+          "vuid": "VUID-vkCmdDrawIndexed-None-02011",
+          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_LINEAR</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code>."
+        },
+        {
           "vuid": "VUID-vkCmdDrawIndexed-None-01500",
           "text": " Image subresources used as attachments in the current render pass <strong class=\"purple\">must</strong> not be accessed in any way other than as an attachment by this command."
         },
@@ -12595,31 +12509,11 @@
           "text": " This command <strong class=\"purple\">must</strong> only be called inside of a render pass instance"
         }
       ],
-      "!(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-vkCmdDrawIndexed-linearTilingFeatures-00470",
-          "text": " Any <code>VkImageView</code> being sampled with <code>VK_FILTER_LINEAR</code> as a result of this command <strong class=\"purple\">must</strong> be of a format which supports linear filtering, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code> flag in <code>VkFormatProperties</code>::<code>linearTilingFeatures</code> or <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code> for linearly or optimally tiled images, respectively"
-        }
-      ],
-      "(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-vkCmdDrawIndexed-formatFeatures-01955",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_LINEAR</code> as a result of this command <strong class=\"purple\">must</strong> be of a format which supports linear filtering, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code> flag in <a href=\"#VkAndroidHardwareBufferFormatPropertiesANDROID\">VkAndroidHardwareBufferFormatPropertiesANDROID</a>::<code>formatFeatures</code> returned by <a href=\"#vkGetAndroidHardwareBufferPropertiesANDROID\">vkGetAndroidHardwareBufferPropertiesANDROID</a> for external format images, or by <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>linearTilingFeatures</code> or <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>optimalTilingFeatures</code> returned by <a href=\"#vkGetPhysicalDeviceFormatProperties\">vkGetPhysicalDeviceFormatProperties</a> for non-external format linearly or optimally tiled images, respectively"
-        }
-      ],
-      "(VK_IMG_filter_cubic)+!(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-vkCmdDrawIndexed-linearTilingFeatures-00471",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command <strong class=\"purple\">must</strong> be of a format which supports cubic filtering, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code> flag in <code>VkFormatProperties</code>::<code>linearTilingFeatures</code> or <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code> for linearly or optimally tiled images, respectively"
-        }
-      ],
-      "(VK_IMG_filter_cubic)+(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-vkCmdDrawIndexed-formatFeatures-01956",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command <strong class=\"purple\">must</strong> be of a format which supports cubic filtering, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code> flag in <a href=\"#VkAndroidHardwareBufferFormatPropertiesANDROID\">VkAndroidHardwareBufferFormatPropertiesANDROID</a>::<code>formatFeatures</code> returned by <a href=\"#vkGetAndroidHardwareBufferPropertiesANDROID\">vkGetAndroidHardwareBufferPropertiesANDROID</a> for external format images, or by <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>linearTilingFeatures</code> or <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>optimalTilingFeatures</code> returned by <a href=\"#vkGetPhysicalDeviceFormatProperties\">vkGetPhysicalDeviceFormatProperties</a> for non-external format linearly or optimally tiled images, respectively"
-        }
-      ],
       "(VK_IMG_filter_cubic)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexed-None-02012",
+          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code>."
+        },
         {
           "vuid": "VUID-vkCmdDrawIndexed-None-00472",
           "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command <strong class=\"purple\">must</strong> not have a <a href=\"#VkImageViewType\">VkImageViewType</a> of <code>VK_IMAGE_VIEW_TYPE_3D</code>, <code>VK_IMAGE_VIEW_TYPE_CUBE</code>, or <code>VK_IMAGE_VIEW_TYPE_CUBE_ARRAY</code>"
@@ -12747,6 +12641,10 @@
           "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
         },
         {
+          "vuid": "VUID-vkCmdDrawIndirect-None-02013",
+          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_LINEAR</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code>."
+        },
+        {
           "vuid": "VUID-vkCmdDrawIndirect-None-01501",
           "text": " Image subresources used as attachments in the current render pass <strong class=\"purple\">must</strong> not be accessed in any way other than as an attachment by this command."
         },
@@ -12775,31 +12673,11 @@
           "text": " Both of <code>buffer</code>, and <code>commandBuffer</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkDevice</code>"
         }
       ],
-      "!(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-vkCmdDrawIndirect-linearTilingFeatures-00496",
-          "text": " Any <code>VkImageView</code> being sampled with <code>VK_FILTER_LINEAR</code> as a result of this command <strong class=\"purple\">must</strong> be of a format which supports linear filtering, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code> flag in <code>VkFormatProperties</code>::<code>linearTilingFeatures</code> or <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code> for linearly or optimally tiled images, respectively"
-        }
-      ],
-      "(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-vkCmdDrawIndirect-formatFeatures-01957",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_LINEAR</code> as a result of this command <strong class=\"purple\">must</strong> be of a format which supports linear filtering, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code> flag in <a href=\"#VkAndroidHardwareBufferFormatPropertiesANDROID\">VkAndroidHardwareBufferFormatPropertiesANDROID</a>::<code>formatFeatures</code> returned by <a href=\"#vkGetAndroidHardwareBufferPropertiesANDROID\">vkGetAndroidHardwareBufferPropertiesANDROID</a> for external format images, or by <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>linearTilingFeatures</code> or <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>optimalTilingFeatures</code> returned by <a href=\"#vkGetPhysicalDeviceFormatProperties\">vkGetPhysicalDeviceFormatProperties</a> for non-external format linearly or optimally tiled images, respectively"
-        }
-      ],
-      "(VK_IMG_filter_cubic)+!(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-vkCmdDrawIndirect-linearTilingFeatures-00497",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command <strong class=\"purple\">must</strong> be of a format which supports cubic filtering, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code> flag in <code>VkFormatProperties</code>::<code>linearTilingFeatures</code> or <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code> for linearly or optimally tiled images, respectively"
-        }
-      ],
-      "(VK_IMG_filter_cubic)+(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-vkCmdDrawIndirect-formatFeatures-01958",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command <strong class=\"purple\">must</strong> be of a format which supports cubic filtering, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code> flag in <a href=\"#VkAndroidHardwareBufferFormatPropertiesANDROID\">VkAndroidHardwareBufferFormatPropertiesANDROID</a>::<code>formatFeatures</code> returned by <a href=\"#vkGetAndroidHardwareBufferPropertiesANDROID\">vkGetAndroidHardwareBufferPropertiesANDROID</a> for external format images, or by <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>linearTilingFeatures</code> or <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>optimalTilingFeatures</code> returned by <a href=\"#vkGetPhysicalDeviceFormatProperties\">vkGetPhysicalDeviceFormatProperties</a> for non-external format linearly or optimally tiled images, respectively"
-        }
-      ],
       "(VK_IMG_filter_cubic)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirect-None-02014",
+          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code>."
+        },
         {
           "vuid": "VUID-vkCmdDrawIndirect-None-00498",
           "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command <strong class=\"purple\">must</strong> not have a <a href=\"#VkImageViewType\">VkImageViewType</a> of <code>VK_IMAGE_VIEW_TYPE_3D</code>, <code>VK_IMAGE_VIEW_TYPE_CUBE</code>, or <code>VK_IMAGE_VIEW_TYPE_CUBE_ARRAY</code>"
@@ -12951,8 +12829,8 @@
           "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
         },
         {
-          "vuid": "VUID-vkCmdDrawIndirectCountKHR-linearTilingFeatures-03130",
-          "text": " Any <code>VkImageView</code> being sampled with <code>VK_FILTER_LINEAR</code> as a result of this command <strong class=\"purple\">must</strong> be of a format which supports linear filtering, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code> flag in <code>VkFormatProperties</code>::<code>linearTilingFeatures</code> (for a linear image) or <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code>(for an optimally tiled image) returned by <code>vkGetPhysicalDeviceFormatProperties</code>"
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-None-02015",
+          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_LINEAR</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code>."
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCountKHR-None-03131",
@@ -12989,8 +12867,8 @@
       ],
       "(VK_KHR_draw_indirect_count)+(VK_IMG_filter_cubic)": [
         {
-          "vuid": "VUID-vkCmdDrawIndirectCountKHR-linearTilingFeatures-03169",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command <strong class=\"purple\">must</strong> be of a format which supports cubic filtering, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code> flag in <code>VkFormatProperties</code>::<code>linearTilingFeatures</code> (for a linear image) or <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code>(for an optimally tiled image) returned by <code>vkGetPhysicalDeviceFormatProperties</code>"
+          "vuid": "VUID-vkCmdDrawIndirectCountKHR-None-02016",
+          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code>."
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCountKHR-None-03170",
@@ -13131,6 +13009,10 @@
           "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
         },
         {
+          "vuid": "VUID-vkCmdDrawIndirectCountAMD-None-02017",
+          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_LINEAR</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code>."
+        },
+        {
           "vuid": "VUID-vkCmdDrawIndirectCountAMD-None-01502",
           "text": " Image subresources used as attachments in the current render pass <strong class=\"purple\">must</strong> not be accessed in any way other than as an attachment by this command."
         },
@@ -13161,18 +13043,6 @@
         {
           "vuid": "VUID-vkCmdDrawIndirectCountAMD-commonparent",
           "text": " Each of <code>buffer</code>, <code>commandBuffer</code>, and <code>countBuffer</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkDevice</code>"
-        }
-      ],
-      "(VK_AMD_draw_indirect_count)+!(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-vkCmdDrawIndirectCountAMD-linearTilingFeatures-00524",
-          "text": " Any <code>VkImageView</code> being sampled with <code>VK_FILTER_LINEAR</code> as a result of this command <strong class=\"purple\">must</strong> be of a format which supports linear filtering, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code> flag in <code>VkFormatProperties</code>::<code>linearTilingFeatures</code> or <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code> for linearly or optimally tiled images, respectively"
-        }
-      ],
-      "(VK_AMD_draw_indirect_count)+(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-vkCmdDrawIndirectCountAMD-formatFeatures-01959",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_LINEAR</code> as a result of this command <strong class=\"purple\">must</strong> be of a format which supports linear filtering, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code> flag in <a href=\"#VkAndroidHardwareBufferFormatPropertiesANDROID\">VkAndroidHardwareBufferFormatPropertiesANDROID</a>::<code>formatFeatures</code> returned by <a href=\"#vkGetAndroidHardwareBufferPropertiesANDROID\">vkGetAndroidHardwareBufferPropertiesANDROID</a> for external format images, or by <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>linearTilingFeatures</code> or <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>optimalTilingFeatures</code> returned by <a href=\"#vkGetPhysicalDeviceFormatProperties\">vkGetPhysicalDeviceFormatProperties</a> for non-external format linearly or optimally tiled images, respectively"
         }
       ],
       "(VK_AMD_draw_indirect_count)+(VK_VERSION_1_1,VK_KHR_multiview)": [
@@ -13297,6 +13167,10 @@
           "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
         },
         {
+          "vuid": "VUID-vkCmdDrawIndexedIndirect-None-02018",
+          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_LINEAR</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code>."
+        },
+        {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-None-01503",
           "text": " Image subresources used as attachments in the current render pass <strong class=\"purple\">must</strong> not be accessed in any way other than as an attachment by this command."
         },
@@ -13325,31 +13199,11 @@
           "text": " Both of <code>buffer</code>, and <code>commandBuffer</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkDevice</code>"
         }
       ],
-      "!(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-vkCmdDrawIndexedIndirect-linearTilingFeatures-00548",
-          "text": " Any <code>VkImageView</code> being sampled with <code>VK_FILTER_LINEAR</code> as a result of this command <strong class=\"purple\">must</strong> be of a format which supports linear filtering, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code> flag in <code>VkFormatProperties</code>::<code>linearTilingFeatures</code> or <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code> for linearly or optimally tiled images, respectively"
-        }
-      ],
-      "(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-vkCmdDrawIndexedIndirect-formatFeatures-01960",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_LINEAR</code> as a result of this command <strong class=\"purple\">must</strong> be of a format which supports linear filtering, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code> flag in <a href=\"#VkAndroidHardwareBufferFormatPropertiesANDROID\">VkAndroidHardwareBufferFormatPropertiesANDROID</a>::<code>formatFeatures</code> returned by <a href=\"#vkGetAndroidHardwareBufferPropertiesANDROID\">vkGetAndroidHardwareBufferPropertiesANDROID</a> for external format images, or by <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>linearTilingFeatures</code> or <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>optimalTilingFeatures</code> returned by <a href=\"#vkGetPhysicalDeviceFormatProperties\">vkGetPhysicalDeviceFormatProperties</a> for non-external format linearly or optimally tiled images, respectively"
-        }
-      ],
-      "(VK_IMG_filter_cubic)+!(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-vkCmdDrawIndexedIndirect-linearTilingFeatures-00549",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command <strong class=\"purple\">must</strong> be of a format which supports cubic filtering, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code> flag in <code>VkFormatProperties</code>::<code>linearTilingFeatures</code> or <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code> for linearly or optimally tiled images, respectively"
-        }
-      ],
-      "(VK_IMG_filter_cubic)+(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-vkCmdDrawIndexedIndirect-formatFeatures-01961",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command <strong class=\"purple\">must</strong> be of a format which supports cubic filtering, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code> flag in <a href=\"#VkAndroidHardwareBufferFormatPropertiesANDROID\">VkAndroidHardwareBufferFormatPropertiesANDROID</a>::<code>formatFeatures</code> returned by <a href=\"#vkGetAndroidHardwareBufferPropertiesANDROID\">vkGetAndroidHardwareBufferPropertiesANDROID</a> for external format images, or by <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>linearTilingFeatures</code> or <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>optimalTilingFeatures</code> returned by <a href=\"#vkGetPhysicalDeviceFormatProperties\">vkGetPhysicalDeviceFormatProperties</a> for non-external format linearly or optimally tiled images, respectively"
-        }
-      ],
       "(VK_IMG_filter_cubic)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirect-None-02019",
+          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code>."
+        },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-None-00550",
           "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command <strong class=\"purple\">must</strong> not have a <a href=\"#VkImageViewType\">VkImageViewType</a> of <code>VK_IMAGE_VIEW_TYPE_3D</code>, <code>VK_IMAGE_VIEW_TYPE_CUBE</code>, or <code>VK_IMAGE_VIEW_TYPE_CUBE_ARRAY</code>"
@@ -13505,8 +13359,8 @@
           "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
         },
         {
-          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-linearTilingFeatures-03162",
-          "text": " Any <code>VkImageView</code> being sampled with <code>VK_FILTER_LINEAR</code> as a result of this command <strong class=\"purple\">must</strong> be of a format which supports linear filtering, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code> flag in <code>VkFormatProperties</code>::<code>linearTilingFeatures</code> (for a linear image) or <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code>(for an optimally tiled image) returned by <code>vkGetPhysicalDeviceFormatProperties</code>"
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-None-02020",
+          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_LINEAR</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code>."
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-None-03163",
@@ -13543,8 +13397,8 @@
       ],
       "(VK_KHR_draw_indirect_count)+(VK_IMG_filter_cubic)": [
         {
-          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-linearTilingFeatures-03172",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command <strong class=\"purple\">must</strong> be of a format which supports cubic filtering, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code> flag in <code>VkFormatProperties</code>::<code>linearTilingFeatures</code> (for a linear image) or <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code>(for an optimally tiled image) returned by <code>vkGetPhysicalDeviceFormatProperties</code>"
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-None-02021",
+          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code>."
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-None-03173",
@@ -13685,6 +13539,10 @@
           "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
         },
         {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCountAMD-None-02022",
+          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_LINEAR</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code>."
+        },
+        {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCountAMD-None-01504",
           "text": " Image subresources used as attachments in the current render pass <strong class=\"purple\">must</strong> not be accessed in any way other than as an attachment by this command."
         },
@@ -13715,18 +13573,6 @@
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCountAMD-commonparent",
           "text": " Each of <code>buffer</code>, <code>commandBuffer</code>, and <code>countBuffer</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkDevice</code>"
-        }
-      ],
-      "(VK_AMD_draw_indirect_count)+!(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-vkCmdDrawIndexedIndirectCountAMD-linearTilingFeatures-00577",
-          "text": " Any <code>VkImageView</code> being sampled with <code>VK_FILTER_LINEAR</code> as a result of this command <strong class=\"purple\">must</strong> be of a format which supports linear filtering, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code> flag in <code>VkFormatProperties</code>::<code>linearTilingFeatures</code> or <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code> for linearly or optimally tiled images, respectively"
-        }
-      ],
-      "(VK_AMD_draw_indirect_count)+(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-vkCmdDrawIndexedIndirectCountAMD-formatFeatures-01962",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_LINEAR</code> as a result of this command <strong class=\"purple\">must</strong> be of a format which supports linear filtering, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code> flag in <a href=\"#VkAndroidHardwareBufferFormatPropertiesANDROID\">VkAndroidHardwareBufferFormatPropertiesANDROID</a>::<code>formatFeatures</code> returned by <a href=\"#vkGetAndroidHardwareBufferPropertiesANDROID\">vkGetAndroidHardwareBufferPropertiesANDROID</a> for external format images, or by <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>linearTilingFeatures</code> or <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>optimalTilingFeatures</code> returned by <a href=\"#vkGetPhysicalDeviceFormatProperties\">vkGetPhysicalDeviceFormatProperties</a> for non-external format linearly or optimally tiled images, respectively"
         }
       ],
       "(VK_AMD_draw_indirect_count)+(VK_VERSION_1_1,VK_KHR_multiview)": [
@@ -15065,6 +14911,10 @@
           "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_COMPUTE</code> accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
         },
         {
+          "vuid": "VUID-vkCmdDispatch-None-02005",
+          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_LINEAR</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code>."
+        },
+        {
           "vuid": "VUID-vkCmdDispatch-commandBuffer-parameter",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <code>VkCommandBuffer</code> handle"
         },
@@ -15081,31 +14931,11 @@
           "text": " This command <strong class=\"purple\">must</strong> only be called outside of a render pass instance"
         }
       ],
-      "!(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-vkCmdDispatch-linearTilingFeatures-00398",
-          "text": " Any <code>VkImageView</code> being sampled with <code>VK_FILTER_LINEAR</code> as a result of this command <strong class=\"purple\">must</strong> be of a format which supports linear filtering, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code> flag in <code>VkFormatProperties</code>::<code>linearTilingFeatures</code> or <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code> for linearly or optimally tiled images, respectively"
-        }
-      ],
-      "(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-vkCmdDispatch-formatFeatures-01949",
-          "text": " Any <code>VkImageView</code> being sampled with <code>VK_FILTER_LINEAR</code> as a result of this command <strong class=\"purple\">must</strong> be of a format which supports linear filtering, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code> flag in <a href=\"#VkAndroidHardwareBufferFormatPropertiesANDROID\">VkAndroidHardwareBufferFormatPropertiesANDROID</a>::<code>formatFeatures</code> returned by <a href=\"#vkGetAndroidHardwareBufferPropertiesANDROID\">vkGetAndroidHardwareBufferPropertiesANDROID</a> for external format images, or by <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>linearTilingFeatures</code> or <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>optimalTilingFeatures</code> returned by <a href=\"#vkGetPhysicalDeviceFormatProperties\">vkGetPhysicalDeviceFormatProperties</a> for non-external format linearly or optimally tiled images, respectively"
-        }
-      ],
-      "(VK_IMG_filter_cubic)+!(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-vkCmdDispatch-linearTilingFeatures-00399",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command <strong class=\"purple\">must</strong> be of a format which supports cubic filtering, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code> flag in <code>VkFormatProperties</code>::<code>linearTilingFeatures</code> or <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code> for linearly or optimally tiled images, respectively"
-        }
-      ],
-      "(VK_IMG_filter_cubic)+(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-vkCmdDispatch-formatFeatures-01950",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command <strong class=\"purple\">must</strong> be of a format which supports cubic filtering, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code> flag in <a href=\"#VkAndroidHardwareBufferFormatPropertiesANDROID\">VkAndroidHardwareBufferFormatPropertiesANDROID</a>::<code>formatFeatures</code> returned by <a href=\"#vkGetAndroidHardwareBufferPropertiesANDROID\">vkGetAndroidHardwareBufferPropertiesANDROID</a> for external format images, or by <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>linearTilingFeatures</code> or <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>optimalTilingFeatures</code> returned by <a href=\"#vkGetPhysicalDeviceFormatProperties\">vkGetPhysicalDeviceFormatProperties</a> for non-external format linearly or optimally tiled images, respectively"
-        }
-      ],
       "(VK_IMG_filter_cubic)": [
+        {
+          "vuid": "VUID-vkCmdDispatch-None-02006",
+          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code>."
+        },
         {
           "vuid": "VUID-vkCmdDispatch-None-00400",
           "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command <strong class=\"purple\">must</strong> not have a <a href=\"#VkImageViewType\">VkImageViewType</a> of <code>VK_IMAGE_VIEW_TYPE_3D</code>, <code>VK_IMAGE_VIEW_TYPE_CUBE</code>, or <code>VK_IMAGE_VIEW_TYPE_CUBE_ARRAY</code>"
@@ -15181,6 +15011,10 @@
           "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_COMPUTE</code> accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
         },
         {
+          "vuid": "VUID-vkCmdDispatchIndirect-None-02007",
+          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_LINEAR</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code>."
+        },
+        {
           "vuid": "VUID-vkCmdDispatchIndirect-commandBuffer-parameter",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <code>VkCommandBuffer</code> handle"
         },
@@ -15205,31 +15039,11 @@
           "text": " Both of <code>buffer</code>, and <code>commandBuffer</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkDevice</code>"
         }
       ],
-      "!(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-vkCmdDispatchIndirect-linearTilingFeatures-00414",
-          "text": " Any <code>VkImageView</code> being sampled with <code>VK_FILTER_LINEAR</code> as a result of this command <strong class=\"purple\">must</strong> be of a format which supports linear filtering, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code> flag in <code>VkFormatProperties</code>::<code>linearTilingFeatures</code> or <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code> for linearly or optimally tiled images, respectively"
-        }
-      ],
-      "(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-vkCmdDispatchIndirect-formatFeatures-01951",
-          "text": " Any <code>VkImageView</code> being sampled with <code>VK_FILTER_LINEAR</code> as a result of this command <strong class=\"purple\">must</strong> be of a format which supports linear filtering, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code> flag in <a href=\"#VkAndroidHardwareBufferFormatPropertiesANDROID\">VkAndroidHardwareBufferFormatPropertiesANDROID</a>::<code>formatFeatures</code> returned by <a href=\"#vkGetAndroidHardwareBufferPropertiesANDROID\">vkGetAndroidHardwareBufferPropertiesANDROID</a> for external format images, or by <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>linearTilingFeatures</code> or <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>optimalTilingFeatures</code> returned by <a href=\"#vkGetPhysicalDeviceFormatProperties\">vkGetPhysicalDeviceFormatProperties</a> for non-external format linearly or optimally tiled images, respectively"
-        }
-      ],
-      "(VK_IMG_filter_cubic)+!(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-vkCmdDispatchIndirect-linearTilingFeatures-00415",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command <strong class=\"purple\">must</strong> be of a format which supports cubic filtering, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code> flag in <code>VkFormatProperties</code>::<code>linearTilingFeatures</code> or <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code> for linearly or optimally tiled images, respectively"
-        }
-      ],
-      "(VK_IMG_filter_cubic)+(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-vkCmdDispatchIndirect-formatFeatures-01952",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command <strong class=\"purple\">must</strong> be of a format which supports cubic filtering, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code> flag in <a href=\"#VkAndroidHardwareBufferFormatPropertiesANDROID\">VkAndroidHardwareBufferFormatPropertiesANDROID</a>::<code>formatFeatures</code> returned by <a href=\"#vkGetAndroidHardwareBufferPropertiesANDROID\">vkGetAndroidHardwareBufferPropertiesANDROID</a> for external format images, or by <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>linearTilingFeatures</code> or <a href=\"#VkFormatProperties\">VkFormatProperties</a>::<code>optimalTilingFeatures</code> returned by <a href=\"#vkGetPhysicalDeviceFormatProperties\">vkGetPhysicalDeviceFormatProperties</a> for non-external format linearly or optimally tiled images, respectively"
-        }
-      ],
       "(VK_IMG_filter_cubic)": [
+        {
+          "vuid": "VUID-vkCmdDispatchIndirect-None-02008",
+          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code>."
+        },
         {
           "vuid": "VUID-vkCmdDispatchIndirect-None-00416",
           "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command <strong class=\"purple\">must</strong> not have a <a href=\"#VkImageViewType\">VkImageViewType</a> of <code>VK_IMAGE_VIEW_TYPE_3D</code>, <code>VK_IMAGE_VIEW_TYPE_CUBE</code>, or <code>VK_IMAGE_VIEW_TYPE_CUBE_ARRAY</code>"
@@ -19729,6 +19543,54 @@
         {
           "vuid": "VUID-vkDestroyDebugReportCallbackEXT-callback-parent",
           "text": " <code>callback</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from <code>instance</code>"
+        }
+      ]
+    },
+    "vkCmdSetCheckpointNV": {
+      "(VK_NV_device_diagnostic_checkpoints)": [
+        {
+          "vuid": "VUID-vkCmdSetCheckpointNV-commandBuffer-parameter",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <code>VkCommandBuffer</code> handle"
+        },
+        {
+          "vuid": "VUID-vkCmdSetCheckpointNV-commandBuffer-recording",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be in the <a href=\"#commandbuffers-lifecycle\">recording state</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdSetCheckpointNV-commandBuffer-cmdpool",
+          "text": " The <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from <strong class=\"purple\">must</strong> support graphics, compute, or transfer operations"
+        }
+      ]
+    },
+    "vkGetQueueCheckpointDataNV": {
+      "(VK_NV_device_diagnostic_checkpoints)": [
+        {
+          "vuid": "VUID-vkGetQueueCheckpointDataNV-queue-02025",
+          "text": " The device that <code>queue</code> belongs to <strong class=\"purple\">must</strong> be in the lost state"
+        },
+        {
+          "vuid": "VUID-vkGetQueueCheckpointDataNV-queue-parameter",
+          "text": " <code>queue</code> <strong class=\"purple\">must</strong> be a valid <code>VkQueue</code> handle"
+        },
+        {
+          "vuid": "VUID-vkGetQueueCheckpointDataNV-pCheckpointDataCount-parameter",
+          "text": " <code>pCheckpointDataCount</code> <strong class=\"purple\">must</strong> be a valid pointer to a <code>uint32_t</code> value"
+        },
+        {
+          "vuid": "VUID-vkGetQueueCheckpointDataNV-pCheckpointData-parameter",
+          "text": " If the value referenced by <code>pCheckpointDataCount</code> is not <code>0</code>, and <code>pCheckpointData</code> is not <code>NULL</code>, <code>pCheckpointData</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>pCheckpointDataCount</code> <code>VkCheckpointDataNV</code> structures"
+        }
+      ]
+    },
+    "VkCheckpointDataNV": {
+      "(VK_NV_device_diagnostic_checkpoints)": [
+        {
+          "vuid": "VUID-VkCheckpointDataNV-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_CHECKPOINT_DATA_NV</code>"
+        },
+        {
+          "vuid": "VUID-VkCheckpointDataNV-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
         }
       ]
     }
