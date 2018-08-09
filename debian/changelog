@@ -1,5 +1,5 @@
-vulkan-headers (1.1.79.0) UNRELEASED; urgency=medium
+vulkan-headers (1.1.77-1) unstable; urgency=medium
 
-  * New upstream version
+  * Split from vulkan. (Closes: #901914)
 
- -- Brett Johnson <brett@linuxturtle.net>  Mon, 16 Jul 2018 11:30:03 -0600
+ -- Timo Aaltonen <tjaalton@debian.org>  Wed, 01 Aug 2018 11:37:04 +0300

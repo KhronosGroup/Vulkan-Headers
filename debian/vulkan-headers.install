@@ -1,2 +1,2 @@
-usr/include/
-usr/share/
+usr/include/vulkan
+usr/share/vulkan/registry

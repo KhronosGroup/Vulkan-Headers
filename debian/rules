@@ -1,20 +1,22 @@
 #!/usr/bin/make -f
 
-%:
-	dh $@ 
+# see EXAMPLES in dpkg-buildflags(1) and read /usr/share/dpkg/*
+DPKG_EXPORT_BUILDFLAGS = 1
+include /usr/share/dpkg/default.mk
 
-override_dh_auto_configure:
-	dh_auto_configure -- \
-	-DCMAKE_BUILD_TYPE=Release
+%:
+	dh $@ --with quilt --builddirectory=build/
 
 override_dh_auto_install:
 	dh_auto_install --destdir=debian/tmp
 
-override_dh_auto_build:
+override_dh_install:
+	dh_install --fail-missing
 
 gentarball: SOURCE=vulkan-headers
 gentarball: UV=$(shell dpkg-parsechangelog|awk '/^Version:/ {print $$2}'|sed 's/-.*$$//')
 gentarball:
-	git archive --format=tar upstream-unstable --prefix=$(SOURCE)-$(UV)/ | gzip -9 > \
-		../$(SOURCE)_$(UV).orig.tar.gz
+	tar --transform 's,^,$(SOURCE)-$(UV)/,' \
+		--exclude 'debian' --exclude-vcs \
+		-cJf ../$(SOURCE)_$(UV).orig.tar.xz .
 

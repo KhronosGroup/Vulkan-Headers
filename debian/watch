@@ -1,3 +1,4 @@
-version=4
+version=3
 
-# no tagged releases
+opts="filenamemangle=s/(?:.*?)?v?(\d[\d.]*)\.tar\.gz/vulkan-$1.tar.gz/" \
+ https://github.com/KhronosGroup/Vulkan-Headers/tags (?:.*?/)sdk[_-](\d[\d.]*)\.tar\.gz
