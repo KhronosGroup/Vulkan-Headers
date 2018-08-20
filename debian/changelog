@@ -1,8 +1,8 @@
-vulkan-headers (1.1.82.0-1) UNRELEASED; urgency=medium
+vulkan-headers (1.1.82.0-2) UNRELEASED; urgency=medium
 
   * New upstream release
 
- -- Brett Johnson <brett@linuxturtle.net>  Thu, 09 Aug 2018 11:53:25 -0600
+ -- Brett Johnson <brett@linuxturtle.net>  Thu, 09 Aug 2018 17:51:28 -0600
 
 vulkan-headers (1.1.77-1) unstable; urgency=medium
 
