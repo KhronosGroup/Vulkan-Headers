@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.1.82",
-    "comment": "from git branch: master commit: ff0c2339083b76aba0414afafdb195bba15c78d8",
-    "date": "2018-07-30 16:08:24Z"
+    "api version": "1.1.83",
+    "comment": "from git branch: master commit: dd9919749a56177c2eb9b6525c0979722a3c24ff",
+    "date": "2018-08-20 19:42:16Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -255,6 +255,14 @@
         {
           "vuid": "VUID-VkQueueFamilyProperties2-pNext-pNext",
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkQueueFamilyCheckpointPropertiesNV\">VkQueueFamilyCheckpointPropertiesNV</a>"
+        }
+      ]
+    },
+    "VkQueueFamilyCheckpointPropertiesNV": {
+      "(VK_VERSION_1_1,VK_KHR_get_physical_device_properties2)+(VK_NV_device_diagnostic_checkpoints)": [
+        {
+          "vuid": "VUID-VkQueueFamilyCheckpointPropertiesNV-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV</code>"
         }
       ]
     },
@@ -2459,6 +2467,10 @@
         {
           "vuid": "VUID-vkCmdPipelineBarrier-pDependencies-02024",
           "text": " If <code>vkCmdPipelineBarrier</code> is called within a render pass instance, the render pass <strong class=\"purple\">must</strong> have been created with at least one <code>VkSubpassDependency</code> instance in <code>VkRenderPassCreateInfo</code>::<code>pDependencies</code> that expresses a dependency from the current subpass to itself, and for which <code>srcStageMask</code> contains a subset of the bit values in <code>VkSubpassDependency</code>::<code>srcStageMask</code>, <code>dstStageMask</code> contains a subset of the bit values in <code>VkSubpassDependency</code>::<code>dstStageMask</code>, and <code>dependencyFlags</code> is equal to <code>VkSubpassDependency</code>::<code>dependencyFlags</code>."
+        },
+        {
+          "vuid": "VUID-vkCmdPipelineBarrier-pMemoryBarriers-02026",
+          "text": " If <code>vkCmdPipelineBarrier</code> is called within a render pass instance, for each element of <code>pMemoryBarriers</code> and <code>pImageMemoryBarriers</code>, the render pass <strong class=\"purple\">must</strong> have been defined with a <code>VkSubpassDependency</code> self-dependency for the current subpass with valid <code>srcStageMask</code>, <code>dstStageMask</code>, and <code>dependencyFlags</code> values such that <code>Vk*Barrier</code>::<code>srcAccessMask</code> contains a subset of the bit values in <code>VkSubpassDependency</code>::<code>srcAccessMask</code> and <code>Vk*Barrier</code>::<code>dstAccessMask</code> contains a subset of the bit values in <code>VkSubpassDependency</code>::<code>dstAccessMask</code>."
         },
         {
           "vuid": "VUID-vkCmdPipelineBarrier-bufferMemoryBarrierCount-01178",
@@ -9390,7 +9402,7 @@
         },
         {
           "vuid": "VUID-VkWriteDescriptorSet-descriptorType-01948",
-          "text": " If <code>descriptorType</code> is <code>VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER</code>, and <code>dstSet</code> was allocated with a layout that included immutable samplers for <code>dstBinding</code>, then the <code>imageView</code> member of each element of <code>pImageInfo</code> which corresponds to a immutable sampler that enables <a href=\"#samplers-YCbCr-conversion\">sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion</a> <strong class=\"purple\">must</strong> have been created with a <code>VkSamplerYcbcrConversionInfo</code> structure in its <code>pNext</code> chain with an <em>identically defined</em> <code>VkSamplerYcbcrConversionInfo</code> to the corresponding immutable sampler"
+          "text": " If <code>descriptorType</code> is <code>VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER</code>, and <code>dstSet</code> was allocated with a layout that included immutable samplers for <code>dstBinding</code>, then the <code>imageView</code> member of each element of <code>pImageInfo</code> which corresponds to an immutable sampler that enables <a href=\"#samplers-YCbCr-conversion\">sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion</a> <strong class=\"purple\">must</strong> have been created with a <code>VkSamplerYcbcrConversionInfo</code> structure in its <code>pNext</code> chain with an <em>identically defined</em> <code>VkSamplerYcbcrConversionInfo</code> to the corresponding immutable sampler"
         },
         {
           "vuid": "VUID-VkWriteDescriptorSet-descriptorType-01402",
@@ -9514,7 +9526,7 @@
         },
         {
           "vuid": "VUID-VkDescriptorImageInfo-imageLayout-00344",
-          "text": " <code>imageLayout</code> <strong class=\"purple\">must</strong> match the actual <a href=\"#VkImageLayout\">VkImageLayout</a> of each subresource accessible from <code>imageView</code> at the time this descriptor is accessed"
+          "text": " <code>imageLayout</code> <strong class=\"purple\">must</strong> match the actual <a href=\"#VkImageLayout\">VkImageLayout</a> of each subresource accessible from <code>imageView</code> at the time this descriptor is accessed as defined by the <a href=\"#resources-image-layouts-matching-rule\">image layout matching rules</a>"
         },
         {
           "vuid": "VUID-VkDescriptorImageInfo-commonparent",
@@ -11216,7 +11228,7 @@
         },
         {
           "vuid": "VUID-VkImageCopy-srcImage-01790",
-          "text": " If both <code>srcImage</code> and <code>dstImage</code> are of type <code>VK_IMAGE_TYPE_2D</code> then then <code>extent.depth</code> <strong class=\"purple\">must</strong> be <code>1</code>."
+          "text": " If both <code>srcImage</code> and <code>dstImage</code> are of type <code>VK_IMAGE_TYPE_2D</code> then <code>extent.depth</code> <strong class=\"purple\">must</strong> be <code>1</code>."
         },
         {
           "vuid": "VUID-VkImageCopy-srcImage-01791",
@@ -12362,7 +12374,7 @@
         },
         {
           "vuid": "VUID-vkCmdDraw-None-02009",
-          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_LINEAR</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code>."
+          "text": " If a <code>VkImageView</code> is sampled with <code>VK_FILTER_LINEAR</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code>."
         },
         {
           "vuid": "VUID-vkCmdDraw-commandBuffer-parameter",
@@ -12384,7 +12396,7 @@
       "(VK_IMG_filter_cubic)": [
         {
           "vuid": "VUID-vkCmdDraw-None-02010",
-          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code>."
+          "text": " If a <code>VkImageView</code> is sampled with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code>."
         },
         {
           "vuid": "VUID-vkCmdDraw-None-00452",
@@ -12486,7 +12498,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexed-None-02011",
-          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_LINEAR</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code>."
+          "text": " If a <code>VkImageView</code> is sampled with <code>VK_FILTER_LINEAR</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code>."
         },
         {
           "vuid": "VUID-vkCmdDrawIndexed-None-01500",
@@ -12512,7 +12524,7 @@
       "(VK_IMG_filter_cubic)": [
         {
           "vuid": "VUID-vkCmdDrawIndexed-None-02012",
-          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code>."
+          "text": " If a <code>VkImageView</code> is sampled with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code>."
         },
         {
           "vuid": "VUID-vkCmdDrawIndexed-None-00472",
@@ -12642,7 +12654,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirect-None-02013",
-          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_LINEAR</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code>."
+          "text": " If a <code>VkImageView</code> is sampled with <code>VK_FILTER_LINEAR</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code>."
         },
         {
           "vuid": "VUID-vkCmdDrawIndirect-None-01501",
@@ -12676,7 +12688,7 @@
       "(VK_IMG_filter_cubic)": [
         {
           "vuid": "VUID-vkCmdDrawIndirect-None-02014",
-          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code>."
+          "text": " If a <code>VkImageView</code> is sampled with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code>."
         },
         {
           "vuid": "VUID-vkCmdDrawIndirect-None-00498",
@@ -12830,7 +12842,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCountKHR-None-02015",
-          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_LINEAR</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code>."
+          "text": " If a <code>VkImageView</code> is sampled with <code>VK_FILTER_LINEAR</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code>."
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCountKHR-None-03131",
@@ -12868,7 +12880,7 @@
       "(VK_KHR_draw_indirect_count)+(VK_IMG_filter_cubic)": [
         {
           "vuid": "VUID-vkCmdDrawIndirectCountKHR-None-02016",
-          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code>."
+          "text": " If a <code>VkImageView</code> is sampled with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code>."
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCountKHR-None-03170",
@@ -13010,7 +13022,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCountAMD-None-02017",
-          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_LINEAR</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code>."
+          "text": " If a <code>VkImageView</code> is sampled with <code>VK_FILTER_LINEAR</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code>."
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCountAMD-None-01502",
@@ -13168,7 +13180,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-None-02018",
-          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_LINEAR</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code>."
+          "text": " If a <code>VkImageView</code> is sampled with <code>VK_FILTER_LINEAR</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code>."
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-None-01503",
@@ -13202,7 +13214,7 @@
       "(VK_IMG_filter_cubic)": [
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-None-02019",
-          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code>."
+          "text": " If a <code>VkImageView</code> is sampled with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code>."
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-None-00550",
@@ -13360,7 +13372,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-None-02020",
-          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_LINEAR</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code>."
+          "text": " If a <code>VkImageView</code> is sampled with <code>VK_FILTER_LINEAR</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code>."
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-None-03163",
@@ -13398,7 +13410,7 @@
       "(VK_KHR_draw_indirect_count)+(VK_IMG_filter_cubic)": [
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-None-02021",
-          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code>."
+          "text": " If a <code>VkImageView</code> is sampled with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code>."
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-None-03173",
@@ -13540,7 +13552,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCountAMD-None-02022",
-          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_LINEAR</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code>."
+          "text": " If a <code>VkImageView</code> is sampled with <code>VK_FILTER_LINEAR</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code>."
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCountAMD-None-01504",

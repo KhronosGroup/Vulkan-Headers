@@ -70,7 +70,7 @@
   #undef MemoryBarrier
 #endif
 
-static_assert( VK_HEADER_VERSION ==  82 , "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION ==  83 , "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
@@ -107,7 +107,7 @@ static_assert( VK_HEADER_VERSION ==  82 , "Wrong VK_HEADER_VERSION!" );
 # elif defined(__GNUC__)
 #  define VULKAN_HPP_INLINE __attribute__((always_inline)) __inline__
 # elif defined(_MSC_VER)
-#  define VULKAN_HPP_INLINE __forceinline
+#  define VULKAN_HPP_INLINE inline
 # else
 #  define VULKAN_HPP_INLINE inline
 # endif
@@ -2371,7 +2371,7 @@ public:
       ObjectDestroy( OwnerType owner = OwnerType(), Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &dispatch = Dispatch() )
         : m_owner( owner )
         , m_allocator( allocator )
-        , m_dispatch( dispatch )
+        , m_dispatch( &dispatch )
       {}
 
       OwnerType getOwner() const { return m_owner; }
@@ -2381,13 +2381,13 @@ public:
       template <typename T>
       void destroy(T t)
       {
-        m_owner.destroy( t, m_allocator, m_dispatch );
+        m_owner.destroy( t, m_allocator, *m_dispatch );
       }
 
     private:
       OwnerType m_owner;
       Optional<const AllocationCallbacks> m_allocator;
-      Dispatch const& m_dispatch;
+      Dispatch const* m_dispatch;
   };
 
   class NoParent;
@@ -2398,7 +2398,7 @@ public:
     public:
       ObjectDestroy( Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &dispatch = Dispatch() )
         : m_allocator( allocator )
-        , m_dispatch( dispatch )
+        , m_dispatch( &dispatch )
       {}
 
       Optional<const AllocationCallbacks> getAllocator() const { return m_allocator; }
@@ -2407,12 +2407,12 @@ public:
       template <typename T>
       void destroy(T t)
       {
-        t.destroy( m_allocator, m_dispatch );
+        t.destroy( m_allocator, *m_dispatch );
       }
 
     private:
       Optional<const AllocationCallbacks> m_allocator;
-      Dispatch const& m_dispatch;
+      Dispatch const* m_dispatch;
   };
 
   template <typename OwnerType, typename Dispatch>
@@ -2422,7 +2422,7 @@ public:
       ObjectFree( OwnerType owner = OwnerType(), Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &dispatch = Dispatch() )
         : m_owner( owner )
         , m_allocator( allocator )
-        , m_dispatch( dispatch )
+        , m_dispatch( &dispatch )
       {}
 
       OwnerType getOwner() const { return m_owner; }
@@ -2432,13 +2432,13 @@ public:
       template <typename T>
       void destroy(T t)
       {
-        m_owner.free( t, m_allocator, m_dispatch );
+        m_owner.free( t, m_allocator, *m_dispatch );
       }
 
     private:
       OwnerType m_owner;
       Optional<const AllocationCallbacks> m_allocator;
-      Dispatch const& m_dispatch;
+      Dispatch const* m_dispatch;
   };
 
   template <typename OwnerType, typename PoolType, typename Dispatch>
@@ -2448,7 +2448,7 @@ public:
       PoolFree( OwnerType owner = OwnerType(), PoolType pool = PoolType(), Dispatch const &dispatch = Dispatch() )
         : m_owner( owner )
         , m_pool( pool )
-        , m_dispatch( dispatch )
+        , m_dispatch( &dispatch )
       {}
 
       OwnerType getOwner() const { return m_owner; }
@@ -2458,13 +2458,13 @@ public:
       template <typename T>
       void destroy(T t)
       {
-        m_owner.free( m_pool, t, m_dispatch );
+        m_owner.free( m_pool, t, *m_dispatch );
       }
 
     private:
       OwnerType m_owner;
       PoolType m_pool;
-      Dispatch const& m_dispatch;
+      Dispatch const* m_dispatch;
   };
 
   using SampleMask = uint32_t;
@@ -8676,6 +8676,7 @@ public:
     eAndroidSurfaceCreateInfoKHR = VK_STRUCTURE_TYPE_ANDROID_SURFACE_CREATE_INFO_KHR,
     eWin32SurfaceCreateInfoKHR = VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR,
     eDebugReportCallbackCreateInfoEXT = VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT,
+    eDebugReportCreateInfoEXT = VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT,
     ePipelineRasterizationStateRasterizationOrderAMD = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_RASTERIZATION_ORDER_AMD,
     eDebugMarkerObjectNameInfoEXT = VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_NAME_INFO_EXT,
     eDebugMarkerObjectTagInfoEXT = VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_TAG_INFO_EXT,
@@ -24776,6 +24777,7 @@ public:
   enum class ColorSpaceKHR
   {
     eSrgbNonlinear = VK_COLOR_SPACE_SRGB_NONLINEAR_KHR,
+    eVkColorspaceSrgbNonlinear = VK_COLOR_SPACE_SRGB_NONLINEAR_KHR,
     eDisplayP3NonlinearEXT = VK_COLOR_SPACE_DISPLAY_P3_NONLINEAR_EXT,
     eExtendedSrgbLinearEXT = VK_COLOR_SPACE_EXTENDED_SRGB_LINEAR_EXT,
     eDciP3LinearEXT = VK_COLOR_SPACE_DCI_P3_LINEAR_EXT,
@@ -25385,11 +25387,13 @@ public:
     eSurfaceKhr = VK_DEBUG_REPORT_OBJECT_TYPE_SURFACE_KHR_EXT,
     eSwapchainKhr = VK_DEBUG_REPORT_OBJECT_TYPE_SWAPCHAIN_KHR_EXT,
     eDebugReportCallbackExt = VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT_EXT,
+    eDebugReport = VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT_EXT,
     eDisplayKhr = VK_DEBUG_REPORT_OBJECT_TYPE_DISPLAY_KHR_EXT,
     eDisplayModeKhr = VK_DEBUG_REPORT_OBJECT_TYPE_DISPLAY_MODE_KHR_EXT,
     eObjectTableNvx = VK_DEBUG_REPORT_OBJECT_TYPE_OBJECT_TABLE_NVX_EXT,
     eIndirectCommandsLayoutNvx = VK_DEBUG_REPORT_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NVX_EXT,
     eValidationCacheExt = VK_DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT_EXT,
+    eValidationCache = VK_DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT_EXT,
     eSamplerYcbcrConversion = VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_EXT,
     eSamplerYcbcrConversionKHR = VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_EXT,
     eDescriptorUpdateTemplate = VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_EXT,
