@@ -70,7 +70,7 @@
   #undef MemoryBarrier
 #endif
 
-static_assert( VK_HEADER_VERSION ==  83 , "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION ==  84 , "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
@@ -7563,7 +7563,8 @@ public:
     eStorageBuffer = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
     eUniformBufferDynamic = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC,
     eStorageBufferDynamic = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC,
-    eInputAttachment = VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT
+    eInputAttachment = VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT,
+    eInlineUniformBlockEXT = VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT
   };
 
   struct DescriptorPoolSize
@@ -8692,6 +8693,8 @@ public:
     eWin32KeyedMutexAcquireReleaseInfoNV = VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_NV,
     eValidationFlagsEXT = VK_STRUCTURE_TYPE_VALIDATION_FLAGS_EXT,
     eViSurfaceCreateInfoNN = VK_STRUCTURE_TYPE_VI_SURFACE_CREATE_INFO_NN,
+    eImageViewAstcDecodeModeEXT = VK_STRUCTURE_TYPE_IMAGE_VIEW_ASTC_DECODE_MODE_EXT,
+    ePhysicalDeviceAstcDecodeFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT,
     eImportMemoryWin32HandleInfoKHR = VK_STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_KHR,
     eExportMemoryWin32HandleInfoKHR = VK_STRUCTURE_TYPE_EXPORT_MEMORY_WIN32_HANDLE_INFO_KHR,
     eMemoryWin32HandlePropertiesKHR = VK_STRUCTURE_TYPE_MEMORY_WIN32_HANDLE_PROPERTIES_KHR,
@@ -8767,6 +8770,10 @@ public:
     eExternalFormatANDROID = VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID,
     ePhysicalDeviceSamplerFilterMinmaxPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES_EXT,
     eSamplerReductionModeCreateInfoEXT = VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO_EXT,
+    ePhysicalDeviceInlineUniformBlockFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES_EXT,
+    ePhysicalDeviceInlineUniformBlockPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES_EXT,
+    eWriteDescriptorSetInlineUniformBlockEXT = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK_EXT,
+    eDescriptorPoolInlineUniformBlockCreateInfoEXT = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_INLINE_UNIFORM_BLOCK_CREATE_INFO_EXT,
     eSampleLocationsInfoEXT = VK_STRUCTURE_TYPE_SAMPLE_LOCATIONS_INFO_EXT,
     eRenderPassSampleLocationsBeginInfoEXT = VK_STRUCTURE_TYPE_RENDER_PASS_SAMPLE_LOCATIONS_BEGIN_INFO_EXT,
     ePipelineSampleLocationsStateCreateInfoEXT = VK_STRUCTURE_TYPE_PIPELINE_SAMPLE_LOCATIONS_STATE_CREATE_INFO_EXT,
@@ -8793,8 +8800,10 @@ public:
     ePhysicalDeviceShaderCorePropertiesAMD = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_AMD,
     ePhysicalDeviceVertexAttributeDivisorPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_EXT,
     ePipelineVertexInputDivisorStateCreateInfoEXT = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_EXT,
+    ePhysicalDeviceVertexAttributeDivisorFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT,
     eCheckpointDataNV = VK_STRUCTURE_TYPE_CHECKPOINT_DATA_NV,
-    eQueueFamilyCheckpointPropertiesNV = VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV
+    eQueueFamilyCheckpointPropertiesNV = VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV,
+    ePhysicalDeviceVulkanMemoryModelFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES_KHR
   };
 
   struct ApplicationInfo
@@ -15665,6 +15674,192 @@ public:
   };
   static_assert( sizeof( PhysicalDeviceBlendOperationAdvancedPropertiesEXT ) == sizeof( VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT ), "struct and wrapper have different size!" );
 
+  struct PhysicalDeviceInlineUniformBlockFeaturesEXT
+  {
+    operator const VkPhysicalDeviceInlineUniformBlockFeaturesEXT&() const
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceInlineUniformBlockFeaturesEXT*>(this);
+    }
+
+    bool operator==( PhysicalDeviceInlineUniformBlockFeaturesEXT const& rhs ) const
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( inlineUniformBlock == rhs.inlineUniformBlock )
+          && ( descriptorBindingInlineUniformBlockUpdateAfterBind == rhs.descriptorBindingInlineUniformBlockUpdateAfterBind );
+    }
+
+    bool operator!=( PhysicalDeviceInlineUniformBlockFeaturesEXT const& rhs ) const
+    {
+      return !operator==( rhs );
+    }
+
+  private:
+    StructureType sType = StructureType::ePhysicalDeviceInlineUniformBlockFeaturesEXT;
+
+  public:
+    void* pNext = nullptr;
+    Bool32 inlineUniformBlock;
+    Bool32 descriptorBindingInlineUniformBlockUpdateAfterBind;
+  };
+  static_assert( sizeof( PhysicalDeviceInlineUniformBlockFeaturesEXT ) == sizeof( VkPhysicalDeviceInlineUniformBlockFeaturesEXT ), "struct and wrapper have different size!" );
+
+  struct PhysicalDeviceInlineUniformBlockPropertiesEXT
+  {
+    operator const VkPhysicalDeviceInlineUniformBlockPropertiesEXT&() const
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceInlineUniformBlockPropertiesEXT*>(this);
+    }
+
+    bool operator==( PhysicalDeviceInlineUniformBlockPropertiesEXT const& rhs ) const
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( maxInlineUniformBlockSize == rhs.maxInlineUniformBlockSize )
+          && ( maxPerStageDescriptorInlineUniformBlocks == rhs.maxPerStageDescriptorInlineUniformBlocks )
+          && ( maxPerStageDescriptorUpdateAfterBindInlineUniformBlocks == rhs.maxPerStageDescriptorUpdateAfterBindInlineUniformBlocks )
+          && ( maxDescriptorSetInlineUniformBlocks == rhs.maxDescriptorSetInlineUniformBlocks )
+          && ( maxDescriptorSetUpdateAfterBindInlineUniformBlocks == rhs.maxDescriptorSetUpdateAfterBindInlineUniformBlocks );
+    }
+
+    bool operator!=( PhysicalDeviceInlineUniformBlockPropertiesEXT const& rhs ) const
+    {
+      return !operator==( rhs );
+    }
+
+  private:
+    StructureType sType = StructureType::ePhysicalDeviceInlineUniformBlockPropertiesEXT;
+
+  public:
+    void* pNext = nullptr;
+    uint32_t maxInlineUniformBlockSize;
+    uint32_t maxPerStageDescriptorInlineUniformBlocks;
+    uint32_t maxPerStageDescriptorUpdateAfterBindInlineUniformBlocks;
+    uint32_t maxDescriptorSetInlineUniformBlocks;
+    uint32_t maxDescriptorSetUpdateAfterBindInlineUniformBlocks;
+  };
+  static_assert( sizeof( PhysicalDeviceInlineUniformBlockPropertiesEXT ) == sizeof( VkPhysicalDeviceInlineUniformBlockPropertiesEXT ), "struct and wrapper have different size!" );
+
+  struct WriteDescriptorSetInlineUniformBlockEXT
+  {
+    WriteDescriptorSetInlineUniformBlockEXT( uint32_t dataSize_ = 0,
+                                             const void* pData_ = nullptr )
+      : dataSize( dataSize_ )
+      , pData( pData_ )
+    {
+    }
+
+    WriteDescriptorSetInlineUniformBlockEXT( VkWriteDescriptorSetInlineUniformBlockEXT const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( WriteDescriptorSetInlineUniformBlockEXT ) );
+    }
+
+    WriteDescriptorSetInlineUniformBlockEXT& operator=( VkWriteDescriptorSetInlineUniformBlockEXT const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( WriteDescriptorSetInlineUniformBlockEXT ) );
+      return *this;
+    }
+    WriteDescriptorSetInlineUniformBlockEXT& setPNext( const void* pNext_ )
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    WriteDescriptorSetInlineUniformBlockEXT& setDataSize( uint32_t dataSize_ )
+    {
+      dataSize = dataSize_;
+      return *this;
+    }
+
+    WriteDescriptorSetInlineUniformBlockEXT& setPData( const void* pData_ )
+    {
+      pData = pData_;
+      return *this;
+    }
+
+    operator const VkWriteDescriptorSetInlineUniformBlockEXT&() const
+    {
+      return *reinterpret_cast<const VkWriteDescriptorSetInlineUniformBlockEXT*>(this);
+    }
+
+    bool operator==( WriteDescriptorSetInlineUniformBlockEXT const& rhs ) const
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( dataSize == rhs.dataSize )
+          && ( pData == rhs.pData );
+    }
+
+    bool operator!=( WriteDescriptorSetInlineUniformBlockEXT const& rhs ) const
+    {
+      return !operator==( rhs );
+    }
+
+  private:
+    StructureType sType = StructureType::eWriteDescriptorSetInlineUniformBlockEXT;
+
+  public:
+    const void* pNext = nullptr;
+    uint32_t dataSize;
+    const void* pData;
+  };
+  static_assert( sizeof( WriteDescriptorSetInlineUniformBlockEXT ) == sizeof( VkWriteDescriptorSetInlineUniformBlockEXT ), "struct and wrapper have different size!" );
+
+  struct DescriptorPoolInlineUniformBlockCreateInfoEXT
+  {
+    DescriptorPoolInlineUniformBlockCreateInfoEXT( uint32_t maxInlineUniformBlockBindings_ = 0 )
+      : maxInlineUniformBlockBindings( maxInlineUniformBlockBindings_ )
+    {
+    }
+
+    DescriptorPoolInlineUniformBlockCreateInfoEXT( VkDescriptorPoolInlineUniformBlockCreateInfoEXT const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( DescriptorPoolInlineUniformBlockCreateInfoEXT ) );
+    }
+
+    DescriptorPoolInlineUniformBlockCreateInfoEXT& operator=( VkDescriptorPoolInlineUniformBlockCreateInfoEXT const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( DescriptorPoolInlineUniformBlockCreateInfoEXT ) );
+      return *this;
+    }
+    DescriptorPoolInlineUniformBlockCreateInfoEXT& setPNext( const void* pNext_ )
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    DescriptorPoolInlineUniformBlockCreateInfoEXT& setMaxInlineUniformBlockBindings( uint32_t maxInlineUniformBlockBindings_ )
+    {
+      maxInlineUniformBlockBindings = maxInlineUniformBlockBindings_;
+      return *this;
+    }
+
+    operator const VkDescriptorPoolInlineUniformBlockCreateInfoEXT&() const
+    {
+      return *reinterpret_cast<const VkDescriptorPoolInlineUniformBlockCreateInfoEXT*>(this);
+    }
+
+    bool operator==( DescriptorPoolInlineUniformBlockCreateInfoEXT const& rhs ) const
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( maxInlineUniformBlockBindings == rhs.maxInlineUniformBlockBindings );
+    }
+
+    bool operator!=( DescriptorPoolInlineUniformBlockCreateInfoEXT const& rhs ) const
+    {
+      return !operator==( rhs );
+    }
+
+  private:
+    StructureType sType = StructureType::eDescriptorPoolInlineUniformBlockCreateInfoEXT;
+
+  public:
+    const void* pNext = nullptr;
+    uint32_t maxInlineUniformBlockBindings;
+  };
+  static_assert( sizeof( DescriptorPoolInlineUniformBlockCreateInfoEXT ) == sizeof( VkDescriptorPoolInlineUniformBlockCreateInfoEXT ), "struct and wrapper have different size!" );
+
   struct ImageFormatListCreateInfoKHR
   {
     ImageFormatListCreateInfoKHR( uint32_t viewFormatCount_ = 0,
@@ -17344,6 +17539,211 @@ public:
     Bool32 inheritedConditionalRendering;
   };
   static_assert( sizeof( PhysicalDeviceConditionalRenderingFeaturesEXT ) == sizeof( VkPhysicalDeviceConditionalRenderingFeaturesEXT ), "struct and wrapper have different size!" );
+
+  struct PhysicalDeviceVulkanMemoryModelFeaturesKHR
+  {
+    operator const VkPhysicalDeviceVulkanMemoryModelFeaturesKHR&() const
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceVulkanMemoryModelFeaturesKHR*>(this);
+    }
+
+    bool operator==( PhysicalDeviceVulkanMemoryModelFeaturesKHR const& rhs ) const
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( vulkanMemoryModel == rhs.vulkanMemoryModel )
+          && ( vulkanMemoryModelDeviceScope == rhs.vulkanMemoryModelDeviceScope );
+    }
+
+    bool operator!=( PhysicalDeviceVulkanMemoryModelFeaturesKHR const& rhs ) const
+    {
+      return !operator==( rhs );
+    }
+
+  private:
+    StructureType sType = StructureType::ePhysicalDeviceVulkanMemoryModelFeaturesKHR;
+
+  public:
+    void* pNext = nullptr;
+    Bool32 vulkanMemoryModel;
+    Bool32 vulkanMemoryModelDeviceScope;
+  };
+  static_assert( sizeof( PhysicalDeviceVulkanMemoryModelFeaturesKHR ) == sizeof( VkPhysicalDeviceVulkanMemoryModelFeaturesKHR ), "struct and wrapper have different size!" );
+
+  struct PhysicalDeviceVertexAttributeDivisorFeaturesEXT
+  {
+    PhysicalDeviceVertexAttributeDivisorFeaturesEXT( Bool32 vertexAttributeInstanceRateDivisor_ = 0,
+                                                     Bool32 vertexAttributeInstanceRateZeroDivisor_ = 0 )
+      : vertexAttributeInstanceRateDivisor( vertexAttributeInstanceRateDivisor_ )
+      , vertexAttributeInstanceRateZeroDivisor( vertexAttributeInstanceRateZeroDivisor_ )
+    {
+    }
+
+    PhysicalDeviceVertexAttributeDivisorFeaturesEXT( VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( PhysicalDeviceVertexAttributeDivisorFeaturesEXT ) );
+    }
+
+    PhysicalDeviceVertexAttributeDivisorFeaturesEXT& operator=( VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( PhysicalDeviceVertexAttributeDivisorFeaturesEXT ) );
+      return *this;
+    }
+    PhysicalDeviceVertexAttributeDivisorFeaturesEXT& setPNext( void* pNext_ )
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    PhysicalDeviceVertexAttributeDivisorFeaturesEXT& setVertexAttributeInstanceRateDivisor( Bool32 vertexAttributeInstanceRateDivisor_ )
+    {
+      vertexAttributeInstanceRateDivisor = vertexAttributeInstanceRateDivisor_;
+      return *this;
+    }
+
+    PhysicalDeviceVertexAttributeDivisorFeaturesEXT& setVertexAttributeInstanceRateZeroDivisor( Bool32 vertexAttributeInstanceRateZeroDivisor_ )
+    {
+      vertexAttributeInstanceRateZeroDivisor = vertexAttributeInstanceRateZeroDivisor_;
+      return *this;
+    }
+
+    operator const VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT&() const
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT*>(this);
+    }
+
+    bool operator==( PhysicalDeviceVertexAttributeDivisorFeaturesEXT const& rhs ) const
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( vertexAttributeInstanceRateDivisor == rhs.vertexAttributeInstanceRateDivisor )
+          && ( vertexAttributeInstanceRateZeroDivisor == rhs.vertexAttributeInstanceRateZeroDivisor );
+    }
+
+    bool operator!=( PhysicalDeviceVertexAttributeDivisorFeaturesEXT const& rhs ) const
+    {
+      return !operator==( rhs );
+    }
+
+  private:
+    StructureType sType = StructureType::ePhysicalDeviceVertexAttributeDivisorFeaturesEXT;
+
+  public:
+    void* pNext = nullptr;
+    Bool32 vertexAttributeInstanceRateDivisor;
+    Bool32 vertexAttributeInstanceRateZeroDivisor;
+  };
+  static_assert( sizeof( PhysicalDeviceVertexAttributeDivisorFeaturesEXT ) == sizeof( VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT ), "struct and wrapper have different size!" );
+
+  struct ImageViewASTCDecodeModeEXT
+  {
+    ImageViewASTCDecodeModeEXT( Format decodeMode_ = Format::eUndefined )
+      : decodeMode( decodeMode_ )
+    {
+    }
+
+    ImageViewASTCDecodeModeEXT( VkImageViewASTCDecodeModeEXT const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( ImageViewASTCDecodeModeEXT ) );
+    }
+
+    ImageViewASTCDecodeModeEXT& operator=( VkImageViewASTCDecodeModeEXT const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( ImageViewASTCDecodeModeEXT ) );
+      return *this;
+    }
+    ImageViewASTCDecodeModeEXT& setPNext( const void* pNext_ )
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    ImageViewASTCDecodeModeEXT& setDecodeMode( Format decodeMode_ )
+    {
+      decodeMode = decodeMode_;
+      return *this;
+    }
+
+    operator const VkImageViewASTCDecodeModeEXT&() const
+    {
+      return *reinterpret_cast<const VkImageViewASTCDecodeModeEXT*>(this);
+    }
+
+    bool operator==( ImageViewASTCDecodeModeEXT const& rhs ) const
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( decodeMode == rhs.decodeMode );
+    }
+
+    bool operator!=( ImageViewASTCDecodeModeEXT const& rhs ) const
+    {
+      return !operator==( rhs );
+    }
+
+  private:
+    StructureType sType = StructureType::eImageViewAstcDecodeModeEXT;
+
+  public:
+    const void* pNext = nullptr;
+    Format decodeMode;
+  };
+  static_assert( sizeof( ImageViewASTCDecodeModeEXT ) == sizeof( VkImageViewASTCDecodeModeEXT ), "struct and wrapper have different size!" );
+
+  struct PhysicalDeviceASTCDecodeFeaturesEXT
+  {
+    PhysicalDeviceASTCDecodeFeaturesEXT( Bool32 decodeModeSharedExponent_ = 0 )
+      : decodeModeSharedExponent( decodeModeSharedExponent_ )
+    {
+    }
+
+    PhysicalDeviceASTCDecodeFeaturesEXT( VkPhysicalDeviceASTCDecodeFeaturesEXT const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( PhysicalDeviceASTCDecodeFeaturesEXT ) );
+    }
+
+    PhysicalDeviceASTCDecodeFeaturesEXT& operator=( VkPhysicalDeviceASTCDecodeFeaturesEXT const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( PhysicalDeviceASTCDecodeFeaturesEXT ) );
+      return *this;
+    }
+    PhysicalDeviceASTCDecodeFeaturesEXT& setPNext( void* pNext_ )
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    PhysicalDeviceASTCDecodeFeaturesEXT& setDecodeModeSharedExponent( Bool32 decodeModeSharedExponent_ )
+    {
+      decodeModeSharedExponent = decodeModeSharedExponent_;
+      return *this;
+    }
+
+    operator const VkPhysicalDeviceASTCDecodeFeaturesEXT&() const
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceASTCDecodeFeaturesEXT*>(this);
+    }
+
+    bool operator==( PhysicalDeviceASTCDecodeFeaturesEXT const& rhs ) const
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( decodeModeSharedExponent == rhs.decodeModeSharedExponent );
+    }
+
+    bool operator!=( PhysicalDeviceASTCDecodeFeaturesEXT const& rhs ) const
+    {
+      return !operator==( rhs );
+    }
+
+  private:
+    StructureType sType = StructureType::ePhysicalDeviceAstcDecodeFeaturesEXT;
+
+  public:
+    void* pNext = nullptr;
+    Bool32 decodeModeSharedExponent;
+  };
+  static_assert( sizeof( PhysicalDeviceASTCDecodeFeaturesEXT ) == sizeof( VkPhysicalDeviceASTCDecodeFeaturesEXT ), "struct and wrapper have different size!" );
 
   enum class SubpassContents
   {
@@ -41043,11 +41443,17 @@ public:
   template <> struct isStructureChainValid<PipelineMultisampleStateCreateInfo, PipelineCoverageToColorStateCreateInfoNV>{ enum { value = true }; };
   template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceSamplerFilterMinmaxPropertiesEXT>{ enum { value = true }; };
   template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceBlendOperationAdvancedFeaturesEXT>{ enum { value = true }; };
+  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceBlendOperationAdvancedFeaturesEXT>{ enum { value = true }; };
   template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceBlendOperationAdvancedPropertiesEXT>{ enum { value = true }; };
+  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceInlineUniformBlockFeaturesEXT>{ enum { value = true }; };
+  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceInlineUniformBlockFeaturesEXT>{ enum { value = true }; };
+  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceInlineUniformBlockPropertiesEXT>{ enum { value = true }; };
+  template <> struct isStructureChainValid<DescriptorPoolCreateInfo, DescriptorPoolInlineUniformBlockCreateInfoEXT>{ enum { value = true }; };
   template <> struct isStructureChainValid<ImageCreateInfo, ImageFormatListCreateInfoKHR>{ enum { value = true }; };
   template <> struct isStructureChainValid<ShaderModuleCreateInfo, ShaderModuleValidationCacheCreateInfoEXT>{ enum { value = true }; };
   template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceMaintenance3Properties>{ enum { value = true }; };
   template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceShaderDrawParameterFeatures>{ enum { value = true }; };
+  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceShaderDrawParameterFeatures>{ enum { value = true }; };
   template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceExternalMemoryHostPropertiesEXT>{ enum { value = true }; };
   template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceConservativeRasterizationPropertiesEXT>{ enum { value = true }; };
   template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceShaderCorePropertiesAMD>{ enum { value = true }; };
@@ -41073,6 +41479,13 @@ public:
   template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDevice8BitStorageFeaturesKHR>{ enum { value = true }; };
   template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceConditionalRenderingFeaturesEXT>{ enum { value = true }; };
   template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceConditionalRenderingFeaturesEXT>{ enum { value = true }; };
+  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceVulkanMemoryModelFeaturesKHR>{ enum { value = true }; };
+  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceVulkanMemoryModelFeaturesKHR>{ enum { value = true }; };
+  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceVertexAttributeDivisorFeaturesEXT>{ enum { value = true }; };
+  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceVertexAttributeDivisorFeaturesEXT>{ enum { value = true }; };
+  template <> struct isStructureChainValid<ImageViewCreateInfo, ImageViewASTCDecodeModeEXT>{ enum { value = true }; };
+  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceASTCDecodeFeaturesEXT>{ enum { value = true }; };
+  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceASTCDecodeFeaturesEXT>{ enum { value = true }; };
   template <> struct isStructureChainValid<SurfaceCapabilities2KHR, SharedPresentSurfaceCapabilitiesKHR>{ enum { value = true }; };
   template <> struct isStructureChainValid<ImageViewCreateInfo, ImageViewUsageCreateInfo>{ enum { value = true }; };
   template <> struct isStructureChainValid<RenderPassCreateInfo, RenderPassInputAttachmentAspectCreateInfo>{ enum { value = true }; };
@@ -41739,6 +42152,7 @@ public:
     case DescriptorType::eUniformBufferDynamic: return "UniformBufferDynamic";
     case DescriptorType::eStorageBufferDynamic: return "StorageBufferDynamic";
     case DescriptorType::eInputAttachment: return "InputAttachment";
+    case DescriptorType::eInlineUniformBlockEXT: return "InlineUniformBlockEXT";
     default: return "invalid";
     }
   }
@@ -42478,6 +42892,8 @@ public:
     case StructureType::eWin32KeyedMutexAcquireReleaseInfoNV: return "Win32KeyedMutexAcquireReleaseInfoNV";
     case StructureType::eValidationFlagsEXT: return "ValidationFlagsEXT";
     case StructureType::eViSurfaceCreateInfoNN: return "ViSurfaceCreateInfoNN";
+    case StructureType::eImageViewAstcDecodeModeEXT: return "ImageViewAstcDecodeModeEXT";
+    case StructureType::ePhysicalDeviceAstcDecodeFeaturesEXT: return "PhysicalDeviceAstcDecodeFeaturesEXT";
     case StructureType::eImportMemoryWin32HandleInfoKHR: return "ImportMemoryWin32HandleInfoKHR";
     case StructureType::eExportMemoryWin32HandleInfoKHR: return "ExportMemoryWin32HandleInfoKHR";
     case StructureType::eMemoryWin32HandlePropertiesKHR: return "MemoryWin32HandlePropertiesKHR";
@@ -42553,6 +42969,10 @@ public:
     case StructureType::eExternalFormatANDROID: return "ExternalFormatANDROID";
     case StructureType::ePhysicalDeviceSamplerFilterMinmaxPropertiesEXT: return "PhysicalDeviceSamplerFilterMinmaxPropertiesEXT";
     case StructureType::eSamplerReductionModeCreateInfoEXT: return "SamplerReductionModeCreateInfoEXT";
+    case StructureType::ePhysicalDeviceInlineUniformBlockFeaturesEXT: return "PhysicalDeviceInlineUniformBlockFeaturesEXT";
+    case StructureType::ePhysicalDeviceInlineUniformBlockPropertiesEXT: return "PhysicalDeviceInlineUniformBlockPropertiesEXT";
+    case StructureType::eWriteDescriptorSetInlineUniformBlockEXT: return "WriteDescriptorSetInlineUniformBlockEXT";
+    case StructureType::eDescriptorPoolInlineUniformBlockCreateInfoEXT: return "DescriptorPoolInlineUniformBlockCreateInfoEXT";
     case StructureType::eSampleLocationsInfoEXT: return "SampleLocationsInfoEXT";
     case StructureType::eRenderPassSampleLocationsBeginInfoEXT: return "RenderPassSampleLocationsBeginInfoEXT";
     case StructureType::ePipelineSampleLocationsStateCreateInfoEXT: return "PipelineSampleLocationsStateCreateInfoEXT";
@@ -42579,8 +42999,10 @@ public:
     case StructureType::ePhysicalDeviceShaderCorePropertiesAMD: return "PhysicalDeviceShaderCorePropertiesAMD";
     case StructureType::ePhysicalDeviceVertexAttributeDivisorPropertiesEXT: return "PhysicalDeviceVertexAttributeDivisorPropertiesEXT";
     case StructureType::ePipelineVertexInputDivisorStateCreateInfoEXT: return "PipelineVertexInputDivisorStateCreateInfoEXT";
+    case StructureType::ePhysicalDeviceVertexAttributeDivisorFeaturesEXT: return "PhysicalDeviceVertexAttributeDivisorFeaturesEXT";
     case StructureType::eCheckpointDataNV: return "CheckpointDataNV";
     case StructureType::eQueueFamilyCheckpointPropertiesNV: return "QueueFamilyCheckpointPropertiesNV";
+    case StructureType::ePhysicalDeviceVulkanMemoryModelFeaturesKHR: return "PhysicalDeviceVulkanMemoryModelFeaturesKHR";
     default: return "invalid";
     }
   }

@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.1.83",
-    "comment": "from git branch: master commit: dd9919749a56177c2eb9b6525c0979722a3c24ff",
-    "date": "2018-08-20 19:42:16Z"
+    "api version": "1.1.84",
+    "comment": "from git branch: master commit: 9d4ae0fcf4d2157548db32456b58f7ae7db21e81",
+    "date": "2018-09-10 16:15:15Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -198,7 +198,7 @@
         },
         {
           "vuid": "VUID-VkPhysicalDeviceProperties2-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT\">VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceConservativeRasterizationPropertiesEXT\">VkPhysicalDeviceConservativeRasterizationPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingPropertiesEXT\">VkPhysicalDeviceDescriptorIndexingPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDiscardRectanglePropertiesEXT\">VkPhysicalDeviceDiscardRectanglePropertiesEXT</a>, <a href=\"#VkPhysicalDeviceExternalMemoryHostPropertiesEXT\">VkPhysicalDeviceExternalMemoryHostPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceIDProperties\">VkPhysicalDeviceIDProperties</a>, <a href=\"#VkPhysicalDeviceMaintenance3Properties\">VkPhysicalDeviceMaintenance3Properties</a>, <a href=\"#VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX\">VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX</a>, <a href=\"#VkPhysicalDeviceMultiviewProperties\">VkPhysicalDeviceMultiviewProperties</a>, <a href=\"#VkPhysicalDevicePointClippingProperties\">VkPhysicalDevicePointClippingProperties</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryProperties\">VkPhysicalDeviceProtectedMemoryProperties</a>, <a href=\"#VkPhysicalDevicePushDescriptorPropertiesKHR\">VkPhysicalDevicePushDescriptorPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceSampleLocationsPropertiesEXT\">VkPhysicalDeviceSampleLocationsPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT\">VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceShaderCorePropertiesAMD\">VkPhysicalDeviceShaderCorePropertiesAMD</a>, <a href=\"#VkPhysicalDeviceSubgroupProperties\">VkPhysicalDeviceSubgroupProperties</a>, or <a href=\"#VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT\">VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT\">VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceConservativeRasterizationPropertiesEXT\">VkPhysicalDeviceConservativeRasterizationPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingPropertiesEXT\">VkPhysicalDeviceDescriptorIndexingPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDiscardRectanglePropertiesEXT\">VkPhysicalDeviceDiscardRectanglePropertiesEXT</a>, <a href=\"#VkPhysicalDeviceExternalMemoryHostPropertiesEXT\">VkPhysicalDeviceExternalMemoryHostPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceIDProperties\">VkPhysicalDeviceIDProperties</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockPropertiesEXT\">VkPhysicalDeviceInlineUniformBlockPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceMaintenance3Properties\">VkPhysicalDeviceMaintenance3Properties</a>, <a href=\"#VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX\">VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX</a>, <a href=\"#VkPhysicalDeviceMultiviewProperties\">VkPhysicalDeviceMultiviewProperties</a>, <a href=\"#VkPhysicalDevicePointClippingProperties\">VkPhysicalDevicePointClippingProperties</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryProperties\">VkPhysicalDeviceProtectedMemoryProperties</a>, <a href=\"#VkPhysicalDevicePushDescriptorPropertiesKHR\">VkPhysicalDevicePushDescriptorPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceSampleLocationsPropertiesEXT\">VkPhysicalDeviceSampleLocationsPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT\">VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceShaderCorePropertiesAMD\">VkPhysicalDeviceShaderCorePropertiesAMD</a>, <a href=\"#VkPhysicalDeviceSubgroupProperties\">VkPhysicalDeviceSubgroupProperties</a>, or <a href=\"#VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT\">VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT</a>"
         },
         {
           "vuid": "VUID-VkPhysicalDeviceProperties2-sType-unique",
@@ -318,7 +318,7 @@
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice8BitStorageFeaturesKHR\">VkPhysicalDevice8BitStorageFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeaturesEXT\">VkPhysicalDeviceDescriptorIndexingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, or <a href=\"#VkPhysicalDeviceVariablePointerFeatures\">VkPhysicalDeviceVariablePointerFeatures</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice8BitStorageFeaturesKHR\">VkPhysicalDevice8BitStorageFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeaturesEXT\">VkPhysicalDeviceDescriptorIndexingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeaturesEXT\">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceShaderDrawParameterFeatures\">VkPhysicalDeviceShaderDrawParameterFeatures</a>, <a href=\"#VkPhysicalDeviceVariablePointerFeatures\">VkPhysicalDeviceVariablePointerFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, or <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeaturesKHR\">VkPhysicalDeviceVulkanMemoryModelFeaturesKHR</a>"
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-sType-unique",
@@ -925,7 +925,7 @@
           "text": " Each element of the <code>pCommandBuffers</code> member of each element of <code>pSubmits</code> <strong class=\"purple\">must</strong> have been allocated from a <code>VkCommandPool</code> that was created for the same queue family <code>queue</code> belongs to."
         },
         {
-          "vuid": "VUID-vkQueueSubmit-pCommandBuffers",
+          "vuid": "VUID-vkQueueSubmit-pSubmits-02207",
           "text": " If any element of <code>pSubmits</code>&#8594;<code>pCommandBuffers</code> includes a <a href=\"#synchronization-queue-transfers-acquire\">Queue Family Transfer Acquire Operation</a>, there <strong class=\"purple\">must</strong> exist a previously submitted <a href=\"#synchronization-queue-transfers-release\">Queue Family Transfer Release Operation</a> on a queue in the queue family identified by the acquire operation, with parameters matching the acquire operation as defined in the definition of such <a href=\"#synchronization-queue-transfers-acquire\">acquire operations</a>, and which happens before the acquire operation."
         },
         {
@@ -7270,7 +7270,7 @@
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkImageViewUsageCreateInfo\">VkImageViewUsageCreateInfo</a> or <a href=\"#VkSamplerYcbcrConversionInfo\">VkSamplerYcbcrConversionInfo</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkImageViewASTCDecodeModeEXT\">VkImageViewASTCDecodeModeEXT</a>, <a href=\"#VkImageViewUsageCreateInfo\">VkImageViewUsageCreateInfo</a>, or <a href=\"#VkSamplerYcbcrConversionInfo\">VkSamplerYcbcrConversionInfo</a>"
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-sType-unique",
@@ -7499,6 +7499,34 @@
         {
           "vuid": "VUID-VkComponentMapping-a-parameter",
           "text": " <code>a</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkComponentSwizzle\">VkComponentSwizzle</a> value"
+        }
+      ]
+    },
+    "VkImageViewASTCDecodeModeEXT": {
+      "(VK_EXT_astc_decode_mode)": [
+        {
+          "vuid": "VUID-VkImageViewASTCDecodeModeEXT-decodeMode-02230",
+          "text": " <code>decodeMode</code> <strong class=\"purple\">must</strong> be one of <code>VK_FORMAT_R16G16B16A16_SFLOAT</code>, <code>VK_FORMAT_R8G8B8A8_UNORM</code>, or <code>VK_FORMAT_E5B9G9R9_UFLOAT_PACK32</code>"
+        },
+        {
+          "vuid": "VUID-VkImageViewASTCDecodeModeEXT-decodeMode-02231",
+          "text": " If the <a href=\"#features-features-astc-decodeModeSharedExponent\">decodeModeSharedExponent</a> feature is not enabled, <code>decodeMode</code> <strong class=\"purple\">must</strong> not be <code>VK_FORMAT_E5B9G9R9_UFLOAT_PACK32</code>"
+        },
+        {
+          "vuid": "VUID-VkImageViewASTCDecodeModeEXT-decodeMode-02232",
+          "text": " If <code>decodeMode</code> is <code>VK_FORMAT_R8G8B8A8_UNORM</code> the image view <strong class=\"purple\">must</strong> not include blocks using any of the ASTC HDR modes"
+        },
+        {
+          "vuid": "VUID-VkImageViewASTCDecodeModeEXT-format-02233",
+          "text": " <code>format</code> of the image view <strong class=\"purple\">must</strong> be one of <code>VK_FORMAT_ASTC_4x4_UNORM_BLOCK</code>, <code>VK_FORMAT_ASTC_4x4_SRGB_BLOCK</code>, <code>VK_FORMAT_ASTC_5x4_UNORM_BLOCK</code>, <code>VK_FORMAT_ASTC_5x4_SRGB_BLOCK</code>, <code>VK_FORMAT_ASTC_5x5_UNORM_BLOCK</code>, <code>VK_FORMAT_ASTC_5x5_SRGB_BLOCK</code>, <code>VK_FORMAT_ASTC_6x5_UNORM_BLOCK</code>, <code>VK_FORMAT_ASTC_6x5_SRGB_BLOCK</code>, <code>VK_FORMAT_ASTC_6x6_UNORM_BLOCK</code>, <code>VK_FORMAT_ASTC_6x6_SRGB_BLOCK</code>, <code>VK_FORMAT_ASTC_8x5_UNORM_BLOCK</code>, <code>VK_FORMAT_ASTC_8x5_SRGB_BLOCK</code>, <code>VK_FORMAT_ASTC_8x6_UNORM_BLOCK</code>, <code>VK_FORMAT_ASTC_8x6_SRGB_BLOCK</code>, <code>VK_FORMAT_ASTC_8x8_UNORM_BLOCK</code>, <code>VK_FORMAT_ASTC_8x8_SRGB_BLOCK</code>, <code>VK_FORMAT_ASTC_10x5_UNORM_BLOCK</code>, <code>VK_FORMAT_ASTC_10x5_SRGB_BLOCK</code>, <code>VK_FORMAT_ASTC_10x6_UNORM_BLOCK</code>, <code>VK_FORMAT_ASTC_10x6_SRGB_BLOCK</code>, <code>VK_FORMAT_ASTC_10x8_UNORM_BLOCK</code>, <code>VK_FORMAT_ASTC_10x8_SRGB_BLOCK</code>, <code>VK_FORMAT_ASTC_10x10_UNORM_BLOCK</code>, <code>VK_FORMAT_ASTC_10x10_SRGB_BLOCK</code>, <code>VK_FORMAT_ASTC_12x10_UNORM_BLOCK</code>, <code>VK_FORMAT_ASTC_12x10_SRGB_BLOCK</code>, <code>VK_FORMAT_ASTC_12x12_UNORM_BLOCK</code>, or <code>VK_FORMAT_ASTC_12x12_SRGB_BLOCK</code>"
+        },
+        {
+          "vuid": "VUID-VkImageViewASTCDecodeModeEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_IMAGE_VIEW_ASTC_DECODE_MODE_EXT</code>"
+        },
+        {
+          "vuid": "VUID-VkImageViewASTCDecodeModeEXT-decodeMode-parameter",
+          "text": " <code>decodeMode</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkFormat\">VkFormat</a> value"
         }
       ]
     },
@@ -8609,6 +8637,12 @@
           "text": " If <code>flags</code> contains <code>VK_DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR</code>, then the total number of elements of all bindings <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#VkPhysicalDevicePushDescriptorPropertiesKHR\">VkPhysicalDevicePushDescriptorPropertiesKHR</a>::<code>maxPushDescriptors</code>"
         }
       ],
+      "(VK_KHR_push_descriptor)+(VK_EXT_inline_uniform_block)": [
+        {
+          "vuid": "VUID-VkDescriptorSetLayoutCreateInfo-flags-02208",
+          "text": " If <code>flags</code> contains <code>VK_DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR</code>, then all elements of <code>pBindings</code> <strong class=\"purple\">must</strong> not have a <code>descriptorType</code> of <code>VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT</code>"
+        }
+      ],
       "(VK_EXT_descriptor_indexing)": [
         {
           "vuid": "VUID-VkDescriptorSetLayoutCreateInfo-flags-03000",
@@ -8637,6 +8671,16 @@
         {
           "vuid": "VUID-VkDescriptorSetLayoutBinding-descriptorType-parameter",
           "text": " <code>descriptorType</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDescriptorType\">VkDescriptorType</a> value"
+        }
+      ],
+      "(VK_EXT_inline_uniform_block)": [
+        {
+          "vuid": "VUID-VkDescriptorSetLayoutBinding-descriptorType-02209",
+          "text": " If <code>descriptorType</code> is <code>VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT</code> then <code>descriptorCount</code> <strong class=\"purple\">must</strong> be a multiple of <code>4</code>"
+        },
+        {
+          "vuid": "VUID-VkDescriptorSetLayoutBinding-descriptorType-02210",
+          "text": " If <code>descriptorType</code> is <code>VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT</code> then <code>descriptorCount</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceInlineUniformBlockPropertiesEXT</code>::<code>maxInlineUniformBlockSize</code>"
         }
       ]
     },
@@ -8711,6 +8755,12 @@
         {
           "vuid": "VUID-VkDescriptorSetLayoutBindingFlagsCreateInfoEXT-flags-03003",
           "text": " If <a href=\"#VkDescriptorSetLayoutCreateInfo\">VkDescriptorSetLayoutCreateInfo</a>::<code>flags</code> includes <code>VK_DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR</code>, then all elements of <code>pBindingFlags</code> <strong class=\"purple\">must</strong> not include <code>VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT</code>, <code>VK_DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT_EXT</code>, or <code>VK_DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT_EXT</code>"
+        }
+      ],
+      "(VK_EXT_descriptor_indexing)+(VK_EXT_inline_uniform_block)": [
+        {
+          "vuid": "VUID-VkDescriptorSetLayoutBindingFlagsCreateInfoEXT-descriptorBindingInlineUniformBlockUpdateAfterBind-02211",
+          "text": " If <a href=\"#VkPhysicalDeviceInlineUniformBlockFeatureEXT\">VkPhysicalDeviceInlineUniformBlockFeatureEXT</a>::<code>descriptorBindingInlineUniformBlockUpdateAfterBind</code> is not enabled, all bindings with descriptor type <code>VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT</code> <strong class=\"purple\">must</strong> not use <code>VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT</code>"
         }
       ]
     },
@@ -8887,6 +8937,16 @@
           "text": " The total number of descriptors of the type <code>VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT</code> accessible across all shader stages and across all elements of <code>pSetLayouts</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceLimits</code>::<code>maxDescriptorSetInputAttachments</code>"
         }
       ],
+      "!(VK_EXT_descriptor_indexing)+(VK_EXT_inline_uniform_block)": [
+        {
+          "vuid": "VUID-VkPipelineLayoutCreateInfo-descriptorType-02212",
+          "text": " The total number of bindings with a <code>descriptorType</code> of <code>VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT</code> accessible to any given shader stage across all elements of <code>pSetLayouts</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceInlineUniformBlockPropertiesEXT</code>::<code>maxPerStageDescriptorInlineUniformBlocks</code>"
+        },
+        {
+          "vuid": "VUID-VkPipelineLayoutCreateInfo-descriptorType-02213",
+          "text": " The total number of bindings with a <code>descriptorType</code> of <code>VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT</code> accessible across all shader stages and across all elements of <code>pSetLayouts</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceInlineUniformBlockPropertiesEXT</code>::<code>maxDescriptorSetInlineUniformBlocks</code>"
+        }
+      ],
       "(VK_EXT_descriptor_indexing)": [
         {
           "vuid": "VUID-VkPipelineLayoutCreateInfo-descriptorType-03016",
@@ -9001,6 +9061,24 @@
           "text": " The total number of descriptors of the type <code>VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT</code> accessible across all shader stages and across all elements of <code>pSetLayouts</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceDescriptorIndexingPropertiesEXT</code>::<code>maxDescriptorSetUpdateAfterBindInputAttachments</code>"
         }
       ],
+      "(VK_EXT_descriptor_indexing)+(VK_EXT_inline_uniform_block)": [
+        {
+          "vuid": "VUID-VkPipelineLayoutCreateInfo-descriptorType-02214",
+          "text": " The total number of bindings in descriptor set layouts created without the <code>VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT_EXT</code> bit set with a <code>descriptorType</code> of <code>VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT</code> accessible to any given shader stage across all elements of <code>pSetLayouts</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceInlineUniformBlockPropertiesEXT</code>::<code>maxPerStageDescriptorInlineUniformBlocks</code>"
+        },
+        {
+          "vuid": "VUID-VkPipelineLayoutCreateInfo-descriptorType-02215",
+          "text": " The total number of bindings with a <code>descriptorType</code> of <code>VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT</code> accessible to any given shader stage across all elements of <code>pSetLayouts</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceInlineUniformBlockPropertiesEXT</code>::<code>maxPerStageDescriptorUpdateAfterBindInlineUniformBlocks</code>"
+        },
+        {
+          "vuid": "VUID-VkPipelineLayoutCreateInfo-descriptorType-02216",
+          "text": " The total number of bindings in descriptor set layouts created without the <code>VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT_EXT</code> bit set with a <code>descriptorType</code> of <code>VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT</code> accessible across all shader stages and across all elements of <code>pSetLayouts</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceInlineUniformBlockPropertiesEXT</code>::<code>maxDescriptorSetInlineUniformBlocks</code>"
+        },
+        {
+          "vuid": "VUID-VkPipelineLayoutCreateInfo-descriptorType-02217",
+          "text": " The total number of bindings with a <code>descriptorType</code> of <code>VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT</code> accessible across all shader stages and across all elements of <code>pSetLayouts</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceInlineUniformBlockPropertiesEXT</code>::<code>maxDescriptorSetUpdateAfterBindInlineUniformBlocks</code>"
+        }
+      ],
       "(VK_KHR_push_descriptor)": [
         {
           "vuid": "VUID-VkPipelineLayoutCreateInfo-pSetLayouts-00293",
@@ -9104,7 +9182,7 @@
         },
         {
           "vuid": "VUID-VkDescriptorPoolCreateInfo-pNext-pNext",
-          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDescriptorPoolInlineUniformBlockCreateInfoEXT\">VkDescriptorPoolInlineUniformBlockCreateInfoEXT</a>"
         },
         {
           "vuid": "VUID-VkDescriptorPoolCreateInfo-flags-parameter",
@@ -9120,6 +9198,14 @@
         }
       ]
     },
+    "VkDescriptorPoolInlineUniformBlockCreateInfoEXT": {
+      "(VK_EXT_inline_uniform_block)": [
+        {
+          "vuid": "VUID-VkDescriptorPoolInlineUniformBlockCreateInfoEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_INLINE_UNIFORM_BLOCK_CREATE_INFO_EXT</code>"
+        }
+      ]
+    },
     "VkDescriptorPoolSize": {
       "core": [
         {
@@ -9129,6 +9215,12 @@
         {
           "vuid": "VUID-VkDescriptorPoolSize-type-parameter",
           "text": " <code>type</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDescriptorType\">VkDescriptorType</a> value"
+        }
+      ],
+      "(VK_EXT_inline_uniform_block)": [
+        {
+          "vuid": "VUID-VkDescriptorPoolSize-type-02218",
+          "text": " If <code>type</code> is <code>VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT</code> then <code>descriptorCount</code> <strong class=\"purple\">must</strong> be a multiple of <code>4</code>"
         }
       ]
     },
@@ -9485,6 +9577,20 @@
           "text": " Both of <code>dstSet</code>, and the elements of <code>pTexelBufferView</code> that are valid handles <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkDevice</code>"
         }
       ],
+      "(VK_EXT_inline_uniform_block)": [
+        {
+          "vuid": "VUID-VkWriteDescriptorSet-descriptorType-02219",
+          "text": " If <code>descriptorType</code> is <code>VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT</code>, <code>dstArrayElement</code> <strong class=\"purple\">must</strong> be an integer multiple of <code>4</code>"
+        },
+        {
+          "vuid": "VUID-VkWriteDescriptorSet-descriptorType-02220",
+          "text": " If <code>descriptorType</code> is <code>VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT</code>, <code>descriptorCount</code> <strong class=\"purple\">must</strong> be an integer multiple of <code>4</code>"
+        },
+        {
+          "vuid": "VUID-VkWriteDescriptorSet-descriptorType-02221",
+          "text": " If <code>descriptorType</code> is <code>VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT</code>, the <code>pNext</code> chain <strong class=\"purple\">must</strong> include a <a href=\"#VkWriteDescriptorSetInlineUniformBlockEXT\">VkWriteDescriptorSetInlineUniformBlockEXT</a> structure whose <code>dataSize</code> member equals <code>descriptorCount</code>"
+        }
+      ],
       "(VK_EXT_descriptor_indexing)": [
         {
           "vuid": "VUID-VkWriteDescriptorSet-descriptorCount-03048",
@@ -9540,6 +9646,30 @@
         }
       ]
     },
+    "VkWriteDescriptorSetInlineUniformBlockEXT": {
+      "(VK_EXT_inline_uniform_block)": [
+        {
+          "vuid": "VUID-VkWriteDescriptorSetInlineUniformBlockEXT-dataSize-02222",
+          "text": " <code>dataSize</code> <strong class=\"purple\">must</strong> be an integer multiple of <code>4</code>"
+        },
+        {
+          "vuid": "VUID-VkWriteDescriptorSetInlineUniformBlockEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK_EXT</code>"
+        },
+        {
+          "vuid": "VUID-VkWriteDescriptorSetInlineUniformBlockEXT-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkWriteDescriptorSetInlineUniformBlockEXT-pData-parameter",
+          "text": " <code>pData</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>dataSize</code> bytes"
+        },
+        {
+          "vuid": "VUID-VkWriteDescriptorSetInlineUniformBlockEXT-dataSize-arraylength",
+          "text": " <code>dataSize</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
+        }
+      ]
+    },
     "VkCopyDescriptorSet": {
       "core": [
         {
@@ -9581,6 +9711,20 @@
         {
           "vuid": "VUID-VkCopyDescriptorSet-commonparent",
           "text": " Both of <code>dstSet</code>, and <code>srcSet</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkDevice</code>"
+        }
+      ],
+      "(VK_EXT_inline_uniform_block)": [
+        {
+          "vuid": "VUID-VkCopyDescriptorSet-srcBinding-02223",
+          "text": " If the descriptor type of the descriptor set binding specified by <code>srcBinding</code> is <code>VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT</code>, <code>srcArrayElement</code> <strong class=\"purple\">must</strong> be an integer multiple of <code>4</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyDescriptorSet-dstBinding-02224",
+          "text": " If the descriptor type of the descriptor set binding specified by <code>dstBinding</code> is <code>VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT</code>, <code>dstArrayElement</code> <strong class=\"purple\">must</strong> be an integer multiple of <code>4</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyDescriptorSet-srcBinding-02225",
+          "text": " If the descriptor type of the descriptor set binding specified by either <code>srcBinding</code> or <code>dstBinding</code> is <code>VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT</code>, <code>descriptorCount</code> <strong class=\"purple\">must</strong> be an integer multiple of <code>4</code>"
         }
       ],
       "(VK_EXT_descriptor_indexing)": [
@@ -9689,6 +9833,16 @@
         {
           "vuid": "VUID-VkDescriptorUpdateTemplateEntry-descriptorType-parameter",
           "text": " <code>descriptorType</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDescriptorType\">VkDescriptorType</a> value"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_descriptor_update_template)+(VK_EXT_inline_uniform_block)": [
+        {
+          "vuid": "VUID-VkDescriptorUpdateTemplateEntry-descriptor-02226",
+          "text": " If <code>descriptor</code> type is <code>VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT</code>, <code>dstArrayElement</code> <strong class=\"purple\">must</strong> be an integer multiple of <code>4</code>"
+        },
+        {
+          "vuid": "VUID-VkDescriptorUpdateTemplateEntry-descriptor-02227",
+          "text": " If <code>descriptor</code> type is <code>VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT</code>, <code>descriptorCount</code> <strong class=\"purple\">must</strong> be an integer multiple of <code>4</code>"
         }
       ]
     },
@@ -13845,8 +13999,16 @@
           "text": " <code>binding</code> <strong class=\"purple\">must</strong> be less than <code>VkPhysicalDeviceLimits</code>::<code>maxVertexInputBindings</code>"
         },
         {
+          "vuid": "VUID-VkVertexInputBindingDivisorDescriptionEXT-vertexAttributeInstanceRateZeroDivisor-02228",
+          "text": " If the <code>vertexAttributeInstanceRateZeroDivisor</code> feature is not enabled, <code>divisor</code> <strong class=\"purple\">must</strong> not be <code>0</code>"
+        },
+        {
+          "vuid": "VUID-VkVertexInputBindingDivisorDescriptionEXT-vertexAttributeInstanceRateDivisor-02229",
+          "text": " If the <code>vertexAttributeInstanceRateDivisor</code> feature is not enabled, <code>divisor</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+        },
+        {
           "vuid": "VUID-VkVertexInputBindingDivisorDescriptionEXT-divisor-01870",
-          "text": " <code>divisor</code> <strong class=\"purple\">must</strong> be a value between <code>1</code> and <code>VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT</code>::<code>maxVertexAttribDivisor</code>, inclusive."
+          "text": " <code>divisor</code> <strong class=\"purple\">must</strong> be a value between <code>0</code> and <code>VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT</code>::<code>maxVertexAttribDivisor</code>, inclusive."
         },
         {
           "vuid": "VUID-VkVertexInputBindingDivisorDescriptionEXT-inputRate-01871",
@@ -18416,6 +18578,38 @@
         }
       ]
     },
+    "VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT": {
+      "(VK_EXT_vertex_attribute_divisor)": [
+        {
+          "vuid": "VUID-VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT</code>"
+        }
+      ]
+    },
+    "VkPhysicalDeviceASTCDecodeFeaturesEXT": {
+      "(VK_EXT_astc_decode_mode)": [
+        {
+          "vuid": "VUID-VkPhysicalDeviceASTCDecodeFeaturesEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT</code>"
+        }
+      ]
+    },
+    "VkPhysicalDeviceVulkanMemoryModelFeaturesKHR": {
+      "(VK_KHR_vulkan_memory_model)": [
+        {
+          "vuid": "VUID-VkPhysicalDeviceVulkanMemoryModelFeaturesKHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES_KHR</code>"
+        }
+      ]
+    },
+    "VkPhysicalDeviceInlineUniformBlockFeaturesEXT": {
+      "(VK_EXT_inline_uniform_block)": [
+        {
+          "vuid": "VUID-VkPhysicalDeviceInlineUniformBlockFeaturesEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES_EXT</code>"
+        }
+      ]
+    },
     "VkPhysicalDevicePushDescriptorPropertiesKHR": {
       "(VK_KHR_push_descriptor)": [
         {
@@ -18525,6 +18719,14 @@
         {
           "vuid": "VUID-VkPhysicalDeviceDescriptorIndexingPropertiesEXT-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES_EXT</code>"
+        }
+      ]
+    },
+    "VkPhysicalDeviceInlineUniformBlockPropertiesEXT": {
+      "(VK_EXT_inline_uniform_block)": [
+        {
+          "vuid": "VUID-VkPhysicalDeviceInlineUniformBlockPropertiesEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES_EXT</code>"
         }
       ]
     },
