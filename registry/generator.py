@@ -499,27 +499,6 @@ class OutputGenerator:
         self.logMsg('diag', 'isEnumRequired:', elem.get('name'),
             '->', required)
         return required
-
-        #@@@ This code is overridden by equivalent code now run in
-        #@@@ Registry.generateFeature
-
-        required = False
-
-        extname = elem.get('extname')
-        if extname is not None:
-            # 'supported' attribute was injected when the <enum> element was
-            # moved into the <enums> group in Registry.parseTree()
-            if self.genOpts.defaultExtensions == elem.get('supported'):
-                required = True
-            elif re.match(self.genOpts.addExtensions, extname) is not None:
-                required = True
-        elif elem.get('version') is not None:
-            required = re.match(self.genOpts.emitversions, elem.get('version')) is not None
-        else:
-            required = True
-
-        return required
-
     #
     # makeCDecls - return C prototype and function pointer typedef for a
     #   command, as a two-element list of strings.
