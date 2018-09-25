@@ -53,7 +53,24 @@
 # include <cassert>
 # define VULKAN_HPP_ASSERT   assert
 #endif
-static_assert( VK_HEADER_VERSION ==  76 , "Wrong VK_HEADER_VERSION!" );
+
+// <tuple> includes <sys/sysmacros.h> through some other header
+// this results in major(x) being resolved to gnu_dev_major(x)
+// which is an expression in a constructor initializer list.
+#if defined(major)
+  #undef major
+#endif
+#if defined(minor)
+  #undef minor
+#endif
+
+// Windows defines MemoryBarrier which is deprecated and collides
+// with the vk::MemoryBarrier struct.
+#ifdef MemoryBarrier
+  #undef MemoryBarrier
+#endif
+
+static_assert( VK_HEADER_VERSION ==  82 , "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
@@ -359,13 +376,13 @@ namespace VULKAN_HPP_NAMESPACE
 
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
 
-  template <typename Type> class UniqueHandleTraits;
+  template <typename Type, typename Dispatch> class UniqueHandleTraits;
 
-  template <typename Type>
-  class UniqueHandle : public UniqueHandleTraits<Type>::deleter
+  template <typename Type, typename Dispatch>
+  class UniqueHandle : public UniqueHandleTraits<Type,Dispatch>::deleter
   {
   private:
-    using Deleter = typename UniqueHandleTraits<Type>::deleter;
+    using Deleter = typename UniqueHandleTraits<Type,Dispatch>::deleter;
   public:
     explicit UniqueHandle( Type const& value = Type(), Deleter const& deleter = Deleter() )
       : Deleter( deleter)
@@ -444,7 +461,7 @@ namespace VULKAN_HPP_NAMESPACE
       return value;
     }
 
-    void swap( UniqueHandle<Type> & rhs )
+    void swap( UniqueHandle<Type,Dispatch> & rhs )
     {
       std::swap(m_value, rhs.m_value);
       std::swap(static_cast<Deleter&>(*this), static_cast<Deleter&>(rhs));
@@ -454,8 +471,8 @@ namespace VULKAN_HPP_NAMESPACE
     Type    m_value;
   };
 
-  template <typename Type>
-  VULKAN_HPP_INLINE void swap( UniqueHandle<Type> & lhs, UniqueHandle<Type> & rhs )
+  template <typename Type, typename Dispatch>
+  VULKAN_HPP_INLINE void swap( UniqueHandle<Type,Dispatch> & lhs, UniqueHandle<Type,Dispatch> & rhs )
   {
     lhs.swap( rhs );
   }
@@ -1018,119 +1035,21 @@ namespace VULKAN_HPP_NAMESPACE
   }
 
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
-  template <typename T>
-  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<T>>::type createResultValue( Result result, T & data, char const * message, typename UniqueHandleTraits<T>::deleter const& deleter )
+  template <typename T, typename D>
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<T,D>>::type createResultValue( Result result, T & data, char const * message, typename UniqueHandleTraits<T,D>::deleter const& deleter )
   {
 #ifdef VULKAN_HPP_NO_EXCEPTIONS
     VULKAN_HPP_ASSERT( result == Result::eSuccess );
-    return ResultValue<UniqueHandle<T>>( result, UniqueHandle<T>(data, deleter) );
+    return ResultValue<UniqueHandle<T,D>>( result, UniqueHandle<T,D>(data, deleter) );
 #else
     if ( result != Result::eSuccess )
     {
       throwResultException( result, message );
     }
-    return UniqueHandle<T>(data, deleter);
+    return UniqueHandle<T,D>(data, deleter);
 #endif
   }
 #endif
-
-
-  struct AllocationCallbacks;
-
-  template <typename OwnerType>
-  class ObjectDestroy
-  {
-    public:
-      ObjectDestroy(OwnerType owner = OwnerType(), Optional<const AllocationCallbacks> allocator = nullptr)
-        : m_owner(owner)
-        , m_allocator(allocator)
-      {}
-
-      OwnerType getOwner() const { return m_owner; }
-      Optional<const AllocationCallbacks> getAllocator() const { return m_allocator; }
-
-    protected:
-      template <typename T>
-      void destroy(T t)
-      {
-        m_owner.destroy(t, m_allocator);
-      }
-
-    private:
-      OwnerType m_owner;
-      Optional<const AllocationCallbacks> m_allocator;
-  };
-
-  class NoParent;
-
-  template <>
-  class ObjectDestroy<NoParent>
-  {
-  public:
-    ObjectDestroy( Optional<const AllocationCallbacks> allocator = nullptr )
-      : m_allocator( allocator )
-    {}
-
-    Optional<const AllocationCallbacks> getAllocator() const { return m_allocator; }
-
-  protected:
-    template <typename T>
-    void destroy(T t)
-    {
-      t.destroy( m_allocator );
-    }
-
-  private:
-    Optional<const AllocationCallbacks> m_allocator;
-  };
-
-  template <typename OwnerType>
-  class ObjectFree
-  {
-    public:
-      ObjectFree(OwnerType owner = OwnerType(), Optional<const AllocationCallbacks> allocator = nullptr)
-        : m_owner(owner)
-        , m_allocator(allocator)
-      {}
-
-      OwnerType getOwner() const { return m_owner; }
-      Optional<const AllocationCallbacks> getAllocator() const { return m_allocator; }
-
-    protected:
-      template <typename T>
-      void destroy(T t)
-      {
-        m_owner.free(t, m_allocator);
-      }
-
-    private:
-      OwnerType m_owner;
-      Optional<const AllocationCallbacks> m_allocator;
-  };
-
-  template <typename OwnerType, typename PoolType>
-  class PoolFree
-  {
-    public:
-      PoolFree(OwnerType owner = OwnerType(), PoolType pool = PoolType())
-        : m_owner(owner)
-        , m_pool(pool)
-      {}
-
-      OwnerType getOwner() const { return m_owner; }
-      PoolType getPool() const { return m_pool; }
-
-    protected:
-      template <typename T>
-      void destroy(T t)
-      {
-        m_owner.free(m_pool, t);
-      }
-
-    private:
-      OwnerType m_owner;
-      PoolType m_pool;
-  };
 
 class DispatchLoaderStatic
 {
@@ -1189,6 +1108,10 @@ public:
   {
     return ::vkBindImageMemory2KHR( device, bindInfoCount, pBindInfos);
   }
+  void vkCmdBeginConditionalRenderingEXT( VkCommandBuffer commandBuffer, const VkConditionalRenderingBeginInfoEXT* pConditionalRenderingBegin  ) const
+  {
+    return ::vkCmdBeginConditionalRenderingEXT( commandBuffer, pConditionalRenderingBegin);
+  }
   void vkCmdBeginDebugUtilsLabelEXT( VkCommandBuffer commandBuffer, const VkDebugUtilsLabelEXT* pLabelInfo  ) const
   {
     return ::vkCmdBeginDebugUtilsLabelEXT( commandBuffer, pLabelInfo);
@@ -1200,6 +1123,10 @@ public:
   void vkCmdBeginRenderPass( VkCommandBuffer commandBuffer, const VkRenderPassBeginInfo* pRenderPassBegin, VkSubpassContents contents  ) const
   {
     return ::vkCmdBeginRenderPass( commandBuffer, pRenderPassBegin, contents);
+  }
+  void vkCmdBeginRenderPass2KHR( VkCommandBuffer commandBuffer, const VkRenderPassBeginInfo* pRenderPassBegin, const VkSubpassBeginInfoKHR* pSubpassBeginInfo  ) const
+  {
+    return ::vkCmdBeginRenderPass2KHR( commandBuffer, pRenderPassBegin, pSubpassBeginInfo);
   }
   void vkCmdBindDescriptorSets( VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint32_t firstSet, uint32_t descriptorSetCount, const VkDescriptorSet* pDescriptorSets, uint32_t dynamicOffsetCount, const uint32_t* pDynamicOffsets  ) const
   {
@@ -1313,6 +1240,10 @@ public:
   {
     return ::vkCmdDrawIndirectCountKHR( commandBuffer, buffer, offset, countBuffer, countBufferOffset, maxDrawCount, stride);
   }
+  void vkCmdEndConditionalRenderingEXT( VkCommandBuffer commandBuffer  ) const
+  {
+    return ::vkCmdEndConditionalRenderingEXT( commandBuffer);
+  }
   void vkCmdEndDebugUtilsLabelEXT( VkCommandBuffer commandBuffer  ) const
   {
     return ::vkCmdEndDebugUtilsLabelEXT( commandBuffer);
@@ -1324,6 +1255,10 @@ public:
   void vkCmdEndRenderPass( VkCommandBuffer commandBuffer  ) const
   {
     return ::vkCmdEndRenderPass( commandBuffer);
+  }
+  void vkCmdEndRenderPass2KHR( VkCommandBuffer commandBuffer, const VkSubpassEndInfoKHR* pSubpassEndInfo  ) const
+  {
+    return ::vkCmdEndRenderPass2KHR( commandBuffer, pSubpassEndInfo);
   }
   void vkCmdExecuteCommands( VkCommandBuffer commandBuffer, uint32_t commandBufferCount, const VkCommandBuffer* pCommandBuffers  ) const
   {
@@ -1340,6 +1275,10 @@ public:
   void vkCmdNextSubpass( VkCommandBuffer commandBuffer, VkSubpassContents contents  ) const
   {
     return ::vkCmdNextSubpass( commandBuffer, contents);
+  }
+  void vkCmdNextSubpass2KHR( VkCommandBuffer commandBuffer, const VkSubpassBeginInfoKHR* pSubpassBeginInfo, const VkSubpassEndInfoKHR* pSubpassEndInfo  ) const
+  {
+    return ::vkCmdNextSubpass2KHR( commandBuffer, pSubpassBeginInfo, pSubpassEndInfo);
   }
   void vkCmdPipelineBarrier( VkCommandBuffer commandBuffer, VkPipelineStageFlags srcStageMask, VkPipelineStageFlags dstStageMask, VkDependencyFlags dependencyFlags, uint32_t memoryBarrierCount, const VkMemoryBarrier* pMemoryBarriers, uint32_t bufferMemoryBarrierCount, const VkBufferMemoryBarrier* pBufferMemoryBarriers, uint32_t imageMemoryBarrierCount, const VkImageMemoryBarrier* pImageMemoryBarriers  ) const
   {
@@ -1380,6 +1319,10 @@ public:
   void vkCmdSetBlendConstants( VkCommandBuffer commandBuffer, const float blendConstants[4]  ) const
   {
     return ::vkCmdSetBlendConstants( commandBuffer, blendConstants);
+  }
+  void vkCmdSetCheckpointNV( VkCommandBuffer commandBuffer, const void* pCheckpointMarker  ) const
+  {
+    return ::vkCmdSetCheckpointNV( commandBuffer, pCheckpointMarker);
   }
   void vkCmdSetDepthBias( VkCommandBuffer commandBuffer, float depthBiasConstantFactor, float depthBiasClamp, float depthBiasSlopeFactor  ) const
   {
@@ -1580,6 +1523,10 @@ public:
   VkResult vkCreateRenderPass( VkDevice device, const VkRenderPassCreateInfo* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkRenderPass* pRenderPass  ) const
   {
     return ::vkCreateRenderPass( device, pCreateInfo, pAllocator, pRenderPass);
+  }
+  VkResult vkCreateRenderPass2KHR( VkDevice device, const VkRenderPassCreateInfo2KHR* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkRenderPass* pRenderPass  ) const
+  {
+    return ::vkCreateRenderPass2KHR( device, pCreateInfo, pAllocator, pRenderPass);
   }
   VkResult vkCreateSampler( VkDevice device, const VkSamplerCreateInfo* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkSampler* pSampler  ) const
   {
@@ -2213,6 +2160,10 @@ public:
   {
     return ::vkGetQueryPoolResults( device, queryPool, firstQuery, queryCount, dataSize, pData, stride, flags);
   }
+  void vkGetQueueCheckpointDataNV( VkQueue queue, uint32_t* pCheckpointDataCount, VkCheckpointDataNV* pCheckpointData  ) const
+  {
+    return ::vkGetQueueCheckpointDataNV( queue, pCheckpointDataCount, pCheckpointData);
+  }
 #ifdef VK_USE_PLATFORM_XLIB_XRANDR_NV
   VkResult vkGetRandROutputDisplayEXT( VkPhysicalDevice physicalDevice, Display* dpy, RROutput rrOutput, VkDisplayKHR* pDisplay  ) const
   {
@@ -2410,6 +2361,112 @@ public:
     return ::vkWaitForFences( device, fenceCount, pFences, waitAll, timeout);
   }
 };
+
+  struct AllocationCallbacks;
+
+  template <typename OwnerType, typename Dispatch>
+  class ObjectDestroy
+  {
+    public:
+      ObjectDestroy( OwnerType owner = OwnerType(), Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &dispatch = Dispatch() )
+        : m_owner( owner )
+        , m_allocator( allocator )
+        , m_dispatch( dispatch )
+      {}
+
+      OwnerType getOwner() const { return m_owner; }
+      Optional<const AllocationCallbacks> getAllocator() const { return m_allocator; }
+
+    protected:
+      template <typename T>
+      void destroy(T t)
+      {
+        m_owner.destroy( t, m_allocator, m_dispatch );
+      }
+
+    private:
+      OwnerType m_owner;
+      Optional<const AllocationCallbacks> m_allocator;
+      Dispatch const& m_dispatch;
+  };
+
+  class NoParent;
+
+  template <typename Dispatch>
+  class ObjectDestroy<NoParent,Dispatch>
+  {
+    public:
+      ObjectDestroy( Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &dispatch = Dispatch() )
+        : m_allocator( allocator )
+        , m_dispatch( dispatch )
+      {}
+
+      Optional<const AllocationCallbacks> getAllocator() const { return m_allocator; }
+
+    protected:
+      template <typename T>
+      void destroy(T t)
+      {
+        t.destroy( m_allocator, m_dispatch );
+      }
+
+    private:
+      Optional<const AllocationCallbacks> m_allocator;
+      Dispatch const& m_dispatch;
+  };
+
+  template <typename OwnerType, typename Dispatch>
+  class ObjectFree
+  {
+    public:
+      ObjectFree( OwnerType owner = OwnerType(), Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &dispatch = Dispatch() )
+        : m_owner( owner )
+        , m_allocator( allocator )
+        , m_dispatch( dispatch )
+      {}
+
+      OwnerType getOwner() const { return m_owner; }
+      Optional<const AllocationCallbacks> getAllocator() const { return m_allocator; }
+
+    protected:
+      template <typename T>
+      void destroy(T t)
+      {
+        m_owner.free( t, m_allocator, m_dispatch );
+      }
+
+    private:
+      OwnerType m_owner;
+      Optional<const AllocationCallbacks> m_allocator;
+      Dispatch const& m_dispatch;
+  };
+
+  template <typename OwnerType, typename PoolType, typename Dispatch>
+  class PoolFree
+  {
+    public:
+      PoolFree( OwnerType owner = OwnerType(), PoolType pool = PoolType(), Dispatch const &dispatch = Dispatch() )
+        : m_owner( owner )
+        , m_pool( pool )
+        , m_dispatch( dispatch )
+      {}
+
+      OwnerType getOwner() const { return m_owner; }
+      PoolType getPool() const { return m_pool; }
+
+    protected:
+      template <typename T>
+      void destroy(T t)
+      {
+        m_owner.free( m_pool, t, m_dispatch );
+      }
+
+    private:
+      OwnerType m_owner;
+      PoolType m_pool;
+      Dispatch const& m_dispatch;
+  };
+
   using SampleMask = uint32_t;
 
   using Bool32 = uint32_t;
@@ -4815,7 +4872,8 @@ public:
 
   struct Offset2D
   {
-    Offset2D( int32_t x_ = 0, int32_t y_ = 0 )
+    Offset2D( int32_t x_ = 0,
+              int32_t y_ = 0 )
       : x( x_ )
       , y( y_ )
     {
@@ -4866,14 +4924,17 @@ public:
 
   struct Offset3D
   {
-    Offset3D( int32_t x_ = 0, int32_t y_ = 0, int32_t z_ = 0 )
+    Offset3D( int32_t x_ = 0,
+              int32_t y_ = 0,
+              int32_t z_ = 0 )
       : x( x_ )
       , y( y_ )
       , z( z_ )
     {
     }
 
-    explicit Offset3D( Offset2D const& offset2D, int32_t z_ = 0 )
+    explicit Offset3D( Offset2D const& offset2D,
+                       int32_t z_ = 0 )
       : x( offset2D.x )
       , y( offset2D.y )
       , z( z_ )
@@ -4932,7 +4993,8 @@ public:
 
   struct Extent2D
   {
-    Extent2D( uint32_t width_ = 0, uint32_t height_ = 0 )
+    Extent2D( uint32_t width_ = 0,
+              uint32_t height_ = 0 )
       : width( width_ )
       , height( height_ )
     {
@@ -4983,14 +5045,17 @@ public:
 
   struct Extent3D
   {
-    Extent3D( uint32_t width_ = 0, uint32_t height_ = 0, uint32_t depth_ = 0 )
+    Extent3D( uint32_t width_ = 0,
+              uint32_t height_ = 0,
+              uint32_t depth_ = 0 )
       : width( width_ )
       , height( height_ )
       , depth( depth_ )
     {
     }
 
-    explicit Extent3D( Extent2D const& extent2D, uint32_t depth_ = 0 )
+    explicit Extent3D( Extent2D const& extent2D,
+                       uint32_t depth_ = 0 )
       : width( extent2D.width )
       , height( extent2D.height )
       , depth( depth_ )
@@ -5049,7 +5114,12 @@ public:
 
   struct Viewport
   {
-    Viewport( float x_ = 0, float y_ = 0, float width_ = 0, float height_ = 0, float minDepth_ = 0, float maxDepth_ = 0 )
+    Viewport( float x_ = 0,
+              float y_ = 0,
+              float width_ = 0,
+              float height_ = 0,
+              float minDepth_ = 0,
+              float maxDepth_ = 0 )
       : x( x_ )
       , y( y_ )
       , width( width_ )
@@ -5136,7 +5206,8 @@ public:
 
   struct Rect2D
   {
-    Rect2D( Offset2D offset_ = Offset2D(), Extent2D extent_ = Extent2D() )
+    Rect2D( Offset2D offset_ = Offset2D(),
+            Extent2D extent_ = Extent2D() )
       : offset( offset_ )
       , extent( extent_ )
     {
@@ -5187,7 +5258,9 @@ public:
 
   struct ClearRect
   {
-    ClearRect( Rect2D rect_ = Rect2D(), uint32_t baseArrayLayer_ = 0, uint32_t layerCount_ = 0 )
+    ClearRect( Rect2D rect_ = Rect2D(),
+               uint32_t baseArrayLayer_ = 0,
+               uint32_t layerCount_ = 0 )
       : rect( rect_ )
       , baseArrayLayer( baseArrayLayer_ )
       , layerCount( layerCount_ )
@@ -5297,7 +5370,12 @@ public:
 
   struct AllocationCallbacks
   {
-    AllocationCallbacks( void* pUserData_ = nullptr, PFN_vkAllocationFunction pfnAllocation_ = nullptr, PFN_vkReallocationFunction pfnReallocation_ = nullptr, PFN_vkFreeFunction pfnFree_ = nullptr, PFN_vkInternalAllocationNotification pfnInternalAllocation_ = nullptr, PFN_vkInternalFreeNotification pfnInternalFree_ = nullptr )
+    AllocationCallbacks( void* pUserData_ = nullptr,
+                         PFN_vkAllocationFunction pfnAllocation_ = nullptr,
+                         PFN_vkReallocationFunction pfnReallocation_ = nullptr,
+                         PFN_vkFreeFunction pfnFree_ = nullptr,
+                         PFN_vkInternalAllocationNotification pfnInternalAllocation_ = nullptr,
+                         PFN_vkInternalFreeNotification pfnInternalFree_ = nullptr )
       : pUserData( pUserData_ )
       , pfnAllocation( pfnAllocation_ )
       , pfnReallocation( pfnReallocation_ )
@@ -5409,7 +5487,9 @@ public:
 
   struct DescriptorBufferInfo
   {
-    DescriptorBufferInfo( Buffer buffer_ = Buffer(), DeviceSize offset_ = 0, DeviceSize range_ = 0 )
+    DescriptorBufferInfo( Buffer buffer_ = Buffer(),
+                          DeviceSize offset_ = 0,
+                          DeviceSize range_ = 0 )
       : buffer( buffer_ )
       , offset( offset_ )
       , range( range_ )
@@ -5498,7 +5578,9 @@ public:
 
   struct BufferCopy
   {
-    BufferCopy( DeviceSize srcOffset_ = 0, DeviceSize dstOffset_ = 0, DeviceSize size_ = 0 )
+    BufferCopy( DeviceSize srcOffset_ = 0,
+                DeviceSize dstOffset_ = 0,
+                DeviceSize size_ = 0 )
       : srcOffset( srcOffset_ )
       , dstOffset( dstOffset_ )
       , size( size_ )
@@ -5558,7 +5640,9 @@ public:
 
   struct SpecializationMapEntry
   {
-    SpecializationMapEntry( uint32_t constantID_ = 0, uint32_t offset_ = 0, size_t size_ = 0 )
+    SpecializationMapEntry( uint32_t constantID_ = 0,
+                            uint32_t offset_ = 0,
+                            size_t size_ = 0 )
       : constantID( constantID_ )
       , offset( offset_ )
       , size( size_ )
@@ -5618,7 +5702,10 @@ public:
 
   struct SpecializationInfo
   {
-    SpecializationInfo( uint32_t mapEntryCount_ = 0, const SpecializationMapEntry* pMapEntries_ = nullptr, size_t dataSize_ = 0, const void* pData_ = nullptr )
+    SpecializationInfo( uint32_t mapEntryCount_ = 0,
+                        const SpecializationMapEntry* pMapEntries_ = nullptr,
+                        size_t dataSize_ = 0,
+                        const void* pData_ = nullptr )
       : mapEntryCount( mapEntryCount_ )
       , pMapEntries( pMapEntries_ )
       , dataSize( dataSize_ )
@@ -5732,7 +5819,8 @@ public:
 
   struct ClearDepthStencilValue
   {
-    ClearDepthStencilValue( float depth_ = 0, uint32_t stencil_ = 0 )
+    ClearDepthStencilValue( float depth_ = 0,
+                            uint32_t stencil_ = 0 )
       : depth( depth_ )
       , stencil( stencil_ )
     {
@@ -5821,7 +5909,61 @@ public:
 
   struct PhysicalDeviceFeatures
   {
-    PhysicalDeviceFeatures( Bool32 robustBufferAccess_ = 0, Bool32 fullDrawIndexUint32_ = 0, Bool32 imageCubeArray_ = 0, Bool32 independentBlend_ = 0, Bool32 geometryShader_ = 0, Bool32 tessellationShader_ = 0, Bool32 sampleRateShading_ = 0, Bool32 dualSrcBlend_ = 0, Bool32 logicOp_ = 0, Bool32 multiDrawIndirect_ = 0, Bool32 drawIndirectFirstInstance_ = 0, Bool32 depthClamp_ = 0, Bool32 depthBiasClamp_ = 0, Bool32 fillModeNonSolid_ = 0, Bool32 depthBounds_ = 0, Bool32 wideLines_ = 0, Bool32 largePoints_ = 0, Bool32 alphaToOne_ = 0, Bool32 multiViewport_ = 0, Bool32 samplerAnisotropy_ = 0, Bool32 textureCompressionETC2_ = 0, Bool32 textureCompressionASTC_LDR_ = 0, Bool32 textureCompressionBC_ = 0, Bool32 occlusionQueryPrecise_ = 0, Bool32 pipelineStatisticsQuery_ = 0, Bool32 vertexPipelineStoresAndAtomics_ = 0, Bool32 fragmentStoresAndAtomics_ = 0, Bool32 shaderTessellationAndGeometryPointSize_ = 0, Bool32 shaderImageGatherExtended_ = 0, Bool32 shaderStorageImageExtendedFormats_ = 0, Bool32 shaderStorageImageMultisample_ = 0, Bool32 shaderStorageImageReadWithoutFormat_ = 0, Bool32 shaderStorageImageWriteWithoutFormat_ = 0, Bool32 shaderUniformBufferArrayDynamicIndexing_ = 0, Bool32 shaderSampledImageArrayDynamicIndexing_ = 0, Bool32 shaderStorageBufferArrayDynamicIndexing_ = 0, Bool32 shaderStorageImageArrayDynamicIndexing_ = 0, Bool32 shaderClipDistance_ = 0, Bool32 shaderCullDistance_ = 0, Bool32 shaderFloat64_ = 0, Bool32 shaderInt64_ = 0, Bool32 shaderInt16_ = 0, Bool32 shaderResourceResidency_ = 0, Bool32 shaderResourceMinLod_ = 0, Bool32 sparseBinding_ = 0, Bool32 sparseResidencyBuffer_ = 0, Bool32 sparseResidencyImage2D_ = 0, Bool32 sparseResidencyImage3D_ = 0, Bool32 sparseResidency2Samples_ = 0, Bool32 sparseResidency4Samples_ = 0, Bool32 sparseResidency8Samples_ = 0, Bool32 sparseResidency16Samples_ = 0, Bool32 sparseResidencyAliased_ = 0, Bool32 variableMultisampleRate_ = 0, Bool32 inheritedQueries_ = 0 )
+    PhysicalDeviceFeatures( Bool32 robustBufferAccess_ = 0,
+                            Bool32 fullDrawIndexUint32_ = 0,
+                            Bool32 imageCubeArray_ = 0,
+                            Bool32 independentBlend_ = 0,
+                            Bool32 geometryShader_ = 0,
+                            Bool32 tessellationShader_ = 0,
+                            Bool32 sampleRateShading_ = 0,
+                            Bool32 dualSrcBlend_ = 0,
+                            Bool32 logicOp_ = 0,
+                            Bool32 multiDrawIndirect_ = 0,
+                            Bool32 drawIndirectFirstInstance_ = 0,
+                            Bool32 depthClamp_ = 0,
+                            Bool32 depthBiasClamp_ = 0,
+                            Bool32 fillModeNonSolid_ = 0,
+                            Bool32 depthBounds_ = 0,
+                            Bool32 wideLines_ = 0,
+                            Bool32 largePoints_ = 0,
+                            Bool32 alphaToOne_ = 0,
+                            Bool32 multiViewport_ = 0,
+                            Bool32 samplerAnisotropy_ = 0,
+                            Bool32 textureCompressionETC2_ = 0,
+                            Bool32 textureCompressionASTC_LDR_ = 0,
+                            Bool32 textureCompressionBC_ = 0,
+                            Bool32 occlusionQueryPrecise_ = 0,
+                            Bool32 pipelineStatisticsQuery_ = 0,
+                            Bool32 vertexPipelineStoresAndAtomics_ = 0,
+                            Bool32 fragmentStoresAndAtomics_ = 0,
+                            Bool32 shaderTessellationAndGeometryPointSize_ = 0,
+                            Bool32 shaderImageGatherExtended_ = 0,
+                            Bool32 shaderStorageImageExtendedFormats_ = 0,
+                            Bool32 shaderStorageImageMultisample_ = 0,
+                            Bool32 shaderStorageImageReadWithoutFormat_ = 0,
+                            Bool32 shaderStorageImageWriteWithoutFormat_ = 0,
+                            Bool32 shaderUniformBufferArrayDynamicIndexing_ = 0,
+                            Bool32 shaderSampledImageArrayDynamicIndexing_ = 0,
+                            Bool32 shaderStorageBufferArrayDynamicIndexing_ = 0,
+                            Bool32 shaderStorageImageArrayDynamicIndexing_ = 0,
+                            Bool32 shaderClipDistance_ = 0,
+                            Bool32 shaderCullDistance_ = 0,
+                            Bool32 shaderFloat64_ = 0,
+                            Bool32 shaderInt64_ = 0,
+                            Bool32 shaderInt16_ = 0,
+                            Bool32 shaderResourceResidency_ = 0,
+                            Bool32 shaderResourceMinLod_ = 0,
+                            Bool32 sparseBinding_ = 0,
+                            Bool32 sparseResidencyBuffer_ = 0,
+                            Bool32 sparseResidencyImage2D_ = 0,
+                            Bool32 sparseResidencyImage3D_ = 0,
+                            Bool32 sparseResidency2Samples_ = 0,
+                            Bool32 sparseResidency4Samples_ = 0,
+                            Bool32 sparseResidency8Samples_ = 0,
+                            Bool32 sparseResidency16Samples_ = 0,
+                            Bool32 sparseResidencyAliased_ = 0,
+                            Bool32 variableMultisampleRate_ = 0,
+                            Bool32 inheritedQueries_ = 0 )
       : robustBufferAccess( robustBufferAccess_ )
       , fullDrawIndexUint32( fullDrawIndexUint32_ )
       , imageCubeArray( imageCubeArray_ )
@@ -6378,7 +6520,10 @@ public:
 
   struct DrawIndirectCommand
   {
-    DrawIndirectCommand( uint32_t vertexCount_ = 0, uint32_t instanceCount_ = 0, uint32_t firstVertex_ = 0, uint32_t firstInstance_ = 0 )
+    DrawIndirectCommand( uint32_t vertexCount_ = 0,
+                         uint32_t instanceCount_ = 0,
+                         uint32_t firstVertex_ = 0,
+                         uint32_t firstInstance_ = 0 )
       : vertexCount( vertexCount_ )
       , instanceCount( instanceCount_ )
       , firstVertex( firstVertex_ )
@@ -6447,7 +6592,11 @@ public:
 
   struct DrawIndexedIndirectCommand
   {
-    DrawIndexedIndirectCommand( uint32_t indexCount_ = 0, uint32_t instanceCount_ = 0, uint32_t firstIndex_ = 0, int32_t vertexOffset_ = 0, uint32_t firstInstance_ = 0 )
+    DrawIndexedIndirectCommand( uint32_t indexCount_ = 0,
+                                uint32_t instanceCount_ = 0,
+                                uint32_t firstIndex_ = 0,
+                                int32_t vertexOffset_ = 0,
+                                uint32_t firstInstance_ = 0 )
       : indexCount( indexCount_ )
       , instanceCount( instanceCount_ )
       , firstIndex( firstIndex_ )
@@ -6525,7 +6674,9 @@ public:
 
   struct DispatchIndirectCommand
   {
-    DispatchIndirectCommand( uint32_t x_ = 0, uint32_t y_ = 0, uint32_t z_ = 0 )
+    DispatchIndirectCommand( uint32_t x_ = 0,
+                             uint32_t y_ = 0,
+                             uint32_t z_ = 0 )
       : x( x_ )
       , y( y_ )
       , z( z_ )
@@ -6608,7 +6759,8 @@ public:
 
   struct DisplayModeParametersKHR
   {
-    DisplayModeParametersKHR( Extent2D visibleRegion_ = Extent2D(), uint32_t refreshRate_ = 0 )
+    DisplayModeParametersKHR( Extent2D visibleRegion_ = Extent2D(),
+                              uint32_t refreshRate_ = 0 )
       : visibleRegion( visibleRegion_ )
       , refreshRate( refreshRate_ )
     {
@@ -6682,14 +6834,17 @@ public:
 
   struct RectLayerKHR
   {
-    RectLayerKHR( Offset2D offset_ = Offset2D(), Extent2D extent_ = Extent2D(), uint32_t layer_ = 0 )
+    RectLayerKHR( Offset2D offset_ = Offset2D(),
+                  Extent2D extent_ = Extent2D(),
+                  uint32_t layer_ = 0 )
       : offset( offset_ )
       , extent( extent_ )
       , layer( layer_ )
     {
     }
 
-    explicit RectLayerKHR( Rect2D const& rect2D, uint32_t layer_ = 0 )
+    explicit RectLayerKHR( Rect2D const& rect2D,
+                           uint32_t layer_ = 0 )
       : offset( rect2D.offset )
       , extent( rect2D.extent )
       , layer( layer_ )
@@ -6748,7 +6903,8 @@ public:
 
   struct PresentRegionKHR
   {
-    PresentRegionKHR( uint32_t rectangleCount_ = 0, const RectLayerKHR* pRectangles_ = nullptr )
+    PresentRegionKHR( uint32_t rectangleCount_ = 0,
+                      const RectLayerKHR* pRectangles_ = nullptr )
       : rectangleCount( rectangleCount_ )
       , pRectangles( pRectangles_ )
     {
@@ -6799,7 +6955,8 @@ public:
 
   struct XYColorEXT
   {
-    XYColorEXT( float x_ = 0, float y_ = 0 )
+    XYColorEXT( float x_ = 0,
+                float y_ = 0 )
       : x( x_ )
       , y( y_ )
     {
@@ -6850,27 +7007,6 @@ public:
 
   struct RefreshCycleDurationGOOGLE
   {
-    RefreshCycleDurationGOOGLE( uint64_t refreshDuration_ = 0 )
-      : refreshDuration( refreshDuration_ )
-    {
-    }
-
-    RefreshCycleDurationGOOGLE( VkRefreshCycleDurationGOOGLE const & rhs )
-    {
-      memcpy( this, &rhs, sizeof( RefreshCycleDurationGOOGLE ) );
-    }
-
-    RefreshCycleDurationGOOGLE& operator=( VkRefreshCycleDurationGOOGLE const & rhs )
-    {
-      memcpy( this, &rhs, sizeof( RefreshCycleDurationGOOGLE ) );
-      return *this;
-    }
-    RefreshCycleDurationGOOGLE& setRefreshDuration( uint64_t refreshDuration_ )
-    {
-      refreshDuration = refreshDuration_;
-      return *this;
-    }
-
     operator const VkRefreshCycleDurationGOOGLE&() const
     {
       return *reinterpret_cast<const VkRefreshCycleDurationGOOGLE*>(this);
@@ -6892,55 +7028,6 @@ public:
 
   struct PastPresentationTimingGOOGLE
   {
-    PastPresentationTimingGOOGLE( uint32_t presentID_ = 0, uint64_t desiredPresentTime_ = 0, uint64_t actualPresentTime_ = 0, uint64_t earliestPresentTime_ = 0, uint64_t presentMargin_ = 0 )
-      : presentID( presentID_ )
-      , desiredPresentTime( desiredPresentTime_ )
-      , actualPresentTime( actualPresentTime_ )
-      , earliestPresentTime( earliestPresentTime_ )
-      , presentMargin( presentMargin_ )
-    {
-    }
-
-    PastPresentationTimingGOOGLE( VkPastPresentationTimingGOOGLE const & rhs )
-    {
-      memcpy( this, &rhs, sizeof( PastPresentationTimingGOOGLE ) );
-    }
-
-    PastPresentationTimingGOOGLE& operator=( VkPastPresentationTimingGOOGLE const & rhs )
-    {
-      memcpy( this, &rhs, sizeof( PastPresentationTimingGOOGLE ) );
-      return *this;
-    }
-    PastPresentationTimingGOOGLE& setPresentID( uint32_t presentID_ )
-    {
-      presentID = presentID_;
-      return *this;
-    }
-
-    PastPresentationTimingGOOGLE& setDesiredPresentTime( uint64_t desiredPresentTime_ )
-    {
-      desiredPresentTime = desiredPresentTime_;
-      return *this;
-    }
-
-    PastPresentationTimingGOOGLE& setActualPresentTime( uint64_t actualPresentTime_ )
-    {
-      actualPresentTime = actualPresentTime_;
-      return *this;
-    }
-
-    PastPresentationTimingGOOGLE& setEarliestPresentTime( uint64_t earliestPresentTime_ )
-    {
-      earliestPresentTime = earliestPresentTime_;
-      return *this;
-    }
-
-    PastPresentationTimingGOOGLE& setPresentMargin( uint64_t presentMargin_ )
-    {
-      presentMargin = presentMargin_;
-      return *this;
-    }
-
     operator const VkPastPresentationTimingGOOGLE&() const
     {
       return *reinterpret_cast<const VkPastPresentationTimingGOOGLE*>(this);
@@ -6970,7 +7057,8 @@ public:
 
   struct PresentTimeGOOGLE
   {
-    PresentTimeGOOGLE( uint32_t presentID_ = 0, uint64_t desiredPresentTime_ = 0 )
+    PresentTimeGOOGLE( uint32_t presentID_ = 0,
+                       uint64_t desiredPresentTime_ = 0 )
       : presentID( presentID_ )
       , desiredPresentTime( desiredPresentTime_ )
     {
@@ -7021,7 +7109,8 @@ public:
 
   struct ViewportWScalingNV
   {
-    ViewportWScalingNV( float xcoeff_ = 0, float ycoeff_ = 0 )
+    ViewportWScalingNV( float xcoeff_ = 0,
+                        float ycoeff_ = 0 )
       : xcoeff( xcoeff_ )
       , ycoeff( ycoeff_ )
     {
@@ -7072,7 +7161,8 @@ public:
 
   struct SampleLocationEXT
   {
-    SampleLocationEXT( float x_ = 0, float y_ = 0 )
+    SampleLocationEXT( float x_ = 0,
+                       float y_ = 0 )
       : x( x_ )
       , y( y_ )
     {
@@ -7152,7 +7242,8 @@ public:
 
   struct VertexInputBindingDivisorDescriptionEXT
   {
-    VertexInputBindingDivisorDescriptionEXT( uint32_t binding_ = 0, uint32_t divisor_ = 0 )
+    VertexInputBindingDivisorDescriptionEXT( uint32_t binding_ = 0,
+                                             uint32_t divisor_ = 0 )
       : binding( binding_ )
       , divisor( divisor_ )
     {
@@ -7222,7 +7313,9 @@ public:
 
   struct DescriptorImageInfo
   {
-    DescriptorImageInfo( Sampler sampler_ = Sampler(), ImageView imageView_ = ImageView(), ImageLayout imageLayout_ = ImageLayout::eUndefined )
+    DescriptorImageInfo( Sampler sampler_ = Sampler(),
+                         ImageView imageView_ = ImageView(),
+                         ImageLayout imageLayout_ = ImageLayout::eUndefined )
       : sampler( sampler_ )
       , imageView( imageView_ )
       , imageLayout( imageLayout_ )
@@ -7282,7 +7375,8 @@ public:
 
   struct AttachmentReference
   {
-    AttachmentReference( uint32_t attachment_ = 0, ImageLayout layout_ = ImageLayout::eUndefined )
+    AttachmentReference( uint32_t attachment_ = 0,
+                         ImageLayout layout_ = ImageLayout::eUndefined )
       : attachment( attachment_ )
       , layout( layout_ )
     {
@@ -7387,7 +7481,10 @@ public:
 
   struct ComponentMapping
   {
-    ComponentMapping( ComponentSwizzle r_ = ComponentSwizzle::eIdentity, ComponentSwizzle g_ = ComponentSwizzle::eIdentity, ComponentSwizzle b_ = ComponentSwizzle::eIdentity, ComponentSwizzle a_ = ComponentSwizzle::eIdentity )
+    ComponentMapping( ComponentSwizzle r_ = ComponentSwizzle::eIdentity,
+                      ComponentSwizzle g_ = ComponentSwizzle::eIdentity,
+                      ComponentSwizzle b_ = ComponentSwizzle::eIdentity,
+                      ComponentSwizzle a_ = ComponentSwizzle::eIdentity )
       : r( r_ )
       , g( g_ )
       , b( b_ )
@@ -7471,7 +7568,8 @@ public:
 
   struct DescriptorPoolSize
   {
-    DescriptorPoolSize( DescriptorType type_ = DescriptorType::eSampler, uint32_t descriptorCount_ = 0 )
+    DescriptorPoolSize( DescriptorType type_ = DescriptorType::eSampler,
+                        uint32_t descriptorCount_ = 0 )
       : type( type_ )
       , descriptorCount( descriptorCount_ )
     {
@@ -7522,7 +7620,12 @@ public:
 
   struct DescriptorUpdateTemplateEntry
   {
-    DescriptorUpdateTemplateEntry( uint32_t dstBinding_ = 0, uint32_t dstArrayElement_ = 0, uint32_t descriptorCount_ = 0, DescriptorType descriptorType_ = DescriptorType::eSampler, size_t offset_ = 0, size_t stride_ = 0 )
+    DescriptorUpdateTemplateEntry( uint32_t dstBinding_ = 0,
+                                   uint32_t dstArrayElement_ = 0,
+                                   uint32_t descriptorCount_ = 0,
+                                   DescriptorType descriptorType_ = DescriptorType::eSampler,
+                                   size_t offset_ = 0,
+                                   size_t stride_ = 0 )
       : dstBinding( dstBinding_ )
       , dstArrayElement( dstArrayElement_ )
       , descriptorCount( descriptorCount_ )
@@ -7832,7 +7935,13 @@ public:
 
   struct StencilOpState
   {
-    StencilOpState( StencilOp failOp_ = StencilOp::eKeep, StencilOp passOp_ = StencilOp::eKeep, StencilOp depthFailOp_ = StencilOp::eKeep, CompareOp compareOp_ = CompareOp::eNever, uint32_t compareMask_ = 0, uint32_t writeMask_ = 0, uint32_t reference_ = 0 )
+    StencilOpState( StencilOp failOp_ = StencilOp::eKeep,
+                    StencilOp passOp_ = StencilOp::eKeep,
+                    StencilOp depthFailOp_ = StencilOp::eKeep,
+                    CompareOp compareOp_ = CompareOp::eNever,
+                    uint32_t compareMask_ = 0,
+                    uint32_t writeMask_ = 0,
+                    uint32_t reference_ = 0 )
       : failOp( failOp_ )
       , passOp( passOp_ )
       , depthFailOp( depthFailOp_ )
@@ -7977,7 +8086,9 @@ public:
 
   struct VertexInputBindingDescription
   {
-    VertexInputBindingDescription( uint32_t binding_ = 0, uint32_t stride_ = 0, VertexInputRate inputRate_ = VertexInputRate::eVertex )
+    VertexInputBindingDescription( uint32_t binding_ = 0,
+                                   uint32_t stride_ = 0,
+                                   VertexInputRate inputRate_ = VertexInputRate::eVertex )
       : binding( binding_ )
       , stride( stride_ )
       , inputRate( inputRate_ )
@@ -8302,7 +8413,10 @@ public:
 
   struct VertexInputAttributeDescription
   {
-    VertexInputAttributeDescription( uint32_t location_ = 0, uint32_t binding_ = 0, Format format_ = Format::eUndefined, uint32_t offset_ = 0 )
+    VertexInputAttributeDescription( uint32_t location_ = 0,
+                                     uint32_t binding_ = 0,
+                                     Format format_ = Format::eUndefined,
+                                     uint32_t offset_ = 0 )
       : location( location_ )
       , binding( binding_ )
       , format( format_ )
@@ -8592,6 +8706,9 @@ public:
     eImportSemaphoreFdInfoKHR = VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_FD_INFO_KHR,
     eSemaphoreGetFdInfoKHR = VK_STRUCTURE_TYPE_SEMAPHORE_GET_FD_INFO_KHR,
     ePhysicalDevicePushDescriptorPropertiesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR,
+    eCommandBufferInheritanceConditionalRenderingInfoEXT = VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_CONDITIONAL_RENDERING_INFO_EXT,
+    ePhysicalDeviceConditionalRenderingFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONDITIONAL_RENDERING_FEATURES_EXT,
+    eConditionalRenderingBeginInfoEXT = VK_STRUCTURE_TYPE_CONDITIONAL_RENDERING_BEGIN_INFO_EXT,
     ePresentRegionsKHR = VK_STRUCTURE_TYPE_PRESENT_REGIONS_KHR,
     eObjectTableCreateInfoNVX = VK_STRUCTURE_TYPE_OBJECT_TABLE_CREATE_INFO_NVX,
     eIndirectCommandsLayoutCreateInfoNVX = VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_NVX,
@@ -8613,6 +8730,13 @@ public:
     ePhysicalDeviceConservativeRasterizationPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT,
     ePipelineRasterizationConservativeStateCreateInfoEXT = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_CONSERVATIVE_STATE_CREATE_INFO_EXT,
     eHdrMetadataEXT = VK_STRUCTURE_TYPE_HDR_METADATA_EXT,
+    eAttachmentDescription2KHR = VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_2_KHR,
+    eAttachmentReference2KHR = VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_2_KHR,
+    eSubpassDescription2KHR = VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_2_KHR,
+    eSubpassDependency2KHR = VK_STRUCTURE_TYPE_SUBPASS_DEPENDENCY_2_KHR,
+    eRenderPassCreateInfo2KHR = VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2_KHR,
+    eSubpassBeginInfoKHR = VK_STRUCTURE_TYPE_SUBPASS_BEGIN_INFO_KHR,
+    eSubpassEndInfoKHR = VK_STRUCTURE_TYPE_SUBPASS_END_INFO_KHR,
     eSharedPresentSurfaceCapabilitiesKHR = VK_STRUCTURE_TYPE_SHARED_PRESENT_SURFACE_CAPABILITIES_KHR,
     eImportFenceWin32HandleInfoKHR = VK_STRUCTURE_TYPE_IMPORT_FENCE_WIN32_HANDLE_INFO_KHR,
     eExportFenceWin32HandleInfoKHR = VK_STRUCTURE_TYPE_EXPORT_FENCE_WIN32_HANDLE_INFO_KHR,
@@ -8661,17 +8785,24 @@ public:
     eDescriptorSetVariableDescriptorCountAllocateInfoEXT = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_ALLOCATE_INFO_EXT,
     eDescriptorSetVariableDescriptorCountLayoutSupportEXT = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT_EXT,
     eDeviceQueueGlobalPriorityCreateInfoEXT = VK_STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_EXT,
+    ePhysicalDevice8BitStorageFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES_KHR,
     eImportMemoryHostPointerInfoEXT = VK_STRUCTURE_TYPE_IMPORT_MEMORY_HOST_POINTER_INFO_EXT,
     eMemoryHostPointerPropertiesEXT = VK_STRUCTURE_TYPE_MEMORY_HOST_POINTER_PROPERTIES_EXT,
     ePhysicalDeviceExternalMemoryHostPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT,
     ePhysicalDeviceShaderCorePropertiesAMD = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_AMD,
     ePhysicalDeviceVertexAttributeDivisorPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_EXT,
-    ePipelineVertexInputDivisorStateCreateInfoEXT = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_EXT
+    ePipelineVertexInputDivisorStateCreateInfoEXT = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_EXT,
+    eCheckpointDataNV = VK_STRUCTURE_TYPE_CHECKPOINT_DATA_NV,
+    eQueueFamilyCheckpointPropertiesNV = VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV
   };
 
   struct ApplicationInfo
   {
-    ApplicationInfo( const char* pApplicationName_ = nullptr, uint32_t applicationVersion_ = 0, const char* pEngineName_ = nullptr, uint32_t engineVersion_ = 0, uint32_t apiVersion_ = 0 )
+    ApplicationInfo( const char* pApplicationName_ = nullptr,
+                     uint32_t applicationVersion_ = 0,
+                     const char* pEngineName_ = nullptr,
+                     uint32_t engineVersion_ = 0,
+                     uint32_t apiVersion_ = 0 )
       : pApplicationName( pApplicationName_ )
       , applicationVersion( applicationVersion_ )
       , pEngineName( pEngineName_ )
@@ -8762,7 +8893,12 @@ public:
 
   struct InstanceCreateInfo
   {
-    InstanceCreateInfo( InstanceCreateFlags flags_ = InstanceCreateFlags(), const ApplicationInfo* pApplicationInfo_ = nullptr, uint32_t enabledLayerCount_ = 0, const char* const* ppEnabledLayerNames_ = nullptr, uint32_t enabledExtensionCount_ = 0, const char* const* ppEnabledExtensionNames_ = nullptr )
+    InstanceCreateInfo( InstanceCreateFlags flags_ = InstanceCreateFlags(),
+                        const ApplicationInfo* pApplicationInfo_ = nullptr,
+                        uint32_t enabledLayerCount_ = 0,
+                        const char* const* ppEnabledLayerNames_ = nullptr,
+                        uint32_t enabledExtensionCount_ = 0,
+                        const char* const* ppEnabledExtensionNames_ = nullptr )
       : flags( flags_ )
       , pApplicationInfo( pApplicationInfo_ )
       , enabledLayerCount( enabledLayerCount_ )
@@ -8862,7 +8998,8 @@ public:
 
   struct MemoryAllocateInfo
   {
-    MemoryAllocateInfo( DeviceSize allocationSize_ = 0, uint32_t memoryTypeIndex_ = 0 )
+    MemoryAllocateInfo( DeviceSize allocationSize_ = 0,
+                        uint32_t memoryTypeIndex_ = 0 )
       : allocationSize( allocationSize_ )
       , memoryTypeIndex( memoryTypeIndex_ )
     {
@@ -8926,7 +9063,9 @@ public:
 
   struct MappedMemoryRange
   {
-    MappedMemoryRange( DeviceMemory memory_ = DeviceMemory(), DeviceSize offset_ = 0, DeviceSize size_ = 0 )
+    MappedMemoryRange( DeviceMemory memory_ = DeviceMemory(),
+                       DeviceSize offset_ = 0,
+                       DeviceSize size_ = 0 )
       : memory( memory_ )
       , offset( offset_ )
       , size( size_ )
@@ -8999,7 +9138,14 @@ public:
 
   struct WriteDescriptorSet
   {
-    WriteDescriptorSet( DescriptorSet dstSet_ = DescriptorSet(), uint32_t dstBinding_ = 0, uint32_t dstArrayElement_ = 0, uint32_t descriptorCount_ = 0, DescriptorType descriptorType_ = DescriptorType::eSampler, const DescriptorImageInfo* pImageInfo_ = nullptr, const DescriptorBufferInfo* pBufferInfo_ = nullptr, const BufferView* pTexelBufferView_ = nullptr )
+    WriteDescriptorSet( DescriptorSet dstSet_ = DescriptorSet(),
+                        uint32_t dstBinding_ = 0,
+                        uint32_t dstArrayElement_ = 0,
+                        uint32_t descriptorCount_ = 0,
+                        DescriptorType descriptorType_ = DescriptorType::eSampler,
+                        const DescriptorImageInfo* pImageInfo_ = nullptr,
+                        const DescriptorBufferInfo* pBufferInfo_ = nullptr,
+                        const BufferView* pTexelBufferView_ = nullptr )
       : dstSet( dstSet_ )
       , dstBinding( dstBinding_ )
       , dstArrayElement( dstArrayElement_ )
@@ -9117,7 +9263,13 @@ public:
 
   struct CopyDescriptorSet
   {
-    CopyDescriptorSet( DescriptorSet srcSet_ = DescriptorSet(), uint32_t srcBinding_ = 0, uint32_t srcArrayElement_ = 0, DescriptorSet dstSet_ = DescriptorSet(), uint32_t dstBinding_ = 0, uint32_t dstArrayElement_ = 0, uint32_t descriptorCount_ = 0 )
+    CopyDescriptorSet( DescriptorSet srcSet_ = DescriptorSet(),
+                       uint32_t srcBinding_ = 0,
+                       uint32_t srcArrayElement_ = 0,
+                       DescriptorSet dstSet_ = DescriptorSet(),
+                       uint32_t dstBinding_ = 0,
+                       uint32_t dstArrayElement_ = 0,
+                       uint32_t descriptorCount_ = 0 )
       : srcSet( srcSet_ )
       , srcBinding( srcBinding_ )
       , srcArrayElement( srcArrayElement_ )
@@ -9226,7 +9378,11 @@ public:
 
   struct BufferViewCreateInfo
   {
-    BufferViewCreateInfo( BufferViewCreateFlags flags_ = BufferViewCreateFlags(), Buffer buffer_ = Buffer(), Format format_ = Format::eUndefined, DeviceSize offset_ = 0, DeviceSize range_ = 0 )
+    BufferViewCreateInfo( BufferViewCreateFlags flags_ = BufferViewCreateFlags(),
+                          Buffer buffer_ = Buffer(),
+                          Format format_ = Format::eUndefined,
+                          DeviceSize offset_ = 0,
+                          DeviceSize range_ = 0 )
       : flags( flags_ )
       , buffer( buffer_ )
       , format( format_ )
@@ -9317,7 +9473,9 @@ public:
 
   struct ShaderModuleCreateInfo
   {
-    ShaderModuleCreateInfo( ShaderModuleCreateFlags flags_ = ShaderModuleCreateFlags(), size_t codeSize_ = 0, const uint32_t* pCode_ = nullptr )
+    ShaderModuleCreateInfo( ShaderModuleCreateFlags flags_ = ShaderModuleCreateFlags(),
+                            size_t codeSize_ = 0,
+                            const uint32_t* pCode_ = nullptr )
       : flags( flags_ )
       , codeSize( codeSize_ )
       , pCode( pCode_ )
@@ -9390,7 +9548,9 @@ public:
 
   struct DescriptorSetAllocateInfo
   {
-    DescriptorSetAllocateInfo( DescriptorPool descriptorPool_ = DescriptorPool(), uint32_t descriptorSetCount_ = 0, const DescriptorSetLayout* pSetLayouts_ = nullptr )
+    DescriptorSetAllocateInfo( DescriptorPool descriptorPool_ = DescriptorPool(),
+                               uint32_t descriptorSetCount_ = 0,
+                               const DescriptorSetLayout* pSetLayouts_ = nullptr )
       : descriptorPool( descriptorPool_ )
       , descriptorSetCount( descriptorSetCount_ )
       , pSetLayouts( pSetLayouts_ )
@@ -9463,7 +9623,11 @@ public:
 
   struct PipelineVertexInputStateCreateInfo
   {
-    PipelineVertexInputStateCreateInfo( PipelineVertexInputStateCreateFlags flags_ = PipelineVertexInputStateCreateFlags(), uint32_t vertexBindingDescriptionCount_ = 0, const VertexInputBindingDescription* pVertexBindingDescriptions_ = nullptr, uint32_t vertexAttributeDescriptionCount_ = 0, const VertexInputAttributeDescription* pVertexAttributeDescriptions_ = nullptr )
+    PipelineVertexInputStateCreateInfo( PipelineVertexInputStateCreateFlags flags_ = PipelineVertexInputStateCreateFlags(),
+                                        uint32_t vertexBindingDescriptionCount_ = 0,
+                                        const VertexInputBindingDescription* pVertexBindingDescriptions_ = nullptr,
+                                        uint32_t vertexAttributeDescriptionCount_ = 0,
+                                        const VertexInputAttributeDescription* pVertexAttributeDescriptions_ = nullptr )
       : flags( flags_ )
       , vertexBindingDescriptionCount( vertexBindingDescriptionCount_ )
       , pVertexBindingDescriptions( pVertexBindingDescriptions_ )
@@ -9554,7 +9718,9 @@ public:
 
   struct PipelineInputAssemblyStateCreateInfo
   {
-    PipelineInputAssemblyStateCreateInfo( PipelineInputAssemblyStateCreateFlags flags_ = PipelineInputAssemblyStateCreateFlags(), PrimitiveTopology topology_ = PrimitiveTopology::ePointList, Bool32 primitiveRestartEnable_ = 0 )
+    PipelineInputAssemblyStateCreateInfo( PipelineInputAssemblyStateCreateFlags flags_ = PipelineInputAssemblyStateCreateFlags(),
+                                          PrimitiveTopology topology_ = PrimitiveTopology::ePointList,
+                                          Bool32 primitiveRestartEnable_ = 0 )
       : flags( flags_ )
       , topology( topology_ )
       , primitiveRestartEnable( primitiveRestartEnable_ )
@@ -9627,7 +9793,8 @@ public:
 
   struct PipelineTessellationStateCreateInfo
   {
-    PipelineTessellationStateCreateInfo( PipelineTessellationStateCreateFlags flags_ = PipelineTessellationStateCreateFlags(), uint32_t patchControlPoints_ = 0 )
+    PipelineTessellationStateCreateInfo( PipelineTessellationStateCreateFlags flags_ = PipelineTessellationStateCreateFlags(),
+                                         uint32_t patchControlPoints_ = 0 )
       : flags( flags_ )
       , patchControlPoints( patchControlPoints_ )
     {
@@ -9691,7 +9858,11 @@ public:
 
   struct PipelineViewportStateCreateInfo
   {
-    PipelineViewportStateCreateInfo( PipelineViewportStateCreateFlags flags_ = PipelineViewportStateCreateFlags(), uint32_t viewportCount_ = 0, const Viewport* pViewports_ = nullptr, uint32_t scissorCount_ = 0, const Rect2D* pScissors_ = nullptr )
+    PipelineViewportStateCreateInfo( PipelineViewportStateCreateFlags flags_ = PipelineViewportStateCreateFlags(),
+                                     uint32_t viewportCount_ = 0,
+                                     const Viewport* pViewports_ = nullptr,
+                                     uint32_t scissorCount_ = 0,
+                                     const Rect2D* pScissors_ = nullptr )
       : flags( flags_ )
       , viewportCount( viewportCount_ )
       , pViewports( pViewports_ )
@@ -9782,7 +9953,17 @@ public:
 
   struct PipelineRasterizationStateCreateInfo
   {
-    PipelineRasterizationStateCreateInfo( PipelineRasterizationStateCreateFlags flags_ = PipelineRasterizationStateCreateFlags(), Bool32 depthClampEnable_ = 0, Bool32 rasterizerDiscardEnable_ = 0, PolygonMode polygonMode_ = PolygonMode::eFill, CullModeFlags cullMode_ = CullModeFlags(), FrontFace frontFace_ = FrontFace::eCounterClockwise, Bool32 depthBiasEnable_ = 0, float depthBiasConstantFactor_ = 0, float depthBiasClamp_ = 0, float depthBiasSlopeFactor_ = 0, float lineWidth_ = 0 )
+    PipelineRasterizationStateCreateInfo( PipelineRasterizationStateCreateFlags flags_ = PipelineRasterizationStateCreateFlags(),
+                                          Bool32 depthClampEnable_ = 0,
+                                          Bool32 rasterizerDiscardEnable_ = 0,
+                                          PolygonMode polygonMode_ = PolygonMode::eFill,
+                                          CullModeFlags cullMode_ = CullModeFlags(),
+                                          FrontFace frontFace_ = FrontFace::eCounterClockwise,
+                                          Bool32 depthBiasEnable_ = 0,
+                                          float depthBiasConstantFactor_ = 0,
+                                          float depthBiasClamp_ = 0,
+                                          float depthBiasSlopeFactor_ = 0,
+                                          float lineWidth_ = 0 )
       : flags( flags_ )
       , depthClampEnable( depthClampEnable_ )
       , rasterizerDiscardEnable( rasterizerDiscardEnable_ )
@@ -9927,7 +10108,16 @@ public:
 
   struct PipelineDepthStencilStateCreateInfo
   {
-    PipelineDepthStencilStateCreateInfo( PipelineDepthStencilStateCreateFlags flags_ = PipelineDepthStencilStateCreateFlags(), Bool32 depthTestEnable_ = 0, Bool32 depthWriteEnable_ = 0, CompareOp depthCompareOp_ = CompareOp::eNever, Bool32 depthBoundsTestEnable_ = 0, Bool32 stencilTestEnable_ = 0, StencilOpState front_ = StencilOpState(), StencilOpState back_ = StencilOpState(), float minDepthBounds_ = 0, float maxDepthBounds_ = 0 )
+    PipelineDepthStencilStateCreateInfo( PipelineDepthStencilStateCreateFlags flags_ = PipelineDepthStencilStateCreateFlags(),
+                                         Bool32 depthTestEnable_ = 0,
+                                         Bool32 depthWriteEnable_ = 0,
+                                         CompareOp depthCompareOp_ = CompareOp::eNever,
+                                         Bool32 depthBoundsTestEnable_ = 0,
+                                         Bool32 stencilTestEnable_ = 0,
+                                         StencilOpState front_ = StencilOpState(),
+                                         StencilOpState back_ = StencilOpState(),
+                                         float minDepthBounds_ = 0,
+                                         float maxDepthBounds_ = 0 )
       : flags( flags_ )
       , depthTestEnable( depthTestEnable_ )
       , depthWriteEnable( depthWriteEnable_ )
@@ -10063,7 +10253,9 @@ public:
 
   struct PipelineCacheCreateInfo
   {
-    PipelineCacheCreateInfo( PipelineCacheCreateFlags flags_ = PipelineCacheCreateFlags(), size_t initialDataSize_ = 0, const void* pInitialData_ = nullptr )
+    PipelineCacheCreateInfo( PipelineCacheCreateFlags flags_ = PipelineCacheCreateFlags(),
+                             size_t initialDataSize_ = 0,
+                             const void* pInitialData_ = nullptr )
       : flags( flags_ )
       , initialDataSize( initialDataSize_ )
       , pInitialData( pInitialData_ )
@@ -10136,7 +10328,22 @@ public:
 
   struct SamplerCreateInfo
   {
-    SamplerCreateInfo( SamplerCreateFlags flags_ = SamplerCreateFlags(), Filter magFilter_ = Filter::eNearest, Filter minFilter_ = Filter::eNearest, SamplerMipmapMode mipmapMode_ = SamplerMipmapMode::eNearest, SamplerAddressMode addressModeU_ = SamplerAddressMode::eRepeat, SamplerAddressMode addressModeV_ = SamplerAddressMode::eRepeat, SamplerAddressMode addressModeW_ = SamplerAddressMode::eRepeat, float mipLodBias_ = 0, Bool32 anisotropyEnable_ = 0, float maxAnisotropy_ = 0, Bool32 compareEnable_ = 0, CompareOp compareOp_ = CompareOp::eNever, float minLod_ = 0, float maxLod_ = 0, BorderColor borderColor_ = BorderColor::eFloatTransparentBlack, Bool32 unnormalizedCoordinates_ = 0 )
+    SamplerCreateInfo( SamplerCreateFlags flags_ = SamplerCreateFlags(),
+                       Filter magFilter_ = Filter::eNearest,
+                       Filter minFilter_ = Filter::eNearest,
+                       SamplerMipmapMode mipmapMode_ = SamplerMipmapMode::eNearest,
+                       SamplerAddressMode addressModeU_ = SamplerAddressMode::eRepeat,
+                       SamplerAddressMode addressModeV_ = SamplerAddressMode::eRepeat,
+                       SamplerAddressMode addressModeW_ = SamplerAddressMode::eRepeat,
+                       float mipLodBias_ = 0,
+                       Bool32 anisotropyEnable_ = 0,
+                       float maxAnisotropy_ = 0,
+                       Bool32 compareEnable_ = 0,
+                       CompareOp compareOp_ = CompareOp::eNever,
+                       float minLod_ = 0,
+                       float maxLod_ = 0,
+                       BorderColor borderColor_ = BorderColor::eFloatTransparentBlack,
+                       Bool32 unnormalizedCoordinates_ = 0 )
       : flags( flags_ )
       , magFilter( magFilter_ )
       , minFilter( minFilter_ )
@@ -10326,7 +10533,9 @@ public:
 
   struct CommandBufferAllocateInfo
   {
-    CommandBufferAllocateInfo( CommandPool commandPool_ = CommandPool(), CommandBufferLevel level_ = CommandBufferLevel::ePrimary, uint32_t commandBufferCount_ = 0 )
+    CommandBufferAllocateInfo( CommandPool commandPool_ = CommandPool(),
+                               CommandBufferLevel level_ = CommandBufferLevel::ePrimary,
+                               uint32_t commandBufferCount_ = 0 )
       : commandPool( commandPool_ )
       , level( level_ )
       , commandBufferCount( commandBufferCount_ )
@@ -10399,7 +10608,11 @@ public:
 
   struct RenderPassBeginInfo
   {
-    RenderPassBeginInfo( RenderPass renderPass_ = RenderPass(), Framebuffer framebuffer_ = Framebuffer(), Rect2D renderArea_ = Rect2D(), uint32_t clearValueCount_ = 0, const ClearValue* pClearValues_ = nullptr )
+    RenderPassBeginInfo( RenderPass renderPass_ = RenderPass(),
+                         Framebuffer framebuffer_ = Framebuffer(),
+                         Rect2D renderArea_ = Rect2D(),
+                         uint32_t clearValueCount_ = 0,
+                         const ClearValue* pClearValues_ = nullptr )
       : renderPass( renderPass_ )
       , framebuffer( framebuffer_ )
       , renderArea( renderArea_ )
@@ -10600,7 +10813,13 @@ public:
 
   struct FramebufferCreateInfo
   {
-    FramebufferCreateInfo( FramebufferCreateFlags flags_ = FramebufferCreateFlags(), RenderPass renderPass_ = RenderPass(), uint32_t attachmentCount_ = 0, const ImageView* pAttachments_ = nullptr, uint32_t width_ = 0, uint32_t height_ = 0, uint32_t layers_ = 0 )
+    FramebufferCreateInfo( FramebufferCreateFlags flags_ = FramebufferCreateFlags(),
+                           RenderPass renderPass_ = RenderPass(),
+                           uint32_t attachmentCount_ = 0,
+                           const ImageView* pAttachments_ = nullptr,
+                           uint32_t width_ = 0,
+                           uint32_t height_ = 0,
+                           uint32_t layers_ = 0 )
       : flags( flags_ )
       , renderPass( renderPass_ )
       , attachmentCount( attachmentCount_ )
@@ -10709,7 +10928,8 @@ public:
 
   struct DisplayModeCreateInfoKHR
   {
-    DisplayModeCreateInfoKHR( DisplayModeCreateFlagsKHR flags_ = DisplayModeCreateFlagsKHR(), DisplayModeParametersKHR parameters_ = DisplayModeParametersKHR() )
+    DisplayModeCreateInfoKHR( DisplayModeCreateFlagsKHR flags_ = DisplayModeCreateFlagsKHR(),
+                              DisplayModeParametersKHR parameters_ = DisplayModeParametersKHR() )
       : flags( flags_ )
       , parameters( parameters_ )
     {
@@ -10773,7 +10993,9 @@ public:
 
   struct DisplayPresentInfoKHR
   {
-    DisplayPresentInfoKHR( Rect2D srcRect_ = Rect2D(), Rect2D dstRect_ = Rect2D(), Bool32 persistent_ = 0 )
+    DisplayPresentInfoKHR( Rect2D srcRect_ = Rect2D(),
+                           Rect2D dstRect_ = Rect2D(),
+                           Bool32 persistent_ = 0 )
       : srcRect( srcRect_ )
       , dstRect( dstRect_ )
       , persistent( persistent_ )
@@ -10847,7 +11069,8 @@ public:
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
   struct AndroidSurfaceCreateInfoKHR
   {
-    AndroidSurfaceCreateInfoKHR( AndroidSurfaceCreateFlagsKHR flags_ = AndroidSurfaceCreateFlagsKHR(), struct ANativeWindow* window_ = nullptr )
+    AndroidSurfaceCreateInfoKHR( AndroidSurfaceCreateFlagsKHR flags_ = AndroidSurfaceCreateFlagsKHR(),
+                                 struct ANativeWindow* window_ = nullptr )
       : flags( flags_ )
       , window( window_ )
     {
@@ -10913,7 +11136,9 @@ public:
 #ifdef VK_USE_PLATFORM_MIR_KHR
   struct MirSurfaceCreateInfoKHR
   {
-    MirSurfaceCreateInfoKHR( MirSurfaceCreateFlagsKHR flags_ = MirSurfaceCreateFlagsKHR(), MirConnection* connection_ = nullptr, MirSurface* mirSurface_ = nullptr )
+    MirSurfaceCreateInfoKHR( MirSurfaceCreateFlagsKHR flags_ = MirSurfaceCreateFlagsKHR(),
+                             MirConnection* connection_ = nullptr,
+                             MirSurface* mirSurface_ = nullptr )
       : flags( flags_ )
       , connection( connection_ )
       , mirSurface( mirSurface_ )
@@ -10988,7 +11213,8 @@ public:
 #ifdef VK_USE_PLATFORM_VI_NN
   struct ViSurfaceCreateInfoNN
   {
-    ViSurfaceCreateInfoNN( ViSurfaceCreateFlagsNN flags_ = ViSurfaceCreateFlagsNN(), void* window_ = nullptr )
+    ViSurfaceCreateInfoNN( ViSurfaceCreateFlagsNN flags_ = ViSurfaceCreateFlagsNN(),
+                           void* window_ = nullptr )
       : flags( flags_ )
       , window( window_ )
     {
@@ -11054,7 +11280,9 @@ public:
 #ifdef VK_USE_PLATFORM_WAYLAND_KHR
   struct WaylandSurfaceCreateInfoKHR
   {
-    WaylandSurfaceCreateInfoKHR( WaylandSurfaceCreateFlagsKHR flags_ = WaylandSurfaceCreateFlagsKHR(), struct wl_display* display_ = nullptr, struct wl_surface* surface_ = nullptr )
+    WaylandSurfaceCreateInfoKHR( WaylandSurfaceCreateFlagsKHR flags_ = WaylandSurfaceCreateFlagsKHR(),
+                                 struct wl_display* display_ = nullptr,
+                                 struct wl_surface* surface_ = nullptr )
       : flags( flags_ )
       , display( display_ )
       , surface( surface_ )
@@ -11129,7 +11357,9 @@ public:
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   struct Win32SurfaceCreateInfoKHR
   {
-    Win32SurfaceCreateInfoKHR( Win32SurfaceCreateFlagsKHR flags_ = Win32SurfaceCreateFlagsKHR(), HINSTANCE hinstance_ = 0, HWND hwnd_ = 0 )
+    Win32SurfaceCreateInfoKHR( Win32SurfaceCreateFlagsKHR flags_ = Win32SurfaceCreateFlagsKHR(),
+                               HINSTANCE hinstance_ = 0,
+                               HWND hwnd_ = 0 )
       : flags( flags_ )
       , hinstance( hinstance_ )
       , hwnd( hwnd_ )
@@ -11204,7 +11434,9 @@ public:
 #ifdef VK_USE_PLATFORM_XLIB_KHR
   struct XlibSurfaceCreateInfoKHR
   {
-    XlibSurfaceCreateInfoKHR( XlibSurfaceCreateFlagsKHR flags_ = XlibSurfaceCreateFlagsKHR(), Display* dpy_ = nullptr, Window window_ = 0 )
+    XlibSurfaceCreateInfoKHR( XlibSurfaceCreateFlagsKHR flags_ = XlibSurfaceCreateFlagsKHR(),
+                              Display* dpy_ = nullptr,
+                              Window window_ = 0 )
       : flags( flags_ )
       , dpy( dpy_ )
       , window( window_ )
@@ -11279,7 +11511,9 @@ public:
 #ifdef VK_USE_PLATFORM_XCB_KHR
   struct XcbSurfaceCreateInfoKHR
   {
-    XcbSurfaceCreateInfoKHR( XcbSurfaceCreateFlagsKHR flags_ = XcbSurfaceCreateFlagsKHR(), xcb_connection_t* connection_ = nullptr, xcb_window_t window_ = 0 )
+    XcbSurfaceCreateInfoKHR( XcbSurfaceCreateFlagsKHR flags_ = XcbSurfaceCreateFlagsKHR(),
+                             xcb_connection_t* connection_ = nullptr,
+                             xcb_window_t window_ = 0 )
       : flags( flags_ )
       , connection( connection_ )
       , window( window_ )
@@ -11353,7 +11587,8 @@ public:
 
   struct DebugMarkerMarkerInfoEXT
   {
-    DebugMarkerMarkerInfoEXT( const char* pMarkerName_ = nullptr, std::array<float,4> const& color_ = { { 0, 0, 0, 0 } } )
+    DebugMarkerMarkerInfoEXT( const char* pMarkerName_ = nullptr,
+                              std::array<float,4> const& color_ = { { 0, 0, 0, 0 } } )
       : pMarkerName( pMarkerName_ )
     {
       memcpy( &color, color_.data(), 4 * sizeof( float ) );
@@ -11527,7 +11762,8 @@ public:
 
   struct DedicatedAllocationMemoryAllocateInfoNV
   {
-    DedicatedAllocationMemoryAllocateInfoNV( Image image_ = Image(), Buffer buffer_ = Buffer() )
+    DedicatedAllocationMemoryAllocateInfoNV( Image image_ = Image(),
+                                             Buffer buffer_ = Buffer() )
       : image( image_ )
       , buffer( buffer_ )
     {
@@ -11592,7 +11828,8 @@ public:
 #ifdef VK_USE_PLATFORM_WIN32_NV
   struct ExportMemoryWin32HandleInfoNV
   {
-    ExportMemoryWin32HandleInfoNV( const SECURITY_ATTRIBUTES* pAttributes_ = nullptr, DWORD dwAccess_ = 0 )
+    ExportMemoryWin32HandleInfoNV( const SECURITY_ATTRIBUTES* pAttributes_ = nullptr,
+                                   DWORD dwAccess_ = 0 )
       : pAttributes( pAttributes_ )
       , dwAccess( dwAccess_ )
     {
@@ -11658,7 +11895,13 @@ public:
 #ifdef VK_USE_PLATFORM_WIN32_NV
   struct Win32KeyedMutexAcquireReleaseInfoNV
   {
-    Win32KeyedMutexAcquireReleaseInfoNV( uint32_t acquireCount_ = 0, const DeviceMemory* pAcquireSyncs_ = nullptr, const uint64_t* pAcquireKeys_ = nullptr, const uint32_t* pAcquireTimeoutMilliseconds_ = nullptr, uint32_t releaseCount_ = 0, const DeviceMemory* pReleaseSyncs_ = nullptr, const uint64_t* pReleaseKeys_ = nullptr )
+    Win32KeyedMutexAcquireReleaseInfoNV( uint32_t acquireCount_ = 0,
+                                         const DeviceMemory* pAcquireSyncs_ = nullptr,
+                                         const uint64_t* pAcquireKeys_ = nullptr,
+                                         const uint32_t* pAcquireTimeoutMilliseconds_ = nullptr,
+                                         uint32_t releaseCount_ = 0,
+                                         const DeviceMemory* pReleaseSyncs_ = nullptr,
+                                         const uint64_t* pReleaseKeys_ = nullptr )
       : acquireCount( acquireCount_ )
       , pAcquireSyncs( pAcquireSyncs_ )
       , pAcquireKeys( pAcquireKeys_ )
@@ -11823,7 +12066,11 @@ public:
 
   struct DeviceGeneratedCommandsLimitsNVX
   {
-    DeviceGeneratedCommandsLimitsNVX( uint32_t maxIndirectCommandsLayoutTokenCount_ = 0, uint32_t maxObjectEntryCounts_ = 0, uint32_t minSequenceCountBufferOffsetAlignment_ = 0, uint32_t minSequenceIndexBufferOffsetAlignment_ = 0, uint32_t minCommandsTokenBufferOffsetAlignment_ = 0 )
+    DeviceGeneratedCommandsLimitsNVX( uint32_t maxIndirectCommandsLayoutTokenCount_ = 0,
+                                      uint32_t maxObjectEntryCounts_ = 0,
+                                      uint32_t minSequenceCountBufferOffsetAlignment_ = 0,
+                                      uint32_t minSequenceIndexBufferOffsetAlignment_ = 0,
+                                      uint32_t minCommandsTokenBufferOffsetAlignment_ = 0 )
       : maxIndirectCommandsLayoutTokenCount( maxIndirectCommandsLayoutTokenCount_ )
       , maxObjectEntryCounts( maxObjectEntryCounts_ )
       , minSequenceCountBufferOffsetAlignment( minSequenceCountBufferOffsetAlignment_ )
@@ -11914,7 +12161,9 @@ public:
 
   struct CmdReserveSpaceForCommandsInfoNVX
   {
-    CmdReserveSpaceForCommandsInfoNVX( ObjectTableNVX objectTable_ = ObjectTableNVX(), IndirectCommandsLayoutNVX indirectCommandsLayout_ = IndirectCommandsLayoutNVX(), uint32_t maxSequencesCount_ = 0 )
+    CmdReserveSpaceForCommandsInfoNVX( ObjectTableNVX objectTable_ = ObjectTableNVX(),
+                                       IndirectCommandsLayoutNVX indirectCommandsLayout_ = IndirectCommandsLayoutNVX(),
+                                       uint32_t maxSequencesCount_ = 0 )
       : objectTable( objectTable_ )
       , indirectCommandsLayout( indirectCommandsLayout_ )
       , maxSequencesCount( maxSequencesCount_ )
@@ -12099,7 +12348,8 @@ public:
 
   struct PresentRegionsKHR
   {
-    PresentRegionsKHR( uint32_t swapchainCount_ = 0, const PresentRegionKHR* pRegions_ = nullptr )
+    PresentRegionsKHR( uint32_t swapchainCount_ = 0,
+                       const PresentRegionKHR* pRegions_ = nullptr )
       : swapchainCount( swapchainCount_ )
       , pRegions( pRegions_ )
     {
@@ -12163,7 +12413,8 @@ public:
 
   struct PhysicalDeviceVariablePointerFeatures
   {
-    PhysicalDeviceVariablePointerFeatures( Bool32 variablePointersStorageBuffer_ = 0, Bool32 variablePointers_ = 0 )
+    PhysicalDeviceVariablePointerFeatures( Bool32 variablePointersStorageBuffer_ = 0,
+                                           Bool32 variablePointers_ = 0 )
       : variablePointersStorageBuffer( variablePointersStorageBuffer_ )
       , variablePointers( variablePointers_ )
     {
@@ -12268,7 +12519,9 @@ public:
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   struct ExportMemoryWin32HandleInfoKHR
   {
-    ExportMemoryWin32HandleInfoKHR( const SECURITY_ATTRIBUTES* pAttributes_ = nullptr, DWORD dwAccess_ = 0, LPCWSTR name_ = 0 )
+    ExportMemoryWin32HandleInfoKHR( const SECURITY_ATTRIBUTES* pAttributes_ = nullptr,
+                                    DWORD dwAccess_ = 0,
+                                    LPCWSTR name_ = 0 )
       : pAttributes( pAttributes_ )
       , dwAccess( dwAccess_ )
       , name( name_ )
@@ -12401,7 +12654,13 @@ public:
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   struct Win32KeyedMutexAcquireReleaseInfoKHR
   {
-    Win32KeyedMutexAcquireReleaseInfoKHR( uint32_t acquireCount_ = 0, const DeviceMemory* pAcquireSyncs_ = nullptr, const uint64_t* pAcquireKeys_ = nullptr, const uint32_t* pAcquireTimeouts_ = nullptr, uint32_t releaseCount_ = 0, const DeviceMemory* pReleaseSyncs_ = nullptr, const uint64_t* pReleaseKeys_ = nullptr )
+    Win32KeyedMutexAcquireReleaseInfoKHR( uint32_t acquireCount_ = 0,
+                                          const DeviceMemory* pAcquireSyncs_ = nullptr,
+                                          const uint64_t* pAcquireKeys_ = nullptr,
+                                          const uint32_t* pAcquireTimeouts_ = nullptr,
+                                          uint32_t releaseCount_ = 0,
+                                          const DeviceMemory* pReleaseSyncs_ = nullptr,
+                                          const uint64_t* pReleaseKeys_ = nullptr )
       : acquireCount( acquireCount_ )
       , pAcquireSyncs( pAcquireSyncs_ )
       , pAcquireKeys( pAcquireKeys_ )
@@ -12512,7 +12771,9 @@ public:
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   struct ExportSemaphoreWin32HandleInfoKHR
   {
-    ExportSemaphoreWin32HandleInfoKHR( const SECURITY_ATTRIBUTES* pAttributes_ = nullptr, DWORD dwAccess_ = 0, LPCWSTR name_ = 0 )
+    ExportSemaphoreWin32HandleInfoKHR( const SECURITY_ATTRIBUTES* pAttributes_ = nullptr,
+                                       DWORD dwAccess_ = 0,
+                                       LPCWSTR name_ = 0 )
       : pAttributes( pAttributes_ )
       , dwAccess( dwAccess_ )
       , name( name_ )
@@ -12587,7 +12848,10 @@ public:
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   struct D3D12FenceSubmitInfoKHR
   {
-    D3D12FenceSubmitInfoKHR( uint32_t waitSemaphoreValuesCount_ = 0, const uint64_t* pWaitSemaphoreValues_ = nullptr, uint32_t signalSemaphoreValuesCount_ = 0, const uint64_t* pSignalSemaphoreValues_ = nullptr )
+    D3D12FenceSubmitInfoKHR( uint32_t waitSemaphoreValuesCount_ = 0,
+                             const uint64_t* pWaitSemaphoreValues_ = nullptr,
+                             uint32_t signalSemaphoreValuesCount_ = 0,
+                             const uint64_t* pSignalSemaphoreValues_ = nullptr )
       : waitSemaphoreValuesCount( waitSemaphoreValuesCount_ )
       , pWaitSemaphoreValues( pWaitSemaphoreValues_ )
       , signalSemaphoreValuesCount( signalSemaphoreValuesCount_ )
@@ -12671,7 +12935,9 @@ public:
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   struct ExportFenceWin32HandleInfoKHR
   {
-    ExportFenceWin32HandleInfoKHR( const SECURITY_ATTRIBUTES* pAttributes_ = nullptr, DWORD dwAccess_ = 0, LPCWSTR name_ = 0 )
+    ExportFenceWin32HandleInfoKHR( const SECURITY_ATTRIBUTES* pAttributes_ = nullptr,
+                                   DWORD dwAccess_ = 0,
+                                   LPCWSTR name_ = 0 )
       : pAttributes( pAttributes_ )
       , dwAccess( dwAccess_ )
       , name( name_ )
@@ -12745,7 +13011,9 @@ public:
 
   struct PhysicalDeviceMultiviewFeatures
   {
-    PhysicalDeviceMultiviewFeatures( Bool32 multiview_ = 0, Bool32 multiviewGeometryShader_ = 0, Bool32 multiviewTessellationShader_ = 0 )
+    PhysicalDeviceMultiviewFeatures( Bool32 multiview_ = 0,
+                                     Bool32 multiviewGeometryShader_ = 0,
+                                     Bool32 multiviewTessellationShader_ = 0 )
       : multiview( multiview_ )
       , multiviewGeometryShader( multiviewGeometryShader_ )
       , multiviewTessellationShader( multiviewTessellationShader_ )
@@ -12852,7 +13120,12 @@ public:
 
   struct RenderPassMultiviewCreateInfo
   {
-    RenderPassMultiviewCreateInfo( uint32_t subpassCount_ = 0, const uint32_t* pViewMasks_ = nullptr, uint32_t dependencyCount_ = 0, const int32_t* pViewOffsets_ = nullptr, uint32_t correlationMaskCount_ = 0, const uint32_t* pCorrelationMasks_ = nullptr )
+    RenderPassMultiviewCreateInfo( uint32_t subpassCount_ = 0,
+                                   const uint32_t* pViewMasks_ = nullptr,
+                                   uint32_t dependencyCount_ = 0,
+                                   const int32_t* pViewOffsets_ = nullptr,
+                                   uint32_t correlationMaskCount_ = 0,
+                                   const uint32_t* pCorrelationMasks_ = nullptr )
       : subpassCount( subpassCount_ )
       , pViewMasks( pViewMasks_ )
       , dependencyCount( dependencyCount_ )
@@ -12954,7 +13227,9 @@ public:
 
   struct BindBufferMemoryInfo
   {
-    BindBufferMemoryInfo( Buffer buffer_ = Buffer(), DeviceMemory memory_ = DeviceMemory(), DeviceSize memoryOffset_ = 0 )
+    BindBufferMemoryInfo( Buffer buffer_ = Buffer(),
+                          DeviceMemory memory_ = DeviceMemory(),
+                          DeviceSize memoryOffset_ = 0 )
       : buffer( buffer_ )
       , memory( memory_ )
       , memoryOffset( memoryOffset_ )
@@ -13029,7 +13304,8 @@ public:
 
   struct BindBufferMemoryDeviceGroupInfo
   {
-    BindBufferMemoryDeviceGroupInfo( uint32_t deviceIndexCount_ = 0, const uint32_t* pDeviceIndices_ = nullptr )
+    BindBufferMemoryDeviceGroupInfo( uint32_t deviceIndexCount_ = 0,
+                                     const uint32_t* pDeviceIndices_ = nullptr )
       : deviceIndexCount( deviceIndexCount_ )
       , pDeviceIndices( pDeviceIndices_ )
     {
@@ -13095,7 +13371,9 @@ public:
 
   struct BindImageMemoryInfo
   {
-    BindImageMemoryInfo( Image image_ = Image(), DeviceMemory memory_ = DeviceMemory(), DeviceSize memoryOffset_ = 0 )
+    BindImageMemoryInfo( Image image_ = Image(),
+                         DeviceMemory memory_ = DeviceMemory(),
+                         DeviceSize memoryOffset_ = 0 )
       : image( image_ )
       , memory( memory_ )
       , memoryOffset( memoryOffset_ )
@@ -13170,7 +13448,10 @@ public:
 
   struct BindImageMemoryDeviceGroupInfo
   {
-    BindImageMemoryDeviceGroupInfo( uint32_t deviceIndexCount_ = 0, const uint32_t* pDeviceIndices_ = nullptr, uint32_t splitInstanceBindRegionCount_ = 0, const Rect2D* pSplitInstanceBindRegions_ = nullptr )
+    BindImageMemoryDeviceGroupInfo( uint32_t deviceIndexCount_ = 0,
+                                    const uint32_t* pDeviceIndices_ = nullptr,
+                                    uint32_t splitInstanceBindRegionCount_ = 0,
+                                    const Rect2D* pSplitInstanceBindRegions_ = nullptr )
       : deviceIndexCount( deviceIndexCount_ )
       , pDeviceIndices( pDeviceIndices_ )
       , splitInstanceBindRegionCount( splitInstanceBindRegionCount_ )
@@ -13254,7 +13535,9 @@ public:
 
   struct DeviceGroupRenderPassBeginInfo
   {
-    DeviceGroupRenderPassBeginInfo( uint32_t deviceMask_ = 0, uint32_t deviceRenderAreaCount_ = 0, const Rect2D* pDeviceRenderAreas_ = nullptr )
+    DeviceGroupRenderPassBeginInfo( uint32_t deviceMask_ = 0,
+                                    uint32_t deviceRenderAreaCount_ = 0,
+                                    const Rect2D* pDeviceRenderAreas_ = nullptr )
       : deviceMask( deviceMask_ )
       , deviceRenderAreaCount( deviceRenderAreaCount_ )
       , pDeviceRenderAreas( pDeviceRenderAreas_ )
@@ -13386,7 +13669,12 @@ public:
 
   struct DeviceGroupSubmitInfo
   {
-    DeviceGroupSubmitInfo( uint32_t waitSemaphoreCount_ = 0, const uint32_t* pWaitSemaphoreDeviceIndices_ = nullptr, uint32_t commandBufferCount_ = 0, const uint32_t* pCommandBufferDeviceMasks_ = nullptr, uint32_t signalSemaphoreCount_ = 0, const uint32_t* pSignalSemaphoreDeviceIndices_ = nullptr )
+    DeviceGroupSubmitInfo( uint32_t waitSemaphoreCount_ = 0,
+                           const uint32_t* pWaitSemaphoreDeviceIndices_ = nullptr,
+                           uint32_t commandBufferCount_ = 0,
+                           const uint32_t* pCommandBufferDeviceMasks_ = nullptr,
+                           uint32_t signalSemaphoreCount_ = 0,
+                           const uint32_t* pSignalSemaphoreDeviceIndices_ = nullptr )
       : waitSemaphoreCount( waitSemaphoreCount_ )
       , pWaitSemaphoreDeviceIndices( pWaitSemaphoreDeviceIndices_ )
       , commandBufferCount( commandBufferCount_ )
@@ -13488,7 +13776,8 @@ public:
 
   struct DeviceGroupBindSparseInfo
   {
-    DeviceGroupBindSparseInfo( uint32_t resourceDeviceIndex_ = 0, uint32_t memoryDeviceIndex_ = 0 )
+    DeviceGroupBindSparseInfo( uint32_t resourceDeviceIndex_ = 0,
+                               uint32_t memoryDeviceIndex_ = 0 )
       : resourceDeviceIndex( resourceDeviceIndex_ )
       , memoryDeviceIndex( memoryDeviceIndex_ )
     {
@@ -13609,7 +13898,8 @@ public:
 
   struct BindImageMemorySwapchainInfoKHR
   {
-    BindImageMemorySwapchainInfoKHR( SwapchainKHR swapchain_ = SwapchainKHR(), uint32_t imageIndex_ = 0 )
+    BindImageMemorySwapchainInfoKHR( SwapchainKHR swapchain_ = SwapchainKHR(),
+                                     uint32_t imageIndex_ = 0 )
       : swapchain( swapchain_ )
       , imageIndex( imageIndex_ )
     {
@@ -13673,7 +13963,11 @@ public:
 
   struct AcquireNextImageInfoKHR
   {
-    AcquireNextImageInfoKHR( SwapchainKHR swapchain_ = SwapchainKHR(), uint64_t timeout_ = 0, Semaphore semaphore_ = Semaphore(), Fence fence_ = Fence(), uint32_t deviceMask_ = 0 )
+    AcquireNextImageInfoKHR( SwapchainKHR swapchain_ = SwapchainKHR(),
+                             uint64_t timeout_ = 0,
+                             Semaphore semaphore_ = Semaphore(),
+                             Fence fence_ = Fence(),
+                             uint32_t deviceMask_ = 0 )
       : swapchain( swapchain_ )
       , timeout( timeout_ )
       , semaphore( semaphore_ )
@@ -13764,7 +14058,14 @@ public:
 
   struct HdrMetadataEXT
   {
-    HdrMetadataEXT( XYColorEXT displayPrimaryRed_ = XYColorEXT(), XYColorEXT displayPrimaryGreen_ = XYColorEXT(), XYColorEXT displayPrimaryBlue_ = XYColorEXT(), XYColorEXT whitePoint_ = XYColorEXT(), float maxLuminance_ = 0, float minLuminance_ = 0, float maxContentLightLevel_ = 0, float maxFrameAverageLightLevel_ = 0 )
+    HdrMetadataEXT( XYColorEXT displayPrimaryRed_ = XYColorEXT(),
+                    XYColorEXT displayPrimaryGreen_ = XYColorEXT(),
+                    XYColorEXT displayPrimaryBlue_ = XYColorEXT(),
+                    XYColorEXT whitePoint_ = XYColorEXT(),
+                    float maxLuminance_ = 0,
+                    float minLuminance_ = 0,
+                    float maxContentLightLevel_ = 0,
+                    float maxFrameAverageLightLevel_ = 0 )
       : displayPrimaryRed( displayPrimaryRed_ )
       , displayPrimaryGreen( displayPrimaryGreen_ )
       , displayPrimaryBlue( displayPrimaryBlue_ )
@@ -13882,7 +14183,8 @@ public:
 
   struct PresentTimesInfoGOOGLE
   {
-    PresentTimesInfoGOOGLE( uint32_t swapchainCount_ = 0, const PresentTimeGOOGLE* pTimes_ = nullptr )
+    PresentTimesInfoGOOGLE( uint32_t swapchainCount_ = 0,
+                            const PresentTimeGOOGLE* pTimes_ = nullptr )
       : swapchainCount( swapchainCount_ )
       , pTimes( pTimes_ )
     {
@@ -13947,7 +14249,8 @@ public:
 #ifdef VK_USE_PLATFORM_IOS_MVK
   struct IOSSurfaceCreateInfoMVK
   {
-    IOSSurfaceCreateInfoMVK( IOSSurfaceCreateFlagsMVK flags_ = IOSSurfaceCreateFlagsMVK(), const void* pView_ = nullptr )
+    IOSSurfaceCreateInfoMVK( IOSSurfaceCreateFlagsMVK flags_ = IOSSurfaceCreateFlagsMVK(),
+                             const void* pView_ = nullptr )
       : flags( flags_ )
       , pView( pView_ )
     {
@@ -14013,7 +14316,8 @@ public:
 #ifdef VK_USE_PLATFORM_MACOS_MVK
   struct MacOSSurfaceCreateInfoMVK
   {
-    MacOSSurfaceCreateInfoMVK( MacOSSurfaceCreateFlagsMVK flags_ = MacOSSurfaceCreateFlagsMVK(), const void* pView_ = nullptr )
+    MacOSSurfaceCreateInfoMVK( MacOSSurfaceCreateFlagsMVK flags_ = MacOSSurfaceCreateFlagsMVK(),
+                               const void* pView_ = nullptr )
       : flags( flags_ )
       , pView( pView_ )
     {
@@ -14078,7 +14382,9 @@ public:
 
   struct PipelineViewportWScalingStateCreateInfoNV
   {
-    PipelineViewportWScalingStateCreateInfoNV( Bool32 viewportWScalingEnable_ = 0, uint32_t viewportCount_ = 0, const ViewportWScalingNV* pViewportWScalings_ = nullptr )
+    PipelineViewportWScalingStateCreateInfoNV( Bool32 viewportWScalingEnable_ = 0,
+                                               uint32_t viewportCount_ = 0,
+                                               const ViewportWScalingNV* pViewportWScalings_ = nullptr )
       : viewportWScalingEnable( viewportWScalingEnable_ )
       , viewportCount( viewportCount_ )
       , pViewportWScalings( pViewportWScalings_ )
@@ -14345,7 +14651,8 @@ public:
 
   struct DisplayPlaneInfo2KHR
   {
-    DisplayPlaneInfo2KHR( DisplayModeKHR mode_ = DisplayModeKHR(), uint32_t planeIndex_ = 0 )
+    DisplayPlaneInfo2KHR( DisplayModeKHR mode_ = DisplayModeKHR(),
+                          uint32_t planeIndex_ = 0 )
       : mode( mode_ )
       , planeIndex( planeIndex_ )
     {
@@ -14409,7 +14716,10 @@ public:
 
   struct PhysicalDevice16BitStorageFeatures
   {
-    PhysicalDevice16BitStorageFeatures( Bool32 storageBuffer16BitAccess_ = 0, Bool32 uniformAndStorageBuffer16BitAccess_ = 0, Bool32 storagePushConstant16_ = 0, Bool32 storageInputOutput16_ = 0 )
+    PhysicalDevice16BitStorageFeatures( Bool32 storageBuffer16BitAccess_ = 0,
+                                        Bool32 uniformAndStorageBuffer16BitAccess_ = 0,
+                                        Bool32 storagePushConstant16_ = 0,
+                                        Bool32 storageInputOutput16_ = 0 )
       : storageBuffer16BitAccess( storageBuffer16BitAccess_ )
       , uniformAndStorageBuffer16BitAccess( uniformAndStorageBuffer16BitAccess_ )
       , storagePushConstant16( storagePushConstant16_ )
@@ -14726,7 +15036,8 @@ public:
 
   struct MemoryDedicatedAllocateInfo
   {
-    MemoryDedicatedAllocateInfo( Image image_ = Image(), Buffer buffer_ = Buffer() )
+    MemoryDedicatedAllocateInfo( Image image_ = Image(),
+                                 Buffer buffer_ = Buffer() )
       : image( image_ )
       , buffer( buffer_ )
     {
@@ -15129,7 +15440,9 @@ public:
 
   struct PipelineCoverageToColorStateCreateInfoNV
   {
-    PipelineCoverageToColorStateCreateInfoNV( PipelineCoverageToColorStateCreateFlagsNV flags_ = PipelineCoverageToColorStateCreateFlagsNV(), Bool32 coverageToColorEnable_ = 0, uint32_t coverageToColorLocation_ = 0 )
+    PipelineCoverageToColorStateCreateInfoNV( PipelineCoverageToColorStateCreateFlagsNV flags_ = PipelineCoverageToColorStateCreateFlagsNV(),
+                                              Bool32 coverageToColorEnable_ = 0,
+                                              uint32_t coverageToColorLocation_ = 0 )
       : flags( flags_ )
       , coverageToColorEnable( coverageToColorEnable_ )
       , coverageToColorLocation( coverageToColorLocation_ )
@@ -15353,7 +15666,8 @@ public:
 
   struct ImageFormatListCreateInfoKHR
   {
-    ImageFormatListCreateInfoKHR( uint32_t viewFormatCount_ = 0, const Format* pViewFormats_ = nullptr )
+    ImageFormatListCreateInfoKHR( uint32_t viewFormatCount_ = 0,
+                                  const Format* pViewFormats_ = nullptr )
       : viewFormatCount( viewFormatCount_ )
       , pViewFormats( pViewFormats_ )
     {
@@ -15417,7 +15731,9 @@ public:
 
   struct ValidationCacheCreateInfoEXT
   {
-    ValidationCacheCreateInfoEXT( ValidationCacheCreateFlagsEXT flags_ = ValidationCacheCreateFlagsEXT(), size_t initialDataSize_ = 0, const void* pInitialData_ = nullptr )
+    ValidationCacheCreateInfoEXT( ValidationCacheCreateFlagsEXT flags_ = ValidationCacheCreateFlagsEXT(),
+                                  size_t initialDataSize_ = 0,
+                                  const void* pInitialData_ = nullptr )
       : flags( flags_ )
       , initialDataSize( initialDataSize_ )
       , pInitialData( pInitialData_ )
@@ -15662,7 +15978,8 @@ public:
 
   struct DebugUtilsLabelEXT
   {
-    DebugUtilsLabelEXT( const char* pLabelName_ = nullptr, std::array<float,4> const& color_ = { { 0, 0, 0, 0 } } )
+    DebugUtilsLabelEXT( const char* pLabelName_ = nullptr,
+                        std::array<float,4> const& color_ = { { 0, 0, 0, 0 } } )
       : pLabelName( pLabelName_ )
     {
       memcpy( &color, color_.data(), 4 * sizeof( float ) );
@@ -15836,7 +16153,15 @@ public:
 
   struct PhysicalDeviceConservativeRasterizationPropertiesEXT
   {
-    PhysicalDeviceConservativeRasterizationPropertiesEXT( float primitiveOverestimationSize_ = 0, float maxExtraPrimitiveOverestimationSize_ = 0, float extraPrimitiveOverestimationSizeGranularity_ = 0, Bool32 primitiveUnderestimation_ = 0, Bool32 conservativePointAndLineRasterization_ = 0, Bool32 degenerateTrianglesRasterized_ = 0, Bool32 degenerateLinesRasterized_ = 0, Bool32 fullyCoveredFragmentShaderInputVariable_ = 0, Bool32 conservativeRasterizationPostDepthCoverage_ = 0 )
+    PhysicalDeviceConservativeRasterizationPropertiesEXT( float primitiveOverestimationSize_ = 0,
+                                                          float maxExtraPrimitiveOverestimationSize_ = 0,
+                                                          float extraPrimitiveOverestimationSizeGranularity_ = 0,
+                                                          Bool32 primitiveUnderestimation_ = 0,
+                                                          Bool32 conservativePointAndLineRasterization_ = 0,
+                                                          Bool32 degenerateTrianglesRasterized_ = 0,
+                                                          Bool32 degenerateLinesRasterized_ = 0,
+                                                          Bool32 fullyCoveredFragmentShaderInputVariable_ = 0,
+                                                          Bool32 conservativeRasterizationPostDepthCoverage_ = 0 )
       : primitiveOverestimationSize( primitiveOverestimationSize_ )
       , maxExtraPrimitiveOverestimationSize( maxExtraPrimitiveOverestimationSize_ )
       , extraPrimitiveOverestimationSizeGranularity( extraPrimitiveOverestimationSizeGranularity_ )
@@ -16017,7 +16342,26 @@ public:
 
   struct PhysicalDeviceDescriptorIndexingFeaturesEXT
   {
-    PhysicalDeviceDescriptorIndexingFeaturesEXT( Bool32 shaderInputAttachmentArrayDynamicIndexing_ = 0, Bool32 shaderUniformTexelBufferArrayDynamicIndexing_ = 0, Bool32 shaderStorageTexelBufferArrayDynamicIndexing_ = 0, Bool32 shaderUniformBufferArrayNonUniformIndexing_ = 0, Bool32 shaderSampledImageArrayNonUniformIndexing_ = 0, Bool32 shaderStorageBufferArrayNonUniformIndexing_ = 0, Bool32 shaderStorageImageArrayNonUniformIndexing_ = 0, Bool32 shaderInputAttachmentArrayNonUniformIndexing_ = 0, Bool32 shaderUniformTexelBufferArrayNonUniformIndexing_ = 0, Bool32 shaderStorageTexelBufferArrayNonUniformIndexing_ = 0, Bool32 descriptorBindingUniformBufferUpdateAfterBind_ = 0, Bool32 descriptorBindingSampledImageUpdateAfterBind_ = 0, Bool32 descriptorBindingStorageImageUpdateAfterBind_ = 0, Bool32 descriptorBindingStorageBufferUpdateAfterBind_ = 0, Bool32 descriptorBindingUniformTexelBufferUpdateAfterBind_ = 0, Bool32 descriptorBindingStorageTexelBufferUpdateAfterBind_ = 0, Bool32 descriptorBindingUpdateUnusedWhilePending_ = 0, Bool32 descriptorBindingPartiallyBound_ = 0, Bool32 descriptorBindingVariableDescriptorCount_ = 0, Bool32 runtimeDescriptorArray_ = 0 )
+    PhysicalDeviceDescriptorIndexingFeaturesEXT( Bool32 shaderInputAttachmentArrayDynamicIndexing_ = 0,
+                                                 Bool32 shaderUniformTexelBufferArrayDynamicIndexing_ = 0,
+                                                 Bool32 shaderStorageTexelBufferArrayDynamicIndexing_ = 0,
+                                                 Bool32 shaderUniformBufferArrayNonUniformIndexing_ = 0,
+                                                 Bool32 shaderSampledImageArrayNonUniformIndexing_ = 0,
+                                                 Bool32 shaderStorageBufferArrayNonUniformIndexing_ = 0,
+                                                 Bool32 shaderStorageImageArrayNonUniformIndexing_ = 0,
+                                                 Bool32 shaderInputAttachmentArrayNonUniformIndexing_ = 0,
+                                                 Bool32 shaderUniformTexelBufferArrayNonUniformIndexing_ = 0,
+                                                 Bool32 shaderStorageTexelBufferArrayNonUniformIndexing_ = 0,
+                                                 Bool32 descriptorBindingUniformBufferUpdateAfterBind_ = 0,
+                                                 Bool32 descriptorBindingSampledImageUpdateAfterBind_ = 0,
+                                                 Bool32 descriptorBindingStorageImageUpdateAfterBind_ = 0,
+                                                 Bool32 descriptorBindingStorageBufferUpdateAfterBind_ = 0,
+                                                 Bool32 descriptorBindingUniformTexelBufferUpdateAfterBind_ = 0,
+                                                 Bool32 descriptorBindingStorageTexelBufferUpdateAfterBind_ = 0,
+                                                 Bool32 descriptorBindingUpdateUnusedWhilePending_ = 0,
+                                                 Bool32 descriptorBindingPartiallyBound_ = 0,
+                                                 Bool32 descriptorBindingVariableDescriptorCount_ = 0,
+                                                 Bool32 runtimeDescriptorArray_ = 0 )
       : shaderInputAttachmentArrayDynamicIndexing( shaderInputAttachmentArrayDynamicIndexing_ )
       , shaderUniformTexelBufferArrayDynamicIndexing( shaderUniformTexelBufferArrayDynamicIndexing_ )
       , shaderStorageTexelBufferArrayDynamicIndexing( shaderStorageTexelBufferArrayDynamicIndexing_ )
@@ -16315,7 +16659,8 @@ public:
 
   struct DescriptorSetVariableDescriptorCountAllocateInfoEXT
   {
-    DescriptorSetVariableDescriptorCountAllocateInfoEXT( uint32_t descriptorSetCount_ = 0, const uint32_t* pDescriptorCounts_ = nullptr )
+    DescriptorSetVariableDescriptorCountAllocateInfoEXT( uint32_t descriptorSetCount_ = 0,
+                                                         const uint32_t* pDescriptorCounts_ = nullptr )
       : descriptorSetCount( descriptorSetCount_ )
       , pDescriptorCounts( pDescriptorCounts_ )
     {
@@ -16405,9 +16750,56 @@ public:
   };
   static_assert( sizeof( DescriptorSetVariableDescriptorCountLayoutSupportEXT ) == sizeof( VkDescriptorSetVariableDescriptorCountLayoutSupportEXT ), "struct and wrapper have different size!" );
 
+  struct SubpassEndInfoKHR
+  {
+    SubpassEndInfoKHR(  )
+    {
+    }
+
+    SubpassEndInfoKHR( VkSubpassEndInfoKHR const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( SubpassEndInfoKHR ) );
+    }
+
+    SubpassEndInfoKHR& operator=( VkSubpassEndInfoKHR const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( SubpassEndInfoKHR ) );
+      return *this;
+    }
+    SubpassEndInfoKHR& setPNext( const void* pNext_ )
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    operator const VkSubpassEndInfoKHR&() const
+    {
+      return *reinterpret_cast<const VkSubpassEndInfoKHR*>(this);
+    }
+
+    bool operator==( SubpassEndInfoKHR const& rhs ) const
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext );
+    }
+
+    bool operator!=( SubpassEndInfoKHR const& rhs ) const
+    {
+      return !operator==( rhs );
+    }
+
+  private:
+    StructureType sType = StructureType::eSubpassEndInfoKHR;
+
+  public:
+    const void* pNext = nullptr;
+  };
+  static_assert( sizeof( SubpassEndInfoKHR ) == sizeof( VkSubpassEndInfoKHR ), "struct and wrapper have different size!" );
+
   struct PipelineVertexInputDivisorStateCreateInfoEXT
   {
-    PipelineVertexInputDivisorStateCreateInfoEXT( uint32_t vertexBindingDivisorCount_ = 0, const VertexInputBindingDivisorDescriptionEXT* pVertexBindingDivisors_ = nullptr )
+    PipelineVertexInputDivisorStateCreateInfoEXT( uint32_t vertexBindingDivisorCount_ = 0,
+                                                  const VertexInputBindingDivisorDescriptionEXT* pVertexBindingDivisors_ = nullptr )
       : vertexBindingDivisorCount( vertexBindingDivisorCount_ )
       , pVertexBindingDivisors( pVertexBindingDivisors_ )
     {
@@ -16700,6 +17092,61 @@ public:
   static_assert( sizeof( MemoryGetAndroidHardwareBufferInfoANDROID ) == sizeof( VkMemoryGetAndroidHardwareBufferInfoANDROID ), "struct and wrapper have different size!" );
 #endif /*VK_USE_PLATFORM_ANDROID_ANDROID*/
 
+  struct CommandBufferInheritanceConditionalRenderingInfoEXT
+  {
+    CommandBufferInheritanceConditionalRenderingInfoEXT( Bool32 conditionalRenderingEnable_ = 0 )
+      : conditionalRenderingEnable( conditionalRenderingEnable_ )
+    {
+    }
+
+    CommandBufferInheritanceConditionalRenderingInfoEXT( VkCommandBufferInheritanceConditionalRenderingInfoEXT const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( CommandBufferInheritanceConditionalRenderingInfoEXT ) );
+    }
+
+    CommandBufferInheritanceConditionalRenderingInfoEXT& operator=( VkCommandBufferInheritanceConditionalRenderingInfoEXT const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( CommandBufferInheritanceConditionalRenderingInfoEXT ) );
+      return *this;
+    }
+    CommandBufferInheritanceConditionalRenderingInfoEXT& setPNext( const void* pNext_ )
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    CommandBufferInheritanceConditionalRenderingInfoEXT& setConditionalRenderingEnable( Bool32 conditionalRenderingEnable_ )
+    {
+      conditionalRenderingEnable = conditionalRenderingEnable_;
+      return *this;
+    }
+
+    operator const VkCommandBufferInheritanceConditionalRenderingInfoEXT&() const
+    {
+      return *reinterpret_cast<const VkCommandBufferInheritanceConditionalRenderingInfoEXT*>(this);
+    }
+
+    bool operator==( CommandBufferInheritanceConditionalRenderingInfoEXT const& rhs ) const
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( conditionalRenderingEnable == rhs.conditionalRenderingEnable );
+    }
+
+    bool operator!=( CommandBufferInheritanceConditionalRenderingInfoEXT const& rhs ) const
+    {
+      return !operator==( rhs );
+    }
+
+  private:
+    StructureType sType = StructureType::eCommandBufferInheritanceConditionalRenderingInfoEXT;
+
+  public:
+    const void* pNext = nullptr;
+    Bool32 conditionalRenderingEnable;
+  };
+  static_assert( sizeof( CommandBufferInheritanceConditionalRenderingInfoEXT ) == sizeof( VkCommandBufferInheritanceConditionalRenderingInfoEXT ), "struct and wrapper have different size!" );
+
 #ifdef VK_USE_PLATFORM_ANDROID_ANDROID
   struct ExternalFormatANDROID
   {
@@ -16757,15 +17204,215 @@ public:
   static_assert( sizeof( ExternalFormatANDROID ) == sizeof( VkExternalFormatANDROID ), "struct and wrapper have different size!" );
 #endif /*VK_USE_PLATFORM_ANDROID_ANDROID*/
 
+  struct PhysicalDevice8BitStorageFeaturesKHR
+  {
+    PhysicalDevice8BitStorageFeaturesKHR( Bool32 storageBuffer8BitAccess_ = 0,
+                                          Bool32 uniformAndStorageBuffer8BitAccess_ = 0,
+                                          Bool32 storagePushConstant8_ = 0 )
+      : storageBuffer8BitAccess( storageBuffer8BitAccess_ )
+      , uniformAndStorageBuffer8BitAccess( uniformAndStorageBuffer8BitAccess_ )
+      , storagePushConstant8( storagePushConstant8_ )
+    {
+    }
+
+    PhysicalDevice8BitStorageFeaturesKHR( VkPhysicalDevice8BitStorageFeaturesKHR const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( PhysicalDevice8BitStorageFeaturesKHR ) );
+    }
+
+    PhysicalDevice8BitStorageFeaturesKHR& operator=( VkPhysicalDevice8BitStorageFeaturesKHR const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( PhysicalDevice8BitStorageFeaturesKHR ) );
+      return *this;
+    }
+    PhysicalDevice8BitStorageFeaturesKHR& setPNext( void* pNext_ )
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    PhysicalDevice8BitStorageFeaturesKHR& setStorageBuffer8BitAccess( Bool32 storageBuffer8BitAccess_ )
+    {
+      storageBuffer8BitAccess = storageBuffer8BitAccess_;
+      return *this;
+    }
+
+    PhysicalDevice8BitStorageFeaturesKHR& setUniformAndStorageBuffer8BitAccess( Bool32 uniformAndStorageBuffer8BitAccess_ )
+    {
+      uniformAndStorageBuffer8BitAccess = uniformAndStorageBuffer8BitAccess_;
+      return *this;
+    }
+
+    PhysicalDevice8BitStorageFeaturesKHR& setStoragePushConstant8( Bool32 storagePushConstant8_ )
+    {
+      storagePushConstant8 = storagePushConstant8_;
+      return *this;
+    }
+
+    operator const VkPhysicalDevice8BitStorageFeaturesKHR&() const
+    {
+      return *reinterpret_cast<const VkPhysicalDevice8BitStorageFeaturesKHR*>(this);
+    }
+
+    bool operator==( PhysicalDevice8BitStorageFeaturesKHR const& rhs ) const
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( storageBuffer8BitAccess == rhs.storageBuffer8BitAccess )
+          && ( uniformAndStorageBuffer8BitAccess == rhs.uniformAndStorageBuffer8BitAccess )
+          && ( storagePushConstant8 == rhs.storagePushConstant8 );
+    }
+
+    bool operator!=( PhysicalDevice8BitStorageFeaturesKHR const& rhs ) const
+    {
+      return !operator==( rhs );
+    }
+
+  private:
+    StructureType sType = StructureType::ePhysicalDevice8BitStorageFeaturesKHR;
+
+  public:
+    void* pNext = nullptr;
+    Bool32 storageBuffer8BitAccess;
+    Bool32 uniformAndStorageBuffer8BitAccess;
+    Bool32 storagePushConstant8;
+  };
+  static_assert( sizeof( PhysicalDevice8BitStorageFeaturesKHR ) == sizeof( VkPhysicalDevice8BitStorageFeaturesKHR ), "struct and wrapper have different size!" );
+
+  struct PhysicalDeviceConditionalRenderingFeaturesEXT
+  {
+    PhysicalDeviceConditionalRenderingFeaturesEXT( Bool32 conditionalRendering_ = 0,
+                                                   Bool32 inheritedConditionalRendering_ = 0 )
+      : conditionalRendering( conditionalRendering_ )
+      , inheritedConditionalRendering( inheritedConditionalRendering_ )
+    {
+    }
+
+    PhysicalDeviceConditionalRenderingFeaturesEXT( VkPhysicalDeviceConditionalRenderingFeaturesEXT const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( PhysicalDeviceConditionalRenderingFeaturesEXT ) );
+    }
+
+    PhysicalDeviceConditionalRenderingFeaturesEXT& operator=( VkPhysicalDeviceConditionalRenderingFeaturesEXT const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( PhysicalDeviceConditionalRenderingFeaturesEXT ) );
+      return *this;
+    }
+    PhysicalDeviceConditionalRenderingFeaturesEXT& setPNext( void* pNext_ )
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    PhysicalDeviceConditionalRenderingFeaturesEXT& setConditionalRendering( Bool32 conditionalRendering_ )
+    {
+      conditionalRendering = conditionalRendering_;
+      return *this;
+    }
+
+    PhysicalDeviceConditionalRenderingFeaturesEXT& setInheritedConditionalRendering( Bool32 inheritedConditionalRendering_ )
+    {
+      inheritedConditionalRendering = inheritedConditionalRendering_;
+      return *this;
+    }
+
+    operator const VkPhysicalDeviceConditionalRenderingFeaturesEXT&() const
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceConditionalRenderingFeaturesEXT*>(this);
+    }
+
+    bool operator==( PhysicalDeviceConditionalRenderingFeaturesEXT const& rhs ) const
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( conditionalRendering == rhs.conditionalRendering )
+          && ( inheritedConditionalRendering == rhs.inheritedConditionalRendering );
+    }
+
+    bool operator!=( PhysicalDeviceConditionalRenderingFeaturesEXT const& rhs ) const
+    {
+      return !operator==( rhs );
+    }
+
+  private:
+    StructureType sType = StructureType::ePhysicalDeviceConditionalRenderingFeaturesEXT;
+
+  public:
+    void* pNext = nullptr;
+    Bool32 conditionalRendering;
+    Bool32 inheritedConditionalRendering;
+  };
+  static_assert( sizeof( PhysicalDeviceConditionalRenderingFeaturesEXT ) == sizeof( VkPhysicalDeviceConditionalRenderingFeaturesEXT ), "struct and wrapper have different size!" );
+
   enum class SubpassContents
   {
     eInline = VK_SUBPASS_CONTENTS_INLINE,
     eSecondaryCommandBuffers = VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS
   };
 
+  struct SubpassBeginInfoKHR
+  {
+    SubpassBeginInfoKHR( SubpassContents contents_ = SubpassContents::eInline )
+      : contents( contents_ )
+    {
+    }
+
+    SubpassBeginInfoKHR( VkSubpassBeginInfoKHR const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( SubpassBeginInfoKHR ) );
+    }
+
+    SubpassBeginInfoKHR& operator=( VkSubpassBeginInfoKHR const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( SubpassBeginInfoKHR ) );
+      return *this;
+    }
+    SubpassBeginInfoKHR& setPNext( const void* pNext_ )
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    SubpassBeginInfoKHR& setContents( SubpassContents contents_ )
+    {
+      contents = contents_;
+      return *this;
+    }
+
+    operator const VkSubpassBeginInfoKHR&() const
+    {
+      return *reinterpret_cast<const VkSubpassBeginInfoKHR*>(this);
+    }
+
+    bool operator==( SubpassBeginInfoKHR const& rhs ) const
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( contents == rhs.contents );
+    }
+
+    bool operator!=( SubpassBeginInfoKHR const& rhs ) const
+    {
+      return !operator==( rhs );
+    }
+
+  private:
+    StructureType sType = StructureType::eSubpassBeginInfoKHR;
+
+  public:
+    const void* pNext = nullptr;
+    SubpassContents contents;
+  };
+  static_assert( sizeof( SubpassBeginInfoKHR ) == sizeof( VkSubpassBeginInfoKHR ), "struct and wrapper have different size!" );
+
   struct PresentInfoKHR
   {
-    PresentInfoKHR( uint32_t waitSemaphoreCount_ = 0, const Semaphore* pWaitSemaphores_ = nullptr, uint32_t swapchainCount_ = 0, const SwapchainKHR* pSwapchains_ = nullptr, const uint32_t* pImageIndices_ = nullptr, Result* pResults_ = nullptr )
+    PresentInfoKHR( uint32_t waitSemaphoreCount_ = 0,
+                    const Semaphore* pWaitSemaphores_ = nullptr,
+                    uint32_t swapchainCount_ = 0,
+                    const SwapchainKHR* pSwapchains_ = nullptr,
+                    const uint32_t* pImageIndices_ = nullptr,
+                    Result* pResults_ = nullptr )
       : waitSemaphoreCount( waitSemaphoreCount_ )
       , pWaitSemaphores( pWaitSemaphores_ )
       , swapchainCount( swapchainCount_ )
@@ -16881,7 +17528,9 @@ public:
 
   struct PipelineDynamicStateCreateInfo
   {
-    PipelineDynamicStateCreateInfo( PipelineDynamicStateCreateFlags flags_ = PipelineDynamicStateCreateFlags(), uint32_t dynamicStateCount_ = 0, const DynamicState* pDynamicStates_ = nullptr )
+    PipelineDynamicStateCreateInfo( PipelineDynamicStateCreateFlags flags_ = PipelineDynamicStateCreateFlags(),
+                                    uint32_t dynamicStateCount_ = 0,
+                                    const DynamicState* pDynamicStates_ = nullptr )
       : flags( flags_ )
       , dynamicStateCount( dynamicStateCount_ )
       , pDynamicStates( pDynamicStates_ )
@@ -16961,7 +17610,14 @@ public:
 
   struct DescriptorUpdateTemplateCreateInfo
   {
-    DescriptorUpdateTemplateCreateInfo( DescriptorUpdateTemplateCreateFlags flags_ = DescriptorUpdateTemplateCreateFlags(), uint32_t descriptorUpdateEntryCount_ = 0, const DescriptorUpdateTemplateEntry* pDescriptorUpdateEntries_ = nullptr, DescriptorUpdateTemplateType templateType_ = DescriptorUpdateTemplateType::eDescriptorSet, DescriptorSetLayout descriptorSetLayout_ = DescriptorSetLayout(), PipelineBindPoint pipelineBindPoint_ = PipelineBindPoint::eGraphics, PipelineLayout pipelineLayout_ = PipelineLayout(), uint32_t set_ = 0 )
+    DescriptorUpdateTemplateCreateInfo( DescriptorUpdateTemplateCreateFlags flags_ = DescriptorUpdateTemplateCreateFlags(),
+                                        uint32_t descriptorUpdateEntryCount_ = 0,
+                                        const DescriptorUpdateTemplateEntry* pDescriptorUpdateEntries_ = nullptr,
+                                        DescriptorUpdateTemplateType templateType_ = DescriptorUpdateTemplateType::eDescriptorSet,
+                                        DescriptorSetLayout descriptorSetLayout_ = DescriptorSetLayout(),
+                                        PipelineBindPoint pipelineBindPoint_ = PipelineBindPoint::eGraphics,
+                                        PipelineLayout pipelineLayout_ = PipelineLayout(),
+                                        uint32_t set_ = 0 )
       : flags( flags_ )
       , descriptorUpdateEntryCount( descriptorUpdateEntryCount_ )
       , pDescriptorUpdateEntries( pDescriptorUpdateEntries_ )
@@ -17124,7 +17780,9 @@ public:
 
   struct DebugUtilsObjectNameInfoEXT
   {
-    DebugUtilsObjectNameInfoEXT( ObjectType objectType_ = ObjectType::eUnknown, uint64_t objectHandle_ = 0, const char* pObjectName_ = nullptr )
+    DebugUtilsObjectNameInfoEXT( ObjectType objectType_ = ObjectType::eUnknown,
+                                 uint64_t objectHandle_ = 0,
+                                 const char* pObjectName_ = nullptr )
       : objectType( objectType_ )
       , objectHandle( objectHandle_ )
       , pObjectName( pObjectName_ )
@@ -17197,7 +17855,11 @@ public:
 
   struct DebugUtilsObjectTagInfoEXT
   {
-    DebugUtilsObjectTagInfoEXT( ObjectType objectType_ = ObjectType::eUnknown, uint64_t objectHandle_ = 0, uint64_t tagName_ = 0, size_t tagSize_ = 0, const void* pTag_ = nullptr )
+    DebugUtilsObjectTagInfoEXT( ObjectType objectType_ = ObjectType::eUnknown,
+                                uint64_t objectHandle_ = 0,
+                                uint64_t tagName_ = 0,
+                                size_t tagSize_ = 0,
+                                const void* pTag_ = nullptr )
       : objectType( objectType_ )
       , objectHandle( objectHandle_ )
       , tagName( tagName_ )
@@ -17288,7 +17950,16 @@ public:
 
   struct DebugUtilsMessengerCallbackDataEXT
   {
-    DebugUtilsMessengerCallbackDataEXT( DebugUtilsMessengerCallbackDataFlagsEXT flags_ = DebugUtilsMessengerCallbackDataFlagsEXT(), const char* pMessageIdName_ = nullptr, int32_t messageIdNumber_ = 0, const char* pMessage_ = nullptr, uint32_t queueLabelCount_ = 0, DebugUtilsLabelEXT* pQueueLabels_ = nullptr, uint32_t cmdBufLabelCount_ = 0, DebugUtilsLabelEXT* pCmdBufLabels_ = nullptr, uint32_t objectCount_ = 0, DebugUtilsObjectNameInfoEXT* pObjects_ = nullptr )
+    DebugUtilsMessengerCallbackDataEXT( DebugUtilsMessengerCallbackDataFlagsEXT flags_ = DebugUtilsMessengerCallbackDataFlagsEXT(),
+                                        const char* pMessageIdName_ = nullptr,
+                                        int32_t messageIdNumber_ = 0,
+                                        const char* pMessage_ = nullptr,
+                                        uint32_t queueLabelCount_ = 0,
+                                        DebugUtilsLabelEXT* pQueueLabels_ = nullptr,
+                                        uint32_t cmdBufLabelCount_ = 0,
+                                        DebugUtilsLabelEXT* pCmdBufLabels_ = nullptr,
+                                        uint32_t objectCount_ = 0,
+                                        DebugUtilsObjectNameInfoEXT* pObjects_ = nullptr )
       : flags( flags_ )
       , pMessageIdName( pMessageIdName_ )
       , messageIdNumber( messageIdNumber_ )
@@ -17535,7 +18206,10 @@ public:
 
   struct DeviceQueueCreateInfo
   {
-    DeviceQueueCreateInfo( DeviceQueueCreateFlags flags_ = DeviceQueueCreateFlags(), uint32_t queueFamilyIndex_ = 0, uint32_t queueCount_ = 0, const float* pQueuePriorities_ = nullptr )
+    DeviceQueueCreateInfo( DeviceQueueCreateFlags flags_ = DeviceQueueCreateFlags(),
+                           uint32_t queueFamilyIndex_ = 0,
+                           uint32_t queueCount_ = 0,
+                           const float* pQueuePriorities_ = nullptr )
       : flags( flags_ )
       , queueFamilyIndex( queueFamilyIndex_ )
       , queueCount( queueCount_ )
@@ -17617,7 +18291,14 @@ public:
 
   struct DeviceCreateInfo
   {
-    DeviceCreateInfo( DeviceCreateFlags flags_ = DeviceCreateFlags(), uint32_t queueCreateInfoCount_ = 0, const DeviceQueueCreateInfo* pQueueCreateInfos_ = nullptr, uint32_t enabledLayerCount_ = 0, const char* const* ppEnabledLayerNames_ = nullptr, uint32_t enabledExtensionCount_ = 0, const char* const* ppEnabledExtensionNames_ = nullptr, const PhysicalDeviceFeatures* pEnabledFeatures_ = nullptr )
+    DeviceCreateInfo( DeviceCreateFlags flags_ = DeviceCreateFlags(),
+                      uint32_t queueCreateInfoCount_ = 0,
+                      const DeviceQueueCreateInfo* pQueueCreateInfos_ = nullptr,
+                      uint32_t enabledLayerCount_ = 0,
+                      const char* const* ppEnabledLayerNames_ = nullptr,
+                      uint32_t enabledExtensionCount_ = 0,
+                      const char* const* ppEnabledExtensionNames_ = nullptr,
+                      const PhysicalDeviceFeatures* pEnabledFeatures_ = nullptr )
       : flags( flags_ )
       , queueCreateInfoCount( queueCreateInfoCount_ )
       , pQueueCreateInfos( pQueueCreateInfos_ )
@@ -17735,7 +18416,9 @@ public:
 
   struct DeviceQueueInfo2
   {
-    DeviceQueueInfo2( DeviceQueueCreateFlags flags_ = DeviceQueueCreateFlags(), uint32_t queueFamilyIndex_ = 0, uint32_t queueIndex_ = 0 )
+    DeviceQueueInfo2( DeviceQueueCreateFlags flags_ = DeviceQueueCreateFlags(),
+                      uint32_t queueFamilyIndex_ = 0,
+                      uint32_t queueIndex_ = 0 )
       : flags( flags_ )
       , queueFamilyIndex( queueFamilyIndex_ )
       , queueIndex( queueIndex_ )
@@ -17985,6 +18668,7 @@ public:
     eHostWrite = VK_ACCESS_HOST_WRITE_BIT,
     eMemoryRead = VK_ACCESS_MEMORY_READ_BIT,
     eMemoryWrite = VK_ACCESS_MEMORY_WRITE_BIT,
+    eConditionalRenderingReadEXT = VK_ACCESS_CONDITIONAL_RENDERING_READ_BIT_EXT,
     eCommandProcessReadNVX = VK_ACCESS_COMMAND_PROCESS_READ_BIT_NVX,
     eCommandProcessWriteNVX = VK_ACCESS_COMMAND_PROCESS_WRITE_BIT_NVX,
     eColorAttachmentReadNoncoherentEXT = VK_ACCESS_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT
@@ -18006,13 +18690,14 @@ public:
   {
     enum
     {
-      allFlags = VkFlags(AccessFlagBits::eIndirectCommandRead) | VkFlags(AccessFlagBits::eIndexRead) | VkFlags(AccessFlagBits::eVertexAttributeRead) | VkFlags(AccessFlagBits::eUniformRead) | VkFlags(AccessFlagBits::eInputAttachmentRead) | VkFlags(AccessFlagBits::eShaderRead) | VkFlags(AccessFlagBits::eShaderWrite) | VkFlags(AccessFlagBits::eColorAttachmentRead) | VkFlags(AccessFlagBits::eColorAttachmentWrite) | VkFlags(AccessFlagBits::eDepthStencilAttachmentRead) | VkFlags(AccessFlagBits::eDepthStencilAttachmentWrite) | VkFlags(AccessFlagBits::eTransferRead) | VkFlags(AccessFlagBits::eTransferWrite) | VkFlags(AccessFlagBits::eHostRead) | VkFlags(AccessFlagBits::eHostWrite) | VkFlags(AccessFlagBits::eMemoryRead) | VkFlags(AccessFlagBits::eMemoryWrite) | VkFlags(AccessFlagBits::eCommandProcessReadNVX) | VkFlags(AccessFlagBits::eCommandProcessWriteNVX) | VkFlags(AccessFlagBits::eColorAttachmentReadNoncoherentEXT)
+      allFlags = VkFlags(AccessFlagBits::eIndirectCommandRead) | VkFlags(AccessFlagBits::eIndexRead) | VkFlags(AccessFlagBits::eVertexAttributeRead) | VkFlags(AccessFlagBits::eUniformRead) | VkFlags(AccessFlagBits::eInputAttachmentRead) | VkFlags(AccessFlagBits::eShaderRead) | VkFlags(AccessFlagBits::eShaderWrite) | VkFlags(AccessFlagBits::eColorAttachmentRead) | VkFlags(AccessFlagBits::eColorAttachmentWrite) | VkFlags(AccessFlagBits::eDepthStencilAttachmentRead) | VkFlags(AccessFlagBits::eDepthStencilAttachmentWrite) | VkFlags(AccessFlagBits::eTransferRead) | VkFlags(AccessFlagBits::eTransferWrite) | VkFlags(AccessFlagBits::eHostRead) | VkFlags(AccessFlagBits::eHostWrite) | VkFlags(AccessFlagBits::eMemoryRead) | VkFlags(AccessFlagBits::eMemoryWrite) | VkFlags(AccessFlagBits::eConditionalRenderingReadEXT) | VkFlags(AccessFlagBits::eCommandProcessReadNVX) | VkFlags(AccessFlagBits::eCommandProcessWriteNVX) | VkFlags(AccessFlagBits::eColorAttachmentReadNoncoherentEXT)
     };
   };
 
   struct MemoryBarrier
   {
-    MemoryBarrier( AccessFlags srcAccessMask_ = AccessFlags(), AccessFlags dstAccessMask_ = AccessFlags() )
+    MemoryBarrier( AccessFlags srcAccessMask_ = AccessFlags(),
+                   AccessFlags dstAccessMask_ = AccessFlags() )
       : srcAccessMask( srcAccessMask_ )
       , dstAccessMask( dstAccessMask_ )
     {
@@ -18076,7 +18761,13 @@ public:
 
   struct BufferMemoryBarrier
   {
-    BufferMemoryBarrier( AccessFlags srcAccessMask_ = AccessFlags(), AccessFlags dstAccessMask_ = AccessFlags(), uint32_t srcQueueFamilyIndex_ = 0, uint32_t dstQueueFamilyIndex_ = 0, Buffer buffer_ = Buffer(), DeviceSize offset_ = 0, DeviceSize size_ = 0 )
+    BufferMemoryBarrier( AccessFlags srcAccessMask_ = AccessFlags(),
+                         AccessFlags dstAccessMask_ = AccessFlags(),
+                         uint32_t srcQueueFamilyIndex_ = 0,
+                         uint32_t dstQueueFamilyIndex_ = 0,
+                         Buffer buffer_ = Buffer(),
+                         DeviceSize offset_ = 0,
+                         DeviceSize size_ = 0 )
       : srcAccessMask( srcAccessMask_ )
       , dstAccessMask( dstAccessMask_ )
       , srcQueueFamilyIndex( srcQueueFamilyIndex_ )
@@ -18193,7 +18884,8 @@ public:
     eStorageBuffer = VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,
     eIndexBuffer = VK_BUFFER_USAGE_INDEX_BUFFER_BIT,
     eVertexBuffer = VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
-    eIndirectBuffer = VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT
+    eIndirectBuffer = VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT,
+    eConditionalRenderingEXT = VK_BUFFER_USAGE_CONDITIONAL_RENDERING_BIT_EXT
   };
 
   using BufferUsageFlags = Flags<BufferUsageFlagBits, VkBufferUsageFlags>;
@@ -18212,7 +18904,7 @@ public:
   {
     enum
     {
-      allFlags = VkFlags(BufferUsageFlagBits::eTransferSrc) | VkFlags(BufferUsageFlagBits::eTransferDst) | VkFlags(BufferUsageFlagBits::eUniformTexelBuffer) | VkFlags(BufferUsageFlagBits::eStorageTexelBuffer) | VkFlags(BufferUsageFlagBits::eUniformBuffer) | VkFlags(BufferUsageFlagBits::eStorageBuffer) | VkFlags(BufferUsageFlagBits::eIndexBuffer) | VkFlags(BufferUsageFlagBits::eVertexBuffer) | VkFlags(BufferUsageFlagBits::eIndirectBuffer)
+      allFlags = VkFlags(BufferUsageFlagBits::eTransferSrc) | VkFlags(BufferUsageFlagBits::eTransferDst) | VkFlags(BufferUsageFlagBits::eUniformTexelBuffer) | VkFlags(BufferUsageFlagBits::eStorageTexelBuffer) | VkFlags(BufferUsageFlagBits::eUniformBuffer) | VkFlags(BufferUsageFlagBits::eStorageBuffer) | VkFlags(BufferUsageFlagBits::eIndexBuffer) | VkFlags(BufferUsageFlagBits::eVertexBuffer) | VkFlags(BufferUsageFlagBits::eIndirectBuffer) | VkFlags(BufferUsageFlagBits::eConditionalRenderingEXT)
     };
   };
 
@@ -18246,7 +18938,12 @@ public:
 
   struct BufferCreateInfo
   {
-    BufferCreateInfo( BufferCreateFlags flags_ = BufferCreateFlags(), DeviceSize size_ = 0, BufferUsageFlags usage_ = BufferUsageFlags(), SharingMode sharingMode_ = SharingMode::eExclusive, uint32_t queueFamilyIndexCount_ = 0, const uint32_t* pQueueFamilyIndices_ = nullptr )
+    BufferCreateInfo( BufferCreateFlags flags_ = BufferCreateFlags(),
+                      DeviceSize size_ = 0,
+                      BufferUsageFlags usage_ = BufferUsageFlags(),
+                      SharingMode sharingMode_ = SharingMode::eExclusive,
+                      uint32_t queueFamilyIndexCount_ = 0,
+                      const uint32_t* pQueueFamilyIndices_ = nullptr )
       : flags( flags_ )
       , size( size_ )
       , usage( usage_ )
@@ -18378,7 +19075,11 @@ public:
 
   struct DescriptorSetLayoutBinding
   {
-    DescriptorSetLayoutBinding( uint32_t binding_ = 0, DescriptorType descriptorType_ = DescriptorType::eSampler, uint32_t descriptorCount_ = 0, ShaderStageFlags stageFlags_ = ShaderStageFlags(), const Sampler* pImmutableSamplers_ = nullptr )
+    DescriptorSetLayoutBinding( uint32_t binding_ = 0,
+                                DescriptorType descriptorType_ = DescriptorType::eSampler,
+                                uint32_t descriptorCount_ = 0,
+                                ShaderStageFlags stageFlags_ = ShaderStageFlags(),
+                                const Sampler* pImmutableSamplers_ = nullptr )
       : binding( binding_ )
       , descriptorType( descriptorType_ )
       , descriptorCount( descriptorCount_ )
@@ -18456,7 +19157,11 @@ public:
 
   struct PipelineShaderStageCreateInfo
   {
-    PipelineShaderStageCreateInfo( PipelineShaderStageCreateFlags flags_ = PipelineShaderStageCreateFlags(), ShaderStageFlagBits stage_ = ShaderStageFlagBits::eVertex, ShaderModule module_ = ShaderModule(), const char* pName_ = nullptr, const SpecializationInfo* pSpecializationInfo_ = nullptr )
+    PipelineShaderStageCreateInfo( PipelineShaderStageCreateFlags flags_ = PipelineShaderStageCreateFlags(),
+                                   ShaderStageFlagBits stage_ = ShaderStageFlagBits::eVertex,
+                                   ShaderModule module_ = ShaderModule(),
+                                   const char* pName_ = nullptr,
+                                   const SpecializationInfo* pSpecializationInfo_ = nullptr )
       : flags( flags_ )
       , stage( stage_ )
       , module( module_ )
@@ -18547,7 +19252,9 @@ public:
 
   struct PushConstantRange
   {
-    PushConstantRange( ShaderStageFlags stageFlags_ = ShaderStageFlags(), uint32_t offset_ = 0, uint32_t size_ = 0 )
+    PushConstantRange( ShaderStageFlags stageFlags_ = ShaderStageFlags(),
+                       uint32_t offset_ = 0,
+                       uint32_t size_ = 0 )
       : stageFlags( stageFlags_ )
       , offset( offset_ )
       , size( size_ )
@@ -18607,7 +19314,11 @@ public:
 
   struct PipelineLayoutCreateInfo
   {
-    PipelineLayoutCreateInfo( PipelineLayoutCreateFlags flags_ = PipelineLayoutCreateFlags(), uint32_t setLayoutCount_ = 0, const DescriptorSetLayout* pSetLayouts_ = nullptr, uint32_t pushConstantRangeCount_ = 0, const PushConstantRange* pPushConstantRanges_ = nullptr )
+    PipelineLayoutCreateInfo( PipelineLayoutCreateFlags flags_ = PipelineLayoutCreateFlags(),
+                              uint32_t setLayoutCount_ = 0,
+                              const DescriptorSetLayout* pSetLayouts_ = nullptr,
+                              uint32_t pushConstantRangeCount_ = 0,
+                              const PushConstantRange* pPushConstantRanges_ = nullptr )
       : flags( flags_ )
       , setLayoutCount( setLayoutCount_ )
       , pSetLayouts( pSetLayouts_ )
@@ -18891,7 +19602,11 @@ public:
 
   struct PhysicalDeviceImageFormatInfo2
   {
-    PhysicalDeviceImageFormatInfo2( Format format_ = Format::eUndefined, ImageType type_ = ImageType::e1D, ImageTiling tiling_ = ImageTiling::eOptimal, ImageUsageFlags usage_ = ImageUsageFlags(), ImageCreateFlags flags_ = ImageCreateFlags() )
+    PhysicalDeviceImageFormatInfo2( Format format_ = Format::eUndefined,
+                                    ImageType type_ = ImageType::e1D,
+                                    ImageTiling tiling_ = ImageTiling::eOptimal,
+                                    ImageUsageFlags usage_ = ImageUsageFlags(),
+                                    ImageCreateFlags flags_ = ImageCreateFlags() )
       : format( format_ )
       , type( type_ )
       , tiling( tiling_ )
@@ -19015,7 +19730,11 @@ public:
 
   struct ComputePipelineCreateInfo
   {
-    ComputePipelineCreateInfo( PipelineCreateFlags flags_ = PipelineCreateFlags(), PipelineShaderStageCreateInfo stage_ = PipelineShaderStageCreateInfo(), PipelineLayout layout_ = PipelineLayout(), Pipeline basePipelineHandle_ = Pipeline(), int32_t basePipelineIndex_ = 0 )
+    ComputePipelineCreateInfo( PipelineCreateFlags flags_ = PipelineCreateFlags(),
+                               PipelineShaderStageCreateInfo stage_ = PipelineShaderStageCreateInfo(),
+                               PipelineLayout layout_ = PipelineLayout(),
+                               Pipeline basePipelineHandle_ = Pipeline(),
+                               int32_t basePipelineIndex_ = 0 )
       : flags( flags_ )
       , stage( stage_ )
       , layout( layout_ )
@@ -19134,7 +19853,14 @@ public:
 
   struct PipelineColorBlendAttachmentState
   {
-    PipelineColorBlendAttachmentState( Bool32 blendEnable_ = 0, BlendFactor srcColorBlendFactor_ = BlendFactor::eZero, BlendFactor dstColorBlendFactor_ = BlendFactor::eZero, BlendOp colorBlendOp_ = BlendOp::eAdd, BlendFactor srcAlphaBlendFactor_ = BlendFactor::eZero, BlendFactor dstAlphaBlendFactor_ = BlendFactor::eZero, BlendOp alphaBlendOp_ = BlendOp::eAdd, ColorComponentFlags colorWriteMask_ = ColorComponentFlags() )
+    PipelineColorBlendAttachmentState( Bool32 blendEnable_ = 0,
+                                       BlendFactor srcColorBlendFactor_ = BlendFactor::eZero,
+                                       BlendFactor dstColorBlendFactor_ = BlendFactor::eZero,
+                                       BlendOp colorBlendOp_ = BlendOp::eAdd,
+                                       BlendFactor srcAlphaBlendFactor_ = BlendFactor::eZero,
+                                       BlendFactor dstAlphaBlendFactor_ = BlendFactor::eZero,
+                                       BlendOp alphaBlendOp_ = BlendOp::eAdd,
+                                       ColorComponentFlags colorWriteMask_ = ColorComponentFlags() )
       : blendEnable( blendEnable_ )
       , srcColorBlendFactor( srcColorBlendFactor_ )
       , dstColorBlendFactor( dstColorBlendFactor_ )
@@ -19239,7 +19965,12 @@ public:
 
   struct PipelineColorBlendStateCreateInfo
   {
-    PipelineColorBlendStateCreateInfo( PipelineColorBlendStateCreateFlags flags_ = PipelineColorBlendStateCreateFlags(), Bool32 logicOpEnable_ = 0, LogicOp logicOp_ = LogicOp::eClear, uint32_t attachmentCount_ = 0, const PipelineColorBlendAttachmentState* pAttachments_ = nullptr, std::array<float,4> const& blendConstants_ = { { 0, 0, 0, 0 } } )
+    PipelineColorBlendStateCreateInfo( PipelineColorBlendStateCreateFlags flags_ = PipelineColorBlendStateCreateFlags(),
+                                       Bool32 logicOpEnable_ = 0,
+                                       LogicOp logicOp_ = LogicOp::eClear,
+                                       uint32_t attachmentCount_ = 0,
+                                       const PipelineColorBlendAttachmentState* pAttachments_ = nullptr,
+                                       std::array<float,4> const& blendConstants_ = { { 0, 0, 0, 0 } } )
       : flags( flags_ )
       , logicOpEnable( logicOpEnable_ )
       , logicOp( logicOp_ )
@@ -19646,7 +20377,12 @@ public:
 
   struct CommandBufferInheritanceInfo
   {
-    CommandBufferInheritanceInfo( RenderPass renderPass_ = RenderPass(), uint32_t subpass_ = 0, Framebuffer framebuffer_ = Framebuffer(), Bool32 occlusionQueryEnable_ = 0, QueryControlFlags queryFlags_ = QueryControlFlags(), QueryPipelineStatisticFlags pipelineStatistics_ = QueryPipelineStatisticFlags() )
+    CommandBufferInheritanceInfo( RenderPass renderPass_ = RenderPass(),
+                                  uint32_t subpass_ = 0,
+                                  Framebuffer framebuffer_ = Framebuffer(),
+                                  Bool32 occlusionQueryEnable_ = 0,
+                                  QueryControlFlags queryFlags_ = QueryControlFlags(),
+                                  QueryPipelineStatisticFlags pipelineStatistics_ = QueryPipelineStatisticFlags() )
       : renderPass( renderPass_ )
       , subpass( subpass_ )
       , framebuffer( framebuffer_ )
@@ -19746,7 +20482,8 @@ public:
 
   struct CommandBufferBeginInfo
   {
-    CommandBufferBeginInfo( CommandBufferUsageFlags flags_ = CommandBufferUsageFlags(), const CommandBufferInheritanceInfo* pInheritanceInfo_ = nullptr )
+    CommandBufferBeginInfo( CommandBufferUsageFlags flags_ = CommandBufferUsageFlags(),
+                            const CommandBufferInheritanceInfo* pInheritanceInfo_ = nullptr )
       : flags( flags_ )
       , pInheritanceInfo( pInheritanceInfo_ )
     {
@@ -19810,7 +20547,10 @@ public:
 
   struct QueryPoolCreateInfo
   {
-    QueryPoolCreateInfo( QueryPoolCreateFlags flags_ = QueryPoolCreateFlags(), QueryType queryType_ = QueryType::eOcclusion, uint32_t queryCount_ = 0, QueryPipelineStatisticFlags pipelineStatistics_ = QueryPipelineStatisticFlags() )
+    QueryPoolCreateInfo( QueryPoolCreateFlags flags_ = QueryPoolCreateFlags(),
+                         QueryType queryType_ = QueryType::eOcclusion,
+                         uint32_t queryCount_ = 0,
+                         QueryPipelineStatisticFlags pipelineStatistics_ = QueryPipelineStatisticFlags() )
       : flags( flags_ )
       , queryType( queryType_ )
       , queryCount( queryCount_ )
@@ -19926,7 +20666,9 @@ public:
 
   struct ImageSubresource
   {
-    ImageSubresource( ImageAspectFlags aspectMask_ = ImageAspectFlags(), uint32_t mipLevel_ = 0, uint32_t arrayLayer_ = 0 )
+    ImageSubresource( ImageAspectFlags aspectMask_ = ImageAspectFlags(),
+                      uint32_t mipLevel_ = 0,
+                      uint32_t arrayLayer_ = 0 )
       : aspectMask( aspectMask_ )
       , mipLevel( mipLevel_ )
       , arrayLayer( arrayLayer_ )
@@ -19986,7 +20728,10 @@ public:
 
   struct ImageSubresourceLayers
   {
-    ImageSubresourceLayers( ImageAspectFlags aspectMask_ = ImageAspectFlags(), uint32_t mipLevel_ = 0, uint32_t baseArrayLayer_ = 0, uint32_t layerCount_ = 0 )
+    ImageSubresourceLayers( ImageAspectFlags aspectMask_ = ImageAspectFlags(),
+                            uint32_t mipLevel_ = 0,
+                            uint32_t baseArrayLayer_ = 0,
+                            uint32_t layerCount_ = 0 )
       : aspectMask( aspectMask_ )
       , mipLevel( mipLevel_ )
       , baseArrayLayer( baseArrayLayer_ )
@@ -20055,7 +20800,11 @@ public:
 
   struct ImageSubresourceRange
   {
-    ImageSubresourceRange( ImageAspectFlags aspectMask_ = ImageAspectFlags(), uint32_t baseMipLevel_ = 0, uint32_t levelCount_ = 0, uint32_t baseArrayLayer_ = 0, uint32_t layerCount_ = 0 )
+    ImageSubresourceRange( ImageAspectFlags aspectMask_ = ImageAspectFlags(),
+                           uint32_t baseMipLevel_ = 0,
+                           uint32_t levelCount_ = 0,
+                           uint32_t baseArrayLayer_ = 0,
+                           uint32_t layerCount_ = 0 )
       : aspectMask( aspectMask_ )
       , baseMipLevel( baseMipLevel_ )
       , levelCount( levelCount_ )
@@ -20133,7 +20882,14 @@ public:
 
   struct ImageMemoryBarrier
   {
-    ImageMemoryBarrier( AccessFlags srcAccessMask_ = AccessFlags(), AccessFlags dstAccessMask_ = AccessFlags(), ImageLayout oldLayout_ = ImageLayout::eUndefined, ImageLayout newLayout_ = ImageLayout::eUndefined, uint32_t srcQueueFamilyIndex_ = 0, uint32_t dstQueueFamilyIndex_ = 0, Image image_ = Image(), ImageSubresourceRange subresourceRange_ = ImageSubresourceRange() )
+    ImageMemoryBarrier( AccessFlags srcAccessMask_ = AccessFlags(),
+                        AccessFlags dstAccessMask_ = AccessFlags(),
+                        ImageLayout oldLayout_ = ImageLayout::eUndefined,
+                        ImageLayout newLayout_ = ImageLayout::eUndefined,
+                        uint32_t srcQueueFamilyIndex_ = 0,
+                        uint32_t dstQueueFamilyIndex_ = 0,
+                        Image image_ = Image(),
+                        ImageSubresourceRange subresourceRange_ = ImageSubresourceRange() )
       : srcAccessMask( srcAccessMask_ )
       , dstAccessMask( dstAccessMask_ )
       , oldLayout( oldLayout_ )
@@ -20251,7 +21007,12 @@ public:
 
   struct ImageViewCreateInfo
   {
-    ImageViewCreateInfo( ImageViewCreateFlags flags_ = ImageViewCreateFlags(), Image image_ = Image(), ImageViewType viewType_ = ImageViewType::e1D, Format format_ = Format::eUndefined, ComponentMapping components_ = ComponentMapping(), ImageSubresourceRange subresourceRange_ = ImageSubresourceRange() )
+    ImageViewCreateInfo( ImageViewCreateFlags flags_ = ImageViewCreateFlags(),
+                         Image image_ = Image(),
+                         ImageViewType viewType_ = ImageViewType::e1D,
+                         Format format_ = Format::eUndefined,
+                         ComponentMapping components_ = ComponentMapping(),
+                         ImageSubresourceRange subresourceRange_ = ImageSubresourceRange() )
       : flags( flags_ )
       , image( image_ )
       , viewType( viewType_ )
@@ -20351,7 +21112,11 @@ public:
 
   struct ImageCopy
   {
-    ImageCopy( ImageSubresourceLayers srcSubresource_ = ImageSubresourceLayers(), Offset3D srcOffset_ = Offset3D(), ImageSubresourceLayers dstSubresource_ = ImageSubresourceLayers(), Offset3D dstOffset_ = Offset3D(), Extent3D extent_ = Extent3D() )
+    ImageCopy( ImageSubresourceLayers srcSubresource_ = ImageSubresourceLayers(),
+               Offset3D srcOffset_ = Offset3D(),
+               ImageSubresourceLayers dstSubresource_ = ImageSubresourceLayers(),
+               Offset3D dstOffset_ = Offset3D(),
+               Extent3D extent_ = Extent3D() )
       : srcSubresource( srcSubresource_ )
       , srcOffset( srcOffset_ )
       , dstSubresource( dstSubresource_ )
@@ -20429,7 +21194,10 @@ public:
 
   struct ImageBlit
   {
-    ImageBlit( ImageSubresourceLayers srcSubresource_ = ImageSubresourceLayers(), std::array<Offset3D,2> const& srcOffsets_ = { { Offset3D(), Offset3D() } }, ImageSubresourceLayers dstSubresource_ = ImageSubresourceLayers(), std::array<Offset3D,2> const& dstOffsets_ = { { Offset3D(), Offset3D() } } )
+    ImageBlit( ImageSubresourceLayers srcSubresource_ = ImageSubresourceLayers(),
+               std::array<Offset3D,2> const& srcOffsets_ = { { Offset3D(), Offset3D() } },
+               ImageSubresourceLayers dstSubresource_ = ImageSubresourceLayers(),
+               std::array<Offset3D,2> const& dstOffsets_ = { { Offset3D(), Offset3D() } } )
       : srcSubresource( srcSubresource_ )
       , dstSubresource( dstSubresource_ )
     {
@@ -20498,7 +21266,12 @@ public:
 
   struct BufferImageCopy
   {
-    BufferImageCopy( DeviceSize bufferOffset_ = 0, uint32_t bufferRowLength_ = 0, uint32_t bufferImageHeight_ = 0, ImageSubresourceLayers imageSubresource_ = ImageSubresourceLayers(), Offset3D imageOffset_ = Offset3D(), Extent3D imageExtent_ = Extent3D() )
+    BufferImageCopy( DeviceSize bufferOffset_ = 0,
+                     uint32_t bufferRowLength_ = 0,
+                     uint32_t bufferImageHeight_ = 0,
+                     ImageSubresourceLayers imageSubresource_ = ImageSubresourceLayers(),
+                     Offset3D imageOffset_ = Offset3D(),
+                     Extent3D imageExtent_ = Extent3D() )
       : bufferOffset( bufferOffset_ )
       , bufferRowLength( bufferRowLength_ )
       , bufferImageHeight( bufferImageHeight_ )
@@ -20585,7 +21358,11 @@ public:
 
   struct ImageResolve
   {
-    ImageResolve( ImageSubresourceLayers srcSubresource_ = ImageSubresourceLayers(), Offset3D srcOffset_ = Offset3D(), ImageSubresourceLayers dstSubresource_ = ImageSubresourceLayers(), Offset3D dstOffset_ = Offset3D(), Extent3D extent_ = Extent3D() )
+    ImageResolve( ImageSubresourceLayers srcSubresource_ = ImageSubresourceLayers(),
+                  Offset3D srcOffset_ = Offset3D(),
+                  ImageSubresourceLayers dstSubresource_ = ImageSubresourceLayers(),
+                  Offset3D dstOffset_ = Offset3D(),
+                  Extent3D extent_ = Extent3D() )
       : srcSubresource( srcSubresource_ )
       , srcOffset( srcOffset_ )
       , dstSubresource( dstSubresource_ )
@@ -20663,7 +21440,9 @@ public:
 
   struct ClearAttachment
   {
-    ClearAttachment( ImageAspectFlags aspectMask_ = ImageAspectFlags(), uint32_t colorAttachment_ = 0, ClearValue clearValue_ = ClearValue() )
+    ClearAttachment( ImageAspectFlags aspectMask_ = ImageAspectFlags(),
+                     uint32_t colorAttachment_ = 0,
+                     ClearValue clearValue_ = ClearValue() )
       : aspectMask( aspectMask_ )
       , colorAttachment( colorAttachment_ )
       , clearValue( clearValue_ )
@@ -20711,7 +21490,9 @@ public:
 
   struct InputAttachmentAspectReference
   {
-    InputAttachmentAspectReference( uint32_t subpass_ = 0, uint32_t inputAttachmentIndex_ = 0, ImageAspectFlags aspectMask_ = ImageAspectFlags() )
+    InputAttachmentAspectReference( uint32_t subpass_ = 0,
+                                    uint32_t inputAttachmentIndex_ = 0,
+                                    ImageAspectFlags aspectMask_ = ImageAspectFlags() )
       : subpass( subpass_ )
       , inputAttachmentIndex( inputAttachmentIndex_ )
       , aspectMask( aspectMask_ )
@@ -20773,7 +21554,8 @@ public:
 
   struct RenderPassInputAttachmentAspectCreateInfo
   {
-    RenderPassInputAttachmentAspectCreateInfo( uint32_t aspectReferenceCount_ = 0, const InputAttachmentAspectReference* pAspectReferences_ = nullptr )
+    RenderPassInputAttachmentAspectCreateInfo( uint32_t aspectReferenceCount_ = 0,
+                                               const InputAttachmentAspectReference* pAspectReferences_ = nullptr )
       : aspectReferenceCount( aspectReferenceCount_ )
       , pAspectReferences( pAspectReferences_ )
     {
@@ -20951,6 +21733,81 @@ public:
 
   using ImagePlaneMemoryRequirementsInfoKHR = ImagePlaneMemoryRequirementsInfo;
 
+  struct AttachmentReference2KHR
+  {
+    AttachmentReference2KHR( uint32_t attachment_ = 0,
+                             ImageLayout layout_ = ImageLayout::eUndefined,
+                             ImageAspectFlags aspectMask_ = ImageAspectFlags() )
+      : attachment( attachment_ )
+      , layout( layout_ )
+      , aspectMask( aspectMask_ )
+    {
+    }
+
+    AttachmentReference2KHR( VkAttachmentReference2KHR const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( AttachmentReference2KHR ) );
+    }
+
+    AttachmentReference2KHR& operator=( VkAttachmentReference2KHR const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( AttachmentReference2KHR ) );
+      return *this;
+    }
+    AttachmentReference2KHR& setPNext( const void* pNext_ )
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    AttachmentReference2KHR& setAttachment( uint32_t attachment_ )
+    {
+      attachment = attachment_;
+      return *this;
+    }
+
+    AttachmentReference2KHR& setLayout( ImageLayout layout_ )
+    {
+      layout = layout_;
+      return *this;
+    }
+
+    AttachmentReference2KHR& setAspectMask( ImageAspectFlags aspectMask_ )
+    {
+      aspectMask = aspectMask_;
+      return *this;
+    }
+
+    operator const VkAttachmentReference2KHR&() const
+    {
+      return *reinterpret_cast<const VkAttachmentReference2KHR*>(this);
+    }
+
+    bool operator==( AttachmentReference2KHR const& rhs ) const
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( attachment == rhs.attachment )
+          && ( layout == rhs.layout )
+          && ( aspectMask == rhs.aspectMask );
+    }
+
+    bool operator!=( AttachmentReference2KHR const& rhs ) const
+    {
+      return !operator==( rhs );
+    }
+
+  private:
+    StructureType sType = StructureType::eAttachmentReference2KHR;
+
+  public:
+    const void* pNext = nullptr;
+    uint32_t attachment;
+    ImageLayout layout;
+    ImageAspectFlags aspectMask;
+  };
+  static_assert( sizeof( AttachmentReference2KHR ) == sizeof( VkAttachmentReference2KHR ), "struct and wrapper have different size!" );
+
   enum class SparseImageFormatFlagBits
   {
     eSingleMiptail = VK_SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT,
@@ -21119,7 +21976,11 @@ public:
 
   struct SparseMemoryBind
   {
-    SparseMemoryBind( DeviceSize resourceOffset_ = 0, DeviceSize size_ = 0, DeviceMemory memory_ = DeviceMemory(), DeviceSize memoryOffset_ = 0, SparseMemoryBindFlags flags_ = SparseMemoryBindFlags() )
+    SparseMemoryBind( DeviceSize resourceOffset_ = 0,
+                      DeviceSize size_ = 0,
+                      DeviceMemory memory_ = DeviceMemory(),
+                      DeviceSize memoryOffset_ = 0,
+                      SparseMemoryBindFlags flags_ = SparseMemoryBindFlags() )
       : resourceOffset( resourceOffset_ )
       , size( size_ )
       , memory( memory_ )
@@ -21197,7 +22058,12 @@ public:
 
   struct SparseImageMemoryBind
   {
-    SparseImageMemoryBind( ImageSubresource subresource_ = ImageSubresource(), Offset3D offset_ = Offset3D(), Extent3D extent_ = Extent3D(), DeviceMemory memory_ = DeviceMemory(), DeviceSize memoryOffset_ = 0, SparseMemoryBindFlags flags_ = SparseMemoryBindFlags() )
+    SparseImageMemoryBind( ImageSubresource subresource_ = ImageSubresource(),
+                           Offset3D offset_ = Offset3D(),
+                           Extent3D extent_ = Extent3D(),
+                           DeviceMemory memory_ = DeviceMemory(),
+                           DeviceSize memoryOffset_ = 0,
+                           SparseMemoryBindFlags flags_ = SparseMemoryBindFlags() )
       : subresource( subresource_ )
       , offset( offset_ )
       , extent( extent_ )
@@ -21284,7 +22150,9 @@ public:
 
   struct SparseBufferMemoryBindInfo
   {
-    SparseBufferMemoryBindInfo( Buffer buffer_ = Buffer(), uint32_t bindCount_ = 0, const SparseMemoryBind* pBinds_ = nullptr )
+    SparseBufferMemoryBindInfo( Buffer buffer_ = Buffer(),
+                                uint32_t bindCount_ = 0,
+                                const SparseMemoryBind* pBinds_ = nullptr )
       : buffer( buffer_ )
       , bindCount( bindCount_ )
       , pBinds( pBinds_ )
@@ -21344,7 +22212,9 @@ public:
 
   struct SparseImageOpaqueMemoryBindInfo
   {
-    SparseImageOpaqueMemoryBindInfo( Image image_ = Image(), uint32_t bindCount_ = 0, const SparseMemoryBind* pBinds_ = nullptr )
+    SparseImageOpaqueMemoryBindInfo( Image image_ = Image(),
+                                     uint32_t bindCount_ = 0,
+                                     const SparseMemoryBind* pBinds_ = nullptr )
       : image( image_ )
       , bindCount( bindCount_ )
       , pBinds( pBinds_ )
@@ -21404,7 +22274,9 @@ public:
 
   struct SparseImageMemoryBindInfo
   {
-    SparseImageMemoryBindInfo( Image image_ = Image(), uint32_t bindCount_ = 0, const SparseImageMemoryBind* pBinds_ = nullptr )
+    SparseImageMemoryBindInfo( Image image_ = Image(),
+                               uint32_t bindCount_ = 0,
+                               const SparseImageMemoryBind* pBinds_ = nullptr )
       : image( image_ )
       , bindCount( bindCount_ )
       , pBinds( pBinds_ )
@@ -21464,7 +22336,16 @@ public:
 
   struct BindSparseInfo
   {
-    BindSparseInfo( uint32_t waitSemaphoreCount_ = 0, const Semaphore* pWaitSemaphores_ = nullptr, uint32_t bufferBindCount_ = 0, const SparseBufferMemoryBindInfo* pBufferBinds_ = nullptr, uint32_t imageOpaqueBindCount_ = 0, const SparseImageOpaqueMemoryBindInfo* pImageOpaqueBinds_ = nullptr, uint32_t imageBindCount_ = 0, const SparseImageMemoryBindInfo* pImageBinds_ = nullptr, uint32_t signalSemaphoreCount_ = 0, const Semaphore* pSignalSemaphores_ = nullptr )
+    BindSparseInfo( uint32_t waitSemaphoreCount_ = 0,
+                    const Semaphore* pWaitSemaphores_ = nullptr,
+                    uint32_t bufferBindCount_ = 0,
+                    const SparseBufferMemoryBindInfo* pBufferBinds_ = nullptr,
+                    uint32_t imageOpaqueBindCount_ = 0,
+                    const SparseImageOpaqueMemoryBindInfo* pImageOpaqueBinds_ = nullptr,
+                    uint32_t imageBindCount_ = 0,
+                    const SparseImageMemoryBindInfo* pImageBinds_ = nullptr,
+                    uint32_t signalSemaphoreCount_ = 0,
+                    const Semaphore* pSignalSemaphores_ = nullptr )
       : waitSemaphoreCount( waitSemaphoreCount_ )
       , pWaitSemaphores( pWaitSemaphores_ )
       , bufferBindCount( bufferBindCount_ )
@@ -21617,6 +22498,7 @@ public:
     eHost = VK_PIPELINE_STAGE_HOST_BIT,
     eAllGraphics = VK_PIPELINE_STAGE_ALL_GRAPHICS_BIT,
     eAllCommands = VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,
+    eConditionalRenderingEXT = VK_PIPELINE_STAGE_CONDITIONAL_RENDERING_BIT_EXT,
     eCommandProcessNVX = VK_PIPELINE_STAGE_COMMAND_PROCESS_BIT_NVX
   };
 
@@ -21636,9 +22518,67 @@ public:
   {
     enum
     {
-      allFlags = VkFlags(PipelineStageFlagBits::eTopOfPipe) | VkFlags(PipelineStageFlagBits::eDrawIndirect) | VkFlags(PipelineStageFlagBits::eVertexInput) | VkFlags(PipelineStageFlagBits::eVertexShader) | VkFlags(PipelineStageFlagBits::eTessellationControlShader) | VkFlags(PipelineStageFlagBits::eTessellationEvaluationShader) | VkFlags(PipelineStageFlagBits::eGeometryShader) | VkFlags(PipelineStageFlagBits::eFragmentShader) | VkFlags(PipelineStageFlagBits::eEarlyFragmentTests) | VkFlags(PipelineStageFlagBits::eLateFragmentTests) | VkFlags(PipelineStageFlagBits::eColorAttachmentOutput) | VkFlags(PipelineStageFlagBits::eComputeShader) | VkFlags(PipelineStageFlagBits::eTransfer) | VkFlags(PipelineStageFlagBits::eBottomOfPipe) | VkFlags(PipelineStageFlagBits::eHost) | VkFlags(PipelineStageFlagBits::eAllGraphics) | VkFlags(PipelineStageFlagBits::eAllCommands) | VkFlags(PipelineStageFlagBits::eCommandProcessNVX)
+      allFlags = VkFlags(PipelineStageFlagBits::eTopOfPipe) | VkFlags(PipelineStageFlagBits::eDrawIndirect) | VkFlags(PipelineStageFlagBits::eVertexInput) | VkFlags(PipelineStageFlagBits::eVertexShader) | VkFlags(PipelineStageFlagBits::eTessellationControlShader) | VkFlags(PipelineStageFlagBits::eTessellationEvaluationShader) | VkFlags(PipelineStageFlagBits::eGeometryShader) | VkFlags(PipelineStageFlagBits::eFragmentShader) | VkFlags(PipelineStageFlagBits::eEarlyFragmentTests) | VkFlags(PipelineStageFlagBits::eLateFragmentTests) | VkFlags(PipelineStageFlagBits::eColorAttachmentOutput) | VkFlags(PipelineStageFlagBits::eComputeShader) | VkFlags(PipelineStageFlagBits::eTransfer) | VkFlags(PipelineStageFlagBits::eBottomOfPipe) | VkFlags(PipelineStageFlagBits::eHost) | VkFlags(PipelineStageFlagBits::eAllGraphics) | VkFlags(PipelineStageFlagBits::eAllCommands) | VkFlags(PipelineStageFlagBits::eConditionalRenderingEXT) | VkFlags(PipelineStageFlagBits::eCommandProcessNVX)
     };
   };
+
+  struct QueueFamilyCheckpointPropertiesNV
+  {
+    operator const VkQueueFamilyCheckpointPropertiesNV&() const
+    {
+      return *reinterpret_cast<const VkQueueFamilyCheckpointPropertiesNV*>(this);
+    }
+
+    bool operator==( QueueFamilyCheckpointPropertiesNV const& rhs ) const
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( checkpointExecutionStageMask == rhs.checkpointExecutionStageMask );
+    }
+
+    bool operator!=( QueueFamilyCheckpointPropertiesNV const& rhs ) const
+    {
+      return !operator==( rhs );
+    }
+
+  private:
+    StructureType sType = StructureType::eQueueFamilyCheckpointPropertiesNV;
+
+  public:
+    void* pNext = nullptr;
+    PipelineStageFlags checkpointExecutionStageMask;
+  };
+  static_assert( sizeof( QueueFamilyCheckpointPropertiesNV ) == sizeof( VkQueueFamilyCheckpointPropertiesNV ), "struct and wrapper have different size!" );
+
+  struct CheckpointDataNV
+  {
+    operator const VkCheckpointDataNV&() const
+    {
+      return *reinterpret_cast<const VkCheckpointDataNV*>(this);
+    }
+
+    bool operator==( CheckpointDataNV const& rhs ) const
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( stage == rhs.stage )
+          && ( pCheckpointMarker == rhs.pCheckpointMarker );
+    }
+
+    bool operator!=( CheckpointDataNV const& rhs ) const
+    {
+      return !operator==( rhs );
+    }
+
+  private:
+    StructureType sType = StructureType::eCheckpointDataNV;
+
+  public:
+    void* pNext = nullptr;
+    PipelineStageFlagBits stage;
+    void* pCheckpointMarker;
+  };
+  static_assert( sizeof( CheckpointDataNV ) == sizeof( VkCheckpointDataNV ), "struct and wrapper have different size!" );
 
   enum class CommandPoolCreateFlagBits
   {
@@ -21669,7 +22609,8 @@ public:
 
   struct CommandPoolCreateInfo
   {
-    CommandPoolCreateInfo( CommandPoolCreateFlags flags_ = CommandPoolCreateFlags(), uint32_t queueFamilyIndex_ = 0 )
+    CommandPoolCreateInfo( CommandPoolCreateFlags flags_ = CommandPoolCreateFlags(),
+                           uint32_t queueFamilyIndex_ = 0 )
       : flags( flags_ )
       , queueFamilyIndex( queueFamilyIndex_ )
     {
@@ -21843,7 +22784,19 @@ public:
 
   struct ImageCreateInfo
   {
-    ImageCreateInfo( ImageCreateFlags flags_ = ImageCreateFlags(), ImageType imageType_ = ImageType::e1D, Format format_ = Format::eUndefined, Extent3D extent_ = Extent3D(), uint32_t mipLevels_ = 0, uint32_t arrayLayers_ = 0, SampleCountFlagBits samples_ = SampleCountFlagBits::e1, ImageTiling tiling_ = ImageTiling::eOptimal, ImageUsageFlags usage_ = ImageUsageFlags(), SharingMode sharingMode_ = SharingMode::eExclusive, uint32_t queueFamilyIndexCount_ = 0, const uint32_t* pQueueFamilyIndices_ = nullptr, ImageLayout initialLayout_ = ImageLayout::eUndefined )
+    ImageCreateInfo( ImageCreateFlags flags_ = ImageCreateFlags(),
+                     ImageType imageType_ = ImageType::e1D,
+                     Format format_ = Format::eUndefined,
+                     Extent3D extent_ = Extent3D(),
+                     uint32_t mipLevels_ = 0,
+                     uint32_t arrayLayers_ = 0,
+                     SampleCountFlagBits samples_ = SampleCountFlagBits::e1,
+                     ImageTiling tiling_ = ImageTiling::eOptimal,
+                     ImageUsageFlags usage_ = ImageUsageFlags(),
+                     SharingMode sharingMode_ = SharingMode::eExclusive,
+                     uint32_t queueFamilyIndexCount_ = 0,
+                     const uint32_t* pQueueFamilyIndices_ = nullptr,
+                     ImageLayout initialLayout_ = ImageLayout::eUndefined )
       : flags( flags_ )
       , imageType( imageType_ )
       , format( format_ )
@@ -22006,7 +22959,13 @@ public:
 
   struct PipelineMultisampleStateCreateInfo
   {
-    PipelineMultisampleStateCreateInfo( PipelineMultisampleStateCreateFlags flags_ = PipelineMultisampleStateCreateFlags(), SampleCountFlagBits rasterizationSamples_ = SampleCountFlagBits::e1, Bool32 sampleShadingEnable_ = 0, float minSampleShading_ = 0, const SampleMask* pSampleMask_ = nullptr, Bool32 alphaToCoverageEnable_ = 0, Bool32 alphaToOneEnable_ = 0 )
+    PipelineMultisampleStateCreateInfo( PipelineMultisampleStateCreateFlags flags_ = PipelineMultisampleStateCreateFlags(),
+                                        SampleCountFlagBits rasterizationSamples_ = SampleCountFlagBits::e1,
+                                        Bool32 sampleShadingEnable_ = 0,
+                                        float minSampleShading_ = 0,
+                                        const SampleMask* pSampleMask_ = nullptr,
+                                        Bool32 alphaToCoverageEnable_ = 0,
+                                        Bool32 alphaToOneEnable_ = 0 )
       : flags( flags_ )
       , rasterizationSamples( rasterizationSamples_ )
       , sampleShadingEnable( sampleShadingEnable_ )
@@ -22115,7 +23074,23 @@ public:
 
   struct GraphicsPipelineCreateInfo
   {
-    GraphicsPipelineCreateInfo( PipelineCreateFlags flags_ = PipelineCreateFlags(), uint32_t stageCount_ = 0, const PipelineShaderStageCreateInfo* pStages_ = nullptr, const PipelineVertexInputStateCreateInfo* pVertexInputState_ = nullptr, const PipelineInputAssemblyStateCreateInfo* pInputAssemblyState_ = nullptr, const PipelineTessellationStateCreateInfo* pTessellationState_ = nullptr, const PipelineViewportStateCreateInfo* pViewportState_ = nullptr, const PipelineRasterizationStateCreateInfo* pRasterizationState_ = nullptr, const PipelineMultisampleStateCreateInfo* pMultisampleState_ = nullptr, const PipelineDepthStencilStateCreateInfo* pDepthStencilState_ = nullptr, const PipelineColorBlendStateCreateInfo* pColorBlendState_ = nullptr, const PipelineDynamicStateCreateInfo* pDynamicState_ = nullptr, PipelineLayout layout_ = PipelineLayout(), RenderPass renderPass_ = RenderPass(), uint32_t subpass_ = 0, Pipeline basePipelineHandle_ = Pipeline(), int32_t basePipelineIndex_ = 0 )
+    GraphicsPipelineCreateInfo( PipelineCreateFlags flags_ = PipelineCreateFlags(),
+                                uint32_t stageCount_ = 0,
+                                const PipelineShaderStageCreateInfo* pStages_ = nullptr,
+                                const PipelineVertexInputStateCreateInfo* pVertexInputState_ = nullptr,
+                                const PipelineInputAssemblyStateCreateInfo* pInputAssemblyState_ = nullptr,
+                                const PipelineTessellationStateCreateInfo* pTessellationState_ = nullptr,
+                                const PipelineViewportStateCreateInfo* pViewportState_ = nullptr,
+                                const PipelineRasterizationStateCreateInfo* pRasterizationState_ = nullptr,
+                                const PipelineMultisampleStateCreateInfo* pMultisampleState_ = nullptr,
+                                const PipelineDepthStencilStateCreateInfo* pDepthStencilState_ = nullptr,
+                                const PipelineColorBlendStateCreateInfo* pColorBlendState_ = nullptr,
+                                const PipelineDynamicStateCreateInfo* pDynamicState_ = nullptr,
+                                PipelineLayout layout_ = PipelineLayout(),
+                                RenderPass renderPass_ = RenderPass(),
+                                uint32_t subpass_ = 0,
+                                Pipeline basePipelineHandle_ = Pipeline(),
+                                int32_t basePipelineIndex_ = 0 )
       : flags( flags_ )
       , stageCount( stageCount_ )
       , pStages( pStages_ )
@@ -22642,7 +23617,11 @@ public:
 
   struct PhysicalDeviceSparseImageFormatInfo2
   {
-    PhysicalDeviceSparseImageFormatInfo2( Format format_ = Format::eUndefined, ImageType type_ = ImageType::e1D, SampleCountFlagBits samples_ = SampleCountFlagBits::e1, ImageUsageFlags usage_ = ImageUsageFlags(), ImageTiling tiling_ = ImageTiling::eOptimal )
+    PhysicalDeviceSparseImageFormatInfo2( Format format_ = Format::eUndefined,
+                                          ImageType type_ = ImageType::e1D,
+                                          SampleCountFlagBits samples_ = SampleCountFlagBits::e1,
+                                          ImageUsageFlags usage_ = ImageUsageFlags(),
+                                          ImageTiling tiling_ = ImageTiling::eOptimal )
       : format( format_ )
       , type( type_ )
       , samples( samples_ )
@@ -22735,7 +23714,10 @@ public:
 
   struct SampleLocationsInfoEXT
   {
-    SampleLocationsInfoEXT( SampleCountFlagBits sampleLocationsPerPixel_ = SampleCountFlagBits::e1, Extent2D sampleLocationGridSize_ = Extent2D(), uint32_t sampleLocationsCount_ = 0, const SampleLocationEXT* pSampleLocations_ = nullptr )
+    SampleLocationsInfoEXT( SampleCountFlagBits sampleLocationsPerPixel_ = SampleCountFlagBits::e1,
+                            Extent2D sampleLocationGridSize_ = Extent2D(),
+                            uint32_t sampleLocationsCount_ = 0,
+                            const SampleLocationEXT* pSampleLocations_ = nullptr )
       : sampleLocationsPerPixel( sampleLocationsPerPixel_ )
       , sampleLocationGridSize( sampleLocationGridSize_ )
       , sampleLocationsCount( sampleLocationsCount_ )
@@ -22817,7 +23799,8 @@ public:
 
   struct AttachmentSampleLocationsEXT
   {
-    AttachmentSampleLocationsEXT( uint32_t attachmentIndex_ = 0, SampleLocationsInfoEXT sampleLocationsInfo_ = SampleLocationsInfoEXT() )
+    AttachmentSampleLocationsEXT( uint32_t attachmentIndex_ = 0,
+                                  SampleLocationsInfoEXT sampleLocationsInfo_ = SampleLocationsInfoEXT() )
       : attachmentIndex( attachmentIndex_ )
       , sampleLocationsInfo( sampleLocationsInfo_ )
     {
@@ -22868,7 +23851,8 @@ public:
 
   struct SubpassSampleLocationsEXT
   {
-    SubpassSampleLocationsEXT( uint32_t subpassIndex_ = 0, SampleLocationsInfoEXT sampleLocationsInfo_ = SampleLocationsInfoEXT() )
+    SubpassSampleLocationsEXT( uint32_t subpassIndex_ = 0,
+                               SampleLocationsInfoEXT sampleLocationsInfo_ = SampleLocationsInfoEXT() )
       : subpassIndex( subpassIndex_ )
       , sampleLocationsInfo( sampleLocationsInfo_ )
     {
@@ -22919,7 +23903,10 @@ public:
 
   struct RenderPassSampleLocationsBeginInfoEXT
   {
-    RenderPassSampleLocationsBeginInfoEXT( uint32_t attachmentInitialSampleLocationsCount_ = 0, const AttachmentSampleLocationsEXT* pAttachmentInitialSampleLocations_ = nullptr, uint32_t postSubpassSampleLocationsCount_ = 0, const SubpassSampleLocationsEXT* pPostSubpassSampleLocations_ = nullptr )
+    RenderPassSampleLocationsBeginInfoEXT( uint32_t attachmentInitialSampleLocationsCount_ = 0,
+                                           const AttachmentSampleLocationsEXT* pAttachmentInitialSampleLocations_ = nullptr,
+                                           uint32_t postSubpassSampleLocationsCount_ = 0,
+                                           const SubpassSampleLocationsEXT* pPostSubpassSampleLocations_ = nullptr )
       : attachmentInitialSampleLocationsCount( attachmentInitialSampleLocationsCount_ )
       , pAttachmentInitialSampleLocations( pAttachmentInitialSampleLocations_ )
       , postSubpassSampleLocationsCount( postSubpassSampleLocationsCount_ )
@@ -23001,7 +23988,8 @@ public:
 
   struct PipelineSampleLocationsStateCreateInfoEXT
   {
-    PipelineSampleLocationsStateCreateInfoEXT( Bool32 sampleLocationsEnable_ = 0, SampleLocationsInfoEXT sampleLocationsInfo_ = SampleLocationsInfoEXT() )
+    PipelineSampleLocationsStateCreateInfoEXT( Bool32 sampleLocationsEnable_ = 0,
+                                               SampleLocationsInfoEXT sampleLocationsInfo_ = SampleLocationsInfoEXT() )
       : sampleLocationsEnable( sampleLocationsEnable_ )
       , sampleLocationsInfo( sampleLocationsInfo_ )
     {
@@ -23126,7 +24114,15 @@ public:
 
   struct AttachmentDescription
   {
-    AttachmentDescription( AttachmentDescriptionFlags flags_ = AttachmentDescriptionFlags(), Format format_ = Format::eUndefined, SampleCountFlagBits samples_ = SampleCountFlagBits::e1, AttachmentLoadOp loadOp_ = AttachmentLoadOp::eLoad, AttachmentStoreOp storeOp_ = AttachmentStoreOp::eStore, AttachmentLoadOp stencilLoadOp_ = AttachmentLoadOp::eLoad, AttachmentStoreOp stencilStoreOp_ = AttachmentStoreOp::eStore, ImageLayout initialLayout_ = ImageLayout::eUndefined, ImageLayout finalLayout_ = ImageLayout::eUndefined )
+    AttachmentDescription( AttachmentDescriptionFlags flags_ = AttachmentDescriptionFlags(),
+                           Format format_ = Format::eUndefined,
+                           SampleCountFlagBits samples_ = SampleCountFlagBits::e1,
+                           AttachmentLoadOp loadOp_ = AttachmentLoadOp::eLoad,
+                           AttachmentStoreOp storeOp_ = AttachmentStoreOp::eStore,
+                           AttachmentLoadOp stencilLoadOp_ = AttachmentLoadOp::eLoad,
+                           AttachmentStoreOp stencilStoreOp_ = AttachmentStoreOp::eStore,
+                           ImageLayout initialLayout_ = ImageLayout::eUndefined,
+                           ImageLayout finalLayout_ = ImageLayout::eUndefined )
       : flags( flags_ )
       , format( format_ )
       , samples( samples_ )
@@ -23238,6 +24234,141 @@ public:
   };
   static_assert( sizeof( AttachmentDescription ) == sizeof( VkAttachmentDescription ), "struct and wrapper have different size!" );
 
+  struct AttachmentDescription2KHR
+  {
+    AttachmentDescription2KHR( AttachmentDescriptionFlags flags_ = AttachmentDescriptionFlags(),
+                               Format format_ = Format::eUndefined,
+                               SampleCountFlagBits samples_ = SampleCountFlagBits::e1,
+                               AttachmentLoadOp loadOp_ = AttachmentLoadOp::eLoad,
+                               AttachmentStoreOp storeOp_ = AttachmentStoreOp::eStore,
+                               AttachmentLoadOp stencilLoadOp_ = AttachmentLoadOp::eLoad,
+                               AttachmentStoreOp stencilStoreOp_ = AttachmentStoreOp::eStore,
+                               ImageLayout initialLayout_ = ImageLayout::eUndefined,
+                               ImageLayout finalLayout_ = ImageLayout::eUndefined )
+      : flags( flags_ )
+      , format( format_ )
+      , samples( samples_ )
+      , loadOp( loadOp_ )
+      , storeOp( storeOp_ )
+      , stencilLoadOp( stencilLoadOp_ )
+      , stencilStoreOp( stencilStoreOp_ )
+      , initialLayout( initialLayout_ )
+      , finalLayout( finalLayout_ )
+    {
+    }
+
+    AttachmentDescription2KHR( VkAttachmentDescription2KHR const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( AttachmentDescription2KHR ) );
+    }
+
+    AttachmentDescription2KHR& operator=( VkAttachmentDescription2KHR const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( AttachmentDescription2KHR ) );
+      return *this;
+    }
+    AttachmentDescription2KHR& setPNext( const void* pNext_ )
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    AttachmentDescription2KHR& setFlags( AttachmentDescriptionFlags flags_ )
+    {
+      flags = flags_;
+      return *this;
+    }
+
+    AttachmentDescription2KHR& setFormat( Format format_ )
+    {
+      format = format_;
+      return *this;
+    }
+
+    AttachmentDescription2KHR& setSamples( SampleCountFlagBits samples_ )
+    {
+      samples = samples_;
+      return *this;
+    }
+
+    AttachmentDescription2KHR& setLoadOp( AttachmentLoadOp loadOp_ )
+    {
+      loadOp = loadOp_;
+      return *this;
+    }
+
+    AttachmentDescription2KHR& setStoreOp( AttachmentStoreOp storeOp_ )
+    {
+      storeOp = storeOp_;
+      return *this;
+    }
+
+    AttachmentDescription2KHR& setStencilLoadOp( AttachmentLoadOp stencilLoadOp_ )
+    {
+      stencilLoadOp = stencilLoadOp_;
+      return *this;
+    }
+
+    AttachmentDescription2KHR& setStencilStoreOp( AttachmentStoreOp stencilStoreOp_ )
+    {
+      stencilStoreOp = stencilStoreOp_;
+      return *this;
+    }
+
+    AttachmentDescription2KHR& setInitialLayout( ImageLayout initialLayout_ )
+    {
+      initialLayout = initialLayout_;
+      return *this;
+    }
+
+    AttachmentDescription2KHR& setFinalLayout( ImageLayout finalLayout_ )
+    {
+      finalLayout = finalLayout_;
+      return *this;
+    }
+
+    operator const VkAttachmentDescription2KHR&() const
+    {
+      return *reinterpret_cast<const VkAttachmentDescription2KHR*>(this);
+    }
+
+    bool operator==( AttachmentDescription2KHR const& rhs ) const
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( flags == rhs.flags )
+          && ( format == rhs.format )
+          && ( samples == rhs.samples )
+          && ( loadOp == rhs.loadOp )
+          && ( storeOp == rhs.storeOp )
+          && ( stencilLoadOp == rhs.stencilLoadOp )
+          && ( stencilStoreOp == rhs.stencilStoreOp )
+          && ( initialLayout == rhs.initialLayout )
+          && ( finalLayout == rhs.finalLayout );
+    }
+
+    bool operator!=( AttachmentDescription2KHR const& rhs ) const
+    {
+      return !operator==( rhs );
+    }
+
+  private:
+    StructureType sType = StructureType::eAttachmentDescription2KHR;
+
+  public:
+    const void* pNext = nullptr;
+    AttachmentDescriptionFlags flags;
+    Format format;
+    SampleCountFlagBits samples;
+    AttachmentLoadOp loadOp;
+    AttachmentStoreOp storeOp;
+    AttachmentLoadOp stencilLoadOp;
+    AttachmentStoreOp stencilStoreOp;
+    ImageLayout initialLayout;
+    ImageLayout finalLayout;
+  };
+  static_assert( sizeof( AttachmentDescription2KHR ) == sizeof( VkAttachmentDescription2KHR ), "struct and wrapper have different size!" );
+
   enum class StencilFaceFlagBits
   {
     eFront = VK_STENCIL_FACE_FRONT_BIT,
@@ -23293,7 +24424,10 @@ public:
 
   struct DescriptorPoolCreateInfo
   {
-    DescriptorPoolCreateInfo( DescriptorPoolCreateFlags flags_ = DescriptorPoolCreateFlags(), uint32_t maxSets_ = 0, uint32_t poolSizeCount_ = 0, const DescriptorPoolSize* pPoolSizes_ = nullptr )
+    DescriptorPoolCreateInfo( DescriptorPoolCreateFlags flags_ = DescriptorPoolCreateFlags(),
+                              uint32_t maxSets_ = 0,
+                              uint32_t poolSizeCount_ = 0,
+                              const DescriptorPoolSize* pPoolSizes_ = nullptr )
       : flags( flags_ )
       , maxSets( maxSets_ )
       , poolSizeCount( poolSizeCount_ )
@@ -23404,7 +24538,13 @@ public:
 
   struct SubpassDependency
   {
-    SubpassDependency( uint32_t srcSubpass_ = 0, uint32_t dstSubpass_ = 0, PipelineStageFlags srcStageMask_ = PipelineStageFlags(), PipelineStageFlags dstStageMask_ = PipelineStageFlags(), AccessFlags srcAccessMask_ = AccessFlags(), AccessFlags dstAccessMask_ = AccessFlags(), DependencyFlags dependencyFlags_ = DependencyFlags() )
+    SubpassDependency( uint32_t srcSubpass_ = 0,
+                       uint32_t dstSubpass_ = 0,
+                       PipelineStageFlags srcStageMask_ = PipelineStageFlags(),
+                       PipelineStageFlags dstStageMask_ = PipelineStageFlags(),
+                       AccessFlags srcAccessMask_ = AccessFlags(),
+                       AccessFlags dstAccessMask_ = AccessFlags(),
+                       DependencyFlags dependencyFlags_ = DependencyFlags() )
       : srcSubpass( srcSubpass_ )
       , dstSubpass( dstSubpass_ )
       , srcStageMask( srcStageMask_ )
@@ -23497,6 +24637,131 @@ public:
     DependencyFlags dependencyFlags;
   };
   static_assert( sizeof( SubpassDependency ) == sizeof( VkSubpassDependency ), "struct and wrapper have different size!" );
+
+  struct SubpassDependency2KHR
+  {
+    SubpassDependency2KHR( uint32_t srcSubpass_ = 0,
+                           uint32_t dstSubpass_ = 0,
+                           PipelineStageFlags srcStageMask_ = PipelineStageFlags(),
+                           PipelineStageFlags dstStageMask_ = PipelineStageFlags(),
+                           AccessFlags srcAccessMask_ = AccessFlags(),
+                           AccessFlags dstAccessMask_ = AccessFlags(),
+                           DependencyFlags dependencyFlags_ = DependencyFlags(),
+                           int32_t viewOffset_ = 0 )
+      : srcSubpass( srcSubpass_ )
+      , dstSubpass( dstSubpass_ )
+      , srcStageMask( srcStageMask_ )
+      , dstStageMask( dstStageMask_ )
+      , srcAccessMask( srcAccessMask_ )
+      , dstAccessMask( dstAccessMask_ )
+      , dependencyFlags( dependencyFlags_ )
+      , viewOffset( viewOffset_ )
+    {
+    }
+
+    SubpassDependency2KHR( VkSubpassDependency2KHR const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( SubpassDependency2KHR ) );
+    }
+
+    SubpassDependency2KHR& operator=( VkSubpassDependency2KHR const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( SubpassDependency2KHR ) );
+      return *this;
+    }
+    SubpassDependency2KHR& setPNext( const void* pNext_ )
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    SubpassDependency2KHR& setSrcSubpass( uint32_t srcSubpass_ )
+    {
+      srcSubpass = srcSubpass_;
+      return *this;
+    }
+
+    SubpassDependency2KHR& setDstSubpass( uint32_t dstSubpass_ )
+    {
+      dstSubpass = dstSubpass_;
+      return *this;
+    }
+
+    SubpassDependency2KHR& setSrcStageMask( PipelineStageFlags srcStageMask_ )
+    {
+      srcStageMask = srcStageMask_;
+      return *this;
+    }
+
+    SubpassDependency2KHR& setDstStageMask( PipelineStageFlags dstStageMask_ )
+    {
+      dstStageMask = dstStageMask_;
+      return *this;
+    }
+
+    SubpassDependency2KHR& setSrcAccessMask( AccessFlags srcAccessMask_ )
+    {
+      srcAccessMask = srcAccessMask_;
+      return *this;
+    }
+
+    SubpassDependency2KHR& setDstAccessMask( AccessFlags dstAccessMask_ )
+    {
+      dstAccessMask = dstAccessMask_;
+      return *this;
+    }
+
+    SubpassDependency2KHR& setDependencyFlags( DependencyFlags dependencyFlags_ )
+    {
+      dependencyFlags = dependencyFlags_;
+      return *this;
+    }
+
+    SubpassDependency2KHR& setViewOffset( int32_t viewOffset_ )
+    {
+      viewOffset = viewOffset_;
+      return *this;
+    }
+
+    operator const VkSubpassDependency2KHR&() const
+    {
+      return *reinterpret_cast<const VkSubpassDependency2KHR*>(this);
+    }
+
+    bool operator==( SubpassDependency2KHR const& rhs ) const
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( srcSubpass == rhs.srcSubpass )
+          && ( dstSubpass == rhs.dstSubpass )
+          && ( srcStageMask == rhs.srcStageMask )
+          && ( dstStageMask == rhs.dstStageMask )
+          && ( srcAccessMask == rhs.srcAccessMask )
+          && ( dstAccessMask == rhs.dstAccessMask )
+          && ( dependencyFlags == rhs.dependencyFlags )
+          && ( viewOffset == rhs.viewOffset );
+    }
+
+    bool operator!=( SubpassDependency2KHR const& rhs ) const
+    {
+      return !operator==( rhs );
+    }
+
+  private:
+    StructureType sType = StructureType::eSubpassDependency2KHR;
+
+  public:
+    const void* pNext = nullptr;
+    uint32_t srcSubpass;
+    uint32_t dstSubpass;
+    PipelineStageFlags srcStageMask;
+    PipelineStageFlags dstStageMask;
+    AccessFlags srcAccessMask;
+    AccessFlags dstAccessMask;
+    DependencyFlags dependencyFlags;
+    int32_t viewOffset;
+  };
+  static_assert( sizeof( SubpassDependency2KHR ) == sizeof( VkSubpassDependency2KHR ), "struct and wrapper have different size!" );
 
   enum class PresentModeKHR
   {
@@ -23767,7 +25032,14 @@ public:
 
   struct DisplaySurfaceCreateInfoKHR
   {
-    DisplaySurfaceCreateInfoKHR( DisplaySurfaceCreateFlagsKHR flags_ = DisplaySurfaceCreateFlagsKHR(), DisplayModeKHR displayMode_ = DisplayModeKHR(), uint32_t planeIndex_ = 0, uint32_t planeStackIndex_ = 0, SurfaceTransformFlagBitsKHR transform_ = SurfaceTransformFlagBitsKHR::eIdentity, float globalAlpha_ = 0, DisplayPlaneAlphaFlagBitsKHR alphaMode_ = DisplayPlaneAlphaFlagBitsKHR::eOpaque, Extent2D imageExtent_ = Extent2D() )
+    DisplaySurfaceCreateInfoKHR( DisplaySurfaceCreateFlagsKHR flags_ = DisplaySurfaceCreateFlagsKHR(),
+                                 DisplayModeKHR displayMode_ = DisplayModeKHR(),
+                                 uint32_t planeIndex_ = 0,
+                                 uint32_t planeStackIndex_ = 0,
+                                 SurfaceTransformFlagBitsKHR transform_ = SurfaceTransformFlagBitsKHR::eIdentity,
+                                 float globalAlpha_ = 0,
+                                 DisplayPlaneAlphaFlagBitsKHR alphaMode_ = DisplayPlaneAlphaFlagBitsKHR::eOpaque,
+                                 Extent2D imageExtent_ = Extent2D() )
       : flags( flags_ )
       , displayMode( displayMode_ )
       , planeIndex( planeIndex_ )
@@ -24009,7 +25281,9 @@ public:
 
   struct DebugReportCallbackCreateInfoEXT
   {
-    DebugReportCallbackCreateInfoEXT( DebugReportFlagsEXT flags_ = DebugReportFlagsEXT(), PFN_vkDebugReportCallbackEXT pfnCallback_ = nullptr, void* pUserData_ = nullptr )
+    DebugReportCallbackCreateInfoEXT( DebugReportFlagsEXT flags_ = DebugReportFlagsEXT(),
+                                      PFN_vkDebugReportCallbackEXT pfnCallback_ = nullptr,
+                                      void* pUserData_ = nullptr )
       : flags( flags_ )
       , pfnCallback( pfnCallback_ )
       , pUserData( pUserData_ )
@@ -24124,7 +25398,9 @@ public:
 
   struct DebugMarkerObjectNameInfoEXT
   {
-    DebugMarkerObjectNameInfoEXT( DebugReportObjectTypeEXT objectType_ = DebugReportObjectTypeEXT::eUnknown, uint64_t object_ = 0, const char* pObjectName_ = nullptr )
+    DebugMarkerObjectNameInfoEXT( DebugReportObjectTypeEXT objectType_ = DebugReportObjectTypeEXT::eUnknown,
+                                  uint64_t object_ = 0,
+                                  const char* pObjectName_ = nullptr )
       : objectType( objectType_ )
       , object( object_ )
       , pObjectName( pObjectName_ )
@@ -24197,7 +25473,11 @@ public:
 
   struct DebugMarkerObjectTagInfoEXT
   {
-    DebugMarkerObjectTagInfoEXT( DebugReportObjectTypeEXT objectType_ = DebugReportObjectTypeEXT::eUnknown, uint64_t object_ = 0, uint64_t tagName_ = 0, size_t tagSize_ = 0, const void* pTag_ = nullptr )
+    DebugMarkerObjectTagInfoEXT( DebugReportObjectTypeEXT objectType_ = DebugReportObjectTypeEXT::eUnknown,
+                                 uint64_t object_ = 0,
+                                 uint64_t tagName_ = 0,
+                                 size_t tagSize_ = 0,
+                                 const void* pTag_ = nullptr )
       : objectType( objectType_ )
       , object( object_ )
       , tagName( tagName_ )
@@ -24488,7 +25768,8 @@ public:
 #ifdef VK_USE_PLATFORM_WIN32_NV
   struct ImportMemoryWin32HandleInfoNV
   {
-    ImportMemoryWin32HandleInfoNV( ExternalMemoryHandleTypeFlagsNV handleType_ = ExternalMemoryHandleTypeFlagsNV(), HANDLE handle_ = 0 )
+    ImportMemoryWin32HandleInfoNV( ExternalMemoryHandleTypeFlagsNV handleType_ = ExternalMemoryHandleTypeFlagsNV(),
+                                   HANDLE handle_ = 0 )
       : handleType( handleType_ )
       , handle( handle_ )
     {
@@ -24613,7 +25894,8 @@ public:
 
   struct ValidationFlagsEXT
   {
-    ValidationFlagsEXT( uint32_t disabledValidationCheckCount_ = 0, ValidationCheckEXT* pDisabledValidationChecks_ = nullptr )
+    ValidationFlagsEXT( uint32_t disabledValidationCheckCount_ = 0,
+                        const ValidationCheckEXT* pDisabledValidationChecks_ = nullptr )
       : disabledValidationCheckCount( disabledValidationCheckCount_ )
       , pDisabledValidationChecks( pDisabledValidationChecks_ )
     {
@@ -24641,7 +25923,7 @@ public:
       return *this;
     }
 
-    ValidationFlagsEXT& setPDisabledValidationChecks( ValidationCheckEXT* pDisabledValidationChecks_ )
+    ValidationFlagsEXT& setPDisabledValidationChecks( const ValidationCheckEXT* pDisabledValidationChecks_ )
     {
       pDisabledValidationChecks = pDisabledValidationChecks_;
       return *this;
@@ -24671,7 +25953,7 @@ public:
   public:
     const void* pNext = nullptr;
     uint32_t disabledValidationCheckCount;
-    ValidationCheckEXT* pDisabledValidationChecks;
+    const ValidationCheckEXT* pDisabledValidationChecks;
   };
   static_assert( sizeof( ValidationFlagsEXT ) == sizeof( VkValidationFlagsEXT ), "struct and wrapper have different size!" );
 
@@ -24810,7 +26092,9 @@ public:
 
   struct IndirectCommandsTokenNVX
   {
-    IndirectCommandsTokenNVX( IndirectCommandsTokenTypeNVX tokenType_ = IndirectCommandsTokenTypeNVX::ePipeline, Buffer buffer_ = Buffer(), DeviceSize offset_ = 0 )
+    IndirectCommandsTokenNVX( IndirectCommandsTokenTypeNVX tokenType_ = IndirectCommandsTokenTypeNVX::ePipeline,
+                              Buffer buffer_ = Buffer(),
+                              DeviceSize offset_ = 0 )
       : tokenType( tokenType_ )
       , buffer( buffer_ )
       , offset( offset_ )
@@ -24870,7 +26154,10 @@ public:
 
   struct IndirectCommandsLayoutTokenNVX
   {
-    IndirectCommandsLayoutTokenNVX( IndirectCommandsTokenTypeNVX tokenType_ = IndirectCommandsTokenTypeNVX::ePipeline, uint32_t bindingUnit_ = 0, uint32_t dynamicCount_ = 0, uint32_t divisor_ = 0 )
+    IndirectCommandsLayoutTokenNVX( IndirectCommandsTokenTypeNVX tokenType_ = IndirectCommandsTokenTypeNVX::ePipeline,
+                                    uint32_t bindingUnit_ = 0,
+                                    uint32_t dynamicCount_ = 0,
+                                    uint32_t divisor_ = 0 )
       : tokenType( tokenType_ )
       , bindingUnit( bindingUnit_ )
       , dynamicCount( dynamicCount_ )
@@ -24939,7 +26226,10 @@ public:
 
   struct IndirectCommandsLayoutCreateInfoNVX
   {
-    IndirectCommandsLayoutCreateInfoNVX( PipelineBindPoint pipelineBindPoint_ = PipelineBindPoint::eGraphics, IndirectCommandsLayoutUsageFlagsNVX flags_ = IndirectCommandsLayoutUsageFlagsNVX(), uint32_t tokenCount_ = 0, const IndirectCommandsLayoutTokenNVX* pTokens_ = nullptr )
+    IndirectCommandsLayoutCreateInfoNVX( PipelineBindPoint pipelineBindPoint_ = PipelineBindPoint::eGraphics,
+                                         IndirectCommandsLayoutUsageFlagsNVX flags_ = IndirectCommandsLayoutUsageFlagsNVX(),
+                                         uint32_t tokenCount_ = 0,
+                                         const IndirectCommandsLayoutTokenNVX* pTokens_ = nullptr )
       : pipelineBindPoint( pipelineBindPoint_ )
       , flags( flags_ )
       , tokenCount( tokenCount_ )
@@ -25030,7 +26320,15 @@ public:
 
   struct ObjectTableCreateInfoNVX
   {
-    ObjectTableCreateInfoNVX( uint32_t objectCount_ = 0, const ObjectEntryTypeNVX* pObjectEntryTypes_ = nullptr, const uint32_t* pObjectEntryCounts_ = nullptr, const ObjectEntryUsageFlagsNVX* pObjectEntryUsageFlags_ = nullptr, uint32_t maxUniformBuffersPerDescriptor_ = 0, uint32_t maxStorageBuffersPerDescriptor_ = 0, uint32_t maxStorageImagesPerDescriptor_ = 0, uint32_t maxSampledImagesPerDescriptor_ = 0, uint32_t maxPipelineLayouts_ = 0 )
+    ObjectTableCreateInfoNVX( uint32_t objectCount_ = 0,
+                              const ObjectEntryTypeNVX* pObjectEntryTypes_ = nullptr,
+                              const uint32_t* pObjectEntryCounts_ = nullptr,
+                              const ObjectEntryUsageFlagsNVX* pObjectEntryUsageFlags_ = nullptr,
+                              uint32_t maxUniformBuffersPerDescriptor_ = 0,
+                              uint32_t maxStorageBuffersPerDescriptor_ = 0,
+                              uint32_t maxStorageImagesPerDescriptor_ = 0,
+                              uint32_t maxSampledImagesPerDescriptor_ = 0,
+                              uint32_t maxPipelineLayouts_ = 0 )
       : objectCount( objectCount_ )
       , pObjectEntryTypes( pObjectEntryTypes_ )
       , pObjectEntryCounts( pObjectEntryCounts_ )
@@ -25157,7 +26455,8 @@ public:
 
   struct ObjectTableEntryNVX
   {
-    ObjectTableEntryNVX( ObjectEntryTypeNVX type_ = ObjectEntryTypeNVX::eDescriptorSet, ObjectEntryUsageFlagsNVX flags_ = ObjectEntryUsageFlagsNVX() )
+    ObjectTableEntryNVX( ObjectEntryTypeNVX type_ = ObjectEntryTypeNVX::eDescriptorSet,
+                         ObjectEntryUsageFlagsNVX flags_ = ObjectEntryUsageFlagsNVX() )
       : type( type_ )
       , flags( flags_ )
     {
@@ -25208,14 +26507,17 @@ public:
 
   struct ObjectTablePipelineEntryNVX
   {
-    ObjectTablePipelineEntryNVX( ObjectEntryTypeNVX type_ = ObjectEntryTypeNVX::eDescriptorSet, ObjectEntryUsageFlagsNVX flags_ = ObjectEntryUsageFlagsNVX(), Pipeline pipeline_ = Pipeline() )
+    ObjectTablePipelineEntryNVX( ObjectEntryTypeNVX type_ = ObjectEntryTypeNVX::eDescriptorSet,
+                                 ObjectEntryUsageFlagsNVX flags_ = ObjectEntryUsageFlagsNVX(),
+                                 Pipeline pipeline_ = Pipeline() )
       : type( type_ )
       , flags( flags_ )
       , pipeline( pipeline_ )
     {
     }
 
-    explicit ObjectTablePipelineEntryNVX( ObjectTableEntryNVX const& objectTableEntryNVX, Pipeline pipeline_ = Pipeline() )
+    explicit ObjectTablePipelineEntryNVX( ObjectTableEntryNVX const& objectTableEntryNVX,
+                                          Pipeline pipeline_ = Pipeline() )
       : type( objectTableEntryNVX.type )
       , flags( objectTableEntryNVX.flags )
       , pipeline( pipeline_ )
@@ -25274,7 +26576,10 @@ public:
 
   struct ObjectTableDescriptorSetEntryNVX
   {
-    ObjectTableDescriptorSetEntryNVX( ObjectEntryTypeNVX type_ = ObjectEntryTypeNVX::eDescriptorSet, ObjectEntryUsageFlagsNVX flags_ = ObjectEntryUsageFlagsNVX(), PipelineLayout pipelineLayout_ = PipelineLayout(), DescriptorSet descriptorSet_ = DescriptorSet() )
+    ObjectTableDescriptorSetEntryNVX( ObjectEntryTypeNVX type_ = ObjectEntryTypeNVX::eDescriptorSet,
+                                      ObjectEntryUsageFlagsNVX flags_ = ObjectEntryUsageFlagsNVX(),
+                                      PipelineLayout pipelineLayout_ = PipelineLayout(),
+                                      DescriptorSet descriptorSet_ = DescriptorSet() )
       : type( type_ )
       , flags( flags_ )
       , pipelineLayout( pipelineLayout_ )
@@ -25282,7 +26587,9 @@ public:
     {
     }
 
-    explicit ObjectTableDescriptorSetEntryNVX( ObjectTableEntryNVX const& objectTableEntryNVX, PipelineLayout pipelineLayout_ = PipelineLayout(), DescriptorSet descriptorSet_ = DescriptorSet() )
+    explicit ObjectTableDescriptorSetEntryNVX( ObjectTableEntryNVX const& objectTableEntryNVX,
+                                               PipelineLayout pipelineLayout_ = PipelineLayout(),
+                                               DescriptorSet descriptorSet_ = DescriptorSet() )
       : type( objectTableEntryNVX.type )
       , flags( objectTableEntryNVX.flags )
       , pipelineLayout( pipelineLayout_ )
@@ -25350,14 +26657,17 @@ public:
 
   struct ObjectTableVertexBufferEntryNVX
   {
-    ObjectTableVertexBufferEntryNVX( ObjectEntryTypeNVX type_ = ObjectEntryTypeNVX::eDescriptorSet, ObjectEntryUsageFlagsNVX flags_ = ObjectEntryUsageFlagsNVX(), Buffer buffer_ = Buffer() )
+    ObjectTableVertexBufferEntryNVX( ObjectEntryTypeNVX type_ = ObjectEntryTypeNVX::eDescriptorSet,
+                                     ObjectEntryUsageFlagsNVX flags_ = ObjectEntryUsageFlagsNVX(),
+                                     Buffer buffer_ = Buffer() )
       : type( type_ )
       , flags( flags_ )
       , buffer( buffer_ )
     {
     }
 
-    explicit ObjectTableVertexBufferEntryNVX( ObjectTableEntryNVX const& objectTableEntryNVX, Buffer buffer_ = Buffer() )
+    explicit ObjectTableVertexBufferEntryNVX( ObjectTableEntryNVX const& objectTableEntryNVX,
+                                              Buffer buffer_ = Buffer() )
       : type( objectTableEntryNVX.type )
       , flags( objectTableEntryNVX.flags )
       , buffer( buffer_ )
@@ -25416,7 +26726,10 @@ public:
 
   struct ObjectTableIndexBufferEntryNVX
   {
-    ObjectTableIndexBufferEntryNVX( ObjectEntryTypeNVX type_ = ObjectEntryTypeNVX::eDescriptorSet, ObjectEntryUsageFlagsNVX flags_ = ObjectEntryUsageFlagsNVX(), Buffer buffer_ = Buffer(), IndexType indexType_ = IndexType::eUint16 )
+    ObjectTableIndexBufferEntryNVX( ObjectEntryTypeNVX type_ = ObjectEntryTypeNVX::eDescriptorSet,
+                                    ObjectEntryUsageFlagsNVX flags_ = ObjectEntryUsageFlagsNVX(),
+                                    Buffer buffer_ = Buffer(),
+                                    IndexType indexType_ = IndexType::eUint16 )
       : type( type_ )
       , flags( flags_ )
       , buffer( buffer_ )
@@ -25424,7 +26737,9 @@ public:
     {
     }
 
-    explicit ObjectTableIndexBufferEntryNVX( ObjectTableEntryNVX const& objectTableEntryNVX, Buffer buffer_ = Buffer(), IndexType indexType_ = IndexType::eUint16 )
+    explicit ObjectTableIndexBufferEntryNVX( ObjectTableEntryNVX const& objectTableEntryNVX,
+                                             Buffer buffer_ = Buffer(),
+                                             IndexType indexType_ = IndexType::eUint16 )
       : type( objectTableEntryNVX.type )
       , flags( objectTableEntryNVX.flags )
       , buffer( buffer_ )
@@ -25492,7 +26807,10 @@ public:
 
   struct ObjectTablePushConstantEntryNVX
   {
-    ObjectTablePushConstantEntryNVX( ObjectEntryTypeNVX type_ = ObjectEntryTypeNVX::eDescriptorSet, ObjectEntryUsageFlagsNVX flags_ = ObjectEntryUsageFlagsNVX(), PipelineLayout pipelineLayout_ = PipelineLayout(), ShaderStageFlags stageFlags_ = ShaderStageFlags() )
+    ObjectTablePushConstantEntryNVX( ObjectEntryTypeNVX type_ = ObjectEntryTypeNVX::eDescriptorSet,
+                                     ObjectEntryUsageFlagsNVX flags_ = ObjectEntryUsageFlagsNVX(),
+                                     PipelineLayout pipelineLayout_ = PipelineLayout(),
+                                     ShaderStageFlags stageFlags_ = ShaderStageFlags() )
       : type( type_ )
       , flags( flags_ )
       , pipelineLayout( pipelineLayout_ )
@@ -25500,7 +26818,9 @@ public:
     {
     }
 
-    explicit ObjectTablePushConstantEntryNVX( ObjectTableEntryNVX const& objectTableEntryNVX, PipelineLayout pipelineLayout_ = PipelineLayout(), ShaderStageFlags stageFlags_ = ShaderStageFlags() )
+    explicit ObjectTablePushConstantEntryNVX( ObjectTableEntryNVX const& objectTableEntryNVX,
+                                              PipelineLayout pipelineLayout_ = PipelineLayout(),
+                                              ShaderStageFlags stageFlags_ = ShaderStageFlags() )
       : type( objectTableEntryNVX.type )
       , flags( objectTableEntryNVX.flags )
       , pipelineLayout( pipelineLayout_ )
@@ -25594,7 +26914,9 @@ public:
 
   struct DescriptorSetLayoutCreateInfo
   {
-    DescriptorSetLayoutCreateInfo( DescriptorSetLayoutCreateFlags flags_ = DescriptorSetLayoutCreateFlags(), uint32_t bindingCount_ = 0, const DescriptorSetLayoutBinding* pBindings_ = nullptr )
+    DescriptorSetLayoutCreateInfo( DescriptorSetLayoutCreateFlags flags_ = DescriptorSetLayoutCreateFlags(),
+                                   uint32_t bindingCount_ = 0,
+                                   const DescriptorSetLayoutBinding* pBindings_ = nullptr )
       : flags( flags_ )
       , bindingCount( bindingCount_ )
       , pBindings( pBindings_ )
@@ -25768,7 +27090,9 @@ public:
 
   struct PhysicalDeviceExternalBufferInfo
   {
-    PhysicalDeviceExternalBufferInfo( BufferCreateFlags flags_ = BufferCreateFlags(), BufferUsageFlags usage_ = BufferUsageFlags(), ExternalMemoryHandleTypeFlagBits handleType_ = ExternalMemoryHandleTypeFlagBits::eOpaqueFd )
+    PhysicalDeviceExternalBufferInfo( BufferCreateFlags flags_ = BufferCreateFlags(),
+                                      BufferUsageFlags usage_ = BufferUsageFlags(),
+                                      ExternalMemoryHandleTypeFlagBits handleType_ = ExternalMemoryHandleTypeFlagBits::eOpaqueFd )
       : flags( flags_ )
       , usage( usage_ )
       , handleType( handleType_ )
@@ -26015,7 +27339,9 @@ public:
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   struct ImportMemoryWin32HandleInfoKHR
   {
-    ImportMemoryWin32HandleInfoKHR( ExternalMemoryHandleTypeFlagBits handleType_ = ExternalMemoryHandleTypeFlagBits::eOpaqueFd, HANDLE handle_ = 0, LPCWSTR name_ = 0 )
+    ImportMemoryWin32HandleInfoKHR( ExternalMemoryHandleTypeFlagBits handleType_ = ExternalMemoryHandleTypeFlagBits::eOpaqueFd,
+                                    HANDLE handle_ = 0,
+                                    LPCWSTR name_ = 0 )
       : handleType( handleType_ )
       , handle( handle_ )
       , name( name_ )
@@ -26090,7 +27416,8 @@ public:
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   struct MemoryGetWin32HandleInfoKHR
   {
-    MemoryGetWin32HandleInfoKHR( DeviceMemory memory_ = DeviceMemory(), ExternalMemoryHandleTypeFlagBits handleType_ = ExternalMemoryHandleTypeFlagBits::eOpaqueFd )
+    MemoryGetWin32HandleInfoKHR( DeviceMemory memory_ = DeviceMemory(),
+                                 ExternalMemoryHandleTypeFlagBits handleType_ = ExternalMemoryHandleTypeFlagBits::eOpaqueFd )
       : memory( memory_ )
       , handleType( handleType_ )
     {
@@ -26155,7 +27482,8 @@ public:
 
   struct ImportMemoryFdInfoKHR
   {
-    ImportMemoryFdInfoKHR( ExternalMemoryHandleTypeFlagBits handleType_ = ExternalMemoryHandleTypeFlagBits::eOpaqueFd, int fd_ = 0 )
+    ImportMemoryFdInfoKHR( ExternalMemoryHandleTypeFlagBits handleType_ = ExternalMemoryHandleTypeFlagBits::eOpaqueFd,
+                           int fd_ = 0 )
       : handleType( handleType_ )
       , fd( fd_ )
     {
@@ -26219,7 +27547,8 @@ public:
 
   struct MemoryGetFdInfoKHR
   {
-    MemoryGetFdInfoKHR( DeviceMemory memory_ = DeviceMemory(), ExternalMemoryHandleTypeFlagBits handleType_ = ExternalMemoryHandleTypeFlagBits::eOpaqueFd )
+    MemoryGetFdInfoKHR( DeviceMemory memory_ = DeviceMemory(),
+                        ExternalMemoryHandleTypeFlagBits handleType_ = ExternalMemoryHandleTypeFlagBits::eOpaqueFd )
       : memory( memory_ )
       , handleType( handleType_ )
     {
@@ -26283,7 +27612,8 @@ public:
 
   struct ImportMemoryHostPointerInfoEXT
   {
-    ImportMemoryHostPointerInfoEXT( ExternalMemoryHandleTypeFlagBits handleType_ = ExternalMemoryHandleTypeFlagBits::eOpaqueFd, void* pHostPointer_ = nullptr )
+    ImportMemoryHostPointerInfoEXT( ExternalMemoryHandleTypeFlagBits handleType_ = ExternalMemoryHandleTypeFlagBits::eOpaqueFd,
+                                    void* pHostPointer_ = nullptr )
       : handleType( handleType_ )
       , pHostPointer( pHostPointer_ )
     {
@@ -26617,7 +27947,8 @@ public:
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   struct SemaphoreGetWin32HandleInfoKHR
   {
-    SemaphoreGetWin32HandleInfoKHR( Semaphore semaphore_ = Semaphore(), ExternalSemaphoreHandleTypeFlagBits handleType_ = ExternalSemaphoreHandleTypeFlagBits::eOpaqueFd )
+    SemaphoreGetWin32HandleInfoKHR( Semaphore semaphore_ = Semaphore(),
+                                    ExternalSemaphoreHandleTypeFlagBits handleType_ = ExternalSemaphoreHandleTypeFlagBits::eOpaqueFd )
       : semaphore( semaphore_ )
       , handleType( handleType_ )
     {
@@ -26682,7 +28013,8 @@ public:
 
   struct SemaphoreGetFdInfoKHR
   {
-    SemaphoreGetFdInfoKHR( Semaphore semaphore_ = Semaphore(), ExternalSemaphoreHandleTypeFlagBits handleType_ = ExternalSemaphoreHandleTypeFlagBits::eOpaqueFd )
+    SemaphoreGetFdInfoKHR( Semaphore semaphore_ = Semaphore(),
+                           ExternalSemaphoreHandleTypeFlagBits handleType_ = ExternalSemaphoreHandleTypeFlagBits::eOpaqueFd )
       : semaphore( semaphore_ )
       , handleType( handleType_ )
     {
@@ -26839,7 +28171,11 @@ public:
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   struct ImportSemaphoreWin32HandleInfoKHR
   {
-    ImportSemaphoreWin32HandleInfoKHR( Semaphore semaphore_ = Semaphore(), SemaphoreImportFlags flags_ = SemaphoreImportFlags(), ExternalSemaphoreHandleTypeFlagBits handleType_ = ExternalSemaphoreHandleTypeFlagBits::eOpaqueFd, HANDLE handle_ = 0, LPCWSTR name_ = 0 )
+    ImportSemaphoreWin32HandleInfoKHR( Semaphore semaphore_ = Semaphore(),
+                                       SemaphoreImportFlags flags_ = SemaphoreImportFlags(),
+                                       ExternalSemaphoreHandleTypeFlagBits handleType_ = ExternalSemaphoreHandleTypeFlagBits::eOpaqueFd,
+                                       HANDLE handle_ = 0,
+                                       LPCWSTR name_ = 0 )
       : semaphore( semaphore_ )
       , flags( flags_ )
       , handleType( handleType_ )
@@ -26931,7 +28267,10 @@ public:
 
   struct ImportSemaphoreFdInfoKHR
   {
-    ImportSemaphoreFdInfoKHR( Semaphore semaphore_ = Semaphore(), SemaphoreImportFlags flags_ = SemaphoreImportFlags(), ExternalSemaphoreHandleTypeFlagBits handleType_ = ExternalSemaphoreHandleTypeFlagBits::eOpaqueFd, int fd_ = 0 )
+    ImportSemaphoreFdInfoKHR( Semaphore semaphore_ = Semaphore(),
+                              SemaphoreImportFlags flags_ = SemaphoreImportFlags(),
+                              ExternalSemaphoreHandleTypeFlagBits handleType_ = ExternalSemaphoreHandleTypeFlagBits::eOpaqueFd,
+                              int fd_ = 0 )
       : semaphore( semaphore_ )
       , flags( flags_ )
       , handleType( handleType_ )
@@ -27162,7 +28501,8 @@ public:
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   struct FenceGetWin32HandleInfoKHR
   {
-    FenceGetWin32HandleInfoKHR( Fence fence_ = Fence(), ExternalFenceHandleTypeFlagBits handleType_ = ExternalFenceHandleTypeFlagBits::eOpaqueFd )
+    FenceGetWin32HandleInfoKHR( Fence fence_ = Fence(),
+                                ExternalFenceHandleTypeFlagBits handleType_ = ExternalFenceHandleTypeFlagBits::eOpaqueFd )
       : fence( fence_ )
       , handleType( handleType_ )
     {
@@ -27227,7 +28567,8 @@ public:
 
   struct FenceGetFdInfoKHR
   {
-    FenceGetFdInfoKHR( Fence fence_ = Fence(), ExternalFenceHandleTypeFlagBits handleType_ = ExternalFenceHandleTypeFlagBits::eOpaqueFd )
+    FenceGetFdInfoKHR( Fence fence_ = Fence(),
+                       ExternalFenceHandleTypeFlagBits handleType_ = ExternalFenceHandleTypeFlagBits::eOpaqueFd )
       : fence( fence_ )
       , handleType( handleType_ )
     {
@@ -27384,7 +28725,11 @@ public:
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   struct ImportFenceWin32HandleInfoKHR
   {
-    ImportFenceWin32HandleInfoKHR( Fence fence_ = Fence(), FenceImportFlags flags_ = FenceImportFlags(), ExternalFenceHandleTypeFlagBits handleType_ = ExternalFenceHandleTypeFlagBits::eOpaqueFd, HANDLE handle_ = 0, LPCWSTR name_ = 0 )
+    ImportFenceWin32HandleInfoKHR( Fence fence_ = Fence(),
+                                   FenceImportFlags flags_ = FenceImportFlags(),
+                                   ExternalFenceHandleTypeFlagBits handleType_ = ExternalFenceHandleTypeFlagBits::eOpaqueFd,
+                                   HANDLE handle_ = 0,
+                                   LPCWSTR name_ = 0 )
       : fence( fence_ )
       , flags( flags_ )
       , handleType( handleType_ )
@@ -27476,7 +28821,10 @@ public:
 
   struct ImportFenceFdInfoKHR
   {
-    ImportFenceFdInfoKHR( Fence fence_ = Fence(), FenceImportFlags flags_ = FenceImportFlags(), ExternalFenceHandleTypeFlagBits handleType_ = ExternalFenceHandleTypeFlagBits::eOpaqueFd, int fd_ = 0 )
+    ImportFenceFdInfoKHR( Fence fence_ = Fence(),
+                          FenceImportFlags flags_ = FenceImportFlags(),
+                          ExternalFenceHandleTypeFlagBits handleType_ = ExternalFenceHandleTypeFlagBits::eOpaqueFd,
+                          int fd_ = 0 )
       : fence( fence_ )
       , flags( flags_ )
       , handleType( handleType_ )
@@ -27930,7 +29278,8 @@ public:
 
   struct MemoryAllocateFlagsInfo
   {
-    MemoryAllocateFlagsInfo( MemoryAllocateFlags flags_ = MemoryAllocateFlags(), uint32_t deviceMask_ = 0 )
+    MemoryAllocateFlagsInfo( MemoryAllocateFlags flags_ = MemoryAllocateFlags(),
+                             uint32_t deviceMask_ = 0 )
       : flags( flags_ )
       , deviceMask( deviceMask_ )
     {
@@ -28054,7 +29403,9 @@ public:
 
   struct DeviceGroupPresentInfoKHR
   {
-    DeviceGroupPresentInfoKHR( uint32_t swapchainCount_ = 0, const uint32_t* pDeviceMasks_ = nullptr, DeviceGroupPresentModeFlagBitsKHR mode_ = DeviceGroupPresentModeFlagBitsKHR::eLocal )
+    DeviceGroupPresentInfoKHR( uint32_t swapchainCount_ = 0,
+                               const uint32_t* pDeviceMasks_ = nullptr,
+                               DeviceGroupPresentModeFlagBitsKHR mode_ = DeviceGroupPresentModeFlagBitsKHR::eLocal )
       : swapchainCount( swapchainCount_ )
       , pDeviceMasks( pDeviceMasks_ )
       , mode( mode_ )
@@ -28208,7 +29559,22 @@ public:
 
   struct SwapchainCreateInfoKHR
   {
-    SwapchainCreateInfoKHR( SwapchainCreateFlagsKHR flags_ = SwapchainCreateFlagsKHR(), SurfaceKHR surface_ = SurfaceKHR(), uint32_t minImageCount_ = 0, Format imageFormat_ = Format::eUndefined, ColorSpaceKHR imageColorSpace_ = ColorSpaceKHR::eSrgbNonlinear, Extent2D imageExtent_ = Extent2D(), uint32_t imageArrayLayers_ = 0, ImageUsageFlags imageUsage_ = ImageUsageFlags(), SharingMode imageSharingMode_ = SharingMode::eExclusive, uint32_t queueFamilyIndexCount_ = 0, const uint32_t* pQueueFamilyIndices_ = nullptr, SurfaceTransformFlagBitsKHR preTransform_ = SurfaceTransformFlagBitsKHR::eIdentity, CompositeAlphaFlagBitsKHR compositeAlpha_ = CompositeAlphaFlagBitsKHR::eOpaque, PresentModeKHR presentMode_ = PresentModeKHR::eImmediate, Bool32 clipped_ = 0, SwapchainKHR oldSwapchain_ = SwapchainKHR() )
+    SwapchainCreateInfoKHR( SwapchainCreateFlagsKHR flags_ = SwapchainCreateFlagsKHR(),
+                            SurfaceKHR surface_ = SurfaceKHR(),
+                            uint32_t minImageCount_ = 0,
+                            Format imageFormat_ = Format::eUndefined,
+                            ColorSpaceKHR imageColorSpace_ = ColorSpaceKHR::eSrgbNonlinear,
+                            Extent2D imageExtent_ = Extent2D(),
+                            uint32_t imageArrayLayers_ = 0,
+                            ImageUsageFlags imageUsage_ = ImageUsageFlags(),
+                            SharingMode imageSharingMode_ = SharingMode::eExclusive,
+                            uint32_t queueFamilyIndexCount_ = 0,
+                            const uint32_t* pQueueFamilyIndices_ = nullptr,
+                            SurfaceTransformFlagBitsKHR preTransform_ = SurfaceTransformFlagBitsKHR::eIdentity,
+                            CompositeAlphaFlagBitsKHR compositeAlpha_ = CompositeAlphaFlagBitsKHR::eOpaque,
+                            PresentModeKHR presentMode_ = PresentModeKHR::eImmediate,
+                            Bool32 clipped_ = 0,
+                            SwapchainKHR oldSwapchain_ = SwapchainKHR() )
       : flags( flags_ )
       , surface( surface_ )
       , minImageCount( minImageCount_ )
@@ -28410,7 +29776,10 @@ public:
 
   struct ViewportSwizzleNV
   {
-    ViewportSwizzleNV( ViewportCoordinateSwizzleNV x_ = ViewportCoordinateSwizzleNV::ePositiveX, ViewportCoordinateSwizzleNV y_ = ViewportCoordinateSwizzleNV::ePositiveX, ViewportCoordinateSwizzleNV z_ = ViewportCoordinateSwizzleNV::ePositiveX, ViewportCoordinateSwizzleNV w_ = ViewportCoordinateSwizzleNV::ePositiveX )
+    ViewportSwizzleNV( ViewportCoordinateSwizzleNV x_ = ViewportCoordinateSwizzleNV::ePositiveX,
+                       ViewportCoordinateSwizzleNV y_ = ViewportCoordinateSwizzleNV::ePositiveX,
+                       ViewportCoordinateSwizzleNV z_ = ViewportCoordinateSwizzleNV::ePositiveX,
+                       ViewportCoordinateSwizzleNV w_ = ViewportCoordinateSwizzleNV::ePositiveX )
       : x( x_ )
       , y( y_ )
       , z( z_ )
@@ -28479,7 +29848,9 @@ public:
 
   struct PipelineViewportSwizzleStateCreateInfoNV
   {
-    PipelineViewportSwizzleStateCreateInfoNV( PipelineViewportSwizzleStateCreateFlagsNV flags_ = PipelineViewportSwizzleStateCreateFlagsNV(), uint32_t viewportCount_ = 0, const ViewportSwizzleNV* pViewportSwizzles_ = nullptr )
+    PipelineViewportSwizzleStateCreateInfoNV( PipelineViewportSwizzleStateCreateFlagsNV flags_ = PipelineViewportSwizzleStateCreateFlagsNV(),
+                                              uint32_t viewportCount_ = 0,
+                                              const ViewportSwizzleNV* pViewportSwizzles_ = nullptr )
       : flags( flags_ )
       , viewportCount( viewportCount_ )
       , pViewportSwizzles( pViewportSwizzles_ )
@@ -28558,7 +29929,10 @@ public:
 
   struct PipelineDiscardRectangleStateCreateInfoEXT
   {
-    PipelineDiscardRectangleStateCreateInfoEXT( PipelineDiscardRectangleStateCreateFlagsEXT flags_ = PipelineDiscardRectangleStateCreateFlagsEXT(), DiscardRectangleModeEXT discardRectangleMode_ = DiscardRectangleModeEXT::eInclusive, uint32_t discardRectangleCount_ = 0, const Rect2D* pDiscardRectangles_ = nullptr )
+    PipelineDiscardRectangleStateCreateInfoEXT( PipelineDiscardRectangleStateCreateFlagsEXT flags_ = PipelineDiscardRectangleStateCreateFlagsEXT(),
+                                                DiscardRectangleModeEXT discardRectangleMode_ = DiscardRectangleModeEXT::eInclusive,
+                                                uint32_t discardRectangleCount_ = 0,
+                                                const Rect2D* pDiscardRectangles_ = nullptr )
       : flags( flags_ )
       , discardRectangleMode( discardRectangleMode_ )
       , discardRectangleCount( discardRectangleCount_ )
@@ -28666,7 +30040,16 @@ public:
 
   struct SubpassDescription
   {
-    SubpassDescription( SubpassDescriptionFlags flags_ = SubpassDescriptionFlags(), PipelineBindPoint pipelineBindPoint_ = PipelineBindPoint::eGraphics, uint32_t inputAttachmentCount_ = 0, const AttachmentReference* pInputAttachments_ = nullptr, uint32_t colorAttachmentCount_ = 0, const AttachmentReference* pColorAttachments_ = nullptr, const AttachmentReference* pResolveAttachments_ = nullptr, const AttachmentReference* pDepthStencilAttachment_ = nullptr, uint32_t preserveAttachmentCount_ = 0, const uint32_t* pPreserveAttachments_ = nullptr )
+    SubpassDescription( SubpassDescriptionFlags flags_ = SubpassDescriptionFlags(),
+                        PipelineBindPoint pipelineBindPoint_ = PipelineBindPoint::eGraphics,
+                        uint32_t inputAttachmentCount_ = 0,
+                        const AttachmentReference* pInputAttachments_ = nullptr,
+                        uint32_t colorAttachmentCount_ = 0,
+                        const AttachmentReference* pColorAttachments_ = nullptr,
+                        const AttachmentReference* pResolveAttachments_ = nullptr,
+                        const AttachmentReference* pDepthStencilAttachment_ = nullptr,
+                        uint32_t preserveAttachmentCount_ = 0,
+                        const uint32_t* pPreserveAttachments_ = nullptr )
       : flags( flags_ )
       , pipelineBindPoint( pipelineBindPoint_ )
       , inputAttachmentCount( inputAttachmentCount_ )
@@ -28789,7 +30172,13 @@ public:
 
   struct RenderPassCreateInfo
   {
-    RenderPassCreateInfo( RenderPassCreateFlags flags_ = RenderPassCreateFlags(), uint32_t attachmentCount_ = 0, const AttachmentDescription* pAttachments_ = nullptr, uint32_t subpassCount_ = 0, const SubpassDescription* pSubpasses_ = nullptr, uint32_t dependencyCount_ = 0, const SubpassDependency* pDependencies_ = nullptr )
+    RenderPassCreateInfo( RenderPassCreateFlags flags_ = RenderPassCreateFlags(),
+                          uint32_t attachmentCount_ = 0,
+                          const AttachmentDescription* pAttachments_ = nullptr,
+                          uint32_t subpassCount_ = 0,
+                          const SubpassDescription* pSubpasses_ = nullptr,
+                          uint32_t dependencyCount_ = 0,
+                          const SubpassDependency* pDependencies_ = nullptr )
       : flags( flags_ )
       , attachmentCount( attachmentCount_ )
       , pAttachments( pAttachments_ )
@@ -28895,6 +30284,296 @@ public:
     const SubpassDependency* pDependencies;
   };
   static_assert( sizeof( RenderPassCreateInfo ) == sizeof( VkRenderPassCreateInfo ), "struct and wrapper have different size!" );
+
+  struct SubpassDescription2KHR
+  {
+    SubpassDescription2KHR( SubpassDescriptionFlags flags_ = SubpassDescriptionFlags(),
+                            PipelineBindPoint pipelineBindPoint_ = PipelineBindPoint::eGraphics,
+                            uint32_t viewMask_ = 0,
+                            uint32_t inputAttachmentCount_ = 0,
+                            const AttachmentReference2KHR* pInputAttachments_ = nullptr,
+                            uint32_t colorAttachmentCount_ = 0,
+                            const AttachmentReference2KHR* pColorAttachments_ = nullptr,
+                            const AttachmentReference2KHR* pResolveAttachments_ = nullptr,
+                            const AttachmentReference2KHR* pDepthStencilAttachment_ = nullptr,
+                            uint32_t preserveAttachmentCount_ = 0,
+                            const uint32_t* pPreserveAttachments_ = nullptr )
+      : flags( flags_ )
+      , pipelineBindPoint( pipelineBindPoint_ )
+      , viewMask( viewMask_ )
+      , inputAttachmentCount( inputAttachmentCount_ )
+      , pInputAttachments( pInputAttachments_ )
+      , colorAttachmentCount( colorAttachmentCount_ )
+      , pColorAttachments( pColorAttachments_ )
+      , pResolveAttachments( pResolveAttachments_ )
+      , pDepthStencilAttachment( pDepthStencilAttachment_ )
+      , preserveAttachmentCount( preserveAttachmentCount_ )
+      , pPreserveAttachments( pPreserveAttachments_ )
+    {
+    }
+
+    SubpassDescription2KHR( VkSubpassDescription2KHR const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( SubpassDescription2KHR ) );
+    }
+
+    SubpassDescription2KHR& operator=( VkSubpassDescription2KHR const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( SubpassDescription2KHR ) );
+      return *this;
+    }
+    SubpassDescription2KHR& setPNext( const void* pNext_ )
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    SubpassDescription2KHR& setFlags( SubpassDescriptionFlags flags_ )
+    {
+      flags = flags_;
+      return *this;
+    }
+
+    SubpassDescription2KHR& setPipelineBindPoint( PipelineBindPoint pipelineBindPoint_ )
+    {
+      pipelineBindPoint = pipelineBindPoint_;
+      return *this;
+    }
+
+    SubpassDescription2KHR& setViewMask( uint32_t viewMask_ )
+    {
+      viewMask = viewMask_;
+      return *this;
+    }
+
+    SubpassDescription2KHR& setInputAttachmentCount( uint32_t inputAttachmentCount_ )
+    {
+      inputAttachmentCount = inputAttachmentCount_;
+      return *this;
+    }
+
+    SubpassDescription2KHR& setPInputAttachments( const AttachmentReference2KHR* pInputAttachments_ )
+    {
+      pInputAttachments = pInputAttachments_;
+      return *this;
+    }
+
+    SubpassDescription2KHR& setColorAttachmentCount( uint32_t colorAttachmentCount_ )
+    {
+      colorAttachmentCount = colorAttachmentCount_;
+      return *this;
+    }
+
+    SubpassDescription2KHR& setPColorAttachments( const AttachmentReference2KHR* pColorAttachments_ )
+    {
+      pColorAttachments = pColorAttachments_;
+      return *this;
+    }
+
+    SubpassDescription2KHR& setPResolveAttachments( const AttachmentReference2KHR* pResolveAttachments_ )
+    {
+      pResolveAttachments = pResolveAttachments_;
+      return *this;
+    }
+
+    SubpassDescription2KHR& setPDepthStencilAttachment( const AttachmentReference2KHR* pDepthStencilAttachment_ )
+    {
+      pDepthStencilAttachment = pDepthStencilAttachment_;
+      return *this;
+    }
+
+    SubpassDescription2KHR& setPreserveAttachmentCount( uint32_t preserveAttachmentCount_ )
+    {
+      preserveAttachmentCount = preserveAttachmentCount_;
+      return *this;
+    }
+
+    SubpassDescription2KHR& setPPreserveAttachments( const uint32_t* pPreserveAttachments_ )
+    {
+      pPreserveAttachments = pPreserveAttachments_;
+      return *this;
+    }
+
+    operator const VkSubpassDescription2KHR&() const
+    {
+      return *reinterpret_cast<const VkSubpassDescription2KHR*>(this);
+    }
+
+    bool operator==( SubpassDescription2KHR const& rhs ) const
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( flags == rhs.flags )
+          && ( pipelineBindPoint == rhs.pipelineBindPoint )
+          && ( viewMask == rhs.viewMask )
+          && ( inputAttachmentCount == rhs.inputAttachmentCount )
+          && ( pInputAttachments == rhs.pInputAttachments )
+          && ( colorAttachmentCount == rhs.colorAttachmentCount )
+          && ( pColorAttachments == rhs.pColorAttachments )
+          && ( pResolveAttachments == rhs.pResolveAttachments )
+          && ( pDepthStencilAttachment == rhs.pDepthStencilAttachment )
+          && ( preserveAttachmentCount == rhs.preserveAttachmentCount )
+          && ( pPreserveAttachments == rhs.pPreserveAttachments );
+    }
+
+    bool operator!=( SubpassDescription2KHR const& rhs ) const
+    {
+      return !operator==( rhs );
+    }
+
+  private:
+    StructureType sType = StructureType::eSubpassDescription2KHR;
+
+  public:
+    const void* pNext = nullptr;
+    SubpassDescriptionFlags flags;
+    PipelineBindPoint pipelineBindPoint;
+    uint32_t viewMask;
+    uint32_t inputAttachmentCount;
+    const AttachmentReference2KHR* pInputAttachments;
+    uint32_t colorAttachmentCount;
+    const AttachmentReference2KHR* pColorAttachments;
+    const AttachmentReference2KHR* pResolveAttachments;
+    const AttachmentReference2KHR* pDepthStencilAttachment;
+    uint32_t preserveAttachmentCount;
+    const uint32_t* pPreserveAttachments;
+  };
+  static_assert( sizeof( SubpassDescription2KHR ) == sizeof( VkSubpassDescription2KHR ), "struct and wrapper have different size!" );
+
+  struct RenderPassCreateInfo2KHR
+  {
+    RenderPassCreateInfo2KHR( RenderPassCreateFlags flags_ = RenderPassCreateFlags(),
+                              uint32_t attachmentCount_ = 0,
+                              const AttachmentDescription2KHR* pAttachments_ = nullptr,
+                              uint32_t subpassCount_ = 0,
+                              const SubpassDescription2KHR* pSubpasses_ = nullptr,
+                              uint32_t dependencyCount_ = 0,
+                              const SubpassDependency2KHR* pDependencies_ = nullptr,
+                              uint32_t correlatedViewMaskCount_ = 0,
+                              const uint32_t* pCorrelatedViewMasks_ = nullptr )
+      : flags( flags_ )
+      , attachmentCount( attachmentCount_ )
+      , pAttachments( pAttachments_ )
+      , subpassCount( subpassCount_ )
+      , pSubpasses( pSubpasses_ )
+      , dependencyCount( dependencyCount_ )
+      , pDependencies( pDependencies_ )
+      , correlatedViewMaskCount( correlatedViewMaskCount_ )
+      , pCorrelatedViewMasks( pCorrelatedViewMasks_ )
+    {
+    }
+
+    RenderPassCreateInfo2KHR( VkRenderPassCreateInfo2KHR const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( RenderPassCreateInfo2KHR ) );
+    }
+
+    RenderPassCreateInfo2KHR& operator=( VkRenderPassCreateInfo2KHR const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( RenderPassCreateInfo2KHR ) );
+      return *this;
+    }
+    RenderPassCreateInfo2KHR& setPNext( const void* pNext_ )
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    RenderPassCreateInfo2KHR& setFlags( RenderPassCreateFlags flags_ )
+    {
+      flags = flags_;
+      return *this;
+    }
+
+    RenderPassCreateInfo2KHR& setAttachmentCount( uint32_t attachmentCount_ )
+    {
+      attachmentCount = attachmentCount_;
+      return *this;
+    }
+
+    RenderPassCreateInfo2KHR& setPAttachments( const AttachmentDescription2KHR* pAttachments_ )
+    {
+      pAttachments = pAttachments_;
+      return *this;
+    }
+
+    RenderPassCreateInfo2KHR& setSubpassCount( uint32_t subpassCount_ )
+    {
+      subpassCount = subpassCount_;
+      return *this;
+    }
+
+    RenderPassCreateInfo2KHR& setPSubpasses( const SubpassDescription2KHR* pSubpasses_ )
+    {
+      pSubpasses = pSubpasses_;
+      return *this;
+    }
+
+    RenderPassCreateInfo2KHR& setDependencyCount( uint32_t dependencyCount_ )
+    {
+      dependencyCount = dependencyCount_;
+      return *this;
+    }
+
+    RenderPassCreateInfo2KHR& setPDependencies( const SubpassDependency2KHR* pDependencies_ )
+    {
+      pDependencies = pDependencies_;
+      return *this;
+    }
+
+    RenderPassCreateInfo2KHR& setCorrelatedViewMaskCount( uint32_t correlatedViewMaskCount_ )
+    {
+      correlatedViewMaskCount = correlatedViewMaskCount_;
+      return *this;
+    }
+
+    RenderPassCreateInfo2KHR& setPCorrelatedViewMasks( const uint32_t* pCorrelatedViewMasks_ )
+    {
+      pCorrelatedViewMasks = pCorrelatedViewMasks_;
+      return *this;
+    }
+
+    operator const VkRenderPassCreateInfo2KHR&() const
+    {
+      return *reinterpret_cast<const VkRenderPassCreateInfo2KHR*>(this);
+    }
+
+    bool operator==( RenderPassCreateInfo2KHR const& rhs ) const
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( flags == rhs.flags )
+          && ( attachmentCount == rhs.attachmentCount )
+          && ( pAttachments == rhs.pAttachments )
+          && ( subpassCount == rhs.subpassCount )
+          && ( pSubpasses == rhs.pSubpasses )
+          && ( dependencyCount == rhs.dependencyCount )
+          && ( pDependencies == rhs.pDependencies )
+          && ( correlatedViewMaskCount == rhs.correlatedViewMaskCount )
+          && ( pCorrelatedViewMasks == rhs.pCorrelatedViewMasks );
+    }
+
+    bool operator!=( RenderPassCreateInfo2KHR const& rhs ) const
+    {
+      return !operator==( rhs );
+    }
+
+  private:
+    StructureType sType = StructureType::eRenderPassCreateInfo2KHR;
+
+  public:
+    const void* pNext = nullptr;
+    RenderPassCreateFlags flags;
+    uint32_t attachmentCount;
+    const AttachmentDescription2KHR* pAttachments;
+    uint32_t subpassCount;
+    const SubpassDescription2KHR* pSubpasses;
+    uint32_t dependencyCount;
+    const SubpassDependency2KHR* pDependencies;
+    uint32_t correlatedViewMaskCount;
+    const uint32_t* pCorrelatedViewMasks;
+  };
+  static_assert( sizeof( RenderPassCreateInfo2KHR ) == sizeof( VkRenderPassCreateInfo2KHR ), "struct and wrapper have different size!" );
 
   enum class PointClippingBehavior
   {
@@ -29093,7 +30772,14 @@ public:
 
   struct SamplerYcbcrConversionCreateInfo
   {
-    SamplerYcbcrConversionCreateInfo( Format format_ = Format::eUndefined, SamplerYcbcrModelConversion ycbcrModel_ = SamplerYcbcrModelConversion::eRgbIdentity, SamplerYcbcrRange ycbcrRange_ = SamplerYcbcrRange::eItuFull, ComponentMapping components_ = ComponentMapping(), ChromaLocation xChromaOffset_ = ChromaLocation::eCositedEven, ChromaLocation yChromaOffset_ = ChromaLocation::eCositedEven, Filter chromaFilter_ = Filter::eNearest, Bool32 forceExplicitReconstruction_ = 0 )
+    SamplerYcbcrConversionCreateInfo( Format format_ = Format::eUndefined,
+                                      SamplerYcbcrModelConversion ycbcrModel_ = SamplerYcbcrModelConversion::eRgbIdentity,
+                                      SamplerYcbcrRange ycbcrRange_ = SamplerYcbcrRange::eItuFull,
+                                      ComponentMapping components_ = ComponentMapping(),
+                                      ChromaLocation xChromaOffset_ = ChromaLocation::eCositedEven,
+                                      ChromaLocation yChromaOffset_ = ChromaLocation::eCositedEven,
+                                      Filter chromaFilter_ = Filter::eNearest,
+                                      Bool32 forceExplicitReconstruction_ = 0 )
       : format( format_ )
       , ycbcrModel( ycbcrModel_ )
       , ycbcrRange( ycbcrRange_ )
@@ -29264,7 +30950,9 @@ public:
 
   struct PipelineColorBlendAdvancedStateCreateInfoEXT
   {
-    PipelineColorBlendAdvancedStateCreateInfoEXT( Bool32 srcPremultiplied_ = 0, Bool32 dstPremultiplied_ = 0, BlendOverlapEXT blendOverlap_ = BlendOverlapEXT::eUncorrelated )
+    PipelineColorBlendAdvancedStateCreateInfoEXT( Bool32 srcPremultiplied_ = 0,
+                                                  Bool32 dstPremultiplied_ = 0,
+                                                  BlendOverlapEXT blendOverlap_ = BlendOverlapEXT::eUncorrelated )
       : srcPremultiplied( srcPremultiplied_ )
       , dstPremultiplied( dstPremultiplied_ )
       , blendOverlap( blendOverlap_ )
@@ -29345,7 +31033,11 @@ public:
 
   struct PipelineCoverageModulationStateCreateInfoNV
   {
-    PipelineCoverageModulationStateCreateInfoNV( PipelineCoverageModulationStateCreateFlagsNV flags_ = PipelineCoverageModulationStateCreateFlagsNV(), CoverageModulationModeNV coverageModulationMode_ = CoverageModulationModeNV::eNone, Bool32 coverageModulationTableEnable_ = 0, uint32_t coverageModulationTableCount_ = 0, const float* pCoverageModulationTable_ = nullptr )
+    PipelineCoverageModulationStateCreateInfoNV( PipelineCoverageModulationStateCreateFlagsNV flags_ = PipelineCoverageModulationStateCreateFlagsNV(),
+                                                 CoverageModulationModeNV coverageModulationMode_ = CoverageModulationModeNV::eNone,
+                                                 Bool32 coverageModulationTableEnable_ = 0,
+                                                 uint32_t coverageModulationTableCount_ = 0,
+                                                 const float* pCoverageModulationTable_ = nullptr )
       : flags( flags_ )
       , coverageModulationMode( coverageModulationMode_ )
       , coverageModulationTableEnable( coverageModulationTableEnable_ )
@@ -29566,7 +31258,11 @@ public:
 
   struct DebugUtilsMessengerCreateInfoEXT
   {
-    DebugUtilsMessengerCreateInfoEXT( DebugUtilsMessengerCreateFlagsEXT flags_ = DebugUtilsMessengerCreateFlagsEXT(), DebugUtilsMessageSeverityFlagsEXT messageSeverity_ = DebugUtilsMessageSeverityFlagsEXT(), DebugUtilsMessageTypeFlagsEXT messageType_ = DebugUtilsMessageTypeFlagsEXT(), PFN_vkDebugUtilsMessengerCallbackEXT pfnUserCallback_ = nullptr, void* pUserData_ = nullptr )
+    DebugUtilsMessengerCreateInfoEXT( DebugUtilsMessengerCreateFlagsEXT flags_ = DebugUtilsMessengerCreateFlagsEXT(),
+                                      DebugUtilsMessageSeverityFlagsEXT messageSeverity_ = DebugUtilsMessageSeverityFlagsEXT(),
+                                      DebugUtilsMessageTypeFlagsEXT messageType_ = DebugUtilsMessageTypeFlagsEXT(),
+                                      PFN_vkDebugUtilsMessengerCallbackEXT pfnUserCallback_ = nullptr,
+                                      void* pUserData_ = nullptr )
       : flags( flags_ )
       , messageSeverity( messageSeverity_ )
       , messageType( messageType_ )
@@ -29664,7 +31360,9 @@ public:
 
   struct PipelineRasterizationConservativeStateCreateInfoEXT
   {
-    PipelineRasterizationConservativeStateCreateInfoEXT( PipelineRasterizationConservativeStateCreateFlagsEXT flags_ = PipelineRasterizationConservativeStateCreateFlagsEXT(), ConservativeRasterizationModeEXT conservativeRasterizationMode_ = ConservativeRasterizationModeEXT::eDisabled, float extraPrimitiveOverestimationSize_ = 0 )
+    PipelineRasterizationConservativeStateCreateInfoEXT( PipelineRasterizationConservativeStateCreateFlagsEXT flags_ = PipelineRasterizationConservativeStateCreateFlagsEXT(),
+                                                         ConservativeRasterizationModeEXT conservativeRasterizationMode_ = ConservativeRasterizationModeEXT::eDisabled,
+                                                         float extraPrimitiveOverestimationSize_ = 0 )
       : flags( flags_ )
       , conservativeRasterizationMode( conservativeRasterizationMode_ )
       , extraPrimitiveOverestimationSize( extraPrimitiveOverestimationSize_ )
@@ -29765,7 +31463,8 @@ public:
 
   struct DescriptorSetLayoutBindingFlagsCreateInfoEXT
   {
-    DescriptorSetLayoutBindingFlagsCreateInfoEXT( uint32_t bindingCount_ = 0, const DescriptorBindingFlagsEXT* pBindingFlags_ = nullptr )
+    DescriptorSetLayoutBindingFlagsCreateInfoEXT( uint32_t bindingCount_ = 0,
+                                                  const DescriptorBindingFlagsEXT* pBindingFlags_ = nullptr )
       : bindingCount( bindingCount_ )
       , pBindingFlags( pBindingFlags_ )
     {
@@ -29826,6 +31525,113 @@ public:
     const DescriptorBindingFlagsEXT* pBindingFlags;
   };
   static_assert( sizeof( DescriptorSetLayoutBindingFlagsCreateInfoEXT ) == sizeof( VkDescriptorSetLayoutBindingFlagsCreateInfoEXT ), "struct and wrapper have different size!" );
+
+  enum class VendorId
+  {
+    eViv = VK_VENDOR_ID_VIV,
+    eVsi = VK_VENDOR_ID_VSI,
+    eKazan = VK_VENDOR_ID_KAZAN
+  };
+
+  enum class ConditionalRenderingFlagBitsEXT
+  {
+    eInverted = VK_CONDITIONAL_RENDERING_INVERTED_BIT_EXT
+  };
+
+  using ConditionalRenderingFlagsEXT = Flags<ConditionalRenderingFlagBitsEXT, VkConditionalRenderingFlagsEXT>;
+
+  VULKAN_HPP_INLINE ConditionalRenderingFlagsEXT operator|( ConditionalRenderingFlagBitsEXT bit0, ConditionalRenderingFlagBitsEXT bit1 )
+  {
+    return ConditionalRenderingFlagsEXT( bit0 ) | bit1;
+  }
+
+  VULKAN_HPP_INLINE ConditionalRenderingFlagsEXT operator~( ConditionalRenderingFlagBitsEXT bits )
+  {
+    return ~( ConditionalRenderingFlagsEXT( bits ) );
+  }
+
+  template <> struct FlagTraits<ConditionalRenderingFlagBitsEXT>
+  {
+    enum
+    {
+      allFlags = VkFlags(ConditionalRenderingFlagBitsEXT::eInverted)
+    };
+  };
+
+  struct ConditionalRenderingBeginInfoEXT
+  {
+    ConditionalRenderingBeginInfoEXT( Buffer buffer_ = Buffer(),
+                                      DeviceSize offset_ = 0,
+                                      ConditionalRenderingFlagsEXT flags_ = ConditionalRenderingFlagsEXT() )
+      : buffer( buffer_ )
+      , offset( offset_ )
+      , flags( flags_ )
+    {
+    }
+
+    ConditionalRenderingBeginInfoEXT( VkConditionalRenderingBeginInfoEXT const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( ConditionalRenderingBeginInfoEXT ) );
+    }
+
+    ConditionalRenderingBeginInfoEXT& operator=( VkConditionalRenderingBeginInfoEXT const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( ConditionalRenderingBeginInfoEXT ) );
+      return *this;
+    }
+    ConditionalRenderingBeginInfoEXT& setPNext( const void* pNext_ )
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    ConditionalRenderingBeginInfoEXT& setBuffer( Buffer buffer_ )
+    {
+      buffer = buffer_;
+      return *this;
+    }
+
+    ConditionalRenderingBeginInfoEXT& setOffset( DeviceSize offset_ )
+    {
+      offset = offset_;
+      return *this;
+    }
+
+    ConditionalRenderingBeginInfoEXT& setFlags( ConditionalRenderingFlagsEXT flags_ )
+    {
+      flags = flags_;
+      return *this;
+    }
+
+    operator const VkConditionalRenderingBeginInfoEXT&() const
+    {
+      return *reinterpret_cast<const VkConditionalRenderingBeginInfoEXT*>(this);
+    }
+
+    bool operator==( ConditionalRenderingBeginInfoEXT const& rhs ) const
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( buffer == rhs.buffer )
+          && ( offset == rhs.offset )
+          && ( flags == rhs.flags );
+    }
+
+    bool operator!=( ConditionalRenderingBeginInfoEXT const& rhs ) const
+    {
+      return !operator==( rhs );
+    }
+
+  private:
+    StructureType sType = StructureType::eConditionalRenderingBeginInfoEXT;
+
+  public:
+    const void* pNext = nullptr;
+    Buffer buffer;
+    DeviceSize offset;
+    ConditionalRenderingFlagsEXT flags;
+  };
+  static_assert( sizeof( ConditionalRenderingBeginInfoEXT ) == sizeof( VkConditionalRenderingBeginInfoEXT ), "struct and wrapper have different size!" );
 
   template<typename Dispatch = DispatchLoaderStatic>
   Result enumerateInstanceVersion( uint32_t* pApiVersion, Dispatch const &d = Dispatch() );
@@ -30163,6 +31969,16 @@ public:
     void endQuery( QueryPool queryPool, uint32_t query, Dispatch const &d = Dispatch() ) const;
 
     template<typename Dispatch = DispatchLoaderStatic>
+    void beginConditionalRenderingEXT( const ConditionalRenderingBeginInfoEXT* pConditionalRenderingBegin, Dispatch const &d = Dispatch() ) const;
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+    template<typename Dispatch = DispatchLoaderStatic>
+    void beginConditionalRenderingEXT( const ConditionalRenderingBeginInfoEXT & conditionalRenderingBegin, Dispatch const &d = Dispatch() ) const;
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+    template<typename Dispatch = DispatchLoaderStatic>
+    void endConditionalRenderingEXT(Dispatch const &d = Dispatch() ) const;
+
+    template<typename Dispatch = DispatchLoaderStatic>
     void resetQueryPool( QueryPool queryPool, uint32_t firstQuery, uint32_t queryCount, Dispatch const &d = Dispatch() ) const;
 
     template<typename Dispatch = DispatchLoaderStatic>
@@ -30299,10 +32115,34 @@ public:
     void writeBufferMarkerAMD( PipelineStageFlagBits pipelineStage, Buffer dstBuffer, DeviceSize dstOffset, uint32_t marker, Dispatch const &d = Dispatch() ) const;
 
     template<typename Dispatch = DispatchLoaderStatic>
+    void beginRenderPass2KHR( const RenderPassBeginInfo* pRenderPassBegin, const SubpassBeginInfoKHR* pSubpassBeginInfo, Dispatch const &d = Dispatch() ) const;
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+    template<typename Dispatch = DispatchLoaderStatic>
+    void beginRenderPass2KHR( const RenderPassBeginInfo & renderPassBegin, const SubpassBeginInfoKHR & subpassBeginInfo, Dispatch const &d = Dispatch() ) const;
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+    template<typename Dispatch = DispatchLoaderStatic>
+    void nextSubpass2KHR( const SubpassBeginInfoKHR* pSubpassBeginInfo, const SubpassEndInfoKHR* pSubpassEndInfo, Dispatch const &d = Dispatch() ) const;
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+    template<typename Dispatch = DispatchLoaderStatic>
+    void nextSubpass2KHR( const SubpassBeginInfoKHR & subpassBeginInfo, const SubpassEndInfoKHR & subpassEndInfo, Dispatch const &d = Dispatch() ) const;
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+    template<typename Dispatch = DispatchLoaderStatic>
+    void endRenderPass2KHR( const SubpassEndInfoKHR* pSubpassEndInfo, Dispatch const &d = Dispatch() ) const;
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+    template<typename Dispatch = DispatchLoaderStatic>
+    void endRenderPass2KHR( const SubpassEndInfoKHR & subpassEndInfo, Dispatch const &d = Dispatch() ) const;
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+    template<typename Dispatch = DispatchLoaderStatic>
     void drawIndirectCountKHR( Buffer buffer, DeviceSize offset, Buffer countBuffer, DeviceSize countBufferOffset, uint32_t maxDrawCount, uint32_t stride, Dispatch const &d = Dispatch() ) const;
 
     template<typename Dispatch = DispatchLoaderStatic>
     void drawIndexedIndirectCountKHR( Buffer buffer, DeviceSize offset, Buffer countBuffer, DeviceSize countBufferOffset, uint32_t maxDrawCount, uint32_t stride, Dispatch const &d = Dispatch() ) const;
+
+    template<typename Dispatch = DispatchLoaderStatic>
+    void setCheckpointNV( const void* pCheckpointMarker, Dispatch const &d = Dispatch() ) const;
 
 
 
@@ -30867,6 +32707,33 @@ public:
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE void CommandBuffer::beginConditionalRenderingEXT( const ConditionalRenderingBeginInfoEXT* pConditionalRenderingBegin, Dispatch const &d) const
+  {
+    d.vkCmdBeginConditionalRenderingEXT( m_commandBuffer, reinterpret_cast<const VkConditionalRenderingBeginInfoEXT*>( pConditionalRenderingBegin ) );
+  }
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE void CommandBuffer::beginConditionalRenderingEXT( const ConditionalRenderingBeginInfoEXT & conditionalRenderingBegin, Dispatch const &d ) const
+  {
+    d.vkCmdBeginConditionalRenderingEXT( m_commandBuffer, reinterpret_cast<const VkConditionalRenderingBeginInfoEXT*>( &conditionalRenderingBegin ) );
+  }
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+#ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE void CommandBuffer::endConditionalRenderingEXT(Dispatch const &d) const
+  {
+    d.vkCmdEndConditionalRenderingEXT( m_commandBuffer );
+  }
+#else
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE void CommandBuffer::endConditionalRenderingEXT(Dispatch const &d ) const
+  {
+    d.vkCmdEndConditionalRenderingEXT( m_commandBuffer );
+  }
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::resetQueryPool( QueryPool queryPool, uint32_t firstQuery, uint32_t queryCount, Dispatch const &d) const
@@ -31246,6 +33113,45 @@ public:
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE void CommandBuffer::beginRenderPass2KHR( const RenderPassBeginInfo* pRenderPassBegin, const SubpassBeginInfoKHR* pSubpassBeginInfo, Dispatch const &d) const
+  {
+    d.vkCmdBeginRenderPass2KHR( m_commandBuffer, reinterpret_cast<const VkRenderPassBeginInfo*>( pRenderPassBegin ), reinterpret_cast<const VkSubpassBeginInfoKHR*>( pSubpassBeginInfo ) );
+  }
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE void CommandBuffer::beginRenderPass2KHR( const RenderPassBeginInfo & renderPassBegin, const SubpassBeginInfoKHR & subpassBeginInfo, Dispatch const &d ) const
+  {
+    d.vkCmdBeginRenderPass2KHR( m_commandBuffer, reinterpret_cast<const VkRenderPassBeginInfo*>( &renderPassBegin ), reinterpret_cast<const VkSubpassBeginInfoKHR*>( &subpassBeginInfo ) );
+  }
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE void CommandBuffer::nextSubpass2KHR( const SubpassBeginInfoKHR* pSubpassBeginInfo, const SubpassEndInfoKHR* pSubpassEndInfo, Dispatch const &d) const
+  {
+    d.vkCmdNextSubpass2KHR( m_commandBuffer, reinterpret_cast<const VkSubpassBeginInfoKHR*>( pSubpassBeginInfo ), reinterpret_cast<const VkSubpassEndInfoKHR*>( pSubpassEndInfo ) );
+  }
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE void CommandBuffer::nextSubpass2KHR( const SubpassBeginInfoKHR & subpassBeginInfo, const SubpassEndInfoKHR & subpassEndInfo, Dispatch const &d ) const
+  {
+    d.vkCmdNextSubpass2KHR( m_commandBuffer, reinterpret_cast<const VkSubpassBeginInfoKHR*>( &subpassBeginInfo ), reinterpret_cast<const VkSubpassEndInfoKHR*>( &subpassEndInfo ) );
+  }
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE void CommandBuffer::endRenderPass2KHR( const SubpassEndInfoKHR* pSubpassEndInfo, Dispatch const &d) const
+  {
+    d.vkCmdEndRenderPass2KHR( m_commandBuffer, reinterpret_cast<const VkSubpassEndInfoKHR*>( pSubpassEndInfo ) );
+  }
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE void CommandBuffer::endRenderPass2KHR( const SubpassEndInfoKHR & subpassEndInfo, Dispatch const &d ) const
+  {
+    d.vkCmdEndRenderPass2KHR( m_commandBuffer, reinterpret_cast<const VkSubpassEndInfoKHR*>( &subpassEndInfo ) );
+  }
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::drawIndirectCountKHR( Buffer buffer, DeviceSize offset, Buffer countBuffer, DeviceSize countBufferOffset, uint32_t maxDrawCount, uint32_t stride, Dispatch const &d) const
@@ -31274,9 +33180,29 @@ public:
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+#ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE void CommandBuffer::setCheckpointNV( const void* pCheckpointMarker, Dispatch const &d) const
+  {
+    d.vkCmdSetCheckpointNV( m_commandBuffer, pCheckpointMarker );
+  }
+#else
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE void CommandBuffer::setCheckpointNV( const void* pCheckpointMarker, Dispatch const &d ) const
+  {
+    d.vkCmdSetCheckpointNV( m_commandBuffer, pCheckpointMarker );
+  }
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
   struct SubmitInfo
   {
-    SubmitInfo( uint32_t waitSemaphoreCount_ = 0, const Semaphore* pWaitSemaphores_ = nullptr, const PipelineStageFlags* pWaitDstStageMask_ = nullptr, uint32_t commandBufferCount_ = 0, const CommandBuffer* pCommandBuffers_ = nullptr, uint32_t signalSemaphoreCount_ = 0, const Semaphore* pSignalSemaphores_ = nullptr )
+    SubmitInfo( uint32_t waitSemaphoreCount_ = 0,
+                const Semaphore* pWaitSemaphores_ = nullptr,
+                const PipelineStageFlags* pWaitDstStageMask_ = nullptr,
+                uint32_t commandBufferCount_ = 0,
+                const CommandBuffer* pCommandBuffers_ = nullptr,
+                uint32_t signalSemaphoreCount_ = 0,
+                const Semaphore* pSignalSemaphores_ = nullptr )
       : waitSemaphoreCount( waitSemaphoreCount_ )
       , pWaitSemaphores( pWaitSemaphores_ )
       , pWaitDstStageMask( pWaitDstStageMask_ )
@@ -31473,6 +33399,13 @@ public:
     void insertDebugUtilsLabelEXT( const DebugUtilsLabelEXT & labelInfo, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+    template<typename Dispatch = DispatchLoaderStatic>
+    void getCheckpointDataNV( uint32_t* pCheckpointDataCount, CheckpointDataNV* pCheckpointData, Dispatch const &d = Dispatch() ) const;
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+    template <typename Allocator = std::allocator<CheckpointDataNV>, typename Dispatch = DispatchLoaderStatic> 
+    std::vector<CheckpointDataNV,Allocator> getCheckpointDataNV(Dispatch const &d = Dispatch() ) const;
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 
     VULKAN_HPP_TYPESAFE_EXPLICIT operator VkQueue() const
@@ -31593,63 +33526,81 @@ public:
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE void Queue::getCheckpointDataNV( uint32_t* pCheckpointDataCount, CheckpointDataNV* pCheckpointData, Dispatch const &d) const
+  {
+    d.vkGetQueueCheckpointDataNV( m_queue, pCheckpointDataCount, reinterpret_cast<VkCheckpointDataNV*>( pCheckpointData ) );
+  }
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE std::vector<CheckpointDataNV,Allocator> Queue::getCheckpointDataNV(Dispatch const &d ) const
+  {
+    std::vector<CheckpointDataNV,Allocator> checkpointData;
+    uint32_t checkpointDataCount;
+    d.vkGetQueueCheckpointDataNV( m_queue, &checkpointDataCount, nullptr );
+    checkpointData.resize( checkpointDataCount );
+    d.vkGetQueueCheckpointDataNV( m_queue, &checkpointDataCount, reinterpret_cast<VkCheckpointDataNV*>( checkpointData.data() ) );
+    return checkpointData;
+  }
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   class Device;
 
-  template <> class UniqueHandleTraits<Buffer> {public: using deleter = ObjectDestroy<Device>; };
-  using UniqueBuffer = UniqueHandle<Buffer>;
-  template <> class UniqueHandleTraits<BufferView> {public: using deleter = ObjectDestroy<Device>; };
-  using UniqueBufferView = UniqueHandle<BufferView>;
-  template <> class UniqueHandleTraits<CommandBuffer> {public: using deleter = PoolFree<Device, CommandPool>; };
-  using UniqueCommandBuffer = UniqueHandle<CommandBuffer>;
-  template <> class UniqueHandleTraits<CommandPool> {public: using deleter = ObjectDestroy<Device>; };
-  using UniqueCommandPool = UniqueHandle<CommandPool>;
-  template <> class UniqueHandleTraits<DescriptorPool> {public: using deleter = ObjectDestroy<Device>; };
-  using UniqueDescriptorPool = UniqueHandle<DescriptorPool>;
-  template <> class UniqueHandleTraits<DescriptorSet> {public: using deleter = PoolFree<Device, DescriptorPool>; };
-  using UniqueDescriptorSet = UniqueHandle<DescriptorSet>;
-  template <> class UniqueHandleTraits<DescriptorSetLayout> {public: using deleter = ObjectDestroy<Device>; };
-  using UniqueDescriptorSetLayout = UniqueHandle<DescriptorSetLayout>;
-  template <> class UniqueHandleTraits<DescriptorUpdateTemplate> {public: using deleter = ObjectDestroy<Device>; };
-  using UniqueDescriptorUpdateTemplate = UniqueHandle<DescriptorUpdateTemplate>;
-  template <> class UniqueHandleTraits<DeviceMemory> {public: using deleter = ObjectFree<Device>; };
-  using UniqueDeviceMemory = UniqueHandle<DeviceMemory>;
-  template <> class UniqueHandleTraits<Event> {public: using deleter = ObjectDestroy<Device>; };
-  using UniqueEvent = UniqueHandle<Event>;
-  template <> class UniqueHandleTraits<Fence> {public: using deleter = ObjectDestroy<Device>; };
-  using UniqueFence = UniqueHandle<Fence>;
-  template <> class UniqueHandleTraits<Framebuffer> {public: using deleter = ObjectDestroy<Device>; };
-  using UniqueFramebuffer = UniqueHandle<Framebuffer>;
-  template <> class UniqueHandleTraits<Image> {public: using deleter = ObjectDestroy<Device>; };
-  using UniqueImage = UniqueHandle<Image>;
-  template <> class UniqueHandleTraits<ImageView> {public: using deleter = ObjectDestroy<Device>; };
-  using UniqueImageView = UniqueHandle<ImageView>;
-  template <> class UniqueHandleTraits<IndirectCommandsLayoutNVX> {public: using deleter = ObjectDestroy<Device>; };
-  using UniqueIndirectCommandsLayoutNVX = UniqueHandle<IndirectCommandsLayoutNVX>;
-  template <> class UniqueHandleTraits<ObjectTableNVX> {public: using deleter = ObjectDestroy<Device>; };
-  using UniqueObjectTableNVX = UniqueHandle<ObjectTableNVX>;
-  template <> class UniqueHandleTraits<Pipeline> {public: using deleter = ObjectDestroy<Device>; };
-  using UniquePipeline = UniqueHandle<Pipeline>;
-  template <> class UniqueHandleTraits<PipelineCache> {public: using deleter = ObjectDestroy<Device>; };
-  using UniquePipelineCache = UniqueHandle<PipelineCache>;
-  template <> class UniqueHandleTraits<PipelineLayout> {public: using deleter = ObjectDestroy<Device>; };
-  using UniquePipelineLayout = UniqueHandle<PipelineLayout>;
-  template <> class UniqueHandleTraits<QueryPool> {public: using deleter = ObjectDestroy<Device>; };
-  using UniqueQueryPool = UniqueHandle<QueryPool>;
-  template <> class UniqueHandleTraits<RenderPass> {public: using deleter = ObjectDestroy<Device>; };
-  using UniqueRenderPass = UniqueHandle<RenderPass>;
-  template <> class UniqueHandleTraits<Sampler> {public: using deleter = ObjectDestroy<Device>; };
-  using UniqueSampler = UniqueHandle<Sampler>;
-  template <> class UniqueHandleTraits<SamplerYcbcrConversion> {public: using deleter = ObjectDestroy<Device>; };
-  using UniqueSamplerYcbcrConversion = UniqueHandle<SamplerYcbcrConversion>;
-  template <> class UniqueHandleTraits<Semaphore> {public: using deleter = ObjectDestroy<Device>; };
-  using UniqueSemaphore = UniqueHandle<Semaphore>;
-  template <> class UniqueHandleTraits<ShaderModule> {public: using deleter = ObjectDestroy<Device>; };
-  using UniqueShaderModule = UniqueHandle<ShaderModule>;
-  template <> class UniqueHandleTraits<SwapchainKHR> {public: using deleter = ObjectDestroy<Device>; };
-  using UniqueSwapchainKHR = UniqueHandle<SwapchainKHR>;
-  template <> class UniqueHandleTraits<ValidationCacheEXT> {public: using deleter = ObjectDestroy<Device>; };
-  using UniqueValidationCacheEXT = UniqueHandle<ValidationCacheEXT>;
+  template <typename Dispatch> class UniqueHandleTraits<Buffer,Dispatch> {public: using deleter = ObjectDestroy<Device,Dispatch>; };
+  using UniqueBuffer = UniqueHandle<Buffer,DispatchLoaderStatic>;
+  template <typename Dispatch> class UniqueHandleTraits<BufferView,Dispatch> {public: using deleter = ObjectDestroy<Device,Dispatch>; };
+  using UniqueBufferView = UniqueHandle<BufferView,DispatchLoaderStatic>;
+  template <typename Dispatch> class UniqueHandleTraits<CommandBuffer,Dispatch> {public: using deleter = PoolFree<Device, CommandPool,Dispatch>; };
+  using UniqueCommandBuffer = UniqueHandle<CommandBuffer,DispatchLoaderStatic>;
+  template <typename Dispatch> class UniqueHandleTraits<CommandPool,Dispatch> {public: using deleter = ObjectDestroy<Device,Dispatch>; };
+  using UniqueCommandPool = UniqueHandle<CommandPool,DispatchLoaderStatic>;
+  template <typename Dispatch> class UniqueHandleTraits<DescriptorPool,Dispatch> {public: using deleter = ObjectDestroy<Device,Dispatch>; };
+  using UniqueDescriptorPool = UniqueHandle<DescriptorPool,DispatchLoaderStatic>;
+  template <typename Dispatch> class UniqueHandleTraits<DescriptorSet,Dispatch> {public: using deleter = PoolFree<Device, DescriptorPool,Dispatch>; };
+  using UniqueDescriptorSet = UniqueHandle<DescriptorSet,DispatchLoaderStatic>;
+  template <typename Dispatch> class UniqueHandleTraits<DescriptorSetLayout,Dispatch> {public: using deleter = ObjectDestroy<Device,Dispatch>; };
+  using UniqueDescriptorSetLayout = UniqueHandle<DescriptorSetLayout,DispatchLoaderStatic>;
+  template <typename Dispatch> class UniqueHandleTraits<DescriptorUpdateTemplate,Dispatch> {public: using deleter = ObjectDestroy<Device,Dispatch>; };
+  using UniqueDescriptorUpdateTemplate = UniqueHandle<DescriptorUpdateTemplate,DispatchLoaderStatic>;
+  template <typename Dispatch> class UniqueHandleTraits<DeviceMemory,Dispatch> {public: using deleter = ObjectFree<Device,Dispatch>; };
+  using UniqueDeviceMemory = UniqueHandle<DeviceMemory,DispatchLoaderStatic>;
+  template <typename Dispatch> class UniqueHandleTraits<Event,Dispatch> {public: using deleter = ObjectDestroy<Device,Dispatch>; };
+  using UniqueEvent = UniqueHandle<Event,DispatchLoaderStatic>;
+  template <typename Dispatch> class UniqueHandleTraits<Fence,Dispatch> {public: using deleter = ObjectDestroy<Device,Dispatch>; };
+  using UniqueFence = UniqueHandle<Fence,DispatchLoaderStatic>;
+  template <typename Dispatch> class UniqueHandleTraits<Framebuffer,Dispatch> {public: using deleter = ObjectDestroy<Device,Dispatch>; };
+  using UniqueFramebuffer = UniqueHandle<Framebuffer,DispatchLoaderStatic>;
+  template <typename Dispatch> class UniqueHandleTraits<Image,Dispatch> {public: using deleter = ObjectDestroy<Device,Dispatch>; };
+  using UniqueImage = UniqueHandle<Image,DispatchLoaderStatic>;
+  template <typename Dispatch> class UniqueHandleTraits<ImageView,Dispatch> {public: using deleter = ObjectDestroy<Device,Dispatch>; };
+  using UniqueImageView = UniqueHandle<ImageView,DispatchLoaderStatic>;
+  template <typename Dispatch> class UniqueHandleTraits<IndirectCommandsLayoutNVX,Dispatch> {public: using deleter = ObjectDestroy<Device,Dispatch>; };
+  using UniqueIndirectCommandsLayoutNVX = UniqueHandle<IndirectCommandsLayoutNVX,DispatchLoaderStatic>;
+  template <typename Dispatch> class UniqueHandleTraits<ObjectTableNVX,Dispatch> {public: using deleter = ObjectDestroy<Device,Dispatch>; };
+  using UniqueObjectTableNVX = UniqueHandle<ObjectTableNVX,DispatchLoaderStatic>;
+  template <typename Dispatch> class UniqueHandleTraits<Pipeline,Dispatch> {public: using deleter = ObjectDestroy<Device,Dispatch>; };
+  using UniquePipeline = UniqueHandle<Pipeline,DispatchLoaderStatic>;
+  template <typename Dispatch> class UniqueHandleTraits<PipelineCache,Dispatch> {public: using deleter = ObjectDestroy<Device,Dispatch>; };
+  using UniquePipelineCache = UniqueHandle<PipelineCache,DispatchLoaderStatic>;
+  template <typename Dispatch> class UniqueHandleTraits<PipelineLayout,Dispatch> {public: using deleter = ObjectDestroy<Device,Dispatch>; };
+  using UniquePipelineLayout = UniqueHandle<PipelineLayout,DispatchLoaderStatic>;
+  template <typename Dispatch> class UniqueHandleTraits<QueryPool,Dispatch> {public: using deleter = ObjectDestroy<Device,Dispatch>; };
+  using UniqueQueryPool = UniqueHandle<QueryPool,DispatchLoaderStatic>;
+  template <typename Dispatch> class UniqueHandleTraits<RenderPass,Dispatch> {public: using deleter = ObjectDestroy<Device,Dispatch>; };
+  using UniqueRenderPass = UniqueHandle<RenderPass,DispatchLoaderStatic>;
+  template <typename Dispatch> class UniqueHandleTraits<Sampler,Dispatch> {public: using deleter = ObjectDestroy<Device,Dispatch>; };
+  using UniqueSampler = UniqueHandle<Sampler,DispatchLoaderStatic>;
+  template <typename Dispatch> class UniqueHandleTraits<SamplerYcbcrConversion,Dispatch> {public: using deleter = ObjectDestroy<Device,Dispatch>; };
+  using UniqueSamplerYcbcrConversion = UniqueHandle<SamplerYcbcrConversion,DispatchLoaderStatic>;
+  template <typename Dispatch> class UniqueHandleTraits<Semaphore,Dispatch> {public: using deleter = ObjectDestroy<Device,Dispatch>; };
+  using UniqueSemaphore = UniqueHandle<Semaphore,DispatchLoaderStatic>;
+  template <typename Dispatch> class UniqueHandleTraits<ShaderModule,Dispatch> {public: using deleter = ObjectDestroy<Device,Dispatch>; };
+  using UniqueShaderModule = UniqueHandle<ShaderModule,DispatchLoaderStatic>;
+  template <typename Dispatch> class UniqueHandleTraits<SwapchainKHR,Dispatch> {public: using deleter = ObjectDestroy<Device,Dispatch>; };
+  using UniqueSwapchainKHR = UniqueHandle<SwapchainKHR,DispatchLoaderStatic>;
+  template <typename Dispatch> class UniqueHandleTraits<ValidationCacheEXT,Dispatch> {public: using deleter = ObjectDestroy<Device,Dispatch>; };
+  using UniqueValidationCacheEXT = UniqueHandle<ValidationCacheEXT,DispatchLoaderStatic>;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 
   class Device
@@ -31732,7 +33683,7 @@ public:
     ResultValueType<DeviceMemory>::type allocateMemory( const MemoryAllocateInfo & allocateInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = DispatchLoaderStatic>
-    ResultValueType<UniqueDeviceMemory>::type allocateMemoryUnique( const MemoryAllocateInfo & allocateInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<DeviceMemory,Dispatch>>::type allocateMemoryUnique( const MemoryAllocateInfo & allocateInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -31825,7 +33776,7 @@ public:
     ResultValueType<Fence>::type createFence( const FenceCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = DispatchLoaderStatic>
-    ResultValueType<UniqueFence>::type createFenceUnique( const FenceCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<Fence,Dispatch>>::type createFenceUnique( const FenceCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -31867,7 +33818,7 @@ public:
     ResultValueType<Semaphore>::type createSemaphore( const SemaphoreCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = DispatchLoaderStatic>
-    ResultValueType<UniqueSemaphore>::type createSemaphoreUnique( const SemaphoreCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<Semaphore,Dispatch>>::type createSemaphoreUnique( const SemaphoreCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -31892,7 +33843,7 @@ public:
     ResultValueType<Event>::type createEvent( const EventCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = DispatchLoaderStatic>
-    ResultValueType<UniqueEvent>::type createEventUnique( const EventCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<Event,Dispatch>>::type createEventUnique( const EventCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -31936,7 +33887,7 @@ public:
     ResultValueType<QueryPool>::type createQueryPool( const QueryPoolCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = DispatchLoaderStatic>
-    ResultValueType<UniqueQueryPool>::type createQueryPoolUnique( const QueryPoolCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<QueryPool,Dispatch>>::type createQueryPoolUnique( const QueryPoolCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -31968,7 +33919,7 @@ public:
     ResultValueType<Buffer>::type createBuffer( const BufferCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = DispatchLoaderStatic>
-    ResultValueType<UniqueBuffer>::type createBufferUnique( const BufferCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<Buffer,Dispatch>>::type createBufferUnique( const BufferCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -31993,7 +33944,7 @@ public:
     ResultValueType<BufferView>::type createBufferView( const BufferViewCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = DispatchLoaderStatic>
-    ResultValueType<UniqueBufferView>::type createBufferViewUnique( const BufferViewCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<BufferView,Dispatch>>::type createBufferViewUnique( const BufferViewCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -32018,7 +33969,7 @@ public:
     ResultValueType<Image>::type createImage( const ImageCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = DispatchLoaderStatic>
-    ResultValueType<UniqueImage>::type createImageUnique( const ImageCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<Image,Dispatch>>::type createImageUnique( const ImageCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -32050,7 +34001,7 @@ public:
     ResultValueType<ImageView>::type createImageView( const ImageViewCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = DispatchLoaderStatic>
-    ResultValueType<UniqueImageView>::type createImageViewUnique( const ImageViewCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<ImageView,Dispatch>>::type createImageViewUnique( const ImageViewCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -32075,7 +34026,7 @@ public:
     ResultValueType<ShaderModule>::type createShaderModule( const ShaderModuleCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = DispatchLoaderStatic>
-    ResultValueType<UniqueShaderModule>::type createShaderModuleUnique( const ShaderModuleCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<ShaderModule,Dispatch>>::type createShaderModuleUnique( const ShaderModuleCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -32100,7 +34051,7 @@ public:
     ResultValueType<PipelineCache>::type createPipelineCache( const PipelineCacheCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = DispatchLoaderStatic>
-    ResultValueType<UniquePipelineCache>::type createPipelineCacheUnique( const PipelineCacheCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<PipelineCache,Dispatch>>::type createPipelineCacheUnique( const PipelineCacheCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -32141,9 +34092,9 @@ public:
     ResultValueType<Pipeline>::type createGraphicsPipeline( PipelineCache pipelineCache, const GraphicsPipelineCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template <typename Allocator = std::allocator<UniquePipeline>, typename Dispatch = DispatchLoaderStatic> 
-    typename ResultValueType<std::vector<UniquePipeline,Allocator>>::type createGraphicsPipelinesUnique( PipelineCache pipelineCache, ArrayProxy<const GraphicsPipelineCreateInfo> createInfos, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<std::vector<UniqueHandle<Pipeline,Dispatch>,Allocator>>::type createGraphicsPipelinesUnique( PipelineCache pipelineCache, ArrayProxy<const GraphicsPipelineCreateInfo> createInfos, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
     template <typename Allocator = std::allocator<UniquePipeline>, typename Dispatch = DispatchLoaderStatic> 
-    ResultValueType<UniquePipeline>::type createGraphicsPipelineUnique( PipelineCache pipelineCache, const GraphicsPipelineCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<Pipeline,Dispatch>>::type createGraphicsPipelineUnique( PipelineCache pipelineCache, const GraphicsPipelineCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -32156,9 +34107,9 @@ public:
     ResultValueType<Pipeline>::type createComputePipeline( PipelineCache pipelineCache, const ComputePipelineCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template <typename Allocator = std::allocator<UniquePipeline>, typename Dispatch = DispatchLoaderStatic> 
-    typename ResultValueType<std::vector<UniquePipeline,Allocator>>::type createComputePipelinesUnique( PipelineCache pipelineCache, ArrayProxy<const ComputePipelineCreateInfo> createInfos, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<std::vector<UniqueHandle<Pipeline,Dispatch>,Allocator>>::type createComputePipelinesUnique( PipelineCache pipelineCache, ArrayProxy<const ComputePipelineCreateInfo> createInfos, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
     template <typename Allocator = std::allocator<UniquePipeline>, typename Dispatch = DispatchLoaderStatic> 
-    ResultValueType<UniquePipeline>::type createComputePipelineUnique( PipelineCache pipelineCache, const ComputePipelineCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<Pipeline,Dispatch>>::type createComputePipelineUnique( PipelineCache pipelineCache, const ComputePipelineCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -32183,7 +34134,7 @@ public:
     ResultValueType<PipelineLayout>::type createPipelineLayout( const PipelineLayoutCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = DispatchLoaderStatic>
-    ResultValueType<UniquePipelineLayout>::type createPipelineLayoutUnique( const PipelineLayoutCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<PipelineLayout,Dispatch>>::type createPipelineLayoutUnique( const PipelineLayoutCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -32208,7 +34159,7 @@ public:
     ResultValueType<Sampler>::type createSampler( const SamplerCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = DispatchLoaderStatic>
-    ResultValueType<UniqueSampler>::type createSamplerUnique( const SamplerCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<Sampler,Dispatch>>::type createSamplerUnique( const SamplerCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -32233,7 +34184,7 @@ public:
     ResultValueType<DescriptorSetLayout>::type createDescriptorSetLayout( const DescriptorSetLayoutCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = DispatchLoaderStatic>
-    ResultValueType<UniqueDescriptorSetLayout>::type createDescriptorSetLayoutUnique( const DescriptorSetLayoutCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<DescriptorSetLayout,Dispatch>>::type createDescriptorSetLayoutUnique( const DescriptorSetLayoutCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -32258,7 +34209,7 @@ public:
     ResultValueType<DescriptorPool>::type createDescriptorPool( const DescriptorPoolCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = DispatchLoaderStatic>
-    ResultValueType<UniqueDescriptorPool>::type createDescriptorPoolUnique( const DescriptorPoolCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<DescriptorPool,Dispatch>>::type createDescriptorPoolUnique( const DescriptorPoolCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -32291,7 +34242,7 @@ public:
     typename ResultValueType<std::vector<DescriptorSet,Allocator>>::type allocateDescriptorSets( const DescriptorSetAllocateInfo & allocateInfo, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template <typename Allocator = std::allocator<UniqueDescriptorSet>, typename Dispatch = DispatchLoaderStatic> 
-    typename ResultValueType<std::vector<UniqueDescriptorSet,Allocator>>::type allocateDescriptorSetsUnique( const DescriptorSetAllocateInfo & allocateInfo, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<std::vector<UniqueHandle<DescriptorSet,Dispatch>,Allocator>>::type allocateDescriptorSetsUnique( const DescriptorSetAllocateInfo & allocateInfo, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -32323,7 +34274,7 @@ public:
     ResultValueType<Framebuffer>::type createFramebuffer( const FramebufferCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = DispatchLoaderStatic>
-    ResultValueType<UniqueFramebuffer>::type createFramebufferUnique( const FramebufferCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<Framebuffer,Dispatch>>::type createFramebufferUnique( const FramebufferCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -32348,7 +34299,7 @@ public:
     ResultValueType<RenderPass>::type createRenderPass( const RenderPassCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = DispatchLoaderStatic>
-    ResultValueType<UniqueRenderPass>::type createRenderPassUnique( const RenderPassCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<RenderPass,Dispatch>>::type createRenderPassUnique( const RenderPassCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -32380,7 +34331,7 @@ public:
     ResultValueType<CommandPool>::type createCommandPool( const CommandPoolCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = DispatchLoaderStatic>
-    ResultValueType<UniqueCommandPool>::type createCommandPoolUnique( const CommandPoolCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<CommandPool,Dispatch>>::type createCommandPoolUnique( const CommandPoolCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -32413,7 +34364,7 @@ public:
     typename ResultValueType<std::vector<CommandBuffer,Allocator>>::type allocateCommandBuffers( const CommandBufferAllocateInfo & allocateInfo, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template <typename Allocator = std::allocator<UniqueCommandBuffer>, typename Dispatch = DispatchLoaderStatic> 
-    typename ResultValueType<std::vector<UniqueCommandBuffer,Allocator>>::type allocateCommandBuffersUnique( const CommandBufferAllocateInfo & allocateInfo, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<std::vector<UniqueHandle<CommandBuffer,Dispatch>,Allocator>>::type allocateCommandBuffersUnique( const CommandBufferAllocateInfo & allocateInfo, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -32440,9 +34391,9 @@ public:
     ResultValueType<SwapchainKHR>::type createSharedSwapchainKHR( const SwapchainCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template <typename Allocator = std::allocator<UniqueSwapchainKHR>, typename Dispatch = DispatchLoaderStatic> 
-    typename ResultValueType<std::vector<UniqueSwapchainKHR,Allocator>>::type createSharedSwapchainsKHRUnique( ArrayProxy<const SwapchainCreateInfoKHR> createInfos, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<std::vector<UniqueHandle<SwapchainKHR,Dispatch>,Allocator>>::type createSharedSwapchainsKHRUnique( ArrayProxy<const SwapchainCreateInfoKHR> createInfos, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
     template <typename Allocator = std::allocator<UniqueSwapchainKHR>, typename Dispatch = DispatchLoaderStatic> 
-    ResultValueType<UniqueSwapchainKHR>::type createSharedSwapchainKHRUnique( const SwapchainCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<SwapchainKHR,Dispatch>>::type createSharedSwapchainKHRUnique( const SwapchainCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -32453,7 +34404,7 @@ public:
     ResultValueType<SwapchainKHR>::type createSwapchainKHR( const SwapchainCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = DispatchLoaderStatic>
-    ResultValueType<UniqueSwapchainKHR>::type createSwapchainKHRUnique( const SwapchainCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<SwapchainKHR,Dispatch>>::type createSwapchainKHRUnique( const SwapchainCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -32515,7 +34466,7 @@ public:
     ResultValueType<IndirectCommandsLayoutNVX>::type createIndirectCommandsLayoutNVX( const IndirectCommandsLayoutCreateInfoNVX & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = DispatchLoaderStatic>
-    ResultValueType<UniqueIndirectCommandsLayoutNVX>::type createIndirectCommandsLayoutNVXUnique( const IndirectCommandsLayoutCreateInfoNVX & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<IndirectCommandsLayoutNVX,Dispatch>>::type createIndirectCommandsLayoutNVXUnique( const IndirectCommandsLayoutCreateInfoNVX & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -32540,7 +34491,7 @@ public:
     ResultValueType<ObjectTableNVX>::type createObjectTableNVX( const ObjectTableCreateInfoNVX & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = DispatchLoaderStatic>
-    ResultValueType<UniqueObjectTableNVX>::type createObjectTableNVXUnique( const ObjectTableCreateInfoNVX & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<ObjectTableNVX,Dispatch>>::type createObjectTableNVXUnique( const ObjectTableCreateInfoNVX & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -32772,7 +34723,7 @@ public:
     ResultValueType<DescriptorUpdateTemplate>::type createDescriptorUpdateTemplate( const DescriptorUpdateTemplateCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = DispatchLoaderStatic>
-    ResultValueType<UniqueDescriptorUpdateTemplate>::type createDescriptorUpdateTemplateUnique( const DescriptorUpdateTemplateCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<DescriptorUpdateTemplate,Dispatch>>::type createDescriptorUpdateTemplateUnique( const DescriptorUpdateTemplateCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -32783,7 +34734,7 @@ public:
     ResultValueType<DescriptorUpdateTemplate>::type createDescriptorUpdateTemplateKHR( const DescriptorUpdateTemplateCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = DispatchLoaderStatic>
-    ResultValueType<UniqueDescriptorUpdateTemplate>::type createDescriptorUpdateTemplateKHRUnique( const DescriptorUpdateTemplateCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<DescriptorUpdateTemplate,Dispatch>>::type createDescriptorUpdateTemplateKHRUnique( const DescriptorUpdateTemplateCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -32895,7 +34846,7 @@ public:
     ResultValueType<SamplerYcbcrConversion>::type createSamplerYcbcrConversion( const SamplerYcbcrConversionCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = DispatchLoaderStatic>
-    ResultValueType<UniqueSamplerYcbcrConversion>::type createSamplerYcbcrConversionUnique( const SamplerYcbcrConversionCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<SamplerYcbcrConversion,Dispatch>>::type createSamplerYcbcrConversionUnique( const SamplerYcbcrConversionCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -32906,7 +34857,7 @@ public:
     ResultValueType<SamplerYcbcrConversion>::type createSamplerYcbcrConversionKHR( const SamplerYcbcrConversionCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = DispatchLoaderStatic>
-    ResultValueType<UniqueSamplerYcbcrConversion>::type createSamplerYcbcrConversionKHRUnique( const SamplerYcbcrConversionCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<SamplerYcbcrConversion,Dispatch>>::type createSamplerYcbcrConversionKHRUnique( const SamplerYcbcrConversionCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -32945,7 +34896,7 @@ public:
     ResultValueType<ValidationCacheEXT>::type createValidationCacheEXT( const ValidationCacheCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = DispatchLoaderStatic>
-    ResultValueType<UniqueValidationCacheEXT>::type createValidationCacheEXTUnique( const ValidationCacheCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<ValidationCacheEXT,Dispatch>>::type createValidationCacheEXTUnique( const ValidationCacheCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -33021,6 +34972,17 @@ public:
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = DispatchLoaderStatic>
     ResultValueType<MemoryHostPointerPropertiesEXT>::type getMemoryHostPointerPropertiesEXT( ExternalMemoryHandleTypeFlagBits handleType, const void* pHostPointer, Dispatch const &d = Dispatch() ) const;
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+    template<typename Dispatch = DispatchLoaderStatic>
+    Result createRenderPass2KHR( const RenderPassCreateInfo2KHR* pCreateInfo, const AllocationCallbacks* pAllocator, RenderPass* pRenderPass, Dispatch const &d = Dispatch() ) const;
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+    template<typename Dispatch = DispatchLoaderStatic>
+    ResultValueType<RenderPass>::type createRenderPass2KHR( const RenderPassCreateInfo2KHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+#ifndef VULKAN_HPP_NO_SMART_HANDLE
+    template<typename Dispatch = DispatchLoaderStatic>
+    typename ResultValueType<UniqueHandle<RenderPass,Dispatch>>::type createRenderPass2KHRUnique( const RenderPassCreateInfo2KHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+#endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
 #ifdef VK_USE_PLATFORM_ANDROID_ANDROID
@@ -33137,13 +35099,13 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<UniqueDeviceMemory>::type Device::allocateMemoryUnique( const MemoryAllocateInfo & allocateInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<DeviceMemory,Dispatch>>::type Device::allocateMemoryUnique( const MemoryAllocateInfo & allocateInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     DeviceMemory memory;
     Result result = static_cast<Result>( d.vkAllocateMemory( m_device, reinterpret_cast<const VkMemoryAllocateInfo*>( &allocateInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkDeviceMemory*>( &memory ) ) );
 
-    ObjectFree<Device> deleter( *this, allocator );
-    return createResultValue( result, memory, VULKAN_HPP_NAMESPACE_STRING"::Device::allocateMemoryUnique", deleter );
+    ObjectFree<Device,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<DeviceMemory,Dispatch>( result, memory, VULKAN_HPP_NAMESPACE_STRING"::Device::allocateMemoryUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -33339,13 +35301,13 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<UniqueFence>::type Device::createFenceUnique( const FenceCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<Fence,Dispatch>>::type Device::createFenceUnique( const FenceCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     Fence fence;
     Result result = static_cast<Result>( d.vkCreateFence( m_device, reinterpret_cast<const VkFenceCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkFence*>( &fence ) ) );
 
-    ObjectDestroy<Device> deleter( *this, allocator );
-    return createResultValue( result, fence, VULKAN_HPP_NAMESPACE_STRING"::Device::createFenceUnique", deleter );
+    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<Fence,Dispatch>( result, fence, VULKAN_HPP_NAMESPACE_STRING"::Device::createFenceUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -33434,13 +35396,13 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<UniqueSemaphore>::type Device::createSemaphoreUnique( const SemaphoreCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<Semaphore,Dispatch>>::type Device::createSemaphoreUnique( const SemaphoreCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     Semaphore semaphore;
     Result result = static_cast<Result>( d.vkCreateSemaphore( m_device, reinterpret_cast<const VkSemaphoreCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSemaphore*>( &semaphore ) ) );
 
-    ObjectDestroy<Device> deleter( *this, allocator );
-    return createResultValue( result, semaphore, VULKAN_HPP_NAMESPACE_STRING"::Device::createSemaphoreUnique", deleter );
+    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<Semaphore,Dispatch>( result, semaphore, VULKAN_HPP_NAMESPACE_STRING"::Device::createSemaphoreUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -33486,13 +35448,13 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<UniqueEvent>::type Device::createEventUnique( const EventCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<Event,Dispatch>>::type Device::createEventUnique( const EventCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     Event event;
     Result result = static_cast<Result>( d.vkCreateEvent( m_device, reinterpret_cast<const VkEventCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkEvent*>( &event ) ) );
 
-    ObjectDestroy<Device> deleter( *this, allocator );
-    return createResultValue( result, event, VULKAN_HPP_NAMESPACE_STRING"::Device::createEventUnique", deleter );
+    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<Event,Dispatch>( result, event, VULKAN_HPP_NAMESPACE_STRING"::Device::createEventUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -33583,13 +35545,13 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<UniqueQueryPool>::type Device::createQueryPoolUnique( const QueryPoolCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<QueryPool,Dispatch>>::type Device::createQueryPoolUnique( const QueryPoolCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     QueryPool queryPool;
     Result result = static_cast<Result>( d.vkCreateQueryPool( m_device, reinterpret_cast<const VkQueryPoolCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkQueryPool*>( &queryPool ) ) );
 
-    ObjectDestroy<Device> deleter( *this, allocator );
-    return createResultValue( result, queryPool, VULKAN_HPP_NAMESPACE_STRING"::Device::createQueryPoolUnique", deleter );
+    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<QueryPool,Dispatch>( result, queryPool, VULKAN_HPP_NAMESPACE_STRING"::Device::createQueryPoolUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -33649,13 +35611,13 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<UniqueBuffer>::type Device::createBufferUnique( const BufferCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<Buffer,Dispatch>>::type Device::createBufferUnique( const BufferCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     Buffer buffer;
     Result result = static_cast<Result>( d.vkCreateBuffer( m_device, reinterpret_cast<const VkBufferCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkBuffer*>( &buffer ) ) );
 
-    ObjectDestroy<Device> deleter( *this, allocator );
-    return createResultValue( result, buffer, VULKAN_HPP_NAMESPACE_STRING"::Device::createBufferUnique", deleter );
+    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<Buffer,Dispatch>( result, buffer, VULKAN_HPP_NAMESPACE_STRING"::Device::createBufferUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -33701,13 +35663,13 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<UniqueBufferView>::type Device::createBufferViewUnique( const BufferViewCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<BufferView,Dispatch>>::type Device::createBufferViewUnique( const BufferViewCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     BufferView view;
     Result result = static_cast<Result>( d.vkCreateBufferView( m_device, reinterpret_cast<const VkBufferViewCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkBufferView*>( &view ) ) );
 
-    ObjectDestroy<Device> deleter( *this, allocator );
-    return createResultValue( result, view, VULKAN_HPP_NAMESPACE_STRING"::Device::createBufferViewUnique", deleter );
+    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<BufferView,Dispatch>( result, view, VULKAN_HPP_NAMESPACE_STRING"::Device::createBufferViewUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -33753,13 +35715,13 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<UniqueImage>::type Device::createImageUnique( const ImageCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<Image,Dispatch>>::type Device::createImageUnique( const ImageCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     Image image;
     Result result = static_cast<Result>( d.vkCreateImage( m_device, reinterpret_cast<const VkImageCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkImage*>( &image ) ) );
 
-    ObjectDestroy<Device> deleter( *this, allocator );
-    return createResultValue( result, image, VULKAN_HPP_NAMESPACE_STRING"::Device::createImageUnique", deleter );
+    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<Image,Dispatch>( result, image, VULKAN_HPP_NAMESPACE_STRING"::Device::createImageUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -33820,13 +35782,13 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<UniqueImageView>::type Device::createImageViewUnique( const ImageViewCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<ImageView,Dispatch>>::type Device::createImageViewUnique( const ImageViewCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     ImageView view;
     Result result = static_cast<Result>( d.vkCreateImageView( m_device, reinterpret_cast<const VkImageViewCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkImageView*>( &view ) ) );
 
-    ObjectDestroy<Device> deleter( *this, allocator );
-    return createResultValue( result, view, VULKAN_HPP_NAMESPACE_STRING"::Device::createImageViewUnique", deleter );
+    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<ImageView,Dispatch>( result, view, VULKAN_HPP_NAMESPACE_STRING"::Device::createImageViewUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -33872,13 +35834,13 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<UniqueShaderModule>::type Device::createShaderModuleUnique( const ShaderModuleCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<ShaderModule,Dispatch>>::type Device::createShaderModuleUnique( const ShaderModuleCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     ShaderModule shaderModule;
     Result result = static_cast<Result>( d.vkCreateShaderModule( m_device, reinterpret_cast<const VkShaderModuleCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkShaderModule*>( &shaderModule ) ) );
 
-    ObjectDestroy<Device> deleter( *this, allocator );
-    return createResultValue( result, shaderModule, VULKAN_HPP_NAMESPACE_STRING"::Device::createShaderModuleUnique", deleter );
+    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<ShaderModule,Dispatch>( result, shaderModule, VULKAN_HPP_NAMESPACE_STRING"::Device::createShaderModuleUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -33924,13 +35886,13 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<UniquePipelineCache>::type Device::createPipelineCacheUnique( const PipelineCacheCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<PipelineCache,Dispatch>>::type Device::createPipelineCacheUnique( const PipelineCacheCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     PipelineCache pipelineCache;
     Result result = static_cast<Result>( d.vkCreatePipelineCache( m_device, reinterpret_cast<const VkPipelineCacheCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkPipelineCache*>( &pipelineCache ) ) );
 
-    ObjectDestroy<Device> deleter( *this, allocator );
-    return createResultValue( result, pipelineCache, VULKAN_HPP_NAMESPACE_STRING"::Device::createPipelineCacheUnique", deleter );
+    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<PipelineCache,Dispatch>( result, pipelineCache, VULKAN_HPP_NAMESPACE_STRING"::Device::createPipelineCacheUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -34024,7 +35986,7 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template <typename Allocator, typename Dispatch> 
-  VULKAN_HPP_INLINE typename ResultValueType<std::vector<UniquePipeline,Allocator>>::type Device::createGraphicsPipelinesUnique( PipelineCache pipelineCache, ArrayProxy<const GraphicsPipelineCreateInfo> createInfos, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<UniqueHandle<Pipeline,Dispatch>,Allocator>>::type Device::createGraphicsPipelinesUnique( PipelineCache pipelineCache, ArrayProxy<const GraphicsPipelineCreateInfo> createInfos, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     static_assert( sizeof( Pipeline ) <= sizeof( UniquePipeline ), "Pipeline is greater than UniquePipeline!" );
     std::vector<UniquePipeline, Allocator> pipelines;
@@ -34032,7 +35994,7 @@ public:
     Pipeline* buffer = reinterpret_cast<Pipeline*>( reinterpret_cast<char*>( pipelines.data() ) + createInfos.size() * ( sizeof( UniquePipeline ) - sizeof( Pipeline ) ) );
     Result result = static_cast<Result>(d.vkCreateGraphicsPipelines( m_device, static_cast<VkPipelineCache>( pipelineCache ), createInfos.size() , reinterpret_cast<const VkGraphicsPipelineCreateInfo*>( createInfos.data() ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkPipeline*>( buffer ) ) );
 
-    ObjectDestroy<Device> deleter( *this, allocator );
+    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
     for ( size_t i=0 ; i<createInfos.size() ; i++ )
     {
       pipelines.push_back( UniquePipeline( buffer[i], deleter ) );
@@ -34041,13 +36003,13 @@ public:
     return createResultValue( result, pipelines, VULKAN_HPP_NAMESPACE_STRING "::Device::createGraphicsPipelinesUnique" );
   }
   template <typename Allocator, typename Dispatch> 
-  VULKAN_HPP_INLINE ResultValueType<UniquePipeline>::type Device::createGraphicsPipelineUnique( PipelineCache pipelineCache, const GraphicsPipelineCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<Pipeline,Dispatch>>::type Device::createGraphicsPipelineUnique( PipelineCache pipelineCache, const GraphicsPipelineCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     Pipeline pipeline;
     Result result = static_cast<Result>( d.vkCreateGraphicsPipelines( m_device, static_cast<VkPipelineCache>( pipelineCache ), 1 , reinterpret_cast<const VkGraphicsPipelineCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkPipeline*>( &pipeline ) ) );
 
-    ObjectDestroy<Device> deleter( *this, allocator );
-    return createResultValue( result, pipeline, VULKAN_HPP_NAMESPACE_STRING"::Device::createGraphicsPipelineUnique", deleter );
+    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<Pipeline,Dispatch>( result, pipeline, VULKAN_HPP_NAMESPACE_STRING"::Device::createGraphicsPipelineUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -34074,7 +36036,7 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template <typename Allocator, typename Dispatch> 
-  VULKAN_HPP_INLINE typename ResultValueType<std::vector<UniquePipeline,Allocator>>::type Device::createComputePipelinesUnique( PipelineCache pipelineCache, ArrayProxy<const ComputePipelineCreateInfo> createInfos, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<UniqueHandle<Pipeline,Dispatch>,Allocator>>::type Device::createComputePipelinesUnique( PipelineCache pipelineCache, ArrayProxy<const ComputePipelineCreateInfo> createInfos, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     static_assert( sizeof( Pipeline ) <= sizeof( UniquePipeline ), "Pipeline is greater than UniquePipeline!" );
     std::vector<UniquePipeline, Allocator> pipelines;
@@ -34082,7 +36044,7 @@ public:
     Pipeline* buffer = reinterpret_cast<Pipeline*>( reinterpret_cast<char*>( pipelines.data() ) + createInfos.size() * ( sizeof( UniquePipeline ) - sizeof( Pipeline ) ) );
     Result result = static_cast<Result>(d.vkCreateComputePipelines( m_device, static_cast<VkPipelineCache>( pipelineCache ), createInfos.size() , reinterpret_cast<const VkComputePipelineCreateInfo*>( createInfos.data() ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkPipeline*>( buffer ) ) );
 
-    ObjectDestroy<Device> deleter( *this, allocator );
+    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
     for ( size_t i=0 ; i<createInfos.size() ; i++ )
     {
       pipelines.push_back( UniquePipeline( buffer[i], deleter ) );
@@ -34091,13 +36053,13 @@ public:
     return createResultValue( result, pipelines, VULKAN_HPP_NAMESPACE_STRING "::Device::createComputePipelinesUnique" );
   }
   template <typename Allocator, typename Dispatch> 
-  VULKAN_HPP_INLINE ResultValueType<UniquePipeline>::type Device::createComputePipelineUnique( PipelineCache pipelineCache, const ComputePipelineCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<Pipeline,Dispatch>>::type Device::createComputePipelineUnique( PipelineCache pipelineCache, const ComputePipelineCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     Pipeline pipeline;
     Result result = static_cast<Result>( d.vkCreateComputePipelines( m_device, static_cast<VkPipelineCache>( pipelineCache ), 1 , reinterpret_cast<const VkComputePipelineCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkPipeline*>( &pipeline ) ) );
 
-    ObjectDestroy<Device> deleter( *this, allocator );
-    return createResultValue( result, pipeline, VULKAN_HPP_NAMESPACE_STRING"::Device::createComputePipelineUnique", deleter );
+    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<Pipeline,Dispatch>( result, pipeline, VULKAN_HPP_NAMESPACE_STRING"::Device::createComputePipelineUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -34143,13 +36105,13 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<UniquePipelineLayout>::type Device::createPipelineLayoutUnique( const PipelineLayoutCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<PipelineLayout,Dispatch>>::type Device::createPipelineLayoutUnique( const PipelineLayoutCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     PipelineLayout pipelineLayout;
     Result result = static_cast<Result>( d.vkCreatePipelineLayout( m_device, reinterpret_cast<const VkPipelineLayoutCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkPipelineLayout*>( &pipelineLayout ) ) );
 
-    ObjectDestroy<Device> deleter( *this, allocator );
-    return createResultValue( result, pipelineLayout, VULKAN_HPP_NAMESPACE_STRING"::Device::createPipelineLayoutUnique", deleter );
+    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<PipelineLayout,Dispatch>( result, pipelineLayout, VULKAN_HPP_NAMESPACE_STRING"::Device::createPipelineLayoutUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -34195,13 +36157,13 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<UniqueSampler>::type Device::createSamplerUnique( const SamplerCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<Sampler,Dispatch>>::type Device::createSamplerUnique( const SamplerCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     Sampler sampler;
     Result result = static_cast<Result>( d.vkCreateSampler( m_device, reinterpret_cast<const VkSamplerCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSampler*>( &sampler ) ) );
 
-    ObjectDestroy<Device> deleter( *this, allocator );
-    return createResultValue( result, sampler, VULKAN_HPP_NAMESPACE_STRING"::Device::createSamplerUnique", deleter );
+    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<Sampler,Dispatch>( result, sampler, VULKAN_HPP_NAMESPACE_STRING"::Device::createSamplerUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -34247,13 +36209,13 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<UniqueDescriptorSetLayout>::type Device::createDescriptorSetLayoutUnique( const DescriptorSetLayoutCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<DescriptorSetLayout,Dispatch>>::type Device::createDescriptorSetLayoutUnique( const DescriptorSetLayoutCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     DescriptorSetLayout setLayout;
     Result result = static_cast<Result>( d.vkCreateDescriptorSetLayout( m_device, reinterpret_cast<const VkDescriptorSetLayoutCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkDescriptorSetLayout*>( &setLayout ) ) );
 
-    ObjectDestroy<Device> deleter( *this, allocator );
-    return createResultValue( result, setLayout, VULKAN_HPP_NAMESPACE_STRING"::Device::createDescriptorSetLayoutUnique", deleter );
+    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<DescriptorSetLayout,Dispatch>( result, setLayout, VULKAN_HPP_NAMESPACE_STRING"::Device::createDescriptorSetLayoutUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -34299,13 +36261,13 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<UniqueDescriptorPool>::type Device::createDescriptorPoolUnique( const DescriptorPoolCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<DescriptorPool,Dispatch>>::type Device::createDescriptorPoolUnique( const DescriptorPoolCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     DescriptorPool descriptorPool;
     Result result = static_cast<Result>( d.vkCreateDescriptorPool( m_device, reinterpret_cast<const VkDescriptorPoolCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkDescriptorPool*>( &descriptorPool ) ) );
 
-    ObjectDestroy<Device> deleter( *this, allocator );
-    return createResultValue( result, descriptorPool, VULKAN_HPP_NAMESPACE_STRING"::Device::createDescriptorPoolUnique", deleter );
+    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<DescriptorPool,Dispatch>( result, descriptorPool, VULKAN_HPP_NAMESPACE_STRING"::Device::createDescriptorPoolUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -34366,7 +36328,7 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template <typename Allocator, typename Dispatch> 
-  VULKAN_HPP_INLINE typename ResultValueType<std::vector<UniqueDescriptorSet,Allocator>>::type Device::allocateDescriptorSetsUnique( const DescriptorSetAllocateInfo & allocateInfo, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<UniqueHandle<DescriptorSet,Dispatch>,Allocator>>::type Device::allocateDescriptorSetsUnique( const DescriptorSetAllocateInfo & allocateInfo, Dispatch const &d ) const
   {
     static_assert( sizeof( DescriptorSet ) <= sizeof( UniqueDescriptorSet ), "DescriptorSet is greater than UniqueDescriptorSet!" );
     std::vector<UniqueDescriptorSet, Allocator> descriptorSets;
@@ -34374,7 +36336,7 @@ public:
     DescriptorSet* buffer = reinterpret_cast<DescriptorSet*>( reinterpret_cast<char*>( descriptorSets.data() ) + allocateInfo.descriptorSetCount * ( sizeof( UniqueDescriptorSet ) - sizeof( DescriptorSet ) ) );
     Result result = static_cast<Result>(d.vkAllocateDescriptorSets( m_device, reinterpret_cast<const VkDescriptorSetAllocateInfo*>( &allocateInfo ), reinterpret_cast<VkDescriptorSet*>( buffer ) ) );
 
-    PoolFree<Device,DescriptorPool> deleter( *this, allocateInfo.descriptorPool );
+    PoolFree<Device,DescriptorPool,Dispatch> deleter( *this, allocateInfo.descriptorPool, d );
     for ( size_t i=0 ; i<allocateInfo.descriptorSetCount ; i++ )
     {
       descriptorSets.push_back( UniqueDescriptorSet( buffer[i], deleter ) );
@@ -34441,13 +36403,13 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<UniqueFramebuffer>::type Device::createFramebufferUnique( const FramebufferCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<Framebuffer,Dispatch>>::type Device::createFramebufferUnique( const FramebufferCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     Framebuffer framebuffer;
     Result result = static_cast<Result>( d.vkCreateFramebuffer( m_device, reinterpret_cast<const VkFramebufferCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkFramebuffer*>( &framebuffer ) ) );
 
-    ObjectDestroy<Device> deleter( *this, allocator );
-    return createResultValue( result, framebuffer, VULKAN_HPP_NAMESPACE_STRING"::Device::createFramebufferUnique", deleter );
+    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<Framebuffer,Dispatch>( result, framebuffer, VULKAN_HPP_NAMESPACE_STRING"::Device::createFramebufferUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -34493,13 +36455,13 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<UniqueRenderPass>::type Device::createRenderPassUnique( const RenderPassCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<RenderPass,Dispatch>>::type Device::createRenderPassUnique( const RenderPassCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     RenderPass renderPass;
     Result result = static_cast<Result>( d.vkCreateRenderPass( m_device, reinterpret_cast<const VkRenderPassCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkRenderPass*>( &renderPass ) ) );
 
-    ObjectDestroy<Device> deleter( *this, allocator );
-    return createResultValue( result, renderPass, VULKAN_HPP_NAMESPACE_STRING"::Device::createRenderPassUnique", deleter );
+    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<RenderPass,Dispatch>( result, renderPass, VULKAN_HPP_NAMESPACE_STRING"::Device::createRenderPassUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -34560,13 +36522,13 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<UniqueCommandPool>::type Device::createCommandPoolUnique( const CommandPoolCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<CommandPool,Dispatch>>::type Device::createCommandPoolUnique( const CommandPoolCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     CommandPool commandPool;
     Result result = static_cast<Result>( d.vkCreateCommandPool( m_device, reinterpret_cast<const VkCommandPoolCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkCommandPool*>( &commandPool ) ) );
 
-    ObjectDestroy<Device> deleter( *this, allocator );
-    return createResultValue( result, commandPool, VULKAN_HPP_NAMESPACE_STRING"::Device::createCommandPoolUnique", deleter );
+    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<CommandPool,Dispatch>( result, commandPool, VULKAN_HPP_NAMESPACE_STRING"::Device::createCommandPoolUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -34627,7 +36589,7 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template <typename Allocator, typename Dispatch> 
-  VULKAN_HPP_INLINE typename ResultValueType<std::vector<UniqueCommandBuffer,Allocator>>::type Device::allocateCommandBuffersUnique( const CommandBufferAllocateInfo & allocateInfo, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<UniqueHandle<CommandBuffer,Dispatch>,Allocator>>::type Device::allocateCommandBuffersUnique( const CommandBufferAllocateInfo & allocateInfo, Dispatch const &d ) const
   {
     static_assert( sizeof( CommandBuffer ) <= sizeof( UniqueCommandBuffer ), "CommandBuffer is greater than UniqueCommandBuffer!" );
     std::vector<UniqueCommandBuffer, Allocator> commandBuffers;
@@ -34635,7 +36597,7 @@ public:
     CommandBuffer* buffer = reinterpret_cast<CommandBuffer*>( reinterpret_cast<char*>( commandBuffers.data() ) + allocateInfo.commandBufferCount * ( sizeof( UniqueCommandBuffer ) - sizeof( CommandBuffer ) ) );
     Result result = static_cast<Result>(d.vkAllocateCommandBuffers( m_device, reinterpret_cast<const VkCommandBufferAllocateInfo*>( &allocateInfo ), reinterpret_cast<VkCommandBuffer*>( buffer ) ) );
 
-    PoolFree<Device,CommandPool> deleter( *this, allocateInfo.commandPool );
+    PoolFree<Device,CommandPool,Dispatch> deleter( *this, allocateInfo.commandPool, d );
     for ( size_t i=0 ; i<allocateInfo.commandBufferCount ; i++ )
     {
       commandBuffers.push_back( UniqueCommandBuffer( buffer[i], deleter ) );
@@ -34694,7 +36656,7 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template <typename Allocator, typename Dispatch> 
-  VULKAN_HPP_INLINE typename ResultValueType<std::vector<UniqueSwapchainKHR,Allocator>>::type Device::createSharedSwapchainsKHRUnique( ArrayProxy<const SwapchainCreateInfoKHR> createInfos, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<UniqueHandle<SwapchainKHR,Dispatch>,Allocator>>::type Device::createSharedSwapchainsKHRUnique( ArrayProxy<const SwapchainCreateInfoKHR> createInfos, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     static_assert( sizeof( SwapchainKHR ) <= sizeof( UniqueSwapchainKHR ), "SwapchainKHR is greater than UniqueSwapchainKHR!" );
     std::vector<UniqueSwapchainKHR, Allocator> swapchainKHRs;
@@ -34702,7 +36664,7 @@ public:
     SwapchainKHR* buffer = reinterpret_cast<SwapchainKHR*>( reinterpret_cast<char*>( swapchainKHRs.data() ) + createInfos.size() * ( sizeof( UniqueSwapchainKHR ) - sizeof( SwapchainKHR ) ) );
     Result result = static_cast<Result>(d.vkCreateSharedSwapchainsKHR( m_device, createInfos.size() , reinterpret_cast<const VkSwapchainCreateInfoKHR*>( createInfos.data() ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSwapchainKHR*>( buffer ) ) );
 
-    ObjectDestroy<Device> deleter( *this, allocator );
+    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
     for ( size_t i=0 ; i<createInfos.size() ; i++ )
     {
       swapchainKHRs.push_back( UniqueSwapchainKHR( buffer[i], deleter ) );
@@ -34711,13 +36673,13 @@ public:
     return createResultValue( result, swapchainKHRs, VULKAN_HPP_NAMESPACE_STRING "::Device::createSharedSwapchainsKHRUnique" );
   }
   template <typename Allocator, typename Dispatch> 
-  VULKAN_HPP_INLINE ResultValueType<UniqueSwapchainKHR>::type Device::createSharedSwapchainKHRUnique( const SwapchainCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<SwapchainKHR,Dispatch>>::type Device::createSharedSwapchainKHRUnique( const SwapchainCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     SwapchainKHR swapchain;
     Result result = static_cast<Result>( d.vkCreateSharedSwapchainsKHR( m_device, 1 , reinterpret_cast<const VkSwapchainCreateInfoKHR*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSwapchainKHR*>( &swapchain ) ) );
 
-    ObjectDestroy<Device> deleter( *this, allocator );
-    return createResultValue( result, swapchain, VULKAN_HPP_NAMESPACE_STRING"::Device::createSharedSwapchainKHRUnique", deleter );
+    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<SwapchainKHR,Dispatch>( result, swapchain, VULKAN_HPP_NAMESPACE_STRING"::Device::createSharedSwapchainKHRUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -34737,13 +36699,13 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<UniqueSwapchainKHR>::type Device::createSwapchainKHRUnique( const SwapchainCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<SwapchainKHR,Dispatch>>::type Device::createSwapchainKHRUnique( const SwapchainCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     SwapchainKHR swapchain;
     Result result = static_cast<Result>( d.vkCreateSwapchainKHR( m_device, reinterpret_cast<const VkSwapchainCreateInfoKHR*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSwapchainKHR*>( &swapchain ) ) );
 
-    ObjectDestroy<Device> deleter( *this, allocator );
-    return createResultValue( result, swapchain, VULKAN_HPP_NAMESPACE_STRING"::Device::createSwapchainKHRUnique", deleter );
+    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<SwapchainKHR,Dispatch>( result, swapchain, VULKAN_HPP_NAMESPACE_STRING"::Device::createSwapchainKHRUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -34876,13 +36838,13 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<UniqueIndirectCommandsLayoutNVX>::type Device::createIndirectCommandsLayoutNVXUnique( const IndirectCommandsLayoutCreateInfoNVX & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<IndirectCommandsLayoutNVX,Dispatch>>::type Device::createIndirectCommandsLayoutNVXUnique( const IndirectCommandsLayoutCreateInfoNVX & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     IndirectCommandsLayoutNVX indirectCommandsLayout;
     Result result = static_cast<Result>( d.vkCreateIndirectCommandsLayoutNVX( m_device, reinterpret_cast<const VkIndirectCommandsLayoutCreateInfoNVX*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkIndirectCommandsLayoutNVX*>( &indirectCommandsLayout ) ) );
 
-    ObjectDestroy<Device> deleter( *this, allocator );
-    return createResultValue( result, indirectCommandsLayout, VULKAN_HPP_NAMESPACE_STRING"::Device::createIndirectCommandsLayoutNVXUnique", deleter );
+    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<IndirectCommandsLayoutNVX,Dispatch>( result, indirectCommandsLayout, VULKAN_HPP_NAMESPACE_STRING"::Device::createIndirectCommandsLayoutNVXUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -34928,13 +36890,13 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<UniqueObjectTableNVX>::type Device::createObjectTableNVXUnique( const ObjectTableCreateInfoNVX & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<ObjectTableNVX,Dispatch>>::type Device::createObjectTableNVXUnique( const ObjectTableCreateInfoNVX & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     ObjectTableNVX objectTable;
     Result result = static_cast<Result>( d.vkCreateObjectTableNVX( m_device, reinterpret_cast<const VkObjectTableCreateInfoNVX*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkObjectTableNVX*>( &objectTable ) ) );
 
-    ObjectDestroy<Device> deleter( *this, allocator );
-    return createResultValue( result, objectTable, VULKAN_HPP_NAMESPACE_STRING"::Device::createObjectTableNVXUnique", deleter );
+    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<ObjectTableNVX,Dispatch>( result, objectTable, VULKAN_HPP_NAMESPACE_STRING"::Device::createObjectTableNVXUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -35430,13 +37392,13 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<UniqueDescriptorUpdateTemplate>::type Device::createDescriptorUpdateTemplateUnique( const DescriptorUpdateTemplateCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<DescriptorUpdateTemplate,Dispatch>>::type Device::createDescriptorUpdateTemplateUnique( const DescriptorUpdateTemplateCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     DescriptorUpdateTemplate descriptorUpdateTemplate;
     Result result = static_cast<Result>( d.vkCreateDescriptorUpdateTemplate( m_device, reinterpret_cast<const VkDescriptorUpdateTemplateCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkDescriptorUpdateTemplate*>( &descriptorUpdateTemplate ) ) );
 
-    ObjectDestroy<Device> deleter( *this, allocator );
-    return createResultValue( result, descriptorUpdateTemplate, VULKAN_HPP_NAMESPACE_STRING"::Device::createDescriptorUpdateTemplateUnique", deleter );
+    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<DescriptorUpdateTemplate,Dispatch>( result, descriptorUpdateTemplate, VULKAN_HPP_NAMESPACE_STRING"::Device::createDescriptorUpdateTemplateUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -35456,13 +37418,13 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<UniqueDescriptorUpdateTemplate>::type Device::createDescriptorUpdateTemplateKHRUnique( const DescriptorUpdateTemplateCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<DescriptorUpdateTemplate,Dispatch>>::type Device::createDescriptorUpdateTemplateKHRUnique( const DescriptorUpdateTemplateCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     DescriptorUpdateTemplate descriptorUpdateTemplate;
     Result result = static_cast<Result>( d.vkCreateDescriptorUpdateTemplateKHR( m_device, reinterpret_cast<const VkDescriptorUpdateTemplateCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkDescriptorUpdateTemplate*>( &descriptorUpdateTemplate ) ) );
 
-    ObjectDestroy<Device> deleter( *this, allocator );
-    return createResultValue( result, descriptorUpdateTemplate, VULKAN_HPP_NAMESPACE_STRING"::Device::createDescriptorUpdateTemplateKHRUnique", deleter );
+    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<DescriptorUpdateTemplate,Dispatch>( result, descriptorUpdateTemplate, VULKAN_HPP_NAMESPACE_STRING"::Device::createDescriptorUpdateTemplateKHRUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -35755,13 +37717,13 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<UniqueSamplerYcbcrConversion>::type Device::createSamplerYcbcrConversionUnique( const SamplerYcbcrConversionCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<SamplerYcbcrConversion,Dispatch>>::type Device::createSamplerYcbcrConversionUnique( const SamplerYcbcrConversionCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     SamplerYcbcrConversion ycbcrConversion;
     Result result = static_cast<Result>( d.vkCreateSamplerYcbcrConversion( m_device, reinterpret_cast<const VkSamplerYcbcrConversionCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSamplerYcbcrConversion*>( &ycbcrConversion ) ) );
 
-    ObjectDestroy<Device> deleter( *this, allocator );
-    return createResultValue( result, ycbcrConversion, VULKAN_HPP_NAMESPACE_STRING"::Device::createSamplerYcbcrConversionUnique", deleter );
+    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<SamplerYcbcrConversion,Dispatch>( result, ycbcrConversion, VULKAN_HPP_NAMESPACE_STRING"::Device::createSamplerYcbcrConversionUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -35781,13 +37743,13 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<UniqueSamplerYcbcrConversion>::type Device::createSamplerYcbcrConversionKHRUnique( const SamplerYcbcrConversionCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<SamplerYcbcrConversion,Dispatch>>::type Device::createSamplerYcbcrConversionKHRUnique( const SamplerYcbcrConversionCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     SamplerYcbcrConversion ycbcrConversion;
     Result result = static_cast<Result>( d.vkCreateSamplerYcbcrConversionKHR( m_device, reinterpret_cast<const VkSamplerYcbcrConversionCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSamplerYcbcrConversion*>( &ycbcrConversion ) ) );
 
-    ObjectDestroy<Device> deleter( *this, allocator );
-    return createResultValue( result, ycbcrConversion, VULKAN_HPP_NAMESPACE_STRING"::Device::createSamplerYcbcrConversionKHRUnique", deleter );
+    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<SamplerYcbcrConversion,Dispatch>( result, ycbcrConversion, VULKAN_HPP_NAMESPACE_STRING"::Device::createSamplerYcbcrConversionKHRUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -35861,13 +37823,13 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<UniqueValidationCacheEXT>::type Device::createValidationCacheEXTUnique( const ValidationCacheCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<ValidationCacheEXT,Dispatch>>::type Device::createValidationCacheEXTUnique( const ValidationCacheCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     ValidationCacheEXT validationCache;
     Result result = static_cast<Result>( d.vkCreateValidationCacheEXT( m_device, reinterpret_cast<const VkValidationCacheCreateInfoEXT*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkValidationCacheEXT*>( &validationCache ) ) );
 
-    ObjectDestroy<Device> deleter( *this, allocator );
-    return createResultValue( result, validationCache, VULKAN_HPP_NAMESPACE_STRING"::Device::createValidationCacheEXTUnique", deleter );
+    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<ValidationCacheEXT,Dispatch>( result, validationCache, VULKAN_HPP_NAMESPACE_STRING"::Device::createValidationCacheEXTUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -36055,6 +38017,32 @@ public:
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE Result Device::createRenderPass2KHR( const RenderPassCreateInfo2KHR* pCreateInfo, const AllocationCallbacks* pAllocator, RenderPass* pRenderPass, Dispatch const &d) const
+  {
+    return static_cast<Result>( d.vkCreateRenderPass2KHR( m_device, reinterpret_cast<const VkRenderPassCreateInfo2KHR*>( pCreateInfo ), reinterpret_cast<const VkAllocationCallbacks*>( pAllocator ), reinterpret_cast<VkRenderPass*>( pRenderPass ) ) );
+  }
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE ResultValueType<RenderPass>::type Device::createRenderPass2KHR( const RenderPassCreateInfo2KHR & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  {
+    RenderPass renderPass;
+    Result result = static_cast<Result>( d.vkCreateRenderPass2KHR( m_device, reinterpret_cast<const VkRenderPassCreateInfo2KHR*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkRenderPass*>( &renderPass ) ) );
+    return createResultValue( result, renderPass, VULKAN_HPP_NAMESPACE_STRING"::Device::createRenderPass2KHR" );
+  }
+#ifndef VULKAN_HPP_NO_SMART_HANDLE
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<RenderPass,Dispatch>>::type Device::createRenderPass2KHRUnique( const RenderPassCreateInfo2KHR & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  {
+    RenderPass renderPass;
+    Result result = static_cast<Result>( d.vkCreateRenderPass2KHR( m_device, reinterpret_cast<const VkRenderPassCreateInfo2KHR*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkRenderPass*>( &renderPass ) ) );
+
+    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<RenderPass,Dispatch>( result, renderPass, VULKAN_HPP_NAMESPACE_STRING"::Device::createRenderPass2KHRUnique", deleter );
+  }
+#endif /*VULKAN_HPP_NO_SMART_HANDLE*/
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 #ifdef VK_USE_PLATFORM_ANDROID_ANDROID
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::getAndroidHardwareBufferPropertiesANDROID( const struct AHardwareBuffer* buffer, AndroidHardwareBufferPropertiesANDROID* pProperties, Dispatch const &d) const
@@ -36099,8 +38087,8 @@ public:
 
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
 
-  template <> class UniqueHandleTraits<Device> {public: using deleter = ObjectDestroy<NoParent>; };
-  using UniqueDevice = UniqueHandle<Device>;
+  template <typename Dispatch> class UniqueHandleTraits<Device,Dispatch> {public: using deleter = ObjectDestroy<NoParent,Dispatch>; };
+  using UniqueDevice = UniqueHandle<Device,DispatchLoaderStatic>;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 
   class PhysicalDevice
@@ -36196,7 +38184,7 @@ public:
     ResultValueType<Device>::type createDevice( const DeviceCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = DispatchLoaderStatic>
-    ResultValueType<UniqueDevice>::type createDeviceUnique( const DeviceCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<Device,Dispatch>>::type createDeviceUnique( const DeviceCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -36720,13 +38708,13 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<UniqueDevice>::type PhysicalDevice::createDeviceUnique( const DeviceCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<Device,Dispatch>>::type PhysicalDevice::createDeviceUnique( const DeviceCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     Device device;
     Result result = static_cast<Result>( d.vkCreateDevice( m_physicalDevice, reinterpret_cast<const VkDeviceCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkDevice*>( &device ) ) );
 
-    ObjectDestroy<NoParent> deleter( allocator );
-    return createResultValue( result, device, VULKAN_HPP_NAMESPACE_STRING"::PhysicalDevice::createDeviceUnique", deleter );
+    ObjectDestroy<NoParent,Dispatch> deleter( allocator, d );
+    return createResultValue<Device,Dispatch>( result, device, VULKAN_HPP_NAMESPACE_STRING"::PhysicalDevice::createDeviceUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -37745,7 +39733,16 @@ public:
 
   struct CmdProcessCommandsInfoNVX
   {
-    CmdProcessCommandsInfoNVX( ObjectTableNVX objectTable_ = ObjectTableNVX(), IndirectCommandsLayoutNVX indirectCommandsLayout_ = IndirectCommandsLayoutNVX(), uint32_t indirectCommandsTokenCount_ = 0, const IndirectCommandsTokenNVX* pIndirectCommandsTokens_ = nullptr, uint32_t maxSequencesCount_ = 0, CommandBuffer targetCommandBuffer_ = CommandBuffer(), Buffer sequencesCountBuffer_ = Buffer(), DeviceSize sequencesCountOffset_ = 0, Buffer sequencesIndexBuffer_ = Buffer(), DeviceSize sequencesIndexOffset_ = 0 )
+    CmdProcessCommandsInfoNVX( ObjectTableNVX objectTable_ = ObjectTableNVX(),
+                               IndirectCommandsLayoutNVX indirectCommandsLayout_ = IndirectCommandsLayoutNVX(),
+                               uint32_t indirectCommandsTokenCount_ = 0,
+                               const IndirectCommandsTokenNVX* pIndirectCommandsTokens_ = nullptr,
+                               uint32_t maxSequencesCount_ = 0,
+                               CommandBuffer targetCommandBuffer_ = CommandBuffer(),
+                               Buffer sequencesCountBuffer_ = Buffer(),
+                               DeviceSize sequencesCountOffset_ = 0,
+                               Buffer sequencesIndexBuffer_ = Buffer(),
+                               DeviceSize sequencesIndexOffset_ = 0 )
       : objectTable( objectTable_ )
       , indirectCommandsLayout( indirectCommandsLayout_ )
       , indirectCommandsTokenCount( indirectCommandsTokenCount_ )
@@ -37916,12 +39913,12 @@ public:
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   class Instance;
 
-  template <> class UniqueHandleTraits<DebugReportCallbackEXT> {public: using deleter = ObjectDestroy<Instance>; };
-  using UniqueDebugReportCallbackEXT = UniqueHandle<DebugReportCallbackEXT>;
-  template <> class UniqueHandleTraits<DebugUtilsMessengerEXT> {public: using deleter = ObjectDestroy<Instance>; };
-  using UniqueDebugUtilsMessengerEXT = UniqueHandle<DebugUtilsMessengerEXT>;
-  template <> class UniqueHandleTraits<SurfaceKHR> {public: using deleter = ObjectDestroy<Instance>; };
-  using UniqueSurfaceKHR = UniqueHandle<SurfaceKHR>;
+  template <typename Dispatch> class UniqueHandleTraits<DebugReportCallbackEXT,Dispatch> {public: using deleter = ObjectDestroy<Instance,Dispatch>; };
+  using UniqueDebugReportCallbackEXT = UniqueHandle<DebugReportCallbackEXT,DispatchLoaderStatic>;
+  template <typename Dispatch> class UniqueHandleTraits<DebugUtilsMessengerEXT,Dispatch> {public: using deleter = ObjectDestroy<Instance,Dispatch>; };
+  using UniqueDebugUtilsMessengerEXT = UniqueHandle<DebugUtilsMessengerEXT,DispatchLoaderStatic>;
+  template <typename Dispatch> class UniqueHandleTraits<SurfaceKHR,Dispatch> {public: using deleter = ObjectDestroy<Instance,Dispatch>; };
+  using UniqueSurfaceKHR = UniqueHandle<SurfaceKHR,DispatchLoaderStatic>;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 
   class Instance
@@ -37997,7 +39994,7 @@ public:
     ResultValueType<SurfaceKHR>::type createAndroidSurfaceKHR( const AndroidSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = DispatchLoaderStatic>
-    ResultValueType<UniqueSurfaceKHR>::type createAndroidSurfaceKHRUnique( const AndroidSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<SurfaceKHR,Dispatch>>::type createAndroidSurfaceKHRUnique( const AndroidSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_ANDROID_KHR*/
@@ -38009,7 +40006,7 @@ public:
     ResultValueType<SurfaceKHR>::type createDisplayPlaneSurfaceKHR( const DisplaySurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = DispatchLoaderStatic>
-    ResultValueType<UniqueSurfaceKHR>::type createDisplayPlaneSurfaceKHRUnique( const DisplaySurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<SurfaceKHR,Dispatch>>::type createDisplayPlaneSurfaceKHRUnique( const DisplaySurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -38021,7 +40018,7 @@ public:
     ResultValueType<SurfaceKHR>::type createMirSurfaceKHR( const MirSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = DispatchLoaderStatic>
-    ResultValueType<UniqueSurfaceKHR>::type createMirSurfaceKHRUnique( const MirSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<SurfaceKHR,Dispatch>>::type createMirSurfaceKHRUnique( const MirSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_MIR_KHR*/
@@ -38048,7 +40045,7 @@ public:
     ResultValueType<SurfaceKHR>::type createViSurfaceNN( const ViSurfaceCreateInfoNN & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = DispatchLoaderStatic>
-    ResultValueType<UniqueSurfaceKHR>::type createViSurfaceNNUnique( const ViSurfaceCreateInfoNN & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<SurfaceKHR,Dispatch>>::type createViSurfaceNNUnique( const ViSurfaceCreateInfoNN & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_VI_NN*/
@@ -38061,7 +40058,7 @@ public:
     ResultValueType<SurfaceKHR>::type createWaylandSurfaceKHR( const WaylandSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = DispatchLoaderStatic>
-    ResultValueType<UniqueSurfaceKHR>::type createWaylandSurfaceKHRUnique( const WaylandSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<SurfaceKHR,Dispatch>>::type createWaylandSurfaceKHRUnique( const WaylandSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_WAYLAND_KHR*/
@@ -38074,7 +40071,7 @@ public:
     ResultValueType<SurfaceKHR>::type createWin32SurfaceKHR( const Win32SurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = DispatchLoaderStatic>
-    ResultValueType<UniqueSurfaceKHR>::type createWin32SurfaceKHRUnique( const Win32SurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<SurfaceKHR,Dispatch>>::type createWin32SurfaceKHRUnique( const Win32SurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
@@ -38087,7 +40084,7 @@ public:
     ResultValueType<SurfaceKHR>::type createXlibSurfaceKHR( const XlibSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = DispatchLoaderStatic>
-    ResultValueType<UniqueSurfaceKHR>::type createXlibSurfaceKHRUnique( const XlibSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<SurfaceKHR,Dispatch>>::type createXlibSurfaceKHRUnique( const XlibSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_XLIB_KHR*/
@@ -38100,7 +40097,7 @@ public:
     ResultValueType<SurfaceKHR>::type createXcbSurfaceKHR( const XcbSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = DispatchLoaderStatic>
-    ResultValueType<UniqueSurfaceKHR>::type createXcbSurfaceKHRUnique( const XcbSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<SurfaceKHR,Dispatch>>::type createXcbSurfaceKHRUnique( const XcbSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_XCB_KHR*/
@@ -38112,7 +40109,7 @@ public:
     ResultValueType<DebugReportCallbackEXT>::type createDebugReportCallbackEXT( const DebugReportCallbackCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = DispatchLoaderStatic>
-    ResultValueType<UniqueDebugReportCallbackEXT>::type createDebugReportCallbackEXTUnique( const DebugReportCallbackCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<DebugReportCallbackEXT,Dispatch>>::type createDebugReportCallbackEXTUnique( const DebugReportCallbackCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -38159,7 +40156,7 @@ public:
     ResultValueType<SurfaceKHR>::type createIOSSurfaceMVK( const IOSSurfaceCreateInfoMVK & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = DispatchLoaderStatic>
-    ResultValueType<UniqueSurfaceKHR>::type createIOSSurfaceMVKUnique( const IOSSurfaceCreateInfoMVK & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<SurfaceKHR,Dispatch>>::type createIOSSurfaceMVKUnique( const IOSSurfaceCreateInfoMVK & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_IOS_MVK*/
@@ -38172,7 +40169,7 @@ public:
     ResultValueType<SurfaceKHR>::type createMacOSSurfaceMVK( const MacOSSurfaceCreateInfoMVK & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = DispatchLoaderStatic>
-    ResultValueType<UniqueSurfaceKHR>::type createMacOSSurfaceMVKUnique( const MacOSSurfaceCreateInfoMVK & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<SurfaceKHR,Dispatch>>::type createMacOSSurfaceMVKUnique( const MacOSSurfaceCreateInfoMVK & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_MACOS_MVK*/
@@ -38184,7 +40181,7 @@ public:
     ResultValueType<DebugUtilsMessengerEXT>::type createDebugUtilsMessengerEXT( const DebugUtilsMessengerCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = DispatchLoaderStatic>
-    ResultValueType<UniqueDebugUtilsMessengerEXT>::type createDebugUtilsMessengerEXTUnique( const DebugUtilsMessengerCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+    typename ResultValueType<UniqueHandle<DebugUtilsMessengerEXT,Dispatch>>::type createDebugUtilsMessengerEXTUnique( const DebugUtilsMessengerCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -38301,13 +40298,13 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<UniqueSurfaceKHR>::type Instance::createAndroidSurfaceKHRUnique( const AndroidSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<SurfaceKHR,Dispatch>>::type Instance::createAndroidSurfaceKHRUnique( const AndroidSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     SurfaceKHR surface;
     Result result = static_cast<Result>( d.vkCreateAndroidSurfaceKHR( m_instance, reinterpret_cast<const VkAndroidSurfaceCreateInfoKHR*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSurfaceKHR*>( &surface ) ) );
 
-    ObjectDestroy<Instance> deleter( *this, allocator );
-    return createResultValue( result, surface, VULKAN_HPP_NAMESPACE_STRING"::Instance::createAndroidSurfaceKHRUnique", deleter );
+    ObjectDestroy<Instance,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<SurfaceKHR,Dispatch>( result, surface, VULKAN_HPP_NAMESPACE_STRING"::Instance::createAndroidSurfaceKHRUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -38328,13 +40325,13 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<UniqueSurfaceKHR>::type Instance::createDisplayPlaneSurfaceKHRUnique( const DisplaySurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<SurfaceKHR,Dispatch>>::type Instance::createDisplayPlaneSurfaceKHRUnique( const DisplaySurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     SurfaceKHR surface;
     Result result = static_cast<Result>( d.vkCreateDisplayPlaneSurfaceKHR( m_instance, reinterpret_cast<const VkDisplaySurfaceCreateInfoKHR*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSurfaceKHR*>( &surface ) ) );
 
-    ObjectDestroy<Instance> deleter( *this, allocator );
-    return createResultValue( result, surface, VULKAN_HPP_NAMESPACE_STRING"::Instance::createDisplayPlaneSurfaceKHRUnique", deleter );
+    ObjectDestroy<Instance,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<SurfaceKHR,Dispatch>( result, surface, VULKAN_HPP_NAMESPACE_STRING"::Instance::createDisplayPlaneSurfaceKHRUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -38355,13 +40352,13 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<UniqueSurfaceKHR>::type Instance::createMirSurfaceKHRUnique( const MirSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<SurfaceKHR,Dispatch>>::type Instance::createMirSurfaceKHRUnique( const MirSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     SurfaceKHR surface;
     Result result = static_cast<Result>( d.vkCreateMirSurfaceKHR( m_instance, reinterpret_cast<const VkMirSurfaceCreateInfoKHR*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSurfaceKHR*>( &surface ) ) );
 
-    ObjectDestroy<Instance> deleter( *this, allocator );
-    return createResultValue( result, surface, VULKAN_HPP_NAMESPACE_STRING"::Instance::createMirSurfaceKHRUnique", deleter );
+    ObjectDestroy<Instance,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<SurfaceKHR,Dispatch>( result, surface, VULKAN_HPP_NAMESPACE_STRING"::Instance::createMirSurfaceKHRUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -38409,13 +40406,13 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<UniqueSurfaceKHR>::type Instance::createViSurfaceNNUnique( const ViSurfaceCreateInfoNN & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<SurfaceKHR,Dispatch>>::type Instance::createViSurfaceNNUnique( const ViSurfaceCreateInfoNN & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     SurfaceKHR surface;
     Result result = static_cast<Result>( d.vkCreateViSurfaceNN( m_instance, reinterpret_cast<const VkViSurfaceCreateInfoNN*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSurfaceKHR*>( &surface ) ) );
 
-    ObjectDestroy<Instance> deleter( *this, allocator );
-    return createResultValue( result, surface, VULKAN_HPP_NAMESPACE_STRING"::Instance::createViSurfaceNNUnique", deleter );
+    ObjectDestroy<Instance,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<SurfaceKHR,Dispatch>( result, surface, VULKAN_HPP_NAMESPACE_STRING"::Instance::createViSurfaceNNUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -38437,13 +40434,13 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<UniqueSurfaceKHR>::type Instance::createWaylandSurfaceKHRUnique( const WaylandSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<SurfaceKHR,Dispatch>>::type Instance::createWaylandSurfaceKHRUnique( const WaylandSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     SurfaceKHR surface;
     Result result = static_cast<Result>( d.vkCreateWaylandSurfaceKHR( m_instance, reinterpret_cast<const VkWaylandSurfaceCreateInfoKHR*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSurfaceKHR*>( &surface ) ) );
 
-    ObjectDestroy<Instance> deleter( *this, allocator );
-    return createResultValue( result, surface, VULKAN_HPP_NAMESPACE_STRING"::Instance::createWaylandSurfaceKHRUnique", deleter );
+    ObjectDestroy<Instance,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<SurfaceKHR,Dispatch>( result, surface, VULKAN_HPP_NAMESPACE_STRING"::Instance::createWaylandSurfaceKHRUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -38465,13 +40462,13 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<UniqueSurfaceKHR>::type Instance::createWin32SurfaceKHRUnique( const Win32SurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<SurfaceKHR,Dispatch>>::type Instance::createWin32SurfaceKHRUnique( const Win32SurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     SurfaceKHR surface;
     Result result = static_cast<Result>( d.vkCreateWin32SurfaceKHR( m_instance, reinterpret_cast<const VkWin32SurfaceCreateInfoKHR*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSurfaceKHR*>( &surface ) ) );
 
-    ObjectDestroy<Instance> deleter( *this, allocator );
-    return createResultValue( result, surface, VULKAN_HPP_NAMESPACE_STRING"::Instance::createWin32SurfaceKHRUnique", deleter );
+    ObjectDestroy<Instance,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<SurfaceKHR,Dispatch>( result, surface, VULKAN_HPP_NAMESPACE_STRING"::Instance::createWin32SurfaceKHRUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -38493,13 +40490,13 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<UniqueSurfaceKHR>::type Instance::createXlibSurfaceKHRUnique( const XlibSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<SurfaceKHR,Dispatch>>::type Instance::createXlibSurfaceKHRUnique( const XlibSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     SurfaceKHR surface;
     Result result = static_cast<Result>( d.vkCreateXlibSurfaceKHR( m_instance, reinterpret_cast<const VkXlibSurfaceCreateInfoKHR*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSurfaceKHR*>( &surface ) ) );
 
-    ObjectDestroy<Instance> deleter( *this, allocator );
-    return createResultValue( result, surface, VULKAN_HPP_NAMESPACE_STRING"::Instance::createXlibSurfaceKHRUnique", deleter );
+    ObjectDestroy<Instance,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<SurfaceKHR,Dispatch>( result, surface, VULKAN_HPP_NAMESPACE_STRING"::Instance::createXlibSurfaceKHRUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -38521,13 +40518,13 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<UniqueSurfaceKHR>::type Instance::createXcbSurfaceKHRUnique( const XcbSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<SurfaceKHR,Dispatch>>::type Instance::createXcbSurfaceKHRUnique( const XcbSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     SurfaceKHR surface;
     Result result = static_cast<Result>( d.vkCreateXcbSurfaceKHR( m_instance, reinterpret_cast<const VkXcbSurfaceCreateInfoKHR*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSurfaceKHR*>( &surface ) ) );
 
-    ObjectDestroy<Instance> deleter( *this, allocator );
-    return createResultValue( result, surface, VULKAN_HPP_NAMESPACE_STRING"::Instance::createXcbSurfaceKHRUnique", deleter );
+    ObjectDestroy<Instance,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<SurfaceKHR,Dispatch>( result, surface, VULKAN_HPP_NAMESPACE_STRING"::Instance::createXcbSurfaceKHRUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -38548,13 +40545,13 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<UniqueDebugReportCallbackEXT>::type Instance::createDebugReportCallbackEXTUnique( const DebugReportCallbackCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<DebugReportCallbackEXT,Dispatch>>::type Instance::createDebugReportCallbackEXTUnique( const DebugReportCallbackCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     DebugReportCallbackEXT callback;
     Result result = static_cast<Result>( d.vkCreateDebugReportCallbackEXT( m_instance, reinterpret_cast<const VkDebugReportCallbackCreateInfoEXT*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkDebugReportCallbackEXT*>( &callback ) ) );
 
-    ObjectDestroy<Instance> deleter( *this, allocator );
-    return createResultValue( result, callback, VULKAN_HPP_NAMESPACE_STRING"::Instance::createDebugReportCallbackEXTUnique", deleter );
+    ObjectDestroy<Instance,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<DebugReportCallbackEXT,Dispatch>( result, callback, VULKAN_HPP_NAMESPACE_STRING"::Instance::createDebugReportCallbackEXTUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -38676,13 +40673,13 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<UniqueSurfaceKHR>::type Instance::createIOSSurfaceMVKUnique( const IOSSurfaceCreateInfoMVK & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<SurfaceKHR,Dispatch>>::type Instance::createIOSSurfaceMVKUnique( const IOSSurfaceCreateInfoMVK & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     SurfaceKHR surface;
     Result result = static_cast<Result>( d.vkCreateIOSSurfaceMVK( m_instance, reinterpret_cast<const VkIOSSurfaceCreateInfoMVK*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSurfaceKHR*>( &surface ) ) );
 
-    ObjectDestroy<Instance> deleter( *this, allocator );
-    return createResultValue( result, surface, VULKAN_HPP_NAMESPACE_STRING"::Instance::createIOSSurfaceMVKUnique", deleter );
+    ObjectDestroy<Instance,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<SurfaceKHR,Dispatch>( result, surface, VULKAN_HPP_NAMESPACE_STRING"::Instance::createIOSSurfaceMVKUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -38704,13 +40701,13 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<UniqueSurfaceKHR>::type Instance::createMacOSSurfaceMVKUnique( const MacOSSurfaceCreateInfoMVK & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<SurfaceKHR,Dispatch>>::type Instance::createMacOSSurfaceMVKUnique( const MacOSSurfaceCreateInfoMVK & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     SurfaceKHR surface;
     Result result = static_cast<Result>( d.vkCreateMacOSSurfaceMVK( m_instance, reinterpret_cast<const VkMacOSSurfaceCreateInfoMVK*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSurfaceKHR*>( &surface ) ) );
 
-    ObjectDestroy<Instance> deleter( *this, allocator );
-    return createResultValue( result, surface, VULKAN_HPP_NAMESPACE_STRING"::Instance::createMacOSSurfaceMVKUnique", deleter );
+    ObjectDestroy<Instance,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<SurfaceKHR,Dispatch>( result, surface, VULKAN_HPP_NAMESPACE_STRING"::Instance::createMacOSSurfaceMVKUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -38731,13 +40728,13 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<UniqueDebugUtilsMessengerEXT>::type Instance::createDebugUtilsMessengerEXTUnique( const DebugUtilsMessengerCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<DebugUtilsMessengerEXT,Dispatch>>::type Instance::createDebugUtilsMessengerEXTUnique( const DebugUtilsMessengerCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     DebugUtilsMessengerEXT messenger;
     Result result = static_cast<Result>( d.vkCreateDebugUtilsMessengerEXT( m_instance, reinterpret_cast<const VkDebugUtilsMessengerCreateInfoEXT*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkDebugUtilsMessengerEXT*>( &messenger ) ) );
 
-    ObjectDestroy<Instance> deleter( *this, allocator );
-    return createResultValue( result, messenger, VULKAN_HPP_NAMESPACE_STRING"::Instance::createDebugUtilsMessengerEXTUnique", deleter );
+    ObjectDestroy<Instance,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<DebugUtilsMessengerEXT,Dispatch>( result, messenger, VULKAN_HPP_NAMESPACE_STRING"::Instance::createDebugUtilsMessengerEXTUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -38783,7 +40780,8 @@ public:
 
   struct DeviceGroupDeviceCreateInfo
   {
-    DeviceGroupDeviceCreateInfo( uint32_t physicalDeviceCount_ = 0, const PhysicalDevice* pPhysicalDevices_ = nullptr )
+    DeviceGroupDeviceCreateInfo( uint32_t physicalDeviceCount_ = 0,
+                                 const PhysicalDevice* pPhysicalDevices_ = nullptr )
       : physicalDeviceCount( physicalDeviceCount_ )
       , pPhysicalDevices( pPhysicalDevices_ )
     {
@@ -38849,8 +40847,8 @@ public:
 
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
 
-  template <> class UniqueHandleTraits<Instance> {public: using deleter = ObjectDestroy<NoParent>; };
-  using UniqueInstance = UniqueHandle<Instance>;
+  template <typename Dispatch> class UniqueHandleTraits<Instance,Dispatch> {public: using deleter = ObjectDestroy<NoParent,Dispatch>; };
+  using UniqueInstance = UniqueHandle<Instance,DispatchLoaderStatic>;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 
   template<typename Dispatch = DispatchLoaderStatic>
@@ -38860,7 +40858,7 @@ public:
   ResultValueType<Instance>::type createInstance( const InstanceCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() );
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch = DispatchLoaderStatic>
-  ResultValueType<UniqueInstance>::type createInstanceUnique( const InstanceCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() );
+  typename ResultValueType<UniqueHandle<Instance,Dispatch>>::type createInstanceUnique( const InstanceCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() );
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -38879,13 +40877,13 @@ public:
   }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<UniqueInstance>::type createInstanceUnique( const InstanceCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d )
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<Instance,Dispatch>>::type createInstanceUnique( const InstanceCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d )
   {
     Instance instance;
     Result result = static_cast<Result>( d.vkCreateInstance( reinterpret_cast<const VkInstanceCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkInstance*>( &instance ) ) );
 
-    ObjectDestroy<NoParent> deleter( allocator );
-    return createResultValue( result, instance, VULKAN_HPP_NAMESPACE_STRING"::createInstanceUnique", deleter );
+    ObjectDestroy<NoParent,Dispatch> deleter( allocator, d );
+    return createResultValue<Instance,Dispatch>( result, instance, VULKAN_HPP_NAMESPACE_STRING"::createInstanceUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -39062,15 +41060,21 @@ public:
 #ifdef VK_USE_PLATFORM_ANDROID_ANDROID
   template <> struct isStructureChainValid<ImageFormatProperties2, AndroidHardwareBufferUsageANDROID>{ enum { value = true }; };
 #endif /*VK_USE_PLATFORM_ANDROID_ANDROID*/
+  template <> struct isStructureChainValid<CommandBufferInheritanceInfo, CommandBufferInheritanceConditionalRenderingInfoEXT>{ enum { value = true }; };
 #ifdef VK_USE_PLATFORM_ANDROID_ANDROID
   template <> struct isStructureChainValid<ImageCreateInfo, ExternalFormatANDROID>{ enum { value = true }; };
   template <> struct isStructureChainValid<SamplerYcbcrConversionCreateInfo, ExternalFormatANDROID>{ enum { value = true }; };
 #endif /*VK_USE_PLATFORM_ANDROID_ANDROID*/
+  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDevice8BitStorageFeaturesKHR>{ enum { value = true }; };
+  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDevice8BitStorageFeaturesKHR>{ enum { value = true }; };
+  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceConditionalRenderingFeaturesEXT>{ enum { value = true }; };
+  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceConditionalRenderingFeaturesEXT>{ enum { value = true }; };
   template <> struct isStructureChainValid<SurfaceCapabilities2KHR, SharedPresentSurfaceCapabilitiesKHR>{ enum { value = true }; };
   template <> struct isStructureChainValid<ImageViewCreateInfo, ImageViewUsageCreateInfo>{ enum { value = true }; };
   template <> struct isStructureChainValid<RenderPassCreateInfo, RenderPassInputAttachmentAspectCreateInfo>{ enum { value = true }; };
   template <> struct isStructureChainValid<BindImageMemoryInfo, BindImagePlaneMemoryInfo>{ enum { value = true }; };
   template <> struct isStructureChainValid<ImageMemoryRequirementsInfo2, ImagePlaneMemoryRequirementsInfo>{ enum { value = true }; };
+  template <> struct isStructureChainValid<QueueFamilyProperties2, QueueFamilyCheckpointPropertiesNV>{ enum { value = true }; };
   template <> struct isStructureChainValid<ImageMemoryBarrier, SampleLocationsInfoEXT>{ enum { value = true }; };
   template <> struct isStructureChainValid<RenderPassBeginInfo, RenderPassSampleLocationsBeginInfoEXT>{ enum { value = true }; };
   template <> struct isStructureChainValid<PipelineMultisampleStateCreateInfo, PipelineSampleLocationsStateCreateInfoEXT>{ enum { value = true }; };
@@ -40485,6 +42489,9 @@ public:
     case StructureType::eImportSemaphoreFdInfoKHR: return "ImportSemaphoreFdInfoKHR";
     case StructureType::eSemaphoreGetFdInfoKHR: return "SemaphoreGetFdInfoKHR";
     case StructureType::ePhysicalDevicePushDescriptorPropertiesKHR: return "PhysicalDevicePushDescriptorPropertiesKHR";
+    case StructureType::eCommandBufferInheritanceConditionalRenderingInfoEXT: return "CommandBufferInheritanceConditionalRenderingInfoEXT";
+    case StructureType::ePhysicalDeviceConditionalRenderingFeaturesEXT: return "PhysicalDeviceConditionalRenderingFeaturesEXT";
+    case StructureType::eConditionalRenderingBeginInfoEXT: return "ConditionalRenderingBeginInfoEXT";
     case StructureType::ePresentRegionsKHR: return "PresentRegionsKHR";
     case StructureType::eObjectTableCreateInfoNVX: return "ObjectTableCreateInfoNVX";
     case StructureType::eIndirectCommandsLayoutCreateInfoNVX: return "IndirectCommandsLayoutCreateInfoNVX";
@@ -40506,6 +42513,13 @@ public:
     case StructureType::ePhysicalDeviceConservativeRasterizationPropertiesEXT: return "PhysicalDeviceConservativeRasterizationPropertiesEXT";
     case StructureType::ePipelineRasterizationConservativeStateCreateInfoEXT: return "PipelineRasterizationConservativeStateCreateInfoEXT";
     case StructureType::eHdrMetadataEXT: return "HdrMetadataEXT";
+    case StructureType::eAttachmentDescription2KHR: return "AttachmentDescription2KHR";
+    case StructureType::eAttachmentReference2KHR: return "AttachmentReference2KHR";
+    case StructureType::eSubpassDescription2KHR: return "SubpassDescription2KHR";
+    case StructureType::eSubpassDependency2KHR: return "SubpassDependency2KHR";
+    case StructureType::eRenderPassCreateInfo2KHR: return "RenderPassCreateInfo2KHR";
+    case StructureType::eSubpassBeginInfoKHR: return "SubpassBeginInfoKHR";
+    case StructureType::eSubpassEndInfoKHR: return "SubpassEndInfoKHR";
     case StructureType::eSharedPresentSurfaceCapabilitiesKHR: return "SharedPresentSurfaceCapabilitiesKHR";
     case StructureType::eImportFenceWin32HandleInfoKHR: return "ImportFenceWin32HandleInfoKHR";
     case StructureType::eExportFenceWin32HandleInfoKHR: return "ExportFenceWin32HandleInfoKHR";
@@ -40554,12 +42568,15 @@ public:
     case StructureType::eDescriptorSetVariableDescriptorCountAllocateInfoEXT: return "DescriptorSetVariableDescriptorCountAllocateInfoEXT";
     case StructureType::eDescriptorSetVariableDescriptorCountLayoutSupportEXT: return "DescriptorSetVariableDescriptorCountLayoutSupportEXT";
     case StructureType::eDeviceQueueGlobalPriorityCreateInfoEXT: return "DeviceQueueGlobalPriorityCreateInfoEXT";
+    case StructureType::ePhysicalDevice8BitStorageFeaturesKHR: return "PhysicalDevice8BitStorageFeaturesKHR";
     case StructureType::eImportMemoryHostPointerInfoEXT: return "ImportMemoryHostPointerInfoEXT";
     case StructureType::eMemoryHostPointerPropertiesEXT: return "MemoryHostPointerPropertiesEXT";
     case StructureType::ePhysicalDeviceExternalMemoryHostPropertiesEXT: return "PhysicalDeviceExternalMemoryHostPropertiesEXT";
     case StructureType::ePhysicalDeviceShaderCorePropertiesAMD: return "PhysicalDeviceShaderCorePropertiesAMD";
     case StructureType::ePhysicalDeviceVertexAttributeDivisorPropertiesEXT: return "PhysicalDeviceVertexAttributeDivisorPropertiesEXT";
     case StructureType::ePipelineVertexInputDivisorStateCreateInfoEXT: return "PipelineVertexInputDivisorStateCreateInfoEXT";
+    case StructureType::eCheckpointDataNV: return "CheckpointDataNV";
+    case StructureType::eQueueFamilyCheckpointPropertiesNV: return "QueueFamilyCheckpointPropertiesNV";
     default: return "invalid";
     }
   }
@@ -40758,6 +42775,7 @@ public:
     case AccessFlagBits::eHostWrite: return "HostWrite";
     case AccessFlagBits::eMemoryRead: return "MemoryRead";
     case AccessFlagBits::eMemoryWrite: return "MemoryWrite";
+    case AccessFlagBits::eConditionalRenderingReadEXT: return "ConditionalRenderingReadEXT";
     case AccessFlagBits::eCommandProcessReadNVX: return "CommandProcessReadNVX";
     case AccessFlagBits::eCommandProcessWriteNVX: return "CommandProcessWriteNVX";
     case AccessFlagBits::eColorAttachmentReadNoncoherentEXT: return "ColorAttachmentReadNoncoherentEXT";
@@ -40786,6 +42804,7 @@ public:
     if (value & AccessFlagBits::eHostWrite) result += "HostWrite | ";
     if (value & AccessFlagBits::eMemoryRead) result += "MemoryRead | ";
     if (value & AccessFlagBits::eMemoryWrite) result += "MemoryWrite | ";
+    if (value & AccessFlagBits::eConditionalRenderingReadEXT) result += "ConditionalRenderingReadEXT | ";
     if (value & AccessFlagBits::eCommandProcessReadNVX) result += "CommandProcessReadNVX | ";
     if (value & AccessFlagBits::eCommandProcessWriteNVX) result += "CommandProcessWriteNVX | ";
     if (value & AccessFlagBits::eColorAttachmentReadNoncoherentEXT) result += "ColorAttachmentReadNoncoherentEXT | ";
@@ -40805,6 +42824,7 @@ public:
     case BufferUsageFlagBits::eIndexBuffer: return "IndexBuffer";
     case BufferUsageFlagBits::eVertexBuffer: return "VertexBuffer";
     case BufferUsageFlagBits::eIndirectBuffer: return "IndirectBuffer";
+    case BufferUsageFlagBits::eConditionalRenderingEXT: return "ConditionalRenderingEXT";
     default: return "invalid";
     }
   }
@@ -40822,6 +42842,7 @@ public:
     if (value & BufferUsageFlagBits::eIndexBuffer) result += "IndexBuffer | ";
     if (value & BufferUsageFlagBits::eVertexBuffer) result += "VertexBuffer | ";
     if (value & BufferUsageFlagBits::eIndirectBuffer) result += "IndirectBuffer | ";
+    if (value & BufferUsageFlagBits::eConditionalRenderingEXT) result += "ConditionalRenderingEXT | ";
     return "{" + result.substr(0, result.size() - 3) + "}";
   }
 
@@ -41265,6 +43286,7 @@ public:
     case PipelineStageFlagBits::eHost: return "Host";
     case PipelineStageFlagBits::eAllGraphics: return "AllGraphics";
     case PipelineStageFlagBits::eAllCommands: return "AllCommands";
+    case PipelineStageFlagBits::eConditionalRenderingEXT: return "ConditionalRenderingEXT";
     case PipelineStageFlagBits::eCommandProcessNVX: return "CommandProcessNVX";
     default: return "invalid";
     }
@@ -41291,6 +43313,7 @@ public:
     if (value & PipelineStageFlagBits::eHost) result += "Host | ";
     if (value & PipelineStageFlagBits::eAllGraphics) result += "AllGraphics | ";
     if (value & PipelineStageFlagBits::eAllCommands) result += "AllCommands | ";
+    if (value & PipelineStageFlagBits::eConditionalRenderingEXT) result += "ConditionalRenderingEXT | ";
     if (value & PipelineStageFlagBits::eCommandProcessNVX) result += "CommandProcessNVX | ";
     return "{" + result.substr(0, result.size() - 3) + "}";
   }
@@ -42377,6 +44400,34 @@ public:
     return "{" + result.substr(0, result.size() - 3) + "}";
   }
 
+  VULKAN_HPP_INLINE std::string to_string(VendorId value)
+  {
+    switch (value)
+    {
+    case VendorId::eViv: return "Viv";
+    case VendorId::eVsi: return "Vsi";
+    case VendorId::eKazan: return "Kazan";
+    default: return "invalid";
+    }
+  }
+
+  VULKAN_HPP_INLINE std::string to_string(ConditionalRenderingFlagBitsEXT value)
+  {
+    switch (value)
+    {
+    case ConditionalRenderingFlagBitsEXT::eInverted: return "Inverted";
+    default: return "invalid";
+    }
+  }
+
+  VULKAN_HPP_INLINE std::string to_string(ConditionalRenderingFlagsEXT value)
+  {
+    if (!value) return "{}";
+    std::string result;
+    if (value & ConditionalRenderingFlagBitsEXT::eInverted) result += "Inverted | ";
+    return "{" + result.substr(0, result.size() - 3) + "}";
+  }
+
   class DispatchLoaderDynamic
   {
   public:
@@ -42395,9 +44446,11 @@ public:
     PFN_vkBindImageMemory vkBindImageMemory = 0;
     PFN_vkBindImageMemory2 vkBindImageMemory2 = 0;
     PFN_vkBindImageMemory2KHR vkBindImageMemory2KHR = 0;
+    PFN_vkCmdBeginConditionalRenderingEXT vkCmdBeginConditionalRenderingEXT = 0;
     PFN_vkCmdBeginDebugUtilsLabelEXT vkCmdBeginDebugUtilsLabelEXT = 0;
     PFN_vkCmdBeginQuery vkCmdBeginQuery = 0;
     PFN_vkCmdBeginRenderPass vkCmdBeginRenderPass = 0;
+    PFN_vkCmdBeginRenderPass2KHR vkCmdBeginRenderPass2KHR = 0;
     PFN_vkCmdBindDescriptorSets vkCmdBindDescriptorSets = 0;
     PFN_vkCmdBindIndexBuffer vkCmdBindIndexBuffer = 0;
     PFN_vkCmdBindPipeline vkCmdBindPipeline = 0;
@@ -42426,13 +44479,16 @@ public:
     PFN_vkCmdDrawIndirect vkCmdDrawIndirect = 0;
     PFN_vkCmdDrawIndirectCountAMD vkCmdDrawIndirectCountAMD = 0;
     PFN_vkCmdDrawIndirectCountKHR vkCmdDrawIndirectCountKHR = 0;
+    PFN_vkCmdEndConditionalRenderingEXT vkCmdEndConditionalRenderingEXT = 0;
     PFN_vkCmdEndDebugUtilsLabelEXT vkCmdEndDebugUtilsLabelEXT = 0;
     PFN_vkCmdEndQuery vkCmdEndQuery = 0;
     PFN_vkCmdEndRenderPass vkCmdEndRenderPass = 0;
+    PFN_vkCmdEndRenderPass2KHR vkCmdEndRenderPass2KHR = 0;
     PFN_vkCmdExecuteCommands vkCmdExecuteCommands = 0;
     PFN_vkCmdFillBuffer vkCmdFillBuffer = 0;
     PFN_vkCmdInsertDebugUtilsLabelEXT vkCmdInsertDebugUtilsLabelEXT = 0;
     PFN_vkCmdNextSubpass vkCmdNextSubpass = 0;
+    PFN_vkCmdNextSubpass2KHR vkCmdNextSubpass2KHR = 0;
     PFN_vkCmdPipelineBarrier vkCmdPipelineBarrier = 0;
     PFN_vkCmdProcessCommandsNVX vkCmdProcessCommandsNVX = 0;
     PFN_vkCmdPushConstants vkCmdPushConstants = 0;
@@ -42443,6 +44499,7 @@ public:
     PFN_vkCmdResetQueryPool vkCmdResetQueryPool = 0;
     PFN_vkCmdResolveImage vkCmdResolveImage = 0;
     PFN_vkCmdSetBlendConstants vkCmdSetBlendConstants = 0;
+    PFN_vkCmdSetCheckpointNV vkCmdSetCheckpointNV = 0;
     PFN_vkCmdSetDepthBias vkCmdSetDepthBias = 0;
     PFN_vkCmdSetDepthBounds vkCmdSetDepthBounds = 0;
     PFN_vkCmdSetDeviceMask vkCmdSetDeviceMask = 0;
@@ -42499,6 +44556,7 @@ public:
     PFN_vkCreatePipelineLayout vkCreatePipelineLayout = 0;
     PFN_vkCreateQueryPool vkCreateQueryPool = 0;
     PFN_vkCreateRenderPass vkCreateRenderPass = 0;
+    PFN_vkCreateRenderPass2KHR vkCreateRenderPass2KHR = 0;
     PFN_vkCreateSampler vkCreateSampler = 0;
     PFN_vkCreateSamplerYcbcrConversion vkCreateSamplerYcbcrConversion = 0;
     PFN_vkCreateSamplerYcbcrConversionKHR vkCreateSamplerYcbcrConversionKHR = 0;
@@ -42681,6 +44739,7 @@ public:
 #endif /*VK_USE_PLATFORM_XLIB_KHR*/
     PFN_vkGetPipelineCacheData vkGetPipelineCacheData = 0;
     PFN_vkGetQueryPoolResults vkGetQueryPoolResults = 0;
+    PFN_vkGetQueueCheckpointDataNV vkGetQueueCheckpointDataNV = 0;
 #ifdef VK_USE_PLATFORM_XLIB_XRANDR_NV
     PFN_vkGetRandROutputDisplayEXT vkGetRandROutputDisplayEXT = 0;
 #endif /*VK_USE_PLATFORM_XLIB_XRANDR_NV*/
@@ -42762,9 +44821,11 @@ public:
       vkBindImageMemory = PFN_vkBindImageMemory(device ? device.getProcAddr( "vkBindImageMemory") : instance.getProcAddr( "vkBindImageMemory"));
       vkBindImageMemory2 = PFN_vkBindImageMemory2(device ? device.getProcAddr( "vkBindImageMemory2") : instance.getProcAddr( "vkBindImageMemory2"));
       vkBindImageMemory2KHR = PFN_vkBindImageMemory2KHR(device ? device.getProcAddr( "vkBindImageMemory2KHR") : instance.getProcAddr( "vkBindImageMemory2KHR"));
+      vkCmdBeginConditionalRenderingEXT = PFN_vkCmdBeginConditionalRenderingEXT(device ? device.getProcAddr( "vkCmdBeginConditionalRenderingEXT") : instance.getProcAddr( "vkCmdBeginConditionalRenderingEXT"));
       vkCmdBeginDebugUtilsLabelEXT = PFN_vkCmdBeginDebugUtilsLabelEXT(device ? device.getProcAddr( "vkCmdBeginDebugUtilsLabelEXT") : instance.getProcAddr( "vkCmdBeginDebugUtilsLabelEXT"));
       vkCmdBeginQuery = PFN_vkCmdBeginQuery(device ? device.getProcAddr( "vkCmdBeginQuery") : instance.getProcAddr( "vkCmdBeginQuery"));
       vkCmdBeginRenderPass = PFN_vkCmdBeginRenderPass(device ? device.getProcAddr( "vkCmdBeginRenderPass") : instance.getProcAddr( "vkCmdBeginRenderPass"));
+      vkCmdBeginRenderPass2KHR = PFN_vkCmdBeginRenderPass2KHR(device ? device.getProcAddr( "vkCmdBeginRenderPass2KHR") : instance.getProcAddr( "vkCmdBeginRenderPass2KHR"));
       vkCmdBindDescriptorSets = PFN_vkCmdBindDescriptorSets(device ? device.getProcAddr( "vkCmdBindDescriptorSets") : instance.getProcAddr( "vkCmdBindDescriptorSets"));
       vkCmdBindIndexBuffer = PFN_vkCmdBindIndexBuffer(device ? device.getProcAddr( "vkCmdBindIndexBuffer") : instance.getProcAddr( "vkCmdBindIndexBuffer"));
       vkCmdBindPipeline = PFN_vkCmdBindPipeline(device ? device.getProcAddr( "vkCmdBindPipeline") : instance.getProcAddr( "vkCmdBindPipeline"));
@@ -42793,13 +44854,16 @@ public:
       vkCmdDrawIndirect = PFN_vkCmdDrawIndirect(device ? device.getProcAddr( "vkCmdDrawIndirect") : instance.getProcAddr( "vkCmdDrawIndirect"));
       vkCmdDrawIndirectCountAMD = PFN_vkCmdDrawIndirectCountAMD(device ? device.getProcAddr( "vkCmdDrawIndirectCountAMD") : instance.getProcAddr( "vkCmdDrawIndirectCountAMD"));
       vkCmdDrawIndirectCountKHR = PFN_vkCmdDrawIndirectCountKHR(device ? device.getProcAddr( "vkCmdDrawIndirectCountKHR") : instance.getProcAddr( "vkCmdDrawIndirectCountKHR"));
+      vkCmdEndConditionalRenderingEXT = PFN_vkCmdEndConditionalRenderingEXT(device ? device.getProcAddr( "vkCmdEndConditionalRenderingEXT") : instance.getProcAddr( "vkCmdEndConditionalRenderingEXT"));
       vkCmdEndDebugUtilsLabelEXT = PFN_vkCmdEndDebugUtilsLabelEXT(device ? device.getProcAddr( "vkCmdEndDebugUtilsLabelEXT") : instance.getProcAddr( "vkCmdEndDebugUtilsLabelEXT"));
       vkCmdEndQuery = PFN_vkCmdEndQuery(device ? device.getProcAddr( "vkCmdEndQuery") : instance.getProcAddr( "vkCmdEndQuery"));
       vkCmdEndRenderPass = PFN_vkCmdEndRenderPass(device ? device.getProcAddr( "vkCmdEndRenderPass") : instance.getProcAddr( "vkCmdEndRenderPass"));
+      vkCmdEndRenderPass2KHR = PFN_vkCmdEndRenderPass2KHR(device ? device.getProcAddr( "vkCmdEndRenderPass2KHR") : instance.getProcAddr( "vkCmdEndRenderPass2KHR"));
       vkCmdExecuteCommands = PFN_vkCmdExecuteCommands(device ? device.getProcAddr( "vkCmdExecuteCommands") : instance.getProcAddr( "vkCmdExecuteCommands"));
       vkCmdFillBuffer = PFN_vkCmdFillBuffer(device ? device.getProcAddr( "vkCmdFillBuffer") : instance.getProcAddr( "vkCmdFillBuffer"));
       vkCmdInsertDebugUtilsLabelEXT = PFN_vkCmdInsertDebugUtilsLabelEXT(device ? device.getProcAddr( "vkCmdInsertDebugUtilsLabelEXT") : instance.getProcAddr( "vkCmdInsertDebugUtilsLabelEXT"));
       vkCmdNextSubpass = PFN_vkCmdNextSubpass(device ? device.getProcAddr( "vkCmdNextSubpass") : instance.getProcAddr( "vkCmdNextSubpass"));
+      vkCmdNextSubpass2KHR = PFN_vkCmdNextSubpass2KHR(device ? device.getProcAddr( "vkCmdNextSubpass2KHR") : instance.getProcAddr( "vkCmdNextSubpass2KHR"));
       vkCmdPipelineBarrier = PFN_vkCmdPipelineBarrier(device ? device.getProcAddr( "vkCmdPipelineBarrier") : instance.getProcAddr( "vkCmdPipelineBarrier"));
       vkCmdProcessCommandsNVX = PFN_vkCmdProcessCommandsNVX(device ? device.getProcAddr( "vkCmdProcessCommandsNVX") : instance.getProcAddr( "vkCmdProcessCommandsNVX"));
       vkCmdPushConstants = PFN_vkCmdPushConstants(device ? device.getProcAddr( "vkCmdPushConstants") : instance.getProcAddr( "vkCmdPushConstants"));
@@ -42810,6 +44874,7 @@ public:
       vkCmdResetQueryPool = PFN_vkCmdResetQueryPool(device ? device.getProcAddr( "vkCmdResetQueryPool") : instance.getProcAddr( "vkCmdResetQueryPool"));
       vkCmdResolveImage = PFN_vkCmdResolveImage(device ? device.getProcAddr( "vkCmdResolveImage") : instance.getProcAddr( "vkCmdResolveImage"));
       vkCmdSetBlendConstants = PFN_vkCmdSetBlendConstants(device ? device.getProcAddr( "vkCmdSetBlendConstants") : instance.getProcAddr( "vkCmdSetBlendConstants"));
+      vkCmdSetCheckpointNV = PFN_vkCmdSetCheckpointNV(device ? device.getProcAddr( "vkCmdSetCheckpointNV") : instance.getProcAddr( "vkCmdSetCheckpointNV"));
       vkCmdSetDepthBias = PFN_vkCmdSetDepthBias(device ? device.getProcAddr( "vkCmdSetDepthBias") : instance.getProcAddr( "vkCmdSetDepthBias"));
       vkCmdSetDepthBounds = PFN_vkCmdSetDepthBounds(device ? device.getProcAddr( "vkCmdSetDepthBounds") : instance.getProcAddr( "vkCmdSetDepthBounds"));
       vkCmdSetDeviceMask = PFN_vkCmdSetDeviceMask(device ? device.getProcAddr( "vkCmdSetDeviceMask") : instance.getProcAddr( "vkCmdSetDeviceMask"));
@@ -42866,6 +44931,7 @@ public:
       vkCreatePipelineLayout = PFN_vkCreatePipelineLayout(device ? device.getProcAddr( "vkCreatePipelineLayout") : instance.getProcAddr( "vkCreatePipelineLayout"));
       vkCreateQueryPool = PFN_vkCreateQueryPool(device ? device.getProcAddr( "vkCreateQueryPool") : instance.getProcAddr( "vkCreateQueryPool"));
       vkCreateRenderPass = PFN_vkCreateRenderPass(device ? device.getProcAddr( "vkCreateRenderPass") : instance.getProcAddr( "vkCreateRenderPass"));
+      vkCreateRenderPass2KHR = PFN_vkCreateRenderPass2KHR(device ? device.getProcAddr( "vkCreateRenderPass2KHR") : instance.getProcAddr( "vkCreateRenderPass2KHR"));
       vkCreateSampler = PFN_vkCreateSampler(device ? device.getProcAddr( "vkCreateSampler") : instance.getProcAddr( "vkCreateSampler"));
       vkCreateSamplerYcbcrConversion = PFN_vkCreateSamplerYcbcrConversion(device ? device.getProcAddr( "vkCreateSamplerYcbcrConversion") : instance.getProcAddr( "vkCreateSamplerYcbcrConversion"));
       vkCreateSamplerYcbcrConversionKHR = PFN_vkCreateSamplerYcbcrConversionKHR(device ? device.getProcAddr( "vkCreateSamplerYcbcrConversionKHR") : instance.getProcAddr( "vkCreateSamplerYcbcrConversionKHR"));
@@ -43048,6 +45114,7 @@ public:
 #endif /*VK_USE_PLATFORM_XLIB_KHR*/
       vkGetPipelineCacheData = PFN_vkGetPipelineCacheData(device ? device.getProcAddr( "vkGetPipelineCacheData") : instance.getProcAddr( "vkGetPipelineCacheData"));
       vkGetQueryPoolResults = PFN_vkGetQueryPoolResults(device ? device.getProcAddr( "vkGetQueryPoolResults") : instance.getProcAddr( "vkGetQueryPoolResults"));
+      vkGetQueueCheckpointDataNV = PFN_vkGetQueueCheckpointDataNV(device ? device.getProcAddr( "vkGetQueueCheckpointDataNV") : instance.getProcAddr( "vkGetQueueCheckpointDataNV"));
 #ifdef VK_USE_PLATFORM_XLIB_XRANDR_NV
       vkGetRandROutputDisplayEXT = PFN_vkGetRandROutputDisplayEXT(device ? device.getProcAddr( "vkGetRandROutputDisplayEXT") : instance.getProcAddr( "vkGetRandROutputDisplayEXT"));
 #endif /*VK_USE_PLATFORM_XLIB_XRANDR_NV*/
