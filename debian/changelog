@@ -1,8 +1,14 @@
-vulkan-headers (1.1.82.0-2) UNRELEASED; urgency=medium
+vulkan-headers (1.1.85.0-1) UNRELEASED; urgency=medium
+
+  * New upstream version
+
+ -- Brett Johnson <brett@linuxturtle.net>  Mon, 01 Oct 2018 12:57:03 -0600
+
+vulkan-headers (1.1.82.0-2) unstable; urgency=medium
 
   * Rebuild for LunarG
 
- -- Brett Johnson <brett@linuxturtle.net>  Mon, 27 Aug 2018 15:05:05 -0600
+ -- Brett Johnson <brett@linuxturtle.net>  Mon, 01 Oct 2018 12:57:03 -0600
 
 vulkan-headers (1.1.82.0-1) unstable; urgency=medium
 
