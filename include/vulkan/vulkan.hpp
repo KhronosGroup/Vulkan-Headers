@@ -70,7 +70,7 @@
   #undef MemoryBarrier
 #endif
 
-static_assert( VK_HEADER_VERSION ==  85 , "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION ==  87 , "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
@@ -1185,9 +1185,9 @@ public:
   {
     return ::vkCmdBlitImage( commandBuffer, srcImage, srcImageLayout, dstImage, dstImageLayout, regionCount, pRegions, filter);
   }
-  void vkCmdBuildAccelerationStructureNVX( VkCommandBuffer cmdBuf, VkAccelerationStructureTypeNVX type, uint32_t instanceCount, VkBuffer instanceData, VkDeviceSize instanceOffset, uint32_t geometryCount, const VkGeometryNVX* pGeometries, VkBuildAccelerationStructureFlagsNVX flags, VkBool32 update, VkAccelerationStructureNVX dst, VkAccelerationStructureNVX src, VkBuffer scratch, VkDeviceSize scratchOffset  ) const
+  void vkCmdBuildAccelerationStructureNVX( VkCommandBuffer commandBuffer, VkAccelerationStructureTypeNVX type, uint32_t instanceCount, VkBuffer instanceData, VkDeviceSize instanceOffset, uint32_t geometryCount, const VkGeometryNVX* pGeometries, VkBuildAccelerationStructureFlagsNVX flags, VkBool32 update, VkAccelerationStructureNVX dst, VkAccelerationStructureNVX src, VkBuffer scratch, VkDeviceSize scratchOffset  ) const
   {
-    return ::vkCmdBuildAccelerationStructureNVX( cmdBuf, type, instanceCount, instanceData, instanceOffset, geometryCount, pGeometries, flags, update, dst, src, scratch, scratchOffset);
+    return ::vkCmdBuildAccelerationStructureNVX( commandBuffer, type, instanceCount, instanceData, instanceOffset, geometryCount, pGeometries, flags, update, dst, src, scratch, scratchOffset);
   }
   void vkCmdClearAttachments( VkCommandBuffer commandBuffer, uint32_t attachmentCount, const VkClearAttachment* pAttachments, uint32_t rectCount, const VkClearRect* pRects  ) const
   {
@@ -1201,9 +1201,9 @@ public:
   {
     return ::vkCmdClearDepthStencilImage( commandBuffer, image, imageLayout, pDepthStencil, rangeCount, pRanges);
   }
-  void vkCmdCopyAccelerationStructureNVX( VkCommandBuffer cmdBuf, VkAccelerationStructureNVX dst, VkAccelerationStructureNVX src, VkCopyAccelerationStructureModeNVX mode  ) const
+  void vkCmdCopyAccelerationStructureNVX( VkCommandBuffer commandBuffer, VkAccelerationStructureNVX dst, VkAccelerationStructureNVX src, VkCopyAccelerationStructureModeNVX mode  ) const
   {
-    return ::vkCmdCopyAccelerationStructureNVX( cmdBuf, dst, src, mode);
+    return ::vkCmdCopyAccelerationStructureNVX( commandBuffer, dst, src, mode);
   }
   void vkCmdCopyBuffer( VkCommandBuffer commandBuffer, VkBuffer srcBuffer, VkBuffer dstBuffer, uint32_t regionCount, const VkBufferCopy* pRegions  ) const
   {
@@ -1449,9 +1449,9 @@ public:
   {
     return ::vkCmdSetViewportWScalingNV( commandBuffer, firstViewport, viewportCount, pViewportWScalings);
   }
-  void vkCmdTraceRaysNVX( VkCommandBuffer cmdBuf, VkBuffer raygenShaderBindingTableBuffer, VkDeviceSize raygenShaderBindingOffset, VkBuffer missShaderBindingTableBuffer, VkDeviceSize missShaderBindingOffset, VkDeviceSize missShaderBindingStride, VkBuffer hitShaderBindingTableBuffer, VkDeviceSize hitShaderBindingOffset, VkDeviceSize hitShaderBindingStride, uint32_t width, uint32_t height  ) const
+  void vkCmdTraceRaysNVX( VkCommandBuffer commandBuffer, VkBuffer raygenShaderBindingTableBuffer, VkDeviceSize raygenShaderBindingOffset, VkBuffer missShaderBindingTableBuffer, VkDeviceSize missShaderBindingOffset, VkDeviceSize missShaderBindingStride, VkBuffer hitShaderBindingTableBuffer, VkDeviceSize hitShaderBindingOffset, VkDeviceSize hitShaderBindingStride, uint32_t width, uint32_t height  ) const
   {
-    return ::vkCmdTraceRaysNVX( cmdBuf, raygenShaderBindingTableBuffer, raygenShaderBindingOffset, missShaderBindingTableBuffer, missShaderBindingOffset, missShaderBindingStride, hitShaderBindingTableBuffer, hitShaderBindingOffset, hitShaderBindingStride, width, height);
+    return ::vkCmdTraceRaysNVX( commandBuffer, raygenShaderBindingTableBuffer, raygenShaderBindingOffset, missShaderBindingTableBuffer, missShaderBindingOffset, missShaderBindingStride, hitShaderBindingTableBuffer, hitShaderBindingOffset, hitShaderBindingStride, width, height);
   }
   void vkCmdUpdateBuffer( VkCommandBuffer commandBuffer, VkBuffer dstBuffer, VkDeviceSize dstOffset, VkDeviceSize dataSize, const void* pData  ) const
   {
@@ -1461,9 +1461,9 @@ public:
   {
     return ::vkCmdWaitEvents( commandBuffer, eventCount, pEvents, srcStageMask, dstStageMask, memoryBarrierCount, pMemoryBarriers, bufferMemoryBarrierCount, pBufferMemoryBarriers, imageMemoryBarrierCount, pImageMemoryBarriers);
   }
-  void vkCmdWriteAccelerationStructurePropertiesNVX( VkCommandBuffer cmdBuf, VkAccelerationStructureNVX accelerationStructure, VkQueryType queryType, VkQueryPool queryPool, uint32_t query  ) const
+  void vkCmdWriteAccelerationStructurePropertiesNVX( VkCommandBuffer commandBuffer, VkAccelerationStructureNVX accelerationStructure, VkQueryType queryType, VkQueryPool queryPool, uint32_t query  ) const
   {
-    return ::vkCmdWriteAccelerationStructurePropertiesNVX( cmdBuf, accelerationStructure, queryType, queryPool, query);
+    return ::vkCmdWriteAccelerationStructurePropertiesNVX( commandBuffer, accelerationStructure, queryType, queryPool, query);
   }
   void vkCmdWriteBufferMarkerAMD( VkCommandBuffer commandBuffer, VkPipelineStageFlagBits pipelineStage, VkBuffer dstBuffer, VkDeviceSize dstOffset, uint32_t marker  ) const
   {
@@ -1565,6 +1565,12 @@ public:
   {
     return ::vkCreateImage( device, pCreateInfo, pAllocator, pImage);
   }
+#ifdef VK_USE_PLATFORM_FUCHSIA_FUCHSIA
+  VkResult vkCreateImagePipeSurfaceFUCHSIA( VkInstance instance, const VkImagePipeSurfaceCreateInfoFUCHSIA* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkSurfaceKHR* pSurface  ) const
+  {
+    return ::vkCreateImagePipeSurfaceFUCHSIA( instance, pCreateInfo, pAllocator, pSurface);
+  }
+#endif /*VK_USE_PLATFORM_FUCHSIA_FUCHSIA*/
   VkResult vkCreateImageView( VkDevice device, const VkImageViewCreateInfo* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkImageView* pView  ) const
   {
     return ::vkCreateImageView( device, pCreateInfo, pAllocator, pView);
@@ -2841,6 +2847,16 @@ public:
 #ifdef VK_USE_PLATFORM_MACOS_MVK
   using MacOSSurfaceCreateFlagsMVK = Flags<MacOSSurfaceCreateFlagBitsMVK, VkMacOSSurfaceCreateFlagsMVK>;
 #endif /*VK_USE_PLATFORM_MACOS_MVK*/
+
+#ifdef VK_USE_PLATFORM_FUCHSIA_FUCHSIA
+  enum class ImagePipeSurfaceCreateFlagBitsFUCHSIA
+  {
+  };
+#endif /*VK_USE_PLATFORM_FUCHSIA_FUCHSIA*/
+
+#ifdef VK_USE_PLATFORM_FUCHSIA_FUCHSIA
+  using ImagePipeSurfaceCreateFlagsFUCHSIA = Flags<ImagePipeSurfaceCreateFlagBitsFUCHSIA, VkImagePipeSurfaceCreateFlagsFUCHSIA>;
+#endif /*VK_USE_PLATFORM_FUCHSIA_FUCHSIA*/
 
   enum class CommandPoolTrimFlagBits
   {
@@ -7143,6 +7159,83 @@ public:
   };
   static_assert( sizeof( DisplayModePropertiesKHR ) == sizeof( VkDisplayModePropertiesKHR ), "struct and wrapper have different size!" );
 
+  struct ConformanceVersionKHR
+  {
+    ConformanceVersionKHR( uint8_t major_ = 0,
+                           uint8_t minor_ = 0,
+                           uint8_t subminor_ = 0,
+                           uint8_t patch_ = 0 )
+      : major( major_ )
+      , minor( minor_ )
+      , subminor( subminor_ )
+      , patch( patch_ )
+    {
+    }
+
+    ConformanceVersionKHR( VkConformanceVersionKHR const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( ConformanceVersionKHR ) );
+    }
+
+    ConformanceVersionKHR& operator=( VkConformanceVersionKHR const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( ConformanceVersionKHR ) );
+      return *this;
+    }
+    ConformanceVersionKHR& setMajor( uint8_t major_ )
+    {
+      major = major_;
+      return *this;
+    }
+
+    ConformanceVersionKHR& setMinor( uint8_t minor_ )
+    {
+      minor = minor_;
+      return *this;
+    }
+
+    ConformanceVersionKHR& setSubminor( uint8_t subminor_ )
+    {
+      subminor = subminor_;
+      return *this;
+    }
+
+    ConformanceVersionKHR& setPatch( uint8_t patch_ )
+    {
+      patch = patch_;
+      return *this;
+    }
+
+    operator VkConformanceVersionKHR const&() const
+    {
+      return *reinterpret_cast<const VkConformanceVersionKHR*>(this);
+    }
+
+    operator VkConformanceVersionKHR &()
+    {
+      return *reinterpret_cast<VkConformanceVersionKHR*>(this);
+    }
+
+    bool operator==( ConformanceVersionKHR const& rhs ) const
+    {
+      return ( major == rhs.major )
+          && ( minor == rhs.minor )
+          && ( subminor == rhs.subminor )
+          && ( patch == rhs.patch );
+    }
+
+    bool operator!=( ConformanceVersionKHR const& rhs ) const
+    {
+      return !operator==( rhs );
+    }
+
+    uint8_t major;
+    uint8_t minor;
+    uint8_t subminor;
+    uint8_t patch;
+  };
+  static_assert( sizeof( ConformanceVersionKHR ) == sizeof( VkConformanceVersionKHR ), "struct and wrapper have different size!" );
+
   struct RectLayerKHR
   {
     RectLayerKHR( Offset2D offset_ = Offset2D(),
@@ -9344,10 +9437,12 @@ public:
     eImportMemoryHostPointerInfoEXT = VK_STRUCTURE_TYPE_IMPORT_MEMORY_HOST_POINTER_INFO_EXT,
     eMemoryHostPointerPropertiesEXT = VK_STRUCTURE_TYPE_MEMORY_HOST_POINTER_PROPERTIES_EXT,
     ePhysicalDeviceExternalMemoryHostPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT,
+    ePhysicalDeviceShaderAtomicInt64FeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES_KHR,
     ePhysicalDeviceShaderCorePropertiesAMD = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_AMD,
     ePhysicalDeviceVertexAttributeDivisorPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_EXT,
     ePipelineVertexInputDivisorStateCreateInfoEXT = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_EXT,
     ePhysicalDeviceVertexAttributeDivisorFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT,
+    ePhysicalDeviceDriverPropertiesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES_KHR,
     ePhysicalDeviceComputeShaderDerivativesFeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_NV,
     ePhysicalDeviceMeshShaderFeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_NV,
     ePhysicalDeviceMeshShaderPropertiesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_PROPERTIES_NV,
@@ -9357,7 +9452,8 @@ public:
     ePhysicalDeviceExclusiveScissorFeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXCLUSIVE_SCISSOR_FEATURES_NV,
     eCheckpointDataNV = VK_STRUCTURE_TYPE_CHECKPOINT_DATA_NV,
     eQueueFamilyCheckpointPropertiesNV = VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV,
-    ePhysicalDeviceVulkanMemoryModelFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES_KHR
+    ePhysicalDeviceVulkanMemoryModelFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES_KHR,
+    eImagepipeSurfaceCreateInfoFUCHSIA = VK_STRUCTURE_TYPE_IMAGEPIPE_SURFACE_CREATE_INFO_FUCHSIA
   };
 
   struct ApplicationInfo
@@ -12304,6 +12400,78 @@ public:
   static_assert( sizeof( XcbSurfaceCreateInfoKHR ) == sizeof( VkXcbSurfaceCreateInfoKHR ), "struct and wrapper have different size!" );
 #endif /*VK_USE_PLATFORM_XCB_KHR*/
 
+#ifdef VK_USE_PLATFORM_FUCHSIA_FUCHSIA
+  struct ImagePipeSurfaceCreateInfoFUCHSIA
+  {
+    ImagePipeSurfaceCreateInfoFUCHSIA( ImagePipeSurfaceCreateFlagsFUCHSIA flags_ = ImagePipeSurfaceCreateFlagsFUCHSIA(),
+                                       zx_handle_t imagePipeHandle_ = 0 )
+      : flags( flags_ )
+      , imagePipeHandle( imagePipeHandle_ )
+    {
+    }
+
+    ImagePipeSurfaceCreateInfoFUCHSIA( VkImagePipeSurfaceCreateInfoFUCHSIA const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( ImagePipeSurfaceCreateInfoFUCHSIA ) );
+    }
+
+    ImagePipeSurfaceCreateInfoFUCHSIA& operator=( VkImagePipeSurfaceCreateInfoFUCHSIA const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( ImagePipeSurfaceCreateInfoFUCHSIA ) );
+      return *this;
+    }
+    ImagePipeSurfaceCreateInfoFUCHSIA& setPNext( const void* pNext_ )
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    ImagePipeSurfaceCreateInfoFUCHSIA& setFlags( ImagePipeSurfaceCreateFlagsFUCHSIA flags_ )
+    {
+      flags = flags_;
+      return *this;
+    }
+
+    ImagePipeSurfaceCreateInfoFUCHSIA& setImagePipeHandle( zx_handle_t imagePipeHandle_ )
+    {
+      imagePipeHandle = imagePipeHandle_;
+      return *this;
+    }
+
+    operator VkImagePipeSurfaceCreateInfoFUCHSIA const&() const
+    {
+      return *reinterpret_cast<const VkImagePipeSurfaceCreateInfoFUCHSIA*>(this);
+    }
+
+    operator VkImagePipeSurfaceCreateInfoFUCHSIA &()
+    {
+      return *reinterpret_cast<VkImagePipeSurfaceCreateInfoFUCHSIA*>(this);
+    }
+
+    bool operator==( ImagePipeSurfaceCreateInfoFUCHSIA const& rhs ) const
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( flags == rhs.flags )
+          && ( imagePipeHandle == rhs.imagePipeHandle );
+    }
+
+    bool operator!=( ImagePipeSurfaceCreateInfoFUCHSIA const& rhs ) const
+    {
+      return !operator==( rhs );
+    }
+
+  private:
+    StructureType sType = StructureType::eImagepipeSurfaceCreateInfoFUCHSIA;
+
+  public:
+    const void* pNext = nullptr;
+    ImagePipeSurfaceCreateFlagsFUCHSIA flags;
+    zx_handle_t imagePipeHandle;
+  };
+  static_assert( sizeof( ImagePipeSurfaceCreateInfoFUCHSIA ) == sizeof( VkImagePipeSurfaceCreateInfoFUCHSIA ), "struct and wrapper have different size!" );
+#endif /*VK_USE_PLATFORM_FUCHSIA_FUCHSIA*/
+
   struct DebugMarkerMarkerInfoEXT
   {
     DebugMarkerMarkerInfoEXT( const char* pMarkerName_ = nullptr,
@@ -13119,6 +13287,45 @@ public:
     uint32_t maxPushDescriptors;
   };
   static_assert( sizeof( PhysicalDevicePushDescriptorPropertiesKHR ) == sizeof( VkPhysicalDevicePushDescriptorPropertiesKHR ), "struct and wrapper have different size!" );
+
+  struct PhysicalDeviceDriverPropertiesKHR
+  {
+    operator VkPhysicalDeviceDriverPropertiesKHR const&() const
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceDriverPropertiesKHR*>(this);
+    }
+
+    operator VkPhysicalDeviceDriverPropertiesKHR &()
+    {
+      return *reinterpret_cast<VkPhysicalDeviceDriverPropertiesKHR*>(this);
+    }
+
+    bool operator==( PhysicalDeviceDriverPropertiesKHR const& rhs ) const
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( driverID == rhs.driverID )
+          && ( memcmp( driverName, rhs.driverName, VK_MAX_DRIVER_NAME_SIZE_KHR * sizeof( char ) ) == 0 )
+          && ( memcmp( driverInfo, rhs.driverInfo, VK_MAX_DRIVER_INFO_SIZE_KHR * sizeof( char ) ) == 0 )
+          && ( conformanceVersion == rhs.conformanceVersion );
+    }
+
+    bool operator!=( PhysicalDeviceDriverPropertiesKHR const& rhs ) const
+    {
+      return !operator==( rhs );
+    }
+
+  private:
+    StructureType sType = StructureType::ePhysicalDeviceDriverPropertiesKHR;
+
+  public:
+    void* pNext = nullptr;
+    uint32_t driverID;
+    char driverName[VK_MAX_DRIVER_NAME_SIZE_KHR];
+    char driverInfo[VK_MAX_DRIVER_INFO_SIZE_KHR];
+    ConformanceVersionKHR conformanceVersion;
+  };
+  static_assert( sizeof( PhysicalDeviceDriverPropertiesKHR ) == sizeof( VkPhysicalDeviceDriverPropertiesKHR ), "struct and wrapper have different size!" );
 
   struct PresentRegionsKHR
   {
@@ -18758,6 +18965,76 @@ public:
     Bool32 vulkanMemoryModelDeviceScope;
   };
   static_assert( sizeof( PhysicalDeviceVulkanMemoryModelFeaturesKHR ) == sizeof( VkPhysicalDeviceVulkanMemoryModelFeaturesKHR ), "struct and wrapper have different size!" );
+
+  struct PhysicalDeviceShaderAtomicInt64FeaturesKHR
+  {
+    PhysicalDeviceShaderAtomicInt64FeaturesKHR( Bool32 shaderBufferInt64Atomics_ = 0,
+                                                Bool32 shaderSharedInt64Atomics_ = 0 )
+      : shaderBufferInt64Atomics( shaderBufferInt64Atomics_ )
+      , shaderSharedInt64Atomics( shaderSharedInt64Atomics_ )
+    {
+    }
+
+    PhysicalDeviceShaderAtomicInt64FeaturesKHR( VkPhysicalDeviceShaderAtomicInt64FeaturesKHR const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( PhysicalDeviceShaderAtomicInt64FeaturesKHR ) );
+    }
+
+    PhysicalDeviceShaderAtomicInt64FeaturesKHR& operator=( VkPhysicalDeviceShaderAtomicInt64FeaturesKHR const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( PhysicalDeviceShaderAtomicInt64FeaturesKHR ) );
+      return *this;
+    }
+    PhysicalDeviceShaderAtomicInt64FeaturesKHR& setPNext( void* pNext_ )
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    PhysicalDeviceShaderAtomicInt64FeaturesKHR& setShaderBufferInt64Atomics( Bool32 shaderBufferInt64Atomics_ )
+    {
+      shaderBufferInt64Atomics = shaderBufferInt64Atomics_;
+      return *this;
+    }
+
+    PhysicalDeviceShaderAtomicInt64FeaturesKHR& setShaderSharedInt64Atomics( Bool32 shaderSharedInt64Atomics_ )
+    {
+      shaderSharedInt64Atomics = shaderSharedInt64Atomics_;
+      return *this;
+    }
+
+    operator VkPhysicalDeviceShaderAtomicInt64FeaturesKHR const&() const
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceShaderAtomicInt64FeaturesKHR*>(this);
+    }
+
+    operator VkPhysicalDeviceShaderAtomicInt64FeaturesKHR &()
+    {
+      return *reinterpret_cast<VkPhysicalDeviceShaderAtomicInt64FeaturesKHR*>(this);
+    }
+
+    bool operator==( PhysicalDeviceShaderAtomicInt64FeaturesKHR const& rhs ) const
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( shaderBufferInt64Atomics == rhs.shaderBufferInt64Atomics )
+          && ( shaderSharedInt64Atomics == rhs.shaderSharedInt64Atomics );
+    }
+
+    bool operator!=( PhysicalDeviceShaderAtomicInt64FeaturesKHR const& rhs ) const
+    {
+      return !operator==( rhs );
+    }
+
+  private:
+    StructureType sType = StructureType::ePhysicalDeviceShaderAtomicInt64FeaturesKHR;
+
+  public:
+    void* pNext = nullptr;
+    Bool32 shaderBufferInt64Atomics;
+    Bool32 shaderSharedInt64Atomics;
+  };
+  static_assert( sizeof( PhysicalDeviceShaderAtomicInt64FeaturesKHR ) == sizeof( VkPhysicalDeviceShaderAtomicInt64FeaturesKHR ), "struct and wrapper have different size!" );
 
   struct PhysicalDeviceVertexAttributeDivisorFeaturesEXT
   {
@@ -35614,6 +35891,19 @@ public:
     eKazan = VK_VENDOR_ID_KAZAN
   };
 
+  enum class DriverIdKHR
+  {
+    eAmdProprietary = VK_DRIVER_ID_AMD_PROPRIETARY_KHR,
+    eAmdOpenSource = VK_DRIVER_ID_AMD_OPEN_SOURCE_KHR,
+    eMesaRadv = VK_DRIVER_ID_MESA_RADV_KHR,
+    eNvidiaProprietary = VK_DRIVER_ID_NVIDIA_PROPRIETARY_KHR,
+    eIntelProprietaryWindows = VK_DRIVER_ID_INTEL_PROPRIETARY_WINDOWS_KHR,
+    eIntelOpenSourceMesa = VK_DRIVER_ID_INTEL_OPEN_SOURCE_MESA_KHR,
+    eImaginationProprietary = VK_DRIVER_ID_IMAGINATION_PROPRIETARY_KHR,
+    eQualcommProprietary = VK_DRIVER_ID_QUALCOMM_PROPRIETARY_KHR,
+    eArmProprietary = VK_DRIVER_ID_ARM_PROPRIETARY_KHR
+  };
+
   enum class ConditionalRenderingFlagBitsEXT
   {
     eInverted = VK_CONDITIONAL_RENDERING_INVERTED_BIT_EXT
@@ -39963,15 +40253,15 @@ public:
     template<typename Dispatch = DispatchLoaderStatic>
     Result getRaytracingShaderHandlesNVX( Pipeline pipeline, uint32_t firstGroup, uint32_t groupCount, size_t dataSize, void* pData, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
-    template <typename Allocator = std::allocator<uint8_t>, typename Dispatch = DispatchLoaderStatic> 
-    typename ResultValueType<std::vector<uint8_t,Allocator>>::type getRaytracingShaderHandlesNVX( Pipeline pipeline, uint32_t firstGroup, uint32_t groupCount, size_t dataSize, Dispatch const &d = Dispatch() ) const;
+    template <typename T, typename Dispatch = DispatchLoaderStatic>
+    ResultValueType<void>::type getRaytracingShaderHandlesNVX( Pipeline pipeline, uint32_t firstGroup, uint32_t groupCount, ArrayProxy<T> data, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = DispatchLoaderStatic>
     Result getAccelerationStructureHandleNVX( AccelerationStructureNVX accelerationStructure, size_t dataSize, void* pData, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
-    template <typename Allocator = std::allocator<uint8_t>, typename Dispatch = DispatchLoaderStatic> 
-    typename ResultValueType<std::vector<uint8_t,Allocator>>::type getAccelerationStructureHandleNVX( AccelerationStructureNVX accelerationStructure, size_t dataSize, Dispatch const &d = Dispatch() ) const;
+    template <typename T, typename Dispatch = DispatchLoaderStatic>
+    ResultValueType<void>::type getAccelerationStructureHandleNVX( AccelerationStructureNVX accelerationStructure, ArrayProxy<T> data, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = DispatchLoaderStatic>
@@ -43186,12 +43476,11 @@ public:
     return static_cast<Result>( d.vkGetRaytracingShaderHandlesNVX( m_device, static_cast<VkPipeline>( pipeline ), firstGroup, groupCount, dataSize, pData ) );
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
-  template <typename Allocator, typename Dispatch> 
-  VULKAN_HPP_INLINE typename ResultValueType<std::vector<uint8_t,Allocator>>::type Device::getRaytracingShaderHandlesNVX( Pipeline pipeline, uint32_t firstGroup, uint32_t groupCount, size_t dataSize, Dispatch const &d ) const
+  template <typename T, typename Dispatch>
+  VULKAN_HPP_INLINE ResultValueType<void>::type Device::getRaytracingShaderHandlesNVX( Pipeline pipeline, uint32_t firstGroup, uint32_t groupCount, ArrayProxy<T> data, Dispatch const &d ) const
   {
-    std::vector<uint8_t,Allocator> data( dataSize );
-    Result result = static_cast<Result>( d.vkGetRaytracingShaderHandlesNVX( m_device, static_cast<VkPipeline>( pipeline ), firstGroup, groupCount, data.size() * sizeof( uint8_t ) , reinterpret_cast<void*>( data.data() ) ) );
-    return createResultValue( result, data, VULKAN_HPP_NAMESPACE_STRING"::Device::getRaytracingShaderHandlesNVX" );
+    Result result = static_cast<Result>( d.vkGetRaytracingShaderHandlesNVX( m_device, static_cast<VkPipeline>( pipeline ), firstGroup, groupCount, data.size() * sizeof( T ) , reinterpret_cast<void*>( data.data() ) ) );
+    return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::getRaytracingShaderHandlesNVX" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -43201,12 +43490,11 @@ public:
     return static_cast<Result>( d.vkGetAccelerationStructureHandleNVX( m_device, static_cast<VkAccelerationStructureNVX>( accelerationStructure ), dataSize, pData ) );
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
-  template <typename Allocator, typename Dispatch> 
-  VULKAN_HPP_INLINE typename ResultValueType<std::vector<uint8_t,Allocator>>::type Device::getAccelerationStructureHandleNVX( AccelerationStructureNVX accelerationStructure, size_t dataSize, Dispatch const &d ) const
+  template <typename T, typename Dispatch>
+  VULKAN_HPP_INLINE ResultValueType<void>::type Device::getAccelerationStructureHandleNVX( AccelerationStructureNVX accelerationStructure, ArrayProxy<T> data, Dispatch const &d ) const
   {
-    std::vector<uint8_t,Allocator> data( dataSize );
-    Result result = static_cast<Result>( d.vkGetAccelerationStructureHandleNVX( m_device, static_cast<VkAccelerationStructureNVX>( accelerationStructure ), data.size() * sizeof( uint8_t ) , reinterpret_cast<void*>( data.data() ) ) );
-    return createResultValue( result, data, VULKAN_HPP_NAMESPACE_STRING"::Device::getAccelerationStructureHandleNVX" );
+    Result result = static_cast<Result>( d.vkGetAccelerationStructureHandleNVX( m_device, static_cast<VkAccelerationStructureNVX>( accelerationStructure ), data.size() * sizeof( T ) , reinterpret_cast<void*>( data.data() ) ) );
+    return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::getAccelerationStructureHandleNVX" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -43552,6 +43840,8 @@ public:
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = DispatchLoaderStatic>
     FormatProperties2 getFormatProperties2( Format format, Dispatch const &d = Dispatch() ) const;
+    template <typename X, typename Y, typename ...Z, typename Dispatch = DispatchLoaderStatic>
+    StructureChain<X, Y, Z...> getFormatProperties2( Format format, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = DispatchLoaderStatic>
@@ -43559,6 +43849,8 @@ public:
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = DispatchLoaderStatic>
     FormatProperties2 getFormatProperties2KHR( Format format, Dispatch const &d = Dispatch() ) const;
+    template <typename X, typename Y, typename ...Z, typename Dispatch = DispatchLoaderStatic>
+    StructureChain<X, Y, Z...> getFormatProperties2KHR( Format format, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = DispatchLoaderStatic>
@@ -44409,6 +44701,14 @@ public:
     d.vkGetPhysicalDeviceFormatProperties2( m_physicalDevice, static_cast<VkFormat>( format ), reinterpret_cast<VkFormatProperties2*>( &formatProperties ) );
     return formatProperties;
   }
+  template <typename X, typename Y, typename ...Z, typename Dispatch>
+  VULKAN_HPP_INLINE StructureChain<X, Y, Z...> PhysicalDevice::getFormatProperties2( Format format, Dispatch const &d ) const
+  {
+    StructureChain<X, Y, Z...> structureChain;
+    FormatProperties2& formatProperties = structureChain.template get<FormatProperties2>();
+    d.vkGetPhysicalDeviceFormatProperties2( m_physicalDevice, static_cast<VkFormat>( format ), reinterpret_cast<VkFormatProperties2*>( &formatProperties ) );
+    return structureChain;
+  }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
   template<typename Dispatch>
@@ -44423,6 +44723,14 @@ public:
     FormatProperties2 formatProperties;
     d.vkGetPhysicalDeviceFormatProperties2KHR( m_physicalDevice, static_cast<VkFormat>( format ), reinterpret_cast<VkFormatProperties2*>( &formatProperties ) );
     return formatProperties;
+  }
+  template <typename X, typename Y, typename ...Z, typename Dispatch>
+  VULKAN_HPP_INLINE StructureChain<X, Y, Z...> PhysicalDevice::getFormatProperties2KHR( Format format, Dispatch const &d ) const
+  {
+    StructureChain<X, Y, Z...> structureChain;
+    FormatProperties2& formatProperties = structureChain.template get<FormatProperties2>();
+    d.vkGetPhysicalDeviceFormatProperties2KHR( m_physicalDevice, static_cast<VkFormat>( format ), reinterpret_cast<VkFormatProperties2*>( &formatProperties ) );
+    return structureChain;
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -45297,6 +45605,19 @@ public:
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_XCB_KHR*/
 
+#ifdef VK_USE_PLATFORM_FUCHSIA_FUCHSIA
+    template<typename Dispatch = DispatchLoaderStatic>
+    Result createImagePipeSurfaceFUCHSIA( const ImagePipeSurfaceCreateInfoFUCHSIA* pCreateInfo, const AllocationCallbacks* pAllocator, SurfaceKHR* pSurface, Dispatch const &d = Dispatch() ) const;
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+    template<typename Dispatch = DispatchLoaderStatic>
+    ResultValueType<SurfaceKHR>::type createImagePipeSurfaceFUCHSIA( const ImagePipeSurfaceCreateInfoFUCHSIA & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+#ifndef VULKAN_HPP_NO_SMART_HANDLE
+    template<typename Dispatch = DispatchLoaderStatic>
+    typename ResultValueType<UniqueHandle<SurfaceKHR,Dispatch>>::type createImagePipeSurfaceFUCHSIAUnique( const ImagePipeSurfaceCreateInfoFUCHSIA & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+#endif /*VULKAN_HPP_NO_SMART_HANDLE*/
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+#endif /*VK_USE_PLATFORM_FUCHSIA_FUCHSIA*/
+
     template<typename Dispatch = DispatchLoaderStatic>
     Result createDebugReportCallbackEXT( const DebugReportCallbackCreateInfoEXT* pCreateInfo, const AllocationCallbacks* pAllocator, DebugReportCallbackEXT* pCallback, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
@@ -45724,6 +46045,34 @@ public:
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_XCB_KHR*/
+
+#ifdef VK_USE_PLATFORM_FUCHSIA_FUCHSIA
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE Result Instance::createImagePipeSurfaceFUCHSIA( const ImagePipeSurfaceCreateInfoFUCHSIA* pCreateInfo, const AllocationCallbacks* pAllocator, SurfaceKHR* pSurface, Dispatch const &d) const
+  {
+    return static_cast<Result>( d.vkCreateImagePipeSurfaceFUCHSIA( m_instance, reinterpret_cast<const VkImagePipeSurfaceCreateInfoFUCHSIA*>( pCreateInfo ), reinterpret_cast<const VkAllocationCallbacks*>( pAllocator ), reinterpret_cast<VkSurfaceKHR*>( pSurface ) ) );
+  }
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE ResultValueType<SurfaceKHR>::type Instance::createImagePipeSurfaceFUCHSIA( const ImagePipeSurfaceCreateInfoFUCHSIA & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  {
+    SurfaceKHR surface;
+    Result result = static_cast<Result>( d.vkCreateImagePipeSurfaceFUCHSIA( m_instance, reinterpret_cast<const VkImagePipeSurfaceCreateInfoFUCHSIA*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSurfaceKHR*>( &surface ) ) );
+    return createResultValue( result, surface, VULKAN_HPP_NAMESPACE_STRING"::Instance::createImagePipeSurfaceFUCHSIA" );
+  }
+#ifndef VULKAN_HPP_NO_SMART_HANDLE
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<SurfaceKHR,Dispatch>>::type Instance::createImagePipeSurfaceFUCHSIAUnique( const ImagePipeSurfaceCreateInfoFUCHSIA & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  {
+    SurfaceKHR surface;
+    Result result = static_cast<Result>( d.vkCreateImagePipeSurfaceFUCHSIA( m_instance, reinterpret_cast<const VkImagePipeSurfaceCreateInfoFUCHSIA*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSurfaceKHR*>( &surface ) ) );
+
+    ObjectDestroy<Instance,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<SurfaceKHR,Dispatch>( result, surface, VULKAN_HPP_NAMESPACE_STRING"::Instance::createImagePipeSurfaceFUCHSIAUnique", deleter );
+  }
+#endif /*VULKAN_HPP_NO_SMART_HANDLE*/
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+#endif /*VK_USE_PLATFORM_FUCHSIA_FUCHSIA*/
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Instance::createDebugReportCallbackEXT( const DebugReportCallbackCreateInfoEXT* pCreateInfo, const AllocationCallbacks* pAllocator, DebugReportCallbackEXT* pCallback, Dispatch const &d) const
@@ -46197,6 +46546,7 @@ public:
 #endif /*VK_USE_PLATFORM_WIN32_NV*/
   template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceFeatures2>{ enum { value = true }; };
   template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDevicePushDescriptorPropertiesKHR>{ enum { value = true }; };
+  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceDriverPropertiesKHR>{ enum { value = true }; };
   template <> struct isStructureChainValid<PresentInfoKHR, PresentRegionsKHR>{ enum { value = true }; };
   template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceVariablePointerFeatures>{ enum { value = true }; };
   template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceVariablePointerFeatures>{ enum { value = true }; };
@@ -46288,6 +46638,8 @@ public:
   template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceConditionalRenderingFeaturesEXT>{ enum { value = true }; };
   template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceVulkanMemoryModelFeaturesKHR>{ enum { value = true }; };
   template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceVulkanMemoryModelFeaturesKHR>{ enum { value = true }; };
+  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceShaderAtomicInt64FeaturesKHR>{ enum { value = true }; };
+  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceShaderAtomicInt64FeaturesKHR>{ enum { value = true }; };
   template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceVertexAttributeDivisorFeaturesEXT>{ enum { value = true }; };
   template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceVertexAttributeDivisorFeaturesEXT>{ enum { value = true }; };
   template <> struct isStructureChainValid<ImageViewCreateInfo, ImageViewASTCDecodeModeEXT>{ enum { value = true }; };
@@ -46774,6 +47126,20 @@ public:
     return "{}";
   }
 #endif /*VK_USE_PLATFORM_MACOS_MVK*/
+
+#ifdef VK_USE_PLATFORM_FUCHSIA_FUCHSIA
+  VULKAN_HPP_INLINE std::string to_string(ImagePipeSurfaceCreateFlagBitsFUCHSIA)
+  {
+    return "(void)";
+  }
+#endif /*VK_USE_PLATFORM_FUCHSIA_FUCHSIA*/
+
+#ifdef VK_USE_PLATFORM_FUCHSIA_FUCHSIA
+  VULKAN_HPP_INLINE std::string to_string(ImagePipeSurfaceCreateFlagsFUCHSIA)
+  {
+    return "{}";
+  }
+#endif /*VK_USE_PLATFORM_FUCHSIA_FUCHSIA*/
 
   VULKAN_HPP_INLINE std::string to_string(CommandPoolTrimFlagBits)
   {
@@ -47849,10 +48215,12 @@ public:
     case StructureType::eImportMemoryHostPointerInfoEXT: return "ImportMemoryHostPointerInfoEXT";
     case StructureType::eMemoryHostPointerPropertiesEXT: return "MemoryHostPointerPropertiesEXT";
     case StructureType::ePhysicalDeviceExternalMemoryHostPropertiesEXT: return "PhysicalDeviceExternalMemoryHostPropertiesEXT";
+    case StructureType::ePhysicalDeviceShaderAtomicInt64FeaturesKHR: return "PhysicalDeviceShaderAtomicInt64FeaturesKHR";
     case StructureType::ePhysicalDeviceShaderCorePropertiesAMD: return "PhysicalDeviceShaderCorePropertiesAMD";
     case StructureType::ePhysicalDeviceVertexAttributeDivisorPropertiesEXT: return "PhysicalDeviceVertexAttributeDivisorPropertiesEXT";
     case StructureType::ePipelineVertexInputDivisorStateCreateInfoEXT: return "PipelineVertexInputDivisorStateCreateInfoEXT";
     case StructureType::ePhysicalDeviceVertexAttributeDivisorFeaturesEXT: return "PhysicalDeviceVertexAttributeDivisorFeaturesEXT";
+    case StructureType::ePhysicalDeviceDriverPropertiesKHR: return "PhysicalDeviceDriverPropertiesKHR";
     case StructureType::ePhysicalDeviceComputeShaderDerivativesFeaturesNV: return "PhysicalDeviceComputeShaderDerivativesFeaturesNV";
     case StructureType::ePhysicalDeviceMeshShaderFeaturesNV: return "PhysicalDeviceMeshShaderFeaturesNV";
     case StructureType::ePhysicalDeviceMeshShaderPropertiesNV: return "PhysicalDeviceMeshShaderPropertiesNV";
@@ -47863,6 +48231,7 @@ public:
     case StructureType::eCheckpointDataNV: return "CheckpointDataNV";
     case StructureType::eQueueFamilyCheckpointPropertiesNV: return "QueueFamilyCheckpointPropertiesNV";
     case StructureType::ePhysicalDeviceVulkanMemoryModelFeaturesKHR: return "PhysicalDeviceVulkanMemoryModelFeaturesKHR";
+    case StructureType::eImagepipeSurfaceCreateInfoFUCHSIA: return "ImagepipeSurfaceCreateInfoFUCHSIA";
     default: return "invalid";
     }
   }
@@ -49740,6 +50109,23 @@ public:
     }
   }
 
+  VULKAN_HPP_INLINE std::string to_string(DriverIdKHR value)
+  {
+    switch (value)
+    {
+    case DriverIdKHR::eAmdProprietary: return "AmdProprietary";
+    case DriverIdKHR::eAmdOpenSource: return "AmdOpenSource";
+    case DriverIdKHR::eMesaRadv: return "MesaRadv";
+    case DriverIdKHR::eNvidiaProprietary: return "NvidiaProprietary";
+    case DriverIdKHR::eIntelProprietaryWindows: return "IntelProprietaryWindows";
+    case DriverIdKHR::eIntelOpenSourceMesa: return "IntelOpenSourceMesa";
+    case DriverIdKHR::eImaginationProprietary: return "ImaginationProprietary";
+    case DriverIdKHR::eQualcommProprietary: return "QualcommProprietary";
+    case DriverIdKHR::eArmProprietary: return "ArmProprietary";
+    default: return "invalid";
+    }
+  }
+
   VULKAN_HPP_INLINE std::string to_string(ConditionalRenderingFlagBitsEXT value)
   {
     switch (value)
@@ -50014,6 +50400,9 @@ public:
     PFN_vkCreateIOSSurfaceMVK vkCreateIOSSurfaceMVK = 0;
 #endif /*VK_USE_PLATFORM_IOS_MVK*/
     PFN_vkCreateImage vkCreateImage = 0;
+#ifdef VK_USE_PLATFORM_FUCHSIA_FUCHSIA
+    PFN_vkCreateImagePipeSurfaceFUCHSIA vkCreateImagePipeSurfaceFUCHSIA = 0;
+#endif /*VK_USE_PLATFORM_FUCHSIA_FUCHSIA*/
     PFN_vkCreateImageView vkCreateImageView = 0;
     PFN_vkCreateIndirectCommandsLayoutNVX vkCreateIndirectCommandsLayoutNVX = 0;
     PFN_vkCreateInstance vkCreateInstance = 0;
@@ -50287,7 +50676,7 @@ public:
       vkAcquireNextImage2KHR = PFN_vkAcquireNextImage2KHR(device ? device.getProcAddr( "vkAcquireNextImage2KHR") : instance.getProcAddr( "vkAcquireNextImage2KHR"));
       vkAcquireNextImageKHR = PFN_vkAcquireNextImageKHR(device ? device.getProcAddr( "vkAcquireNextImageKHR") : instance.getProcAddr( "vkAcquireNextImageKHR"));
 #ifdef VK_USE_PLATFORM_XLIB_XRANDR_NV
-      vkAcquireXlibDisplayEXT = PFN_vkAcquireXlibDisplayEXT(device ? device.getProcAddr( "vkAcquireXlibDisplayEXT") : instance.getProcAddr( "vkAcquireXlibDisplayEXT"));
+      vkAcquireXlibDisplayEXT = PFN_vkAcquireXlibDisplayEXT(instance.getProcAddr( "vkAcquireXlibDisplayEXT"));
 #endif /*VK_USE_PLATFORM_XLIB_XRANDR_NV*/
       vkAllocateCommandBuffers = PFN_vkAllocateCommandBuffers(device ? device.getProcAddr( "vkAllocateCommandBuffers") : instance.getProcAddr( "vkAllocateCommandBuffers"));
       vkAllocateDescriptorSets = PFN_vkAllocateDescriptorSets(device ? device.getProcAddr( "vkAllocateDescriptorSets") : instance.getProcAddr( "vkAllocateDescriptorSets"));
@@ -50398,8 +50787,8 @@ public:
       vkCreateDescriptorSetLayout = PFN_vkCreateDescriptorSetLayout(device ? device.getProcAddr( "vkCreateDescriptorSetLayout") : instance.getProcAddr( "vkCreateDescriptorSetLayout"));
       vkCreateDescriptorUpdateTemplate = PFN_vkCreateDescriptorUpdateTemplate(device ? device.getProcAddr( "vkCreateDescriptorUpdateTemplate") : instance.getProcAddr( "vkCreateDescriptorUpdateTemplate"));
       vkCreateDescriptorUpdateTemplateKHR = PFN_vkCreateDescriptorUpdateTemplateKHR(device ? device.getProcAddr( "vkCreateDescriptorUpdateTemplateKHR") : instance.getProcAddr( "vkCreateDescriptorUpdateTemplateKHR"));
-      vkCreateDevice = PFN_vkCreateDevice(device ? device.getProcAddr( "vkCreateDevice") : instance.getProcAddr( "vkCreateDevice"));
-      vkCreateDisplayModeKHR = PFN_vkCreateDisplayModeKHR(device ? device.getProcAddr( "vkCreateDisplayModeKHR") : instance.getProcAddr( "vkCreateDisplayModeKHR"));
+      vkCreateDevice = PFN_vkCreateDevice(instance.getProcAddr( "vkCreateDevice"));
+      vkCreateDisplayModeKHR = PFN_vkCreateDisplayModeKHR(instance.getProcAddr( "vkCreateDisplayModeKHR"));
       vkCreateDisplayPlaneSurfaceKHR = PFN_vkCreateDisplayPlaneSurfaceKHR(instance.getProcAddr( "vkCreateDisplayPlaneSurfaceKHR"));
       vkCreateEvent = PFN_vkCreateEvent(device ? device.getProcAddr( "vkCreateEvent") : instance.getProcAddr( "vkCreateEvent"));
       vkCreateFence = PFN_vkCreateFence(device ? device.getProcAddr( "vkCreateFence") : instance.getProcAddr( "vkCreateFence"));
@@ -50409,6 +50798,9 @@ public:
       vkCreateIOSSurfaceMVK = PFN_vkCreateIOSSurfaceMVK(instance.getProcAddr( "vkCreateIOSSurfaceMVK"));
 #endif /*VK_USE_PLATFORM_IOS_MVK*/
       vkCreateImage = PFN_vkCreateImage(device ? device.getProcAddr( "vkCreateImage") : instance.getProcAddr( "vkCreateImage"));
+#ifdef VK_USE_PLATFORM_FUCHSIA_FUCHSIA
+      vkCreateImagePipeSurfaceFUCHSIA = PFN_vkCreateImagePipeSurfaceFUCHSIA(instance.getProcAddr( "vkCreateImagePipeSurfaceFUCHSIA"));
+#endif /*VK_USE_PLATFORM_FUCHSIA_FUCHSIA*/
       vkCreateImageView = PFN_vkCreateImageView(device ? device.getProcAddr( "vkCreateImageView") : instance.getProcAddr( "vkCreateImageView"));
       vkCreateIndirectCommandsLayoutNVX = PFN_vkCreateIndirectCommandsLayoutNVX(device ? device.getProcAddr( "vkCreateIndirectCommandsLayoutNVX") : instance.getProcAddr( "vkCreateIndirectCommandsLayoutNVX"));
       vkCreateInstance = PFN_vkCreateInstance(instance.getProcAddr( "vkCreateInstance"));
@@ -50486,8 +50878,8 @@ public:
       vkDeviceWaitIdle = PFN_vkDeviceWaitIdle(device ? device.getProcAddr( "vkDeviceWaitIdle") : instance.getProcAddr( "vkDeviceWaitIdle"));
       vkDisplayPowerControlEXT = PFN_vkDisplayPowerControlEXT(device ? device.getProcAddr( "vkDisplayPowerControlEXT") : instance.getProcAddr( "vkDisplayPowerControlEXT"));
       vkEndCommandBuffer = PFN_vkEndCommandBuffer(device ? device.getProcAddr( "vkEndCommandBuffer") : instance.getProcAddr( "vkEndCommandBuffer"));
-      vkEnumerateDeviceExtensionProperties = PFN_vkEnumerateDeviceExtensionProperties(device ? device.getProcAddr( "vkEnumerateDeviceExtensionProperties") : instance.getProcAddr( "vkEnumerateDeviceExtensionProperties"));
-      vkEnumerateDeviceLayerProperties = PFN_vkEnumerateDeviceLayerProperties(device ? device.getProcAddr( "vkEnumerateDeviceLayerProperties") : instance.getProcAddr( "vkEnumerateDeviceLayerProperties"));
+      vkEnumerateDeviceExtensionProperties = PFN_vkEnumerateDeviceExtensionProperties(instance.getProcAddr( "vkEnumerateDeviceExtensionProperties"));
+      vkEnumerateDeviceLayerProperties = PFN_vkEnumerateDeviceLayerProperties(instance.getProcAddr( "vkEnumerateDeviceLayerProperties"));
       vkEnumerateInstanceExtensionProperties = PFN_vkEnumerateInstanceExtensionProperties(instance.getProcAddr( "vkEnumerateInstanceExtensionProperties"));
       vkEnumerateInstanceLayerProperties = PFN_vkEnumerateInstanceLayerProperties(instance.getProcAddr( "vkEnumerateInstanceLayerProperties"));
       vkEnumerateInstanceVersion = PFN_vkEnumerateInstanceVersion(instance.getProcAddr( "vkEnumerateInstanceVersion"));
@@ -50517,11 +50909,11 @@ public:
       vkGetDeviceProcAddr = PFN_vkGetDeviceProcAddr(device ? device.getProcAddr( "vkGetDeviceProcAddr") : instance.getProcAddr( "vkGetDeviceProcAddr"));
       vkGetDeviceQueue = PFN_vkGetDeviceQueue(device ? device.getProcAddr( "vkGetDeviceQueue") : instance.getProcAddr( "vkGetDeviceQueue"));
       vkGetDeviceQueue2 = PFN_vkGetDeviceQueue2(device ? device.getProcAddr( "vkGetDeviceQueue2") : instance.getProcAddr( "vkGetDeviceQueue2"));
-      vkGetDisplayModeProperties2KHR = PFN_vkGetDisplayModeProperties2KHR(device ? device.getProcAddr( "vkGetDisplayModeProperties2KHR") : instance.getProcAddr( "vkGetDisplayModeProperties2KHR"));
-      vkGetDisplayModePropertiesKHR = PFN_vkGetDisplayModePropertiesKHR(device ? device.getProcAddr( "vkGetDisplayModePropertiesKHR") : instance.getProcAddr( "vkGetDisplayModePropertiesKHR"));
-      vkGetDisplayPlaneCapabilities2KHR = PFN_vkGetDisplayPlaneCapabilities2KHR(device ? device.getProcAddr( "vkGetDisplayPlaneCapabilities2KHR") : instance.getProcAddr( "vkGetDisplayPlaneCapabilities2KHR"));
-      vkGetDisplayPlaneCapabilitiesKHR = PFN_vkGetDisplayPlaneCapabilitiesKHR(device ? device.getProcAddr( "vkGetDisplayPlaneCapabilitiesKHR") : instance.getProcAddr( "vkGetDisplayPlaneCapabilitiesKHR"));
-      vkGetDisplayPlaneSupportedDisplaysKHR = PFN_vkGetDisplayPlaneSupportedDisplaysKHR(device ? device.getProcAddr( "vkGetDisplayPlaneSupportedDisplaysKHR") : instance.getProcAddr( "vkGetDisplayPlaneSupportedDisplaysKHR"));
+      vkGetDisplayModeProperties2KHR = PFN_vkGetDisplayModeProperties2KHR(instance.getProcAddr( "vkGetDisplayModeProperties2KHR"));
+      vkGetDisplayModePropertiesKHR = PFN_vkGetDisplayModePropertiesKHR(instance.getProcAddr( "vkGetDisplayModePropertiesKHR"));
+      vkGetDisplayPlaneCapabilities2KHR = PFN_vkGetDisplayPlaneCapabilities2KHR(instance.getProcAddr( "vkGetDisplayPlaneCapabilities2KHR"));
+      vkGetDisplayPlaneCapabilitiesKHR = PFN_vkGetDisplayPlaneCapabilitiesKHR(instance.getProcAddr( "vkGetDisplayPlaneCapabilitiesKHR"));
+      vkGetDisplayPlaneSupportedDisplaysKHR = PFN_vkGetDisplayPlaneSupportedDisplaysKHR(instance.getProcAddr( "vkGetDisplayPlaneSupportedDisplaysKHR"));
       vkGetEventStatus = PFN_vkGetEventStatus(device ? device.getProcAddr( "vkGetEventStatus") : instance.getProcAddr( "vkGetEventStatus"));
       vkGetFenceFdKHR = PFN_vkGetFenceFdKHR(device ? device.getProcAddr( "vkGetFenceFdKHR") : instance.getProcAddr( "vkGetFenceFdKHR"));
       vkGetFenceStatus = PFN_vkGetFenceStatus(device ? device.getProcAddr( "vkGetFenceStatus") : instance.getProcAddr( "vkGetFenceStatus"));
@@ -50552,68 +50944,68 @@ public:
       vkGetMemoryWin32HandlePropertiesKHR = PFN_vkGetMemoryWin32HandlePropertiesKHR(device ? device.getProcAddr( "vkGetMemoryWin32HandlePropertiesKHR") : instance.getProcAddr( "vkGetMemoryWin32HandlePropertiesKHR"));
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
       vkGetPastPresentationTimingGOOGLE = PFN_vkGetPastPresentationTimingGOOGLE(device ? device.getProcAddr( "vkGetPastPresentationTimingGOOGLE") : instance.getProcAddr( "vkGetPastPresentationTimingGOOGLE"));
-      vkGetPhysicalDeviceDisplayPlaneProperties2KHR = PFN_vkGetPhysicalDeviceDisplayPlaneProperties2KHR(device ? device.getProcAddr( "vkGetPhysicalDeviceDisplayPlaneProperties2KHR") : instance.getProcAddr( "vkGetPhysicalDeviceDisplayPlaneProperties2KHR"));
-      vkGetPhysicalDeviceDisplayPlanePropertiesKHR = PFN_vkGetPhysicalDeviceDisplayPlanePropertiesKHR(device ? device.getProcAddr( "vkGetPhysicalDeviceDisplayPlanePropertiesKHR") : instance.getProcAddr( "vkGetPhysicalDeviceDisplayPlanePropertiesKHR"));
-      vkGetPhysicalDeviceDisplayProperties2KHR = PFN_vkGetPhysicalDeviceDisplayProperties2KHR(device ? device.getProcAddr( "vkGetPhysicalDeviceDisplayProperties2KHR") : instance.getProcAddr( "vkGetPhysicalDeviceDisplayProperties2KHR"));
-      vkGetPhysicalDeviceDisplayPropertiesKHR = PFN_vkGetPhysicalDeviceDisplayPropertiesKHR(device ? device.getProcAddr( "vkGetPhysicalDeviceDisplayPropertiesKHR") : instance.getProcAddr( "vkGetPhysicalDeviceDisplayPropertiesKHR"));
-      vkGetPhysicalDeviceExternalBufferProperties = PFN_vkGetPhysicalDeviceExternalBufferProperties(device ? device.getProcAddr( "vkGetPhysicalDeviceExternalBufferProperties") : instance.getProcAddr( "vkGetPhysicalDeviceExternalBufferProperties"));
-      vkGetPhysicalDeviceExternalBufferPropertiesKHR = PFN_vkGetPhysicalDeviceExternalBufferPropertiesKHR(device ? device.getProcAddr( "vkGetPhysicalDeviceExternalBufferPropertiesKHR") : instance.getProcAddr( "vkGetPhysicalDeviceExternalBufferPropertiesKHR"));
-      vkGetPhysicalDeviceExternalFenceProperties = PFN_vkGetPhysicalDeviceExternalFenceProperties(device ? device.getProcAddr( "vkGetPhysicalDeviceExternalFenceProperties") : instance.getProcAddr( "vkGetPhysicalDeviceExternalFenceProperties"));
-      vkGetPhysicalDeviceExternalFencePropertiesKHR = PFN_vkGetPhysicalDeviceExternalFencePropertiesKHR(device ? device.getProcAddr( "vkGetPhysicalDeviceExternalFencePropertiesKHR") : instance.getProcAddr( "vkGetPhysicalDeviceExternalFencePropertiesKHR"));
-      vkGetPhysicalDeviceExternalImageFormatPropertiesNV = PFN_vkGetPhysicalDeviceExternalImageFormatPropertiesNV(device ? device.getProcAddr( "vkGetPhysicalDeviceExternalImageFormatPropertiesNV") : instance.getProcAddr( "vkGetPhysicalDeviceExternalImageFormatPropertiesNV"));
-      vkGetPhysicalDeviceExternalSemaphoreProperties = PFN_vkGetPhysicalDeviceExternalSemaphoreProperties(device ? device.getProcAddr( "vkGetPhysicalDeviceExternalSemaphoreProperties") : instance.getProcAddr( "vkGetPhysicalDeviceExternalSemaphoreProperties"));
-      vkGetPhysicalDeviceExternalSemaphorePropertiesKHR = PFN_vkGetPhysicalDeviceExternalSemaphorePropertiesKHR(device ? device.getProcAddr( "vkGetPhysicalDeviceExternalSemaphorePropertiesKHR") : instance.getProcAddr( "vkGetPhysicalDeviceExternalSemaphorePropertiesKHR"));
-      vkGetPhysicalDeviceFeatures = PFN_vkGetPhysicalDeviceFeatures(device ? device.getProcAddr( "vkGetPhysicalDeviceFeatures") : instance.getProcAddr( "vkGetPhysicalDeviceFeatures"));
-      vkGetPhysicalDeviceFeatures2 = PFN_vkGetPhysicalDeviceFeatures2(device ? device.getProcAddr( "vkGetPhysicalDeviceFeatures2") : instance.getProcAddr( "vkGetPhysicalDeviceFeatures2"));
-      vkGetPhysicalDeviceFeatures2KHR = PFN_vkGetPhysicalDeviceFeatures2KHR(device ? device.getProcAddr( "vkGetPhysicalDeviceFeatures2KHR") : instance.getProcAddr( "vkGetPhysicalDeviceFeatures2KHR"));
-      vkGetPhysicalDeviceFormatProperties = PFN_vkGetPhysicalDeviceFormatProperties(device ? device.getProcAddr( "vkGetPhysicalDeviceFormatProperties") : instance.getProcAddr( "vkGetPhysicalDeviceFormatProperties"));
-      vkGetPhysicalDeviceFormatProperties2 = PFN_vkGetPhysicalDeviceFormatProperties2(device ? device.getProcAddr( "vkGetPhysicalDeviceFormatProperties2") : instance.getProcAddr( "vkGetPhysicalDeviceFormatProperties2"));
-      vkGetPhysicalDeviceFormatProperties2KHR = PFN_vkGetPhysicalDeviceFormatProperties2KHR(device ? device.getProcAddr( "vkGetPhysicalDeviceFormatProperties2KHR") : instance.getProcAddr( "vkGetPhysicalDeviceFormatProperties2KHR"));
-      vkGetPhysicalDeviceGeneratedCommandsPropertiesNVX = PFN_vkGetPhysicalDeviceGeneratedCommandsPropertiesNVX(device ? device.getProcAddr( "vkGetPhysicalDeviceGeneratedCommandsPropertiesNVX") : instance.getProcAddr( "vkGetPhysicalDeviceGeneratedCommandsPropertiesNVX"));
-      vkGetPhysicalDeviceImageFormatProperties = PFN_vkGetPhysicalDeviceImageFormatProperties(device ? device.getProcAddr( "vkGetPhysicalDeviceImageFormatProperties") : instance.getProcAddr( "vkGetPhysicalDeviceImageFormatProperties"));
-      vkGetPhysicalDeviceImageFormatProperties2 = PFN_vkGetPhysicalDeviceImageFormatProperties2(device ? device.getProcAddr( "vkGetPhysicalDeviceImageFormatProperties2") : instance.getProcAddr( "vkGetPhysicalDeviceImageFormatProperties2"));
-      vkGetPhysicalDeviceImageFormatProperties2KHR = PFN_vkGetPhysicalDeviceImageFormatProperties2KHR(device ? device.getProcAddr( "vkGetPhysicalDeviceImageFormatProperties2KHR") : instance.getProcAddr( "vkGetPhysicalDeviceImageFormatProperties2KHR"));
-      vkGetPhysicalDeviceMemoryProperties = PFN_vkGetPhysicalDeviceMemoryProperties(device ? device.getProcAddr( "vkGetPhysicalDeviceMemoryProperties") : instance.getProcAddr( "vkGetPhysicalDeviceMemoryProperties"));
-      vkGetPhysicalDeviceMemoryProperties2 = PFN_vkGetPhysicalDeviceMemoryProperties2(device ? device.getProcAddr( "vkGetPhysicalDeviceMemoryProperties2") : instance.getProcAddr( "vkGetPhysicalDeviceMemoryProperties2"));
-      vkGetPhysicalDeviceMemoryProperties2KHR = PFN_vkGetPhysicalDeviceMemoryProperties2KHR(device ? device.getProcAddr( "vkGetPhysicalDeviceMemoryProperties2KHR") : instance.getProcAddr( "vkGetPhysicalDeviceMemoryProperties2KHR"));
+      vkGetPhysicalDeviceDisplayPlaneProperties2KHR = PFN_vkGetPhysicalDeviceDisplayPlaneProperties2KHR(instance.getProcAddr( "vkGetPhysicalDeviceDisplayPlaneProperties2KHR"));
+      vkGetPhysicalDeviceDisplayPlanePropertiesKHR = PFN_vkGetPhysicalDeviceDisplayPlanePropertiesKHR(instance.getProcAddr( "vkGetPhysicalDeviceDisplayPlanePropertiesKHR"));
+      vkGetPhysicalDeviceDisplayProperties2KHR = PFN_vkGetPhysicalDeviceDisplayProperties2KHR(instance.getProcAddr( "vkGetPhysicalDeviceDisplayProperties2KHR"));
+      vkGetPhysicalDeviceDisplayPropertiesKHR = PFN_vkGetPhysicalDeviceDisplayPropertiesKHR(instance.getProcAddr( "vkGetPhysicalDeviceDisplayPropertiesKHR"));
+      vkGetPhysicalDeviceExternalBufferProperties = PFN_vkGetPhysicalDeviceExternalBufferProperties(instance.getProcAddr( "vkGetPhysicalDeviceExternalBufferProperties"));
+      vkGetPhysicalDeviceExternalBufferPropertiesKHR = PFN_vkGetPhysicalDeviceExternalBufferPropertiesKHR(instance.getProcAddr( "vkGetPhysicalDeviceExternalBufferPropertiesKHR"));
+      vkGetPhysicalDeviceExternalFenceProperties = PFN_vkGetPhysicalDeviceExternalFenceProperties(instance.getProcAddr( "vkGetPhysicalDeviceExternalFenceProperties"));
+      vkGetPhysicalDeviceExternalFencePropertiesKHR = PFN_vkGetPhysicalDeviceExternalFencePropertiesKHR(instance.getProcAddr( "vkGetPhysicalDeviceExternalFencePropertiesKHR"));
+      vkGetPhysicalDeviceExternalImageFormatPropertiesNV = PFN_vkGetPhysicalDeviceExternalImageFormatPropertiesNV(instance.getProcAddr( "vkGetPhysicalDeviceExternalImageFormatPropertiesNV"));
+      vkGetPhysicalDeviceExternalSemaphoreProperties = PFN_vkGetPhysicalDeviceExternalSemaphoreProperties(instance.getProcAddr( "vkGetPhysicalDeviceExternalSemaphoreProperties"));
+      vkGetPhysicalDeviceExternalSemaphorePropertiesKHR = PFN_vkGetPhysicalDeviceExternalSemaphorePropertiesKHR(instance.getProcAddr( "vkGetPhysicalDeviceExternalSemaphorePropertiesKHR"));
+      vkGetPhysicalDeviceFeatures = PFN_vkGetPhysicalDeviceFeatures(instance.getProcAddr( "vkGetPhysicalDeviceFeatures"));
+      vkGetPhysicalDeviceFeatures2 = PFN_vkGetPhysicalDeviceFeatures2(instance.getProcAddr( "vkGetPhysicalDeviceFeatures2"));
+      vkGetPhysicalDeviceFeatures2KHR = PFN_vkGetPhysicalDeviceFeatures2KHR(instance.getProcAddr( "vkGetPhysicalDeviceFeatures2KHR"));
+      vkGetPhysicalDeviceFormatProperties = PFN_vkGetPhysicalDeviceFormatProperties(instance.getProcAddr( "vkGetPhysicalDeviceFormatProperties"));
+      vkGetPhysicalDeviceFormatProperties2 = PFN_vkGetPhysicalDeviceFormatProperties2(instance.getProcAddr( "vkGetPhysicalDeviceFormatProperties2"));
+      vkGetPhysicalDeviceFormatProperties2KHR = PFN_vkGetPhysicalDeviceFormatProperties2KHR(instance.getProcAddr( "vkGetPhysicalDeviceFormatProperties2KHR"));
+      vkGetPhysicalDeviceGeneratedCommandsPropertiesNVX = PFN_vkGetPhysicalDeviceGeneratedCommandsPropertiesNVX(instance.getProcAddr( "vkGetPhysicalDeviceGeneratedCommandsPropertiesNVX"));
+      vkGetPhysicalDeviceImageFormatProperties = PFN_vkGetPhysicalDeviceImageFormatProperties(instance.getProcAddr( "vkGetPhysicalDeviceImageFormatProperties"));
+      vkGetPhysicalDeviceImageFormatProperties2 = PFN_vkGetPhysicalDeviceImageFormatProperties2(instance.getProcAddr( "vkGetPhysicalDeviceImageFormatProperties2"));
+      vkGetPhysicalDeviceImageFormatProperties2KHR = PFN_vkGetPhysicalDeviceImageFormatProperties2KHR(instance.getProcAddr( "vkGetPhysicalDeviceImageFormatProperties2KHR"));
+      vkGetPhysicalDeviceMemoryProperties = PFN_vkGetPhysicalDeviceMemoryProperties(instance.getProcAddr( "vkGetPhysicalDeviceMemoryProperties"));
+      vkGetPhysicalDeviceMemoryProperties2 = PFN_vkGetPhysicalDeviceMemoryProperties2(instance.getProcAddr( "vkGetPhysicalDeviceMemoryProperties2"));
+      vkGetPhysicalDeviceMemoryProperties2KHR = PFN_vkGetPhysicalDeviceMemoryProperties2KHR(instance.getProcAddr( "vkGetPhysicalDeviceMemoryProperties2KHR"));
 #ifdef VK_USE_PLATFORM_MIR_KHR
-      vkGetPhysicalDeviceMirPresentationSupportKHR = PFN_vkGetPhysicalDeviceMirPresentationSupportKHR(device ? device.getProcAddr( "vkGetPhysicalDeviceMirPresentationSupportKHR") : instance.getProcAddr( "vkGetPhysicalDeviceMirPresentationSupportKHR"));
+      vkGetPhysicalDeviceMirPresentationSupportKHR = PFN_vkGetPhysicalDeviceMirPresentationSupportKHR(instance.getProcAddr( "vkGetPhysicalDeviceMirPresentationSupportKHR"));
 #endif /*VK_USE_PLATFORM_MIR_KHR*/
-      vkGetPhysicalDeviceMultisamplePropertiesEXT = PFN_vkGetPhysicalDeviceMultisamplePropertiesEXT(device ? device.getProcAddr( "vkGetPhysicalDeviceMultisamplePropertiesEXT") : instance.getProcAddr( "vkGetPhysicalDeviceMultisamplePropertiesEXT"));
-      vkGetPhysicalDevicePresentRectanglesKHR = PFN_vkGetPhysicalDevicePresentRectanglesKHR(device ? device.getProcAddr( "vkGetPhysicalDevicePresentRectanglesKHR") : instance.getProcAddr( "vkGetPhysicalDevicePresentRectanglesKHR"));
-      vkGetPhysicalDeviceProperties = PFN_vkGetPhysicalDeviceProperties(device ? device.getProcAddr( "vkGetPhysicalDeviceProperties") : instance.getProcAddr( "vkGetPhysicalDeviceProperties"));
-      vkGetPhysicalDeviceProperties2 = PFN_vkGetPhysicalDeviceProperties2(device ? device.getProcAddr( "vkGetPhysicalDeviceProperties2") : instance.getProcAddr( "vkGetPhysicalDeviceProperties2"));
-      vkGetPhysicalDeviceProperties2KHR = PFN_vkGetPhysicalDeviceProperties2KHR(device ? device.getProcAddr( "vkGetPhysicalDeviceProperties2KHR") : instance.getProcAddr( "vkGetPhysicalDeviceProperties2KHR"));
-      vkGetPhysicalDeviceQueueFamilyProperties = PFN_vkGetPhysicalDeviceQueueFamilyProperties(device ? device.getProcAddr( "vkGetPhysicalDeviceQueueFamilyProperties") : instance.getProcAddr( "vkGetPhysicalDeviceQueueFamilyProperties"));
-      vkGetPhysicalDeviceQueueFamilyProperties2 = PFN_vkGetPhysicalDeviceQueueFamilyProperties2(device ? device.getProcAddr( "vkGetPhysicalDeviceQueueFamilyProperties2") : instance.getProcAddr( "vkGetPhysicalDeviceQueueFamilyProperties2"));
-      vkGetPhysicalDeviceQueueFamilyProperties2KHR = PFN_vkGetPhysicalDeviceQueueFamilyProperties2KHR(device ? device.getProcAddr( "vkGetPhysicalDeviceQueueFamilyProperties2KHR") : instance.getProcAddr( "vkGetPhysicalDeviceQueueFamilyProperties2KHR"));
-      vkGetPhysicalDeviceSparseImageFormatProperties = PFN_vkGetPhysicalDeviceSparseImageFormatProperties(device ? device.getProcAddr( "vkGetPhysicalDeviceSparseImageFormatProperties") : instance.getProcAddr( "vkGetPhysicalDeviceSparseImageFormatProperties"));
-      vkGetPhysicalDeviceSparseImageFormatProperties2 = PFN_vkGetPhysicalDeviceSparseImageFormatProperties2(device ? device.getProcAddr( "vkGetPhysicalDeviceSparseImageFormatProperties2") : instance.getProcAddr( "vkGetPhysicalDeviceSparseImageFormatProperties2"));
-      vkGetPhysicalDeviceSparseImageFormatProperties2KHR = PFN_vkGetPhysicalDeviceSparseImageFormatProperties2KHR(device ? device.getProcAddr( "vkGetPhysicalDeviceSparseImageFormatProperties2KHR") : instance.getProcAddr( "vkGetPhysicalDeviceSparseImageFormatProperties2KHR"));
-      vkGetPhysicalDeviceSurfaceCapabilities2EXT = PFN_vkGetPhysicalDeviceSurfaceCapabilities2EXT(device ? device.getProcAddr( "vkGetPhysicalDeviceSurfaceCapabilities2EXT") : instance.getProcAddr( "vkGetPhysicalDeviceSurfaceCapabilities2EXT"));
-      vkGetPhysicalDeviceSurfaceCapabilities2KHR = PFN_vkGetPhysicalDeviceSurfaceCapabilities2KHR(device ? device.getProcAddr( "vkGetPhysicalDeviceSurfaceCapabilities2KHR") : instance.getProcAddr( "vkGetPhysicalDeviceSurfaceCapabilities2KHR"));
-      vkGetPhysicalDeviceSurfaceCapabilitiesKHR = PFN_vkGetPhysicalDeviceSurfaceCapabilitiesKHR(device ? device.getProcAddr( "vkGetPhysicalDeviceSurfaceCapabilitiesKHR") : instance.getProcAddr( "vkGetPhysicalDeviceSurfaceCapabilitiesKHR"));
-      vkGetPhysicalDeviceSurfaceFormats2KHR = PFN_vkGetPhysicalDeviceSurfaceFormats2KHR(device ? device.getProcAddr( "vkGetPhysicalDeviceSurfaceFormats2KHR") : instance.getProcAddr( "vkGetPhysicalDeviceSurfaceFormats2KHR"));
-      vkGetPhysicalDeviceSurfaceFormatsKHR = PFN_vkGetPhysicalDeviceSurfaceFormatsKHR(device ? device.getProcAddr( "vkGetPhysicalDeviceSurfaceFormatsKHR") : instance.getProcAddr( "vkGetPhysicalDeviceSurfaceFormatsKHR"));
-      vkGetPhysicalDeviceSurfacePresentModesKHR = PFN_vkGetPhysicalDeviceSurfacePresentModesKHR(device ? device.getProcAddr( "vkGetPhysicalDeviceSurfacePresentModesKHR") : instance.getProcAddr( "vkGetPhysicalDeviceSurfacePresentModesKHR"));
-      vkGetPhysicalDeviceSurfaceSupportKHR = PFN_vkGetPhysicalDeviceSurfaceSupportKHR(device ? device.getProcAddr( "vkGetPhysicalDeviceSurfaceSupportKHR") : instance.getProcAddr( "vkGetPhysicalDeviceSurfaceSupportKHR"));
+      vkGetPhysicalDeviceMultisamplePropertiesEXT = PFN_vkGetPhysicalDeviceMultisamplePropertiesEXT(instance.getProcAddr( "vkGetPhysicalDeviceMultisamplePropertiesEXT"));
+      vkGetPhysicalDevicePresentRectanglesKHR = PFN_vkGetPhysicalDevicePresentRectanglesKHR(instance.getProcAddr( "vkGetPhysicalDevicePresentRectanglesKHR"));
+      vkGetPhysicalDeviceProperties = PFN_vkGetPhysicalDeviceProperties(instance.getProcAddr( "vkGetPhysicalDeviceProperties"));
+      vkGetPhysicalDeviceProperties2 = PFN_vkGetPhysicalDeviceProperties2(instance.getProcAddr( "vkGetPhysicalDeviceProperties2"));
+      vkGetPhysicalDeviceProperties2KHR = PFN_vkGetPhysicalDeviceProperties2KHR(instance.getProcAddr( "vkGetPhysicalDeviceProperties2KHR"));
+      vkGetPhysicalDeviceQueueFamilyProperties = PFN_vkGetPhysicalDeviceQueueFamilyProperties(instance.getProcAddr( "vkGetPhysicalDeviceQueueFamilyProperties"));
+      vkGetPhysicalDeviceQueueFamilyProperties2 = PFN_vkGetPhysicalDeviceQueueFamilyProperties2(instance.getProcAddr( "vkGetPhysicalDeviceQueueFamilyProperties2"));
+      vkGetPhysicalDeviceQueueFamilyProperties2KHR = PFN_vkGetPhysicalDeviceQueueFamilyProperties2KHR(instance.getProcAddr( "vkGetPhysicalDeviceQueueFamilyProperties2KHR"));
+      vkGetPhysicalDeviceSparseImageFormatProperties = PFN_vkGetPhysicalDeviceSparseImageFormatProperties(instance.getProcAddr( "vkGetPhysicalDeviceSparseImageFormatProperties"));
+      vkGetPhysicalDeviceSparseImageFormatProperties2 = PFN_vkGetPhysicalDeviceSparseImageFormatProperties2(instance.getProcAddr( "vkGetPhysicalDeviceSparseImageFormatProperties2"));
+      vkGetPhysicalDeviceSparseImageFormatProperties2KHR = PFN_vkGetPhysicalDeviceSparseImageFormatProperties2KHR(instance.getProcAddr( "vkGetPhysicalDeviceSparseImageFormatProperties2KHR"));
+      vkGetPhysicalDeviceSurfaceCapabilities2EXT = PFN_vkGetPhysicalDeviceSurfaceCapabilities2EXT(instance.getProcAddr( "vkGetPhysicalDeviceSurfaceCapabilities2EXT"));
+      vkGetPhysicalDeviceSurfaceCapabilities2KHR = PFN_vkGetPhysicalDeviceSurfaceCapabilities2KHR(instance.getProcAddr( "vkGetPhysicalDeviceSurfaceCapabilities2KHR"));
+      vkGetPhysicalDeviceSurfaceCapabilitiesKHR = PFN_vkGetPhysicalDeviceSurfaceCapabilitiesKHR(instance.getProcAddr( "vkGetPhysicalDeviceSurfaceCapabilitiesKHR"));
+      vkGetPhysicalDeviceSurfaceFormats2KHR = PFN_vkGetPhysicalDeviceSurfaceFormats2KHR(instance.getProcAddr( "vkGetPhysicalDeviceSurfaceFormats2KHR"));
+      vkGetPhysicalDeviceSurfaceFormatsKHR = PFN_vkGetPhysicalDeviceSurfaceFormatsKHR(instance.getProcAddr( "vkGetPhysicalDeviceSurfaceFormatsKHR"));
+      vkGetPhysicalDeviceSurfacePresentModesKHR = PFN_vkGetPhysicalDeviceSurfacePresentModesKHR(instance.getProcAddr( "vkGetPhysicalDeviceSurfacePresentModesKHR"));
+      vkGetPhysicalDeviceSurfaceSupportKHR = PFN_vkGetPhysicalDeviceSurfaceSupportKHR(instance.getProcAddr( "vkGetPhysicalDeviceSurfaceSupportKHR"));
 #ifdef VK_USE_PLATFORM_WAYLAND_KHR
-      vkGetPhysicalDeviceWaylandPresentationSupportKHR = PFN_vkGetPhysicalDeviceWaylandPresentationSupportKHR(device ? device.getProcAddr( "vkGetPhysicalDeviceWaylandPresentationSupportKHR") : instance.getProcAddr( "vkGetPhysicalDeviceWaylandPresentationSupportKHR"));
+      vkGetPhysicalDeviceWaylandPresentationSupportKHR = PFN_vkGetPhysicalDeviceWaylandPresentationSupportKHR(instance.getProcAddr( "vkGetPhysicalDeviceWaylandPresentationSupportKHR"));
 #endif /*VK_USE_PLATFORM_WAYLAND_KHR*/
 #ifdef VK_USE_PLATFORM_WIN32_KHR
-      vkGetPhysicalDeviceWin32PresentationSupportKHR = PFN_vkGetPhysicalDeviceWin32PresentationSupportKHR(device ? device.getProcAddr( "vkGetPhysicalDeviceWin32PresentationSupportKHR") : instance.getProcAddr( "vkGetPhysicalDeviceWin32PresentationSupportKHR"));
+      vkGetPhysicalDeviceWin32PresentationSupportKHR = PFN_vkGetPhysicalDeviceWin32PresentationSupportKHR(instance.getProcAddr( "vkGetPhysicalDeviceWin32PresentationSupportKHR"));
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 #ifdef VK_USE_PLATFORM_XCB_KHR
-      vkGetPhysicalDeviceXcbPresentationSupportKHR = PFN_vkGetPhysicalDeviceXcbPresentationSupportKHR(device ? device.getProcAddr( "vkGetPhysicalDeviceXcbPresentationSupportKHR") : instance.getProcAddr( "vkGetPhysicalDeviceXcbPresentationSupportKHR"));
+      vkGetPhysicalDeviceXcbPresentationSupportKHR = PFN_vkGetPhysicalDeviceXcbPresentationSupportKHR(instance.getProcAddr( "vkGetPhysicalDeviceXcbPresentationSupportKHR"));
 #endif /*VK_USE_PLATFORM_XCB_KHR*/
 #ifdef VK_USE_PLATFORM_XLIB_KHR
-      vkGetPhysicalDeviceXlibPresentationSupportKHR = PFN_vkGetPhysicalDeviceXlibPresentationSupportKHR(device ? device.getProcAddr( "vkGetPhysicalDeviceXlibPresentationSupportKHR") : instance.getProcAddr( "vkGetPhysicalDeviceXlibPresentationSupportKHR"));
+      vkGetPhysicalDeviceXlibPresentationSupportKHR = PFN_vkGetPhysicalDeviceXlibPresentationSupportKHR(instance.getProcAddr( "vkGetPhysicalDeviceXlibPresentationSupportKHR"));
 #endif /*VK_USE_PLATFORM_XLIB_KHR*/
       vkGetPipelineCacheData = PFN_vkGetPipelineCacheData(device ? device.getProcAddr( "vkGetPipelineCacheData") : instance.getProcAddr( "vkGetPipelineCacheData"));
       vkGetQueryPoolResults = PFN_vkGetQueryPoolResults(device ? device.getProcAddr( "vkGetQueryPoolResults") : instance.getProcAddr( "vkGetQueryPoolResults"));
       vkGetQueueCheckpointDataNV = PFN_vkGetQueueCheckpointDataNV(device ? device.getProcAddr( "vkGetQueueCheckpointDataNV") : instance.getProcAddr( "vkGetQueueCheckpointDataNV"));
 #ifdef VK_USE_PLATFORM_XLIB_XRANDR_NV
-      vkGetRandROutputDisplayEXT = PFN_vkGetRandROutputDisplayEXT(device ? device.getProcAddr( "vkGetRandROutputDisplayEXT") : instance.getProcAddr( "vkGetRandROutputDisplayEXT"));
+      vkGetRandROutputDisplayEXT = PFN_vkGetRandROutputDisplayEXT(instance.getProcAddr( "vkGetRandROutputDisplayEXT"));
 #endif /*VK_USE_PLATFORM_XLIB_XRANDR_NV*/
       vkGetRaytracingShaderHandlesNVX = PFN_vkGetRaytracingShaderHandlesNVX(device ? device.getProcAddr( "vkGetRaytracingShaderHandlesNVX") : instance.getProcAddr( "vkGetRaytracingShaderHandlesNVX"));
       vkGetRefreshCycleDurationGOOGLE = PFN_vkGetRefreshCycleDurationGOOGLE(device ? device.getProcAddr( "vkGetRefreshCycleDurationGOOGLE") : instance.getProcAddr( "vkGetRefreshCycleDurationGOOGLE"));
@@ -50649,7 +51041,7 @@ public:
       vkRegisterDeviceEventEXT = PFN_vkRegisterDeviceEventEXT(device ? device.getProcAddr( "vkRegisterDeviceEventEXT") : instance.getProcAddr( "vkRegisterDeviceEventEXT"));
       vkRegisterDisplayEventEXT = PFN_vkRegisterDisplayEventEXT(device ? device.getProcAddr( "vkRegisterDisplayEventEXT") : instance.getProcAddr( "vkRegisterDisplayEventEXT"));
       vkRegisterObjectsNVX = PFN_vkRegisterObjectsNVX(device ? device.getProcAddr( "vkRegisterObjectsNVX") : instance.getProcAddr( "vkRegisterObjectsNVX"));
-      vkReleaseDisplayEXT = PFN_vkReleaseDisplayEXT(device ? device.getProcAddr( "vkReleaseDisplayEXT") : instance.getProcAddr( "vkReleaseDisplayEXT"));
+      vkReleaseDisplayEXT = PFN_vkReleaseDisplayEXT(instance.getProcAddr( "vkReleaseDisplayEXT"));
       vkResetCommandBuffer = PFN_vkResetCommandBuffer(device ? device.getProcAddr( "vkResetCommandBuffer") : instance.getProcAddr( "vkResetCommandBuffer"));
       vkResetCommandPool = PFN_vkResetCommandPool(device ? device.getProcAddr( "vkResetCommandPool") : instance.getProcAddr( "vkResetCommandPool"));
       vkResetDescriptorPool = PFN_vkResetDescriptorPool(device ? device.getProcAddr( "vkResetDescriptorPool") : instance.getProcAddr( "vkResetDescriptorPool"));

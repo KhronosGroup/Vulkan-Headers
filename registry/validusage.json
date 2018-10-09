@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.1.85",
-    "comment": "from git branch: master commit: 9858c1e89e21246f779226d2be779fd33bb6a50d",
-    "date": "2018-09-19 19:31:34Z"
+    "api version": "1.1.87",
+    "comment": "from git branch: master commit: 911a7646949e661b24ad6111479029ed9e841284",
+    "date": "2018-10-09 21:58:14Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -198,7 +198,7 @@
         },
         {
           "vuid": "VUID-VkPhysicalDeviceProperties2-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT\">VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceConservativeRasterizationPropertiesEXT\">VkPhysicalDeviceConservativeRasterizationPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingPropertiesEXT\">VkPhysicalDeviceDescriptorIndexingPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDiscardRectanglePropertiesEXT\">VkPhysicalDeviceDiscardRectanglePropertiesEXT</a>, <a href=\"#VkPhysicalDeviceExternalMemoryHostPropertiesEXT\">VkPhysicalDeviceExternalMemoryHostPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceIDProperties\">VkPhysicalDeviceIDProperties</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockPropertiesEXT\">VkPhysicalDeviceInlineUniformBlockPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceMaintenance3Properties\">VkPhysicalDeviceMaintenance3Properties</a>, <a href=\"#VkPhysicalDeviceMeshShaderPropertiesNV\">VkPhysicalDeviceMeshShaderPropertiesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX\">VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX</a>, <a href=\"#VkPhysicalDeviceMultiviewProperties\">VkPhysicalDeviceMultiviewProperties</a>, <a href=\"#VkPhysicalDevicePointClippingProperties\">VkPhysicalDevicePointClippingProperties</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryProperties\">VkPhysicalDeviceProtectedMemoryProperties</a>, <a href=\"#VkPhysicalDevicePushDescriptorPropertiesKHR\">VkPhysicalDevicePushDescriptorPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceRaytracingPropertiesNVX\">VkPhysicalDeviceRaytracingPropertiesNVX</a>, <a href=\"#VkPhysicalDeviceSampleLocationsPropertiesEXT\">VkPhysicalDeviceSampleLocationsPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT\">VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceShaderCorePropertiesAMD\">VkPhysicalDeviceShaderCorePropertiesAMD</a>, <a href=\"#VkPhysicalDeviceSubgroupProperties\">VkPhysicalDeviceSubgroupProperties</a>, or <a href=\"#VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT\">VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT\">VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceConservativeRasterizationPropertiesEXT\">VkPhysicalDeviceConservativeRasterizationPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingPropertiesEXT\">VkPhysicalDeviceDescriptorIndexingPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDiscardRectanglePropertiesEXT\">VkPhysicalDeviceDiscardRectanglePropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDriverPropertiesKHR\">VkPhysicalDeviceDriverPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceExternalMemoryHostPropertiesEXT\">VkPhysicalDeviceExternalMemoryHostPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceIDProperties\">VkPhysicalDeviceIDProperties</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockPropertiesEXT\">VkPhysicalDeviceInlineUniformBlockPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceMaintenance3Properties\">VkPhysicalDeviceMaintenance3Properties</a>, <a href=\"#VkPhysicalDeviceMeshShaderPropertiesNV\">VkPhysicalDeviceMeshShaderPropertiesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX\">VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX</a>, <a href=\"#VkPhysicalDeviceMultiviewProperties\">VkPhysicalDeviceMultiviewProperties</a>, <a href=\"#VkPhysicalDevicePointClippingProperties\">VkPhysicalDevicePointClippingProperties</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryProperties\">VkPhysicalDeviceProtectedMemoryProperties</a>, <a href=\"#VkPhysicalDevicePushDescriptorPropertiesKHR\">VkPhysicalDevicePushDescriptorPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceRaytracingPropertiesNVX\">VkPhysicalDeviceRaytracingPropertiesNVX</a>, <a href=\"#VkPhysicalDeviceSampleLocationsPropertiesEXT\">VkPhysicalDeviceSampleLocationsPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT\">VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceShaderCorePropertiesAMD\">VkPhysicalDeviceShaderCorePropertiesAMD</a>, <a href=\"#VkPhysicalDeviceSubgroupProperties\">VkPhysicalDeviceSubgroupProperties</a>, or <a href=\"#VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT\">VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT</a>"
         },
         {
           "vuid": "VUID-VkPhysicalDeviceProperties2-sType-unique",
@@ -211,6 +211,14 @@
         {
           "vuid": "VUID-VkPhysicalDeviceIDProperties-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES</code>"
+        }
+      ]
+    },
+    "VkPhysicalDeviceDriverPropertiesKHR": {
+      "(VK_VERSION_1_1,VK_KHR_get_physical_device_properties2)+(VK_KHR_driver_properties)": [
+        {
+          "vuid": "VUID-VkPhysicalDeviceDriverPropertiesKHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES_KHR</code>"
         }
       ]
     },
@@ -318,7 +326,7 @@
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice8BitStorageFeaturesKHR\">VkPhysicalDevice8BitStorageFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeaturesEXT\">VkPhysicalDeviceDescriptorIndexingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeaturesEXT\">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceShaderDrawParameterFeatures\">VkPhysicalDeviceShaderDrawParameterFeatures</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceVariablePointerFeatures\">VkPhysicalDeviceVariablePointerFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, or <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeaturesKHR\">VkPhysicalDeviceVulkanMemoryModelFeaturesKHR</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice8BitStorageFeaturesKHR\">VkPhysicalDevice8BitStorageFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeaturesEXT\">VkPhysicalDeviceDescriptorIndexingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeaturesEXT\">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64FeaturesKHR\">VkPhysicalDeviceShaderAtomicInt64FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDrawParameterFeatures\">VkPhysicalDeviceShaderDrawParameterFeatures</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceVariablePointerFeatures\">VkPhysicalDeviceVariablePointerFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, or <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeaturesKHR\">VkPhysicalDeviceVulkanMemoryModelFeaturesKHR</a>"
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-sType-unique",
@@ -2513,12 +2521,8 @@
           "text": " If the <a href=\"#features-features-tessellationShader\">tessellation shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
         },
         {
-          "vuid": "VUID-vkCmdPipelineBarrier-pDependencies-02024",
-          "text": " If <code>vkCmdPipelineBarrier</code> is called within a render pass instance, the render pass <strong class=\"purple\">must</strong> have been created with at least one <code>VkSubpassDependency</code> instance in <code>VkRenderPassCreateInfo</code>::<code>pDependencies</code> that expresses a dependency from the current subpass to itself, and for which <code>srcStageMask</code> contains a subset of the bit values in <code>VkSubpassDependency</code>::<code>srcStageMask</code>, <code>dstStageMask</code> contains a subset of the bit values in <code>VkSubpassDependency</code>::<code>dstStageMask</code>, and <code>dependencyFlags</code> is equal to <code>VkSubpassDependency</code>::<code>dependencyFlags</code>."
-        },
-        {
-          "vuid": "VUID-vkCmdPipelineBarrier-pMemoryBarriers-02026",
-          "text": " If <code>vkCmdPipelineBarrier</code> is called within a render pass instance, for each element of <code>pMemoryBarriers</code> and <code>pImageMemoryBarriers</code>, the render pass <strong class=\"purple\">must</strong> have been defined with a <code>VkSubpassDependency</code> self-dependency for the current subpass with valid <code>srcStageMask</code>, <code>dstStageMask</code>, and <code>dependencyFlags</code> values such that <code>Vk*Barrier</code>::<code>srcAccessMask</code> contains a subset of the bit values in <code>VkSubpassDependency</code>::<code>srcAccessMask</code> and <code>Vk*Barrier</code>::<code>dstAccessMask</code> contains a subset of the bit values in <code>VkSubpassDependency</code>::<code>dstAccessMask</code>."
+          "vuid": "VUID-vkCmdPipelineBarrier-pDependencies-02285",
+          "text": " If <code>vkCmdPipelineBarrier</code> is called within a render pass instance, the render pass <strong class=\"purple\">must</strong> have been created with at least one <code>VkSubpassDependency</code> instance in <code>VkRenderPassCreateInfo</code>::<code>pDependencies</code> that expresses a dependency from the current subpass to itself, and for which <code>srcStageMask</code> contains a subset of the bit values in <code>VkSubpassDependency</code>::<code>srcStageMask</code>, <code>dstStageMask</code> contains a subset of the bit values in <code>VkSubpassDependency</code>::<code>dstStageMask</code>, <code>dependencyFlags</code> is equal to <code>VkSubpassDependency</code>::<code>dependencyFlags</code>, <code>srcAccessMask</code> member of each each element of <code>pMemoryBarriers</code> and <code>pImageMemoryBarriers</code> contains a subset of the bit values in <code>VkSubpassDependency</code>::<code>srcAccessMask</code>, and <code>dstAccessMask</code> member of each element of <code>pMemoryBarriers</code> and <code>pImageMemoryBarriers</code> contains a subset of the bit values in <code>VkSubpassDependency</code>::<code>dstAccessMask</code>"
         },
         {
           "vuid": "VUID-vkCmdPipelineBarrier-bufferMemoryBarrierCount-01178",
@@ -2955,8 +2959,8 @@
           "text": " Each <code>sType</code> member in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
-          "vuid": "VUID-VkRenderPassCreateInfo-flags-zerobitmask",
-          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be <code>0</code>"
+          "vuid": "VUID-VkRenderPassCreateInfo-flags-parameter",
+          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkRenderPassCreateFlagBits\">VkRenderPassCreateFlagBits</a> values"
         },
         {
           "vuid": "VUID-VkRenderPassCreateInfo-pAttachments-parameter",
@@ -3109,6 +3113,12 @@
         {
           "vuid": "VUID-VkInputAttachmentAspectReference-aspectMask-requiredbitmask",
           "text": " <code>aspectMask</code> <strong class=\"purple\">must</strong> not be <code>0</code>"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_maintenance2)+(VK_EXT_image_drm_format_modifier)": [
+        {
+          "vuid": "VUID-VkInputAttachmentAspectReferenceKHR-aspectMask-02250",
+          "text": " <code>aspectMask</code> <strong class=\"purple\">must</strong> not include <code>VK_IMAGE_ASPECT_MEMORY_PLANE</code><em>_i</em>_BIT_EXT for any index <em>i</em>."
         }
       ]
     },
@@ -3417,8 +3427,8 @@
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
         },
         {
-          "vuid": "VUID-VkRenderPassCreateInfo2KHR-flags-zerobitmask",
-          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be <code>0</code>"
+          "vuid": "VUID-VkRenderPassCreateInfo2KHR-flags-parameter",
+          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkRenderPassCreateFlagBits\">VkRenderPassCreateFlagBits</a> values"
         },
         {
           "vuid": "VUID-VkRenderPassCreateInfo2KHR-pAttachments-parameter",
@@ -5190,11 +5200,7 @@
         },
         {
           "vuid": "VUID-VkPipelineDynamicStateCreateInfo-pDynamicStates-parameter",
-          "text": " <code>pDynamicStates</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>dynamicStateCount</code> valid <a href=\"#VkDynamicState\">VkDynamicState</a> values"
-        },
-        {
-          "vuid": "VUID-VkPipelineDynamicStateCreateInfo-dynamicStateCount-arraylength",
-          "text": " <code>dynamicStateCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
+          "text": " If <code>dynamicStateCount</code> is not <code>0</code>, <code>pDynamicStates</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>dynamicStateCount</code> valid <a href=\"#VkDynamicState\">VkDynamicState</a> values"
         }
       ]
     },
@@ -6933,39 +6939,11 @@
       ]
     },
     "VkImageCreateInfo": {
-      "!(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-VkImageCreateInfo-format-00940",
-          "text": " The combination of <code>format</code>, <code>imageType</code>, <code>tiling</code>, <code>usage</code>, and <code>flags</code> <strong class=\"purple\">must</strong> be supported, as indicated by a <code>VK_SUCCESS</code> return value from <code>vkGetPhysicalDeviceImageFormatProperties</code> invoked with the same values passed to the corresponding parameters."
-        },
-        {
-          "vuid": "VUID-VkImageCreateInfo-format-00943",
-          "text": " <code>format</code> <strong class=\"purple\">must</strong> not be <code>VK_FORMAT_UNDEFINED</code>"
-        }
-      ],
-      "(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-VkImageCreateInfo-pNext-01889",
-          "text": " If the <code>pNext</code> chain does not contain an instance of <a href=\"#VkExternalFormatANDROID\">VkExternalFormatANDROID</a>, or if <code>format</code> is not <code>VK_FORMAT_UNDEFINED</code>, the combination of <code>format</code>, <code>imageType</code>, <code>tiling</code>, <code>usage</code>, and <code>flags</code> <strong class=\"purple\">must</strong> be supported, as indicated by a <code>VK_SUCCESS</code> return value from <code>vkGetPhysicalDeviceImageFormatProperties</code> invoked with the same values passed to the corresponding parameters."
-        },
-        {
-          "vuid": "VUID-VkImageCreateInfo-pNext-01974",
-          "text": " If the <code>pNext</code> chain contains an instance of <a href=\"#VkExternalFormatANDROID\">VkExternalFormatANDROID</a>, and its member <code>externalFormat</code> is non-zero the <code>format</code> <strong class=\"purple\">must</strong> be <code>VK_FORMAT_UNDEFINED</code>."
-        },
-        {
-          "vuid": "VUID-VkImageCreateInfo-pNext-01975",
-          "text": " If the <code>pNext</code> chain does not contain an instance of <a href=\"#VkExternalFormatANDROID\">VkExternalFormatANDROID</a>, or does and its member <code>externalFormat</code> is <code>0</code> the <code>format</code> <strong class=\"purple\">must</strong> not be <code>VK_FORMAT_UNDEFINED</code>."
-        },
-        {
-          "vuid": "VUID-VkImageCreateInfo-pNext-01892",
-          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a> structure whose <code>handleTypes</code> member includes <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID</code>:"
-        },
-        {
-          "vuid": "VUID-VkImageCreateInfo-pNext-01893",
-          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExternalFormatANDROID\">VkExternalFormatANDROID</a> structure whose <code>externalFormat</code> member is not <code>0</code>:"
-        }
-      ],
       "core": [
+        {
+          "vuid": "VUID-VkImageCreateInfo-imageCreateMaxMipLevels-02251",
+          "text": " Each of the following values (as described in <a href=\"#resources-image-creation-limits\">Image Creation Limits</a>) <strong class=\"purple\">must</strong> not be undefined <code>imageCreateMaxMipLevels</code>, <code>imageCreateMaxArrayLayers</code>, <code>imageCreateMaxExtent</code>, and <code>imageCreateSampleCounts</code>."
+        },
         {
           "vuid": "VUID-VkImageCreateInfo-sharingMode-00941",
           "text": " If <code>sharingMode</code> is <code>VK_SHARING_MODE_CONCURRENT</code>, <code>pQueueFamilyIndices</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>queueFamilyIndexCount</code> <code>uint32_t</code> values"
@@ -6999,24 +6977,20 @@
           "text": " If <code>flags</code> contains <code>VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT</code>, <code>imageType</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_TYPE_2D</code>"
         },
         {
-          "vuid": "VUID-VkImageCreateInfo-imageType-00951",
-          "text": " If <code>imageType</code> is <code>VK_IMAGE_TYPE_1D</code>, <code>extent.width</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceLimits</code>::<code>maxImageDimension1D</code>, or <code>VkImageFormatProperties</code>::<code>maxExtent.width</code> (as returned by <code>vkGetPhysicalDeviceImageFormatProperties</code> with <code>format</code>, <code>imageType</code>, <code>tiling</code>, <code>usage</code>, and <code>flags</code> equal to those in this structure) - whichever is higher"
+          "vuid": "VUID-VkImageCreateInfo-extent-02252",
+          "text": " <code>extent.width</code> <strong class=\"purple\">must</strong> be less than or equal to <code>imageCreateMaxExtent.pname</code>:width (as defined in <a href=\"#resources-image-creation-limits\">Image Creation Limits</a>)."
         },
         {
-          "vuid": "VUID-VkImageCreateInfo-imageType-00952",
-          "text": " If <code>imageType</code> is <code>VK_IMAGE_TYPE_2D</code> and <code>flags</code> does not contain <code>VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT</code>, <code>extent.width</code> and <code>extent.height</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceLimits</code>::<code>maxImageDimension2D</code>, or <code>VkImageFormatProperties</code>::<code>maxExtent.width</code>/<code>height</code> (as returned by <code>vkGetPhysicalDeviceImageFormatProperties</code> with <code>format</code>, <code>imageType</code>, <code>tiling</code>, <code>usage</code>, and <code>flags</code> equal to those in this structure) - whichever is higher"
+          "vuid": "VUID-VkImageCreateInfo-extent-02253",
+          "text": " <code>extent.height</code> <strong class=\"purple\">must</strong> be less than or equal to <code>imageCreateMaxExtent.pname</code>:height (as defined in <a href=\"#resources-image-creation-limits\">Image Creation Limits</a>)."
         },
         {
-          "vuid": "VUID-VkImageCreateInfo-imageType-00953",
-          "text": " If <code>imageType</code> is <code>VK_IMAGE_TYPE_2D</code> and <code>flags</code> contains <code>VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT</code>, <code>extent.width</code> and <code>extent.height</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceLimits</code>::<code>maxImageDimensionCube</code>, or <code>VkImageFormatProperties</code>::<code>maxExtent.width</code>/<code>height</code> (as returned by <code>vkGetPhysicalDeviceImageFormatProperties</code> with <code>format</code>, <code>imageType</code>, <code>tiling</code>, <code>usage</code>, and <code>flags</code> equal to those in this structure) - whichever is higher"
+          "vuid": "VUID-VkImageCreateInfo-extent-02254",
+          "text": " <code>extent.depth</code> <strong class=\"purple\">must</strong> be less than or equal to <code>imageCreateMaxExtent.pname</code>:depth (as defined in <a href=\"#resources-image-creation-limits\">Image Creation Limits</a>)."
         },
         {
           "vuid": "VUID-VkImageCreateInfo-imageType-00954",
           "text": " If <code>imageType</code> is <code>VK_IMAGE_TYPE_2D</code> and <code>flags</code> contains <code>VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT</code>, <code>extent.width</code> and <code>extent.height</code> <strong class=\"purple\">must</strong> be equal and <code>arrayLayers</code> <strong class=\"purple\">must</strong> be greater than or equal to 6"
-        },
-        {
-          "vuid": "VUID-VkImageCreateInfo-imageType-00955",
-          "text": " If <code>imageType</code> is <code>VK_IMAGE_TYPE_3D</code>, <code>extent.width</code>, <code>extent.height</code> and <code>extent.depth</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceLimits</code>::<code>maxImageDimension3D</code>, or <code>VkImageFormatProperties</code>::<code>maxExtent.width</code>/<code>height</code>/<code>depth</code> (as returned by <code>vkGetPhysicalDeviceImageFormatProperties</code> with <code>format</code>, <code>imageType</code>, <code>tiling</code>, <code>usage</code>, and <code>flags</code> equal to those in this structure) - whichever is higher"
         },
         {
           "vuid": "VUID-VkImageCreateInfo-imageType-00956",
@@ -7031,20 +7005,20 @@
           "text": " <code>mipLevels</code> <strong class=\"purple\">must</strong> be less than or equal to the number of levels in the complete mipmap chain based on <span class=\"eq\"><code>extent.width</code></span>, <span class=\"eq\"><code>extent.height</code></span>, and <span class=\"eq\"><code>extent.depth</code></span>."
         },
         {
-          "vuid": "VUID-VkImageCreateInfo-extent-00959",
-          "text": " <code>mipLevels</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkImageFormatProperties</code>::<code>maxMipLevels</code> (as returned by <code>vkGetPhysicalDeviceImageFormatProperties</code> with <code>format</code>, <code>imageType</code>, <code>tiling</code>, <code>usage</code>, and <code>flags</code> equal to those in this structure)"
+          "vuid": "VUID-VkImageCreateInfo-mipLevels-02255",
+          "text": " <code>mipLevels</code> <strong class=\"purple\">must</strong> be less than or equal to <code>imageCreateMaxMipLevels</code> (as defined in <a href=\"#resources-image-creation-limits\">Image Creation Limits</a>)."
         },
         {
-          "vuid": "VUID-VkImageCreateInfo-arrayLayers-00960",
-          "text": " <code>arrayLayers</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkImageFormatProperties</code>::<code>maxArrayLayers</code> (as returned by <code>vkGetPhysicalDeviceImageFormatProperties</code> with <code>format</code>, <code>imageType</code>, <code>tiling</code>, <code>usage</code>, and <code>flags</code> equal to those in this structure)"
+          "vuid": "VUID-VkImageCreateInfo-arrayLayers-02256",
+          "text": " <code>arrayLayers</code> <strong class=\"purple\">must</strong> be less than or equal to <code>imageCreateMaxArrayLayers</code> (as defined in <a href=\"#resources-image-creation-limits\">Image Creation Limits</a>)."
         },
         {
           "vuid": "VUID-VkImageCreateInfo-imageType-00961",
           "text": " If <code>imageType</code> is <code>VK_IMAGE_TYPE_3D</code>, <code>arrayLayers</code> <strong class=\"purple\">must</strong> be <code>1</code>."
         },
         {
-          "vuid": "VUID-VkImageCreateInfo-samples-00962",
-          "text": " If <code>samples</code> is not <code>VK_SAMPLE_COUNT_1_BIT</code>, <code>imageType</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_TYPE_2D</code>, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT</code>, <code>tiling</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_TILING_OPTIMAL</code>, and <code>mipLevels</code> <strong class=\"purple\">must</strong> be equal to <code>1</code>"
+          "vuid": "VUID-VkImageCreateInfo-samples-02257",
+          "text": " If <code>samples</code> is not <code>VK_SAMPLE_COUNT_1_BIT</code>, then <code>imageType</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_TYPE_2D</code>, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT</code>, <code>mipLevels</code> <strong class=\"purple\">must</strong> be equal to <code>1</code>, and <code>imageCreateMaybeLinear</code> (as defined in <a href=\"#resources-image-creation-limits\">Image Creation Limits</a>) <strong class=\"purple\">must</strong> be <code>false</code>,"
         },
         {
           "vuid": "VUID-VkImageCreateInfo-usage-00963",
@@ -7063,8 +7037,8 @@
           "text": " If <code>usage</code> includes <code>VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT</code>, <code>usage</code> <strong class=\"purple\">must</strong> also contain at least one of <code>VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT</code>, <code>VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</code>, or <code>VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT</code>."
         },
         {
-          "vuid": "VUID-VkImageCreateInfo-samples-00967",
-          "text": " <code>samples</code> <strong class=\"purple\">must</strong> be a bit value that is set in <code>VkImageFormatProperties</code>::<code>sampleCounts</code> returned by <code>vkGetPhysicalDeviceImageFormatProperties</code> with <code>format</code>, <code>imageType</code>, <code>tiling</code>, <code>usage</code>, and <code>flags</code> equal to those in this structure"
+          "vuid": "VUID-VkImageCreateInfo-samples-02258",
+          "text": " <code>samples</code> <strong class=\"purple\">must</strong> be a bit value that is set in <code>imageCreateSampleCounts</code> (as defined in <a href=\"#resources-image-creation-limits\">Image Creation Limits</a>)."
         },
         {
           "vuid": "VUID-VkImageCreateInfo-usage-00968",
@@ -7179,6 +7153,30 @@
           "text": " If <code>sharingMode</code> is <code>VK_SHARING_MODE_CONCURRENT</code>, each element of <code>pQueueFamilyIndices</code> <strong class=\"purple\">must</strong> be unique and <strong class=\"purple\">must</strong> be less than <code>pQueueFamilyPropertyCount</code> returned by either <a href=\"#vkGetPhysicalDeviceQueueFamilyProperties\">vkGetPhysicalDeviceQueueFamilyProperties</a> or <a href=\"#vkGetPhysicalDeviceQueueFamilyProperties2\">vkGetPhysicalDeviceQueueFamilyProperties2</a> for the <code>physicalDevice</code> that was used to create <code>device</code>"
         }
       ],
+      "!(VK_ANDROID_external_memory_android_hardware_buffer)": [
+        {
+          "vuid": "VUID-VkImageCreateInfo-format-00943",
+          "text": " <code>format</code> <strong class=\"purple\">must</strong> not be <code>VK_FORMAT_UNDEFINED</code>"
+        }
+      ],
+      "(VK_ANDROID_external_memory_android_hardware_buffer)": [
+        {
+          "vuid": "VUID-VkImageCreateInfo-pNext-01974",
+          "text": " If the <code>pNext</code> chain contains an instance of <a href=\"#VkExternalFormatANDROID\">VkExternalFormatANDROID</a>, and its member <code>externalFormat</code> is non-zero the <code>format</code> <strong class=\"purple\">must</strong> be <code>VK_FORMAT_UNDEFINED</code>."
+        },
+        {
+          "vuid": "VUID-VkImageCreateInfo-pNext-01975",
+          "text": " If the <code>pNext</code> chain does not contain an instance of <a href=\"#VkExternalFormatANDROID\">VkExternalFormatANDROID</a>, or does and its member <code>externalFormat</code> is <code>0</code> the <code>format</code> <strong class=\"purple\">must</strong> not be <code>VK_FORMAT_UNDEFINED</code>."
+        },
+        {
+          "vuid": "VUID-VkImageCreateInfo-pNext-01892",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a> structure whose <code>handleTypes</code> member includes <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID</code>:"
+        },
+        {
+          "vuid": "VUID-VkImageCreateInfo-pNext-01893",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExternalFormatANDROID\">VkExternalFormatANDROID</a> structure whose <code>externalFormat</code> member is not <code>0</code>:"
+        }
+      ],
       "(VK_VERSION_1_1,VK_KHR_maintenance1)": [
         {
           "vuid": "VUID-VkImageCreateInfo-flags-00950",
@@ -7219,8 +7217,8 @@
           "text": " If the logical device was created with <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>::<code>physicalDeviceCount</code> equal to 1, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT</code>"
         },
         {
-          "vuid": "VUID-VkImageCreateInfo-flags-00992",
-          "text": " If <code>flags</code> contains <code>VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT</code>, then <code>mipLevels</code> <strong class=\"purple\">must</strong> be one, <code>arrayLayers</code> <strong class=\"purple\">must</strong> be one, <code>imageType</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_TYPE_2D</code>, and <code>tiling</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_TILING_OPTIMAL</code>"
+          "vuid": "VUID-VkImageCreateInfo-flags-02259",
+          "text": " If <code>flags</code> contains <code>VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT</code>, then <code>mipLevels</code> <strong class=\"purple\">must</strong> be one, <code>arrayLayers</code> <strong class=\"purple\">must</strong> be one, <code>imageType</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_TYPE_2D</code>. and <code>imageCreateMaybeLinear</code> (as defined in <a href=\"#resources-image-creation-limits\">Image Creation Limits</a>) <strong class=\"purple\">must</strong> be <code>false</code>."
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_maintenance2)": [
@@ -7245,16 +7243,22 @@
           "text": " If the image <code>format</code> is one of those listed in <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\">Formats requiring sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion for <code>VK_IMAGE_ASPECT_COLOR_BIT</code> image views</a>:"
         },
         {
-          "vuid": "VUID-VkImageCreateInfo-tiling-01575",
-          "text": " If <code>tiling</code> is <code>VK_IMAGE_TILING_OPTIMAL</code>, <code>format</code> is a <em>multi-planar</em> format, and <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code> (as returned by <code>vkGetPhysicalDeviceFormatProperties</code> with the same value of <code>format</code>) does not include <code>VK_FORMAT_FEATURE_DISJOINT_BIT</code>, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_IMAGE_CREATE_DISJOINT_BIT</code>"
-        },
-        {
-          "vuid": "VUID-VkImageCreateInfo-tiling-01576",
-          "text": " If <code>tiling</code> is <code>VK_IMAGE_TILING_LINEAR</code>, <code>format</code> is a <em>multi-planar</em> format, and <code>VkFormatProperties</code>::<code>linearTilingFeatures</code> (as returned by <code>vkGetPhysicalDeviceFormatProperties</code> with the same value of <code>format</code>) does not include <code>VK_FORMAT_FEATURE_DISJOINT_BIT</code>, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_IMAGE_CREATE_DISJOINT_BIT</code>"
+          "vuid": "VUID-VkImageCreateInfo-imageCreateFormatFeatures-02260",
+          "text": " If pame:format is a <em>multi-planar</em> format, and if <code>imageCreateFormatFeatures</code> (as defined in <a href=\"#resources-image-creation-limits\">Image Creation Limits</a>) does not contain <code>VK_FORMAT_FEATURE_DISJOINT_BIT</code>, then <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_IMAGE_CREATE_DISJOINT_BIT</code>."
         },
         {
           "vuid": "VUID-VkImageCreateInfo-format-01577",
           "text": " If <code>format</code> is not a <em>multi-planar</em> format, and <code>flags</code> does not include <code>VK_IMAGE_CREATE_ALIAS_BIT</code>, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_IMAGE_CREATE_DISJOINT_BIT</code>"
+        }
+      ],
+      "(VK_EXT_image_drm_format_modifier)": [
+        {
+          "vuid": "VUID-VkImageCreateInfo-tiling-02261",
+          "text": " If <code>tiling</code> is <code>VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT</code>, then the <code>pNext</code> chain <strong class=\"purple\">must</strong> contain exactly one of <a href=\"#VkImageDrmFormatModifierListCreateInfoEXT\">VkImageDrmFormatModifierListCreateInfoEXT</a> or <a href=\"#VkImageDrmFormatModifierExplicitCreateInfoEXT\">VkImageDrmFormatModifierExplicitCreateInfoEXT</a>."
+        },
+        {
+          "vuid": "VUID-VkImageCreateInfo-pNext-02262",
+          "text": " If the <code>pNext</code> chain contains <a href=\"#VkImageDrmFormatModifierListCreateInfoEXT\">VkImageDrmFormatModifierListCreateInfoEXT</a> or <a href=\"#VkImageDrmFormatModifierExplicitCreateInfoEXT\">VkImageDrmFormatModifierExplicitCreateInfoEXT</a>, then <code>tiling</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT</code>."
         }
       ],
       "(VK_EXT_sample_locations)": [
@@ -7388,12 +7392,48 @@
         }
       ]
     },
+    "VkImageDrmFormatModifierListCreateInfoEXT": {
+      "(VK_EXT_image_drm_format_modifier)": [
+        {
+          "vuid": "VUID-VkImageDrmFormatModifierListCreateInfoEXT-pDrmFormatModifiers-02263",
+          "text": " Each <em>modifier</em> in <code>pDrmFormatModifiers</code> must be compatible with the parameters in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> and its <code>pNext</code> chain, as determined by querying <a href=\"#VkPhysicalDeviceImageFormatInfo2\">VkPhysicalDeviceImageFormatInfo2</a> extended with <a href=\"#VkPhysicalDeviceImageDrmFormatModifierInfoEXT\">VkPhysicalDeviceImageDrmFormatModifierInfoEXT</a>."
+        }
+      ]
+    },
+    "VkImageDrmFormatModifierExplicitCreateInfoEXT": {
+      "(VK_EXT_image_drm_format_modifier)": [
+        {
+          "vuid": "VUID-VkImageDrmFormatModifierExplicitCreateInfoEXT-drmFormatModifier-02264",
+          "text": " <code>drmFormatModifier</code> must be compatible with the parameters in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> and its <code>pNext</code> chain, as determined by querying <a href=\"#VkPhysicalDeviceImageFormatInfo2KHR\">VkPhysicalDeviceImageFormatInfo2KHR</a> extended with <a href=\"#VkPhysicalDeviceImageDrmFormatModifierInfoEXT\">VkPhysicalDeviceImageDrmFormatModifierInfoEXT</a>."
+        },
+        {
+          "vuid": "VUID-VkImageDrmFormatModifierExplicitCreateInfoEXT-drmFormatModifierPlaneCount-02265",
+          "text": " <code>drmFormatModifierPlaneCount</code> <strong class=\"purple\">must</strong> be equal to the <a href=\"#VkDrmFormatModifierPropertiesEXT\">VkDrmFormatModifierPropertiesEXT</a>::<code>drmFormatModifierPlaneCount</code> associated with <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>format</code> and <code>drmFormatModifier</code>, as found by querying <a href=\"#VkDrmFormatModifierPropertiesListEXT\">VkDrmFormatModifierPropertiesListEXT</a>."
+        },
+        {
+          "vuid": "VUID-VkImageDrmFormatModifierExplicitCreateInfoEXT-pPlaneLayouts-02266",
+          "text": " For each element of <code>pPlaneLayouts</code>:"
+        }
+      ]
+    },
     "vkGetImageSubresourceLayout": {
-      "core": [
+      "!(VK_EXT_image_drm_format_modifier)": [
         {
           "vuid": "VUID-vkGetImageSubresourceLayout-image-00996",
           "text": " <code>image</code> <strong class=\"purple\">must</strong> have been created with <code>tiling</code> equal to <code>VK_IMAGE_TILING_LINEAR</code>"
+        }
+      ],
+      "(VK_EXT_image_drm_format_modifier)": [
+        {
+          "vuid": "VUID-vkGetImageSubresourceLayout-image-02270",
+          "text": " <code>image</code> <strong class=\"purple\">must</strong> have been created with <code>tiling</code> equal to <code>VK_IMAGE_TILING_LINEAR</code> or <code>VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT</code>"
         },
+        {
+          "vuid": "VUID-vkGetImageSubresourceLayout-tiling-02271",
+          "text": "  If the <code>tiling</code> of the <code>image</code> is  <code>VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT</code>, then the <code>aspectMask</code>  member of <code>pSubresource</code> <strong class=\"purple\">must</strong> be  <code>VK_IMAGE_ASPECT_MEMORY_PLANE</code><em>_i</em>_BIT_EXT and the index <em>i</em>  <strong class=\"purple\">must</strong> be less than the  <a href=\"#VkDrmFormatModifierPropertiesEXT\"><code>drmFormatModifierPlaneCount</code></a>  associated with the image&#8217;s <a href=\"#VkImageCreateInfo\"><code>format</code></a> and <a href=\"#VkImageDrmFormatModifierPropertiesEXT\"><code>drmFormatModifier</code></a>."
+        }
+      ],
+      "core": [
         {
           "vuid": "VUID-vkGetImageSubresourceLayout-aspectMask-00997",
           "text": " The <code>aspectMask</code> member of <code>pSubresource</code> <strong class=\"purple\">must</strong> only have a single bit set"
@@ -7430,11 +7470,11 @@
       "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
         {
           "vuid": "VUID-vkGetImageSubresourceLayout-format-01581",
-          "text": " If the <code>format</code> of <code>image</code> is a <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\">multi-planar format</a> with two planes, the <code>aspectMask</code> member of <code>pSubresource</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code> or <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code>"
+          "text": " If the <code>tiling</code> of the <code>image</code> is <code>VK_IMAGE_TILING_LINEAR</code> and its <code>format</code> is a <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\">multi-planar format</a> with two planes, the <code>aspectMask</code> member of <code>pSubresource</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code> or <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code>"
         },
         {
           "vuid": "VUID-vkGetImageSubresourceLayout-format-01582",
-          "text": " If the <code>format</code> of <code>image</code> is a <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\">multi-planar format</a> with three planes, the <code>aspectMask</code> member of <code>pSubresource</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code>, <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code> or <code>VK_IMAGE_ASPECT_PLANE_2_BIT</code>"
+          "text": " If the <code>tiling</code> of the <code>image</code> is <code>VK_IMAGE_TILING_LINEAR</code> and its <code>format</code> is a <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\">multi-planar format</a> with three planes, the <code>aspectMask</code> member of <code>pSubresource</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code>, <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code> or <code>VK_IMAGE_ASPECT_PLANE_2_BIT</code>"
         }
       ],
       "(VK_ANDROID_external_memory_android_hardware_buffer)": [
@@ -7453,6 +7493,14 @@
         {
           "vuid": "VUID-VkImageSubresource-aspectMask-requiredbitmask",
           "text": " <code>aspectMask</code> <strong class=\"purple\">must</strong> not be <code>0</code>"
+        }
+      ]
+    },
+    "vkGetImageDrmFormatModifierPropertiesEXT": {
+      "(VK_EXT_image_drm_format_modifier)": [
+        {
+          "vuid": "VUID-vkGetImageDrmFormatModifierPropertiesEXT-image-02272",
+          "text": " <code>image</code> <strong class=\"purple\">must</strong> have been created with <a href=\"#VkImageCreateInfo\"><code>tiling</code></a> equal to <code>VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT</code>."
         }
       ]
     },
@@ -7519,24 +7567,24 @@
           "text": " If the <a href=\"#features-features-imageCubeArray\">image cubemap arrays</a> feature is not enabled, <code>viewType</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_VIEW_TYPE_CUBE_ARRAY</code>"
         },
         {
-          "vuid": "VUID-VkImageViewCreateInfo-image-01006",
-          "text": " If <code>image</code> was created with <code>VK_IMAGE_TILING_LINEAR</code>, <code>format</code> <strong class=\"purple\">must</strong> be format that has at least one supported feature bit present in the value of <code>VkFormatProperties</code>::<code>linearTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code> with the same value of <code>format</code>"
+          "vuid": "VUID-VkImageViewCreateInfo-None-02273",
+          "text": " The <a href=\"#resources-image-view-format-features\">format features</a> of the resultant image view <strong class=\"purple\">must</strong> contain at least one bit."
         },
         {
-          "vuid": "VUID-VkImageViewCreateInfo-image-01008",
-          "text": " If <code>image</code> was created with <code>VK_IMAGE_TILING_LINEAR</code> and <code>usage</code> contains <code>VK_IMAGE_USAGE_SAMPLED_BIT</code>, <code>format</code> <strong class=\"purple\">must</strong> be supported for sampled images, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT</code> flag in <code>VkFormatProperties</code>::<code>linearTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code> with the same value of <code>format</code>"
+          "vuid": "VUID-VkImageViewCreateInfo-usage-02274",
+          "text": " If <code>usage</code> contains <code>VK_IMAGE_USAGE_SAMPLED_BIT</code>, then the <a href=\"#resources-image-view-format-features\">format features</a> of the resultant image view <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT</code>."
         },
         {
-          "vuid": "VUID-VkImageViewCreateInfo-image-01009",
-          "text": " If <code>image</code> was created with <code>VK_IMAGE_TILING_LINEAR</code> and <code>usage</code> contains <code>VK_IMAGE_USAGE_STORAGE_BIT</code>, <code>format</code> <strong class=\"purple\">must</strong> be supported for storage images, as specified by the <code>VK_FORMAT_FEATURE_STORAGE_IMAGE_BIT</code> flag in <code>VkFormatProperties</code>::<code>linearTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code> with the same value of <code>format</code>"
+          "vuid": "VUID-VkImageViewCreateInfo-usage-02275",
+          "text": " If <code>usage</code> contains <code>VK_IMAGE_USAGE_STORAGE_BIT</code>, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_STORAGE_IMAGE_BIT</code>."
         },
         {
-          "vuid": "VUID-VkImageViewCreateInfo-image-01010",
-          "text": " If <code>image</code> was created with <code>VK_IMAGE_TILING_LINEAR</code> and <code>usage</code> contains <code>VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT</code>, <code>format</code> <strong class=\"purple\">must</strong> be supported for color attachments, as specified by the <code>VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT</code> flag in <code>VkFormatProperties</code>::<code>linearTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code> with the same value of <code>format</code>"
+          "vuid": "VUID-VkImageViewCreateInfo-usage-02276",
+          "text": " If <code>usage</code> contains <code>VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT</code>, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT</code>."
         },
         {
-          "vuid": "VUID-VkImageViewCreateInfo-image-01011",
-          "text": " If <code>image</code> was created with <code>VK_IMAGE_TILING_LINEAR</code> and <code>usage</code> contains <code>VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</code>, <code>format</code> <strong class=\"purple\">must</strong> be supported for depth/stencil attachments, as specified by the <code>VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT</code> flag in <code>VkFormatProperties</code>::<code>linearTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code> with the same value of <code>format</code>"
+          "vuid": "VUID-VkImageViewCreateInfo-usage-02277",
+          "text": " If <code>usage</code> contains <code>VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</code>, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT</code>."
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-subresourceRange-01478",
@@ -7637,54 +7685,6 @@
           "text": " If <code>image</code> was created with <code>usage</code> containing <code>VK_IMAGE_USAGE_SHADING_RATE_IMAGE_BIT_NV</code>, <code>format</code> <strong class=\"purple\">must</strong> be <code>VK_FORMAT_R8_UINT</code>"
         }
       ],
-      "!(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-VkImageViewCreateInfo-image-01012",
-          "text": " If <code>image</code> was created with <code>VK_IMAGE_TILING_OPTIMAL</code>, <code>format</code> <strong class=\"purple\">must</strong> be format that has at least one supported feature bit present in the value of <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code> with the same value of <code>format</code>"
-        },
-        {
-          "vuid": "VUID-VkImageViewCreateInfo-image-01013",
-          "text": " If <code>image</code> was created with <code>VK_IMAGE_TILING_OPTIMAL</code> and <code>usage</code> contains <code>VK_IMAGE_USAGE_SAMPLED_BIT</code>, <code>format</code> <strong class=\"purple\">must</strong> be supported for sampled images, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT</code> flag in <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code> with the same value of <code>format</code>"
-        },
-        {
-          "vuid": "VUID-VkImageViewCreateInfo-image-01014",
-          "text": " If <code>image</code> was created with <code>VK_IMAGE_TILING_OPTIMAL</code> and <code>usage</code> contains <code>VK_IMAGE_USAGE_STORAGE_BIT</code>, <code>format</code> <strong class=\"purple\">must</strong> be supported for storage images, as specified by the <code>VK_FORMAT_FEATURE_STORAGE_IMAGE_BIT</code> flag in <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code> with the same value of <code>format</code>"
-        },
-        {
-          "vuid": "VUID-VkImageViewCreateInfo-image-01015",
-          "text": " If <code>image</code> was created with <code>VK_IMAGE_TILING_OPTIMAL</code> and <code>usage</code> contains <code>VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT</code>, <code>format</code> <strong class=\"purple\">must</strong> be supported for color attachments, as specified by the <code>VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT</code> flag in <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code> with the same value of <code>format</code>"
-        },
-        {
-          "vuid": "VUID-VkImageViewCreateInfo-image-01016",
-          "text": " If <code>image</code> was created with <code>VK_IMAGE_TILING_OPTIMAL</code> and <code>usage</code> contains <code>VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</code>, <code>format</code> <strong class=\"purple\">must</strong> be supported for depth/stencil attachments, as specified by the <code>VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT</code> flag in <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code> with the same value of <code>format</code>"
-        }
-      ],
-      "(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-VkImageViewCreateInfo-image-01965",
-          "text": " If <code>image</code> was created with <code>VK_IMAGE_TILING_OPTIMAL</code> and <code>format</code> is not <code>VK_FORMAT_UNDEFINED</code>, <code>format</code> <strong class=\"purple\">must</strong> be format that has at least one supported feature bit present in the value of <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code> with the same value of <code>format</code>"
-        },
-        {
-          "vuid": "VUID-VkImageViewCreateInfo-image-01966",
-          "text": " If <code>image</code> was created with <code>VK_IMAGE_TILING_OPTIMAL</code>, and <code>format</code> is not <code>VK_FORMAT_UNDEFINED</code>, and <code>usage</code> contains <code>VK_IMAGE_USAGE_SAMPLED_BIT</code>, <code>format</code> <strong class=\"purple\">must</strong> be supported for sampled images, as specified by the <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT</code> flag in <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code> with the same value of <code>format</code>"
-        },
-        {
-          "vuid": "VUID-VkImageViewCreateInfo-image-01967",
-          "text": " If <code>image</code> was created with <code>VK_IMAGE_TILING_OPTIMAL</code>, and <code>format</code> is not <code>VK_FORMAT_UNDEFINED</code>, and <code>usage</code> contains <code>VK_IMAGE_USAGE_STORAGE_BIT</code>, <code>format</code> <strong class=\"purple\">must</strong> be supported for storage images, as specified by the <code>VK_FORMAT_FEATURE_STORAGE_IMAGE_BIT</code> flag in <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code> with the same value of <code>format</code>"
-        },
-        {
-          "vuid": "VUID-VkImageViewCreateInfo-image-01968",
-          "text": " If <code>image</code> was created with <code>VK_IMAGE_TILING_OPTIMAL</code>, and <code>format</code> is not <code>VK_FORMAT_UNDEFINED</code>, and <code>usage</code> contains <code>VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT</code>, <code>format</code> <strong class=\"purple\">must</strong> be supported for color attachments, as specified by the <code>VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT</code> flag in <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code> with the same value of <code>format</code>"
-        },
-        {
-          "vuid": "VUID-VkImageViewCreateInfo-image-01969",
-          "text": " If <code>image</code> was created with <code>VK_IMAGE_TILING_OPTIMAL</code>, and <code>format</code> is not <code>VK_FORMAT_UNDEFINED</code>, and <code>usage</code> contains <code>VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</code>, <code>format</code> <strong class=\"purple\">must</strong> be supported for depth/stencil attachments, as specified by the <code>VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT</code> flag in <code>VkFormatProperties</code>::<code>optimalTilingFeatures</code> returned by <code>vkGetPhysicalDeviceFormatProperties</code> with the same value of <code>format</code>"
-        },
-        {
-          "vuid": "VUID-VkImageViewCreateInfo-image-01896",
-          "text": " If <code>image</code> has an <a href=\"#memory-external-android-hardware-buffer-external-formats\">external format</a>:"
-        }
-      ],
       "!(VK_VERSION_1_1,VK_KHR_maintenance1)": [
         {
           "vuid": "VUID-VkImageViewCreateInfo-subresourceRange-01480",
@@ -7748,6 +7748,12 @@
           "vuid": "VUID-VkImageViewCreateInfo-image-01019",
           "text": " If <code>image</code> was not created with the <code>VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT</code> flag, <code>format</code> <strong class=\"purple\">must</strong> be identical to the <code>format</code> used to create <code>image</code>"
         }
+      ],
+      "(VK_ANDROID_external_memory_android_hardware_buffer)": [
+        {
+          "vuid": "VUID-VkImageViewCreateInfo-image-01896",
+          "text": " If <code>image</code> has an <a href=\"#memory-external-android-hardware-buffer-external-formats\">external format</a>:"
+        }
       ]
     },
     "VkImageViewUsageCreateInfo": {
@@ -7793,6 +7799,12 @@
         {
           "vuid": "VUID-VkImageSubresourceRange-aspectMask-01670",
           "text": " If <code>aspectMask</code> includes <code>VK_IMAGE_ASPECT_COLOR_BIT</code>, then it <strong class=\"purple\">must</strong> not include any of <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code>, <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code>, or <code>VK_IMAGE_ASPECT_PLANE_2_BIT</code>"
+        }
+      ],
+      "(VK_EXT_image_drm_format_modifier)": [
+        {
+          "vuid": "VUID-VkImageSubresourceRange-aspectMask-02278",
+          "text": " <code>aspectMask</code> <strong class=\"purple\">must</strong> not include <code>VK_IMAGE_ASPECT_MEMORY_PLANE</code><em>_i</em>_BIT_EXT for any index <em>i</em>."
         }
       ]
     },
@@ -7979,7 +7991,19 @@
         {
           "vuid": "VUID-VkImageMemoryRequirementsInfo2-image-01590",
           "text": " If <code>image</code> was not created with the <code>VK_IMAGE_CREATE_DISJOINT_BIT</code> flag, there <strong class=\"purple\">must</strong> not be a <a href=\"#VkImagePlaneMemoryRequirementsInfo\">VkImagePlaneMemoryRequirementsInfo</a> in the <code>pNext</code> chain of the <a href=\"#VkImageMemoryRequirementsInfo2\">VkImageMemoryRequirementsInfo2</a> structure"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_get_memory_requirements2)+(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)+(VK_EXT_image_drm_format_modifier)": [
+        {
+          "vuid": "VUID-VkImageMemoryRequirementsInfo2KHR-image-02279",
+          "text": " If <code>image</code> was created with <code>VK_IMAGE_CREATE_DISJOINT_BIT</code> and with <code>VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT</code>, then there <strong class=\"purple\">must</strong> be a <a href=\"#VkImagePlaneMemoryRequirementsInfo\">VkImagePlaneMemoryRequirementsInfo</a> in the <code>pNext</code> chain of the <a href=\"#VkImageMemoryRequirementsInfo2\">VkImageMemoryRequirementsInfo2</a> structure"
         },
+        {
+          "vuid": "VUID-VkImageMemoryRequirementsInfo2KHR-image-02280",
+          "text": " If <code>image</code> was created with a single-plane format and with any <code>tiling</code> other than <code>VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT</code>, then there <strong class=\"purple\">must</strong> not be a <a href=\"#VkImagePlaneMemoryRequirementsInfo\">VkImagePlaneMemoryRequirementsInfo</a> in the <code>pNext</code> chain of the <a href=\"#VkImageMemoryRequirementsInfo2\">VkImageMemoryRequirementsInfo2</a> structure"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_get_memory_requirements2)+(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)+!(VK_EXT_image_drm_format_modifier)": [
         {
           "vuid": "VUID-VkImageMemoryRequirementsInfo2-image-01591",
           "text": " If <code>image</code> was created with a single-plane format, there <strong class=\"purple\">must</strong> not be a <a href=\"#VkImagePlaneMemoryRequirementsInfo\">VkImagePlaneMemoryRequirementsInfo</a> in the <code>pNext</code> chain of the <a href=\"#VkImageMemoryRequirementsInfo2\">VkImageMemoryRequirementsInfo2</a> structure"
@@ -8009,8 +8033,8 @@
     "VkImagePlaneMemoryRequirementsInfo": {
       "(VK_VERSION_1_1,VK_KHR_get_memory_requirements2)+(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
         {
-          "vuid": "VUID-VkImagePlaneMemoryRequirementsInfo-planeAspect-01592",
-          "text": " <code>planeAspect</code> <strong class=\"purple\">must</strong> be an aspect that exists in the format; that is, for a two-plane image <code>planeAspect</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code> or <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code>, and for a three-plane image <code>planeAspect</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code>, <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code> or <code>VK_IMAGE_ASPECT_PLANE_2_BIT</code>"
+          "vuid": "VUID-VkImagePlaneMemoryRequirementsInfoKHR-planeAspect-02281",
+          "text": " If the image&#8217;s tiling is <code>VK_IMAGE_TILING_LINEAR</code> or <code>VK_IMAGE_TILING_OPTIMAL</code>, then <code>planeAspect</code> <strong class=\"purple\">must</strong> be a single valid <em>format plane</em> for the image. (That is, for a two-plane image <code>planeAspect</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code> or <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code>, and for a three-plane image <code>planeAspect</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code>, <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code> or <code>VK_IMAGE_ASPECT_PLANE_2_BIT</code>)."
         },
         {
           "vuid": "VUID-VkImagePlaneMemoryRequirementsInfo-sType-sType",
@@ -8019,6 +8043,12 @@
         {
           "vuid": "VUID-VkImagePlaneMemoryRequirementsInfo-planeAspect-parameter",
           "text": " <code>planeAspect</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImageAspectFlagBits\">VkImageAspectFlagBits</a> value"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_get_memory_requirements2)+(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)+(VK_EXT_image_drm_format_modifier)": [
+        {
+          "vuid": "VUID-VkImagePlaneMemoryRequirementsInfoKHR-planeAspect-02282",
+          "text": "  If the image&#8217;s tiling is <code>VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT</code>,  then <code>planeAspect</code> <strong class=\"purple\">must</strong> be a single valid <em>memory plane</em> for the  image.  (That is, <code>aspectMask</code> <strong class=\"purple\">must</strong> specify a plane index that is less than  the  <a href=\"#VkDrmFormatModifierPropertiesEXT\"><code>drmFormatModifierPlaneCount</code></a>  associated with the image&#8217;s <a href=\"#VkImageCreateInfo\"><code>format</code></a> and <a href=\"#VkImageDrmFormatModifierPropertiesEXT\"><code>drmFormatModifier</code></a>.)"
         }
       ]
     },
@@ -8547,8 +8577,8 @@
     "VkBindImagePlaneMemoryInfo": {
       "(VK_VERSION_1_1,VK_KHR_bind_memory2)+(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
         {
-          "vuid": "VUID-VkBindImagePlaneMemoryInfo-planeAspect-01642",
-          "text": " <code>planeAspect</code> <strong class=\"purple\">must</strong> be a single valid plane aspect for the image format (that is, <code>planeAspect</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code> or <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code> for &#8220;<code>_2PLANE</code>&#8221; formats and <code>planeAspect</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code>, <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code>, or <code>VK_IMAGE_ASPECT_PLANE_2_BIT</code> for &#8220;<code>_3PLANE</code>&#8221; formats)"
+          "vuid": "VUID-VkBindImagePlaneMemoryInfoKHR-planeAspect-02283",
+          "text": " If the image&#8217;s tiling is <code>VK_IMAGE_TILING_LINEAR</code> or <code>VK_IMAGE_TILING_OPTIMAL</code>, then <code>planeAspect</code> <strong class=\"purple\">must</strong> be a single valid <em>format plane</em> for the image. (That is, <code>planeAspect</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code> or <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code> for &#8220;<code>_2PLANE</code>&#8221; formats and <code>planeAspect</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code>, <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code>, or <code>VK_IMAGE_ASPECT_PLANE_2_BIT</code> for &#8220;<code>_3PLANE</code>&#8221; formats.)"
         },
         {
           "vuid": "VUID-VkBindImagePlaneMemoryInfo-None-01643",
@@ -8561,6 +8591,12 @@
         {
           "vuid": "VUID-VkBindImagePlaneMemoryInfo-planeAspect-parameter",
           "text": " <code>planeAspect</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImageAspectFlagBits\">VkImageAspectFlagBits</a> value"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_bind_memory2)+(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)+(VK_EXT_image_drm_format_modifier)": [
+        {
+          "vuid": "VUID-VkBindImagePlaneMemoryInfoKHR-planeAspect-02284",
+          "text": "  If the image&#8217;s tiling is <code>VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT</code>,  then <code>planeAspect</code> <strong class=\"purple\">must</strong> be a single valid <em>memory plane</em> for the  image.  (That is, <code>aspectMask</code> <strong class=\"purple\">must</strong> specify a plane index that is less than  the  <a href=\"#VkDrmFormatModifierPropertiesEXT\"><code>drmFormatModifierPlaneCount</code></a>  associated with the image&#8217;s <a href=\"#VkImageCreateInfo\"><code>format</code></a> and <a href=\"#VkImageDrmFormatModifierPropertiesEXT\"><code>drmFormatModifier</code></a>.)"
         }
       ]
     },
@@ -11409,6 +11445,12 @@
           "text": " <code>aspectMask</code> <strong class=\"purple\">must</strong> not be <code>0</code>"
         }
       ],
+      "(VK_EXT_image_drm_format_modifier)": [
+        {
+          "vuid": "VUID-VkClearAttachment-aspectMask-02246",
+          "text": " <code>aspectMask</code> <strong class=\"purple\">must</strong> not include <code>VK_IMAGE_ASPECT_MEMORY_PLANE</code><em>_i</em>_BIT_EXT for any index <em>i</em>."
+        }
+      ],
       "(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-VkClearAttachment-commandBuffer-01809",
@@ -12088,6 +12130,12 @@
           "vuid": "VUID-VkImageSubresourceLayers-aspectMask-requiredbitmask",
           "text": " <code>aspectMask</code> <strong class=\"purple\">must</strong> not be <code>0</code>"
         }
+      ],
+      "(VK_EXT_image_drm_format_modifier)": [
+        {
+          "vuid": "VUID-VkImageSubresourceLayers-aspectMask-02247",
+          "text": " <code>aspectMask</code> <strong class=\"purple\">must</strong> not include <code>VK_IMAGE_ASPECT_MEMORY_PLANE</code><em>_i</em>_BIT_EXT for any index <em>i</em>."
+        }
       ]
     },
     "vkCmdCopyBufferToImage": {
@@ -12461,12 +12509,14 @@
           "text": " If the calling command&#8217;s <code>VkImage</code> parameter is of <a href=\"#VkImageType\">VkImageType</a> <code>VK_IMAGE_TYPE_3D</code>, the <code>baseArrayLayer</code> and <code>layerCount</code> members of <code>imageSubresource</code> <strong class=\"purple\">must</strong> be <code>0</code> and <code>1</code>, respectively"
         },
         {
-          "vuid": "VUID-VkBufferImageCopy-None-00214",
-          "text": " When copying to the depth aspect of an image subresource, the data in the source buffer <strong class=\"purple\">must</strong> be in the range <span class=\"eq\">[0,1]</span>"
-        },
-        {
           "vuid": "VUID-VkBufferImageCopy-imageSubresource-parameter",
           "text": " <code>imageSubresource</code> <strong class=\"purple\">must</strong> be a valid <code>VkImageSubresourceLayers</code> structure"
+        }
+      ],
+      "!(VK_EXT_depth_range_unrestricted)": [
+        {
+          "vuid": "VUID-VkBufferImageCopy-None-00214",
+          "text": " When copying to the depth aspect of an image subresource, the data in the source buffer <strong class=\"purple\">must</strong> be in the range <span class=\"eq\">[0,1]</span>"
         }
       ]
     },
@@ -15556,15 +15606,11 @@
         },
         {
           "vuid": "VUID-VkSampleLocationsInfoEXT-sampleLocationsPerPixel-parameter",
-          "text": " <code>sampleLocationsPerPixel</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkSampleCountFlagBits\">VkSampleCountFlagBits</a> value"
+          "text": " If <code>sampleLocationsPerPixel</code> is not <code>0</code>, <code>sampleLocationsPerPixel</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkSampleCountFlagBits\">VkSampleCountFlagBits</a> value"
         },
         {
           "vuid": "VUID-VkSampleLocationsInfoEXT-pSampleLocations-parameter",
-          "text": " <code>pSampleLocations</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>sampleLocationsCount</code> <code>VkSampleLocationEXT</code> structures"
-        },
-        {
-          "vuid": "VUID-VkSampleLocationsInfoEXT-sampleLocationsCount-arraylength",
-          "text": " <code>sampleLocationsCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
+          "text": " If <code>sampleLocationsCount</code> is not <code>0</code>, <code>pSampleLocations</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>sampleLocationsCount</code> <code>VkSampleLocationEXT</code> structures"
         }
       ]
     },
@@ -18182,6 +18228,46 @@
         }
       ]
     },
+    "vkCreateImagePipeSurfaceFUCHSIA": {
+      "(VK_KHR_surface)+(VK_FUCHSIA_imagepipe_surface)": [
+        {
+          "vuid": "VUID-vkCreateImagePipeSurfaceFUCHSIA-instance-parameter",
+          "text": " <code>instance</code> <strong class=\"purple\">must</strong> be a valid <code>VkInstance</code> handle"
+        },
+        {
+          "vuid": "VUID-vkCreateImagePipeSurfaceFUCHSIA-pCreateInfo-parameter",
+          "text": " <code>pCreateInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <code>VkImagePipeSurfaceCreateInfoFUCHSIA</code> structure"
+        },
+        {
+          "vuid": "VUID-vkCreateImagePipeSurfaceFUCHSIA-pAllocator-parameter",
+          "text": " If <code>pAllocator</code> is not <code>NULL</code>, <code>pAllocator</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <code>VkAllocationCallbacks</code> structure"
+        },
+        {
+          "vuid": "VUID-vkCreateImagePipeSurfaceFUCHSIA-pSurface-parameter",
+          "text": " <code>pSurface</code> <strong class=\"purple\">must</strong> be a valid pointer to a <code>VkSurfaceKHR</code> handle"
+        }
+      ]
+    },
+    "VkImagePipeSurfaceCreateInfoFUCHSIA": {
+      "(VK_KHR_surface)+(VK_FUCHSIA_imagepipe_surface)": [
+        {
+          "vuid": "VUID-VkImagePipeSurfaceCreateInfoFUCHSIA-imagePipeHandle-00000",
+          "text": " <code>imagePipeHandle</code> <strong class=\"purple\">must</strong> be a valid <code>zx_handle_t</code>"
+        },
+        {
+          "vuid": "VUID-VkImagePipeSurfaceCreateInfoFUCHSIA-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_IMAGEPIPE_SURFACE_CREATE_INFO_FUCHSIA</code>"
+        },
+        {
+          "vuid": "VUID-VkImagePipeSurfaceCreateInfoFUCHSIA-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkImagePipeSurfaceCreateInfoFUCHSIA-flags-zerobitmask",
+          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be <code>0</code>"
+        }
+      ]
+    },
     "vkCreateIOSSurfaceMVK": {
       "(VK_KHR_surface)+(VK_MVK_ios_surface)": [
         {
@@ -19877,8 +19963,8 @@
     "vkCmdTraceRaysNVX": {
       "(VK_NVX_raytracing)": [
         {
-          "vuid": "VUID-vkCmdTraceRaysNVX-cmdBuf-parameter",
-          "text": " <code>cmdBuf</code> <strong class=\"purple\">must</strong> be a valid <code>VkCommandBuffer</code> handle"
+          "vuid": "VUID-vkCmdTraceRaysNVX-commandBuffer-parameter",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <code>VkCommandBuffer</code> handle"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysNVX-raygenShaderBindingTableBuffer-parameter",
@@ -19902,7 +19988,7 @@
         },
         {
           "vuid": "VUID-vkCmdTraceRaysNVX-commonparent",
-          "text": " Each of <code>cmdBuf</code>, <code>hitShaderBindingTableBuffer</code>, <code>missShaderBindingTableBuffer</code>, and <code>raygenShaderBindingTableBuffer</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkDevice</code>"
+          "text": " Each of <code>commandBuffer</code>, <code>hitShaderBindingTableBuffer</code>, <code>missShaderBindingTableBuffer</code>, and <code>raygenShaderBindingTableBuffer</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkDevice</code>"
         }
       ]
     },
@@ -19913,8 +19999,8 @@
           "text": " <code>geometryCount</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceRaytracingPropertiesNVX</code>::<code>maxGeometryCount</code>"
         },
         {
-          "vuid": "VUID-vkCmdBuildAccelerationStructureNVX-cmdBuf-parameter",
-          "text": " <code>cmdBuf</code> <strong class=\"purple\">must</strong> be a valid <code>VkCommandBuffer</code> handle"
+          "vuid": "VUID-vkCmdBuildAccelerationStructureNVX-commandBuffer-parameter",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <code>VkCommandBuffer</code> handle"
         },
         {
           "vuid": "VUID-vkCmdBuildAccelerationStructureNVX-type-parameter",
@@ -19954,7 +20040,7 @@
         },
         {
           "vuid": "VUID-vkCmdBuildAccelerationStructureNVX-commonparent",
-          "text": " Each of <code>cmdBuf</code>, <code>dst</code>, <code>instanceData</code>, <code>scratch</code>, and <code>src</code> that are valid handles <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkDevice</code>"
+          "text": " Each of <code>commandBuffer</code>, <code>dst</code>, <code>instanceData</code>, <code>scratch</code>, and <code>src</code> that are valid handles <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkDevice</code>"
         }
       ]
     },
@@ -19965,8 +20051,8 @@
           "text": " <code>queryType</code> <strong class=\"purple\">must</strong> be VK_QUERY_TYPE_COMPACTED_SIZE_NVX"
         },
         {
-          "vuid": "VUID-vkCmdWriteAccelerationStructurePropertiesNVX-cmdBuf-parameter",
-          "text": " <code>cmdBuf</code> <strong class=\"purple\">must</strong> be a valid <code>VkCommandBuffer</code> handle"
+          "vuid": "VUID-vkCmdWriteAccelerationStructurePropertiesNVX-commandBuffer-parameter",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <code>VkCommandBuffer</code> handle"
         },
         {
           "vuid": "VUID-vkCmdWriteAccelerationStructurePropertiesNVX-accelerationStructure-parameter",
@@ -19990,15 +20076,15 @@
         },
         {
           "vuid": "VUID-vkCmdWriteAccelerationStructurePropertiesNVX-commonparent",
-          "text": " Each of <code>accelerationStructure</code>, <code>cmdBuf</code>, and <code>queryPool</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkDevice</code>"
+          "text": " Each of <code>accelerationStructure</code>, <code>commandBuffer</code>, and <code>queryPool</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkDevice</code>"
         }
       ]
     },
     "vkCmdCopyAccelerationStructureNVX": {
       "(VK_NVX_raytracing)": [
         {
-          "vuid": "VUID-vkCmdCopyAccelerationStructureNVX-cmdBuf-parameter",
-          "text": " <code>cmdBuf</code> <strong class=\"purple\">must</strong> be a valid <code>VkCommandBuffer</code> handle"
+          "vuid": "VUID-vkCmdCopyAccelerationStructureNVX-commandBuffer-parameter",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <code>VkCommandBuffer</code> handle"
         },
         {
           "vuid": "VUID-vkCmdCopyAccelerationStructureNVX-dst-parameter",
@@ -20022,7 +20108,7 @@
         },
         {
           "vuid": "VUID-vkCmdCopyAccelerationStructureNVX-commonparent",
-          "text": " Each of <code>cmdBuf</code>, <code>dst</code>, and <code>src</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkDevice</code>"
+          "text": " Each of <code>commandBuffer</code>, <code>dst</code>, and <code>src</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkDevice</code>"
         }
       ]
     },
@@ -20147,6 +20233,14 @@
         {
           "vuid": "VUID-VkPhysicalDeviceMultiviewFeatures-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES</code>"
+        }
+      ]
+    },
+    "VkPhysicalDeviceShaderAtomicInt64FeaturesKHR": {
+      "(VK_KHR_shader_atomic_int64)": [
+        {
+          "vuid": "VUID-VkPhysicalDeviceShaderAtomicInt64FeaturesKHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES_KHR</code>"
         }
       ]
     },
@@ -20535,6 +20629,12 @@
       ]
     },
     "vkGetPhysicalDeviceImageFormatProperties": {
+      "(VK_EXT_image_drm_format_modifier)": [
+        {
+          "vuid": "VUID-vkGetPhysicalDeviceImageFormatProperties-tiling-02248",
+          "text": " <code>tiling</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT</code>. (Use <a href=\"#vkGetPhysicalDeviceImageFormatProperties2\">vkGetPhysicalDeviceImageFormatProperties2</a> instead)."
+        }
+      ],
       "core": [
         {
           "vuid": "VUID-vkGetPhysicalDeviceImageFormatProperties-physicalDevice-parameter",
@@ -20633,6 +20733,12 @@
       ]
     },
     "VkPhysicalDeviceImageFormatInfo2": {
+      "(VK_VERSION_1_1,VK_KHR_get_physical_device_properties2)+(VK_EXT_image_drm_format_modifier)": [
+        {
+          "vuid": "VUID-VkPhysicalDeviceImageFormatInfo2KHR-tiling-02249",
+          "text": " <code>tiling</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT</code> if and only if the <code>pNext</code> chain contains <a href=\"#VkPhysicalDeviceImageDrmFormatModifierInfoEXT\">VkPhysicalDeviceImageDrmFormatModifierInfoEXT</a>."
+        }
+      ],
       "(VK_VERSION_1_1,VK_KHR_get_physical_device_properties2)": [
         {
           "vuid": "VUID-VkPhysicalDeviceImageFormatInfo2-sType-sType",
