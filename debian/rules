@@ -13,10 +13,9 @@ override_dh_auto_install:
 override_dh_install:
 	dh_install --fail-missing
 
-gentarball: SOURCE=vulkan-headers
-gentarball: UV=$(shell dpkg-parsechangelog|awk '/^Version:/ {print $$2}'|sed 's/-.*$$//')
+gentarball: SOURCE = $(shell dpkg-parsechangelog -SSource)
+gentarball: UV=$(shell dpkg-parsechangelog -SVersion |sed 's/-.*$$//')
 gentarball:
 	tar --transform 's,^,$(SOURCE)-$(UV)/,' \
 		--exclude 'debian' --exclude-vcs \
 		-cJf ../$(SOURCE)_$(UV).orig.tar.xz .
-
