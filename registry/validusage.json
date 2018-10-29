@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.1.89",
-    "comment": "from git branch: master commit: 8d6a7b23a7decb5161e0e4a3297c4665f9061b0e",
-    "date": "2018-10-22 16:27:29Z"
+    "api version": "1.1.90",
+    "comment": "from git branch: master commit: 894211de5fe395af42ce6f2ce1d97ff70e212380",
+    "date": "2018-10-29 20:26:11Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -3215,6 +3215,10 @@
           "text": " All attachments in <code>pColorAttachments</code> that are not <code>VK_ATTACHMENT_UNUSED</code> <strong class=\"purple\">must</strong> have the same sample count"
         },
         {
+          "vuid": "VUID-VkSubpassDescription-pDepthStencilAttachment-01418",
+          "text": " If neither the <code>VK_AMD_mixed_attachment_samples</code> nor the <code>VK_NV_framebuffer_mixed_samples</code> extensions are enabled, and if <code>pDepthStencilAttachment</code> is not <code>VK_ATTACHMENT_UNUSED</code> and any attachments in <code>pColorAttachments</code> are not <code>VK_ATTACHMENT_UNUSED</code>, they <strong class=\"purple\">must</strong> have the same sample count"
+        },
+        {
           "vuid": "VUID-VkSubpassDescription-None-00852",
           "text": " If any input attachments are <code>VK_ATTACHMENT_UNUSED</code>, then any pipelines bound during the subpass <strong class=\"purple\">must</strong> not access those input attachments from the fragment shader"
         },
@@ -3262,13 +3266,7 @@
       "(VK_AMD_mixed_attachment_samples)": [
         {
           "vuid": "VUID-VkSubpassDescription-pColorAttachments-01506",
-          "text": " All attachments in <code>pColorAttachments</code> that are not <code>VK_ATTACHMENT_UNUSED</code> <strong class=\"purple\">must</strong> have a sample count that is smaller than or equal to the sample count of <code>pDepthStencilAttachment</code> if it is not <code>VK_ATTACHMENT_UNUSED</code>"
-        }
-      ],
-      "!(VK_AMD_mixed_attachment_samples)+!(VK_NV_framebuffer_mixed_samples)": [
-        {
-          "vuid": "VUID-VkSubpassDescription-pDepthStencilAttachment-01418",
-          "text": " If <code>pDepthStencilAttachment</code> is not <code>VK_ATTACHMENT_UNUSED</code> and any attachments in <code>pColorAttachments</code> are not <code>VK_ATTACHMENT_UNUSED</code>, they <strong class=\"purple\">must</strong> have the same sample count"
+          "text": " If the <code>VK_AMD_mixed_attachment_samples</code> extension is enabled, and all attachments in <code>pColorAttachments</code> that are not <code>VK_ATTACHMENT_UNUSED</code> <strong class=\"purple\">must</strong> have a sample count that is smaller than or equal to the sample count of <code>pDepthStencilAttachment</code> if it is not <code>VK_ATTACHMENT_UNUSED</code>"
         }
       ],
       "(VK_NVX_multiview_per_view_attributes)": [
@@ -3599,6 +3597,10 @@
           "text": " All attachments in <code>pColorAttachments</code> that are not <code>VK_ATTACHMENT_UNUSED</code> <strong class=\"purple\">must</strong> have the same sample count"
         },
         {
+          "vuid": "VUID-VkSubpassDescription2KHR-pDepthStencilAttachment-03071",
+          "text": " If neither the <code>VK_AMD_mixed_attachment_samples</code> nor the <code>VK_NV_framebuffer_mixed_samples</code> extensions are enabled, and if <code>pDepthStencilAttachment</code> is not <code>VK_ATTACHMENT_UNUSED</code> and any attachments in <code>pColorAttachments</code> are not <code>VK_ATTACHMENT_UNUSED</code>, they <strong class=\"purple\">must</strong> have the same sample count"
+        },
+        {
           "vuid": "VUID-VkSubpassDescription2KHR-None-03072",
           "text": " If any input attachments are <code>VK_ATTACHMENT_UNUSED</code>, then any pipelines bound during the subpass <strong class=\"purple\">must</strong> not access those input attachments from the fragment shader"
         },
@@ -3658,13 +3660,7 @@
       "(VK_KHR_create_renderpass2)+(VK_AMD_mixed_attachment_samples)": [
         {
           "vuid": "VUID-VkSubpassDescription2KHR-pColorAttachments-03070",
-          "text": " All attachments in <code>pColorAttachments</code> that are not <code>VK_ATTACHMENT_UNUSED</code> <strong class=\"purple\">must</strong> have a sample count that is smaller than or equal to the sample count of <code>pDepthStencilAttachment</code> if it is not <code>VK_ATTACHMENT_UNUSED</code>"
-        }
-      ],
-      "(VK_KHR_create_renderpass2)+!(VK_AMD_mixed_attachment_samples)+!(VK_NV_framebuffer_mixed_samples)": [
-        {
-          "vuid": "VUID-VkSubpassDescription2KHR-pDepthStencilAttachment-03071",
-          "text": " If <code>pDepthStencilAttachment</code> is not <code>VK_ATTACHMENT_UNUSED</code> and any attachments in <code>pColorAttachments</code> are not <code>VK_ATTACHMENT_UNUSED</code>, they <strong class=\"purple\">must</strong> have the same sample count"
+          "text": " If the <code>VK_AMD_mixed_attachment_samples</code> extension is enabled, all attachments in <code>pColorAttachments</code> that are not <code>VK_ATTACHMENT_UNUSED</code> <strong class=\"purple\">must</strong> have a sample count that is smaller than or equal to the sample count of <code>pDepthStencilAttachment</code> if it is not <code>VK_ATTACHMENT_UNUSED</code>"
         }
       ],
       "(VK_KHR_create_renderpass2)+(VK_NVX_multiview_per_view_attributes)": [
@@ -4486,7 +4482,7 @@
         },
         {
           "vuid": "VUID-VkShaderModuleCreateInfo-pCode-parameter",
-          "text": " <code>pCode</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of \\(codeSize \\over 4\\) <code>uint32_t</code> values"
+          "text": " <code>pCode</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of \\(\\textrm{codeSize} \\over 4\\) <code>uint32_t</code> values"
         }
       ],
       "!(VK_NV_glsl_shader)": [
@@ -5081,6 +5077,10 @@
           "text": " <code>layout</code> <strong class=\"purple\">must</strong> be <a href=\"#descriptorsets-pipelinelayout-consistency\">consistent</a> with all shaders specified in <code>pStages</code>"
         },
         {
+          "vuid": "VUID-VkGraphicsPipelineCreateInfo-subpass-00757",
+          "text": " If neither the <code>VK_AMD_mixed_attachment_samples</code> nor the <code>VK_NV_framebuffer_mixed_samples</code> extensions are enabled, and if <code>subpass</code> uses color and/or depth/stencil attachments, then the <code>rasterizationSamples</code> member of <code>pMultisampleState</code> <strong class=\"purple\">must</strong> be the same as the sample count for those subpass attachments"
+        },
+        {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-subpass-00758",
           "text": " If <code>subpass</code> does not use any color and/or depth/stencil attachments, then the <code>rasterizationSamples</code> member of <code>pMultisampleState</code> <strong class=\"purple\">must</strong> follow the rules for a <a href=\"#renderpass-noattachments\">zero-attachment subpass</a>"
         },
@@ -5215,26 +5215,20 @@
           "text": " If the <code>sampleLocationsEnable</code> member of a <a href=\"#VkPipelineSampleLocationsStateCreateInfoEXT\">VkPipelineSampleLocationsStateCreateInfoEXT</a> structure chained to the <code>pNext</code> chain of <code>pMultisampleState</code> is <code>VK_TRUE</code>, the fragment shader code <strong class=\"purple\">must</strong> not statically use the extended instruction <code>InterpolateAtSample</code>"
         }
       ],
-      "!(VK_AMD_mixed_attachment_samples)+!(VK_NV_framebuffer_mixed_samples)": [
-        {
-          "vuid": "VUID-VkGraphicsPipelineCreateInfo-subpass-00757",
-          "text": " If <code>subpass</code> uses color and/or depth/stencil attachments, then the <code>rasterizationSamples</code> member of <code>pMultisampleState</code> <strong class=\"purple\">must</strong> be the same as the sample count for those subpass attachments"
-        }
-      ],
       "(VK_AMD_mixed_attachment_samples)": [
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-subpass-01505",
-          "text": " If <code>subpass</code> uses color and/or depth/stencil attachments, then the <code>rasterizationSamples</code> member of <code>pMultisampleState</code> <strong class=\"purple\">must</strong> equal the maximum of the sample counts of those subpass attachments"
+          "text": " If the <code>VK_AMD_mixed_attachment_samples</code> extension is enabled, and if <code>subpass</code> uses color and/or depth/stencil attachments, then the <code>rasterizationSamples</code> member of <code>pMultisampleState</code> <strong class=\"purple\">must</strong> equal the maximum of the sample counts of those subpass attachments"
         }
       ],
       "(VK_NV_framebuffer_mixed_samples)": [
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-subpass-01411",
-          "text": " If <code>subpass</code> has a depth/stencil attachment and depth test, stencil test, or depth bounds test are enabled, then the <code>rasterizationSamples</code> member of <code>pMultisampleState</code> <strong class=\"purple\">must</strong> be the same as the sample count of the depth/stencil attachment"
+          "text": " If the <code>VK_NV_framebuffer_mixed_samples</code> extension is enabled, and if <code>subpass</code> has a depth/stencil attachment and depth test, stencil test, or depth bounds test are enabled, then the <code>rasterizationSamples</code> member of <code>pMultisampleState</code> <strong class=\"purple\">must</strong> be the same as the sample count of the depth/stencil attachment"
         },
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-subpass-01412",
-          "text": " If <code>subpass</code> has any color attachments, then the <code>rasterizationSamples</code> member of <code>pMultisampleState</code> <strong class=\"purple\">must</strong> be greater than or equal to the sample count for those subpass attachments"
+          "text": " If the <code>VK_NV_framebuffer_mixed_samples</code> extension is enabled, and if <code>subpass</code> has any color attachments, then the <code>rasterizationSamples</code> member of <code>pMultisampleState</code> <strong class=\"purple\">must</strong> be greater than or equal to the sample count for those subpass attachments"
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_multiview)": [
@@ -16236,7 +16230,7 @@
       "(VK_NV_framebuffer_mixed_samples)": [
         {
           "vuid": "VUID-VkPipelineMultisampleStateCreateInfo-rasterizationSamples-01415",
-          "text": " If the subpass has any color attachments and <code>rasterizationSamples</code> is greater than the number of color samples, then <code>sampleShadingEnable</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>"
+          "text": " If the <code>VK_NV_framebuffer_mixed_samples</code> extension is enabled, and if the subpass has any color attachments and <code>rasterizationSamples</code> is greater than the number of color samples, then <code>sampleShadingEnable</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>"
         }
       ]
     },

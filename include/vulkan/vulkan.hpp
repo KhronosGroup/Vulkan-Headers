@@ -70,7 +70,7 @@
   #undef MemoryBarrier
 #endif
 
-static_assert( VK_HEADER_VERSION ==  89 , "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION ==  90 , "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
@@ -2530,25 +2530,25 @@ public:
   class ObjectDestroy
   {
     public:
-      ObjectDestroy( OwnerType owner = OwnerType(), Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &dispatch = Dispatch() )
+      ObjectDestroy( OwnerType owner = OwnerType(), Optional<const AllocationCallbacks> allocationCallbacks = nullptr, Dispatch const &dispatch = Dispatch() )
         : m_owner( owner )
-        , m_allocator( allocator )
+        , m_allocationCallbacks( allocationCallbacks )
         , m_dispatch( &dispatch )
       {}
 
       OwnerType getOwner() const { return m_owner; }
-      Optional<const AllocationCallbacks> getAllocator() const { return m_allocator; }
+      Optional<const AllocationCallbacks> getAllocator() const { return m_allocationCallbacks; }
 
     protected:
       template <typename T>
       void destroy(T t)
       {
-        m_owner.destroy( t, m_allocator, *m_dispatch );
+        m_owner.destroy( t, m_allocationCallbacks, *m_dispatch );
       }
 
     private:
       OwnerType m_owner;
-      Optional<const AllocationCallbacks> m_allocator;
+      Optional<const AllocationCallbacks> m_allocationCallbacks;
       Dispatch const* m_dispatch;
   };
 
@@ -2558,22 +2558,22 @@ public:
   class ObjectDestroy<NoParent,Dispatch>
   {
     public:
-      ObjectDestroy( Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &dispatch = Dispatch() )
-        : m_allocator( allocator )
+      ObjectDestroy( Optional<const AllocationCallbacks> allocationCallbacks = nullptr, Dispatch const &dispatch = Dispatch() )
+        : m_allocationCallbacks( allocationCallbacks )
         , m_dispatch( &dispatch )
       {}
 
-      Optional<const AllocationCallbacks> getAllocator() const { return m_allocator; }
+      Optional<const AllocationCallbacks> getAllocator() const { return m_allocationCallbacks; }
 
     protected:
       template <typename T>
       void destroy(T t)
       {
-        t.destroy( m_allocator, *m_dispatch );
+        t.destroy( m_allocationCallbacks, *m_dispatch );
       }
 
     private:
-      Optional<const AllocationCallbacks> m_allocator;
+      Optional<const AllocationCallbacks> m_allocationCallbacks;
       Dispatch const* m_dispatch;
   };
 
@@ -2581,25 +2581,25 @@ public:
   class ObjectFree
   {
     public:
-      ObjectFree( OwnerType owner = OwnerType(), Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &dispatch = Dispatch() )
+      ObjectFree( OwnerType owner = OwnerType(), Optional<const AllocationCallbacks> allocationCallbacks = nullptr, Dispatch const &dispatch = Dispatch() )
         : m_owner( owner )
-        , m_allocator( allocator )
+        , m_allocationCallbacks( allocationCallbacks )
         , m_dispatch( &dispatch )
       {}
 
       OwnerType getOwner() const { return m_owner; }
-      Optional<const AllocationCallbacks> getAllocator() const { return m_allocator; }
+      Optional<const AllocationCallbacks> getAllocator() const { return m_allocationCallbacks; }
 
     protected:
       template <typename T>
       void destroy(T t)
       {
-        m_owner.free( t, m_allocator, *m_dispatch );
+        m_owner.free( t, m_allocationCallbacks, *m_dispatch );
       }
 
     private:
       OwnerType m_owner;
-      Optional<const AllocationCallbacks> m_allocator;
+      Optional<const AllocationCallbacks> m_allocationCallbacks;
       Dispatch const* m_dispatch;
   };
 
@@ -37393,6 +37393,8 @@ public:
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template <typename Allocator = std::allocator<LayerProperties>, typename Dispatch = DispatchLoaderStatic> 
   typename ResultValueType<std::vector<LayerProperties,Allocator>>::type enumerateInstanceLayerProperties(Dispatch const &d = Dispatch() );
+  template <typename Allocator = std::allocator<LayerProperties>, typename Dispatch = DispatchLoaderStatic> 
+  typename ResultValueType<std::vector<LayerProperties,Allocator>>::type enumerateInstanceLayerProperties(Allocator const& vectorAllocator, Dispatch const &d );
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
   template<typename Dispatch>
@@ -37420,6 +37422,25 @@ public:
     properties.resize( propertyCount );
     return createResultValue( result, properties, VULKAN_HPP_NAMESPACE_STRING"::enumerateInstanceLayerProperties" );
   }
+  template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<LayerProperties,Allocator>>::type enumerateInstanceLayerProperties(Allocator const& vectorAllocator, Dispatch const &d )
+  {
+    std::vector<LayerProperties,Allocator> properties( vectorAllocator );
+    uint32_t propertyCount;
+    Result result;
+    do
+    {
+      result = static_cast<Result>( d.vkEnumerateInstanceLayerProperties( &propertyCount, nullptr ) );
+      if ( ( result == Result::eSuccess ) && propertyCount )
+      {
+        properties.resize( propertyCount );
+        result = static_cast<Result>( d.vkEnumerateInstanceLayerProperties( &propertyCount, reinterpret_cast<VkLayerProperties*>( properties.data() ) ) );
+      }
+    } while ( result == Result::eIncomplete );
+    VULKAN_HPP_ASSERT( propertyCount <= properties.size() );
+    properties.resize( propertyCount );
+    return createResultValue( result, properties, VULKAN_HPP_NAMESPACE_STRING"::enumerateInstanceLayerProperties" );
+  }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
 
@@ -37428,6 +37449,8 @@ public:
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template <typename Allocator = std::allocator<ExtensionProperties>, typename Dispatch = DispatchLoaderStatic> 
   typename ResultValueType<std::vector<ExtensionProperties,Allocator>>::type enumerateInstanceExtensionProperties( Optional<const std::string> layerName = nullptr, Dispatch const &d = Dispatch() );
+  template <typename Allocator = std::allocator<ExtensionProperties>, typename Dispatch = DispatchLoaderStatic> 
+  typename ResultValueType<std::vector<ExtensionProperties,Allocator>>::type enumerateInstanceExtensionProperties( Optional<const std::string> layerName, Allocator const& vectorAllocator, Dispatch const &d );
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
   template<typename Dispatch>
@@ -37440,6 +37463,25 @@ public:
   VULKAN_HPP_INLINE typename ResultValueType<std::vector<ExtensionProperties,Allocator>>::type enumerateInstanceExtensionProperties( Optional<const std::string> layerName, Dispatch const &d )
   {
     std::vector<ExtensionProperties,Allocator> properties;
+    uint32_t propertyCount;
+    Result result;
+    do
+    {
+      result = static_cast<Result>( d.vkEnumerateInstanceExtensionProperties( layerName ? layerName->c_str() : nullptr, &propertyCount, nullptr ) );
+      if ( ( result == Result::eSuccess ) && propertyCount )
+      {
+        properties.resize( propertyCount );
+        result = static_cast<Result>( d.vkEnumerateInstanceExtensionProperties( layerName ? layerName->c_str() : nullptr, &propertyCount, reinterpret_cast<VkExtensionProperties*>( properties.data() ) ) );
+      }
+    } while ( result == Result::eIncomplete );
+    VULKAN_HPP_ASSERT( propertyCount <= properties.size() );
+    properties.resize( propertyCount );
+    return createResultValue( result, properties, VULKAN_HPP_NAMESPACE_STRING"::enumerateInstanceExtensionProperties" );
+  }
+  template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<ExtensionProperties,Allocator>>::type enumerateInstanceExtensionProperties( Optional<const std::string> layerName, Allocator const& vectorAllocator, Dispatch const &d )
+  {
+    std::vector<ExtensionProperties,Allocator> properties( vectorAllocator );
     uint32_t propertyCount;
     Result result;
     do
@@ -39491,6 +39533,8 @@ public:
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Allocator = std::allocator<CheckpointDataNV>, typename Dispatch = DispatchLoaderStatic> 
     std::vector<CheckpointDataNV,Allocator> getCheckpointDataNV(Dispatch const &d = Dispatch() ) const;
+    template <typename Allocator = std::allocator<CheckpointDataNV>, typename Dispatch = DispatchLoaderStatic> 
+    std::vector<CheckpointDataNV,Allocator> getCheckpointDataNV(Allocator const& vectorAllocator, Dispatch const &d ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
 
@@ -39623,6 +39667,16 @@ public:
   VULKAN_HPP_INLINE std::vector<CheckpointDataNV,Allocator> Queue::getCheckpointDataNV(Dispatch const &d ) const
   {
     std::vector<CheckpointDataNV,Allocator> checkpointData;
+    uint32_t checkpointDataCount;
+    d.vkGetQueueCheckpointDataNV( m_queue, &checkpointDataCount, nullptr );
+    checkpointData.resize( checkpointDataCount );
+    d.vkGetQueueCheckpointDataNV( m_queue, &checkpointDataCount, reinterpret_cast<VkCheckpointDataNV*>( checkpointData.data() ) );
+    return checkpointData;
+  }
+  template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE std::vector<CheckpointDataNV,Allocator> Queue::getCheckpointDataNV(Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    std::vector<CheckpointDataNV,Allocator> checkpointData( vectorAllocator );
     uint32_t checkpointDataCount;
     d.vkGetQueueCheckpointDataNV( m_queue, &checkpointDataCount, nullptr );
     checkpointData.resize( checkpointDataCount );
@@ -39856,6 +39910,8 @@ public:
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Allocator = std::allocator<SparseImageMemoryRequirements>, typename Dispatch = DispatchLoaderStatic> 
     std::vector<SparseImageMemoryRequirements,Allocator> getImageSparseMemoryRequirements( Image image, Dispatch const &d = Dispatch() ) const;
+    template <typename Allocator = std::allocator<SparseImageMemoryRequirements>, typename Dispatch = DispatchLoaderStatic> 
+    std::vector<SparseImageMemoryRequirements,Allocator> getImageSparseMemoryRequirements( Image image, Allocator const& vectorAllocator, Dispatch const &d ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = DispatchLoaderStatic>
@@ -40163,6 +40219,8 @@ public:
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Allocator = std::allocator<uint8_t>, typename Dispatch = DispatchLoaderStatic> 
     typename ResultValueType<std::vector<uint8_t,Allocator>>::type getPipelineCacheData( PipelineCache pipelineCache, Dispatch const &d = Dispatch() ) const;
+    template <typename Allocator = std::allocator<uint8_t>, typename Dispatch = DispatchLoaderStatic> 
+    typename ResultValueType<std::vector<uint8_t,Allocator>>::type getPipelineCacheData( PipelineCache pipelineCache, Allocator const& vectorAllocator, Dispatch const &d ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = DispatchLoaderStatic>
@@ -40178,11 +40236,15 @@ public:
     template <typename Allocator = std::allocator<Pipeline>, typename Dispatch = DispatchLoaderStatic> 
     typename ResultValueType<std::vector<Pipeline,Allocator>>::type createGraphicsPipelines( PipelineCache pipelineCache, ArrayProxy<const GraphicsPipelineCreateInfo> createInfos, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
     template <typename Allocator = std::allocator<Pipeline>, typename Dispatch = DispatchLoaderStatic> 
+    typename ResultValueType<std::vector<Pipeline,Allocator>>::type createGraphicsPipelines( PipelineCache pipelineCache, ArrayProxy<const GraphicsPipelineCreateInfo> createInfos, Optional<const AllocationCallbacks> allocator, Allocator const& vectorAllocator, Dispatch const &d ) const;
+    template<typename Dispatch = DispatchLoaderStatic>
     ResultValueType<Pipeline>::type createGraphicsPipeline( PipelineCache pipelineCache, const GraphicsPipelineCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template <typename Allocator = std::allocator<UniquePipeline>, typename Dispatch = DispatchLoaderStatic> 
     typename ResultValueType<std::vector<UniqueHandle<Pipeline,Dispatch>,Allocator>>::type createGraphicsPipelinesUnique( PipelineCache pipelineCache, ArrayProxy<const GraphicsPipelineCreateInfo> createInfos, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
     template <typename Allocator = std::allocator<UniquePipeline>, typename Dispatch = DispatchLoaderStatic> 
+    typename ResultValueType<std::vector<UniqueHandle<Pipeline,Dispatch>,Allocator>>::type createGraphicsPipelinesUnique( PipelineCache pipelineCache, ArrayProxy<const GraphicsPipelineCreateInfo> createInfos, Optional<const AllocationCallbacks> allocator, Allocator const& vectorAllocator, Dispatch const &d ) const;
+    template<typename Dispatch = DispatchLoaderStatic>
     typename ResultValueType<UniqueHandle<Pipeline,Dispatch>>::type createGraphicsPipelineUnique( PipelineCache pipelineCache, const GraphicsPipelineCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -40193,11 +40255,15 @@ public:
     template <typename Allocator = std::allocator<Pipeline>, typename Dispatch = DispatchLoaderStatic> 
     typename ResultValueType<std::vector<Pipeline,Allocator>>::type createComputePipelines( PipelineCache pipelineCache, ArrayProxy<const ComputePipelineCreateInfo> createInfos, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
     template <typename Allocator = std::allocator<Pipeline>, typename Dispatch = DispatchLoaderStatic> 
+    typename ResultValueType<std::vector<Pipeline,Allocator>>::type createComputePipelines( PipelineCache pipelineCache, ArrayProxy<const ComputePipelineCreateInfo> createInfos, Optional<const AllocationCallbacks> allocator, Allocator const& vectorAllocator, Dispatch const &d ) const;
+    template<typename Dispatch = DispatchLoaderStatic>
     ResultValueType<Pipeline>::type createComputePipeline( PipelineCache pipelineCache, const ComputePipelineCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template <typename Allocator = std::allocator<UniquePipeline>, typename Dispatch = DispatchLoaderStatic> 
     typename ResultValueType<std::vector<UniqueHandle<Pipeline,Dispatch>,Allocator>>::type createComputePipelinesUnique( PipelineCache pipelineCache, ArrayProxy<const ComputePipelineCreateInfo> createInfos, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
     template <typename Allocator = std::allocator<UniquePipeline>, typename Dispatch = DispatchLoaderStatic> 
+    typename ResultValueType<std::vector<UniqueHandle<Pipeline,Dispatch>,Allocator>>::type createComputePipelinesUnique( PipelineCache pipelineCache, ArrayProxy<const ComputePipelineCreateInfo> createInfos, Optional<const AllocationCallbacks> allocator, Allocator const& vectorAllocator, Dispatch const &d ) const;
+    template<typename Dispatch = DispatchLoaderStatic>
     typename ResultValueType<UniqueHandle<Pipeline,Dispatch>>::type createComputePipelineUnique( PipelineCache pipelineCache, const ComputePipelineCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -40329,9 +40395,13 @@ public:
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Allocator = std::allocator<DescriptorSet>, typename Dispatch = DispatchLoaderStatic> 
     typename ResultValueType<std::vector<DescriptorSet,Allocator>>::type allocateDescriptorSets( const DescriptorSetAllocateInfo & allocateInfo, Dispatch const &d = Dispatch() ) const;
+    template <typename Allocator = std::allocator<DescriptorSet>, typename Dispatch = DispatchLoaderStatic> 
+    typename ResultValueType<std::vector<DescriptorSet,Allocator>>::type allocateDescriptorSets( const DescriptorSetAllocateInfo & allocateInfo, Allocator const& vectorAllocator, Dispatch const &d ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template <typename Allocator = std::allocator<UniqueDescriptorSet>, typename Dispatch = DispatchLoaderStatic> 
     typename ResultValueType<std::vector<UniqueHandle<DescriptorSet,Dispatch>,Allocator>>::type allocateDescriptorSetsUnique( const DescriptorSetAllocateInfo & allocateInfo, Dispatch const &d = Dispatch() ) const;
+    template <typename Allocator = std::allocator<UniqueDescriptorSet>, typename Dispatch = DispatchLoaderStatic> 
+    typename ResultValueType<std::vector<UniqueHandle<DescriptorSet,Dispatch>,Allocator>>::type allocateDescriptorSetsUnique( const DescriptorSetAllocateInfo & allocateInfo, Allocator const& vectorAllocator, Dispatch const &d ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -40451,9 +40521,13 @@ public:
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Allocator = std::allocator<CommandBuffer>, typename Dispatch = DispatchLoaderStatic> 
     typename ResultValueType<std::vector<CommandBuffer,Allocator>>::type allocateCommandBuffers( const CommandBufferAllocateInfo & allocateInfo, Dispatch const &d = Dispatch() ) const;
+    template <typename Allocator = std::allocator<CommandBuffer>, typename Dispatch = DispatchLoaderStatic> 
+    typename ResultValueType<std::vector<CommandBuffer,Allocator>>::type allocateCommandBuffers( const CommandBufferAllocateInfo & allocateInfo, Allocator const& vectorAllocator, Dispatch const &d ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template <typename Allocator = std::allocator<UniqueCommandBuffer>, typename Dispatch = DispatchLoaderStatic> 
     typename ResultValueType<std::vector<UniqueHandle<CommandBuffer,Dispatch>,Allocator>>::type allocateCommandBuffersUnique( const CommandBufferAllocateInfo & allocateInfo, Dispatch const &d = Dispatch() ) const;
+    template <typename Allocator = std::allocator<UniqueCommandBuffer>, typename Dispatch = DispatchLoaderStatic> 
+    typename ResultValueType<std::vector<UniqueHandle<CommandBuffer,Dispatch>,Allocator>>::type allocateCommandBuffersUnique( const CommandBufferAllocateInfo & allocateInfo, Allocator const& vectorAllocator, Dispatch const &d ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -40477,11 +40551,15 @@ public:
     template <typename Allocator = std::allocator<SwapchainKHR>, typename Dispatch = DispatchLoaderStatic> 
     typename ResultValueType<std::vector<SwapchainKHR,Allocator>>::type createSharedSwapchainsKHR( ArrayProxy<const SwapchainCreateInfoKHR> createInfos, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
     template <typename Allocator = std::allocator<SwapchainKHR>, typename Dispatch = DispatchLoaderStatic> 
+    typename ResultValueType<std::vector<SwapchainKHR,Allocator>>::type createSharedSwapchainsKHR( ArrayProxy<const SwapchainCreateInfoKHR> createInfos, Optional<const AllocationCallbacks> allocator, Allocator const& vectorAllocator, Dispatch const &d ) const;
+    template<typename Dispatch = DispatchLoaderStatic>
     ResultValueType<SwapchainKHR>::type createSharedSwapchainKHR( const SwapchainCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template <typename Allocator = std::allocator<UniqueSwapchainKHR>, typename Dispatch = DispatchLoaderStatic> 
     typename ResultValueType<std::vector<UniqueHandle<SwapchainKHR,Dispatch>,Allocator>>::type createSharedSwapchainsKHRUnique( ArrayProxy<const SwapchainCreateInfoKHR> createInfos, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
     template <typename Allocator = std::allocator<UniqueSwapchainKHR>, typename Dispatch = DispatchLoaderStatic> 
+    typename ResultValueType<std::vector<UniqueHandle<SwapchainKHR,Dispatch>,Allocator>>::type createSharedSwapchainsKHRUnique( ArrayProxy<const SwapchainCreateInfoKHR> createInfos, Optional<const AllocationCallbacks> allocator, Allocator const& vectorAllocator, Dispatch const &d ) const;
+    template<typename Dispatch = DispatchLoaderStatic>
     typename ResultValueType<UniqueHandle<SwapchainKHR,Dispatch>>::type createSharedSwapchainKHRUnique( const SwapchainCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -40516,6 +40594,8 @@ public:
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Allocator = std::allocator<Image>, typename Dispatch = DispatchLoaderStatic> 
     typename ResultValueType<std::vector<Image,Allocator>>::type getSwapchainImagesKHR( SwapchainKHR swapchain, Dispatch const &d = Dispatch() ) const;
+    template <typename Allocator = std::allocator<Image>, typename Dispatch = DispatchLoaderStatic> 
+    typename ResultValueType<std::vector<Image,Allocator>>::type getSwapchainImagesKHR( SwapchainKHR swapchain, Allocator const& vectorAllocator, Dispatch const &d ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = DispatchLoaderStatic>
@@ -40876,6 +40956,8 @@ public:
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Allocator = std::allocator<PastPresentationTimingGOOGLE>, typename Dispatch = DispatchLoaderStatic> 
     typename ResultValueType<std::vector<PastPresentationTimingGOOGLE,Allocator>>::type getPastPresentationTimingGOOGLE( SwapchainKHR swapchain, Dispatch const &d = Dispatch() ) const;
+    template <typename Allocator = std::allocator<PastPresentationTimingGOOGLE>, typename Dispatch = DispatchLoaderStatic> 
+    typename ResultValueType<std::vector<PastPresentationTimingGOOGLE,Allocator>>::type getPastPresentationTimingGOOGLE( SwapchainKHR swapchain, Allocator const& vectorAllocator, Dispatch const &d ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = DispatchLoaderStatic>
@@ -40919,6 +41001,8 @@ public:
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Allocator = std::allocator<SparseImageMemoryRequirements2>, typename Dispatch = DispatchLoaderStatic> 
     std::vector<SparseImageMemoryRequirements2,Allocator> getImageSparseMemoryRequirements2( const ImageSparseMemoryRequirementsInfo2 & info, Dispatch const &d = Dispatch() ) const;
+    template <typename Allocator = std::allocator<SparseImageMemoryRequirements2>, typename Dispatch = DispatchLoaderStatic> 
+    std::vector<SparseImageMemoryRequirements2,Allocator> getImageSparseMemoryRequirements2( const ImageSparseMemoryRequirementsInfo2 & info, Allocator const& vectorAllocator, Dispatch const &d ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = DispatchLoaderStatic>
@@ -40926,6 +41010,8 @@ public:
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Allocator = std::allocator<SparseImageMemoryRequirements2>, typename Dispatch = DispatchLoaderStatic> 
     std::vector<SparseImageMemoryRequirements2,Allocator> getImageSparseMemoryRequirements2KHR( const ImageSparseMemoryRequirementsInfo2 & info, Dispatch const &d = Dispatch() ) const;
+    template <typename Allocator = std::allocator<SparseImageMemoryRequirements2>, typename Dispatch = DispatchLoaderStatic> 
+    std::vector<SparseImageMemoryRequirements2,Allocator> getImageSparseMemoryRequirements2KHR( const ImageSparseMemoryRequirementsInfo2 & info, Allocator const& vectorAllocator, Dispatch const &d ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = DispatchLoaderStatic>
@@ -41008,6 +41094,8 @@ public:
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Allocator = std::allocator<uint8_t>, typename Dispatch = DispatchLoaderStatic> 
     typename ResultValueType<std::vector<uint8_t,Allocator>>::type getValidationCacheDataEXT( ValidationCacheEXT validationCache, Dispatch const &d = Dispatch() ) const;
+    template <typename Allocator = std::allocator<uint8_t>, typename Dispatch = DispatchLoaderStatic> 
+    typename ResultValueType<std::vector<uint8_t,Allocator>>::type getValidationCacheDataEXT( ValidationCacheEXT validationCache, Allocator const& vectorAllocator, Dispatch const &d ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = DispatchLoaderStatic>
@@ -41040,6 +41128,8 @@ public:
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Allocator = std::allocator<uint8_t>, typename Dispatch = DispatchLoaderStatic> 
     typename ResultValueType<std::vector<uint8_t,Allocator>>::type getShaderInfoAMD( Pipeline pipeline, ShaderStageFlagBits shaderStage, ShaderInfoTypeAMD infoType, Dispatch const &d = Dispatch() ) const;
+    template <typename Allocator = std::allocator<uint8_t>, typename Dispatch = DispatchLoaderStatic> 
+    typename ResultValueType<std::vector<uint8_t,Allocator>>::type getShaderInfoAMD( Pipeline pipeline, ShaderStageFlagBits shaderStage, ShaderInfoTypeAMD infoType, Allocator const& vectorAllocator, Dispatch const &d ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = DispatchLoaderStatic>
@@ -41175,11 +41265,15 @@ public:
     template <typename Allocator = std::allocator<Pipeline>, typename Dispatch = DispatchLoaderStatic> 
     typename ResultValueType<std::vector<Pipeline,Allocator>>::type createRaytracingPipelinesNVX( PipelineCache pipelineCache, ArrayProxy<const RaytracingPipelineCreateInfoNVX> createInfos, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
     template <typename Allocator = std::allocator<Pipeline>, typename Dispatch = DispatchLoaderStatic> 
+    typename ResultValueType<std::vector<Pipeline,Allocator>>::type createRaytracingPipelinesNVX( PipelineCache pipelineCache, ArrayProxy<const RaytracingPipelineCreateInfoNVX> createInfos, Optional<const AllocationCallbacks> allocator, Allocator const& vectorAllocator, Dispatch const &d ) const;
+    template<typename Dispatch = DispatchLoaderStatic>
     ResultValueType<Pipeline>::type createRaytracingPipelineNVX( PipelineCache pipelineCache, const RaytracingPipelineCreateInfoNVX & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template <typename Allocator = std::allocator<UniquePipeline>, typename Dispatch = DispatchLoaderStatic> 
     typename ResultValueType<std::vector<UniqueHandle<Pipeline,Dispatch>,Allocator>>::type createRaytracingPipelinesNVXUnique( PipelineCache pipelineCache, ArrayProxy<const RaytracingPipelineCreateInfoNVX> createInfos, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
     template <typename Allocator = std::allocator<UniquePipeline>, typename Dispatch = DispatchLoaderStatic> 
+    typename ResultValueType<std::vector<UniqueHandle<Pipeline,Dispatch>,Allocator>>::type createRaytracingPipelinesNVXUnique( PipelineCache pipelineCache, ArrayProxy<const RaytracingPipelineCreateInfoNVX> createInfos, Optional<const AllocationCallbacks> allocator, Allocator const& vectorAllocator, Dispatch const &d ) const;
+    template<typename Dispatch = DispatchLoaderStatic>
     typename ResultValueType<UniqueHandle<Pipeline,Dispatch>>::type createRaytracingPipelineNVXUnique( PipelineCache pipelineCache, const RaytracingPipelineCreateInfoNVX & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -41464,6 +41558,16 @@ public:
   VULKAN_HPP_INLINE std::vector<SparseImageMemoryRequirements,Allocator> Device::getImageSparseMemoryRequirements( Image image, Dispatch const &d ) const
   {
     std::vector<SparseImageMemoryRequirements,Allocator> sparseMemoryRequirements;
+    uint32_t sparseMemoryRequirementCount;
+    d.vkGetImageSparseMemoryRequirements( m_device, static_cast<VkImage>( image ), &sparseMemoryRequirementCount, nullptr );
+    sparseMemoryRequirements.resize( sparseMemoryRequirementCount );
+    d.vkGetImageSparseMemoryRequirements( m_device, static_cast<VkImage>( image ), &sparseMemoryRequirementCount, reinterpret_cast<VkSparseImageMemoryRequirements*>( sparseMemoryRequirements.data() ) );
+    return sparseMemoryRequirements;
+  }
+  template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE std::vector<SparseImageMemoryRequirements,Allocator> Device::getImageSparseMemoryRequirements( Image image, Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    std::vector<SparseImageMemoryRequirements,Allocator> sparseMemoryRequirements( vectorAllocator );
     uint32_t sparseMemoryRequirementCount;
     d.vkGetImageSparseMemoryRequirements( m_device, static_cast<VkImage>( image ), &sparseMemoryRequirementCount, nullptr );
     sparseMemoryRequirements.resize( sparseMemoryRequirementCount );
@@ -42134,6 +42238,25 @@ public:
     data.resize( dataSize );
     return createResultValue( result, data, VULKAN_HPP_NAMESPACE_STRING"::Device::getPipelineCacheData" );
   }
+  template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<uint8_t,Allocator>>::type Device::getPipelineCacheData( PipelineCache pipelineCache, Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    std::vector<uint8_t,Allocator> data( vectorAllocator );
+    size_t dataSize;
+    Result result;
+    do
+    {
+      result = static_cast<Result>( d.vkGetPipelineCacheData( m_device, static_cast<VkPipelineCache>( pipelineCache ), &dataSize, nullptr ) );
+      if ( ( result == Result::eSuccess ) && dataSize )
+      {
+        data.resize( dataSize );
+        result = static_cast<Result>( d.vkGetPipelineCacheData( m_device, static_cast<VkPipelineCache>( pipelineCache ), &dataSize, reinterpret_cast<void*>( data.data() ) ) );
+      }
+    } while ( result == Result::eIncomplete );
+    VULKAN_HPP_ASSERT( dataSize <= data.size() );
+    data.resize( dataSize );
+    return createResultValue( result, data, VULKAN_HPP_NAMESPACE_STRING"::Device::getPipelineCacheData" );
+  }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
   template<typename Dispatch>
@@ -42164,6 +42287,13 @@ public:
     return createResultValue( result, pipelines, VULKAN_HPP_NAMESPACE_STRING"::Device::createGraphicsPipelines" );
   }
   template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<Pipeline,Allocator>>::type Device::createGraphicsPipelines( PipelineCache pipelineCache, ArrayProxy<const GraphicsPipelineCreateInfo> createInfos, Optional<const AllocationCallbacks> allocator, Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    std::vector<Pipeline,Allocator> pipelines( createInfos.size(), vectorAllocator );
+    Result result = static_cast<Result>( d.vkCreateGraphicsPipelines( m_device, static_cast<VkPipelineCache>( pipelineCache ), createInfos.size() , reinterpret_cast<const VkGraphicsPipelineCreateInfo*>( createInfos.data() ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkPipeline*>( pipelines.data() ) ) );
+    return createResultValue( result, pipelines, VULKAN_HPP_NAMESPACE_STRING"::Device::createGraphicsPipelines" );
+  }
+  template<typename Dispatch>
   VULKAN_HPP_INLINE ResultValueType<Pipeline>::type Device::createGraphicsPipeline( PipelineCache pipelineCache, const GraphicsPipelineCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     Pipeline pipeline;
@@ -42189,6 +42319,23 @@ public:
     return createResultValue( result, pipelines, VULKAN_HPP_NAMESPACE_STRING "::Device::createGraphicsPipelinesUnique" );
   }
   template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<UniqueHandle<Pipeline,Dispatch>,Allocator>>::type Device::createGraphicsPipelinesUnique( PipelineCache pipelineCache, ArrayProxy<const GraphicsPipelineCreateInfo> createInfos, Optional<const AllocationCallbacks> allocator, Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    static_assert( sizeof( Pipeline ) <= sizeof( UniquePipeline ), "Pipeline is greater than UniquePipeline!" );
+    std::vector<UniquePipeline, Allocator> pipelines;
+    pipelines.reserve( createInfos.size() );
+    Pipeline* buffer = reinterpret_cast<Pipeline*>( reinterpret_cast<char*>( pipelines.data() ) + createInfos.size() * ( sizeof( UniquePipeline ) - sizeof( Pipeline ) ) );
+    Result result = static_cast<Result>(d.vkCreateGraphicsPipelines( m_device, static_cast<VkPipelineCache>( pipelineCache ), createInfos.size() , reinterpret_cast<const VkGraphicsPipelineCreateInfo*>( createInfos.data() ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkPipeline*>( buffer ) ) );
+
+    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+    for ( size_t i=0 ; i<createInfos.size() ; i++ )
+    {
+      pipelines.push_back( UniquePipeline( buffer[i], deleter ) );
+    }
+
+    return createResultValue( result, pipelines, VULKAN_HPP_NAMESPACE_STRING "::Device::createGraphicsPipelinesUnique" );
+  }
+  template<typename Dispatch>
   VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<Pipeline,Dispatch>>::type Device::createGraphicsPipelineUnique( PipelineCache pipelineCache, const GraphicsPipelineCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     Pipeline pipeline;
@@ -42214,6 +42361,13 @@ public:
     return createResultValue( result, pipelines, VULKAN_HPP_NAMESPACE_STRING"::Device::createComputePipelines" );
   }
   template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<Pipeline,Allocator>>::type Device::createComputePipelines( PipelineCache pipelineCache, ArrayProxy<const ComputePipelineCreateInfo> createInfos, Optional<const AllocationCallbacks> allocator, Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    std::vector<Pipeline,Allocator> pipelines( createInfos.size(), vectorAllocator );
+    Result result = static_cast<Result>( d.vkCreateComputePipelines( m_device, static_cast<VkPipelineCache>( pipelineCache ), createInfos.size() , reinterpret_cast<const VkComputePipelineCreateInfo*>( createInfos.data() ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkPipeline*>( pipelines.data() ) ) );
+    return createResultValue( result, pipelines, VULKAN_HPP_NAMESPACE_STRING"::Device::createComputePipelines" );
+  }
+  template<typename Dispatch>
   VULKAN_HPP_INLINE ResultValueType<Pipeline>::type Device::createComputePipeline( PipelineCache pipelineCache, const ComputePipelineCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     Pipeline pipeline;
@@ -42239,6 +42393,23 @@ public:
     return createResultValue( result, pipelines, VULKAN_HPP_NAMESPACE_STRING "::Device::createComputePipelinesUnique" );
   }
   template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<UniqueHandle<Pipeline,Dispatch>,Allocator>>::type Device::createComputePipelinesUnique( PipelineCache pipelineCache, ArrayProxy<const ComputePipelineCreateInfo> createInfos, Optional<const AllocationCallbacks> allocator, Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    static_assert( sizeof( Pipeline ) <= sizeof( UniquePipeline ), "Pipeline is greater than UniquePipeline!" );
+    std::vector<UniquePipeline, Allocator> pipelines;
+    pipelines.reserve( createInfos.size() );
+    Pipeline* buffer = reinterpret_cast<Pipeline*>( reinterpret_cast<char*>( pipelines.data() ) + createInfos.size() * ( sizeof( UniquePipeline ) - sizeof( Pipeline ) ) );
+    Result result = static_cast<Result>(d.vkCreateComputePipelines( m_device, static_cast<VkPipelineCache>( pipelineCache ), createInfos.size() , reinterpret_cast<const VkComputePipelineCreateInfo*>( createInfos.data() ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkPipeline*>( buffer ) ) );
+
+    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+    for ( size_t i=0 ; i<createInfos.size() ; i++ )
+    {
+      pipelines.push_back( UniquePipeline( buffer[i], deleter ) );
+    }
+
+    return createResultValue( result, pipelines, VULKAN_HPP_NAMESPACE_STRING "::Device::createComputePipelinesUnique" );
+  }
+  template<typename Dispatch>
   VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<Pipeline,Dispatch>>::type Device::createComputePipelineUnique( PipelineCache pipelineCache, const ComputePipelineCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     Pipeline pipeline;
@@ -42512,9 +42683,33 @@ public:
     Result result = static_cast<Result>( d.vkAllocateDescriptorSets( m_device, reinterpret_cast<const VkDescriptorSetAllocateInfo*>( &allocateInfo ), reinterpret_cast<VkDescriptorSet*>( descriptorSets.data() ) ) );
     return createResultValue( result, descriptorSets, VULKAN_HPP_NAMESPACE_STRING"::Device::allocateDescriptorSets" );
   }
+  template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<DescriptorSet,Allocator>>::type Device::allocateDescriptorSets( const DescriptorSetAllocateInfo & allocateInfo, Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    std::vector<DescriptorSet,Allocator> descriptorSets( allocateInfo.descriptorSetCount, vectorAllocator );
+    Result result = static_cast<Result>( d.vkAllocateDescriptorSets( m_device, reinterpret_cast<const VkDescriptorSetAllocateInfo*>( &allocateInfo ), reinterpret_cast<VkDescriptorSet*>( descriptorSets.data() ) ) );
+    return createResultValue( result, descriptorSets, VULKAN_HPP_NAMESPACE_STRING"::Device::allocateDescriptorSets" );
+  }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template <typename Allocator, typename Dispatch> 
   VULKAN_HPP_INLINE typename ResultValueType<std::vector<UniqueHandle<DescriptorSet,Dispatch>,Allocator>>::type Device::allocateDescriptorSetsUnique( const DescriptorSetAllocateInfo & allocateInfo, Dispatch const &d ) const
+  {
+    static_assert( sizeof( DescriptorSet ) <= sizeof( UniqueDescriptorSet ), "DescriptorSet is greater than UniqueDescriptorSet!" );
+    std::vector<UniqueDescriptorSet, Allocator> descriptorSets;
+    descriptorSets.reserve( allocateInfo.descriptorSetCount );
+    DescriptorSet* buffer = reinterpret_cast<DescriptorSet*>( reinterpret_cast<char*>( descriptorSets.data() ) + allocateInfo.descriptorSetCount * ( sizeof( UniqueDescriptorSet ) - sizeof( DescriptorSet ) ) );
+    Result result = static_cast<Result>(d.vkAllocateDescriptorSets( m_device, reinterpret_cast<const VkDescriptorSetAllocateInfo*>( &allocateInfo ), reinterpret_cast<VkDescriptorSet*>( buffer ) ) );
+
+    PoolFree<Device,DescriptorPool,Dispatch> deleter( *this, allocateInfo.descriptorPool, d );
+    for ( size_t i=0 ; i<allocateInfo.descriptorSetCount ; i++ )
+    {
+      descriptorSets.push_back( UniqueDescriptorSet( buffer[i], deleter ) );
+    }
+
+    return createResultValue( result, descriptorSets, VULKAN_HPP_NAMESPACE_STRING "::Device::allocateDescriptorSetsUnique" );
+  }
+  template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<UniqueHandle<DescriptorSet,Dispatch>,Allocator>>::type Device::allocateDescriptorSetsUnique( const DescriptorSetAllocateInfo & allocateInfo, Allocator const& vectorAllocator, Dispatch const &d ) const
   {
     static_assert( sizeof( DescriptorSet ) <= sizeof( UniqueDescriptorSet ), "DescriptorSet is greater than UniqueDescriptorSet!" );
     std::vector<UniqueDescriptorSet, Allocator> descriptorSets;
@@ -42773,9 +42968,33 @@ public:
     Result result = static_cast<Result>( d.vkAllocateCommandBuffers( m_device, reinterpret_cast<const VkCommandBufferAllocateInfo*>( &allocateInfo ), reinterpret_cast<VkCommandBuffer*>( commandBuffers.data() ) ) );
     return createResultValue( result, commandBuffers, VULKAN_HPP_NAMESPACE_STRING"::Device::allocateCommandBuffers" );
   }
+  template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<CommandBuffer,Allocator>>::type Device::allocateCommandBuffers( const CommandBufferAllocateInfo & allocateInfo, Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    std::vector<CommandBuffer,Allocator> commandBuffers( allocateInfo.commandBufferCount, vectorAllocator );
+    Result result = static_cast<Result>( d.vkAllocateCommandBuffers( m_device, reinterpret_cast<const VkCommandBufferAllocateInfo*>( &allocateInfo ), reinterpret_cast<VkCommandBuffer*>( commandBuffers.data() ) ) );
+    return createResultValue( result, commandBuffers, VULKAN_HPP_NAMESPACE_STRING"::Device::allocateCommandBuffers" );
+  }
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template <typename Allocator, typename Dispatch> 
   VULKAN_HPP_INLINE typename ResultValueType<std::vector<UniqueHandle<CommandBuffer,Dispatch>,Allocator>>::type Device::allocateCommandBuffersUnique( const CommandBufferAllocateInfo & allocateInfo, Dispatch const &d ) const
+  {
+    static_assert( sizeof( CommandBuffer ) <= sizeof( UniqueCommandBuffer ), "CommandBuffer is greater than UniqueCommandBuffer!" );
+    std::vector<UniqueCommandBuffer, Allocator> commandBuffers;
+    commandBuffers.reserve( allocateInfo.commandBufferCount );
+    CommandBuffer* buffer = reinterpret_cast<CommandBuffer*>( reinterpret_cast<char*>( commandBuffers.data() ) + allocateInfo.commandBufferCount * ( sizeof( UniqueCommandBuffer ) - sizeof( CommandBuffer ) ) );
+    Result result = static_cast<Result>(d.vkAllocateCommandBuffers( m_device, reinterpret_cast<const VkCommandBufferAllocateInfo*>( &allocateInfo ), reinterpret_cast<VkCommandBuffer*>( buffer ) ) );
+
+    PoolFree<Device,CommandPool,Dispatch> deleter( *this, allocateInfo.commandPool, d );
+    for ( size_t i=0 ; i<allocateInfo.commandBufferCount ; i++ )
+    {
+      commandBuffers.push_back( UniqueCommandBuffer( buffer[i], deleter ) );
+    }
+
+    return createResultValue( result, commandBuffers, VULKAN_HPP_NAMESPACE_STRING "::Device::allocateCommandBuffersUnique" );
+  }
+  template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<UniqueHandle<CommandBuffer,Dispatch>,Allocator>>::type Device::allocateCommandBuffersUnique( const CommandBufferAllocateInfo & allocateInfo, Allocator const& vectorAllocator, Dispatch const &d ) const
   {
     static_assert( sizeof( CommandBuffer ) <= sizeof( UniqueCommandBuffer ), "CommandBuffer is greater than UniqueCommandBuffer!" );
     std::vector<UniqueCommandBuffer, Allocator> commandBuffers;
@@ -42834,6 +43053,13 @@ public:
     return createResultValue( result, swapchains, VULKAN_HPP_NAMESPACE_STRING"::Device::createSharedSwapchainsKHR" );
   }
   template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<SwapchainKHR,Allocator>>::type Device::createSharedSwapchainsKHR( ArrayProxy<const SwapchainCreateInfoKHR> createInfos, Optional<const AllocationCallbacks> allocator, Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    std::vector<SwapchainKHR,Allocator> swapchains( createInfos.size(), vectorAllocator );
+    Result result = static_cast<Result>( d.vkCreateSharedSwapchainsKHR( m_device, createInfos.size() , reinterpret_cast<const VkSwapchainCreateInfoKHR*>( createInfos.data() ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSwapchainKHR*>( swapchains.data() ) ) );
+    return createResultValue( result, swapchains, VULKAN_HPP_NAMESPACE_STRING"::Device::createSharedSwapchainsKHR" );
+  }
+  template<typename Dispatch>
   VULKAN_HPP_INLINE ResultValueType<SwapchainKHR>::type Device::createSharedSwapchainKHR( const SwapchainCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     SwapchainKHR swapchain;
@@ -42859,6 +43085,23 @@ public:
     return createResultValue( result, swapchainKHRs, VULKAN_HPP_NAMESPACE_STRING "::Device::createSharedSwapchainsKHRUnique" );
   }
   template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<UniqueHandle<SwapchainKHR,Dispatch>,Allocator>>::type Device::createSharedSwapchainsKHRUnique( ArrayProxy<const SwapchainCreateInfoKHR> createInfos, Optional<const AllocationCallbacks> allocator, Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    static_assert( sizeof( SwapchainKHR ) <= sizeof( UniqueSwapchainKHR ), "SwapchainKHR is greater than UniqueSwapchainKHR!" );
+    std::vector<UniqueSwapchainKHR, Allocator> swapchainKHRs;
+    swapchainKHRs.reserve( createInfos.size() );
+    SwapchainKHR* buffer = reinterpret_cast<SwapchainKHR*>( reinterpret_cast<char*>( swapchainKHRs.data() ) + createInfos.size() * ( sizeof( UniqueSwapchainKHR ) - sizeof( SwapchainKHR ) ) );
+    Result result = static_cast<Result>(d.vkCreateSharedSwapchainsKHR( m_device, createInfos.size() , reinterpret_cast<const VkSwapchainCreateInfoKHR*>( createInfos.data() ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSwapchainKHR*>( buffer ) ) );
+
+    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+    for ( size_t i=0 ; i<createInfos.size() ; i++ )
+    {
+      swapchainKHRs.push_back( UniqueSwapchainKHR( buffer[i], deleter ) );
+    }
+
+    return createResultValue( result, swapchainKHRs, VULKAN_HPP_NAMESPACE_STRING "::Device::createSharedSwapchainsKHRUnique" );
+  }
+  template<typename Dispatch>
   VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<SwapchainKHR,Dispatch>>::type Device::createSharedSwapchainKHRUnique( const SwapchainCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     SwapchainKHR swapchain;
@@ -42932,6 +43175,25 @@ public:
   VULKAN_HPP_INLINE typename ResultValueType<std::vector<Image,Allocator>>::type Device::getSwapchainImagesKHR( SwapchainKHR swapchain, Dispatch const &d ) const
   {
     std::vector<Image,Allocator> swapchainImages;
+    uint32_t swapchainImageCount;
+    Result result;
+    do
+    {
+      result = static_cast<Result>( d.vkGetSwapchainImagesKHR( m_device, static_cast<VkSwapchainKHR>( swapchain ), &swapchainImageCount, nullptr ) );
+      if ( ( result == Result::eSuccess ) && swapchainImageCount )
+      {
+        swapchainImages.resize( swapchainImageCount );
+        result = static_cast<Result>( d.vkGetSwapchainImagesKHR( m_device, static_cast<VkSwapchainKHR>( swapchain ), &swapchainImageCount, reinterpret_cast<VkImage*>( swapchainImages.data() ) ) );
+      }
+    } while ( result == Result::eIncomplete );
+    VULKAN_HPP_ASSERT( swapchainImageCount <= swapchainImages.size() );
+    swapchainImages.resize( swapchainImageCount );
+    return createResultValue( result, swapchainImages, VULKAN_HPP_NAMESPACE_STRING"::Device::getSwapchainImagesKHR" );
+  }
+  template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<Image,Allocator>>::type Device::getSwapchainImagesKHR( SwapchainKHR swapchain, Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    std::vector<Image,Allocator> swapchainImages( vectorAllocator );
     uint32_t swapchainImageCount;
     Result result;
     do
@@ -43758,6 +44020,25 @@ public:
     presentationTimings.resize( presentationTimingCount );
     return createResultValue( result, presentationTimings, VULKAN_HPP_NAMESPACE_STRING"::Device::getPastPresentationTimingGOOGLE" );
   }
+  template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<PastPresentationTimingGOOGLE,Allocator>>::type Device::getPastPresentationTimingGOOGLE( SwapchainKHR swapchain, Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    std::vector<PastPresentationTimingGOOGLE,Allocator> presentationTimings( vectorAllocator );
+    uint32_t presentationTimingCount;
+    Result result;
+    do
+    {
+      result = static_cast<Result>( d.vkGetPastPresentationTimingGOOGLE( m_device, static_cast<VkSwapchainKHR>( swapchain ), &presentationTimingCount, nullptr ) );
+      if ( ( result == Result::eSuccess ) && presentationTimingCount )
+      {
+        presentationTimings.resize( presentationTimingCount );
+        result = static_cast<Result>( d.vkGetPastPresentationTimingGOOGLE( m_device, static_cast<VkSwapchainKHR>( swapchain ), &presentationTimingCount, reinterpret_cast<VkPastPresentationTimingGOOGLE*>( presentationTimings.data() ) ) );
+      }
+    } while ( result == Result::eIncomplete );
+    VULKAN_HPP_ASSERT( presentationTimingCount <= presentationTimings.size() );
+    presentationTimings.resize( presentationTimingCount );
+    return createResultValue( result, presentationTimings, VULKAN_HPP_NAMESPACE_STRING"::Device::getPastPresentationTimingGOOGLE" );
+  }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
   template<typename Dispatch>
@@ -43868,6 +44149,16 @@ public:
     d.vkGetImageSparseMemoryRequirements2( m_device, reinterpret_cast<const VkImageSparseMemoryRequirementsInfo2*>( &info ), &sparseMemoryRequirementCount, reinterpret_cast<VkSparseImageMemoryRequirements2*>( sparseMemoryRequirements.data() ) );
     return sparseMemoryRequirements;
   }
+  template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE std::vector<SparseImageMemoryRequirements2,Allocator> Device::getImageSparseMemoryRequirements2( const ImageSparseMemoryRequirementsInfo2 & info, Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    std::vector<SparseImageMemoryRequirements2,Allocator> sparseMemoryRequirements( vectorAllocator );
+    uint32_t sparseMemoryRequirementCount;
+    d.vkGetImageSparseMemoryRequirements2( m_device, reinterpret_cast<const VkImageSparseMemoryRequirementsInfo2*>( &info ), &sparseMemoryRequirementCount, nullptr );
+    sparseMemoryRequirements.resize( sparseMemoryRequirementCount );
+    d.vkGetImageSparseMemoryRequirements2( m_device, reinterpret_cast<const VkImageSparseMemoryRequirementsInfo2*>( &info ), &sparseMemoryRequirementCount, reinterpret_cast<VkSparseImageMemoryRequirements2*>( sparseMemoryRequirements.data() ) );
+    return sparseMemoryRequirements;
+  }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
   template<typename Dispatch>
@@ -43880,6 +44171,16 @@ public:
   VULKAN_HPP_INLINE std::vector<SparseImageMemoryRequirements2,Allocator> Device::getImageSparseMemoryRequirements2KHR( const ImageSparseMemoryRequirementsInfo2 & info, Dispatch const &d ) const
   {
     std::vector<SparseImageMemoryRequirements2,Allocator> sparseMemoryRequirements;
+    uint32_t sparseMemoryRequirementCount;
+    d.vkGetImageSparseMemoryRequirements2KHR( m_device, reinterpret_cast<const VkImageSparseMemoryRequirementsInfo2*>( &info ), &sparseMemoryRequirementCount, nullptr );
+    sparseMemoryRequirements.resize( sparseMemoryRequirementCount );
+    d.vkGetImageSparseMemoryRequirements2KHR( m_device, reinterpret_cast<const VkImageSparseMemoryRequirementsInfo2*>( &info ), &sparseMemoryRequirementCount, reinterpret_cast<VkSparseImageMemoryRequirements2*>( sparseMemoryRequirements.data() ) );
+    return sparseMemoryRequirements;
+  }
+  template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE std::vector<SparseImageMemoryRequirements2,Allocator> Device::getImageSparseMemoryRequirements2KHR( const ImageSparseMemoryRequirementsInfo2 & info, Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    std::vector<SparseImageMemoryRequirements2,Allocator> sparseMemoryRequirements( vectorAllocator );
     uint32_t sparseMemoryRequirementCount;
     d.vkGetImageSparseMemoryRequirements2KHR( m_device, reinterpret_cast<const VkImageSparseMemoryRequirementsInfo2*>( &info ), &sparseMemoryRequirementCount, nullptr );
     sparseMemoryRequirements.resize( sparseMemoryRequirementCount );
@@ -44071,6 +44372,25 @@ public:
     data.resize( dataSize );
     return createResultValue( result, data, VULKAN_HPP_NAMESPACE_STRING"::Device::getValidationCacheDataEXT" );
   }
+  template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<uint8_t,Allocator>>::type Device::getValidationCacheDataEXT( ValidationCacheEXT validationCache, Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    std::vector<uint8_t,Allocator> data( vectorAllocator );
+    size_t dataSize;
+    Result result;
+    do
+    {
+      result = static_cast<Result>( d.vkGetValidationCacheDataEXT( m_device, static_cast<VkValidationCacheEXT>( validationCache ), &dataSize, nullptr ) );
+      if ( ( result == Result::eSuccess ) && dataSize )
+      {
+        data.resize( dataSize );
+        result = static_cast<Result>( d.vkGetValidationCacheDataEXT( m_device, static_cast<VkValidationCacheEXT>( validationCache ), &dataSize, reinterpret_cast<void*>( data.data() ) ) );
+      }
+    } while ( result == Result::eIncomplete );
+    VULKAN_HPP_ASSERT( dataSize <= data.size() );
+    data.resize( dataSize );
+    return createResultValue( result, data, VULKAN_HPP_NAMESPACE_STRING"::Device::getValidationCacheDataEXT" );
+  }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
   template<typename Dispatch>
@@ -44143,6 +44463,25 @@ public:
   VULKAN_HPP_INLINE typename ResultValueType<std::vector<uint8_t,Allocator>>::type Device::getShaderInfoAMD( Pipeline pipeline, ShaderStageFlagBits shaderStage, ShaderInfoTypeAMD infoType, Dispatch const &d ) const
   {
     std::vector<uint8_t,Allocator> info;
+    size_t infoSize;
+    Result result;
+    do
+    {
+      result = static_cast<Result>( d.vkGetShaderInfoAMD( m_device, static_cast<VkPipeline>( pipeline ), static_cast<VkShaderStageFlagBits>( shaderStage ), static_cast<VkShaderInfoTypeAMD>( infoType ), &infoSize, nullptr ) );
+      if ( ( result == Result::eSuccess ) && infoSize )
+      {
+        info.resize( infoSize );
+        result = static_cast<Result>( d.vkGetShaderInfoAMD( m_device, static_cast<VkPipeline>( pipeline ), static_cast<VkShaderStageFlagBits>( shaderStage ), static_cast<VkShaderInfoTypeAMD>( infoType ), &infoSize, reinterpret_cast<void*>( info.data() ) ) );
+      }
+    } while ( result == Result::eIncomplete );
+    VULKAN_HPP_ASSERT( infoSize <= info.size() );
+    info.resize( infoSize );
+    return createResultValue( result, info, VULKAN_HPP_NAMESPACE_STRING"::Device::getShaderInfoAMD" );
+  }
+  template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<uint8_t,Allocator>>::type Device::getShaderInfoAMD( Pipeline pipeline, ShaderStageFlagBits shaderStage, ShaderInfoTypeAMD infoType, Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    std::vector<uint8_t,Allocator> info( vectorAllocator );
     size_t infoSize;
     Result result;
     do
@@ -44447,6 +44786,13 @@ public:
     return createResultValue( result, pipelines, VULKAN_HPP_NAMESPACE_STRING"::Device::createRaytracingPipelinesNVX" );
   }
   template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<Pipeline,Allocator>>::type Device::createRaytracingPipelinesNVX( PipelineCache pipelineCache, ArrayProxy<const RaytracingPipelineCreateInfoNVX> createInfos, Optional<const AllocationCallbacks> allocator, Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    std::vector<Pipeline,Allocator> pipelines( createInfos.size(), vectorAllocator );
+    Result result = static_cast<Result>( d.vkCreateRaytracingPipelinesNVX( m_device, static_cast<VkPipelineCache>( pipelineCache ), createInfos.size() , reinterpret_cast<const VkRaytracingPipelineCreateInfoNVX*>( createInfos.data() ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkPipeline*>( pipelines.data() ) ) );
+    return createResultValue( result, pipelines, VULKAN_HPP_NAMESPACE_STRING"::Device::createRaytracingPipelinesNVX" );
+  }
+  template<typename Dispatch>
   VULKAN_HPP_INLINE ResultValueType<Pipeline>::type Device::createRaytracingPipelineNVX( PipelineCache pipelineCache, const RaytracingPipelineCreateInfoNVX & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     Pipeline pipeline;
@@ -44472,6 +44818,23 @@ public:
     return createResultValue( result, pipelines, VULKAN_HPP_NAMESPACE_STRING "::Device::createRaytracingPipelinesNVXUnique" );
   }
   template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<UniqueHandle<Pipeline,Dispatch>,Allocator>>::type Device::createRaytracingPipelinesNVXUnique( PipelineCache pipelineCache, ArrayProxy<const RaytracingPipelineCreateInfoNVX> createInfos, Optional<const AllocationCallbacks> allocator, Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    static_assert( sizeof( Pipeline ) <= sizeof( UniquePipeline ), "Pipeline is greater than UniquePipeline!" );
+    std::vector<UniquePipeline, Allocator> pipelines;
+    pipelines.reserve( createInfos.size() );
+    Pipeline* buffer = reinterpret_cast<Pipeline*>( reinterpret_cast<char*>( pipelines.data() ) + createInfos.size() * ( sizeof( UniquePipeline ) - sizeof( Pipeline ) ) );
+    Result result = static_cast<Result>(d.vkCreateRaytracingPipelinesNVX( m_device, static_cast<VkPipelineCache>( pipelineCache ), createInfos.size() , reinterpret_cast<const VkRaytracingPipelineCreateInfoNVX*>( createInfos.data() ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkPipeline*>( buffer ) ) );
+
+    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+    for ( size_t i=0 ; i<createInfos.size() ; i++ )
+    {
+      pipelines.push_back( UniquePipeline( buffer[i], deleter ) );
+    }
+
+    return createResultValue( result, pipelines, VULKAN_HPP_NAMESPACE_STRING "::Device::createRaytracingPipelinesNVXUnique" );
+  }
+  template<typename Dispatch>
   VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<Pipeline,Dispatch>>::type Device::createRaytracingPipelineNVXUnique( PipelineCache pipelineCache, const RaytracingPipelineCreateInfoNVX & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     Pipeline pipeline;
@@ -44562,6 +44925,8 @@ public:
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Allocator = std::allocator<QueueFamilyProperties>, typename Dispatch = DispatchLoaderStatic> 
     std::vector<QueueFamilyProperties,Allocator> getQueueFamilyProperties(Dispatch const &d = Dispatch() ) const;
+    template <typename Allocator = std::allocator<QueueFamilyProperties>, typename Dispatch = DispatchLoaderStatic> 
+    std::vector<QueueFamilyProperties,Allocator> getQueueFamilyProperties(Allocator const& vectorAllocator, Dispatch const &d ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = DispatchLoaderStatic>
@@ -44608,6 +44973,8 @@ public:
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Allocator = std::allocator<LayerProperties>, typename Dispatch = DispatchLoaderStatic> 
     typename ResultValueType<std::vector<LayerProperties,Allocator>>::type enumerateDeviceLayerProperties(Dispatch const &d = Dispatch() ) const;
+    template <typename Allocator = std::allocator<LayerProperties>, typename Dispatch = DispatchLoaderStatic> 
+    typename ResultValueType<std::vector<LayerProperties,Allocator>>::type enumerateDeviceLayerProperties(Allocator const& vectorAllocator, Dispatch const &d ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = DispatchLoaderStatic>
@@ -44615,6 +44982,8 @@ public:
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Allocator = std::allocator<ExtensionProperties>, typename Dispatch = DispatchLoaderStatic> 
     typename ResultValueType<std::vector<ExtensionProperties,Allocator>>::type enumerateDeviceExtensionProperties( Optional<const std::string> layerName = nullptr, Dispatch const &d = Dispatch() ) const;
+    template <typename Allocator = std::allocator<ExtensionProperties>, typename Dispatch = DispatchLoaderStatic> 
+    typename ResultValueType<std::vector<ExtensionProperties,Allocator>>::type enumerateDeviceExtensionProperties( Optional<const std::string> layerName, Allocator const& vectorAllocator, Dispatch const &d ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = DispatchLoaderStatic>
@@ -44622,6 +44991,8 @@ public:
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Allocator = std::allocator<SparseImageFormatProperties>, typename Dispatch = DispatchLoaderStatic> 
     std::vector<SparseImageFormatProperties,Allocator> getSparseImageFormatProperties( Format format, ImageType type, SampleCountFlagBits samples, ImageUsageFlags usage, ImageTiling tiling, Dispatch const &d = Dispatch() ) const;
+    template <typename Allocator = std::allocator<SparseImageFormatProperties>, typename Dispatch = DispatchLoaderStatic> 
+    std::vector<SparseImageFormatProperties,Allocator> getSparseImageFormatProperties( Format format, ImageType type, SampleCountFlagBits samples, ImageUsageFlags usage, ImageTiling tiling, Allocator const& vectorAllocator, Dispatch const &d ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = DispatchLoaderStatic>
@@ -44629,6 +45000,8 @@ public:
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Allocator = std::allocator<DisplayPropertiesKHR>, typename Dispatch = DispatchLoaderStatic> 
     typename ResultValueType<std::vector<DisplayPropertiesKHR,Allocator>>::type getDisplayPropertiesKHR(Dispatch const &d = Dispatch() ) const;
+    template <typename Allocator = std::allocator<DisplayPropertiesKHR>, typename Dispatch = DispatchLoaderStatic> 
+    typename ResultValueType<std::vector<DisplayPropertiesKHR,Allocator>>::type getDisplayPropertiesKHR(Allocator const& vectorAllocator, Dispatch const &d ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = DispatchLoaderStatic>
@@ -44636,6 +45009,8 @@ public:
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Allocator = std::allocator<DisplayPlanePropertiesKHR>, typename Dispatch = DispatchLoaderStatic> 
     typename ResultValueType<std::vector<DisplayPlanePropertiesKHR,Allocator>>::type getDisplayPlanePropertiesKHR(Dispatch const &d = Dispatch() ) const;
+    template <typename Allocator = std::allocator<DisplayPlanePropertiesKHR>, typename Dispatch = DispatchLoaderStatic> 
+    typename ResultValueType<std::vector<DisplayPlanePropertiesKHR,Allocator>>::type getDisplayPlanePropertiesKHR(Allocator const& vectorAllocator, Dispatch const &d ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = DispatchLoaderStatic>
@@ -44643,6 +45018,8 @@ public:
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Allocator = std::allocator<DisplayKHR>, typename Dispatch = DispatchLoaderStatic> 
     typename ResultValueType<std::vector<DisplayKHR,Allocator>>::type getDisplayPlaneSupportedDisplaysKHR( uint32_t planeIndex, Dispatch const &d = Dispatch() ) const;
+    template <typename Allocator = std::allocator<DisplayKHR>, typename Dispatch = DispatchLoaderStatic> 
+    typename ResultValueType<std::vector<DisplayKHR,Allocator>>::type getDisplayPlaneSupportedDisplaysKHR( uint32_t planeIndex, Allocator const& vectorAllocator, Dispatch const &d ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = DispatchLoaderStatic>
@@ -44650,6 +45027,8 @@ public:
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Allocator = std::allocator<DisplayModePropertiesKHR>, typename Dispatch = DispatchLoaderStatic> 
     typename ResultValueType<std::vector<DisplayModePropertiesKHR,Allocator>>::type getDisplayModePropertiesKHR( DisplayKHR display, Dispatch const &d = Dispatch() ) const;
+    template <typename Allocator = std::allocator<DisplayModePropertiesKHR>, typename Dispatch = DispatchLoaderStatic> 
+    typename ResultValueType<std::vector<DisplayModePropertiesKHR,Allocator>>::type getDisplayModePropertiesKHR( DisplayKHR display, Allocator const& vectorAllocator, Dispatch const &d ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = DispatchLoaderStatic>
@@ -44694,6 +45073,8 @@ public:
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Allocator = std::allocator<SurfaceFormatKHR>, typename Dispatch = DispatchLoaderStatic> 
     typename ResultValueType<std::vector<SurfaceFormatKHR,Allocator>>::type getSurfaceFormatsKHR( SurfaceKHR surface, Dispatch const &d = Dispatch() ) const;
+    template <typename Allocator = std::allocator<SurfaceFormatKHR>, typename Dispatch = DispatchLoaderStatic> 
+    typename ResultValueType<std::vector<SurfaceFormatKHR,Allocator>>::type getSurfaceFormatsKHR( SurfaceKHR surface, Allocator const& vectorAllocator, Dispatch const &d ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = DispatchLoaderStatic>
@@ -44701,6 +45082,8 @@ public:
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Allocator = std::allocator<PresentModeKHR>, typename Dispatch = DispatchLoaderStatic> 
     typename ResultValueType<std::vector<PresentModeKHR,Allocator>>::type getSurfacePresentModesKHR( SurfaceKHR surface, Dispatch const &d = Dispatch() ) const;
+    template <typename Allocator = std::allocator<PresentModeKHR>, typename Dispatch = DispatchLoaderStatic> 
+    typename ResultValueType<std::vector<PresentModeKHR,Allocator>>::type getSurfacePresentModesKHR( SurfaceKHR surface, Allocator const& vectorAllocator, Dispatch const &d ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
 #ifdef VK_USE_PLATFORM_WAYLAND_KHR
@@ -44826,6 +45209,8 @@ public:
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Allocator = std::allocator<QueueFamilyProperties2>, typename Dispatch = DispatchLoaderStatic> 
     std::vector<QueueFamilyProperties2,Allocator> getQueueFamilyProperties2(Dispatch const &d = Dispatch() ) const;
+    template <typename Allocator = std::allocator<QueueFamilyProperties2>, typename Dispatch = DispatchLoaderStatic> 
+    std::vector<QueueFamilyProperties2,Allocator> getQueueFamilyProperties2(Allocator const& vectorAllocator, Dispatch const &d ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = DispatchLoaderStatic>
@@ -44833,6 +45218,8 @@ public:
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Allocator = std::allocator<QueueFamilyProperties2>, typename Dispatch = DispatchLoaderStatic> 
     std::vector<QueueFamilyProperties2,Allocator> getQueueFamilyProperties2KHR(Dispatch const &d = Dispatch() ) const;
+    template <typename Allocator = std::allocator<QueueFamilyProperties2>, typename Dispatch = DispatchLoaderStatic> 
+    std::vector<QueueFamilyProperties2,Allocator> getQueueFamilyProperties2KHR(Allocator const& vectorAllocator, Dispatch const &d ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = DispatchLoaderStatic>
@@ -44854,6 +45241,8 @@ public:
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Allocator = std::allocator<SparseImageFormatProperties2>, typename Dispatch = DispatchLoaderStatic> 
     std::vector<SparseImageFormatProperties2,Allocator> getSparseImageFormatProperties2( const PhysicalDeviceSparseImageFormatInfo2 & formatInfo, Dispatch const &d = Dispatch() ) const;
+    template <typename Allocator = std::allocator<SparseImageFormatProperties2>, typename Dispatch = DispatchLoaderStatic> 
+    std::vector<SparseImageFormatProperties2,Allocator> getSparseImageFormatProperties2( const PhysicalDeviceSparseImageFormatInfo2 & formatInfo, Allocator const& vectorAllocator, Dispatch const &d ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = DispatchLoaderStatic>
@@ -44861,6 +45250,8 @@ public:
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Allocator = std::allocator<SparseImageFormatProperties2>, typename Dispatch = DispatchLoaderStatic> 
     std::vector<SparseImageFormatProperties2,Allocator> getSparseImageFormatProperties2KHR( const PhysicalDeviceSparseImageFormatInfo2 & formatInfo, Dispatch const &d = Dispatch() ) const;
+    template <typename Allocator = std::allocator<SparseImageFormatProperties2>, typename Dispatch = DispatchLoaderStatic> 
+    std::vector<SparseImageFormatProperties2,Allocator> getSparseImageFormatProperties2KHR( const PhysicalDeviceSparseImageFormatInfo2 & formatInfo, Allocator const& vectorAllocator, Dispatch const &d ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = DispatchLoaderStatic>
@@ -44943,6 +45334,8 @@ public:
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Allocator = std::allocator<Rect2D>, typename Dispatch = DispatchLoaderStatic> 
     typename ResultValueType<std::vector<Rect2D,Allocator>>::type getPresentRectanglesKHR( SurfaceKHR surface, Dispatch const &d = Dispatch() ) const;
+    template <typename Allocator = std::allocator<Rect2D>, typename Dispatch = DispatchLoaderStatic> 
+    typename ResultValueType<std::vector<Rect2D,Allocator>>::type getPresentRectanglesKHR( SurfaceKHR surface, Allocator const& vectorAllocator, Dispatch const &d ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = DispatchLoaderStatic>
@@ -44966,6 +45359,8 @@ public:
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Allocator = std::allocator<SurfaceFormat2KHR>, typename Dispatch = DispatchLoaderStatic> 
     typename ResultValueType<std::vector<SurfaceFormat2KHR,Allocator>>::type getSurfaceFormats2KHR( const PhysicalDeviceSurfaceInfo2KHR & surfaceInfo, Dispatch const &d = Dispatch() ) const;
+    template <typename Allocator = std::allocator<SurfaceFormat2KHR>, typename Dispatch = DispatchLoaderStatic> 
+    typename ResultValueType<std::vector<SurfaceFormat2KHR,Allocator>>::type getSurfaceFormats2KHR( const PhysicalDeviceSurfaceInfo2KHR & surfaceInfo, Allocator const& vectorAllocator, Dispatch const &d ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = DispatchLoaderStatic>
@@ -44973,6 +45368,8 @@ public:
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Allocator = std::allocator<DisplayProperties2KHR>, typename Dispatch = DispatchLoaderStatic> 
     typename ResultValueType<std::vector<DisplayProperties2KHR,Allocator>>::type getDisplayProperties2KHR(Dispatch const &d = Dispatch() ) const;
+    template <typename Allocator = std::allocator<DisplayProperties2KHR>, typename Dispatch = DispatchLoaderStatic> 
+    typename ResultValueType<std::vector<DisplayProperties2KHR,Allocator>>::type getDisplayProperties2KHR(Allocator const& vectorAllocator, Dispatch const &d ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = DispatchLoaderStatic>
@@ -44980,6 +45377,8 @@ public:
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Allocator = std::allocator<DisplayPlaneProperties2KHR>, typename Dispatch = DispatchLoaderStatic> 
     typename ResultValueType<std::vector<DisplayPlaneProperties2KHR,Allocator>>::type getDisplayPlaneProperties2KHR(Dispatch const &d = Dispatch() ) const;
+    template <typename Allocator = std::allocator<DisplayPlaneProperties2KHR>, typename Dispatch = DispatchLoaderStatic> 
+    typename ResultValueType<std::vector<DisplayPlaneProperties2KHR,Allocator>>::type getDisplayPlaneProperties2KHR(Allocator const& vectorAllocator, Dispatch const &d ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = DispatchLoaderStatic>
@@ -44987,6 +45386,8 @@ public:
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Allocator = std::allocator<DisplayModeProperties2KHR>, typename Dispatch = DispatchLoaderStatic> 
     typename ResultValueType<std::vector<DisplayModeProperties2KHR,Allocator>>::type getDisplayModeProperties2KHR( DisplayKHR display, Dispatch const &d = Dispatch() ) const;
+    template <typename Allocator = std::allocator<DisplayModeProperties2KHR>, typename Dispatch = DispatchLoaderStatic> 
+    typename ResultValueType<std::vector<DisplayModeProperties2KHR,Allocator>>::type getDisplayModeProperties2KHR( DisplayKHR display, Allocator const& vectorAllocator, Dispatch const &d ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = DispatchLoaderStatic>
@@ -45001,6 +45402,8 @@ public:
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Allocator = std::allocator<TimeDomainEXT>, typename Dispatch = DispatchLoaderStatic> 
     typename ResultValueType<std::vector<TimeDomainEXT,Allocator>>::type getCalibrateableTimeDomainsEXT(Dispatch const &d = Dispatch() ) const;
+    template <typename Allocator = std::allocator<TimeDomainEXT>, typename Dispatch = DispatchLoaderStatic> 
+    typename ResultValueType<std::vector<TimeDomainEXT,Allocator>>::type getCalibrateableTimeDomainsEXT(Allocator const& vectorAllocator, Dispatch const &d ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
 
@@ -45059,6 +45462,16 @@ public:
   VULKAN_HPP_INLINE std::vector<QueueFamilyProperties,Allocator> PhysicalDevice::getQueueFamilyProperties(Dispatch const &d ) const
   {
     std::vector<QueueFamilyProperties,Allocator> queueFamilyProperties;
+    uint32_t queueFamilyPropertyCount;
+    d.vkGetPhysicalDeviceQueueFamilyProperties( m_physicalDevice, &queueFamilyPropertyCount, nullptr );
+    queueFamilyProperties.resize( queueFamilyPropertyCount );
+    d.vkGetPhysicalDeviceQueueFamilyProperties( m_physicalDevice, &queueFamilyPropertyCount, reinterpret_cast<VkQueueFamilyProperties*>( queueFamilyProperties.data() ) );
+    return queueFamilyProperties;
+  }
+  template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE std::vector<QueueFamilyProperties,Allocator> PhysicalDevice::getQueueFamilyProperties(Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    std::vector<QueueFamilyProperties,Allocator> queueFamilyProperties( vectorAllocator );
     uint32_t queueFamilyPropertyCount;
     d.vkGetPhysicalDeviceQueueFamilyProperties( m_physicalDevice, &queueFamilyPropertyCount, nullptr );
     queueFamilyProperties.resize( queueFamilyPropertyCount );
@@ -45178,6 +45591,25 @@ public:
     properties.resize( propertyCount );
     return createResultValue( result, properties, VULKAN_HPP_NAMESPACE_STRING"::PhysicalDevice::enumerateDeviceLayerProperties" );
   }
+  template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<LayerProperties,Allocator>>::type PhysicalDevice::enumerateDeviceLayerProperties(Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    std::vector<LayerProperties,Allocator> properties( vectorAllocator );
+    uint32_t propertyCount;
+    Result result;
+    do
+    {
+      result = static_cast<Result>( d.vkEnumerateDeviceLayerProperties( m_physicalDevice, &propertyCount, nullptr ) );
+      if ( ( result == Result::eSuccess ) && propertyCount )
+      {
+        properties.resize( propertyCount );
+        result = static_cast<Result>( d.vkEnumerateDeviceLayerProperties( m_physicalDevice, &propertyCount, reinterpret_cast<VkLayerProperties*>( properties.data() ) ) );
+      }
+    } while ( result == Result::eIncomplete );
+    VULKAN_HPP_ASSERT( propertyCount <= properties.size() );
+    properties.resize( propertyCount );
+    return createResultValue( result, properties, VULKAN_HPP_NAMESPACE_STRING"::PhysicalDevice::enumerateDeviceLayerProperties" );
+  }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
   template<typename Dispatch>
@@ -45190,6 +45622,25 @@ public:
   VULKAN_HPP_INLINE typename ResultValueType<std::vector<ExtensionProperties,Allocator>>::type PhysicalDevice::enumerateDeviceExtensionProperties( Optional<const std::string> layerName, Dispatch const &d ) const
   {
     std::vector<ExtensionProperties,Allocator> properties;
+    uint32_t propertyCount;
+    Result result;
+    do
+    {
+      result = static_cast<Result>( d.vkEnumerateDeviceExtensionProperties( m_physicalDevice, layerName ? layerName->c_str() : nullptr, &propertyCount, nullptr ) );
+      if ( ( result == Result::eSuccess ) && propertyCount )
+      {
+        properties.resize( propertyCount );
+        result = static_cast<Result>( d.vkEnumerateDeviceExtensionProperties( m_physicalDevice, layerName ? layerName->c_str() : nullptr, &propertyCount, reinterpret_cast<VkExtensionProperties*>( properties.data() ) ) );
+      }
+    } while ( result == Result::eIncomplete );
+    VULKAN_HPP_ASSERT( propertyCount <= properties.size() );
+    properties.resize( propertyCount );
+    return createResultValue( result, properties, VULKAN_HPP_NAMESPACE_STRING"::PhysicalDevice::enumerateDeviceExtensionProperties" );
+  }
+  template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<ExtensionProperties,Allocator>>::type PhysicalDevice::enumerateDeviceExtensionProperties( Optional<const std::string> layerName, Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    std::vector<ExtensionProperties,Allocator> properties( vectorAllocator );
     uint32_t propertyCount;
     Result result;
     do
@@ -45223,6 +45674,16 @@ public:
     d.vkGetPhysicalDeviceSparseImageFormatProperties( m_physicalDevice, static_cast<VkFormat>( format ), static_cast<VkImageType>( type ), static_cast<VkSampleCountFlagBits>( samples ), static_cast<VkImageUsageFlags>( usage ), static_cast<VkImageTiling>( tiling ), &propertyCount, reinterpret_cast<VkSparseImageFormatProperties*>( properties.data() ) );
     return properties;
   }
+  template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE std::vector<SparseImageFormatProperties,Allocator> PhysicalDevice::getSparseImageFormatProperties( Format format, ImageType type, SampleCountFlagBits samples, ImageUsageFlags usage, ImageTiling tiling, Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    std::vector<SparseImageFormatProperties,Allocator> properties( vectorAllocator );
+    uint32_t propertyCount;
+    d.vkGetPhysicalDeviceSparseImageFormatProperties( m_physicalDevice, static_cast<VkFormat>( format ), static_cast<VkImageType>( type ), static_cast<VkSampleCountFlagBits>( samples ), static_cast<VkImageUsageFlags>( usage ), static_cast<VkImageTiling>( tiling ), &propertyCount, nullptr );
+    properties.resize( propertyCount );
+    d.vkGetPhysicalDeviceSparseImageFormatProperties( m_physicalDevice, static_cast<VkFormat>( format ), static_cast<VkImageType>( type ), static_cast<VkSampleCountFlagBits>( samples ), static_cast<VkImageUsageFlags>( usage ), static_cast<VkImageTiling>( tiling ), &propertyCount, reinterpret_cast<VkSparseImageFormatProperties*>( properties.data() ) );
+    return properties;
+  }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
   template<typename Dispatch>
@@ -45235,6 +45696,25 @@ public:
   VULKAN_HPP_INLINE typename ResultValueType<std::vector<DisplayPropertiesKHR,Allocator>>::type PhysicalDevice::getDisplayPropertiesKHR(Dispatch const &d ) const
   {
     std::vector<DisplayPropertiesKHR,Allocator> properties;
+    uint32_t propertyCount;
+    Result result;
+    do
+    {
+      result = static_cast<Result>( d.vkGetPhysicalDeviceDisplayPropertiesKHR( m_physicalDevice, &propertyCount, nullptr ) );
+      if ( ( result == Result::eSuccess ) && propertyCount )
+      {
+        properties.resize( propertyCount );
+        result = static_cast<Result>( d.vkGetPhysicalDeviceDisplayPropertiesKHR( m_physicalDevice, &propertyCount, reinterpret_cast<VkDisplayPropertiesKHR*>( properties.data() ) ) );
+      }
+    } while ( result == Result::eIncomplete );
+    VULKAN_HPP_ASSERT( propertyCount <= properties.size() );
+    properties.resize( propertyCount );
+    return createResultValue( result, properties, VULKAN_HPP_NAMESPACE_STRING"::PhysicalDevice::getDisplayPropertiesKHR" );
+  }
+  template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<DisplayPropertiesKHR,Allocator>>::type PhysicalDevice::getDisplayPropertiesKHR(Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    std::vector<DisplayPropertiesKHR,Allocator> properties( vectorAllocator );
     uint32_t propertyCount;
     Result result;
     do
@@ -45277,6 +45757,25 @@ public:
     properties.resize( propertyCount );
     return createResultValue( result, properties, VULKAN_HPP_NAMESPACE_STRING"::PhysicalDevice::getDisplayPlanePropertiesKHR" );
   }
+  template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<DisplayPlanePropertiesKHR,Allocator>>::type PhysicalDevice::getDisplayPlanePropertiesKHR(Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    std::vector<DisplayPlanePropertiesKHR,Allocator> properties( vectorAllocator );
+    uint32_t propertyCount;
+    Result result;
+    do
+    {
+      result = static_cast<Result>( d.vkGetPhysicalDeviceDisplayPlanePropertiesKHR( m_physicalDevice, &propertyCount, nullptr ) );
+      if ( ( result == Result::eSuccess ) && propertyCount )
+      {
+        properties.resize( propertyCount );
+        result = static_cast<Result>( d.vkGetPhysicalDeviceDisplayPlanePropertiesKHR( m_physicalDevice, &propertyCount, reinterpret_cast<VkDisplayPlanePropertiesKHR*>( properties.data() ) ) );
+      }
+    } while ( result == Result::eIncomplete );
+    VULKAN_HPP_ASSERT( propertyCount <= properties.size() );
+    properties.resize( propertyCount );
+    return createResultValue( result, properties, VULKAN_HPP_NAMESPACE_STRING"::PhysicalDevice::getDisplayPlanePropertiesKHR" );
+  }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
   template<typename Dispatch>
@@ -45304,6 +45803,25 @@ public:
     displays.resize( displayCount );
     return createResultValue( result, displays, VULKAN_HPP_NAMESPACE_STRING"::PhysicalDevice::getDisplayPlaneSupportedDisplaysKHR" );
   }
+  template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<DisplayKHR,Allocator>>::type PhysicalDevice::getDisplayPlaneSupportedDisplaysKHR( uint32_t planeIndex, Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    std::vector<DisplayKHR,Allocator> displays( vectorAllocator );
+    uint32_t displayCount;
+    Result result;
+    do
+    {
+      result = static_cast<Result>( d.vkGetDisplayPlaneSupportedDisplaysKHR( m_physicalDevice, planeIndex, &displayCount, nullptr ) );
+      if ( ( result == Result::eSuccess ) && displayCount )
+      {
+        displays.resize( displayCount );
+        result = static_cast<Result>( d.vkGetDisplayPlaneSupportedDisplaysKHR( m_physicalDevice, planeIndex, &displayCount, reinterpret_cast<VkDisplayKHR*>( displays.data() ) ) );
+      }
+    } while ( result == Result::eIncomplete );
+    VULKAN_HPP_ASSERT( displayCount <= displays.size() );
+    displays.resize( displayCount );
+    return createResultValue( result, displays, VULKAN_HPP_NAMESPACE_STRING"::PhysicalDevice::getDisplayPlaneSupportedDisplaysKHR" );
+  }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
   template<typename Dispatch>
@@ -45316,6 +45834,25 @@ public:
   VULKAN_HPP_INLINE typename ResultValueType<std::vector<DisplayModePropertiesKHR,Allocator>>::type PhysicalDevice::getDisplayModePropertiesKHR( DisplayKHR display, Dispatch const &d ) const
   {
     std::vector<DisplayModePropertiesKHR,Allocator> properties;
+    uint32_t propertyCount;
+    Result result;
+    do
+    {
+      result = static_cast<Result>( d.vkGetDisplayModePropertiesKHR( m_physicalDevice, static_cast<VkDisplayKHR>( display ), &propertyCount, nullptr ) );
+      if ( ( result == Result::eSuccess ) && propertyCount )
+      {
+        properties.resize( propertyCount );
+        result = static_cast<Result>( d.vkGetDisplayModePropertiesKHR( m_physicalDevice, static_cast<VkDisplayKHR>( display ), &propertyCount, reinterpret_cast<VkDisplayModePropertiesKHR*>( properties.data() ) ) );
+      }
+    } while ( result == Result::eIncomplete );
+    VULKAN_HPP_ASSERT( propertyCount <= properties.size() );
+    properties.resize( propertyCount );
+    return createResultValue( result, properties, VULKAN_HPP_NAMESPACE_STRING"::PhysicalDevice::getDisplayModePropertiesKHR" );
+  }
+  template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<DisplayModePropertiesKHR,Allocator>>::type PhysicalDevice::getDisplayModePropertiesKHR( DisplayKHR display, Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    std::vector<DisplayModePropertiesKHR,Allocator> properties( vectorAllocator );
     uint32_t propertyCount;
     Result result;
     do
@@ -45433,6 +45970,25 @@ public:
     surfaceFormats.resize( surfaceFormatCount );
     return createResultValue( result, surfaceFormats, VULKAN_HPP_NAMESPACE_STRING"::PhysicalDevice::getSurfaceFormatsKHR" );
   }
+  template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<SurfaceFormatKHR,Allocator>>::type PhysicalDevice::getSurfaceFormatsKHR( SurfaceKHR surface, Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    std::vector<SurfaceFormatKHR,Allocator> surfaceFormats( vectorAllocator );
+    uint32_t surfaceFormatCount;
+    Result result;
+    do
+    {
+      result = static_cast<Result>( d.vkGetPhysicalDeviceSurfaceFormatsKHR( m_physicalDevice, static_cast<VkSurfaceKHR>( surface ), &surfaceFormatCount, nullptr ) );
+      if ( ( result == Result::eSuccess ) && surfaceFormatCount )
+      {
+        surfaceFormats.resize( surfaceFormatCount );
+        result = static_cast<Result>( d.vkGetPhysicalDeviceSurfaceFormatsKHR( m_physicalDevice, static_cast<VkSurfaceKHR>( surface ), &surfaceFormatCount, reinterpret_cast<VkSurfaceFormatKHR*>( surfaceFormats.data() ) ) );
+      }
+    } while ( result == Result::eIncomplete );
+    VULKAN_HPP_ASSERT( surfaceFormatCount <= surfaceFormats.size() );
+    surfaceFormats.resize( surfaceFormatCount );
+    return createResultValue( result, surfaceFormats, VULKAN_HPP_NAMESPACE_STRING"::PhysicalDevice::getSurfaceFormatsKHR" );
+  }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
   template<typename Dispatch>
@@ -45445,6 +46001,25 @@ public:
   VULKAN_HPP_INLINE typename ResultValueType<std::vector<PresentModeKHR,Allocator>>::type PhysicalDevice::getSurfacePresentModesKHR( SurfaceKHR surface, Dispatch const &d ) const
   {
     std::vector<PresentModeKHR,Allocator> presentModes;
+    uint32_t presentModeCount;
+    Result result;
+    do
+    {
+      result = static_cast<Result>( d.vkGetPhysicalDeviceSurfacePresentModesKHR( m_physicalDevice, static_cast<VkSurfaceKHR>( surface ), &presentModeCount, nullptr ) );
+      if ( ( result == Result::eSuccess ) && presentModeCount )
+      {
+        presentModes.resize( presentModeCount );
+        result = static_cast<Result>( d.vkGetPhysicalDeviceSurfacePresentModesKHR( m_physicalDevice, static_cast<VkSurfaceKHR>( surface ), &presentModeCount, reinterpret_cast<VkPresentModeKHR*>( presentModes.data() ) ) );
+      }
+    } while ( result == Result::eIncomplete );
+    VULKAN_HPP_ASSERT( presentModeCount <= presentModes.size() );
+    presentModes.resize( presentModeCount );
+    return createResultValue( result, presentModes, VULKAN_HPP_NAMESPACE_STRING"::PhysicalDevice::getSurfacePresentModesKHR" );
+  }
+  template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<PresentModeKHR,Allocator>>::type PhysicalDevice::getSurfacePresentModesKHR( SurfaceKHR surface, Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    std::vector<PresentModeKHR,Allocator> presentModes( vectorAllocator );
     uint32_t presentModeCount;
     Result result;
     do
@@ -45753,6 +46328,16 @@ public:
     d.vkGetPhysicalDeviceQueueFamilyProperties2( m_physicalDevice, &queueFamilyPropertyCount, reinterpret_cast<VkQueueFamilyProperties2*>( queueFamilyProperties.data() ) );
     return queueFamilyProperties;
   }
+  template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE std::vector<QueueFamilyProperties2,Allocator> PhysicalDevice::getQueueFamilyProperties2(Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    std::vector<QueueFamilyProperties2,Allocator> queueFamilyProperties( vectorAllocator );
+    uint32_t queueFamilyPropertyCount;
+    d.vkGetPhysicalDeviceQueueFamilyProperties2( m_physicalDevice, &queueFamilyPropertyCount, nullptr );
+    queueFamilyProperties.resize( queueFamilyPropertyCount );
+    d.vkGetPhysicalDeviceQueueFamilyProperties2( m_physicalDevice, &queueFamilyPropertyCount, reinterpret_cast<VkQueueFamilyProperties2*>( queueFamilyProperties.data() ) );
+    return queueFamilyProperties;
+  }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
   template<typename Dispatch>
@@ -45765,6 +46350,16 @@ public:
   VULKAN_HPP_INLINE std::vector<QueueFamilyProperties2,Allocator> PhysicalDevice::getQueueFamilyProperties2KHR(Dispatch const &d ) const
   {
     std::vector<QueueFamilyProperties2,Allocator> queueFamilyProperties;
+    uint32_t queueFamilyPropertyCount;
+    d.vkGetPhysicalDeviceQueueFamilyProperties2KHR( m_physicalDevice, &queueFamilyPropertyCount, nullptr );
+    queueFamilyProperties.resize( queueFamilyPropertyCount );
+    d.vkGetPhysicalDeviceQueueFamilyProperties2KHR( m_physicalDevice, &queueFamilyPropertyCount, reinterpret_cast<VkQueueFamilyProperties2*>( queueFamilyProperties.data() ) );
+    return queueFamilyProperties;
+  }
+  template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE std::vector<QueueFamilyProperties2,Allocator> PhysicalDevice::getQueueFamilyProperties2KHR(Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    std::vector<QueueFamilyProperties2,Allocator> queueFamilyProperties( vectorAllocator );
     uint32_t queueFamilyPropertyCount;
     d.vkGetPhysicalDeviceQueueFamilyProperties2KHR( m_physicalDevice, &queueFamilyPropertyCount, nullptr );
     queueFamilyProperties.resize( queueFamilyPropertyCount );
@@ -45819,6 +46414,16 @@ public:
     d.vkGetPhysicalDeviceSparseImageFormatProperties2( m_physicalDevice, reinterpret_cast<const VkPhysicalDeviceSparseImageFormatInfo2*>( &formatInfo ), &propertyCount, reinterpret_cast<VkSparseImageFormatProperties2*>( properties.data() ) );
     return properties;
   }
+  template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE std::vector<SparseImageFormatProperties2,Allocator> PhysicalDevice::getSparseImageFormatProperties2( const PhysicalDeviceSparseImageFormatInfo2 & formatInfo, Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    std::vector<SparseImageFormatProperties2,Allocator> properties( vectorAllocator );
+    uint32_t propertyCount;
+    d.vkGetPhysicalDeviceSparseImageFormatProperties2( m_physicalDevice, reinterpret_cast<const VkPhysicalDeviceSparseImageFormatInfo2*>( &formatInfo ), &propertyCount, nullptr );
+    properties.resize( propertyCount );
+    d.vkGetPhysicalDeviceSparseImageFormatProperties2( m_physicalDevice, reinterpret_cast<const VkPhysicalDeviceSparseImageFormatInfo2*>( &formatInfo ), &propertyCount, reinterpret_cast<VkSparseImageFormatProperties2*>( properties.data() ) );
+    return properties;
+  }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
   template<typename Dispatch>
@@ -45831,6 +46436,16 @@ public:
   VULKAN_HPP_INLINE std::vector<SparseImageFormatProperties2,Allocator> PhysicalDevice::getSparseImageFormatProperties2KHR( const PhysicalDeviceSparseImageFormatInfo2 & formatInfo, Dispatch const &d ) const
   {
     std::vector<SparseImageFormatProperties2,Allocator> properties;
+    uint32_t propertyCount;
+    d.vkGetPhysicalDeviceSparseImageFormatProperties2KHR( m_physicalDevice, reinterpret_cast<const VkPhysicalDeviceSparseImageFormatInfo2*>( &formatInfo ), &propertyCount, nullptr );
+    properties.resize( propertyCount );
+    d.vkGetPhysicalDeviceSparseImageFormatProperties2KHR( m_physicalDevice, reinterpret_cast<const VkPhysicalDeviceSparseImageFormatInfo2*>( &formatInfo ), &propertyCount, reinterpret_cast<VkSparseImageFormatProperties2*>( properties.data() ) );
+    return properties;
+  }
+  template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE std::vector<SparseImageFormatProperties2,Allocator> PhysicalDevice::getSparseImageFormatProperties2KHR( const PhysicalDeviceSparseImageFormatInfo2 & formatInfo, Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    std::vector<SparseImageFormatProperties2,Allocator> properties( vectorAllocator );
     uint32_t propertyCount;
     d.vkGetPhysicalDeviceSparseImageFormatProperties2KHR( m_physicalDevice, reinterpret_cast<const VkPhysicalDeviceSparseImageFormatInfo2*>( &formatInfo ), &propertyCount, nullptr );
     properties.resize( propertyCount );
@@ -46018,6 +46633,25 @@ public:
     rects.resize( rectCount );
     return createResultValue( result, rects, VULKAN_HPP_NAMESPACE_STRING"::PhysicalDevice::getPresentRectanglesKHR" );
   }
+  template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<Rect2D,Allocator>>::type PhysicalDevice::getPresentRectanglesKHR( SurfaceKHR surface, Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    std::vector<Rect2D,Allocator> rects( vectorAllocator );
+    uint32_t rectCount;
+    Result result;
+    do
+    {
+      result = static_cast<Result>( d.vkGetPhysicalDevicePresentRectanglesKHR( m_physicalDevice, static_cast<VkSurfaceKHR>( surface ), &rectCount, nullptr ) );
+      if ( ( result == Result::eSuccess ) && rectCount )
+      {
+        rects.resize( rectCount );
+        result = static_cast<Result>( d.vkGetPhysicalDevicePresentRectanglesKHR( m_physicalDevice, static_cast<VkSurfaceKHR>( surface ), &rectCount, reinterpret_cast<VkRect2D*>( rects.data() ) ) );
+      }
+    } while ( result == Result::eIncomplete );
+    VULKAN_HPP_ASSERT( rectCount <= rects.size() );
+    rects.resize( rectCount );
+    return createResultValue( result, rects, VULKAN_HPP_NAMESPACE_STRING"::PhysicalDevice::getPresentRectanglesKHR" );
+  }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
   template<typename Dispatch>
@@ -46083,6 +46717,25 @@ public:
     surfaceFormats.resize( surfaceFormatCount );
     return createResultValue( result, surfaceFormats, VULKAN_HPP_NAMESPACE_STRING"::PhysicalDevice::getSurfaceFormats2KHR" );
   }
+  template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<SurfaceFormat2KHR,Allocator>>::type PhysicalDevice::getSurfaceFormats2KHR( const PhysicalDeviceSurfaceInfo2KHR & surfaceInfo, Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    std::vector<SurfaceFormat2KHR,Allocator> surfaceFormats( vectorAllocator );
+    uint32_t surfaceFormatCount;
+    Result result;
+    do
+    {
+      result = static_cast<Result>( d.vkGetPhysicalDeviceSurfaceFormats2KHR( m_physicalDevice, reinterpret_cast<const VkPhysicalDeviceSurfaceInfo2KHR*>( &surfaceInfo ), &surfaceFormatCount, nullptr ) );
+      if ( ( result == Result::eSuccess ) && surfaceFormatCount )
+      {
+        surfaceFormats.resize( surfaceFormatCount );
+        result = static_cast<Result>( d.vkGetPhysicalDeviceSurfaceFormats2KHR( m_physicalDevice, reinterpret_cast<const VkPhysicalDeviceSurfaceInfo2KHR*>( &surfaceInfo ), &surfaceFormatCount, reinterpret_cast<VkSurfaceFormat2KHR*>( surfaceFormats.data() ) ) );
+      }
+    } while ( result == Result::eIncomplete );
+    VULKAN_HPP_ASSERT( surfaceFormatCount <= surfaceFormats.size() );
+    surfaceFormats.resize( surfaceFormatCount );
+    return createResultValue( result, surfaceFormats, VULKAN_HPP_NAMESPACE_STRING"::PhysicalDevice::getSurfaceFormats2KHR" );
+  }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
   template<typename Dispatch>
@@ -46095,6 +46748,25 @@ public:
   VULKAN_HPP_INLINE typename ResultValueType<std::vector<DisplayProperties2KHR,Allocator>>::type PhysicalDevice::getDisplayProperties2KHR(Dispatch const &d ) const
   {
     std::vector<DisplayProperties2KHR,Allocator> properties;
+    uint32_t propertyCount;
+    Result result;
+    do
+    {
+      result = static_cast<Result>( d.vkGetPhysicalDeviceDisplayProperties2KHR( m_physicalDevice, &propertyCount, nullptr ) );
+      if ( ( result == Result::eSuccess ) && propertyCount )
+      {
+        properties.resize( propertyCount );
+        result = static_cast<Result>( d.vkGetPhysicalDeviceDisplayProperties2KHR( m_physicalDevice, &propertyCount, reinterpret_cast<VkDisplayProperties2KHR*>( properties.data() ) ) );
+      }
+    } while ( result == Result::eIncomplete );
+    VULKAN_HPP_ASSERT( propertyCount <= properties.size() );
+    properties.resize( propertyCount );
+    return createResultValue( result, properties, VULKAN_HPP_NAMESPACE_STRING"::PhysicalDevice::getDisplayProperties2KHR" );
+  }
+  template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<DisplayProperties2KHR,Allocator>>::type PhysicalDevice::getDisplayProperties2KHR(Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    std::vector<DisplayProperties2KHR,Allocator> properties( vectorAllocator );
     uint32_t propertyCount;
     Result result;
     do
@@ -46137,6 +46809,25 @@ public:
     properties.resize( propertyCount );
     return createResultValue( result, properties, VULKAN_HPP_NAMESPACE_STRING"::PhysicalDevice::getDisplayPlaneProperties2KHR" );
   }
+  template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<DisplayPlaneProperties2KHR,Allocator>>::type PhysicalDevice::getDisplayPlaneProperties2KHR(Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    std::vector<DisplayPlaneProperties2KHR,Allocator> properties( vectorAllocator );
+    uint32_t propertyCount;
+    Result result;
+    do
+    {
+      result = static_cast<Result>( d.vkGetPhysicalDeviceDisplayPlaneProperties2KHR( m_physicalDevice, &propertyCount, nullptr ) );
+      if ( ( result == Result::eSuccess ) && propertyCount )
+      {
+        properties.resize( propertyCount );
+        result = static_cast<Result>( d.vkGetPhysicalDeviceDisplayPlaneProperties2KHR( m_physicalDevice, &propertyCount, reinterpret_cast<VkDisplayPlaneProperties2KHR*>( properties.data() ) ) );
+      }
+    } while ( result == Result::eIncomplete );
+    VULKAN_HPP_ASSERT( propertyCount <= properties.size() );
+    properties.resize( propertyCount );
+    return createResultValue( result, properties, VULKAN_HPP_NAMESPACE_STRING"::PhysicalDevice::getDisplayPlaneProperties2KHR" );
+  }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
   template<typename Dispatch>
@@ -46149,6 +46840,25 @@ public:
   VULKAN_HPP_INLINE typename ResultValueType<std::vector<DisplayModeProperties2KHR,Allocator>>::type PhysicalDevice::getDisplayModeProperties2KHR( DisplayKHR display, Dispatch const &d ) const
   {
     std::vector<DisplayModeProperties2KHR,Allocator> properties;
+    uint32_t propertyCount;
+    Result result;
+    do
+    {
+      result = static_cast<Result>( d.vkGetDisplayModeProperties2KHR( m_physicalDevice, static_cast<VkDisplayKHR>( display ), &propertyCount, nullptr ) );
+      if ( ( result == Result::eSuccess ) && propertyCount )
+      {
+        properties.resize( propertyCount );
+        result = static_cast<Result>( d.vkGetDisplayModeProperties2KHR( m_physicalDevice, static_cast<VkDisplayKHR>( display ), &propertyCount, reinterpret_cast<VkDisplayModeProperties2KHR*>( properties.data() ) ) );
+      }
+    } while ( result == Result::eIncomplete );
+    VULKAN_HPP_ASSERT( propertyCount <= properties.size() );
+    properties.resize( propertyCount );
+    return createResultValue( result, properties, VULKAN_HPP_NAMESPACE_STRING"::PhysicalDevice::getDisplayModeProperties2KHR" );
+  }
+  template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<DisplayModeProperties2KHR,Allocator>>::type PhysicalDevice::getDisplayModeProperties2KHR( DisplayKHR display, Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    std::vector<DisplayModeProperties2KHR,Allocator> properties( vectorAllocator );
     uint32_t propertyCount;
     Result result;
     do
@@ -46191,6 +46901,25 @@ public:
   VULKAN_HPP_INLINE typename ResultValueType<std::vector<TimeDomainEXT,Allocator>>::type PhysicalDevice::getCalibrateableTimeDomainsEXT(Dispatch const &d ) const
   {
     std::vector<TimeDomainEXT,Allocator> timeDomains;
+    uint32_t timeDomainCount;
+    Result result;
+    do
+    {
+      result = static_cast<Result>( d.vkGetPhysicalDeviceCalibrateableTimeDomainsEXT( m_physicalDevice, &timeDomainCount, nullptr ) );
+      if ( ( result == Result::eSuccess ) && timeDomainCount )
+      {
+        timeDomains.resize( timeDomainCount );
+        result = static_cast<Result>( d.vkGetPhysicalDeviceCalibrateableTimeDomainsEXT( m_physicalDevice, &timeDomainCount, reinterpret_cast<VkTimeDomainEXT*>( timeDomains.data() ) ) );
+      }
+    } while ( result == Result::eIncomplete );
+    VULKAN_HPP_ASSERT( timeDomainCount <= timeDomains.size() );
+    timeDomains.resize( timeDomainCount );
+    return createResultValue( result, timeDomains, VULKAN_HPP_NAMESPACE_STRING"::PhysicalDevice::getCalibrateableTimeDomainsEXT" );
+  }
+  template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<TimeDomainEXT,Allocator>>::type PhysicalDevice::getCalibrateableTimeDomainsEXT(Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    std::vector<TimeDomainEXT,Allocator> timeDomains( vectorAllocator );
     uint32_t timeDomainCount;
     Result result;
     do
@@ -46464,6 +47193,8 @@ public:
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Allocator = std::allocator<PhysicalDevice>, typename Dispatch = DispatchLoaderStatic> 
     typename ResultValueType<std::vector<PhysicalDevice,Allocator>>::type enumeratePhysicalDevices(Dispatch const &d = Dispatch() ) const;
+    template <typename Allocator = std::allocator<PhysicalDevice>, typename Dispatch = DispatchLoaderStatic> 
+    typename ResultValueType<std::vector<PhysicalDevice,Allocator>>::type enumeratePhysicalDevices(Allocator const& vectorAllocator, Dispatch const &d ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = DispatchLoaderStatic>
@@ -46639,6 +47370,8 @@ public:
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Allocator = std::allocator<PhysicalDeviceGroupProperties>, typename Dispatch = DispatchLoaderStatic> 
     typename ResultValueType<std::vector<PhysicalDeviceGroupProperties,Allocator>>::type enumeratePhysicalDeviceGroups(Dispatch const &d = Dispatch() ) const;
+    template <typename Allocator = std::allocator<PhysicalDeviceGroupProperties>, typename Dispatch = DispatchLoaderStatic> 
+    typename ResultValueType<std::vector<PhysicalDeviceGroupProperties,Allocator>>::type enumeratePhysicalDeviceGroups(Allocator const& vectorAllocator, Dispatch const &d ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = DispatchLoaderStatic>
@@ -46646,6 +47379,8 @@ public:
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Allocator = std::allocator<PhysicalDeviceGroupProperties>, typename Dispatch = DispatchLoaderStatic> 
     typename ResultValueType<std::vector<PhysicalDeviceGroupProperties,Allocator>>::type enumeratePhysicalDeviceGroupsKHR(Dispatch const &d = Dispatch() ) const;
+    template <typename Allocator = std::allocator<PhysicalDeviceGroupProperties>, typename Dispatch = DispatchLoaderStatic> 
+    typename ResultValueType<std::vector<PhysicalDeviceGroupProperties,Allocator>>::type enumeratePhysicalDeviceGroupsKHR(Allocator const& vectorAllocator, Dispatch const &d ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
 #ifdef VK_USE_PLATFORM_IOS_MVK
@@ -46752,6 +47487,25 @@ public:
   VULKAN_HPP_INLINE typename ResultValueType<std::vector<PhysicalDevice,Allocator>>::type Instance::enumeratePhysicalDevices(Dispatch const &d ) const
   {
     std::vector<PhysicalDevice,Allocator> physicalDevices;
+    uint32_t physicalDeviceCount;
+    Result result;
+    do
+    {
+      result = static_cast<Result>( d.vkEnumeratePhysicalDevices( m_instance, &physicalDeviceCount, nullptr ) );
+      if ( ( result == Result::eSuccess ) && physicalDeviceCount )
+      {
+        physicalDevices.resize( physicalDeviceCount );
+        result = static_cast<Result>( d.vkEnumeratePhysicalDevices( m_instance, &physicalDeviceCount, reinterpret_cast<VkPhysicalDevice*>( physicalDevices.data() ) ) );
+      }
+    } while ( result == Result::eIncomplete );
+    VULKAN_HPP_ASSERT( physicalDeviceCount <= physicalDevices.size() );
+    physicalDevices.resize( physicalDeviceCount );
+    return createResultValue( result, physicalDevices, VULKAN_HPP_NAMESPACE_STRING"::Instance::enumeratePhysicalDevices" );
+  }
+  template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<PhysicalDevice,Allocator>>::type Instance::enumeratePhysicalDevices(Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    std::vector<PhysicalDevice,Allocator> physicalDevices( vectorAllocator );
     uint32_t physicalDeviceCount;
     Result result;
     do
@@ -47156,6 +47910,25 @@ public:
     physicalDeviceGroupProperties.resize( physicalDeviceGroupCount );
     return createResultValue( result, physicalDeviceGroupProperties, VULKAN_HPP_NAMESPACE_STRING"::Instance::enumeratePhysicalDeviceGroups" );
   }
+  template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<PhysicalDeviceGroupProperties,Allocator>>::type Instance::enumeratePhysicalDeviceGroups(Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    std::vector<PhysicalDeviceGroupProperties,Allocator> physicalDeviceGroupProperties( vectorAllocator );
+    uint32_t physicalDeviceGroupCount;
+    Result result;
+    do
+    {
+      result = static_cast<Result>( d.vkEnumeratePhysicalDeviceGroups( m_instance, &physicalDeviceGroupCount, nullptr ) );
+      if ( ( result == Result::eSuccess ) && physicalDeviceGroupCount )
+      {
+        physicalDeviceGroupProperties.resize( physicalDeviceGroupCount );
+        result = static_cast<Result>( d.vkEnumeratePhysicalDeviceGroups( m_instance, &physicalDeviceGroupCount, reinterpret_cast<VkPhysicalDeviceGroupProperties*>( physicalDeviceGroupProperties.data() ) ) );
+      }
+    } while ( result == Result::eIncomplete );
+    VULKAN_HPP_ASSERT( physicalDeviceGroupCount <= physicalDeviceGroupProperties.size() );
+    physicalDeviceGroupProperties.resize( physicalDeviceGroupCount );
+    return createResultValue( result, physicalDeviceGroupProperties, VULKAN_HPP_NAMESPACE_STRING"::Instance::enumeratePhysicalDeviceGroups" );
+  }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
   template<typename Dispatch>
@@ -47168,6 +47941,25 @@ public:
   VULKAN_HPP_INLINE typename ResultValueType<std::vector<PhysicalDeviceGroupProperties,Allocator>>::type Instance::enumeratePhysicalDeviceGroupsKHR(Dispatch const &d ) const
   {
     std::vector<PhysicalDeviceGroupProperties,Allocator> physicalDeviceGroupProperties;
+    uint32_t physicalDeviceGroupCount;
+    Result result;
+    do
+    {
+      result = static_cast<Result>( d.vkEnumeratePhysicalDeviceGroupsKHR( m_instance, &physicalDeviceGroupCount, nullptr ) );
+      if ( ( result == Result::eSuccess ) && physicalDeviceGroupCount )
+      {
+        physicalDeviceGroupProperties.resize( physicalDeviceGroupCount );
+        result = static_cast<Result>( d.vkEnumeratePhysicalDeviceGroupsKHR( m_instance, &physicalDeviceGroupCount, reinterpret_cast<VkPhysicalDeviceGroupProperties*>( physicalDeviceGroupProperties.data() ) ) );
+      }
+    } while ( result == Result::eIncomplete );
+    VULKAN_HPP_ASSERT( physicalDeviceGroupCount <= physicalDeviceGroupProperties.size() );
+    physicalDeviceGroupProperties.resize( physicalDeviceGroupCount );
+    return createResultValue( result, physicalDeviceGroupProperties, VULKAN_HPP_NAMESPACE_STRING"::Instance::enumeratePhysicalDeviceGroupsKHR" );
+  }
+  template <typename Allocator, typename Dispatch> 
+  VULKAN_HPP_INLINE typename ResultValueType<std::vector<PhysicalDeviceGroupProperties,Allocator>>::type Instance::enumeratePhysicalDeviceGroupsKHR(Allocator const& vectorAllocator, Dispatch const &d ) const
+  {
+    std::vector<PhysicalDeviceGroupProperties,Allocator> physicalDeviceGroupProperties( vectorAllocator );
     uint32_t physicalDeviceGroupCount;
     Result result;
     do
