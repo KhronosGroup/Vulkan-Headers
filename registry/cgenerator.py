@@ -189,7 +189,7 @@ class COutputGenerator(OutputGenerator):
             # If type declarations are needed by other features based on
             # this one, it may be necessary to suppress the ExtraProtect,
             # or move it below the 'for section...' loop.
-            if (self.featureExtraProtect != None):
+            if (self.featureExtraProtect is not None):
                 write('#ifdef', self.featureExtraProtect, file=self.outFile)
             write('#define', self.featureName, '1', file=self.outFile)
             for section in self.TYPE_SECTIONS:
@@ -209,7 +209,7 @@ class COutputGenerator(OutputGenerator):
                     write('#endif', file=self.outFile)
                 else:
                     self.newline()
-            if (self.featureExtraProtect != None):
+            if (self.featureExtraProtect is not None):
                 write('#endif /*', self.featureExtraProtect, '*/', file=self.outFile)
             if (self.genOpts.protectFeature):
                 write('#endif /*', self.featureName, '*/', file=self.outFile)
@@ -351,14 +351,14 @@ class COutputGenerator(OutputGenerator):
                 # Extension enumerants are only included if they are required
                 if self.isEnumRequired(elem):
                     decl = "    " + name + " = " + strVal + ",\n"
-                    if numVal != None:
+                    if numVal is not None:
                         body += decl
                     else:
                         aliasText += decl
 
                 # Don't track min/max for non-numbers (numVal == None)
-                if isEnum and numVal != None and elem.get('extends') is None:
-                    if minName == None:
+                if isEnum and numVal is not None and elem.get('extends') is None:
+                    if minName is None:
                         minName = maxName = name
                         minValue = maxValue = numVal
                     elif numVal < minValue:

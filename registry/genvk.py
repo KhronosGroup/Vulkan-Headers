@@ -41,7 +41,7 @@ def endTimer(timeit, msg):
 
 # Turn a list of strings into a regexp string matching exactly those strings
 def makeREstring(list, default = None):
-    if len(list) > 0 or default == None:
+    if len(list) > 0 or default is None:
         return '^(' + '|'.join(list) + ')$'
     else:
         return default
