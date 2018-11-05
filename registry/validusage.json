@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.1.90",
-    "comment": "from git branch: master commit: 894211de5fe395af42ce6f2ce1d97ff70e212380",
-    "date": "2018-10-29 20:26:11Z"
+    "api version": "1.1.91",
+    "comment": "from git branch: master commit: c2ef675dac74b77abdaf4c3de679381f2e3b276c",
+    "date": "2018-11-05 17:16:43Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -198,7 +198,7 @@
         },
         {
           "vuid": "VUID-VkPhysicalDeviceProperties2-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT\">VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceConservativeRasterizationPropertiesEXT\">VkPhysicalDeviceConservativeRasterizationPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingPropertiesEXT\">VkPhysicalDeviceDescriptorIndexingPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDiscardRectanglePropertiesEXT\">VkPhysicalDeviceDiscardRectanglePropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDriverPropertiesKHR\">VkPhysicalDeviceDriverPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceExternalMemoryHostPropertiesEXT\">VkPhysicalDeviceExternalMemoryHostPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceIDProperties\">VkPhysicalDeviceIDProperties</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockPropertiesEXT\">VkPhysicalDeviceInlineUniformBlockPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceMaintenance3Properties\">VkPhysicalDeviceMaintenance3Properties</a>, <a href=\"#VkPhysicalDeviceMeshShaderPropertiesNV\">VkPhysicalDeviceMeshShaderPropertiesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX\">VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX</a>, <a href=\"#VkPhysicalDeviceMultiviewProperties\">VkPhysicalDeviceMultiviewProperties</a>, <a href=\"#VkPhysicalDevicePCIBusInfoPropertiesEXT\">VkPhysicalDevicePCIBusInfoPropertiesEXT</a>, <a href=\"#VkPhysicalDevicePointClippingProperties\">VkPhysicalDevicePointClippingProperties</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryProperties\">VkPhysicalDeviceProtectedMemoryProperties</a>, <a href=\"#VkPhysicalDevicePushDescriptorPropertiesKHR\">VkPhysicalDevicePushDescriptorPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceRaytracingPropertiesNVX\">VkPhysicalDeviceRaytracingPropertiesNVX</a>, <a href=\"#VkPhysicalDeviceSampleLocationsPropertiesEXT\">VkPhysicalDeviceSampleLocationsPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT\">VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceShaderCorePropertiesAMD\">VkPhysicalDeviceShaderCorePropertiesAMD</a>, <a href=\"#VkPhysicalDeviceSubgroupProperties\">VkPhysicalDeviceSubgroupProperties</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackPropertiesEXT\">VkPhysicalDeviceTransformFeedbackPropertiesEXT</a>, or <a href=\"#VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT\">VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT\">VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceConservativeRasterizationPropertiesEXT\">VkPhysicalDeviceConservativeRasterizationPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingPropertiesEXT\">VkPhysicalDeviceDescriptorIndexingPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDiscardRectanglePropertiesEXT\">VkPhysicalDeviceDiscardRectanglePropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDriverPropertiesKHR\">VkPhysicalDeviceDriverPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceExternalMemoryHostPropertiesEXT\">VkPhysicalDeviceExternalMemoryHostPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceIDProperties\">VkPhysicalDeviceIDProperties</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockPropertiesEXT\">VkPhysicalDeviceInlineUniformBlockPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceMaintenance3Properties\">VkPhysicalDeviceMaintenance3Properties</a>, <a href=\"#VkPhysicalDeviceMeshShaderPropertiesNV\">VkPhysicalDeviceMeshShaderPropertiesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX\">VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX</a>, <a href=\"#VkPhysicalDeviceMultiviewProperties\">VkPhysicalDeviceMultiviewProperties</a>, <a href=\"#VkPhysicalDevicePCIBusInfoPropertiesEXT\">VkPhysicalDevicePCIBusInfoPropertiesEXT</a>, <a href=\"#VkPhysicalDevicePointClippingProperties\">VkPhysicalDevicePointClippingProperties</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryProperties\">VkPhysicalDeviceProtectedMemoryProperties</a>, <a href=\"#VkPhysicalDevicePushDescriptorPropertiesKHR\">VkPhysicalDevicePushDescriptorPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceRayTracingPropertiesNV\">VkPhysicalDeviceRayTracingPropertiesNV</a>, <a href=\"#VkPhysicalDeviceSampleLocationsPropertiesEXT\">VkPhysicalDeviceSampleLocationsPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT\">VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceShaderCorePropertiesAMD\">VkPhysicalDeviceShaderCorePropertiesAMD</a>, <a href=\"#VkPhysicalDeviceSubgroupProperties\">VkPhysicalDeviceSubgroupProperties</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackPropertiesEXT\">VkPhysicalDeviceTransformFeedbackPropertiesEXT</a>, or <a href=\"#VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT\">VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT</a>"
         },
         {
           "vuid": "VUID-VkPhysicalDeviceProperties2-sType-unique",
@@ -334,7 +334,7 @@
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice8BitStorageFeaturesKHR\">VkPhysicalDevice8BitStorageFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeaturesEXT\">VkPhysicalDeviceDescriptorIndexingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeaturesEXT\">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64FeaturesKHR\">VkPhysicalDeviceShaderAtomicInt64FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDrawParameterFeatures\">VkPhysicalDeviceShaderDrawParameterFeatures</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackFeaturesEXT\">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVariablePointerFeatures\">VkPhysicalDeviceVariablePointerFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, or <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeaturesKHR\">VkPhysicalDeviceVulkanMemoryModelFeaturesKHR</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceMemoryOverallocationCreateInfoAMD\">VkDeviceMemoryOverallocationCreateInfoAMD</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice8BitStorageFeaturesKHR\">VkPhysicalDevice8BitStorageFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeaturesEXT\">VkPhysicalDeviceDescriptorIndexingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeaturesEXT\">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64FeaturesKHR\">VkPhysicalDeviceShaderAtomicInt64FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDrawParameterFeatures\">VkPhysicalDeviceShaderDrawParameterFeatures</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackFeaturesEXT\">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVariablePointerFeatures\">VkPhysicalDeviceVariablePointerFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, or <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeaturesKHR\">VkPhysicalDeviceVulkanMemoryModelFeaturesKHR</a>"
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-sType-unique",
@@ -405,6 +405,18 @@
         {
           "vuid": "VUID-VkDeviceGroupDeviceCreateInfo-pPhysicalDevices-parameter",
           "text": " If <code>physicalDeviceCount</code> is not <code>0</code>, <code>pPhysicalDevices</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>physicalDeviceCount</code> valid <code>VkPhysicalDevice</code> handles"
+        }
+      ]
+    },
+    "VkDeviceMemoryOverallocationCreateInfoAMD": {
+      "(VK_AMD_memory_overallocation_behavior)": [
+        {
+          "vuid": "VUID-VkDeviceMemoryOverallocationCreateInfoAMD-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_DEVICE_MEMORY_OVERALLOCATION_CREATE_INFO_AMD</code>"
+        },
+        {
+          "vuid": "VUID-VkDeviceMemoryOverallocationCreateInfoAMD-overallocationBehavior-parameter",
+          "text": " <code>overallocationBehavior</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkMemoryOverallocationBehaviorAMD\">VkMemoryOverallocationBehaviorAMD</a> value"
         }
       ]
     },
@@ -2536,7 +2548,7 @@
         },
         {
           "vuid": "VUID-vkCmdPipelineBarrier-pDependencies-02285",
-          "text": " If <code>vkCmdPipelineBarrier</code> is called within a render pass instance, the render pass <strong class=\"purple\">must</strong> have been created with at least one <code>VkSubpassDependency</code> instance in <code>VkRenderPassCreateInfo</code>::<code>pDependencies</code> that expresses a dependency from the current subpass to itself, and for which <code>srcStageMask</code> contains a subset of the bit values in <code>VkSubpassDependency</code>::<code>srcStageMask</code>, <code>dstStageMask</code> contains a subset of the bit values in <code>VkSubpassDependency</code>::<code>dstStageMask</code>, <code>dependencyFlags</code> is equal to <code>VkSubpassDependency</code>::<code>dependencyFlags</code>, <code>srcAccessMask</code> member of each each element of <code>pMemoryBarriers</code> and <code>pImageMemoryBarriers</code> contains a subset of the bit values in <code>VkSubpassDependency</code>::<code>srcAccessMask</code>, and <code>dstAccessMask</code> member of each element of <code>pMemoryBarriers</code> and <code>pImageMemoryBarriers</code> contains a subset of the bit values in <code>VkSubpassDependency</code>::<code>dstAccessMask</code>"
+          "text": " If <code>vkCmdPipelineBarrier</code> is called within a render pass instance, the render pass <strong class=\"purple\">must</strong> have been created with at least one <code>VkSubpassDependency</code> instance in <code>VkRenderPassCreateInfo</code>::<code>pDependencies</code> that expresses a dependency from the current subpass to itself, and for which <code>srcStageMask</code> contains a subset of the bit values in <code>VkSubpassDependency</code>::<code>srcStageMask</code>, <code>dstStageMask</code> contains a subset of the bit values in <code>VkSubpassDependency</code>::<code>dstStageMask</code>, <code>dependencyFlags</code> is equal to <code>VkSubpassDependency</code>::<code>dependencyFlags</code>, <code>srcAccessMask</code> member of each element of <code>pMemoryBarriers</code> and <code>pImageMemoryBarriers</code> contains a subset of the bit values in <code>VkSubpassDependency</code>::<code>srcAccessMask</code>, and <code>dstAccessMask</code> member of each element of <code>pMemoryBarriers</code> and <code>pImageMemoryBarriers</code> contains a subset of the bit values in <code>VkSubpassDependency</code>::<code>dstAccessMask</code>"
         },
         {
           "vuid": "VUID-vkCmdPipelineBarrier-bufferMemoryBarrierCount-01178",
@@ -5564,6 +5576,16 @@
           "vuid": "VUID-vkCmdBindPipeline-None-02323",
           "text": " This command <strong class=\"purple\">must</strong> not be recorded when transform feedback is active"
         }
+      ],
+      "(VK_NV_ray_tracing)": [
+        {
+          "vuid": "VUID-vkCmdBindPipeline-pipelineBindPoint-02391",
+          "text": " If <code>pipelineBindPoint</code> is <code>VK_PIPELINE_BIND_POINT_RAY_TRACING_NV</code>, the <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from <strong class=\"purple\">must</strong> support compute operations"
+        },
+        {
+          "vuid": "VUID-vkCmdBindPipeline-pipelineBindPoint-02392",
+          "text": " If <code>pipelineBindPoint</code> is <code>VK_PIPELINE_BIND_POINT_RAY_TRACING_NV</code>, the <code>pipeline</code> <strong class=\"purple\">must</strong> be a ray tracing pipeline"
+        }
       ]
     },
     "vkGetShaderInfoAMD": {
@@ -5598,118 +5620,214 @@
         }
       ]
     },
-    "vkCreateRaytracingPipelinesNVX": {
-      "(VK_NVX_raytracing)": [
+    "vkCreateRayTracingPipelinesNV": {
+      "(VK_NV_ray_tracing)": [
         {
-          "vuid": "VUID-vkCreateRaytracingPipelinesNVX-device-parameter",
+          "vuid": "VUID-vkCreateRayTracingPipelinesNV-flags-02402",
+          "text": " If the <code>flags</code> member of any element of <code>pCreateInfos</code> contains the <code>VK_PIPELINE_CREATE_DERIVATIVE_BIT</code> flag, and the <code>basePipelineIndex</code> member of that same element is not <code>-1</code>, <code>basePipelineIndex</code> <strong class=\"purple\">must</strong> be less than the index into <code>pCreateInfos</code> that corresponds to that element"
+        },
+        {
+          "vuid": "VUID-vkCreateRayTracingPipelinesNV-flags-02403",
+          "text": " If the <code>flags</code> member of any element of <code>pCreateInfos</code> contains the <code>VK_PIPELINE_CREATE_DERIVATIVE_BIT</code> flag, the base pipeline <strong class=\"purple\">must</strong> have been created with the <code>VK_PIPELINE_CREATE_ALLOW_DERIVATIVES_BIT</code> flag set"
+        },
+        {
+          "vuid": "VUID-vkCreateRayTracingPipelinesNV-device-parameter",
           "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <code>VkDevice</code> handle"
         },
         {
-          "vuid": "VUID-vkCreateRaytracingPipelinesNVX-pipelineCache-parameter",
+          "vuid": "VUID-vkCreateRayTracingPipelinesNV-pipelineCache-parameter",
           "text": " If <code>pipelineCache</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>pipelineCache</code> <strong class=\"purple\">must</strong> be a valid <code>VkPipelineCache</code> handle"
         },
         {
-          "vuid": "VUID-vkCreateRaytracingPipelinesNVX-pCreateInfos-parameter",
-          "text": " <code>pCreateInfos</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>createInfoCount</code> valid <code>VkRaytracingPipelineCreateInfoNVX</code> structures"
+          "vuid": "VUID-vkCreateRayTracingPipelinesNV-pCreateInfos-parameter",
+          "text": " <code>pCreateInfos</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>createInfoCount</code> valid <code>VkRayTracingPipelineCreateInfoNV</code> structures"
         },
         {
-          "vuid": "VUID-vkCreateRaytracingPipelinesNVX-pAllocator-parameter",
+          "vuid": "VUID-vkCreateRayTracingPipelinesNV-pAllocator-parameter",
           "text": " If <code>pAllocator</code> is not <code>NULL</code>, <code>pAllocator</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <code>VkAllocationCallbacks</code> structure"
         },
         {
-          "vuid": "VUID-vkCreateRaytracingPipelinesNVX-pPipelines-parameter",
+          "vuid": "VUID-vkCreateRayTracingPipelinesNV-pPipelines-parameter",
           "text": " <code>pPipelines</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>createInfoCount</code> <code>VkPipeline</code> handles"
         },
         {
-          "vuid": "VUID-vkCreateRaytracingPipelinesNVX-createInfoCount-arraylength",
+          "vuid": "VUID-vkCreateRayTracingPipelinesNV-createInfoCount-arraylength",
           "text": " <code>createInfoCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
         },
         {
-          "vuid": "VUID-vkCreateRaytracingPipelinesNVX-pipelineCache-parent",
+          "vuid": "VUID-vkCreateRayTracingPipelinesNV-pipelineCache-parent",
           "text": " If <code>pipelineCache</code> is a valid handle, it <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from <code>device</code>"
         }
       ]
     },
-    "VkRaytracingPipelineCreateInfoNVX": {
-      "(VK_NVX_raytracing)": [
+    "VkRayTracingPipelineCreateInfoNV": {
+      "(VK_NV_ray_tracing)": [
         {
-          "vuid": "VUID-VkRaytracingPipelineCreateInfoNVX-sType-sType",
-          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_RAYTRACING_PIPELINE_CREATE_INFO_NVX</code>"
+          "vuid": "VUID-VkRayTracingPipelineCreateInfoNV-flags-02404",
+          "text": " If <code>flags</code> contains the <code>VK_PIPELINE_CREATE_DERIVATIVE_BIT</code> flag, and <code>basePipelineIndex</code> is -1, <code>basePipelineHandle</code> <strong class=\"purple\">must</strong> be a valid handle to a ray tracing <code>VkPipeline</code>"
         },
         {
-          "vuid": "VUID-VkRaytracingPipelineCreateInfoNVX-pNext-pNext",
+          "vuid": "VUID-VkRayTracingPipelineCreateInfoNV-flags-02405",
+          "text": " If <code>flags</code> contains the <code>VK_PIPELINE_CREATE_DERIVATIVE_BIT</code> flag, and <code>basePipelineHandle</code> is <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>basePipelineIndex</code> <strong class=\"purple\">must</strong> be a valid index into the calling command&#8217;s <code>pCreateInfos</code> parameter"
+        },
+        {
+          "vuid": "VUID-VkRayTracingPipelineCreateInfoNV-flags-02406",
+          "text": " If <code>flags</code> contains the <code>VK_PIPELINE_CREATE_DERIVATIVE_BIT</code> flag, and <code>basePipelineIndex</code> is not -1, <code>basePipelineHandle</code> <strong class=\"purple\">must</strong> be <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>"
+        },
+        {
+          "vuid": "VUID-VkRayTracingPipelineCreateInfoNV-flags-02407",
+          "text": " If <code>flags</code> contains the <code>VK_PIPELINE_CREATE_DERIVATIVE_BIT</code> flag, and <code>basePipelineHandle</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>basePipelineIndex</code> <strong class=\"purple\">must</strong> be -1"
+        },
+        {
+          "vuid": "VUID-VkRayTracingPipelineCreateInfoNV-stage-02408",
+          "text": " The <code>stage</code> member of one element of <code>pStages</code> <strong class=\"purple\">must</strong> be <code>VK_SHADER_STAGE_RAYGEN_BIT_NV</code>"
+        },
+        {
+          "vuid": "VUID-VkRayTracingPipelineCreateInfoNV-pStages-02409",
+          "text": " The shader code for the entry points identified by <code>pStages</code>, and the rest of the state identified by this structure <strong class=\"purple\">must</strong> adhere to the pipeline linking rules described in the <a href=\"#interfaces\">Shader Interfaces</a> chapter"
+        },
+        {
+          "vuid": "VUID-VkRayTracingPipelineCreateInfoNV-layout-02410",
+          "text": " <code>layout</code> <strong class=\"purple\">must</strong> be <a href=\"#descriptorsets-pipelinelayout-consistency\">consistent</a> with all shaders specified in <code>pStages</code>"
+        },
+        {
+          "vuid": "VUID-VkRayTracingPipelineCreateInfoNV-layout-02411",
+          "text": " The number of resources in <code>layout</code> accessible to each shader stage that is used by the pipeline <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceLimits</code>::<code>maxPerStageResources</code>"
+        },
+        {
+          "vuid": "VUID-VkRayTracingPipelineCreateInfoNV-maxRecursionDepth-02412",
+          "text": " <code>maxRecursionDepth</code> <strong class=\"purple\">must</strong> be less than or equal to VkPhysicalDeviceRayTracingPropertiesNV::<code>maxRecursionDepth</code>"
+        },
+        {
+          "vuid": "VUID-VkRayTracingPipelineCreateInfoNV-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_RAY_TRACING_PIPELINE_CREATE_INFO_NV</code>"
+        },
+        {
+          "vuid": "VUID-VkRayTracingPipelineCreateInfoNV-pNext-pNext",
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
         },
         {
-          "vuid": "VUID-VkRaytracingPipelineCreateInfoNVX-flags-parameter",
+          "vuid": "VUID-VkRayTracingPipelineCreateInfoNV-flags-parameter",
           "text": " <code>flags</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkPipelineCreateFlagBits\">VkPipelineCreateFlagBits</a> values"
         },
         {
-          "vuid": "VUID-VkRaytracingPipelineCreateInfoNVX-pStages-parameter",
+          "vuid": "VUID-VkRayTracingPipelineCreateInfoNV-pStages-parameter",
           "text": " <code>pStages</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>stageCount</code> valid <code>VkPipelineShaderStageCreateInfo</code> structures"
         },
         {
-          "vuid": "VUID-VkRaytracingPipelineCreateInfoNVX-pGroupNumbers-parameter",
-          "text": " <code>pGroupNumbers</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>stageCount</code> <code>uint32_t</code> values"
+          "vuid": "VUID-VkRayTracingPipelineCreateInfoNV-pGroups-parameter",
+          "text": " <code>pGroups</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>groupCount</code> valid <code>VkRayTracingShaderGroupCreateInfoNV</code> structures"
         },
         {
-          "vuid": "VUID-VkRaytracingPipelineCreateInfoNVX-layout-parameter",
+          "vuid": "VUID-VkRayTracingPipelineCreateInfoNV-layout-parameter",
           "text": " <code>layout</code> <strong class=\"purple\">must</strong> be a valid <code>VkPipelineLayout</code> handle"
         },
         {
-          "vuid": "VUID-VkRaytracingPipelineCreateInfoNVX-stageCount-arraylength",
+          "vuid": "VUID-VkRayTracingPipelineCreateInfoNV-stageCount-arraylength",
           "text": " <code>stageCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
         },
         {
-          "vuid": "VUID-VkRaytracingPipelineCreateInfoNVX-commonparent",
+          "vuid": "VUID-VkRayTracingPipelineCreateInfoNV-groupCount-arraylength",
+          "text": " <code>groupCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
+        },
+        {
+          "vuid": "VUID-VkRayTracingPipelineCreateInfoNV-commonparent",
           "text": " Both of <code>basePipelineHandle</code>, and <code>layout</code> that are valid handles <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkDevice</code>"
         }
       ]
     },
-    "vkGetRaytracingShaderHandlesNVX": {
-      "(VK_NVX_raytracing)": [
+    "VkRayTracingShaderGroupCreateInfoNV": {
+      "(VK_NV_ray_tracing)": [
         {
-          "vuid": "VUID-vkGetRaytracingShaderHandlesNVX-device-parameter",
+          "vuid": "VUID-VkRayTracingShaderGroupCreateInfoNV-type-02413",
+          "text": " If <code>type</code> is <code>VK_RAY_TRACING_SHADER_GROUP_TYPE_GENERAL_NV</code> then <code>generalShader</code> <strong class=\"purple\">must</strong> be a valid index into <code>pStages</code> referring to a shader of <code>VK_SHADER_STAGE_RAYGEN_BIT_NV</code>, <code>VK_SHADER_STAGE_MISS_BIT_NV</code>, or <code>VK_SHADER_STAGE_CALLABLE_BIT_NV</code>."
+        },
+        {
+          "vuid": "VUID-VkRayTracingShaderGroupCreateInfoNV-type-02414",
+          "text": " If <code>type</code> is <code>VK_RAY_TRACING_SHADER_GROUP_TYPE_GENERAL_NV</code> then <code>closestHitShader</code>, <code>anyHitShader</code>, and <code>intersectionShader</code> <strong class=\"purple\">must</strong> be <code>VK_SHADER_UNUSED_NV</code>."
+        },
+        {
+          "vuid": "VUID-VkRayTracingShaderGroupCreateInfoNV-type-02415",
+          "text": " If <code>type</code> is <code>VK_RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_NV</code> then <code>intersectionShader</code> <strong class=\"purple\">must</strong> be a valid index into <code>pStages</code> referring to a shader of <code>VK_SHADER_STAGE_INTERSECTION_BIT_NV</code>."
+        },
+        {
+          "vuid": "VUID-VkRayTracingShaderGroupCreateInfoNV-type-02416",
+          "text": " If <code>type</code> is <code>VK_RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_NV</code> then <code>intersectionShader</code> <strong class=\"purple\">must</strong> be <code>VK_SHADER_UNUSED_NV</code>."
+        },
+        {
+          "vuid": "VUID-VkRayTracingShaderGroupCreateInfoNV-closestHitShader-02417",
+          "text": " <code>closestHitShader</code> <strong class=\"purple\">must</strong> be either <code>VK_SHADER_UNUSED_NV</code> or a valid index into <code>pStages</code> referring to a shader of <code>VK_SHADER_STAGE_CLOSEST_HIT_BIT_NV</code>."
+        },
+        {
+          "vuid": "VUID-VkRayTracingShaderGroupCreateInfoNV-anyHitShader-02418",
+          "text": " <code>anyHitShader</code> <strong class=\"purple\">must</strong> be either <code>VK_SHADER_UNUSED_NV</code> or a valid index into <code>pStages</code> referring to a shader of <code>VK_SHADER_STAGE_ANY_HIT_BIT_NV</code>."
+        },
+        {
+          "vuid": "VUID-VkRayTracingShaderGroupCreateInfoNV-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_RAY_TRACING_SHADER_GROUP_CREATE_INFO_NV</code>"
+        },
+        {
+          "vuid": "VUID-VkRayTracingShaderGroupCreateInfoNV-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkRayTracingShaderGroupCreateInfoNV-type-parameter",
+          "text": " <code>type</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkRayTracingShaderGroupTypeNV\">VkRayTracingShaderGroupTypeNV</a> value"
+        }
+      ]
+    },
+    "vkGetRayTracingShaderGroupHandlesNV": {
+      "(VK_NV_ray_tracing)": [
+        {
+          "vuid": "VUID-vkGetRayTracingShaderGroupHandlesNV-firstGroup-02419",
+          "text": " The sum of <code>firstGroup</code> and <code>groupCount</code> <strong class=\"purple\">must</strong> be less than the number of shader groups in <code>pipeline</code>."
+        },
+        {
+          "vuid": "VUID-vkGetRayTracingShaderGroupHandlesNV-dataSize-02420",
+          "text": " <code>dataSize</code> <strong class=\"purple\">must</strong> be at least <span class=\"eq\"><code>VkPhysicalDeviceRayTracingPropertiesNV</code>::<code>shaderGroupHandleSize</code> {times} <code>groupCount</code></span>"
+        },
+        {
+          "vuid": "VUID-vkGetRayTracingShaderGroupHandlesNV-device-parameter",
           "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <code>VkDevice</code> handle"
         },
         {
-          "vuid": "VUID-vkGetRaytracingShaderHandlesNVX-pipeline-parameter",
+          "vuid": "VUID-vkGetRayTracingShaderGroupHandlesNV-pipeline-parameter",
           "text": " <code>pipeline</code> <strong class=\"purple\">must</strong> be a valid <code>VkPipeline</code> handle"
         },
         {
-          "vuid": "VUID-vkGetRaytracingShaderHandlesNVX-pData-parameter",
+          "vuid": "VUID-vkGetRayTracingShaderGroupHandlesNV-pData-parameter",
           "text": " <code>pData</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>dataSize</code> bytes"
         },
         {
-          "vuid": "VUID-vkGetRaytracingShaderHandlesNVX-dataSize-arraylength",
+          "vuid": "VUID-vkGetRayTracingShaderGroupHandlesNV-dataSize-arraylength",
           "text": " <code>dataSize</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
         },
         {
-          "vuid": "VUID-vkGetRaytracingShaderHandlesNVX-pipeline-parent",
+          "vuid": "VUID-vkGetRayTracingShaderGroupHandlesNV-pipeline-parent",
           "text": " <code>pipeline</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from <code>device</code>"
         }
       ]
     },
-    "vkCompileDeferredNVX": {
-      "(VK_NVX_raytracing)": [
+    "vkCompileDeferredNV": {
+      "(VK_NV_ray_tracing)": [
         {
-          "vuid": "VUID-vkCompileDeferredNVX-pipeline-02237",
-          "text": " <code>pipeline</code> <strong class=\"purple\">must</strong> have been created with VK_PIPELINE_CREATE_DEFER_COMPILE_BIT_NVX."
+          "vuid": "VUID-vkCompileDeferredNV-pipeline-02237",
+          "text": " <code>pipeline</code> <strong class=\"purple\">must</strong> have been created with <code>VK_PIPELINE_CREATE_DEFER_COMPILE_BIT_NV</code>."
         },
         {
-          "vuid": "VUID-vkCompileDeferredNVX-shader-02238",
+          "vuid": "VUID-vkCompileDeferredNV-shader-02238",
           "text": " <code>shader</code> <strong class=\"purple\">must</strong> not have been called as a deferred compile before."
         },
         {
-          "vuid": "VUID-vkCompileDeferredNVX-device-parameter",
+          "vuid": "VUID-vkCompileDeferredNV-device-parameter",
           "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <code>VkDevice</code> handle"
         },
         {
-          "vuid": "VUID-vkCompileDeferredNVX-pipeline-parameter",
+          "vuid": "VUID-vkCompileDeferredNV-pipeline-parameter",
           "text": " <code>pipeline</code> <strong class=\"purple\">must</strong> be a valid <code>VkPipeline</code> handle"
         },
         {
-          "vuid": "VUID-vkCompileDeferredNVX-pipeline-parent",
+          "vuid": "VUID-vkCompileDeferredNV-pipeline-parent",
           "text": " <code>pipeline</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from <code>device</code>"
         }
       ]
@@ -5879,16 +5997,40 @@
       ],
       "(VK_ANDROID_external_memory_android_hardware_buffer)": [
         {
-          "vuid": "VUID-VkMemoryAllocateInfo-None-01873",
-          "text": " If the parameters define an import operation and the external handle type is <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID</code>:"
+          "vuid": "VUID-VkMemoryAllocateInfo-allocationSize-02383",
+          "text": " If the parameters define an import operation and the external handle type is <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID</code>, <code>allocationSize</code> <strong class=\"purple\">must</strong> be the size returned by <a href=\"#vkGetAndroidHardwareBufferPropertiesANDROID\">vkGetAndroidHardwareBufferPropertiesANDROID</a> for the Android hardware buffer."
+        },
+        {
+          "vuid": "VUID-VkMemoryAllocateInfo-pNext-02384",
+          "text": " If the parameters define an import operation and the external handle type is <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID</code>, and the <code>pNext</code> chain does not contain an instance of <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a> or <code>VkMemoryDedicatedAllocateInfo</code>::<code>image</code> is <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, the Android hardware buffer <strong class=\"purple\">must</strong> have a <code>AHardwareBuffer_Desc</code>::<code>format</code> of <code>AHARDWAREBUFFER_FORMAT_BLOB</code> and a <code>AHardwareBuffer_Desc</code>::<code>usage</code> that includes <code>AHARDWAREBUFFER_USAGE_GPU_DATA_BUFFER</code>."
+        },
+        {
+          "vuid": "VUID-VkMemoryAllocateInfo-memoryTypeIndex-02385",
+          "text": " If the parameters define an import operation and the external handle type is <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID</code>, <code>memoryTypeIndex</code> <strong class=\"purple\">must</strong> be one of those returned by <a href=\"#vkGetAndroidHardwareBufferPropertiesANDROID\">vkGetAndroidHardwareBufferPropertiesANDROID</a> for the Android hardware buffer."
         },
         {
           "vuid": "VUID-VkMemoryAllocateInfo-pNext-01874",
           "text": " If the parameters do not define an import operation, and the <code>pNext</code> chain contains an instance of <code>VkExportMemoryAllocateInfo</code> with <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID</code> included in its <code>handleTypes</code> member, and the <code>pNext</code> contains an instance of <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a> with <code>image</code> not equal to <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, then <code>allocationSize</code> <strong class=\"purple\">must</strong> be <code>0</code>, otherwise <code>allocationSize</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>."
         },
         {
-          "vuid": "VUID-VkMemoryAllocateInfo-pNext-01875",
-          "text": " If the parameters define an import operation, the external handle is an Android hardware buffer, and the <code>pNext</code> chain includes an instance of <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a> with <code>image</code> that is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>:"
+          "vuid": "VUID-VkMemoryAllocateInfo-pNext-02386",
+          "text": " If the parameters define an import operation, the external handle is an Android hardware buffer, and the <code>pNext</code> chain includes an instance of <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a> with <code>image</code> that is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, the Android hardware buffer&#8217;s <code>AHardwareBuffer</code>::<code>usage</code> <strong class=\"purple\">must</strong> include at least one of <code>AHARDWAREBUFFER_USAGE_GPU_COLOR_OUTPUT</code> or <code>AHARDWAREBUFFER_USAGE_GPU_SAMPLED_IMAGE</code>."
+        },
+        {
+          "vuid": "VUID-VkMemoryAllocateInfo-pNext-02387",
+          "text": " If the parameters define an import operation, the external handle is an Android hardware buffer, and the <code>pNext</code> chain includes an instance of <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a> with <code>image</code> that is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, the format of <code>image</code> <strong class=\"purple\">must</strong> be <code>VK_FORMAT_UNDEFINED</code> or the format returned by <a href=\"#vkGetAndroidHardwareBufferPropertiesANDROID\">vkGetAndroidHardwareBufferPropertiesANDROID</a> in <a href=\"#VkAndroidHardwareBufferFormatPropertiesANDROID\">VkAndroidHardwareBufferFormatPropertiesANDROID</a>::<code>format</code> for the Android hardware buffer."
+        },
+        {
+          "vuid": "VUID-VkMemoryAllocateInfo-pNext-02388",
+          "text": " If the parameters define an import operation, the external handle is an Android hardware buffer, and the <code>pNext</code> chain includes an instance of <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a> with <code>image</code> that is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, the width, height, and array layer dimensions of <code>image</code> and the Android hardware buffer&#8217;s <code>AHardwareBuffer_Desc</code> <strong class=\"purple\">must</strong> be identical."
+        },
+        {
+          "vuid": "VUID-VkMemoryAllocateInfo-pNext-02389",
+          "text": " If the parameters define an import operation, the external handle is an Android hardware buffer, and the <code>pNext</code> chain includes an instance of <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a> with <code>image</code> that is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, and the Android hardware buffer&#8217;s <code>AHardwareBuffer</code>::<code>usage</code> includes <code>AHARDWAREBUFFER_USAGE_GPU_MIPMAP_COMPLETE</code>, the <code>image</code> <strong class=\"purple\">must</strong> either have a complete mipmap chain, or it <strong class=\"purple\">must</strong> have exactly <code>1</code> mip level."
+        },
+        {
+          "vuid": "VUID-VkMemoryAllocateInfo-pNext-02390",
+          "text": " If the parameters define an import operation, the external handle is an Android hardware buffer, and the <code>pNext</code> chain includes an instance of <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a> with <code>image</code> that is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, each bit set in the usage of <code>image</code> <strong class=\"purple\">must</strong> be listed in <a href=\"#memory-external-android-hardware-buffer-usage\">AHardwareBuffer Usage Equivalence</a>, and if there is a corresponding <code>AHARDWAREBUFFER_USAGE</code> bit listed that bit <strong class=\"purple\">must</strong> be included in the Android hardware buffer&#8217;s <code>AHardwareBuffer_Desc</code>::<code>usage</code>."
         }
       ],
       "core": [
@@ -6362,7 +6504,7 @@
         },
         {
           "vuid": "VUID-VkImportAndroidHardwareBufferInfoANDROID-buffer-01881",
-          "text": " If <code>buffer</code> is not <code>NULL</code>, it <strong class=\"purple\">must</strong> be a valid Android hardware buffer object with format and usage compatible with Vulkan as described by <a href=\"#VkExternalMemoryHandleTypeFlagBits\">VkExternalMemoryHandleTypeFlagBits</a>."
+          "text": " If <code>buffer</code> is not <code>NULL</code>, it <strong class=\"purple\">must</strong> be a valid Android hardware buffer object with <code>AHardwareBuffer_Desc</code>::<code>format</code> and <code>AHardwareBuffer_Desc</code>::<code>usage</code> compatible with Vulkan as described in <a href=\"#memory-external-android-hardware-buffer\">Android Hardware Buffers</a>."
         },
         {
           "vuid": "VUID-VkImportAndroidHardwareBufferInfoANDROID-sType-sType",
@@ -6406,7 +6548,7 @@
       "(VK_ANDROID_external_memory_android_hardware_buffer)": [
         {
           "vuid": "VUID-vkGetAndroidHardwareBufferPropertiesANDROID-buffer-01884",
-          "text": " <code>buffer</code> <strong class=\"purple\">must</strong> be a valid Android hardware buffer object with at least one of the <code>AHARDWAREBUFFER_USAGE_GPU_</code>* usage flags."
+          "text": " <code>buffer</code> <strong class=\"purple\">must</strong> be a valid Android hardware buffer object with at least one of the <code>AHARDWAREBUFFER_USAGE_GPU_</code>* flags in its <code>AHardwareBuffer_Desc</code>::<code>usage</code>"
         },
         {
           "vuid": "VUID-vkGetAndroidHardwareBufferPropertiesANDROID-device-parameter",
@@ -7285,12 +7427,28 @@
           "text": " If the <code>pNext</code> chain does not contain an instance of <a href=\"#VkExternalFormatANDROID\">VkExternalFormatANDROID</a>, or does and its member <code>externalFormat</code> is <code>0</code> the <code>format</code> <strong class=\"purple\">must</strong> not be <code>VK_FORMAT_UNDEFINED</code>."
         },
         {
-          "vuid": "VUID-VkImageCreateInfo-pNext-01892",
-          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a> structure whose <code>handleTypes</code> member includes <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID</code>:"
+          "vuid": "VUID-VkImageCreateInfo-pNext-02393",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a> structure whose <code>handleTypes</code> member includes <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID</code>, <code>imageType</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_TYPE_2D</code>."
         },
         {
-          "vuid": "VUID-VkImageCreateInfo-pNext-01893",
-          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExternalFormatANDROID\">VkExternalFormatANDROID</a> structure whose <code>externalFormat</code> member is not <code>0</code>:"
+          "vuid": "VUID-VkImageCreateInfo-pNext-02394",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a> structure whose <code>handleTypes</code> member includes <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID</code>, <code>mipLevels</code> <strong class=\"purple\">must</strong> either be <code>1</code> or equal to the number of levels in the complete mipmap chain based on <span class=\"eq\"><code>extent.width</code></span>, <span class=\"eq\"><code>extent.height</code></span>, and <span class=\"eq\"><code>extent.depth</code></span>."
+        },
+        {
+          "vuid": "VUID-VkImageCreateInfo-pNext-02395",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a> structure whose <code>handleTypes</code> member includes <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID</code>, and <code>format</code> is <code>VK_FORMAT_UNDEFINED</code>, then the <code>pNext</code> chain <strong class=\"purple\">must</strong> include a <a href=\"#VkExternalFormatANDROID\">VkExternalFormatANDROID</a> structure whose <code>externalFormat</code> member is not <code>0</code>."
+        },
+        {
+          "vuid": "VUID-VkImageCreateInfo-pNext-02396",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExternalFormatANDROID\">VkExternalFormatANDROID</a> structure whose <code>externalFormat</code> member is not <code>0</code>, <code>flags</code> <strong class=\"purple\">must</strong> not include <code>VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT</code>."
+        },
+        {
+          "vuid": "VUID-VkImageCreateInfo-pNext-02397",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExternalFormatANDROID\">VkExternalFormatANDROID</a> structure whose <code>externalFormat</code> member is not <code>0</code>, <code>usage</code> <strong class=\"purple\">must</strong> not include any usages except <code>VK_IMAGE_USAGE_SAMPLED_BIT</code>."
+        },
+        {
+          "vuid": "VUID-VkImageCreateInfo-pNext-02398",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExternalFormatANDROID\">VkExternalFormatANDROID</a> structure whose <code>externalFormat</code> member is not <code>0</code>, <code>tiling</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_TILING_OPTIMAL</code>."
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_maintenance1)": [
@@ -7927,8 +8085,16 @@
       ],
       "(VK_ANDROID_external_memory_android_hardware_buffer)": [
         {
-          "vuid": "VUID-VkImageViewCreateInfo-image-01896",
-          "text": " If <code>image</code> has an <a href=\"#memory-external-android-hardware-buffer-external-formats\">external format</a>:"
+          "vuid": "VUID-VkImageViewCreateInfo-image-02399",
+          "text": " If <code>image</code> has an <a href=\"#memory-external-android-hardware-buffer-external-formats\">external format</a>, <code>format</code> <strong class=\"purple\">must</strong> be <code>VK_FORMAT_UNDEFINED</code>."
+        },
+        {
+          "vuid": "VUID-VkImageViewCreateInfo-image-02400",
+          "text": " If <code>image</code> has an <a href=\"#memory-external-android-hardware-buffer-external-formats\">external format</a>, the <code>pNext</code> chain <strong class=\"purple\">must</strong> contain an instance of <a href=\"#VkSamplerYcbcrConversionInfo\">VkSamplerYcbcrConversionInfo</a> with a <code>conversion</code> object created with the same external format as <code>image</code>."
+        },
+        {
+          "vuid": "VUID-VkImageViewCreateInfo-image-02401",
+          "text": " If <code>image</code> has an <a href=\"#memory-external-android-hardware-buffer-external-formats\">external format</a>, all members of <code>components</code> <strong class=\"purple\">must</strong> be <code>VK_COMPONENT_SWIZZLE_IDENTITY</code>."
         }
       ]
     },
@@ -8776,278 +8942,414 @@
         }
       ]
     },
-    "vkCreateAccelerationStructureNVX": {
-      "(VK_NVX_raytracing)": [
+    "vkCreateAccelerationStructureNV": {
+      "(VK_NV_ray_tracing)": [
         {
-          "vuid": "VUID-vkCreateAccelerationStructureNVX-device-parameter",
+          "vuid": "VUID-vkCreateAccelerationStructureNV-device-parameter",
           "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <code>VkDevice</code> handle"
         },
         {
-          "vuid": "VUID-vkCreateAccelerationStructureNVX-pCreateInfo-parameter",
-          "text": " <code>pCreateInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <code>VkAccelerationStructureCreateInfoNVX</code> structure"
+          "vuid": "VUID-vkCreateAccelerationStructureNV-pCreateInfo-parameter",
+          "text": " <code>pCreateInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <code>VkAccelerationStructureCreateInfoNV</code> structure"
         },
         {
-          "vuid": "VUID-vkCreateAccelerationStructureNVX-pAllocator-parameter",
+          "vuid": "VUID-vkCreateAccelerationStructureNV-pAllocator-parameter",
           "text": " If <code>pAllocator</code> is not <code>NULL</code>, <code>pAllocator</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <code>VkAllocationCallbacks</code> structure"
         },
         {
-          "vuid": "VUID-vkCreateAccelerationStructureNVX-pAccelerationStructure-parameter",
-          "text": " <code>pAccelerationStructure</code> <strong class=\"purple\">must</strong> be a valid pointer to a <code>VkAccelerationStructureNVX</code> handle"
+          "vuid": "VUID-vkCreateAccelerationStructureNV-pAccelerationStructure-parameter",
+          "text": " <code>pAccelerationStructure</code> <strong class=\"purple\">must</strong> be a valid pointer to a <code>VkAccelerationStructureNV</code> handle"
         }
       ]
     },
-    "VkAccelerationStructureCreateInfoNVX": {
-      "(VK_NVX_raytracing)": [
+    "VkAccelerationStructureCreateInfoNV": {
+      "(VK_NV_ray_tracing)": [
         {
-          "vuid": "VUID-VkAccelerationStructureCreateInfoNVX-geometryCount-02239",
-          "text": " <code>geometryCount</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceRaytracingPropertiesNVX</code>::<code>maxGeometryCount</code>"
+          "vuid": "VUID-VkAccelerationStructureCreateInfoNV-compactedSize-02421",
+          "text": " If <code>compactedSize</code> is not <code>0</code> then both <code>info</code>::<code>geometryCount</code> and <code>info</code>::<code>instanceCount</code> <strong class=\"purple\">must</strong> be <code>0</code>"
         },
         {
-          "vuid": "VUID-VkAccelerationStructureCreateInfoNVX-sType-sType",
-          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_NVX</code>"
+          "vuid": "VUID-VkAccelerationStructureCreateInfoNV-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_NV</code>"
         },
         {
-          "vuid": "VUID-VkAccelerationStructureCreateInfoNVX-pNext-pNext",
+          "vuid": "VUID-VkAccelerationStructureCreateInfoNV-pNext-pNext",
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
         },
         {
-          "vuid": "VUID-VkAccelerationStructureCreateInfoNVX-type-parameter",
-          "text": " <code>type</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkAccelerationStructureTypeNVX\">VkAccelerationStructureTypeNVX</a> value"
-        },
-        {
-          "vuid": "VUID-VkAccelerationStructureCreateInfoNVX-flags-parameter",
-          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkBuildAccelerationStructureFlagBitsNVX\">VkBuildAccelerationStructureFlagBitsNVX</a> values"
-        },
-        {
-          "vuid": "VUID-VkAccelerationStructureCreateInfoNVX-pGeometries-parameter",
-          "text": " If <code>geometryCount</code> is not <code>0</code>, <code>pGeometries</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>geometryCount</code> valid <code>VkGeometryNVX</code> structures"
+          "vuid": "VUID-VkAccelerationStructureCreateInfoNV-info-parameter",
+          "text": " <code>info</code> <strong class=\"purple\">must</strong> be a valid <code>VkAccelerationStructureInfoNV</code> structure"
         }
       ]
     },
-    "VkGeometryNVX": {
-      "(VK_NVX_raytracing)": [
+    "VkAccelerationStructureInfoNV": {
+      "(VK_NV_ray_tracing)": [
         {
-          "vuid": "VUID-VkGeometryNVX-sType-sType",
-          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_GEOMETRY_NVX</code>"
+          "vuid": "VUID-VkAccelerationStructureInfoNV-geometryCount-02422",
+          "text": " <code>geometryCount</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceRayTracingPropertiesNV</code>::<code>maxGeometryCount</code>"
         },
         {
-          "vuid": "VUID-VkGeometryNVX-pNext-pNext",
+          "vuid": "VUID-VkAccelerationStructureInfoNV-instanceCount-02423",
+          "text": " <code>instanceCount</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceRayTracingPropertiesNV</code>::<code>maxInstanceCount</code>"
+        },
+        {
+          "vuid": "VUID-VkAccelerationStructureInfoNV-maxTriangleCount-02424",
+          "text": " The total number of triangles in all geometries <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceRayTracingPropertiesNV</code>::<code>maxTriangleCount</code>"
+        },
+        {
+          "vuid": "VUID-VkAccelerationStructureInfoNV-type-02425",
+          "text": " If <code>type</code> is <code>VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_NV</code> then <code>geometryCount</code> <strong class=\"purple\">must</strong> be <code>0</code>."
+        },
+        {
+          "vuid": "VUID-VkAccelerationStructureInfoNV-type-02426",
+          "text": " If <code>type</code> is <code>VK_ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_NV</code> then <code>instanceCount</code> <strong class=\"purple\">must</strong> be <code>0</code>."
+        },
+        {
+          "vuid": "VUID-VkAccelerationStructureInfoNV-compactedSize-02427",
+          "text": " If <code>compactedSize</code> is not <code>0</code> then both <code>geometryCount</code> and <code>instanceCount</code> <strong class=\"purple\">must</strong> be <code>0</code>"
+        },
+        {
+          "vuid": "VUID-VkAccelerationStructureInfoNV-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_INFO_NV</code>"
+        },
+        {
+          "vuid": "VUID-VkAccelerationStructureInfoNV-pNext-pNext",
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
         },
         {
-          "vuid": "VUID-VkGeometryNVX-geometryType-parameter",
-          "text": " <code>geometryType</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkGeometryTypeNVX\">VkGeometryTypeNVX</a> value"
+          "vuid": "VUID-VkAccelerationStructureInfoNV-type-parameter",
+          "text": " <code>type</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkAccelerationStructureTypeNV\">VkAccelerationStructureTypeNV</a> value"
         },
         {
-          "vuid": "VUID-VkGeometryNVX-geometry-parameter",
-          "text": " <code>geometry</code> <strong class=\"purple\">must</strong> be a valid <code>VkGeometryDataNVX</code> structure"
+          "vuid": "VUID-VkAccelerationStructureInfoNV-flags-parameter",
+          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkBuildAccelerationStructureFlagBitsNV\">VkBuildAccelerationStructureFlagBitsNV</a> values"
         },
         {
-          "vuid": "VUID-VkGeometryNVX-flags-parameter",
-          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkGeometryFlagBitsNVX\">VkGeometryFlagBitsNVX</a> values"
+          "vuid": "VUID-VkAccelerationStructureInfoNV-pGeometries-parameter",
+          "text": " If <code>geometryCount</code> is not <code>0</code>, <code>pGeometries</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>geometryCount</code> valid <code>VkGeometryNV</code> structures"
         }
       ]
     },
-    "VkGeometryDataNVX": {
-      "(VK_NVX_raytracing)": [
+    "VkGeometryNV": {
+      "(VK_NV_ray_tracing)": [
         {
-          "vuid": "VUID-VkGeometryDataNVX-triangles-parameter",
-          "text": " <code>triangles</code> <strong class=\"purple\">must</strong> be a valid <code>VkGeometryTrianglesNVX</code> structure"
+          "vuid": "VUID-VkGeometryNV-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_GEOMETRY_NV</code>"
         },
         {
-          "vuid": "VUID-VkGeometryDataNVX-aabbs-parameter",
-          "text": " <code>aabbs</code> <strong class=\"purple\">must</strong> be a valid <code>VkGeometryAABBNVX</code> structure"
-        }
-      ]
-    },
-    "VkGeometryTrianglesNVX": {
-      "(VK_NVX_raytracing)": [
-        {
-          "vuid": "VUID-VkGeometryTrianglesNVX-sType-sType",
-          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_GEOMETRY_TRIANGLES_NVX</code>"
-        },
-        {
-          "vuid": "VUID-VkGeometryTrianglesNVX-pNext-pNext",
+          "vuid": "VUID-VkGeometryNV-pNext-pNext",
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
         },
         {
-          "vuid": "VUID-VkGeometryTrianglesNVX-vertexData-parameter",
+          "vuid": "VUID-VkGeometryNV-geometryType-parameter",
+          "text": " <code>geometryType</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkGeometryTypeNV\">VkGeometryTypeNV</a> value"
+        },
+        {
+          "vuid": "VUID-VkGeometryNV-geometry-parameter",
+          "text": " <code>geometry</code> <strong class=\"purple\">must</strong> be a valid <code>VkGeometryDataNV</code> structure"
+        },
+        {
+          "vuid": "VUID-VkGeometryNV-flags-parameter",
+          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkGeometryFlagBitsNV\">VkGeometryFlagBitsNV</a> values"
+        }
+      ]
+    },
+    "VkGeometryDataNV": {
+      "(VK_NV_ray_tracing)": [
+        {
+          "vuid": "VUID-VkGeometryDataNV-triangles-parameter",
+          "text": " <code>triangles</code> <strong class=\"purple\">must</strong> be a valid <code>VkGeometryTrianglesNV</code> structure"
+        },
+        {
+          "vuid": "VUID-VkGeometryDataNV-aabbs-parameter",
+          "text": " <code>aabbs</code> <strong class=\"purple\">must</strong> be a valid <code>VkGeometryAABBNV</code> structure"
+        }
+      ]
+    },
+    "VkGeometryTrianglesNV": {
+      "(VK_NV_ray_tracing)": [
+        {
+          "vuid": "VUID-VkGeometryTrianglesNV-vertexOffset-02428",
+          "text": " <code>vertexOffset</code> <strong class=\"purple\">must</strong> be less than the size of <code>vertexData</code>"
+        },
+        {
+          "vuid": "VUID-VkGeometryTrianglesNV-vertexOffset-02429",
+          "text": " <code>vertexOffset</code> <strong class=\"purple\">must</strong> be a multiple of the component size of <code>vertexFormat</code>."
+        },
+        {
+          "vuid": "VUID-VkGeometryTrianglesNV-vertexFormat-02430",
+          "text": " <code>vertexFormat</code> <strong class=\"purple\">must</strong> be one of <code>VK_FORMAT_R32G32B32_SFLOAT</code>, <code>VK_FORMAT_R32G32_SFLOAT</code>, <code>VK_FORMAT_R16G16B16_SFLOAT</code>, <code>VK_FORMAT_R16G16_SFLOAT</code>, <code>VK_FORMAT_R16G16_SNORM</code>, or <code>VK_FORMAT_R16G16B16_SNORM</code>"
+        },
+        {
+          "vuid": "VUID-VkGeometryTrianglesNV-indexOffset-02431",
+          "text": " <code>indexOffset</code> <strong class=\"purple\">must</strong> be less than the size of <code>indexData</code>"
+        },
+        {
+          "vuid": "VUID-VkGeometryTrianglesNV-indexOffset-02432",
+          "text": " <code>indexOffset</code> <strong class=\"purple\">must</strong> be a multiple of the element size of <code>indexType</code>"
+        },
+        {
+          "vuid": "VUID-VkGeometryTrianglesNV-indexType-02433",
+          "text": " <code>indexType</code> <strong class=\"purple\">must</strong> be <code>VK_INDEX_TYPE_UINT16</code>, <code>VK_INDEX_TYPE_UINT32</code>, or <code>VK_INDEX_TYPE_NONE_NV</code>"
+        },
+        {
+          "vuid": "VUID-VkGeometryTrianglesNV-indexData-02434",
+          "text": " <code>indexData</code> <strong class=\"purple\">must</strong> be <code>VK_NULL_HANDLE</code> if <code>indexType</code> is <code>VK_INDEX_TYPE_NONE_NV</code>"
+        },
+        {
+          "vuid": "VUID-VkGeometryTrianglesNV-indexData-02435",
+          "text": " <code>indexData</code> <strong class=\"purple\">must</strong> be a valid handle if <code>indexType</code> is not <code>VK_INDEX_TYPE_NONE_NV</code>"
+        },
+        {
+          "vuid": "VUID-VkGeometryTrianglesNV-indexCount-02436",
+          "text": " <code>indexCount</code> <strong class=\"purple\">must</strong> be 0 if <code>indexType</code> is <code>VK_INDEX_TYPE_NONE_NV</code>"
+        },
+        {
+          "vuid": "VUID-VkGeometryTrianglesNV-transformOffset-02437",
+          "text": " <code>transformOffset</code> <strong class=\"purple\">must</strong> be less than the size of <code>transformData</code>"
+        },
+        {
+          "vuid": "VUID-VkGeometryTrianglesNV-transformOffset-02438",
+          "text": " <code>transformOffset</code> <strong class=\"purple\">must</strong> be a multiple of 16"
+        },
+        {
+          "vuid": "VUID-VkGeometryTrianglesNV-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_GEOMETRY_TRIANGLES_NV</code>"
+        },
+        {
+          "vuid": "VUID-VkGeometryTrianglesNV-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkGeometryTrianglesNV-vertexData-parameter",
           "text": " If <code>vertexData</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>vertexData</code> <strong class=\"purple\">must</strong> be a valid <code>VkBuffer</code> handle"
         },
         {
-          "vuid": "VUID-VkGeometryTrianglesNVX-vertexFormat-parameter",
+          "vuid": "VUID-VkGeometryTrianglesNV-vertexFormat-parameter",
           "text": " <code>vertexFormat</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkFormat\">VkFormat</a> value"
         },
         {
-          "vuid": "VUID-VkGeometryTrianglesNVX-indexData-parameter",
+          "vuid": "VUID-VkGeometryTrianglesNV-indexData-parameter",
           "text": " If <code>indexData</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>indexData</code> <strong class=\"purple\">must</strong> be a valid <code>VkBuffer</code> handle"
         },
         {
-          "vuid": "VUID-VkGeometryTrianglesNVX-indexType-parameter",
+          "vuid": "VUID-VkGeometryTrianglesNV-indexType-parameter",
           "text": " <code>indexType</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkIndexType\">VkIndexType</a> value"
         },
         {
-          "vuid": "VUID-VkGeometryTrianglesNVX-transformData-parameter",
+          "vuid": "VUID-VkGeometryTrianglesNV-transformData-parameter",
           "text": " If <code>transformData</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>transformData</code> <strong class=\"purple\">must</strong> be a valid <code>VkBuffer</code> handle"
         },
         {
-          "vuid": "VUID-VkGeometryTrianglesNVX-commonparent",
+          "vuid": "VUID-VkGeometryTrianglesNV-commonparent",
           "text": " Each of <code>indexData</code>, <code>transformData</code>, and <code>vertexData</code> that are valid handles <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkDevice</code>"
         }
       ]
     },
-    "VkGeometryAABBNVX": {
-      "(VK_NVX_raytracing)": [
+    "VkGeometryAABBNV": {
+      "(VK_NV_ray_tracing)": [
         {
-          "vuid": "VUID-VkGeometryAABBNVX-sType-sType",
-          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_GEOMETRY_AABB_NVX</code>"
+          "vuid": "VUID-VkGeometryAABBNV-offset-02439",
+          "text": " <code>offset</code> <strong class=\"purple\">must</strong> be less than the size of <code>aabbData</code>"
         },
         {
-          "vuid": "VUID-VkGeometryAABBNVX-pNext-pNext",
+          "vuid": "VUID-VkGeometryAABBNV-offset-02440",
+          "text": " <code>offset</code> <strong class=\"purple\">must</strong> be a multiple of 8."
+        },
+        {
+          "vuid": "VUID-VkGeometryAABBNV-stride-02441",
+          "text": " <code>stride</code> <strong class=\"purple\">must</strong> be a multiple of 8."
+        },
+        {
+          "vuid": "VUID-VkGeometryAABBNV-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_GEOMETRY_AABB_NV</code>"
+        },
+        {
+          "vuid": "VUID-VkGeometryAABBNV-pNext-pNext",
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
         },
         {
-          "vuid": "VUID-VkGeometryAABBNVX-aabbData-parameter",
+          "vuid": "VUID-VkGeometryAABBNV-aabbData-parameter",
           "text": " If <code>aabbData</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>aabbData</code> <strong class=\"purple\">must</strong> be a valid <code>VkBuffer</code> handle"
         }
       ]
     },
-    "vkDestroyAccelerationStructureNVX": {
-      "(VK_NVX_raytracing)": [
+    "vkDestroyAccelerationStructureNV": {
+      "(VK_NV_ray_tracing)": [
         {
-          "vuid": "VUID-vkDestroyAccelerationStructureNVX-device-parameter",
+          "vuid": "VUID-vkDestroyAccelerationStructureNV-accelerationStructure-02442",
+          "text": " All submitted commands that refer to <code>accelerationStructure</code> <strong class=\"purple\">must</strong> have completed execution"
+        },
+        {
+          "vuid": "VUID-vkDestroyAccelerationStructureNV-accelerationStructure-02443",
+          "text": " If <code>VkAllocationCallbacks</code> were provided when <code>accelerationStructure</code> was created, a compatible set of callbacks <strong class=\"purple\">must</strong> be provided here"
+        },
+        {
+          "vuid": "VUID-vkDestroyAccelerationStructureNV-accelerationStructure-02444",
+          "text": " If no <code>VkAllocationCallbacks</code> were provided when <code>accelerationStructure</code> was created, <code>pAllocator</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-vkDestroyAccelerationStructureNV-device-parameter",
           "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <code>VkDevice</code> handle"
         },
         {
-          "vuid": "VUID-vkDestroyAccelerationStructureNVX-accelerationStructure-parameter",
-          "text": " <code>accelerationStructure</code> <strong class=\"purple\">must</strong> be a valid <code>VkAccelerationStructureNVX</code> handle"
+          "vuid": "VUID-vkDestroyAccelerationStructureNV-accelerationStructure-parameter",
+          "text": " <code>accelerationStructure</code> <strong class=\"purple\">must</strong> be a valid <code>VkAccelerationStructureNV</code> handle"
         },
         {
-          "vuid": "VUID-vkDestroyAccelerationStructureNVX-pAllocator-parameter",
+          "vuid": "VUID-vkDestroyAccelerationStructureNV-pAllocator-parameter",
           "text": " If <code>pAllocator</code> is not <code>NULL</code>, <code>pAllocator</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <code>VkAllocationCallbacks</code> structure"
         },
         {
-          "vuid": "VUID-vkDestroyAccelerationStructureNVX-accelerationStructure-parent",
+          "vuid": "VUID-vkDestroyAccelerationStructureNV-accelerationStructure-parent",
           "text": " <code>accelerationStructure</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from <code>device</code>"
         }
       ]
     },
-    "vkGetAccelerationStructureMemoryRequirementsNVX": {
-      "(VK_NVX_raytracing)": [
+    "vkGetAccelerationStructureMemoryRequirementsNV": {
+      "(VK_NV_ray_tracing)": [
         {
-          "vuid": "VUID-vkGetAccelerationStructureMemoryRequirementsNVX-device-parameter",
+          "vuid": "VUID-vkGetAccelerationStructureMemoryRequirementsNV-device-parameter",
           "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <code>VkDevice</code> handle"
         },
         {
-          "vuid": "VUID-vkGetAccelerationStructureMemoryRequirementsNVX-pInfo-parameter",
-          "text": " <code>pInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <code>VkAccelerationStructureMemoryRequirementsInfoNVX</code> structure"
+          "vuid": "VUID-vkGetAccelerationStructureMemoryRequirementsNV-pInfo-parameter",
+          "text": " <code>pInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <code>VkAccelerationStructureMemoryRequirementsInfoNV</code> structure"
         },
         {
-          "vuid": "VUID-vkGetAccelerationStructureMemoryRequirementsNVX-pMemoryRequirements-parameter",
+          "vuid": "VUID-vkGetAccelerationStructureMemoryRequirementsNV-pMemoryRequirements-parameter",
           "text": " <code>pMemoryRequirements</code> <strong class=\"purple\">must</strong> be a valid pointer to a <code>VkMemoryRequirements2KHR</code> structure"
         }
       ]
     },
-    "vkGetAccelerationStructureScratchMemoryRequirementsNVX": {
-      "(VK_NVX_raytracing)": [
+    "VkAccelerationStructureMemoryRequirementsInfoNV": {
+      "(VK_NV_ray_tracing)": [
         {
-          "vuid": "VUID-vkGetAccelerationStructureScratchMemoryRequirementsNVX-device-parameter",
-          "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <code>VkDevice</code> handle"
+          "vuid": "VUID-VkAccelerationStructureMemoryRequirementsInfoNV-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_INFO_NV</code>"
         },
         {
-          "vuid": "VUID-vkGetAccelerationStructureScratchMemoryRequirementsNVX-pInfo-parameter",
-          "text": " <code>pInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <code>VkAccelerationStructureMemoryRequirementsInfoNVX</code> structure"
-        },
-        {
-          "vuid": "VUID-vkGetAccelerationStructureScratchMemoryRequirementsNVX-pMemoryRequirements-parameter",
-          "text": " <code>pMemoryRequirements</code> <strong class=\"purple\">must</strong> be a valid pointer to a <code>VkMemoryRequirements2KHR</code> structure"
-        }
-      ]
-    },
-    "VkAccelerationStructureMemoryRequirementsInfoNVX": {
-      "(VK_NVX_raytracing)": [
-        {
-          "vuid": "VUID-VkAccelerationStructureMemoryRequirementsInfoNVX-sType-sType",
-          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_INFO_NVX</code>"
-        },
-        {
-          "vuid": "VUID-VkAccelerationStructureMemoryRequirementsInfoNVX-pNext-pNext",
+          "vuid": "VUID-VkAccelerationStructureMemoryRequirementsInfoNV-pNext-pNext",
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
         },
         {
-          "vuid": "VUID-VkAccelerationStructureMemoryRequirementsInfoNVX-accelerationStructure-parameter",
-          "text": " <code>accelerationStructure</code> <strong class=\"purple\">must</strong> be a valid <code>VkAccelerationStructureNVX</code> handle"
+          "vuid": "VUID-VkAccelerationStructureMemoryRequirementsInfoNV-type-parameter",
+          "text": " <code>type</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkAccelerationStructureMemoryRequirementsTypeNV\">VkAccelerationStructureMemoryRequirementsTypeNV</a> value"
+        },
+        {
+          "vuid": "VUID-VkAccelerationStructureMemoryRequirementsInfoNV-accelerationStructure-parameter",
+          "text": " <code>accelerationStructure</code> <strong class=\"purple\">must</strong> be a valid <code>VkAccelerationStructureNV</code> handle"
         }
       ]
     },
-    "vkBindAccelerationStructureMemoryNVX": {
-      "(VK_NVX_raytracing)": [
+    "vkBindAccelerationStructureMemoryNV": {
+      "(VK_NV_ray_tracing)": [
         {
-          "vuid": "VUID-vkBindAccelerationStructureMemoryNVX-device-parameter",
+          "vuid": "VUID-vkBindAccelerationStructureMemoryNV-accelerationStructure-02445",
+          "text": " <code>accelerationStructure</code> <strong class=\"purple\">must</strong> not already be backed by a memory object"
+        },
+        {
+          "vuid": "VUID-vkBindAccelerationStructureMemoryNV-memoryOffset-02446",
+          "text": " <code>memoryOffset</code> <strong class=\"purple\">must</strong> be less than the size of <code>memory</code>"
+        },
+        {
+          "vuid": "VUID-vkBindAccelerationStructureMemoryNV-memory-02447",
+          "text": " <code>memory</code> <strong class=\"purple\">must</strong> have been allocated using one of the memory types allowed in the <code>memoryTypeBits</code> member of the <code>VkMemoryRequirements</code> structure returned from a call to <code>vkGetAccelerationStructureMemoryRequirementsNV</code> with <code>accelerationStructure</code> and <code>type</code> of <code>VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_OBJECT_NV</code>"
+        },
+        {
+          "vuid": "VUID-vkBindAccelerationStructureMemoryNV-memoryOffset-02448",
+          "text": " <code>memoryOffset</code> <strong class=\"purple\">must</strong> be an integer multiple of the <code>alignment</code> member of the <code>VkMemoryRequirements</code> structure returned from a call to <code>vkGetAccelerationStructureMemoryRequirementsNV</code> with <code>accelerationStructure</code> and <code>type</code> of <code>VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_OBJECT_NV</code>"
+        },
+        {
+          "vuid": "VUID-vkBindAccelerationStructureMemoryNV-size-02449",
+          "text": " The <code>size</code> member of the <code>VkMemoryRequirements</code> structure returned from a call to <code>vkGetImageMemoryRequirements</code> with <code>accelerationStructure</code> and <code>type</code> of <code>VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_OBJECT_NV</code> <strong class=\"purple\">must</strong> be less than or equal to the size of <code>memory</code> minus <code>memoryOffset</code>"
+        },
+        {
+          "vuid": "VUID-vkBindAccelerationStructureMemoryNV-device-parameter",
           "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <code>VkDevice</code> handle"
         },
         {
-          "vuid": "VUID-vkBindAccelerationStructureMemoryNVX-pBindInfos-parameter",
-          "text": " <code>pBindInfos</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>bindInfoCount</code> valid <code>VkBindAccelerationStructureMemoryInfoNVX</code> structures"
+          "vuid": "VUID-vkBindAccelerationStructureMemoryNV-pBindInfos-parameter",
+          "text": " <code>pBindInfos</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>bindInfoCount</code> valid <code>VkBindAccelerationStructureMemoryInfoNV</code> structures"
         },
         {
-          "vuid": "VUID-vkBindAccelerationStructureMemoryNVX-bindInfoCount-arraylength",
+          "vuid": "VUID-vkBindAccelerationStructureMemoryNV-bindInfoCount-arraylength",
           "text": " <code>bindInfoCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
         }
       ]
     },
-    "VkBindAccelerationStructureMemoryInfoNVX": {
-      "(VK_NVX_raytracing)": [
+    "VkBindAccelerationStructureMemoryInfoNV": {
+      "(VK_NV_ray_tracing)": [
         {
-          "vuid": "VUID-VkBindAccelerationStructureMemoryInfoNVX-sType-sType",
-          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_BIND_ACCELERATION_STRUCTURE_MEMORY_INFO_NVX</code>"
+          "vuid": "VUID-VkBindAccelerationStructureMemoryInfoNV-accelerationStructure-02450",
+          "text": " <code>accelerationStructure</code> <strong class=\"purple\">must</strong> not already be backed by a memory object"
         },
         {
-          "vuid": "VUID-VkBindAccelerationStructureMemoryInfoNVX-pNext-pNext",
+          "vuid": "VUID-VkBindAccelerationStructureMemoryInfoNV-memoryOffset-02451",
+          "text": " <code>memoryOffset</code> <strong class=\"purple\">must</strong> be less than the size of <code>memory</code>"
+        },
+        {
+          "vuid": "VUID-VkBindAccelerationStructureMemoryInfoNV-memory-02452",
+          "text": " <code>memory</code> <strong class=\"purple\">must</strong> have been allocated using one of the memory types allowed in the <code>memoryTypeBits</code> member of the <code>VkMemoryRequirements</code> structure returned from a call to <code>vkGetAccelerationStructureMemoryRequirementsNV</code> with <code>accelerationStructure</code>"
+        },
+        {
+          "vuid": "VUID-VkBindAccelerationStructureMemoryInfoNV-memoryOffset-02453",
+          "text": " <code>memoryOffset</code> <strong class=\"purple\">must</strong> be an integer multiple of the <code>alignment</code> member of the <code>VkMemoryRequirements</code> structure returned from a call to <code>vkGetAccelerationStructureMemoryRequirementsNV</code> with <code>accelerationStructure</code>"
+        },
+        {
+          "vuid": "VUID-VkBindAccelerationStructureMemoryInfoNV-size-02454",
+          "text": " The <code>size</code> member of the <code>VkMemoryRequirements</code> structure returned from a call to <code>vkGetAccelerationStructureMemoryRequirementsNV</code> with <code>accelerationStructure</code> <strong class=\"purple\">must</strong> be less than or equal to the size of <code>memory</code> minus <code>memoryOffset</code>"
+        },
+        {
+          "vuid": "VUID-VkBindAccelerationStructureMemoryInfoNV-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_BIND_ACCELERATION_STRUCTURE_MEMORY_INFO_NV</code>"
+        },
+        {
+          "vuid": "VUID-VkBindAccelerationStructureMemoryInfoNV-pNext-pNext",
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
         },
         {
-          "vuid": "VUID-VkBindAccelerationStructureMemoryInfoNVX-accelerationStructure-parameter",
-          "text": " <code>accelerationStructure</code> <strong class=\"purple\">must</strong> be a valid <code>VkAccelerationStructureNVX</code> handle"
+          "vuid": "VUID-VkBindAccelerationStructureMemoryInfoNV-accelerationStructure-parameter",
+          "text": " <code>accelerationStructure</code> <strong class=\"purple\">must</strong> be a valid <code>VkAccelerationStructureNV</code> handle"
         },
         {
-          "vuid": "VUID-VkBindAccelerationStructureMemoryInfoNVX-memory-parameter",
+          "vuid": "VUID-VkBindAccelerationStructureMemoryInfoNV-memory-parameter",
           "text": " <code>memory</code> <strong class=\"purple\">must</strong> be a valid <code>VkDeviceMemory</code> handle"
         },
         {
-          "vuid": "VUID-VkBindAccelerationStructureMemoryInfoNVX-pDeviceIndices-parameter",
+          "vuid": "VUID-VkBindAccelerationStructureMemoryInfoNV-pDeviceIndices-parameter",
           "text": " If <code>deviceIndexCount</code> is not <code>0</code>, <code>pDeviceIndices</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>deviceIndexCount</code> <code>uint32_t</code> values"
         },
         {
-          "vuid": "VUID-VkBindAccelerationStructureMemoryInfoNVX-commonparent",
+          "vuid": "VUID-VkBindAccelerationStructureMemoryInfoNV-commonparent",
           "text": " Both of <code>accelerationStructure</code>, and <code>memory</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkDevice</code>"
         }
       ]
     },
-    "vkGetAccelerationStructureHandleNVX": {
-      "(VK_NVX_raytracing)": [
+    "vkGetAccelerationStructureHandleNV": {
+      "(VK_NV_ray_tracing)": [
         {
-          "vuid": "VUID-vkGetAccelerationStructureHandleNVX-dataSize-02240",
+          "vuid": "VUID-vkGetAccelerationStructureHandleNV-dataSize-02240",
           "text": " <code>dataSize</code> <strong class=\"purple\">must</strong> be large enough to contain the result of the query, as described above"
         },
         {
-          "vuid": "VUID-vkGetAccelerationStructureHandleNVX-device-parameter",
+          "vuid": "VUID-vkGetAccelerationStructureHandleNV-device-parameter",
           "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <code>VkDevice</code> handle"
         },
         {
-          "vuid": "VUID-vkGetAccelerationStructureHandleNVX-accelerationStructure-parameter",
-          "text": " <code>accelerationStructure</code> <strong class=\"purple\">must</strong> be a valid <code>VkAccelerationStructureNVX</code> handle"
+          "vuid": "VUID-vkGetAccelerationStructureHandleNV-accelerationStructure-parameter",
+          "text": " <code>accelerationStructure</code> <strong class=\"purple\">must</strong> be a valid <code>VkAccelerationStructureNV</code> handle"
         },
         {
-          "vuid": "VUID-vkGetAccelerationStructureHandleNVX-pData-parameter",
+          "vuid": "VUID-vkGetAccelerationStructureHandleNV-pData-parameter",
           "text": " <code>pData</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>dataSize</code> bytes"
         },
         {
-          "vuid": "VUID-vkGetAccelerationStructureHandleNVX-dataSize-arraylength",
+          "vuid": "VUID-vkGetAccelerationStructureHandleNV-dataSize-arraylength",
           "text": " <code>dataSize</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
         },
         {
-          "vuid": "VUID-vkGetAccelerationStructureHandleNVX-accelerationStructure-parent",
+          "vuid": "VUID-vkGetAccelerationStructureHandleNV-accelerationStructure-parent",
           "text": " <code>accelerationStructure</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from <code>device</code>"
         }
       ]
@@ -9882,6 +10184,12 @@
           "vuid": "VUID-VkPipelineLayoutCreateInfo-pSetLayouts-00293",
           "text": " <code>pSetLayouts</code> <strong class=\"purple\">must</strong> not contain more than one descriptor set layout that was created with <code>VK_DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR</code> set"
         }
+      ],
+      "(VK_NV_ray_tracing)": [
+        {
+          "vuid": "VUID-VkPipelineLayoutCreateInfo-descriptorType-02381",
+          "text": " The total number of bindings with a <code>descriptorType</code> of <code>VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_NV</code> accessible across all shader stages and across all elements of <code>pSetLayouts</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceRayTracingPropertiesNV</code>::<code>maxDescriptorSetAccelerationStructures</code>"
+        }
       ]
     },
     "VkPushConstantRange": {
@@ -10360,7 +10668,7 @@
         },
         {
           "vuid": "VUID-VkWriteDescriptorSet-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDescriptorAccelerationStructureInfoNVX\">VkDescriptorAccelerationStructureInfoNVX</a> or <a href=\"#VkWriteDescriptorSetInlineUniformBlockEXT\">VkWriteDescriptorSetInlineUniformBlockEXT</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkWriteDescriptorSetAccelerationStructureNV\">VkWriteDescriptorSetAccelerationStructureNV</a> or <a href=\"#VkWriteDescriptorSetInlineUniformBlockEXT\">VkWriteDescriptorSetInlineUniformBlockEXT</a>"
         },
         {
           "vuid": "VUID-VkWriteDescriptorSet-sType-unique",
@@ -10391,6 +10699,12 @@
         {
           "vuid": "VUID-VkWriteDescriptorSet-descriptorType-02221",
           "text": " If <code>descriptorType</code> is <code>VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT</code>, the <code>pNext</code> chain <strong class=\"purple\">must</strong> include a <a href=\"#VkWriteDescriptorSetInlineUniformBlockEXT\">VkWriteDescriptorSetInlineUniformBlockEXT</a> structure whose <code>dataSize</code> member equals <code>descriptorCount</code>"
+        }
+      ],
+      "(VK_NV_ray_tracing)": [
+        {
+          "vuid": "VUID-VkWriteDescriptorSet-descriptorType-02382",
+          "text": " If <code>descriptorType</code> is <code>VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_NV</code>, the <code>pNext</code> chain <strong class=\"purple\">must</strong> include a <a href=\"#VkWriteDescriptorSetAccelerationStructureNV\">VkWriteDescriptorSetAccelerationStructureNV</a> structure whose <code>accelerationStructureCount</code> member equals <code>descriptorCount</code>"
         }
       ],
       "(VK_EXT_descriptor_indexing)": [
@@ -10465,6 +10779,26 @@
         {
           "vuid": "VUID-VkWriteDescriptorSetInlineUniformBlockEXT-dataSize-arraylength",
           "text": " <code>dataSize</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
+        }
+      ]
+    },
+    "VkWriteDescriptorSetAccelerationStructureNV": {
+      "(VK_NV_ray_tracing)": [
+        {
+          "vuid": "VUID-VkWriteDescriptorSetAccelerationStructureNV-accelerationStructureCount-02236",
+          "text": " <code>accelerationStructureCount</code> <strong class=\"purple\">must</strong> be equal to descriptorCount in the extended structure."
+        },
+        {
+          "vuid": "VUID-VkWriteDescriptorSetAccelerationStructureNV-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_NV</code>"
+        },
+        {
+          "vuid": "VUID-VkWriteDescriptorSetAccelerationStructureNV-pAccelerationStructures-parameter",
+          "text": " <code>pAccelerationStructures</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>accelerationStructureCount</code> valid <code>VkAccelerationStructureNV</code> handles"
+        },
+        {
+          "vuid": "VUID-VkWriteDescriptorSetAccelerationStructureNV-accelerationStructureCount-arraylength",
+          "text": " <code>accelerationStructureCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
         }
       ]
     },
@@ -10909,26 +11243,6 @@
         {
           "vuid": "VUID-vkCmdPushConstants-commonparent",
           "text": " Both of <code>commandBuffer</code>, and <code>layout</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkDevice</code>"
-        }
-      ]
-    },
-    "VkDescriptorAccelerationStructureInfoNVX": {
-      "(VK_NVX_raytracing)": [
-        {
-          "vuid": "VUID-VkDescriptorAccelerationStructureInfoNVX-accelerationStructureCount-02236",
-          "text": " <code>accelerationStructureCount</code> <strong class=\"purple\">must</strong> be equal to descriptorCount in the extended structure."
-        },
-        {
-          "vuid": "VUID-VkDescriptorAccelerationStructureInfoNVX-sType-sType",
-          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_DESCRIPTOR_ACCELERATION_STRUCTURE_INFO_NVX</code>"
-        },
-        {
-          "vuid": "VUID-VkDescriptorAccelerationStructureInfoNVX-pAccelerationStructures-parameter",
-          "text": " <code>pAccelerationStructures</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>accelerationStructureCount</code> valid <code>VkAccelerationStructureNVX</code> handles"
-        },
-        {
-          "vuid": "VUID-VkDescriptorAccelerationStructureInfoNVX-accelerationStructureCount-arraylength",
-          "text": " <code>accelerationStructureCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
         }
       ]
     },
@@ -14870,7 +15184,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-None-02305",
-          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_LINEAR</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code>"
+          "text": " If a <code>VkImageView</code> is sampled with <code>VK_FILTER_LINEAR</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code>"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-commandBuffer-parameter",
@@ -14900,7 +15214,7 @@
       "(VK_EXT_transform_feedback)+(VK_IMG_filter_cubic)": [
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-None-02306",
-          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code>"
+          "text": " If a <code>VkImageView</code> is sampled with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code>"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-None-02307",
@@ -17288,7 +17602,7 @@
         },
         {
           "vuid": "VUID-vkCmdDispatch-None-02005",
-          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_LINEAR</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code>."
+          "text": " If a <code>VkImageView</code> is sampled with <code>VK_FILTER_LINEAR</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code>."
         },
         {
           "vuid": "VUID-vkCmdDispatch-commandBuffer-parameter",
@@ -17310,7 +17624,7 @@
       "(VK_IMG_filter_cubic)": [
         {
           "vuid": "VUID-vkCmdDispatch-None-02006",
-          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code>."
+          "text": " If a <code>VkImageView</code> is sampled with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code>."
         },
         {
           "vuid": "VUID-vkCmdDispatch-None-00400",
@@ -17394,7 +17708,7 @@
         },
         {
           "vuid": "VUID-vkCmdDispatchIndirect-None-02007",
-          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_LINEAR</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code>."
+          "text": " If a <code>VkImageView</code> is sampled with <code>VK_FILTER_LINEAR</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code>."
         },
         {
           "vuid": "VUID-vkCmdDispatchIndirect-commandBuffer-parameter",
@@ -17424,7 +17738,7 @@
       "(VK_IMG_filter_cubic)": [
         {
           "vuid": "VUID-vkCmdDispatchIndirect-None-02008",
-          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code>."
+          "text": " If a <code>VkImageView</code> is sampled with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code>."
         },
         {
           "vuid": "VUID-vkCmdDispatchIndirect-None-00416",
@@ -18700,50 +19014,6 @@
         }
       ]
     },
-    "vkCreateMirSurfaceKHR": {
-      "(VK_KHR_surface)+(VK_KHR_mir_surface)": [
-        {
-          "vuid": "VUID-vkCreateMirSurfaceKHR-instance-parameter",
-          "text": " <code>instance</code> <strong class=\"purple\">must</strong> be a valid <code>VkInstance</code> handle"
-        },
-        {
-          "vuid": "VUID-vkCreateMirSurfaceKHR-pCreateInfo-parameter",
-          "text": " <code>pCreateInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <code>VkMirSurfaceCreateInfoKHR</code> structure"
-        },
-        {
-          "vuid": "VUID-vkCreateMirSurfaceKHR-pAllocator-parameter",
-          "text": " If <code>pAllocator</code> is not <code>NULL</code>, <code>pAllocator</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <code>VkAllocationCallbacks</code> structure"
-        },
-        {
-          "vuid": "VUID-vkCreateMirSurfaceKHR-pSurface-parameter",
-          "text": " <code>pSurface</code> <strong class=\"purple\">must</strong> be a valid pointer to a <code>VkSurfaceKHR</code> handle"
-        }
-      ]
-    },
-    "VkMirSurfaceCreateInfoKHR": {
-      "(VK_KHR_surface)+(VK_KHR_mir_surface)": [
-        {
-          "vuid": "VUID-VkMirSurfaceCreateInfoKHR-connection-01263",
-          "text": " <code>connection</code> <strong class=\"purple\">must</strong> point to a valid <code>MirConnection</code>."
-        },
-        {
-          "vuid": "VUID-VkMirSurfaceCreateInfoKHR-surface-01264",
-          "text": " <code>surface</code> <strong class=\"purple\">must</strong> point to a valid <code>MirSurface</code>."
-        },
-        {
-          "vuid": "VUID-VkMirSurfaceCreateInfoKHR-sType-sType",
-          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_MIR_SURFACE_CREATE_INFO_KHR</code>"
-        },
-        {
-          "vuid": "VUID-VkMirSurfaceCreateInfoKHR-pNext-pNext",
-          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
-        },
-        {
-          "vuid": "VUID-VkMirSurfaceCreateInfoKHR-flags-zerobitmask",
-          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be <code>0</code>"
-        }
-      ]
-    },
     "vkCreateWaylandSurfaceKHR": {
       "(VK_KHR_surface)+(VK_KHR_wayland_surface)": [
         {
@@ -19557,22 +19827,6 @@
         {
           "vuid": "VUID-vkGetPhysicalDeviceSurfaceSupportKHR-commonparent",
           "text": " Both of <code>physicalDevice</code>, and <code>surface</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkInstance</code>"
-        }
-      ]
-    },
-    "vkGetPhysicalDeviceMirPresentationSupportKHR": {
-      "(VK_KHR_surface)+(VK_KHR_mir_surface)": [
-        {
-          "vuid": "VUID-vkGetPhysicalDeviceMirPresentationSupportKHR-queueFamilyIndex-01265",
-          "text": " <code>queueFamilyIndex</code> <strong class=\"purple\">must</strong> be less than <code>pQueueFamilyPropertyCount</code> returned by <code>vkGetPhysicalDeviceQueueFamilyProperties</code> for the given <code>physicalDevice</code>"
-        },
-        {
-          "vuid": "VUID-vkGetPhysicalDeviceMirPresentationSupportKHR-physicalDevice-parameter",
-          "text": " <code>physicalDevice</code> <strong class=\"purple\">must</strong> be a valid <code>VkPhysicalDevice</code> handle"
-        },
-        {
-          "vuid": "VUID-vkGetPhysicalDeviceMirPresentationSupportKHR-connection-parameter",
-          "text": " <code>connection</code> <strong class=\"purple\">must</strong> be a valid pointer to a <code>MirConnection</code> value"
         }
       ]
     },
@@ -20644,162 +20898,332 @@
         }
       ]
     },
-    "VkPhysicalDeviceRaytracingPropertiesNVX": {
-      "(VK_NVX_raytracing)": [
+    "vkCmdTraceRaysNV": {
+      "(VK_NV_ray_tracing)": [
         {
-          "vuid": "VUID-VkPhysicalDeviceRaytracingPropertiesNVX-sType-sType",
-          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAYTRACING_PROPERTIES_NVX</code>"
-        }
-      ]
-    },
-    "vkCmdTraceRaysNVX": {
-      "(VK_NVX_raytracing)": [
+          "vuid": "VUID-vkCmdTraceRaysNV-raygenShaderBindingOffset-02455",
+          "text": " <code>raygenShaderBindingOffset</code> <strong class=\"purple\">must</strong> be less than the size of <code>raygenShaderBindingTableBuffer</code>"
+        },
         {
-          "vuid": "VUID-vkCmdTraceRaysNVX-commandBuffer-parameter",
+          "vuid": "VUID-vkCmdTraceRaysNV-raygenShaderBindingOffset-02456",
+          "text": " <code>raygenShaderBindingOffset</code> <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPropertiesNV</code>::<code>shaderGroupBaseAlignment</code>."
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-missShaderBindingOffset-02457",
+          "text": " <code>missShaderBindingOffset</code> <strong class=\"purple\">must</strong> be less than the size of <code>missShaderBindingTableBuffer</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-missShaderBindingOffset-02458",
+          "text": " <code>missShaderBindingOffset</code> <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPropertiesNV</code>::<code>shaderGroupBaseAlignment</code>."
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-hitShaderBindingOffset-02459",
+          "text": " <code>hitShaderBindingOffset</code> <strong class=\"purple\">must</strong> be less than the size of <code>hitShaderBindingTableBuffer</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-hitShaderBindingOffset-02460",
+          "text": " <code>hitShaderBindingOffset</code> <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPropertiesNV</code>::<code>shaderGroupBaseAlignment</code>."
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-callableShaderBindingOffset-02461",
+          "text": " <code>callableShaderBindingOffset</code> <strong class=\"purple\">must</strong> be less than the size of <code>callableShaderBindingTableBuffer</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-callableShaderBindingOffset-02462",
+          "text": " <code>callableShaderBindingOffset</code> <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPropertiesNV</code>::<code>shaderGroupBaseAlignment</code>."
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-missShaderBindingStride-02463",
+          "text": " <code>missShaderBindingStride</code> <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPropertiesNV</code>::<code>shaderGroupHandleSize</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-hitShaderBindingStride-02464",
+          "text": " <code>hitShaderBindingStride</code> <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPropertiesNV</code>::<code>shaderGroupHandleSize</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-callableShaderBindingStride-02465",
+          "text": " <code>callableShaderBindingStride</code> <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceRayTracingPropertiesNV</code>::<code>shaderGroupHandleSize</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-missShaderBindingStride-02466",
+          "text": " <code>missShaderBindingStride</code> <strong class=\"purple\">must</strong> be a less than or equal to <code>VkPhysicalDeviceRayTracingPropertiesNV</code>::<code>maxShaderGroupStride</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-hitShaderBindingStride-02467",
+          "text": " <code>hitShaderBindingStride</code> <strong class=\"purple\">must</strong> be a less than or equal to <code>VkPhysicalDeviceRayTracingPropertiesNV</code>::<code>maxShaderGroupStride</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-callableShaderBindingStride-02468",
+          "text": " <code>callableShaderBindingStride</code> <strong class=\"purple\">must</strong> be a less than or equal to <code>VkPhysicalDeviceRayTracingPropertiesNV</code>::<code>maxShaderGroupStride</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-width-02469",
+          "text": " <code>width</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceLimits</code>::<code>maxComputeWorkGroupCount</code>[0]"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-height-02470",
+          "text": " <code>height</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceLimits</code>::<code>maxComputeWorkGroupCount</code>[1]"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-depth-02471",
+          "text": " <code>depth</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceLimits</code>::<code>maxComputeWorkGroupCount</code>[2]"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-None-02472",
+          "text": " For each set <em>n</em> that is statically used by the <code>VkPipeline</code> bound to <code>VK_PIPELINE_BIND_POINT_RAY_TRACING_NV</code>, a descriptor set <strong class=\"purple\">must</strong> have been bound to <em>n</em> at <code>VK_PIPELINE_BIND_POINT_RAY_TRACING_NV</code>, with a <code>VkPipelineLayout</code> that is compatible for set <em>n</em>, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-None-02473",
+          "text": " Descriptors in each bound descriptor set, specified via <code>vkCmdBindDescriptorSets</code>, <strong class=\"purple\">must</strong> be valid if they are statically used by the bound <code>VkPipeline</code> object, specified via <code>vkCmdBindPipeline</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-None-02474",
+          "text": " A valid ray tracing pipeline <strong class=\"purple\">must</strong> be bound to the current command buffer with <code>VK_PIPELINE_BIND_POINT_RAY_TRACING_NV</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-None-02475",
+          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to <code>VK_PIPELINE_BIND_POINT_RAY_TRACING_NV</code>, a push constant value <strong class=\"purple\">must</strong> have been set for <code>VK_PIPELINE_BIND_POINT_RAY_TRACING_NV</code>, with a <code>VkPipelineLayout</code> that is compatible for push constants with the one used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-None-02476",
+          "text": " If any <code>VkSampler</code> object that is accessed from a shader by the <code>VkPipeline</code> bound to <code>VK_PIPELINE_BIND_POINT_RAY_TRACING_NV</code> uses unnormalized coordinates, it <strong class=\"purple\">must</strong> not be used to sample from any <code>VkImage</code> with a <code>VkImageView</code> of the type <code>VK_IMAGE_VIEW_TYPE_3D</code>, <code>VK_IMAGE_VIEW_TYPE_CUBE</code>, <code>VK_IMAGE_VIEW_TYPE_1D_ARRAY</code>, <code>VK_IMAGE_VIEW_TYPE_2D_ARRAY</code> or <code>VK_IMAGE_VIEW_TYPE_CUBE_ARRAY</code>, in any shader stage"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-None-02477",
+          "text": " If any <code>VkSampler</code> object that is accessed from a shader by the <code>VkPipeline</code> bound to <code>VK_PIPELINE_BIND_POINT_RAY_TRACING_NV</code> uses unnormalized coordinates, it <strong class=\"purple\">must</strong> not be used with any of the SPIR-V <code>OpImageSample*</code> or <code>OpImageSparseSample*</code> instructions with <code>ImplicitLod</code>, <code>Dref</code> or <code>Proj</code> in their name, in any shader stage"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-None-02478",
+          "text": " If any <code>VkSampler</code> object that is accessed from a shader by the <code>VkPipeline</code> bound to <code>VK_PIPELINE_BIND_POINT_RAY_TRACING_NV</code> uses unnormalized coordinates, it <strong class=\"purple\">must</strong> not be used with any of the SPIR-V <code>OpImageSample*</code> or <code>OpImageSparseSample*</code> instructions that includes a LOD bias or any offset values, in any shader stage"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-None-02479",
+          "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_RAY_TRACING_NV</code> accesses a uniform buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-None-02480",
+          "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_RAY_TRACING_NV</code> accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-None-02481",
+          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_LINEAR</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code>."
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-commandBuffer-parameter",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <code>VkCommandBuffer</code> handle"
         },
         {
-          "vuid": "VUID-vkCmdTraceRaysNVX-raygenShaderBindingTableBuffer-parameter",
+          "vuid": "VUID-vkCmdTraceRaysNV-raygenShaderBindingTableBuffer-parameter",
           "text": " <code>raygenShaderBindingTableBuffer</code> <strong class=\"purple\">must</strong> be a valid <code>VkBuffer</code> handle"
         },
         {
-          "vuid": "VUID-vkCmdTraceRaysNVX-missShaderBindingTableBuffer-parameter",
-          "text": " <code>missShaderBindingTableBuffer</code> <strong class=\"purple\">must</strong> be a valid <code>VkBuffer</code> handle"
+          "vuid": "VUID-vkCmdTraceRaysNV-missShaderBindingTableBuffer-parameter",
+          "text": " If <code>missShaderBindingTableBuffer</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>missShaderBindingTableBuffer</code> <strong class=\"purple\">must</strong> be a valid <code>VkBuffer</code> handle"
         },
         {
-          "vuid": "VUID-vkCmdTraceRaysNVX-hitShaderBindingTableBuffer-parameter",
-          "text": " <code>hitShaderBindingTableBuffer</code> <strong class=\"purple\">must</strong> be a valid <code>VkBuffer</code> handle"
+          "vuid": "VUID-vkCmdTraceRaysNV-hitShaderBindingTableBuffer-parameter",
+          "text": " If <code>hitShaderBindingTableBuffer</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>hitShaderBindingTableBuffer</code> <strong class=\"purple\">must</strong> be a valid <code>VkBuffer</code> handle"
         },
         {
-          "vuid": "VUID-vkCmdTraceRaysNVX-commandBuffer-recording",
+          "vuid": "VUID-vkCmdTraceRaysNV-callableShaderBindingTableBuffer-parameter",
+          "text": " If <code>callableShaderBindingTableBuffer</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>callableShaderBindingTableBuffer</code> <strong class=\"purple\">must</strong> be a valid <code>VkBuffer</code> handle"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-commandBuffer-recording",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be in the <a href=\"#commandbuffers-lifecycle\">recording state</a>"
         },
         {
-          "vuid": "VUID-vkCmdTraceRaysNVX-commandBuffer-cmdpool",
-          "text": " The <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from <strong class=\"purple\">must</strong> support graphics, or compute operations"
+          "vuid": "VUID-vkCmdTraceRaysNV-commandBuffer-cmdpool",
+          "text": " The <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from <strong class=\"purple\">must</strong> support compute operations"
         },
         {
-          "vuid": "VUID-vkCmdTraceRaysNVX-commonparent",
-          "text": " Each of <code>commandBuffer</code>, <code>hitShaderBindingTableBuffer</code>, <code>missShaderBindingTableBuffer</code>, and <code>raygenShaderBindingTableBuffer</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkDevice</code>"
+          "vuid": "VUID-vkCmdTraceRaysNV-commonparent",
+          "text": " Each of <code>callableShaderBindingTableBuffer</code>, <code>commandBuffer</code>, <code>hitShaderBindingTableBuffer</code>, <code>missShaderBindingTableBuffer</code>, and <code>raygenShaderBindingTableBuffer</code> that are valid handles <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkDevice</code>"
+        }
+      ],
+      "(VK_NV_ray_tracing)+(VK_IMG_filter_cubic)": [
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-None-02482",
+          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code>."
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-None-02483",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command <strong class=\"purple\">must</strong> not have a <a href=\"#VkImageViewType\">VkImageViewType</a> of <code>VK_IMAGE_VIEW_TYPE_3D</code>, <code>VK_IMAGE_VIEW_TYPE_CUBE</code>, or <code>VK_IMAGE_VIEW_TYPE_CUBE_ARRAY</code>"
+        }
+      ],
+      "(VK_NV_ray_tracing)+(VK_VERSION_1_1)": [
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-commandBuffer-02484",
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer, and any pipeline stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_RAY_TRACING_NV</code> reads from or writes to any image or buffer, that image or buffer <strong class=\"purple\">must</strong> not be a protected image or protected buffer."
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-commandBuffer-02485",
+          "text": " If <code>commandBuffer</code> is a protected command buffer, and any pipeline stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_RAY_TRACING_NV</code> writes to any image or buffer, that image or buffer <strong class=\"purple\">must</strong> not be an unprotected image or unprotected buffer."
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-commandBuffer-02486",
+          "text": " If <code>commandBuffer</code> is a protected command buffer, and any pipeline stage other than the ray tracing pipeline stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_RAY_TRACING_NV</code> reads from any image or buffer, the image or buffer <strong class=\"purple\">must</strong> not be a protected image or protected buffer."
+        }
+      ],
+      "(VK_NV_ray_tracing)+(VK_NV_corner_sampled_image)": [
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-flags-02487",
+          "text": " Any <a href=\"#VkImage\">VkImage</a> created with a <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>flags</code> containing <code>VK_IMAGE_CREATE_CORNER_SAMPLED_BIT_NV</code> sampled as a result of this command <strong class=\"purple\">must</strong> only be sampled using a <a href=\"#VkSamplerAddressMode\">VkSamplerAddressMode</a> of <code>VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE</code>."
         }
       ]
     },
-    "vkCmdBuildAccelerationStructureNVX": {
-      "(VK_NVX_raytracing)": [
+    "vkCmdBuildAccelerationStructureNV": {
+      "(VK_NV_ray_tracing)": [
         {
-          "vuid": "VUID-vkCmdBuildAccelerationStructureNVX-geometryCount-02241",
-          "text": " <code>geometryCount</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceRaytracingPropertiesNVX</code>::<code>maxGeometryCount</code>"
+          "vuid": "VUID-vkCmdBuildAccelerationStructureNV-geometryCount-02241",
+          "text": " <code>geometryCount</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceRayTracingPropertiesNV</code>::<code>maxGeometryCount</code>"
         },
         {
-          "vuid": "VUID-vkCmdBuildAccelerationStructureNVX-commandBuffer-parameter",
+          "vuid": "VUID-vkCmdBuildAccelerationStructureNV-dst-02488",
+          "text": " <code>dst</code> <strong class=\"purple\">must</strong> have been created with compatible <code>VkAccelerationStructureInfoNV</code> where <code>VkAccelerationStructureInfoNV</code>:::<code>type</code> and <code>VkAccelerationStructureInfoNV</code>::<code>flags</code> are identical, <code>VkAccelerationStructureInfoNV</code>::<code>instanceCount</code> and <code>VkAccelerationStructureInfoNV</code>::<code>geometryCount</code> for <code>dst</code> are greater than or equal to the build size and each geometry in <code>VkAccelerationStructureInfoNV</code>::<code>pGeometries</code> for <code>dst</code> has greater than or equal to the number of vertices, indices, and AABBs."
+        },
+        {
+          "vuid": "VUID-vkCmdBuildAccelerationStructureNV-update-02489",
+          "text": " If <code>update</code> is true, <code>src</code> <strong class=\"purple\">must</strong> not be <code>VK_NULL_HANDLE</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdBuildAccelerationStructureNV-update-02490",
+          "text": " If <code>update</code> is true, <code>src</code> <strong class=\"purple\">must</strong> have been built last with <code>VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_NV</code> set in <code>VkAccelerationStructureInfoNV</code>::<code>flags</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdBuildAccelerationStructureNV-update-02491",
+          "text": " If <code>update</code> is false, The <code>size</code> member of the <code>VkMemoryRequirements</code> structure returned from a call to <code>vkGetAccelerationStructureMemoryRequirementsNV</code> with <code>VkAccelerationStructureMemoryRequirementsInfoNV</code>::<code>accelerationStructure</code> set to <code>dst</code> and <code>VkAccelerationStructureMemoryRequirementsInfoNV</code>::<code>type</code> set to <code>VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_BUILD_SCRATCH_NV</code> <strong class=\"purple\">must</strong> be less than or equal to the size of <code>scratch</code> minus <code>scratchOffset</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdBuildAccelerationStructureNV-update-02492",
+          "text": " If <code>update</code> is true, The <code>size</code> member of the <code>VkMemoryRequirements</code> structure returned from a call to <code>vkGetAccelerationStructureMemoryRequirementsNV</code> with <code>VkAccelerationStructureMemoryRequirementsInfoNV</code>::<code>accelerationStructure</code> set to <code>dst</code> and <code>VkAccelerationStructureMemoryRequirementsInfoNV</code>::<code>type</code> set to <code>VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_UPDATE_SCRATCH_NV</code> <strong class=\"purple\">must</strong> be less than or equal to the size of <code>scratch</code> minus <code>scratchOffset</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdBuildAccelerationStructureNV-commandBuffer-parameter",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <code>VkCommandBuffer</code> handle"
         },
         {
-          "vuid": "VUID-vkCmdBuildAccelerationStructureNVX-type-parameter",
-          "text": " <code>type</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkAccelerationStructureTypeNVX\">VkAccelerationStructureTypeNVX</a> value"
+          "vuid": "VUID-vkCmdBuildAccelerationStructureNV-pInfo-parameter",
+          "text": " <code>pInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <code>VkAccelerationStructureInfoNV</code> structure"
         },
         {
-          "vuid": "VUID-vkCmdBuildAccelerationStructureNVX-instanceData-parameter",
+          "vuid": "VUID-vkCmdBuildAccelerationStructureNV-instanceData-parameter",
           "text": " If <code>instanceData</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>instanceData</code> <strong class=\"purple\">must</strong> be a valid <code>VkBuffer</code> handle"
         },
         {
-          "vuid": "VUID-vkCmdBuildAccelerationStructureNVX-pGeometries-parameter",
-          "text": " If <code>geometryCount</code> is not <code>0</code>, <code>pGeometries</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>geometryCount</code> valid <code>VkGeometryNVX</code> structures"
+          "vuid": "VUID-vkCmdBuildAccelerationStructureNV-dst-parameter",
+          "text": " <code>dst</code> <strong class=\"purple\">must</strong> be a valid <code>VkAccelerationStructureNV</code> handle"
         },
         {
-          "vuid": "VUID-vkCmdBuildAccelerationStructureNVX-flags-parameter",
-          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkBuildAccelerationStructureFlagBitsNVX\">VkBuildAccelerationStructureFlagBitsNVX</a> values"
+          "vuid": "VUID-vkCmdBuildAccelerationStructureNV-src-parameter",
+          "text": " If <code>src</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>src</code> <strong class=\"purple\">must</strong> be a valid <code>VkAccelerationStructureNV</code> handle"
         },
         {
-          "vuid": "VUID-vkCmdBuildAccelerationStructureNVX-dst-parameter",
-          "text": " <code>dst</code> <strong class=\"purple\">must</strong> be a valid <code>VkAccelerationStructureNVX</code> handle"
-        },
-        {
-          "vuid": "VUID-vkCmdBuildAccelerationStructureNVX-src-parameter",
-          "text": " If <code>src</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>src</code> <strong class=\"purple\">must</strong> be a valid <code>VkAccelerationStructureNVX</code> handle"
-        },
-        {
-          "vuid": "VUID-vkCmdBuildAccelerationStructureNVX-scratch-parameter",
+          "vuid": "VUID-vkCmdBuildAccelerationStructureNV-scratch-parameter",
           "text": " <code>scratch</code> <strong class=\"purple\">must</strong> be a valid <code>VkBuffer</code> handle"
         },
         {
-          "vuid": "VUID-vkCmdBuildAccelerationStructureNVX-commandBuffer-recording",
+          "vuid": "VUID-vkCmdBuildAccelerationStructureNV-commandBuffer-recording",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be in the <a href=\"#commandbuffers-lifecycle\">recording state</a>"
         },
         {
-          "vuid": "VUID-vkCmdBuildAccelerationStructureNVX-commandBuffer-cmdpool",
-          "text": " The <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from <strong class=\"purple\">must</strong> support graphics, or compute operations"
+          "vuid": "VUID-vkCmdBuildAccelerationStructureNV-commandBuffer-cmdpool",
+          "text": " The <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from <strong class=\"purple\">must</strong> support compute operations"
         },
         {
-          "vuid": "VUID-vkCmdBuildAccelerationStructureNVX-commonparent",
+          "vuid": "VUID-vkCmdBuildAccelerationStructureNV-commonparent",
           "text": " Each of <code>commandBuffer</code>, <code>dst</code>, <code>instanceData</code>, <code>scratch</code>, and <code>src</code> that are valid handles <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkDevice</code>"
         }
       ]
     },
-    "vkCmdWriteAccelerationStructurePropertiesNVX": {
-      "(VK_NVX_raytracing)": [
+    "vkCmdWriteAccelerationStructuresPropertiesNV": {
+      "(VK_NV_ray_tracing)": [
         {
-          "vuid": "VUID-vkCmdWriteAccelerationStructurePropertiesNVX-queryType-02242",
-          "text": " <code>queryType</code> <strong class=\"purple\">must</strong> be VK_QUERY_TYPE_COMPACTED_SIZE_NVX"
+          "vuid": "VUID-vkCmdWriteAccelerationStructuresPropertiesNV-queryType-02242",
+          "text": " <code>queryType</code> <strong class=\"purple\">must</strong> be <code>VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_NV</code>"
         },
         {
-          "vuid": "VUID-vkCmdWriteAccelerationStructurePropertiesNVX-commandBuffer-parameter",
+          "vuid": "VUID-vkCmdWriteAccelerationStructuresPropertiesNV-queryPool-02493",
+          "text": " <code>queryPool</code> <strong class=\"purple\">must</strong> have been created with a <code>queryType</code> matching <code>queryType</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdWriteAccelerationStructuresPropertiesNV-queryPool-02494",
+          "text": " The queries identified by <code>queryPool</code> and <code>firstQuery</code> <strong class=\"purple\">must</strong> be <em>unavailable</em>"
+        },
+        {
+          "vuid": "VUID-vkCmdWriteAccelerationStructuresPropertiesNV-accelerationStructures-02495",
+          "text": " All acceleration structures in <code>accelerationStructures</code> <strong class=\"purple\">must</strong> have been built with <code>VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_NV</code> if <code>queryType</code> is <code>VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_NV</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdWriteAccelerationStructuresPropertiesNV-commandBuffer-parameter",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <code>VkCommandBuffer</code> handle"
         },
         {
-          "vuid": "VUID-vkCmdWriteAccelerationStructurePropertiesNVX-accelerationStructure-parameter",
-          "text": " <code>accelerationStructure</code> <strong class=\"purple\">must</strong> be a valid <code>VkAccelerationStructureNVX</code> handle"
+          "vuid": "VUID-vkCmdWriteAccelerationStructuresPropertiesNV-pAccelerationStructures-parameter",
+          "text": " <code>pAccelerationStructures</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>accelerationStructureCount</code> valid <code>VkAccelerationStructureNV</code> handles"
         },
         {
-          "vuid": "VUID-vkCmdWriteAccelerationStructurePropertiesNVX-queryType-parameter",
+          "vuid": "VUID-vkCmdWriteAccelerationStructuresPropertiesNV-queryType-parameter",
           "text": " <code>queryType</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkQueryType\">VkQueryType</a> value"
         },
         {
-          "vuid": "VUID-vkCmdWriteAccelerationStructurePropertiesNVX-queryPool-parameter",
+          "vuid": "VUID-vkCmdWriteAccelerationStructuresPropertiesNV-queryPool-parameter",
           "text": " <code>queryPool</code> <strong class=\"purple\">must</strong> be a valid <code>VkQueryPool</code> handle"
         },
         {
-          "vuid": "VUID-vkCmdWriteAccelerationStructurePropertiesNVX-commandBuffer-recording",
+          "vuid": "VUID-vkCmdWriteAccelerationStructuresPropertiesNV-commandBuffer-recording",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be in the <a href=\"#commandbuffers-lifecycle\">recording state</a>"
         },
         {
-          "vuid": "VUID-vkCmdWriteAccelerationStructurePropertiesNVX-commandBuffer-cmdpool",
-          "text": " The <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from <strong class=\"purple\">must</strong> support graphics, or compute operations"
+          "vuid": "VUID-vkCmdWriteAccelerationStructuresPropertiesNV-commandBuffer-cmdpool",
+          "text": " The <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from <strong class=\"purple\">must</strong> support compute operations"
         },
         {
-          "vuid": "VUID-vkCmdWriteAccelerationStructurePropertiesNVX-commonparent",
-          "text": " Each of <code>accelerationStructure</code>, <code>commandBuffer</code>, and <code>queryPool</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkDevice</code>"
+          "vuid": "VUID-vkCmdWriteAccelerationStructuresPropertiesNV-accelerationStructureCount-arraylength",
+          "text": " <code>accelerationStructureCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdWriteAccelerationStructuresPropertiesNV-commonparent",
+          "text": " Each of <code>commandBuffer</code>, <code>queryPool</code>, and the elements of <code>pAccelerationStructures</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkDevice</code>"
         }
       ]
     },
-    "vkCmdCopyAccelerationStructureNVX": {
-      "(VK_NVX_raytracing)": [
+    "vkCmdCopyAccelerationStructureNV": {
+      "(VK_NV_ray_tracing)": [
         {
-          "vuid": "VUID-vkCmdCopyAccelerationStructureNVX-commandBuffer-parameter",
+          "vuid": "VUID-vkCmdCopyAccelerationStructureNV-mode-02496",
+          "text": " <code>mode</code> <strong class=\"purple\">must</strong> be <code>VK_COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_NV</code> or <code>VK_COPY_ACCELERATION_STRUCTURE_MODE_CLONE_NV</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdCopyAccelerationStructureNV-src-02497",
+          "text": " <code>src</code> <strong class=\"purple\">must</strong> have been built with <code>VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_NV</code> if <code>mode</code> is <code>VK_COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_NV</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdCopyAccelerationStructureNV-commandBuffer-parameter",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <code>VkCommandBuffer</code> handle"
         },
         {
-          "vuid": "VUID-vkCmdCopyAccelerationStructureNVX-dst-parameter",
-          "text": " <code>dst</code> <strong class=\"purple\">must</strong> be a valid <code>VkAccelerationStructureNVX</code> handle"
+          "vuid": "VUID-vkCmdCopyAccelerationStructureNV-dst-parameter",
+          "text": " <code>dst</code> <strong class=\"purple\">must</strong> be a valid <code>VkAccelerationStructureNV</code> handle"
         },
         {
-          "vuid": "VUID-vkCmdCopyAccelerationStructureNVX-src-parameter",
-          "text": " <code>src</code> <strong class=\"purple\">must</strong> be a valid <code>VkAccelerationStructureNVX</code> handle"
+          "vuid": "VUID-vkCmdCopyAccelerationStructureNV-src-parameter",
+          "text": " <code>src</code> <strong class=\"purple\">must</strong> be a valid <code>VkAccelerationStructureNV</code> handle"
         },
         {
-          "vuid": "VUID-vkCmdCopyAccelerationStructureNVX-mode-parameter",
-          "text": " <code>mode</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCopyAccelerationStructureModeNVX\">VkCopyAccelerationStructureModeNVX</a> value"
+          "vuid": "VUID-vkCmdCopyAccelerationStructureNV-mode-parameter",
+          "text": " <code>mode</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCopyAccelerationStructureModeNV\">VkCopyAccelerationStructureModeNV</a> value"
         },
         {
-          "vuid": "VUID-vkCmdCopyAccelerationStructureNVX-commandBuffer-recording",
+          "vuid": "VUID-vkCmdCopyAccelerationStructureNV-commandBuffer-recording",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be in the <a href=\"#commandbuffers-lifecycle\">recording state</a>"
         },
         {
-          "vuid": "VUID-vkCmdCopyAccelerationStructureNVX-commandBuffer-cmdpool",
-          "text": " The <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from <strong class=\"purple\">must</strong> support graphics, or compute operations"
+          "vuid": "VUID-vkCmdCopyAccelerationStructureNV-commandBuffer-cmdpool",
+          "text": " The <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from <strong class=\"purple\">must</strong> support compute operations"
         },
         {
-          "vuid": "VUID-vkCmdCopyAccelerationStructureNVX-commonparent",
+          "vuid": "VUID-vkCmdCopyAccelerationStructureNV-commonparent",
           "text": " Each of <code>commandBuffer</code>, <code>dst</code>, and <code>src</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkDevice</code>"
         }
       ]
@@ -21261,6 +21685,14 @@
         {
           "vuid": "VUID-VkPhysicalDeviceTransformFeedbackPropertiesEXT-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_PROPERTIES_EXT</code>"
+        }
+      ]
+    },
+    "VkPhysicalDeviceRayTracingPropertiesNV": {
+      "(VK_NV_ray_tracing)": [
+        {
+          "vuid": "VUID-VkPhysicalDeviceRayTracingPropertiesNV-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PROPERTIES_NV</code>"
         }
       ]
     },
