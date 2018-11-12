@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.1.91",
-    "comment": "from git branch: master commit: c2ef675dac74b77abdaf4c3de679381f2e3b276c",
-    "date": "2018-11-05 17:16:43Z"
+    "api version": "1.1.92",
+    "comment": "from git branch: master commit: 279452463adf97364575ea9e5bdf17e5b5a0a74c",
+    "date": "2018-11-12 16:55:13Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -374,7 +374,7 @@
       "(VK_AMD_negative_viewport_height)+(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-VkDeviceCreateInfo-ppEnabledExtensionNames-01840",
-          "text": " <code>ppEnabledExtensionNames</code> <strong class=\"purple\">must</strong> not contain <code>VK_AMD_negative_viewport_height</code>"
+          "text": " <code>ppEnabledExtensionNames</code> <strong class=\"purple\">must</strong> not contain <code><a href=\"#VK_AMD_negative_viewport_height\">VK_AMD_negative_viewport_height</a></code>"
         }
       ],
       "(VK_AMD_negative_viewport_height)+!(VK_VERSION_1_1)+(VK_KHR_maintenance1)": [
@@ -540,7 +540,7 @@
         },
         {
           "vuid": "VUID-VkDeviceQueueInfo2-queueIndex-01843",
-          "text": " <code>queueIndex</code> <strong class=\"purple\">must</strong> be less than the number of queues created for the specified queue family index and <code>VkDeviceQueueCreateFlags</code> member <code>flags</code> equal to this <code>flags</code> value when <code>device</code> was created, via the <code>queueCount</code> member of the <code>VkDeviceQueueCreateInfo</code> structure"
+          "text": " <code>queueIndex</code> <strong class=\"purple\">must</strong> be less than the number of queues created for the specified queue family index and <a href=\"#VkDeviceQueueCreateFlags\">VkDeviceQueueCreateFlags</a> member <code>flags</code> equal to this <code>flags</code> value when <code>device</code> was created, via the <code>queueCount</code> member of the <code>VkDeviceQueueCreateInfo</code> structure"
         },
         {
           "vuid": "VUID-VkDeviceQueueInfo2-sType-sType",
@@ -5166,7 +5166,7 @@
       "(VK_NV_mesh_shader)": [
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-pStages-02095",
-          "text": " The geometric shader stages provided in <code>pStages</code> <strong class=\"purple\">must</strong> be either from the mesh shading pipeline (<code>stage</code> is <code>VK_SHADER_STAGE_TASK_BIT_NV</code> or <code>VK_SHADER_STAGE_MESH_BIT_NV</code>) or from the primitive shading pipeline (<code>stage</code> is <code>VK_SHADER_STAGE_VERTEX_BIT</code>, <code>VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT</code>, <code>VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT</code>, or <code>VK_SHADER_STAGE_GEOEMETRY_BIT</code>)."
+          "text": " The geometric shader stages provided in <code>pStages</code> <strong class=\"purple\">must</strong> be either from the mesh shading pipeline (<code>stage</code> is <code>VK_SHADER_STAGE_TASK_BIT_NV</code> or <code>VK_SHADER_STAGE_MESH_BIT_NV</code>) or from the primitive shading pipeline (<code>stage</code> is <code>VK_SHADER_STAGE_VERTEX_BIT</code>, <code>VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT</code>, <code>VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT</code>, or <code>VK_SHADER_STAGE_GEOMETRY_BIT</code>)."
         },
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-stage-02096",
@@ -9860,7 +9860,7 @@
       "(VK_EXT_descriptor_indexing)+(VK_EXT_inline_uniform_block)": [
         {
           "vuid": "VUID-VkDescriptorSetLayoutBindingFlagsCreateInfoEXT-descriptorBindingInlineUniformBlockUpdateAfterBind-02211",
-          "text": " If <a href=\"#VkPhysicalDeviceInlineUniformBlockFeatureEXT\">VkPhysicalDeviceInlineUniformBlockFeatureEXT</a>::<code>descriptorBindingInlineUniformBlockUpdateAfterBind</code> is not enabled, all bindings with descriptor type <code>VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT</code> <strong class=\"purple\">must</strong> not use <code>VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT</code>"
+          "text": " If <a href=\"#VkPhysicalDeviceInlineUniformBlockFeaturesEXT\">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>::<code>descriptorBindingInlineUniformBlockUpdateAfterBind</code> is not enabled, all bindings with descriptor type <code>VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT</code> <strong class=\"purple\">must</strong> not use <code>VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT</code>"
         }
       ]
     },
@@ -11815,6 +11815,10 @@
           "text": " <code>imageLayout</code> <strong class=\"purple\">must</strong> specify the layout of the image subresource ranges of <code>image</code> specified in <code>pRanges</code> at the time this command is executed on a <code>VkDevice</code>"
         },
         {
+          "vuid": "VUID-vkCmdClearColorImage-aspectMask-02498",
+          "text": " The <a href=\"#VkImageSubresourceRange\">VkImageSubresourceRange</a>::<code>aspectMask</code> members of the elements of the <code>pRanges</code> array <strong class=\"purple\">must</strong> each only include <code>VK_IMAGE_ASPECT_COLOR_BIT</code>"
+        },
+        {
           "vuid": "VUID-vkCmdClearColorImage-baseMipLevel-01470",
           "text": " The <a href=\"#VkImageSubresourceRange\">VkImageSubresourceRange</a>::<code>baseMipLevel</code> members of the elements of the <code>pRanges</code> array <strong class=\"purple\">must</strong> each be less than the <code>mipLevels</code> specified in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> when <code>image</code> was created"
         },
@@ -11929,6 +11933,14 @@
           "text": " <code>imageLayout</code> <strong class=\"purple\">must</strong> be either of <code>VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL</code> or <code>VK_IMAGE_LAYOUT_GENERAL</code>"
         },
         {
+          "vuid": "VUID-vkCmdClearDepthStencilImage-aspectMask-02499",
+          "text": " The <a href=\"#VkImageSubresourceRange\">VkImageSubresourceRange</a>::<code>aspectMask</code> members of the elements of the <code>pRanges</code> array <strong class=\"purple\">must</strong> each only include <code>VK_IMAGE_ASPECT_DEPTH_BIT</code> if the image format has a depth component"
+        },
+        {
+          "vuid": "VUID-vkCmdClearDepthStencilImage-aspectMask-02500",
+          "text": " The <a href=\"#VkImageSubresourceRange\">VkImageSubresourceRange</a>::<code>aspectMask</code> members of the elements of the <code>pRanges</code> array <strong class=\"purple\">must</strong> each only include <code>VK_IMAGE_ASPECT_STENCIL_BIT</code> if the image format has a stencil component"
+        },
+        {
           "vuid": "VUID-vkCmdClearDepthStencilImage-baseMipLevel-01474",
           "text": " The <a href=\"#VkImageSubresourceRange\">VkImageSubresourceRange</a>::<code>baseMipLevel</code> members of the elements of the <code>pRanges</code> array <strong class=\"purple\">must</strong> each be less than the <code>mipLevels</code> specified in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> when <code>image</code> was created"
         },
@@ -12003,8 +12015,16 @@
     "vkCmdClearAttachments": {
       "core": [
         {
-          "vuid": "VUID-vkCmdClearAttachments-aspectMask-00015",
-          "text": " If the <code>aspectMask</code> member of any element of <code>pAttachments</code> contains <code>VK_IMAGE_ASPECT_COLOR_BIT</code>, the <code>colorAttachment</code> member of that element <strong class=\"purple\">must</strong> refer to a valid color attachment in the current subpass"
+          "vuid": "VUID-vkCmdClearAttachments-aspectMask-02501",
+          "text": " If the <code>aspectMask</code> member of any element of <code>pAttachments</code> contains <code>VK_IMAGE_ASPECT_COLOR_BIT</code>, then the <code>colorAttachment</code> member of that element <strong class=\"purple\">must</strong> either refer to a color attachment which is <code>VK_ATTACHMENT_UNUSED</code>, or <strong class=\"purple\">must</strong> be a valid color attachment."
+        },
+        {
+          "vuid": "VUID-vkCmdClearAttachments-aspectMask-02502",
+          "text": " If the <code>aspectMask</code> member of any element of <code>pAttachments</code> contains <code>VK_IMAGE_ASPECT_DEPTH_BIT</code>, then the current subpass' depth/stencil attachment <strong class=\"purple\">must</strong> either be <code>VK_ATTACHMENT_UNUSED</code>, or <strong class=\"purple\">must</strong> have a depth component"
+        },
+        {
+          "vuid": "VUID-vkCmdClearAttachments-aspectMask-02503",
+          "text": " If the <code>aspectMask</code> member of any element of <code>pAttachments</code> contains <code>VK_IMAGE_ASPECT_STENCIL_BIT</code>, then the current subpass' depth/stencil attachment <strong class=\"purple\">must</strong> either be <code>VK_ATTACHMENT_UNUSED</code>, or <strong class=\"purple\">must</strong> have a stencil component"
         },
         {
           "vuid": "VUID-vkCmdClearAttachments-pRects-00016",
@@ -12051,6 +12071,16 @@
           "text": " <code>rectCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
         }
       ],
+      "(VK_VERSION_1_1)": [
+        {
+          "vuid": "VUID-vkCmdClearAttachments-commandBuffer-02504",
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then each attachment to be cleared <strong class=\"purple\">must</strong> not be a protected image."
+        },
+        {
+          "vuid": "VUID-vkCmdClearAttachments-commandBuffer-02505",
+          "text": " If <code>commandBuffer</code> is a protected command buffer, then each attachment to be cleared <strong class=\"purple\">must</strong> not be an unprotected image."
+        }
+      ],
       "(VK_VERSION_1_1,VK_KHR_multiview)": [
         {
           "vuid": "VUID-vkCmdClearAttachments-baseArrayLayer-00018",
@@ -12085,16 +12115,6 @@
         {
           "vuid": "VUID-VkClearAttachment-aspectMask-02246",
           "text": " <code>aspectMask</code> <strong class=\"purple\">must</strong> not include <code>VK_IMAGE_ASPECT_MEMORY_PLANE</code><em>_i</em>_BIT_EXT for any index <em>i</em>."
-        }
-      ],
-      "(VK_VERSION_1_1)": [
-        {
-          "vuid": "VUID-VkClearAttachment-commandBuffer-01809",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then the attachment to be cleared <strong class=\"purple\">must</strong> not be a protected image."
-        },
-        {
-          "vuid": "VUID-VkClearAttachment-commandBuffer-01810",
-          "text": " If <code>commandBuffer</code> is a protected command buffer, then the attachment to be cleared <strong class=\"purple\">must</strong> not be an unprotected image."
         }
       ]
     },
@@ -16700,7 +16720,7 @@
         },
         {
           "vuid": "VUID-vkCmdBindShadingRateImageNV-imageView-02062",
-          "text": " If <code>imageView</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>imageLayout</code> <strong class=\"purple\">must</strong> match the actual <code>VkImageLayout</code> of each subresource accessible from <code>imageView</code> at the time the subresource is accessed."
+          "text": " If <code>imageView</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>imageLayout</code> <strong class=\"purple\">must</strong> match the actual <a href=\"#VkImageLayout\">VkImageLayout</a> of each subresource accessible from <code>imageView</code> at the time the subresource is accessed."
         },
         {
           "vuid": "VUID-vkCmdBindShadingRateImageNV-imageLayout-02063",
@@ -16828,7 +16848,7 @@
         },
         {
           "vuid": "VUID-VkCoarseSampleOrderCustomNV-sampleCount-02074",
-          "text": " <code>sampleCount</code> <strong class=\"purple\">must</strong> correspond to a sample count enumerated in <a href=\"#VkSampleCountFlags\">VkSampleCountFlags</a> whose corresponding bit is set in <code>VkPhysicalDeviceLimits</code>::<code>framebufferNoAttachmentsSampleCounts</code>."
+          "text": " <code>sampleCount</code> <strong class=\"purple\">must</strong> correspond to a sample count enumerated in <a href=\"#VkSampleCountFlags\">VkSampleCountFlags</a> whose corresponding bit is set in <a href=\"#VkPhysicalDeviceLimits\">VkPhysicalDeviceLimits</a>::<code>framebufferNoAttachmentsSampleCounts</code>."
         },
         {
           "vuid": "VUID-VkCoarseSampleOrderCustomNV-sampleLocationCount-02075",
@@ -17638,11 +17658,11 @@
         },
         {
           "vuid": "VUID-vkCmdDispatch-commandBuffer-01845",
-          "text": " If <code>commandBuffer</code> is a protected command buffer, and any pipeline stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_POINT_COMPUTE</code> writes to any image or buffer, that image or buffer <strong class=\"purple\">must</strong> not be an unprotected image or unprotected buffer."
+          "text": " If <code>commandBuffer</code> is a protected command buffer, and any pipeline stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_COMPUTE</code> writes to any image or buffer, that image or buffer <strong class=\"purple\">must</strong> not be an unprotected image or unprotected buffer."
         },
         {
           "vuid": "VUID-vkCmdDispatch-commandBuffer-01846",
-          "text": " If <code>commandBuffer</code> is a protected command buffer, and any pipeline stage other than the compute pipeline stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_POINT_COMPUTE</code> reads from any image or buffer, the image or buffer <strong class=\"purple\">must</strong> not be a protected image or protected buffer."
+          "text": " If <code>commandBuffer</code> is a protected command buffer, and any pipeline stage other than the compute pipeline stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_COMPUTE</code> reads from any image or buffer, the image or buffer <strong class=\"purple\">must</strong> not be a protected image or protected buffer."
         }
       ],
       "(VK_NV_corner_sampled_image)": [
@@ -17752,11 +17772,11 @@
         },
         {
           "vuid": "VUID-vkCmdDispatchIndirect-commandBuffer-01848",
-          "text": " If <code>commandBuffer</code> is a protected command buffer, and any pipeline stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_POINT_COMPUTE</code> writes to any image or buffer, that image or buffer <strong class=\"purple\">must</strong> not be an unprotected image or unprotected buffer."
+          "text": " If <code>commandBuffer</code> is a protected command buffer, and any pipeline stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_COMPUTE</code> writes to any image or buffer, that image or buffer <strong class=\"purple\">must</strong> not be an unprotected image or unprotected buffer."
         },
         {
           "vuid": "VUID-vkCmdDispatchIndirect-commandBuffer-01849",
-          "text": " If <code>commandBuffer</code> is a protected command buffer, and any pipeline stage other than the compute pipeline stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_POINT_COMPUTE</code> reads from any image or buffer, the image or buffer <strong class=\"purple\">must</strong> not be a protected image or protected buffer."
+          "text": " If <code>commandBuffer</code> is a protected command buffer, and any pipeline stage other than the compute pipeline stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_COMPUTE</code> reads from any image or buffer, the image or buffer <strong class=\"purple\">must</strong> not be a protected image or protected buffer."
         }
       ],
       "(VK_NV_corner_sampled_image)": [
