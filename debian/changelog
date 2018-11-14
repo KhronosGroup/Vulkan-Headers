@@ -1,8 +1,15 @@
-vulkan-headers (1.1.85.0-1) UNRELEASED; urgency=medium
+vulkan-headers (1.1.92.0~rc1-1) UNRELEASED; urgency=medium
 
+  * new upstream version
+
+ -- Jeremy Hayes <jeremy@centaurus>  Wed, 14 Nov 2018 12:37:28 -0700
+
+vulkan-headers (1.1.85.0-1) unstable; urgency=medium
+
+  [ Brett Johnson ]
   * New upstream version
 
- -- Brett Johnson <brett@linuxturtle.net>  Mon, 01 Oct 2018 12:57:03 -0600
+ -- Jeremy Hayes <jeremy@centaurus>  Wed, 14 Nov 2018 12:37:28 -0700
 
 vulkan-headers (1.1.82.0-2) unstable; urgency=medium
 
