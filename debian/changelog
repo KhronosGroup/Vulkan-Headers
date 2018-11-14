@@ -1,0 +1,25 @@
+vulkan-headers (1.1.85.0-1) UNRELEASED; urgency=medium
+
+  * New upstream version
+
+ -- Brett Johnson <brett@linuxturtle.net>  Mon, 01 Oct 2018 12:57:03 -0600
+
+vulkan-headers (1.1.82.0-2) unstable; urgency=medium
+
+  * Rebuild for LunarG
+
+ -- Brett Johnson <brett@linuxturtle.net>  Mon, 01 Oct 2018 12:57:03 -0600
+
+vulkan-headers (1.1.82.0-1) unstable; urgency=medium
+
+  * New upstream release.
+  * watch: Updated.
+  * Drop intel header, shouldn't be needed anymore.
+
+ -- Timo Aaltonen <tjaalton@debian.org>  Fri, 24 Aug 2018 11:03:40 +0300
+
+vulkan-headers (1.1.77-1) unstable; urgency=medium
+
+  * Split from vulkan. (Closes: #901914)
+
+ -- Timo Aaltonen <tjaalton@debian.org>  Wed, 01 Aug 2018 11:37:04 +0300
