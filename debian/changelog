@@ -1,8 +1,8 @@
-vulkan-headers (1.1.92.0~rc1-1) UNRELEASED; urgency=medium
+vulkan-headers (1.1.92.0~rc1-1lunarg16.04.1.1) xenial; urgency=medium
 
   * new upstream version
 
- -- Jeremy Hayes <jeremy@centaurus>  Wed, 14 Nov 2018 12:37:28 -0700
+ -- Jeremy Hayes <jeremy@centaurus>  Wed, 14 Nov 2018 12:38:06 -0700
 
 vulkan-headers (1.1.85.0-1) unstable; urgency=medium
 
