@@ -70,7 +70,7 @@
   #undef MemoryBarrier
 #endif
 
-static_assert( VK_HEADER_VERSION ==  92 , "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION ==  93 , "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
@@ -9494,7 +9494,9 @@ public:
     eQueueFamilyCheckpointPropertiesNV = VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV,
     ePhysicalDeviceVulkanMemoryModelFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES_KHR,
     ePhysicalDevicePciBusInfoPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PCI_BUS_INFO_PROPERTIES_EXT,
-    eImagepipeSurfaceCreateInfoFUCHSIA = VK_STRUCTURE_TYPE_IMAGEPIPE_SURFACE_CREATE_INFO_FUCHSIA
+    eImagepipeSurfaceCreateInfoFUCHSIA = VK_STRUCTURE_TYPE_IMAGEPIPE_SURFACE_CREATE_INFO_FUCHSIA,
+    ePhysicalDeviceScalarBlockLayoutFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES_EXT,
+    eImageStencilUsageCreateInfoEXT = VK_STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO_EXT
   };
 
   struct ApplicationInfo
@@ -21113,6 +21115,66 @@ public:
   };
   static_assert( sizeof( ImageDrmFormatModifierPropertiesEXT ) == sizeof( VkImageDrmFormatModifierPropertiesEXT ), "struct and wrapper have different size!" );
 
+  struct PhysicalDeviceScalarBlockLayoutFeaturesEXT
+  {
+    PhysicalDeviceScalarBlockLayoutFeaturesEXT( Bool32 scalarBlockLayout_ = 0 )
+      : scalarBlockLayout( scalarBlockLayout_ )
+    {
+    }
+
+    PhysicalDeviceScalarBlockLayoutFeaturesEXT( VkPhysicalDeviceScalarBlockLayoutFeaturesEXT const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( PhysicalDeviceScalarBlockLayoutFeaturesEXT ) );
+    }
+
+    PhysicalDeviceScalarBlockLayoutFeaturesEXT& operator=( VkPhysicalDeviceScalarBlockLayoutFeaturesEXT const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( PhysicalDeviceScalarBlockLayoutFeaturesEXT ) );
+      return *this;
+    }
+    PhysicalDeviceScalarBlockLayoutFeaturesEXT& setPNext( void* pNext_ )
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    PhysicalDeviceScalarBlockLayoutFeaturesEXT& setScalarBlockLayout( Bool32 scalarBlockLayout_ )
+    {
+      scalarBlockLayout = scalarBlockLayout_;
+      return *this;
+    }
+
+    operator VkPhysicalDeviceScalarBlockLayoutFeaturesEXT const&() const
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceScalarBlockLayoutFeaturesEXT*>(this);
+    }
+
+    operator VkPhysicalDeviceScalarBlockLayoutFeaturesEXT &()
+    {
+      return *reinterpret_cast<VkPhysicalDeviceScalarBlockLayoutFeaturesEXT*>(this);
+    }
+
+    bool operator==( PhysicalDeviceScalarBlockLayoutFeaturesEXT const& rhs ) const
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( scalarBlockLayout == rhs.scalarBlockLayout );
+    }
+
+    bool operator!=( PhysicalDeviceScalarBlockLayoutFeaturesEXT const& rhs ) const
+    {
+      return !operator==( rhs );
+    }
+
+  private:
+    StructureType sType = StructureType::ePhysicalDeviceScalarBlockLayoutFeaturesEXT;
+
+  public:
+    void* pNext = nullptr;
+    Bool32 scalarBlockLayout;
+  };
+  static_assert( sizeof( PhysicalDeviceScalarBlockLayoutFeaturesEXT ) == sizeof( VkPhysicalDeviceScalarBlockLayoutFeaturesEXT ), "struct and wrapper have different size!" );
+
   enum class SubpassContents
   {
     eInline = VK_SUBPASS_CONTENTS_INLINE,
@@ -23477,6 +23539,66 @@ public:
   static_assert( sizeof( ImageViewUsageCreateInfo ) == sizeof( VkImageViewUsageCreateInfo ), "struct and wrapper have different size!" );
 
   using ImageViewUsageCreateInfoKHR = ImageViewUsageCreateInfo;
+
+  struct ImageStencilUsageCreateInfoEXT
+  {
+    ImageStencilUsageCreateInfoEXT( ImageUsageFlags stencilUsage_ = ImageUsageFlags() )
+      : stencilUsage( stencilUsage_ )
+    {
+    }
+
+    ImageStencilUsageCreateInfoEXT( VkImageStencilUsageCreateInfoEXT const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( ImageStencilUsageCreateInfoEXT ) );
+    }
+
+    ImageStencilUsageCreateInfoEXT& operator=( VkImageStencilUsageCreateInfoEXT const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( ImageStencilUsageCreateInfoEXT ) );
+      return *this;
+    }
+    ImageStencilUsageCreateInfoEXT& setPNext( const void* pNext_ )
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    ImageStencilUsageCreateInfoEXT& setStencilUsage( ImageUsageFlags stencilUsage_ )
+    {
+      stencilUsage = stencilUsage_;
+      return *this;
+    }
+
+    operator VkImageStencilUsageCreateInfoEXT const&() const
+    {
+      return *reinterpret_cast<const VkImageStencilUsageCreateInfoEXT*>(this);
+    }
+
+    operator VkImageStencilUsageCreateInfoEXT &()
+    {
+      return *reinterpret_cast<VkImageStencilUsageCreateInfoEXT*>(this);
+    }
+
+    bool operator==( ImageStencilUsageCreateInfoEXT const& rhs ) const
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( stencilUsage == rhs.stencilUsage );
+    }
+
+    bool operator!=( ImageStencilUsageCreateInfoEXT const& rhs ) const
+    {
+      return !operator==( rhs );
+    }
+
+  private:
+    StructureType sType = StructureType::eImageStencilUsageCreateInfoEXT;
+
+  public:
+    const void* pNext = nullptr;
+    ImageUsageFlags stencilUsage;
+  };
+  static_assert( sizeof( ImageStencilUsageCreateInfoEXT ) == sizeof( VkImageStencilUsageCreateInfoEXT ), "struct and wrapper have different size!" );
 
   enum class ImageCreateFlagBits
   {
@@ -36363,7 +36485,8 @@ public:
     eIntelOpenSourceMesa = VK_DRIVER_ID_INTEL_OPEN_SOURCE_MESA_KHR,
     eImaginationProprietary = VK_DRIVER_ID_IMAGINATION_PROPRIETARY_KHR,
     eQualcommProprietary = VK_DRIVER_ID_QUALCOMM_PROPRIETARY_KHR,
-    eArmProprietary = VK_DRIVER_ID_ARM_PROPRIETARY_KHR
+    eArmProprietary = VK_DRIVER_ID_ARM_PROPRIETARY_KHR,
+    eGooglePastel = VK_DRIVER_ID_GOOGLE_PASTEL_KHR
   };
 
   struct PhysicalDeviceDriverPropertiesKHR
@@ -48716,8 +48839,12 @@ public:
   template <> struct isStructureChainValid<PhysicalDeviceImageFormatInfo2, PhysicalDeviceImageDrmFormatModifierInfoEXT>{ enum { value = true }; };
   template <> struct isStructureChainValid<ImageCreateInfo, ImageDrmFormatModifierListCreateInfoEXT>{ enum { value = true }; };
   template <> struct isStructureChainValid<ImageCreateInfo, ImageDrmFormatModifierExplicitCreateInfoEXT>{ enum { value = true }; };
+  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceScalarBlockLayoutFeaturesEXT>{ enum { value = true }; };
+  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceScalarBlockLayoutFeaturesEXT>{ enum { value = true }; };
   template <> struct isStructureChainValid<SurfaceCapabilities2KHR, SharedPresentSurfaceCapabilitiesKHR>{ enum { value = true }; };
   template <> struct isStructureChainValid<ImageViewCreateInfo, ImageViewUsageCreateInfo>{ enum { value = true }; };
+  template <> struct isStructureChainValid<ImageCreateInfo, ImageStencilUsageCreateInfoEXT>{ enum { value = true }; };
+  template <> struct isStructureChainValid<PhysicalDeviceImageFormatInfo2, ImageStencilUsageCreateInfoEXT>{ enum { value = true }; };
   template <> struct isStructureChainValid<FormatProperties2, DrmFormatModifierPropertiesListEXT>{ enum { value = true }; };
   template <> struct isStructureChainValid<RenderPassCreateInfo, RenderPassInputAttachmentAspectCreateInfo>{ enum { value = true }; };
   template <> struct isStructureChainValid<BindImageMemoryInfo, BindImagePlaneMemoryInfo>{ enum { value = true }; };
@@ -50294,6 +50421,8 @@ public:
     case StructureType::ePhysicalDeviceVulkanMemoryModelFeaturesKHR: return "PhysicalDeviceVulkanMemoryModelFeaturesKHR";
     case StructureType::ePhysicalDevicePciBusInfoPropertiesEXT: return "PhysicalDevicePciBusInfoPropertiesEXT";
     case StructureType::eImagepipeSurfaceCreateInfoFUCHSIA: return "ImagepipeSurfaceCreateInfoFUCHSIA";
+    case StructureType::ePhysicalDeviceScalarBlockLayoutFeaturesEXT: return "PhysicalDeviceScalarBlockLayoutFeaturesEXT";
+    case StructureType::eImageStencilUsageCreateInfoEXT: return "ImageStencilUsageCreateInfoEXT";
     default: return "invalid";
     }
   }
@@ -52218,6 +52347,7 @@ public:
     case DriverIdKHR::eImaginationProprietary: return "ImaginationProprietary";
     case DriverIdKHR::eQualcommProprietary: return "QualcommProprietary";
     case DriverIdKHR::eArmProprietary: return "ArmProprietary";
+    case DriverIdKHR::eGooglePastel: return "GooglePastel";
     default: return "invalid";
     }
   }
