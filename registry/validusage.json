@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.1.92",
-    "comment": "from git branch: master commit: 279452463adf97364575ea9e5bdf17e5b5a0a74c",
-    "date": "2018-11-12 16:55:13Z"
+    "api version": "1.1.94",
+    "comment": "from git branch: master commit: c24b84795f6c083df107d8639286881a23894679",
+    "date": "2018-11-27 18:23:26Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -198,7 +198,7 @@
         },
         {
           "vuid": "VUID-VkPhysicalDeviceProperties2-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT\">VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceConservativeRasterizationPropertiesEXT\">VkPhysicalDeviceConservativeRasterizationPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingPropertiesEXT\">VkPhysicalDeviceDescriptorIndexingPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDiscardRectanglePropertiesEXT\">VkPhysicalDeviceDiscardRectanglePropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDriverPropertiesKHR\">VkPhysicalDeviceDriverPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceExternalMemoryHostPropertiesEXT\">VkPhysicalDeviceExternalMemoryHostPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceIDProperties\">VkPhysicalDeviceIDProperties</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockPropertiesEXT\">VkPhysicalDeviceInlineUniformBlockPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceMaintenance3Properties\">VkPhysicalDeviceMaintenance3Properties</a>, <a href=\"#VkPhysicalDeviceMeshShaderPropertiesNV\">VkPhysicalDeviceMeshShaderPropertiesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX\">VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX</a>, <a href=\"#VkPhysicalDeviceMultiviewProperties\">VkPhysicalDeviceMultiviewProperties</a>, <a href=\"#VkPhysicalDevicePCIBusInfoPropertiesEXT\">VkPhysicalDevicePCIBusInfoPropertiesEXT</a>, <a href=\"#VkPhysicalDevicePointClippingProperties\">VkPhysicalDevicePointClippingProperties</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryProperties\">VkPhysicalDeviceProtectedMemoryProperties</a>, <a href=\"#VkPhysicalDevicePushDescriptorPropertiesKHR\">VkPhysicalDevicePushDescriptorPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceRayTracingPropertiesNV\">VkPhysicalDeviceRayTracingPropertiesNV</a>, <a href=\"#VkPhysicalDeviceSampleLocationsPropertiesEXT\">VkPhysicalDeviceSampleLocationsPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT\">VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceShaderCorePropertiesAMD\">VkPhysicalDeviceShaderCorePropertiesAMD</a>, <a href=\"#VkPhysicalDeviceSubgroupProperties\">VkPhysicalDeviceSubgroupProperties</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackPropertiesEXT\">VkPhysicalDeviceTransformFeedbackPropertiesEXT</a>, or <a href=\"#VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT\">VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT\">VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceConservativeRasterizationPropertiesEXT\">VkPhysicalDeviceConservativeRasterizationPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingPropertiesEXT\">VkPhysicalDeviceDescriptorIndexingPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDiscardRectanglePropertiesEXT\">VkPhysicalDeviceDiscardRectanglePropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDriverPropertiesKHR\">VkPhysicalDeviceDriverPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceExternalMemoryHostPropertiesEXT\">VkPhysicalDeviceExternalMemoryHostPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapPropertiesEXT\">VkPhysicalDeviceFragmentDensityMapPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceIDProperties\">VkPhysicalDeviceIDProperties</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockPropertiesEXT\">VkPhysicalDeviceInlineUniformBlockPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceMaintenance3Properties\">VkPhysicalDeviceMaintenance3Properties</a>, <a href=\"#VkPhysicalDeviceMeshShaderPropertiesNV\">VkPhysicalDeviceMeshShaderPropertiesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX\">VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX</a>, <a href=\"#VkPhysicalDeviceMultiviewProperties\">VkPhysicalDeviceMultiviewProperties</a>, <a href=\"#VkPhysicalDevicePCIBusInfoPropertiesEXT\">VkPhysicalDevicePCIBusInfoPropertiesEXT</a>, <a href=\"#VkPhysicalDevicePointClippingProperties\">VkPhysicalDevicePointClippingProperties</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryProperties\">VkPhysicalDeviceProtectedMemoryProperties</a>, <a href=\"#VkPhysicalDevicePushDescriptorPropertiesKHR\">VkPhysicalDevicePushDescriptorPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceRayTracingPropertiesNV\">VkPhysicalDeviceRayTracingPropertiesNV</a>, <a href=\"#VkPhysicalDeviceSampleLocationsPropertiesEXT\">VkPhysicalDeviceSampleLocationsPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT\">VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceShaderCorePropertiesAMD\">VkPhysicalDeviceShaderCorePropertiesAMD</a>, <a href=\"#VkPhysicalDeviceSubgroupProperties\">VkPhysicalDeviceSubgroupProperties</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackPropertiesEXT\">VkPhysicalDeviceTransformFeedbackPropertiesEXT</a>, or <a href=\"#VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT\">VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT</a>"
         },
         {
           "vuid": "VUID-VkPhysicalDeviceProperties2-sType-unique",
@@ -334,7 +334,7 @@
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceMemoryOverallocationCreateInfoAMD\">VkDeviceMemoryOverallocationCreateInfoAMD</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice8BitStorageFeaturesKHR\">VkPhysicalDevice8BitStorageFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeaturesEXT\">VkPhysicalDeviceDescriptorIndexingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeaturesEXT\">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64FeaturesKHR\">VkPhysicalDeviceShaderAtomicInt64FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDrawParameterFeatures\">VkPhysicalDeviceShaderDrawParameterFeatures</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackFeaturesEXT\">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVariablePointerFeatures\">VkPhysicalDeviceVariablePointerFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, or <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeaturesKHR\">VkPhysicalDeviceVulkanMemoryModelFeaturesKHR</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceMemoryOverallocationCreateInfoAMD\">VkDeviceMemoryOverallocationCreateInfoAMD</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice8BitStorageFeaturesKHR\">VkPhysicalDevice8BitStorageFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeaturesEXT\">VkPhysicalDeviceDescriptorIndexingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapFeaturesEXT\">VkPhysicalDeviceFragmentDensityMapFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeaturesEXT\">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceScalarBlockLayoutFeaturesEXT\">VkPhysicalDeviceScalarBlockLayoutFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64FeaturesKHR\">VkPhysicalDeviceShaderAtomicInt64FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDrawParameterFeatures\">VkPhysicalDeviceShaderDrawParameterFeatures</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackFeaturesEXT\">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVariablePointerFeatures\">VkPhysicalDeviceVariablePointerFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, or <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeaturesKHR\">VkPhysicalDeviceVulkanMemoryModelFeaturesKHR</a>"
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-sType-unique",
@@ -2989,32 +2989,32 @@
     "VkRenderPassCreateInfo": {
       "core": [
         {
-          "vuid": "VUID-VkRenderPassCreateInfo-None-00832",
-          "text": " If any two subpasses operate on attachments with overlapping ranges of the same <code>VkDeviceMemory</code> object, and at least one subpass writes to that area of <code>VkDeviceMemory</code>, a subpass dependency <strong class=\"purple\">must</strong> be included (either directly or via some intermediate subpasses) between them"
-        },
-        {
-          "vuid": "VUID-VkRenderPassCreateInfo-attachment-00833",
-          "text": " If the <code>attachment</code> member of any element of <code>pInputAttachments</code>, <code>pColorAttachments</code>, <code>pResolveAttachments</code> or <code>pDepthStencilAttachment</code>, or the attachment indexed by any element of <code>pPreserveAttachments</code> in any element of <code>pSubpasses</code> is bound to a range of a <code>VkDeviceMemory</code> object that overlaps with any other attachment in any subpass (including the same subpass), the <code>VkAttachmentDescription</code> structures describing them <strong class=\"purple\">must</strong> include <code>VK_ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT</code> in <code>flags</code>"
-        },
-        {
           "vuid": "VUID-VkRenderPassCreateInfo-attachment-00834",
           "text": " If the <code>attachment</code> member of any element of <code>pInputAttachments</code>, <code>pColorAttachments</code>, <code>pResolveAttachments</code> or <code>pDepthStencilAttachment</code>, or any element of <code>pPreserveAttachments</code> in any element of <code>pSubpasses</code> is not <code>VK_ATTACHMENT_UNUSED</code>, it <strong class=\"purple\">must</strong> be less than <code>attachmentCount</code>"
-        },
-        {
-          "vuid": "VUID-VkRenderPassCreateInfo-pPreserveAttachments-00835",
-          "text": " The value of each element of the <code>pPreserveAttachments</code> member in each element of <code>pSubpasses</code> <strong class=\"purple\">must</strong> not be <code>VK_ATTACHMENT_UNUSED</code>"
         },
         {
           "vuid": "VUID-VkRenderPassCreateInfo-pAttachments-00836",
           "text": " For any member of <code>pAttachments</code> with a <code>loadOp</code> equal to <code>VK_ATTACHMENT_LOAD_OP_CLEAR</code>, the first use of that attachment <strong class=\"purple\">must</strong> not specify a <code>layout</code> equal to <code>VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL</code> or <code>VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL</code>."
         },
         {
+          "vuid": "VUID-VkRenderPassCreateInfo-pAttachments-02511",
+          "text": " For any member of <code>pAttachments</code> with a <code>stencilLoadOp</code> equal to <code>VK_ATTACHMENT_LOAD_OP_CLEAR</code>, the first use of that attachment <strong class=\"purple\">must</strong> not specify a <code>layout</code> equal to <code>VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL</code> or <code>VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL</code>."
+        },
+        {
           "vuid": "VUID-VkRenderPassCreateInfo-pDependencies-00837",
-          "text": " For any element of <code>pDependencies</code>, if the <code>srcSubpass</code> is not <code>VK_SUBPASS_EXTERNAL</code>, all stage flags included in the <code>srcStageMask</code> member of that dependency <strong class=\"purple\">must</strong> be a pipeline stage supported by the <a href=\"#synchronization-pipeline-stages-types\">pipeline</a> identified by the <code>pipelineBindPoint</code> member of the source subpass."
+          "text": " For any element of <code>pDependencies</code>, if the <code>srcSubpass</code> is not <code>VK_SUBPASS_EXTERNAL</code>, all stage flags included in the <code>srcStageMask</code> member of that dependency <strong class=\"purple\">must</strong> be a pipeline stage supported by the <a href=\"#synchronization-pipeline-stages-types\">pipeline</a> identified by the <code>pipelineBindPoint</code> member of the source subpass"
         },
         {
           "vuid": "VUID-VkRenderPassCreateInfo-pDependencies-00838",
-          "text": " For any element of <code>pDependencies</code>, if the <code>dstSubpass</code> is not <code>VK_SUBPASS_EXTERNAL</code>, all stage flags included in the <code>dstStageMask</code> member of that dependency <strong class=\"purple\">must</strong> be a pipeline stage supported by the <a href=\"#synchronization-pipeline-stages-types\">pipeline</a> identified by the <code>pipelineBindPoint</code> member of the source subpass."
+          "text": " For any element of <code>pDependencies</code>, if the <code>dstSubpass</code> is not <code>VK_SUBPASS_EXTERNAL</code>, all stage flags included in the <code>dstStageMask</code> member of that dependency <strong class=\"purple\">must</strong> be a pipeline stage supported by the <a href=\"#synchronization-pipeline-stages-types\">pipeline</a> identified by the <code>pipelineBindPoint</code> member of the source subpass"
+        },
+        {
+          "vuid": "VUID-VkRenderPassCreateInfo-srcSubpass-02517",
+          "text": " The <code>srcSubpass</code> member of each element of <code>pDependencies</code> <strong class=\"purple\">must</strong> be less than <code>subpassCount</code>"
+        },
+        {
+          "vuid": "VUID-VkRenderPassCreateInfo-dstSubpass-02518",
+          "text": " The <code>dstSubpass</code> member of each element of <code>pDependencies</code> <strong class=\"purple\">must</strong> be less than <code>subpassCount</code>"
         },
         {
           "vuid": "VUID-VkRenderPassCreateInfo-sType-sType",
@@ -3022,15 +3022,11 @@
         },
         {
           "vuid": "VUID-VkRenderPassCreateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkRenderPassInputAttachmentAspectCreateInfo\">VkRenderPassInputAttachmentAspectCreateInfo</a> or <a href=\"#VkRenderPassMultiviewCreateInfo\">VkRenderPassMultiviewCreateInfo</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkRenderPassFragmentDensityMapCreateInfoEXT\">VkRenderPassFragmentDensityMapCreateInfoEXT</a>, <a href=\"#VkRenderPassInputAttachmentAspectCreateInfo\">VkRenderPassInputAttachmentAspectCreateInfo</a>, or <a href=\"#VkRenderPassMultiviewCreateInfo\">VkRenderPassMultiviewCreateInfo</a>"
         },
         {
           "vuid": "VUID-VkRenderPassCreateInfo-sType-unique",
           "text": " Each <code>sType</code> member in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
-        },
-        {
-          "vuid": "VUID-VkRenderPassCreateInfo-flags-parameter",
-          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkRenderPassCreateFlagBits\">VkRenderPassCreateFlagBits</a> values"
         },
         {
           "vuid": "VUID-VkRenderPassCreateInfo-pAttachments-parameter",
@@ -3068,7 +3064,7 @@
         },
         {
           "vuid": "VUID-VkRenderPassCreateInfo-pNext-01963",
-          "text": " If the <code>pNext</code> chain includes an instance of <a href=\"#VkRenderPassInputAttachmentAspectCreateInfo\">VkRenderPassInputAttachmentAspectCreateInfo</a>, the <code>aspectMask</code> member of any element of <code>pAspectReferences</code> <strong class=\"purple\">must</strong> only include aspects that are present in images of the <code>format</code> of the input attachment specified by the <code>subpass</code> and <code>inputAttachment</code> of the same element of <code>pAspectReferences</code>"
+          "text": " If the <code>pNext</code> chain includes an instance of <a href=\"#VkRenderPassInputAttachmentAspectCreateInfo\">VkRenderPassInputAttachmentAspectCreateInfo</a>, for any element of the <code>pInputAttachments</code> member of any element of <code>pSubpasses</code> where the <code>attachment</code> member is not <code>VK_ATTACHMENT_UNUSED</code>, the <code>aspectMask</code> member of the corresponding element of <a href=\"#VkRenderPassInputAttachmentAspectCreateInfo\">VkRenderPassInputAttachmentAspectCreateInfo</a>::<code>pAspectReferences</code> <strong class=\"purple\">must</strong> only include aspects that are present in images of the format specified by the element of <code>pAttachments</code> at <code>attachment</code>"
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_multiview)": [
@@ -3083,6 +3079,26 @@
         {
           "vuid": "VUID-VkRenderPassCreateInfo-pNext-01930",
           "text": " If the <code>pNext</code> chain includes an instance of <a href=\"#VkRenderPassMultiviewCreateInfo\">VkRenderPassMultiviewCreateInfo</a>, for each non-zero element of <code>pViewOffsets</code>, the <code>srcSubpass</code> and <code>dstSubpass</code> members of <code>pDependencies</code> at the same index <strong class=\"purple\">must</strong> not be equal"
+        },
+        {
+          "vuid": "VUID-VkRenderPassCreateInfo-pNext-02512",
+          "text": " If the <code>pNext</code> chain includes an instance of <a href=\"#VkRenderPassMultiviewCreateInfo\">VkRenderPassMultiviewCreateInfo</a>, for any element of <code>pDependencies</code> with a <code>dependencyFlags</code> member that doesn&#8217;t include <code>VK_DEPENDENCY_VIEW_LOCAL_BIT</code>, the corresponding element of the <code>pViewOffsets</code> member of that <a href=\"#VkRenderPassMultiviewCreateInfo\">VkRenderPassMultiviewCreateInfo</a> instance <strong class=\"purple\">must</strong> be <code>0</code>"
+        },
+        {
+          "vuid": "VUID-VkRenderPassCreateInfo-pNext-02513",
+          "text": " If the <code>pNext</code> chain includes an instance of <a href=\"#VkRenderPassMultiviewCreateInfo\">VkRenderPassMultiviewCreateInfo</a>, elements of its <code>pViewMasks</code> member <strong class=\"purple\">must</strong> either all be <code>0</code>, or all not be <code>0</code>"
+        },
+        {
+          "vuid": "VUID-VkRenderPassCreateInfo-pNext-02514",
+          "text": " If the <code>pNext</code> chain includes an instance of <a href=\"#VkRenderPassMultiviewCreateInfo\">VkRenderPassMultiviewCreateInfo</a>, and each element of its <code>pViewMasks</code> member is <code>0</code>, the <code>dependencyFlags</code> member of each element of <code>pDependencies</code> <strong class=\"purple\">must</strong> not include <code>VK_DEPENDENCY_VIEW_LOCAL_BIT</code>"
+        },
+        {
+          "vuid": "VUID-VkRenderPassCreateInfo-pNext-02515",
+          "text": " If the <code>pNext</code> chain includes an instance of <a href=\"#VkRenderPassMultiviewCreateInfo\">VkRenderPassMultiviewCreateInfo</a>, and each element of its <code>pViewMasks</code> member is <code>0</code>, <code>correlatedViewMaskCount</code> <strong class=\"purple\">must</strong> be <code>0</code>"
+        },
+        {
+          "vuid": "VUID-VkRenderPassCreateInfo-pNext-02516",
+          "text": " If the <code>pNext</code> chain includes an instance of <a href=\"#VkRenderPassMultiviewCreateInfo\">VkRenderPassMultiviewCreateInfo</a>, each element of its <code>pViewMask</code> member <strong class=\"purple\">must</strong> not include a bit at a position greater than the value of <a href=\"#VkPhysicalDeviceLimits\">VkPhysicalDeviceLimits</a>::<code>maxFramebufferLayers</code>"
         }
       ]
     },
@@ -3107,6 +3123,38 @@
         {
           "vuid": "VUID-VkRenderPassMultiviewCreateInfo-pCorrelationMasks-parameter",
           "text": " If <code>correlationMaskCount</code> is not <code>0</code>, <code>pCorrelationMasks</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>correlationMaskCount</code> <code>uint32_t</code> values"
+        }
+      ]
+    },
+    "VkRenderPassFragmentDensityMapCreateInfoEXT": {
+      "(VK_EXT_fragment_density_map)": [
+        {
+          "vuid": "VUID-VkRenderPassFragmentDensityMapCreateInfoEXT-fragmentDensityMapAttachment-02547",
+          "text": " If <code>fragmentDensityMapAttachment</code> is not <code>VK_ATTACHMENT_UNUSED</code>, <code>fragmentDensityMapAttachment</code> <strong class=\"purple\">must</strong> be less than <code>VkRenderPassCreateInfo</code>::<code>attachmentCount</code>"
+        },
+        {
+          "vuid": "VUID-VkRenderPassFragmentDensityMapCreateInfoEXT-fragmentDensityMapAttachment-02548",
+          "text": " If <code>fragmentDensityMapAttachment</code> is not <code>VK_ATTACHMENT_UNUSED</code>, <code>fragmentDensityMapAttachment</code> <strong class=\"purple\">must</strong> not be an element of <code>VkSubpassDescription</code>::<code>pInputAttachments</code>, <code>VkSubpassDescription</code>::<code>pColorAttachments</code>, <code>VkSubpassDescription</code>::<code>pResolveAttachments</code>, <code>VkSubpassDescription</code>::<code>pDepthStencilAttachment</code>, or <code>VkSubpassDescription</code>::<code>pPreserveAttachments</code> for any subpass"
+        },
+        {
+          "vuid": "VUID-VkRenderPassFragmentDensityMapCreateInfoEXT-fragmentDensityMapAttachment-02549",
+          "text": " If <code>fragmentDensityMapAttachment</code> is not <code>VK_ATTACHMENT_UNUSED</code>, <code>layout</code> <strong class=\"purple\">must</strong> be equal to <code>VK_IMAGE_LAYOUT_FRAGMENT_DENSITY_MAP_OPTIMAL_EXT</code>, or <code>VK_IMAGE_LAYOUT_GENERAL</code>"
+        },
+        {
+          "vuid": "VUID-VkRenderPassFragmentDensityMapCreateInfoEXT-fragmentDensityMapAttachment-02550",
+          "text": " If <code>fragmentDensityMapAttachment</code> is not <code>VK_ATTACHMENT_UNUSED</code>, <code>fragmentDensityMapAttachment</code> <strong class=\"purple\">must</strong> reference an attachment with a <code>loadOp</code> equal to <code>VK_ATTACHMENT_LOAD_OP_LOAD</code> or <code>VK_ATTACHMENT_LOAD_OP_DONT_CARE</code>."
+        },
+        {
+          "vuid": "VUID-VkRenderPassFragmentDensityMapCreateInfoEXT-fragmentDensityMapAttachment-02551",
+          "text": " If <code>fragmentDensityMapAttachment</code> is not <code>VK_ATTACHMENT_UNUSED</code>, <code>fragmentDensityMapAttachment</code> <strong class=\"purple\">must</strong> reference an attachment with a <code>storeOp</code> equal to <code>VK_ATTACHMENT_STORE_OP_DONT_CARE</code>."
+        },
+        {
+          "vuid": "VUID-VkRenderPassFragmentDensityMapCreateInfoEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_RENDER_PASS_FRAGMENT_DENSITY_MAP_CREATE_INFO_EXT</code>"
+        },
+        {
+          "vuid": "VUID-VkRenderPassFragmentDensityMapCreateInfoEXT-fragmentDensityMapAttachment-parameter",
+          "text": " <code>fragmentDensityMapAttachment</code> <strong class=\"purple\">must</strong> be a valid <code>VkAttachmentReference</code> structure"
         }
       ]
     },
@@ -3231,10 +3279,6 @@
           "text": " If neither the <code>VK_AMD_mixed_attachment_samples</code> nor the <code>VK_NV_framebuffer_mixed_samples</code> extensions are enabled, and if <code>pDepthStencilAttachment</code> is not <code>VK_ATTACHMENT_UNUSED</code> and any attachments in <code>pColorAttachments</code> are not <code>VK_ATTACHMENT_UNUSED</code>, they <strong class=\"purple\">must</strong> have the same sample count"
         },
         {
-          "vuid": "VUID-VkSubpassDescription-None-00852",
-          "text": " If any input attachments are <code>VK_ATTACHMENT_UNUSED</code>, then any pipelines bound during the subpass <strong class=\"purple\">must</strong> not access those input attachments from the fragment shader"
-        },
-        {
           "vuid": "VUID-VkSubpassDescription-attachment-00853",
           "text": " The <code>attachment</code> member of each element of <code>pPreserveAttachments</code> <strong class=\"purple\">must</strong> not be <code>VK_ATTACHMENT_UNUSED</code>"
         },
@@ -3243,8 +3287,8 @@
           "text": " Each element of <code>pPreserveAttachments</code> <strong class=\"purple\">must</strong> not also be an element of any other member of the subpass description"
         },
         {
-          "vuid": "VUID-VkSubpassDescription-layout-00855",
-          "text": " If any attachment is used as both an input attachment and a color or depth/stencil attachment, then each use <strong class=\"purple\">must</strong> use the same <code>layout</code>"
+          "vuid": "VUID-VkSubpassDescription-layout-02519",
+          "text": " If any attachment is used by more than one <a href=\"#VkAttachmentReference\">VkAttachmentReference</a> member, then each use <strong class=\"purple\">must</strong> use the same <code>layout</code>"
         },
         {
           "vuid": "VUID-VkSubpassDescription-flags-parameter",
@@ -3385,12 +3429,12 @@
       ],
       "(VK_VERSION_1_1,VK_KHR_multiview)": [
         {
-          "vuid": "VUID-VkSubpassDependency-dependencyFlags-00870",
-          "text": " If <code>dependencyFlags</code> includes <code>VK_DEPENDENCY_VIEW_LOCAL_BIT</code>, then both <code>srcSubpass</code> and <code>dstSubpass</code> <strong class=\"purple\">must</strong> not equal <code>VK_SUBPASS_EXTERNAL</code>"
+          "vuid": "VUID-VkSubpassDependency-dependencyFlags-02520",
+          "text": " If <code>dependencyFlags</code> includes <code>VK_DEPENDENCY_VIEW_LOCAL_BIT</code>, <code>srcSubpass</code> <strong class=\"purple\">must</strong> not be equal to <code>VK_SUBPASS_EXTERNAL</code>"
         },
         {
-          "vuid": "VUID-VkSubpassDependency-dependencyFlags-00871",
-          "text": " If <code>dependencyFlags</code> includes <code>VK_DEPENDENCY_VIEW_LOCAL_BIT</code>, then the render pass <strong class=\"purple\">must</strong> have multiview enabled"
+          "vuid": "VUID-VkSubpassDependency-dependencyFlags-02521",
+          "text": " If <code>dependencyFlags</code> includes <code>VK_DEPENDENCY_VIEW_LOCAL_BIT</code>, <code>dstSubpass</code> <strong class=\"purple\">must</strong> not be equal to <code>VK_SUBPASS_EXTERNAL</code>"
         },
         {
           "vuid": "VUID-VkSubpassDependency-srcSubpass-00872",
@@ -3451,12 +3495,12 @@
           "text": " If the <code>attachment</code> member of any element of <code>pInputAttachments</code>, <code>pColorAttachments</code>, <code>pResolveAttachments</code> or <code>pDepthStencilAttachment</code>, or any element of <code>pPreserveAttachments</code> in any given element of <code>pSubpasses</code> is not <code>VK_ATTACHMENT_UNUSED</code>, it <strong class=\"purple\">must</strong> be less than <code>attachmentCount</code>"
         },
         {
-          "vuid": "VUID-VkRenderPassCreateInfo2KHR-pPreserveAttachments-03052",
-          "text": " The value of any element of the <code>pPreserveAttachments</code> member in any given element of <code>pSubpasses</code> <strong class=\"purple\">must</strong> not be <code>VK_ATTACHMENT_UNUSED</code>"
+          "vuid": "VUID-VkRenderPassCreateInfo2KHR-pAttachments-02522",
+          "text": " For any member of <code>pAttachments</code> with a <code>loadOp</code> equal to <code>VK_ATTACHMENT_LOAD_OP_CLEAR</code>, the first use of that attachment <strong class=\"purple\">must</strong> not specify a <code>layout</code> equal to <code>VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL</code>, <code>VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL</code>, or <code>VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL</code>"
         },
         {
-          "vuid": "VUID-VkRenderPassCreateInfo2KHR-pAttachments-03053",
-          "text": " For any member of <code>pAttachments</code> with a <code>loadOp</code> equal to <code>VK_ATTACHMENT_LOAD_OP_CLEAR</code>, the first use of that attachment <strong class=\"purple\">must</strong> not specify a <code>layout</code> equal to <code>VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL</code> or <code>VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL</code>."
+          "vuid": "VUID-VkRenderPassCreateInfo2KHR-pAttachments-02523",
+          "text": " For any member of <code>pAttachments</code> with a <code>stencilLoadOp</code> equal to <code>VK_ATTACHMENT_LOAD_OP_CLEAR</code>, the first use of that attachment <strong class=\"purple\">must</strong> not specify a <code>layout</code> equal to <code>VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL</code>, <code>VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL</code>, or <code>VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL</code>."
         },
         {
           "vuid": "VUID-VkRenderPassCreateInfo2KHR-pDependencies-03054",
@@ -3487,16 +3531,28 @@
           "text": " For any element of <code>pDependencies</code> where its <code>srcSubpass</code> member equals its <code>dstSubpass</code> member, if the <code>viewMask</code> member of the corresponding element of <code>pSubpasses</code> includes more than one bit, its <code>dependencyFlags</code> member <strong class=\"purple\">must</strong> include <code>VK_DEPENDENCY_VIEW_LOCAL_BIT</code>"
         },
         {
+          "vuid": "VUID-VkRenderPassCreateInfo2KHR-viewMask-02524",
+          "text": " The <code>viewMask</code> member <strong class=\"purple\">must</strong> not include a bit at a position greater than the value of <a href=\"#VkPhysicalDeviceLimits\">VkPhysicalDeviceLimits</a>::<code>maxFramebufferLayers</code>"
+        },
+        {
+          "vuid": "VUID-VkRenderPassCreateInfo2KHR-attachment-02525",
+          "text": " If the <code>attachment</code> member of any element of the <code>pInputAttachments</code> member of any element of <code>pSubpasses</code> is not <code>VK_ATTACHMENT_UNUSED</code>, the <code>aspectMask</code> member of that element of <code>pInputAttachments</code> <strong class=\"purple\">must</strong> only include aspects that are present in images of the format specified by the element of <code>pAttachments</code> specified by <code>attachment</code>"
+        },
+        {
+          "vuid": "VUID-VkRenderPassCreateInfo2KHR-srcSubpass-02526",
+          "text": " The <code>srcSubpass</code> member of each element of <code>pDependencies</code> <strong class=\"purple\">must</strong> be less than <code>subpassCount</code>"
+        },
+        {
+          "vuid": "VUID-VkRenderPassCreateInfo2KHR-dstSubpass-02527",
+          "text": " The <code>dstSubpass</code> member of each element of <code>pDependencies</code> <strong class=\"purple\">must</strong> be less than <code>subpassCount</code>"
+        },
+        {
           "vuid": "VUID-VkRenderPassCreateInfo2KHR-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2_KHR</code>"
         },
         {
           "vuid": "VUID-VkRenderPassCreateInfo2KHR-pNext-pNext",
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
-        },
-        {
-          "vuid": "VUID-VkRenderPassCreateInfo2KHR-flags-parameter",
-          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkRenderPassCreateFlagBits\">VkRenderPassCreateFlagBits</a> values"
         },
         {
           "vuid": "VUID-VkRenderPassCreateInfo2KHR-pAttachments-parameter",
@@ -3517,12 +3573,6 @@
         {
           "vuid": "VUID-VkRenderPassCreateInfo2KHR-subpassCount-arraylength",
           "text": " <code>subpassCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
-        }
-      ],
-      "(VK_KHR_create_renderpass2)+(VK_EXT_transform_feedback)": [
-        {
-          "vuid": "VUID-VkRenderPassCreateInfo2KHR-None-02348",
-          "text": " If any two subpasses activate transform feedback to the same bound transform feedback buffers a subpass dependency <strong class=\"purple\">must</strong> be included (either directly or via some intermediate subpasses) between them"
         }
       ]
     },
@@ -3613,10 +3663,6 @@
           "text": " If neither the <code>VK_AMD_mixed_attachment_samples</code> nor the <code>VK_NV_framebuffer_mixed_samples</code> extensions are enabled, and if <code>pDepthStencilAttachment</code> is not <code>VK_ATTACHMENT_UNUSED</code> and any attachments in <code>pColorAttachments</code> are not <code>VK_ATTACHMENT_UNUSED</code>, they <strong class=\"purple\">must</strong> have the same sample count"
         },
         {
-          "vuid": "VUID-VkSubpassDescription2KHR-None-03072",
-          "text": " If any input attachments are <code>VK_ATTACHMENT_UNUSED</code>, then any pipelines bound during the subpass <strong class=\"purple\">must</strong> not access those input attachments from the fragment shader"
-        },
-        {
           "vuid": "VUID-VkSubpassDescription2KHR-attachment-03073",
           "text": " The <code>attachment</code> member of any element of <code>pPreserveAttachments</code> <strong class=\"purple\">must</strong> not be <code>VK_ATTACHMENT_UNUSED</code>"
         },
@@ -3625,8 +3671,8 @@
           "text": " Any given element of <code>pPreserveAttachments</code> <strong class=\"purple\">must</strong> not also be an element of any other member of the subpass description"
         },
         {
-          "vuid": "VUID-VkSubpassDescription2KHR-layout-03075",
-          "text": " If any attachment is used as both an input attachment and a color or depth/stencil attachment, then each use <strong class=\"purple\">must</strong> use the same <code>layout</code>"
+          "vuid": "VUID-VkSubpassDescription2KHR-layout-02528",
+          "text": " If any attachment is used by more than one <a href=\"#VkAttachmentReference\">VkAttachmentReference</a> member, then each use <strong class=\"purple\">must</strong> use the same <code>layout</code>"
         },
         {
           "vuid": "VUID-VkSubpassDescription2KHR-aspectMask-03175",
@@ -3635,6 +3681,10 @@
         {
           "vuid": "VUID-VkSubpassDescription2KHR-aspectMask-03176",
           "text": " The <code>aspectMask</code> member of any element of <code>pInputAttachments</code> <strong class=\"purple\">must</strong> not be <code>0</code>"
+        },
+        {
+          "vuid": "VUID-VkSubpassDescription2KHR-aspectMask-02529",
+          "text": " The <code>aspectMask</code> member of each element of <code>pInputAttachments</code> <strong class=\"purple\">must</strong> not include <code>VK_IMAGE_ASPECT_METADATA_BIT</code>"
         },
         {
           "vuid": "VUID-VkSubpassDescription2KHR-sType-sType",
@@ -3759,6 +3809,10 @@
         {
           "vuid": "VUID-VkSubpassDependency2KHR-srcSubpass-02245",
           "text": " If <code>srcSubpass</code> equals <code>dstSubpass</code>, and <code>srcStageMask</code> and <code>dstStageMask</code> both include a <a href=\"#synchronization-framebuffer-regions\">framebuffer-space stage</a>, then <code>dependencyFlags</code> <strong class=\"purple\">must</strong> include <code>VK_DEPENDENCY_BY_REGION_BIT</code>"
+        },
+        {
+          "vuid": "VUID-VkSubpassDependency2KHR-viewOffset-02530",
+          "text": " If <code>viewOffset</code> is not equal to <code>0</code>, <code>srcSubpass</code> <strong class=\"purple\">must</strong> not be equal to <code>dstSubpass</code>"
         },
         {
           "vuid": "VUID-VkSubpassDependency2KHR-dependencyFlags-03092",
@@ -3899,10 +3953,6 @@
           "text": " Each element of <code>pAttachments</code> <strong class=\"purple\">must</strong> have been created with a <code>samples</code> value that matches the <code>samples</code> value specified by the corresponding <code>VkAttachmentDescription</code> in <code>renderPass</code>"
         },
         {
-          "vuid": "VUID-VkFramebufferCreateInfo-pAttachments-00882",
-          "text": " Each element of <code>pAttachments</code> <strong class=\"purple\">must</strong> have dimensions at least as large as the corresponding framebuffer dimension"
-        },
-        {
           "vuid": "VUID-VkFramebufferCreateInfo-pAttachments-00883",
           "text": " Each element of <code>pAttachments</code> <strong class=\"purple\">must</strong> only specify a single mip level"
         },
@@ -3959,10 +4009,44 @@
           "text": " Both of <code>renderPass</code>, and the elements of <code>pAttachments</code> that are valid handles <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkDevice</code>"
         }
       ],
+      "(VK_EXT_fragment_density_map)": [
+        {
+          "vuid": "VUID-VkFramebufferCreateInfo-pAttachments-02552",
+          "text": " Each element of <code>pAttachments</code> that is used as a fragment density map attachment by <code>renderPass</code> <strong class=\"purple\">must</strong> not have been created with a <code>flags</code> value including <code>VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT</code>."
+        },
+        {
+          "vuid": "VUID-VkFramebufferCreateInfo-renderPass-02553",
+          "text": " If <code>renderPass</code> has a fragment density map attachment and <a href=\"#features-features-nonsubsampledimages\">non-subsample image feature</a> is not enabled, each element of <code>pAttachments</code> <strong class=\"purple\">must</strong> have been created with a <code>flags</code> value including <code>VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT</code> unless that element is the fragment density map attachment."
+        },
+        {
+          "vuid": "VUID-VkFramebufferCreateInfo-pAttachments-02554",
+          "text": " Each element of <code>pAttachments</code> <strong class=\"purple\">must</strong> have dimensions at least as large as the corresponding framebuffer dimension except for any element that is referenced by <code>fragmentDensityMapAttachment</code>"
+        },
+        {
+          "vuid": "VUID-VkFramebufferCreateInfo-pAttachments-02555",
+          "text": " An element of <code>pAttachments</code> that is referenced by <code>fragmentDensityMapAttachment</code> <strong class=\"purple\">must</strong> have a width at least as large as \\(\\lceil{\\frac{width}{maxFragmentDensityTexelSize_{width}}}\\rceil\\)"
+        },
+        {
+          "vuid": "VUID-VkFramebufferCreateInfo-pAttachments-02556",
+          "text": " An element of <code>pAttachments</code> that is referenced by <code>fragmentDensityMapAttachment</code> <strong class=\"purple\">must</strong> have a height at least as large as \\(\\lceil{\\frac{height}{maxFragmentDensityTexelSize_{height}}}\\rceil\\)"
+        }
+      ],
+      "!(VK_EXT_fragment_density_map)": [
+        {
+          "vuid": "VUID-VkFramebufferCreateInfo-pAttachments-00882",
+          "text": " Each element of <code>pAttachments</code> <strong class=\"purple\">must</strong> have dimensions at least as large as the corresponding framebuffer dimension"
+        }
+      ],
       "(VK_VERSION_1_1,VK_KHR_maintenance1)": [
         {
           "vuid": "VUID-VkFramebufferCreateInfo-pAttachments-00891",
           "text": " Each element of <code>pAttachments</code> that is a 2D or 2D array image view taken from a 3D image <strong class=\"purple\">must</strong> not be a depth/stencil format"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_multiview)": [
+        {
+          "vuid": "VUID-VkFramebufferCreateInfo-renderPass-02531",
+          "text": " If <code>renderPass</code> was specified with non-zero view masks, <code>layers</code> <strong class=\"purple\">must</strong> be greater than or equal to the greatest position of any bit included in any of those view masks"
         }
       ]
     },
@@ -4022,7 +4106,11 @@
         },
         {
           "vuid": "VUID-vkCmdBeginRenderPass-srcStageMask-00901",
-          "text": " The <code>srcStageMask</code> and <code>dstStageMask</code> members of any element of the <code>pDependencies</code> member of <a href=\"#VkRenderPassCreateInfo\">VkRenderPassCreateInfo</a> used to create <code>renderPass</code> <strong class=\"purple\">must</strong> be supported by the capabilities of the queue family identified by the <code>queueFamilyIndex</code> member of the <a href=\"#VkCommandPoolCreateInfo\">VkCommandPoolCreateInfo</a> used to create the command pool which <code>commandBuffer</code> was allocated from."
+          "text": " The <code>srcStageMask</code> and <code>dstStageMask</code> members of any element of the <code>pDependencies</code> member of <a href=\"#VkRenderPassCreateInfo\">VkRenderPassCreateInfo</a> used to create <code>renderPass</code> <strong class=\"purple\">must</strong> be supported by the capabilities of the queue family identified by the <code>queueFamilyIndex</code> member of the <a href=\"#VkCommandPoolCreateInfo\">VkCommandPoolCreateInfo</a> used to create the command pool which <code>commandBuffer</code> was allocated from"
+        },
+        {
+          "vuid": "VUID-vkCmdBeginRenderPass-framebuffer-02532",
+          "text": " For any attachment in <code>framebuffer</code> that is used by <code>renderPass</code> and is bound to memory locations that are also bound to another attachment used by <code>renderPass</code>, and if at least one of those uses causes either attachment to be written to, both attachments <strong class=\"purple\">must</strong> have had the <code>VK_ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT</code> set"
         },
         {
           "vuid": "VUID-vkCmdBeginRenderPass-commandBuffer-parameter",
@@ -4073,6 +4161,10 @@
           "text": " If any of the <code>initialLayout</code> or <code>finalLayout</code> member of the <code>VkAttachmentDescription</code> structures or the <code>layout</code> member of the <code>VkAttachmentReference</code> structures specified when creating the render pass specified in the <code>renderPass</code> member of <code>pRenderPassBegin</code> is <code>VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL</code> then the corresponding attachment image subresource of the framebuffer specified in the <code>framebuffer</code> member of <code>pRenderPassBegin</code> <strong class=\"purple\">must</strong> have been created with <code>VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT</code> set"
         },
         {
+          "vuid": "VUID-vkCmdBeginRenderPass2KHR-initialLayout-03096",
+          "text": " If any of the <code>initialLayout</code> or <code>finalLayout</code> member of the <code>VkAttachmentDescription</code> structures or the <code>layout</code> member of the <code>VkAttachmentReference</code> structures specified when creating the render pass specified in the <code>renderPass</code> member of <code>pRenderPassBegin</code> is <code>VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL</code>, <code>VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL</code>, <code>VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL</code>, or <code>VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL</code> then the corresponding attachment image subresource of the framebuffer specified in the <code>framebuffer</code> member of <code>pRenderPassBegin</code> <strong class=\"purple\">must</strong> have been created with <code>VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</code> set"
+        },
+        {
           "vuid": "VUID-vkCmdBeginRenderPass2KHR-initialLayout-03097",
           "text": " If any of the <code>initialLayout</code> or <code>finalLayout</code> member of the <code>VkAttachmentDescription</code> structures or the <code>layout</code> member of the <code>VkAttachmentReference</code> structures specified when creating the render pass specified in the <code>renderPass</code> member of <code>pRenderPassBegin</code> is <code>VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL</code> then the corresponding attachment image subresource of the framebuffer specified in the <code>framebuffer</code> member of <code>pRenderPassBegin</code> <strong class=\"purple\">must</strong> have been created with <code>VK_IMAGE_USAGE_SAMPLED_BIT</code> or <code>VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT</code> set"
         },
@@ -4090,7 +4182,11 @@
         },
         {
           "vuid": "VUID-vkCmdBeginRenderPass2KHR-srcStageMask-03101",
-          "text": " The <code>srcStageMask</code> and <code>dstStageMask</code> members of any element of the <code>pDependencies</code> member of <a href=\"#VkRenderPassCreateInfo\">VkRenderPassCreateInfo</a> used to create <code>renderPass</code> <strong class=\"purple\">must</strong> be supported by the capabilities of the queue family identified by the <code>queueFamilyIndex</code> member of the <a href=\"#VkCommandPoolCreateInfo\">VkCommandPoolCreateInfo</a> used to create the command pool which <code>commandBuffer</code> was allocated from."
+          "text": " The <code>srcStageMask</code> and <code>dstStageMask</code> members of any element of the <code>pDependencies</code> member of <a href=\"#VkRenderPassCreateInfo\">VkRenderPassCreateInfo</a> used to create <code>renderPass</code> <strong class=\"purple\">must</strong> be supported by the capabilities of the queue family identified by the <code>queueFamilyIndex</code> member of the <a href=\"#VkCommandPoolCreateInfo\">VkCommandPoolCreateInfo</a> used to create the command pool which <code>commandBuffer</code> was allocated from"
+        },
+        {
+          "vuid": "VUID-vkCmdBeginRenderPass2KHR-framebuffer-02533",
+          "text": " For any attachment in <code>framebuffer</code> that is used by <code>renderPass</code> and is bound to memory locations that are also bound to another attachment used by <code>renderPass</code>, and if at least one of those uses causes either attachment to be written to, both attachments <strong class=\"purple\">must</strong> have had the <code>VK_ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT</code> set"
         },
         {
           "vuid": "VUID-vkCmdBeginRenderPass2KHR-commandBuffer-parameter",
@@ -4120,18 +4216,6 @@
           "vuid": "VUID-vkCmdBeginRenderPass2KHR-bufferlevel",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a primary <code>VkCommandBuffer</code>"
         }
-      ],
-      "(VK_KHR_create_renderpass2)+!(VK_KHR_maintenance2)": [
-        {
-          "vuid": "VUID-vkCmdBeginRenderPass2KHR-initialLayout-03095",
-          "text": " If any of the <code>initialLayout</code> or <code>finalLayout</code> member of the <code>VkAttachmentDescription</code> structures or the <code>layout</code> member of the <code>VkAttachmentReference</code> structures specified when creating the render pass specified in the <code>renderPass</code> member of <code>pRenderPassBegin</code> is <code>VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL</code>, or <code>VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL</code> then the corresponding attachment image subresource of the framebuffer specified in the <code>framebuffer</code> member of <code>pRenderPassBegin</code> <strong class=\"purple\">must</strong> have been created with <code>VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</code> set"
-        }
-      ],
-      "(VK_KHR_create_renderpass2)+(VK_KHR_maintenance2)": [
-        {
-          "vuid": "VUID-vkCmdBeginRenderPass2KHR-initialLayout-03096",
-          "text": " If any of the <code>initialLayout</code> or <code>finalLayout</code> member of the <code>VkAttachmentDescription</code> structures or the <code>layout</code> member of the <code>VkAttachmentReference</code> structures specified when creating the render pass specified in the <code>renderPass</code> member of <code>pRenderPassBegin</code> is <code>VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL</code>, <code>VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL</code>, <code>VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL</code>, or <code>VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL</code> then the corresponding attachment image subresource of the framebuffer specified in the <code>framebuffer</code> member of <code>pRenderPassBegin</code> <strong class=\"purple\">must</strong> have been created with <code>VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</code> set"
-        }
       ]
     },
     "VkRenderPassBeginInfo": {
@@ -4139,10 +4223,6 @@
         {
           "vuid": "VUID-VkRenderPassBeginInfo-clearValueCount-00902",
           "text": " <code>clearValueCount</code> <strong class=\"purple\">must</strong> be greater than the largest attachment index in <code>renderPass</code> that specifies a <code>loadOp</code> (or <code>stencilLoadOp</code>, if the attachment has a depth/stencil format) of <code>VK_ATTACHMENT_LOAD_OP_CLEAR</code>"
-        },
-        {
-          "vuid": "VUID-VkRenderPassBeginInfo-clearValueCount-00903",
-          "text": " If <code>clearValueCount</code> is not <code>0</code>, <code>pClearValues</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>clearValueCount</code> valid <code>VkClearValue</code> unions"
         },
         {
           "vuid": "VUID-VkRenderPassBeginInfo-renderPass-00904",
@@ -4167,6 +4247,10 @@
         {
           "vuid": "VUID-VkRenderPassBeginInfo-framebuffer-parameter",
           "text": " <code>framebuffer</code> <strong class=\"purple\">must</strong> be a valid <code>VkFramebuffer</code> handle"
+        },
+        {
+          "vuid": "VUID-VkRenderPassBeginInfo-pClearValues-parameter",
+          "text": " If <code>clearValueCount</code> is not <code>0</code>, <code>pClearValues</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>clearValueCount</code> <code>VkClearValue</code> unions"
         },
         {
           "vuid": "VUID-VkRenderPassBeginInfo-commonparent",
@@ -5205,7 +5289,7 @@
       ],
       "(VK_EXT_depth_range_unrestricted)": [
         {
-          "vuid": "VUID-VkGraphicsPipelineCreateInfo-pDynamicStates-00755",
+          "vuid": "VUID-VkGraphicsPipelineCreateInfo-pDynamicStates-02510",
           "text": " If the <code><a href=\"#VK_EXT_depth_range_unrestricted\">VK_EXT_depth_range_unrestricted</a></code> extension is not enabled and no element of the <code>pDynamicStates</code> member of <code>pDynamicState</code> is <code>VK_DYNAMIC_STATE_DEPTH_BOUNDS</code>, and the <code>depthBoundsTestEnable</code> member of <code>pDepthStencilState</code> is <code>VK_TRUE</code>, the <code>minDepthBounds</code> and <code>maxDepthBounds</code> members of <code>pDepthStencilState</code> <strong class=\"purple\">must</strong> be between <code>0.0</code> and <code>1.0</code>, inclusive"
         }
       ],
@@ -6316,6 +6400,18 @@
         }
       ]
     },
+    "VkMemoryWin32HandlePropertiesKHR": {
+      "(VK_KHR_external_memory_win32)": [
+        {
+          "vuid": "VUID-VkMemoryWin32HandlePropertiesKHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_MEMORY_WIN32_HANDLE_PROPERTIES_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkMemoryWin32HandlePropertiesKHR-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        }
+      ]
+    },
     "VkImportMemoryFdInfoKHR": {
       "(VK_KHR_external_memory_fd)": [
         {
@@ -7092,11 +7188,11 @@
         },
         {
           "vuid": "VUID-VkBufferViewCreateInfo-range-00929",
-          "text": " If <code>range</code> is not equal to <code>VK_WHOLE_SIZE</code>, <code>range</code> <strong class=\"purple\">must</strong> be a multiple of the element size of <code>format</code>"
+          "text": " If <code>range</code> is not equal to <code>VK_WHOLE_SIZE</code>, <code>range</code> <strong class=\"purple\">must</strong> be an integer multiple of the texel block size of <code>format</code>"
         },
         {
           "vuid": "VUID-VkBufferViewCreateInfo-range-00930",
-          "text": " If <code>range</code> is not equal to <code>VK_WHOLE_SIZE</code>, <code>range</code> divided by the element size of <code>format</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceLimits</code>::<code>maxTexelBufferElements</code>"
+          "text": " If <code>range</code> is not equal to <code>VK_WHOLE_SIZE</code>, <code>range</code> divided by the texel block size of <code>format</code>, multiplied by the number of texels per texel block for that format (as defined in the <a href=\"#features-formats-compatibility\">Compatible Formats</a> table), <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceLimits</code>::<code>maxTexelBufferElements</code>"
         },
         {
           "vuid": "VUID-VkBufferViewCreateInfo-offset-00931",
@@ -7356,7 +7452,7 @@
         },
         {
           "vuid": "VUID-VkImageCreateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDedicatedAllocationImageCreateInfoNV\">VkDedicatedAllocationImageCreateInfoNV</a>, <a href=\"#VkExternalFormatANDROID\">VkExternalFormatANDROID</a>, <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a>, <a href=\"#VkExternalMemoryImageCreateInfoNV\">VkExternalMemoryImageCreateInfoNV</a>, <a href=\"#VkImageDrmFormatModifierExplicitCreateInfoEXT\">VkImageDrmFormatModifierExplicitCreateInfoEXT</a>, <a href=\"#VkImageDrmFormatModifierListCreateInfoEXT\">VkImageDrmFormatModifierListCreateInfoEXT</a>, <a href=\"#VkImageFormatListCreateInfoKHR\">VkImageFormatListCreateInfoKHR</a>, or <a href=\"#VkImageSwapchainCreateInfoKHR\">VkImageSwapchainCreateInfoKHR</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDedicatedAllocationImageCreateInfoNV\">VkDedicatedAllocationImageCreateInfoNV</a>, <a href=\"#VkExternalFormatANDROID\">VkExternalFormatANDROID</a>, <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a>, <a href=\"#VkExternalMemoryImageCreateInfoNV\">VkExternalMemoryImageCreateInfoNV</a>, <a href=\"#VkImageDrmFormatModifierExplicitCreateInfoEXT\">VkImageDrmFormatModifierExplicitCreateInfoEXT</a>, <a href=\"#VkImageDrmFormatModifierListCreateInfoEXT\">VkImageDrmFormatModifierListCreateInfoEXT</a>, <a href=\"#VkImageFormatListCreateInfoKHR\">VkImageFormatListCreateInfoKHR</a>, <a href=\"#VkImageStencilUsageCreateInfoEXT\">VkImageStencilUsageCreateInfoEXT</a>, or <a href=\"#VkImageSwapchainCreateInfoKHR\">VkImageSwapchainCreateInfoKHR</a>"
         },
         {
           "vuid": "VUID-VkImageCreateInfo-sType-unique",
@@ -7451,6 +7547,40 @@
           "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExternalFormatANDROID\">VkExternalFormatANDROID</a> structure whose <code>externalFormat</code> member is not <code>0</code>, <code>tiling</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_TILING_OPTIMAL</code>."
         }
       ],
+      "(VK_EXT_fragment_density_map)": [
+        {
+          "vuid": "VUID-VkImageCreateInfo-flags-02557",
+          "text": " If <code>flags</code> contains <code>VK_IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT</code>, <code>imageType</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_TYPE_2D</code>"
+        },
+        {
+          "vuid": "VUID-VkImageCreateInfo-samples-02558",
+          "text": " If <code>samples</code> is not <code>VK_SAMPLE_COUNT_1_BIT</code>, <code>usage</code> <strong class=\"purple\">must</strong> not contain <code>VK_IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT</code>"
+        },
+        {
+          "vuid": "VUID-VkImageCreateInfo-usage-02559",
+          "text": " If <code>usage</code> includes <code>VK_IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT</code>, <code>extent.width</code> <strong class=\"purple\">must</strong> be less than or equal to \\(\\lceil{\\frac{maxFramebufferWidth}{minFragmentDensityTexelSize_{width}}}\\rceil\\)"
+        },
+        {
+          "vuid": "VUID-VkImageCreateInfo-usage-02560",
+          "text": " If <code>usage</code> includes <code>VK_IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT</code>, <code>extent.height</code> <strong class=\"purple\">must</strong> be less than or equal to \\(\\lceil{\\frac{maxFramebufferHeight}{minFragmentDensityTexelSize_{height}}}\\rceil\\)"
+        },
+        {
+          "vuid": "VUID-VkImageCreateInfo-flags-02565",
+          "text": " If <code>flags</code> contains <code>VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT</code>, <code>tiling</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_TILING_OPTIMAL</code>"
+        },
+        {
+          "vuid": "VUID-VkImageCreateInfo-flags-02566",
+          "text": " If <code>flags</code> contains <code>VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT</code>, <code>imageType</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_TYPE_2D</code>"
+        },
+        {
+          "vuid": "VUID-VkImageCreateInfo-flags-02567",
+          "text": " If <code>flags</code> contains <code>VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT</code>, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT</code>"
+        },
+        {
+          "vuid": "VUID-VkImageCreateInfo-flags-02568",
+          "text": " If <code>flags</code> contains <code>VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT</code>, <code>mipLevels</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+        }
+      ],
       "(VK_VERSION_1_1,VK_KHR_maintenance1)": [
         {
           "vuid": "VUID-VkImageCreateInfo-flags-00950",
@@ -7513,8 +7643,20 @@
       ],
       "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
         {
-          "vuid": "VUID-VkImageCreateInfo-format-01574",
-          "text": " If the image <code>format</code> is one of those listed in <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\">Formats requiring sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion for <code>VK_IMAGE_ASPECT_COLOR_BIT</code> image views</a>:"
+          "vuid": "VUID-VkImageCreateInfo-format-02561",
+          "text": " If the image <code>format</code> is one of those listed in <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\">Formats requiring sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion for <code>VK_IMAGE_ASPECT_COLOR_BIT</code> image views</a>, then <code>mipLevels</code> <strong class=\"purple\">must</strong> be 1"
+        },
+        {
+          "vuid": "VUID-VkImageCreateInfo-format-02562",
+          "text": " If the image <code>format</code> is one of those listed in <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\">Formats requiring sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion for <code>VK_IMAGE_ASPECT_COLOR_BIT</code> image views</a>, <code>samples</code> must be <code>VK_SAMPLE_COUNT_1_BIT</code>"
+        },
+        {
+          "vuid": "VUID-VkImageCreateInfo-format-02563",
+          "text": " If the image <code>format</code> is one of those listed in <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\">Formats requiring sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion for <code>VK_IMAGE_ASPECT_COLOR_BIT</code> image views</a>, <code>imageType</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_TYPE_2D</code>"
+        },
+        {
+          "vuid": "VUID-VkImageCreateInfo-format-02564",
+          "text": " If the image <code>format</code> is one of those listed in <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\">Formats requiring sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion for <code>VK_IMAGE_ASPECT_COLOR_BIT</code> image views</a>, <code>arrayLayers</code> <strong class=\"purple\">must</strong> be 1"
         },
         {
           "vuid": "VUID-VkImageCreateInfo-imageCreateFormatFeatures-02260",
@@ -7543,6 +7685,28 @@
         {
           "vuid": "VUID-VkImageCreateInfo-flags-01533",
           "text": " If <code>flags</code> contains <code>VK_IMAGE_CREATE_SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_BIT_EXT</code> <code>format</code> <strong class=\"purple\">must</strong> be a depth or depth/stencil format"
+        }
+      ],
+      "(VK_EXT_separate_stencil_usage)": [
+        {
+          "vuid": "VUID-VkImageCreateInfo-format-02534",
+          "text": " If <code>format</code> is a depth-stencil format and the <code>pNext</code> chain contains an instance of <a href=\"#VkImageStencilUsageCreateInfoEXT\">VkImageStencilUsageCreateInfoEXT</a>, then its <code>stencilUsage</code> member <strong class=\"purple\">must</strong> only include <code>VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</code> if <code>usage</code> also includes it"
+        },
+        {
+          "vuid": "VUID-VkImageCreateInfo-format-02535",
+          "text": " If <code>format</code> is a depth-stencil format and the <code>pNext</code> chain contains an instance of <a href=\"#VkImageStencilUsageCreateInfoEXT\">VkImageStencilUsageCreateInfoEXT</a>, then its <code>stencilUsage</code> member <strong class=\"purple\">must</strong> only include <code>VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT</code> if <code>usage</code> also includes it"
+        },
+        {
+          "vuid": "VUID-VkImageCreateInfo-Format-02536",
+          "text": " If <code>Format</code> is a depth-stencil format and the <code>pNext</code> chain contains an instance of <a href=\"#VkImageStencilUsageCreateInfoEXT\">VkImageStencilUsageCreateInfoEXT</a> with its <code>stencilUsage</code> member including <code>VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT</code>, <code>extent.width</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceLimits</code>::<code>maxFramebufferWidth</code>"
+        },
+        {
+          "vuid": "VUID-VkImageCreateInfo-format-02537",
+          "text": " If <code>format</code> is a depth-stencil format and the <code>pNext</code> chain contains an instance of <a href=\"#VkImageStencilUsageCreateInfoEXT\">VkImageStencilUsageCreateInfoEXT</a> with its <code>stencilUsage</code> member including <code>VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT</code>, <code>extent.height</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceLimits</code>::<code>maxFramebufferHeight</code>"
+        },
+        {
+          "vuid": "VUID-VkImageCreateInfo-format-02538",
+          "text": " If the <a href=\"#features-features-shaderStorageImageMultisample\">multisampled storage images</a> feature is not enabled, <code>format</code> is a depth-stencil format and the <code>pNext</code> chain contains an instance of <a href=\"#VkImageStencilUsageCreateInfoEXT\">VkImageStencilUsageCreateInfoEXT</a> with its <code>stencilUsage</code> including <code>VK_IMAGE_USAGE_STORAGE_BIT</code>, <code>samples</code> <strong class=\"purple\">must</strong> be <code>VK_SAMPLE_COUNT_1_BIT</code>"
         }
       ],
       "(VK_NV_corner_sampled_image)": [
@@ -7575,6 +7739,26 @@
         {
           "vuid": "VUID-VkImageCreateInfo-tiling-02084",
           "text": " If <code>usage</code> includes <code>VK_IMAGE_USAGE_SHADING_RATE_IMAGE_BIT_NV</code>, <code>tiling</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_TILING_OPTIMAL</code>."
+        }
+      ]
+    },
+    "VkImageStencilUsageCreateInfoEXT": {
+      "(VK_EXT_separate_stencil_usage)": [
+        {
+          "vuid": "VUID-VkImageStencilUsageCreateInfoEXT-stencilUsage-02539",
+          "text": " If <code>stencilUsage</code> includes <code>VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT</code>, then bits other than <code>VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</code>, and <code>VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT</code> <strong class=\"purple\">must</strong> not be set"
+        },
+        {
+          "vuid": "VUID-VkImageStencilUsageCreateInfoEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO_EXT</code>"
+        },
+        {
+          "vuid": "VUID-VkImageStencilUsageCreateInfoEXT-stencilUsage-parameter",
+          "text": " <code>stencilUsage</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkImageUsageFlagBits\">VkImageUsageFlagBits</a> values"
+        },
+        {
+          "vuid": "VUID-VkImageStencilUsageCreateInfoEXT-stencilUsage-requiredbitmask",
+          "text": " <code>stencilUsage</code> <strong class=\"purple\">must</strong> not be <code>0</code>"
         }
       ]
     },
@@ -7953,8 +8137,8 @@
           "text": " Each <code>sType</code> member in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
-          "vuid": "VUID-VkImageViewCreateInfo-flags-zerobitmask",
-          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be <code>0</code>"
+          "vuid": "VUID-VkImageViewCreateInfo-flags-parameter",
+          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkImageViewCreateFlagBits\">VkImageViewCreateFlagBits</a> values"
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-image-parameter",
@@ -7999,24 +8183,42 @@
           "text": " If <code>subresourceRange</code>::<code>layerCount</code> is not <code>VK_REMAINING_ARRAY_LAYERS</code>, <code>image</code> is a 3D image created with <code>VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT</code> set, and <code>viewType</code> is <code>VK_IMAGE_VIEW_TYPE_2D</code> or <code>VK_IMAGE_VIEW_TYPE_2D_ARRAY</code>, <code>subresourceRange</code>::<code>layerCount</code> <strong class=\"purple\">must</strong> be non-zero and <span class=\"eq\"><code>subresourceRange</code>::<code>baseArrayLayer</code> &#43; <code>subresourceRange</code>::<code>layerCount</code></span> <strong class=\"purple\">must</strong> be less than or equal to the <code>extent.depth</code> specified in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> when <code>image</code> was created"
         }
       ],
-      "!(VK_NV_shading_rate_image)": [
+      "!(VK_EXT_fragment_density_map)+!(VK_NV_shading_rate_image)": [
         {
           "vuid": "VUID-VkImageViewCreateInfo-image-01007",
           "text": " <code>image</code> <strong class=\"purple\">must</strong> have been created with a <code>usage</code> value containing at least one of <code>VK_IMAGE_USAGE_SAMPLED_BIT</code>, <code>VK_IMAGE_USAGE_STORAGE_BIT</code>, <code>VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT</code>, <code>VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</code>, or <code>VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT</code>"
         }
       ],
-      "(VK_NV_shading_rate_image)": [
+      "!(VK_EXT_fragment_density_map)+(VK_NV_shading_rate_image)": [
         {
           "vuid": "VUID-VkImageViewCreateInfo-image-02085",
           "text": " <code>image</code> <strong class=\"purple\">must</strong> have been created with a <code>usage</code> value containing at least one of <code>VK_IMAGE_USAGE_SAMPLED_BIT</code>, <code>VK_IMAGE_USAGE_STORAGE_BIT</code>, <code>VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT</code>, <code>VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</code>, <code>VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT</code>, or <code>VK_IMAGE_USAGE_SHADING_RATE_IMAGE_BIT_NV</code>"
+        }
+      ],
+      "(VK_EXT_fragment_density_map)+!(VK_NV_shading_rate_image)": [
+        {
+          "vuid": "VUID-VkImageViewCreateInfo-image-02569",
+          "text": " <code>image</code> <strong class=\"purple\">must</strong> have been created with a <code>usage</code> value containing at least one of <code>VK_IMAGE_USAGE_SAMPLED_BIT</code>, <code>VK_IMAGE_USAGE_STORAGE_BIT</code>, <code>VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT</code>, <code>VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</code>, <code>VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT</code>, or <code>VK_IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT</code>"
+        }
+      ],
+      "(VK_EXT_fragment_density_map)+(VK_NV_shading_rate_image)": [
+        {
+          "vuid": "VUID-VkImageViewCreateInfo-image-02570",
+          "text": " <code>image</code> <strong class=\"purple\">must</strong> have been created with a <code>usage</code> value containing at least one of <code>VK_IMAGE_USAGE_SAMPLED_BIT</code>, <code>VK_IMAGE_USAGE_STORAGE_BIT</code>, <code>VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT</code>, <code>VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</code>, <code>VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT</code>, <code>VK_IMAGE_USAGE_SHADING_RATE_IMAGE_BIT_NV</code>, or <code>VK_IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT</code>"
+        }
+      ],
+      "(VK_EXT_fragment_density_map)": [
+        {
+          "vuid": "VUID-VkImageViewCreateInfo-image-02571",
+          "text": " If <code>image</code> was created with <code>usage</code> containing <code>VK_IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT</code>, <code>subresourceRange.levelCount</code> <strong class=\"purple\">must</strong> be <code>1</code>"
         },
         {
-          "vuid": "VUID-VkImageViewCreateInfo-image-02086",
-          "text": " If <code>image</code> was created with <code>usage</code> containing <code>VK_IMAGE_USAGE_SHADING_RATE_IMAGE_BIT_NV</code>, <code>viewType</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_VIEW_TYPE_2D</code> or <code>VK_IMAGE_VIEW_TYPE_2D_ARRAY</code>"
+          "vuid": "VUID-VkImageViewCreateInfo-flags-02572",
+          "text": " If <a href=\"#features-features-fragmentdensitymapdynamic\">dynamic fragment density map</a> feature is not enabled, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DYNAMIC_BIT_EXT</code>"
         },
         {
-          "vuid": "VUID-VkImageViewCreateInfo-image-02087",
-          "text": " If <code>image</code> was created with <code>usage</code> containing <code>VK_IMAGE_USAGE_SHADING_RATE_IMAGE_BIT_NV</code>, <code>format</code> <strong class=\"purple\">must</strong> be <code>VK_FORMAT_R8_UINT</code>"
+          "vuid": "VUID-VkImageViewCreateInfo-image-02573",
+          "text": " If <a href=\"#features-features-fragmentdensitymapdynamic\">dynamic fragment density map</a> feature is not enabled and <code>image</code> was created with <code>usage</code> containing <code>VK_IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT</code>, <code>flags</code> <strong class=\"purple\">must</strong> not contain any of <code>VK_IMAGE_CREATE_PROTECTED_BIT</code>, <code>VK_IMAGE_CREATE_SPARSE_BINDING_BIT</code>, <code>VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</code>, or <code>VK_IMAGE_CREATE_SPARSE_ALIASED_BIT</code>"
         }
       ],
       "!(VK_VERSION_1_1,VK_KHR_maintenance1)": [
@@ -8095,6 +8297,16 @@
         {
           "vuid": "VUID-VkImageViewCreateInfo-image-02401",
           "text": " If <code>image</code> has an <a href=\"#memory-external-android-hardware-buffer-external-formats\">external format</a>, all members of <code>components</code> <strong class=\"purple\">must</strong> be <code>VK_COMPONENT_SWIZZLE_IDENTITY</code>."
+        }
+      ],
+      "(VK_NV_shading_rate_image)": [
+        {
+          "vuid": "VUID-VkImageViewCreateInfo-image-02086",
+          "text": " If <code>image</code> was created with <code>usage</code> containing <code>VK_IMAGE_USAGE_SHADING_RATE_IMAGE_BIT_NV</code>, <code>viewType</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_VIEW_TYPE_2D</code> or <code>VK_IMAGE_VIEW_TYPE_2D_ARRAY</code>"
+        },
+        {
+          "vuid": "VUID-VkImageViewCreateInfo-image-02087",
+          "text": " If <code>image</code> was created with <code>usage</code> containing <code>VK_IMAGE_USAGE_SHADING_RATE_IMAGE_BIT_NV</code>, <code>format</code> <strong class=\"purple\">must</strong> be <code>VK_FORMAT_R8_UINT</code>"
         }
       ]
     },
@@ -9441,8 +9653,8 @@
           "text": " Each <code>sType</code> member in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
-          "vuid": "VUID-VkSamplerCreateInfo-flags-zerobitmask",
-          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be <code>0</code>"
+          "vuid": "VUID-VkSamplerCreateInfo-flags-parameter",
+          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkSamplerCreateFlagBits\">VkSamplerCreateFlagBits</a> values"
         },
         {
           "vuid": "VUID-VkSamplerCreateInfo-magFilter-parameter",
@@ -9501,6 +9713,36 @@
         {
           "vuid": "VUID-VkSamplerCreateInfo-compareEnable-01423",
           "text": " If <code>compareEnable</code> is <code>VK_TRUE</code>, the <code>reductionMode</code> member of <a href=\"#VkSamplerReductionModeCreateInfoEXT\">VkSamplerReductionModeCreateInfoEXT</a> <strong class=\"purple\">must</strong> be <code>VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE_EXT</code>"
+        }
+      ],
+      "(VK_EXT_fragment_density_map)": [
+        {
+          "vuid": "VUID-VkSamplerCreateInfo-flags-02574",
+          "text": " If <code>flags</code> includes <code>VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT</code>, then <code>minFilter</code> and <code>magFilter</code> <strong class=\"purple\">must</strong> be equal."
+        },
+        {
+          "vuid": "VUID-VkSamplerCreateInfo-flags-02575",
+          "text": " If <code>flags</code> includes <code>VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT</code>, then <code>mipmapMode</code> <strong class=\"purple\">must</strong> be <code>VK_SAMPLER_MIPMAP_MODE_NEAREST</code>."
+        },
+        {
+          "vuid": "VUID-VkSamplerCreateInfo-flags-02576",
+          "text": " If <code>flags</code> includes <code>VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT</code>, then <code>minLod</code> and <code>maxLod</code> <strong class=\"purple\">must</strong> be zero."
+        },
+        {
+          "vuid": "VUID-VkSamplerCreateInfo-flags-02577",
+          "text": " If <code>flags</code> includes <code>VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT</code>, then <code>addressModeU</code> and <code>addressModeV</code> <strong class=\"purple\">must</strong> each be either <code>VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE</code> or <code>VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER</code>."
+        },
+        {
+          "vuid": "VUID-VkSamplerCreateInfo-flags-02578",
+          "text": " If <code>flags</code> includes <code>VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT</code>, then <code>anisotropyEnable</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>."
+        },
+        {
+          "vuid": "VUID-VkSamplerCreateInfo-flags-02579",
+          "text": " If <code>flags</code> includes <code>VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT</code>, then <code>compareEnable</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>."
+        },
+        {
+          "vuid": "VUID-VkSamplerCreateInfo-flags-02580",
+          "text": " If <code>flags</code> includes <code>VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT</code>, then <code>unnormalizedCoordinates</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>."
         }
       ]
     },
@@ -9615,8 +9857,24 @@
           "text": " <code>format</code> <strong class=\"purple\">must</strong> represent unsigned normalized values (i.e. the format must be a <code>UNORM</code> format)"
         },
         {
-          "vuid": "VUID-VkSamplerYcbcrConversionCreateInfo-None-01654",
-          "text": " If the format has a <code>_422</code> or <code>_420</code> suffix:"
+          "vuid": "VUID-VkSamplerYcbcrConversionCreateInfo-components-02581",
+          "text": " If the format has a <code>_422</code> or <code>_420</code> suffix, then <code>components.g</code> <strong class=\"purple\">must</strong> be <code>VK_COMPONENT_SWIZZLE_IDENTITY</code>"
+        },
+        {
+          "vuid": "VUID-VkSamplerYcbcrConversionCreateInfo-components-02582",
+          "text": " If the format has a <code>_422</code> or <code>_420</code> suffix, then <code>components.a</code> <strong class=\"purple\">must</strong> be <code>VK_COMPONENT_SWIZZLE_IDENTITY</code>, <code>VK_COMPONENT_SWIZZLE_ONE</code>, or <code>VK_COMPONENT_SWIZZLE_ZERO</code>"
+        },
+        {
+          "vuid": "VUID-VkSamplerYcbcrConversionCreateInfo-components-02583",
+          "text": " If the format has a <code>_422</code> or <code>_420</code> suffix, then <code>components.r</code> <strong class=\"purple\">must</strong> be <code>VK_COMPONENT_SWIZZLE_IDENTITY</code> or <code>VK_COMPONENT_SWIZZLE_B</code>"
+        },
+        {
+          "vuid": "VUID-VkSamplerYcbcrConversionCreateInfo-components-02584",
+          "text": " If the format has a <code>_422</code> or <code>_420</code> suffix, then <code>components.b</code> <strong class=\"purple\">must</strong> be <code>VK_COMPONENT_SWIZZLE_IDENTITY</code> or <code>VK_COMPONENT_SWIZZLE_R</code>"
+        },
+        {
+          "vuid": "VUID-VkSamplerYcbcrConversionCreateInfo-components-02585",
+          "text": " If the format has a <code>_422</code> or <code>_420</code> suffix, and if either <code>components.r</code> or <code>components.b</code> is <code>VK_COMPONENT_SWIZZLE_IDENTITY</code>, both values <strong class=\"purple\">must</strong> be <code>VK_COMPONENT_SWIZZLE_IDENTITY</code>"
         },
         {
           "vuid": "VUID-VkSamplerYcbcrConversionCreateInfo-ycbcrModel-01655",
@@ -12127,7 +12385,7 @@
       ],
       "!(VK_EXT_depth_range_unrestricted)": [
         {
-          "vuid": "VUID-VkClearDepthStencilValue-depth-00022",
+          "vuid": "VUID-VkClearDepthStencilValue-depth-02506",
           "text": " <code>depth</code> <strong class=\"purple\">must</strong> be between <code>0.0</code> and <code>1.0</code>, inclusive"
         }
       ]
@@ -12500,7 +12758,7 @@
         },
         {
           "vuid": "VUID-vkCmdCopyImage-srcImage-00135",
-          "text": " The <a href=\"#VkFormat\">VkFormat</a> of each of <code>srcImage</code> and <code>dstImage</code> <strong class=\"purple\">must</strong> be compatible, as defined <a href=\"#copies-images-format-compatibility\">below</a>"
+          "text": " The <a href=\"#VkFormat\">VkFormat</a> of each of <code>srcImage</code> and <code>dstImage</code> <strong class=\"purple\">must</strong> be compatible, as defined <a href=\"#copies-images-format-compatibility\">above</a>"
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
@@ -12514,7 +12772,7 @@
         },
         {
           "vuid": "VUID-vkCmdCopyImage-srcImage-01548",
-          "text": " If the <a href=\"#VkFormat\">VkFormat</a> of each of <code>srcImage</code> and <code>dstImage</code> is not a <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\"><em>multi-planar format</em></a>, the <a href=\"#VkFormat\">VkFormat</a> of each of <code>srcImage</code> and <code>dstImage</code> <strong class=\"purple\">must</strong> be compatible, as defined <a href=\"#copies-images-format-compatibility\">below</a>"
+          "text": " If the <a href=\"#VkFormat\">VkFormat</a> of each of <code>srcImage</code> and <code>dstImage</code> is not a <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\"><em>multi-planar format</em></a>, the <a href=\"#VkFormat\">VkFormat</a> of each of <code>srcImage</code> and <code>dstImage</code> <strong class=\"purple\">must</strong> be compatible, as defined <a href=\"#copies-images-format-compatibility\">above</a>"
         },
         {
           "vuid": "VUID-vkCmdCopyImage-None-01549",
@@ -12557,6 +12815,12 @@
         {
           "vuid": "VUID-vkCmdCopyImage-commandBuffer-01827",
           "text": " If <code>commandBuffer</code> is a protected command buffer, then <code>dstImage</code> <strong class=\"purple\">must</strong> not be an unprotected image"
+        }
+      ],
+      "(VK_EXT_fragment_density_map)": [
+        {
+          "vuid": "VUID-vkCmdCopyImage-dstImage-02542",
+          "text": " <code>dstImage</code> and <code>srcImage</code> <strong class=\"purple\">must</strong> not have been created with <code>flags</code> containing <code>VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT</code>"
         }
       ]
     },
@@ -12916,6 +13180,12 @@
           "vuid": "VUID-vkCmdCopyBufferToImage-commandBuffer-01830",
           "text": " If <code>commandBuffer</code> is a protected command buffer, then <code>dstImage</code> <strong class=\"purple\">must</strong> not be an unprotected image"
         }
+      ],
+      "(VK_EXT_fragment_density_map)": [
+        {
+          "vuid": "VUID-vkCmdCopyBufferToImage-dstImage-02543",
+          "text": " <code>dstImage</code> <strong class=\"purple\">must</strong> not have been created with <code>flags</code> containing <code>VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT</code>"
+        }
       ]
     },
     "vkCmdCopyImageToBuffer": {
@@ -13040,13 +13310,19 @@
           "vuid": "VUID-vkCmdCopyImageToBuffer-commandBuffer-01833",
           "text": " If <code>commandBuffer</code> is a protected command buffer, then <code>dstBuffer</code> <strong class=\"purple\">must</strong> not be an unprotected buffer"
         }
+      ],
+      "(VK_EXT_fragment_density_map)": [
+        {
+          "vuid": "VUID-vkCmdCopyImageToBuffer-srcImage-02544",
+          "text": " <code>srcImage</code> <strong class=\"purple\">must</strong> not have been created with <code>flags</code> containing <code>VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT</code>"
+        }
       ]
     },
     "VkBufferImageCopy": {
       "!(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
         {
           "vuid": "VUID-VkBufferImageCopy-bufferOffset-00193",
-          "text": " If the calling command&#8217;s <code>VkImage</code> parameter&#8217;s format is not a depth/stencil format, then <code>bufferOffset</code> <strong class=\"purple\">must</strong> be a multiple of the format&#8217;s element size"
+          "text": " If the calling command&#8217;s <code>VkImage</code> parameter&#8217;s format is not a depth/stencil format, then <code>bufferOffset</code> <strong class=\"purple\">must</strong> be a multiple of the format&#8217;s texel block size."
         },
         {
           "vuid": "VUID-VkBufferImageCopy-bufferRowLength-00203",
@@ -13080,7 +13356,7 @@
       "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
         {
           "vuid": "VUID-VkBufferImageCopy-bufferOffset-01558",
-          "text": " If the calling command&#8217;s <code>VkImage</code> parameter&#8217;s format is not a depth/stencil format or a <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\">multi-planar format</a>, then <code>bufferOffset</code> <strong class=\"purple\">must</strong> be a multiple of the format&#8217;s element size"
+          "text": " If the calling command&#8217;s <code>VkImage</code> parameter&#8217;s format is not a depth/stencil format or a <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\">multi-planar format</a>, then <code>bufferOffset</code> <strong class=\"purple\">must</strong> be a multiple of the format&#8217;s texel block size."
         },
         {
           "vuid": "VUID-VkBufferImageCopy-bufferOffset-01559",
@@ -13372,6 +13648,12 @@
           "vuid": "VUID-vkCmdBlitImage-commandBuffer-01836",
           "text": " If <code>commandBuffer</code> is a protected command buffer, then <code>dstImage</code> <strong class=\"purple\">must</strong> not be an unprotected image"
         }
+      ],
+      "(VK_EXT_fragment_density_map)": [
+        {
+          "vuid": "VUID-vkCmdBlitImage-dstImage-02545",
+          "text": " <code>dstImage</code> and <code>srcImage</code> <strong class=\"purple\">must</strong> not have been created with <code>flags</code> containing <code>VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT</code>"
+        }
       ]
     },
     "VkImageBlit": {
@@ -13586,6 +13868,12 @@
           "vuid": "VUID-vkCmdResolveImage-commandBuffer-01839",
           "text": " If <code>commandBuffer</code> is a protected command buffer, then <code>dstImage</code> <strong class=\"purple\">must</strong> not be an unprotected image"
         }
+      ],
+      "(VK_EXT_fragment_density_map)": [
+        {
+          "vuid": "VUID-vkCmdResolveImage-dstImage-02546",
+          "text": " <code>dstImage</code> and <code>srcImage</code> <strong class=\"purple\">must</strong> not have been created with <code>flags</code> containing <code>VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT</code>"
+        }
       ]
     },
     "VkImageResolve": {
@@ -13769,6 +14057,12 @@
         {
           "vuid": "VUID-vkCmdBindIndexBuffer-commonparent",
           "text": " Both of <code>buffer</code>, and <code>commandBuffer</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkDevice</code>"
+        }
+      ],
+      "(VK_NV_ray_tracing)": [
+        {
+          "vuid": "VUID-vkCmdBindIndexBuffer-indexType-02507",
+          "text": " <code>indexType</code> <strong class=\"purple\">must</strong> not be VK_INDEX_TYPE_NONE_NV."
         }
       ]
     },
@@ -15309,6 +15603,22 @@
         {
           "vuid": "VUID-VkConditionalRenderingBeginInfoEXT-offset-01984",
           "text": " <code>offset</code> <strong class=\"purple\">must</strong> be a multiple of 4"
+        },
+        {
+          "vuid": "VUID-VkConditionalRenderingBeginInfoEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_CONDITIONAL_RENDERING_BEGIN_INFO_EXT</code>"
+        },
+        {
+          "vuid": "VUID-VkConditionalRenderingBeginInfoEXT-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkConditionalRenderingBeginInfoEXT-buffer-parameter",
+          "text": " <code>buffer</code> <strong class=\"purple\">must</strong> be a valid <code>VkBuffer</code> handle"
+        },
+        {
+          "vuid": "VUID-VkConditionalRenderingBeginInfoEXT-flags-parameter",
+          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkConditionalRenderingFlagBitsEXT\">VkConditionalRenderingFlagBitsEXT</a> values"
         }
       ]
     },
@@ -16461,11 +16771,11 @@
       ],
       "!(VK_EXT_depth_range_unrestricted)": [
         {
-          "vuid": "VUID-VkViewport-minDepth-01234",
+          "vuid": "VUID-VkViewport-minDepth-02540",
           "text": " <code>minDepth</code> <strong class=\"purple\">must</strong> be between <code>0.0</code> and <code>1.0</code>, inclusive"
         },
         {
-          "vuid": "VUID-VkViewport-maxDepth-01235",
+          "vuid": "VUID-VkViewport-maxDepth-02541",
           "text": " <code>maxDepth</code> <strong class=\"purple\">must</strong> be between <code>0.0</code> and <code>1.0</code>, inclusive"
         }
       ]
@@ -17263,11 +17573,11 @@
       ],
       "!(VK_EXT_depth_range_unrestricted)": [
         {
-          "vuid": "VUID-vkCmdSetDepthBounds-minDepthBounds-00600",
+          "vuid": "VUID-vkCmdSetDepthBounds-minDepthBounds-02508",
           "text": " <code>minDepthBounds</code> <strong class=\"purple\">must</strong> be between <code>0.0</code> and <code>1.0</code>, inclusive"
         },
         {
-          "vuid": "VUID-vkCmdSetDepthBounds-maxDepthBounds-00601",
+          "vuid": "VUID-vkCmdSetDepthBounds-maxDepthBounds-02509",
           "text": " <code>maxDepthBounds</code> <strong class=\"purple\">must</strong> be between <code>0.0</code> and <code>1.0</code>, inclusive"
         }
       ]
@@ -20310,7 +20620,7 @@
         },
         {
           "vuid": "VUID-VkSwapchainCreateInfoKHR-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceGroupSwapchainCreateInfoKHR\">VkDeviceGroupSwapchainCreateInfoKHR</a> or <a href=\"#VkSwapchainCounterCreateInfoEXT\">VkSwapchainCounterCreateInfoEXT</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceGroupSwapchainCreateInfoKHR\">VkDeviceGroupSwapchainCreateInfoKHR</a>, <a href=\"#VkImageFormatListCreateInfoKHR\">VkImageFormatListCreateInfoKHR</a>, or <a href=\"#VkSwapchainCounterCreateInfoEXT\">VkSwapchainCounterCreateInfoEXT</a>"
         },
         {
           "vuid": "VUID-VkSwapchainCreateInfoKHR-sType-unique",
@@ -20405,6 +20715,12 @@
         {
           "vuid": "VUID-VkSwapchainCreateInfoKHR-physicalDeviceCount-01429",
           "text": " If the logical device was created with <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>::<code>physicalDeviceCount</code> equal to 1, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_SWAPCHAIN_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT_KHR</code>"
+        }
+      ],
+      "(VK_KHR_surface)+(VK_KHR_swapchain)+(VK_KHR_swapchain_mutable_format)": [
+        {
+          "vuid": "VUID-VkSwapchainCreateInfoKHR-flags-03168",
+          "text": " If <code>flags</code> contains <code>VK_SWAPCHAIN_CREATE_MUTABLE_FORMAT_BIT_KHR</code> then the <code>pNext</code> chain <strong class=\"purple\">must</strong> contain an instance of <a href=\"#VkImageFormatListCreateInfoKHR\">VkImageFormatListCreateInfoKHR</a> with a <code>viewFormatCount</code> greater than zero and <code>pViewFormats</code> <strong class=\"purple\">must</strong> have an element equal to <code>imageFormat</code>"
         }
       ]
     },
@@ -21026,7 +21342,7 @@
         },
         {
           "vuid": "VUID-vkCmdTraceRaysNV-None-02481",
-          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_LINEAR</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code>."
+          "text": " If a <code>VkImageView</code> is sampled with <code>VK_FILTER_LINEAR</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code>."
         },
         {
           "vuid": "VUID-vkCmdTraceRaysNV-commandBuffer-parameter",
@@ -21064,7 +21380,7 @@
       "(VK_NV_ray_tracing)+(VK_IMG_filter_cubic)": [
         {
           "vuid": "VUID-vkCmdTraceRaysNV-None-02482",
-          "text": " If a <code>VkImageView</code> is sampled with with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code>."
+          "text": " If a <code>VkImageView</code> is sampled with <code>VK_FILTER_CUBIC_IMG</code> as a result of this command, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</code>."
         },
         {
           "vuid": "VUID-vkCmdTraceRaysNV-None-02483",
@@ -21548,6 +21864,22 @@
         }
       ]
     },
+    "VkPhysicalDeviceFragmentDensityMapFeaturesEXT": {
+      "(VK_EXT_fragment_density_map)": [
+        {
+          "vuid": "VUID-VkPhysicalDeviceFragmentDensityMapFeaturesEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_FEATURES_EXT</code>"
+        }
+      ]
+    },
+    "VkPhysicalDeviceScalarBlockLayoutFeaturesEXT": {
+      "(VK_EXT_scalar_block_layout)": [
+        {
+          "vuid": "VUID-VkPhysicalDeviceScalarBlockLayoutFeaturesEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES_EXT</code>"
+        }
+      ]
+    },
     "VkPhysicalDevicePushDescriptorPropertiesKHR": {
       "(VK_KHR_push_descriptor)": [
         {
@@ -21681,6 +22013,14 @@
         {
           "vuid": "VUID-VkPhysicalDeviceConservativeRasterizationPropertiesEXT-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT</code>"
+        }
+      ]
+    },
+    "VkPhysicalDeviceFragmentDensityMapPropertiesEXT": {
+      "(VK_EXT_fragment_density_map)": [
+        {
+          "vuid": "VUID-VkPhysicalDeviceFragmentDensityMapPropertiesEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_PROPERTIES_EXT</code>"
         }
       ]
     },
@@ -21922,7 +22262,7 @@
         },
         {
           "vuid": "VUID-VkPhysicalDeviceImageFormatInfo2-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkImageFormatListCreateInfoKHR\">VkImageFormatListCreateInfoKHR</a>, <a href=\"#VkPhysicalDeviceExternalImageFormatInfo\">VkPhysicalDeviceExternalImageFormatInfo</a>, or <a href=\"#VkPhysicalDeviceImageDrmFormatModifierInfoEXT\">VkPhysicalDeviceImageDrmFormatModifierInfoEXT</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkImageFormatListCreateInfoKHR\">VkImageFormatListCreateInfoKHR</a>, <a href=\"#VkImageStencilUsageCreateInfoEXT\">VkImageStencilUsageCreateInfoEXT</a>, <a href=\"#VkPhysicalDeviceExternalImageFormatInfo\">VkPhysicalDeviceExternalImageFormatInfo</a>, or <a href=\"#VkPhysicalDeviceImageDrmFormatModifierInfoEXT\">VkPhysicalDeviceImageDrmFormatModifierInfoEXT</a>"
         },
         {
           "vuid": "VUID-VkPhysicalDeviceImageFormatInfo2-sType-unique",
