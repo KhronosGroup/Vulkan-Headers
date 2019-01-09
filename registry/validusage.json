@@ -4026,7 +4026,7 @@
         },
         {
           "vuid": "VUID-VkFramebufferCreateInfo-pAttachments-02603",
-          "text": " Each element of <code>pAttachments</code> that is used as a depth/stencil"
+          "text": " Each element of <code>pAttachments</code> that is used as a depth/stencil attachment or depth/stencil resolve attachment by <code>renderPass</code> <strong class=\"purple\">must</strong> have been created with a <code>usage</code> value including <code>VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</code>"
         },
         {
           "vuid": "VUID-VkFramebufferCreateInfo-pAttachments-00879",
