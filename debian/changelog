@@ -1,3 +1,9 @@
+vulkan-headers (1.1.97.0~rc1-1lunarg16.04.1.1) xenial; urgency=medium
+
+  * new upstream version
+
+ -- John Zupin <john@odin>  Thu, 17 Jan 2019 11:48:11 -0700
+
 vulkan-headers (1.1.92.0~rc1-1lunarg16.04.1.1) xenial; urgency=medium
 
   * new upstream version
