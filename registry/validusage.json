@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.1.99",
-    "comment": "from git branch: master commit: b59ec03ee3f44086ebc3e4c556952afe9e743655",
-    "date": "2019-02-04 16:55:13Z"
+    "api version": "1.1.100",
+    "comment": "from git branch: master commit: fcf5980cf6acc620334f55b0cf2d162b05e0487a",
+    "date": "2019-02-14 21:15:17Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -2583,14 +2583,6 @@
           "text": " If <code>vkCmdPipelineBarrier</code> is called within a render pass instance, <code>bufferMemoryBarrierCount</code> <strong class=\"purple\">must</strong> be <code>0</code>"
         },
         {
-          "vuid": "VUID-vkCmdPipelineBarrier-image-01179",
-          "text": " If <code>vkCmdPipelineBarrier</code> is called within a render pass instance, the <code>image</code> member of any element of <code>pImageMemoryBarriers</code> <strong class=\"purple\">must</strong> be equal to one of the elements of <code>pAttachments</code> that the current <code>framebuffer</code> was created with, that is also referred to by one of the elements of the <code>pColorAttachments</code>, <code>pResolveAttachments</code> or <code>pDepthStencilAttachment</code> members of the <code>VkSubpassDescription</code> instance"
-        },
-        {
-          "vuid": "VUID-vkCmdPipelineBarrier-oldLayout-01180",
-          "text": " If <code>vkCmdPipelineBarrier</code> is called within a render pass instance, the <code>oldLayout</code> and <code>newLayout</code> members of any element of <code>pImageMemoryBarriers</code> <strong class=\"purple\">must</strong> be equal to the <code>layout</code> member of an element of the <code>pColorAttachments</code>, <code>pResolveAttachments</code> or <code>pDepthStencilAttachment</code> members of the <code>VkSubpassDescription</code> instance"
-        },
-        {
           "vuid": "VUID-vkCmdPipelineBarrier-oldLayout-01181",
           "text": " If <code>vkCmdPipelineBarrier</code> is called within a render pass instance, the <code>oldLayout</code> and <code>newLayout</code> members of an element of <code>pImageMemoryBarriers</code> <strong class=\"purple\">must</strong> be equal"
         },
@@ -2653,6 +2645,26 @@
         {
           "vuid": "VUID-vkCmdPipelineBarrier-commandBuffer-cmdpool",
           "text": " The <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from <strong class=\"purple\">must</strong> support transfer, graphics, or compute operations"
+        }
+      ],
+      "(VK_KHR_depth_stencil_resolve)": [
+        {
+          "vuid": "VUID-vkCmdPipelineBarrier-image-02635",
+          "text": " If <code>vkCmdPipelineBarrier</code> is called within a render pass instance, the <code>image</code> member of any element of <code>pImageMemoryBarriers</code> <strong class=\"purple\">must</strong> be equal to one of the elements of <code>pAttachments</code> that the current <code>framebuffer</code> was created with, that is also referred to by one of the elements of the <code>pColorAttachments</code>, <code>pResolveAttachments</code> or <code>pDepthStencilAttachment</code> members of the <code>VkSubpassDescription</code> instance or by the <code>pDepthStencilResolveAttachment</code> member of the <code>VkSubpassDescriptionDepthStencilResolveKHR</code> structure that the current subpass was created with"
+        },
+        {
+          "vuid": "VUID-vkCmdPipelineBarrier-oldLayout-02636",
+          "text": " If <code>vkCmdPipelineBarrier</code> is called within a render pass instance, the <code>oldLayout</code> and <code>newLayout</code> members of any element of <code>pImageMemoryBarriers</code> <strong class=\"purple\">must</strong> be equal to the <code>layout</code> member of an element of the <code>pColorAttachments</code>, <code>pResolveAttachments</code> or <code>pDepthStencilAttachment</code> members of the <code>VkSubpassDescription</code> instance or by the <code>pDepthStencilResolveAttachment</code> member of the <code>VkSubpassDescriptionDepthStencilResolveKHR</code> structure that the current subpass was created with, that refers to the same <code>image</code>"
+        }
+      ],
+      "!(VK_KHR_depth_stencil_resolve)": [
+        {
+          "vuid": "VUID-vkCmdPipelineBarrier-image-02637",
+          "text": " If <code>vkCmdPipelineBarrier</code> is called within a render pass instance, the <code>image</code> member of any element of <code>pImageMemoryBarriers</code> <strong class=\"purple\">must</strong> be equal to one of the elements of <code>pAttachments</code> that the current <code>framebuffer</code> was created with, that is also referred to by one of the elements of the <code>pColorAttachments</code>, <code>pResolveAttachments</code> or <code>pDepthStencilAttachment</code> members of the <code>VkSubpassDescription</code> instance that the current subpass was created with"
+        },
+        {
+          "vuid": "VUID-vkCmdPipelineBarrier-oldLayout-02638",
+          "text": " If <code>vkCmdPipelineBarrier</code> is called within a render pass instance, the <code>oldLayout</code> and <code>newLayout</code> members of any element of <code>pImageMemoryBarriers</code> <strong class=\"purple\">must</strong> be equal to the <code>layout</code> member of an element of the <code>pColorAttachments</code>, <code>pResolveAttachments</code> or <code>pDepthStencilAttachment</code> members of the <code>VkSubpassDescription</code> instance that the current subpass was created with, that refers to the same <code>image</code>"
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_multiview)": [
@@ -4025,8 +4037,8 @@
           "text": " Each element of <code>pAttachments</code> that is used as a color attachment or resolve attachment by <code>renderPass</code> <strong class=\"purple\">must</strong> have been created with a <code>usage</code> value including <code>VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT</code>"
         },
         {
-          "vuid": "VUID-VkFramebufferCreateInfo-pAttachments-02603",
-          "text": " Each element of <code>pAttachments</code> that is used as a depth/stencil"
+          "vuid": "VUID-VkFramebufferCreateInfo-pAttachments-02633",
+          "text": " Each element of <code>pAttachments</code> that is used as a depth/stencil attachment by <code>renderPass</code> <strong class=\"purple\">must</strong> have been created with a <code>usage</code> value including <code>VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</code>"
         },
         {
           "vuid": "VUID-VkFramebufferCreateInfo-pAttachments-00879",
@@ -4095,6 +4107,12 @@
         {
           "vuid": "VUID-VkFramebufferCreateInfo-commonparent",
           "text": " Both of <code>renderPass</code>, and the elements of <code>pAttachments</code> that are valid handles <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkDevice</code>"
+        }
+      ],
+      "(VK_KHR_depth_stencil_resolve)": [
+        {
+          "vuid": "VUID-VkFramebufferCreateInfo-pAttachments-02634",
+          "text": " Each element of <code>pAttachments</code> that is used as a depth/stencil resolve attachment by <code>renderPass</code> <strong class=\"purple\">must</strong> have been created with a <code>usage</code> value including <code>VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</code>"
         }
       ],
       "(VK_EXT_fragment_density_map)": [
@@ -11247,6 +11265,10 @@
         {
           "vuid": "VUID-VkCopyDescriptorSet-dstArrayElement-00348",
           "text": " The sum of <code>dstArrayElement</code> and <code>descriptorCount</code> <strong class=\"purple\">must</strong> be less than or equal to the number of array elements in the descriptor set binding specified by <code>dstBinding</code>, and all applicable consecutive bindings, as described by <a href=\"#descriptorsets-updates-consecutive\">consecutive binding updates</a>"
+        },
+        {
+          "vuid": "VUID-VkCopyDescriptorSet-dstBinding-02632",
+          "text": " The type of <code>dstBinding</code> within <code>dstSet</code> <strong class=\"purple\">must</strong> be equal to the type of <code>srcBinding</code> within <code>srcSet</code>"
         },
         {
           "vuid": "VUID-VkCopyDescriptorSet-srcSet-00349",

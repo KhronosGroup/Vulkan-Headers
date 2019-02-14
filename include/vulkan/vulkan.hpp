@@ -56,7 +56,7 @@
 # define VULKAN_HPP_ASSERT   assert
 #endif
 
-static_assert( VK_HEADER_VERSION ==  99 , "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION ==  100 , "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
@@ -3230,7 +3230,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     eNearest = VK_FILTER_NEAREST,
     eLinear = VK_FILTER_LINEAR,
-    eCubicExt = VK_FILTER_CUBIC_EXT
+    eCubicIMG = VK_FILTER_CUBIC_IMG,
+    eCubicEXT = VK_FILTER_CUBIC_EXT
   };
 
   VULKAN_HPP_INLINE std::string to_string( Filter value )
@@ -3239,7 +3240,7 @@ namespace VULKAN_HPP_NAMESPACE
     {
       case Filter::eNearest : return "Nearest";
       case Filter::eLinear : return "Linear";
-      case Filter::eCubicExt : return "CubicExt";
+      case Filter::eCubicIMG : return "CubicIMG";
       default: return "invalid";
     }
   }
@@ -5652,6 +5653,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & AccessFlagBits::eAccelerationStructureReadNV ) result += "AccelerationStructureReadNV | ";
     if ( value & AccessFlagBits::eAccelerationStructureWriteNV ) result += "AccelerationStructureWriteNV | ";
     if ( value & AccessFlagBits::eFragmentDensityMapReadEXT ) result += "FragmentDensityMapReadEXT";
+    return result;
   }
 
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
@@ -5711,6 +5713,7 @@ namespace VULKAN_HPP_NAMESPACE
     std::string result;
 
     if ( value & AttachmentDescriptionFlagBits::eMayAlias ) result += "MayAlias";
+    return result;
   }
 
   enum class BufferCreateFlagBits
@@ -5765,6 +5768,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & BufferCreateFlagBits::eSparseAliased ) result += "SparseAliased | ";
     if ( value & BufferCreateFlagBits::eProtected ) result += "Protected | ";
     if ( value & BufferCreateFlagBits::eDeviceAddressCaptureReplayEXT ) result += "DeviceAddressCaptureReplayEXT";
+    return result;
   }
 
   enum class BufferUsageFlagBits
@@ -5846,6 +5850,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & BufferUsageFlagBits::eConditionalRenderingEXT ) result += "ConditionalRenderingEXT | ";
     if ( value & BufferUsageFlagBits::eRayTracingNV ) result += "RayTracingNV | ";
     if ( value & BufferUsageFlagBits::eShaderDeviceAddressEXT ) result += "ShaderDeviceAddressEXT";
+    return result;
   }
 
   enum class BufferViewCreateFlagBits
@@ -5915,6 +5920,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & BuildAccelerationStructureFlagBitsNV::ePreferFastTrace ) result += "PreferFastTrace | ";
     if ( value & BuildAccelerationStructureFlagBitsNV::ePreferFastBuild ) result += "PreferFastBuild | ";
     if ( value & BuildAccelerationStructureFlagBitsNV::eLowMemory ) result += "LowMemory";
+    return result;
   }
 
   enum class ColorComponentFlagBits
@@ -5966,6 +5972,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & ColorComponentFlagBits::eG ) result += "G | ";
     if ( value & ColorComponentFlagBits::eB ) result += "B | ";
     if ( value & ColorComponentFlagBits::eA ) result += "A";
+    return result;
   }
 
   enum class CommandBufferResetFlagBits
@@ -6008,6 +6015,7 @@ namespace VULKAN_HPP_NAMESPACE
     std::string result;
 
     if ( value & CommandBufferResetFlagBits::eReleaseResources ) result += "ReleaseResources";
+    return result;
   }
 
   enum class CommandBufferUsageFlagBits
@@ -6056,6 +6064,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & CommandBufferUsageFlagBits::eOneTimeSubmit ) result += "OneTimeSubmit | ";
     if ( value & CommandBufferUsageFlagBits::eRenderPassContinue ) result += "RenderPassContinue | ";
     if ( value & CommandBufferUsageFlagBits::eSimultaneousUse ) result += "SimultaneousUse";
+    return result;
   }
 
   enum class CommandPoolCreateFlagBits
@@ -6104,6 +6113,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & CommandPoolCreateFlagBits::eTransient ) result += "Transient | ";
     if ( value & CommandPoolCreateFlagBits::eResetCommandBuffer ) result += "ResetCommandBuffer | ";
     if ( value & CommandPoolCreateFlagBits::eProtected ) result += "Protected";
+    return result;
   }
 
   enum class CommandPoolResetFlagBits
@@ -6146,6 +6156,7 @@ namespace VULKAN_HPP_NAMESPACE
     std::string result;
 
     if ( value & CommandPoolResetFlagBits::eReleaseResources ) result += "ReleaseResources";
+    return result;
   }
 
   enum class CommandPoolTrimFlagBits
@@ -6214,6 +6225,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & CompositeAlphaFlagBitsKHR::ePreMultiplied ) result += "PreMultiplied | ";
     if ( value & CompositeAlphaFlagBitsKHR::ePostMultiplied ) result += "PostMultiplied | ";
     if ( value & CompositeAlphaFlagBitsKHR::eInherit ) result += "Inherit";
+    return result;
   }
 
   enum class ConditionalRenderingFlagBitsEXT
@@ -6256,6 +6268,7 @@ namespace VULKAN_HPP_NAMESPACE
     std::string result;
 
     if ( value & ConditionalRenderingFlagBitsEXT::eInverted ) result += "Inverted";
+    return result;
   }
 
   enum class CullModeFlagBits
@@ -6307,6 +6320,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & CullModeFlagBits::eFront ) result += "Front | ";
     if ( value & CullModeFlagBits::eBack ) result += "Back | ";
     if ( value & CullModeFlagBits::eFrontAndBack ) result += "FrontAndBack";
+    return result;
   }
 
   enum class DebugReportFlagBitsEXT
@@ -6361,6 +6375,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & DebugReportFlagBitsEXT::ePerformanceWarning ) result += "PerformanceWarning | ";
     if ( value & DebugReportFlagBitsEXT::eError ) result += "Error | ";
     if ( value & DebugReportFlagBitsEXT::eDebug ) result += "Debug";
+    return result;
   }
 
   enum class DebugUtilsMessageSeverityFlagBitsEXT
@@ -6412,6 +6427,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & DebugUtilsMessageSeverityFlagBitsEXT::eInfo ) result += "Info | ";
     if ( value & DebugUtilsMessageSeverityFlagBitsEXT::eWarning ) result += "Warning | ";
     if ( value & DebugUtilsMessageSeverityFlagBitsEXT::eError ) result += "Error";
+    return result;
   }
 
   enum class DebugUtilsMessageTypeFlagBitsEXT
@@ -6460,6 +6476,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & DebugUtilsMessageTypeFlagBitsEXT::eGeneral ) result += "General | ";
     if ( value & DebugUtilsMessageTypeFlagBitsEXT::eValidation ) result += "Validation | ";
     if ( value & DebugUtilsMessageTypeFlagBitsEXT::ePerformance ) result += "Performance";
+    return result;
   }
 
   enum class DebugUtilsMessengerCallbackDataFlagBitsEXT
@@ -6540,6 +6557,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & DependencyFlagBits::eByRegion ) result += "ByRegion | ";
     if ( value & DependencyFlagBits::eDeviceGroup ) result += "DeviceGroup | ";
     if ( value & DependencyFlagBits::eViewLocal ) result += "ViewLocal";
+    return result;
   }
 
   enum class DescriptorBindingFlagBitsEXT
@@ -6591,6 +6609,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & DescriptorBindingFlagBitsEXT::eUpdateUnusedWhilePending ) result += "UpdateUnusedWhilePending | ";
     if ( value & DescriptorBindingFlagBitsEXT::ePartiallyBound ) result += "PartiallyBound | ";
     if ( value & DescriptorBindingFlagBitsEXT::eVariableDescriptorCount ) result += "VariableDescriptorCount";
+    return result;
   }
 
   enum class DescriptorPoolCreateFlagBits
@@ -6636,6 +6655,7 @@ namespace VULKAN_HPP_NAMESPACE
 
     if ( value & DescriptorPoolCreateFlagBits::eFreeDescriptorSet ) result += "FreeDescriptorSet | ";
     if ( value & DescriptorPoolCreateFlagBits::eUpdateAfterBindEXT ) result += "UpdateAfterBindEXT";
+    return result;
   }
 
   enum class DescriptorPoolResetFlagBits
@@ -6696,6 +6716,7 @@ namespace VULKAN_HPP_NAMESPACE
 
     if ( value & DescriptorSetLayoutCreateFlagBits::ePushDescriptorKHR ) result += "PushDescriptorKHR | ";
     if ( value & DescriptorSetLayoutCreateFlagBits::eUpdateAfterBindPoolEXT ) result += "UpdateAfterBindPoolEXT";
+    return result;
   }
 
   enum class DescriptorUpdateTemplateCreateFlagBits
@@ -6779,6 +6800,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & DeviceGroupPresentModeFlagBitsKHR::eRemote ) result += "Remote | ";
     if ( value & DeviceGroupPresentModeFlagBitsKHR::eSum ) result += "Sum | ";
     if ( value & DeviceGroupPresentModeFlagBitsKHR::eLocalMultiDevice ) result += "LocalMultiDevice";
+    return result;
   }
 
   enum class DeviceQueueCreateFlagBits
@@ -6821,6 +6843,7 @@ namespace VULKAN_HPP_NAMESPACE
     std::string result;
 
     if ( value & DeviceQueueCreateFlagBits::eProtected ) result += "Protected";
+    return result;
   }
 
   enum class DisplayModeCreateFlagBitsKHR
@@ -6887,6 +6910,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & DisplayPlaneAlphaFlagBitsKHR::eGlobal ) result += "Global | ";
     if ( value & DisplayPlaneAlphaFlagBitsKHR::ePerPixel ) result += "PerPixel | ";
     if ( value & DisplayPlaneAlphaFlagBitsKHR::ePerPixelPremultiplied ) result += "PerPixelPremultiplied";
+    return result;
   }
 
   enum class DisplaySurfaceCreateFlagBitsKHR
@@ -6966,6 +6990,7 @@ namespace VULKAN_HPP_NAMESPACE
 
     if ( value & ExternalFenceFeatureFlagBits::eExportable ) result += "Exportable | ";
     if ( value & ExternalFenceFeatureFlagBits::eImportable ) result += "Importable";
+    return result;
   }
 
   enum class ExternalFenceHandleTypeFlagBits
@@ -7023,6 +7048,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & ExternalFenceHandleTypeFlagBits::eOpaqueWin32 ) result += "OpaqueWin32 | ";
     if ( value & ExternalFenceHandleTypeFlagBits::eOpaqueWin32Kmt ) result += "OpaqueWin32Kmt | ";
     if ( value & ExternalFenceHandleTypeFlagBits::eSyncFd ) result += "SyncFd";
+    return result;
   }
 
   enum class ExternalMemoryFeatureFlagBits
@@ -7076,6 +7102,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & ExternalMemoryFeatureFlagBits::eDedicatedOnly ) result += "DedicatedOnly | ";
     if ( value & ExternalMemoryFeatureFlagBits::eExportable ) result += "Exportable | ";
     if ( value & ExternalMemoryFeatureFlagBits::eImportable ) result += "Importable";
+    return result;
   }
 
   enum class ExternalMemoryFeatureFlagBitsNV
@@ -7124,6 +7151,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & ExternalMemoryFeatureFlagBitsNV::eDedicatedOnly ) result += "DedicatedOnly | ";
     if ( value & ExternalMemoryFeatureFlagBitsNV::eExportable ) result += "Exportable | ";
     if ( value & ExternalMemoryFeatureFlagBitsNV::eImportable ) result += "Importable";
+    return result;
   }
 
   enum class ExternalMemoryHandleTypeFlagBits
@@ -7205,6 +7233,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & ExternalMemoryHandleTypeFlagBits::eAndroidHardwareBufferANDROID ) result += "AndroidHardwareBufferANDROID | ";
     if ( value & ExternalMemoryHandleTypeFlagBits::eHostAllocationEXT ) result += "HostAllocationEXT | ";
     if ( value & ExternalMemoryHandleTypeFlagBits::eHostMappedForeignMemoryEXT ) result += "HostMappedForeignMemoryEXT";
+    return result;
   }
 
   enum class ExternalMemoryHandleTypeFlagBitsNV
@@ -7256,6 +7285,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & ExternalMemoryHandleTypeFlagBitsNV::eOpaqueWin32Kmt ) result += "OpaqueWin32Kmt | ";
     if ( value & ExternalMemoryHandleTypeFlagBitsNV::eD3D11Image ) result += "D3D11Image | ";
     if ( value & ExternalMemoryHandleTypeFlagBitsNV::eD3D11ImageKmt ) result += "D3D11ImageKmt";
+    return result;
   }
 
   enum class ExternalSemaphoreFeatureFlagBits
@@ -7305,6 +7335,7 @@ namespace VULKAN_HPP_NAMESPACE
 
     if ( value & ExternalSemaphoreFeatureFlagBits::eExportable ) result += "Exportable | ";
     if ( value & ExternalSemaphoreFeatureFlagBits::eImportable ) result += "Importable";
+    return result;
   }
 
   enum class ExternalSemaphoreHandleTypeFlagBits
@@ -7366,6 +7397,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & ExternalSemaphoreHandleTypeFlagBits::eOpaqueWin32Kmt ) result += "OpaqueWin32Kmt | ";
     if ( value & ExternalSemaphoreHandleTypeFlagBits::eD3D12Fence ) result += "D3D12Fence | ";
     if ( value & ExternalSemaphoreHandleTypeFlagBits::eSyncFd ) result += "SyncFd";
+    return result;
   }
 
   enum class FenceCreateFlagBits
@@ -7408,6 +7440,7 @@ namespace VULKAN_HPP_NAMESPACE
     std::string result;
 
     if ( value & FenceCreateFlagBits::eSignaled ) result += "Signaled";
+    return result;
   }
 
   enum class FenceImportFlagBits
@@ -7453,6 +7486,7 @@ namespace VULKAN_HPP_NAMESPACE
     std::string result;
 
     if ( value & FenceImportFlagBits::eTemporary ) result += "Temporary";
+    return result;
   }
 
   enum class FormatFeatureFlagBits
@@ -7479,7 +7513,7 @@ namespace VULKAN_HPP_NAMESPACE
     eSampledImageYcbcrConversionChromaReconstructionExplicitForceable = VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT,
     eDisjoint = VK_FORMAT_FEATURE_DISJOINT_BIT,
     eCositedChromaSamples = VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT,
-    eSampledImageFilterCubicExt = VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_EXT,
+    eSampledImageFilterCubicIMG = VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG,
     eSampledImageFilterMinmaxEXT = VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_MINMAX_BIT_EXT,
     eFragmentDensityMapEXT = VK_FORMAT_FEATURE_FRAGMENT_DENSITY_MAP_BIT_EXT,
     eTransferSrcKHR = VK_FORMAT_FEATURE_TRANSFER_SRC_BIT_KHR,
@@ -7490,7 +7524,8 @@ namespace VULKAN_HPP_NAMESPACE
     eSampledImageYcbcrConversionChromaReconstructionExplicitKHR = VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT_KHR,
     eSampledImageYcbcrConversionChromaReconstructionExplicitForceableKHR = VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT_KHR,
     eDisjointKHR = VK_FORMAT_FEATURE_DISJOINT_BIT_KHR,
-    eCositedChromaSamplesKHR = VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT_KHR
+    eCositedChromaSamplesKHR = VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT_KHR,
+    eSampledImageFilterCubicEXT = VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_EXT
   };
 
   VULKAN_HPP_INLINE std::string to_string( FormatFeatureFlagBits value )
@@ -7519,7 +7554,7 @@ namespace VULKAN_HPP_NAMESPACE
       case FormatFeatureFlagBits::eSampledImageYcbcrConversionChromaReconstructionExplicitForceable : return "SampledImageYcbcrConversionChromaReconstructionExplicitForceable";
       case FormatFeatureFlagBits::eDisjoint : return "Disjoint";
       case FormatFeatureFlagBits::eCositedChromaSamples : return "CositedChromaSamples";
-      case FormatFeatureFlagBits::eSampledImageFilterCubicExt : return "SampledImageFilterCubicExt";
+      case FormatFeatureFlagBits::eSampledImageFilterCubicIMG : return "SampledImageFilterCubicIMG";
       case FormatFeatureFlagBits::eSampledImageFilterMinmaxEXT : return "SampledImageFilterMinmaxEXT";
       case FormatFeatureFlagBits::eFragmentDensityMapEXT : return "FragmentDensityMapEXT";
       default: return "invalid";
@@ -7542,7 +7577,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     enum
     {
-      allFlags = VkFlags(FormatFeatureFlagBits::eSampledImage) | VkFlags(FormatFeatureFlagBits::eStorageImage) | VkFlags(FormatFeatureFlagBits::eStorageImageAtomic) | VkFlags(FormatFeatureFlagBits::eUniformTexelBuffer) | VkFlags(FormatFeatureFlagBits::eStorageTexelBuffer) | VkFlags(FormatFeatureFlagBits::eStorageTexelBufferAtomic) | VkFlags(FormatFeatureFlagBits::eVertexBuffer) | VkFlags(FormatFeatureFlagBits::eColorAttachment) | VkFlags(FormatFeatureFlagBits::eColorAttachmentBlend) | VkFlags(FormatFeatureFlagBits::eDepthStencilAttachment) | VkFlags(FormatFeatureFlagBits::eBlitSrc) | VkFlags(FormatFeatureFlagBits::eBlitDst) | VkFlags(FormatFeatureFlagBits::eSampledImageFilterLinear) | VkFlags(FormatFeatureFlagBits::eTransferSrc) | VkFlags(FormatFeatureFlagBits::eTransferDst) | VkFlags(FormatFeatureFlagBits::eMidpointChromaSamples) | VkFlags(FormatFeatureFlagBits::eSampledImageYcbcrConversionLinearFilter) | VkFlags(FormatFeatureFlagBits::eSampledImageYcbcrConversionSeparateReconstructionFilter) | VkFlags(FormatFeatureFlagBits::eSampledImageYcbcrConversionChromaReconstructionExplicit) | VkFlags(FormatFeatureFlagBits::eSampledImageYcbcrConversionChromaReconstructionExplicitForceable) | VkFlags(FormatFeatureFlagBits::eDisjoint) | VkFlags(FormatFeatureFlagBits::eCositedChromaSamples) | VkFlags(FormatFeatureFlagBits::eSampledImageFilterCubicExt) | VkFlags(FormatFeatureFlagBits::eSampledImageFilterMinmaxEXT) | VkFlags(FormatFeatureFlagBits::eFragmentDensityMapEXT)
+      allFlags = VkFlags(FormatFeatureFlagBits::eSampledImage) | VkFlags(FormatFeatureFlagBits::eStorageImage) | VkFlags(FormatFeatureFlagBits::eStorageImageAtomic) | VkFlags(FormatFeatureFlagBits::eUniformTexelBuffer) | VkFlags(FormatFeatureFlagBits::eStorageTexelBuffer) | VkFlags(FormatFeatureFlagBits::eStorageTexelBufferAtomic) | VkFlags(FormatFeatureFlagBits::eVertexBuffer) | VkFlags(FormatFeatureFlagBits::eColorAttachment) | VkFlags(FormatFeatureFlagBits::eColorAttachmentBlend) | VkFlags(FormatFeatureFlagBits::eDepthStencilAttachment) | VkFlags(FormatFeatureFlagBits::eBlitSrc) | VkFlags(FormatFeatureFlagBits::eBlitDst) | VkFlags(FormatFeatureFlagBits::eSampledImageFilterLinear) | VkFlags(FormatFeatureFlagBits::eTransferSrc) | VkFlags(FormatFeatureFlagBits::eTransferDst) | VkFlags(FormatFeatureFlagBits::eMidpointChromaSamples) | VkFlags(FormatFeatureFlagBits::eSampledImageYcbcrConversionLinearFilter) | VkFlags(FormatFeatureFlagBits::eSampledImageYcbcrConversionSeparateReconstructionFilter) | VkFlags(FormatFeatureFlagBits::eSampledImageYcbcrConversionChromaReconstructionExplicit) | VkFlags(FormatFeatureFlagBits::eSampledImageYcbcrConversionChromaReconstructionExplicitForceable) | VkFlags(FormatFeatureFlagBits::eDisjoint) | VkFlags(FormatFeatureFlagBits::eCositedChromaSamples) | VkFlags(FormatFeatureFlagBits::eSampledImageFilterCubicIMG) | VkFlags(FormatFeatureFlagBits::eSampledImageFilterMinmaxEXT) | VkFlags(FormatFeatureFlagBits::eFragmentDensityMapEXT)
     };
   };
 
@@ -7573,9 +7608,10 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & FormatFeatureFlagBits::eSampledImageYcbcrConversionChromaReconstructionExplicitForceable ) result += "SampledImageYcbcrConversionChromaReconstructionExplicitForceable | ";
     if ( value & FormatFeatureFlagBits::eDisjoint ) result += "Disjoint | ";
     if ( value & FormatFeatureFlagBits::eCositedChromaSamples ) result += "CositedChromaSamples | ";
-    if ( value & FormatFeatureFlagBits::eSampledImageFilterCubicExt ) result += "SampledImageFilterCubicExt | ";
+    if ( value & FormatFeatureFlagBits::eSampledImageFilterCubicIMG ) result += "SampledImageFilterCubicIMG | ";
     if ( value & FormatFeatureFlagBits::eSampledImageFilterMinmaxEXT ) result += "SampledImageFilterMinmaxEXT | ";
     if ( value & FormatFeatureFlagBits::eFragmentDensityMapEXT ) result += "FragmentDensityMapEXT";
+    return result;
   }
 
   enum class FramebufferCreateFlagBits
@@ -7636,6 +7672,7 @@ namespace VULKAN_HPP_NAMESPACE
 
     if ( value & GeometryFlagBitsNV::eOpaque ) result += "Opaque | ";
     if ( value & GeometryFlagBitsNV::eNoDuplicateAnyHitInvocation ) result += "NoDuplicateAnyHitInvocation";
+    return result;
   }
 
   enum class GeometryInstanceFlagBitsNV
@@ -7687,6 +7724,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & GeometryInstanceFlagBitsNV::eTriangleFrontCounterclockwise ) result += "TriangleFrontCounterclockwise | ";
     if ( value & GeometryInstanceFlagBitsNV::eForceOpaque ) result += "ForceOpaque | ";
     if ( value & GeometryInstanceFlagBitsNV::eForceNoOpaque ) result += "ForceNoOpaque";
+    return result;
   }
 
 #ifdef VK_USE_PLATFORM_IOS_MVK
@@ -7779,6 +7817,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & ImageAspectFlagBits::eMemoryPlane1EXT ) result += "MemoryPlane1EXT | ";
     if ( value & ImageAspectFlagBits::eMemoryPlane2EXT ) result += "MemoryPlane2EXT | ";
     if ( value & ImageAspectFlagBits::eMemoryPlane3EXT ) result += "MemoryPlane3EXT";
+    return result;
   }
 
   enum class ImageCreateFlagBits
@@ -7869,6 +7908,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & ImageCreateFlagBits::eCornerSampledNV ) result += "CornerSampledNV | ";
     if ( value & ImageCreateFlagBits::eSampleLocationsCompatibleDepthEXT ) result += "SampleLocationsCompatibleDepthEXT | ";
     if ( value & ImageCreateFlagBits::eSubsampledEXT ) result += "SubsampledEXT";
+    return result;
   }
 
 #ifdef VK_USE_PLATFORM_FUCHSIA
@@ -7955,6 +7995,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & ImageUsageFlagBits::eInputAttachment ) result += "InputAttachment | ";
     if ( value & ImageUsageFlagBits::eShadingRateImageNV ) result += "ShadingRateImageNV | ";
     if ( value & ImageUsageFlagBits::eFragmentDensityMapEXT ) result += "FragmentDensityMapEXT";
+    return result;
   }
 
   enum class ImageViewCreateFlagBits
@@ -7997,6 +8038,7 @@ namespace VULKAN_HPP_NAMESPACE
     std::string result;
 
     if ( value & ImageViewCreateFlagBits::eFragmentDensityMapDynamicEXT ) result += "FragmentDensityMapDynamicEXT";
+    return result;
   }
 
   enum class IndirectCommandsLayoutUsageFlagBitsNVX
@@ -8048,6 +8090,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & IndirectCommandsLayoutUsageFlagBitsNVX::eSparseSequences ) result += "SparseSequences | ";
     if ( value & IndirectCommandsLayoutUsageFlagBitsNVX::eEmptyExecutions ) result += "EmptyExecutions | ";
     if ( value & IndirectCommandsLayoutUsageFlagBitsNVX::eIndexedSequences ) result += "IndexedSequences";
+    return result;
   }
 
   enum class InstanceCreateFlagBits
@@ -8125,6 +8168,7 @@ namespace VULKAN_HPP_NAMESPACE
     std::string result;
 
     if ( value & MemoryAllocateFlagBits::eDeviceMask ) result += "DeviceMask";
+    return result;
   }
 
   enum class MemoryHeapFlagBits
@@ -8171,6 +8215,7 @@ namespace VULKAN_HPP_NAMESPACE
 
     if ( value & MemoryHeapFlagBits::eDeviceLocal ) result += "DeviceLocal | ";
     if ( value & MemoryHeapFlagBits::eMultiInstance ) result += "MultiInstance";
+    return result;
   }
 
   enum class MemoryMapFlagBits
@@ -8243,6 +8288,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & MemoryPropertyFlagBits::eHostCached ) result += "HostCached | ";
     if ( value & MemoryPropertyFlagBits::eLazilyAllocated ) result += "LazilyAllocated | ";
     if ( value & MemoryPropertyFlagBits::eProtected ) result += "Protected";
+    return result;
   }
 
   enum class ObjectEntryUsageFlagBitsNVX
@@ -8288,6 +8334,7 @@ namespace VULKAN_HPP_NAMESPACE
 
     if ( value & ObjectEntryUsageFlagBitsNVX::eGraphics ) result += "Graphics | ";
     if ( value & ObjectEntryUsageFlagBitsNVX::eCompute ) result += "Compute";
+    return result;
   }
 
   enum class PeerMemoryFeatureFlagBits
@@ -8345,6 +8392,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & PeerMemoryFeatureFlagBits::eCopyDst ) result += "CopyDst | ";
     if ( value & PeerMemoryFeatureFlagBits::eGenericSrc ) result += "GenericSrc | ";
     if ( value & PeerMemoryFeatureFlagBits::eGenericDst ) result += "GenericDst";
+    return result;
   }
 
   enum class PipelineCacheCreateFlagBits
@@ -8464,6 +8512,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & PipelineCreateFlagBits::eViewIndexFromDeviceIndex ) result += "ViewIndexFromDeviceIndex | ";
     if ( value & PipelineCreateFlagBits::eDispatchBase ) result += "DispatchBase | ";
     if ( value & PipelineCreateFlagBits::eDeferCompileNV ) result += "DeferCompileNV";
+    return result;
   }
 
   enum class PipelineDepthStencilStateCreateFlagBits
@@ -8731,6 +8780,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & PipelineStageFlagBits::eTaskShaderNV ) result += "TaskShaderNV | ";
     if ( value & PipelineStageFlagBits::eMeshShaderNV ) result += "MeshShaderNV | ";
     if ( value & PipelineStageFlagBits::eFragmentDensityProcessEXT ) result += "FragmentDensityProcessEXT";
+    return result;
   }
 
   enum class PipelineTessellationStateCreateFlagBits
@@ -8833,6 +8883,7 @@ namespace VULKAN_HPP_NAMESPACE
     std::string result;
 
     if ( value & QueryControlFlagBits::ePrecise ) result += "Precise";
+    return result;
   }
 
   enum class QueryPipelineStatisticFlagBits
@@ -8905,6 +8956,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & QueryPipelineStatisticFlagBits::eTessellationControlShaderPatches ) result += "TessellationControlShaderPatches | ";
     if ( value & QueryPipelineStatisticFlagBits::eTessellationEvaluationShaderInvocations ) result += "TessellationEvaluationShaderInvocations | ";
     if ( value & QueryPipelineStatisticFlagBits::eComputeShaderInvocations ) result += "ComputeShaderInvocations";
+    return result;
   }
 
   enum class QueryPoolCreateFlagBits
@@ -8971,6 +9023,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & QueryResultFlagBits::eWait ) result += "Wait | ";
     if ( value & QueryResultFlagBits::eWithAvailability ) result += "WithAvailability | ";
     if ( value & QueryResultFlagBits::ePartial ) result += "Partial";
+    return result;
   }
 
   enum class QueueFlagBits
@@ -9025,6 +9078,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & QueueFlagBits::eTransfer ) result += "Transfer | ";
     if ( value & QueueFlagBits::eSparseBinding ) result += "SparseBinding | ";
     if ( value & QueueFlagBits::eProtected ) result += "Protected";
+    return result;
   }
 
   enum class RenderPassCreateFlagBits
@@ -9094,6 +9148,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & ResolveModeFlagBitsKHR::eAverage ) result += "Average | ";
     if ( value & ResolveModeFlagBitsKHR::eMin ) result += "Min | ";
     if ( value & ResolveModeFlagBitsKHR::eMax ) result += "Max";
+    return result;
   }
 
   enum class SampleCountFlagBits
@@ -9154,6 +9209,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & SampleCountFlagBits::e16 ) result += "16 | ";
     if ( value & SampleCountFlagBits::e32 ) result += "32 | ";
     if ( value & SampleCountFlagBits::e64 ) result += "64";
+    return result;
   }
 
   enum class SamplerCreateFlagBits
@@ -9199,6 +9255,7 @@ namespace VULKAN_HPP_NAMESPACE
 
     if ( value & SamplerCreateFlagBits::eSubsampledEXT ) result += "SubsampledEXT | ";
     if ( value & SamplerCreateFlagBits::eSubsampledCoarseReconstructionEXT ) result += "SubsampledCoarseReconstructionEXT";
+    return result;
   }
 
   enum class SemaphoreCreateFlagBits
@@ -9259,6 +9316,7 @@ namespace VULKAN_HPP_NAMESPACE
     std::string result;
 
     if ( value & SemaphoreImportFlagBits::eTemporary ) result += "Temporary";
+    return result;
   }
 
   enum class ShaderModuleCreateFlagBits
@@ -9361,6 +9419,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & ShaderStageFlagBits::eCallableNV ) result += "CallableNV | ";
     if ( value & ShaderStageFlagBits::eTaskNV ) result += "TaskNV | ";
     if ( value & ShaderStageFlagBits::eMeshNV ) result += "MeshNV";
+    return result;
   }
 
   enum class SparseImageFormatFlagBits
@@ -9409,6 +9468,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & SparseImageFormatFlagBits::eSingleMiptail ) result += "SingleMiptail | ";
     if ( value & SparseImageFormatFlagBits::eAlignedMipSize ) result += "AlignedMipSize | ";
     if ( value & SparseImageFormatFlagBits::eNonstandardBlockSize ) result += "NonstandardBlockSize";
+    return result;
   }
 
   enum class SparseMemoryBindFlagBits
@@ -9451,6 +9511,7 @@ namespace VULKAN_HPP_NAMESPACE
     std::string result;
 
     if ( value & SparseMemoryBindFlagBits::eMetadata ) result += "Metadata";
+    return result;
   }
 
   enum class StencilFaceFlagBits
@@ -9499,6 +9560,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & StencilFaceFlagBits::eFront ) result += "Front | ";
     if ( value & StencilFaceFlagBits::eBack ) result += "Back | ";
     if ( value & StencilFaceFlagBits::eVkStencilFrontAndBack ) result += "VkStencilFrontAndBack";
+    return result;
   }
 
   enum class SubgroupFeatureFlagBits
@@ -9565,6 +9627,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & SubgroupFeatureFlagBits::eClustered ) result += "Clustered | ";
     if ( value & SubgroupFeatureFlagBits::eQuad ) result += "Quad | ";
     if ( value & SubgroupFeatureFlagBits::ePartitionedNV ) result += "PartitionedNV";
+    return result;
   }
 
   enum class SubpassDescriptionFlagBits
@@ -9610,6 +9673,7 @@ namespace VULKAN_HPP_NAMESPACE
 
     if ( value & SubpassDescriptionFlagBits::ePerViewAttributesNVX ) result += "PerViewAttributesNVX | ";
     if ( value & SubpassDescriptionFlagBits::ePerViewPositionXOnlyNVX ) result += "PerViewPositionXOnlyNVX";
+    return result;
   }
 
   enum class SurfaceCounterFlagBitsEXT
@@ -9652,6 +9716,7 @@ namespace VULKAN_HPP_NAMESPACE
     std::string result;
 
     if ( value & SurfaceCounterFlagBitsEXT::eVblank ) result += "Vblank";
+    return result;
   }
 
   enum class SurfaceTransformFlagBitsKHR
@@ -9718,6 +9783,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & SurfaceTransformFlagBitsKHR::eHorizontalMirrorRotate180 ) result += "HorizontalMirrorRotate180 | ";
     if ( value & SurfaceTransformFlagBitsKHR::eHorizontalMirrorRotate270 ) result += "HorizontalMirrorRotate270 | ";
     if ( value & SurfaceTransformFlagBitsKHR::eInherit ) result += "Inherit";
+    return result;
   }
 
   enum class SwapchainCreateFlagBitsKHR
@@ -9766,6 +9832,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & SwapchainCreateFlagBitsKHR::eSplitInstanceBindRegions ) result += "SplitInstanceBindRegions | ";
     if ( value & SwapchainCreateFlagBitsKHR::eProtected ) result += "Protected | ";
     if ( value & SwapchainCreateFlagBitsKHR::eMutableFormat ) result += "MutableFormat";
+    return result;
   }
 
   enum class ValidationCacheCreateFlagBitsEXT
