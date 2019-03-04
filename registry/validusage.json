@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.1.101",
-    "comment": "from git branch: master commit: 55220784e078fe3dad80e9520ca1d264f9b12b72",
-    "date": "2019-02-20 00:56:19Z"
+    "api version": "1.1.102",
+    "comment": "from git branch: github-master commit: 35e7bee5f0f50b7c1634cd205ded035acea43ad9",
+    "date": "2019-03-04 05:06:36Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -362,7 +362,7 @@
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceMemoryOverallocationCreateInfoAMD\">VkDeviceMemoryOverallocationCreateInfoAMD</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice8BitStorageFeaturesKHR\">VkPhysicalDevice8BitStorageFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBufferAddressFeaturesEXT\">VkPhysicalDeviceBufferAddressFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixFeaturesNV\">VkPhysicalDeviceCooperativeMatrixFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV\">VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDepthClipEnableFeaturesEXT\">VkPhysicalDeviceDepthClipEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeaturesEXT\">VkPhysicalDeviceDescriptorIndexingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFloat16Int8FeaturesKHR\">VkPhysicalDeviceFloat16Int8FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapFeaturesEXT\">VkPhysicalDeviceFragmentDensityMapFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeaturesEXT\">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMemoryPriorityFeaturesEXT\">VkPhysicalDeviceMemoryPriorityFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceScalarBlockLayoutFeaturesEXT\">VkPhysicalDeviceScalarBlockLayoutFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64FeaturesKHR\">VkPhysicalDeviceShaderAtomicInt64FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDrawParameterFeatures\">VkPhysicalDeviceShaderDrawParameterFeatures</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackFeaturesEXT\">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVariablePointerFeatures\">VkPhysicalDeviceVariablePointerFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, or <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeaturesKHR\">VkPhysicalDeviceVulkanMemoryModelFeaturesKHR</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceMemoryOverallocationCreateInfoAMD\">VkDeviceMemoryOverallocationCreateInfoAMD</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice8BitStorageFeaturesKHR\">VkPhysicalDevice8BitStorageFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBufferAddressFeaturesEXT\">VkPhysicalDeviceBufferAddressFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixFeaturesNV\">VkPhysicalDeviceCooperativeMatrixFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV\">VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDepthClipEnableFeaturesEXT\">VkPhysicalDeviceDepthClipEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeaturesEXT\">VkPhysicalDeviceDescriptorIndexingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFloat16Int8FeaturesKHR\">VkPhysicalDeviceFloat16Int8FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapFeaturesEXT\">VkPhysicalDeviceFragmentDensityMapFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeaturesEXT\">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMemoryPriorityFeaturesEXT\">VkPhysicalDeviceMemoryPriorityFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceScalarBlockLayoutFeaturesEXT\">VkPhysicalDeviceScalarBlockLayoutFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64FeaturesKHR\">VkPhysicalDeviceShaderAtomicInt64FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDrawParameterFeatures\">VkPhysicalDeviceShaderDrawParameterFeatures</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackFeaturesEXT\">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVariablePointerFeatures\">VkPhysicalDeviceVariablePointerFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeaturesKHR\">VkPhysicalDeviceVulkanMemoryModelFeaturesKHR</a>, or <a href=\"#VkPhysicalDeviceYcbcrImageArraysFeaturesEXT\">VkPhysicalDeviceYcbcrImageArraysFeaturesEXT</a>"
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-sType-unique",
@@ -856,15 +856,15 @@
       "core": [
         {
           "vuid": "VUID-VkCommandBufferInheritanceInfo-occlusionQueryEnable-00056",
-          "text": " If the <a href=\"#features-features-inheritedQueries\">inherited queries</a> feature is not enabled, <code>occlusionQueryEnable</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>"
+          "text": " If the <a href=\"#features-inheritedQueries\">inherited queries</a> feature is not enabled, <code>occlusionQueryEnable</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>"
         },
         {
           "vuid": "VUID-VkCommandBufferInheritanceInfo-queryFlags-00057",
-          "text": " If the <a href=\"#features-features-inheritedQueries\">inherited queries</a> feature is enabled, <code>queryFlags</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkQueryControlFlagBits\">VkQueryControlFlagBits</a> values"
+          "text": " If the <a href=\"#features-inheritedQueries\">inherited queries</a> feature is enabled, <code>queryFlags</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkQueryControlFlagBits\">VkQueryControlFlagBits</a> values"
         },
         {
           "vuid": "VUID-VkCommandBufferInheritanceInfo-pipelineStatistics-00058",
-          "text": " If the <a href=\"#features-features-pipelineStatisticsQuery\">pipeline statistics queries</a> feature is not enabled, <code>pipelineStatistics</code> <strong class=\"purple\">must</strong> be <code>0</code>"
+          "text": " If the <a href=\"#features-pipelineStatisticsQuery\">pipeline statistics queries</a> feature is not enabled, <code>pipelineStatistics</code> <strong class=\"purple\">must</strong> be <code>0</code>"
         },
         {
           "vuid": "VUID-VkCommandBufferInheritanceInfo-sType-sType",
@@ -884,7 +884,7 @@
       "(VK_EXT_conditional_rendering)": [
         {
           "vuid": "VUID-VkCommandBufferInheritanceConditionalRenderingInfoEXT-conditionalRenderingEnable-01977",
-          "text": " If the <a href=\"#features-features-inheritedConditionalRendering\">inherited conditional rendering</a> feature is not enabled, <code>conditionalRenderingEnable</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>"
+          "text": " If the <a href=\"#features-inheritedConditionalRendering\">inherited conditional rendering</a> feature is not enabled, <code>conditionalRenderingEnable</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>"
         },
         {
           "vuid": "VUID-VkCommandBufferInheritanceConditionalRenderingInfoEXT-sType-sType",
@@ -1010,11 +1010,11 @@
         },
         {
           "vuid": "VUID-VkSubmitInfo-pWaitDstStageMask-00076",
-          "text": " If the <a href=\"#features-features-geometryShader\">geometry shaders</a> feature is not enabled, each element of <code>pWaitDstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT</code>"
+          "text": " If the <a href=\"#features-geometryShader\">geometry shaders</a> feature is not enabled, each element of <code>pWaitDstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT</code>"
         },
         {
           "vuid": "VUID-VkSubmitInfo-pWaitDstStageMask-00077",
-          "text": " If the <a href=\"#features-features-tessellationShader\">tessellation shaders</a> feature is not enabled, each element of <code>pWaitDstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
+          "text": " If the <a href=\"#features-tessellationShader\">tessellation shaders</a> feature is not enabled, each element of <code>pWaitDstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
         },
         {
           "vuid": "VUID-VkSubmitInfo-pWaitDstStageMask-00078",
@@ -1060,11 +1060,11 @@
       "(VK_NV_mesh_shader)": [
         {
           "vuid": "VUID-VkSubmitInfo-pWaitDstStageMask-02089",
-          "text": " If the <a href=\"#features-features-meshShader\">mesh shaders</a> feature is not enabled, each element of <code>pWaitDstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV</code>"
+          "text": " If the <a href=\"#features-meshShader\">mesh shaders</a> feature is not enabled, each element of <code>pWaitDstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV</code>"
         },
         {
           "vuid": "VUID-VkSubmitInfo-pWaitDstStageMask-02090",
-          "text": " If the <a href=\"#features-features-taskShader\">task shaders</a> feature is not enabled, each element of <code>pWaitDstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV</code>"
+          "text": " If the <a href=\"#features-taskShader\">task shaders</a> feature is not enabled, each element of <code>pWaitDstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV</code>"
         }
       ]
     },
@@ -1284,7 +1284,7 @@
         },
         {
           "vuid": "VUID-vkCmdExecuteCommands-commandBuffer-00101",
-          "text": " If the <a href=\"#features-features-inheritedQueries\">inherited queries</a> feature is not enabled, <code>commandBuffer</code> <strong class=\"purple\">must</strong> not have any queries <a href=\"#queries-operation-active\">active</a>"
+          "text": " If the <a href=\"#features-inheritedQueries\">inherited queries</a> feature is not enabled, <code>commandBuffer</code> <strong class=\"purple\">must</strong> not have any queries <a href=\"#queries-operation-active\">active</a>"
         },
         {
           "vuid": "VUID-vkCmdExecuteCommands-commandBuffer-00102",
@@ -2316,11 +2316,11 @@
         },
         {
           "vuid": "VUID-vkCmdSetEvent-stageMask-01150",
-          "text": " If the <a href=\"#features-features-geometryShader\">geometry shaders</a> feature is not enabled, <code>stageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT</code>"
+          "text": " If the <a href=\"#features-geometryShader\">geometry shaders</a> feature is not enabled, <code>stageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT</code>"
         },
         {
           "vuid": "VUID-vkCmdSetEvent-stageMask-01151",
-          "text": " If the <a href=\"#features-features-tessellationShader\">tessellation shaders</a> feature is not enabled, <code>stageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
+          "text": " If the <a href=\"#features-tessellationShader\">tessellation shaders</a> feature is not enabled, <code>stageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
         },
         {
           "vuid": "VUID-vkCmdSetEvent-commandBuffer-parameter",
@@ -2364,11 +2364,11 @@
       "(VK_NV_mesh_shader)": [
         {
           "vuid": "VUID-vkCmdSetEvent-stageMask-02107",
-          "text": " If the <a href=\"#features-features-meshShader\">mesh shaders</a> feature is not enabled, <code>stageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV</code>"
+          "text": " If the <a href=\"#features-meshShader\">mesh shaders</a> feature is not enabled, <code>stageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV</code>"
         },
         {
           "vuid": "VUID-vkCmdSetEvent-stageMask-02108",
-          "text": " If the <a href=\"#features-features-taskShader\">task shaders</a> feature is not enabled, <code>stageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV</code>"
+          "text": " If the <a href=\"#features-taskShader\">task shaders</a> feature is not enabled, <code>stageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV</code>"
         }
       ]
     },
@@ -2380,11 +2380,11 @@
         },
         {
           "vuid": "VUID-vkCmdResetEvent-stageMask-01154",
-          "text": " If the <a href=\"#features-features-geometryShader\">geometry shaders</a> feature is not enabled, <code>stageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT</code>"
+          "text": " If the <a href=\"#features-geometryShader\">geometry shaders</a> feature is not enabled, <code>stageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT</code>"
         },
         {
           "vuid": "VUID-vkCmdResetEvent-stageMask-01155",
-          "text": " If the <a href=\"#features-features-tessellationShader\">tessellation shaders</a> feature is not enabled, <code>stageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
+          "text": " If the <a href=\"#features-tessellationShader\">tessellation shaders</a> feature is not enabled, <code>stageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
         },
         {
           "vuid": "VUID-vkCmdResetEvent-event-01156",
@@ -2432,11 +2432,11 @@
       "(VK_NV_mesh_shader)": [
         {
           "vuid": "VUID-vkCmdResetEvent-stageMask-02109",
-          "text": " If the <a href=\"#features-features-meshShader\">mesh shaders</a> feature is not enabled, <code>stageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV</code>"
+          "text": " If the <a href=\"#features-meshShader\">mesh shaders</a> feature is not enabled, <code>stageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV</code>"
         },
         {
           "vuid": "VUID-vkCmdResetEvent-stageMask-02110",
-          "text": " If the <a href=\"#features-features-taskShader\">task shaders</a> feature is not enabled, <code>stageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV</code>"
+          "text": " If the <a href=\"#features-taskShader\">task shaders</a> feature is not enabled, <code>stageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV</code>"
         }
       ]
     },
@@ -2448,19 +2448,19 @@
         },
         {
           "vuid": "VUID-vkCmdWaitEvents-srcStageMask-01159",
-          "text": " If the <a href=\"#features-features-geometryShader\">geometry shaders</a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT</code>"
+          "text": " If the <a href=\"#features-geometryShader\">geometry shaders</a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT</code>"
         },
         {
           "vuid": "VUID-vkCmdWaitEvents-dstStageMask-01160",
-          "text": " If the <a href=\"#features-features-geometryShader\">geometry shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT</code>"
+          "text": " If the <a href=\"#features-geometryShader\">geometry shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT</code>"
         },
         {
           "vuid": "VUID-vkCmdWaitEvents-srcStageMask-01161",
-          "text": " If the <a href=\"#features-features-tessellationShader\">tessellation shaders</a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
+          "text": " If the <a href=\"#features-tessellationShader\">tessellation shaders</a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
         },
         {
           "vuid": "VUID-vkCmdWaitEvents-dstStageMask-01162",
-          "text": " If the <a href=\"#features-features-tessellationShader\">tessellation shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
+          "text": " If the <a href=\"#features-tessellationShader\">tessellation shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
         },
         {
           "vuid": "VUID-vkCmdWaitEvents-pEvents-01163",
@@ -2540,19 +2540,19 @@
       "(VK_NV_mesh_shader)": [
         {
           "vuid": "VUID-vkCmdWaitEvents-srcStageMask-02111",
-          "text": " If the <a href=\"#features-features-meshShader\">mesh shaders</a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV</code>"
+          "text": " If the <a href=\"#features-meshShader\">mesh shaders</a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV</code>"
         },
         {
           "vuid": "VUID-vkCmdWaitEvents-srcStageMask-02112",
-          "text": " If the <a href=\"#features-features-taskShader\">task shaders</a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV</code>"
+          "text": " If the <a href=\"#features-taskShader\">task shaders</a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV</code>"
         },
         {
           "vuid": "VUID-vkCmdWaitEvents-dstStageMask-02113",
-          "text": " If the <a href=\"#features-features-meshShader\">mesh shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV</code>"
+          "text": " If the <a href=\"#features-meshShader\">mesh shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV</code>"
         },
         {
           "vuid": "VUID-vkCmdWaitEvents-dstStageMask-02114",
-          "text": " If the <a href=\"#features-features-taskShader\">task shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV</code>"
+          "text": " If the <a href=\"#features-taskShader\">task shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV</code>"
         }
       ]
     },
@@ -2560,19 +2560,19 @@
       "core": [
         {
           "vuid": "VUID-vkCmdPipelineBarrier-srcStageMask-01168",
-          "text": " If the <a href=\"#features-features-geometryShader\">geometry shaders</a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT</code>"
+          "text": " If the <a href=\"#features-geometryShader\">geometry shaders</a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT</code>"
         },
         {
           "vuid": "VUID-vkCmdPipelineBarrier-dstStageMask-01169",
-          "text": " If the <a href=\"#features-features-geometryShader\">geometry shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT</code>"
+          "text": " If the <a href=\"#features-geometryShader\">geometry shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT</code>"
         },
         {
           "vuid": "VUID-vkCmdPipelineBarrier-srcStageMask-01170",
-          "text": " If the <a href=\"#features-features-tessellationShader\">tessellation shaders</a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
+          "text": " If the <a href=\"#features-tessellationShader\">tessellation shaders</a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
         },
         {
           "vuid": "VUID-vkCmdPipelineBarrier-dstStageMask-01171",
-          "text": " If the <a href=\"#features-features-tessellationShader\">tessellation shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
+          "text": " If the <a href=\"#features-tessellationShader\">tessellation shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
         },
         {
           "vuid": "VUID-vkCmdPipelineBarrier-pDependencies-02285",
@@ -2676,19 +2676,19 @@
       "(VK_NV_mesh_shader)": [
         {
           "vuid": "VUID-vkCmdPipelineBarrier-srcStageMask-02115",
-          "text": " If the <a href=\"#features-features-meshShader\">mesh shaders</a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV</code>"
+          "text": " If the <a href=\"#features-meshShader\">mesh shaders</a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV</code>"
         },
         {
           "vuid": "VUID-vkCmdPipelineBarrier-srcStageMask-02116",
-          "text": " If the <a href=\"#features-features-taskShader\">task shaders</a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV</code>"
+          "text": " If the <a href=\"#features-taskShader\">task shaders</a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV</code>"
         },
         {
           "vuid": "VUID-vkCmdPipelineBarrier-dstStageMask-02117",
-          "text": " If the <a href=\"#features-features-meshShader\">mesh shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV</code>"
+          "text": " If the <a href=\"#features-meshShader\">mesh shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV</code>"
         },
         {
           "vuid": "VUID-vkCmdPipelineBarrier-dstStageMask-02118",
-          "text": " If the <a href=\"#features-features-taskShader\">task shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV</code>"
+          "text": " If the <a href=\"#features-taskShader\">task shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV</code>"
         }
       ]
     },
@@ -3412,19 +3412,19 @@
         },
         {
           "vuid": "VUID-VkSubpassDependency-srcStageMask-00860",
-          "text": " If the <a href=\"#features-features-geometryShader\">geometry shaders</a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT</code>"
+          "text": " If the <a href=\"#features-geometryShader\">geometry shaders</a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT</code>"
         },
         {
           "vuid": "VUID-VkSubpassDependency-dstStageMask-00861",
-          "text": " If the <a href=\"#features-features-geometryShader\">geometry shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT</code>"
+          "text": " If the <a href=\"#features-geometryShader\">geometry shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT</code>"
         },
         {
           "vuid": "VUID-VkSubpassDependency-srcStageMask-00862",
-          "text": " If the <a href=\"#features-features-tessellationShader\">tessellation shaders</a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
+          "text": " If the <a href=\"#features-tessellationShader\">tessellation shaders</a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
         },
         {
           "vuid": "VUID-VkSubpassDependency-dstStageMask-00863",
-          "text": " If the <a href=\"#features-features-tessellationShader\">tessellation shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
+          "text": " If the <a href=\"#features-tessellationShader\">tessellation shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
         },
         {
           "vuid": "VUID-VkSubpassDependency-srcSubpass-00864",
@@ -3500,19 +3500,19 @@
       "(VK_NV_mesh_shader)": [
         {
           "vuid": "VUID-VkSubpassDependency-srcStageMask-02099",
-          "text": " If the <a href=\"#features-features-meshShader\">mesh shaders</a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV</code>"
+          "text": " If the <a href=\"#features-meshShader\">mesh shaders</a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV</code>"
         },
         {
           "vuid": "VUID-VkSubpassDependency-srcStageMask-02100",
-          "text": " If the <a href=\"#features-features-taskShader\">task shaders</a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV</code>"
+          "text": " If the <a href=\"#features-taskShader\">task shaders</a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV</code>"
         },
         {
           "vuid": "VUID-VkSubpassDependency-dstStageMask-02101",
-          "text": " If the <a href=\"#features-features-meshShader\">mesh shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV</code>"
+          "text": " If the <a href=\"#features-meshShader\">mesh shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV</code>"
         },
         {
           "vuid": "VUID-VkSubpassDependency-dstStageMask-02102",
-          "text": " If the <a href=\"#features-features-taskShader\">task shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV</code>"
+          "text": " If the <a href=\"#features-taskShader\">task shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV</code>"
         }
       ]
     },
@@ -3880,19 +3880,19 @@
         },
         {
           "vuid": "VUID-VkSubpassDependency2KHR-srcStageMask-03080",
-          "text": " If the <a href=\"#features-features-geometryShader\">geometry shaders</a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT</code>"
+          "text": " If the <a href=\"#features-geometryShader\">geometry shaders</a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT</code>"
         },
         {
           "vuid": "VUID-VkSubpassDependency2KHR-dstStageMask-03081",
-          "text": " If the <a href=\"#features-features-geometryShader\">geometry shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT</code>"
+          "text": " If the <a href=\"#features-geometryShader\">geometry shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT</code>"
         },
         {
           "vuid": "VUID-VkSubpassDependency2KHR-srcStageMask-03082",
-          "text": " If the <a href=\"#features-features-tessellationShader\">tessellation shaders</a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
+          "text": " If the <a href=\"#features-tessellationShader\">tessellation shaders</a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
         },
         {
           "vuid": "VUID-VkSubpassDependency2KHR-dstStageMask-03083",
-          "text": " If the <a href=\"#features-features-tessellationShader\">tessellation shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
+          "text": " If the <a href=\"#features-tessellationShader\">tessellation shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
         },
         {
           "vuid": "VUID-VkSubpassDependency2KHR-srcSubpass-03084",
@@ -3978,19 +3978,19 @@
       "(VK_KHR_create_renderpass2)+(VK_NV_mesh_shader)": [
         {
           "vuid": "VUID-VkSubpassDependency2KHR-srcStageMask-02103",
-          "text": " If the <a href=\"#features-features-meshShader\">mesh shaders</a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV</code>"
+          "text": " If the <a href=\"#features-meshShader\">mesh shaders</a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV</code>"
         },
         {
           "vuid": "VUID-VkSubpassDependency2KHR-srcStageMask-02104",
-          "text": " If the <a href=\"#features-features-taskShader\">task shaders</a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV</code>"
+          "text": " If the <a href=\"#features-taskShader\">task shaders</a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV</code>"
         },
         {
           "vuid": "VUID-VkSubpassDependency2KHR-dstStageMask-02105",
-          "text": " If the <a href=\"#features-features-meshShader\">mesh shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV</code>"
+          "text": " If the <a href=\"#features-meshShader\">mesh shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV</code>"
         },
         {
           "vuid": "VUID-VkSubpassDependency2KHR-dstStageMask-02106",
-          "text": " If the <a href=\"#features-features-taskShader\">task shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV</code>"
+          "text": " If the <a href=\"#features-taskShader\">task shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV</code>"
         }
       ]
     },
@@ -4142,7 +4142,7 @@
         },
         {
           "vuid": "VUID-VkFramebufferCreateInfo-renderPass-02553",
-          "text": " If <code>renderPass</code> has a fragment density map attachment and <a href=\"#features-features-nonsubsampledimages\">non-subsample image feature</a> is not enabled, each element of <code>pAttachments</code> <strong class=\"purple\">must</strong> have been created with a <code>flags</code> value including <code>VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT</code> unless that element is the fragment density map attachment."
+          "text": " If <code>renderPass</code> has a fragment density map attachment and <a href=\"#features-nonsubsampledimages\">non-subsample image feature</a> is not enabled, each element of <code>pAttachments</code> <strong class=\"purple\">must</strong> have been created with a <code>flags</code> value including <code>VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT</code> unless that element is the fragment density map attachment."
         },
         {
           "vuid": "VUID-VkFramebufferCreateInfo-pAttachments-02554",
@@ -5064,11 +5064,11 @@
       "core": [
         {
           "vuid": "VUID-VkPipelineShaderStageCreateInfo-stage-00704",
-          "text": " If the <a href=\"#features-features-geometryShader\">geometry shaders</a> feature is not enabled, <code>stage</code> <strong class=\"purple\">must</strong> not be <code>VK_SHADER_STAGE_GEOMETRY_BIT</code>"
+          "text": " If the <a href=\"#features-geometryShader\">geometry shaders</a> feature is not enabled, <code>stage</code> <strong class=\"purple\">must</strong> not be <code>VK_SHADER_STAGE_GEOMETRY_BIT</code>"
         },
         {
           "vuid": "VUID-VkPipelineShaderStageCreateInfo-stage-00705",
-          "text": " If the <a href=\"#features-features-tessellationShader\">tessellation shaders</a> feature is not enabled, <code>stage</code> <strong class=\"purple\">must</strong> not be <code>VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT</code> or <code>VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT</code>"
+          "text": " If the <a href=\"#features-tessellationShader\">tessellation shaders</a> feature is not enabled, <code>stage</code> <strong class=\"purple\">must</strong> not be <code>VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT</code> or <code>VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT</code>"
         },
         {
           "vuid": "VUID-VkPipelineShaderStageCreateInfo-stage-00706",
@@ -5158,11 +5158,11 @@
       "(VK_NV_mesh_shader)": [
         {
           "vuid": "VUID-VkPipelineShaderStageCreateInfo-stage-02091",
-          "text": " If the <a href=\"#features-features-meshShader\">mesh shader</a> feature is not enabled, <code>stage</code> <strong class=\"purple\">must</strong> not be <code>VK_SHADER_STAGE_MESH_BIT_NV</code>"
+          "text": " If the <a href=\"#features-meshShader\">mesh shader</a> feature is not enabled, <code>stage</code> <strong class=\"purple\">must</strong> not be <code>VK_SHADER_STAGE_MESH_BIT_NV</code>"
         },
         {
           "vuid": "VUID-VkPipelineShaderStageCreateInfo-stage-02092",
-          "text": " If the <a href=\"#features-features-taskShader\">task shader</a> feature is not enabled, <code>stage</code> <strong class=\"purple\">must</strong> not be <code>VK_SHADER_STAGE_TASK_BIT_NV</code>"
+          "text": " If the <a href=\"#features-taskShader\">task shader</a> feature is not enabled, <code>stage</code> <strong class=\"purple\">must</strong> not be <code>VK_SHADER_STAGE_TASK_BIT_NV</code>"
         },
         {
           "vuid": "VUID-VkPipelineShaderStageCreateInfo-stage-02093",
@@ -5796,7 +5796,7 @@
         },
         {
           "vuid": "VUID-vkCmdBindPipeline-pipeline-00781",
-          "text": " If the <a href=\"#features-features-variableMultisampleRate\">variable multisample rate</a> feature is not supported, <code>pipeline</code> is a graphics pipeline, the current subpass has no attachments, and this is not the first call to this function with a graphics pipeline after transitioning to the current subpass, then the sample count specified by this pipeline <strong class=\"purple\">must</strong> match that set in the previous pipeline"
+          "text": " If the <a href=\"#features-variableMultisampleRate\">variable multisample rate</a> feature is not supported, <code>pipeline</code> is a graphics pipeline, the current subpass has no attachments, and this is not the first call to this function with a graphics pipeline after transitioning to the current subpass, then the sample count specified by this pipeline <strong class=\"purple\">must</strong> match that set in the previous pipeline"
         },
         {
           "vuid": "VUID-vkCmdBindPipeline-commandBuffer-parameter",
@@ -7256,15 +7256,15 @@
         },
         {
           "vuid": "VUID-VkBufferCreateInfo-flags-00915",
-          "text": " If the <a href=\"#features-features-sparseBinding\">sparse bindings</a> feature is not enabled, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_BUFFER_CREATE_SPARSE_BINDING_BIT</code>"
+          "text": " If the <a href=\"#features-sparseBinding\">sparse bindings</a> feature is not enabled, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_BUFFER_CREATE_SPARSE_BINDING_BIT</code>"
         },
         {
           "vuid": "VUID-VkBufferCreateInfo-flags-00916",
-          "text": " If the <a href=\"#features-features-sparseResidencyBuffer\">sparse buffer residency</a> feature is not enabled, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT</code>"
+          "text": " If the <a href=\"#features-sparseResidencyBuffer\">sparse buffer residency</a> feature is not enabled, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT</code>"
         },
         {
           "vuid": "VUID-VkBufferCreateInfo-flags-00917",
-          "text": " If the <a href=\"#features-features-sparseResidencyAliased\">sparse aliased residency</a> feature is not enabled, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_BUFFER_CREATE_SPARSE_ALIASED_BIT</code>"
+          "text": " If the <a href=\"#features-sparseResidencyAliased\">sparse aliased residency</a> feature is not enabled, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_BUFFER_CREATE_SPARSE_ALIASED_BIT</code>"
         },
         {
           "vuid": "VUID-VkBufferCreateInfo-flags-00918",
@@ -7340,11 +7340,11 @@
         },
         {
           "vuid": "VUID-VkBufferCreateInfo-flags-02605",
-          "text": " If <code>flags</code> includes <code>VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_EXT</code>, the <a href=\"#features-features-bufferDeviceAddressCaptureReplay\">bufferDeviceAddressCaptureReplay</a> feature <strong class=\"purple\">must</strong> be enabled"
+          "text": " If <code>flags</code> includes <code>VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_EXT</code>, the <a href=\"#features-bufferDeviceAddressCaptureReplay\">bufferDeviceAddressCaptureReplay</a> feature <strong class=\"purple\">must</strong> be enabled"
         },
         {
           "vuid": "VUID-VkBufferCreateInfo-usage-02606",
-          "text": " If <code>usage</code> includes <code>VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT_EXT</code>, the <a href=\"#features-features-bufferDeviceAddress\">bufferDeviceAddress</a> feature <strong class=\"purple\">must</strong> be enabled"
+          "text": " If <code>usage</code> includes <code>VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT_EXT</code>, the <a href=\"#features-bufferDeviceAddress\">bufferDeviceAddress</a> feature <strong class=\"purple\">must</strong> be enabled"
         }
       ]
     },
@@ -7448,7 +7448,7 @@
         },
         {
           "vuid": "VUID-VkBufferViewCreateInfo-range-00930",
-          "text": " If <code>range</code> is not equal to <code>VK_WHOLE_SIZE</code>, <code>range</code> divided by the texel block size of <code>format</code>, multiplied by the number of texels per texel block for that format (as defined in the <a href=\"#features-formats-compatibility\">Compatible Formats</a> table), <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceLimits</code>::<code>maxTexelBufferElements</code>"
+          "text": " If <code>range</code> is not equal to <code>VK_WHOLE_SIZE</code>, <code>range</code> divided by the texel block size of <code>format</code>, multiplied by the number of texels per texel block for that format (as defined in the <a href=\"#formats-compatibility\">Compatible Formats</a> table), <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceLimits</code>::<code>maxTexelBufferElements</code>"
         },
         {
           "vuid": "VUID-VkBufferViewCreateInfo-offset-00931",
@@ -7652,15 +7652,15 @@
         },
         {
           "vuid": "VUID-VkImageCreateInfo-usage-00968",
-          "text": " If the <a href=\"#features-features-shaderStorageImageMultisample\">multisampled storage images</a> feature is not enabled, and <code>usage</code> contains <code>VK_IMAGE_USAGE_STORAGE_BIT</code>, <code>samples</code> <strong class=\"purple\">must</strong> be <code>VK_SAMPLE_COUNT_1_BIT</code>"
+          "text": " If the <a href=\"#features-shaderStorageImageMultisample\">multisampled storage images</a> feature is not enabled, and <code>usage</code> contains <code>VK_IMAGE_USAGE_STORAGE_BIT</code>, <code>samples</code> <strong class=\"purple\">must</strong> be <code>VK_SAMPLE_COUNT_1_BIT</code>"
         },
         {
           "vuid": "VUID-VkImageCreateInfo-flags-00969",
-          "text": " If the <a href=\"#features-features-sparseBinding\">sparse bindings</a> feature is not enabled, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_IMAGE_CREATE_SPARSE_BINDING_BIT</code>"
+          "text": " If the <a href=\"#features-sparseBinding\">sparse bindings</a> feature is not enabled, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_IMAGE_CREATE_SPARSE_BINDING_BIT</code>"
         },
         {
           "vuid": "VUID-VkImageCreateInfo-flags-01924",
-          "text": " If the <a href=\"#features-features-sparseResidencyAliased\">sparse aliased residency</a> feature is not enabled, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_IMAGE_CREATE_SPARSE_ALIASED_BIT</code>"
+          "text": " If the <a href=\"#features-sparseResidencyAliased\">sparse aliased residency</a> feature is not enabled, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_IMAGE_CREATE_SPARSE_ALIASED_BIT</code>"
         },
         {
           "vuid": "VUID-VkImageCreateInfo-imageType-00970",
@@ -7668,27 +7668,27 @@
         },
         {
           "vuid": "VUID-VkImageCreateInfo-imageType-00971",
-          "text": " If the <a href=\"#features-features-sparseResidencyImage2D\">sparse residency for 2D images</a> feature is not enabled, and <code>imageType</code> is <code>VK_IMAGE_TYPE_2D</code>, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</code>"
+          "text": " If the <a href=\"#features-sparseResidencyImage2D\">sparse residency for 2D images</a> feature is not enabled, and <code>imageType</code> is <code>VK_IMAGE_TYPE_2D</code>, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</code>"
         },
         {
           "vuid": "VUID-VkImageCreateInfo-imageType-00972",
-          "text": " If the <a href=\"#features-features-sparseResidencyImage3D\">sparse residency for 3D images</a> feature is not enabled, and <code>imageType</code> is <code>VK_IMAGE_TYPE_3D</code>, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</code>"
+          "text": " If the <a href=\"#features-sparseResidencyImage3D\">sparse residency for 3D images</a> feature is not enabled, and <code>imageType</code> is <code>VK_IMAGE_TYPE_3D</code>, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</code>"
         },
         {
           "vuid": "VUID-VkImageCreateInfo-imageType-00973",
-          "text": " If the <a href=\"#features-features-sparseResidency2Samples\">sparse residency for images with 2 samples</a> feature is not enabled, <code>imageType</code> is <code>VK_IMAGE_TYPE_2D</code>, and <code>samples</code> is <code>VK_SAMPLE_COUNT_2_BIT</code>, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</code>"
+          "text": " If the <a href=\"#features-sparseResidency2Samples\">sparse residency for images with 2 samples</a> feature is not enabled, <code>imageType</code> is <code>VK_IMAGE_TYPE_2D</code>, and <code>samples</code> is <code>VK_SAMPLE_COUNT_2_BIT</code>, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</code>"
         },
         {
           "vuid": "VUID-VkImageCreateInfo-imageType-00974",
-          "text": " If the <a href=\"#features-features-sparseResidency4Samples\">sparse residency for images with 4 samples</a> feature is not enabled, <code>imageType</code> is <code>VK_IMAGE_TYPE_2D</code>, and <code>samples</code> is <code>VK_SAMPLE_COUNT_4_BIT</code>, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</code>"
+          "text": " If the <a href=\"#features-sparseResidency4Samples\">sparse residency for images with 4 samples</a> feature is not enabled, <code>imageType</code> is <code>VK_IMAGE_TYPE_2D</code>, and <code>samples</code> is <code>VK_SAMPLE_COUNT_4_BIT</code>, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</code>"
         },
         {
           "vuid": "VUID-VkImageCreateInfo-imageType-00975",
-          "text": " If the <a href=\"#features-features-sparseResidency8Samples\">sparse residency for images with 8 samples</a> feature is not enabled, <code>imageType</code> is <code>VK_IMAGE_TYPE_2D</code>, and <code>samples</code> is <code>VK_SAMPLE_COUNT_8_BIT</code>, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</code>"
+          "text": " If the <a href=\"#features-sparseResidency8Samples\">sparse residency for images with 8 samples</a> feature is not enabled, <code>imageType</code> is <code>VK_IMAGE_TYPE_2D</code>, and <code>samples</code> is <code>VK_SAMPLE_COUNT_8_BIT</code>, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</code>"
         },
         {
           "vuid": "VUID-VkImageCreateInfo-imageType-00976",
-          "text": " If the <a href=\"#features-features-sparseResidency16Samples\">sparse residency for images with 16 samples</a> feature is not enabled, <code>imageType</code> is <code>VK_IMAGE_TYPE_2D</code>, and <code>samples</code> is <code>VK_SAMPLE_COUNT_16_BIT</code>, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</code>"
+          "text": " If the <a href=\"#features-sparseResidency16Samples\">sparse residency for images with 16 samples</a> feature is not enabled, <code>imageType</code> is <code>VK_IMAGE_TYPE_2D</code>, and <code>samples</code> is <code>VK_SAMPLE_COUNT_16_BIT</code>, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</code>"
         },
         {
           "vuid": "VUID-VkImageCreateInfo-flags-00987",
@@ -7896,19 +7896,15 @@
       "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
         {
           "vuid": "VUID-VkImageCreateInfo-format-02561",
-          "text": " If the image <code>format</code> is one of those listed in <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\">Formats requiring sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion for <code>VK_IMAGE_ASPECT_COLOR_BIT</code> image views</a>, then <code>mipLevels</code> <strong class=\"purple\">must</strong> be 1"
+          "text": " If the image <code>format</code> is one of those listed in <a href=\"#formats-requiring-sampler-ycbcr-conversion\">Formats requiring sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion for <code>VK_IMAGE_ASPECT_COLOR_BIT</code> image views</a>, then <code>mipLevels</code> <strong class=\"purple\">must</strong> be 1"
         },
         {
           "vuid": "VUID-VkImageCreateInfo-format-02562",
-          "text": " If the image <code>format</code> is one of those listed in <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\">Formats requiring sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion for <code>VK_IMAGE_ASPECT_COLOR_BIT</code> image views</a>, <code>samples</code> must be <code>VK_SAMPLE_COUNT_1_BIT</code>"
+          "text": " If the image <code>format</code> is one of those listed in <a href=\"#formats-requiring-sampler-ycbcr-conversion\">Formats requiring sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion for <code>VK_IMAGE_ASPECT_COLOR_BIT</code> image views</a>, <code>samples</code> must be <code>VK_SAMPLE_COUNT_1_BIT</code>"
         },
         {
           "vuid": "VUID-VkImageCreateInfo-format-02563",
-          "text": " If the image <code>format</code> is one of those listed in <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\">Formats requiring sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion for <code>VK_IMAGE_ASPECT_COLOR_BIT</code> image views</a>, <code>imageType</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_TYPE_2D</code>"
-        },
-        {
-          "vuid": "VUID-VkImageCreateInfo-format-02564",
-          "text": " If the image <code>format</code> is one of those listed in <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\">Formats requiring sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion for <code>VK_IMAGE_ASPECT_COLOR_BIT</code> image views</a>, <code>arrayLayers</code> <strong class=\"purple\">must</strong> be 1"
+          "text": " If the image <code>format</code> is one of those listed in <a href=\"#formats-requiring-sampler-ycbcr-conversion\">Formats requiring sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion for <code>VK_IMAGE_ASPECT_COLOR_BIT</code> image views</a>, <code>imageType</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_TYPE_2D</code>"
         },
         {
           "vuid": "VUID-VkImageCreateInfo-imageCreateFormatFeatures-02260",
@@ -7917,6 +7913,18 @@
         {
           "vuid": "VUID-VkImageCreateInfo-format-01577",
           "text": " If <code>format</code> is not a <em>multi-planar</em> format, and <code>flags</code> does not include <code>VK_IMAGE_CREATE_ALIAS_BIT</code>, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_IMAGE_CREATE_DISJOINT_BIT</code>"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)+(VK_EXT_ycbcr_image_arrays)": [
+        {
+          "vuid": "VUID-VkImageCreateInfo-format-02653",
+          "text": " If the image <code>format</code> is one of those listed in <a href=\"#formats-requiring-sampler-ycbcr-conversion\">Formats requiring sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion for <code>VK_IMAGE_ASPECT_COLOR_BIT</code> image views</a>, and the <code>ycbcrImageArrays</code> feature is not enabled, <code>arrayLayers</code> <strong class=\"purple\">must</strong> be 1"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)+!(VK_EXT_ycbcr_image_arrays)": [
+        {
+          "vuid": "VUID-VkImageCreateInfo-format-02564",
+          "text": " If the image <code>format</code> is one of those listed in <a href=\"#formats-requiring-sampler-ycbcr-conversion\">Formats requiring sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion for <code>VK_IMAGE_ASPECT_COLOR_BIT</code> image views</a>, <code>arrayLayers</code> <strong class=\"purple\">must</strong> be 1"
         }
       ],
       "(VK_EXT_image_drm_format_modifier)": [
@@ -7958,7 +7966,7 @@
         },
         {
           "vuid": "VUID-VkImageCreateInfo-format-02538",
-          "text": " If the <a href=\"#features-features-shaderStorageImageMultisample\">multisampled storage images</a> feature is not enabled, <code>format</code> is a depth-stencil format and the <code>pNext</code> chain contains an instance of <a href=\"#VkImageStencilUsageCreateInfoEXT\">VkImageStencilUsageCreateInfoEXT</a> with its <code>stencilUsage</code> including <code>VK_IMAGE_USAGE_STORAGE_BIT</code>, <code>samples</code> <strong class=\"purple\">must</strong> be <code>VK_SAMPLE_COUNT_1_BIT</code>"
+          "text": " If the <a href=\"#features-shaderStorageImageMultisample\">multisampled storage images</a> feature is not enabled, <code>format</code> is a depth-stencil format and the <code>pNext</code> chain contains an instance of <a href=\"#VkImageStencilUsageCreateInfoEXT\">VkImageStencilUsageCreateInfoEXT</a> with its <code>stencilUsage</code> including <code>VK_IMAGE_USAGE_STORAGE_BIT</code>, <code>samples</code> <strong class=\"purple\">must</strong> be <code>VK_SAMPLE_COUNT_1_BIT</code>"
         }
       ],
       "(VK_NV_corner_sampled_image)": [
@@ -8086,7 +8094,7 @@
       "(VK_KHR_image_format_list)": [
         {
           "vuid": "VUID-VkImageFormatListCreateInfoKHR-viewFormatCount-01578",
-          "text": " If <code>viewFormatCount</code> is not <code>0</code>, all of the formats in the <code>pViewFormats</code> array <strong class=\"purple\">must</strong> be compatible with the format specified in the <code>format</code> field of <code>VkImageCreateInfo</code>, as described in the <a href=\"#features-formats-compatibility\">compatibility table</a>."
+          "text": " If <code>viewFormatCount</code> is not <code>0</code>, all of the formats in the <code>pViewFormats</code> array <strong class=\"purple\">must</strong> be compatible with the format specified in the <code>format</code> field of <code>VkImageCreateInfo</code>, as described in the <a href=\"#formats-compatibility\">compatibility table</a>."
         },
         {
           "vuid": "VUID-VkImageFormatListCreateInfoKHR-flags-01579",
@@ -8212,11 +8220,11 @@
       "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
         {
           "vuid": "VUID-vkGetImageSubresourceLayout-format-01581",
-          "text": " If the <code>tiling</code> of the <code>image</code> is <code>VK_IMAGE_TILING_LINEAR</code> and its <code>format</code> is a <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\">multi-planar format</a> with two planes, the <code>aspectMask</code> member of <code>pSubresource</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code> or <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code>"
+          "text": " If the <code>tiling</code> of the <code>image</code> is <code>VK_IMAGE_TILING_LINEAR</code> and its <code>format</code> is a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">multi-planar format</a> with two planes, the <code>aspectMask</code> member of <code>pSubresource</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code> or <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code>"
         },
         {
           "vuid": "VUID-vkGetImageSubresourceLayout-format-01582",
-          "text": " If the <code>tiling</code> of the <code>image</code> is <code>VK_IMAGE_TILING_LINEAR</code> and its <code>format</code> is a <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\">multi-planar format</a> with three planes, the <code>aspectMask</code> member of <code>pSubresource</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code>, <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code> or <code>VK_IMAGE_ASPECT_PLANE_2_BIT</code>"
+          "text": " If the <code>tiling</code> of the <code>image</code> is <code>VK_IMAGE_TILING_LINEAR</code> and its <code>format</code> is a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">multi-planar format</a> with three planes, the <code>aspectMask</code> member of <code>pSubresource</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code>, <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code> or <code>VK_IMAGE_ASPECT_PLANE_2_BIT</code>"
         }
       ],
       "(VK_ANDROID_external_memory_android_hardware_buffer)": [
@@ -8334,7 +8342,7 @@
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-viewType-01004",
-          "text": " If the <a href=\"#features-features-imageCubeArray\">image cubemap arrays</a> feature is not enabled, <code>viewType</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_VIEW_TYPE_CUBE_ARRAY</code>"
+          "text": " If the <a href=\"#features-imageCubeArray\">image cubemap arrays</a> feature is not enabled, <code>viewType</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_VIEW_TYPE_CUBE_ARRAY</code>"
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-None-02273",
@@ -8370,7 +8378,7 @@
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-image-01018",
-          "text": " If <code>image</code> was created with the <code>VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT</code> flag, <code>format</code> <strong class=\"purple\">must</strong> be compatible with the <code>format</code> used to create <code>image</code>, as defined in <a href=\"#features-formats-compatibility-classes\">Format Compatibility Classes</a>"
+          "text": " If <code>image</code> was created with the <code>VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT</code> flag, <code>format</code> <strong class=\"purple\">must</strong> be compatible with the <code>format</code> used to create <code>image</code>, as defined in <a href=\"#formats-compatibility-classes\">Format Compatibility Classes</a>"
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-image-01020",
@@ -8470,11 +8478,11 @@
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-flags-02572",
-          "text": " If <a href=\"#features-features-fragmentdensitymapdynamic\">dynamic fragment density map</a> feature is not enabled, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DYNAMIC_BIT_EXT</code>"
+          "text": " If <a href=\"#features-fragmentdensitymapdynamic\">dynamic fragment density map</a> feature is not enabled, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DYNAMIC_BIT_EXT</code>"
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-image-02573",
-          "text": " If <a href=\"#features-features-fragmentdensitymapdynamic\">dynamic fragment density map</a> feature is not enabled and <code>image</code> was created with <code>usage</code> containing <code>VK_IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT</code>, <code>flags</code> <strong class=\"purple\">must</strong> not contain any of <code>VK_IMAGE_CREATE_PROTECTED_BIT</code>, <code>VK_IMAGE_CREATE_SPARSE_BINDING_BIT</code>, <code>VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</code>, or <code>VK_IMAGE_CREATE_SPARSE_ALIASED_BIT</code>"
+          "text": " If <a href=\"#features-fragmentdensitymapdynamic\">dynamic fragment density map</a> feature is not enabled and <code>image</code> was created with <code>usage</code> containing <code>VK_IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT</code>, <code>flags</code> <strong class=\"purple\">must</strong> not contain any of <code>VK_IMAGE_CREATE_PROTECTED_BIT</code>, <code>VK_IMAGE_CREATE_SPARSE_BINDING_BIT</code>, <code>VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</code>, or <code>VK_IMAGE_CREATE_SPARSE_ALIASED_BIT</code>"
         }
       ],
       "!(VK_VERSION_1_1,VK_KHR_maintenance1)": [
@@ -8490,19 +8498,19 @@
       "(VK_VERSION_1_1,VK_KHR_maintenance2)+!(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
         {
           "vuid": "VUID-VkImageViewCreateInfo-image-01759",
-          "text": " If <code>image</code> was created with the <code>VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT</code> flag, but without the <code>VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT</code> flag, <code>format</code> <strong class=\"purple\">must</strong> be compatible with the <code>format</code> used to create <code>image</code>, as defined in <a href=\"#features-formats-compatibility-classes\">Format Compatibility Classes</a>"
+          "text": " If <code>image</code> was created with the <code>VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT</code> flag, but without the <code>VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT</code> flag, <code>format</code> <strong class=\"purple\">must</strong> be compatible with the <code>format</code> used to create <code>image</code>, as defined in <a href=\"#formats-compatibility-classes\">Format Compatibility Classes</a>"
         }
       ],
       "!(VK_VERSION_1_1,VK_KHR_maintenance2)+(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
         {
           "vuid": "VUID-VkImageViewCreateInfo-image-01760",
-          "text": " If <code>image</code> was created with the <code>VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT</code> flag, and if the <code>format</code> of the <code>image</code> is not a <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\">multi-planar</a> format, <code>format</code> <strong class=\"purple\">must</strong> be compatible with the <code>format</code> used to create <code>image</code>, as defined in <a href=\"#features-formats-compatibility-classes\">Format Compatibility Classes</a>"
+          "text": " If <code>image</code> was created with the <code>VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT</code> flag, and if the <code>format</code> of the <code>image</code> is not a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">multi-planar</a> format, <code>format</code> <strong class=\"purple\">must</strong> be compatible with the <code>format</code> used to create <code>image</code>, as defined in <a href=\"#formats-compatibility-classes\">Format Compatibility Classes</a>"
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_maintenance2)+(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
         {
           "vuid": "VUID-VkImageViewCreateInfo-image-01761",
-          "text": " If <code>image</code> was created with the <code>VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT</code> flag, but without the <code>VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT</code> flag, and if the <code>format</code> of the <code>image</code> is not a <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\">multi-planar</a> format, <code>format</code> <strong class=\"purple\">must</strong> be compatible with the <code>format</code> used to create <code>image</code>, as defined in <a href=\"#features-formats-compatibility-classes\">Format Compatibility Classes</a>"
+          "text": " If <code>image</code> was created with the <code>VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT</code> flag, but without the <code>VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT</code> flag, and if the <code>format</code> of the <code>image</code> is not a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">multi-planar</a> format, <code>format</code> <strong class=\"purple\">must</strong> be compatible with the <code>format</code> used to create <code>image</code>, as defined in <a href=\"#formats-compatibility-classes\">Format Compatibility Classes</a>"
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_maintenance2)": [
@@ -8524,11 +8532,11 @@
       "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
         {
           "vuid": "VUID-VkImageViewCreateInfo-image-01586",
-          "text": " If <code>image</code> was created with the <code>VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT</code> flag, if the <code>format</code> of the <code>image</code> is a <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\">multi-planar</a> format, and if <code>subresourceRange.aspectMask</code> is one of <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code>, <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code>, or <code>VK_IMAGE_ASPECT_PLANE_2_BIT</code>, then <code>format</code> <strong class=\"purple\">must</strong> be compatible with the <a href=\"#VkFormat\">VkFormat</a> for the plane of the <code>image</code> <code>format</code> indicated by <code>subresourceRange.aspectMask</code>, as defined in <a href=\"#features-formats-compatible-planes\">Compatible formats of planes of multi-planar formats</a>"
+          "text": " If <code>image</code> was created with the <code>VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT</code> flag, if the <code>format</code> of the <code>image</code> is a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">multi-planar</a> format, and if <code>subresourceRange.aspectMask</code> is one of <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code>, <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code>, or <code>VK_IMAGE_ASPECT_PLANE_2_BIT</code>, then <code>format</code> <strong class=\"purple\">must</strong> be compatible with the <a href=\"#VkFormat\">VkFormat</a> for the plane of the <code>image</code> <code>format</code> indicated by <code>subresourceRange.aspectMask</code>, as defined in <a href=\"#formats-compatible-planes\">Compatible formats of planes of multi-planar formats</a>"
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-image-01762",
-          "text": " If <code>image</code> was not created with the <code>VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT</code> flag, or if the <code>format</code> of the <code>image</code> is a <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\">multi-planar</a> format and if <code>subresourceRange.aspectMask</code> is <code>VK_IMAGE_ASPECT_COLOR_BIT</code>, <code>format</code> <strong class=\"purple\">must</strong> be identical to the <code>format</code> used to create <code>image</code>"
+          "text": " If <code>image</code> was not created with the <code>VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT</code> flag, or if the <code>format</code> of the <code>image</code> is a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">multi-planar</a> format and if <code>subresourceRange.aspectMask</code> is <code>VK_IMAGE_ASPECT_COLOR_BIT</code>, <code>format</code> <strong class=\"purple\">must</strong> be identical to the <code>format</code> used to create <code>image</code>"
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-pNext-01970",
@@ -8646,7 +8654,7 @@
         },
         {
           "vuid": "VUID-VkImageViewASTCDecodeModeEXT-decodeMode-02231",
-          "text": " If the <a href=\"#features-features-astc-decodeModeSharedExponent\"><code>decodeModeSharedExponent</code></a> feature is not enabled, <code>decodeMode</code> <strong class=\"purple\">must</strong> not be <code>VK_FORMAT_E5B9G9R9_UFLOAT_PACK32</code>"
+          "text": " If the <a href=\"#features-astc-decodeModeSharedExponent\"><code>decodeModeSharedExponent</code></a> feature is not enabled, <code>decodeMode</code> <strong class=\"purple\">must</strong> not be <code>VK_FORMAT_E5B9G9R9_UFLOAT_PACK32</code>"
         },
         {
           "vuid": "VUID-VkImageViewASTCDecodeModeEXT-decodeMode-02232",
@@ -8695,6 +8703,62 @@
         {
           "vuid": "VUID-vkDestroyImageView-imageView-parent",
           "text": " If <code>imageView</code> is a valid handle, it <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from <code>device</code>"
+        }
+      ]
+    },
+    "vkGetImageViewHandleNVX": {
+      "(VK_NVX_image_view_handle)": [
+        {
+          "vuid": "VUID-vkGetImageViewHandleNVX-device-parameter",
+          "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <code>VkDevice</code> handle"
+        },
+        {
+          "vuid": "VUID-vkGetImageViewHandleNVX-pInfo-parameter",
+          "text": " <code>pInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <code>VkImageViewHandleInfoNVX</code> structure"
+        }
+      ]
+    },
+    "VkImageViewHandleInfoNVX": {
+      "(VK_NVX_image_view_handle)": [
+        {
+          "vuid": "VUID-VkImageViewHandleInfoNVX-descriptorType-02654",
+          "text": " <code>descriptorType</code> <strong class=\"purple\">must</strong> be <code>VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE</code>, <code>VK_DESCRIPTOR_TYPE_STORAGE_IMAGE</code>, or <code>VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER</code>"
+        },
+        {
+          "vuid": "VUID-VkImageViewHandleInfoNVX-sampler-02655",
+          "text": " <code>sampler</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkSampler\">VkSampler</a> if <code>descriptorType</code> is <code>VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER</code>"
+        },
+        {
+          "vuid": "VUID-VkImageViewHandleInfoNVX-imageView-02656",
+          "text": "    If descriptorType is <code>VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE</code> or    <code>VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER</code>, the image that    <code>imageView</code> was created from <strong class=\"purple\">must</strong> have been created with the    <code>VK_IMAGE_USAGE_SAMPLED_BIT</code> usage bit set"
+        },
+        {
+          "vuid": "VUID-VkImageViewHandleInfoNVX-imageView-02657",
+          "text": " If descriptorType is <code>VK_DESCRIPTOR_TYPE_STORAGE_IMAGE</code>, the image that <code>imageView</code> was created from <strong class=\"purple\">must</strong> have been created with the <code>VK_IMAGE_USAGE_STORAGE_BIT</code> usage bit set"
+        },
+        {
+          "vuid": "VUID-VkImageViewHandleInfoNVX-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_IMAGE_VIEW_HANDLE_INFO_NVX</code>"
+        },
+        {
+          "vuid": "VUID-VkImageViewHandleInfoNVX-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkImageViewHandleInfoNVX-imageView-parameter",
+          "text": " <code>imageView</code> <strong class=\"purple\">must</strong> be a valid <code>VkImageView</code> handle"
+        },
+        {
+          "vuid": "VUID-VkImageViewHandleInfoNVX-descriptorType-parameter",
+          "text": " <code>descriptorType</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDescriptorType\">VkDescriptorType</a> value"
+        },
+        {
+          "vuid": "VUID-VkImageViewHandleInfoNVX-sampler-parameter",
+          "text": " If <code>sampler</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>sampler</code> <strong class=\"purple\">must</strong> be a valid <code>VkSampler</code> handle"
+        },
+        {
+          "vuid": "VUID-VkImageViewHandleInfoNVX-commonparent",
+          "text": " Both of <code>imageView</code>, and <code>sampler</code> that are valid handles <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkDevice</code>"
         }
       ]
     },
@@ -9142,11 +9206,11 @@
       "(VK_VERSION_1_1,VK_KHR_dedicated_allocation)+(VK_NV_dedicated_allocation_image_aliasing)": [
         {
           "vuid": "VUID-vkBindImageMemory-memory-02628",
-          "text": " If the <a href=\"#features-features-dedicatedAllocationImageAliasing\">dedicated allocation image aliasing</a> feature is not enabled, and the <code>VkMemoryAllocateInfo</code> provided when <code>memory</code> was allocated included an instance of <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a> in its <code>pNext</code> chain, and <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>image</code> was not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, then <code>image</code> <strong class=\"purple\">must</strong> equal <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>image</code> and <code>memoryOffset</code> <strong class=\"purple\">must</strong> be zero."
+          "text": " If the <a href=\"#features-dedicatedAllocationImageAliasing\">dedicated allocation image aliasing</a> feature is not enabled, and the <code>VkMemoryAllocateInfo</code> provided when <code>memory</code> was allocated included an instance of <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a> in its <code>pNext</code> chain, and <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>image</code> was not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, then <code>image</code> <strong class=\"purple\">must</strong> equal <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>image</code> and <code>memoryOffset</code> <strong class=\"purple\">must</strong> be zero."
         },
         {
           "vuid": "VUID-vkBindImageMemory-memory-02629",
-          "text": " If the <a href=\"#features-features-dedicatedAllocationImageAliasing\">dedicated allocation image aliasing</a> feature is enabled, and the <code>VkMemoryAllocateInfo</code> provided when <code>memory</code> was allocated included an instance of <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a> in its <code>pNext</code> chain, and <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>image</code> was not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, then <code>memoryOffset</code> <strong class=\"purple\">must</strong> be zero, and <code>image</code> <strong class=\"purple\">must</strong> be either equal to <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>image</code> or an image that was created using the same parameters in <code>VkImageCreateInfo</code>, with the exception that <code>extent</code> and <code>arrayLayers</code> <strong class=\"purple\">may</strong> differ subject to the following restrictions: every dimension in the <code>extent</code> parameter of the image being bound <strong class=\"purple\">must</strong> be equal to or smaller than the original image for which the allocation was created; and the <code>arrayLayers</code> parameter of the image being bound <strong class=\"purple\">must</strong> be equal to or smaller than the original image for which the allocation was created."
+          "text": " If the <a href=\"#features-dedicatedAllocationImageAliasing\">dedicated allocation image aliasing</a> feature is enabled, and the <code>VkMemoryAllocateInfo</code> provided when <code>memory</code> was allocated included an instance of <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a> in its <code>pNext</code> chain, and <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>image</code> was not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, then <code>memoryOffset</code> <strong class=\"purple\">must</strong> be zero, and <code>image</code> <strong class=\"purple\">must</strong> be either equal to <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>image</code> or an image that was created using the same parameters in <code>VkImageCreateInfo</code>, with the exception that <code>extent</code> and <code>arrayLayers</code> <strong class=\"purple\">may</strong> differ subject to the following restrictions: every dimension in the <code>extent</code> parameter of the image being bound <strong class=\"purple\">must</strong> be equal to or smaller than the original image for which the allocation was created; and the <code>arrayLayers</code> parameter of the image being bound <strong class=\"purple\">must</strong> be equal to or smaller than the original image for which the allocation was created."
         }
       ],
       "(VK_VERSION_1_1)": [
@@ -9282,11 +9346,11 @@
       "(VK_VERSION_1_1,VK_KHR_bind_memory2)+(VK_VERSION_1_1,VK_KHR_dedicated_allocation)+(VK_NV_dedicated_allocation_image_aliasing)": [
         {
           "vuid": "VUID-VkBindImageMemoryInfo-memory-02630",
-          "text": " If the <a href=\"#features-features-dedicatedAllocationImageAliasing\">dedicated allocation image aliasing</a> feature is not enabled, and the <code>VkMemoryAllocateInfo</code> provided when <code>memory</code> was allocated included an instance of <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a> in its <code>pNext</code> chain, and <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>image</code> was not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, then <code>image</code> <strong class=\"purple\">must</strong> equal <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>image</code> and <code>memoryOffset</code> <strong class=\"purple\">must</strong> be zero."
+          "text": " If the <a href=\"#features-dedicatedAllocationImageAliasing\">dedicated allocation image aliasing</a> feature is not enabled, and the <code>VkMemoryAllocateInfo</code> provided when <code>memory</code> was allocated included an instance of <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a> in its <code>pNext</code> chain, and <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>image</code> was not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, then <code>image</code> <strong class=\"purple\">must</strong> equal <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>image</code> and <code>memoryOffset</code> <strong class=\"purple\">must</strong> be zero."
         },
         {
           "vuid": "VUID-VkBindImageMemoryInfo-memory-02631",
-          "text": " If the <a href=\"#features-features-dedicatedAllocationImageAliasing\">dedicated allocation image aliasing</a> feature is enabled, and the <code>VkMemoryAllocateInfo</code> provided when <code>memory</code> was allocated included an instance of <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a> in its <code>pNext</code> chain, and <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>image</code> was not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, then <code>memoryOffset</code> <strong class=\"purple\">must</strong> be zero, and <code>image</code> <strong class=\"purple\">must</strong> be either equal to <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>image</code> or an image that was created using the same parameters in <code>VkImageCreateInfo</code>, with the exception that <code>extent</code> and <code>arrayLayers</code> <strong class=\"purple\">may</strong> differ subject to the following restrictions: every dimension in the <code>extent</code> parameter of the image being bound <strong class=\"purple\">must</strong> be equal to or smaller than the original image for which the allocation was created; and the <code>arrayLayers</code> parameter of the image being bound <strong class=\"purple\">must</strong> be equal to or smaller than the original image for which the allocation was created."
+          "text": " If the <a href=\"#features-dedicatedAllocationImageAliasing\">dedicated allocation image aliasing</a> feature is enabled, and the <code>VkMemoryAllocateInfo</code> provided when <code>memory</code> was allocated included an instance of <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a> in its <code>pNext</code> chain, and <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>image</code> was not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, then <code>memoryOffset</code> <strong class=\"purple\">must</strong> be zero, and <code>image</code> <strong class=\"purple\">must</strong> be either equal to <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>image</code> or an image that was created using the same parameters in <code>VkImageCreateInfo</code>, with the exception that <code>extent</code> and <code>arrayLayers</code> <strong class=\"purple\">may</strong> differ subject to the following restrictions: every dimension in the <code>extent</code> parameter of the image being bound <strong class=\"purple\">must</strong> be equal to or smaller than the original image for which the allocation was created; and the <code>arrayLayers</code> parameter of the image being bound <strong class=\"purple\">must</strong> be equal to or smaller than the original image for which the allocation was created."
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_bind_memory2)+(VK_NV_dedicated_allocation)": [
@@ -9858,7 +9922,7 @@
         },
         {
           "vuid": "VUID-VkSamplerCreateInfo-anisotropyEnable-01070",
-          "text": " If the <a href=\"#features-features-samplerAnisotropy\">anisotropic sampling</a> feature is not enabled, <code>anisotropyEnable</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>"
+          "text": " If the <a href=\"#features-samplerAnisotropy\">anisotropic sampling</a> feature is not enabled, <code>anisotropyEnable</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>"
         },
         {
           "vuid": "VUID-VkSamplerCreateInfo-anisotropyEnable-01071",
@@ -10066,7 +10130,7 @@
       "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
         {
           "vuid": "VUID-vkCreateSamplerYcbcrConversion-None-01648",
-          "text": " The <a href=\"#features-features-sampler-YCbCr-conversion\">sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion feature</a> <strong class=\"purple\">must</strong> be enabled"
+          "text": " The <a href=\"#features-sampler-YCbCr-conversion\">sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion feature</a> <strong class=\"purple\">must</strong> be enabled"
         },
         {
           "vuid": "VUID-vkCreateSamplerYcbcrConversion-device-parameter",
@@ -11276,7 +11340,7 @@
       "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
         {
           "vuid": "VUID-VkDescriptorImageInfo-sampler-01564",
-          "text": " If <code>sampler</code> is used and the <a href=\"#VkFormat\">VkFormat</a> of the image is a <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\">multi-planar format</a>, the image <strong class=\"purple\">must</strong> have been created with <code>VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT</code>, and the <code>aspectMask</code> of the <code>imageView</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code>, <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code> or (for three-plane formats only) <code>VK_IMAGE_ASPECT_PLANE_2_BIT</code>"
+          "text": " If <code>sampler</code> is used and the <a href=\"#VkFormat\">VkFormat</a> of the image is a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">multi-planar format</a>, the image <strong class=\"purple\">must</strong> have been created with <code>VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT</code>, and the <code>aspectMask</code> of the <code>imageView</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code>, <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code> or (for three-plane formats only) <code>VK_IMAGE_ASPECT_PLANE_2_BIT</code>"
         }
       ]
     },
@@ -11772,11 +11836,11 @@
       "(VK_EXT_buffer_device_address)": [
         {
           "vuid": "VUID-vkGetBufferDeviceAddressEXT-None-02598",
-          "text": " The <a href=\"#features-features-bufferDeviceAddress\">bufferDeviceAddress</a> feature <strong class=\"purple\">must</strong> be enabled"
+          "text": " The <a href=\"#features-bufferDeviceAddress\">bufferDeviceAddress</a> feature <strong class=\"purple\">must</strong> be enabled"
         },
         {
           "vuid": "VUID-vkGetBufferDeviceAddressEXT-device-02599",
-          "text": " If <code>device</code> was created with multiple physical devices, then the <a href=\"#features-features-bufferDeviceAddressMultiDevice\">bufferDeviceAddressMultiDevice</a> feature <strong class=\"purple\">must</strong> be enabled"
+          "text": " If <code>device</code> was created with multiple physical devices, then the <a href=\"#features-bufferDeviceAddressMultiDevice\">bufferDeviceAddressMultiDevice</a> feature <strong class=\"purple\">must</strong> be enabled"
         },
         {
           "vuid": "VUID-vkGetBufferDeviceAddressEXT-device-parameter",
@@ -11836,7 +11900,7 @@
       "core": [
         {
           "vuid": "VUID-VkQueryPoolCreateInfo-queryType-00791",
-          "text": " If the <a href=\"#features-features-pipelineStatisticsQuery\">pipeline statistics queries</a> feature is not enabled, <code>queryType</code> <strong class=\"purple\">must</strong> not be <code>VK_QUERY_TYPE_PIPELINE_STATISTICS</code>"
+          "text": " If the <a href=\"#features-pipelineStatisticsQuery\">pipeline statistics queries</a> feature is not enabled, <code>queryType</code> <strong class=\"purple\">must</strong> not be <code>VK_QUERY_TYPE_PIPELINE_STATISTICS</code>"
         },
         {
           "vuid": "VUID-VkQueryPoolCreateInfo-queryType-00792",
@@ -11940,7 +12004,7 @@
         },
         {
           "vuid": "VUID-vkCmdBeginQuery-queryType-00800",
-          "text": " If the <a href=\"#features-features-occlusionQueryPrecise\">precise occlusion queries</a> feature is not enabled, or the <code>queryType</code> used to create <code>queryPool</code> was not <code>VK_QUERY_TYPE_OCCLUSION</code>, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_QUERY_CONTROL_PRECISE_BIT</code>"
+          "text": " If the <a href=\"#features-occlusionQueryPrecise\">precise occlusion queries</a> feature is not enabled, or the <code>queryType</code> used to create <code>queryPool</code> was not <code>VK_QUERY_TYPE_OCCLUSION</code>, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_QUERY_CONTROL_PRECISE_BIT</code>"
         },
         {
           "vuid": "VUID-vkCmdBeginQuery-query-00802",
@@ -12018,7 +12082,7 @@
         },
         {
           "vuid": "VUID-vkCmdBeginQueryIndexedEXT-queryType-02331",
-          "text": " If the <a href=\"#features-features-occlusionQueryPrecise\">precise occlusion queries</a> feature is not enabled, or the <code>queryType</code> used to create <code>queryPool</code> was not <code>VK_QUERY_TYPE_OCCLUSION</code>, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_QUERY_CONTROL_PRECISE_BIT</code>"
+          "text": " If the <a href=\"#features-occlusionQueryPrecise\">precise occlusion queries</a> feature is not enabled, or the <code>queryType</code> used to create <code>queryPool</code> was not <code>VK_QUERY_TYPE_OCCLUSION</code>, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_QUERY_CONTROL_PRECISE_BIT</code>"
         },
         {
           "vuid": "VUID-vkCmdBeginQueryIndexedEXT-query-02332",
@@ -12448,7 +12512,7 @@
       "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
         {
           "vuid": "VUID-vkCmdClearColorImage-image-01545",
-          "text": " <code>image</code> <strong class=\"purple\">must</strong> not use a format listed in <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\">Formats requiring sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion for <code>VK_IMAGE_ASPECT_COLOR_BIT</code> image views</a>"
+          "text": " <code>image</code> <strong class=\"purple\">must</strong> not use a format listed in <a href=\"#formats-requiring-sampler-ycbcr-conversion\">Formats requiring sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion for <code>VK_IMAGE_ASPECT_COLOR_BIT</code> image views</a>"
         }
       ],
       "!(VK_KHR_shared_presentable_image)": [
@@ -13080,15 +13144,15 @@
         },
         {
           "vuid": "VUID-vkCmdCopyImage-srcImage-01548",
-          "text": " If the <a href=\"#VkFormat\">VkFormat</a> of each of <code>srcImage</code> and <code>dstImage</code> is not a <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\"><em>multi-planar format</em></a>, the <a href=\"#VkFormat\">VkFormat</a> of each of <code>srcImage</code> and <code>dstImage</code> <strong class=\"purple\">must</strong> be compatible, as defined <a href=\"#copies-images-format-compatibility\">above</a>"
+          "text": " If the <a href=\"#VkFormat\">VkFormat</a> of each of <code>srcImage</code> and <code>dstImage</code> is not a <a href=\"#formats-requiring-sampler-ycbcr-conversion\"><em>multi-planar format</em></a>, the <a href=\"#VkFormat\">VkFormat</a> of each of <code>srcImage</code> and <code>dstImage</code> <strong class=\"purple\">must</strong> be compatible, as defined <a href=\"#copies-images-format-compatibility\">above</a>"
         },
         {
           "vuid": "VUID-vkCmdCopyImage-None-01549",
-          "text": " In a copy to or from a plane of a <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\">multi-planar image</a>, the <a href=\"#VkFormat\">VkFormat</a> of the image and plane <strong class=\"purple\">must</strong> be compatible according to <a href=\"#features-formats-compatible-planes\">the description of compatible planes</a> for the plane being copied"
+          "text": " In a copy to or from a plane of a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">multi-planar image</a>, the <a href=\"#VkFormat\">VkFormat</a> of the image and plane <strong class=\"purple\">must</strong> be compatible according to <a href=\"#formats-compatible-planes\">the description of compatible planes</a> for the plane being copied"
         },
         {
           "vuid": "VUID-vkCmdCopyImage-aspectMask-01550",
-          "text": " When a copy is performed to or from an image with a <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\">multi-planar format</a>, the <code>aspectMask</code> of the <code>srcSubresource</code> and/or <code>dstSubresource</code> that refers to the multi-planar image <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code>, <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code>, or <code>VK_IMAGE_ASPECT_PLANE_2_BIT</code> (with <code>VK_IMAGE_ASPECT_PLANE_2_BIT</code> valid only for a <a href=\"#VkFormat\">VkFormat</a> with three planes)"
+          "text": " When a copy is performed to or from an image with a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">multi-planar format</a>, the <code>aspectMask</code> of the <code>srcSubresource</code> and/or <code>dstSubresource</code> that refers to the multi-planar image <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code>, <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code>, or <code>VK_IMAGE_ASPECT_PLANE_2_BIT</code> (with <code>VK_IMAGE_ASPECT_PLANE_2_BIT</code> valid only for a <a href=\"#VkFormat\">VkFormat</a> with three planes)"
         }
       ],
       "!(VK_KHR_shared_presentable_image)": [
@@ -13174,31 +13238,31 @@
       "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
         {
           "vuid": "VUID-VkImageCopy-srcImage-01551",
-          "text": " If neither the calling command&#8217;s <code>srcImage</code> nor the calling command&#8217;s <code>dstImage</code> has a <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\">multi-planar image format</a> then the <code>aspectMask</code> member of <code>srcSubresource</code> and <code>dstSubresource</code> <strong class=\"purple\">must</strong> match"
+          "text": " If neither the calling command&#8217;s <code>srcImage</code> nor the calling command&#8217;s <code>dstImage</code> has a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">multi-planar image format</a> then the <code>aspectMask</code> member of <code>srcSubresource</code> and <code>dstSubresource</code> <strong class=\"purple\">must</strong> match"
         },
         {
           "vuid": "VUID-VkImageCopy-srcImage-01552",
-          "text": " If the calling command&#8217;s <code>srcImage</code> has a <a href=\"#VkFormat\">VkFormat</a> with <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\">two planes</a> then the <code>srcSubresource</code> <code>aspectMask</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code> or <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code>"
+          "text": " If the calling command&#8217;s <code>srcImage</code> has a <a href=\"#VkFormat\">VkFormat</a> with <a href=\"#formats-requiring-sampler-ycbcr-conversion\">two planes</a> then the <code>srcSubresource</code> <code>aspectMask</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code> or <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code>"
         },
         {
           "vuid": "VUID-VkImageCopy-srcImage-01553",
-          "text": " If the calling command&#8217;s <code>srcImage</code> has a <a href=\"#VkFormat\">VkFormat</a> with <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\">three planes</a> then the <code>srcSubresource</code> <code>aspectMask</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code>, <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code>, or <code>VK_IMAGE_ASPECT_PLANE_2_BIT</code>"
+          "text": " If the calling command&#8217;s <code>srcImage</code> has a <a href=\"#VkFormat\">VkFormat</a> with <a href=\"#formats-requiring-sampler-ycbcr-conversion\">three planes</a> then the <code>srcSubresource</code> <code>aspectMask</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code>, <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code>, or <code>VK_IMAGE_ASPECT_PLANE_2_BIT</code>"
         },
         {
           "vuid": "VUID-VkImageCopy-dstImage-01554",
-          "text": " If the calling command&#8217;s <code>dstImage</code> has a <a href=\"#VkFormat\">VkFormat</a> with <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\">two planes</a> then the <code>dstSubresource</code> <code>aspectMask</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code> or <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code>"
+          "text": " If the calling command&#8217;s <code>dstImage</code> has a <a href=\"#VkFormat\">VkFormat</a> with <a href=\"#formats-requiring-sampler-ycbcr-conversion\">two planes</a> then the <code>dstSubresource</code> <code>aspectMask</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code> or <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code>"
         },
         {
           "vuid": "VUID-VkImageCopy-dstImage-01555",
-          "text": " If the calling command&#8217;s <code>dstImage</code> has a <a href=\"#VkFormat\">VkFormat</a> with <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\">three planes</a> then the <code>dstSubresource</code> <code>aspectMask</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code>, <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code>, or <code>VK_IMAGE_ASPECT_PLANE_2_BIT</code>"
+          "text": " If the calling command&#8217;s <code>dstImage</code> has a <a href=\"#VkFormat\">VkFormat</a> with <a href=\"#formats-requiring-sampler-ycbcr-conversion\">three planes</a> then the <code>dstSubresource</code> <code>aspectMask</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code>, <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code>, or <code>VK_IMAGE_ASPECT_PLANE_2_BIT</code>"
         },
         {
           "vuid": "VUID-VkImageCopy-srcImage-01556",
-          "text": " If the calling command&#8217;s <code>srcImage</code> has a <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\">multi-planar image format</a> and the <code>dstImage</code> does not have a multi-planar image format, the <code>dstSubresource</code> <code>aspectMask</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_COLOR_BIT</code>"
+          "text": " If the calling command&#8217;s <code>srcImage</code> has a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">multi-planar image format</a> and the <code>dstImage</code> does not have a multi-planar image format, the <code>dstSubresource</code> <code>aspectMask</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_COLOR_BIT</code>"
         },
         {
           "vuid": "VUID-VkImageCopy-dstImage-01557",
-          "text": " If the calling command&#8217;s <code>dstImage</code> has a <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\">multi-planar image format</a> and the <code>srcImage</code> does not have a multi-planar image format, the <code>srcSubresource</code> <code>aspectMask</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_COLOR_BIT</code>"
+          "text": " If the calling command&#8217;s <code>dstImage</code> has a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">multi-planar image format</a> and the <code>srcImage</code> does not have a multi-planar image format, the <code>srcSubresource</code> <code>aspectMask</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_COLOR_BIT</code>"
         },
         {
           "vuid": "VUID-VkImageCopy-srcImage-01727",
@@ -13664,11 +13728,11 @@
       "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
         {
           "vuid": "VUID-VkBufferImageCopy-bufferOffset-01558",
-          "text": " If the calling command&#8217;s <code>VkImage</code> parameter&#8217;s format is not a depth/stencil format or a <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\">multi-planar format</a>, then <code>bufferOffset</code> <strong class=\"purple\">must</strong> be a multiple of the format&#8217;s texel block size."
+          "text": " If the calling command&#8217;s <code>VkImage</code> parameter&#8217;s format is not a depth/stencil format or a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">multi-planar format</a>, then <code>bufferOffset</code> <strong class=\"purple\">must</strong> be a multiple of the format&#8217;s texel block size."
         },
         {
           "vuid": "VUID-VkBufferImageCopy-bufferOffset-01559",
-          "text": " If the calling command&#8217;s <code>VkImage</code> parameter&#8217;s format is a <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\">multi-planar format</a>, then <code>bufferOffset</code> <strong class=\"purple\">must</strong> be a multiple of the element size of the compatible format for the format and the <code>aspectMask</code> of the <code>imageSubresource</code> as defined in <a href=\"#features-formats-compatible-planes\">Compatible formats of planes of multi-planar formats</a>"
+          "text": " If the calling command&#8217;s <code>VkImage</code> parameter&#8217;s format is a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">multi-planar format</a>, then <code>bufferOffset</code> <strong class=\"purple\">must</strong> be a multiple of the element size of the compatible format for the format and the <code>aspectMask</code> of the <code>imageSubresource</code> as defined in <a href=\"#formats-compatible-planes\">Compatible formats of planes of multi-planar formats</a>"
         },
         {
           "vuid": "VUID-VkBufferImageCopy-None-01735",
@@ -13700,7 +13764,7 @@
         },
         {
           "vuid": "VUID-VkBufferImageCopy-aspectMask-01560",
-          "text": " If the calling command&#8217;s <code>VkImage</code> parameter&#8217;s format is a <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\">multi-planar format</a>, then the <code>aspectMask</code> member of <code>imageSubresource</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code>, <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code>, or <code>VK_IMAGE_ASPECT_PLANE_2_BIT</code> (with <code>VK_IMAGE_ASPECT_PLANE_2_BIT</code> valid only for image formats with three planes)"
+          "text": " If the calling command&#8217;s <code>VkImage</code> parameter&#8217;s format is a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">multi-planar format</a>, then the <code>aspectMask</code> member of <code>imageSubresource</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code>, <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code>, or <code>VK_IMAGE_ASPECT_PLANE_2_BIT</code> (with <code>VK_IMAGE_ASPECT_PLANE_2_BIT</code> valid only for image formats with three planes)"
         }
       ],
       "core": [
@@ -13906,11 +13970,11 @@
       "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
         {
           "vuid": "VUID-vkCmdBlitImage-srcImage-01561",
-          "text": " <code>srcImage</code> <strong class=\"purple\">must</strong> not use a format listed in <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\">Formats requiring sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion for <code>VK_IMAGE_ASPECT_COLOR_BIT</code> image views</a>"
+          "text": " <code>srcImage</code> <strong class=\"purple\">must</strong> not use a format listed in <a href=\"#formats-requiring-sampler-ycbcr-conversion\">Formats requiring sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion for <code>VK_IMAGE_ASPECT_COLOR_BIT</code> image views</a>"
         },
         {
           "vuid": "VUID-vkCmdBlitImage-dstImage-01562",
-          "text": " <code>dstImage</code> <strong class=\"purple\">must</strong> not use a format listed in <a href=\"#features-formats-requiring-sampler-ycbcr-conversion\">Formats requiring sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion for <code>VK_IMAGE_ASPECT_COLOR_BIT</code> image views</a>"
+          "text": " <code>dstImage</code> <strong class=\"purple\">must</strong> not use a format listed in <a href=\"#formats-requiring-sampler-ycbcr-conversion\">Formats requiring sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion for <code>VK_IMAGE_ASPECT_COLOR_BIT</code> image views</a>"
         }
       ],
       "!(VK_KHR_shared_presentable_image)": [
@@ -14300,11 +14364,11 @@
         },
         {
           "vuid": "VUID-VkPipelineInputAssemblyStateCreateInfo-topology-00429",
-          "text": " If the <a href=\"#features-features-geometryShader\">geometry shaders</a> feature is not enabled, <code>topology</code> <strong class=\"purple\">must</strong> not be any of <code>VK_PRIMITIVE_TOPOLOGY_LINE_LIST_WITH_ADJACENCY</code>, <code>VK_PRIMITIVE_TOPOLOGY_LINE_STRIP_WITH_ADJACENCY</code>, <code>VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST_WITH_ADJACENCY</code> or <code>VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP_WITH_ADJACENCY</code>"
+          "text": " If the <a href=\"#features-geometryShader\">geometry shaders</a> feature is not enabled, <code>topology</code> <strong class=\"purple\">must</strong> not be any of <code>VK_PRIMITIVE_TOPOLOGY_LINE_LIST_WITH_ADJACENCY</code>, <code>VK_PRIMITIVE_TOPOLOGY_LINE_STRIP_WITH_ADJACENCY</code>, <code>VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST_WITH_ADJACENCY</code> or <code>VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP_WITH_ADJACENCY</code>"
         },
         {
           "vuid": "VUID-VkPipelineInputAssemblyStateCreateInfo-topology-00430",
-          "text": " If the <a href=\"#features-features-tessellationShader\">tessellation shaders</a> feature is not enabled, <code>topology</code> <strong class=\"purple\">must</strong> not be <code>VK_PRIMITIVE_TOPOLOGY_PATCH_LIST</code>"
+          "text": " If the <a href=\"#features-tessellationShader\">tessellation shaders</a> feature is not enabled, <code>topology</code> <strong class=\"purple\">must</strong> not be <code>VK_PRIMITIVE_TOPOLOGY_PATCH_LIST</code>"
         },
         {
           "vuid": "VUID-VkPipelineInputAssemblyStateCreateInfo-sType-sType",
@@ -14430,11 +14494,11 @@
         },
         {
           "vuid": "VUID-vkCmdDraw-None-00448",
-          "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a uniform buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
+          "text": " If the <a href=\"#features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a uniform buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
         },
         {
           "vuid": "VUID-vkCmdDraw-None-00449",
-          "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
+          "text": " If the <a href=\"#features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
         },
         {
           "vuid": "VUID-vkCmdDraw-None-01499",
@@ -14576,11 +14640,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexed-None-00468",
-          "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a uniform buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
+          "text": " If the <a href=\"#features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a uniform buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexed-None-00469",
-          "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
+          "text": " If the <a href=\"#features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexed-None-02011",
@@ -14682,11 +14746,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirect-drawCount-00477",
-          "text": " If the <a href=\"#features-features-multiDrawIndirect\">multi-draw indirect</a> feature is not enabled, <code>drawCount</code> <strong class=\"purple\">must</strong> be <code>0</code> or <code>1</code>"
+          "text": " If the <a href=\"#features-multiDrawIndirect\">multi-draw indirect</a> feature is not enabled, <code>drawCount</code> <strong class=\"purple\">must</strong> be <code>0</code> or <code>1</code>"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirect-firstInstance-00478",
-          "text": " If the <a href=\"#features-features-drawIndirectFirstInstance\">drawIndirectFirstInstance</a> feature is not enabled, all the <code>firstInstance</code> members of the <code>VkDrawIndirectCommand</code> structures accessed by this command <strong class=\"purple\">must</strong> be <code>0</code>"
+          "text": " If the <a href=\"#features-drawIndirectFirstInstance\">drawIndirectFirstInstance</a> feature is not enabled, all the <code>firstInstance</code> members of the <code>VkDrawIndirectCommand</code> structures accessed by this command <strong class=\"purple\">must</strong> be <code>0</code>"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirect-renderPass-00479",
@@ -14750,11 +14814,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirect-None-00494",
-          "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a uniform buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
+          "text": " If the <a href=\"#features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a uniform buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirect-None-00495",
-          "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
+          "text": " If the <a href=\"#features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirect-None-02013",
@@ -14848,7 +14912,7 @@
         },
         {
           "vuid": "VUID-VkDrawIndirectCommand-firstInstance-00501",
-          "text": " If the <a href=\"#features-features-drawIndirectFirstInstance\">drawIndirectFirstInstance</a> feature is not enabled, <code>firstInstance</code> <strong class=\"purple\">must</strong> be <code>0</code>"
+          "text": " If the <a href=\"#features-drawIndirectFirstInstance\">drawIndirectFirstInstance</a> feature is not enabled, <code>firstInstance</code> <strong class=\"purple\">must</strong> be <code>0</code>"
         }
       ]
     },
@@ -14888,7 +14952,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCountKHR-firstInstance-03112",
-          "text": " If the <a href=\"#features-features-drawIndirectFirstInstance\">drawIndirectFirstInstance</a> feature is not enabled, all the <code>firstInstance</code> members of the <code>VkDrawIndirectCommand</code> structures accessed by this command <strong class=\"purple\">must</strong> be <code>0</code>"
+          "text": " If the <a href=\"#features-drawIndirectFirstInstance\">drawIndirectFirstInstance</a> feature is not enabled, all the <code>firstInstance</code> members of the <code>VkDrawIndirectCommand</code> structures accessed by this command <strong class=\"purple\">must</strong> be <code>0</code>"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCountKHR-renderPass-03113",
@@ -14952,11 +15016,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCountKHR-None-03128",
-          "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a uniform buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
+          "text": " If the <a href=\"#features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a uniform buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCountKHR-None-03129",
-          "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
+          "text": " If the <a href=\"#features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCountKHR-None-02015",
@@ -15082,7 +15146,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCountAMD-firstInstance-00506",
-          "text": " If the <a href=\"#features-features-drawIndirectFirstInstance\">drawIndirectFirstInstance</a> feature is not enabled, all the <code>firstInstance</code> members of the <code>VkDrawIndirectCommand</code> structures accessed by this command <strong class=\"purple\">must</strong> be <code>0</code>"
+          "text": " If the <a href=\"#features-drawIndirectFirstInstance\">drawIndirectFirstInstance</a> feature is not enabled, all the <code>firstInstance</code> members of the <code>VkDrawIndirectCommand</code> structures accessed by this command <strong class=\"purple\">must</strong> be <code>0</code>"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCountAMD-renderPass-00507",
@@ -15146,11 +15210,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCountAMD-None-00522",
-          "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a uniform buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
+          "text": " If the <a href=\"#features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a uniform buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCountAMD-None-00523",
-          "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
+          "text": " If the <a href=\"#features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCountAMD-None-02017",
@@ -15238,11 +15302,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-drawCount-00529",
-          "text": " If the <a href=\"#features-features-multiDrawIndirect\">multi-draw indirect</a> feature is not enabled, <code>drawCount</code> <strong class=\"purple\">must</strong> be <code>0</code> or <code>1</code>"
+          "text": " If the <a href=\"#features-multiDrawIndirect\">multi-draw indirect</a> feature is not enabled, <code>drawCount</code> <strong class=\"purple\">must</strong> be <code>0</code> or <code>1</code>"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-firstInstance-00530",
-          "text": " If the <a href=\"#features-features-drawIndirectFirstInstance\">drawIndirectFirstInstance</a> feature is not enabled, all the <code>firstInstance</code> members of the <code>VkDrawIndexedIndirectCommand</code> structures accessed by this command <strong class=\"purple\">must</strong> be <code>0</code>"
+          "text": " If the <a href=\"#features-drawIndirectFirstInstance\">drawIndirectFirstInstance</a> feature is not enabled, all the <code>firstInstance</code> members of the <code>VkDrawIndexedIndirectCommand</code> structures accessed by this command <strong class=\"purple\">must</strong> be <code>0</code>"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-renderPass-00531",
@@ -15306,11 +15370,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-None-00546",
-          "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a uniform buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
+          "text": " If the <a href=\"#features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a uniform buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-None-00547",
-          "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
+          "text": " If the <a href=\"#features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-None-02018",
@@ -15408,7 +15472,7 @@
         },
         {
           "vuid": "VUID-VkDrawIndexedIndirectCommand-firstInstance-00554",
-          "text": " If the <a href=\"#features-features-drawIndirectFirstInstance\">drawIndirectFirstInstance</a> feature is not enabled, <code>firstInstance</code> <strong class=\"purple\">must</strong> be <code>0</code>"
+          "text": " If the <a href=\"#features-drawIndirectFirstInstance\">drawIndirectFirstInstance</a> feature is not enabled, <code>firstInstance</code> <strong class=\"purple\">must</strong> be <code>0</code>"
         }
       ]
     },
@@ -15448,7 +15512,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-firstInstance-03144",
-          "text": " If the <a href=\"#features-features-drawIndirectFirstInstance\">drawIndirectFirstInstance</a> feature is not enabled, all the <code>firstInstance</code> members of the <code>VkDrawIndexedIndirectCommand</code> structures accessed by this command <strong class=\"purple\">must</strong> be <code>0</code>"
+          "text": " If the <a href=\"#features-drawIndirectFirstInstance\">drawIndirectFirstInstance</a> feature is not enabled, all the <code>firstInstance</code> members of the <code>VkDrawIndexedIndirectCommand</code> structures accessed by this command <strong class=\"purple\">must</strong> be <code>0</code>"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-renderPass-03145",
@@ -15512,11 +15576,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-None-03160",
-          "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a uniform buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
+          "text": " If the <a href=\"#features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a uniform buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-None-03161",
-          "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
+          "text": " If the <a href=\"#features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-None-02020",
@@ -15642,7 +15706,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCountAMD-firstInstance-00559",
-          "text": " If the <a href=\"#features-features-drawIndirectFirstInstance\">drawIndirectFirstInstance</a> feature is not enabled, all the <code>firstInstance</code> members of the <code>VkDrawIndexedIndirectCommand</code> structures accessed by this command <strong class=\"purple\">must</strong> be <code>0</code>"
+          "text": " If the <a href=\"#features-drawIndirectFirstInstance\">drawIndirectFirstInstance</a> feature is not enabled, all the <code>firstInstance</code> members of the <code>VkDrawIndexedIndirectCommand</code> structures accessed by this command <strong class=\"purple\">must</strong> be <code>0</code>"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCountAMD-renderPass-00560",
@@ -15706,11 +15770,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCountAMD-None-00575",
-          "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a uniform buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
+          "text": " If the <a href=\"#features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a uniform buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCountAMD-None-00576",
-          "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
+          "text": " If the <a href=\"#features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCountAMD-None-02022",
@@ -16066,11 +16130,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksNV-None-02131",
-          "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object currently bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a uniform buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the currently bound descriptor set"
+          "text": " If the <a href=\"#features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object currently bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a uniform buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the currently bound descriptor set"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksNV-None-02132",
-          "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object currently bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the currently bound descriptor set"
+          "text": " If the <a href=\"#features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object currently bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the currently bound descriptor set"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksNV-linearTilingFeatures-02133",
@@ -16160,7 +16224,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-drawCount-02147",
-          "text": " If the <a href=\"#features-features-multiDrawIndirect\">multi-draw indirect</a> feature is not enabled, <code>drawCount</code> <strong class=\"purple\">must</strong> be <code>0</code> or <code>1</code>"
+          "text": " If the <a href=\"#features-multiDrawIndirect\">multi-draw indirect</a> feature is not enabled, <code>drawCount</code> <strong class=\"purple\">must</strong> be <code>0</code> or <code>1</code>"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-renderPass-02148",
@@ -16224,11 +16288,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-None-02163",
-          "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object currently bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a uniform buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the currently bound descriptor set"
+          "text": " If the <a href=\"#features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object currently bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a uniform buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the currently bound descriptor set"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-None-02164",
-          "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object currently bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the currently bound descriptor set"
+          "text": " If the <a href=\"#features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object currently bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the currently bound descriptor set"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-linearTilingFeatures-02165",
@@ -16406,11 +16470,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-None-02198",
-          "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object currently bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a uniform buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the currently bound descriptor set"
+          "text": " If the <a href=\"#features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object currently bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a uniform buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the currently bound descriptor set"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-None-02199",
-          "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object currently bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the currently bound descriptor set"
+          "text": " If the <a href=\"#features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object currently bound to <code>VK_PIPELINE_BIND_POINT_GRAPHICS</code> accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the currently bound descriptor set"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-linearTilingFeatures-02200",
@@ -16986,11 +17050,11 @@
       "core": [
         {
           "vuid": "VUID-VkPipelineViewportStateCreateInfo-viewportCount-01216",
-          "text": " If the <a href=\"#features-features-multiViewport\">multiple viewports</a> feature is not enabled, <code>viewportCount</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+          "text": " If the <a href=\"#features-multiViewport\">multiple viewports</a> feature is not enabled, <code>viewportCount</code> <strong class=\"purple\">must</strong> be <code>1</code>"
         },
         {
           "vuid": "VUID-VkPipelineViewportStateCreateInfo-scissorCount-01217",
-          "text": " If the <a href=\"#features-features-multiViewport\">multiple viewports</a> feature is not enabled, <code>scissorCount</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+          "text": " If the <a href=\"#features-multiViewport\">multiple viewports</a> feature is not enabled, <code>scissorCount</code> <strong class=\"purple\">must</strong> be <code>1</code>"
         },
         {
           "vuid": "VUID-VkPipelineViewportStateCreateInfo-viewportCount-01218",
@@ -17052,11 +17116,11 @@
         },
         {
           "vuid": "VUID-vkCmdSetViewport-firstViewport-01224",
-          "text": " If the <a href=\"#features-features-multiViewport\">multiple viewports</a> feature is not enabled, <code>firstViewport</code> <strong class=\"purple\">must</strong> be <code>0</code>"
+          "text": " If the <a href=\"#features-multiViewport\">multiple viewports</a> feature is not enabled, <code>firstViewport</code> <strong class=\"purple\">must</strong> be <code>0</code>"
         },
         {
           "vuid": "VUID-vkCmdSetViewport-viewportCount-01225",
-          "text": " If the <a href=\"#features-features-multiViewport\">multiple viewports</a> feature is not enabled, <code>viewportCount</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+          "text": " If the <a href=\"#features-multiViewport\">multiple viewports</a> feature is not enabled, <code>viewportCount</code> <strong class=\"purple\">must</strong> be <code>1</code>"
         },
         {
           "vuid": "VUID-vkCmdSetViewport-commandBuffer-parameter",
@@ -17152,7 +17216,7 @@
       "core": [
         {
           "vuid": "VUID-VkPipelineRasterizationStateCreateInfo-depthClampEnable-00782",
-          "text": " If the <a href=\"#features-features-depthClamp\">depth clamping</a> feature is not enabled, <code>depthClampEnable</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>"
+          "text": " If the <a href=\"#features-depthClamp\">depth clamping</a> feature is not enabled, <code>depthClampEnable</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>"
         },
         {
           "vuid": "VUID-VkPipelineRasterizationStateCreateInfo-sType-sType",
@@ -17186,13 +17250,13 @@
       "!(VK_NV_fill_rectangle)": [
         {
           "vuid": "VUID-VkPipelineRasterizationStateCreateInfo-polygonMode-01413",
-          "text": " If the <a href=\"#features-features-fillModeNonSolid\">non-solid fill modes</a> feature is not enabled, <code>polygonMode</code> <strong class=\"purple\">must</strong> be <code>VK_POLYGON_MODE_FILL</code>"
+          "text": " If the <a href=\"#features-fillModeNonSolid\">non-solid fill modes</a> feature is not enabled, <code>polygonMode</code> <strong class=\"purple\">must</strong> be <code>VK_POLYGON_MODE_FILL</code>"
         }
       ],
       "(VK_NV_fill_rectangle)": [
         {
           "vuid": "VUID-VkPipelineRasterizationStateCreateInfo-polygonMode-01507",
-          "text": " If the <a href=\"#features-features-fillModeNonSolid\">non-solid fill modes</a> feature is not enabled, <code>polygonMode</code> <strong class=\"purple\">must</strong> be <code>VK_POLYGON_MODE_FILL</code> or <code>VK_POLYGON_MODE_FILL_RECTANGLE_NV</code>"
+          "text": " If the <a href=\"#features-fillModeNonSolid\">non-solid fill modes</a> feature is not enabled, <code>polygonMode</code> <strong class=\"purple\">must</strong> be <code>VK_POLYGON_MODE_FILL</code> or <code>VK_POLYGON_MODE_FILL_RECTANGLE_NV</code>"
         },
         {
           "vuid": "VUID-VkPipelineRasterizationStateCreateInfo-polygonMode-01414",
@@ -17216,11 +17280,11 @@
       "core": [
         {
           "vuid": "VUID-VkPipelineMultisampleStateCreateInfo-sampleShadingEnable-00784",
-          "text": " If the <a href=\"#features-features-sampleRateShading\">sample rate shading</a> feature is not enabled, <code>sampleShadingEnable</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>"
+          "text": " If the <a href=\"#features-sampleRateShading\">sample rate shading</a> feature is not enabled, <code>sampleShadingEnable</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>"
         },
         {
           "vuid": "VUID-VkPipelineMultisampleStateCreateInfo-alphaToOneEnable-00785",
-          "text": " If the <a href=\"#features-features-alphaToOne\">alpha to one</a> feature is not enabled, <code>alphaToOneEnable</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>"
+          "text": " If the <a href=\"#features-alphaToOne\">alpha to one</a> feature is not enabled, <code>alphaToOneEnable</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>"
         },
         {
           "vuid": "VUID-VkPipelineMultisampleStateCreateInfo-minSampleShading-00786",
@@ -17366,7 +17430,7 @@
       "(VK_NV_shading_rate_image)": [
         {
           "vuid": "VUID-VkPipelineViewportShadingRateImageStateCreateInfoNV-viewportCount-02054",
-          "text": " If the <a href=\"#features-features-multiViewport\">multiple viewports</a> feature is not enabled, <code>viewportCount</code> <strong class=\"purple\">must</strong> be <code>0</code> or <code>1</code>"
+          "text": " If the <a href=\"#features-multiViewport\">multiple viewports</a> feature is not enabled, <code>viewportCount</code> <strong class=\"purple\">must</strong> be <code>0</code> or <code>1</code>"
         },
         {
           "vuid": "VUID-VkPipelineViewportShadingRateImageStateCreateInfoNV-viewportCount-02055",
@@ -17394,7 +17458,7 @@
       "(VK_NV_shading_rate_image)": [
         {
           "vuid": "VUID-vkCmdBindShadingRateImageNV-None-02058",
-          "text": " The <a href=\"#features-features-shadingRateImage\">shading rate image</a> feature <strong class=\"purple\">must</strong> be enabled."
+          "text": " The <a href=\"#features-shadingRateImage\">shading rate image</a> feature <strong class=\"purple\">must</strong> be enabled."
         },
         {
           "vuid": "VUID-vkCmdBindShadingRateImageNV-imageView-02059",
@@ -17446,7 +17510,7 @@
       "(VK_NV_shading_rate_image)": [
         {
           "vuid": "VUID-vkCmdSetViewportShadingRatePaletteNV-None-02064",
-          "text": " The <a href=\"#features-features-shadingRateImage\">shading rate image</a> feature <strong class=\"purple\">must</strong> be enabled."
+          "text": " The <a href=\"#features-shadingRateImage\">shading rate image</a> feature <strong class=\"purple\">must</strong> be enabled."
         },
         {
           "vuid": "VUID-vkCmdSetViewportShadingRatePaletteNV-None-02065",
@@ -17462,11 +17526,11 @@
         },
         {
           "vuid": "VUID-vkCmdSetViewportShadingRatePaletteNV-firstViewport-02068",
-          "text": " If the <a href=\"#features-features-multiViewport\">multiple viewports</a> feature is not enabled, <code>firstViewport</code> <strong class=\"purple\">must</strong> be <code>0</code>"
+          "text": " If the <a href=\"#features-multiViewport\">multiple viewports</a> feature is not enabled, <code>firstViewport</code> <strong class=\"purple\">must</strong> be <code>0</code>"
         },
         {
           "vuid": "VUID-vkCmdSetViewportShadingRatePaletteNV-viewportCount-02069",
-          "text": " If the <a href=\"#features-features-multiViewport\">multiple viewports</a> feature is not enabled, <code>viewportCount</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+          "text": " If the <a href=\"#features-multiViewport\">multiple viewports</a> feature is not enabled, <code>viewportCount</code> <strong class=\"purple\">must</strong> be <code>1</code>"
         },
         {
           "vuid": "VUID-vkCmdSetViewportShadingRatePaletteNV-commandBuffer-parameter",
@@ -17622,7 +17686,7 @@
         },
         {
           "vuid": "VUID-vkCmdSetLineWidth-lineWidth-00788",
-          "text": " If the <a href=\"#features-features-wideLines\">wide lines</a> feature is not enabled, <code>lineWidth</code> <strong class=\"purple\">must</strong> be <code>1.0</code>"
+          "text": " If the <a href=\"#features-wideLines\">wide lines</a> feature is not enabled, <code>lineWidth</code> <strong class=\"purple\">must</strong> be <code>1.0</code>"
         },
         {
           "vuid": "VUID-vkCmdSetLineWidth-commandBuffer-parameter",
@@ -17646,7 +17710,7 @@
         },
         {
           "vuid": "VUID-vkCmdSetDepthBias-depthBiasClamp-00790",
-          "text": " If the <a href=\"#features-features-depthBiasClamp\">depth bias clamping</a> feature is not enabled, <code>depthBiasClamp</code> <strong class=\"purple\">must</strong> be <code>0.0</code>"
+          "text": " If the <a href=\"#features-depthBiasClamp\">depth bias clamping</a> feature is not enabled, <code>depthBiasClamp</code> <strong class=\"purple\">must</strong> be <code>0.0</code>"
         },
         {
           "vuid": "VUID-vkCmdSetDepthBias-commandBuffer-parameter",
@@ -17762,11 +17826,11 @@
         },
         {
           "vuid": "VUID-vkCmdSetScissor-firstScissor-00593",
-          "text": " If the <a href=\"#features-features-multiViewport\">multiple viewports</a> feature is not enabled, <code>firstScissor</code> <strong class=\"purple\">must</strong> be <code>0</code>"
+          "text": " If the <a href=\"#features-multiViewport\">multiple viewports</a> feature is not enabled, <code>firstScissor</code> <strong class=\"purple\">must</strong> be <code>0</code>"
         },
         {
           "vuid": "VUID-vkCmdSetScissor-scissorCount-00594",
-          "text": " If the <a href=\"#features-features-multiViewport\">multiple viewports</a> feature is not enabled, <code>scissorCount</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+          "text": " If the <a href=\"#features-multiViewport\">multiple viewports</a> feature is not enabled, <code>scissorCount</code> <strong class=\"purple\">must</strong> be <code>1</code>"
         },
         {
           "vuid": "VUID-vkCmdSetScissor-x-00595",
@@ -17806,7 +17870,7 @@
       "(VK_NV_scissor_exclusive)": [
         {
           "vuid": "VUID-VkPipelineViewportExclusiveScissorStateCreateInfoNV-exclusiveScissorCount-02027",
-          "text": " If the <a href=\"#features-features-multiViewport\">multiple viewports</a> feature is not enabled, <code>exclusiveScissorCount</code> <strong class=\"purple\">must</strong> be <code>0</code> or <code>1</code>"
+          "text": " If the <a href=\"#features-multiViewport\">multiple viewports</a> feature is not enabled, <code>exclusiveScissorCount</code> <strong class=\"purple\">must</strong> be <code>0</code> or <code>1</code>"
         },
         {
           "vuid": "VUID-VkPipelineViewportExclusiveScissorStateCreateInfoNV-exclusiveScissorCount-02028",
@@ -17834,7 +17898,7 @@
       "(VK_NV_scissor_exclusive)": [
         {
           "vuid": "VUID-vkCmdSetExclusiveScissorNV-None-02031",
-          "text": " The <a href=\"#features-features-exclusiveScissor\">exclusive scissor</a> feature <strong class=\"purple\">must</strong> be enabled."
+          "text": " The <a href=\"#features-exclusiveScissor\">exclusive scissor</a> feature <strong class=\"purple\">must</strong> be enabled."
         },
         {
           "vuid": "VUID-vkCmdSetExclusiveScissorNV-None-02032",
@@ -17850,11 +17914,11 @@
         },
         {
           "vuid": "VUID-vkCmdSetExclusiveScissorNV-firstExclusiveScissor-02035",
-          "text": " If the <a href=\"#features-features-multiViewport\">multiple viewports</a> feature is not enabled, <code>firstExclusiveScissor</code> <strong class=\"purple\">must</strong> be <code>0</code>"
+          "text": " If the <a href=\"#features-multiViewport\">multiple viewports</a> feature is not enabled, <code>firstExclusiveScissor</code> <strong class=\"purple\">must</strong> be <code>0</code>"
         },
         {
           "vuid": "VUID-vkCmdSetExclusiveScissorNV-exclusiveScissorCount-02036",
-          "text": " If the <a href=\"#features-features-multiViewport\">multiple viewports</a> feature is not enabled, <code>exclusiveScissorCount</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+          "text": " If the <a href=\"#features-multiViewport\">multiple viewports</a> feature is not enabled, <code>exclusiveScissorCount</code> <strong class=\"purple\">must</strong> be <code>1</code>"
         },
         {
           "vuid": "VUID-vkCmdSetExclusiveScissorNV-x-02037",
@@ -17894,7 +17958,7 @@
       "core": [
         {
           "vuid": "VUID-VkPipelineDepthStencilStateCreateInfo-depthBoundsTestEnable-00598",
-          "text": " If the <a href=\"#features-features-depthBounds\">depth bounds testing</a> feature is not enabled, <code>depthBoundsTestEnable</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>"
+          "text": " If the <a href=\"#features-depthBounds\">depth bounds testing</a> feature is not enabled, <code>depthBoundsTestEnable</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>"
         },
         {
           "vuid": "VUID-VkPipelineDepthStencilStateCreateInfo-sType-sType",
@@ -18114,11 +18178,11 @@
       "core": [
         {
           "vuid": "VUID-VkPipelineColorBlendStateCreateInfo-pAttachments-00605",
-          "text": " If the <a href=\"#features-features-independentBlend\">independent blending</a> feature is not enabled, all elements of <code>pAttachments</code> <strong class=\"purple\">must</strong> be identical"
+          "text": " If the <a href=\"#features-independentBlend\">independent blending</a> feature is not enabled, all elements of <code>pAttachments</code> <strong class=\"purple\">must</strong> be identical"
         },
         {
           "vuid": "VUID-VkPipelineColorBlendStateCreateInfo-logicOpEnable-00606",
-          "text": " If the <a href=\"#features-features-logicOp\">logic operations</a> feature is not enabled, <code>logicOpEnable</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>"
+          "text": " If the <a href=\"#features-logicOp\">logic operations</a> feature is not enabled, <code>logicOpEnable</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>"
         },
         {
           "vuid": "VUID-VkPipelineColorBlendStateCreateInfo-logicOpEnable-00607",
@@ -18146,19 +18210,19 @@
       "core": [
         {
           "vuid": "VUID-VkPipelineColorBlendAttachmentState-srcColorBlendFactor-00608",
-          "text": " If the <a href=\"#features-features-dualSrcBlend\">dual source blending</a> feature is not enabled, <code>srcColorBlendFactor</code> <strong class=\"purple\">must</strong> not be <code>VK_BLEND_FACTOR_SRC1_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_SRC1_COLOR</code>, <code>VK_BLEND_FACTOR_SRC1_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA</code>"
+          "text": " If the <a href=\"#features-dualSrcBlend\">dual source blending</a> feature is not enabled, <code>srcColorBlendFactor</code> <strong class=\"purple\">must</strong> not be <code>VK_BLEND_FACTOR_SRC1_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_SRC1_COLOR</code>, <code>VK_BLEND_FACTOR_SRC1_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA</code>"
         },
         {
           "vuid": "VUID-VkPipelineColorBlendAttachmentState-dstColorBlendFactor-00609",
-          "text": " If the <a href=\"#features-features-dualSrcBlend\">dual source blending</a> feature is not enabled, <code>dstColorBlendFactor</code> <strong class=\"purple\">must</strong> not be <code>VK_BLEND_FACTOR_SRC1_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_SRC1_COLOR</code>, <code>VK_BLEND_FACTOR_SRC1_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA</code>"
+          "text": " If the <a href=\"#features-dualSrcBlend\">dual source blending</a> feature is not enabled, <code>dstColorBlendFactor</code> <strong class=\"purple\">must</strong> not be <code>VK_BLEND_FACTOR_SRC1_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_SRC1_COLOR</code>, <code>VK_BLEND_FACTOR_SRC1_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA</code>"
         },
         {
           "vuid": "VUID-VkPipelineColorBlendAttachmentState-srcAlphaBlendFactor-00610",
-          "text": " If the <a href=\"#features-features-dualSrcBlend\">dual source blending</a> feature is not enabled, <code>srcAlphaBlendFactor</code> <strong class=\"purple\">must</strong> not be <code>VK_BLEND_FACTOR_SRC1_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_SRC1_COLOR</code>, <code>VK_BLEND_FACTOR_SRC1_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA</code>"
+          "text": " If the <a href=\"#features-dualSrcBlend\">dual source blending</a> feature is not enabled, <code>srcAlphaBlendFactor</code> <strong class=\"purple\">must</strong> not be <code>VK_BLEND_FACTOR_SRC1_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_SRC1_COLOR</code>, <code>VK_BLEND_FACTOR_SRC1_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA</code>"
         },
         {
           "vuid": "VUID-VkPipelineColorBlendAttachmentState-dstAlphaBlendFactor-00611",
-          "text": " If the <a href=\"#features-features-dualSrcBlend\">dual source blending</a> feature is not enabled, <code>dstAlphaBlendFactor</code> <strong class=\"purple\">must</strong> not be <code>VK_BLEND_FACTOR_SRC1_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_SRC1_COLOR</code>, <code>VK_BLEND_FACTOR_SRC1_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA</code>"
+          "text": " If the <a href=\"#features-dualSrcBlend\">dual source blending</a> feature is not enabled, <code>dstAlphaBlendFactor</code> <strong class=\"purple\">must</strong> not be <code>VK_BLEND_FACTOR_SRC1_COLOR</code>, <code>VK_BLEND_FACTOR_ONE_MINUS_SRC1_COLOR</code>, <code>VK_BLEND_FACTOR_SRC1_ALPHA</code>, or <code>VK_BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA</code>"
         },
         {
           "vuid": "VUID-VkPipelineColorBlendAttachmentState-srcColorBlendFactor-parameter",
@@ -18236,15 +18300,15 @@
       "(VK_EXT_blend_operation_advanced)": [
         {
           "vuid": "VUID-VkPipelineColorBlendAdvancedStateCreateInfoEXT-srcPremultiplied-01424",
-          "text": " If the <a href=\"#features-limits-advancedBlendNonPremultipliedSrcColor\">non-premultiplied source color</a> property is not supported, <code>srcPremultiplied</code> <strong class=\"purple\">must</strong> be <code>VK_TRUE</code>"
+          "text": " If the <a href=\"#limits-advancedBlendNonPremultipliedSrcColor\">non-premultiplied source color</a> property is not supported, <code>srcPremultiplied</code> <strong class=\"purple\">must</strong> be <code>VK_TRUE</code>"
         },
         {
           "vuid": "VUID-VkPipelineColorBlendAdvancedStateCreateInfoEXT-dstPremultiplied-01425",
-          "text": " If the <a href=\"#features-limits-advancedBlendNonPremultipliedDstColor\">non-premultiplied destination color</a> property is not supported, <code>dstPremultiplied</code> <strong class=\"purple\">must</strong> be <code>VK_TRUE</code>"
+          "text": " If the <a href=\"#limits-advancedBlendNonPremultipliedDstColor\">non-premultiplied destination color</a> property is not supported, <code>dstPremultiplied</code> <strong class=\"purple\">must</strong> be <code>VK_TRUE</code>"
         },
         {
           "vuid": "VUID-VkPipelineColorBlendAdvancedStateCreateInfoEXT-blendOverlap-01426",
-          "text": " If the <a href=\"#features-limits-advancedBlendCorrelatedOverlap\">correlated overlap</a> property is not supported, <code>blendOverlap</code> <strong class=\"purple\">must</strong> be <code>VK_BLEND_OVERLAP_UNCORRELATED_EXT</code>"
+          "text": " If the <a href=\"#limits-advancedBlendCorrelatedOverlap\">correlated overlap</a> property is not supported, <code>blendOverlap</code> <strong class=\"purple\">must</strong> be <code>VK_BLEND_OVERLAP_UNCORRELATED_EXT</code>"
         },
         {
           "vuid": "VUID-VkPipelineColorBlendAdvancedStateCreateInfoEXT-sType-sType",
@@ -18300,11 +18364,11 @@
         },
         {
           "vuid": "VUID-vkCmdDispatch-None-00396",
-          "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_COMPUTE</code> accesses a uniform buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
+          "text": " If the <a href=\"#features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_COMPUTE</code> accesses a uniform buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
         },
         {
           "vuid": "VUID-vkCmdDispatch-None-00397",
-          "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_COMPUTE</code> accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
+          "text": " If the <a href=\"#features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_COMPUTE</code> accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
         },
         {
           "vuid": "VUID-vkCmdDispatch-None-02005",
@@ -18418,11 +18482,11 @@
         },
         {
           "vuid": "VUID-vkCmdDispatchIndirect-None-00412",
-          "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_COMPUTE</code> accesses a uniform buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
+          "text": " If the <a href=\"#features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_COMPUTE</code> accesses a uniform buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
         },
         {
           "vuid": "VUID-vkCmdDispatchIndirect-None-00413",
-          "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_COMPUTE</code> accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
+          "text": " If the <a href=\"#features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_COMPUTE</code> accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
         },
         {
           "vuid": "VUID-vkCmdDispatchIndirect-None-02007",
@@ -19556,7 +19620,7 @@
       "core": [
         {
           "vuid": "VUID-VkSparseImageMemoryBind-memory-01104",
-          "text": " If the <a href=\"#features-features-sparseResidencyAliased\">sparse aliased residency</a> feature is not enabled, and if any other resources are bound to ranges of <code>memory</code>, the range of <code>memory</code> being bound <strong class=\"purple\">must</strong> not overlap with those bound ranges"
+          "text": " If the <a href=\"#features-sparseResidencyAliased\">sparse aliased residency</a> feature is not enabled, and if any other resources are bound to ranges of <code>memory</code>, the range of <code>memory</code> being bound <strong class=\"purple\">must</strong> not overlap with those bound ranges"
         },
         {
           "vuid": "VUID-VkSparseImageMemoryBind-memory-01105",
@@ -19980,7 +20044,7 @@
       "(VK_KHR_surface)+(VK_MVK_ios_surface)": [
         {
           "vuid": "VUID-VkIOSSurfaceCreateInfoMVK-pView-01316",
-          "text": " <code>pView</code> <strong class=\"purple\">must</strong> be a valid <code>UIView</code> and <strong class=\"purple\">must</strong> be backed by a <code>CALayer</code> instance of type <code>CAMetalLayer</code>."
+          "text": " <code>pView</code> <strong class=\"purple\">must</strong> be a valid <code>UIView</code> and <strong class=\"purple\">must</strong> be backed by a <code>CALayer</code> instance of type <a href=\"#CAMetalLayer\">CAMetalLayer</a>."
         },
         {
           "vuid": "VUID-VkIOSSurfaceCreateInfoMVK-sType-sType",
@@ -20020,7 +20084,7 @@
       "(VK_KHR_surface)+(VK_MVK_macos_surface)": [
         {
           "vuid": "VUID-VkMacOSSurfaceCreateInfoMVK-pView-01317",
-          "text": " <code>pView</code> <strong class=\"purple\">must</strong> be a valid <code>NSView</code> and <strong class=\"purple\">must</strong> be backed by a <code>CALayer</code> instance of type <code>CAMetalLayer</code>."
+          "text": " <code>pView</code> <strong class=\"purple\">must</strong> be a valid <code>NSView</code> and <strong class=\"purple\">must</strong> be backed by a <code>CALayer</code> instance of type <a href=\"#CAMetalLayer\">CAMetalLayer</a>."
         },
         {
           "vuid": "VUID-VkMacOSSurfaceCreateInfoMVK-sType-sType",
@@ -20072,6 +20136,42 @@
         },
         {
           "vuid": "VUID-VkViSurfaceCreateInfoNN-flags-zerobitmask",
+          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be <code>0</code>"
+        }
+      ]
+    },
+    "vkCreateMetalSurfaceEXT": {
+      "(VK_KHR_surface)+(VK_EXT_metal_surface)": [
+        {
+          "vuid": "VUID-vkCreateMetalSurfaceEXT-instance-parameter",
+          "text": " <code>instance</code> <strong class=\"purple\">must</strong> be a valid <code>VkInstance</code> handle"
+        },
+        {
+          "vuid": "VUID-vkCreateMetalSurfaceEXT-pCreateInfo-parameter",
+          "text": " <code>pCreateInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <code>VkMetalSurfaceCreateInfoEXT</code> structure"
+        },
+        {
+          "vuid": "VUID-vkCreateMetalSurfaceEXT-pAllocator-parameter",
+          "text": " If <code>pAllocator</code> is not <code>NULL</code>, <code>pAllocator</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <code>VkAllocationCallbacks</code> structure"
+        },
+        {
+          "vuid": "VUID-vkCreateMetalSurfaceEXT-pSurface-parameter",
+          "text": " <code>pSurface</code> <strong class=\"purple\">must</strong> be a valid pointer to a <code>VkSurfaceKHR</code> handle"
+        }
+      ]
+    },
+    "VkMetalSurfaceCreateInfoEXT": {
+      "(VK_KHR_surface)+(VK_EXT_metal_surface)": [
+        {
+          "vuid": "VUID-VkMetalSurfaceCreateInfoEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_METAL_SURFACE_CREATE_INFO_EXT</code>"
+        },
+        {
+          "vuid": "VUID-VkMetalSurfaceCreateInfoEXT-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkMetalSurfaceCreateInfoEXT-flags-zerobitmask",
           "text": " <code>flags</code> <strong class=\"purple\">must</strong> be <code>0</code>"
         }
       ]
@@ -21742,11 +21842,11 @@
         },
         {
           "vuid": "VUID-vkCmdTraceRaysNV-None-02479",
-          "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_RAY_TRACING_NV</code> accesses a uniform buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
+          "text": " If the <a href=\"#features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_RAY_TRACING_NV</code> accesses a uniform buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysNV-None-02480",
-          "text": " If the <a href=\"#features-features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_RAY_TRACING_NV</code> accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
+          "text": " If the <a href=\"#features-robustBufferAccess\">robust buffer access</a> feature is not enabled, and any shader stage in the <code>VkPipeline</code> object bound to <code>VK_PIPELINE_BIND_POINT_RAY_TRACING_NV</code> accesses a storage buffer, it <strong class=\"purple\">must</strong> not access values outside of the range of that buffer specified in the bound descriptor set"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysNV-None-02481",
@@ -22333,6 +22433,14 @@
         {
           "vuid": "VUID-VkPhysicalDeviceCooperativeMatrixFeaturesNV-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_FEATURES_NV</code>"
+        }
+      ]
+    },
+    "VkPhysicalDeviceYcbcrImageArraysFeaturesEXT": {
+      "(VK_EXT_ycbcr_image_arrays)": [
+        {
+          "vuid": "VUID-VkPhysicalDeviceYcbcrImageArraysFeaturesEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_IMAGE_ARRAYS_FEATURES_EXT</code>"
         }
       ]
     },
