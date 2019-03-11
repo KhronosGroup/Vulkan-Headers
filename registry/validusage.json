@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.1.102",
-    "comment": "from git branch: github-master commit: 35e7bee5f0f50b7c1634cd205ded035acea43ad9",
-    "date": "2019-03-04 05:06:36Z"
+    "api version": "1.1.103",
+    "comment": "from git branch: github-master commit: 4ad4fd17161efd9bfd1125c0c9d17db6fb276216",
+    "date": "2019-03-11 09:10:44Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -8572,14 +8572,30 @@
           "vuid": "VUID-VkImageViewCreateInfo-image-02087",
           "text": " If <code>image</code> was created with <code>usage</code> containing <code>VK_IMAGE_USAGE_SHADING_RATE_IMAGE_BIT_NV</code>, <code>format</code> <strong class=\"purple\">must</strong> be <code>VK_FORMAT_R8_UINT</code>"
         }
+      ],
+      "!(VK_EXT_separate_stencil_usage)": [
+        {
+          "vuid": "VUID-VkImageViewCreateInfo-pNext-02661",
+          "text": " If the <code>pNext</code> chain includes an instance of <a href=\"#VkImageViewUsageCreateInfo\">VkImageViewUsageCreateInfo</a>, its <code>usage</code> member <strong class=\"purple\">must</strong> not include any bits that were not set in the <code>usage</code> member of the <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> structure used to create <code>image</code>."
+        }
+      ],
+      "(VK_EXT_separate_stencil_usage)": [
+        {
+          "vuid": "VUID-VkImageViewCreateInfo-pNext-02662",
+          "text": " If the <code>pNext</code> chain includes an instance of <a href=\"#VkImageViewUsageCreateInfo\">VkImageViewUsageCreateInfo</a>, and <code>image</code> was not created with an instance of <a href=\"#VkImageStencilUsageCreateInfoEXT\">VkImageStencilUsageCreateInfoEXT</a> in the <code>pNext</code> chain of <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>, its <code>usage</code> member <strong class=\"purple\">must</strong> not include any bits that were not set in the <code>usage</code> member of the <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> structure used to create <code>image</code>"
+        },
+        {
+          "vuid": "VUID-VkImageViewCreateInfo-pNext-02663",
+          "text": " If the <code>pNext</code> chain includes an instance of <a href=\"#VkImageViewUsageCreateInfo\">VkImageViewUsageCreateInfo</a>, <code>image</code> was created with an instance of <a href=\"#VkImageStencilUsageCreateInfoEXT\">VkImageStencilUsageCreateInfoEXT</a> in the <code>pNext</code> chain of <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>, and <code>subResourceRange.aspectMask</code> includes <code>VK_IMAGE_ASPECT_STENCIL_BIT</code>, the <code>usage</code> member of the <a href=\"#VkImageViewUsageCreateInfo\">VkImageViewUsageCreateInfo</a> instance <strong class=\"purple\">must</strong> not include any bits that were not set in the <code>usage</code> member of the <a href=\"#VkImageStencilUsageCreateInfoEXT\">VkImageStencilUsageCreateInfoEXT</a> structure used to create <code>image</code>"
+        },
+        {
+          "vuid": "VUID-VkImageViewCreateInfo-pNext-02664",
+          "text": " If the <code>pNext</code> chain includes an instance of <a href=\"#VkImageViewUsageCreateInfo\">VkImageViewUsageCreateInfo</a>, <code>image</code> was created with an instance of <a href=\"#VkImageStencilUsageCreateInfoEXT\">VkImageStencilUsageCreateInfoEXT</a> in the <code>pNext</code> chain of <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>, and <code>subResourceRange.aspectMask</code> includes bits other than <code>VK_IMAGE_ASPECT_STENCIL_BIT</code>, the <code>usage</code> member of the <a href=\"#VkImageViewUsageCreateInfo\">VkImageViewUsageCreateInfo</a> instance <strong class=\"purple\">must</strong> not include any bits that were not set in the <code>usage</code> member of the <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> structure used to create <code>image</code>"
+        }
       ]
     },
     "VkImageViewUsageCreateInfo": {
       "(VK_VERSION_1_1,VK_KHR_maintenance2)": [
-        {
-          "vuid": "VUID-VkImageViewUsageCreateInfo-usage-01587",
-          "text": " <code>usage</code> <strong class=\"purple\">must</strong> not include any set bits that were not set in the <code>usage</code> member of the <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> structure used to create the image this image view is created from."
-        },
         {
           "vuid": "VUID-VkImageViewUsageCreateInfo-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_IMAGE_VIEW_USAGE_CREATE_INFO</code>"
@@ -12545,11 +12561,27 @@
           "text": " The <a href=\"#resources-image-format-features\">format features</a> of <code>image</code> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_TRANSFER_DST_BIT</code>."
         }
       ],
-      "core": [
+      "!(VK_EXT_separate_stencil_usage)": [
         {
           "vuid": "VUID-vkCmdClearDepthStencilImage-image-00009",
           "text": " <code>image</code> <strong class=\"purple\">must</strong> have been created with <code>VK_IMAGE_USAGE_TRANSFER_DST_BIT</code> usage flag"
+        }
+      ],
+      "(VK_EXT_separate_stencil_usage)": [
+        {
+          "vuid": "VUID-vkCmdClearDepthStencilImage-pRanges-02658",
+          "text": " If any element of <code>pRanges.aspect</code> includes <code>VK_IMAGE_ASPECT_STENCIL_BIT</code>, and <code>image</code> was created with <a href=\"#VkImageStencilUsageCreateInfoEXT\">separate stencil usage</a>, <code>VK_IMAGE_USAGE_TRANSFER_DST_BIT</code> <strong class=\"purple\">must</strong> have been included in the <a href=\"#VkImageStencilUsageCreateInfoEXT\">VkImageStencilUsageCreateInfoEXT</a>::<code>stencilUsage</code> used to create <code>image</code>"
         },
+        {
+          "vuid": "VUID-vkCmdClearDepthStencilImage-pRanges-02659",
+          "text": " If any element of <code>pRanges.aspect</code> includes <code>VK_IMAGE_ASPECT_STENCIL_BIT</code>, and <code>image</code> was not created with <a href=\"#VkImageStencilUsageCreateInfoEXT\">separate stencil usage</a>, <code>VK_IMAGE_USAGE_TRANSFER_DST_BIT</code> <strong class=\"purple\">must</strong> have been included in the <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>usage</code> used to create <code>image</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdClearDepthStencilImage-pRanges-02660",
+          "text": " If any element of <code>pRanges.aspect</code> includes <code>VK_IMAGE_ASPECT_DEPTH_BIT</code>, <code>VK_IMAGE_USAGE_TRANSFER_DST_BIT</code> <strong class=\"purple\">must</strong> have been included in the <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>usage</code> used to create <code>image</code>"
+        }
+      ],
+      "core": [
         {
           "vuid": "VUID-vkCmdClearDepthStencilImage-image-00010",
           "text": " If <code>image</code> is non-sparse then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
@@ -21469,10 +21501,6 @@
         {
           "vuid": "VUID-VkAcquireNextImageInfoKHR-deviceMask-01291",
           "text": " <code>deviceMask</code> <strong class=\"purple\">must</strong> not be zero"
-        },
-        {
-          "vuid": "VUID-VkAcquireNextImageInfoKHR-semaphore-01804",
-          "text": " <code>semaphore</code> and <code>fence</code> <strong class=\"purple\">must</strong> not both be equal to <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>."
         },
         {
           "vuid": "VUID-VkAcquireNextImageInfoKHR-sType-sType",
