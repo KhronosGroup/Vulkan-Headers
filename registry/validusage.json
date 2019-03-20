@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.1.103",
-    "comment": "from git branch: github-master commit: 4ad4fd17161efd9bfd1125c0c9d17db6fb276216",
-    "date": "2019-03-11 09:10:44Z"
+    "api version": "1.1.105",
+    "comment": "from git branch: github-master commit: 1f1a557801f170971868735dcbf8484a684abba7",
+    "date": "2019-03-19 09:15:00Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -362,7 +362,7 @@
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceMemoryOverallocationCreateInfoAMD\">VkDeviceMemoryOverallocationCreateInfoAMD</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice8BitStorageFeaturesKHR\">VkPhysicalDevice8BitStorageFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBufferAddressFeaturesEXT\">VkPhysicalDeviceBufferAddressFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixFeaturesNV\">VkPhysicalDeviceCooperativeMatrixFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV\">VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDepthClipEnableFeaturesEXT\">VkPhysicalDeviceDepthClipEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeaturesEXT\">VkPhysicalDeviceDescriptorIndexingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFloat16Int8FeaturesKHR\">VkPhysicalDeviceFloat16Int8FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapFeaturesEXT\">VkPhysicalDeviceFragmentDensityMapFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeaturesEXT\">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMemoryPriorityFeaturesEXT\">VkPhysicalDeviceMemoryPriorityFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceScalarBlockLayoutFeaturesEXT\">VkPhysicalDeviceScalarBlockLayoutFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64FeaturesKHR\">VkPhysicalDeviceShaderAtomicInt64FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDrawParameterFeatures\">VkPhysicalDeviceShaderDrawParameterFeatures</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackFeaturesEXT\">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVariablePointerFeatures\">VkPhysicalDeviceVariablePointerFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeaturesKHR\">VkPhysicalDeviceVulkanMemoryModelFeaturesKHR</a>, or <a href=\"#VkPhysicalDeviceYcbcrImageArraysFeaturesEXT\">VkPhysicalDeviceYcbcrImageArraysFeaturesEXT</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceMemoryOverallocationCreateInfoAMD\">VkDeviceMemoryOverallocationCreateInfoAMD</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice8BitStorageFeaturesKHR\">VkPhysicalDevice8BitStorageFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBufferAddressFeaturesEXT\">VkPhysicalDeviceBufferAddressFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixFeaturesNV\">VkPhysicalDeviceCooperativeMatrixFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV\">VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDepthClipEnableFeaturesEXT\">VkPhysicalDeviceDepthClipEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeaturesEXT\">VkPhysicalDeviceDescriptorIndexingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFloat16Int8FeaturesKHR\">VkPhysicalDeviceFloat16Int8FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapFeaturesEXT\">VkPhysicalDeviceFragmentDensityMapFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV</a>, <a href=\"#VkPhysicalDeviceHostQueryResetFeaturesEXT\">VkPhysicalDeviceHostQueryResetFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeaturesEXT\">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMemoryPriorityFeaturesEXT\">VkPhysicalDeviceMemoryPriorityFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceScalarBlockLayoutFeaturesEXT\">VkPhysicalDeviceScalarBlockLayoutFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64FeaturesKHR\">VkPhysicalDeviceShaderAtomicInt64FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDrawParameterFeatures\">VkPhysicalDeviceShaderDrawParameterFeatures</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackFeaturesEXT\">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVariablePointerFeatures\">VkPhysicalDeviceVariablePointerFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeaturesKHR\">VkPhysicalDeviceVulkanMemoryModelFeaturesKHR</a>, or <a href=\"#VkPhysicalDeviceYcbcrImageArraysFeaturesEXT\">VkPhysicalDeviceYcbcrImageArraysFeaturesEXT</a>"
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-sType-unique",
@@ -982,7 +982,7 @@
         },
         {
           "vuid": "VUID-vkQueueSubmit-pSubmits-02207",
-          "text": " If any element of <code>pSubmits</code>&#8594;<code>pCommandBuffers</code> includes a <a href=\"#synchronization-queue-transfers-acquire\">Queue Family Transfer Acquire Operation</a>, there <strong class=\"purple\">must</strong> exist a previously submitted <a href=\"#synchronization-queue-transfers-release\">Queue Family Transfer Release Operation</a> on a queue in the queue family identified by the acquire operation, with parameters matching the acquire operation as defined in the definition of such <a href=\"#synchronization-queue-transfers-acquire\">acquire operations</a>, and which happens before the acquire operation."
+          "text": " If any element of <code>pSubmits</code>-&gt;<code>pCommandBuffers</code> includes a <a href=\"#synchronization-queue-transfers-acquire\">Queue Family Transfer Acquire Operation</a>, there <strong class=\"purple\">must</strong> exist a previously submitted <a href=\"#synchronization-queue-transfers-release\">Queue Family Transfer Release Operation</a> on a queue in the queue family identified by the acquire operation, with parameters matching the acquire operation as defined in the definition of such <a href=\"#synchronization-queue-transfers-acquire\">acquire operations</a>, and which happens before the acquire operation."
         },
         {
           "vuid": "VUID-vkQueueSubmit-queue-parameter",
@@ -3122,7 +3122,7 @@
         },
         {
           "vuid": "VUID-VkRenderPassCreateInfo-pNext-02512",
-          "text": " If the <code>pNext</code> chain includes an instance of <a href=\"#VkRenderPassMultiviewCreateInfo\">VkRenderPassMultiviewCreateInfo</a>, for any element of <code>pDependencies</code> with a <code>dependencyFlags</code> member that doesn&#8217;t include <code>VK_DEPENDENCY_VIEW_LOCAL_BIT</code>, the corresponding element of the <code>pViewOffsets</code> member of that <a href=\"#VkRenderPassMultiviewCreateInfo\">VkRenderPassMultiviewCreateInfo</a> instance <strong class=\"purple\">must</strong> be <code>0</code>"
+          "text": " If the <code>pNext</code> chain includes an instance of <a href=\"#VkRenderPassMultiviewCreateInfo\">VkRenderPassMultiviewCreateInfo</a>, for any element of <code>pDependencies</code> with a <code>dependencyFlags</code> member that does not include <code>VK_DEPENDENCY_VIEW_LOCAL_BIT</code>, the corresponding element of the <code>pViewOffsets</code> member of that <a href=\"#VkRenderPassMultiviewCreateInfo\">VkRenderPassMultiviewCreateInfo</a> instance <strong class=\"purple\">must</strong> be <code>0</code>"
         },
         {
           "vuid": "VUID-VkRenderPassCreateInfo-pNext-02513",
@@ -3276,7 +3276,7 @@
       "(VK_VERSION_1_1,VK_KHR_maintenance2)+(VK_EXT_image_drm_format_modifier)": [
         {
           "vuid": "VUID-VkInputAttachmentAspectReference-aspectMask-02250",
-          "text": " <code>aspectMask</code> <strong class=\"purple\">must</strong> not include <code>VK_IMAGE_ASPECT_MEMORY_PLANE</code><em>_i</em>_BIT_EXT for any index <em>i</em>."
+          "text": " <code>aspectMask</code> <strong class=\"purple\">must</strong> not include <code>VK_IMAGE_ASPECT_MEMORY_PLANE_i_BIT_EXT</code> for any index <code>i</code>."
         }
       ]
     },
@@ -5040,7 +5040,7 @@
         },
         {
           "vuid": "VUID-VkComputePipelineCreateInfo-pNext-pNext",
-          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkPipelineCreationFeedbackCreateInfoEXT\">VkPipelineCreationFeedbackCreateInfoEXT</a>"
         },
         {
           "vuid": "VUID-VkComputePipelineCreateInfo-flags-parameter",
@@ -5376,7 +5376,7 @@
         },
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkPipelineDiscardRectangleStateCreateInfoEXT\">VkPipelineDiscardRectangleStateCreateInfoEXT</a> or <a href=\"#VkPipelineRepresentativeFragmentTestStateCreateInfoNV\">VkPipelineRepresentativeFragmentTestStateCreateInfoNV</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkPipelineCreationFeedbackCreateInfoEXT\">VkPipelineCreationFeedbackCreateInfoEXT</a>, <a href=\"#VkPipelineDiscardRectangleStateCreateInfoEXT\">VkPipelineDiscardRectangleStateCreateInfoEXT</a>, or <a href=\"#VkPipelineRepresentativeFragmentTestStateCreateInfoNV\">VkPipelineRepresentativeFragmentTestStateCreateInfoNV</a>"
         },
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-sType-unique",
@@ -5962,7 +5962,7 @@
         },
         {
           "vuid": "VUID-VkRayTracingPipelineCreateInfoNV-pNext-pNext",
-          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkPipelineCreationFeedbackCreateInfoEXT\">VkPipelineCreationFeedbackCreateInfoEXT</a>"
         },
         {
           "vuid": "VUID-VkRayTracingPipelineCreateInfoNV-flags-parameter",
@@ -6087,6 +6087,40 @@
         {
           "vuid": "VUID-vkCompileDeferredNV-pipeline-parent",
           "text": " <code>pipeline</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from <code>device</code>"
+        }
+      ]
+    },
+    "VkPipelineCreationFeedbackCreateInfoEXT": {
+      "(VK_EXT_pipeline_creation_feedback)": [
+        {
+          "vuid": "VUID-VkPipelineCreationFeedbackCreateInfoEXT-pipelineStageCreationFeedbackCount-02668",
+          "text": " When chained to <a href=\"#VkGraphicsPipelineCreateInfo\">VkGraphicsPipelineCreateInfo</a>, <a href=\"#VkPipelineCreationFeedbackEXT\">VkPipelineCreationFeedbackEXT</a>::<code>pipelineStageCreationFeedbackCount</code> <strong class=\"purple\">must</strong> equal <a href=\"#VkGraphicsPipelineCreateInfo\">VkGraphicsPipelineCreateInfo</a>::<code>stageCount</code>"
+        },
+        {
+          "vuid": "VUID-VkPipelineCreationFeedbackCreateInfoEXT-pipelineStageCreationFeedbackCount-02669",
+          "text": " When chained to <a href=\"#VkComputePipelineCreateInfo\">VkComputePipelineCreateInfo</a>, <a href=\"#VkPipelineCreationFeedbackEXT\">VkPipelineCreationFeedbackEXT</a>::<code>pipelineStageCreationFeedbackCount</code> <strong class=\"purple\">must</strong> equal 1"
+        },
+        {
+          "vuid": "VUID-VkPipelineCreationFeedbackCreateInfoEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PIPELINE_CREATION_FEEDBACK_CREATE_INFO_EXT</code>"
+        },
+        {
+          "vuid": "VUID-VkPipelineCreationFeedbackCreateInfoEXT-pPipelineCreationFeedback-parameter",
+          "text": " <code>pPipelineCreationFeedback</code> <strong class=\"purple\">must</strong> be a valid pointer to a <code>VkPipelineCreationFeedbackEXT</code> structure"
+        },
+        {
+          "vuid": "VUID-VkPipelineCreationFeedbackCreateInfoEXT-pPipelineStageCreationFeedbacks-parameter",
+          "text": " <code>pPipelineStageCreationFeedbacks</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>pipelineStageCreationFeedbackCount</code> <code>VkPipelineCreationFeedbackEXT</code> structures"
+        },
+        {
+          "vuid": "VUID-VkPipelineCreationFeedbackCreateInfoEXT-pipelineStageCreationFeedbackCount-arraylength",
+          "text": " <code>pipelineStageCreationFeedbackCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
+        }
+      ],
+      "(VK_EXT_pipeline_creation_feedback)+(VK_NV_ray_tracing)": [
+        {
+          "vuid": "VUID-VkPipelineCreationFeedbackCreateInfoEXT-pipelineStageCreationFeedbackCount-02670",
+          "text": " When chained to <a href=\"#VkRayTracingPipelineCreateInfoNV\">VkRayTracingPipelineCreateInfoNV</a>, <a href=\"#VkPipelineCreationFeedbackEXT\">VkPipelineCreationFeedbackEXT</a>::<code>pipelineStageCreationFeedbackCount</code> <strong class=\"purple\">must</strong> equal <a href=\"#VkRayTracingPipelineCreateInfoNV\">VkRayTracingPipelineCreateInfoNV</a>::<code>stageCount</code>"
         }
       ]
     },
@@ -8180,7 +8214,7 @@
         },
         {
           "vuid": "VUID-vkGetImageSubresourceLayout-tiling-02271",
-          "text": "  If the <code>tiling</code> of the <code>image</code> is  <code>VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT</code>, then the <code>aspectMask</code>  member of <code>pSubresource</code> <strong class=\"purple\">must</strong> be  <code>VK_IMAGE_ASPECT_MEMORY_PLANE</code><em>_i</em>_BIT_EXT and the index <em>i</em>  <strong class=\"purple\">must</strong> be less than the  <a href=\"#VkDrmFormatModifierPropertiesEXT\"><code>drmFormatModifierPlaneCount</code></a>  associated with the image&#8217;s <a href=\"#VkImageCreateInfo\"><code>format</code></a> and <a href=\"#VkImageDrmFormatModifierPropertiesEXT\"><code>drmFormatModifier</code></a>."
+          "text": "  If the <code>tiling</code> of the <code>image</code> is  <code>VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT</code>, then the <code>aspectMask</code>  member of <code>pSubresource</code> <strong class=\"purple\">must</strong> be  <code>VK_IMAGE_ASPECT_MEMORY_PLANE_i_BIT_EXT</code> and the index <code>i</code> <strong class=\"purple\">must</strong>  be less than the  <a href=\"#VkDrmFormatModifierPropertiesEXT\"><code>drmFormatModifierPlaneCount</code></a>  associated with the image&#8217;s <a href=\"#VkImageCreateInfo\"><code>format</code></a> and <a href=\"#VkImageDrmFormatModifierPropertiesEXT\"><code>drmFormatModifier</code></a>."
         }
       ],
       "core": [
@@ -8638,7 +8672,7 @@
       "(VK_EXT_image_drm_format_modifier)": [
         {
           "vuid": "VUID-VkImageSubresourceRange-aspectMask-02278",
-          "text": " <code>aspectMask</code> <strong class=\"purple\">must</strong> not include <code>VK_IMAGE_ASPECT_MEMORY_PLANE</code><em>_i</em>_BIT_EXT for any index <em>i</em>."
+          "text": " <code>aspectMask</code> <strong class=\"purple\">must</strong> not include <code>VK_IMAGE_ASPECT_MEMORY_PLANE_i_BIT_EXT</code> for any index <code>i</code>."
         }
       ]
     },
@@ -12008,6 +12042,34 @@
         }
       ]
     },
+    "vkResetQueryPoolEXT": {
+      "(VK_EXT_host_query_reset)": [
+        {
+          "vuid": "VUID-vkResetQueryPoolEXT-None-02665",
+          "text": " The <a href=\"#features-hostQueryReset\">hostQueryReset</a> feature <strong class=\"purple\">must</strong> be enabled"
+        },
+        {
+          "vuid": "VUID-vkResetQueryPoolEXT-firstQuery-02666",
+          "text": " <code>firstQuery</code> <strong class=\"purple\">must</strong> be less than the number of queries in <code>queryPool</code>"
+        },
+        {
+          "vuid": "VUID-vkResetQueryPoolEXT-firstQuery-02667",
+          "text": " The sum of <code>firstQuery</code> and <code>queryCount</code> <strong class=\"purple\">must</strong> be less than or equal to the number of queries in <code>queryPool</code>"
+        },
+        {
+          "vuid": "VUID-vkResetQueryPoolEXT-device-parameter",
+          "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <code>VkDevice</code> handle"
+        },
+        {
+          "vuid": "VUID-vkResetQueryPoolEXT-queryPool-parameter",
+          "text": " <code>queryPool</code> <strong class=\"purple\">must</strong> be a valid <code>VkQueryPool</code> handle"
+        },
+        {
+          "vuid": "VUID-vkResetQueryPoolEXT-queryPool-parent",
+          "text": " <code>queryPool</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from <code>device</code>"
+        }
+      ]
+    },
     "vkCmdBeginQuery": {
       "core": [
         {
@@ -12776,7 +12838,7 @@
       "(VK_EXT_image_drm_format_modifier)": [
         {
           "vuid": "VUID-VkClearAttachment-aspectMask-02246",
-          "text": " <code>aspectMask</code> <strong class=\"purple\">must</strong> not include <code>VK_IMAGE_ASPECT_MEMORY_PLANE</code><em>_i</em>_BIT_EXT for any index <em>i</em>."
+          "text": " <code>aspectMask</code> <strong class=\"purple\">must</strong> not include <code>VK_IMAGE_ASPECT_MEMORY_PLANE_i_BIT_EXT</code> for any index <code>i</code>."
         }
       ]
     },
@@ -13458,7 +13520,7 @@
       "(VK_EXT_image_drm_format_modifier)": [
         {
           "vuid": "VUID-VkImageSubresourceLayers-aspectMask-02247",
-          "text": " <code>aspectMask</code> <strong class=\"purple\">must</strong> not include <code>VK_IMAGE_ASPECT_MEMORY_PLANE</code><em>_i</em>_BIT_EXT for any index <em>i</em>."
+          "text": " <code>aspectMask</code> <strong class=\"purple\">must</strong> not include <code>VK_IMAGE_ASPECT_MEMORY_PLANE_i_BIT_EXT</code> for any index <code>i</code>."
         }
       ]
     },
@@ -14576,7 +14638,7 @@
         },
         {
           "vuid": "VUID-vkCmdDraw-filterCubicMinmax-02614",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_EXT</code> with a reduction mode of either VK_SAMPLER_REDUCTION_MODE_MIN_EXT or VK_SAMPLER_REDUCTION_MODE_MAX_EXT as a result of this command <strong class=\"purple\">must</strong> have a <a href=\"#VkImageViewType\">VkImageViewType</a> and format that supports cubic filtering together with minmax filtering, as specified by <code>VkFilterCubicImageViewImageFormatPropertiesEXT</code>::<code>filterCubicMinmax</code> returned by <code>vkGetPhysicalDeviceImageFormatProperties2</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_EXT</code> with a reduction mode of either <code>VK_SAMPLER_REDUCTION_MODE_MIN_EXT</code> or <code>VK_SAMPLER_REDUCTION_MODE_MAX_EXT</code> as a result of this command <strong class=\"purple\">must</strong> have a <a href=\"#VkImageViewType\">VkImageViewType</a> and format that supports cubic filtering together with minmax filtering, as specified by <code>VkFilterCubicImageViewImageFormatPropertiesEXT</code>::<code>filterCubicMinmax</code> returned by <code>vkGetPhysicalDeviceImageFormatProperties2</code>"
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_multiview)": [
@@ -14722,7 +14784,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexed-filterCubicMinmax-02616",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_EXT</code> with a reduction mode of either VK_SAMPLER_REDUCTION_MODE_MIN_EXT or VK_SAMPLER_REDUCTION_MODE_MAX_EXT as a result of this command <strong class=\"purple\">must</strong> have a <a href=\"#VkImageViewType\">VkImageViewType</a> and format that supports cubic filtering together with minmax filtering, as specified by <code>VkFilterCubicImageViewImageFormatPropertiesEXT</code>::<code>filterCubicMinmax</code> returned by <code>vkGetPhysicalDeviceImageFormatProperties2</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_EXT</code> with a reduction mode of either <code>VK_SAMPLER_REDUCTION_MODE_MIN_EXT</code> or <code>VK_SAMPLER_REDUCTION_MODE_MAX_EXT</code> as a result of this command <strong class=\"purple\">must</strong> have a <a href=\"#VkImageViewType\">VkImageViewType</a> and format that supports cubic filtering together with minmax filtering, as specified by <code>VkFilterCubicImageViewImageFormatPropertiesEXT</code>::<code>filterCubicMinmax</code> returned by <code>vkGetPhysicalDeviceImageFormatProperties2</code>"
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_multiview)": [
@@ -14904,7 +14966,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirect-filterCubicMinmax-02618",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_EXT</code> with a reduction mode of either VK_SAMPLER_REDUCTION_MODE_MIN_EXT or VK_SAMPLER_REDUCTION_MODE_MAX_EXT as a result of this command <strong class=\"purple\">must</strong> have a <a href=\"#VkImageViewType\">VkImageViewType</a> and format that supports cubic filtering together with minmax filtering, as specified by <code>VkFilterCubicImageViewImageFormatPropertiesEXT</code>::<code>filterCubicMinmax</code> returned by <code>vkGetPhysicalDeviceImageFormatProperties2</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_EXT</code> with a reduction mode of either <code>VK_SAMPLER_REDUCTION_MODE_MIN_EXT</code> or <code>VK_SAMPLER_REDUCTION_MODE_MAX_EXT</code> as a result of this command <strong class=\"purple\">must</strong> have a <a href=\"#VkImageViewType\">VkImageViewType</a> and format that supports cubic filtering together with minmax filtering, as specified by <code>VkFilterCubicImageViewImageFormatPropertiesEXT</code>::<code>filterCubicMinmax</code> returned by <code>vkGetPhysicalDeviceImageFormatProperties2</code>"
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_multiview)": [
@@ -15110,7 +15172,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCountKHR-filterCubicMinmax-02620",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_EXT</code> with a reduction mode of either VK_SAMPLER_REDUCTION_MODE_MIN_EXT or VK_SAMPLER_REDUCTION_MODE_MAX_EXT as a result of this command <strong class=\"purple\">must</strong> have a <a href=\"#VkImageViewType\">VkImageViewType</a> and format that supports cubic filtering together with minmax filtering, as specified by <code>VkFilterCubicImageViewImageFormatPropertiesEXT</code>::<code>filterCubicMinmax</code> returned by <code>vkGetPhysicalDeviceImageFormatProperties2</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_EXT</code> with a reduction mode of either <code>VK_SAMPLER_REDUCTION_MODE_MIN_EXT</code> or <code>VK_SAMPLER_REDUCTION_MODE_MAX_EXT</code> as a result of this command <strong class=\"purple\">must</strong> have a <a href=\"#VkImageViewType\">VkImageViewType</a> and format that supports cubic filtering together with minmax filtering, as specified by <code>VkFilterCubicImageViewImageFormatPropertiesEXT</code>::<code>filterCubicMinmax</code> returned by <code>vkGetPhysicalDeviceImageFormatProperties2</code>"
         }
       ],
       "(VK_KHR_draw_indirect_count)+(VK_VERSION_1_1,VK_KHR_multiview)": [
@@ -15460,7 +15522,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-filterCubicMinmax-02622",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_EXT</code> with a reduction mode of either VK_SAMPLER_REDUCTION_MODE_MIN_EXT or VK_SAMPLER_REDUCTION_MODE_MAX_EXT as a result of this command <strong class=\"purple\">must</strong> have a <a href=\"#VkImageViewType\">VkImageViewType</a> and format that supports cubic filtering together with minmax filtering, as specified by <code>VkFilterCubicImageViewImageFormatPropertiesEXT</code>::<code>filterCubicMinmax</code> returned by <code>vkGetPhysicalDeviceImageFormatProperties2</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_EXT</code> with a reduction mode of either <code>VK_SAMPLER_REDUCTION_MODE_MIN_EXT</code> or <code>VK_SAMPLER_REDUCTION_MODE_MAX_EXT</code> as a result of this command <strong class=\"purple\">must</strong> have a <a href=\"#VkImageViewType\">VkImageViewType</a> and format that supports cubic filtering together with minmax filtering, as specified by <code>VkFilterCubicImageViewImageFormatPropertiesEXT</code>::<code>filterCubicMinmax</code> returned by <code>vkGetPhysicalDeviceImageFormatProperties2</code>"
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_multiview)": [
@@ -15670,7 +15732,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCountKHR-filterCubicMinmax-02624",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_EXT</code> with a reduction mode of either VK_SAMPLER_REDUCTION_MODE_MIN_EXT or VK_SAMPLER_REDUCTION_MODE_MAX_EXT as a result of this command <strong class=\"purple\">must</strong> have a <a href=\"#VkImageViewType\">VkImageViewType</a> and format that supports cubic filtering together with minmax filtering, as specified by <code>VkFilterCubicImageViewImageFormatPropertiesEXT</code>::<code>filterCubicMinmax</code> returned by <code>vkGetPhysicalDeviceImageFormatProperties2</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_EXT</code> with a reduction mode of either <code>VK_SAMPLER_REDUCTION_MODE_MIN_EXT</code> or <code>VK_SAMPLER_REDUCTION_MODE_MAX_EXT</code> as a result of this command <strong class=\"purple\">must</strong> have a <a href=\"#VkImageViewType\">VkImageViewType</a> and format that supports cubic filtering together with minmax filtering, as specified by <code>VkFilterCubicImageViewImageFormatPropertiesEXT</code>::<code>filterCubicMinmax</code> returned by <code>vkGetPhysicalDeviceImageFormatProperties2</code>"
         }
       ],
       "(VK_KHR_draw_indirect_count)+(VK_VERSION_1_1,VK_KHR_multiview)": [
@@ -15996,7 +16058,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-filterCubicMinmax-02626",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_EXT</code> with a reduction mode of either VK_SAMPLER_REDUCTION_MODE_MIN_EXT or VK_SAMPLER_REDUCTION_MODE_MAX_EXT as a result of this command <strong class=\"purple\">must</strong> have a <a href=\"#VkImageViewType\">VkImageViewType</a> and format that supports cubic filtering together with minmax filtering, as specified by <code>VkFilterCubicImageViewImageFormatPropertiesEXT</code>::<code>filterCubicMinmax</code> returned by <code>vkGetPhysicalDeviceImageFormatProperties2</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_EXT</code> with a reduction mode of either <code>VK_SAMPLER_REDUCTION_MODE_MIN_EXT</code> or <code>VK_SAMPLER_REDUCTION_MODE_MAX_EXT</code> as a result of this command <strong class=\"purple\">must</strong> have a <a href=\"#VkImageViewType\">VkImageViewType</a> and format that supports cubic filtering together with minmax filtering, as specified by <code>VkFilterCubicImageViewImageFormatPropertiesEXT</code>::<code>filterCubicMinmax</code> returned by <code>vkGetPhysicalDeviceImageFormatProperties2</code>"
         }
       ],
       "(VK_EXT_transform_feedback)+(VK_VERSION_1_1,VK_KHR_multiview)": [
@@ -18442,7 +18504,7 @@
         },
         {
           "vuid": "VUID-vkCmdDispatch-filterCubicMinmax-02610",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_EXT</code> with a reduction mode of either VK_SAMPLER_REDUCTION_MODE_MIN_EXT or VK_SAMPLER_REDUCTION_MODE_MAX_EXT as a result of this command <strong class=\"purple\">must</strong> have a <a href=\"#VkImageViewType\">VkImageViewType</a> and format that supports cubic filtering together with minmax filtering, as specified by <code>VkFilterCubicImageViewImageFormatPropertiesEXT</code>::<code>filterCubicMinmax</code> returned by <code>vkGetPhysicalDeviceImageFormatProperties2</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_EXT</code> with a reduction mode of either <code>VK_SAMPLER_REDUCTION_MODE_MIN_EXT</code> or <code>VK_SAMPLER_REDUCTION_MODE_MAX_EXT</code> as a result of this command <strong class=\"purple\">must</strong> have a <a href=\"#VkImageViewType\">VkImageViewType</a> and format that supports cubic filtering together with minmax filtering, as specified by <code>VkFilterCubicImageViewImageFormatPropertiesEXT</code>::<code>filterCubicMinmax</code> returned by <code>vkGetPhysicalDeviceImageFormatProperties2</code>"
         }
       ],
       "(VK_VERSION_1_1)": [
@@ -18568,7 +18630,7 @@
         },
         {
           "vuid": "VUID-vkCmdDispatchIndirect-filterCubicMinmax-02612",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_EXT</code> with a reduction mode of either VK_SAMPLER_REDUCTION_MODE_MIN_EXT or VK_SAMPLER_REDUCTION_MODE_MAX_EXT as a result of this command <strong class=\"purple\">must</strong> have a <a href=\"#VkImageViewType\">VkImageViewType</a> and format that supports cubic filtering together with minmax filtering, as specified by <code>VkFilterCubicImageViewImageFormatPropertiesEXT</code>::<code>filterCubicMinmax</code> returned by <code>vkGetPhysicalDeviceImageFormatProperties2</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> being sampled with <code>VK_FILTER_CUBIC_EXT</code> with a reduction mode of either <code>VK_SAMPLER_REDUCTION_MODE_MIN_EXT</code> or <code>VK_SAMPLER_REDUCTION_MODE_MAX_EXT</code> as a result of this command <strong class=\"purple\">must</strong> have a <a href=\"#VkImageViewType\">VkImageViewType</a> and format that supports cubic filtering together with minmax filtering, as specified by <code>VkFilterCubicImageViewImageFormatPropertiesEXT</code>::<code>filterCubicMinmax</code> returned by <code>vkGetPhysicalDeviceImageFormatProperties2</code>"
         }
       ],
       "(VK_VERSION_1_1)": [
@@ -20052,6 +20114,46 @@
         }
       ]
     },
+    "vkCreateStreamDescriptorSurfaceGGP": {
+      "(VK_KHR_surface)+(VK_GGP_stream_descriptor_surface)": [
+        {
+          "vuid": "VUID-vkCreateStreamDescriptorSurfaceGGP-instance-parameter",
+          "text": " <code>instance</code> <strong class=\"purple\">must</strong> be a valid <code>VkInstance</code> handle"
+        },
+        {
+          "vuid": "VUID-vkCreateStreamDescriptorSurfaceGGP-pCreateInfo-parameter",
+          "text": " <code>pCreateInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <code>VkStreamDescriptorSurfaceCreateInfoGGP</code> structure"
+        },
+        {
+          "vuid": "VUID-vkCreateStreamDescriptorSurfaceGGP-pAllocator-parameter",
+          "text": " If <code>pAllocator</code> is not <code>NULL</code>, <code>pAllocator</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <code>VkAllocationCallbacks</code> structure"
+        },
+        {
+          "vuid": "VUID-vkCreateStreamDescriptorSurfaceGGP-pSurface-parameter",
+          "text": " <code>pSurface</code> <strong class=\"purple\">must</strong> be a valid pointer to a <code>VkSurfaceKHR</code> handle"
+        }
+      ]
+    },
+    "VkStreamDescriptorSurfaceCreateInfoGGP": {
+      "(VK_KHR_surface)+(VK_GGP_stream_descriptor_surface)": [
+        {
+          "vuid": "VUID-VkStreamDescriptorSurfaceCreateInfoGGP-streamDescriptor-02681",
+          "text": " <code>streamDescriptor</code> <strong class=\"purple\">must</strong> be a valid <code>GgpStreamDescriptor</code>"
+        },
+        {
+          "vuid": "VUID-VkStreamDescriptorSurfaceCreateInfoGGP-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_STREAM_DESCRIPTOR_SURFACE_CREATE_INFO_GGP</code>"
+        },
+        {
+          "vuid": "VUID-VkStreamDescriptorSurfaceCreateInfoGGP-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkStreamDescriptorSurfaceCreateInfoGGP-flags-zerobitmask",
+          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be <code>0</code>"
+        }
+      ]
+    },
     "vkCreateIOSSurfaceMVK": {
       "(VK_KHR_surface)+(VK_MVK_ios_surface)": [
         {
@@ -20769,6 +20871,12 @@
       ]
     },
     "vkGetPhysicalDeviceSurfaceCapabilities2KHR": {
+      "(VK_KHR_surface)+(VK_KHR_get_surface_capabilities2)+(VK_EXT_full_screen_exclusive,VK_KHR_win32_surface)": [
+        {
+          "vuid": "VUID-vkGetPhysicalDeviceSurfaceCapabilities2KHR-pNext-02671",
+          "text": " If an instance of <a href=\"#VkSurfaceCapabilitiesFullScreenExclusiveEXT\">VkSurfaceCapabilitiesFullScreenExclusiveEXT</a> is included in the <code>pNext</code> chain of <code>pSurfaceCapabilities</code>, an instance of <a href=\"#VkSurfaceFullScreenExclusiveWin32InfoEXT\">VkSurfaceFullScreenExclusiveWin32InfoEXT</a> <strong class=\"purple\">must</strong> be included in the <code>pNext</code> chain of <code>pSurfaceInfo</code>."
+        }
+      ],
       "(VK_KHR_surface)+(VK_KHR_get_surface_capabilities2)": [
         {
           "vuid": "VUID-vkGetPhysicalDeviceSurfaceCapabilities2KHR-physicalDevice-parameter",
@@ -20785,6 +20893,12 @@
       ]
     },
     "VkPhysicalDeviceSurfaceInfo2KHR": {
+      "(VK_KHR_surface)+(VK_KHR_get_surface_capabilities2)+(VK_KHR_win32_surface,VK_EXT_full_screen_exclusive)": [
+        {
+          "vuid": "VUID-VkPhysicalDeviceSurfaceInfo2KHR-pNext-02672",
+          "text": " If the <code>pNext</code> chain includes an instance of <a href=\"#VkSurfaceFullScreenExclusiveInfoEXT\">VkSurfaceFullScreenExclusiveInfoEXT</a> with its <code>fullScreenExclusive</code> member set to <code>VK_FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT</code>, and <code>surface</code> was created using <a href=\"#vkCreateWin32SurfaceKHR\">vkCreateWin32SurfaceKHR</a>, an instance of <a href=\"#VkSurfaceFullScreenExclusiveWin32InfoEXT\">VkSurfaceFullScreenExclusiveWin32InfoEXT</a> <strong class=\"purple\">must</strong> be present in the <code>pNext</code> chain"
+        }
+      ],
       "(VK_KHR_surface)+(VK_KHR_get_surface_capabilities2)": [
         {
           "vuid": "VUID-VkPhysicalDeviceSurfaceInfo2KHR-sType-sType",
@@ -20792,11 +20906,39 @@
         },
         {
           "vuid": "VUID-VkPhysicalDeviceSurfaceInfo2KHR-pNext-pNext",
-          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkSurfaceFullScreenExclusiveInfoEXT\">VkSurfaceFullScreenExclusiveInfoEXT</a> or <a href=\"#VkSurfaceFullScreenExclusiveWin32InfoEXT\">VkSurfaceFullScreenExclusiveWin32InfoEXT</a>"
+        },
+        {
+          "vuid": "VUID-VkPhysicalDeviceSurfaceInfo2KHR-sType-unique",
+          "text": " Each <code>sType</code> member in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
           "vuid": "VUID-VkPhysicalDeviceSurfaceInfo2KHR-surface-parameter",
           "text": " <code>surface</code> <strong class=\"purple\">must</strong> be a valid <code>VkSurfaceKHR</code> handle"
+        }
+      ]
+    },
+    "VkSurfaceFullScreenExclusiveInfoEXT": {
+      "(VK_KHR_surface)+(VK_KHR_get_surface_capabilities2)+(VK_EXT_full_screen_exclusive)": [
+        {
+          "vuid": "VUID-VkSurfaceFullScreenExclusiveInfoEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_INFO_EXT</code>"
+        },
+        {
+          "vuid": "VUID-VkSurfaceFullScreenExclusiveInfoEXT-fullScreenExclusive-parameter",
+          "text": " <code>fullScreenExclusive</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkFullScreenExclusiveEXT\">VkFullScreenExclusiveEXT</a> value"
+        }
+      ]
+    },
+    "VkSurfaceFullScreenExclusiveWin32InfoEXT": {
+      "(VK_KHR_surface)+(VK_KHR_get_surface_capabilities2)+(VK_EXT_full_screen_exclusive)+(VK_KHR_win32_surface)": [
+        {
+          "vuid": "VUID-VkSurfaceFullScreenExclusiveWin32InfoEXT-hmonitor-02673",
+          "text": " <code>hmonitor</code> <strong class=\"purple\">must</strong> be a valid <code>HMONITOR</code>"
+        },
+        {
+          "vuid": "VUID-VkSurfaceFullScreenExclusiveWin32InfoEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_WIN32_INFO_EXT</code>"
         }
       ]
     },
@@ -20808,7 +20950,19 @@
         },
         {
           "vuid": "VUID-VkSurfaceCapabilities2KHR-pNext-pNext",
-          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkSharedPresentSurfaceCapabilitiesKHR\">VkSharedPresentSurfaceCapabilitiesKHR</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDisplayNativeHdrSurfaceCapabilitiesAMD\">VkDisplayNativeHdrSurfaceCapabilitiesAMD</a>, <a href=\"#VkSharedPresentSurfaceCapabilitiesKHR\">VkSharedPresentSurfaceCapabilitiesKHR</a>, <a href=\"#VkSurfaceCapabilitiesFullScreenExclusiveEXT\">VkSurfaceCapabilitiesFullScreenExclusiveEXT</a>, or <a href=\"#VkSurfaceProtectedCapabilitiesKHR\">VkSurfaceProtectedCapabilitiesKHR</a>"
+        },
+        {
+          "vuid": "VUID-VkSurfaceCapabilities2KHR-sType-unique",
+          "text": " Each <code>sType</code> member in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+        }
+      ]
+    },
+    "VkSurfaceProtectedCapabilitiesKHR": {
+      "(VK_KHR_surface)+(VK_KHR_get_surface_capabilities2)+(VK_KHR_surface_protected_capabilities)": [
+        {
+          "vuid": "VUID-VkSurfaceProtectedCapabilitiesKHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR</code>"
         }
       ]
     },
@@ -20817,6 +20971,22 @@
         {
           "vuid": "VUID-VkSharedPresentSurfaceCapabilitiesKHR-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_SHARED_PRESENT_SURFACE_CAPABILITIES_KHR</code>"
+        }
+      ]
+    },
+    "VkDisplayNativeHdrSurfaceCapabilitiesAMD": {
+      "(VK_KHR_surface)+(VK_KHR_get_surface_capabilities2)+(VK_AMD_display_native_hdr)": [
+        {
+          "vuid": "VUID-VkDisplayNativeHdrSurfaceCapabilitiesAMD-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_DISPLAY_NATIVE_HDR_SURFACE_CAPABILITIES_AMD</code>"
+        }
+      ]
+    },
+    "VkSurfaceCapabilitiesFullScreenExclusiveEXT": {
+      "(VK_KHR_surface)+(VK_KHR_get_surface_capabilities2)+(VK_EXT_full_screen_exclusive)": [
+        {
+          "vuid": "VUID-VkSurfaceCapabilitiesFullScreenExclusiveEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_FULL_SCREEN_EXCLUSIVE_EXT</code>"
         }
       ]
     },
@@ -20936,6 +21106,66 @@
         }
       ]
     },
+    "vkGetPhysicalDeviceSurfacePresentModes2EXT": {
+      "(VK_KHR_surface)+(VK_EXT_full_screen_exclusive)": [
+        {
+          "vuid": "VUID-vkGetPhysicalDeviceSurfacePresentModes2EXT-physicalDevice-parameter",
+          "text": " <code>physicalDevice</code> <strong class=\"purple\">must</strong> be a valid <code>VkPhysicalDevice</code> handle"
+        },
+        {
+          "vuid": "VUID-vkGetPhysicalDeviceSurfacePresentModes2EXT-pSurfaceInfo-parameter",
+          "text": " <code>pSurfaceInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <code>VkPhysicalDeviceSurfaceInfo2KHR</code> structure"
+        },
+        {
+          "vuid": "VUID-vkGetPhysicalDeviceSurfacePresentModes2EXT-pPresentModeCount-parameter",
+          "text": " <code>pPresentModeCount</code> <strong class=\"purple\">must</strong> be a valid pointer to a <code>uint32_t</code> value"
+        },
+        {
+          "vuid": "VUID-vkGetPhysicalDeviceSurfacePresentModes2EXT-pPresentModes-parameter",
+          "text": " If the value referenced by <code>pPresentModeCount</code> is not <code>0</code>, and <code>pPresentModes</code> is not <code>NULL</code>, <code>pPresentModes</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>pPresentModeCount</code> <a href=\"#VkPresentModeKHR\">VkPresentModeKHR</a> values"
+        }
+      ]
+    },
+    "vkAcquireFullScreenExclusiveModeEXT": {
+      "(VK_KHR_surface)+(VK_EXT_full_screen_exclusive)": [
+        {
+          "vuid": "VUID-vkAcquireFullScreenExclusiveModeEXT-swapchain-02674",
+          "text": " <code>swapchain</code> <strong class=\"purple\">must</strong> not be in the retired state"
+        },
+        {
+          "vuid": "VUID-vkAcquireFullScreenExclusiveModeEXT-swapchain-02675",
+          "text": " <code>swapchain</code> <strong class=\"purple\">must</strong> be a swapchain created with an instance of <a href=\"#VkSurfaceFullScreenExclusiveInfoEXT\">VkSurfaceFullScreenExclusiveInfoEXT</a>, with <code>fullScreenExclusive</code> set to <code>VK_FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT</code>"
+        },
+        {
+          "vuid": "VUID-vkAcquireFullScreenExclusiveModeEXT-swapchain-02676",
+          "text": " <code>swapchain</code> <strong class=\"purple\">must</strong> not currently have exclusive full-screen access"
+        },
+        {
+          "vuid": "VUID-vkAcquireFullScreenExclusiveModeEXT-device-parameter",
+          "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <code>VkDevice</code> handle"
+        },
+        {
+          "vuid": "VUID-vkAcquireFullScreenExclusiveModeEXT-swapchain-parameter",
+          "text": " <code>swapchain</code> <strong class=\"purple\">must</strong> be a valid <code>VkSwapchainKHR</code> handle"
+        },
+        {
+          "vuid": "VUID-vkAcquireFullScreenExclusiveModeEXT-commonparent",
+          "text": " Both of <code>device</code>, and <code>swapchain</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkInstance</code>"
+        }
+      ]
+    },
+    "vkReleaseFullScreenExclusiveModeEXT": {
+      "(VK_KHR_surface)+(VK_EXT_full_screen_exclusive)": [
+        {
+          "vuid": "VUID-vkReleaseFullScreenExclusiveModeEXT-swapchain-02677",
+          "text": " <code>swapchain</code> <strong class=\"purple\">must</strong> not be in the retired state"
+        },
+        {
+          "vuid": "VUID-vkReleaseFullScreenExclusiveModeEXT-swapchain-02678",
+          "text": " <code>swapchain</code> <strong class=\"purple\">must</strong> be a swapchain created with an instance of <a href=\"#VkSurfaceFullScreenExclusiveInfoEXT\">VkSurfaceFullScreenExclusiveInfoEXT</a>, with <code>fullScreenExclusive</code> set to <code>VK_FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT</code>"
+        }
+      ]
+    },
     "vkGetDeviceGroupPresentCapabilitiesKHR": {
       "(VK_KHR_surface)+(VK_KHR_swapchain)+(VK_VERSION_1_1,VK_KHR_device_group)": [
         {
@@ -20977,6 +21207,22 @@
         {
           "vuid": "VUID-vkGetDeviceGroupSurfacePresentModesKHR-commonparent",
           "text": " Both of <code>device</code>, and <code>surface</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkInstance</code>"
+        }
+      ]
+    },
+    "vkGetDeviceGroupSurfacePresentModes2EXT": {
+      "(VK_KHR_surface)+(VK_KHR_swapchain)+(VK_VERSION_1_1,VK_KHR_device_group)+(VK_EXT_full_screen_exclusive)": [
+        {
+          "vuid": "VUID-vkGetDeviceGroupSurfacePresentModes2EXT-device-parameter",
+          "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <code>VkDevice</code> handle"
+        },
+        {
+          "vuid": "VUID-vkGetDeviceGroupSurfacePresentModes2EXT-pSurfaceInfo-parameter",
+          "text": " <code>pSurfaceInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <code>VkPhysicalDeviceSurfaceInfo2KHR</code> structure"
+        },
+        {
+          "vuid": "VUID-vkGetDeviceGroupSurfacePresentModes2EXT-pModes-parameter",
+          "text": " <code>pModes</code> <strong class=\"purple\">must</strong> be a valid pointer to a <a href=\"#VkDeviceGroupPresentModeFlagsKHR\">VkDeviceGroupPresentModeFlagsKHR</a> value"
         }
       ]
     },
@@ -21088,11 +21334,11 @@
       "(VK_KHR_surface)+(VK_KHR_swapchain)": [
         {
           "vuid": "VUID-VkSwapchainCreateInfoKHR-surface-01270",
-          "text": " <code>surface</code> <strong class=\"purple\">must</strong> be a surface that is supported by the device as determined using <code>vkGetPhysicalDeviceSurfaceSupportKHR</code>"
+          "text": " <code>surface</code> <strong class=\"purple\">must</strong> be a surface that is supported by the device as determined using <a href=\"#vkGetPhysicalDeviceSurfaceSupportKHR\">vkGetPhysicalDeviceSurfaceSupportKHR</a>"
         },
         {
           "vuid": "VUID-VkSwapchainCreateInfoKHR-minImageCount-01271",
-          "text": " <code>minImageCount</code> <strong class=\"purple\">must</strong> be greater than or equal to the value returned in the <code>minImageCount</code> member of the <code>VkSurfaceCapabilitiesKHR</code> structure returned by <code>vkGetPhysicalDeviceSurfaceCapabilitiesKHR</code> for the surface"
+          "text": " <code>minImageCount</code> <strong class=\"purple\">must</strong> be greater than or equal to the value returned in the <code>minImageCount</code> member of the <code>VkSurfaceCapabilitiesKHR</code> structure returned by <a href=\"#vkGetPhysicalDeviceSurfaceCapabilitiesKHR\">vkGetPhysicalDeviceSurfaceCapabilitiesKHR</a> for the surface"
         },
         {
           "vuid": "VUID-VkSwapchainCreateInfoKHR-minImageCount-01272",
@@ -21148,7 +21394,7 @@
         },
         {
           "vuid": "VUID-VkSwapchainCreateInfoKHR-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceGroupSwapchainCreateInfoKHR\">VkDeviceGroupSwapchainCreateInfoKHR</a>, <a href=\"#VkImageFormatListCreateInfoKHR\">VkImageFormatListCreateInfoKHR</a>, or <a href=\"#VkSwapchainCounterCreateInfoEXT\">VkSwapchainCounterCreateInfoEXT</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceGroupSwapchainCreateInfoKHR\">VkDeviceGroupSwapchainCreateInfoKHR</a>, <a href=\"#VkImageFormatListCreateInfoKHR\">VkImageFormatListCreateInfoKHR</a>, <a href=\"#VkSurfaceFullScreenExclusiveInfoEXT\">VkSurfaceFullScreenExclusiveInfoEXT</a>, <a href=\"#VkSurfaceFullScreenExclusiveWin32InfoEXT\">VkSurfaceFullScreenExclusiveWin32InfoEXT</a>, <a href=\"#VkSwapchainCounterCreateInfoEXT\">VkSwapchainCounterCreateInfoEXT</a>, or <a href=\"#VkSwapchainDisplayNativeHdrCreateInfoAMD\">VkSwapchainDisplayNativeHdrCreateInfoAMD</a>"
         },
         {
           "vuid": "VUID-VkSwapchainCreateInfoKHR-sType-unique",
@@ -21250,6 +21496,18 @@
           "vuid": "VUID-VkSwapchainCreateInfoKHR-flags-03168",
           "text": " If <code>flags</code> contains <code>VK_SWAPCHAIN_CREATE_MUTABLE_FORMAT_BIT_KHR</code> then the <code>pNext</code> chain <strong class=\"purple\">must</strong> contain an instance of <a href=\"#VkImageFormatListCreateInfoKHR\">VkImageFormatListCreateInfoKHR</a> with a <code>viewFormatCount</code> greater than zero and <code>pViewFormats</code> <strong class=\"purple\">must</strong> have an element equal to <code>imageFormat</code>"
         }
+      ],
+      "(VK_KHR_surface)+(VK_KHR_swapchain)+(VK_KHR_surface_protected_capabilities)": [
+        {
+          "vuid": "VUID-VkSwapchainCreateInfoKHR-flags-03187",
+          "text": " If <code>flags</code> contains <code>VK_SWAPCHAIN_CREATE_PROTECTED_BIT_KHR</code>, then <code>VkSurfaceProtectedCapabilitiesKHR</code>::<code>supportsProtected</code> <strong class=\"purple\">must</strong> be <code>VK_TRUE</code> in the <a href=\"#VkSurfaceProtectedCapabilitiesKHR\">VkSurfaceProtectedCapabilitiesKHR</a> structure returned by <a href=\"#vkGetPhysicalDeviceSurfaceCapabilities2KHR\">vkGetPhysicalDeviceSurfaceCapabilities2KHR</a> for <code>surface</code>"
+        }
+      ],
+      "(VK_KHR_surface)+(VK_KHR_swapchain)+(VK_EXT_full_screen_exclusive,VK_KHR_win32_surface)": [
+        {
+          "vuid": "VUID-VkSwapchainCreateInfoKHR-pNext-02679",
+          "text": " If the <code>pNext</code> chain includes an instance of <a href=\"#VkSurfaceFullScreenExclusiveInfoEXT\">VkSurfaceFullScreenExclusiveInfoEXT</a> with its <code>fullScreenExclusive</code> member set to <code>VK_FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT</code>, and <code>surface</code> was created using <a href=\"#vkCreateWin32SurfaceKHR\">vkCreateWin32SurfaceKHR</a>, an instance of <a href=\"#VkSurfaceFullScreenExclusiveWin32InfoEXT\">VkSurfaceFullScreenExclusiveWin32InfoEXT</a> <strong class=\"purple\">must</strong> be present in the <code>pNext</code> chain"
+        }
       ]
     },
     "VkDeviceGroupSwapchainCreateInfoKHR": {
@@ -21265,6 +21523,30 @@
         {
           "vuid": "VUID-VkDeviceGroupSwapchainCreateInfoKHR-modes-requiredbitmask",
           "text": " <code>modes</code> <strong class=\"purple\">must</strong> not be <code>0</code>"
+        }
+      ]
+    },
+    "VkSwapchainDisplayNativeHdrCreateInfoAMD": {
+      "(VK_KHR_surface)+(VK_KHR_swapchain)+(VK_AMD_display_native_hdr)": [
+        {
+          "vuid": "VUID-VkSwapchainDisplayNativeHdrCreateInfoAMD-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_SWAPCHAIN_DISPLAY_NATIVE_HDR_CREATE_INFO_AMD</code>"
+        },
+        {
+          "vuid": "VUID-VkSwapchainDisplayNativeHdrCreateInfoAMD-localDimmingEnable-XXXXX",
+          "text": " It is only valid to set <code>localDimmingEnable</code> to <code>VK_TRUE</code> if <a href=\"#VkDisplayNativeHdrSurfaceCapabilitiesAMD\">VkDisplayNativeHdrSurfaceCapabilitiesAMD</a>::<code>localDimmingSupport</code> is supported."
+        }
+      ]
+    },
+    "vkSetLocalDimmingAMD": {
+      "(VK_KHR_surface)+(VK_KHR_swapchain)+(VK_AMD_display_native_hdr)": [
+        {
+          "vuid": "VUID-vkSetLocalDimmingAMD-swapChain-parameter",
+          "text": " <code>swapChain</code> <strong class=\"purple\">must</strong> be a valid <code>VkSwapchainKHR</code> handle"
+        },
+        {
+          "vuid": "VUID-vkSetLocalDimmingAMD-XXXXX",
+          "text": " It is only valid to call <a href=\"#vkSetLocalDimmingAMD\">vkSetLocalDimmingAMD</a> if <a href=\"#VkDisplayNativeHdrSurfaceCapabilitiesAMD\">VkDisplayNativeHdrSurfaceCapabilitiesAMD</a>::<code>localDimmingSupport</code> is supported."
         }
       ]
     },
@@ -21578,7 +21860,7 @@
         },
         {
           "vuid": "VUID-VkPresentInfoKHR-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceGroupPresentInfoKHR\">VkDeviceGroupPresentInfoKHR</a>, <a href=\"#VkDisplayPresentInfoKHR\">VkDisplayPresentInfoKHR</a>, <a href=\"#VkPresentRegionsKHR\">VkPresentRegionsKHR</a>, or <a href=\"#VkPresentTimesInfoGOOGLE\">VkPresentTimesInfoGOOGLE</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceGroupPresentInfoKHR\">VkDeviceGroupPresentInfoKHR</a>, <a href=\"#VkDisplayPresentInfoKHR\">VkDisplayPresentInfoKHR</a>, <a href=\"#VkPresentFrameTokenGGP\">VkPresentFrameTokenGGP</a>, <a href=\"#VkPresentRegionsKHR\">VkPresentRegionsKHR</a>, or <a href=\"#VkPresentTimesInfoGOOGLE\">VkPresentTimesInfoGOOGLE</a>"
         },
         {
           "vuid": "VUID-VkPresentInfoKHR-sType-unique",
@@ -21731,6 +22013,18 @@
         {
           "vuid": "VUID-VkPresentTimesInfoGOOGLE-swapchainCount-arraylength",
           "text": " <code>swapchainCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
+        }
+      ]
+    },
+    "VkPresentFrameTokenGGP": {
+      "(VK_KHR_surface)+(VK_KHR_swapchain)+(VK_GGP_frame_token)": [
+        {
+          "vuid": "VUID-VkPresentFrameTokenGGP-frameToken-02680",
+          "text": " <code>frameToken</code> <strong class=\"purple\">must</strong> be a valid <code>GgpFrameToken</code>"
+        },
+        {
+          "vuid": "VUID-VkPresentFrameTokenGGP-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PRESENT_FRAME_TOKEN_GGP</code>"
         }
       ]
     },
@@ -22469,6 +22763,14 @@
         {
           "vuid": "VUID-VkPhysicalDeviceYcbcrImageArraysFeaturesEXT-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_IMAGE_ARRAYS_FEATURES_EXT</code>"
+        }
+      ]
+    },
+    "VkPhysicalDeviceHostQueryResetFeaturesEXT": {
+      "(VK_EXT_host_query_reset)": [
+        {
+          "vuid": "VUID-VkPhysicalDeviceHostQueryResetFeaturesEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES_EXT</code>"
         }
       ]
     },
