@@ -10369,7 +10369,7 @@ typedef void <name>CAMetalLayer</name>;
                 <type name="VkPhysicalDevicePCIBusInfoPropertiesEXT"/>
             </require>
         </extension>
-        <extension name="VK_AMD_display_native_hdr" number="214" type="device" author="AMD" requires="VK_KHR_get_physical_device_properties2,VK_KHR_get_surface_capabilities2,VK_KHR_swapchain" contact="Matthaeus G. Chajdas @anteru" supported="vulkan">
+        <extension name="VK_AMD_display_native_hdr" number="214" type="device" author="AMD" requires="VK_KHR_get_physical_device_properties2,VK_KHR_get_surface_capabilities2,VK_KHR_swapchain" contact="Matthaeus G. Chajdas @anteru" supported="disabled">
             <require>
                 <enum value="1"                                         name="VK_AMD_DISPLAY_NATIVE_HDR_SPEC_VERSION"/>
                 <enum value="&quot;VK_AMD_display_native_hdr&quot;"     name="VK_AMD_DISPLAY_NATIVE_HDR_EXTENSION_NAME"/>
