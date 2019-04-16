@@ -516,9 +516,10 @@ class OutputGenerator:
         # Generator can be used without writing to a file.
         if self.genOpts.filename is not None:
             if sys.platform == 'win32':
-                if not os.path.exists(self.genOpts.directory):
+                directory = Path(self.genOpts.directory)
+                if not Path.exists(directory):
                     os.makedirs(directory)
-                self.outFile = io.open(self.genOpts.directory +  '/' +  self.genOpts.filename, 'w', encoding='utf-8')
+                self.outFile = (directory / self.genOpts.filename).open('w', encoding='utf-8')
             else:
                 filename = self.genOpts.directory + '/' + self.genOpts.filename
                 self.outFile = io.open(filename, 'w', encoding='utf-8')
