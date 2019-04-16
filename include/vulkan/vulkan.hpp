@@ -56,7 +56,7 @@
 # define VULKAN_HPP_ASSERT   assert
 #endif
 
-static_assert( VK_HEADER_VERSION ==  106 , "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION ==  107 , "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
@@ -1945,6 +1945,11 @@ namespace VULKAN_HPP_NAMESPACE
     VkResult vkCreateDisplayPlaneSurfaceKHR( VkInstance instance, const VkDisplaySurfaceCreateInfoKHR* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkSurfaceKHR* pSurface ) const
     {
       return ::vkCreateDisplayPlaneSurfaceKHR( instance, pCreateInfo, pAllocator, pSurface );
+    }
+
+    VkResult vkCreateHeadlessSurfaceEXT( VkInstance instance, const VkHeadlessSurfaceCreateInfoEXT* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkSurfaceKHR* pSurface ) const
+    {
+      return ::vkCreateHeadlessSurfaceEXT( instance, pCreateInfo, pAllocator, pSurface );
     }
 
 #ifdef VK_USE_PLATFORM_IOS_MVK
@@ -5106,6 +5111,7 @@ namespace VULKAN_HPP_NAMESPACE
     eSurfaceFullScreenExclusiveInfoEXT = VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_INFO_EXT,
     eSurfaceCapabilitiesFullScreenExclusiveEXT = VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_FULL_SCREEN_EXCLUSIVE_EXT,
     eSurfaceFullScreenExclusiveWin32InfoEXT = VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_WIN32_INFO_EXT,
+    eHeadlessSurfaceCreateInfoEXT = VK_STRUCTURE_TYPE_HEADLESS_SURFACE_CREATE_INFO_EXT,
     ePhysicalDeviceHostQueryResetFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES_EXT,
     ePhysicalDeviceVariablePointerFeatures = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES,
     ePhysicalDeviceShaderDrawParameterFeatures = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETER_FEATURES,
@@ -5510,6 +5516,7 @@ namespace VULKAN_HPP_NAMESPACE
       case StructureType::eSurfaceFullScreenExclusiveInfoEXT : return "SurfaceFullScreenExclusiveInfoEXT";
       case StructureType::eSurfaceCapabilitiesFullScreenExclusiveEXT : return "SurfaceCapabilitiesFullScreenExclusiveEXT";
       case StructureType::eSurfaceFullScreenExclusiveWin32InfoEXT : return "SurfaceFullScreenExclusiveWin32InfoEXT";
+      case StructureType::eHeadlessSurfaceCreateInfoEXT : return "HeadlessSurfaceCreateInfoEXT";
       case StructureType::ePhysicalDeviceHostQueryResetFeaturesEXT : return "PhysicalDeviceHostQueryResetFeaturesEXT";
       default: return "invalid";
     }
@@ -7918,6 +7925,21 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & GeometryInstanceFlagBitsNV::eForceOpaque ) result += "ForceOpaque | ";
     if ( value & GeometryInstanceFlagBitsNV::eForceNoOpaque ) result += "ForceNoOpaque | ";
     return "{ " + result.substr(0, result.size() - 3) + " }";
+  }
+
+  enum class HeadlessSurfaceCreateFlagBitsEXT
+  {};
+
+  VULKAN_HPP_INLINE std::string to_string( HeadlessSurfaceCreateFlagBitsEXT )
+  {
+    return "(void)";
+  }
+
+  using HeadlessSurfaceCreateFlagsEXT = Flags<HeadlessSurfaceCreateFlagBitsEXT, VkHeadlessSurfaceCreateFlagsEXT>;
+
+  VULKAN_HPP_INLINE std::string to_string( HeadlessSurfaceCreateFlagsEXT  )
+  {
+    return "{}";
   }
 
 #ifdef VK_USE_PLATFORM_IOS_MVK
@@ -10888,6 +10910,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct GeometryTrianglesNV;
   struct GraphicsPipelineCreateInfo;
   struct HdrMetadataEXT;
+  struct HeadlessSurfaceCreateInfoEXT;
 #ifdef VK_USE_PLATFORM_IOS_MVK
   struct IOSSurfaceCreateInfoMVK;
 #endif /*VK_USE_PLATFORM_IOS_MVK*/
@@ -16291,6 +16314,17 @@ namespace VULKAN_HPP_NAMESPACE
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = DispatchLoaderStatic>
     typename ResultValueType<UniqueHandle<SurfaceKHR,Dispatch>>::type createDisplayPlaneSurfaceKHRUnique( const DisplaySurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+#endif /*VULKAN_HPP_NO_SMART_HANDLE*/
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+    template<typename Dispatch = DispatchLoaderStatic>
+    Result createHeadlessSurfaceEXT( const HeadlessSurfaceCreateInfoEXT* pCreateInfo, const AllocationCallbacks* pAllocator, SurfaceKHR* pSurface, Dispatch const &d = Dispatch() ) const;
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+    template<typename Dispatch = DispatchLoaderStatic>
+    ResultValueType<SurfaceKHR>::type createHeadlessSurfaceEXT( const HeadlessSurfaceCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
+#ifndef VULKAN_HPP_NO_SMART_HANDLE
+    template<typename Dispatch = DispatchLoaderStatic>
+    typename ResultValueType<UniqueHandle<SurfaceKHR,Dispatch>>::type createHeadlessSurfaceEXTUnique( const HeadlessSurfaceCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = Dispatch() ) const;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -31145,6 +31179,66 @@ namespace VULKAN_HPP_NAMESPACE
     float maxFrameAverageLightLevel;
   };
   static_assert( sizeof( HdrMetadataEXT ) == sizeof( VkHdrMetadataEXT ), "struct and wrapper have different size!" );
+
+  struct HeadlessSurfaceCreateInfoEXT
+  {
+    HeadlessSurfaceCreateInfoEXT( HeadlessSurfaceCreateFlagsEXT flags_ = HeadlessSurfaceCreateFlagsEXT() )
+      : flags( flags_ )
+    {}
+
+    HeadlessSurfaceCreateInfoEXT( VkHeadlessSurfaceCreateInfoEXT const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( HeadlessSurfaceCreateInfoEXT ) );
+    }
+
+    HeadlessSurfaceCreateInfoEXT& operator=( VkHeadlessSurfaceCreateInfoEXT const & rhs )
+    {
+      memcpy( this, &rhs, sizeof( HeadlessSurfaceCreateInfoEXT ) );
+      return *this;
+    }
+
+    HeadlessSurfaceCreateInfoEXT & setPNext( const void* pNext_ )
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    HeadlessSurfaceCreateInfoEXT & setFlags( HeadlessSurfaceCreateFlagsEXT flags_ )
+    {
+      flags = flags_;
+      return *this;
+    }
+
+    operator VkHeadlessSurfaceCreateInfoEXT const&() const
+    {
+      return *reinterpret_cast<const VkHeadlessSurfaceCreateInfoEXT*>( this );
+    }
+
+    operator VkHeadlessSurfaceCreateInfoEXT &()
+    {
+      return *reinterpret_cast<VkHeadlessSurfaceCreateInfoEXT*>( this );
+    }
+
+    bool operator==( HeadlessSurfaceCreateInfoEXT const& rhs ) const
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( flags == rhs.flags );
+    }
+
+    bool operator!=( HeadlessSurfaceCreateInfoEXT const& rhs ) const
+    {
+      return !operator==( rhs );
+    }
+
+  private:
+    StructureType sType = StructureType::eHeadlessSurfaceCreateInfoEXT;
+
+  public:
+    const void* pNext = nullptr;
+    HeadlessSurfaceCreateFlagsEXT flags;
+  };
+  static_assert( sizeof( HeadlessSurfaceCreateInfoEXT ) == sizeof( VkHeadlessSurfaceCreateInfoEXT ), "struct and wrapper have different size!" );
 
 #ifdef VK_USE_PLATFORM_IOS_MVK
   struct IOSSurfaceCreateInfoMVK
@@ -49590,11 +49684,13 @@ namespace VULKAN_HPP_NAMESPACE
     commandBuffers.reserve( allocateInfo.commandBufferCount );
     CommandBuffer* buffer = reinterpret_cast<CommandBuffer*>( reinterpret_cast<char*>( commandBuffers.data() ) + allocateInfo.commandBufferCount * ( sizeof( UniqueHandle<CommandBuffer, Dispatch> ) - sizeof( CommandBuffer ) ) );
     Result result = static_cast<Result>(d.vkAllocateCommandBuffers( m_device, reinterpret_cast<const VkCommandBufferAllocateInfo*>( &allocateInfo ), reinterpret_cast<VkCommandBuffer*>( buffer ) ) );
-
-    PoolFree<Device,CommandPool,Dispatch> deleter( *this, allocateInfo.commandPool, d );
-    for ( size_t i=0 ; i<allocateInfo.commandBufferCount ; i++ )
+    if (result == vk::Result::eSuccess)
     {
-      commandBuffers.push_back( UniqueHandle<CommandBuffer, Dispatch>( buffer[i], deleter ) );
+      PoolFree<Device,CommandPool,Dispatch> deleter( *this, allocateInfo.commandPool, d );
+      for ( size_t i=0 ; i<allocateInfo.commandBufferCount ; i++ )
+      {
+        commandBuffers.push_back( UniqueHandle<CommandBuffer, Dispatch>( buffer[i], deleter ) );
+      }
     }
 
     return createResultValue( result, commandBuffers, VULKAN_HPP_NAMESPACE_STRING "::Device::allocateCommandBuffersUnique" );
@@ -49607,11 +49703,13 @@ namespace VULKAN_HPP_NAMESPACE
     commandBuffers.reserve( allocateInfo.commandBufferCount );
     CommandBuffer* buffer = reinterpret_cast<CommandBuffer*>( reinterpret_cast<char*>( commandBuffers.data() ) + allocateInfo.commandBufferCount * ( sizeof( UniqueHandle<CommandBuffer, Dispatch> ) - sizeof( CommandBuffer ) ) );
     Result result = static_cast<Result>(d.vkAllocateCommandBuffers( m_device, reinterpret_cast<const VkCommandBufferAllocateInfo*>( &allocateInfo ), reinterpret_cast<VkCommandBuffer*>( buffer ) ) );
-
-    PoolFree<Device,CommandPool,Dispatch> deleter( *this, allocateInfo.commandPool, d );
-    for ( size_t i=0 ; i<allocateInfo.commandBufferCount ; i++ )
+    if (result == vk::Result::eSuccess)
     {
-      commandBuffers.push_back( UniqueHandle<CommandBuffer, Dispatch>( buffer[i], deleter ) );
+      PoolFree<Device,CommandPool,Dispatch> deleter( *this, allocateInfo.commandPool, d );
+      for ( size_t i=0 ; i<allocateInfo.commandBufferCount ; i++ )
+      {
+        commandBuffers.push_back( UniqueHandle<CommandBuffer, Dispatch>( buffer[i], deleter ) );
+      }
     }
 
     return createResultValue( result, commandBuffers, VULKAN_HPP_NAMESPACE_STRING "::Device::allocateCommandBuffersUnique" );
@@ -49648,11 +49746,13 @@ namespace VULKAN_HPP_NAMESPACE
     descriptorSets.reserve( allocateInfo.descriptorSetCount );
     DescriptorSet* buffer = reinterpret_cast<DescriptorSet*>( reinterpret_cast<char*>( descriptorSets.data() ) + allocateInfo.descriptorSetCount * ( sizeof( UniqueHandle<DescriptorSet, Dispatch> ) - sizeof( DescriptorSet ) ) );
     Result result = static_cast<Result>(d.vkAllocateDescriptorSets( m_device, reinterpret_cast<const VkDescriptorSetAllocateInfo*>( &allocateInfo ), reinterpret_cast<VkDescriptorSet*>( buffer ) ) );
-
-    PoolFree<Device,DescriptorPool,Dispatch> deleter( *this, allocateInfo.descriptorPool, d );
-    for ( size_t i=0 ; i<allocateInfo.descriptorSetCount ; i++ )
+    if (result == vk::Result::eSuccess)
     {
-      descriptorSets.push_back( UniqueHandle<DescriptorSet, Dispatch>( buffer[i], deleter ) );
+      PoolFree<Device,DescriptorPool,Dispatch> deleter( *this, allocateInfo.descriptorPool, d );
+      for ( size_t i=0 ; i<allocateInfo.descriptorSetCount ; i++ )
+      {
+        descriptorSets.push_back( UniqueHandle<DescriptorSet, Dispatch>( buffer[i], deleter ) );
+      }
     }
 
     return createResultValue( result, descriptorSets, VULKAN_HPP_NAMESPACE_STRING "::Device::allocateDescriptorSetsUnique" );
@@ -49665,11 +49765,13 @@ namespace VULKAN_HPP_NAMESPACE
     descriptorSets.reserve( allocateInfo.descriptorSetCount );
     DescriptorSet* buffer = reinterpret_cast<DescriptorSet*>( reinterpret_cast<char*>( descriptorSets.data() ) + allocateInfo.descriptorSetCount * ( sizeof( UniqueHandle<DescriptorSet, Dispatch> ) - sizeof( DescriptorSet ) ) );
     Result result = static_cast<Result>(d.vkAllocateDescriptorSets( m_device, reinterpret_cast<const VkDescriptorSetAllocateInfo*>( &allocateInfo ), reinterpret_cast<VkDescriptorSet*>( buffer ) ) );
-
-    PoolFree<Device,DescriptorPool,Dispatch> deleter( *this, allocateInfo.descriptorPool, d );
-    for ( size_t i=0 ; i<allocateInfo.descriptorSetCount ; i++ )
+    if (result == vk::Result::eSuccess)
     {
-      descriptorSets.push_back( UniqueHandle<DescriptorSet, Dispatch>( buffer[i], deleter ) );
+      PoolFree<Device,DescriptorPool,Dispatch> deleter( *this, allocateInfo.descriptorPool, d );
+      for ( size_t i=0 ; i<allocateInfo.descriptorSetCount ; i++ )
+      {
+        descriptorSets.push_back( UniqueHandle<DescriptorSet, Dispatch>( buffer[i], deleter ) );
+      }
     }
 
     return createResultValue( result, descriptorSets, VULKAN_HPP_NAMESPACE_STRING "::Device::allocateDescriptorSetsUnique" );
@@ -49958,11 +50060,13 @@ namespace VULKAN_HPP_NAMESPACE
     pipelines.reserve( createInfos.size() );
     Pipeline* buffer = reinterpret_cast<Pipeline*>( reinterpret_cast<char*>( pipelines.data() ) + createInfos.size() * ( sizeof( UniqueHandle<Pipeline, Dispatch> ) - sizeof( Pipeline ) ) );
     Result result = static_cast<Result>(d.vkCreateComputePipelines( m_device, static_cast<VkPipelineCache>( pipelineCache ), createInfos.size() , reinterpret_cast<const VkComputePipelineCreateInfo*>( createInfos.data() ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkPipeline*>( buffer ) ) );
-
-    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
-    for ( size_t i=0 ; i<createInfos.size() ; i++ )
+    if (result == vk::Result::eSuccess)
     {
-      pipelines.push_back( UniqueHandle<Pipeline, Dispatch>( buffer[i], deleter ) );
+      ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+      for ( size_t i=0 ; i<createInfos.size() ; i++ )
+      {
+        pipelines.push_back( UniqueHandle<Pipeline, Dispatch>( buffer[i], deleter ) );
+      }
     }
 
     return createResultValue( result, pipelines, VULKAN_HPP_NAMESPACE_STRING "::Device::createComputePipelinesUnique" );
@@ -49975,11 +50079,13 @@ namespace VULKAN_HPP_NAMESPACE
     pipelines.reserve( createInfos.size() );
     Pipeline* buffer = reinterpret_cast<Pipeline*>( reinterpret_cast<char*>( pipelines.data() ) + createInfos.size() * ( sizeof( UniqueHandle<Pipeline, Dispatch> ) - sizeof( Pipeline ) ) );
     Result result = static_cast<Result>(d.vkCreateComputePipelines( m_device, static_cast<VkPipelineCache>( pipelineCache ), createInfos.size() , reinterpret_cast<const VkComputePipelineCreateInfo*>( createInfos.data() ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkPipeline*>( buffer ) ) );
-
-    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
-    for ( size_t i=0 ; i<createInfos.size() ; i++ )
+    if (result == vk::Result::eSuccess)
     {
-      pipelines.push_back( UniqueHandle<Pipeline, Dispatch>( buffer[i], deleter ) );
+      ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+      for ( size_t i=0 ; i<createInfos.size() ; i++ )
+      {
+        pipelines.push_back( UniqueHandle<Pipeline, Dispatch>( buffer[i], deleter ) );
+      }
     }
 
     return createResultValue( result, pipelines, VULKAN_HPP_NAMESPACE_STRING "::Device::createComputePipelinesUnique" );
@@ -50214,11 +50320,13 @@ namespace VULKAN_HPP_NAMESPACE
     pipelines.reserve( createInfos.size() );
     Pipeline* buffer = reinterpret_cast<Pipeline*>( reinterpret_cast<char*>( pipelines.data() ) + createInfos.size() * ( sizeof( UniqueHandle<Pipeline, Dispatch> ) - sizeof( Pipeline ) ) );
     Result result = static_cast<Result>(d.vkCreateGraphicsPipelines( m_device, static_cast<VkPipelineCache>( pipelineCache ), createInfos.size() , reinterpret_cast<const VkGraphicsPipelineCreateInfo*>( createInfos.data() ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkPipeline*>( buffer ) ) );
-
-    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
-    for ( size_t i=0 ; i<createInfos.size() ; i++ )
+    if (result == vk::Result::eSuccess)
     {
-      pipelines.push_back( UniqueHandle<Pipeline, Dispatch>( buffer[i], deleter ) );
+      ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+      for ( size_t i=0 ; i<createInfos.size() ; i++ )
+      {
+        pipelines.push_back( UniqueHandle<Pipeline, Dispatch>( buffer[i], deleter ) );
+      }
     }
 
     return createResultValue( result, pipelines, VULKAN_HPP_NAMESPACE_STRING "::Device::createGraphicsPipelinesUnique" );
@@ -50231,11 +50339,13 @@ namespace VULKAN_HPP_NAMESPACE
     pipelines.reserve( createInfos.size() );
     Pipeline* buffer = reinterpret_cast<Pipeline*>( reinterpret_cast<char*>( pipelines.data() ) + createInfos.size() * ( sizeof( UniqueHandle<Pipeline, Dispatch> ) - sizeof( Pipeline ) ) );
     Result result = static_cast<Result>(d.vkCreateGraphicsPipelines( m_device, static_cast<VkPipelineCache>( pipelineCache ), createInfos.size() , reinterpret_cast<const VkGraphicsPipelineCreateInfo*>( createInfos.data() ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkPipeline*>( buffer ) ) );
-
-    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
-    for ( size_t i=0 ; i<createInfos.size() ; i++ )
+    if (result == vk::Result::eSuccess)
     {
-      pipelines.push_back( UniqueHandle<Pipeline, Dispatch>( buffer[i], deleter ) );
+      ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+      for ( size_t i=0 ; i<createInfos.size() ; i++ )
+      {
+        pipelines.push_back( UniqueHandle<Pipeline, Dispatch>( buffer[i], deleter ) );
+      }
     }
 
     return createResultValue( result, pipelines, VULKAN_HPP_NAMESPACE_STRING "::Device::createGraphicsPipelinesUnique" );
@@ -50470,11 +50580,13 @@ namespace VULKAN_HPP_NAMESPACE
     pipelines.reserve( createInfos.size() );
     Pipeline* buffer = reinterpret_cast<Pipeline*>( reinterpret_cast<char*>( pipelines.data() ) + createInfos.size() * ( sizeof( UniqueHandle<Pipeline, Dispatch> ) - sizeof( Pipeline ) ) );
     Result result = static_cast<Result>(d.vkCreateRayTracingPipelinesNV( m_device, static_cast<VkPipelineCache>( pipelineCache ), createInfos.size() , reinterpret_cast<const VkRayTracingPipelineCreateInfoNV*>( createInfos.data() ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkPipeline*>( buffer ) ) );
-
-    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
-    for ( size_t i=0 ; i<createInfos.size() ; i++ )
+    if (result == vk::Result::eSuccess)
     {
-      pipelines.push_back( UniqueHandle<Pipeline, Dispatch>( buffer[i], deleter ) );
+      ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+      for ( size_t i=0 ; i<createInfos.size() ; i++ )
+      {
+        pipelines.push_back( UniqueHandle<Pipeline, Dispatch>( buffer[i], deleter ) );
+      }
     }
 
     return createResultValue( result, pipelines, VULKAN_HPP_NAMESPACE_STRING "::Device::createRayTracingPipelinesNVUnique" );
@@ -50487,11 +50599,13 @@ namespace VULKAN_HPP_NAMESPACE
     pipelines.reserve( createInfos.size() );
     Pipeline* buffer = reinterpret_cast<Pipeline*>( reinterpret_cast<char*>( pipelines.data() ) + createInfos.size() * ( sizeof( UniqueHandle<Pipeline, Dispatch> ) - sizeof( Pipeline ) ) );
     Result result = static_cast<Result>(d.vkCreateRayTracingPipelinesNV( m_device, static_cast<VkPipelineCache>( pipelineCache ), createInfos.size() , reinterpret_cast<const VkRayTracingPipelineCreateInfoNV*>( createInfos.data() ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkPipeline*>( buffer ) ) );
-
-    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
-    for ( size_t i=0 ; i<createInfos.size() ; i++ )
+    if (result == vk::Result::eSuccess)
     {
-      pipelines.push_back( UniqueHandle<Pipeline, Dispatch>( buffer[i], deleter ) );
+      ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+      for ( size_t i=0 ; i<createInfos.size() ; i++ )
+      {
+        pipelines.push_back( UniqueHandle<Pipeline, Dispatch>( buffer[i], deleter ) );
+      }
     }
 
     return createResultValue( result, pipelines, VULKAN_HPP_NAMESPACE_STRING "::Device::createRayTracingPipelinesNVUnique" );
@@ -50726,11 +50840,13 @@ namespace VULKAN_HPP_NAMESPACE
     swapchainKHRs.reserve( createInfos.size() );
     SwapchainKHR* buffer = reinterpret_cast<SwapchainKHR*>( reinterpret_cast<char*>( swapchainKHRs.data() ) + createInfos.size() * ( sizeof( UniqueHandle<SwapchainKHR, Dispatch> ) - sizeof( SwapchainKHR ) ) );
     Result result = static_cast<Result>(d.vkCreateSharedSwapchainsKHR( m_device, createInfos.size() , reinterpret_cast<const VkSwapchainCreateInfoKHR*>( createInfos.data() ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSwapchainKHR*>( buffer ) ) );
-
-    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
-    for ( size_t i=0 ; i<createInfos.size() ; i++ )
+    if (result == vk::Result::eSuccess)
     {
-      swapchainKHRs.push_back( UniqueHandle<SwapchainKHR, Dispatch>( buffer[i], deleter ) );
+      ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+      for ( size_t i=0 ; i<createInfos.size() ; i++ )
+      {
+        swapchainKHRs.push_back( UniqueHandle<SwapchainKHR, Dispatch>( buffer[i], deleter ) );
+      }
     }
 
     return createResultValue( result, swapchainKHRs, VULKAN_HPP_NAMESPACE_STRING "::Device::createSharedSwapchainsKHRUnique" );
@@ -50743,11 +50859,13 @@ namespace VULKAN_HPP_NAMESPACE
     swapchainKHRs.reserve( createInfos.size() );
     SwapchainKHR* buffer = reinterpret_cast<SwapchainKHR*>( reinterpret_cast<char*>( swapchainKHRs.data() ) + createInfos.size() * ( sizeof( UniqueHandle<SwapchainKHR, Dispatch> ) - sizeof( SwapchainKHR ) ) );
     Result result = static_cast<Result>(d.vkCreateSharedSwapchainsKHR( m_device, createInfos.size() , reinterpret_cast<const VkSwapchainCreateInfoKHR*>( createInfos.data() ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSwapchainKHR*>( buffer ) ) );
-
-    ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
-    for ( size_t i=0 ; i<createInfos.size() ; i++ )
+    if (result == vk::Result::eSuccess)
     {
-      swapchainKHRs.push_back( UniqueHandle<SwapchainKHR, Dispatch>( buffer[i], deleter ) );
+      ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
+      for ( size_t i=0 ; i<createInfos.size() ; i++ )
+      {
+        swapchainKHRs.push_back( UniqueHandle<SwapchainKHR, Dispatch>( buffer[i], deleter ) );
+      }
     }
 
     return createResultValue( result, swapchainKHRs, VULKAN_HPP_NAMESPACE_STRING "::Device::createSharedSwapchainsKHRUnique" );
@@ -53297,6 +53415,32 @@ namespace VULKAN_HPP_NAMESPACE
 
     ObjectDestroy<Instance,Dispatch> deleter( *this, allocator, d );
     return createResultValue<SurfaceKHR,Dispatch>( result, surface, VULKAN_HPP_NAMESPACE_STRING"::Instance::createDisplayPlaneSurfaceKHRUnique", deleter );
+  }
+#endif /*VULKAN_HPP_NO_SMART_HANDLE*/
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE Result Instance::createHeadlessSurfaceEXT( const HeadlessSurfaceCreateInfoEXT* pCreateInfo, const AllocationCallbacks* pAllocator, SurfaceKHR* pSurface, Dispatch const &d) const
+  {
+    return static_cast<Result>( d.vkCreateHeadlessSurfaceEXT( m_instance, reinterpret_cast<const VkHeadlessSurfaceCreateInfoEXT*>( pCreateInfo ), reinterpret_cast<const VkAllocationCallbacks*>( pAllocator ), reinterpret_cast<VkSurfaceKHR*>( pSurface ) ) );
+  }
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE ResultValueType<SurfaceKHR>::type Instance::createHeadlessSurfaceEXT( const HeadlessSurfaceCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  {
+    SurfaceKHR surface;
+    Result result = static_cast<Result>( d.vkCreateHeadlessSurfaceEXT( m_instance, reinterpret_cast<const VkHeadlessSurfaceCreateInfoEXT*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSurfaceKHR*>( &surface ) ) );
+    return createResultValue( result, surface, VULKAN_HPP_NAMESPACE_STRING"::Instance::createHeadlessSurfaceEXT" );
+  }
+#ifndef VULKAN_HPP_NO_SMART_HANDLE
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<SurfaceKHR,Dispatch>>::type Instance::createHeadlessSurfaceEXTUnique( const HeadlessSurfaceCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  {
+    SurfaceKHR surface;
+    Result result = static_cast<Result>( d.vkCreateHeadlessSurfaceEXT( m_instance, reinterpret_cast<const VkHeadlessSurfaceCreateInfoEXT*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSurfaceKHR*>( &surface ) ) );
+
+    ObjectDestroy<Instance,Dispatch> deleter( *this, allocator, d );
+    return createResultValue<SurfaceKHR,Dispatch>( result, surface, VULKAN_HPP_NAMESPACE_STRING"::Instance::createHeadlessSurfaceEXTUnique", deleter );
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -56276,6 +56420,7 @@ namespace VULKAN_HPP_NAMESPACE
     PFN_vkCreateDebugReportCallbackEXT vkCreateDebugReportCallbackEXT = 0;
     PFN_vkCreateDebugUtilsMessengerEXT vkCreateDebugUtilsMessengerEXT = 0;
     PFN_vkCreateDisplayPlaneSurfaceKHR vkCreateDisplayPlaneSurfaceKHR = 0;
+    PFN_vkCreateHeadlessSurfaceEXT vkCreateHeadlessSurfaceEXT = 0;
 #ifdef VK_USE_PLATFORM_IOS_MVK
     PFN_vkCreateIOSSurfaceMVK vkCreateIOSSurfaceMVK = 0;
 #endif /*VK_USE_PLATFORM_IOS_MVK*/
@@ -56716,6 +56861,7 @@ namespace VULKAN_HPP_NAMESPACE
       vkCreateDebugReportCallbackEXT = PFN_vkCreateDebugReportCallbackEXT( vkGetInstanceProcAddr( instance, "vkCreateDebugReportCallbackEXT" ) );
       vkCreateDebugUtilsMessengerEXT = PFN_vkCreateDebugUtilsMessengerEXT( vkGetInstanceProcAddr( instance, "vkCreateDebugUtilsMessengerEXT" ) );
       vkCreateDisplayPlaneSurfaceKHR = PFN_vkCreateDisplayPlaneSurfaceKHR( vkGetInstanceProcAddr( instance, "vkCreateDisplayPlaneSurfaceKHR" ) );
+      vkCreateHeadlessSurfaceEXT = PFN_vkCreateHeadlessSurfaceEXT( vkGetInstanceProcAddr( instance, "vkCreateHeadlessSurfaceEXT" ) );
 #ifdef VK_USE_PLATFORM_IOS_MVK
       vkCreateIOSSurfaceMVK = PFN_vkCreateIOSSurfaceMVK( vkGetInstanceProcAddr( instance, "vkCreateIOSSurfaceMVK" ) );
 #endif /*VK_USE_PLATFORM_IOS_MVK*/
