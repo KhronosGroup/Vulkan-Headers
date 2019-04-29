@@ -18,7 +18,7 @@
 # CMake project initialization ---------------------------------------------------------------------------------------------------
 # This section contains pre-project() initialization, and ends with the project() command.
 
-cmake_minimum_required(VERSION 2.8.11)
+cmake_minimum_required(VERSION 3.11.3)
 
 # NONE = this project has no language toolchain requirement.
 project(Vulkan-Headers NONE)
