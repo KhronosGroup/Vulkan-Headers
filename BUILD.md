@@ -78,7 +78,7 @@ directories and place them in any location.
     - [2017](https://www.visualstudio.com/vs/downloads/)
   - The Community Edition of each of the above versions is sufficient, as
     well as any more capable edition.
-- CMake: Continuous integration tools use [CMake 3.12.2](https://github.com/Kitware/CMake/releases/tag/v3.12.2) for Windows
+- CMake [version 3.12.4](https://github.com/Kitware/CMake/releases/tag/v3.12.4) or greater is required.
   - Use the installer option to add CMake to the system PATH
 - Git Client Support
   - [Git for Windows](http://git-scm.com/download/win) is a popular solution
@@ -189,7 +189,7 @@ Build the `uninstall` target to remove the files from the install directory.
 There are no specific Linux distribution or compiler version requirements for
 building this repository. The required tools are
 
-- CMake: Continuous integration tools use [CMake 3.12.4](https://github.com/Kitware/CMake/releases/tag/v3.12.4) for Linux
+- CMake [version 3.12.4](https://github.com/Kitware/CMake/releases/tag/v3.12.4) or greater is required.
 - git
 
 ### Linux Build
@@ -267,4 +267,5 @@ or
 ## Building on MacOS
 
 The instructions for building this repository on MacOS are similar to those for Linux.
-- CMake: Continuous integration tools use [CMake 3.11.3](https://github.com/Kitware/CMake/releases/tag/v3.11.3) for MacOS
+
+CMake [version 3.12.4](https://github.com/Kitware/CMake/releases/tag/v3.12.4) or greater is required.
