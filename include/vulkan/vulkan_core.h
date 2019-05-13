@@ -43,7 +43,7 @@ extern "C" {
 #define VK_VERSION_MINOR(version) (((uint32_t)(version) >> 12) & 0x3ff)
 #define VK_VERSION_PATCH(version) ((uint32_t)(version) & 0xfff)
 // Version of this file
-#define VK_HEADER_VERSION 107
+#define VK_HEADER_VERSION 108
 
 
 #define VK_NULL_HANDLE 0
@@ -484,7 +484,11 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_FEATURES_NV = 1000249000,
     VK_STRUCTURE_TYPE_COOPERATIVE_MATRIX_PROPERTIES_NV = 1000249001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_PROPERTIES_NV = 1000249002,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COVERAGE_REDUCTION_MODE_FEATURES_NV = 1000250000,
+    VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_REDUCTION_STATE_CREATE_INFO_NV = 1000250001,
+    VK_STRUCTURE_TYPE_FRAMEBUFFER_MIXED_SAMPLES_COMBINATION_NV = 1000250002,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_IMAGE_ARRAYS_FEATURES_EXT = 1000252000,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES_KHR = 1000253000,
     VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_INFO_EXT = 1000255000,
     VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_FULL_SCREEN_EXCLUSIVE_EXT = 1000255002,
     VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_WIN32_INFO_EXT = 1000255001,
@@ -4729,7 +4733,7 @@ typedef enum VkColorSpaceKHR {
     VK_COLOR_SPACE_SRGB_NONLINEAR_KHR = 0,
     VK_COLOR_SPACE_DISPLAY_P3_NONLINEAR_EXT = 1000104001,
     VK_COLOR_SPACE_EXTENDED_SRGB_LINEAR_EXT = 1000104002,
-    VK_COLOR_SPACE_DCI_P3_LINEAR_EXT = 1000104003,
+    VK_COLOR_SPACE_DISPLAY_P3_LINEAR_EXT = 1000104003,
     VK_COLOR_SPACE_DCI_P3_NONLINEAR_EXT = 1000104004,
     VK_COLOR_SPACE_BT709_LINEAR_EXT = 1000104005,
     VK_COLOR_SPACE_BT709_NONLINEAR_EXT = 1000104006,
@@ -4743,6 +4747,7 @@ typedef enum VkColorSpaceKHR {
     VK_COLOR_SPACE_EXTENDED_SRGB_NONLINEAR_EXT = 1000104014,
     VK_COLOR_SPACE_DISPLAY_NATIVE_AMD = 1000213000,
     VK_COLORSPACE_SRGB_NONLINEAR_KHR = VK_COLOR_SPACE_SRGB_NONLINEAR_KHR,
+    VK_COLOR_SPACE_DCI_P3_LINEAR_EXT = VK_COLOR_SPACE_DISPLAY_P3_LINEAR_EXT,
     VK_COLOR_SPACE_BEGIN_RANGE_KHR = VK_COLOR_SPACE_SRGB_NONLINEAR_KHR,
     VK_COLOR_SPACE_END_RANGE_KHR = VK_COLOR_SPACE_SRGB_NONLINEAR_KHR,
     VK_COLOR_SPACE_RANGE_SIZE_KHR = (VK_COLOR_SPACE_SRGB_NONLINEAR_KHR - VK_COLOR_SPACE_SRGB_NONLINEAR_KHR + 1),
@@ -5252,16 +5257,9 @@ typedef VkBindBufferMemoryDeviceGroupInfo VkBindBufferMemoryDeviceGroupInfoKHR;
 
 typedef VkBindImageMemoryDeviceGroupInfo VkBindImageMemoryDeviceGroupInfoKHR;
 
-typedef struct VkPhysicalDeviceSurfaceInfo2KHR {
-    VkStructureType    sType;
-    const void*        pNext;
-    VkSurfaceKHR       surface;
-} VkPhysicalDeviceSurfaceInfo2KHR;
-
 typedef void (VKAPI_PTR *PFN_vkGetDeviceGroupPeerMemoryFeaturesKHR)(VkDevice device, uint32_t heapIndex, uint32_t localDeviceIndex, uint32_t remoteDeviceIndex, VkPeerMemoryFeatureFlags* pPeerMemoryFeatures);
 typedef void (VKAPI_PTR *PFN_vkCmdSetDeviceMaskKHR)(VkCommandBuffer commandBuffer, uint32_t deviceMask);
 typedef void (VKAPI_PTR *PFN_vkCmdDispatchBaseKHR)(VkCommandBuffer commandBuffer, uint32_t baseGroupX, uint32_t baseGroupY, uint32_t baseGroupZ, uint32_t groupCountX, uint32_t groupCountY, uint32_t groupCountZ);
-typedef VkResult (VKAPI_PTR *PFN_vkGetDeviceGroupSurfacePresentModes2EXT)(VkDevice device, const VkPhysicalDeviceSurfaceInfo2KHR* pSurfaceInfo, VkDeviceGroupPresentModeFlagsKHR* pModes);
 
 #ifndef VK_NO_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkGetDeviceGroupPeerMemoryFeaturesKHR(
@@ -5283,11 +5281,6 @@ VKAPI_ATTR void VKAPI_CALL vkCmdDispatchBaseKHR(
     uint32_t                                    groupCountX,
     uint32_t                                    groupCountY,
     uint32_t                                    groupCountZ);
-
-VKAPI_ATTR VkResult VKAPI_CALL vkGetDeviceGroupSurfacePresentModes2EXT(
-    VkDevice                                    device,
-    const VkPhysicalDeviceSurfaceInfo2KHR*      pSurfaceInfo,
-    VkDeviceGroupPresentModeFlagsKHR*           pModes);
 #endif
 
 
@@ -5811,6 +5804,12 @@ typedef VkPipelineTessellationDomainOriginStateCreateInfo VkPipelineTessellation
 #define VK_KHR_get_surface_capabilities2 1
 #define VK_KHR_GET_SURFACE_CAPABILITIES_2_SPEC_VERSION 1
 #define VK_KHR_GET_SURFACE_CAPABILITIES_2_EXTENSION_NAME "VK_KHR_get_surface_capabilities2"
+typedef struct VkPhysicalDeviceSurfaceInfo2KHR {
+    VkStructureType    sType;
+    const void*        pNext;
+    VkSurfaceKHR       surface;
+} VkPhysicalDeviceSurfaceInfo2KHR;
+
 typedef struct VkSurfaceCapabilities2KHR {
     VkStructureType             sType;
     void*                       pNext;
@@ -6235,6 +6234,17 @@ typedef struct VkSurfaceProtectedCapabilitiesKHR {
     const void*        pNext;
     VkBool32           supportsProtected;
 } VkSurfaceProtectedCapabilitiesKHR;
+
+
+
+#define VK_KHR_uniform_buffer_standard_layout 1
+#define VK_KHR_UNIFORM_BUFFER_STANDARD_LAYOUT_SPEC_VERSION 1
+#define VK_KHR_UNIFORM_BUFFER_STANDARD_LAYOUT_EXTENSION_NAME "VK_KHR_uniform_buffer_standard_layout"
+typedef struct VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           uniformBufferStandardLayout;
+} VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR;
 
 
 
@@ -7436,7 +7446,7 @@ typedef struct VkPipelineRasterizationDepthClipStateCreateInfoEXT {
 
 
 #define VK_EXT_swapchain_colorspace 1
-#define VK_EXT_SWAPCHAIN_COLOR_SPACE_SPEC_VERSION 3
+#define VK_EXT_SWAPCHAIN_COLOR_SPACE_SPEC_VERSION 4
 #define VK_EXT_SWAPCHAIN_COLOR_SPACE_EXTENSION_NAME "VK_EXT_swapchain_colorspace"
 
 
@@ -9161,6 +9171,51 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetPhysicalDeviceCooperativeMatrixPropertiesNV(
     VkPhysicalDevice                            physicalDevice,
     uint32_t*                                   pPropertyCount,
     VkCooperativeMatrixPropertiesNV*            pProperties);
+#endif
+
+
+#define VK_NV_coverage_reduction_mode 1
+#define VK_NV_COVERAGE_REDUCTION_MODE_SPEC_VERSION 1
+#define VK_NV_COVERAGE_REDUCTION_MODE_EXTENSION_NAME "VK_NV_coverage_reduction_mode"
+
+typedef enum VkCoverageReductionModeNV {
+    VK_COVERAGE_REDUCTION_MODE_MERGE_NV = 0,
+    VK_COVERAGE_REDUCTION_MODE_TRUNCATE_NV = 1,
+    VK_COVERAGE_REDUCTION_MODE_BEGIN_RANGE_NV = VK_COVERAGE_REDUCTION_MODE_MERGE_NV,
+    VK_COVERAGE_REDUCTION_MODE_END_RANGE_NV = VK_COVERAGE_REDUCTION_MODE_TRUNCATE_NV,
+    VK_COVERAGE_REDUCTION_MODE_RANGE_SIZE_NV = (VK_COVERAGE_REDUCTION_MODE_TRUNCATE_NV - VK_COVERAGE_REDUCTION_MODE_MERGE_NV + 1),
+    VK_COVERAGE_REDUCTION_MODE_MAX_ENUM_NV = 0x7FFFFFFF
+} VkCoverageReductionModeNV;
+typedef VkFlags VkPipelineCoverageReductionStateCreateFlagsNV;
+typedef struct VkPhysicalDeviceCoverageReductionModeFeaturesNV {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           coverageReductionMode;
+} VkPhysicalDeviceCoverageReductionModeFeaturesNV;
+
+typedef struct VkPipelineCoverageReductionStateCreateInfoNV {
+    VkStructureType                                  sType;
+    const void*                                      pNext;
+    VkPipelineCoverageReductionStateCreateFlagsNV    flags;
+    VkCoverageReductionModeNV                        coverageReductionMode;
+} VkPipelineCoverageReductionStateCreateInfoNV;
+
+typedef struct VkFramebufferMixedSamplesCombinationNV {
+    VkStructureType              sType;
+    void*                        pNext;
+    VkCoverageReductionModeNV    coverageReductionMode;
+    VkSampleCountFlagBits        rasterizationSamples;
+    VkSampleCountFlags           depthStencilSamples;
+    VkSampleCountFlags           colorSamples;
+} VkFramebufferMixedSamplesCombinationNV;
+
+typedef VkResult (VKAPI_PTR *PFN_vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV)(VkPhysicalDevice physicalDevice, uint32_t* pCombinationCount, VkFramebufferMixedSamplesCombinationNV* pCombinations);
+
+#ifndef VK_NO_PROTOTYPES
+VKAPI_ATTR VkResult VKAPI_CALL vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV(
+    VkPhysicalDevice                            physicalDevice,
+    uint32_t*                                   pCombinationCount,
+    VkFramebufferMixedSamplesCombinationNV*     pCombinations);
 #endif
 
 
