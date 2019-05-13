@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.1.107",
-    "comment": "from git branch: github-master commit: 5abf83f95d89cf6ba104b4c70d42d5c7c678b630",
-    "date": "2019-04-16 12:20:14Z"
+    "api version": "1.1.108",
+    "comment": "from git branch: github-master commit: 40ba6e9a4468915aa3aef2ccc153d60e7988193f",
+    "date": "2019-05-13 08:50:25Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -362,7 +362,7 @@
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceMemoryOverallocationCreateInfoAMD\">VkDeviceMemoryOverallocationCreateInfoAMD</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice8BitStorageFeaturesKHR\">VkPhysicalDevice8BitStorageFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeaturesEXT\">VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixFeaturesNV\">VkPhysicalDeviceCooperativeMatrixFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV\">VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDepthClipEnableFeaturesEXT\">VkPhysicalDeviceDepthClipEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeaturesEXT\">VkPhysicalDeviceDescriptorIndexingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFloat16Int8FeaturesKHR\">VkPhysicalDeviceFloat16Int8FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapFeaturesEXT\">VkPhysicalDeviceFragmentDensityMapFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV</a>, <a href=\"#VkPhysicalDeviceHostQueryResetFeaturesEXT\">VkPhysicalDeviceHostQueryResetFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeaturesEXT\">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMemoryPriorityFeaturesEXT\">VkPhysicalDeviceMemoryPriorityFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceScalarBlockLayoutFeaturesEXT\">VkPhysicalDeviceScalarBlockLayoutFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64FeaturesKHR\">VkPhysicalDeviceShaderAtomicInt64FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDrawParametersFeatures\">VkPhysicalDeviceShaderDrawParametersFeatures</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackFeaturesEXT\">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVariablePointersFeatures\">VkPhysicalDeviceVariablePointersFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeaturesKHR\">VkPhysicalDeviceVulkanMemoryModelFeaturesKHR</a>, or <a href=\"#VkPhysicalDeviceYcbcrImageArraysFeaturesEXT\">VkPhysicalDeviceYcbcrImageArraysFeaturesEXT</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceMemoryOverallocationCreateInfoAMD\">VkDeviceMemoryOverallocationCreateInfoAMD</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice8BitStorageFeaturesKHR\">VkPhysicalDevice8BitStorageFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeaturesEXT\">VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixFeaturesNV\">VkPhysicalDeviceCooperativeMatrixFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCoverageReductionModeFeaturesNV\">VkPhysicalDeviceCoverageReductionModeFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV\">VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDepthClipEnableFeaturesEXT\">VkPhysicalDeviceDepthClipEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeaturesEXT\">VkPhysicalDeviceDescriptorIndexingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFloat16Int8FeaturesKHR\">VkPhysicalDeviceFloat16Int8FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapFeaturesEXT\">VkPhysicalDeviceFragmentDensityMapFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV</a>, <a href=\"#VkPhysicalDeviceHostQueryResetFeaturesEXT\">VkPhysicalDeviceHostQueryResetFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeaturesEXT\">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMemoryPriorityFeaturesEXT\">VkPhysicalDeviceMemoryPriorityFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceScalarBlockLayoutFeaturesEXT\">VkPhysicalDeviceScalarBlockLayoutFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64FeaturesKHR\">VkPhysicalDeviceShaderAtomicInt64FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDrawParametersFeatures\">VkPhysicalDeviceShaderDrawParametersFeatures</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackFeaturesEXT\">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR\">VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceVariablePointersFeatures\">VkPhysicalDeviceVariablePointersFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeaturesKHR\">VkPhysicalDeviceVulkanMemoryModelFeaturesKHR</a>, or <a href=\"#VkPhysicalDeviceYcbcrImageArraysFeaturesEXT\">VkPhysicalDeviceYcbcrImageArraysFeaturesEXT</a>"
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-sType-unique",
@@ -5501,6 +5501,12 @@
           "text": " If the <code>VK_NV_framebuffer_mixed_samples</code> extension is enabled, and if <code>subpass</code> has any color attachments, then the <code>rasterizationSamples</code> member of <code>pMultisampleState</code> <strong class=\"purple\">must</strong> be greater than or equal to the sample count for those subpass attachments"
         }
       ],
+      "(VK_NV_coverage_reduction_mode)": [
+        {
+          "vuid": "VUID-VkGraphicsPipelineCreateInfo-coverageReductionMode-02722",
+          "text": " If the <code>VK_NV_coverage_reduction_mode</code> extension is enabled, the coverage reduction mode specified by <a href=\"#VkPipelineCoverageReductionStateCreateInfoNV\">VkPipelineCoverageReductionStateCreateInfoNV</a>::<code>coverageReductionMode</code>, the <code>rasterizationSamples</code> member of <code>pMultisampleState</code> and the sample counts for the color and depth/stencil attachments (if the subpass has them) <strong class=\"purple\">must</strong> be a valid combination returned by <code>vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV</code>"
+        }
+      ],
       "(VK_VERSION_1_1,VK_KHR_multiview)": [
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-renderPass-00760",
@@ -8473,12 +8479,12 @@
           "text": " If <code>subresourceRange</code>::<code>layerCount</code> is not <code>VK_REMAINING_ARRAY_LAYERS</code>, <code>image</code> is not a 3D image created with <code>VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT</code> set, or <code>viewType</code> is not <code>VK_IMAGE_VIEW_TYPE_2D</code> or <code>VK_IMAGE_VIEW_TYPE_2D_ARRAY</code>, <code>subresourceRange</code>::<code>layerCount</code> <strong class=\"purple\">must</strong> be non-zero and <span class=\"eq\"><code>subresourceRange</code>::<code>baseArrayLayer</code> &#43; <code>subresourceRange</code>::<code>layerCount</code></span> <strong class=\"purple\">must</strong> be less than or equal to the <code>arrayLayers</code> specified in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> when <code>image</code> was created"
         },
         {
-          "vuid": "VUID-VkImageViewCreateInfo-image-01484",
-          "text": " If <code>image</code> is a 3D image created with <code>VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT</code> set, and <code>viewType</code> is <code>VK_IMAGE_VIEW_TYPE_2D</code> or <code>VK_IMAGE_VIEW_TYPE_2D_ARRAY</code>, <code>subresourceRange</code>::<code>baseArrayLayer</code> <strong class=\"purple\">must</strong> be less than the <code>extent.depth</code> specified in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> when <code>image</code> was created"
+          "vuid": "VUID-VkImageViewCreateInfo-image-02724",
+          "text": " If <code>image</code> is a 3D image created with <code>VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT</code> set, and <code>viewType</code> is <code>VK_IMAGE_VIEW_TYPE_2D</code> or <code>VK_IMAGE_VIEW_TYPE_2D_ARRAY</code>, <code>subresourceRange</code>::<code>baseArrayLayer</code> <strong class=\"purple\">must</strong> be less than the depth computed from <code>baseMipLevel</code> and <code>extent.depth</code> specified in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> when <code>image</code> was created, according to the formula defined in <a href=\"#resources-image-miplevel-sizing\">Image Miplevel Sizing</a>."
         },
         {
-          "vuid": "VUID-VkImageViewCreateInfo-subresourceRange-01485",
-          "text": " If <code>subresourceRange</code>::<code>layerCount</code> is not <code>VK_REMAINING_ARRAY_LAYERS</code>, <code>image</code> is a 3D image created with <code>VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT</code> set, and <code>viewType</code> is <code>VK_IMAGE_VIEW_TYPE_2D</code> or <code>VK_IMAGE_VIEW_TYPE_2D_ARRAY</code>, <code>subresourceRange</code>::<code>layerCount</code> <strong class=\"purple\">must</strong> be non-zero and <span class=\"eq\"><code>subresourceRange</code>::<code>baseArrayLayer</code> &#43; <code>subresourceRange</code>::<code>layerCount</code></span> <strong class=\"purple\">must</strong> be less than or equal to the <code>extent.depth</code> specified in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> when <code>image</code> was created"
+          "vuid": "VUID-VkImageViewCreateInfo-subresourceRange-02725",
+          "text": " If <code>subresourceRange</code>::<code>layerCount</code> is not <code>VK_REMAINING_ARRAY_LAYERS</code>, <code>image</code> is a 3D image created with <code>VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT</code> set, and <code>viewType</code> is <code>VK_IMAGE_VIEW_TYPE_2D</code> or <code>VK_IMAGE_VIEW_TYPE_2D_ARRAY</code>, <code>subresourceRange</code>::<code>layerCount</code> <strong class=\"purple\">must</strong> be non-zero and <span class=\"eq\"><code>subresourceRange</code>::<code>baseArrayLayer</code> &#43; <code>subresourceRange</code>::<code>layerCount</code></span> <strong class=\"purple\">must</strong> be less than or equal to the depth computed from <code>baseMipLevel</code> and <code>extent.depth</code> specified in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> when <code>image</code> was created, according to the formula defined in <a href=\"#resources-image-miplevel-sizing\">Image Miplevel Sizing</a>."
         }
       ],
       "!(VK_EXT_fragment_density_map)+!(VK_NV_shading_rate_image)": [
@@ -8607,13 +8613,13 @@
           "text": " If <code>image</code> was created with <code>usage</code> containing <code>VK_IMAGE_USAGE_SHADING_RATE_IMAGE_BIT_NV</code>, <code>format</code> <strong class=\"purple\">must</strong> be <code>VK_FORMAT_R8_UINT</code>"
         }
       ],
-      "!(VK_EXT_separate_stencil_usage)": [
+      "(VK_VERSION_1_1,VK_KHR_maintenance2)+!(VK_EXT_separate_stencil_usage)": [
         {
           "vuid": "VUID-VkImageViewCreateInfo-pNext-02661",
           "text": " If the <code>pNext</code> chain includes an instance of <a href=\"#VkImageViewUsageCreateInfo\">VkImageViewUsageCreateInfo</a>, its <code>usage</code> member <strong class=\"purple\">must</strong> not include any bits that were not set in the <code>usage</code> member of the <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> structure used to create <code>image</code>."
         }
       ],
-      "(VK_EXT_separate_stencil_usage)": [
+      "(VK_VERSION_1_1,VK_KHR_maintenance2)+(VK_EXT_separate_stencil_usage)": [
         {
           "vuid": "VUID-VkImageViewCreateInfo-pNext-02662",
           "text": " If the <code>pNext</code> chain includes an instance of <a href=\"#VkImageViewUsageCreateInfo\">VkImageViewUsageCreateInfo</a>, and <code>image</code> was not created with an instance of <a href=\"#VkImageStencilUsageCreateInfoEXT\">VkImageStencilUsageCreateInfoEXT</a> in the <code>pNext</code> chain of <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>, its <code>usage</code> member <strong class=\"purple\">must</strong> not include any bits that were not set in the <code>usage</code> member of the <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> structure used to create <code>image</code>"
@@ -9074,6 +9080,16 @@
           "vuid": "VUID-vkBindBufferMemory-buffer-01039",
           "text": " If <code>buffer</code> was not created with <a href=\"#VkDedicatedAllocationBufferCreateInfoNV\">VkDedicatedAllocationBufferCreateInfoNV</a>::<code>dedicatedAllocation</code> equal to <code>VK_TRUE</code>, <code>memory</code> <strong class=\"purple\">must</strong> not have been allocated dedicated for a specific buffer or image"
         }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_external_memory)": [
+        {
+          "vuid": "VUID-vkBindBufferMemory-memory-02726",
+          "text": " If <code>memory</code> was allocated with <a href=\"#VkExportMemoryAllocateInfo\">VkExportMemoryAllocateInfo</a>::<code>handleTypes</code> not equal to <code>0</code>, at least one handle type it contained must also have been set in <a href=\"#VkExternalMemoryBufferCreateInfo\">VkExternalMemoryBufferCreateInfo</a>::<code>handleTypes</code> when <code>buffer</code> was created."
+        },
+        {
+          "vuid": "VUID-vkBindBufferMemory-memory-02727",
+          "text": " If <code>memory</code> was created by a memory import operation, the external handle type of the imported memory must also have been set in <a href=\"#VkExternalMemoryBufferCreateInfo\">VkExternalMemoryBufferCreateInfo</a>::<code>handleTypes</code> when <code>buffer</code> was created."
+        }
       ]
     },
     "vkBindBufferMemory2": {
@@ -9283,6 +9299,16 @@
         {
           "vuid": "VUID-vkBindImageMemory-image-01051",
           "text": " If <code>image</code> was not created with <a href=\"#VkDedicatedAllocationImageCreateInfoNV\">VkDedicatedAllocationImageCreateInfoNV</a>::<code>dedicatedAllocation</code> equal to <code>VK_TRUE</code>, <code>memory</code> <strong class=\"purple\">must</strong> not have been allocated dedicated for a specific buffer or image"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_external_memory)": [
+        {
+          "vuid": "VUID-vkBindImageMemory-memory-02728",
+          "text": " If <code>memory</code> was allocated with <a href=\"#VkExportMemoryAllocateInfo\">VkExportMemoryAllocateInfo</a>::<code>handleTypes</code> not equal to <code>0</code>, at least one handle type it contained must also have been set in <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a>::<code>handleTypes</code> when <code>image</code> was created."
+        },
+        {
+          "vuid": "VUID-vkBindImageMemory-memory-02729",
+          "text": " If <code>memory</code> was created by a memory import operation, the external handle type of the imported memory must also have been set in <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a>::<code>handleTypes</code> when <code>image</code> was created."
         }
       ]
     },
@@ -12295,6 +12321,10 @@
           "text": " If the <code>queryType</code> used to create <code>queryPool</code> was not <code>VK_QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT</code> the <code>index</code> <strong class=\"purple\">must</strong> be zero"
         },
         {
+          "vuid": "VUID-vkCmdEndQueryIndexedEXT-queryType-02723",
+          "text": " If the <code>queryType</code> used to create <code>queryPool</code> was <code>VK_QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT</code> <code>index</code> <strong class=\"purple\">must</strong> equal the <code>index</code> used to begin the query"
+        },
+        {
           "vuid": "VUID-vkCmdEndQueryIndexedEXT-commandBuffer-parameter",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <code>VkCommandBuffer</code> handle"
         },
@@ -12324,7 +12354,7 @@
       "(VK_EXT_transform_feedback)+(VK_VERSION_1_1,VK_KHR_multiview)": [
         {
           "vuid": "VUID-vkCmdEndQueryIndexedEXT-query-02345",
-          "text": " If <code>vkCmdEndQuery</code> is called within a render pass instance, the sum of <code>query</code> and the number of bits set in the current subpass&#8217;s view mask <strong class=\"purple\">must</strong> be less than or equal to the number of queries in <code>queryPool</code>"
+          "text": " If <code>vkCmdEndQueryIndexedEXT</code> is called within a render pass instance, the sum of <code>query</code> and the number of bits set in the current subpass&#8217;s view mask <strong class=\"purple\">must</strong> be less than or equal to the number of queries in <code>queryPool</code>"
         }
       ]
     },
@@ -17148,7 +17178,7 @@
         },
         {
           "vuid": "VUID-VkPipelineMultisampleStateCreateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkPipelineCoverageModulationStateCreateInfoNV\">VkPipelineCoverageModulationStateCreateInfoNV</a>, <a href=\"#VkPipelineCoverageToColorStateCreateInfoNV\">VkPipelineCoverageToColorStateCreateInfoNV</a>, or <a href=\"#VkPipelineSampleLocationsStateCreateInfoEXT\">VkPipelineSampleLocationsStateCreateInfoEXT</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkPipelineCoverageModulationStateCreateInfoNV\">VkPipelineCoverageModulationStateCreateInfoNV</a>, <a href=\"#VkPipelineCoverageReductionStateCreateInfoNV\">VkPipelineCoverageReductionStateCreateInfoNV</a>, <a href=\"#VkPipelineCoverageToColorStateCreateInfoNV\">VkPipelineCoverageToColorStateCreateInfoNV</a>, or <a href=\"#VkPipelineSampleLocationsStateCreateInfoEXT\">VkPipelineSampleLocationsStateCreateInfoEXT</a>"
         },
         {
           "vuid": "VUID-VkPipelineMultisampleStateCreateInfo-sType-unique",
@@ -18003,6 +18033,50 @@
         {
           "vuid": "VUID-VkPipelineCoverageToColorStateCreateInfoNV-flags-zerobitmask",
           "text": " <code>flags</code> <strong class=\"purple\">must</strong> be <code>0</code>"
+        }
+      ]
+    },
+    "VkPipelineCoverageReductionStateCreateInfoNV": {
+      "(VK_NV_framebuffer_mixed_samples)+(VK_NV_coverage_reduction_mode)": [
+        {
+          "vuid": "VUID-VkPipelineCoverageReductionStateCreateInfoNV-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_REDUCTION_STATE_CREATE_INFO_NV</code>"
+        },
+        {
+          "vuid": "VUID-VkPipelineCoverageReductionStateCreateInfoNV-flags-zerobitmask",
+          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be <code>0</code>"
+        },
+        {
+          "vuid": "VUID-VkPipelineCoverageReductionStateCreateInfoNV-coverageReductionMode-parameter",
+          "text": " <code>coverageReductionMode</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCoverageReductionModeNV\">VkCoverageReductionModeNV</a> value"
+        }
+      ]
+    },
+    "vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV": {
+      "(VK_NV_framebuffer_mixed_samples)+(VK_NV_coverage_reduction_mode)": [
+        {
+          "vuid": "VUID-vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV-physicalDevice-parameter",
+          "text": " <code>physicalDevice</code> <strong class=\"purple\">must</strong> be a valid <code>VkPhysicalDevice</code> handle"
+        },
+        {
+          "vuid": "VUID-vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV-pCombinationCount-parameter",
+          "text": " <code>pCombinationCount</code> <strong class=\"purple\">must</strong> be a valid pointer to a <code>uint32_t</code> value"
+        },
+        {
+          "vuid": "VUID-vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV-pCombinations-parameter",
+          "text": " If the value referenced by <code>pCombinationCount</code> is not <code>0</code>, and <code>pCombinations</code> is not <code>NULL</code>, <code>pCombinations</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>pCombinationCount</code> <code>VkFramebufferMixedSamplesCombinationNV</code> structures"
+        }
+      ]
+    },
+    "VkFramebufferMixedSamplesCombinationNV": {
+      "(VK_NV_framebuffer_mixed_samples)+(VK_NV_coverage_reduction_mode)": [
+        {
+          "vuid": "VUID-VkFramebufferMixedSamplesCombinationNV-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_FRAMEBUFFER_MIXED_SAMPLES_COMBINATION_NV</code>"
+        },
+        {
+          "vuid": "VUID-VkFramebufferMixedSamplesCombinationNV-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
         }
       ]
     },
@@ -19500,6 +19574,16 @@
           "vuid": "VUID-VkSparseMemoryBind-flags-parameter",
           "text": " <code>flags</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkSparseMemoryBindFlagBits\">VkSparseMemoryBindFlagBits</a> values"
         }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_external_memory)": [
+        {
+          "vuid": "VUID-VkSparseMemoryBind-memory-02730",
+          "text": " If <code>memory</code> was created with <a href=\"#VkExportMemoryAllocateInfo\">VkExportMemoryAllocateInfo</a>::<code>handleTypes</code> not equal to <code>0</code>, at least one handle type it contained must also have been set in <a href=\"#VkExternalMemoryBufferCreateInfo\">VkExternalMemoryBufferCreateInfo</a>::<code>handleTypes</code> or <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a>::<code>handleTypes</code> when the resource was created."
+        },
+        {
+          "vuid": "VUID-VkSparseMemoryBind-memory-02731",
+          "text": " If <code>memory</code> was created by a memory import operation, the external handle type of the imported memory must also have been set in <a href=\"#VkExternalMemoryBufferCreateInfo\">VkExternalMemoryBufferCreateInfo</a>::<code>handleTypes</code> or <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a>::<code>handleTypes</code> when the resource was created."
+        }
       ]
     },
     "VkSparseBufferMemoryBindInfo": {
@@ -19611,6 +19695,16 @@
         {
           "vuid": "VUID-VkSparseImageMemoryBind-flags-parameter",
           "text": " <code>flags</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkSparseMemoryBindFlagBits\">VkSparseMemoryBindFlagBits</a> values"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_external_memory)": [
+        {
+          "vuid": "VUID-VkSparseImageMemoryBind-memory-02732",
+          "text": " If <code>memory</code> was created with <a href=\"#VkExportMemoryAllocateInfo\">VkExportMemoryAllocateInfo</a>::<code>handleTypes</code> not equal to <code>0</code>, at least one handle type it contained must also have been set in <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a>::<code>handleTypes</code> when the image was created."
+        },
+        {
+          "vuid": "VUID-VkSparseImageMemoryBind-memory-02733",
+          "text": " If <code>memory</code> was created by a memory import operation, the external handle type of the imported memory must also have been set in <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a>::<code>handleTypes</code> when <code>image</code> was created."
         }
       ]
     },
@@ -22634,6 +22728,14 @@
         }
       ]
     },
+    "VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR": {
+      "(VK_KHR_uniform_buffer_standard_layout)": [
+        {
+          "vuid": "VUID-VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES_KHR</code>"
+        }
+      ]
+    },
     "VkPhysicalDeviceDepthClipEnableFeaturesEXT": {
       "(VK_EXT_depth_clip_enable)": [
         {
@@ -22687,6 +22789,14 @@
         {
           "vuid": "VUID-VkPhysicalDeviceHostQueryResetFeaturesEXT-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES_EXT</code>"
+        }
+      ]
+    },
+    "VkPhysicalDeviceCoverageReductionModeFeaturesNV": {
+      "(VK_NV_coverage_reduction_mode)": [
+        {
+          "vuid": "VUID-VkPhysicalDeviceCoverageReductionModeFeaturesNV-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COVERAGE_REDUCTION_MODE_FEATURES_NV</code>"
         }
       ]
     },
