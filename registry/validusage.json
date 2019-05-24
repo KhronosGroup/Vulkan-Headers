@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.1.108",
-    "comment": "from git branch: github-master commit: 40ba6e9a4468915aa3aef2ccc153d60e7988193f",
-    "date": "2019-05-13 08:50:25Z"
+    "api version": "1.1.109",
+    "comment": "from git branch: github-master commit: 6635a81b5b9dea234faf967d54abf7241db371c9",
+    "date": "2019-05-24 12:29:59Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -362,7 +362,7 @@
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceMemoryOverallocationCreateInfoAMD\">VkDeviceMemoryOverallocationCreateInfoAMD</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice8BitStorageFeaturesKHR\">VkPhysicalDevice8BitStorageFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeaturesEXT\">VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixFeaturesNV\">VkPhysicalDeviceCooperativeMatrixFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCoverageReductionModeFeaturesNV\">VkPhysicalDeviceCoverageReductionModeFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV\">VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDepthClipEnableFeaturesEXT\">VkPhysicalDeviceDepthClipEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeaturesEXT\">VkPhysicalDeviceDescriptorIndexingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFloat16Int8FeaturesKHR\">VkPhysicalDeviceFloat16Int8FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapFeaturesEXT\">VkPhysicalDeviceFragmentDensityMapFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV</a>, <a href=\"#VkPhysicalDeviceHostQueryResetFeaturesEXT\">VkPhysicalDeviceHostQueryResetFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeaturesEXT\">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMemoryPriorityFeaturesEXT\">VkPhysicalDeviceMemoryPriorityFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceScalarBlockLayoutFeaturesEXT\">VkPhysicalDeviceScalarBlockLayoutFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64FeaturesKHR\">VkPhysicalDeviceShaderAtomicInt64FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDrawParametersFeatures\">VkPhysicalDeviceShaderDrawParametersFeatures</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackFeaturesEXT\">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR\">VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceVariablePointersFeatures\">VkPhysicalDeviceVariablePointersFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeaturesKHR\">VkPhysicalDeviceVulkanMemoryModelFeaturesKHR</a>, or <a href=\"#VkPhysicalDeviceYcbcrImageArraysFeaturesEXT\">VkPhysicalDeviceYcbcrImageArraysFeaturesEXT</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceMemoryOverallocationCreateInfoAMD\">VkDeviceMemoryOverallocationCreateInfoAMD</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice8BitStorageFeaturesKHR\">VkPhysicalDevice8BitStorageFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeaturesEXT\">VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixFeaturesNV\">VkPhysicalDeviceCooperativeMatrixFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCoverageReductionModeFeaturesNV\">VkPhysicalDeviceCoverageReductionModeFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV\">VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDepthClipEnableFeaturesEXT\">VkPhysicalDeviceDepthClipEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeaturesEXT\">VkPhysicalDeviceDescriptorIndexingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFloat16Int8FeaturesKHR\">VkPhysicalDeviceFloat16Int8FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapFeaturesEXT\">VkPhysicalDeviceFragmentDensityMapFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV</a>, <a href=\"#VkPhysicalDeviceHostQueryResetFeaturesEXT\">VkPhysicalDeviceHostQueryResetFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeaturesEXT\">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMemoryPriorityFeaturesEXT\">VkPhysicalDeviceMemoryPriorityFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceScalarBlockLayoutFeaturesEXT\">VkPhysicalDeviceScalarBlockLayoutFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64FeaturesKHR\">VkPhysicalDeviceShaderAtomicInt64FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDrawParametersFeatures\">VkPhysicalDeviceShaderDrawParametersFeatures</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderIntegerFunctions2INTEL\">VkPhysicalDeviceShaderIntegerFunctions2INTEL</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackFeaturesEXT\">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR\">VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceVariablePointersFeatures\">VkPhysicalDeviceVariablePointersFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeaturesKHR\">VkPhysicalDeviceVulkanMemoryModelFeaturesKHR</a>, or <a href=\"#VkPhysicalDeviceYcbcrImageArraysFeaturesEXT\">VkPhysicalDeviceYcbcrImageArraysFeaturesEXT</a>"
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-sType-unique",
@@ -12480,6 +12480,12 @@
           "vuid": "VUID-vkCmdCopyQueryPoolResults-commonparent",
           "text": " Each of <code>commandBuffer</code>, <code>dstBuffer</code>, and <code>queryPool</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkDevice</code>"
         }
+      ],
+      "(VK_INTEL_performance_query)": [
+        {
+          "vuid": "VUID-vkCmdCopyQueryPoolResults-queryType-02734",
+          "text": " <a href=\"#vkCmdCopyQueryPoolResults\">vkCmdCopyQueryPoolResults</a> <strong class=\"purple\">must</strong> not be called if the <code>queryType</code> used to create <code>queryPool</code> was <code>VK_QUERY_TYPE_PERFORMANCE_QUERY_INTEL</code>."
+        }
       ]
     },
     "vkCmdWriteTimestamp": {
@@ -12529,6 +12535,266 @@
         {
           "vuid": "VUID-vkCmdWriteTimestamp-query-00831",
           "text": " If <code>vkCmdWriteTimestamp</code> is called within a render pass instance, the sum of <code>query</code> and the number of bits set in the current subpass&#8217;s view mask <strong class=\"purple\">must</strong> be less than or equal to the number of queries in <code>queryPool</code>"
+        }
+      ]
+    },
+    "vkInitializePerformanceApiINTEL": {
+      "(VK_INTEL_performance_query)+(VK_INTEL_performance_query)": [
+        {
+          "vuid": "VUID-vkInitializePerformanceApiINTEL-device-parameter",
+          "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <code>VkDevice</code> handle"
+        },
+        {
+          "vuid": "VUID-vkInitializePerformanceApiINTEL-pInitializeInfo-parameter",
+          "text": " <code>pInitializeInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <code>VkInitializePerformanceApiInfoINTEL</code> structure"
+        }
+      ]
+    },
+    "VkInitializePerformanceApiInfoINTEL": {
+      "(VK_INTEL_performance_query)+(VK_INTEL_performance_query)": [
+        {
+          "vuid": "VUID-VkInitializePerformanceApiInfoINTEL-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_INITIALIZE_PERFORMANCE_API_INFO_INTEL</code>"
+        },
+        {
+          "vuid": "VUID-VkInitializePerformanceApiInfoINTEL-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        }
+      ]
+    },
+    "vkUninitializePerformanceApiINTEL": {
+      "(VK_INTEL_performance_query)+(VK_INTEL_performance_query)": [
+        {
+          "vuid": "VUID-vkUninitializePerformanceApiINTEL-device-parameter",
+          "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <code>VkDevice</code> handle"
+        }
+      ]
+    },
+    "vkGetPerformanceParameterINTEL": {
+      "(VK_INTEL_performance_query)+(VK_INTEL_performance_query)": [
+        {
+          "vuid": "VUID-vkGetPerformanceParameterINTEL-device-parameter",
+          "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <code>VkDevice</code> handle"
+        },
+        {
+          "vuid": "VUID-vkGetPerformanceParameterINTEL-parameter-parameter",
+          "text": " <code>parameter</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkPerformanceParameterTypeINTEL\">VkPerformanceParameterTypeINTEL</a> value"
+        },
+        {
+          "vuid": "VUID-vkGetPerformanceParameterINTEL-pValue-parameter",
+          "text": " <code>pValue</code> <strong class=\"purple\">must</strong> be a valid pointer to a <code>VkPerformanceValueINTEL</code> structure"
+        }
+      ]
+    },
+    "VkPerformanceValueINTEL": {
+      "(VK_INTEL_performance_query)+(VK_INTEL_performance_query)": [
+        {
+          "vuid": "VUID-VkPerformanceValueINTEL-type-parameter",
+          "text": " <code>type</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkPerformanceValueTypeINTEL\">VkPerformanceValueTypeINTEL</a> value"
+        },
+        {
+          "vuid": "VUID-VkPerformanceValueINTEL-data-parameter",
+          "text": " <code>data</code> <strong class=\"purple\">must</strong> be a valid <code>VkPerformanceValueDataINTEL</code> union"
+        }
+      ]
+    },
+    "VkPerformanceValueDataINTEL": {
+      "(VK_INTEL_performance_query)+(VK_INTEL_performance_query)": [
+        {
+          "vuid": "VUID-VkPerformanceValueDataINTEL-valueString-parameter",
+          "text": " <code>valueString</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid"
+        }
+      ]
+    },
+    "VkQueryPoolCreateInfoINTEL": {
+      "(VK_INTEL_performance_query)+(VK_INTEL_performance_query)": [
+        {
+          "vuid": "VUID-VkQueryPoolCreateInfoINTEL-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO_INTEL</code>"
+        },
+        {
+          "vuid": "VUID-VkQueryPoolCreateInfoINTEL-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkQueryPoolCreateInfoINTEL-performanceCountersSampling-parameter",
+          "text": " <code>performanceCountersSampling</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkQueryPoolSamplingModeINTEL\">VkQueryPoolSamplingModeINTEL</a> value"
+        }
+      ]
+    },
+    "vkCmdSetPerformanceMarkerINTEL": {
+      "(VK_INTEL_performance_query)+(VK_INTEL_performance_query)": [
+        {
+          "vuid": "VUID-vkCmdSetPerformanceMarkerINTEL-commandBuffer-parameter",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <code>VkCommandBuffer</code> handle"
+        },
+        {
+          "vuid": "VUID-vkCmdSetPerformanceMarkerINTEL-pMarkerInfo-parameter",
+          "text": " <code>pMarkerInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <code>VkPerformanceMarkerInfoINTEL</code> structure"
+        },
+        {
+          "vuid": "VUID-vkCmdSetPerformanceMarkerINTEL-commandBuffer-recording",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be in the <a href=\"#commandbuffers-lifecycle\">recording state</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdSetPerformanceMarkerINTEL-commandBuffer-cmdpool",
+          "text": " The <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from <strong class=\"purple\">must</strong> support graphics, compute, or transfer operations"
+        }
+      ]
+    },
+    "VkPerformanceMarkerInfoINTEL": {
+      "(VK_INTEL_performance_query)+(VK_INTEL_performance_query)": [
+        {
+          "vuid": "VUID-VkPerformanceMarkerInfoINTEL-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PERFORMANCE_MARKER_INFO_INTEL</code>"
+        },
+        {
+          "vuid": "VUID-VkPerformanceMarkerInfoINTEL-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        }
+      ]
+    },
+    "vkCmdSetPerformanceStreamMarkerINTEL": {
+      "(VK_INTEL_performance_query)+(VK_INTEL_performance_query)": [
+        {
+          "vuid": "VUID-vkCmdSetPerformanceStreamMarkerINTEL-commandBuffer-parameter",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <code>VkCommandBuffer</code> handle"
+        },
+        {
+          "vuid": "VUID-vkCmdSetPerformanceStreamMarkerINTEL-pMarkerInfo-parameter",
+          "text": " <code>pMarkerInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <code>VkPerformanceStreamMarkerInfoINTEL</code> structure"
+        },
+        {
+          "vuid": "VUID-vkCmdSetPerformanceStreamMarkerINTEL-commandBuffer-recording",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be in the <a href=\"#commandbuffers-lifecycle\">recording state</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdSetPerformanceStreamMarkerINTEL-commandBuffer-cmdpool",
+          "text": " The <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from <strong class=\"purple\">must</strong> support graphics, compute, or transfer operations"
+        }
+      ]
+    },
+    "VkPerformanceStreamMarkerInfoINTEL": {
+      "(VK_INTEL_performance_query)+(VK_INTEL_performance_query)": [
+        {
+          "vuid": "VUID-VkPerformanceStreamMarkerInfoINTEL-marker-02735",
+          "text": " The value written by the application into <code>marker</code> <strong class=\"purple\">must</strong> only used the valid bits as reported by <a href=\"#vkGetPerformanceParameterINTEL\">vkGetPerformanceParameterINTEL</a> with the <code>VK_PERFORMANCE_PARAMETER_TYPE_STREAM_MARKER_VALID_BITS_INTEL</code>."
+        },
+        {
+          "vuid": "VUID-VkPerformanceStreamMarkerInfoINTEL-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PERFORMANCE_STREAM_MARKER_INFO_INTEL</code>"
+        },
+        {
+          "vuid": "VUID-VkPerformanceStreamMarkerInfoINTEL-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        }
+      ]
+    },
+    "vkCmdSetPerformanceOverrideINTEL": {
+      "(VK_INTEL_performance_query)+(VK_INTEL_performance_query)": [
+        {
+          "vuid": "VUID-vkCmdSetPerformanceOverrideINTEL-pOverrideInfo-02736",
+          "text": " <code>pOverrideInfo</code> <strong class=\"purple\">must</strong> not be used with a <a href=\"#VkPerformanceOverrideTypeINTEL\">VkPerformanceOverrideTypeINTEL</a> that is not reported available by <code>vkGetPerformanceParameterINTEL</code>."
+        },
+        {
+          "vuid": "VUID-vkCmdSetPerformanceOverrideINTEL-commandBuffer-parameter",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <code>VkCommandBuffer</code> handle"
+        },
+        {
+          "vuid": "VUID-vkCmdSetPerformanceOverrideINTEL-pOverrideInfo-parameter",
+          "text": " <code>pOverrideInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <code>VkPerformanceOverrideInfoINTEL</code> structure"
+        },
+        {
+          "vuid": "VUID-vkCmdSetPerformanceOverrideINTEL-commandBuffer-recording",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be in the <a href=\"#commandbuffers-lifecycle\">recording state</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdSetPerformanceOverrideINTEL-commandBuffer-cmdpool",
+          "text": " The <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from <strong class=\"purple\">must</strong> support graphics, compute, or transfer operations"
+        }
+      ]
+    },
+    "VkPerformanceOverrideInfoINTEL": {
+      "(VK_INTEL_performance_query)+(VK_INTEL_performance_query)": [
+        {
+          "vuid": "VUID-VkPerformanceOverrideInfoINTEL-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PERFORMANCE_OVERRIDE_INFO_INTEL</code>"
+        },
+        {
+          "vuid": "VUID-VkPerformanceOverrideInfoINTEL-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkPerformanceOverrideInfoINTEL-type-parameter",
+          "text": " <code>type</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkPerformanceOverrideTypeINTEL\">VkPerformanceOverrideTypeINTEL</a> value"
+        }
+      ]
+    },
+    "vkAcquirePerformanceConfigurationINTEL": {
+      "(VK_INTEL_performance_query)+(VK_INTEL_performance_query)": [
+        {
+          "vuid": "VUID-vkAcquirePerformanceConfigurationINTEL-device-parameter",
+          "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <code>VkDevice</code> handle"
+        },
+        {
+          "vuid": "VUID-vkAcquirePerformanceConfigurationINTEL-pAcquireInfo-parameter",
+          "text": " <code>pAcquireInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <code>VkPerformanceConfigurationAcquireInfoINTEL</code> structure"
+        },
+        {
+          "vuid": "VUID-vkAcquirePerformanceConfigurationINTEL-pConfiguration-parameter",
+          "text": " <code>pConfiguration</code> <strong class=\"purple\">must</strong> be a valid pointer to a <code>VkPerformanceConfigurationINTEL</code> handle"
+        }
+      ]
+    },
+    "VkPerformanceConfigurationAcquireInfoINTEL": {
+      "(VK_INTEL_performance_query)+(VK_INTEL_performance_query)": [
+        {
+          "vuid": "VUID-VkPerformanceConfigurationAcquireInfoINTEL-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PERFORMANCE_CONFIGURATION_ACQUIRE_INFO_INTEL</code>"
+        },
+        {
+          "vuid": "VUID-VkPerformanceConfigurationAcquireInfoINTEL-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkPerformanceConfigurationAcquireInfoINTEL-type-parameter",
+          "text": " <code>type</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkPerformanceConfigurationTypeINTEL\">VkPerformanceConfigurationTypeINTEL</a> value"
+        }
+      ]
+    },
+    "vkQueueSetPerformanceConfigurationINTEL": {
+      "(VK_INTEL_performance_query)+(VK_INTEL_performance_query)": [
+        {
+          "vuid": "VUID-vkQueueSetPerformanceConfigurationINTEL-queue-parameter",
+          "text": " <code>queue</code> <strong class=\"purple\">must</strong> be a valid <code>VkQueue</code> handle"
+        },
+        {
+          "vuid": "VUID-vkQueueSetPerformanceConfigurationINTEL-configuration-parameter",
+          "text": " <code>configuration</code> <strong class=\"purple\">must</strong> be a valid <code>VkPerformanceConfigurationINTEL</code> handle"
+        },
+        {
+          "vuid": "VUID-vkQueueSetPerformanceConfigurationINTEL-commonparent",
+          "text": " Both of <code>configuration</code>, and <code>queue</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkDevice</code>"
+        }
+      ]
+    },
+    "vkReleasePerformanceConfigurationINTEL": {
+      "(VK_INTEL_performance_query)+(VK_INTEL_performance_query)": [
+        {
+          "vuid": "VUID-vkReleasePerformanceConfigurationINTEL-configuration-02737",
+          "text": " <code>configuration</code> <strong class=\"purple\">must</strong> not be released before all command buffers submitted while the configuration was set are in <a href=\"#commandbuffers-lifecycle\">pending state</a>."
+        },
+        {
+          "vuid": "VUID-vkReleasePerformanceConfigurationINTEL-device-parameter",
+          "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <code>VkDevice</code> handle"
+        },
+        {
+          "vuid": "VUID-vkReleasePerformanceConfigurationINTEL-configuration-parameter",
+          "text": " <code>configuration</code> <strong class=\"purple\">must</strong> be a valid <code>VkPerformanceConfigurationINTEL</code> handle"
+        },
+        {
+          "vuid": "VUID-vkReleasePerformanceConfigurationINTEL-configuration-parent",
+          "text": " <code>configuration</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from <code>device</code>"
         }
       ]
     },
@@ -17368,7 +17634,7 @@
         },
         {
           "vuid": "VUID-vkCmdBindShadingRateImageNV-imageView-parameter",
-          "text": " <code>imageView</code> <strong class=\"purple\">must</strong> be a valid <code>VkImageView</code> handle"
+          "text": " If <code>imageView</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>imageView</code> <strong class=\"purple\">must</strong> be a valid <code>VkImageView</code> handle"
         },
         {
           "vuid": "VUID-vkCmdBindShadingRateImageNV-imageLayout-parameter",
@@ -17384,7 +17650,7 @@
         },
         {
           "vuid": "VUID-vkCmdBindShadingRateImageNV-commonparent",
-          "text": " Both of <code>commandBuffer</code>, and <code>imageView</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkDevice</code>"
+          "text": " Both of <code>commandBuffer</code>, and <code>imageView</code> that are valid handles <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkDevice</code>"
         }
       ]
     },
@@ -22789,6 +23055,14 @@
         {
           "vuid": "VUID-VkPhysicalDeviceHostQueryResetFeaturesEXT-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES_EXT</code>"
+        }
+      ]
+    },
+    "VkPhysicalDeviceShaderIntegerFunctions2INTEL": {
+      "(VK_INTEL_shader_integer_functions2)": [
+        {
+          "vuid": "VUID-VkPhysicalDeviceShaderIntegerFunctions2INTEL-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_FUNCTIONS2_FEATURES_INTEL</code>"
         }
       ]
     },
