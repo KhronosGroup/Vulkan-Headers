@@ -1,8 +1,14 @@
+vulkan-headers (1.1.108.0~rc1-1) UNRELEASED; urgency=medium
+
+  * New 1.1.108.0~rc1 SDK
+
+ -- John Zupin <john@odin>  Tue, 11 Jun 2019 16:32:01 -0600
+
 vulkan-headers (1.1.106.0~rc2-1lunarg16.04.1.1) xenial; urgency=medium
 
   * new 1.1.106.0~rc2 package
 
- -- John Zupin <john@odin>  Mon, 15 Apr 2019 18:03:22 -0600
+ -- John Zupin <john@odin>  Tue, 11 Jun 2019 16:32:01 -0600
 
 vulkan-headers (1.1.106.0~rc1-1lunarg16.04.1.1) xenial; urgency=medium
 
