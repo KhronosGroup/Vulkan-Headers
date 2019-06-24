@@ -43,7 +43,7 @@ extern "C" {
 #define VK_VERSION_MINOR(version) (((uint32_t)(version) >> 12) & 0x3ff)
 #define VK_VERSION_PATCH(version) ((uint32_t)(version) & 0xfff)
 // Version of this file
-#define VK_HEADER_VERSION 111
+#define VK_HEADER_VERSION 112
 
 
 #define VK_NULL_HANDLE 0
@@ -6138,9 +6138,10 @@ typedef enum VkDriverIdKHR {
     VK_DRIVER_ID_ARM_PROPRIETARY_KHR = 9,
     VK_DRIVER_ID_GOOGLE_SWIFTSHADER_KHR = 10,
     VK_DRIVER_ID_GGP_PROPRIETARY_KHR = 11,
+    VK_DRIVER_ID_BROADCOM_PROPRIETARY_KHR = 12,
     VK_DRIVER_ID_BEGIN_RANGE_KHR = VK_DRIVER_ID_AMD_PROPRIETARY_KHR,
-    VK_DRIVER_ID_END_RANGE_KHR = VK_DRIVER_ID_GGP_PROPRIETARY_KHR,
-    VK_DRIVER_ID_RANGE_SIZE_KHR = (VK_DRIVER_ID_GGP_PROPRIETARY_KHR - VK_DRIVER_ID_AMD_PROPRIETARY_KHR + 1),
+    VK_DRIVER_ID_END_RANGE_KHR = VK_DRIVER_ID_BROADCOM_PROPRIETARY_KHR,
+    VK_DRIVER_ID_RANGE_SIZE_KHR = (VK_DRIVER_ID_BROADCOM_PROPRIETARY_KHR - VK_DRIVER_ID_AMD_PROPRIETARY_KHR + 1),
     VK_DRIVER_ID_MAX_ENUM_KHR = 0x7FFFFFFF
 } VkDriverIdKHR;
 typedef struct VkConformanceVersionKHR {
@@ -6379,7 +6380,7 @@ VKAPI_ATTR void VKAPI_CALL vkDebugReportMessageEXT(
 
 
 #define VK_IMG_filter_cubic 1
-#define VK_IMG_FILTER_CUBIC_SPEC_VERSION  2
+#define VK_IMG_FILTER_CUBIC_SPEC_VERSION  1
 #define VK_IMG_FILTER_CUBIC_EXTENSION_NAME "VK_IMG_filter_cubic"
 
 
@@ -8542,7 +8543,7 @@ typedef struct VkPipelineRepresentativeFragmentTestStateCreateInfoNV {
 
 
 #define VK_EXT_filter_cubic 1
-#define VK_EXT_FILTER_CUBIC_SPEC_VERSION  1
+#define VK_EXT_FILTER_CUBIC_SPEC_VERSION  2
 #define VK_EXT_FILTER_CUBIC_EXTENSION_NAME "VK_EXT_filter_cubic"
 typedef struct VkPhysicalDeviceImageViewImageFormatInfoEXT {
     VkStructureType    sType;
