@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.1.111",
-    "comment": "from git branch: github-master commit: ad46c7dc688fe973ac7299b651403be5f562db8e",
-    "date": "2019-06-10 10:33:18Z"
+    "api version": "1.1.112",
+    "comment": "from git branch: github-master commit: 7376fb77d1a43d79bb1cfd919d493d21b963d5ef",
+    "date": "2019-06-24 03:30:45Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -3138,7 +3138,7 @@
         },
         {
           "vuid": "VUID-VkRenderPassCreateInfo-pNext-02516",
-          "text": " If the <code>pNext</code> chain includes an instance of <a href=\"#VkRenderPassMultiviewCreateInfo\">VkRenderPassMultiviewCreateInfo</a>, each element of its <code>pViewMask</code> member <strong class=\"purple\">must</strong> not include a bit at a position greater than the value of <a href=\"#VkPhysicalDeviceLimits\">VkPhysicalDeviceLimits</a>::<code>maxFramebufferLayers</code>"
+          "text": " If the <code>pNext</code> chain includes an instance of <a href=\"#VkRenderPassMultiviewCreateInfo\">VkRenderPassMultiviewCreateInfo</a>, each element of its <code>pViewMask</code> member <strong class=\"purple\">must</strong> not have a bit set at an index greater than or equal to <a href=\"#VkPhysicalDeviceLimits\">VkPhysicalDeviceLimits</a>::<code>maxFramebufferLayers</code>"
         }
       ]
     },
@@ -3588,7 +3588,7 @@
         },
         {
           "vuid": "VUID-VkRenderPassCreateInfo2KHR-viewMask-02524",
-          "text": " The <code>viewMask</code> member <strong class=\"purple\">must</strong> not include a bit at a position greater than the value of <a href=\"#VkPhysicalDeviceLimits\">VkPhysicalDeviceLimits</a>::<code>maxFramebufferLayers</code>"
+          "text": " The <code>viewMask</code> member <strong class=\"purple\">must</strong> not have a bit set at an index greater than or equal to <a href=\"#VkPhysicalDeviceLimits\">VkPhysicalDeviceLimits</a>::<code>maxFramebufferLayers</code>"
         },
         {
           "vuid": "VUID-VkRenderPassCreateInfo2KHR-attachment-02525",
@@ -4163,16 +4163,42 @@
           "text": " Each element of <code>pAttachments</code> <strong class=\"purple\">must</strong> have dimensions at least as large as the corresponding framebuffer dimension"
         }
       ],
-      "(VK_VERSION_1_1,VK_KHR_maintenance1)": [
+      "!(VK_EXT_fragment_density_map)+(VK_VERSION_1_1,VK_KHR_multiview)": [
         {
-          "vuid": "VUID-VkFramebufferCreateInfo-pAttachments-00891",
-          "text": " Each element of <code>pAttachments</code> that is a 2D or 2D array image view taken from a 3D image <strong class=\"purple\">must</strong> not be a depth/stencil format"
+          "vuid": "VUID-VkFramebufferCreateInfo-renderPass-02743",
+          "text": " If <code>renderPass</code> was specified with non-zero view masks, each element of <code>pAttachments</code> <strong class=\"purple\">must</strong> have a <code>layerCount</code> greater than the index of the most significant bit set in any of those view masks"
+        }
+      ],
+      "(VK_EXT_fragment_density_map)+!(VK_VERSION_1_1,VK_KHR_multiview)": [
+        {
+          "vuid": "VUID-VkFramebufferCreateInfo-pAttachments-02744",
+          "text": " An element of <code>pAttachments</code> that is referenced by <code>fragmentDensityMapAttachment</code> <strong class=\"purple\">must</strong> have a <code>layerCount</code> equal to <code>1</code>"
+        }
+      ],
+      "(VK_EXT_fragment_density_map)+(VK_VERSION_1_1,VK_KHR_multiview)": [
+        {
+          "vuid": "VUID-VkFramebufferCreateInfo-renderPass-02745",
+          "text": " If <code>renderPass</code> was specified with non-zero view masks, each element of <code>pAttachments</code> that is not referenced by <code>fragmentDensityMapAttachment</code> <strong class=\"purple\">must</strong> have a <code>layerCount</code> greater than the index of the most significant bit set in any of those view masks"
+        },
+        {
+          "vuid": "VUID-VkFramebufferCreateInfo-renderPass-02746",
+          "text": " If <code>renderPass</code> was specified with non-zero view masks, each element of <code>pAttachments</code> that is referenced by <code>fragmentDensityMapAttachment</code> <strong class=\"purple\">must</strong> have a <code>layerCount</code> equal to <code>1</code> or greater than the index of the most significant bit set in any of those view masks"
+        },
+        {
+          "vuid": "VUID-VkFramebufferCreateInfo-renderPass-02747",
+          "text": " If <code>renderPass</code> was not specified with non-zero view masks, each element of <code>pAttachments</code> that is referenced by <code>fragmentDensityMapAttachment</code> <strong class=\"purple\">must</strong> have a <code>layerCount</code> equal to <code>1</code>"
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_multiview)": [
         {
           "vuid": "VUID-VkFramebufferCreateInfo-renderPass-02531",
-          "text": " If <code>renderPass</code> was specified with non-zero view masks, <code>layers</code> <strong class=\"purple\">must</strong> be greater than or equal to the greatest position of any bit included in any of those view masks"
+          "text": " If <code>renderPass</code> was specified with non-zero view masks, <code>layers</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_maintenance1)": [
+        {
+          "vuid": "VUID-VkFramebufferCreateInfo-pAttachments-00891",
+          "text": " Each element of <code>pAttachments</code> that is a 2D or 2D array image view taken from a 3D image <strong class=\"purple\">must</strong> not be a depth/stencil format"
         }
       ]
     },
@@ -10281,6 +10307,10 @@
           "text": " If <code>ycbcrModel</code> is not <code>VK_SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY</code>, then <code>components.r</code>, <code>components.g</code>, and <code>components.b</code> <strong class=\"purple\">must</strong> correspond to channels of the <code>format</code>; that is, <code>components.r</code>, <code>components.g</code>, and <code>components.b</code> <strong class=\"purple\">must</strong> not be <code>VK_COMPONENT_SWIZZLE_ZERO</code> or <code>VK_COMPONENT_SWIZZLE_ONE</code>, and <strong class=\"purple\">must</strong> not correspond to a channel which contains zero or one as a consequence of <a href=\"#textures-conversion-to-rgba\">conversion to RGBA</a>"
         },
         {
+          "vuid": "VUID-VkSamplerYcbcrConversionCreateInfo-ycbcrRange-02748",
+          "text": " If <code>ycbcrRange</code> is <code>VK_SAMPLER_YCBCR_RANGE_ITU_NARROW</code> then the R, G and B channels obtained by applying the <code>component</code> swizzle to <code>format</code> <strong class=\"purple\">must</strong> each have a bit-depth greater than or equal to 8."
+        },
+        {
           "vuid": "VUID-VkSamplerYcbcrConversionCreateInfo-forceExplicitReconstruction-01656",
           "text": " If the format does not support <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT</code>, <code>forceExplicitReconstruction</code> <strong class=\"purple\">must</strong> be FALSE"
         },
@@ -12083,6 +12113,14 @@
           "text": " The sum of <code>firstQuery</code> and <code>queryCount</code> <strong class=\"purple\">must</strong> be less than or equal to the number of queries in <code>queryPool</code>"
         },
         {
+          "vuid": "VUID-vkResetQueryPoolEXT-firstQuery-02741",
+          "text": " Submitted commands that refer to the range specified by <code>firstQuery</code> and <code>queryCount</code> in <code>queryPool</code> <strong class=\"purple\">must</strong> have completed execution"
+        },
+        {
+          "vuid": "VUID-vkResetQueryPoolEXT-firstQuery-02742",
+          "text": " The range of queries specified by <code>firstQuery</code> and <code>queryCount</code> in <code>queryPool</code> <strong class=\"purple\">must</strong> not be in use by calls to <a href=\"#vkGetQueryPoolResults\">vkGetQueryPoolResults</a> or <code>vkResetQueryPoolEXT</code> in other threads"
+        },
+        {
           "vuid": "VUID-vkResetQueryPoolEXT-device-parameter",
           "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <code>VkDevice</code> handle"
         },
@@ -12160,7 +12198,7 @@
       "(VK_VERSION_1_1,VK_KHR_multiview)": [
         {
           "vuid": "VUID-vkCmdBeginQuery-query-00808",
-          "text": " If <code>vkCmdBeginQuery</code> is called within a render pass instance, the sum of <code>query</code> and the number of bits set in the current subpass&#8217;s view mask <strong class=\"purple\">must</strong> be less than or equal to the number of queries in <code>queryPool</code>"
+          "text": " If called within a render pass instance, the sum of <code>query</code> and the number of bits set in the current subpass&#8217;s view mask <strong class=\"purple\">must</strong> be less than or equal to the number of queries in <code>queryPool</code>"
         }
       ],
       "(VK_EXT_transform_feedback)": [
@@ -12177,31 +12215,31 @@
     "vkCmdBeginQueryIndexedEXT": {
       "(VK_EXT_transform_feedback)": [
         {
-          "vuid": "VUID-vkCmdBeginQueryIndexedEXT-queryPool-02329",
+          "vuid": "VUID-vkCmdBeginQueryIndexedEXT-queryPool-01922",
           "text": " <code>queryPool</code> <strong class=\"purple\">must</strong> have been created with a <code>queryType</code> that differs from that of any queries that are <a href=\"#queries-operation-active\">active</a> within <code>commandBuffer</code>"
         },
         {
-          "vuid": "VUID-vkCmdBeginQueryIndexedEXT-None-02330",
+          "vuid": "VUID-vkCmdBeginQueryIndexedEXT-None-00807",
           "text": " All queries used by the command <strong class=\"purple\">must</strong> be unavailable"
         },
         {
-          "vuid": "VUID-vkCmdBeginQueryIndexedEXT-queryType-02331",
+          "vuid": "VUID-vkCmdBeginQueryIndexedEXT-queryType-00800",
           "text": " If the <a href=\"#features-occlusionQueryPrecise\">precise occlusion queries</a> feature is not enabled, or the <code>queryType</code> used to create <code>queryPool</code> was not <code>VK_QUERY_TYPE_OCCLUSION</code>, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_QUERY_CONTROL_PRECISE_BIT</code>"
         },
         {
-          "vuid": "VUID-vkCmdBeginQueryIndexedEXT-query-02332",
+          "vuid": "VUID-vkCmdBeginQueryIndexedEXT-query-00802",
           "text": " <code>query</code> <strong class=\"purple\">must</strong> be less than the number of queries in <code>queryPool</code>"
         },
         {
-          "vuid": "VUID-vkCmdBeginQueryIndexedEXT-queryType-02333",
+          "vuid": "VUID-vkCmdBeginQueryIndexedEXT-queryType-00803",
           "text": " If the <code>queryType</code> used to create <code>queryPool</code> was <code>VK_QUERY_TYPE_OCCLUSION</code>, the <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from <strong class=\"purple\">must</strong> support graphics operations"
         },
         {
-          "vuid": "VUID-vkCmdBeginQueryIndexedEXT-queryType-02334",
+          "vuid": "VUID-vkCmdBeginQueryIndexedEXT-queryType-00804",
           "text": " If the <code>queryType</code> used to create <code>queryPool</code> was <code>VK_QUERY_TYPE_PIPELINE_STATISTICS</code> and any of the <code>pipelineStatistics</code> indicate graphics operations, the <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from <strong class=\"purple\">must</strong> support graphics operations"
         },
         {
-          "vuid": "VUID-vkCmdBeginQueryIndexedEXT-queryType-02335",
+          "vuid": "VUID-vkCmdBeginQueryIndexedEXT-queryType-00805",
           "text": " If the <code>queryType</code> used to create <code>queryPool</code> was <code>VK_QUERY_TYPE_PIPELINE_STATISTICS</code> and any of the <code>pipelineStatistics</code> indicate compute operations, the <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from <strong class=\"purple\">must</strong> support compute operations"
         },
         {
@@ -12247,14 +12285,14 @@
       ],
       "(VK_EXT_transform_feedback)+(VK_VERSION_1_1)": [
         {
-          "vuid": "VUID-vkCmdBeginQueryIndexedEXT-commandBuffer-02336",
+          "vuid": "VUID-vkCmdBeginQueryIndexedEXT-commandBuffer-01885",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> not be a protected command buffer"
         }
       ],
       "(VK_EXT_transform_feedback)+(VK_VERSION_1_1,VK_KHR_multiview)": [
         {
-          "vuid": "VUID-vkCmdBeginQueryIndexedEXT-query-02337",
-          "text": " If <code>vkCmdBeginQuery</code> is called within a render pass instance, the sum of <code>query</code> and the number of bits set in the current subpass&#8217;s view mask <strong class=\"purple\">must</strong> be less than or equal to the number of queries in <code>queryPool</code>"
+          "vuid": "VUID-vkCmdBeginQueryIndexedEXT-query-00808",
+          "text": " If called within a render pass instance, the sum of <code>query</code> and the number of bits set in the current subpass&#8217;s view mask <strong class=\"purple\">must</strong> be less than or equal to the number of queries in <code>queryPool</code>"
         }
       ]
     },

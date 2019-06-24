@@ -56,7 +56,7 @@
 # define VULKAN_HPP_ASSERT   assert
 #endif
 
-static_assert( VK_HEADER_VERSION ==  111 , "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION ==  112 , "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
@@ -3361,7 +3361,8 @@ namespace VULKAN_HPP_NAMESPACE
     eQualcommProprietary = VK_DRIVER_ID_QUALCOMM_PROPRIETARY_KHR,
     eArmProprietary = VK_DRIVER_ID_ARM_PROPRIETARY_KHR,
     eGoogleSwiftshader = VK_DRIVER_ID_GOOGLE_SWIFTSHADER_KHR,
-    eGgpProprietary = VK_DRIVER_ID_GGP_PROPRIETARY_KHR
+    eGgpProprietary = VK_DRIVER_ID_GGP_PROPRIETARY_KHR,
+    eBroadcomProprietary = VK_DRIVER_ID_BROADCOM_PROPRIETARY_KHR
   };
 
   VULKAN_HPP_INLINE std::string to_string( DriverIdKHR value )
@@ -3379,6 +3380,7 @@ namespace VULKAN_HPP_NAMESPACE
       case DriverIdKHR::eArmProprietary : return "ArmProprietary";
       case DriverIdKHR::eGoogleSwiftshader : return "GoogleSwiftshader";
       case DriverIdKHR::eGgpProprietary : return "GgpProprietary";
+      case DriverIdKHR::eBroadcomProprietary : return "BroadcomProprietary";
       default: return "invalid";
     }
   }
@@ -58106,8 +58108,8 @@ namespace VULKAN_HPP_NAMESPACE
     // This interface does not require a linked vulkan library.
     void init( VkInstance instance, PFN_vkGetInstanceProcAddr getInstanceProcAddr, VkDevice device = VK_NULL_HANDLE, PFN_vkGetDeviceProcAddr getDeviceProcAddr = nullptr )
     {
-      assert(instance && getInstanceProcAddr);
-      assert(!!device == !!getDeviceProcAddr);
+      VULKAN_HPP_ASSERT(instance && getInstanceProcAddr);
+      VULKAN_HPP_ASSERT(!!device == !!getDeviceProcAddr);
       vkGetInstanceProcAddr = getInstanceProcAddr;
       vkGetDeviceProcAddr = getDeviceProcAddr ? getDeviceProcAddr : PFN_vkGetDeviceProcAddr( vkGetInstanceProcAddr( instance, "vkGetDeviceProcAddr") );
       vkCreateInstance = PFN_vkCreateInstance( vkGetInstanceProcAddr( instance, "vkCreateInstance" ) );
