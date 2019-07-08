@@ -56,7 +56,7 @@
 # define VULKAN_HPP_ASSERT   assert
 #endif
 
-static_assert( VK_HEADER_VERSION ==  113 , "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION ==  114 , "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
@@ -5147,6 +5147,10 @@ namespace VULKAN_HPP_NAMESPACE
     ePhysicalDeviceDepthClipEnableFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_ENABLE_FEATURES_EXT,
     ePipelineRasterizationDepthClipStateCreateInfoEXT = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_DEPTH_CLIP_STATE_CREATE_INFO_EXT,
     eHdrMetadataEXT = VK_STRUCTURE_TYPE_HDR_METADATA_EXT,
+    ePhysicalDeviceImagelessFramebufferFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES_KHR,
+    eFramebufferAttachmentsCreateInfoKHR = VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO_KHR,
+    eFramebufferAttachmentImageInfoKHR = VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENT_IMAGE_INFO_KHR,
+    eRenderPassAttachmentBeginInfoKHR = VK_STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO_KHR,
     eAttachmentDescription2KHR = VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_2_KHR,
     eAttachmentReference2KHR = VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_2_KHR,
     eSubpassDescription2KHR = VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_2_KHR,
@@ -5569,6 +5573,10 @@ namespace VULKAN_HPP_NAMESPACE
       case StructureType::ePhysicalDeviceDepthClipEnableFeaturesEXT : return "PhysicalDeviceDepthClipEnableFeaturesEXT";
       case StructureType::ePipelineRasterizationDepthClipStateCreateInfoEXT : return "PipelineRasterizationDepthClipStateCreateInfoEXT";
       case StructureType::eHdrMetadataEXT : return "HdrMetadataEXT";
+      case StructureType::ePhysicalDeviceImagelessFramebufferFeaturesKHR : return "PhysicalDeviceImagelessFramebufferFeaturesKHR";
+      case StructureType::eFramebufferAttachmentsCreateInfoKHR : return "FramebufferAttachmentsCreateInfoKHR";
+      case StructureType::eFramebufferAttachmentImageInfoKHR : return "FramebufferAttachmentImageInfoKHR";
+      case StructureType::eRenderPassAttachmentBeginInfoKHR : return "RenderPassAttachmentBeginInfoKHR";
       case StructureType::eAttachmentDescription2KHR : return "AttachmentDescription2KHR";
       case StructureType::eAttachmentReference2KHR : return "AttachmentReference2KHR";
       case StructureType::eSubpassDescription2KHR : return "SubpassDescription2KHR";
@@ -6723,10 +6731,8 @@ namespace VULKAN_HPP_NAMESPACE
     if ( !value ) return "{}";
     std::string result;
 
-    if ( value & CullModeFlagBits::eNone ) result += "None | ";
     if ( value & CullModeFlagBits::eFront ) result += "Front | ";
     if ( value & CullModeFlagBits::eBack ) result += "Back | ";
-    if ( value & CullModeFlagBits::eFrontAndBack ) result += "FrontAndBack | ";
     return "{ " + result.substr(0, result.size() - 3) + " }";
   }
 
@@ -8022,18 +8028,46 @@ namespace VULKAN_HPP_NAMESPACE
   }
 
   enum class FramebufferCreateFlagBits
-  {};
-
-  VULKAN_HPP_INLINE std::string to_string( FramebufferCreateFlagBits )
   {
-    return "(void)";
+    eImagelessKHR = VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT_KHR
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( FramebufferCreateFlagBits value )
+  {
+    switch ( value )
+    {
+      case FramebufferCreateFlagBits::eImagelessKHR : return "ImagelessKHR";
+      default: return "invalid";
+    }
   }
 
   using FramebufferCreateFlags = Flags<FramebufferCreateFlagBits, VkFramebufferCreateFlags>;
 
-  VULKAN_HPP_INLINE std::string to_string( FramebufferCreateFlags  )
+  VULKAN_HPP_INLINE FramebufferCreateFlags operator|( FramebufferCreateFlagBits bit0, FramebufferCreateFlagBits bit1 )
   {
-    return "{}";
+    return FramebufferCreateFlags( bit0 ) | bit1;
+  }
+
+  VULKAN_HPP_INLINE FramebufferCreateFlags operator~( FramebufferCreateFlagBits bits )
+  {
+    return ~( FramebufferCreateFlags( bits ) );
+  }
+
+  template <> struct FlagTraits<FramebufferCreateFlagBits>
+  {
+    enum
+    {
+      allFlags = VkFlags(FramebufferCreateFlagBits::eImagelessKHR)
+    };
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( FramebufferCreateFlags value  )
+  {
+    if ( !value ) return "{}";
+    std::string result;
+
+    if ( value & FramebufferCreateFlagBits::eImagelessKHR ) result += "ImagelessKHR | ";
+    return "{ " + result.substr(0, result.size() - 3) + " }";
   }
 
   enum class GeometryFlagBitsNV
@@ -9661,7 +9695,6 @@ namespace VULKAN_HPP_NAMESPACE
     if ( !value ) return "{}";
     std::string result;
 
-    if ( value & ResolveModeFlagBitsKHR::eNone ) result += "None | ";
     if ( value & ResolveModeFlagBitsKHR::eSampleZero ) result += "SampleZero | ";
     if ( value & ResolveModeFlagBitsKHR::eAverage ) result += "Average | ";
     if ( value & ResolveModeFlagBitsKHR::eMin ) result += "Min | ";
@@ -9927,8 +9960,6 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & ShaderStageFlagBits::eGeometry ) result += "Geometry | ";
     if ( value & ShaderStageFlagBits::eFragment ) result += "Fragment | ";
     if ( value & ShaderStageFlagBits::eCompute ) result += "Compute | ";
-    if ( value & ShaderStageFlagBits::eAllGraphics ) result += "AllGraphics | ";
-    if ( value & ShaderStageFlagBits::eAll ) result += "All | ";
     if ( value & ShaderStageFlagBits::eRaygenNV ) result += "RaygenNV | ";
     if ( value & ShaderStageFlagBits::eAnyHitNV ) result += "AnyHitNV | ";
     if ( value & ShaderStageFlagBits::eClosestHitNV ) result += "ClosestHitNV | ";
@@ -10077,7 +10108,6 @@ namespace VULKAN_HPP_NAMESPACE
 
     if ( value & StencilFaceFlagBits::eFront ) result += "Front | ";
     if ( value & StencilFaceFlagBits::eBack ) result += "Back | ";
-    if ( value & StencilFaceFlagBits::eVkStencilFrontAndBack ) result += "VkStencilFrontAndBack | ";
     return "{ " + result.substr(0, result.size() - 3) + " }";
   }
 
@@ -11125,6 +11155,8 @@ namespace VULKAN_HPP_NAMESPACE
   struct FormatProperties;
   struct FormatProperties2;
   using FormatProperties2KHR = FormatProperties2;
+  struct FramebufferAttachmentImageInfoKHR;
+  struct FramebufferAttachmentsCreateInfoKHR;
   struct FramebufferCreateInfo;
   struct FramebufferMixedSamplesCombinationNV;
   struct GeometryAABBNV;
@@ -11295,6 +11327,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct PhysicalDeviceImageFormatInfo2;
   using PhysicalDeviceImageFormatInfo2KHR = PhysicalDeviceImageFormatInfo2;
   struct PhysicalDeviceImageViewImageFormatInfoEXT;
+  struct PhysicalDeviceImagelessFramebufferFeaturesKHR;
   struct PhysicalDeviceInlineUniformBlockFeaturesEXT;
   struct PhysicalDeviceInlineUniformBlockPropertiesEXT;
   struct PhysicalDeviceLimits;
@@ -11412,6 +11445,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct Rect2D;
   struct RectLayerKHR;
   struct RefreshCycleDurationGOOGLE;
+  struct RenderPassAttachmentBeginInfoKHR;
   struct RenderPassBeginInfo;
   struct RenderPassCreateInfo;
   struct RenderPassCreateInfo2KHR;
@@ -11526,6 +11560,9 @@ namespace VULKAN_HPP_NAMESPACE
   class SurfaceKHR
   {
   public:
+    using CType = VkSurfaceKHR;
+
+  public:
     VULKAN_HPP_CONSTEXPR SurfaceKHR()
       : m_surfaceKHR(VK_NULL_HANDLE)
     {}
@@ -11589,6 +11626,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   class DebugReportCallbackEXT
   {
+  public:
+    using CType = VkDebugReportCallbackEXT;
+
   public:
     VULKAN_HPP_CONSTEXPR DebugReportCallbackEXT()
       : m_debugReportCallbackEXT(VK_NULL_HANDLE)
@@ -11654,6 +11694,9 @@ namespace VULKAN_HPP_NAMESPACE
   class DebugUtilsMessengerEXT
   {
   public:
+    using CType = VkDebugUtilsMessengerEXT;
+
+  public:
     VULKAN_HPP_CONSTEXPR DebugUtilsMessengerEXT()
       : m_debugUtilsMessengerEXT(VK_NULL_HANDLE)
     {}
@@ -11717,6 +11760,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   class DisplayKHR
   {
+  public:
+    using CType = VkDisplayKHR;
+
   public:
     VULKAN_HPP_CONSTEXPR DisplayKHR()
       : m_displayKHR(VK_NULL_HANDLE)
@@ -11782,6 +11828,9 @@ namespace VULKAN_HPP_NAMESPACE
   class SwapchainKHR
   {
   public:
+    using CType = VkSwapchainKHR;
+
+  public:
     VULKAN_HPP_CONSTEXPR SwapchainKHR()
       : m_swapchainKHR(VK_NULL_HANDLE)
     {}
@@ -11845,6 +11894,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   class Semaphore
   {
+  public:
+    using CType = VkSemaphore;
+
   public:
     VULKAN_HPP_CONSTEXPR Semaphore()
       : m_semaphore(VK_NULL_HANDLE)
@@ -11910,6 +11962,9 @@ namespace VULKAN_HPP_NAMESPACE
   class Fence
   {
   public:
+    using CType = VkFence;
+
+  public:
     VULKAN_HPP_CONSTEXPR Fence()
       : m_fence(VK_NULL_HANDLE)
     {}
@@ -11973,6 +12028,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   class PerformanceConfigurationINTEL
   {
+  public:
+    using CType = VkPerformanceConfigurationINTEL;
+
   public:
     VULKAN_HPP_CONSTEXPR PerformanceConfigurationINTEL()
       : m_performanceConfigurationINTEL(VK_NULL_HANDLE)
@@ -12038,6 +12096,9 @@ namespace VULKAN_HPP_NAMESPACE
   class QueryPool
   {
   public:
+    using CType = VkQueryPool;
+
+  public:
     VULKAN_HPP_CONSTEXPR QueryPool()
       : m_queryPool(VK_NULL_HANDLE)
     {}
@@ -12101,6 +12162,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   class Buffer
   {
+  public:
+    using CType = VkBuffer;
+
   public:
     VULKAN_HPP_CONSTEXPR Buffer()
       : m_buffer(VK_NULL_HANDLE)
@@ -12166,6 +12230,9 @@ namespace VULKAN_HPP_NAMESPACE
   class PipelineLayout
   {
   public:
+    using CType = VkPipelineLayout;
+
+  public:
     VULKAN_HPP_CONSTEXPR PipelineLayout()
       : m_pipelineLayout(VK_NULL_HANDLE)
     {}
@@ -12229,6 +12296,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   class DescriptorSet
   {
+  public:
+    using CType = VkDescriptorSet;
+
   public:
     VULKAN_HPP_CONSTEXPR DescriptorSet()
       : m_descriptorSet(VK_NULL_HANDLE)
@@ -12294,6 +12364,9 @@ namespace VULKAN_HPP_NAMESPACE
   class Pipeline
   {
   public:
+    using CType = VkPipeline;
+
+  public:
     VULKAN_HPP_CONSTEXPR Pipeline()
       : m_pipeline(VK_NULL_HANDLE)
     {}
@@ -12357,6 +12430,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   class ImageView
   {
+  public:
+    using CType = VkImageView;
+
   public:
     VULKAN_HPP_CONSTEXPR ImageView()
       : m_imageView(VK_NULL_HANDLE)
@@ -12422,6 +12498,9 @@ namespace VULKAN_HPP_NAMESPACE
   class Image
   {
   public:
+    using CType = VkImage;
+
+  public:
     VULKAN_HPP_CONSTEXPR Image()
       : m_image(VK_NULL_HANDLE)
     {}
@@ -12486,6 +12565,9 @@ namespace VULKAN_HPP_NAMESPACE
   class AccelerationStructureNV
   {
   public:
+    using CType = VkAccelerationStructureNV;
+
+  public:
     VULKAN_HPP_CONSTEXPR AccelerationStructureNV()
       : m_accelerationStructureNV(VK_NULL_HANDLE)
     {}
@@ -12549,6 +12631,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   class DescriptorUpdateTemplate
   {
+  public:
+    using CType = VkDescriptorUpdateTemplate;
+
   public:
     VULKAN_HPP_CONSTEXPR DescriptorUpdateTemplate()
       : m_descriptorUpdateTemplate(VK_NULL_HANDLE)
@@ -12615,6 +12700,9 @@ namespace VULKAN_HPP_NAMESPACE
   class Event
   {
   public:
+    using CType = VkEvent;
+
+  public:
     VULKAN_HPP_CONSTEXPR Event()
       : m_event(VK_NULL_HANDLE)
     {}
@@ -12678,6 +12766,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   class CommandBuffer
   {
+  public:
+    using CType = VkCommandBuffer;
+
   public:
     VULKAN_HPP_CONSTEXPR CommandBuffer()
       : m_commandBuffer(VK_NULL_HANDLE)
@@ -13218,6 +13309,9 @@ namespace VULKAN_HPP_NAMESPACE
   class DeviceMemory
   {
   public:
+    using CType = VkDeviceMemory;
+
+  public:
     VULKAN_HPP_CONSTEXPR DeviceMemory()
       : m_deviceMemory(VK_NULL_HANDLE)
     {}
@@ -13281,6 +13375,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   class BufferView
   {
+  public:
+    using CType = VkBufferView;
+
   public:
     VULKAN_HPP_CONSTEXPR BufferView()
       : m_bufferView(VK_NULL_HANDLE)
@@ -13346,6 +13443,9 @@ namespace VULKAN_HPP_NAMESPACE
   class CommandPool
   {
   public:
+    using CType = VkCommandPool;
+
+  public:
     VULKAN_HPP_CONSTEXPR CommandPool()
       : m_commandPool(VK_NULL_HANDLE)
     {}
@@ -13409,6 +13509,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   class PipelineCache
   {
+  public:
+    using CType = VkPipelineCache;
+
   public:
     VULKAN_HPP_CONSTEXPR PipelineCache()
       : m_pipelineCache(VK_NULL_HANDLE)
@@ -13474,6 +13577,9 @@ namespace VULKAN_HPP_NAMESPACE
   class DescriptorPool
   {
   public:
+    using CType = VkDescriptorPool;
+
+  public:
     VULKAN_HPP_CONSTEXPR DescriptorPool()
       : m_descriptorPool(VK_NULL_HANDLE)
     {}
@@ -13537,6 +13643,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   class DescriptorSetLayout
   {
+  public:
+    using CType = VkDescriptorSetLayout;
+
   public:
     VULKAN_HPP_CONSTEXPR DescriptorSetLayout()
       : m_descriptorSetLayout(VK_NULL_HANDLE)
@@ -13602,6 +13711,9 @@ namespace VULKAN_HPP_NAMESPACE
   class Framebuffer
   {
   public:
+    using CType = VkFramebuffer;
+
+  public:
     VULKAN_HPP_CONSTEXPR Framebuffer()
       : m_framebuffer(VK_NULL_HANDLE)
     {}
@@ -13665,6 +13777,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   class IndirectCommandsLayoutNVX
   {
+  public:
+    using CType = VkIndirectCommandsLayoutNVX;
+
   public:
     VULKAN_HPP_CONSTEXPR IndirectCommandsLayoutNVX()
       : m_indirectCommandsLayoutNVX(VK_NULL_HANDLE)
@@ -13730,6 +13845,9 @@ namespace VULKAN_HPP_NAMESPACE
   class ObjectTableNVX
   {
   public:
+    using CType = VkObjectTableNVX;
+
+  public:
     VULKAN_HPP_CONSTEXPR ObjectTableNVX()
       : m_objectTableNVX(VK_NULL_HANDLE)
     {}
@@ -13793,6 +13911,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   class RenderPass
   {
+  public:
+    using CType = VkRenderPass;
+
   public:
     VULKAN_HPP_CONSTEXPR RenderPass()
       : m_renderPass(VK_NULL_HANDLE)
@@ -13858,6 +13979,9 @@ namespace VULKAN_HPP_NAMESPACE
   class Sampler
   {
   public:
+    using CType = VkSampler;
+
+  public:
     VULKAN_HPP_CONSTEXPR Sampler()
       : m_sampler(VK_NULL_HANDLE)
     {}
@@ -13921,6 +14045,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   class SamplerYcbcrConversion
   {
+  public:
+    using CType = VkSamplerYcbcrConversion;
+
   public:
     VULKAN_HPP_CONSTEXPR SamplerYcbcrConversion()
       : m_samplerYcbcrConversion(VK_NULL_HANDLE)
@@ -13987,6 +14114,9 @@ namespace VULKAN_HPP_NAMESPACE
   class ShaderModule
   {
   public:
+    using CType = VkShaderModule;
+
+  public:
     VULKAN_HPP_CONSTEXPR ShaderModule()
       : m_shaderModule(VK_NULL_HANDLE)
     {}
@@ -14051,6 +14181,9 @@ namespace VULKAN_HPP_NAMESPACE
   class ValidationCacheEXT
   {
   public:
+    using CType = VkValidationCacheEXT;
+
+  public:
     VULKAN_HPP_CONSTEXPR ValidationCacheEXT()
       : m_validationCacheEXT(VK_NULL_HANDLE)
     {}
@@ -14114,6 +14247,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   class Queue
   {
+  public:
+    using CType = VkQueue;
+
   public:
     VULKAN_HPP_CONSTEXPR Queue()
       : m_queue(VK_NULL_HANDLE)
@@ -14301,6 +14437,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   class Device
   {
+  public:
+    using CType = VkDevice;
+
   public:
     VULKAN_HPP_CONSTEXPR Device()
       : m_device(VK_NULL_HANDLE)
@@ -15937,6 +16076,9 @@ namespace VULKAN_HPP_NAMESPACE
   class DisplayModeKHR
   {
   public:
+    using CType = VkDisplayModeKHR;
+
+  public:
     VULKAN_HPP_CONSTEXPR DisplayModeKHR()
       : m_displayModeKHR(VK_NULL_HANDLE)
     {}
@@ -16005,6 +16147,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   class PhysicalDevice
   {
+  public:
+    using CType = VkPhysicalDevice;
+
   public:
     VULKAN_HPP_CONSTEXPR PhysicalDevice()
       : m_physicalDevice(VK_NULL_HANDLE)
@@ -16604,6 +16749,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   class Instance
   {
+  public:
+    using CType = VkInstance;
+
   public:
     VULKAN_HPP_CONSTEXPR Instance()
       : m_instance(VK_NULL_HANDLE)
@@ -29592,6 +29740,196 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( FormatProperties2 ) == sizeof( VkFormatProperties2 ), "struct and wrapper have different size!" );
 
+  struct FramebufferAttachmentImageInfoKHR
+  {
+    FramebufferAttachmentImageInfoKHR( ImageCreateFlags flags_ = ImageCreateFlags(),
+                                       ImageUsageFlags usage_ = ImageUsageFlags(),
+                                       uint32_t width_ = 0,
+                                       uint32_t height_ = 0,
+                                       uint32_t layerCount_ = 0,
+                                       uint32_t viewFormatCount_ = 0,
+                                       const Format* pViewFormats_ = nullptr )
+      : flags( flags_ )
+      , usage( usage_ )
+      , width( width_ )
+      , height( height_ )
+      , layerCount( layerCount_ )
+      , viewFormatCount( viewFormatCount_ )
+      , pViewFormats( pViewFormats_ )
+    {}
+
+    FramebufferAttachmentImageInfoKHR( VkFramebufferAttachmentImageInfoKHR const & rhs )
+    {
+      *reinterpret_cast<VkFramebufferAttachmentImageInfoKHR*>(this) = rhs;
+    }
+
+    FramebufferAttachmentImageInfoKHR& operator=( VkFramebufferAttachmentImageInfoKHR const & rhs )
+    {
+      *reinterpret_cast<VkFramebufferAttachmentImageInfoKHR*>(this) = rhs;
+      return *this;
+    }
+
+    FramebufferAttachmentImageInfoKHR & setPNext( const void* pNext_ )
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    FramebufferAttachmentImageInfoKHR & setFlags( ImageCreateFlags flags_ )
+    {
+      flags = flags_;
+      return *this;
+    }
+
+    FramebufferAttachmentImageInfoKHR & setUsage( ImageUsageFlags usage_ )
+    {
+      usage = usage_;
+      return *this;
+    }
+
+    FramebufferAttachmentImageInfoKHR & setWidth( uint32_t width_ )
+    {
+      width = width_;
+      return *this;
+    }
+
+    FramebufferAttachmentImageInfoKHR & setHeight( uint32_t height_ )
+    {
+      height = height_;
+      return *this;
+    }
+
+    FramebufferAttachmentImageInfoKHR & setLayerCount( uint32_t layerCount_ )
+    {
+      layerCount = layerCount_;
+      return *this;
+    }
+
+    FramebufferAttachmentImageInfoKHR & setViewFormatCount( uint32_t viewFormatCount_ )
+    {
+      viewFormatCount = viewFormatCount_;
+      return *this;
+    }
+
+    FramebufferAttachmentImageInfoKHR & setPViewFormats( const Format* pViewFormats_ )
+    {
+      pViewFormats = pViewFormats_;
+      return *this;
+    }
+
+    operator VkFramebufferAttachmentImageInfoKHR const&() const
+    {
+      return *reinterpret_cast<const VkFramebufferAttachmentImageInfoKHR*>( this );
+    }
+
+    operator VkFramebufferAttachmentImageInfoKHR &()
+    {
+      return *reinterpret_cast<VkFramebufferAttachmentImageInfoKHR*>( this );
+    }
+
+    bool operator==( FramebufferAttachmentImageInfoKHR const& rhs ) const
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( flags == rhs.flags )
+          && ( usage == rhs.usage )
+          && ( width == rhs.width )
+          && ( height == rhs.height )
+          && ( layerCount == rhs.layerCount )
+          && ( viewFormatCount == rhs.viewFormatCount )
+          && ( pViewFormats == rhs.pViewFormats );
+    }
+
+    bool operator!=( FramebufferAttachmentImageInfoKHR const& rhs ) const
+    {
+      return !operator==( rhs );
+    }
+
+  private:
+    StructureType sType = StructureType::eFramebufferAttachmentImageInfoKHR;
+
+  public:
+    const void* pNext = nullptr;
+    ImageCreateFlags flags;
+    ImageUsageFlags usage;
+    uint32_t width;
+    uint32_t height;
+    uint32_t layerCount;
+    uint32_t viewFormatCount;
+    const Format* pViewFormats;
+  };
+  static_assert( sizeof( FramebufferAttachmentImageInfoKHR ) == sizeof( VkFramebufferAttachmentImageInfoKHR ), "struct and wrapper have different size!" );
+
+  struct FramebufferAttachmentsCreateInfoKHR
+  {
+    FramebufferAttachmentsCreateInfoKHR( uint32_t attachmentImageInfoCount_ = 0,
+                                         const FramebufferAttachmentImageInfoKHR* pAttachmentImageInfos_ = nullptr )
+      : attachmentImageInfoCount( attachmentImageInfoCount_ )
+      , pAttachmentImageInfos( pAttachmentImageInfos_ )
+    {}
+
+    FramebufferAttachmentsCreateInfoKHR( VkFramebufferAttachmentsCreateInfoKHR const & rhs )
+    {
+      *reinterpret_cast<VkFramebufferAttachmentsCreateInfoKHR*>(this) = rhs;
+    }
+
+    FramebufferAttachmentsCreateInfoKHR& operator=( VkFramebufferAttachmentsCreateInfoKHR const & rhs )
+    {
+      *reinterpret_cast<VkFramebufferAttachmentsCreateInfoKHR*>(this) = rhs;
+      return *this;
+    }
+
+    FramebufferAttachmentsCreateInfoKHR & setPNext( const void* pNext_ )
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    FramebufferAttachmentsCreateInfoKHR & setAttachmentImageInfoCount( uint32_t attachmentImageInfoCount_ )
+    {
+      attachmentImageInfoCount = attachmentImageInfoCount_;
+      return *this;
+    }
+
+    FramebufferAttachmentsCreateInfoKHR & setPAttachmentImageInfos( const FramebufferAttachmentImageInfoKHR* pAttachmentImageInfos_ )
+    {
+      pAttachmentImageInfos = pAttachmentImageInfos_;
+      return *this;
+    }
+
+    operator VkFramebufferAttachmentsCreateInfoKHR const&() const
+    {
+      return *reinterpret_cast<const VkFramebufferAttachmentsCreateInfoKHR*>( this );
+    }
+
+    operator VkFramebufferAttachmentsCreateInfoKHR &()
+    {
+      return *reinterpret_cast<VkFramebufferAttachmentsCreateInfoKHR*>( this );
+    }
+
+    bool operator==( FramebufferAttachmentsCreateInfoKHR const& rhs ) const
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( attachmentImageInfoCount == rhs.attachmentImageInfoCount )
+          && ( pAttachmentImageInfos == rhs.pAttachmentImageInfos );
+    }
+
+    bool operator!=( FramebufferAttachmentsCreateInfoKHR const& rhs ) const
+    {
+      return !operator==( rhs );
+    }
+
+  private:
+    StructureType sType = StructureType::eFramebufferAttachmentsCreateInfoKHR;
+
+  public:
+    const void* pNext = nullptr;
+    uint32_t attachmentImageInfoCount;
+    const FramebufferAttachmentImageInfoKHR* pAttachmentImageInfos;
+  };
+  static_assert( sizeof( FramebufferAttachmentsCreateInfoKHR ) == sizeof( VkFramebufferAttachmentsCreateInfoKHR ), "struct and wrapper have different size!" );
+
   struct FramebufferCreateInfo
   {
     FramebufferCreateInfo( FramebufferCreateFlags flags_ = FramebufferCreateFlags(),
@@ -39162,6 +39500,66 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( PhysicalDeviceImageViewImageFormatInfoEXT ) == sizeof( VkPhysicalDeviceImageViewImageFormatInfoEXT ), "struct and wrapper have different size!" );
 
+  struct PhysicalDeviceImagelessFramebufferFeaturesKHR
+  {
+    PhysicalDeviceImagelessFramebufferFeaturesKHR( Bool32 imagelessFramebuffer_ = 0 )
+      : imagelessFramebuffer( imagelessFramebuffer_ )
+    {}
+
+    PhysicalDeviceImagelessFramebufferFeaturesKHR( VkPhysicalDeviceImagelessFramebufferFeaturesKHR const & rhs )
+    {
+      *reinterpret_cast<VkPhysicalDeviceImagelessFramebufferFeaturesKHR*>(this) = rhs;
+    }
+
+    PhysicalDeviceImagelessFramebufferFeaturesKHR& operator=( VkPhysicalDeviceImagelessFramebufferFeaturesKHR const & rhs )
+    {
+      *reinterpret_cast<VkPhysicalDeviceImagelessFramebufferFeaturesKHR*>(this) = rhs;
+      return *this;
+    }
+
+    PhysicalDeviceImagelessFramebufferFeaturesKHR & setPNext( void* pNext_ )
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    PhysicalDeviceImagelessFramebufferFeaturesKHR & setImagelessFramebuffer( Bool32 imagelessFramebuffer_ )
+    {
+      imagelessFramebuffer = imagelessFramebuffer_;
+      return *this;
+    }
+
+    operator VkPhysicalDeviceImagelessFramebufferFeaturesKHR const&() const
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceImagelessFramebufferFeaturesKHR*>( this );
+    }
+
+    operator VkPhysicalDeviceImagelessFramebufferFeaturesKHR &()
+    {
+      return *reinterpret_cast<VkPhysicalDeviceImagelessFramebufferFeaturesKHR*>( this );
+    }
+
+    bool operator==( PhysicalDeviceImagelessFramebufferFeaturesKHR const& rhs ) const
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( imagelessFramebuffer == rhs.imagelessFramebuffer );
+    }
+
+    bool operator!=( PhysicalDeviceImagelessFramebufferFeaturesKHR const& rhs ) const
+    {
+      return !operator==( rhs );
+    }
+
+  private:
+    StructureType sType = StructureType::ePhysicalDeviceImagelessFramebufferFeaturesKHR;
+
+  public:
+    void* pNext = nullptr;
+    Bool32 imagelessFramebuffer;
+  };
+  static_assert( sizeof( PhysicalDeviceImagelessFramebufferFeaturesKHR ) == sizeof( VkPhysicalDeviceImagelessFramebufferFeaturesKHR ), "struct and wrapper have different size!" );
+
   struct PhysicalDeviceInlineUniformBlockFeaturesEXT
   {
     PhysicalDeviceInlineUniformBlockFeaturesEXT( Bool32 inlineUniformBlock_ = 0,
@@ -44978,6 +45376,76 @@ namespace VULKAN_HPP_NAMESPACE
     uint64_t refreshDuration;
   };
   static_assert( sizeof( RefreshCycleDurationGOOGLE ) == sizeof( VkRefreshCycleDurationGOOGLE ), "struct and wrapper have different size!" );
+
+  struct RenderPassAttachmentBeginInfoKHR
+  {
+    RenderPassAttachmentBeginInfoKHR( uint32_t attachmentCount_ = 0,
+                                      const ImageView* pAttachments_ = nullptr )
+      : attachmentCount( attachmentCount_ )
+      , pAttachments( pAttachments_ )
+    {}
+
+    RenderPassAttachmentBeginInfoKHR( VkRenderPassAttachmentBeginInfoKHR const & rhs )
+    {
+      *reinterpret_cast<VkRenderPassAttachmentBeginInfoKHR*>(this) = rhs;
+    }
+
+    RenderPassAttachmentBeginInfoKHR& operator=( VkRenderPassAttachmentBeginInfoKHR const & rhs )
+    {
+      *reinterpret_cast<VkRenderPassAttachmentBeginInfoKHR*>(this) = rhs;
+      return *this;
+    }
+
+    RenderPassAttachmentBeginInfoKHR & setPNext( const void* pNext_ )
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    RenderPassAttachmentBeginInfoKHR & setAttachmentCount( uint32_t attachmentCount_ )
+    {
+      attachmentCount = attachmentCount_;
+      return *this;
+    }
+
+    RenderPassAttachmentBeginInfoKHR & setPAttachments( const ImageView* pAttachments_ )
+    {
+      pAttachments = pAttachments_;
+      return *this;
+    }
+
+    operator VkRenderPassAttachmentBeginInfoKHR const&() const
+    {
+      return *reinterpret_cast<const VkRenderPassAttachmentBeginInfoKHR*>( this );
+    }
+
+    operator VkRenderPassAttachmentBeginInfoKHR &()
+    {
+      return *reinterpret_cast<VkRenderPassAttachmentBeginInfoKHR*>( this );
+    }
+
+    bool operator==( RenderPassAttachmentBeginInfoKHR const& rhs ) const
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( attachmentCount == rhs.attachmentCount )
+          && ( pAttachments == rhs.pAttachments );
+    }
+
+    bool operator!=( RenderPassAttachmentBeginInfoKHR const& rhs ) const
+    {
+      return !operator==( rhs );
+    }
+
+  private:
+    StructureType sType = StructureType::eRenderPassAttachmentBeginInfoKHR;
+
+  public:
+    const void* pNext = nullptr;
+    uint32_t attachmentCount;
+    const ImageView* pAttachments;
+  };
+  static_assert( sizeof( RenderPassAttachmentBeginInfoKHR ) == sizeof( VkRenderPassAttachmentBeginInfoKHR ), "struct and wrapper have different size!" );
 
   struct RenderPassBeginInfo
   {
@@ -57619,6 +58087,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <> struct isStructureChainValid<ImageCreateInfo, ExternalMemoryImageCreateInfo>{ enum { value = true }; };
   template <> struct isStructureChainValid<ImageCreateInfo, ExternalMemoryImageCreateInfoNV>{ enum { value = true }; };
   template <> struct isStructureChainValid<ImageFormatProperties2, FilterCubicImageViewImageFormatPropertiesEXT>{ enum { value = true }; };
+  template <> struct isStructureChainValid<FramebufferCreateInfo, FramebufferAttachmentsCreateInfoKHR>{ enum { value = true }; };
   template <> struct isStructureChainValid<ImageCreateInfo, ImageDrmFormatModifierExplicitCreateInfoEXT>{ enum { value = true }; };
   template <> struct isStructureChainValid<ImageCreateInfo, ImageDrmFormatModifierListCreateInfoEXT>{ enum { value = true }; };
   template <> struct isStructureChainValid<ImageCreateInfo, ImageFormatListCreateInfoKHR>{ enum { value = true }; };
@@ -57698,6 +58167,8 @@ namespace VULKAN_HPP_NAMESPACE
   template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceIDProperties>{ enum { value = true }; };
   template <> struct isStructureChainValid<PhysicalDeviceImageFormatInfo2, PhysicalDeviceImageDrmFormatModifierInfoEXT>{ enum { value = true }; };
   template <> struct isStructureChainValid<PhysicalDeviceImageFormatInfo2, PhysicalDeviceImageViewImageFormatInfoEXT>{ enum { value = true }; };
+  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceImagelessFramebufferFeaturesKHR>{ enum { value = true }; };
+  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceImagelessFramebufferFeaturesKHR>{ enum { value = true }; };
   template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceInlineUniformBlockFeaturesEXT>{ enum { value = true }; };
   template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceInlineUniformBlockFeaturesEXT>{ enum { value = true }; };
   template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceInlineUniformBlockPropertiesEXT>{ enum { value = true }; };
@@ -57790,6 +58261,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <> struct isStructureChainValid<PresentInfoKHR, PresentTimesInfoGOOGLE>{ enum { value = true }; };
   template <> struct isStructureChainValid<SubmitInfo, ProtectedSubmitInfo>{ enum { value = true }; };
   template <> struct isStructureChainValid<QueueFamilyProperties2, QueueFamilyCheckpointPropertiesNV>{ enum { value = true }; };
+  template <> struct isStructureChainValid<RenderPassBeginInfo, RenderPassAttachmentBeginInfoKHR>{ enum { value = true }; };
   template <> struct isStructureChainValid<RenderPassCreateInfo, RenderPassFragmentDensityMapCreateInfoEXT>{ enum { value = true }; };
   template <> struct isStructureChainValid<RenderPassCreateInfo, RenderPassInputAttachmentAspectCreateInfo>{ enum { value = true }; };
   template <> struct isStructureChainValid<RenderPassCreateInfo, RenderPassMultiviewCreateInfo>{ enum { value = true }; };
