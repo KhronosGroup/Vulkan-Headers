@@ -56,7 +56,7 @@
 # define VULKAN_HPP_ASSERT   assert
 #endif
 
-static_assert( VK_HEADER_VERSION ==  114 , "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION ==  115 , "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
@@ -123,8 +123,10 @@ static_assert( VK_HEADER_VERSION ==  114 , "Wrong VK_HEADER_VERSION!" );
 
 #if defined(_MSC_VER) && (_MSC_VER <= 1800)
 # define VULKAN_HPP_CONSTEXPR
+# define VULKAN_HPP_CONST_OR_CONSTEXPR  const
 #else
 # define VULKAN_HPP_CONSTEXPR constexpr
+# define VULKAN_HPP_CONST_OR_CONSTEXPR  constexpr
 #endif
 
 #if !defined(VULKAN_HPP_NAMESPACE)
@@ -5123,7 +5125,7 @@ namespace VULKAN_HPP_NAMESPACE
     eCommandBufferInheritanceConditionalRenderingInfoEXT = VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_CONDITIONAL_RENDERING_INFO_EXT,
     ePhysicalDeviceConditionalRenderingFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONDITIONAL_RENDERING_FEATURES_EXT,
     eConditionalRenderingBeginInfoEXT = VK_STRUCTURE_TYPE_CONDITIONAL_RENDERING_BEGIN_INFO_EXT,
-    ePhysicalDeviceFloat16Int8FeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT16_INT8_FEATURES_KHR,
+    ePhysicalDeviceShaderFloat16Int8FeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES_KHR,
     ePresentRegionsKHR = VK_STRUCTURE_TYPE_PRESENT_REGIONS_KHR,
     eObjectTableCreateInfoNVX = VK_STRUCTURE_TYPE_OBJECT_TABLE_CREATE_INFO_NVX,
     eIndirectCommandsLayoutCreateInfoNVX = VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_NVX,
@@ -5263,7 +5265,7 @@ namespace VULKAN_HPP_NAMESPACE
     ePhysicalDeviceExclusiveScissorFeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXCLUSIVE_SCISSOR_FEATURES_NV,
     eCheckpointDataNV = VK_STRUCTURE_TYPE_CHECKPOINT_DATA_NV,
     eQueueFamilyCheckpointPropertiesNV = VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV,
-    ePhysicalDeviceShaderIntegerFunctions2FeaturesINTEL = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_FUNCTIONS2_FEATURES_INTEL,
+    ePhysicalDeviceShaderIntegerFunctions2FeaturesINTEL = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_FUNCTIONS_2_FEATURES_INTEL,
     eQueryPoolCreateInfoINTEL = VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO_INTEL,
     eInitializePerformanceApiInfoINTEL = VK_STRUCTURE_TYPE_INITIALIZE_PERFORMANCE_API_INFO_INTEL,
     ePerformanceMarkerInfoINTEL = VK_STRUCTURE_TYPE_PERFORMANCE_MARKER_INFO_INTEL,
@@ -5342,6 +5344,7 @@ namespace VULKAN_HPP_NAMESPACE
     ePhysicalDeviceExternalSemaphoreInfoKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO_KHR,
     eExternalSemaphorePropertiesKHR = VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES_KHR,
     eExportSemaphoreCreateInfoKHR = VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO_KHR,
+    ePhysicalDeviceFloat16Int8FeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT16_INT8_FEATURES_KHR,
     ePhysicalDevice16BitStorageFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES_KHR,
     eDescriptorUpdateTemplateCreateInfoKHR = VK_STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO_KHR,
     ePhysicalDeviceExternalFenceInfoKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FENCE_INFO_KHR,
@@ -5549,7 +5552,7 @@ namespace VULKAN_HPP_NAMESPACE
       case StructureType::eCommandBufferInheritanceConditionalRenderingInfoEXT : return "CommandBufferInheritanceConditionalRenderingInfoEXT";
       case StructureType::ePhysicalDeviceConditionalRenderingFeaturesEXT : return "PhysicalDeviceConditionalRenderingFeaturesEXT";
       case StructureType::eConditionalRenderingBeginInfoEXT : return "ConditionalRenderingBeginInfoEXT";
-      case StructureType::ePhysicalDeviceFloat16Int8FeaturesKHR : return "PhysicalDeviceFloat16Int8FeaturesKHR";
+      case StructureType::ePhysicalDeviceShaderFloat16Int8FeaturesKHR : return "PhysicalDeviceShaderFloat16Int8FeaturesKHR";
       case StructureType::ePresentRegionsKHR : return "PresentRegionsKHR";
       case StructureType::eObjectTableCreateInfoNVX : return "ObjectTableCreateInfoNVX";
       case StructureType::eIndirectCommandsLayoutCreateInfoNVX : return "IndirectCommandsLayoutCreateInfoNVX";
@@ -5946,6 +5949,11 @@ namespace VULKAN_HPP_NAMESPACE
       default: return "invalid";
     }
   }
+
+  template<ObjectType value>
+  struct cpp_type
+  {
+  };
 
   enum class AccessFlagBits
   {
@@ -11312,7 +11320,6 @@ namespace VULKAN_HPP_NAMESPACE
   struct PhysicalDeviceFeatures;
   struct PhysicalDeviceFeatures2;
   using PhysicalDeviceFeatures2KHR = PhysicalDeviceFeatures2;
-  struct PhysicalDeviceFloat16Int8FeaturesKHR;
   struct PhysicalDeviceFloatControlsPropertiesKHR;
   struct PhysicalDeviceFragmentDensityMapFeaturesEXT;
   struct PhysicalDeviceFragmentDensityMapPropertiesEXT;
@@ -11366,8 +11373,10 @@ namespace VULKAN_HPP_NAMESPACE
   struct PhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT;
   struct PhysicalDeviceShaderDrawParametersFeatures;
   using PhysicalDeviceShaderDrawParameterFeatures = PhysicalDeviceShaderDrawParametersFeatures;
+  struct PhysicalDeviceShaderFloat16Int8FeaturesKHR;
+  using PhysicalDeviceFloat16Int8FeaturesKHR = PhysicalDeviceShaderFloat16Int8FeaturesKHR;
   struct PhysicalDeviceShaderImageFootprintFeaturesNV;
-  struct PhysicalDeviceShaderIntegerFunctions2INTEL;
+  struct PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL;
   struct PhysicalDeviceShaderSMBuiltinsFeaturesNV;
   struct PhysicalDeviceShaderSMBuiltinsPropertiesNV;
   struct PhysicalDeviceShadingRateImageFeaturesNV;
@@ -11562,6 +11571,8 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     using CType = VkSurfaceKHR;
 
+    static VULKAN_HPP_CONST_OR_CONSTEXPR ObjectType objectType = ObjectType::eSurfaceKHR;
+
   public:
     VULKAN_HPP_CONSTEXPR SurfaceKHR()
       : m_surfaceKHR(VK_NULL_HANDLE)
@@ -11624,10 +11635,18 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( SurfaceKHR ) == sizeof( VkSurfaceKHR ), "handle and wrapper have different size!" );
 
+  template <>
+  struct cpp_type<ObjectType::eSurfaceKHR>
+  {
+    using type = SurfaceKHR;
+  };
+
   class DebugReportCallbackEXT
   {
   public:
     using CType = VkDebugReportCallbackEXT;
+
+    static VULKAN_HPP_CONST_OR_CONSTEXPR ObjectType objectType = ObjectType::eDebugReportCallbackEXT;
 
   public:
     VULKAN_HPP_CONSTEXPR DebugReportCallbackEXT()
@@ -11691,10 +11710,18 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( DebugReportCallbackEXT ) == sizeof( VkDebugReportCallbackEXT ), "handle and wrapper have different size!" );
 
+  template <>
+  struct cpp_type<ObjectType::eDebugReportCallbackEXT>
+  {
+    using type = DebugReportCallbackEXT;
+  };
+
   class DebugUtilsMessengerEXT
   {
   public:
     using CType = VkDebugUtilsMessengerEXT;
+
+    static VULKAN_HPP_CONST_OR_CONSTEXPR ObjectType objectType = ObjectType::eDebugUtilsMessengerEXT;
 
   public:
     VULKAN_HPP_CONSTEXPR DebugUtilsMessengerEXT()
@@ -11758,10 +11785,18 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( DebugUtilsMessengerEXT ) == sizeof( VkDebugUtilsMessengerEXT ), "handle and wrapper have different size!" );
 
+  template <>
+  struct cpp_type<ObjectType::eDebugUtilsMessengerEXT>
+  {
+    using type = DebugUtilsMessengerEXT;
+  };
+
   class DisplayKHR
   {
   public:
     using CType = VkDisplayKHR;
+
+    static VULKAN_HPP_CONST_OR_CONSTEXPR ObjectType objectType = ObjectType::eDisplayKHR;
 
   public:
     VULKAN_HPP_CONSTEXPR DisplayKHR()
@@ -11825,10 +11860,18 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( DisplayKHR ) == sizeof( VkDisplayKHR ), "handle and wrapper have different size!" );
 
+  template <>
+  struct cpp_type<ObjectType::eDisplayKHR>
+  {
+    using type = DisplayKHR;
+  };
+
   class SwapchainKHR
   {
   public:
     using CType = VkSwapchainKHR;
+
+    static VULKAN_HPP_CONST_OR_CONSTEXPR ObjectType objectType = ObjectType::eSwapchainKHR;
 
   public:
     VULKAN_HPP_CONSTEXPR SwapchainKHR()
@@ -11892,10 +11935,18 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( SwapchainKHR ) == sizeof( VkSwapchainKHR ), "handle and wrapper have different size!" );
 
+  template <>
+  struct cpp_type<ObjectType::eSwapchainKHR>
+  {
+    using type = SwapchainKHR;
+  };
+
   class Semaphore
   {
   public:
     using CType = VkSemaphore;
+
+    static VULKAN_HPP_CONST_OR_CONSTEXPR ObjectType objectType = ObjectType::eSemaphore;
 
   public:
     VULKAN_HPP_CONSTEXPR Semaphore()
@@ -11959,10 +12010,18 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( Semaphore ) == sizeof( VkSemaphore ), "handle and wrapper have different size!" );
 
+  template <>
+  struct cpp_type<ObjectType::eSemaphore>
+  {
+    using type = Semaphore;
+  };
+
   class Fence
   {
   public:
     using CType = VkFence;
+
+    static VULKAN_HPP_CONST_OR_CONSTEXPR ObjectType objectType = ObjectType::eFence;
 
   public:
     VULKAN_HPP_CONSTEXPR Fence()
@@ -12026,10 +12085,18 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( Fence ) == sizeof( VkFence ), "handle and wrapper have different size!" );
 
+  template <>
+  struct cpp_type<ObjectType::eFence>
+  {
+    using type = Fence;
+  };
+
   class PerformanceConfigurationINTEL
   {
   public:
     using CType = VkPerformanceConfigurationINTEL;
+
+    static VULKAN_HPP_CONST_OR_CONSTEXPR ObjectType objectType = ObjectType::ePerformanceConfigurationINTEL;
 
   public:
     VULKAN_HPP_CONSTEXPR PerformanceConfigurationINTEL()
@@ -12093,10 +12160,18 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( PerformanceConfigurationINTEL ) == sizeof( VkPerformanceConfigurationINTEL ), "handle and wrapper have different size!" );
 
+  template <>
+  struct cpp_type<ObjectType::ePerformanceConfigurationINTEL>
+  {
+    using type = PerformanceConfigurationINTEL;
+  };
+
   class QueryPool
   {
   public:
     using CType = VkQueryPool;
+
+    static VULKAN_HPP_CONST_OR_CONSTEXPR ObjectType objectType = ObjectType::eQueryPool;
 
   public:
     VULKAN_HPP_CONSTEXPR QueryPool()
@@ -12160,10 +12235,18 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( QueryPool ) == sizeof( VkQueryPool ), "handle and wrapper have different size!" );
 
+  template <>
+  struct cpp_type<ObjectType::eQueryPool>
+  {
+    using type = QueryPool;
+  };
+
   class Buffer
   {
   public:
     using CType = VkBuffer;
+
+    static VULKAN_HPP_CONST_OR_CONSTEXPR ObjectType objectType = ObjectType::eBuffer;
 
   public:
     VULKAN_HPP_CONSTEXPR Buffer()
@@ -12227,10 +12310,18 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( Buffer ) == sizeof( VkBuffer ), "handle and wrapper have different size!" );
 
+  template <>
+  struct cpp_type<ObjectType::eBuffer>
+  {
+    using type = Buffer;
+  };
+
   class PipelineLayout
   {
   public:
     using CType = VkPipelineLayout;
+
+    static VULKAN_HPP_CONST_OR_CONSTEXPR ObjectType objectType = ObjectType::ePipelineLayout;
 
   public:
     VULKAN_HPP_CONSTEXPR PipelineLayout()
@@ -12294,10 +12385,18 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( PipelineLayout ) == sizeof( VkPipelineLayout ), "handle and wrapper have different size!" );
 
+  template <>
+  struct cpp_type<ObjectType::ePipelineLayout>
+  {
+    using type = PipelineLayout;
+  };
+
   class DescriptorSet
   {
   public:
     using CType = VkDescriptorSet;
+
+    static VULKAN_HPP_CONST_OR_CONSTEXPR ObjectType objectType = ObjectType::eDescriptorSet;
 
   public:
     VULKAN_HPP_CONSTEXPR DescriptorSet()
@@ -12361,10 +12460,18 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( DescriptorSet ) == sizeof( VkDescriptorSet ), "handle and wrapper have different size!" );
 
+  template <>
+  struct cpp_type<ObjectType::eDescriptorSet>
+  {
+    using type = DescriptorSet;
+  };
+
   class Pipeline
   {
   public:
     using CType = VkPipeline;
+
+    static VULKAN_HPP_CONST_OR_CONSTEXPR ObjectType objectType = ObjectType::ePipeline;
 
   public:
     VULKAN_HPP_CONSTEXPR Pipeline()
@@ -12428,10 +12535,18 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( Pipeline ) == sizeof( VkPipeline ), "handle and wrapper have different size!" );
 
+  template <>
+  struct cpp_type<ObjectType::ePipeline>
+  {
+    using type = Pipeline;
+  };
+
   class ImageView
   {
   public:
     using CType = VkImageView;
+
+    static VULKAN_HPP_CONST_OR_CONSTEXPR ObjectType objectType = ObjectType::eImageView;
 
   public:
     VULKAN_HPP_CONSTEXPR ImageView()
@@ -12495,10 +12610,18 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( ImageView ) == sizeof( VkImageView ), "handle and wrapper have different size!" );
 
+  template <>
+  struct cpp_type<ObjectType::eImageView>
+  {
+    using type = ImageView;
+  };
+
   class Image
   {
   public:
     using CType = VkImage;
+
+    static VULKAN_HPP_CONST_OR_CONSTEXPR ObjectType objectType = ObjectType::eImage;
 
   public:
     VULKAN_HPP_CONSTEXPR Image()
@@ -12562,10 +12685,18 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( Image ) == sizeof( VkImage ), "handle and wrapper have different size!" );
 
+  template <>
+  struct cpp_type<ObjectType::eImage>
+  {
+    using type = Image;
+  };
+
   class AccelerationStructureNV
   {
   public:
     using CType = VkAccelerationStructureNV;
+
+    static VULKAN_HPP_CONST_OR_CONSTEXPR ObjectType objectType = ObjectType::eAccelerationStructureNV;
 
   public:
     VULKAN_HPP_CONSTEXPR AccelerationStructureNV()
@@ -12629,10 +12760,18 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( AccelerationStructureNV ) == sizeof( VkAccelerationStructureNV ), "handle and wrapper have different size!" );
 
+  template <>
+  struct cpp_type<ObjectType::eAccelerationStructureNV>
+  {
+    using type = AccelerationStructureNV;
+  };
+
   class DescriptorUpdateTemplate
   {
   public:
     using CType = VkDescriptorUpdateTemplate;
+
+    static VULKAN_HPP_CONST_OR_CONSTEXPR ObjectType objectType = ObjectType::eDescriptorUpdateTemplate;
 
   public:
     VULKAN_HPP_CONSTEXPR DescriptorUpdateTemplate()
@@ -12695,12 +12834,20 @@ namespace VULKAN_HPP_NAMESPACE
     VkDescriptorUpdateTemplate m_descriptorUpdateTemplate;
   };
   static_assert( sizeof( DescriptorUpdateTemplate ) == sizeof( VkDescriptorUpdateTemplate ), "handle and wrapper have different size!" );
+
+  template <>
+  struct cpp_type<ObjectType::eDescriptorUpdateTemplate>
+  {
+    using type = DescriptorUpdateTemplate;
+  };
   using DescriptorUpdateTemplateKHR = DescriptorUpdateTemplate;
 
   class Event
   {
   public:
     using CType = VkEvent;
+
+    static VULKAN_HPP_CONST_OR_CONSTEXPR ObjectType objectType = ObjectType::eEvent;
 
   public:
     VULKAN_HPP_CONSTEXPR Event()
@@ -12764,10 +12911,18 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( Event ) == sizeof( VkEvent ), "handle and wrapper have different size!" );
 
+  template <>
+  struct cpp_type<ObjectType::eEvent>
+  {
+    using type = Event;
+  };
+
   class CommandBuffer
   {
   public:
     using CType = VkCommandBuffer;
+
+    static VULKAN_HPP_CONST_OR_CONSTEXPR ObjectType objectType = ObjectType::eCommandBuffer;
 
   public:
     VULKAN_HPP_CONSTEXPR CommandBuffer()
@@ -13306,10 +13461,18 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( CommandBuffer ) == sizeof( VkCommandBuffer ), "handle and wrapper have different size!" );
 
+  template <>
+  struct cpp_type<ObjectType::eCommandBuffer>
+  {
+    using type = CommandBuffer;
+  };
+
   class DeviceMemory
   {
   public:
     using CType = VkDeviceMemory;
+
+    static VULKAN_HPP_CONST_OR_CONSTEXPR ObjectType objectType = ObjectType::eDeviceMemory;
 
   public:
     VULKAN_HPP_CONSTEXPR DeviceMemory()
@@ -13373,10 +13536,18 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( DeviceMemory ) == sizeof( VkDeviceMemory ), "handle and wrapper have different size!" );
 
+  template <>
+  struct cpp_type<ObjectType::eDeviceMemory>
+  {
+    using type = DeviceMemory;
+  };
+
   class BufferView
   {
   public:
     using CType = VkBufferView;
+
+    static VULKAN_HPP_CONST_OR_CONSTEXPR ObjectType objectType = ObjectType::eBufferView;
 
   public:
     VULKAN_HPP_CONSTEXPR BufferView()
@@ -13440,10 +13611,18 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( BufferView ) == sizeof( VkBufferView ), "handle and wrapper have different size!" );
 
+  template <>
+  struct cpp_type<ObjectType::eBufferView>
+  {
+    using type = BufferView;
+  };
+
   class CommandPool
   {
   public:
     using CType = VkCommandPool;
+
+    static VULKAN_HPP_CONST_OR_CONSTEXPR ObjectType objectType = ObjectType::eCommandPool;
 
   public:
     VULKAN_HPP_CONSTEXPR CommandPool()
@@ -13507,10 +13686,18 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( CommandPool ) == sizeof( VkCommandPool ), "handle and wrapper have different size!" );
 
+  template <>
+  struct cpp_type<ObjectType::eCommandPool>
+  {
+    using type = CommandPool;
+  };
+
   class PipelineCache
   {
   public:
     using CType = VkPipelineCache;
+
+    static VULKAN_HPP_CONST_OR_CONSTEXPR ObjectType objectType = ObjectType::ePipelineCache;
 
   public:
     VULKAN_HPP_CONSTEXPR PipelineCache()
@@ -13574,10 +13761,18 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( PipelineCache ) == sizeof( VkPipelineCache ), "handle and wrapper have different size!" );
 
+  template <>
+  struct cpp_type<ObjectType::ePipelineCache>
+  {
+    using type = PipelineCache;
+  };
+
   class DescriptorPool
   {
   public:
     using CType = VkDescriptorPool;
+
+    static VULKAN_HPP_CONST_OR_CONSTEXPR ObjectType objectType = ObjectType::eDescriptorPool;
 
   public:
     VULKAN_HPP_CONSTEXPR DescriptorPool()
@@ -13641,10 +13836,18 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( DescriptorPool ) == sizeof( VkDescriptorPool ), "handle and wrapper have different size!" );
 
+  template <>
+  struct cpp_type<ObjectType::eDescriptorPool>
+  {
+    using type = DescriptorPool;
+  };
+
   class DescriptorSetLayout
   {
   public:
     using CType = VkDescriptorSetLayout;
+
+    static VULKAN_HPP_CONST_OR_CONSTEXPR ObjectType objectType = ObjectType::eDescriptorSetLayout;
 
   public:
     VULKAN_HPP_CONSTEXPR DescriptorSetLayout()
@@ -13708,10 +13911,18 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( DescriptorSetLayout ) == sizeof( VkDescriptorSetLayout ), "handle and wrapper have different size!" );
 
+  template <>
+  struct cpp_type<ObjectType::eDescriptorSetLayout>
+  {
+    using type = DescriptorSetLayout;
+  };
+
   class Framebuffer
   {
   public:
     using CType = VkFramebuffer;
+
+    static VULKAN_HPP_CONST_OR_CONSTEXPR ObjectType objectType = ObjectType::eFramebuffer;
 
   public:
     VULKAN_HPP_CONSTEXPR Framebuffer()
@@ -13775,10 +13986,18 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( Framebuffer ) == sizeof( VkFramebuffer ), "handle and wrapper have different size!" );
 
+  template <>
+  struct cpp_type<ObjectType::eFramebuffer>
+  {
+    using type = Framebuffer;
+  };
+
   class IndirectCommandsLayoutNVX
   {
   public:
     using CType = VkIndirectCommandsLayoutNVX;
+
+    static VULKAN_HPP_CONST_OR_CONSTEXPR ObjectType objectType = ObjectType::eIndirectCommandsLayoutNVX;
 
   public:
     VULKAN_HPP_CONSTEXPR IndirectCommandsLayoutNVX()
@@ -13842,10 +14061,18 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( IndirectCommandsLayoutNVX ) == sizeof( VkIndirectCommandsLayoutNVX ), "handle and wrapper have different size!" );
 
+  template <>
+  struct cpp_type<ObjectType::eIndirectCommandsLayoutNVX>
+  {
+    using type = IndirectCommandsLayoutNVX;
+  };
+
   class ObjectTableNVX
   {
   public:
     using CType = VkObjectTableNVX;
+
+    static VULKAN_HPP_CONST_OR_CONSTEXPR ObjectType objectType = ObjectType::eObjectTableNVX;
 
   public:
     VULKAN_HPP_CONSTEXPR ObjectTableNVX()
@@ -13909,10 +14136,18 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( ObjectTableNVX ) == sizeof( VkObjectTableNVX ), "handle and wrapper have different size!" );
 
+  template <>
+  struct cpp_type<ObjectType::eObjectTableNVX>
+  {
+    using type = ObjectTableNVX;
+  };
+
   class RenderPass
   {
   public:
     using CType = VkRenderPass;
+
+    static VULKAN_HPP_CONST_OR_CONSTEXPR ObjectType objectType = ObjectType::eRenderPass;
 
   public:
     VULKAN_HPP_CONSTEXPR RenderPass()
@@ -13976,10 +14211,18 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( RenderPass ) == sizeof( VkRenderPass ), "handle and wrapper have different size!" );
 
+  template <>
+  struct cpp_type<ObjectType::eRenderPass>
+  {
+    using type = RenderPass;
+  };
+
   class Sampler
   {
   public:
     using CType = VkSampler;
+
+    static VULKAN_HPP_CONST_OR_CONSTEXPR ObjectType objectType = ObjectType::eSampler;
 
   public:
     VULKAN_HPP_CONSTEXPR Sampler()
@@ -14043,10 +14286,18 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( Sampler ) == sizeof( VkSampler ), "handle and wrapper have different size!" );
 
+  template <>
+  struct cpp_type<ObjectType::eSampler>
+  {
+    using type = Sampler;
+  };
+
   class SamplerYcbcrConversion
   {
   public:
     using CType = VkSamplerYcbcrConversion;
+
+    static VULKAN_HPP_CONST_OR_CONSTEXPR ObjectType objectType = ObjectType::eSamplerYcbcrConversion;
 
   public:
     VULKAN_HPP_CONSTEXPR SamplerYcbcrConversion()
@@ -14109,12 +14360,20 @@ namespace VULKAN_HPP_NAMESPACE
     VkSamplerYcbcrConversion m_samplerYcbcrConversion;
   };
   static_assert( sizeof( SamplerYcbcrConversion ) == sizeof( VkSamplerYcbcrConversion ), "handle and wrapper have different size!" );
+
+  template <>
+  struct cpp_type<ObjectType::eSamplerYcbcrConversion>
+  {
+    using type = SamplerYcbcrConversion;
+  };
   using SamplerYcbcrConversionKHR = SamplerYcbcrConversion;
 
   class ShaderModule
   {
   public:
     using CType = VkShaderModule;
+
+    static VULKAN_HPP_CONST_OR_CONSTEXPR ObjectType objectType = ObjectType::eShaderModule;
 
   public:
     VULKAN_HPP_CONSTEXPR ShaderModule()
@@ -14178,10 +14437,18 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( ShaderModule ) == sizeof( VkShaderModule ), "handle and wrapper have different size!" );
 
+  template <>
+  struct cpp_type<ObjectType::eShaderModule>
+  {
+    using type = ShaderModule;
+  };
+
   class ValidationCacheEXT
   {
   public:
     using CType = VkValidationCacheEXT;
+
+    static VULKAN_HPP_CONST_OR_CONSTEXPR ObjectType objectType = ObjectType::eValidationCacheEXT;
 
   public:
     VULKAN_HPP_CONSTEXPR ValidationCacheEXT()
@@ -14245,10 +14512,18 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( ValidationCacheEXT ) == sizeof( VkValidationCacheEXT ), "handle and wrapper have different size!" );
 
+  template <>
+  struct cpp_type<ObjectType::eValidationCacheEXT>
+  {
+    using type = ValidationCacheEXT;
+  };
+
   class Queue
   {
   public:
     using CType = VkQueue;
+
+    static VULKAN_HPP_CONST_OR_CONSTEXPR ObjectType objectType = ObjectType::eQueue;
 
   public:
     VULKAN_HPP_CONSTEXPR Queue()
@@ -14375,6 +14650,12 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( Queue ) == sizeof( VkQueue ), "handle and wrapper have different size!" );
 
+  template <>
+  struct cpp_type<ObjectType::eQueue>
+  {
+    using type = Queue;
+  };
+
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   class Device;
   template <typename Dispatch> class UniqueHandleTraits<AccelerationStructureNV, Dispatch> { public: using deleter = ObjectDestroy<Device, Dispatch>; };
@@ -14439,6 +14720,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
   public:
     using CType = VkDevice;
+
+    static VULKAN_HPP_CONST_OR_CONSTEXPR ObjectType objectType = ObjectType::eDevice;
 
   public:
     VULKAN_HPP_CONSTEXPR Device()
@@ -16073,10 +16356,18 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( Device ) == sizeof( VkDevice ), "handle and wrapper have different size!" );
 
+  template <>
+  struct cpp_type<ObjectType::eDevice>
+  {
+    using type = Device;
+  };
+
   class DisplayModeKHR
   {
   public:
     using CType = VkDisplayModeKHR;
+
+    static VULKAN_HPP_CONST_OR_CONSTEXPR ObjectType objectType = ObjectType::eDisplayModeKHR;
 
   public:
     VULKAN_HPP_CONSTEXPR DisplayModeKHR()
@@ -16140,6 +16431,12 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( DisplayModeKHR ) == sizeof( VkDisplayModeKHR ), "handle and wrapper have different size!" );
 
+  template <>
+  struct cpp_type<ObjectType::eDisplayModeKHR>
+  {
+    using type = DisplayModeKHR;
+  };
+
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template <typename Dispatch> class UniqueHandleTraits<Device, Dispatch> { public: using deleter = ObjectDestroy<NoParent, Dispatch>; };
   using UniqueDevice = UniqueHandle<Device, DispatchLoaderDefault>;
@@ -16149,6 +16446,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
   public:
     using CType = VkPhysicalDevice;
+
+    static VULKAN_HPP_CONST_OR_CONSTEXPR ObjectType objectType = ObjectType::ePhysicalDevice;
 
   public:
     VULKAN_HPP_CONSTEXPR PhysicalDevice()
@@ -16737,6 +17036,12 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( PhysicalDevice ) == sizeof( VkPhysicalDevice ), "handle and wrapper have different size!" );
 
+  template <>
+  struct cpp_type<ObjectType::ePhysicalDevice>
+  {
+    using type = PhysicalDevice;
+  };
+
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   class Instance;
   template <typename Dispatch> class UniqueHandleTraits<DebugReportCallbackEXT, Dispatch> { public: using deleter = ObjectDestroy<Instance, Dispatch>; };
@@ -16751,6 +17056,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
   public:
     using CType = VkInstance;
+
+    static VULKAN_HPP_CONST_OR_CONSTEXPR ObjectType objectType = ObjectType::eInstance;
 
   public:
     VULKAN_HPP_CONSTEXPR Instance()
@@ -17097,6 +17404,12 @@ namespace VULKAN_HPP_NAMESPACE
     VkInstance m_instance;
   };
   static_assert( sizeof( Instance ) == sizeof( VkInstance ), "handle and wrapper have different size!" );
+
+  template <>
+  struct cpp_type<ObjectType::eInstance>
+  {
+    using type = Instance;
+  };
 
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template <typename Dispatch> class UniqueHandleTraits<Instance, Dispatch> { public: using deleter = ObjectDestroy<NoParent, Dispatch>; };
@@ -38763,76 +39076,6 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( PhysicalDeviceFeatures2 ) == sizeof( VkPhysicalDeviceFeatures2 ), "struct and wrapper have different size!" );
 
-  struct PhysicalDeviceFloat16Int8FeaturesKHR
-  {
-    PhysicalDeviceFloat16Int8FeaturesKHR( Bool32 shaderFloat16_ = 0,
-                                          Bool32 shaderInt8_ = 0 )
-      : shaderFloat16( shaderFloat16_ )
-      , shaderInt8( shaderInt8_ )
-    {}
-
-    PhysicalDeviceFloat16Int8FeaturesKHR( VkPhysicalDeviceFloat16Int8FeaturesKHR const & rhs )
-    {
-      *reinterpret_cast<VkPhysicalDeviceFloat16Int8FeaturesKHR*>(this) = rhs;
-    }
-
-    PhysicalDeviceFloat16Int8FeaturesKHR& operator=( VkPhysicalDeviceFloat16Int8FeaturesKHR const & rhs )
-    {
-      *reinterpret_cast<VkPhysicalDeviceFloat16Int8FeaturesKHR*>(this) = rhs;
-      return *this;
-    }
-
-    PhysicalDeviceFloat16Int8FeaturesKHR & setPNext( void* pNext_ )
-    {
-      pNext = pNext_;
-      return *this;
-    }
-
-    PhysicalDeviceFloat16Int8FeaturesKHR & setShaderFloat16( Bool32 shaderFloat16_ )
-    {
-      shaderFloat16 = shaderFloat16_;
-      return *this;
-    }
-
-    PhysicalDeviceFloat16Int8FeaturesKHR & setShaderInt8( Bool32 shaderInt8_ )
-    {
-      shaderInt8 = shaderInt8_;
-      return *this;
-    }
-
-    operator VkPhysicalDeviceFloat16Int8FeaturesKHR const&() const
-    {
-      return *reinterpret_cast<const VkPhysicalDeviceFloat16Int8FeaturesKHR*>( this );
-    }
-
-    operator VkPhysicalDeviceFloat16Int8FeaturesKHR &()
-    {
-      return *reinterpret_cast<VkPhysicalDeviceFloat16Int8FeaturesKHR*>( this );
-    }
-
-    bool operator==( PhysicalDeviceFloat16Int8FeaturesKHR const& rhs ) const
-    {
-      return ( sType == rhs.sType )
-          && ( pNext == rhs.pNext )
-          && ( shaderFloat16 == rhs.shaderFloat16 )
-          && ( shaderInt8 == rhs.shaderInt8 );
-    }
-
-    bool operator!=( PhysicalDeviceFloat16Int8FeaturesKHR const& rhs ) const
-    {
-      return !operator==( rhs );
-    }
-
-  private:
-    StructureType sType = StructureType::ePhysicalDeviceFloat16Int8FeaturesKHR;
-
-  public:
-    void* pNext = nullptr;
-    Bool32 shaderFloat16;
-    Bool32 shaderInt8;
-  };
-  static_assert( sizeof( PhysicalDeviceFloat16Int8FeaturesKHR ) == sizeof( VkPhysicalDeviceFloat16Int8FeaturesKHR ), "struct and wrapper have different size!" );
-
   struct PhysicalDeviceFloatControlsPropertiesKHR
   {
     operator VkPhysicalDeviceFloatControlsPropertiesKHR const&() const
@@ -41236,6 +41479,76 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( PhysicalDeviceShaderDrawParametersFeatures ) == sizeof( VkPhysicalDeviceShaderDrawParametersFeatures ), "struct and wrapper have different size!" );
 
+  struct PhysicalDeviceShaderFloat16Int8FeaturesKHR
+  {
+    PhysicalDeviceShaderFloat16Int8FeaturesKHR( Bool32 shaderFloat16_ = 0,
+                                                Bool32 shaderInt8_ = 0 )
+      : shaderFloat16( shaderFloat16_ )
+      , shaderInt8( shaderInt8_ )
+    {}
+
+    PhysicalDeviceShaderFloat16Int8FeaturesKHR( VkPhysicalDeviceShaderFloat16Int8FeaturesKHR const & rhs )
+    {
+      *reinterpret_cast<VkPhysicalDeviceShaderFloat16Int8FeaturesKHR*>(this) = rhs;
+    }
+
+    PhysicalDeviceShaderFloat16Int8FeaturesKHR& operator=( VkPhysicalDeviceShaderFloat16Int8FeaturesKHR const & rhs )
+    {
+      *reinterpret_cast<VkPhysicalDeviceShaderFloat16Int8FeaturesKHR*>(this) = rhs;
+      return *this;
+    }
+
+    PhysicalDeviceShaderFloat16Int8FeaturesKHR & setPNext( void* pNext_ )
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    PhysicalDeviceShaderFloat16Int8FeaturesKHR & setShaderFloat16( Bool32 shaderFloat16_ )
+    {
+      shaderFloat16 = shaderFloat16_;
+      return *this;
+    }
+
+    PhysicalDeviceShaderFloat16Int8FeaturesKHR & setShaderInt8( Bool32 shaderInt8_ )
+    {
+      shaderInt8 = shaderInt8_;
+      return *this;
+    }
+
+    operator VkPhysicalDeviceShaderFloat16Int8FeaturesKHR const&() const
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceShaderFloat16Int8FeaturesKHR*>( this );
+    }
+
+    operator VkPhysicalDeviceShaderFloat16Int8FeaturesKHR &()
+    {
+      return *reinterpret_cast<VkPhysicalDeviceShaderFloat16Int8FeaturesKHR*>( this );
+    }
+
+    bool operator==( PhysicalDeviceShaderFloat16Int8FeaturesKHR const& rhs ) const
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( shaderFloat16 == rhs.shaderFloat16 )
+          && ( shaderInt8 == rhs.shaderInt8 );
+    }
+
+    bool operator!=( PhysicalDeviceShaderFloat16Int8FeaturesKHR const& rhs ) const
+    {
+      return !operator==( rhs );
+    }
+
+  private:
+    StructureType sType = StructureType::ePhysicalDeviceShaderFloat16Int8FeaturesKHR;
+
+  public:
+    void* pNext = nullptr;
+    Bool32 shaderFloat16;
+    Bool32 shaderInt8;
+  };
+  static_assert( sizeof( PhysicalDeviceShaderFloat16Int8FeaturesKHR ) == sizeof( VkPhysicalDeviceShaderFloat16Int8FeaturesKHR ), "struct and wrapper have different size!" );
+
   struct PhysicalDeviceShaderImageFootprintFeaturesNV
   {
     PhysicalDeviceShaderImageFootprintFeaturesNV( Bool32 imageFootprint_ = 0 )
@@ -41296,53 +41609,53 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( PhysicalDeviceShaderImageFootprintFeaturesNV ) == sizeof( VkPhysicalDeviceShaderImageFootprintFeaturesNV ), "struct and wrapper have different size!" );
 
-  struct PhysicalDeviceShaderIntegerFunctions2INTEL
+  struct PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL
   {
-    PhysicalDeviceShaderIntegerFunctions2INTEL( Bool32 shaderIntegerFunctions2_ = 0 )
+    PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL( Bool32 shaderIntegerFunctions2_ = 0 )
       : shaderIntegerFunctions2( shaderIntegerFunctions2_ )
     {}
 
-    PhysicalDeviceShaderIntegerFunctions2INTEL( VkPhysicalDeviceShaderIntegerFunctions2INTEL const & rhs )
+    PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL( VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL const & rhs )
     {
-      *reinterpret_cast<VkPhysicalDeviceShaderIntegerFunctions2INTEL*>(this) = rhs;
+      *reinterpret_cast<VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL*>(this) = rhs;
     }
 
-    PhysicalDeviceShaderIntegerFunctions2INTEL& operator=( VkPhysicalDeviceShaderIntegerFunctions2INTEL const & rhs )
+    PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL& operator=( VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL const & rhs )
     {
-      *reinterpret_cast<VkPhysicalDeviceShaderIntegerFunctions2INTEL*>(this) = rhs;
+      *reinterpret_cast<VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL*>(this) = rhs;
       return *this;
     }
 
-    PhysicalDeviceShaderIntegerFunctions2INTEL & setPNext( void* pNext_ )
+    PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL & setPNext( void* pNext_ )
     {
       pNext = pNext_;
       return *this;
     }
 
-    PhysicalDeviceShaderIntegerFunctions2INTEL & setShaderIntegerFunctions2( Bool32 shaderIntegerFunctions2_ )
+    PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL & setShaderIntegerFunctions2( Bool32 shaderIntegerFunctions2_ )
     {
       shaderIntegerFunctions2 = shaderIntegerFunctions2_;
       return *this;
     }
 
-    operator VkPhysicalDeviceShaderIntegerFunctions2INTEL const&() const
+    operator VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL const&() const
     {
-      return *reinterpret_cast<const VkPhysicalDeviceShaderIntegerFunctions2INTEL*>( this );
+      return *reinterpret_cast<const VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL*>( this );
     }
 
-    operator VkPhysicalDeviceShaderIntegerFunctions2INTEL &()
+    operator VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL &()
     {
-      return *reinterpret_cast<VkPhysicalDeviceShaderIntegerFunctions2INTEL*>( this );
+      return *reinterpret_cast<VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL*>( this );
     }
 
-    bool operator==( PhysicalDeviceShaderIntegerFunctions2INTEL const& rhs ) const
+    bool operator==( PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL const& rhs ) const
     {
       return ( sType == rhs.sType )
           && ( pNext == rhs.pNext )
           && ( shaderIntegerFunctions2 == rhs.shaderIntegerFunctions2 );
     }
 
-    bool operator!=( PhysicalDeviceShaderIntegerFunctions2INTEL const& rhs ) const
+    bool operator!=( PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL const& rhs ) const
     {
       return !operator==( rhs );
     }
@@ -41354,7 +41667,7 @@ namespace VULKAN_HPP_NAMESPACE
     void* pNext = nullptr;
     Bool32 shaderIntegerFunctions2;
   };
-  static_assert( sizeof( PhysicalDeviceShaderIntegerFunctions2INTEL ) == sizeof( VkPhysicalDeviceShaderIntegerFunctions2INTEL ), "struct and wrapper have different size!" );
+  static_assert( sizeof( PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL ) == sizeof( VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL ), "struct and wrapper have different size!" );
 
   struct PhysicalDeviceShaderSMBuiltinsFeaturesNV
   {
@@ -58152,8 +58465,6 @@ namespace VULKAN_HPP_NAMESPACE
   template <> struct isStructureChainValid<PhysicalDeviceImageFormatInfo2, PhysicalDeviceExternalImageFormatInfo>{ enum { value = true }; };
   template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceExternalMemoryHostPropertiesEXT>{ enum { value = true }; };
   template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceFeatures2>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceFloat16Int8FeaturesKHR>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceFloat16Int8FeaturesKHR>{ enum { value = true }; };
   template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceFloatControlsPropertiesKHR>{ enum { value = true }; };
   template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceFragmentDensityMapFeaturesEXT>{ enum { value = true }; };
   template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceFragmentDensityMapFeaturesEXT>{ enum { value = true }; };
@@ -58205,10 +58516,12 @@ namespace VULKAN_HPP_NAMESPACE
   template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT>{ enum { value = true }; };
   template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceShaderDrawParametersFeatures>{ enum { value = true }; };
   template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceShaderDrawParametersFeatures>{ enum { value = true }; };
+  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceShaderFloat16Int8FeaturesKHR>{ enum { value = true }; };
+  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceShaderFloat16Int8FeaturesKHR>{ enum { value = true }; };
   template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceShaderImageFootprintFeaturesNV>{ enum { value = true }; };
   template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceShaderImageFootprintFeaturesNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceShaderIntegerFunctions2INTEL>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceShaderIntegerFunctions2INTEL>{ enum { value = true }; };
+  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL>{ enum { value = true }; };
+  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL>{ enum { value = true }; };
   template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceShaderSMBuiltinsFeaturesNV>{ enum { value = true }; };
   template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceShaderSMBuiltinsFeaturesNV>{ enum { value = true }; };
   template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceShaderSMBuiltinsPropertiesNV>{ enum { value = true }; };
@@ -58218,7 +58531,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceSubgroupProperties>{ enum { value = true }; };
   template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceTexelBufferAlignmentFeaturesEXT>{ enum { value = true }; };
   template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceTexelBufferAlignmentFeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceMemoryProperties2, PhysicalDeviceTexelBufferAlignmentPropertiesEXT>{ enum { value = true }; };
+  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceTexelBufferAlignmentPropertiesEXT>{ enum { value = true }; };
   template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceTransformFeedbackFeaturesEXT>{ enum { value = true }; };
   template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceTransformFeedbackFeaturesEXT>{ enum { value = true }; };
   template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceTransformFeedbackPropertiesEXT>{ enum { value = true }; };
