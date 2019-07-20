@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.1.115",
-    "comment": "from git branch: github-master commit: 57b7cd572d2d9dafdcc18218175d984019c2c092",
-    "date": "2019-07-14 13:04:33Z"
+    "api version": "1.1.116",
+    "comment": "from git branch: github-master commit: 7b81afeb9f76ed8b1ca6c2ed9c93d94eee08bfed",
+    "date": "2019-07-20 08:49:42Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -214,7 +214,7 @@
         },
         {
           "vuid": "VUID-VkPhysicalDeviceProperties2-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT\">VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceConservativeRasterizationPropertiesEXT\">VkPhysicalDeviceConservativeRasterizationPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixPropertiesNV\">VkPhysicalDeviceCooperativeMatrixPropertiesNV</a>, <a href=\"#VkPhysicalDeviceDepthStencilResolvePropertiesKHR\">VkPhysicalDeviceDepthStencilResolvePropertiesKHR</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingPropertiesEXT\">VkPhysicalDeviceDescriptorIndexingPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDiscardRectanglePropertiesEXT\">VkPhysicalDeviceDiscardRectanglePropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDriverPropertiesKHR\">VkPhysicalDeviceDriverPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceExternalMemoryHostPropertiesEXT\">VkPhysicalDeviceExternalMemoryHostPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceFloatControlsPropertiesKHR\">VkPhysicalDeviceFloatControlsPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapPropertiesEXT\">VkPhysicalDeviceFragmentDensityMapPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceIDProperties\">VkPhysicalDeviceIDProperties</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockPropertiesEXT\">VkPhysicalDeviceInlineUniformBlockPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceMaintenance3Properties\">VkPhysicalDeviceMaintenance3Properties</a>, <a href=\"#VkPhysicalDeviceMeshShaderPropertiesNV\">VkPhysicalDeviceMeshShaderPropertiesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX\">VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX</a>, <a href=\"#VkPhysicalDeviceMultiviewProperties\">VkPhysicalDeviceMultiviewProperties</a>, <a href=\"#VkPhysicalDevicePCIBusInfoPropertiesEXT\">VkPhysicalDevicePCIBusInfoPropertiesEXT</a>, <a href=\"#VkPhysicalDevicePointClippingProperties\">VkPhysicalDevicePointClippingProperties</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryProperties\">VkPhysicalDeviceProtectedMemoryProperties</a>, <a href=\"#VkPhysicalDevicePushDescriptorPropertiesKHR\">VkPhysicalDevicePushDescriptorPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceRayTracingPropertiesNV\">VkPhysicalDeviceRayTracingPropertiesNV</a>, <a href=\"#VkPhysicalDeviceSampleLocationsPropertiesEXT\">VkPhysicalDeviceSampleLocationsPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT\">VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceShaderCorePropertiesAMD\">VkPhysicalDeviceShaderCorePropertiesAMD</a>, <a href=\"#VkPhysicalDeviceShaderSMBuiltinsPropertiesNV\">VkPhysicalDeviceShaderSMBuiltinsPropertiesNV</a>, <a href=\"#VkPhysicalDeviceShadingRateImagePropertiesNV\">VkPhysicalDeviceShadingRateImagePropertiesNV</a>, <a href=\"#VkPhysicalDeviceSubgroupProperties\">VkPhysicalDeviceSubgroupProperties</a>, <a href=\"#VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT\">VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackPropertiesEXT\">VkPhysicalDeviceTransformFeedbackPropertiesEXT</a>, or <a href=\"#VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT\">VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT\">VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceConservativeRasterizationPropertiesEXT\">VkPhysicalDeviceConservativeRasterizationPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixPropertiesNV\">VkPhysicalDeviceCooperativeMatrixPropertiesNV</a>, <a href=\"#VkPhysicalDeviceDepthStencilResolvePropertiesKHR\">VkPhysicalDeviceDepthStencilResolvePropertiesKHR</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingPropertiesEXT\">VkPhysicalDeviceDescriptorIndexingPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDiscardRectanglePropertiesEXT\">VkPhysicalDeviceDiscardRectanglePropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDriverPropertiesKHR\">VkPhysicalDeviceDriverPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceExternalMemoryHostPropertiesEXT\">VkPhysicalDeviceExternalMemoryHostPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceFloatControlsPropertiesKHR\">VkPhysicalDeviceFloatControlsPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapPropertiesEXT\">VkPhysicalDeviceFragmentDensityMapPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceIDProperties\">VkPhysicalDeviceIDProperties</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockPropertiesEXT\">VkPhysicalDeviceInlineUniformBlockPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceMaintenance3Properties\">VkPhysicalDeviceMaintenance3Properties</a>, <a href=\"#VkPhysicalDeviceMeshShaderPropertiesNV\">VkPhysicalDeviceMeshShaderPropertiesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX\">VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX</a>, <a href=\"#VkPhysicalDeviceMultiviewProperties\">VkPhysicalDeviceMultiviewProperties</a>, <a href=\"#VkPhysicalDevicePCIBusInfoPropertiesEXT\">VkPhysicalDevicePCIBusInfoPropertiesEXT</a>, <a href=\"#VkPhysicalDevicePointClippingProperties\">VkPhysicalDevicePointClippingProperties</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryProperties\">VkPhysicalDeviceProtectedMemoryProperties</a>, <a href=\"#VkPhysicalDevicePushDescriptorPropertiesKHR\">VkPhysicalDevicePushDescriptorPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceRayTracingPropertiesNV\">VkPhysicalDeviceRayTracingPropertiesNV</a>, <a href=\"#VkPhysicalDeviceSampleLocationsPropertiesEXT\">VkPhysicalDeviceSampleLocationsPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT\">VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceShaderCorePropertiesAMD\">VkPhysicalDeviceShaderCorePropertiesAMD</a>, <a href=\"#VkPhysicalDeviceShaderSMBuiltinsPropertiesNV\">VkPhysicalDeviceShaderSMBuiltinsPropertiesNV</a>, <a href=\"#VkPhysicalDeviceShadingRateImagePropertiesNV\">VkPhysicalDeviceShadingRateImagePropertiesNV</a>, <a href=\"#VkPhysicalDeviceSubgroupProperties\">VkPhysicalDeviceSubgroupProperties</a>, <a href=\"#VkPhysicalDeviceSubgroupSizeControlPropertiesEXT\">VkPhysicalDeviceSubgroupSizeControlPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT\">VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackPropertiesEXT\">VkPhysicalDeviceTransformFeedbackPropertiesEXT</a>, or <a href=\"#VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT\">VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT</a>"
         },
         {
           "vuid": "VUID-VkPhysicalDeviceProperties2-sType-unique",
@@ -5352,11 +5352,11 @@
         },
         {
           "vuid": "VUID-VkPipelineShaderStageCreateInfo-pNext-pNext",
-          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT\">VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT</a>"
         },
         {
-          "vuid": "VUID-VkPipelineShaderStageCreateInfo-flags-zerobitmask",
-          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be <code>0</code>"
+          "vuid": "VUID-VkPipelineShaderStageCreateInfo-flags-parameter",
+          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkPipelineShaderStageCreateFlagBits\">VkPipelineShaderStageCreateFlagBits</a> values"
         },
         {
           "vuid": "VUID-VkPipelineShaderStageCreateInfo-stage-parameter",
@@ -5397,6 +5397,52 @@
         {
           "vuid": "VUID-VkPipelineShaderStageCreateInfo-stage-01511",
           "text": " If <code>stage</code> is <code>VK_SHADER_STAGE_FRAGMENT_BIT</code>, and the identified entry point writes to <code>FragStencilRefEXT</code> in any execution path, it <strong class=\"purple\">must</strong> write to <code>FragStencilRefEXT</code> in all execution paths"
+        }
+      ],
+      "(VK_EXT_subgroup_size_control)": [
+        {
+          "vuid": "VUID-VkPipelineShaderStageCreateInfo-pNext-02754",
+          "text": " If a <a href=\"#VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT\">VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT</a> structure is chained to <code>pNext</code>, <code>flags</code> <strong class=\"purple\">must</strong> not have the <code>VK_PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT</code> flag set."
+        },
+        {
+          "vuid": "VUID-VkPipelineShaderStageCreateInfo-pNext-02755",
+          "text": " If a <a href=\"#VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT\">VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT</a> structure is chained to <code>pNext</code>, <code>stage</code> <strong class=\"purple\">must</strong> be a valid bit specified in <a href=\"#limits-required-subgroup-size-stages\"><code>requiredSubgroupSizeStages</code></a>."
+        },
+        {
+          "vuid": "VUID-VkPipelineShaderStageCreateInfo-pNext-02756",
+          "text": " If a <a href=\"#VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT\">VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT</a> structure is chained to <code>pNext</code> and <code>stage</code> is VK_SHADER_STAGE_COMPUTE_BIT then local workgroup size of the shader <strong class=\"purple\">must</strong> be less than or equal to the product of <a href=\"#VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT\">VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT</a>::<code>requiredSubgroupSize</code> and <a href=\"#limits-max-subgroups-per-workgroup\"><code>maxComputeWorkgroupSubgroups</code></a>."
+        },
+        {
+          "vuid": "VUID-VkPipelineShaderStageCreateInfo-pNext-02757",
+          "text": " If a <a href=\"#VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT\">VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT</a> structure is chained to <code>pNext</code>, and <code>flags</code> has the <code>VK_PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT</code> flag set, the local workgroup size in the X dimension of the pipeline <strong class=\"purple\">must</strong> be a multiple of <a href=\"#VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT\">VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT</a>::<code>requiredSubgroupSize</code>."
+        },
+        {
+          "vuid": "VUID-VkPipelineShaderStageCreateInfo-flags-02758",
+          "text": " If <code>flags</code> has both the <code>VK_PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT</code> and <code>VK_PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT</code> flags set, the local workgroup size in the X dimension of the pipeline <strong class=\"purple\">must</strong> be a multiple of <a href=\"#limits-max-subgroup-size\"><code>maxSubgroupSize</code></a>."
+        },
+        {
+          "vuid": "VUID-VkPipelineShaderStageCreateInfo-flags-02759",
+          "text": " If <code>flags</code> has the <code>VK_PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT</code> flag set and <code>flags</code> does not have the <code>VK_PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT</code> flag set and no <a href=\"#VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT\">VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT</a> structure is chained to <code>pNext</code>, the local workgroup size in the X dimension of the pipeline <strong class=\"purple\">must</strong> be a multiple of <a href=\"#limits-subgroup-size\"><code>subgroupSize</code></a>."
+        }
+      ]
+    },
+    "VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT": {
+      "(VK_EXT_subgroup_size_control)": [
+        {
+          "vuid": "VUID-VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT-requiredSubgroupSize-02760",
+          "text": " <code>requiredSubgroupSize</code> <strong class=\"purple\">must</strong> be a power-of-two integer."
+        },
+        {
+          "vuid": "VUID-VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT-requiredSubgroupSize-02761",
+          "text": " <code>requiredSubgroupSize</code> <strong class=\"purple\">must</strong> be greater or equal to <a href=\"#limits-min-subgroup-size\">minSubgroupSize</a>."
+        },
+        {
+          "vuid": "VUID-VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT-requiredSubgroupSize-02762",
+          "text": " <code>requiredSubgroupSize</code> <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#limits-max-subgroup-size\">maxSubgroupSize</a>."
+        },
+        {
+          "vuid": "VUID-VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO_EXT</code>"
         }
       ]
     },
@@ -11685,6 +11731,10 @@
           "text": " <code>accelerationStructureCount</code> <strong class=\"purple\">must</strong> be equal to <code>descriptorCount</code> in the extended structure"
         },
         {
+          "vuid": "VUID-VkWriteDescriptorSetAccelerationStructureNV-pAccelerationStructures-02764",
+          "text": " Each acceleration structure in <code>pAccelerationStructures</code> must have been created with <code>VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_NV</code>"
+        },
+        {
           "vuid": "VUID-VkWriteDescriptorSetAccelerationStructureNV-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_NV</code>"
         },
@@ -12223,6 +12273,10 @@
         {
           "vuid": "VUID-VkQueryPoolCreateInfo-queryType-00792",
           "text": " If <code>queryType</code> is <code>VK_QUERY_TYPE_PIPELINE_STATISTICS</code>, <code>pipelineStatistics</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkQueryPipelineStatisticFlagBits\">VkQueryPipelineStatisticFlagBits</a> values"
+        },
+        {
+          "vuid": "VUID-VkQueryPoolCreateInfo-queryCount-02763",
+          "text": " <code>queryCount</code> <strong class=\"purple\">must</strong> be greater than 0"
         },
         {
           "vuid": "VUID-VkQueryPoolCreateInfo-sType-sType",
@@ -23441,6 +23495,14 @@
         {
           "vuid": "VUID-VkPhysicalDeviceSubgroupProperties-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_PROPERTIES</code>"
+        }
+      ]
+    },
+    "VkPhysicalDeviceSubgroupSizeControlPropertiesEXT": {
+      "(VK_VERSION_1_1)+(VK_EXT_subgroup_size_control)": [
+        {
+          "vuid": "VUID-VkPhysicalDeviceSubgroupSizeControlPropertiesEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES_EXT</code>"
         }
       ]
     },

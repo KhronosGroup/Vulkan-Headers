@@ -56,7 +56,7 @@
 # define VULKAN_HPP_ASSERT   assert
 #endif
 
-static_assert( VK_HEADER_VERSION ==  115 , "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION ==  116 , "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
@@ -4853,6 +4853,24 @@ namespace VULKAN_HPP_NAMESPACE
     }
   }
 
+  enum class ShaderFloatControlsIndependenceKHR
+  {
+    e32BitOnly = VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_32_BIT_ONLY_KHR,
+    eAll = VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_ALL_KHR,
+    eNone = VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_NONE_KHR
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( ShaderFloatControlsIndependenceKHR value )
+  {
+    switch ( value )
+    {
+      case ShaderFloatControlsIndependenceKHR::e32BitOnly : return "32BitOnly";
+      case ShaderFloatControlsIndependenceKHR::eAll : return "All";
+      case ShaderFloatControlsIndependenceKHR::eNone : return "None";
+      default: return "invalid";
+    }
+  }
+
   enum class ShaderInfoTypeAMD
   {
     eStatistics = VK_SHADER_INFO_TYPE_STATISTICS_AMD,
@@ -5282,6 +5300,8 @@ namespace VULKAN_HPP_NAMESPACE
     ePhysicalDeviceFragmentDensityMapPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_PROPERTIES_EXT,
     eRenderPassFragmentDensityMapCreateInfoEXT = VK_STRUCTURE_TYPE_RENDER_PASS_FRAGMENT_DENSITY_MAP_CREATE_INFO_EXT,
     ePhysicalDeviceScalarBlockLayoutFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES_EXT,
+    ePhysicalDeviceSubgroupSizeControlPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES_EXT,
+    ePipelineShaderStageRequiredSubgroupSizeCreateInfoEXT = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO_EXT,
     ePhysicalDeviceMemoryBudgetPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT,
     ePhysicalDeviceMemoryPriorityFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PRIORITY_FEATURES_EXT,
     eMemoryPriorityAllocateInfoEXT = VK_STRUCTURE_TYPE_MEMORY_PRIORITY_ALLOCATE_INFO_EXT,
@@ -5709,6 +5729,8 @@ namespace VULKAN_HPP_NAMESPACE
       case StructureType::ePhysicalDeviceFragmentDensityMapPropertiesEXT : return "PhysicalDeviceFragmentDensityMapPropertiesEXT";
       case StructureType::eRenderPassFragmentDensityMapCreateInfoEXT : return "RenderPassFragmentDensityMapCreateInfoEXT";
       case StructureType::ePhysicalDeviceScalarBlockLayoutFeaturesEXT : return "PhysicalDeviceScalarBlockLayoutFeaturesEXT";
+      case StructureType::ePhysicalDeviceSubgroupSizeControlPropertiesEXT : return "PhysicalDeviceSubgroupSizeControlPropertiesEXT";
+      case StructureType::ePipelineShaderStageRequiredSubgroupSizeCreateInfoEXT : return "PipelineShaderStageRequiredSubgroupSizeCreateInfoEXT";
       case StructureType::ePhysicalDeviceMemoryBudgetPropertiesEXT : return "PhysicalDeviceMemoryBudgetPropertiesEXT";
       case StructureType::ePhysicalDeviceMemoryPriorityFeaturesEXT : return "PhysicalDeviceMemoryPriorityFeaturesEXT";
       case StructureType::eMemoryPriorityAllocateInfoEXT : return "MemoryPriorityAllocateInfoEXT";
@@ -9211,18 +9233,49 @@ namespace VULKAN_HPP_NAMESPACE
   }
 
   enum class PipelineShaderStageCreateFlagBits
-  {};
-
-  VULKAN_HPP_INLINE std::string to_string( PipelineShaderStageCreateFlagBits )
   {
-    return "(void)";
+    eAllowVaryingSubgroupSizeEXT = VK_PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT,
+    eRequireFullSubgroupsEXT = VK_PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( PipelineShaderStageCreateFlagBits value )
+  {
+    switch ( value )
+    {
+      case PipelineShaderStageCreateFlagBits::eAllowVaryingSubgroupSizeEXT : return "AllowVaryingSubgroupSizeEXT";
+      case PipelineShaderStageCreateFlagBits::eRequireFullSubgroupsEXT : return "RequireFullSubgroupsEXT";
+      default: return "invalid";
+    }
   }
 
   using PipelineShaderStageCreateFlags = Flags<PipelineShaderStageCreateFlagBits, VkPipelineShaderStageCreateFlags>;
 
-  VULKAN_HPP_INLINE std::string to_string( PipelineShaderStageCreateFlags  )
+  VULKAN_HPP_INLINE PipelineShaderStageCreateFlags operator|( PipelineShaderStageCreateFlagBits bit0, PipelineShaderStageCreateFlagBits bit1 )
   {
-    return "{}";
+    return PipelineShaderStageCreateFlags( bit0 ) | bit1;
+  }
+
+  VULKAN_HPP_INLINE PipelineShaderStageCreateFlags operator~( PipelineShaderStageCreateFlagBits bits )
+  {
+    return ~( PipelineShaderStageCreateFlags( bits ) );
+  }
+
+  template <> struct FlagTraits<PipelineShaderStageCreateFlagBits>
+  {
+    enum
+    {
+      allFlags = VkFlags(PipelineShaderStageCreateFlagBits::eAllowVaryingSubgroupSizeEXT) | VkFlags(PipelineShaderStageCreateFlagBits::eRequireFullSubgroupsEXT)
+    };
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( PipelineShaderStageCreateFlags value  )
+  {
+    if ( !value ) return "{}";
+    std::string result;
+
+    if ( value & PipelineShaderStageCreateFlagBits::eAllowVaryingSubgroupSizeEXT ) result += "AllowVaryingSubgroupSizeEXT | ";
+    if ( value & PipelineShaderStageCreateFlagBits::eRequireFullSubgroupsEXT ) result += "RequireFullSubgroupsEXT | ";
+    return "{ " + result.substr(0, result.size() - 3) + " }";
   }
 
   enum class PipelineStageFlagBits
@@ -11385,6 +11438,7 @@ namespace VULKAN_HPP_NAMESPACE
   using PhysicalDeviceSparseImageFormatInfo2KHR = PhysicalDeviceSparseImageFormatInfo2;
   struct PhysicalDeviceSparseProperties;
   struct PhysicalDeviceSubgroupProperties;
+  struct PhysicalDeviceSubgroupSizeControlPropertiesEXT;
   struct PhysicalDeviceSurfaceInfo2KHR;
   struct PhysicalDeviceTexelBufferAlignmentFeaturesEXT;
   struct PhysicalDeviceTexelBufferAlignmentPropertiesEXT;
@@ -11422,6 +11476,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct PipelineRepresentativeFragmentTestStateCreateInfoNV;
   struct PipelineSampleLocationsStateCreateInfoEXT;
   struct PipelineShaderStageCreateInfo;
+  struct PipelineShaderStageRequiredSubgroupSizeCreateInfoEXT;
   struct PipelineTessellationDomainOriginStateCreateInfo;
   using PipelineTessellationDomainOriginStateCreateInfoKHR = PipelineTessellationDomainOriginStateCreateInfo;
   struct PipelineTessellationStateCreateInfo;
@@ -39092,8 +39147,8 @@ namespace VULKAN_HPP_NAMESPACE
     {
       return ( sType == rhs.sType )
           && ( pNext == rhs.pNext )
-          && ( separateDenormSettings == rhs.separateDenormSettings )
-          && ( separateRoundingModeSettings == rhs.separateRoundingModeSettings )
+          && ( denormBehaviorIndependence == rhs.denormBehaviorIndependence )
+          && ( roundingModeIndependence == rhs.roundingModeIndependence )
           && ( shaderSignedZeroInfNanPreserveFloat16 == rhs.shaderSignedZeroInfNanPreserveFloat16 )
           && ( shaderSignedZeroInfNanPreserveFloat32 == rhs.shaderSignedZeroInfNanPreserveFloat32 )
           && ( shaderSignedZeroInfNanPreserveFloat64 == rhs.shaderSignedZeroInfNanPreserveFloat64 )
@@ -39121,8 +39176,8 @@ namespace VULKAN_HPP_NAMESPACE
 
   public:
     void* pNext = nullptr;
-    Bool32 separateDenormSettings;
-    Bool32 separateRoundingModeSettings;
+    ShaderFloatControlsIndependenceKHR denormBehaviorIndependence;
+    ShaderFloatControlsIndependenceKHR roundingModeIndependence;
     Bool32 shaderSignedZeroInfNanPreserveFloat16;
     Bool32 shaderSignedZeroInfNanPreserveFloat32;
     Bool32 shaderSignedZeroInfNanPreserveFloat64;
@@ -42010,6 +42065,45 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( PhysicalDeviceSubgroupProperties ) == sizeof( VkPhysicalDeviceSubgroupProperties ), "struct and wrapper have different size!" );
 
+  struct PhysicalDeviceSubgroupSizeControlPropertiesEXT
+  {
+    operator VkPhysicalDeviceSubgroupSizeControlPropertiesEXT const&() const
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceSubgroupSizeControlPropertiesEXT*>( this );
+    }
+
+    operator VkPhysicalDeviceSubgroupSizeControlPropertiesEXT &()
+    {
+      return *reinterpret_cast<VkPhysicalDeviceSubgroupSizeControlPropertiesEXT*>( this );
+    }
+
+    bool operator==( PhysicalDeviceSubgroupSizeControlPropertiesEXT const& rhs ) const
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( minSubgroupSize == rhs.minSubgroupSize )
+          && ( maxSubgroupSize == rhs.maxSubgroupSize )
+          && ( maxComputeWorkgroupSubgroups == rhs.maxComputeWorkgroupSubgroups )
+          && ( requiredSubgroupSizeStages == rhs.requiredSubgroupSizeStages );
+    }
+
+    bool operator!=( PhysicalDeviceSubgroupSizeControlPropertiesEXT const& rhs ) const
+    {
+      return !operator==( rhs );
+    }
+
+  private:
+    StructureType sType = StructureType::ePhysicalDeviceSubgroupSizeControlPropertiesEXT;
+
+  public:
+    void* pNext = nullptr;
+    uint32_t minSubgroupSize;
+    uint32_t maxSubgroupSize;
+    uint32_t maxComputeWorkgroupSubgroups;
+    ShaderStageFlags requiredSubgroupSizeStages;
+  };
+  static_assert( sizeof( PhysicalDeviceSubgroupSizeControlPropertiesEXT ) == sizeof( VkPhysicalDeviceSubgroupSizeControlPropertiesEXT ), "struct and wrapper have different size!" );
+
   struct PhysicalDeviceSurfaceInfo2KHR
   {
     PhysicalDeviceSurfaceInfo2KHR( SurfaceKHR surface_ = SurfaceKHR() )
@@ -43847,6 +43941,39 @@ namespace VULKAN_HPP_NAMESPACE
     SampleLocationsInfoEXT sampleLocationsInfo;
   };
   static_assert( sizeof( PipelineSampleLocationsStateCreateInfoEXT ) == sizeof( VkPipelineSampleLocationsStateCreateInfoEXT ), "struct and wrapper have different size!" );
+
+  struct PipelineShaderStageRequiredSubgroupSizeCreateInfoEXT
+  {
+    operator VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT const&() const
+    {
+      return *reinterpret_cast<const VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT*>( this );
+    }
+
+    operator VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT &()
+    {
+      return *reinterpret_cast<VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT*>( this );
+    }
+
+    bool operator==( PipelineShaderStageRequiredSubgroupSizeCreateInfoEXT const& rhs ) const
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( requiredSubgroupSize == rhs.requiredSubgroupSize );
+    }
+
+    bool operator!=( PipelineShaderStageRequiredSubgroupSizeCreateInfoEXT const& rhs ) const
+    {
+      return !operator==( rhs );
+    }
+
+  private:
+    StructureType sType = StructureType::ePipelineShaderStageRequiredSubgroupSizeCreateInfoEXT;
+
+  public:
+    void* pNext = nullptr;
+    uint32_t requiredSubgroupSize;
+  };
+  static_assert( sizeof( PipelineShaderStageRequiredSubgroupSizeCreateInfoEXT ) == sizeof( VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT ), "struct and wrapper have different size!" );
 
   struct PipelineTessellationDomainOriginStateCreateInfo
   {
@@ -58529,6 +58656,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceShadingRateImageFeaturesNV>{ enum { value = true }; };
   template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceShadingRateImagePropertiesNV>{ enum { value = true }; };
   template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceSubgroupProperties>{ enum { value = true }; };
+  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceSubgroupSizeControlPropertiesEXT>{ enum { value = true }; };
   template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceTexelBufferAlignmentFeaturesEXT>{ enum { value = true }; };
   template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceTexelBufferAlignmentFeaturesEXT>{ enum { value = true }; };
   template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceTexelBufferAlignmentPropertiesEXT>{ enum { value = true }; };
@@ -58560,6 +58688,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <> struct isStructureChainValid<PipelineRasterizationStateCreateInfo, PipelineRasterizationStateStreamCreateInfoEXT>{ enum { value = true }; };
   template <> struct isStructureChainValid<GraphicsPipelineCreateInfo, PipelineRepresentativeFragmentTestStateCreateInfoNV>{ enum { value = true }; };
   template <> struct isStructureChainValid<PipelineMultisampleStateCreateInfo, PipelineSampleLocationsStateCreateInfoEXT>{ enum { value = true }; };
+  template <> struct isStructureChainValid<PipelineShaderStageCreateInfo, PipelineShaderStageRequiredSubgroupSizeCreateInfoEXT>{ enum { value = true }; };
   template <> struct isStructureChainValid<PipelineTessellationStateCreateInfo, PipelineTessellationDomainOriginStateCreateInfo>{ enum { value = true }; };
   template <> struct isStructureChainValid<PipelineVertexInputStateCreateInfo, PipelineVertexInputDivisorStateCreateInfoEXT>{ enum { value = true }; };
   template <> struct isStructureChainValid<PipelineViewportStateCreateInfo, PipelineViewportCoarseSampleOrderStateCreateInfoNV>{ enum { value = true }; };
