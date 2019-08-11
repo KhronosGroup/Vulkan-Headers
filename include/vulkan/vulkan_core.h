@@ -43,7 +43,7 @@ extern "C" {
 #define VK_VERSION_MINOR(version) (((uint32_t)(version) >> 12) & 0x3ff)
 #define VK_VERSION_PATCH(version) ((uint32_t)(version) & 0xfff)
 // Version of this file
-#define VK_HEADER_VERSION 117
+#define VK_HEADER_VERSION 118
 
 
 #define VK_NULL_HANDLE 0
@@ -447,6 +447,7 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_MEMORY_HOST_POINTER_PROPERTIES_EXT = 1000178001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT = 1000178002,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES_KHR = 1000180000,
+    VK_STRUCTURE_TYPE_PIPELINE_COMPILER_CONTROL_CREATE_INFO_AMD = 1000183000,
     VK_STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_EXT = 1000184000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_AMD = 1000185000,
     VK_STRUCTURE_TYPE_DEVICE_MEMORY_OVERALLOCATION_CREATE_INFO_AMD = 1000189000,
@@ -487,6 +488,8 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES_EXT = 1000221000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES_EXT = 1000225000,
     VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO_EXT = 1000225001,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES_EXT = 1000225002,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_2_AMD = 1000227000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT = 1000237000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PRIORITY_FEATURES_EXT = 1000238000,
     VK_STRUCTURE_TYPE_MEMORY_PRIORITY_ALLOCATE_INFO_EXT = 1000238001,
@@ -8741,6 +8744,22 @@ VKAPI_ATTR void VKAPI_CALL vkCmdWriteBufferMarkerAMD(
 #endif
 
 
+#define VK_AMD_pipeline_compiler_control 1
+#define VK_AMD_PIPELINE_COMPILER_CONTROL_SPEC_VERSION 1
+#define VK_AMD_PIPELINE_COMPILER_CONTROL_EXTENSION_NAME "VK_AMD_pipeline_compiler_control"
+
+typedef enum VkPipelineCompilerControlFlagBitsAMD {
+    VK_PIPELINE_COMPILER_CONTROL_FLAG_BITS_MAX_ENUM_AMD = 0x7FFFFFFF
+} VkPipelineCompilerControlFlagBitsAMD;
+typedef VkFlags VkPipelineCompilerControlFlagsAMD;
+typedef struct VkPipelineCompilerControlCreateInfoAMD {
+    VkStructureType                      sType;
+    const void*                          pNext;
+    VkPipelineCompilerControlFlagsAMD    compilerControlFlags;
+} VkPipelineCompilerControlCreateInfoAMD;
+
+
+
 #define VK_EXT_calibrated_timestamps 1
 #define VK_EXT_CALIBRATED_TIMESTAMPS_SPEC_VERSION 1
 #define VK_EXT_CALIBRATED_TIMESTAMPS_EXTENSION_NAME "VK_EXT_calibrated_timestamps"
@@ -9288,8 +9307,15 @@ typedef struct VkPhysicalDeviceScalarBlockLayoutFeaturesEXT {
 
 
 #define VK_EXT_subgroup_size_control 1
-#define VK_EXT_SUBGROUP_SIZE_CONTROL_SPEC_VERSION 1
+#define VK_EXT_SUBGROUP_SIZE_CONTROL_SPEC_VERSION 2
 #define VK_EXT_SUBGROUP_SIZE_CONTROL_EXTENSION_NAME "VK_EXT_subgroup_size_control"
+typedef struct VkPhysicalDeviceSubgroupSizeControlFeaturesEXT {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           subgroupSizeControl;
+    VkBool32           computeFullSubgroups;
+} VkPhysicalDeviceSubgroupSizeControlFeaturesEXT;
+
 typedef struct VkPhysicalDeviceSubgroupSizeControlPropertiesEXT {
     VkStructureType       sType;
     void*                 pNext;
@@ -9304,6 +9330,23 @@ typedef struct VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT {
     void*              pNext;
     uint32_t           requiredSubgroupSize;
 } VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT;
+
+
+
+#define VK_AMD_shader_core_properties2 1
+#define VK_AMD_SHADER_CORE_PROPERTIES_2_SPEC_VERSION 1
+#define VK_AMD_SHADER_CORE_PROPERTIES_2_EXTENSION_NAME "VK_AMD_shader_core_properties2"
+
+typedef enum VkShaderCorePropertiesFlagBitsAMD {
+    VK_SHADER_CORE_PROPERTIES_FLAG_BITS_MAX_ENUM_AMD = 0x7FFFFFFF
+} VkShaderCorePropertiesFlagBitsAMD;
+typedef VkFlags VkShaderCorePropertiesFlagsAMD;
+typedef struct VkPhysicalDeviceShaderCoreProperties2AMD {
+    VkStructureType                   sType;
+    void*                             pNext;
+    VkShaderCorePropertiesFlagsAMD    shaderCoreFeatures;
+    uint32_t                          activeComputeUnitCount;
+} VkPhysicalDeviceShaderCoreProperties2AMD;
 
 
 
