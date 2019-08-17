@@ -56,7 +56,7 @@
 # define VULKAN_HPP_ASSERT   assert
 #endif
 
-static_assert( VK_HEADER_VERSION ==  119 , "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION ==  120 , "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
@@ -6017,7 +6017,8 @@ namespace VULKAN_HPP_NAMESPACE
   enum class ValidationFeatureEnableEXT
   {
     eGpuAssisted = VK_VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_EXT,
-    eGpuAssistedReserveBindingSlot = VK_VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_RESERVE_BINDING_SLOT_EXT
+    eGpuAssistedReserveBindingSlot = VK_VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_RESERVE_BINDING_SLOT_EXT,
+    eBestPractices = VK_VALIDATION_FEATURE_ENABLE_BEST_PRACTICES_EXT
   };
 
   VULKAN_HPP_INLINE std::string to_string( ValidationFeatureEnableEXT value )
@@ -6026,6 +6027,7 @@ namespace VULKAN_HPP_NAMESPACE
     {
       case ValidationFeatureEnableEXT::eGpuAssisted : return "GpuAssisted";
       case ValidationFeatureEnableEXT::eGpuAssistedReserveBindingSlot : return "GpuAssistedReserveBindingSlot";
+      case ValidationFeatureEnableEXT::eBestPractices : return "BestPractices";
       default: return "invalid";
     }
   }
@@ -23020,8 +23022,8 @@ namespace VULKAN_HPP_NAMESPACE
     vk::ClearColorValue color;
     vk::ClearDepthStencilValue depthStencil;
 #else
-    Vkvk::ClearColorValue color;
-    Vkvk::ClearDepthStencilValue depthStencil;
+    VkClearColorValue color;
+    VkClearDepthStencilValue depthStencil;
 #endif  /*VULKAN_HPP_HAS_UNRESTRICTED_UNIONS*/
   };
 
@@ -42563,7 +42565,7 @@ namespace VULKAN_HPP_NAMESPACE
     uint32_t value32;
     uint64_t value64;
     float valueFloat;
-    Vkvk::Bool32 valueBool;
+    VkBool32 valueBool;
     const char* valueString;
 #endif  /*VULKAN_HPP_HAS_UNRESTRICTED_UNIONS*/
   };
@@ -52291,49 +52293,6 @@ namespace VULKAN_HPP_NAMESPACE
 
   union PipelineExecutableStatisticValueKHR
   {
-    PipelineExecutableStatisticValueKHR( vk::Bool32 b32_ = 0 )
-    {
-      b32 = b32_;
-    }
-
-    PipelineExecutableStatisticValueKHR( int64_t i64_ )
-    {
-      i64 = i64_;
-    }
-
-    PipelineExecutableStatisticValueKHR( uint64_t u64_ )
-    {
-      u64 = u64_;
-    }
-
-    PipelineExecutableStatisticValueKHR( double f64_ )
-    {
-      f64 = f64_;
-    }
-
-    PipelineExecutableStatisticValueKHR & setB32( vk::Bool32 b32_ )
-    {
-      b32 = b32_;
-      return *this;
-    }
-
-    PipelineExecutableStatisticValueKHR & setI64( int64_t i64_ )
-    {
-      i64 = i64_;
-      return *this;
-    }
-
-    PipelineExecutableStatisticValueKHR & setU64( uint64_t u64_ )
-    {
-      u64 = u64_;
-      return *this;
-    }
-
-    PipelineExecutableStatisticValueKHR & setF64( double f64_ )
-    {
-      f64 = f64_;
-      return *this;
-    }
     operator VkPipelineExecutableStatisticValueKHR const&() const
     {
       return *reinterpret_cast<const VkPipelineExecutableStatisticValueKHR*>(this);
@@ -52350,7 +52309,7 @@ namespace VULKAN_HPP_NAMESPACE
     uint64_t u64;
     double f64;
 #else
-    Vkvk::Bool32 b32;
+    VkBool32 b32;
     int64_t i64;
     uint64_t u64;
     double f64;
