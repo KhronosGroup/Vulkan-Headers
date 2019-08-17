@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.1.119",
-    "comment": "from git branch: github-master commit: 5a1c484b7e65eb7d83b160f8c92b0cfd77ddbd53",
-    "date": "2019-08-12 06:32:53Z"
+    "api version": "1.1.120",
+    "comment": "from git branch: github-master commit: 521e98405f8587ce6506811125c001f1eda26314",
+    "date": "2019-08-17 22:33:44Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -717,6 +717,10 @@
         {
           "vuid": "VUID-vkAllocateCommandBuffers-pCommandBuffers-parameter",
           "text": " <code>pCommandBuffers</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>pAllocateInfo</code>::commandBufferCount <code>VkCommandBuffer</code> handles"
+        },
+        {
+          "vuid": "VUID-vkAllocateCommandBuffers-pAllocateInfo::commandBufferCount-arraylength",
+          "text": " The value referenced by <code>pAllocateInfo</code>::<code>commandBufferCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
         }
       ]
     },
@@ -863,6 +867,14 @@
           "text": " If the <a href=\"#features-inheritedQueries\">inherited queries</a> feature is enabled, <code>queryFlags</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkQueryControlFlagBits\">VkQueryControlFlagBits</a> values"
         },
         {
+          "vuid": "VUID-VkCommandBufferInheritanceInfo-queryFlags-02788",
+          "text": " If the <a href=\"#features-inheritedQueries\">inherited queries</a> feature is not enabled, <code>queryFlags</code> <strong class=\"purple\">must</strong> be <code>0</code>"
+        },
+        {
+          "vuid": "VUID-VkCommandBufferInheritanceInfo-pipelineStatistics-02789",
+          "text": " If the <a href=\"#features-pipelineStatisticsQuery\">pipeline statistics queries</a> feature is enabled, <code>pipelineStatistics</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkQueryPipelineStatisticFlagBits\">VkQueryPipelineStatisticFlagBits</a> values"
+        },
+        {
           "vuid": "VUID-VkCommandBufferInheritanceInfo-pipelineStatistics-00058",
           "text": " If the <a href=\"#features-pipelineStatisticsQuery\">pipeline statistics queries</a> feature is not enabled, <code>pipelineStatistics</code> <strong class=\"purple\">must</strong> be <code>0</code>"
         },
@@ -954,7 +966,7 @@
         },
         {
           "vuid": "VUID-vkQueueSubmit-pWaitSemaphores-00068",
-          "text": " When a semaphore unsignal operation defined by any element of the <code>pWaitSemaphores</code> member of any element of <code>pSubmits</code> executes on <code>queue</code>, no other queue <strong class=\"purple\">must</strong> be waiting on the same semaphore."
+          "text": " When a semaphore unsignal operation defined by any element of the <code>pWaitSemaphores</code> member of any element of <code>pSubmits</code> executes on <code>queue</code>, there <strong class=\"purple\">must</strong> be no other queues waiting on the same semaphore."
         },
         {
           "vuid": "VUID-vkQueueSubmit-pWaitSemaphores-00069",
@@ -6216,7 +6228,7 @@
       "(VK_KHR_pipeline_executable_properties)": [
         {
           "vuid": "VUID-VkPipelineExecutableInfoKHR-executableIndex-03275",
-          "text": " <code>executableIndex</code> <strong class=\"purple\">must</strong> be less than or equal to the number of executables associated with <code>pipeline</code> as returned in the <code>pExecutableCount</code> parameter of <code>vkGetPipelineExecutablePropertiesKHR</code>."
+          "text": " <code>executableIndex</code> <strong class=\"purple\">must</strong> be less than the number of executables associated with <code>pipeline</code> as returned in the <code>pExecutableCount</code> parameter of <code>vkGetPipelineExecutablePropertiesKHR</code>."
         },
         {
           "vuid": "VUID-VkPipelineExecutableInfoKHR-sType-sType",
@@ -6288,11 +6300,11 @@
         },
         {
           "vuid": "VUID-VkPipelineExecutableInternalRepresentationKHR-name-parameter",
-          "text": " Any given element of <code>name</code> <strong class=\"purple\">must</strong> be a valid"
+          "text": " <code>name</code> <strong class=\"purple\">must</strong> be a null-terminated UTF-8 string whose length is less than or equal to VK_MAX_DESCRIPTION_SIZE"
         },
         {
           "vuid": "VUID-VkPipelineExecutableInternalRepresentationKHR-description-parameter",
-          "text": " Any given element of <code>description</code> <strong class=\"purple\">must</strong> be a valid"
+          "text": " <code>description</code> <strong class=\"purple\">must</strong> be a null-terminated UTF-8 string whose length is less than or equal to VK_MAX_DESCRIPTION_SIZE"
         },
         {
           "vuid": "VUID-VkPipelineExecutableInternalRepresentationKHR-pData-parameter",
@@ -6339,8 +6351,8 @@
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PIPELINE_COMPILER_CONTROL_CREATE_INFO_AMD</code>"
         },
         {
-          "vuid": "VUID-VkPipelineCompilerControlCreateInfoAMD-compilerControlFlags-parameter",
-          "text": " <code>compilerControlFlags</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkPipelineCompilerControlFlagBitsAMD\">VkPipelineCompilerControlFlagBitsAMD</a> values"
+          "vuid": "VUID-VkPipelineCompilerControlCreateInfoAMD-compilerControlFlags-zerobitmask",
+          "text": " <code>compilerControlFlags</code> <strong class=\"purple\">must</strong> be <code>0</code>"
         }
       ]
     },
@@ -9256,7 +9268,7 @@
         },
         {
           "vuid": "VUID-VkImageViewHandleInfoNVX-imageView-02656",
-          "text": "    If descriptorType is <code>VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE</code> or    <code>VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER</code>, the image that    <code>imageView</code> was created from <strong class=\"purple\">must</strong> have been created with the    <code>VK_IMAGE_USAGE_SAMPLED_BIT</code> usage bit set"
+          "text": " If descriptorType is <code>VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE</code> or <code>VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER</code>, the image that <code>imageView</code> was created from <strong class=\"purple\">must</strong> have been created with the <code>VK_IMAGE_USAGE_SAMPLED_BIT</code> usage bit set"
         },
         {
           "vuid": "VUID-VkImageViewHandleInfoNVX-imageView-02657",
@@ -11523,6 +11535,10 @@
         {
           "vuid": "VUID-vkAllocateDescriptorSets-pDescriptorSets-parameter",
           "text": " <code>pDescriptorSets</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>pAllocateInfo</code>::descriptorSetCount <code>VkDescriptorSet</code> handles"
+        },
+        {
+          "vuid": "VUID-vkAllocateDescriptorSets-pAllocateInfo::descriptorSetCount-arraylength",
+          "text": " The value referenced by <code>pAllocateInfo</code>::<code>descriptorSetCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
         }
       ]
     },
@@ -20578,7 +20594,7 @@
         },
         {
           "vuid": "VUID-vkQueueBindSparse-pWaitSemaphores-01116",
-          "text": " When a semaphore unsignal operation defined by any element of the <code>pWaitSemaphores</code> member of any element of <code>pBindInfo</code> executes on <code>queue</code>, no other queue <strong class=\"purple\">must</strong> be waiting on the same semaphore."
+          "text": " When a semaphore unsignal operation defined by any element of the <code>pWaitSemaphores</code> member of any element of <code>pBindInfo</code> executes on <code>queue</code>, there <strong class=\"purple\">must</strong> be no other queues waiting on the same semaphore."
         },
         {
           "vuid": "VUID-vkQueueBindSparse-pWaitSemaphores-01117",
@@ -22670,7 +22686,7 @@
         },
         {
           "vuid": "VUID-vkQueuePresentKHR-pWaitSemaphores-01294",
-          "text": " When a semaphore unsignal operation defined by the elements of the <code>pWaitSemaphores</code> member of <code>pPresentInfo</code> executes on <code>queue</code>, no other queue <strong class=\"purple\">must</strong> be waiting on the same semaphore."
+          "text": " When a semaphore unsignal operation defined by the elements of the <code>pWaitSemaphores</code> member of <code>pPresentInfo</code> executes on <code>queue</code>, there <strong class=\"purple\">must</strong> be no other queues waiting on the same semaphore."
         },
         {
           "vuid": "VUID-vkQueuePresentKHR-pWaitSemaphores-01295",
