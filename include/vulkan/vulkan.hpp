@@ -56,7 +56,7 @@
 # define VULKAN_HPP_ASSERT   assert
 #endif
 
-static_assert( VK_HEADER_VERSION ==  121 , "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION ==  122 , "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
@@ -18035,8 +18035,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     GeometryDataNV( vk::GeometryTrianglesNV triangles_ = vk::GeometryTrianglesNV(),
                     vk::GeometryAABBNV aabbs_ = vk::GeometryAABBNV() )
-        : triangles( triangles_ )
-        , aabbs( aabbs_ )
+      : triangles( triangles_ )
+      , aabbs( aabbs_ )
     {}
 
     GeometryDataNV( VkGeometryDataNV const & rhs )
@@ -18650,12 +18650,12 @@ namespace VULKAN_HPP_NAMESPACE
                          PFN_vkFreeFunction pfnFree_ = nullptr,
                          PFN_vkInternalAllocationNotification pfnInternalAllocation_ = nullptr,
                          PFN_vkInternalFreeNotification pfnInternalFree_ = nullptr )
-        : pUserData( pUserData_ )
-        , pfnAllocation( pfnAllocation_ )
-        , pfnReallocation( pfnReallocation_ )
-        , pfnFree( pfnFree_ )
-        , pfnInternalAllocation( pfnInternalAllocation_ )
-        , pfnInternalFree( pfnInternalFree_ )
+      : pUserData( pUserData_ )
+      , pfnAllocation( pfnAllocation_ )
+      , pfnReallocation( pfnReallocation_ )
+      , pfnFree( pfnFree_ )
+      , pfnInternalAllocation( pfnInternalAllocation_ )
+      , pfnInternalFree( pfnInternalFree_ )
     {}
 
     AllocationCallbacks( VkAllocationCallbacks const & rhs )
@@ -18747,10 +18747,10 @@ namespace VULKAN_HPP_NAMESPACE
                       vk::ComponentSwizzle g_ = vk::ComponentSwizzle::eIdentity,
                       vk::ComponentSwizzle b_ = vk::ComponentSwizzle::eIdentity,
                       vk::ComponentSwizzle a_ = vk::ComponentSwizzle::eIdentity )
-        : r( r_ )
-        , g( g_ )
-        , b( b_ )
-        , a( a_ )
+      : r( r_ )
+      , g( g_ )
+      , b( b_ )
+      , a( a_ )
     {}
 
     ComponentMapping( VkComponentMapping const & rhs )
@@ -19272,15 +19272,15 @@ namespace VULKAN_HPP_NAMESPACE
                            vk::AttachmentStoreOp stencilStoreOp_ = vk::AttachmentStoreOp::eStore,
                            vk::ImageLayout initialLayout_ = vk::ImageLayout::eUndefined,
                            vk::ImageLayout finalLayout_ = vk::ImageLayout::eUndefined )
-        : flags( flags_ )
-        , format( format_ )
-        , samples( samples_ )
-        , loadOp( loadOp_ )
-        , storeOp( storeOp_ )
-        , stencilLoadOp( stencilLoadOp_ )
-        , stencilStoreOp( stencilStoreOp_ )
-        , initialLayout( initialLayout_ )
-        , finalLayout( finalLayout_ )
+      : flags( flags_ )
+      , format( format_ )
+      , samples( samples_ )
+      , loadOp( loadOp_ )
+      , storeOp( storeOp_ )
+      , stencilLoadOp( stencilLoadOp_ )
+      , stencilStoreOp( stencilStoreOp_ )
+      , initialLayout( initialLayout_ )
+      , finalLayout( finalLayout_ )
     {}
 
     AttachmentDescription( VkAttachmentDescription const & rhs )
@@ -19566,8 +19566,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     AttachmentReference( uint32_t attachment_ = 0,
                          vk::ImageLayout layout_ = vk::ImageLayout::eUndefined )
-        : attachment( attachment_ )
-        , layout( layout_ )
+      : attachment( attachment_ )
+      , layout( layout_ )
     {}
 
     AttachmentReference( VkAttachmentReference const & rhs )
@@ -19731,8 +19731,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     Extent2D( uint32_t width_ = 0,
               uint32_t height_ = 0 )
-        : width( width_ )
-        , height( height_ )
+      : width( width_ )
+      , height( height_ )
     {}
 
     Extent2D( VkExtent2D const & rhs )
@@ -19790,8 +19790,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     SampleLocationEXT( float x_ = 0,
                        float y_ = 0 )
-        : x( x_ )
-        , y( y_ )
+      : x( x_ )
+      , y( y_ )
     {}
 
     SampleLocationEXT( VkSampleLocationEXT const & rhs )
@@ -19966,8 +19966,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     AttachmentSampleLocationsEXT( uint32_t attachmentIndex_ = 0,
                                   vk::SampleLocationsInfoEXT sampleLocationsInfo_ = vk::SampleLocationsInfoEXT() )
-        : attachmentIndex( attachmentIndex_ )
-        , sampleLocationsInfo( sampleLocationsInfo_ )
+      : attachmentIndex( attachmentIndex_ )
+      , sampleLocationsInfo( sampleLocationsInfo_ )
     {}
 
     AttachmentSampleLocationsEXT( VkAttachmentSampleLocationsEXT const & rhs )
@@ -20508,8 +20508,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     Offset2D( int32_t x_ = 0,
               int32_t y_ = 0 )
-        : x( x_ )
-        , y( y_ )
+      : x( x_ )
+      , y( y_ )
     {}
 
     Offset2D( VkOffset2D const & rhs )
@@ -20567,8 +20567,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     Rect2D( vk::Offset2D offset_ = vk::Offset2D(),
             vk::Extent2D extent_ = vk::Extent2D() )
-        : offset( offset_ )
-        , extent( extent_ )
+      : offset( offset_ )
+      , extent( extent_ )
     {}
 
     Rect2D( VkRect2D const & rhs )
@@ -21031,11 +21031,11 @@ namespace VULKAN_HPP_NAMESPACE
                       vk::DeviceMemory memory_ = vk::DeviceMemory(),
                       vk::DeviceSize memoryOffset_ = 0,
                       vk::SparseMemoryBindFlags flags_ = vk::SparseMemoryBindFlags() )
-        : resourceOffset( resourceOffset_ )
-        , size( size_ )
-        , memory( memory_ )
-        , memoryOffset( memoryOffset_ )
-        , flags( flags_ )
+      : resourceOffset( resourceOffset_ )
+      , size( size_ )
+      , memory( memory_ )
+      , memoryOffset( memoryOffset_ )
+      , flags( flags_ )
     {}
 
     SparseMemoryBind( VkSparseMemoryBind const & rhs )
@@ -21118,9 +21118,9 @@ namespace VULKAN_HPP_NAMESPACE
     SparseBufferMemoryBindInfo( vk::Buffer buffer_ = vk::Buffer(),
                                 uint32_t bindCount_ = 0,
                                 const vk::SparseMemoryBind* pBinds_ = nullptr )
-        : buffer( buffer_ )
-        , bindCount( bindCount_ )
-        , pBinds( pBinds_ )
+      : buffer( buffer_ )
+      , bindCount( bindCount_ )
+      , pBinds( pBinds_ )
     {}
 
     SparseBufferMemoryBindInfo( VkSparseBufferMemoryBindInfo const & rhs )
@@ -21187,9 +21187,9 @@ namespace VULKAN_HPP_NAMESPACE
     SparseImageOpaqueMemoryBindInfo( vk::Image image_ = vk::Image(),
                                      uint32_t bindCount_ = 0,
                                      const vk::SparseMemoryBind* pBinds_ = nullptr )
-        : image( image_ )
-        , bindCount( bindCount_ )
-        , pBinds( pBinds_ )
+      : image( image_ )
+      , bindCount( bindCount_ )
+      , pBinds( pBinds_ )
     {}
 
     SparseImageOpaqueMemoryBindInfo( VkSparseImageOpaqueMemoryBindInfo const & rhs )
@@ -21256,9 +21256,9 @@ namespace VULKAN_HPP_NAMESPACE
     ImageSubresource( vk::ImageAspectFlags aspectMask_ = vk::ImageAspectFlags(),
                       uint32_t mipLevel_ = 0,
                       uint32_t arrayLayer_ = 0 )
-        : aspectMask( aspectMask_ )
-        , mipLevel( mipLevel_ )
-        , arrayLayer( arrayLayer_ )
+      : aspectMask( aspectMask_ )
+      , mipLevel( mipLevel_ )
+      , arrayLayer( arrayLayer_ )
     {}
 
     ImageSubresource( VkImageSubresource const & rhs )
@@ -21325,9 +21325,9 @@ namespace VULKAN_HPP_NAMESPACE
     Offset3D( int32_t x_ = 0,
               int32_t y_ = 0,
               int32_t z_ = 0 )
-        : x( x_ )
-        , y( y_ )
-        , z( z_ )
+      : x( x_ )
+      , y( y_ )
+      , z( z_ )
     {}
 
     explicit Offset3D( Offset2D const& offset2D,
@@ -21335,7 +21335,6 @@ namespace VULKAN_HPP_NAMESPACE
       : x( offset2D.x )
       , y( offset2D.y )
       , z( z_ )
-
     {}
 
     Offset3D( VkOffset3D const & rhs )
@@ -21402,9 +21401,9 @@ namespace VULKAN_HPP_NAMESPACE
     Extent3D( uint32_t width_ = 0,
               uint32_t height_ = 0,
               uint32_t depth_ = 0 )
-        : width( width_ )
-        , height( height_ )
-        , depth( depth_ )
+      : width( width_ )
+      , height( height_ )
+      , depth( depth_ )
     {}
 
     explicit Extent3D( Extent2D const& extent2D,
@@ -21412,7 +21411,6 @@ namespace VULKAN_HPP_NAMESPACE
       : width( extent2D.width )
       , height( extent2D.height )
       , depth( depth_ )
-
     {}
 
     Extent3D( VkExtent3D const & rhs )
@@ -21482,12 +21480,12 @@ namespace VULKAN_HPP_NAMESPACE
                            vk::DeviceMemory memory_ = vk::DeviceMemory(),
                            vk::DeviceSize memoryOffset_ = 0,
                            vk::SparseMemoryBindFlags flags_ = vk::SparseMemoryBindFlags() )
-        : subresource( subresource_ )
-        , offset( offset_ )
-        , extent( extent_ )
-        , memory( memory_ )
-        , memoryOffset( memoryOffset_ )
-        , flags( flags_ )
+      : subresource( subresource_ )
+      , offset( offset_ )
+      , extent( extent_ )
+      , memory( memory_ )
+      , memoryOffset( memoryOffset_ )
+      , flags( flags_ )
     {}
 
     SparseImageMemoryBind( VkSparseImageMemoryBind const & rhs )
@@ -21578,9 +21576,9 @@ namespace VULKAN_HPP_NAMESPACE
     SparseImageMemoryBindInfo( vk::Image image_ = vk::Image(),
                                uint32_t bindCount_ = 0,
                                const vk::SparseImageMemoryBind* pBinds_ = nullptr )
-        : image( image_ )
-        , bindCount( bindCount_ )
-        , pBinds( pBinds_ )
+      : image( image_ )
+      , bindCount( bindCount_ )
+      , pBinds( pBinds_ )
     {}
 
     SparseImageMemoryBindInfo( VkSparseImageMemoryBindInfo const & rhs )
@@ -21830,9 +21828,9 @@ namespace VULKAN_HPP_NAMESPACE
     BufferCopy( vk::DeviceSize srcOffset_ = 0,
                 vk::DeviceSize dstOffset_ = 0,
                 vk::DeviceSize size_ = 0 )
-        : srcOffset( srcOffset_ )
-        , dstOffset( dstOffset_ )
-        , size( size_ )
+      : srcOffset( srcOffset_ )
+      , dstOffset( dstOffset_ )
+      , size( size_ )
     {}
 
     BufferCopy( VkBufferCopy const & rhs )
@@ -22207,10 +22205,10 @@ namespace VULKAN_HPP_NAMESPACE
                             uint32_t mipLevel_ = 0,
                             uint32_t baseArrayLayer_ = 0,
                             uint32_t layerCount_ = 0 )
-        : aspectMask( aspectMask_ )
-        , mipLevel( mipLevel_ )
-        , baseArrayLayer( baseArrayLayer_ )
-        , layerCount( layerCount_ )
+      : aspectMask( aspectMask_ )
+      , mipLevel( mipLevel_ )
+      , baseArrayLayer( baseArrayLayer_ )
+      , layerCount( layerCount_ )
     {}
 
     ImageSubresourceLayers( VkImageSubresourceLayers const & rhs )
@@ -22288,12 +22286,12 @@ namespace VULKAN_HPP_NAMESPACE
                      vk::ImageSubresourceLayers imageSubresource_ = vk::ImageSubresourceLayers(),
                      vk::Offset3D imageOffset_ = vk::Offset3D(),
                      vk::Extent3D imageExtent_ = vk::Extent3D() )
-        : bufferOffset( bufferOffset_ )
-        , bufferRowLength( bufferRowLength_ )
-        , bufferImageHeight( bufferImageHeight_ )
-        , imageSubresource( imageSubresource_ )
-        , imageOffset( imageOffset_ )
-        , imageExtent( imageExtent_ )
+      : bufferOffset( bufferOffset_ )
+      , bufferRowLength( bufferRowLength_ )
+      , bufferImageHeight( bufferImageHeight_ )
+      , imageSubresource( imageSubresource_ )
+      , imageOffset( imageOffset_ )
+      , imageExtent( imageExtent_ )
     {}
 
     BufferImageCopy( VkBufferImageCopy const & rhs )
@@ -22940,8 +22938,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     ClearDepthStencilValue( float depth_ = 0,
                             uint32_t stencil_ = 0 )
-        : depth( depth_ )
-        , stencil( stencil_ )
+      : depth( depth_ )
+      , stencil( stencil_ )
     {}
 
     ClearDepthStencilValue( VkClearDepthStencilValue const & rhs )
@@ -23042,9 +23040,9 @@ namespace VULKAN_HPP_NAMESPACE
     ClearAttachment( vk::ImageAspectFlags aspectMask_ = vk::ImageAspectFlags(),
                      uint32_t colorAttachment_ = 0,
                      vk::ClearValue clearValue_ = vk::ClearValue() )
-        : aspectMask( aspectMask_ )
-        , colorAttachment( colorAttachment_ )
-        , clearValue( clearValue_ )
+      : aspectMask( aspectMask_ )
+      , colorAttachment( colorAttachment_ )
+      , clearValue( clearValue_ )
     {}
 
     ClearAttachment( VkClearAttachment const & rhs )
@@ -23099,9 +23097,9 @@ namespace VULKAN_HPP_NAMESPACE
     ClearRect( vk::Rect2D rect_ = vk::Rect2D(),
                uint32_t baseArrayLayer_ = 0,
                uint32_t layerCount_ = 0 )
-        : rect( rect_ )
-        , baseArrayLayer( baseArrayLayer_ )
-        , layerCount( layerCount_ )
+      : rect( rect_ )
+      , baseArrayLayer( baseArrayLayer_ )
+      , layerCount( layerCount_ )
     {}
 
     ClearRect( VkClearRect const & rhs )
@@ -23168,9 +23166,9 @@ namespace VULKAN_HPP_NAMESPACE
     IndirectCommandsTokenNVX( vk::IndirectCommandsTokenTypeNVX tokenType_ = vk::IndirectCommandsTokenTypeNVX::ePipeline,
                               vk::Buffer buffer_ = vk::Buffer(),
                               vk::DeviceSize offset_ = 0 )
-        : tokenType( tokenType_ )
-        , buffer( buffer_ )
-        , offset( offset_ )
+      : tokenType( tokenType_ )
+      , buffer( buffer_ )
+      , offset( offset_ )
     {}
 
     IndirectCommandsTokenNVX( VkIndirectCommandsTokenNVX const & rhs )
@@ -23526,9 +23524,9 @@ namespace VULKAN_HPP_NAMESPACE
     CoarseSampleLocationNV( uint32_t pixelX_ = 0,
                             uint32_t pixelY_ = 0,
                             uint32_t sample_ = 0 )
-        : pixelX( pixelX_ )
-        , pixelY( pixelY_ )
-        , sample( sample_ )
+      : pixelX( pixelX_ )
+      , pixelY( pixelY_ )
+      , sample( sample_ )
     {}
 
     CoarseSampleLocationNV( VkCoarseSampleLocationNV const & rhs )
@@ -23596,10 +23594,10 @@ namespace VULKAN_HPP_NAMESPACE
                                uint32_t sampleCount_ = 0,
                                uint32_t sampleLocationCount_ = 0,
                                const vk::CoarseSampleLocationNV* pSampleLocations_ = nullptr )
-        : shadingRate( shadingRate_ )
-        , sampleCount( sampleCount_ )
-        , sampleLocationCount( sampleLocationCount_ )
-        , pSampleLocations( pSampleLocations_ )
+      : shadingRate( shadingRate_ )
+      , sampleCount( sampleCount_ )
+      , sampleLocationCount( sampleLocationCount_ )
+      , pSampleLocations( pSampleLocations_ )
     {}
 
     CoarseSampleOrderCustomNV( VkCoarseSampleOrderCustomNV const & rhs )
@@ -24193,9 +24191,9 @@ namespace VULKAN_HPP_NAMESPACE
     SpecializationMapEntry( uint32_t constantID_ = 0,
                             uint32_t offset_ = 0,
                             size_t size_ = 0 )
-        : constantID( constantID_ )
-        , offset( offset_ )
-        , size( size_ )
+      : constantID( constantID_ )
+      , offset( offset_ )
+      , size( size_ )
     {}
 
     SpecializationMapEntry( VkSpecializationMapEntry const & rhs )
@@ -24263,10 +24261,10 @@ namespace VULKAN_HPP_NAMESPACE
                         const vk::SpecializationMapEntry* pMapEntries_ = nullptr,
                         size_t dataSize_ = 0,
                         const void* pData_ = nullptr )
-        : mapEntryCount( mapEntryCount_ )
-        , pMapEntries( pMapEntries_ )
-        , dataSize( dataSize_ )
-        , pData( pData_ )
+      : mapEntryCount( mapEntryCount_ )
+      , pMapEntries( pMapEntries_ )
+      , dataSize( dataSize_ )
+      , pData( pData_ )
     {}
 
     SpecializationInfo( VkSpecializationInfo const & rhs )
@@ -24704,10 +24702,10 @@ namespace VULKAN_HPP_NAMESPACE
                            uint8_t minor_ = 0,
                            uint8_t subminor_ = 0,
                            uint8_t patch_ = 0 )
-        : major( major_ )
-        , minor( minor_ )
-        , subminor( subminor_ )
-        , patch( patch_ )
+      : major( major_ )
+      , minor( minor_ )
+      , subminor( subminor_ )
+      , patch( patch_ )
     {}
 
     ConformanceVersionKHR( VkConformanceVersionKHR const & rhs )
@@ -26555,9 +26553,9 @@ namespace VULKAN_HPP_NAMESPACE
     DescriptorBufferInfo( vk::Buffer buffer_ = vk::Buffer(),
                           vk::DeviceSize offset_ = 0,
                           vk::DeviceSize range_ = 0 )
-        : buffer( buffer_ )
-        , offset( offset_ )
-        , range( range_ )
+      : buffer( buffer_ )
+      , offset( offset_ )
+      , range( range_ )
     {}
 
     DescriptorBufferInfo( VkDescriptorBufferInfo const & rhs )
@@ -26624,9 +26622,9 @@ namespace VULKAN_HPP_NAMESPACE
     DescriptorImageInfo( vk::Sampler sampler_ = vk::Sampler(),
                          vk::ImageView imageView_ = vk::ImageView(),
                          vk::ImageLayout imageLayout_ = vk::ImageLayout::eUndefined )
-        : sampler( sampler_ )
-        , imageView( imageView_ )
-        , imageLayout( imageLayout_ )
+      : sampler( sampler_ )
+      , imageView( imageView_ )
+      , imageLayout( imageLayout_ )
     {}
 
     DescriptorImageInfo( VkDescriptorImageInfo const & rhs )
@@ -26692,8 +26690,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     DescriptorPoolSize( vk::DescriptorType type_ = vk::DescriptorType::eSampler,
                         uint32_t descriptorCount_ = 0 )
-        : type( type_ )
-        , descriptorCount( descriptorCount_ )
+      : type( type_ )
+      , descriptorCount( descriptorCount_ )
     {}
 
     DescriptorPoolSize( VkDescriptorPoolSize const & rhs )
@@ -27061,11 +27059,11 @@ namespace VULKAN_HPP_NAMESPACE
                                 uint32_t descriptorCount_ = 0,
                                 vk::ShaderStageFlags stageFlags_ = vk::ShaderStageFlags(),
                                 const vk::Sampler* pImmutableSamplers_ = nullptr )
-        : binding( binding_ )
-        , descriptorType( descriptorType_ )
-        , descriptorCount( descriptorCount_ )
-        , stageFlags( stageFlags_ )
-        , pImmutableSamplers( pImmutableSamplers_ )
+      : binding( binding_ )
+      , descriptorType( descriptorType_ )
+      , descriptorCount( descriptorCount_ )
+      , stageFlags( stageFlags_ )
+      , pImmutableSamplers( pImmutableSamplers_ )
     {}
 
     DescriptorSetLayoutBinding( VkDescriptorSetLayoutBinding const & rhs )
@@ -27563,12 +27561,12 @@ namespace VULKAN_HPP_NAMESPACE
                                    vk::DescriptorType descriptorType_ = vk::DescriptorType::eSampler,
                                    size_t offset_ = 0,
                                    size_t stride_ = 0 )
-        : dstBinding( dstBinding_ )
-        , dstArrayElement( dstArrayElement_ )
-        , descriptorCount( descriptorCount_ )
-        , descriptorType( descriptorType_ )
-        , offset( offset_ )
-        , stride( stride_ )
+      : dstBinding( dstBinding_ )
+      , dstArrayElement( dstArrayElement_ )
+      , descriptorCount( descriptorCount_ )
+      , descriptorType( descriptorType_ )
+      , offset( offset_ )
+      , stride( stride_ )
     {}
 
     DescriptorUpdateTemplateEntry( VkDescriptorUpdateTemplateEntry const & rhs )
@@ -27989,61 +27987,61 @@ namespace VULKAN_HPP_NAMESPACE
                             vk::Bool32 sparseResidencyAliased_ = 0,
                             vk::Bool32 variableMultisampleRate_ = 0,
                             vk::Bool32 inheritedQueries_ = 0 )
-        : robustBufferAccess( robustBufferAccess_ )
-        , fullDrawIndexUint32( fullDrawIndexUint32_ )
-        , imageCubeArray( imageCubeArray_ )
-        , independentBlend( independentBlend_ )
-        , geometryShader( geometryShader_ )
-        , tessellationShader( tessellationShader_ )
-        , sampleRateShading( sampleRateShading_ )
-        , dualSrcBlend( dualSrcBlend_ )
-        , logicOp( logicOp_ )
-        , multiDrawIndirect( multiDrawIndirect_ )
-        , drawIndirectFirstInstance( drawIndirectFirstInstance_ )
-        , depthClamp( depthClamp_ )
-        , depthBiasClamp( depthBiasClamp_ )
-        , fillModeNonSolid( fillModeNonSolid_ )
-        , depthBounds( depthBounds_ )
-        , wideLines( wideLines_ )
-        , largePoints( largePoints_ )
-        , alphaToOne( alphaToOne_ )
-        , multiViewport( multiViewport_ )
-        , samplerAnisotropy( samplerAnisotropy_ )
-        , textureCompressionETC2( textureCompressionETC2_ )
-        , textureCompressionASTC_LDR( textureCompressionASTC_LDR_ )
-        , textureCompressionBC( textureCompressionBC_ )
-        , occlusionQueryPrecise( occlusionQueryPrecise_ )
-        , pipelineStatisticsQuery( pipelineStatisticsQuery_ )
-        , vertexPipelineStoresAndAtomics( vertexPipelineStoresAndAtomics_ )
-        , fragmentStoresAndAtomics( fragmentStoresAndAtomics_ )
-        , shaderTessellationAndGeometryPointSize( shaderTessellationAndGeometryPointSize_ )
-        , shaderImageGatherExtended( shaderImageGatherExtended_ )
-        , shaderStorageImageExtendedFormats( shaderStorageImageExtendedFormats_ )
-        , shaderStorageImageMultisample( shaderStorageImageMultisample_ )
-        , shaderStorageImageReadWithoutFormat( shaderStorageImageReadWithoutFormat_ )
-        , shaderStorageImageWriteWithoutFormat( shaderStorageImageWriteWithoutFormat_ )
-        , shaderUniformBufferArrayDynamicIndexing( shaderUniformBufferArrayDynamicIndexing_ )
-        , shaderSampledImageArrayDynamicIndexing( shaderSampledImageArrayDynamicIndexing_ )
-        , shaderStorageBufferArrayDynamicIndexing( shaderStorageBufferArrayDynamicIndexing_ )
-        , shaderStorageImageArrayDynamicIndexing( shaderStorageImageArrayDynamicIndexing_ )
-        , shaderClipDistance( shaderClipDistance_ )
-        , shaderCullDistance( shaderCullDistance_ )
-        , shaderFloat64( shaderFloat64_ )
-        , shaderInt64( shaderInt64_ )
-        , shaderInt16( shaderInt16_ )
-        , shaderResourceResidency( shaderResourceResidency_ )
-        , shaderResourceMinLod( shaderResourceMinLod_ )
-        , sparseBinding( sparseBinding_ )
-        , sparseResidencyBuffer( sparseResidencyBuffer_ )
-        , sparseResidencyImage2D( sparseResidencyImage2D_ )
-        , sparseResidencyImage3D( sparseResidencyImage3D_ )
-        , sparseResidency2Samples( sparseResidency2Samples_ )
-        , sparseResidency4Samples( sparseResidency4Samples_ )
-        , sparseResidency8Samples( sparseResidency8Samples_ )
-        , sparseResidency16Samples( sparseResidency16Samples_ )
-        , sparseResidencyAliased( sparseResidencyAliased_ )
-        , variableMultisampleRate( variableMultisampleRate_ )
-        , inheritedQueries( inheritedQueries_ )
+      : robustBufferAccess( robustBufferAccess_ )
+      , fullDrawIndexUint32( fullDrawIndexUint32_ )
+      , imageCubeArray( imageCubeArray_ )
+      , independentBlend( independentBlend_ )
+      , geometryShader( geometryShader_ )
+      , tessellationShader( tessellationShader_ )
+      , sampleRateShading( sampleRateShading_ )
+      , dualSrcBlend( dualSrcBlend_ )
+      , logicOp( logicOp_ )
+      , multiDrawIndirect( multiDrawIndirect_ )
+      , drawIndirectFirstInstance( drawIndirectFirstInstance_ )
+      , depthClamp( depthClamp_ )
+      , depthBiasClamp( depthBiasClamp_ )
+      , fillModeNonSolid( fillModeNonSolid_ )
+      , depthBounds( depthBounds_ )
+      , wideLines( wideLines_ )
+      , largePoints( largePoints_ )
+      , alphaToOne( alphaToOne_ )
+      , multiViewport( multiViewport_ )
+      , samplerAnisotropy( samplerAnisotropy_ )
+      , textureCompressionETC2( textureCompressionETC2_ )
+      , textureCompressionASTC_LDR( textureCompressionASTC_LDR_ )
+      , textureCompressionBC( textureCompressionBC_ )
+      , occlusionQueryPrecise( occlusionQueryPrecise_ )
+      , pipelineStatisticsQuery( pipelineStatisticsQuery_ )
+      , vertexPipelineStoresAndAtomics( vertexPipelineStoresAndAtomics_ )
+      , fragmentStoresAndAtomics( fragmentStoresAndAtomics_ )
+      , shaderTessellationAndGeometryPointSize( shaderTessellationAndGeometryPointSize_ )
+      , shaderImageGatherExtended( shaderImageGatherExtended_ )
+      , shaderStorageImageExtendedFormats( shaderStorageImageExtendedFormats_ )
+      , shaderStorageImageMultisample( shaderStorageImageMultisample_ )
+      , shaderStorageImageReadWithoutFormat( shaderStorageImageReadWithoutFormat_ )
+      , shaderStorageImageWriteWithoutFormat( shaderStorageImageWriteWithoutFormat_ )
+      , shaderUniformBufferArrayDynamicIndexing( shaderUniformBufferArrayDynamicIndexing_ )
+      , shaderSampledImageArrayDynamicIndexing( shaderSampledImageArrayDynamicIndexing_ )
+      , shaderStorageBufferArrayDynamicIndexing( shaderStorageBufferArrayDynamicIndexing_ )
+      , shaderStorageImageArrayDynamicIndexing( shaderStorageImageArrayDynamicIndexing_ )
+      , shaderClipDistance( shaderClipDistance_ )
+      , shaderCullDistance( shaderCullDistance_ )
+      , shaderFloat64( shaderFloat64_ )
+      , shaderInt64( shaderInt64_ )
+      , shaderInt16( shaderInt16_ )
+      , shaderResourceResidency( shaderResourceResidency_ )
+      , shaderResourceMinLod( shaderResourceMinLod_ )
+      , sparseBinding( sparseBinding_ )
+      , sparseResidencyBuffer( sparseResidencyBuffer_ )
+      , sparseResidencyImage2D( sparseResidencyImage2D_ )
+      , sparseResidencyImage3D( sparseResidencyImage3D_ )
+      , sparseResidency2Samples( sparseResidency2Samples_ )
+      , sparseResidency4Samples( sparseResidency4Samples_ )
+      , sparseResidency8Samples( sparseResidency8Samples_ )
+      , sparseResidency16Samples( sparseResidency16Samples_ )
+      , sparseResidencyAliased( sparseResidencyAliased_ )
+      , variableMultisampleRate( variableMultisampleRate_ )
+      , inheritedQueries( inheritedQueries_ )
     {}
 
     PhysicalDeviceFeatures( VkPhysicalDeviceFeatures const & rhs )
@@ -30030,9 +30028,9 @@ namespace VULKAN_HPP_NAMESPACE
     DispatchIndirectCommand( uint32_t x_ = 0,
                              uint32_t y_ = 0,
                              uint32_t z_ = 0 )
-        : x( x_ )
-        , y( y_ )
-        , z( z_ )
+      : x( x_ )
+      , y( y_ )
+      , z( z_ )
     {}
 
     DispatchIndirectCommand( VkDispatchIndirectCommand const & rhs )
@@ -30182,8 +30180,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     DisplayModeParametersKHR( vk::Extent2D visibleRegion_ = vk::Extent2D(),
                               uint32_t refreshRate_ = 0 )
-        : visibleRegion( visibleRegion_ )
-        , refreshRate( refreshRate_ )
+      : visibleRegion( visibleRegion_ )
+      , refreshRate( refreshRate_ )
     {}
 
     DisplayModeParametersKHR( VkDisplayModeParametersKHR const & rhs )
@@ -31219,11 +31217,11 @@ namespace VULKAN_HPP_NAMESPACE
                                 uint32_t firstIndex_ = 0,
                                 int32_t vertexOffset_ = 0,
                                 uint32_t firstInstance_ = 0 )
-        : indexCount( indexCount_ )
-        , instanceCount( instanceCount_ )
-        , firstIndex( firstIndex_ )
-        , vertexOffset( vertexOffset_ )
-        , firstInstance( firstInstance_ )
+      : indexCount( indexCount_ )
+      , instanceCount( instanceCount_ )
+      , firstIndex( firstIndex_ )
+      , vertexOffset( vertexOffset_ )
+      , firstInstance( firstInstance_ )
     {}
 
     DrawIndexedIndirectCommand( VkDrawIndexedIndirectCommand const & rhs )
@@ -31307,10 +31305,10 @@ namespace VULKAN_HPP_NAMESPACE
                          uint32_t instanceCount_ = 0,
                          uint32_t firstVertex_ = 0,
                          uint32_t firstInstance_ = 0 )
-        : vertexCount( vertexCount_ )
-        , instanceCount( instanceCount_ )
-        , firstVertex( firstVertex_ )
-        , firstInstance( firstInstance_ )
+      : vertexCount( vertexCount_ )
+      , instanceCount( instanceCount_ )
+      , firstVertex( firstVertex_ )
+      , firstInstance( firstInstance_ )
     {}
 
     DrawIndirectCommand( VkDrawIndirectCommand const & rhs )
@@ -31384,8 +31382,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     DrawMeshTasksIndirectCommandNV( uint32_t taskCount_ = 0,
                                     uint32_t firstTask_ = 0 )
-        : taskCount( taskCount_ )
-        , firstTask( firstTask_ )
+      : taskCount( taskCount_ )
+      , firstTask( firstTask_ )
     {}
 
     DrawMeshTasksIndirectCommandNV( VkDrawMeshTasksIndirectCommandNV const & rhs )
@@ -33996,9 +33994,9 @@ namespace VULKAN_HPP_NAMESPACE
     VertexInputBindingDescription( uint32_t binding_ = 0,
                                    uint32_t stride_ = 0,
                                    vk::VertexInputRate inputRate_ = vk::VertexInputRate::eVertex )
-        : binding( binding_ )
-        , stride( stride_ )
-        , inputRate( inputRate_ )
+      : binding( binding_ )
+      , stride( stride_ )
+      , inputRate( inputRate_ )
     {}
 
     VertexInputBindingDescription( VkVertexInputBindingDescription const & rhs )
@@ -34066,10 +34064,10 @@ namespace VULKAN_HPP_NAMESPACE
                                      uint32_t binding_ = 0,
                                      vk::Format format_ = vk::Format::eUndefined,
                                      uint32_t offset_ = 0 )
-        : location( location_ )
-        , binding( binding_ )
-        , format( format_ )
-        , offset( offset_ )
+      : location( location_ )
+      , binding( binding_ )
+      , format( format_ )
+      , offset( offset_ )
     {}
 
     VertexInputAttributeDescription( VkVertexInputAttributeDescription const & rhs )
@@ -34476,12 +34474,12 @@ namespace VULKAN_HPP_NAMESPACE
               float height_ = 0,
               float minDepth_ = 0,
               float maxDepth_ = 0 )
-        : x( x_ )
-        , y( y_ )
-        , width( width_ )
-        , height( height_ )
-        , minDepth( minDepth_ )
-        , maxDepth( maxDepth_ )
+      : x( x_ )
+      , y( y_ )
+      , width( width_ )
+      , height( height_ )
+      , minDepth( minDepth_ )
+      , maxDepth( maxDepth_ )
     {}
 
     Viewport( VkViewport const & rhs )
@@ -35048,13 +35046,13 @@ namespace VULKAN_HPP_NAMESPACE
                     uint32_t compareMask_ = 0,
                     uint32_t writeMask_ = 0,
                     uint32_t reference_ = 0 )
-        : failOp( failOp_ )
-        , passOp( passOp_ )
-        , depthFailOp( depthFailOp_ )
-        , compareOp( compareOp_ )
-        , compareMask( compareMask_ )
-        , writeMask( writeMask_ )
-        , reference( reference_ )
+      : failOp( failOp_ )
+      , passOp( passOp_ )
+      , depthFailOp( depthFailOp_ )
+      , compareOp( compareOp_ )
+      , compareMask( compareMask_ )
+      , writeMask( writeMask_ )
+      , reference( reference_ )
     {}
 
     StencilOpState( VkStencilOpState const & rhs )
@@ -35341,14 +35339,14 @@ namespace VULKAN_HPP_NAMESPACE
                                        vk::BlendFactor dstAlphaBlendFactor_ = vk::BlendFactor::eZero,
                                        vk::BlendOp alphaBlendOp_ = vk::BlendOp::eAdd,
                                        vk::ColorComponentFlags colorWriteMask_ = vk::ColorComponentFlags() )
-        : blendEnable( blendEnable_ )
-        , srcColorBlendFactor( srcColorBlendFactor_ )
-        , dstColorBlendFactor( dstColorBlendFactor_ )
-        , colorBlendOp( colorBlendOp_ )
-        , srcAlphaBlendFactor( srcAlphaBlendFactor_ )
-        , dstAlphaBlendFactor( dstAlphaBlendFactor_ )
-        , alphaBlendOp( alphaBlendOp_ )
-        , colorWriteMask( colorWriteMask_ )
+      : blendEnable( blendEnable_ )
+      , srcColorBlendFactor( srcColorBlendFactor_ )
+      , dstColorBlendFactor( dstColorBlendFactor_ )
+      , colorBlendOp( colorBlendOp_ )
+      , srcAlphaBlendFactor( srcAlphaBlendFactor_ )
+      , dstAlphaBlendFactor( dstAlphaBlendFactor_ )
+      , alphaBlendOp( alphaBlendOp_ )
+      , colorWriteMask( colorWriteMask_ )
     {}
 
     PipelineColorBlendAttachmentState( VkPipelineColorBlendAttachmentState const & rhs )
@@ -35961,8 +35959,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     XYColorEXT( float x_ = 0,
                 float y_ = 0 )
-        : x( x_ )
-        , y( y_ )
+      : x( x_ )
+      , y( y_ )
     {}
 
     XYColorEXT( VkXYColorEXT const & rhs )
@@ -36365,11 +36363,11 @@ namespace VULKAN_HPP_NAMESPACE
                std::array<vk::Offset3D,2> const& srcOffsets_ = { { vk::Offset3D() } },
                vk::ImageSubresourceLayers dstSubresource_ = vk::ImageSubresourceLayers(),
                std::array<vk::Offset3D,2> const& dstOffsets_ = { { vk::Offset3D() } } )
-        : srcSubresource( srcSubresource_ )
-        , dstSubresource( dstSubresource_ )
+      : srcSubresource( srcSubresource_ )
+      , dstSubresource( dstSubresource_ )
     {
-        memcpy( &srcOffsets, srcOffsets_.data(), 2 * sizeof( vk::Offset3D ) );
-        memcpy( &dstOffsets, dstOffsets_.data(), 2 * sizeof( vk::Offset3D ) );
+      memcpy( &srcOffsets, srcOffsets_.data(), 2 * sizeof( vk::Offset3D ) );
+      memcpy( &dstOffsets, dstOffsets_.data(), 2 * sizeof( vk::Offset3D ) );
     
     }
 
@@ -36447,11 +36445,11 @@ namespace VULKAN_HPP_NAMESPACE
                vk::ImageSubresourceLayers dstSubresource_ = vk::ImageSubresourceLayers(),
                vk::Offset3D dstOffset_ = vk::Offset3D(),
                vk::Extent3D extent_ = vk::Extent3D() )
-        : srcSubresource( srcSubresource_ )
-        , srcOffset( srcOffset_ )
-        , dstSubresource( dstSubresource_ )
-        , dstOffset( dstOffset_ )
-        , extent( extent_ )
+      : srcSubresource( srcSubresource_ )
+      , srcOffset( srcOffset_ )
+      , dstSubresource( dstSubresource_ )
+      , dstOffset( dstOffset_ )
+      , extent( extent_ )
     {}
 
     ImageCopy( VkImageCopy const & rhs )
@@ -37200,11 +37198,11 @@ namespace VULKAN_HPP_NAMESPACE
                            uint32_t levelCount_ = 0,
                            uint32_t baseArrayLayer_ = 0,
                            uint32_t layerCount_ = 0 )
-        : aspectMask( aspectMask_ )
-        , baseMipLevel( baseMipLevel_ )
-        , levelCount( levelCount_ )
-        , baseArrayLayer( baseArrayLayer_ )
-        , layerCount( layerCount_ )
+      : aspectMask( aspectMask_ )
+      , baseMipLevel( baseMipLevel_ )
+      , levelCount( levelCount_ )
+      , baseArrayLayer( baseArrayLayer_ )
+      , layerCount( layerCount_ )
     {}
 
     ImageSubresourceRange( VkImageSubresourceRange const & rhs )
@@ -37716,11 +37714,11 @@ namespace VULKAN_HPP_NAMESPACE
                   vk::ImageSubresourceLayers dstSubresource_ = vk::ImageSubresourceLayers(),
                   vk::Offset3D dstOffset_ = vk::Offset3D(),
                   vk::Extent3D extent_ = vk::Extent3D() )
-        : srcSubresource( srcSubresource_ )
-        , srcOffset( srcOffset_ )
-        , dstSubresource( dstSubresource_ )
-        , dstOffset( dstOffset_ )
-        , extent( extent_ )
+      : srcSubresource( srcSubresource_ )
+      , srcOffset( srcOffset_ )
+      , dstSubresource( dstSubresource_ )
+      , dstOffset( dstOffset_ )
+      , extent( extent_ )
     {}
 
     ImageResolve( VkImageResolve const & rhs )
@@ -39449,10 +39447,10 @@ namespace VULKAN_HPP_NAMESPACE
                                     uint32_t bindingUnit_ = 0,
                                     uint32_t dynamicCount_ = 0,
                                     uint32_t divisor_ = 0 )
-        : tokenType( tokenType_ )
-        , bindingUnit( bindingUnit_ )
-        , dynamicCount( dynamicCount_ )
-        , divisor( divisor_ )
+      : tokenType( tokenType_ )
+      , bindingUnit( bindingUnit_ )
+      , dynamicCount( dynamicCount_ )
+      , divisor( divisor_ )
     {}
 
     IndirectCommandsLayoutTokenNVX( VkIndirectCommandsLayoutTokenNVX const & rhs )
@@ -39728,9 +39726,9 @@ namespace VULKAN_HPP_NAMESPACE
     InputAttachmentAspectReference( uint32_t subpass_ = 0,
                                     uint32_t inputAttachmentIndex_ = 0,
                                     vk::ImageAspectFlags aspectMask_ = vk::ImageAspectFlags() )
-        : subpass( subpass_ )
-        , inputAttachmentIndex( inputAttachmentIndex_ )
-        , aspectMask( aspectMask_ )
+      : subpass( subpass_ )
+      , inputAttachmentIndex( inputAttachmentIndex_ )
+      , aspectMask( aspectMask_ )
     {}
 
     InputAttachmentAspectReference( VkInputAttachmentAspectReference const & rhs )
@@ -41634,8 +41632,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     ObjectTableEntryNVX( vk::ObjectEntryTypeNVX type_ = vk::ObjectEntryTypeNVX::eDescriptorSet,
                          vk::ObjectEntryUsageFlagsNVX flags_ = vk::ObjectEntryUsageFlagsNVX() )
-        : type( type_ )
-        , flags( flags_ )
+      : type( type_ )
+      , flags( flags_ )
     {}
 
     ObjectTableEntryNVX( VkObjectTableEntryNVX const & rhs )
@@ -41695,10 +41693,10 @@ namespace VULKAN_HPP_NAMESPACE
                                       vk::ObjectEntryUsageFlagsNVX flags_ = vk::ObjectEntryUsageFlagsNVX(),
                                       vk::PipelineLayout pipelineLayout_ = vk::PipelineLayout(),
                                       vk::DescriptorSet descriptorSet_ = vk::DescriptorSet() )
-        : type( type_ )
-        , flags( flags_ )
-        , pipelineLayout( pipelineLayout_ )
-        , descriptorSet( descriptorSet_ )
+      : type( type_ )
+      , flags( flags_ )
+      , pipelineLayout( pipelineLayout_ )
+      , descriptorSet( descriptorSet_ )
     {}
 
     explicit ObjectTableDescriptorSetEntryNVX( ObjectTableEntryNVX const& objectTableEntryNVX,
@@ -41708,7 +41706,6 @@ namespace VULKAN_HPP_NAMESPACE
       , flags( objectTableEntryNVX.flags )
       , pipelineLayout( pipelineLayout_ )
       , descriptorSet( descriptorSet_ )
-
     {}
 
     ObjectTableDescriptorSetEntryNVX( VkObjectTableDescriptorSetEntryNVX const & rhs )
@@ -41784,10 +41781,10 @@ namespace VULKAN_HPP_NAMESPACE
                                     vk::ObjectEntryUsageFlagsNVX flags_ = vk::ObjectEntryUsageFlagsNVX(),
                                     vk::Buffer buffer_ = vk::Buffer(),
                                     vk::IndexType indexType_ = vk::IndexType::eUint16 )
-        : type( type_ )
-        , flags( flags_ )
-        , buffer( buffer_ )
-        , indexType( indexType_ )
+      : type( type_ )
+      , flags( flags_ )
+      , buffer( buffer_ )
+      , indexType( indexType_ )
     {}
 
     explicit ObjectTableIndexBufferEntryNVX( ObjectTableEntryNVX const& objectTableEntryNVX,
@@ -41797,7 +41794,6 @@ namespace VULKAN_HPP_NAMESPACE
       , flags( objectTableEntryNVX.flags )
       , buffer( buffer_ )
       , indexType( indexType_ )
-
     {}
 
     ObjectTableIndexBufferEntryNVX( VkObjectTableIndexBufferEntryNVX const & rhs )
@@ -41872,9 +41868,9 @@ namespace VULKAN_HPP_NAMESPACE
     ObjectTablePipelineEntryNVX( vk::ObjectEntryTypeNVX type_ = vk::ObjectEntryTypeNVX::eDescriptorSet,
                                  vk::ObjectEntryUsageFlagsNVX flags_ = vk::ObjectEntryUsageFlagsNVX(),
                                  vk::Pipeline pipeline_ = vk::Pipeline() )
-        : type( type_ )
-        , flags( flags_ )
-        , pipeline( pipeline_ )
+      : type( type_ )
+      , flags( flags_ )
+      , pipeline( pipeline_ )
     {}
 
     explicit ObjectTablePipelineEntryNVX( ObjectTableEntryNVX const& objectTableEntryNVX,
@@ -41882,7 +41878,6 @@ namespace VULKAN_HPP_NAMESPACE
       : type( objectTableEntryNVX.type )
       , flags( objectTableEntryNVX.flags )
       , pipeline( pipeline_ )
-
     {}
 
     ObjectTablePipelineEntryNVX( VkObjectTablePipelineEntryNVX const & rhs )
@@ -41950,10 +41945,10 @@ namespace VULKAN_HPP_NAMESPACE
                                      vk::ObjectEntryUsageFlagsNVX flags_ = vk::ObjectEntryUsageFlagsNVX(),
                                      vk::PipelineLayout pipelineLayout_ = vk::PipelineLayout(),
                                      vk::ShaderStageFlags stageFlags_ = vk::ShaderStageFlags() )
-        : type( type_ )
-        , flags( flags_ )
-        , pipelineLayout( pipelineLayout_ )
-        , stageFlags( stageFlags_ )
+      : type( type_ )
+      , flags( flags_ )
+      , pipelineLayout( pipelineLayout_ )
+      , stageFlags( stageFlags_ )
     {}
 
     explicit ObjectTablePushConstantEntryNVX( ObjectTableEntryNVX const& objectTableEntryNVX,
@@ -41963,7 +41958,6 @@ namespace VULKAN_HPP_NAMESPACE
       , flags( objectTableEntryNVX.flags )
       , pipelineLayout( pipelineLayout_ )
       , stageFlags( stageFlags_ )
-
     {}
 
     ObjectTablePushConstantEntryNVX( VkObjectTablePushConstantEntryNVX const & rhs )
@@ -42038,9 +42032,9 @@ namespace VULKAN_HPP_NAMESPACE
     ObjectTableVertexBufferEntryNVX( vk::ObjectEntryTypeNVX type_ = vk::ObjectEntryTypeNVX::eDescriptorSet,
                                      vk::ObjectEntryUsageFlagsNVX flags_ = vk::ObjectEntryUsageFlagsNVX(),
                                      vk::Buffer buffer_ = vk::Buffer() )
-        : type( type_ )
-        , flags( flags_ )
-        , buffer( buffer_ )
+      : type( type_ )
+      , flags( flags_ )
+      , buffer( buffer_ )
     {}
 
     explicit ObjectTableVertexBufferEntryNVX( ObjectTableEntryNVX const& objectTableEntryNVX,
@@ -42048,7 +42042,6 @@ namespace VULKAN_HPP_NAMESPACE
       : type( objectTableEntryNVX.type )
       , flags( objectTableEntryNVX.flags )
       , buffer( buffer_ )
-
     {}
 
     ObjectTableVertexBufferEntryNVX( VkObjectTableVertexBufferEntryNVX const & rhs )
@@ -42584,8 +42577,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     PerformanceValueINTEL( vk::PerformanceValueTypeINTEL type_ = vk::PerformanceValueTypeINTEL::eUint32,
                            vk::PerformanceValueDataINTEL data_ = vk::PerformanceValueDataINTEL() )
-        : type( type_ )
-        , data( data_ )
+      : type( type_ )
+      , data( data_ )
     {}
 
     PerformanceValueINTEL( VkPerformanceValueINTEL const & rhs )
@@ -52556,9 +52549,9 @@ namespace VULKAN_HPP_NAMESPACE
     PushConstantRange( vk::ShaderStageFlags stageFlags_ = vk::ShaderStageFlags(),
                        uint32_t offset_ = 0,
                        uint32_t size_ = 0 )
-        : stageFlags( stageFlags_ )
-        , offset( offset_ )
-        , size( size_ )
+      : stageFlags( stageFlags_ )
+      , offset( offset_ )
+      , size( size_ )
     {}
 
     PushConstantRange( VkPushConstantRange const & rhs )
@@ -53570,8 +53563,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     VertexInputBindingDivisorDescriptionEXT( uint32_t binding_ = 0,
                                              uint32_t divisor_ = 0 )
-        : binding( binding_ )
-        , divisor( divisor_ )
+      : binding( binding_ )
+      , divisor( divisor_ )
     {}
 
     VertexInputBindingDivisorDescriptionEXT( VkVertexInputBindingDivisorDescriptionEXT const & rhs )
@@ -53925,8 +53918,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     ShadingRatePaletteNV( uint32_t shadingRatePaletteEntryCount_ = 0,
                           const vk::ShadingRatePaletteEntryNV* pShadingRatePaletteEntries_ = nullptr )
-        : shadingRatePaletteEntryCount( shadingRatePaletteEntryCount_ )
-        , pShadingRatePaletteEntries( pShadingRatePaletteEntries_ )
+      : shadingRatePaletteEntryCount( shadingRatePaletteEntryCount_ )
+      , pShadingRatePaletteEntries( pShadingRatePaletteEntries_ )
     {}
 
     ShadingRatePaletteNV( VkShadingRatePaletteNV const & rhs )
@@ -54092,10 +54085,10 @@ namespace VULKAN_HPP_NAMESPACE
                        vk::ViewportCoordinateSwizzleNV y_ = vk::ViewportCoordinateSwizzleNV::ePositiveX,
                        vk::ViewportCoordinateSwizzleNV z_ = vk::ViewportCoordinateSwizzleNV::ePositiveX,
                        vk::ViewportCoordinateSwizzleNV w_ = vk::ViewportCoordinateSwizzleNV::ePositiveX )
-        : x( x_ )
-        , y( y_ )
-        , z( z_ )
-        , w( w_ )
+      : x( x_ )
+      , y( y_ )
+      , z( z_ )
+      , w( w_ )
     {}
 
     ViewportSwizzleNV( VkViewportSwizzleNV const & rhs )
@@ -54275,8 +54268,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     ViewportWScalingNV( float xcoeff_ = 0,
                         float ycoeff_ = 0 )
-        : xcoeff( xcoeff_ )
-        , ycoeff( ycoeff_ )
+      : xcoeff( xcoeff_ )
+      , ycoeff( ycoeff_ )
     {}
 
     ViewportWScalingNV( VkViewportWScalingNV const & rhs )
@@ -54667,9 +54660,9 @@ namespace VULKAN_HPP_NAMESPACE
     RectLayerKHR( vk::Offset2D offset_ = vk::Offset2D(),
                   vk::Extent2D extent_ = vk::Extent2D(),
                   uint32_t layer_ = 0 )
-        : offset( offset_ )
-        , extent( extent_ )
-        , layer( layer_ )
+      : offset( offset_ )
+      , extent( extent_ )
+      , layer( layer_ )
     {}
 
     explicit RectLayerKHR( Rect2D const& rect2D,
@@ -54677,7 +54670,6 @@ namespace VULKAN_HPP_NAMESPACE
       : offset( rect2D.offset )
       , extent( rect2D.extent )
       , layer( layer_ )
-
     {}
 
     RectLayerKHR( VkRectLayerKHR const & rhs )
@@ -54743,8 +54735,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     PresentRegionKHR( uint32_t rectangleCount_ = 0,
                       const vk::RectLayerKHR* pRectangles_ = nullptr )
-        : rectangleCount( rectangleCount_ )
-        , pRectangles( pRectangles_ )
+      : rectangleCount( rectangleCount_ )
+      , pRectangles( pRectangles_ )
     {}
 
     PresentRegionKHR( VkPresentRegionKHR const & rhs )
@@ -54897,8 +54889,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     PresentTimeGOOGLE( uint32_t presentID_ = 0,
                        uint64_t desiredPresentTime_ = 0 )
-        : presentID( presentID_ )
-        , desiredPresentTime( desiredPresentTime_ )
+      : presentID( presentID_ )
+      , desiredPresentTime( desiredPresentTime_ )
     {}
 
     PresentTimeGOOGLE( VkPresentTimeGOOGLE const & rhs )
@@ -56045,16 +56037,16 @@ namespace VULKAN_HPP_NAMESPACE
                         const vk::AttachmentReference* pDepthStencilAttachment_ = nullptr,
                         uint32_t preserveAttachmentCount_ = 0,
                         const uint32_t* pPreserveAttachments_ = nullptr )
-        : flags( flags_ )
-        , pipelineBindPoint( pipelineBindPoint_ )
-        , inputAttachmentCount( inputAttachmentCount_ )
-        , pInputAttachments( pInputAttachments_ )
-        , colorAttachmentCount( colorAttachmentCount_ )
-        , pColorAttachments( pColorAttachments_ )
-        , pResolveAttachments( pResolveAttachments_ )
-        , pDepthStencilAttachment( pDepthStencilAttachment_ )
-        , preserveAttachmentCount( preserveAttachmentCount_ )
-        , pPreserveAttachments( pPreserveAttachments_ )
+      : flags( flags_ )
+      , pipelineBindPoint( pipelineBindPoint_ )
+      , inputAttachmentCount( inputAttachmentCount_ )
+      , pInputAttachments( pInputAttachments_ )
+      , colorAttachmentCount( colorAttachmentCount_ )
+      , pColorAttachments( pColorAttachments_ )
+      , pResolveAttachments( pResolveAttachments_ )
+      , pDepthStencilAttachment( pDepthStencilAttachment_ )
+      , preserveAttachmentCount( preserveAttachmentCount_ )
+      , pPreserveAttachments( pPreserveAttachments_ )
     {}
 
     SubpassDescription( VkSubpassDescription const & rhs )
@@ -56181,13 +56173,13 @@ namespace VULKAN_HPP_NAMESPACE
                        vk::AccessFlags srcAccessMask_ = vk::AccessFlags(),
                        vk::AccessFlags dstAccessMask_ = vk::AccessFlags(),
                        vk::DependencyFlags dependencyFlags_ = vk::DependencyFlags() )
-        : srcSubpass( srcSubpass_ )
-        , dstSubpass( dstSubpass_ )
-        , srcStageMask( srcStageMask_ )
-        , dstStageMask( dstStageMask_ )
-        , srcAccessMask( srcAccessMask_ )
-        , dstAccessMask( dstAccessMask_ )
-        , dependencyFlags( dependencyFlags_ )
+      : srcSubpass( srcSubpass_ )
+      , dstSubpass( dstSubpass_ )
+      , srcStageMask( srcStageMask_ )
+      , dstStageMask( dstStageMask_ )
+      , srcAccessMask( srcAccessMask_ )
+      , dstAccessMask( dstAccessMask_ )
+      , dependencyFlags( dependencyFlags_ )
     {}
 
     SubpassDependency( VkSubpassDependency const & rhs )
@@ -57280,8 +57272,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     SubpassSampleLocationsEXT( uint32_t subpassIndex_ = 0,
                                vk::SampleLocationsInfoEXT sampleLocationsInfo_ = vk::SampleLocationsInfoEXT() )
-        : subpassIndex( subpassIndex_ )
-        , sampleLocationsInfo( sampleLocationsInfo_ )
+      : subpassIndex( subpassIndex_ )
+      , sampleLocationsInfo( sampleLocationsInfo_ )
     {}
 
     SubpassSampleLocationsEXT( VkSubpassSampleLocationsEXT const & rhs )

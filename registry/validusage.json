@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.1.121",
-    "comment": "from git branch: github-master commit: 59750fe4c72a9295a94e22474060d3a1635e92c8",
-    "date": "2019-08-25 10:57:34Z"
+    "api version": "1.1.122",
+    "comment": "from git branch: github-master commit: 194a7f4d0d552e78d6f1a2fa2ae0ddbe0215090a",
+    "date": "2019-09-09 03:41:35Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -4062,7 +4062,7 @@
         },
         {
           "vuid": "VUID-VkFramebufferCreateInfo-pAttachments-00880",
-          "text": " If <code>flags</code> does not include <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT_KHR</code>, each element of <code>pAttachments</code> <strong class=\"purple\">must</strong> have been created with an <a href=\"#VkFormat\">VkFormat</a> value that matches the <a href=\"#VkFormat\">VkFormat</a> specified by the corresponding <code>VkAttachmentDescription</code> in <code>renderPass</code>"
+          "text": " If <code>flags</code> does not include <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT_KHR</code>, each element of <code>pAttachments</code> <strong class=\"purple\">must</strong> have been created with a <a href=\"#VkFormat\">VkFormat</a> value that matches the <a href=\"#VkFormat\">VkFormat</a> specified by the corresponding <code>VkAttachmentDescription</code> in <code>renderPass</code>"
         },
         {
           "vuid": "VUID-VkFramebufferCreateInfo-pAttachments-00881",
@@ -4940,7 +4940,7 @@
       "(VK_NV_glsl_shader)": [
         {
           "vuid": "VUID-VkShaderModuleCreateInfo-pCode-01376",
-          "text": " If <code>pCode</code> points to SPIR-V code, <code>codeSize</code> <strong class=\"purple\">must</strong> be a multiple of 4"
+          "text": " If <code>pCode</code> is a pointer to SPIR-V code, <code>codeSize</code> <strong class=\"purple\">must</strong> be a multiple of 4"
         },
         {
           "vuid": "VUID-VkShaderModuleCreateInfo-pCode-01377",
@@ -4948,11 +4948,11 @@
         },
         {
           "vuid": "VUID-VkShaderModuleCreateInfo-pCode-01378",
-          "text": " If <code>pCode</code> points to SPIR-V code, that code <strong class=\"purple\">must</strong> adhere to the validation rules described by the <a href=\"#spirvenv-module-validation\">Validation Rules within a Module</a> section of the <a href=\"#spirvenv-capabilities\">SPIR-V Environment</a> appendix"
+          "text": " If <code>pCode</code> is a pointer to SPIR-V code, that code <strong class=\"purple\">must</strong> adhere to the validation rules described by the <a href=\"#spirvenv-module-validation\">Validation Rules within a Module</a> section of the <a href=\"#spirvenv-capabilities\">SPIR-V Environment</a> appendix"
         },
         {
           "vuid": "VUID-VkShaderModuleCreateInfo-pCode-01379",
-          "text": " If <code>pCode</code> points to GLSL code, it <strong class=\"purple\">must</strong> be valid GLSL code written to the <code>GL_KHR_vulkan_glsl</code> GLSL extension specification"
+          "text": " If <code>pCode</code> is a pointer to GLSL code, it <strong class=\"purple\">must</strong> be valid GLSL code written to the <code>GL_KHR_vulkan_glsl</code> GLSL extension specification"
         }
       ]
     },
@@ -8477,12 +8477,20 @@
       ],
       "(VK_EXT_separate_stencil_usage)": [
         {
-          "vuid": "VUID-VkImageCreateInfo-format-02534",
-          "text": " If <code>format</code> is a depth-stencil format and the <code>pNext</code> chain contains an instance of <a href=\"#VkImageStencilUsageCreateInfoEXT\">VkImageStencilUsageCreateInfoEXT</a>, then its <code>stencilUsage</code> member <strong class=\"purple\">must</strong> only include <code>VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</code> if <code>usage</code> also includes it"
+          "vuid": "VUID-VkImageCreateInfo-format-02795",
+          "text": " If <code>format</code> is a depth-stencil format, <code>usage</code> includes <code>VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</code>, and the <code>pNext</code> chain contains an instance of <a href=\"#VkImageStencilUsageCreateInfoEXT\">VkImageStencilUsageCreateInfoEXT</a>, then <a href=\"#VkImageStencilUsageCreateInfoEXT\">VkImageStencilUsageCreateInfoEXT</a>::<code>stencilUsage</code> member <strong class=\"purple\">must</strong> also include <code>VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</code>"
         },
         {
-          "vuid": "VUID-VkImageCreateInfo-format-02535",
-          "text": " If <code>format</code> is a depth-stencil format and the <code>pNext</code> chain contains an instance of <a href=\"#VkImageStencilUsageCreateInfoEXT\">VkImageStencilUsageCreateInfoEXT</a>, then its <code>stencilUsage</code> member <strong class=\"purple\">must</strong> only include <code>VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT</code> if <code>usage</code> also includes it"
+          "vuid": "VUID-VkImageCreateInfo-format-02796",
+          "text": " If <code>format</code> is a depth-stencil format, <code>usage</code> does not include <code>VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</code>, and the <code>pNext</code> chain contains an instance of <a href=\"#VkImageStencilUsageCreateInfoEXT\">VkImageStencilUsageCreateInfoEXT</a>, then <a href=\"#VkImageStencilUsageCreateInfoEXT\">VkImageStencilUsageCreateInfoEXT</a>::<code>stencilUsage</code> member <strong class=\"purple\">must</strong> also not include <code>VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</code>"
+        },
+        {
+          "vuid": "VUID-VkImageCreateInfo-format-02797",
+          "text": " If <code>format</code> is a depth-stencil format, <code>usage</code> includes <code>VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT</code>, and the <code>pNext</code> chain contains an instance of <a href=\"#VkImageStencilUsageCreateInfoEXT\">VkImageStencilUsageCreateInfoEXT</a>, then <a href=\"#VkImageStencilUsageCreateInfoEXT\">VkImageStencilUsageCreateInfoEXT</a>::<code>stencilUsage</code> member <strong class=\"purple\">must</strong> also include <code>VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT</code>"
+        },
+        {
+          "vuid": "VUID-VkImageCreateInfo-format-02798",
+          "text": " If <code>format</code> is a depth-stencil format, <code>usage</code> does not include <code>VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT</code>, and the <code>pNext</code> chain contains an instance of <a href=\"#VkImageStencilUsageCreateInfoEXT\">VkImageStencilUsageCreateInfoEXT</a>, then <a href=\"#VkImageStencilUsageCreateInfoEXT\">VkImageStencilUsageCreateInfoEXT</a>::<code>stencilUsage</code> member <strong class=\"purple\">must</strong> also not include <code>VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT</code>"
         },
         {
           "vuid": "VUID-VkImageCreateInfo-Format-02536",
@@ -8534,7 +8542,7 @@
       "(VK_EXT_separate_stencil_usage)": [
         {
           "vuid": "VUID-VkImageStencilUsageCreateInfoEXT-stencilUsage-02539",
-          "text": " If <code>stencilUsage</code> includes <code>VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT</code>, then bits other than <code>VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</code>, and <code>VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT</code> <strong class=\"purple\">must</strong> not be set"
+          "text": " If <code>stencilUsage</code> includes <code>VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT</code>, it <strong class=\"purple\">must</strong> not include bits other than <code>VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</code> or <code>VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT</code>"
         },
         {
           "vuid": "VUID-VkImageStencilUsageCreateInfoEXT-sType-sType",
@@ -9054,7 +9062,7 @@
       "(VK_KHR_image_format_list)": [
         {
           "vuid": "VUID-VkImageViewCreateInfo-pNext-01585",
-          "text": " If a <code>VkImageFormatListCreateInfoKHR</code> structure was included in the <code>pNext</code> chain of the <code>VkImageCreateInfo</code> struct used when creating <code>image</code> and the <code>viewFormatCount</code> field of <code>VkImageFormatListCreateInfoKHR</code> is not zero then <code>format</code> <strong class=\"purple\">must</strong> be one of the formats in <code>VkImageFormatListCreateInfoKHR</code>::<code>pViewFormats</code>."
+          "text": " If a <code>VkImageFormatListCreateInfoKHR</code> structure was included in the <code>pNext</code> chain of the <code>VkImageCreateInfo</code> structure used when creating <code>image</code> and the <code>viewFormatCount</code> field of <code>VkImageFormatListCreateInfoKHR</code> is not zero then <code>format</code> <strong class=\"purple\">must</strong> be one of the formats in <code>VkImageFormatListCreateInfoKHR</code>::<code>pViewFormats</code>."
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
@@ -10020,11 +10028,11 @@
         },
         {
           "vuid": "VUID-VkBindImageMemoryDeviceGroupInfo-extent-01640",
-          "text": " The <code>extent.width</code> member of any element of <code>pSplitInstanceBindRegions</code> <strong class=\"purple\">must</strong> either be a multiple of the sparse image block width of all non-metadata aspects of the image, or else <code>extent.width</code> + <code>offset.x</code> <strong class=\"purple\">must</strong> equal the width of the image subresource"
+          "text": " The <code>extent.width</code> member of any element of <code>pSplitInstanceBindRegions</code> <strong class=\"purple\">must</strong> either be a multiple of the sparse image block width of all non-metadata aspects of the image, or else <code>extent.width</code> &#43; <code>offset.x</code> <strong class=\"purple\">must</strong> equal the width of the image subresource"
         },
         {
           "vuid": "VUID-VkBindImageMemoryDeviceGroupInfo-extent-01641",
-          "text": " The <code>extent.height</code> member of any element of <code>pSplitInstanceBindRegions</code> <strong class=\"purple\">must</strong> either be a multiple of the sparse image block height of all non-metadata aspects of the image, or else <code>extent.height</code><br> <code>offset.y</code> <strong class=\"purple\">must</strong> equal the width of the image subresource"
+          "text": " The <code>extent.height</code> member of any element of <code>pSplitInstanceBindRegions</code> <strong class=\"purple\">must</strong> either be a multiple of the sparse image block height of all non-metadata aspects of the image, or else <code>extent.height</code> &#43; <code>offset.y</code> <strong class=\"purple\">must</strong> equal the width of the image subresource"
         },
         {
           "vuid": "VUID-VkBindImageMemoryDeviceGroupInfo-sType-sType",
@@ -12216,7 +12224,7 @@
       "(VK_VERSION_1_1,VK_KHR_descriptor_update_template)": [
         {
           "vuid": "VUID-vkUpdateDescriptorSetWithTemplate-pData-01685",
-          "text": " <code>pData</code> <strong class=\"purple\">must</strong> be a valid pointer to a memory that contains one or more valid instances of <a href=\"#VkDescriptorImageInfo\">VkDescriptorImageInfo</a>, <a href=\"#VkDescriptorBufferInfo\">VkDescriptorBufferInfo</a>, or <a href=\"#VkBufferView\">VkBufferView</a> in a layout defined by <code>descriptorUpdateTemplate</code> when it was created with <a href=\"#vkCreateDescriptorUpdateTemplate\">vkCreateDescriptorUpdateTemplate</a>"
+          "text": " <code>pData</code> <strong class=\"purple\">must</strong> be a valid pointer to a memory containing one or more valid instances of <a href=\"#VkDescriptorImageInfo\">VkDescriptorImageInfo</a>, <a href=\"#VkDescriptorBufferInfo\">VkDescriptorBufferInfo</a>, or <a href=\"#VkBufferView\">VkBufferView</a> in a layout defined by <code>descriptorUpdateTemplate</code> when it was created with <a href=\"#vkCreateDescriptorUpdateTemplate\">vkCreateDescriptorUpdateTemplate</a>"
         },
         {
           "vuid": "VUID-vkUpdateDescriptorSetWithTemplate-device-parameter",
@@ -12360,7 +12368,7 @@
         },
         {
           "vuid": "VUID-vkCmdPushDescriptorSetWithTemplateKHR-pData-01686",
-          "text": " <code>pData</code> <strong class=\"purple\">must</strong> be a valid pointer to a memory that contains one or more valid instances of <a href=\"#VkDescriptorImageInfo\">VkDescriptorImageInfo</a>, <a href=\"#VkDescriptorBufferInfo\">VkDescriptorBufferInfo</a>, or <a href=\"#VkBufferView\">VkBufferView</a> in a layout defined by <code>descriptorUpdateTemplate</code> when it was created with <a href=\"#vkCreateDescriptorUpdateTemplateKHR\">vkCreateDescriptorUpdateTemplateKHR</a>"
+          "text": " <code>pData</code> <strong class=\"purple\">must</strong> be a valid pointer to a memory containing one or more valid instances of <a href=\"#VkDescriptorImageInfo\">VkDescriptorImageInfo</a>, <a href=\"#VkDescriptorBufferInfo\">VkDescriptorBufferInfo</a>, or <a href=\"#VkBufferView\">VkBufferView</a> in a layout defined by <code>descriptorUpdateTemplate</code> when it was created with <a href=\"#vkCreateDescriptorUpdateTemplateKHR\">vkCreateDescriptorUpdateTemplateKHR</a>"
         },
         {
           "vuid": "VUID-vkCmdPushDescriptorSetWithTemplateKHR-commandBuffer-parameter",
