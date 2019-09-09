@@ -44,7 +44,7 @@ extern "C" {
 #define VK_VERSION_MINOR(version) (((uint32_t)(version) >> 12) & 0x3ff)
 #define VK_VERSION_PATCH(version) ((uint32_t)(version) & 0xfff)
 // Version of this file
-#define VK_HEADER_VERSION 121
+#define VK_HEADER_VERSION 122
 
 
 #define VK_NULL_HANDLE 0
@@ -6993,7 +6993,7 @@ typedef struct VkExportMemoryAllocateInfoNV {
 
 
 #define VK_EXT_validation_flags 1
-#define VK_EXT_VALIDATION_FLAGS_SPEC_VERSION 1
+#define VK_EXT_VALIDATION_FLAGS_SPEC_VERSION 2
 #define VK_EXT_VALIDATION_FLAGS_EXTENSION_NAME "VK_EXT_validation_flags"
 
 typedef enum VkValidationCheckEXT {
@@ -9729,7 +9729,7 @@ typedef struct VkPhysicalDeviceYcbcrImageArraysFeaturesEXT {
 
 
 #define VK_EXT_headless_surface 1
-#define VK_EXT_HEADLESS_SURFACE_SPEC_VERSION 0
+#define VK_EXT_HEADLESS_SURFACE_SPEC_VERSION 1
 #define VK_EXT_HEADLESS_SURFACE_EXTENSION_NAME "VK_EXT_headless_surface"
 typedef VkFlags VkHeadlessSurfaceCreateFlagsEXT;
 typedef struct VkHeadlessSurfaceCreateInfoEXT {
