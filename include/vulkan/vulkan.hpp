@@ -56,7 +56,7 @@
 # define VULKAN_HPP_ASSERT   assert
 #endif
 
-static_assert( VK_HEADER_VERSION ==  122 , "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION ==  123 , "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
@@ -5351,6 +5351,7 @@ namespace VULKAN_HPP_NAMESPACE
     ePhysicalDeviceImageViewImageFormatInfoEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_VIEW_IMAGE_FORMAT_INFO_EXT,
     eFilterCubicImageViewImageFormatPropertiesEXT = VK_STRUCTURE_TYPE_FILTER_CUBIC_IMAGE_VIEW_IMAGE_FORMAT_PROPERTIES_EXT,
     eDeviceQueueGlobalPriorityCreateInfoEXT = VK_STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_EXT,
+    ePhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES_KHR,
     ePhysicalDevice8BitStorageFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES_KHR,
     eImportMemoryHostPointerInfoEXT = VK_STRUCTURE_TYPE_IMPORT_MEMORY_HOST_POINTER_INFO_EXT,
     eMemoryHostPointerPropertiesEXT = VK_STRUCTURE_TYPE_MEMORY_HOST_POINTER_PROPERTIES_EXT,
@@ -5795,6 +5796,7 @@ namespace VULKAN_HPP_NAMESPACE
       case StructureType::ePhysicalDeviceImageViewImageFormatInfoEXT : return "PhysicalDeviceImageViewImageFormatInfoEXT";
       case StructureType::eFilterCubicImageViewImageFormatPropertiesEXT : return "FilterCubicImageViewImageFormatPropertiesEXT";
       case StructureType::eDeviceQueueGlobalPriorityCreateInfoEXT : return "DeviceQueueGlobalPriorityCreateInfoEXT";
+      case StructureType::ePhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR : return "PhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR";
       case StructureType::ePhysicalDevice8BitStorageFeaturesKHR : return "PhysicalDevice8BitStorageFeaturesKHR";
       case StructureType::eImportMemoryHostPointerInfoEXT : return "ImportMemoryHostPointerInfoEXT";
       case StructureType::eMemoryHostPointerPropertiesEXT : return "MemoryHostPointerPropertiesEXT";
@@ -11605,6 +11607,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL;
   struct PhysicalDeviceShaderSMBuiltinsFeaturesNV;
   struct PhysicalDeviceShaderSMBuiltinsPropertiesNV;
+  struct PhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR;
   struct PhysicalDeviceShadingRateImageFeaturesNV;
   struct PhysicalDeviceShadingRateImagePropertiesNV;
   struct PhysicalDeviceSparseImageFormatInfo2;
@@ -49648,6 +49651,90 @@ namespace VULKAN_HPP_NAMESPACE
 
   namespace layout
   {
+    struct PhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR
+    {
+    protected:
+      PhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR( vk::Bool32 shaderSubgroupExtendedTypes_ = 0 )
+        : shaderSubgroupExtendedTypes( shaderSubgroupExtendedTypes_ )
+      {}
+
+      PhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR( VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR const & rhs )
+      {
+        *reinterpret_cast<VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR*>(this) = rhs;
+      }
+
+      PhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR& operator=( VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR const & rhs )
+      {
+        *reinterpret_cast<VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR*>(this) = rhs;
+        return *this;
+      }
+
+    public:
+      vk::StructureType sType = StructureType::ePhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR;
+      void* pNext = nullptr;
+      vk::Bool32 shaderSubgroupExtendedTypes;
+    };
+    static_assert( sizeof( PhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR ) == sizeof( VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR ), "layout struct and wrapper have different size!" );
+  }
+
+  struct PhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR : public layout::PhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR
+  {
+    PhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR( vk::Bool32 shaderSubgroupExtendedTypes_ = 0 )
+      : layout::PhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR( shaderSubgroupExtendedTypes_ )
+    {}
+
+    PhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR( VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR const & rhs )
+      : layout::PhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR( rhs )
+    {}
+
+    PhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR& operator=( VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR const & rhs )
+    {
+      *reinterpret_cast<VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR*>(this) = rhs;
+      return *this;
+    }
+
+    PhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR & setPNext( void* pNext_ )
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    PhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR & setShaderSubgroupExtendedTypes( vk::Bool32 shaderSubgroupExtendedTypes_ )
+    {
+      shaderSubgroupExtendedTypes = shaderSubgroupExtendedTypes_;
+      return *this;
+    }
+
+    operator VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR const&() const
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR*>( this );
+    }
+
+    operator VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR &()
+    {
+      return *reinterpret_cast<VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR*>( this );
+    }
+
+    bool operator==( PhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR const& rhs ) const
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( shaderSubgroupExtendedTypes == rhs.shaderSubgroupExtendedTypes );
+    }
+
+    bool operator!=( PhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR const& rhs ) const
+    {
+      return !operator==( rhs );
+    }
+
+  private:
+    using layout::PhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR::sType;
+  };
+  static_assert( sizeof( PhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR ) == sizeof( VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR ), "struct and wrapper have different size!" );
+  static_assert( std::is_standard_layout<PhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR>::value, "struct wrapper is not a standard layout!" );
+
+  namespace layout
+  {
     struct PhysicalDeviceShadingRateImageFeaturesNV
     {
     protected:
@@ -70256,6 +70343,8 @@ namespace VULKAN_HPP_NAMESPACE
   template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceShaderSMBuiltinsFeaturesNV>{ enum { value = true }; };
   template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceShaderSMBuiltinsFeaturesNV>{ enum { value = true }; };
   template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceShaderSMBuiltinsPropertiesNV>{ enum { value = true }; };
+  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR>{ enum { value = true }; };
+  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR>{ enum { value = true }; };
   template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceShadingRateImageFeaturesNV>{ enum { value = true }; };
   template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceShadingRateImageFeaturesNV>{ enum { value = true }; };
   template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceShadingRateImagePropertiesNV>{ enum { value = true }; };
