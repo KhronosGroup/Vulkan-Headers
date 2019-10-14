@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.1.124",
-    "comment": "from git branch: github-master commit: 22a5a1459fbe8be546079525c4c9d50bfc20b30b",
-    "date": "2019-10-06 19:43:09Z"
+    "api version": "1.1.125",
+    "comment": "from git branch: github-master commit: a5b10770a313a4b1fcf74645c6041c6090630085",
+    "date": "2019-10-14 03:06:14Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -351,11 +351,37 @@
       ]
     },
     "VkDeviceCreateInfo": {
-      "core": [
+      "!(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-VkDeviceCreateInfo-queueFamilyIndex-00372",
-          "text": ""
-        },
+          "text": " The <code>queueFamilyIndex</code> member of each element of <code>pQueueCreateInfos</code> <strong class=\"purple\">must</strong> be unique within <code>pQueueCreateInfos</code>"
+        }
+      ],
+      "(VK_VERSION_1_1)": [
+        {
+          "vuid": "VUID-VkDeviceCreateInfo-queueFamilyIndex-02802",
+          "text": " The <code>queueFamilyIndex</code> member of each element of <code>pQueueCreateInfos</code> <strong class=\"purple\">must</strong> be unique within <code>pQueueCreateInfos</code>, except that two members can share the same <code>queueFamilyIndex</code> if one is a protected-capable queue and one is not a protected-capable queue."
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_get_physical_device_properties2)": [
+        {
+          "vuid": "VUID-VkDeviceCreateInfo-pNext-00373",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a> structure, then <code>pEnabledFeatures</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        }
+      ],
+      "(VK_AMD_negative_viewport_height)+(VK_VERSION_1_1)": [
+        {
+          "vuid": "VUID-VkDeviceCreateInfo-ppEnabledExtensionNames-01840",
+          "text": " <code>ppEnabledExtensionNames</code> <strong class=\"purple\">must</strong> not contain <code><a href=\"#VK_AMD_negative_viewport_height\">VK_AMD_negative_viewport_height</a></code>"
+        }
+      ],
+      "(VK_AMD_negative_viewport_height)+!(VK_VERSION_1_1)+(VK_KHR_maintenance1)": [
+        {
+          "vuid": "VUID-VkDeviceCreateInfo-ppEnabledExtensionNames-00374",
+          "text": " <code>ppEnabledExtensionNames</code> <strong class=\"purple\">must</strong> not contain both <code><a href=\"#VK_KHR_maintenance1\">VK_KHR_maintenance1</a></code> and <code><a href=\"#VK_AMD_negative_viewport_height\">VK_AMD_negative_viewport_height</a></code>"
+        }
+      ],
+      "core": [
         {
           "vuid": "VUID-VkDeviceCreateInfo-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO</code>"
@@ -391,24 +417,6 @@
         {
           "vuid": "VUID-VkDeviceCreateInfo-queueCreateInfoCount-arraylength",
           "text": " <code>queueCreateInfoCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
-        }
-      ],
-      "(VK_VERSION_1_1,VK_KHR_get_physical_device_properties2)": [
-        {
-          "vuid": "VUID-VkDeviceCreateInfo-pNext-00373",
-          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a> structure, then <code>pEnabledFeatures</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
-        }
-      ],
-      "(VK_AMD_negative_viewport_height)+(VK_VERSION_1_1)": [
-        {
-          "vuid": "VUID-VkDeviceCreateInfo-ppEnabledExtensionNames-01840",
-          "text": " <code>ppEnabledExtensionNames</code> <strong class=\"purple\">must</strong> not contain <code><a href=\"#VK_AMD_negative_viewport_height\">VK_AMD_negative_viewport_height</a></code>"
-        }
-      ],
-      "(VK_AMD_negative_viewport_height)+!(VK_VERSION_1_1)+(VK_KHR_maintenance1)": [
-        {
-          "vuid": "VUID-VkDeviceCreateInfo-ppEnabledExtensionNames-00374",
-          "text": " <code>ppEnabledExtensionNames</code> <strong class=\"purple\">must</strong> not contain both <code><a href=\"#VK_KHR_maintenance1\">VK_KHR_maintenance1</a></code> and <code><a href=\"#VK_AMD_negative_viewport_height\">VK_AMD_negative_viewport_height</a></code>"
         }
       ]
     },
@@ -3826,7 +3834,7 @@
         },
         {
           "vuid": "VUID-VkRenderPassCreateInfo2KHR-pNext-pNext",
-          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkRenderPassFragmentDensityMapCreateInfoEXT\">VkRenderPassFragmentDensityMapCreateInfoEXT</a>"
         },
         {
           "vuid": "VUID-VkRenderPassCreateInfo2KHR-pAttachments-parameter",
@@ -12885,6 +12893,10 @@
           "text": " All queries used by the command <strong class=\"purple\">must</strong> be unavailable"
         },
         {
+          "vuid": "VUID-vkCmdBeginQuery-queryType-2804",
+          "text": " The <code>queryType</code> used to create <code>queryPool</code> <strong class=\"purple\">must</strong> not be <code>VK_QUERY_TYPE_TIMESTAMP</code>"
+        },
+        {
           "vuid": "VUID-vkCmdBeginQuery-queryType-00800",
           "text": " If the <a href=\"#features-occlusionQueryPrecise\">precise occlusion queries</a> feature is not enabled, or the <code>queryType</code> used to create <code>queryPool</code> was not <code>VK_QUERY_TYPE_OCCLUSION</code>, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_QUERY_CONTROL_PRECISE_BIT</code>"
         },
@@ -12961,6 +12973,10 @@
         {
           "vuid": "VUID-vkCmdBeginQueryIndexedEXT-None-00807",
           "text": " All queries used by the command <strong class=\"purple\">must</strong> be unavailable"
+        },
+        {
+          "vuid": "VUID-vkCmdBeginQueryIndexedEXT-queryType-2804",
+          "text": " The <code>queryType</code> used to create <code>queryPool</code> <strong class=\"purple\">must</strong> not be <code>VK_QUERY_TYPE_TIMESTAMP</code>"
         },
         {
           "vuid": "VUID-vkCmdBeginQueryIndexedEXT-queryType-00800",
@@ -20872,7 +20888,7 @@
       "(VK_KHR_timeline_semaphore)": [
         {
           "vuid": "VUID-vkQueueBindSparse-pWaitSemaphores-03245",
-          "text": " All elements of the <code>pWaitSemaphores</code> of all elements of <code>pBindInfo</code> created with a <a href=\"#VkSemaphoreTypeKHR\">VkSemaphoreTypeKHR</a> of <code>VK_SEMAPHORE_TYPE_BINARY_KHR</code> <strong class=\"purple\">must</strong> reference a semaphore signal operation that has been submitted for execution and any semaphore signal operations on which it depends (if any) <strong class=\"purple\">must</strong> have also been submitted for execution."
+          "text": " All elements of the <code>pWaitSemaphores</code> member of all elements of <code>pBindInfo</code> created with a <a href=\"#VkSemaphoreTypeKHR\">VkSemaphoreTypeKHR</a> of <code>VK_SEMAPHORE_TYPE_BINARY_KHR</code> <strong class=\"purple\">must</strong> reference a semaphore signal operation that has been submitted for execution and any semaphore signal operations on which it depends (if any) <strong class=\"purple\">must</strong> have also been submitted for execution."
         }
       ]
     },
