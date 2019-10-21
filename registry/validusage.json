@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.1.125",
-    "comment": "from git branch: github-master commit: a5b10770a313a4b1fcf74645c6041c6090630085",
-    "date": "2019-10-14 03:06:14Z"
+    "api version": "1.1.126",
+    "comment": "from git branch: github-master commit: 90add81fa4bf15fceee9a4e015cc07c13f7b00a9",
+    "date": "2019-10-21 08:53:05Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -2715,6 +2715,10 @@
         {
           "vuid": "VUID-vkCmdWaitEvents-pMemoryBarriers-01166",
           "text": " Each element of <code>pMemoryBarriers</code>, <code>pBufferMemoryBarriers</code> or <code>pImageMemoryBarriers</code> <strong class=\"purple\">must</strong> not have any access flag included in its <code>dstAccessMask</code> member if that bit is not supported by any of the pipeline stages in <code>dstStageMask</code>, as specified in the <a href=\"#synchronization-access-types-supported\">table of supported access types</a>."
+        },
+        {
+          "vuid": "VUID-vkCmdWaitEvents-srcQueueFamilyIndex-02803",
+          "text": " The <code>srcQueueFamilyIndex</code> and <code>dstQueueFamilyIndex</code> members of any element of <code>pBufferMemoryBarriers</code> or <code>pImageMemoryBarriers</code> <strong class=\"purple\">must</strong> be equal."
         },
         {
           "vuid": "VUID-vkCmdWaitEvents-commandBuffer-parameter",
@@ -7003,6 +7007,18 @@
         {
           "vuid": "VUID-VkMemoryAllocateInfo-allocationSize-01745",
           "text": " If the parameters define an import operation and the external handle is a host pointer, <code>allocationSize</code> <strong class=\"purple\">must</strong> be an integer multiple of <code>VkPhysicalDeviceExternalMemoryHostPropertiesEXT</code>::<code>minImportedHostPointerAlignment</code>"
+        }
+      ],
+      "(VK_EXT_external_memory_host)+(VK_NV_dedicated_allocation)": [
+        {
+          "vuid": "VUID-VkMemoryAllocateInfo-pNext-02805",
+          "text": " If the parameters define an import operation and the external handle is a host pointer, the <code>pNext</code> chain <strong class=\"purple\">must</strong> not contain an instance of <a href=\"#VkDedicatedAllocationMemoryAllocateInfoNV\">VkDedicatedAllocationMemoryAllocateInfoNV</a> with either its <code>image</code> or <code>buffer</code> field set to a value other than <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>."
+        }
+      ],
+      "(VK_EXT_external_memory_host)+(VK_KHR_dedicated_allocation)": [
+        {
+          "vuid": "VUID-VkMemoryAllocateInfo-pNext-02806",
+          "text": " If the parameters define an import operation and the external handle is a host pointer, the <code>pNext</code> chain <strong class=\"purple\">must</strong> not contain an instance of <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a> with either its <code>image</code> or <code>buffer</code> field set to a value other than <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>."
         }
       ],
       "(VK_ANDROID_external_memory_android_hardware_buffer)": [
@@ -12893,7 +12909,7 @@
           "text": " All queries used by the command <strong class=\"purple\">must</strong> be unavailable"
         },
         {
-          "vuid": "VUID-vkCmdBeginQuery-queryType-2804",
+          "vuid": "VUID-vkCmdBeginQuery-queryType-02804",
           "text": " The <code>queryType</code> used to create <code>queryPool</code> <strong class=\"purple\">must</strong> not be <code>VK_QUERY_TYPE_TIMESTAMP</code>"
         },
         {
@@ -12975,7 +12991,7 @@
           "text": " All queries used by the command <strong class=\"purple\">must</strong> be unavailable"
         },
         {
-          "vuid": "VUID-vkCmdBeginQueryIndexedEXT-queryType-2804",
+          "vuid": "VUID-vkCmdBeginQueryIndexedEXT-queryType-02804",
           "text": " The <code>queryType</code> used to create <code>queryPool</code> <strong class=\"purple\">must</strong> not be <code>VK_QUERY_TYPE_TIMESTAMP</code>"
         },
         {
