@@ -28,6 +28,9 @@ config("vulkan_headers_config") {
   if (is_fuchsia) {
     defines = [ "VK_USE_PLATFORM_FUCHSIA" ]
   }
+  if (is_mac) {
+    defines = [ "VK_USE_PLATFORM_METAL_EXT" ]
+  }
 }
 
 # Vulkan headers only, no compiled sources.
