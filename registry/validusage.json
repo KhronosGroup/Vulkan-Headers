@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.1.126",
-    "comment": "from git branch: github-master commit: 90add81fa4bf15fceee9a4e015cc07c13f7b00a9",
-    "date": "2019-10-21 08:53:05Z"
+    "api version": "1.1.127",
+    "comment": "from git branch: github-master commit: fa497b29d87078e1fee7372e369e9a1a788d6358",
+    "date": "2019-11-04 06:40:43Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -388,7 +388,7 @@
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceMemoryOverallocationCreateInfoAMD\">VkDeviceMemoryOverallocationCreateInfoAMD</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice8BitStorageFeaturesKHR\">VkPhysicalDevice8BitStorageFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeaturesEXT\">VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCoherentMemoryFeaturesAMD\">VkPhysicalDeviceCoherentMemoryFeaturesAMD</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixFeaturesNV\">VkPhysicalDeviceCooperativeMatrixFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCoverageReductionModeFeaturesNV\">VkPhysicalDeviceCoverageReductionModeFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV\">VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDepthClipEnableFeaturesEXT\">VkPhysicalDeviceDepthClipEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeaturesEXT\">VkPhysicalDeviceDescriptorIndexingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapFeaturesEXT\">VkPhysicalDeviceFragmentDensityMapFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT\">VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceHostQueryResetFeaturesEXT\">VkPhysicalDeviceHostQueryResetFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceImagelessFramebufferFeaturesKHR\">VkPhysicalDeviceImagelessFramebufferFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceIndexTypeUint8FeaturesEXT\">VkPhysicalDeviceIndexTypeUint8FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeaturesEXT\">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceLineRasterizationFeaturesEXT\">VkPhysicalDeviceLineRasterizationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMemoryPriorityFeaturesEXT\">VkPhysicalDeviceMemoryPriorityFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR\">VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceScalarBlockLayoutFeaturesEXT\">VkPhysicalDeviceScalarBlockLayoutFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64FeaturesKHR\">VkPhysicalDeviceShaderAtomicInt64FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderClockFeaturesKHR\">VkPhysicalDeviceShaderClockFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT\">VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderDrawParametersFeatures\">VkPhysicalDeviceShaderDrawParametersFeatures</a>, <a href=\"#VkPhysicalDeviceShaderFloat16Int8FeaturesKHR\">VkPhysicalDeviceShaderFloat16Int8FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL\">VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL</a>, <a href=\"#VkPhysicalDeviceShaderSMBuiltinsFeaturesNV\">VkPhysicalDeviceShaderSMBuiltinsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR\">VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSubgroupSizeControlFeaturesEXT\">VkPhysicalDeviceSubgroupSizeControlFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT\">VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT\">VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTimelineSemaphoreFeaturesKHR\">VkPhysicalDeviceTimelineSemaphoreFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackFeaturesEXT\">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR\">VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceVariablePointersFeatures\">VkPhysicalDeviceVariablePointersFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeaturesKHR\">VkPhysicalDeviceVulkanMemoryModelFeaturesKHR</a>, or <a href=\"#VkPhysicalDeviceYcbcrImageArraysFeaturesEXT\">VkPhysicalDeviceYcbcrImageArraysFeaturesEXT</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceMemoryOverallocationCreateInfoAMD\">VkDeviceMemoryOverallocationCreateInfoAMD</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice8BitStorageFeaturesKHR\">VkPhysicalDevice8BitStorageFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeaturesEXT\">VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCoherentMemoryFeaturesAMD\">VkPhysicalDeviceCoherentMemoryFeaturesAMD</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixFeaturesNV\">VkPhysicalDeviceCooperativeMatrixFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCoverageReductionModeFeaturesNV\">VkPhysicalDeviceCoverageReductionModeFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV\">VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDepthClipEnableFeaturesEXT\">VkPhysicalDeviceDepthClipEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeaturesEXT\">VkPhysicalDeviceDescriptorIndexingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapFeaturesEXT\">VkPhysicalDeviceFragmentDensityMapFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT\">VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceHostQueryResetFeaturesEXT\">VkPhysicalDeviceHostQueryResetFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceImagelessFramebufferFeaturesKHR\">VkPhysicalDeviceImagelessFramebufferFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceIndexTypeUint8FeaturesEXT\">VkPhysicalDeviceIndexTypeUint8FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeaturesEXT\">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceLineRasterizationFeaturesEXT\">VkPhysicalDeviceLineRasterizationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMemoryPriorityFeaturesEXT\">VkPhysicalDeviceMemoryPriorityFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR\">VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceScalarBlockLayoutFeaturesEXT\">VkPhysicalDeviceScalarBlockLayoutFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR\">VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64FeaturesKHR\">VkPhysicalDeviceShaderAtomicInt64FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderClockFeaturesKHR\">VkPhysicalDeviceShaderClockFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT\">VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderDrawParametersFeatures\">VkPhysicalDeviceShaderDrawParametersFeatures</a>, <a href=\"#VkPhysicalDeviceShaderFloat16Int8FeaturesKHR\">VkPhysicalDeviceShaderFloat16Int8FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL\">VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL</a>, <a href=\"#VkPhysicalDeviceShaderSMBuiltinsFeaturesNV\">VkPhysicalDeviceShaderSMBuiltinsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR\">VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSubgroupSizeControlFeaturesEXT\">VkPhysicalDeviceSubgroupSizeControlFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT\">VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT\">VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTimelineSemaphoreFeaturesKHR\">VkPhysicalDeviceTimelineSemaphoreFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackFeaturesEXT\">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR\">VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceVariablePointersFeatures\">VkPhysicalDeviceVariablePointersFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeaturesKHR\">VkPhysicalDeviceVulkanMemoryModelFeaturesKHR</a>, or <a href=\"#VkPhysicalDeviceYcbcrImageArraysFeaturesEXT\">VkPhysicalDeviceYcbcrImageArraysFeaturesEXT</a>"
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-sType-unique",
@@ -1976,7 +1976,7 @@
         },
         {
           "vuid": "VUID-VkSemaphoreTypeCreateInfoKHR-timelineSemaphore-03252",
-          "text": " If the <a href=\"#features-features-timelineSemaphore\"><code>timelineSemaphore</code></a> feature is not enabled, <code>semaphoreType</code> <strong class=\"purple\">must</strong> not equal <code>VK_SEMAPHORE_TYPE_TIMELINE_KHR</code>"
+          "text": " If the <a href=\"#features-timelineSemaphore\"><code>timelineSemaphore</code></a> feature is not enabled, <code>semaphoreType</code> <strong class=\"purple\">must</strong> not equal <code>VK_SEMAPHORE_TYPE_TIMELINE_KHR</code>"
         },
         {
           "vuid": "VUID-VkSemaphoreTypeCreateInfoKHR-semaphoreType-03279",
@@ -3061,10 +3061,6 @@
           "text": " If <code>subresourceRange.layerCount</code> is not <code>VK_REMAINING_ARRAY_LAYERS</code>, <span class=\"eq\"><code>subresourceRange.baseArrayLayer</code> &#43; <code>subresourceRange.layerCount</code></span> <strong class=\"purple\">must</strong> be less than or equal to the <code>arrayLayers</code> specified in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> when <code>image</code> was created"
         },
         {
-          "vuid": "VUID-VkImageMemoryBarrier-image-01207",
-          "text": " If <code>image</code> has a depth/stencil format with both depth and stencil components, then the <code>aspectMask</code> member of <code>subresourceRange</code> <strong class=\"purple\">must</strong> include both <code>VK_IMAGE_ASPECT_DEPTH_BIT</code> and <code>VK_IMAGE_ASPECT_STENCIL_BIT</code>"
-        },
-        {
           "vuid": "VUID-VkImageMemoryBarrier-oldLayout-01208",
           "text": " If either <code>oldLayout</code> or <code>newLayout</code> is <code>VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL</code> then <code>image</code> <strong class=\"purple\">must</strong> have been created with <code>VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT</code> set"
         },
@@ -3155,6 +3151,22 @@
         {
           "vuid": "VUID-VkImageMemoryBarrier-image-01768",
           "text": " If <code>image</code> was created with a sharing mode of <code>VK_SHARING_MODE_EXCLUSIVE</code> and <code>dstQueueFamilyIndex</code> is not <code>VK_QUEUE_FAMILY_IGNORED</code>, it <strong class=\"purple\">must</strong> be a valid queue family or a special queue family reserved for external memory transfers, as described in <a href=\"#synchronization-queue-transfers\">Queue Family Ownership Transfer</a>."
+        }
+      ],
+      "(VK_KHR_separate_depth_stencil_layouts)": [
+        {
+          "vuid": "VUID-VkImageMemoryBarrier-image-03319",
+          "text": " If <code>image</code> has a depth/stencil format with both depth and stencil and the <a href=\"#features-separateDepthStencilLayouts\">separateDepthStencilLayouts</a> feature is enabled, then the <code>aspectMask</code> member of <code>subresourceRange</code> <strong class=\"purple\">must</strong> include either or both <code>VK_IMAGE_ASPECT_DEPTH_BIT</code> and <code>VK_IMAGE_ASPECT_STENCIL_BIT</code>"
+        },
+        {
+          "vuid": "VUID-VkImageMemoryBarrier-image-03320",
+          "text": " If <code>image</code> has a depth/stencil format with both depth and stencil and the <a href=\"#features-separateDepthStencilLayouts\">separateDepthStencilLayouts</a> feature is not enabled, then the <code>aspectMask</code> member of <code>subresourceRange</code> <strong class=\"purple\">must</strong> include both <code>VK_IMAGE_ASPECT_DEPTH_BIT</code> and <code>VK_IMAGE_ASPECT_STENCIL_BIT</code>"
+        }
+      ],
+      "!(VK_KHR_separate_depth_stencil_layouts)": [
+        {
+          "vuid": "VUID-VkImageMemoryBarrier-image-01207",
+          "text": " If <code>image</code> has a depth/stencil format with both depth and stencil components, then the <code>aspectMask</code> member of <code>subresourceRange</code> <strong class=\"purple\">must</strong> include both <code>VK_IMAGE_ASPECT_DEPTH_BIT</code> and <code>VK_IMAGE_ASPECT_STENCIL_BIT</code>"
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
@@ -3481,6 +3493,48 @@
         {
           "vuid": "VUID-VkAttachmentDescription-finalLayout-parameter",
           "text": " <code>finalLayout</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImageLayout\">VkImageLayout</a> value"
+        }
+      ],
+      "(VK_KHR_separate_depth_stencil_layouts)": [
+        {
+          "vuid": "VUID-VkAttachmentDescription-separateDepthStencilLayouts-03284",
+          "text": " If the <a href=\"#features-separateDepthStencilLayouts\"><code>separateDepthStencilLayouts</code></a> feature is not enabled, <code>initialLayout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL_KHR</code>, <code>VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL_KHR</code>, <code>VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL_KHR</code>, or <code>VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkAttachmentDescription-separateDepthStencilLayouts-03285",
+          "text": " If the <a href=\"#features-separateDepthStencilLayouts\"><code>separateDepthStencilLayouts</code></a> feature is not enabled, <code>finalLayout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL_KHR</code>, <code>VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL_KHR</code>, <code>VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL_KHR</code>, or <code>VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkAttachmentDescription-format-03286",
+          "text": " If <code>format</code> is a color format, <code>initialLayout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL_KHR</code>, <code>VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL_KHR</code>, <code>VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL_KHR</code>, or <code>VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkAttachmentDescription-format-03287",
+          "text": " If <code>format</code> is a color format, <code>finalLayout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL_KHR</code>, <code>VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL_KHR</code>, <code>VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL_KHR</code>, or <code>VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkAttachmentDescription-format-03288",
+          "text": " If <code>format</code> is a depth/stencil format which includes both depth and stencil aspects, <code>initialLayout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL_KHR</code>, <code>VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL_KHR</code>, <code>VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL_KHR</code>, or <code>VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkAttachmentDescription-format-03289",
+          "text": " If <code>format</code> is a depth/stencil format which includes both depth and stencil aspects, <code>finalLayout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL_KHR</code>, <code>VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL_KHR</code>, <code>VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL_KHR</code>, or <code>VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkAttachmentDescription-format-03290",
+          "text": " If <code>format</code> is a depth/stencil format which includes only the depth aspect, <code>initialLayout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL_KHR</code> or <code>VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkAttachmentDescription-format-03291",
+          "text": " If <code>format</code> is a depth/stencil format which includes only the depth aspect, <code>finalLayout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL_KHR</code> or <code>VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkAttachmentDescription-format-03292",
+          "text": " If <code>format</code> is a depth/stencil format which includes only the stencil aspect, <code>initialLayout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL_KHR</code> or <code>VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkAttachmentDescription-format-03293",
+          "text": " If <code>format</code> is a depth/stencil format which includes only the stencil aspect, <code>finalLayout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL_KHR</code> or <code>VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL_KHR</code>"
         }
       ]
     },
@@ -3908,6 +3962,76 @@
           "vuid": "VUID-VkAttachmentDescription2KHR-finalLayout-parameter",
           "text": " <code>finalLayout</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImageLayout\">VkImageLayout</a> value"
         }
+      ],
+      "(VK_KHR_create_renderpass2)+(VK_KHR_separate_depth_stencil_layouts)": [
+        {
+          "vuid": "VUID-VkAttachmentDescription2KHR-separateDepthStencilLayouts-03298",
+          "text": " If the <a href=\"#features-separateDepthStencilLayouts\"><code>separateDepthStencilLayouts</code></a> feature is not enabled, <code>initialLayout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL_KHR</code>, <code>VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL_KHR</code>, <code>VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL_KHR</code> or <code>VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkAttachmentDescription2KHR-separateDepthStencilLayouts-03299",
+          "text": " If the <a href=\"#features-separateDepthStencilLayouts\"><code>separateDepthStencilLayouts</code></a> feature is not enabled, <code>finalLayout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL_KHR</code>, <code>VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL_KHR</code>, <code>VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL_KHR</code> or <code>VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkAttachmentDescription2KHR-format-03300",
+          "text": " If <code>format</code> is a color format, <code>initialLayout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL_KHR</code>, <code>VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL_KHR</code>, <code>VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL_KHR</code> or <code>VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkAttachmentDescription2KHR-format-03301",
+          "text": " If <code>format</code> is a color format, <code>finalLayout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL_KHR</code>, <code>VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL_KHR</code>, <code>VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL_KHR</code> or <code>VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkAttachmentDescription2KHR-format-03302",
+          "text": " If <code>format</code> is a depth/stencil format which includes both depth and stencil aspects, and <code>initialLayout</code> is <code>VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL_KHR</code> or <code>VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL_KHR</code>, the <code>pNext</code> chain <strong class=\"purple\">must</strong> include a valid instance of <a href=\"#VkAttachmentDescriptionStencilLayoutKHR\">VkAttachmentDescriptionStencilLayoutKHR</a>"
+        },
+        {
+          "vuid": "VUID-VkAttachmentDescription2KHR-format-03303",
+          "text": " If <code>format</code> is a depth/stencil format which includes both depth and stencil aspects, and <code>finalLayout</code> is <code>VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL_KHR</code> or <code>VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL_KHR</code>, the <code>pNext</code> chain <strong class=\"purple\">must</strong> include a valid instance of <a href=\"#VkAttachmentDescriptionStencilLayoutKHR\">VkAttachmentDescriptionStencilLayoutKHR</a>"
+        },
+        {
+          "vuid": "VUID-VkAttachmentDescription2KHR-format-03304",
+          "text": " If <code>format</code> is a depth/stencil format which includes only the depth aspect, <code>initialLayout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL_KHR</code> or <code>VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkAttachmentDescription2KHR-format-03305",
+          "text": " If <code>format</code> is a depth/stencil format which includes only the depth aspect, <code>finalLayout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL_KHR</code> or <code>VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkAttachmentDescription2KHR-format-03306",
+          "text": " If <code>format</code> is a depth/stencil format which includes only the stencil aspect, <code>initialLayout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL_KHR</code> or <code>VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkAttachmentDescription2KHR-format-03307",
+          "text": " If <code>format</code> is a depth/stencil format which includes only the stencil aspect, <code>finalLayout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL_KHR</code> or <code>VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL_KHR</code>"
+        }
+      ]
+    },
+    "VkAttachmentDescriptionStencilLayoutKHR": {
+      "(VK_KHR_create_renderpass2)+(VK_KHR_separate_depth_stencil_layouts)": [
+        {
+          "vuid": "VUID-VkAttachmentDescriptionStencilLayoutKHR-stencilInitialLayout-03308",
+          "text": " <code>stencilInitialLayout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL</code>, <code>VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL_KHR</code>, <code>VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL_KHR</code>, <code>VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL</code>, <code>VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL</code>, <code>VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL</code>, or <code>VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL</code>"
+        },
+        {
+          "vuid": "VUID-VkAttachmentDescriptionStencilLayoutKHR-stencilFinalLayout-03309",
+          "text": " <code>stencilFinalLayout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL</code>, <code>VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL_KHR</code>, <code>VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL_KHR</code>, <code>VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL</code>, <code>VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL</code>, <code>VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL</code>, or <code>VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL</code>"
+        },
+        {
+          "vuid": "VUID-VkAttachmentDescriptionStencilLayoutKHR-stencilFinalLayout-03310",
+          "text": " <code>stencilFinalLayout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_UNDEFINED</code> or <code>VK_IMAGE_LAYOUT_PREINITIALIZED</code>"
+        },
+        {
+          "vuid": "VUID-VkAttachmentDescriptionStencilLayoutKHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_STENCIL_LAYOUT_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkAttachmentDescriptionStencilLayoutKHR-stencilInitialLayout-parameter",
+          "text": " <code>stencilInitialLayout</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImageLayout\">VkImageLayout</a> value"
+        },
+        {
+          "vuid": "VUID-VkAttachmentDescriptionStencilLayoutKHR-stencilFinalLayout-parameter",
+          "text": " <code>stencilFinalLayout</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImageLayout\">VkImageLayout</a> value"
+        }
       ]
     },
     "VkSubpassDescription2KHR": {
@@ -4095,6 +4219,44 @@
         {
           "vuid": "VUID-VkAttachmentReference2KHR-layout-parameter",
           "text": " <code>layout</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImageLayout\">VkImageLayout</a> value"
+        }
+      ],
+      "(VK_KHR_create_renderpass2)+(VK_KHR_separate_depth_stencil_layouts)": [
+        {
+          "vuid": "VUID-VkAttachmentReference2KHR-separateDepthStencilLayouts-03313",
+          "text": " If the <a href=\"#features-separateDepthStencilLayouts\"><code>separateDepthStencilLayouts</code></a> feature is not enabled, and <code>attachment</code> is not <code>VK_ATTACHMENT_UNUSED</code>, <code>layout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL_KHR</code>, <code>VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL_KHR</code>, <code>VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL_KHR</code>, or <code>VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL_KHR</code>,"
+        },
+        {
+          "vuid": "VUID-VkAttachmentReference2KHR-attachment-03314",
+          "text": " If <code>attachment</code> is not <code>VK_ATTACHMENT_UNUSED</code>, and <code>aspectMask</code> includes <code>VK_IMAGE_ASPECT_COLOR_BIT</code>, <code>layout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL_KHR</code>, <code>VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL_KHR</code>, <code>VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL_KHR</code>, or <code>VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL_KHR</code>,"
+        },
+        {
+          "vuid": "VUID-VkAttachmentReference2KHR-attachment-03315",
+          "text": " If <code>attachment</code> is not <code>VK_ATTACHMENT_UNUSED</code>, and <code>aspectMask</code> includes both <code>VK_IMAGE_ASPECT_DEPTH_BIT</code> and <code>VK_IMAGE_ASPECT_STENCIL_BIT</code>, and <code>layout</code> is <code>VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL_KHR</code> or <code>VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL_KHR</code>, the <code>pNext</code> chain <strong class=\"purple\">must</strong> include a valid instance of <a href=\"#VkAttachmentReferenceStencilLayoutKHR\">VkAttachmentReferenceStencilLayoutKHR</a>"
+        },
+        {
+          "vuid": "VUID-VkAttachmentReference2KHR-attachment-03316",
+          "text": " If <code>attachment</code> is not <code>VK_ATTACHMENT_UNUSED</code>, and <code>aspectMask</code> includes only <code>VK_IMAGE_ASPECT_DEPTH_BIT</code> then <code>layout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL_KHR</code>, or <code>VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkAttachmentReference2KHR-attachment-03317",
+          "text": " If <code>attachment</code> is not <code>VK_ATTACHMENT_UNUSED</code>, and <code>aspectMask</code> includes only <code>VK_IMAGE_ASPECT_STENCIL_BIT</code> then <code>layout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL_KHR</code>, or <code>VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL_KHR</code>"
+        }
+      ]
+    },
+    "VkAttachmentReferenceStencilLayoutKHR": {
+      "(VK_KHR_create_renderpass2)+(VK_KHR_separate_depth_stencil_layouts)": [
+        {
+          "vuid": "VUID-VkAttachmentReferenceStencilLayoutKHR-stencilLayout-03318",
+          "text": " <code>stencilLayout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_UNDEFINED</code>, <code>VK_IMAGE_LAYOUT_PREINITIALIZED</code>, <code>VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL</code>, <code>VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL_KHR</code>, <code>VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL_KHR</code>, <code>VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL</code>, <code>VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL</code>, <code>VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL</code>, <code>VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL</code>, or <code>VK_IMAGE_LAYOUT_PRESENT_SRC_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkAttachmentReferenceStencilLayoutKHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_STENCIL_LAYOUT_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkAttachmentReferenceStencilLayoutKHR-stencilLayout-parameter",
+          "text": " <code>stencilLayout</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImageLayout\">VkImageLayout</a> value"
         }
       ]
     },
@@ -6369,8 +6531,8 @@
     "vkGetPipelineExecutablePropertiesKHR": {
       "(VK_KHR_pipeline_executable_properties)": [
         {
-          "vuid": "VUID-vkGetPipelineExecutablePropertiesKHR-pipelineExecutableProperties-03270",
-          "text": " <a href=\"#features-pipelineExecutableProperties\"><code>pipelineExecutableProperties</code></a> <strong class=\"purple\">must</strong> be enabled."
+          "vuid": "VUID-vkGetPipelineExecutablePropertiesKHR-pipelineExecutableInfo-03270",
+          "text": " <a href=\"#features-pipelineExecutableInfo\"><code>pipelineExecutableInfo</code></a> <strong class=\"purple\">must</strong> be enabled."
         },
         {
           "vuid": "VUID-vkGetPipelineExecutablePropertiesKHR-pipeline-03271",
@@ -6489,8 +6651,8 @@
     "vkGetPipelineExecutableInternalRepresentationsKHR": {
       "(VK_KHR_pipeline_executable_properties)": [
         {
-          "vuid": "VUID-vkGetPipelineExecutableInternalRepresentationsKHR-pipelineExecutableProperties-03276",
-          "text": " <a href=\"#features-pipelineExecutableProperties\"><code>pipelineExecutableProperties</code></a> <strong class=\"purple\">must</strong> be enabled."
+          "vuid": "VUID-vkGetPipelineExecutableInternalRepresentationsKHR-pipelineExecutableInfo-03276",
+          "text": " <a href=\"#features-pipelineExecutableInfo\"><code>pipelineExecutableInfo</code></a> <strong class=\"purple\">must</strong> be enabled."
         },
         {
           "vuid": "VUID-vkGetPipelineExecutableInternalRepresentationsKHR-pipeline-03277",
@@ -9924,7 +10086,7 @@
       "(VK_VERSION_1_1,VK_KHR_bind_memory2)+(VK_VERSION_1_1,VK_KHR_external_memory)": [
         {
           "vuid": "VUID-VkBindBufferMemoryInfo-handleTypes-02791",
-          "text": " If the value of <a href=\"#VkExportMemoryAllocateInfo\">VkExportMemoryAllocateInfo</a>::<code>handleTypes</code> used to allocate <code>memory</code> is not <code>0</code>, it <strong class=\"purple\">must</strong> include at least one of the handles set in <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a>::<code>handleTypes</code> when <code>image</code> was created"
+          "text": " If the value of <a href=\"#VkExportMemoryAllocateInfo\">VkExportMemoryAllocateInfo</a>::<code>handleTypes</code> used to allocate <code>memory</code> is not <code>0</code>, it <strong class=\"purple\">must</strong> include at least one of the handles set in <a href=\"#VkExternalMemoryBufferCreateInfo\">VkExternalMemoryBufferCreateInfo</a>::<code>handleTypes</code> when <code>buffer</code> was created"
         },
         {
           "vuid": "VUID-VkBindBufferMemoryInfo-memory-02792",
@@ -20728,11 +20890,11 @@
       "(VK_VERSION_1_1,VK_KHR_external_memory)": [
         {
           "vuid": "VUID-VkSparseMemoryBind-memory-02730",
-          "text": " If <code>memory</code> was created with <a href=\"#VkExportMemoryAllocateInfo\">VkExportMemoryAllocateInfo</a>::<code>handleTypes</code> not equal to <code>0</code>, at least one handle type it contained must also have been set in <a href=\"#VkExternalMemoryBufferCreateInfo\">VkExternalMemoryBufferCreateInfo</a>::<code>handleTypes</code> or <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a>::<code>handleTypes</code> when the resource was created."
+          "text": " If <code>memory</code> was created with <a href=\"#VkExportMemoryAllocateInfo\">VkExportMemoryAllocateInfo</a>::<code>handleTypes</code> not equal to <code>0</code>, at least one handle type it contained <strong class=\"purple\">must</strong> also have been set in <a href=\"#VkExternalMemoryBufferCreateInfo\">VkExternalMemoryBufferCreateInfo</a>::<code>handleTypes</code> or <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a>::<code>handleTypes</code> when the resource was created."
         },
         {
           "vuid": "VUID-VkSparseMemoryBind-memory-02731",
-          "text": " If <code>memory</code> was created by a memory import operation, the external handle type of the imported memory must also have been set in <a href=\"#VkExternalMemoryBufferCreateInfo\">VkExternalMemoryBufferCreateInfo</a>::<code>handleTypes</code> or <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a>::<code>handleTypes</code> when the resource was created."
+          "text": " If <code>memory</code> was created by a memory import operation, the external handle type of the imported memory <strong class=\"purple\">must</strong> also have been set in <a href=\"#VkExternalMemoryBufferCreateInfo\">VkExternalMemoryBufferCreateInfo</a>::<code>handleTypes</code> or <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a>::<code>handleTypes</code> when the resource was created."
         }
       ]
     },
@@ -20850,11 +21012,11 @@
       "(VK_VERSION_1_1,VK_KHR_external_memory)": [
         {
           "vuid": "VUID-VkSparseImageMemoryBind-memory-02732",
-          "text": " If <code>memory</code> was created with <a href=\"#VkExportMemoryAllocateInfo\">VkExportMemoryAllocateInfo</a>::<code>handleTypes</code> not equal to <code>0</code>, at least one handle type it contained must also have been set in <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a>::<code>handleTypes</code> when the image was created."
+          "text": " If <code>memory</code> was created with <a href=\"#VkExportMemoryAllocateInfo\">VkExportMemoryAllocateInfo</a>::<code>handleTypes</code> not equal to <code>0</code>, at least one handle type it contained <strong class=\"purple\">must</strong> also have been set in <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a>::<code>handleTypes</code> when the image was created."
         },
         {
           "vuid": "VUID-VkSparseImageMemoryBind-memory-02733",
-          "text": " If <code>memory</code> was created by a memory import operation, the external handle type of the imported memory must also have been set in <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a>::<code>handleTypes</code> when <code>image</code> was created."
+          "text": " If <code>memory</code> was created by a memory import operation, the external handle type of the imported memory <strong class=\"purple\">must</strong> also have been set in <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a>::<code>handleTypes</code> when <code>image</code> was created."
         }
       ]
     },
@@ -24099,6 +24261,14 @@
         {
           "vuid": "VUID-VkPhysicalDeviceShaderSMBuiltinsFeaturesNV-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SM_BUILTINS_FEATURES_NV</code>"
+        }
+      ]
+    },
+    "VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR": {
+      "(VK_KHR_separate_depth_stencil_layouts)": [
+        {
+          "vuid": "VUID-VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES_KHR</code>"
         }
       ]
     },

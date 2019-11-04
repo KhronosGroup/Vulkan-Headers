@@ -60,7 +60,7 @@
 # include <dlfcn.h>
 #endif
 
-static_assert( VK_HEADER_VERSION ==  126 , "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION ==  127 , "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
@@ -168,7 +168,7 @@ namespace VULKAN_HPP_NAMESPACE
       , m_ptr(nullptr)
     {}
 
-    ArrayProxy(T & ptr) VULKAN_HPP_NOEXCEPT
+    ArrayProxy(typename std::remove_reference<T>::type & ptr) VULKAN_HPP_NOEXCEPT
       : m_count(1)
       , m_ptr(&ptr)
     {}
@@ -202,7 +202,7 @@ namespace VULKAN_HPP_NAMESPACE
       , m_ptr(data.data())
     {}
 
-    ArrayProxy(std::initializer_list<T> const& data) VULKAN_HPP_NOEXCEPT
+    ArrayProxy(std::initializer_list<typename std::remove_reference<T>::type> const& data) VULKAN_HPP_NOEXCEPT
       : m_count(static_cast<uint32_t>(data.end() - data.begin()))
       , m_ptr(data.begin())
     {}
@@ -4144,6 +4144,10 @@ namespace VULKAN_HPP_NAMESPACE
     eSharedPresentKHR = VK_IMAGE_LAYOUT_SHARED_PRESENT_KHR,
     eShadingRateOptimalNV = VK_IMAGE_LAYOUT_SHADING_RATE_OPTIMAL_NV,
     eFragmentDensityMapOptimalEXT = VK_IMAGE_LAYOUT_FRAGMENT_DENSITY_MAP_OPTIMAL_EXT,
+    eDepthAttachmentOptimalKHR = VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL_KHR,
+    eDepthReadOnlyOptimalKHR = VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL_KHR,
+    eStencilAttachmentOptimalKHR = VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL_KHR,
+    eStencilReadOnlyOptimalKHR = VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL_KHR,
     eDepthReadOnlyStencilAttachmentOptimalKHR = VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL_KHR,
     eDepthAttachmentStencilReadOnlyOptimalKHR = VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL_KHR
   };
@@ -4167,6 +4171,10 @@ namespace VULKAN_HPP_NAMESPACE
       case ImageLayout::eSharedPresentKHR : return "SharedPresentKHR";
       case ImageLayout::eShadingRateOptimalNV : return "ShadingRateOptimalNV";
       case ImageLayout::eFragmentDensityMapOptimalEXT : return "FragmentDensityMapOptimalEXT";
+      case ImageLayout::eDepthAttachmentOptimalKHR : return "DepthAttachmentOptimalKHR";
+      case ImageLayout::eDepthReadOnlyOptimalKHR : return "DepthReadOnlyOptimalKHR";
+      case ImageLayout::eStencilAttachmentOptimalKHR : return "StencilAttachmentOptimalKHR";
+      case ImageLayout::eStencilReadOnlyOptimalKHR : return "StencilReadOnlyOptimalKHR";
       default: return "invalid";
     }
   }
@@ -5504,6 +5512,9 @@ namespace VULKAN_HPP_NAMESPACE
     eMemoryPriorityAllocateInfoEXT = VK_STRUCTURE_TYPE_MEMORY_PRIORITY_ALLOCATE_INFO_EXT,
     eSurfaceProtectedCapabilitiesKHR = VK_STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR,
     ePhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEDICATED_ALLOCATION_IMAGE_ALIASING_FEATURES_NV,
+    ePhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES_KHR,
+    eAttachmentReferenceStencilLayoutKHR = VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_STENCIL_LAYOUT_KHR,
+    eAttachmentDescriptionStencilLayoutKHR = VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_STENCIL_LAYOUT_KHR,
     ePhysicalDeviceBufferDeviceAddressFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES_EXT,
     eBufferDeviceAddressInfoEXT = VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO_EXT,
     eBufferDeviceAddressCreateInfoEXT = VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_CREATE_INFO_EXT,
@@ -5956,6 +5967,9 @@ namespace VULKAN_HPP_NAMESPACE
       case StructureType::eMemoryPriorityAllocateInfoEXT : return "MemoryPriorityAllocateInfoEXT";
       case StructureType::eSurfaceProtectedCapabilitiesKHR : return "SurfaceProtectedCapabilitiesKHR";
       case StructureType::ePhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV : return "PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV";
+      case StructureType::ePhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR : return "PhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR";
+      case StructureType::eAttachmentReferenceStencilLayoutKHR : return "AttachmentReferenceStencilLayoutKHR";
+      case StructureType::eAttachmentDescriptionStencilLayoutKHR : return "AttachmentDescriptionStencilLayoutKHR";
       case StructureType::ePhysicalDeviceBufferDeviceAddressFeaturesEXT : return "PhysicalDeviceBufferDeviceAddressFeaturesEXT";
       case StructureType::eBufferDeviceAddressInfoEXT : return "BufferDeviceAddressInfoEXT";
       case StructureType::eBufferDeviceAddressCreateInfoEXT : return "BufferDeviceAddressCreateInfoEXT";
@@ -12738,8 +12752,10 @@ namespace VULKAN_HPP_NAMESPACE
   struct ApplicationInfo;
   struct AttachmentDescription;
   struct AttachmentDescription2KHR;
+  struct AttachmentDescriptionStencilLayoutKHR;
   struct AttachmentReference;
   struct AttachmentReference2KHR;
+  struct AttachmentReferenceStencilLayoutKHR;
   struct AttachmentSampleLocationsEXT;
   struct BaseInStructure;
   struct BaseOutStructure;
@@ -13123,6 +13139,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct PhysicalDeviceSamplerYcbcrConversionFeatures;
   using PhysicalDeviceSamplerYcbcrConversionFeaturesKHR = PhysicalDeviceSamplerYcbcrConversionFeatures;
   struct PhysicalDeviceScalarBlockLayoutFeaturesEXT;
+  struct PhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR;
   struct PhysicalDeviceShaderAtomicInt64FeaturesKHR;
   struct PhysicalDeviceShaderClockFeaturesKHR;
   struct PhysicalDeviceShaderCoreProperties2AMD;
@@ -14787,7 +14804,7 @@ namespace VULKAN_HPP_NAMESPACE
     void beginTransformFeedbackEXT( uint32_t firstCounterBuffer, uint32_t counterBufferCount, const vk::Buffer* pCounterBuffers, const vk::DeviceSize* pCounterBufferOffsets, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    void beginTransformFeedbackEXT( uint32_t firstCounterBuffer, ArrayProxy<const vk::Buffer> counterBuffers, ArrayProxy<const vk::DeviceSize> counterBufferOffsets, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
+    void beginTransformFeedbackEXT( uint32_t firstCounterBuffer, ArrayProxy<const vk::Buffer> counterBuffers, ArrayProxy<const vk::DeviceSize> counterBufferOffsets, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
@@ -14810,14 +14827,14 @@ namespace VULKAN_HPP_NAMESPACE
     void bindTransformFeedbackBuffersEXT( uint32_t firstBinding, uint32_t bindingCount, const vk::Buffer* pBuffers, const vk::DeviceSize* pOffsets, const vk::DeviceSize* pSizes, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    void bindTransformFeedbackBuffersEXT( uint32_t firstBinding, ArrayProxy<const vk::Buffer> buffers, ArrayProxy<const vk::DeviceSize> offsets, ArrayProxy<const vk::DeviceSize> sizes, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
+    void bindTransformFeedbackBuffersEXT( uint32_t firstBinding, ArrayProxy<const vk::Buffer> buffers, ArrayProxy<const vk::DeviceSize> offsets, ArrayProxy<const vk::DeviceSize> sizes, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     void bindVertexBuffers( uint32_t firstBinding, uint32_t bindingCount, const vk::Buffer* pBuffers, const vk::DeviceSize* pOffsets, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    void bindVertexBuffers( uint32_t firstBinding, ArrayProxy<const vk::Buffer> buffers, ArrayProxy<const vk::DeviceSize> offsets, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
+    void bindVertexBuffers( uint32_t firstBinding, ArrayProxy<const vk::Buffer> buffers, ArrayProxy<const vk::DeviceSize> offsets, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
@@ -14980,7 +14997,7 @@ namespace VULKAN_HPP_NAMESPACE
     void endTransformFeedbackEXT( uint32_t firstCounterBuffer, uint32_t counterBufferCount, const vk::Buffer* pCounterBuffers, const vk::DeviceSize* pCounterBufferOffsets, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    void endTransformFeedbackEXT( uint32_t firstCounterBuffer, ArrayProxy<const vk::Buffer> counterBuffers, ArrayProxy<const vk::DeviceSize> counterBufferOffsets, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
+    void endTransformFeedbackEXT( uint32_t firstCounterBuffer, ArrayProxy<const vk::Buffer> counterBuffers, ArrayProxy<const vk::DeviceSize> counterBufferOffsets, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
@@ -18104,7 +18121,7 @@ namespace VULKAN_HPP_NAMESPACE
     void setHdrMetadataEXT( uint32_t swapchainCount, const vk::SwapchainKHR* pSwapchains, const vk::HdrMetadataEXT* pMetadata, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    void setHdrMetadataEXT( ArrayProxy<const vk::SwapchainKHR> swapchains, ArrayProxy<const vk::HdrMetadataEXT> metadata, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
+    void setHdrMetadataEXT( ArrayProxy<const vk::SwapchainKHR> swapchains, ArrayProxy<const vk::HdrMetadataEXT> metadata, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
@@ -19119,7 +19136,7 @@ namespace VULKAN_HPP_NAMESPACE
     void debugReportMessageEXT( vk::DebugReportFlagsEXT flags, vk::DebugReportObjectTypeEXT objectType, uint64_t object, size_t location, int32_t messageCode, const char* pLayerPrefix, const char* pMessage, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    void debugReportMessageEXT( vk::DebugReportFlagsEXT flags, vk::DebugReportObjectTypeEXT objectType, uint64_t object, size_t location, int32_t messageCode, const std::string & layerPrefix, const std::string & message, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
+    void debugReportMessageEXT( vk::DebugReportFlagsEXT flags, vk::DebugReportObjectTypeEXT objectType, uint64_t object, size_t location, int32_t messageCode, const std::string & layerPrefix, const std::string & message, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
@@ -21144,6 +21161,101 @@ namespace VULKAN_HPP_NAMESPACE
   static_assert( sizeof( AttachmentDescription2KHR ) == sizeof( VkAttachmentDescription2KHR ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<AttachmentDescription2KHR>::value, "struct wrapper is not a standard layout!" );
 
+  namespace layout
+  {
+    struct AttachmentDescriptionStencilLayoutKHR
+    {
+    protected:
+      VULKAN_HPP_CONSTEXPR AttachmentDescriptionStencilLayoutKHR( vk::ImageLayout stencilInitialLayout_ = vk::ImageLayout::eUndefined,
+                                                                  vk::ImageLayout stencilFinalLayout_ = vk::ImageLayout::eUndefined ) VULKAN_HPP_NOEXCEPT
+        : stencilInitialLayout( stencilInitialLayout_ )
+        , stencilFinalLayout( stencilFinalLayout_ )
+      {}
+
+      AttachmentDescriptionStencilLayoutKHR( VkAttachmentDescriptionStencilLayoutKHR const & rhs ) VULKAN_HPP_NOEXCEPT
+      {
+        *reinterpret_cast<VkAttachmentDescriptionStencilLayoutKHR*>(this) = rhs;
+      }
+
+      AttachmentDescriptionStencilLayoutKHR& operator=( VkAttachmentDescriptionStencilLayoutKHR const & rhs ) VULKAN_HPP_NOEXCEPT
+      {
+        *reinterpret_cast<VkAttachmentDescriptionStencilLayoutKHR*>(this) = rhs;
+        return *this;
+      }
+
+    public:
+      vk::StructureType sType = StructureType::eAttachmentDescriptionStencilLayoutKHR;
+      void* pNext = nullptr;
+      vk::ImageLayout stencilInitialLayout;
+      vk::ImageLayout stencilFinalLayout;
+    };
+    static_assert( sizeof( AttachmentDescriptionStencilLayoutKHR ) == sizeof( VkAttachmentDescriptionStencilLayoutKHR ), "layout struct and wrapper have different size!" );
+  }
+
+  struct AttachmentDescriptionStencilLayoutKHR : public layout::AttachmentDescriptionStencilLayoutKHR
+  {
+    VULKAN_HPP_CONSTEXPR AttachmentDescriptionStencilLayoutKHR( vk::ImageLayout stencilInitialLayout_ = vk::ImageLayout::eUndefined,
+                                                                vk::ImageLayout stencilFinalLayout_ = vk::ImageLayout::eUndefined ) VULKAN_HPP_NOEXCEPT
+      : layout::AttachmentDescriptionStencilLayoutKHR( stencilInitialLayout_, stencilFinalLayout_ )
+    {}
+
+    AttachmentDescriptionStencilLayoutKHR( VkAttachmentDescriptionStencilLayoutKHR const & rhs ) VULKAN_HPP_NOEXCEPT
+      : layout::AttachmentDescriptionStencilLayoutKHR( rhs )
+    {}
+
+    AttachmentDescriptionStencilLayoutKHR& operator=( VkAttachmentDescriptionStencilLayoutKHR const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      layout::AttachmentDescriptionStencilLayoutKHR::operator=(rhs);
+      return *this;
+    }
+
+    AttachmentDescriptionStencilLayoutKHR & setPNext( void* pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    AttachmentDescriptionStencilLayoutKHR & setStencilInitialLayout( vk::ImageLayout stencilInitialLayout_ ) VULKAN_HPP_NOEXCEPT
+    {
+      stencilInitialLayout = stencilInitialLayout_;
+      return *this;
+    }
+
+    AttachmentDescriptionStencilLayoutKHR & setStencilFinalLayout( vk::ImageLayout stencilFinalLayout_ ) VULKAN_HPP_NOEXCEPT
+    {
+      stencilFinalLayout = stencilFinalLayout_;
+      return *this;
+    }
+
+    operator VkAttachmentDescriptionStencilLayoutKHR const&() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkAttachmentDescriptionStencilLayoutKHR*>( this );
+    }
+
+    operator VkAttachmentDescriptionStencilLayoutKHR &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkAttachmentDescriptionStencilLayoutKHR*>( this );
+    }
+
+    bool operator==( AttachmentDescriptionStencilLayoutKHR const& rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( stencilInitialLayout == rhs.stencilInitialLayout )
+          && ( stencilFinalLayout == rhs.stencilFinalLayout );
+    }
+
+    bool operator!=( AttachmentDescriptionStencilLayoutKHR const& rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+
+  private:
+    using layout::AttachmentDescriptionStencilLayoutKHR::sType;
+  };
+  static_assert( sizeof( AttachmentDescriptionStencilLayoutKHR ) == sizeof( VkAttachmentDescriptionStencilLayoutKHR ), "struct and wrapper have different size!" );
+  static_assert( std::is_standard_layout<AttachmentDescriptionStencilLayoutKHR>::value, "struct wrapper is not a standard layout!" );
+
   struct AttachmentReference
   {
     VULKAN_HPP_CONSTEXPR AttachmentReference( uint32_t attachment_ = 0,
@@ -21308,6 +21420,90 @@ namespace VULKAN_HPP_NAMESPACE
   };
   static_assert( sizeof( AttachmentReference2KHR ) == sizeof( VkAttachmentReference2KHR ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<AttachmentReference2KHR>::value, "struct wrapper is not a standard layout!" );
+
+  namespace layout
+  {
+    struct AttachmentReferenceStencilLayoutKHR
+    {
+    protected:
+      VULKAN_HPP_CONSTEXPR AttachmentReferenceStencilLayoutKHR( vk::ImageLayout stencilLayout_ = vk::ImageLayout::eUndefined ) VULKAN_HPP_NOEXCEPT
+        : stencilLayout( stencilLayout_ )
+      {}
+
+      AttachmentReferenceStencilLayoutKHR( VkAttachmentReferenceStencilLayoutKHR const & rhs ) VULKAN_HPP_NOEXCEPT
+      {
+        *reinterpret_cast<VkAttachmentReferenceStencilLayoutKHR*>(this) = rhs;
+      }
+
+      AttachmentReferenceStencilLayoutKHR& operator=( VkAttachmentReferenceStencilLayoutKHR const & rhs ) VULKAN_HPP_NOEXCEPT
+      {
+        *reinterpret_cast<VkAttachmentReferenceStencilLayoutKHR*>(this) = rhs;
+        return *this;
+      }
+
+    public:
+      vk::StructureType sType = StructureType::eAttachmentReferenceStencilLayoutKHR;
+      void* pNext = nullptr;
+      vk::ImageLayout stencilLayout;
+    };
+    static_assert( sizeof( AttachmentReferenceStencilLayoutKHR ) == sizeof( VkAttachmentReferenceStencilLayoutKHR ), "layout struct and wrapper have different size!" );
+  }
+
+  struct AttachmentReferenceStencilLayoutKHR : public layout::AttachmentReferenceStencilLayoutKHR
+  {
+    VULKAN_HPP_CONSTEXPR AttachmentReferenceStencilLayoutKHR( vk::ImageLayout stencilLayout_ = vk::ImageLayout::eUndefined ) VULKAN_HPP_NOEXCEPT
+      : layout::AttachmentReferenceStencilLayoutKHR( stencilLayout_ )
+    {}
+
+    AttachmentReferenceStencilLayoutKHR( VkAttachmentReferenceStencilLayoutKHR const & rhs ) VULKAN_HPP_NOEXCEPT
+      : layout::AttachmentReferenceStencilLayoutKHR( rhs )
+    {}
+
+    AttachmentReferenceStencilLayoutKHR& operator=( VkAttachmentReferenceStencilLayoutKHR const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      layout::AttachmentReferenceStencilLayoutKHR::operator=(rhs);
+      return *this;
+    }
+
+    AttachmentReferenceStencilLayoutKHR & setPNext( void* pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    AttachmentReferenceStencilLayoutKHR & setStencilLayout( vk::ImageLayout stencilLayout_ ) VULKAN_HPP_NOEXCEPT
+    {
+      stencilLayout = stencilLayout_;
+      return *this;
+    }
+
+    operator VkAttachmentReferenceStencilLayoutKHR const&() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkAttachmentReferenceStencilLayoutKHR*>( this );
+    }
+
+    operator VkAttachmentReferenceStencilLayoutKHR &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkAttachmentReferenceStencilLayoutKHR*>( this );
+    }
+
+    bool operator==( AttachmentReferenceStencilLayoutKHR const& rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( stencilLayout == rhs.stencilLayout );
+    }
+
+    bool operator!=( AttachmentReferenceStencilLayoutKHR const& rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+
+  private:
+    using layout::AttachmentReferenceStencilLayoutKHR::sType;
+  };
+  static_assert( sizeof( AttachmentReferenceStencilLayoutKHR ) == sizeof( VkAttachmentReferenceStencilLayoutKHR ), "struct and wrapper have different size!" );
+  static_assert( std::is_standard_layout<AttachmentReferenceStencilLayoutKHR>::value, "struct wrapper is not a standard layout!" );
 
   struct Extent2D
   {
@@ -51125,6 +51321,90 @@ namespace VULKAN_HPP_NAMESPACE
 
   namespace layout
   {
+    struct PhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR
+    {
+    protected:
+      VULKAN_HPP_CONSTEXPR PhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR( vk::Bool32 separateDepthStencilLayouts_ = 0 ) VULKAN_HPP_NOEXCEPT
+        : separateDepthStencilLayouts( separateDepthStencilLayouts_ )
+      {}
+
+      PhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR( VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR const & rhs ) VULKAN_HPP_NOEXCEPT
+      {
+        *reinterpret_cast<VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR*>(this) = rhs;
+      }
+
+      PhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR& operator=( VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR const & rhs ) VULKAN_HPP_NOEXCEPT
+      {
+        *reinterpret_cast<VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR*>(this) = rhs;
+        return *this;
+      }
+
+    public:
+      vk::StructureType sType = StructureType::ePhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR;
+      void* pNext = nullptr;
+      vk::Bool32 separateDepthStencilLayouts;
+    };
+    static_assert( sizeof( PhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR ) == sizeof( VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR ), "layout struct and wrapper have different size!" );
+  }
+
+  struct PhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR : public layout::PhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR
+  {
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR( vk::Bool32 separateDepthStencilLayouts_ = 0 ) VULKAN_HPP_NOEXCEPT
+      : layout::PhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR( separateDepthStencilLayouts_ )
+    {}
+
+    PhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR( VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR const & rhs ) VULKAN_HPP_NOEXCEPT
+      : layout::PhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR( rhs )
+    {}
+
+    PhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR& operator=( VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      layout::PhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR::operator=(rhs);
+      return *this;
+    }
+
+    PhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR & setPNext( void* pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    PhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR & setSeparateDepthStencilLayouts( vk::Bool32 separateDepthStencilLayouts_ ) VULKAN_HPP_NOEXCEPT
+    {
+      separateDepthStencilLayouts = separateDepthStencilLayouts_;
+      return *this;
+    }
+
+    operator VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR const&() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR*>( this );
+    }
+
+    operator VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR*>( this );
+    }
+
+    bool operator==( PhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR const& rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( separateDepthStencilLayouts == rhs.separateDepthStencilLayouts );
+    }
+
+    bool operator!=( PhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR const& rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+
+  private:
+    using layout::PhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR::sType;
+  };
+  static_assert( sizeof( PhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR ) == sizeof( VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR ), "struct and wrapper have different size!" );
+  static_assert( std::is_standard_layout<PhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR>::value, "struct wrapper is not a standard layout!" );
+
+  namespace layout
+  {
     struct PhysicalDeviceShaderAtomicInt64FeaturesKHR
     {
     protected:
@@ -65629,7 +65909,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE void CommandBuffer::beginTransformFeedbackEXT( uint32_t firstCounterBuffer, ArrayProxy<const vk::Buffer> counterBuffers, ArrayProxy<const vk::DeviceSize> counterBufferOffsets, Dispatch const &d ) const VULKAN_HPP_NOEXCEPT
+  VULKAN_HPP_INLINE void CommandBuffer::beginTransformFeedbackEXT( uint32_t firstCounterBuffer, ArrayProxy<const vk::Buffer> counterBuffers, ArrayProxy<const vk::DeviceSize> counterBufferOffsets, Dispatch const &d ) const
   {
 #ifdef VULKAN_HPP_NO_EXCEPTIONS
     VULKAN_HPP_ASSERT( counterBuffers.size() == counterBufferOffsets.size() );
@@ -65705,7 +65985,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE void CommandBuffer::bindTransformFeedbackBuffersEXT( uint32_t firstBinding, ArrayProxy<const vk::Buffer> buffers, ArrayProxy<const vk::DeviceSize> offsets, ArrayProxy<const vk::DeviceSize> sizes, Dispatch const &d ) const VULKAN_HPP_NOEXCEPT
+  VULKAN_HPP_INLINE void CommandBuffer::bindTransformFeedbackBuffersEXT( uint32_t firstBinding, ArrayProxy<const vk::Buffer> buffers, ArrayProxy<const vk::DeviceSize> offsets, ArrayProxy<const vk::DeviceSize> sizes, Dispatch const &d ) const
   {
 #ifdef VULKAN_HPP_NO_EXCEPTIONS
     VULKAN_HPP_ASSERT( buffers.size() == offsets.size() );
@@ -65742,7 +66022,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE void CommandBuffer::bindVertexBuffers( uint32_t firstBinding, ArrayProxy<const vk::Buffer> buffers, ArrayProxy<const vk::DeviceSize> offsets, Dispatch const &d ) const VULKAN_HPP_NOEXCEPT
+  VULKAN_HPP_INLINE void CommandBuffer::bindVertexBuffers( uint32_t firstBinding, ArrayProxy<const vk::Buffer> buffers, ArrayProxy<const vk::DeviceSize> offsets, Dispatch const &d ) const
   {
 #ifdef VULKAN_HPP_NO_EXCEPTIONS
     VULKAN_HPP_ASSERT( buffers.size() == offsets.size() );
@@ -66255,7 +66535,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE void CommandBuffer::endTransformFeedbackEXT( uint32_t firstCounterBuffer, ArrayProxy<const vk::Buffer> counterBuffers, ArrayProxy<const vk::DeviceSize> counterBufferOffsets, Dispatch const &d ) const VULKAN_HPP_NOEXCEPT
+  VULKAN_HPP_INLINE void CommandBuffer::endTransformFeedbackEXT( uint32_t firstCounterBuffer, ArrayProxy<const vk::Buffer> counterBuffers, ArrayProxy<const vk::DeviceSize> counterBufferOffsets, Dispatch const &d ) const
   {
 #ifdef VULKAN_HPP_NO_EXCEPTIONS
     VULKAN_HPP_ASSERT( counterBuffers.size() == counterBufferOffsets.size() );
@@ -70669,7 +70949,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE void Device::setHdrMetadataEXT( ArrayProxy<const vk::SwapchainKHR> swapchains, ArrayProxy<const vk::HdrMetadataEXT> metadata, Dispatch const &d ) const VULKAN_HPP_NOEXCEPT
+  VULKAN_HPP_INLINE void Device::setHdrMetadataEXT( ArrayProxy<const vk::SwapchainKHR> swapchains, ArrayProxy<const vk::HdrMetadataEXT> metadata, Dispatch const &d ) const
   {
 #ifdef VULKAN_HPP_NO_EXCEPTIONS
     VULKAN_HPP_ASSERT( swapchains.size() == metadata.size() );
@@ -71277,7 +71557,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE void Instance::debugReportMessageEXT( vk::DebugReportFlagsEXT flags, vk::DebugReportObjectTypeEXT objectType, uint64_t object, size_t location, int32_t messageCode, const std::string & layerPrefix, const std::string & message, Dispatch const &d ) const VULKAN_HPP_NOEXCEPT
+  VULKAN_HPP_INLINE void Instance::debugReportMessageEXT( vk::DebugReportFlagsEXT flags, vk::DebugReportObjectTypeEXT objectType, uint64_t object, size_t location, int32_t messageCode, const std::string & layerPrefix, const std::string & message, Dispatch const &d ) const
   {
 #ifdef VULKAN_HPP_NO_EXCEPTIONS
     VULKAN_HPP_ASSERT( layerPrefix.size() == message.size() );
@@ -73493,6 +73773,8 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
   template <> struct isStructureChainValid<ImageFormatProperties2, AndroidHardwareBufferUsageANDROID>{ enum { value = true }; };
 #endif /*VK_USE_PLATFORM_ANDROID_KHR*/
+  template <> struct isStructureChainValid<AttachmentDescription2KHR, AttachmentDescriptionStencilLayoutKHR>{ enum { value = true }; };
+  template <> struct isStructureChainValid<AttachmentReference2KHR, AttachmentReferenceStencilLayoutKHR>{ enum { value = true }; };
   template <> struct isStructureChainValid<BindBufferMemoryInfo, BindBufferMemoryDeviceGroupInfo>{ enum { value = true }; };
   template <> struct isStructureChainValid<BindImageMemoryInfo, BindImageMemoryDeviceGroupInfo>{ enum { value = true }; };
   template <> struct isStructureChainValid<BindImageMemoryInfo, BindImageMemorySwapchainInfoKHR>{ enum { value = true }; };
@@ -73666,6 +73948,8 @@ namespace VULKAN_HPP_NAMESPACE
   template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceSamplerYcbcrConversionFeatures>{ enum { value = true }; };
   template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceScalarBlockLayoutFeaturesEXT>{ enum { value = true }; };
   template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceScalarBlockLayoutFeaturesEXT>{ enum { value = true }; };
+  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR>{ enum { value = true }; };
+  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR>{ enum { value = true }; };
   template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceShaderAtomicInt64FeaturesKHR>{ enum { value = true }; };
   template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceShaderAtomicInt64FeaturesKHR>{ enum { value = true }; };
   template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceShaderClockFeaturesKHR>{ enum { value = true }; };
