@@ -31,6 +31,9 @@ config("vulkan_headers_config") {
   if (is_mac) {
     defines = [ "VK_USE_PLATFORM_METAL_EXT" ]
   }
+  if (defined(is_ggp) && is_ggp) {
+    defines = [ "VK_USE_PLATFORM_GGP" ]
+  }
 }
 
 # Vulkan headers only, no compiled sources.
