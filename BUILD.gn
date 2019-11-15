@@ -13,13 +13,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import("//build_overrides/vulkan_headers.gni")
+
 config("vulkan_headers_config") {
   include_dirs = [ "include" ]
 
   if (is_win) {
     defines = [ "VK_USE_PLATFORM_WIN32_KHR" ]
   }
-  if (is_linux) {
+  if (defined(vulkan_use_x11) && vulkan_use_x11) {
     defines = [ "VK_USE_PLATFORM_XCB_KHR" ]
   }
   if (is_android) {
