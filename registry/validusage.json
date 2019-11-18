@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.1.127",
-    "comment": "from git branch: github-master commit: fa497b29d87078e1fee7372e369e9a1a788d6358",
-    "date": "2019-11-04 06:40:43Z"
+    "api version": "1.1.128",
+    "comment": "from git branch: github-master commit: d4b6925d02d0c917403fb8743c0289dd67b027f1",
+    "date": "2019-11-17 15:45:54Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -214,7 +214,7 @@
         },
         {
           "vuid": "VUID-VkPhysicalDeviceProperties2-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT\">VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceConservativeRasterizationPropertiesEXT\">VkPhysicalDeviceConservativeRasterizationPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixPropertiesNV\">VkPhysicalDeviceCooperativeMatrixPropertiesNV</a>, <a href=\"#VkPhysicalDeviceDepthStencilResolvePropertiesKHR\">VkPhysicalDeviceDepthStencilResolvePropertiesKHR</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingPropertiesEXT\">VkPhysicalDeviceDescriptorIndexingPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDiscardRectanglePropertiesEXT\">VkPhysicalDeviceDiscardRectanglePropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDriverPropertiesKHR\">VkPhysicalDeviceDriverPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceExternalMemoryHostPropertiesEXT\">VkPhysicalDeviceExternalMemoryHostPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceFloatControlsPropertiesKHR\">VkPhysicalDeviceFloatControlsPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapPropertiesEXT\">VkPhysicalDeviceFragmentDensityMapPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceIDProperties\">VkPhysicalDeviceIDProperties</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockPropertiesEXT\">VkPhysicalDeviceInlineUniformBlockPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceLineRasterizationPropertiesEXT\">VkPhysicalDeviceLineRasterizationPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceMaintenance3Properties\">VkPhysicalDeviceMaintenance3Properties</a>, <a href=\"#VkPhysicalDeviceMeshShaderPropertiesNV\">VkPhysicalDeviceMeshShaderPropertiesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX\">VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX</a>, <a href=\"#VkPhysicalDeviceMultiviewProperties\">VkPhysicalDeviceMultiviewProperties</a>, <a href=\"#VkPhysicalDevicePCIBusInfoPropertiesEXT\">VkPhysicalDevicePCIBusInfoPropertiesEXT</a>, <a href=\"#VkPhysicalDevicePointClippingProperties\">VkPhysicalDevicePointClippingProperties</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryProperties\">VkPhysicalDeviceProtectedMemoryProperties</a>, <a href=\"#VkPhysicalDevicePushDescriptorPropertiesKHR\">VkPhysicalDevicePushDescriptorPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceRayTracingPropertiesNV\">VkPhysicalDeviceRayTracingPropertiesNV</a>, <a href=\"#VkPhysicalDeviceSampleLocationsPropertiesEXT\">VkPhysicalDeviceSampleLocationsPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT\">VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceShaderCoreProperties2AMD\">VkPhysicalDeviceShaderCoreProperties2AMD</a>, <a href=\"#VkPhysicalDeviceShaderCorePropertiesAMD\">VkPhysicalDeviceShaderCorePropertiesAMD</a>, <a href=\"#VkPhysicalDeviceShaderSMBuiltinsPropertiesNV\">VkPhysicalDeviceShaderSMBuiltinsPropertiesNV</a>, <a href=\"#VkPhysicalDeviceShadingRateImagePropertiesNV\">VkPhysicalDeviceShadingRateImagePropertiesNV</a>, <a href=\"#VkPhysicalDeviceSubgroupProperties\">VkPhysicalDeviceSubgroupProperties</a>, <a href=\"#VkPhysicalDeviceSubgroupSizeControlPropertiesEXT\">VkPhysicalDeviceSubgroupSizeControlPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT\">VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceTimelineSemaphorePropertiesKHR\">VkPhysicalDeviceTimelineSemaphorePropertiesKHR</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackPropertiesEXT\">VkPhysicalDeviceTransformFeedbackPropertiesEXT</a>, or <a href=\"#VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT\">VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT\">VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceConservativeRasterizationPropertiesEXT\">VkPhysicalDeviceConservativeRasterizationPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixPropertiesNV\">VkPhysicalDeviceCooperativeMatrixPropertiesNV</a>, <a href=\"#VkPhysicalDeviceDepthStencilResolvePropertiesKHR\">VkPhysicalDeviceDepthStencilResolvePropertiesKHR</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingPropertiesEXT\">VkPhysicalDeviceDescriptorIndexingPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDiscardRectanglePropertiesEXT\">VkPhysicalDeviceDiscardRectanglePropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDriverPropertiesKHR\">VkPhysicalDeviceDriverPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceExternalMemoryHostPropertiesEXT\">VkPhysicalDeviceExternalMemoryHostPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceFloatControlsPropertiesKHR\">VkPhysicalDeviceFloatControlsPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapPropertiesEXT\">VkPhysicalDeviceFragmentDensityMapPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceIDProperties\">VkPhysicalDeviceIDProperties</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockPropertiesEXT\">VkPhysicalDeviceInlineUniformBlockPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceLineRasterizationPropertiesEXT\">VkPhysicalDeviceLineRasterizationPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceMaintenance3Properties\">VkPhysicalDeviceMaintenance3Properties</a>, <a href=\"#VkPhysicalDeviceMeshShaderPropertiesNV\">VkPhysicalDeviceMeshShaderPropertiesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX\">VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX</a>, <a href=\"#VkPhysicalDeviceMultiviewProperties\">VkPhysicalDeviceMultiviewProperties</a>, <a href=\"#VkPhysicalDevicePCIBusInfoPropertiesEXT\">VkPhysicalDevicePCIBusInfoPropertiesEXT</a>, <a href=\"#VkPhysicalDevicePerformanceQueryPropertiesKHR\">VkPhysicalDevicePerformanceQueryPropertiesKHR</a>, <a href=\"#VkPhysicalDevicePointClippingProperties\">VkPhysicalDevicePointClippingProperties</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryProperties\">VkPhysicalDeviceProtectedMemoryProperties</a>, <a href=\"#VkPhysicalDevicePushDescriptorPropertiesKHR\">VkPhysicalDevicePushDescriptorPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceRayTracingPropertiesNV\">VkPhysicalDeviceRayTracingPropertiesNV</a>, <a href=\"#VkPhysicalDeviceSampleLocationsPropertiesEXT\">VkPhysicalDeviceSampleLocationsPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT\">VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceShaderCoreProperties2AMD\">VkPhysicalDeviceShaderCoreProperties2AMD</a>, <a href=\"#VkPhysicalDeviceShaderCorePropertiesAMD\">VkPhysicalDeviceShaderCorePropertiesAMD</a>, <a href=\"#VkPhysicalDeviceShaderSMBuiltinsPropertiesNV\">VkPhysicalDeviceShaderSMBuiltinsPropertiesNV</a>, <a href=\"#VkPhysicalDeviceShadingRateImagePropertiesNV\">VkPhysicalDeviceShadingRateImagePropertiesNV</a>, <a href=\"#VkPhysicalDeviceSubgroupProperties\">VkPhysicalDeviceSubgroupProperties</a>, <a href=\"#VkPhysicalDeviceSubgroupSizeControlPropertiesEXT\">VkPhysicalDeviceSubgroupSizeControlPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT\">VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceTimelineSemaphorePropertiesKHR\">VkPhysicalDeviceTimelineSemaphorePropertiesKHR</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackPropertiesEXT\">VkPhysicalDeviceTransformFeedbackPropertiesEXT</a>, or <a href=\"#VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT\">VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT</a>"
         },
         {
           "vuid": "VUID-VkPhysicalDeviceProperties2-sType-unique",
@@ -295,6 +295,50 @@
         {
           "vuid": "VUID-VkQueueFamilyCheckpointPropertiesNV-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV</code>"
+        }
+      ]
+    },
+    "vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR": {
+      "(VK_KHR_performance_query)": [
+        {
+          "vuid": "VUID-vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR-physicalDevice-parameter",
+          "text": " <code>physicalDevice</code> <strong class=\"purple\">must</strong> be a valid <code>VkPhysicalDevice</code> handle"
+        },
+        {
+          "vuid": "VUID-vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR-pCounterCount-parameter",
+          "text": " <code>pCounterCount</code> <strong class=\"purple\">must</strong> be a valid pointer to a <code>uint32_t</code> value"
+        },
+        {
+          "vuid": "VUID-vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR-pCounters-parameter",
+          "text": " If the value referenced by <code>pCounterCount</code> is not <code>0</code>, and <code>pCounters</code> is not <code>NULL</code>, <code>pCounters</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>pCounterCount</code> <code>VkPerformanceCounterKHR</code> structures"
+        },
+        {
+          "vuid": "VUID-vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR-pCounterDescriptions-parameter",
+          "text": " If the value referenced by <code>pCounterCount</code> is not <code>0</code>, and <code>pCounterDescriptions</code> is not <code>NULL</code>, <code>pCounterDescriptions</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>pCounterCount</code> <code>VkPerformanceCounterDescriptionKHR</code> structures"
+        }
+      ]
+    },
+    "VkPerformanceCounterKHR": {
+      "(VK_KHR_performance_query)": [
+        {
+          "vuid": "VUID-VkPerformanceCounterKHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PERFORMANCE_COUNTER_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkPerformanceCounterKHR-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        }
+      ]
+    },
+    "VkPerformanceCounterDescriptionKHR": {
+      "(VK_KHR_performance_query)": [
+        {
+          "vuid": "VUID-VkPerformanceCounterDescriptionKHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PERFORMANCE_COUNTER_DESCRIPTION_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkPerformanceCounterDescriptionKHR-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
         }
       ]
     },
@@ -388,7 +432,7 @@
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceMemoryOverallocationCreateInfoAMD\">VkDeviceMemoryOverallocationCreateInfoAMD</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice8BitStorageFeaturesKHR\">VkPhysicalDevice8BitStorageFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeaturesEXT\">VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCoherentMemoryFeaturesAMD\">VkPhysicalDeviceCoherentMemoryFeaturesAMD</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixFeaturesNV\">VkPhysicalDeviceCooperativeMatrixFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCoverageReductionModeFeaturesNV\">VkPhysicalDeviceCoverageReductionModeFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV\">VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDepthClipEnableFeaturesEXT\">VkPhysicalDeviceDepthClipEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeaturesEXT\">VkPhysicalDeviceDescriptorIndexingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapFeaturesEXT\">VkPhysicalDeviceFragmentDensityMapFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT\">VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceHostQueryResetFeaturesEXT\">VkPhysicalDeviceHostQueryResetFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceImagelessFramebufferFeaturesKHR\">VkPhysicalDeviceImagelessFramebufferFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceIndexTypeUint8FeaturesEXT\">VkPhysicalDeviceIndexTypeUint8FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeaturesEXT\">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceLineRasterizationFeaturesEXT\">VkPhysicalDeviceLineRasterizationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMemoryPriorityFeaturesEXT\">VkPhysicalDeviceMemoryPriorityFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR\">VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceScalarBlockLayoutFeaturesEXT\">VkPhysicalDeviceScalarBlockLayoutFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR\">VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64FeaturesKHR\">VkPhysicalDeviceShaderAtomicInt64FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderClockFeaturesKHR\">VkPhysicalDeviceShaderClockFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT\">VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderDrawParametersFeatures\">VkPhysicalDeviceShaderDrawParametersFeatures</a>, <a href=\"#VkPhysicalDeviceShaderFloat16Int8FeaturesKHR\">VkPhysicalDeviceShaderFloat16Int8FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL\">VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL</a>, <a href=\"#VkPhysicalDeviceShaderSMBuiltinsFeaturesNV\">VkPhysicalDeviceShaderSMBuiltinsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR\">VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSubgroupSizeControlFeaturesEXT\">VkPhysicalDeviceSubgroupSizeControlFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT\">VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT\">VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTimelineSemaphoreFeaturesKHR\">VkPhysicalDeviceTimelineSemaphoreFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackFeaturesEXT\">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR\">VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceVariablePointersFeatures\">VkPhysicalDeviceVariablePointersFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeaturesKHR\">VkPhysicalDeviceVulkanMemoryModelFeaturesKHR</a>, or <a href=\"#VkPhysicalDeviceYcbcrImageArraysFeaturesEXT\">VkPhysicalDeviceYcbcrImageArraysFeaturesEXT</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceMemoryOverallocationCreateInfoAMD\">VkDeviceMemoryOverallocationCreateInfoAMD</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice8BitStorageFeaturesKHR\">VkPhysicalDevice8BitStorageFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeaturesEXT\">VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCoherentMemoryFeaturesAMD\">VkPhysicalDeviceCoherentMemoryFeaturesAMD</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixFeaturesNV\">VkPhysicalDeviceCooperativeMatrixFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCoverageReductionModeFeaturesNV\">VkPhysicalDeviceCoverageReductionModeFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV\">VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDepthClipEnableFeaturesEXT\">VkPhysicalDeviceDepthClipEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeaturesEXT\">VkPhysicalDeviceDescriptorIndexingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapFeaturesEXT\">VkPhysicalDeviceFragmentDensityMapFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT\">VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceHostQueryResetFeaturesEXT\">VkPhysicalDeviceHostQueryResetFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceImagelessFramebufferFeaturesKHR\">VkPhysicalDeviceImagelessFramebufferFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceIndexTypeUint8FeaturesEXT\">VkPhysicalDeviceIndexTypeUint8FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeaturesEXT\">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceLineRasterizationFeaturesEXT\">VkPhysicalDeviceLineRasterizationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMemoryPriorityFeaturesEXT\">VkPhysicalDeviceMemoryPriorityFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDevicePerformanceQueryFeaturesKHR\">VkPhysicalDevicePerformanceQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR\">VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceScalarBlockLayoutFeaturesEXT\">VkPhysicalDeviceScalarBlockLayoutFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR\">VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64FeaturesKHR\">VkPhysicalDeviceShaderAtomicInt64FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderClockFeaturesKHR\">VkPhysicalDeviceShaderClockFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT\">VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderDrawParametersFeatures\">VkPhysicalDeviceShaderDrawParametersFeatures</a>, <a href=\"#VkPhysicalDeviceShaderFloat16Int8FeaturesKHR\">VkPhysicalDeviceShaderFloat16Int8FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL\">VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL</a>, <a href=\"#VkPhysicalDeviceShaderSMBuiltinsFeaturesNV\">VkPhysicalDeviceShaderSMBuiltinsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR\">VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSubgroupSizeControlFeaturesEXT\">VkPhysicalDeviceSubgroupSizeControlFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT\">VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT\">VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTimelineSemaphoreFeaturesKHR\">VkPhysicalDeviceTimelineSemaphoreFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackFeaturesEXT\">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR\">VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceVariablePointersFeatures\">VkPhysicalDeviceVariablePointersFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeaturesKHR\">VkPhysicalDeviceVulkanMemoryModelFeaturesKHR</a>, or <a href=\"#VkPhysicalDeviceYcbcrImageArraysFeaturesEXT\">VkPhysicalDeviceYcbcrImageArraysFeaturesEXT</a>"
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-sType-unique",
@@ -1005,6 +1049,10 @@
           "text": " If any element of <code>pSubmits</code>-&gt;<code>pCommandBuffers</code> includes a <a href=\"#synchronization-queue-transfers-acquire\">Queue Family Transfer Acquire Operation</a>, there <strong class=\"purple\">must</strong> exist a previously submitted <a href=\"#synchronization-queue-transfers-release\">Queue Family Transfer Release Operation</a> on a queue in the queue family identified by the acquire operation, with parameters matching the acquire operation as defined in the definition of such <a href=\"#synchronization-queue-transfers-acquire\">acquire operations</a>, and which happens before the acquire operation."
         },
         {
+          "vuid": "VUID-vkQueueSubmit-pSubmits-02808",
+          "text": " Any resource created with <code>VK_SHARING_MODE_EXCLUSIVE</code> that is read by an operation specified by <code>pSubmits</code> <strong class=\"purple\">must</strong> not be owned by any queue family other than the one which <code>queue</code> belongs to, at the time it is executed"
+        },
+        {
           "vuid": "VUID-vkQueueSubmit-queue-parameter",
           "text": " <code>queue</code> <strong class=\"purple\">must</strong> be a valid <code>VkQueue</code> handle"
         },
@@ -1025,6 +1073,12 @@
         {
           "vuid": "VUID-vkQueueSubmit-pWaitSemaphores-03238",
           "text": " All elements of the <code>pWaitSemaphores</code> member of all elements of <code>pSubmits</code> created with a <a href=\"#VkSemaphoreTypeKHR\">VkSemaphoreTypeKHR</a> of <code>VK_SEMAPHORE_TYPE_BINARY_KHR</code> <strong class=\"purple\">must</strong> reference a semaphore signal operation that has been submitted for execution and any semaphore signal operations on which it depends (if any) <strong class=\"purple\">must</strong> have also been submitted for execution."
+        }
+      ],
+      "(VK_KHR_performance_query)": [
+        {
+          "vuid": "VUID-vkQueueSubmit-pCommandBuffers-03220",
+          "text": " If a command recorded into any element of <code>pCommandBuffers</code> was a <a href=\"#vkCmdBeginQuery\">vkCmdBeginQuery</a> whose <code>queryPool</code> was created with a <code>queryType</code> of <code>VK_QUERY_TYPE_PERFORMANCE_QUERY_KHR</code>, the <a href=\"#profiling-lock\">profiling lock</a> <strong class=\"purple\">must</strong> have been held continuously on the <code>VkDevice</code> that <code>queue</code> was retrieved from, throughout recording of those command buffers."
         }
       ]
     },
@@ -1052,7 +1106,7 @@
         },
         {
           "vuid": "VUID-VkSubmitInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkD3D12FenceSubmitInfoKHR\">VkD3D12FenceSubmitInfoKHR</a>, <a href=\"#VkDeviceGroupSubmitInfo\">VkDeviceGroupSubmitInfo</a>, <a href=\"#VkProtectedSubmitInfo\">VkProtectedSubmitInfo</a>, <a href=\"#VkTimelineSemaphoreSubmitInfoKHR\">VkTimelineSemaphoreSubmitInfoKHR</a>, <a href=\"#VkWin32KeyedMutexAcquireReleaseInfoKHR\">VkWin32KeyedMutexAcquireReleaseInfoKHR</a>, or <a href=\"#VkWin32KeyedMutexAcquireReleaseInfoNV\">VkWin32KeyedMutexAcquireReleaseInfoNV</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkD3D12FenceSubmitInfoKHR\">VkD3D12FenceSubmitInfoKHR</a>, <a href=\"#VkDeviceGroupSubmitInfo\">VkDeviceGroupSubmitInfo</a>, <a href=\"#VkPerformanceQuerySubmitInfoKHR\">VkPerformanceQuerySubmitInfoKHR</a>, <a href=\"#VkProtectedSubmitInfo\">VkProtectedSubmitInfo</a>, <a href=\"#VkTimelineSemaphoreSubmitInfoKHR\">VkTimelineSemaphoreSubmitInfoKHR</a>, <a href=\"#VkWin32KeyedMutexAcquireReleaseInfoKHR\">VkWin32KeyedMutexAcquireReleaseInfoKHR</a>, or <a href=\"#VkWin32KeyedMutexAcquireReleaseInfoNV\">VkWin32KeyedMutexAcquireReleaseInfoNV</a>"
         },
         {
           "vuid": "VUID-VkSubmitInfo-sType-unique",
@@ -1292,6 +1346,18 @@
         }
       ]
     },
+    "VkPerformanceQuerySubmitInfoKHR": {
+      "(VK_KHR_performance_query)": [
+        {
+          "vuid": "VUID-VkPerformanceQuerySubmitInfoKHR-counterPassIndex-03221",
+          "text": " <code>counterPassIndex</code> <strong class=\"purple\">must</strong> be less than the number of counter passes required by any queries within the batch. The required number of counter passes for a performance query is obtained by calling <a href=\"#vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR\">vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR</a>."
+        },
+        {
+          "vuid": "VUID-VkPerformanceQuerySubmitInfoKHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PERFORMANCE_QUERY_SUBMIT_INFO_KHR</code>"
+        }
+      ]
+    },
     "vkCmdExecuteCommands": {
       "core": [
         {
@@ -1344,7 +1410,7 @@
         },
         {
           "vuid": "VUID-vkCmdExecuteCommands-pCommandBuffers-00099",
-          "text": " If <code>vkCmdExecuteCommands</code> is being called within a render pass instance, and any element of <code>pCommandBuffers</code> was recorded with <code>VkCommandBufferInheritanceInfo</code>::<code>framebuffer</code> not equal to <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, that <code>VkFramebuffer</code> <strong class=\"purple\">must</strong> match the <code>VkFramebuffer</code> used in the current render pass instance"
+          "text": " If <code>vkCmdExecuteCommands</code> is being called within a render pass instance, and any element of <code>pCommandBuffers</code> was recorded with <a href=\"#VkCommandBufferInheritanceInfo\">VkCommandBufferInheritanceInfo</a>::<code>framebuffer</code> not equal to <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, that <code>VkFramebuffer</code> <strong class=\"purple\">must</strong> match the <code>VkFramebuffer</code> used in the current render pass instance"
         },
         {
           "vuid": "VUID-vkCmdExecuteCommands-pCommandBuffers-00100",
@@ -2721,6 +2787,30 @@
           "text": " The <code>srcQueueFamilyIndex</code> and <code>dstQueueFamilyIndex</code> members of any element of <code>pBufferMemoryBarriers</code> or <code>pImageMemoryBarriers</code> <strong class=\"purple\">must</strong> be equal."
         },
         {
+          "vuid": "VUID-vkCmdWaitEvents-srcAccessMask-02809",
+          "text": " The <code>srcAccessMask</code> member of each element of <code>pMemoryBarriers</code> <strong class=\"purple\">must</strong> only include access flags that are supported by one or more of the pipeline stages in <code>srcStageMask</code>, as specified in the <a href=\"#synchronization-access-types-supported\">table of supported access types</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdWaitEvents-dstAccessMask-02810",
+          "text": " The <code>dstAccessMask</code> member of each element of <code>pMemoryBarriers</code> <strong class=\"purple\">must</strong> only include access flags that are supported by one or more of the pipeline stages in <code>dstStageMask</code>, as specified in the <a href=\"#synchronization-access-types-supported\">table of supported access types</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdWaitEvents-srcAccessMask-02811",
+          "text": " The <code>srcAccessMask</code> member of each element of <code>pBufferMemoryBarriers</code> <strong class=\"purple\">must</strong> only include access flags that are supported by one or more of the pipeline stages in <code>srcStageMask</code>, as specified in the <a href=\"#synchronization-access-types-supported\">table of supported access types</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdWaitEvents-dstAccessMask-02812",
+          "text": " The <code>dstAccessMask</code> member of each element of <code>pBufferMemoryBarriers</code> <strong class=\"purple\">must</strong> only include access flags that are supported by one or more of the pipeline stages in <code>dstStageMask</code>, as specified in the <a href=\"#synchronization-access-types-supported\">table of supported access types</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdWaitEvents-srcAccessMask-02813",
+          "text": " The <code>srcAccessMask</code> member of each element of <code>pImageMemoryBarriers</code> <strong class=\"purple\">must</strong> only include access flags that are supported by one or more of the pipeline stages in <code>srcStageMask</code>, as specified in the <a href=\"#synchronization-access-types-supported\">table of supported access types</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdWaitEvents-dstAccessMask-02814",
+          "text": " The <code>dstAccessMask</code> member of any element of <code>pImageMemoryBarriers</code> <strong class=\"purple\">must</strong> only include access flags that are supported by one or more of the pipeline stages in <code>dstStageMask</code>, as specified in the <a href=\"#synchronization-access-types-supported\">table of supported access types</a>"
+        },
+        {
           "vuid": "VUID-vkCmdWaitEvents-commandBuffer-parameter",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <code>VkCommandBuffer</code> handle"
         },
@@ -2834,15 +2924,31 @@
         },
         {
           "vuid": "VUID-vkCmdPipelineBarrier-srcStageMask-01183",
-          "text": " Any pipeline stage included in <code>srcStageMask</code> or <code>dstStageMask</code> <strong class=\"purple\">must</strong> be supported by the capabilities of the queue family specified by the <code>queueFamilyIndex</code> member of the <a href=\"#VkCommandPoolCreateInfo\">VkCommandPoolCreateInfo</a> structure that was used to create the <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from, as specified in the <a href=\"#synchronization-pipeline-stages-supported\">table of supported pipeline stages</a>."
+          "text": " Any pipeline stage included in <code>srcStageMask</code> or <code>dstStageMask</code> <strong class=\"purple\">must</strong> be supported by the capabilities of the queue family specified by the <code>queueFamilyIndex</code> member of the <a href=\"#VkCommandPoolCreateInfo\">VkCommandPoolCreateInfo</a> structure that was used to create the <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from, as specified in the <a href=\"#synchronization-pipeline-stages-supported\">table of supported pipeline stages</a>"
         },
         {
-          "vuid": "VUID-vkCmdPipelineBarrier-pMemoryBarriers-01184",
-          "text": " Each element of <code>pMemoryBarriers</code>, <code>pBufferMemoryBarriers</code> and <code>pImageMemoryBarriers</code> <strong class=\"purple\">must</strong> not have any access flag included in its <code>srcAccessMask</code> member if that bit is not supported by any of the pipeline stages in <code>srcStageMask</code>, as specified in the <a href=\"#synchronization-access-types-supported\">table of supported access types</a>."
+          "vuid": "VUID-vkCmdPipelineBarrier-srcAccessMask-02815",
+          "text": " The <code>srcAccessMask</code> member of each element of <code>pMemoryBarriers</code> <strong class=\"purple\">must</strong> only include access flags that are supported by one or more of the pipeline stages in <code>srcStageMask</code>, as specified in the <a href=\"#synchronization-access-types-supported\">table of supported access types</a>"
         },
         {
-          "vuid": "VUID-vkCmdPipelineBarrier-pMemoryBarriers-01185",
-          "text": " Each element of <code>pMemoryBarriers</code>, <code>pBufferMemoryBarriers</code> and <code>pImageMemoryBarriers</code> <strong class=\"purple\">must</strong> not have any access flag included in its <code>dstAccessMask</code> member if that bit is not supported by any of the pipeline stages in <code>dstStageMask</code>, as specified in the <a href=\"#synchronization-access-types-supported\">table of supported access types</a>."
+          "vuid": "VUID-vkCmdPipelineBarrier-dstAccessMask-02816",
+          "text": " The <code>dstAccessMask</code> member of each element of <code>pMemoryBarriers</code> <strong class=\"purple\">must</strong> only include access flags that are supported by one or more of the pipeline stages in <code>dstStageMask</code>, as specified in the <a href=\"#synchronization-access-types-supported\">table of supported access types</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdPipelineBarrier-pBufferMemoryBarriers-02817",
+          "text": " For any element of <code>pBufferMemoryBarriers</code>, if its <code>srcQueueFamilyIndex</code> and <code>dstQueueFamilyIndex</code> members are equal, or if its <code>srcQueueFamilyIndex</code> is the queue family index that was used to create the command pool that <code>commandBuffer</code> was allocated from, then its <code>srcAccessMask</code> member <strong class=\"purple\">must</strong> only contain access flags that are supported by one or more of the pipeline stages in <code>srcStageMask</code>, as specified in the <a href=\"#synchronization-access-types-supported\">table of supported access types</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdPipelineBarrier-pBufferMemoryBarriers-02818",
+          "text": " For any element of <code>pBufferMemoryBarriers</code>, if its <code>srcQueueFamilyIndex</code> and <code>dstQueueFamilyIndex</code> members are equal, or if its <code>dstQueueFamilyIndex</code> is the queue family index that was used to create the command pool that <code>commandBuffer</code> was allocated from, then its <code>dstAccessMask</code> member <strong class=\"purple\">must</strong> only contain access flags that are supported by one or more of the pipeline stages in <code>dstStageMask</code>, as specified in the <a href=\"#synchronization-access-types-supported\">table of supported access types</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdPipelineBarrier-pImageMemoryBarriers-02819",
+          "text": " For any element of <code>pImageMemoryBarriers</code>, if its <code>srcQueueFamilyIndex</code> and <code>dstQueueFamilyIndex</code> members are equal, or if its <code>srcQueueFamilyIndex</code> is the queue family index that was used to create the command pool that <code>commandBuffer</code> was allocated from, then its <code>srcAccessMask</code> member <strong class=\"purple\">must</strong> only contain access flags that are supported by one or more of the pipeline stages in <code>srcStageMask</code>, as specified in the <a href=\"#synchronization-access-types-supported\">table of supported access types</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdPipelineBarrier-pImageMemoryBarriers-02820",
+          "text": " For any element of <code>pImageMemoryBarriers</code>, if its <code>srcQueueFamilyIndex</code> and <code>dstQueueFamilyIndex</code> members are equal, or if its <code>dstQueueFamilyIndex</code> is the queue family index that was used to create the command pool that <code>commandBuffer</code> was allocated from, then its <code>dstAccessMask</code> member <strong class=\"purple\">must</strong> only contain access flags that are supported by one or more of the pipeline stages in <code>dstStageMask</code>, as specified in the <a href=\"#synchronization-access-types-supported\">table of supported access types</a>"
         },
         {
           "vuid": "VUID-vkCmdPipelineBarrier-commandBuffer-parameter",
@@ -2985,14 +3091,6 @@
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
         },
         {
-          "vuid": "VUID-VkBufferMemoryBarrier-srcAccessMask-parameter",
-          "text": " <code>srcAccessMask</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkAccessFlagBits\">VkAccessFlagBits</a> values"
-        },
-        {
-          "vuid": "VUID-VkBufferMemoryBarrier-dstAccessMask-parameter",
-          "text": " <code>dstAccessMask</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkAccessFlagBits\">VkAccessFlagBits</a> values"
-        },
-        {
           "vuid": "VUID-VkBufferMemoryBarrier-buffer-parameter",
           "text": " <code>buffer</code> <strong class=\"purple\">must</strong> be a valid <code>VkBuffer</code> handle"
         }
@@ -3095,14 +3193,6 @@
         {
           "vuid": "VUID-VkImageMemoryBarrier-pNext-pNext",
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkSampleLocationsInfoEXT\">VkSampleLocationsInfoEXT</a>"
-        },
-        {
-          "vuid": "VUID-VkImageMemoryBarrier-srcAccessMask-parameter",
-          "text": " <code>srcAccessMask</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkAccessFlagBits\">VkAccessFlagBits</a> values"
-        },
-        {
-          "vuid": "VUID-VkImageMemoryBarrier-dstAccessMask-parameter",
-          "text": " <code>dstAccessMask</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkAccessFlagBits\">VkAccessFlagBits</a> values"
         },
         {
           "vuid": "VUID-VkImageMemoryBarrier-oldLayout-parameter",
@@ -3321,6 +3411,10 @@
         {
           "vuid": "VUID-VkRenderPassCreateInfo-sType-unique",
           "text": " Each <code>sType</code> member in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+        },
+        {
+          "vuid": "VUID-VkRenderPassCreateInfo-flags-zerobitmask",
+          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be <code>0</code>"
         },
         {
           "vuid": "VUID-VkRenderPassCreateInfo-pAttachments-parameter",
@@ -3893,6 +3987,10 @@
         {
           "vuid": "VUID-VkRenderPassCreateInfo2KHR-pNext-pNext",
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkRenderPassFragmentDensityMapCreateInfoEXT\">VkRenderPassFragmentDensityMapCreateInfoEXT</a>"
+        },
+        {
+          "vuid": "VUID-VkRenderPassCreateInfo2KHR-flags-zerobitmask",
+          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be <code>0</code>"
         },
         {
           "vuid": "VUID-VkRenderPassCreateInfo2KHR-pAttachments-parameter",
@@ -5307,8 +5405,8 @@
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkShaderModuleValidationCacheCreateInfoEXT\">VkShaderModuleValidationCacheCreateInfoEXT</a>"
         },
         {
-          "vuid": "VUID-VkShaderModuleCreateInfo-flags-parameter",
-          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkShaderModuleCreateFlagBits\">VkShaderModuleCreateFlagBits</a> values"
+          "vuid": "VUID-VkShaderModuleCreateInfo-flags-zerobitmask",
+          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be <code>0</code>"
         },
         {
           "vuid": "VUID-VkShaderModuleCreateInfo-pCode-parameter",
@@ -7062,7 +7160,7 @@
       "core": [
         {
           "vuid": "VUID-vkAllocateMemory-pAllocateInfo-01713",
-          "text": " <code>pAllocateInfo</code>-&gt;<code>allocationSize</code> <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#VkPhysicalDeviceMemoryProperties\">VkPhysicalDeviceMemoryProperties</a>::<code>memoryHeaps</code>[<code>pAllocateInfo</code>-&gt;<code>memoryTypeIndex</code>].<code>size</code> as returned by <a href=\"#vkGetPhysicalDeviceMemoryProperties\">vkGetPhysicalDeviceMemoryProperties</a> for the <a href=\"#VkPhysicalDevice\">VkPhysicalDevice</a> that <code>device</code> was created from."
+          "text": " <code>pAllocateInfo</code>-&gt;<code>allocationSize</code> <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#VkPhysicalDeviceMemoryProperties\">VkPhysicalDeviceMemoryProperties</a>::<code>memoryHeaps</code>[<code>memindex</code>].<code>size</code> where <code>memindex</code> = <a href=\"#VkPhysicalDeviceMemoryProperties\">VkPhysicalDeviceMemoryProperties</a>::<code>memoryTypes</code>[<code>pAllocateInfo</code>-&gt;<code>memoryTypeIndex</code>].<code>heapIndex</code> as returned by <a href=\"#vkGetPhysicalDeviceMemoryProperties\">vkGetPhysicalDeviceMemoryProperties</a> for the <a href=\"#VkPhysicalDevice\">VkPhysicalDevice</a> that <code>device</code> was created from."
         },
         {
           "vuid": "VUID-vkAllocateMemory-pAllocateInfo-01714",
@@ -8357,10 +8455,6 @@
           "text": " <code>offset</code> <strong class=\"purple\">must</strong> be less than the size of <code>buffer</code>"
         },
         {
-          "vuid": "VUID-VkBufferViewCreateInfo-offset-02749",
-          "text": " If the <a href=\"#features-texelBufferAlignment\">texelBufferAlignment</a> feature is not enabled, <code>offset</code> <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceLimits</code>::<code>minTexelBufferOffsetAlignment</code>"
-        },
-        {
           "vuid": "VUID-VkBufferViewCreateInfo-range-00928",
           "text": " If <code>range</code> is not equal to <code>VK_WHOLE_SIZE</code>, <code>range</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
         },
@@ -8413,7 +8507,17 @@
           "text": " <code>format</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkFormat\">VkFormat</a> value"
         }
       ],
+      "!(VK_EXT_texel_buffer_alignment)": [
+        {
+          "vuid": "VUID-VkBufferViewCreateInfo-offset-00926",
+          "text": " <code>offset</code> <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceLimits</code>::<code>minTexelBufferOffsetAlignment</code>"
+        }
+      ],
       "(VK_EXT_texel_buffer_alignment)": [
+        {
+          "vuid": "VUID-VkBufferViewCreateInfo-offset-02749",
+          "text": " If the <a href=\"#features-texelBufferAlignment\">texelBufferAlignment</a> feature is not enabled, <code>offset</code> <strong class=\"purple\">must</strong> be a multiple of <code>VkPhysicalDeviceLimits</code>::<code>minTexelBufferOffsetAlignment</code>"
+        },
         {
           "vuid": "VUID-VkBufferViewCreateInfo-buffer-02750",
           "text": " If the <a href=\"#features-texelBufferAlignment\">texelBufferAlignment</a> feature is enabled and if <code>buffer</code> was created with <code>usage</code> containing <code>VK_BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT</code>, <code>offset</code> <strong class=\"purple\">must</strong> be a multiple of the lesser of <a href=\"#VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT\">VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT</a>::<code>storageTexelBufferOffsetAlignmentBytes</code> or, if <a href=\"#VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT\">VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT</a>::<code>storageTexelBufferOffsetSingleTexelAlignment</code> is <code>VK_TRUE</code>, the size of a texel of the requested <code>format</code>. If the size of a texel is a multiple of three bytes, then the size of a single component of <code>format</code> is used instead"
@@ -10969,10 +11073,6 @@
           "text": " If any of <code>addressModeU</code>, <code>addressModeV</code> or <code>addressModeW</code> are <code>VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER</code>, <code>borderColor</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkBorderColor\">VkBorderColor</a> value"
         },
         {
-          "vuid": "VUID-VkSamplerCreateInfo-addressModeU-01079",
-          "text": " If the <code><a href=\"#VK_KHR_sampler_mirror_clamp_to_edge\">VK_KHR_sampler_mirror_clamp_to_edge</a></code> extension is not enabled, <code>addressModeU</code>, <code>addressModeV</code> and <code>addressModeW</code> <strong class=\"purple\">must</strong> not be <code>VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE</code>"
-        },
-        {
           "vuid": "VUID-VkSamplerCreateInfo-compareEnable-01080",
           "text": " If <code>compareEnable</code> is <code>VK_TRUE</code>, <code>compareOp</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCompareOp\">VkCompareOp</a> value"
         },
@@ -11031,6 +11131,12 @@
         {
           "vuid": "VUID-VkSamplerCreateInfo-None-01647",
           "text": " The sampler reduction mode <strong class=\"purple\">must</strong> be set to <code>VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE_EXT</code> if <a href=\"#samplers-YCbCr-conversion\">sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion</a> is enabled"
+        }
+      ],
+      "(VK_KHR_sampler_mirror_clamp_to_edge)": [
+        {
+          "vuid": "VUID-VkSamplerCreateInfo-addressModeU-01079",
+          "text": " If the <code><a href=\"#VK_KHR_sampler_mirror_clamp_to_edge\">VK_KHR_sampler_mirror_clamp_to_edge</a></code> extension is not enabled, <code>addressModeU</code>, <code>addressModeV</code> and <code>addressModeW</code> <strong class=\"purple\">must</strong> not be <code>VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE</code>"
         }
       ],
       "(VK_IMG_filter_cubic,VK_EXT_filter_cubic)": [
@@ -12944,7 +13050,7 @@
         },
         {
           "vuid": "VUID-VkQueryPoolCreateInfo-pNext-pNext",
-          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkQueryPoolPerformanceCreateInfoKHR\">VkQueryPoolPerformanceCreateInfoKHR</a>"
         },
         {
           "vuid": "VUID-VkQueryPoolCreateInfo-flags-zerobitmask",
@@ -12953,6 +13059,56 @@
         {
           "vuid": "VUID-VkQueryPoolCreateInfo-queryType-parameter",
           "text": " <code>queryType</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkQueryType\">VkQueryType</a> value"
+        }
+      ],
+      "(VK_KHR_performance_query)": [
+        {
+          "vuid": "VUID-VkQueryPoolCreateInfo-queryType-03222",
+          "text": " If <code>queryType</code> is <code>VK_QUERY_TYPE_PERFORMANCE_QUERY_KHR</code>, the <code>pNext</code> chain <strong class=\"purple\">must</strong> contain a structure of type <a href=\"#VkQueryPoolPerformanceCreateInfoKHR\">VkQueryPoolPerformanceCreateInfoKHR</a>"
+        }
+      ]
+    },
+    "VkQueryPoolPerformanceCreateInfoKHR": {
+      "(VK_KHR_performance_query)": [
+        {
+          "vuid": "VUID-VkQueryPoolPerformanceCreateInfoKHR-queueFamilyIndex-03236",
+          "text": " <code>queueFamilyIndex</code> <strong class=\"purple\">must</strong> be a valid queue family index of the device."
+        },
+        {
+          "vuid": "VUID-VkQueryPoolPerformanceCreateInfoKHR-performanceCounterQueryPools-03237",
+          "text": " The <a href=\"#features-features-performanceCounterQueryPools\"><code>performanceCounterQueryPools</code></a> feature <strong class=\"purple\">must</strong> be enabled"
+        },
+        {
+          "vuid": "VUID-VkQueryPoolPerformanceCreateInfoKHR-pCounterIndices-03321",
+          "text": " Each element of <code>pCounterIndices</code> <strong class=\"purple\">must</strong> be in the range of counters reported by <code>vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR</code> for the queue family specified in <code>queueFamilyIndex</code>."
+        },
+        {
+          "vuid": "VUID-VkQueryPoolPerformanceCreateInfoKHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_CREATE_INFO_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkQueryPoolPerformanceCreateInfoKHR-pCounterIndices-parameter",
+          "text": " <code>pCounterIndices</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>counterIndexCount</code> <code>uint32_t</code> values"
+        },
+        {
+          "vuid": "VUID-VkQueryPoolPerformanceCreateInfoKHR-counterIndexCount-arraylength",
+          "text": " <code>counterIndexCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
+        }
+      ]
+    },
+    "vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR": {
+      "(VK_KHR_performance_query)": [
+        {
+          "vuid": "VUID-vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR-physicalDevice-parameter",
+          "text": " <code>physicalDevice</code> <strong class=\"purple\">must</strong> be a valid <code>VkPhysicalDevice</code> handle"
+        },
+        {
+          "vuid": "VUID-vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR-pPerformanceQueryCreateInfo-parameter",
+          "text": " <code>pPerformanceQueryCreateInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <code>VkQueryPoolPerformanceCreateInfoKHR</code> structure"
+        },
+        {
+          "vuid": "VUID-vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR-pNumPasses-parameter",
+          "text": " <code>pNumPasses</code> <strong class=\"purple\">must</strong> be a valid pointer to a <code>uint32_t</code> value"
         }
       ]
     },
@@ -13140,6 +13296,24 @@
           "vuid": "VUID-vkCmdBeginQuery-queryType-02328",
           "text": " If the <code>queryType</code> used to create <code>queryPool</code> was <code>VK_QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT</code> then <code>VkPhysicalDeviceTransformFeedbackPropertiesEXT</code>::<code>transformFeedbackQueries</code> <strong class=\"purple\">must</strong> be supported"
         }
+      ],
+      "(VK_KHR_performance_query)": [
+        {
+          "vuid": "VUID-vkCmdBeginQuery-queryPool-03223",
+          "text": " If <code>queryPool</code> was created with a <code>queryType</code> of <code>VK_QUERY_TYPE_PERFORMANCE_QUERY_KHR</code>, the <a href=\"#profiling-lock\">profiling lock</a> <strong class=\"purple\">must</strong> have been held before <a href=\"#vkBeginCommandBuffer\">vkBeginCommandBuffer</a> was called on <code>commandBuffer</code>."
+        },
+        {
+          "vuid": "VUID-vkCmdBeginQuery-queryPool-03224",
+          "text": " If <code>queryPool</code> was created with a <code>queryType</code> of <code>VK_QUERY_TYPE_PERFORMANCE_QUERY_KHR</code> and one of the counters used to create <code>queryPool</code> was <code>VK_QUERY_SCOPE_COMMAND_BUFFER_KHR</code>, the query begin <strong class=\"purple\">must</strong> be the first recorded command in <code>commandBuffer</code>."
+        },
+        {
+          "vuid": "VUID-vkCmdBeginQuery-queryPool-03225",
+          "text": " If <code>queryPool</code> was created with a <code>queryType</code> of <code>VK_QUERY_TYPE_PERFORMANCE_QUERY_KHR</code> and one of the counters used to create <code>queryPool</code> was <code>VK_QUERY_SCOPE_RENDER_PASS_KHR</code>, the begin command <strong class=\"purple\">must</strong> not be recorded within a render pass instance."
+        },
+        {
+          "vuid": "VUID-vkCmdBeginQuery-queryPool-03226",
+          "text": " If <code>queryPool</code> was created with a <code>queryType</code> of <code>VK_QUERY_TYPE_PERFORMANCE_QUERY_KHR</code> and another query pool with a <code>queryType</code> <code>VK_QUERY_TYPE_PERFORMANCE_QUERY_KHR</code> has been used within <code>commandBuffer</code>, its parent primary command buffer or secondary command buffer recorded within the same parent primary command buffer as <code>commandBuffer</code>, the <a href=\"#features-features-performanceCounterMultipleQueryPools\"><code>performanceCounterMultipleQueryPools</code></a> feature <strong class=\"purple\">must</strong> be enabled."
+        }
       ]
     },
     "vkCmdBeginQueryIndexedEXT": {
@@ -13228,6 +13402,24 @@
           "vuid": "VUID-vkCmdBeginQueryIndexedEXT-query-00808",
           "text": " If called within a render pass instance, the sum of <code>query</code> and the number of bits set in the current subpass&#8217;s view mask <strong class=\"purple\">must</strong> be less than or equal to the number of queries in <code>queryPool</code>"
         }
+      ],
+      "(VK_EXT_transform_feedback)+(VK_KHR_performance_query)": [
+        {
+          "vuid": "VUID-vkCmdBeginQueryIndexedEXT-queryPool-03223",
+          "text": " If <code>queryPool</code> was created with a <code>queryType</code> of <code>VK_QUERY_TYPE_PERFORMANCE_QUERY_KHR</code>, the <a href=\"#profiling-lock\">profiling lock</a> <strong class=\"purple\">must</strong> have been held before <a href=\"#vkBeginCommandBuffer\">vkBeginCommandBuffer</a> was called on <code>commandBuffer</code>."
+        },
+        {
+          "vuid": "VUID-vkCmdBeginQueryIndexedEXT-queryPool-03224",
+          "text": " If <code>queryPool</code> was created with a <code>queryType</code> of <code>VK_QUERY_TYPE_PERFORMANCE_QUERY_KHR</code> and one of the counters used to create <code>queryPool</code> was <code>VK_QUERY_SCOPE_COMMAND_BUFFER_KHR</code>, the query begin <strong class=\"purple\">must</strong> be the first recorded command in <code>commandBuffer</code>."
+        },
+        {
+          "vuid": "VUID-vkCmdBeginQueryIndexedEXT-queryPool-03225",
+          "text": " If <code>queryPool</code> was created with a <code>queryType</code> of <code>VK_QUERY_TYPE_PERFORMANCE_QUERY_KHR</code> and one of the counters used to create <code>queryPool</code> was <code>VK_QUERY_SCOPE_RENDER_PASS_KHR</code>, the begin command <strong class=\"purple\">must</strong> not be recorded within a render pass instance."
+        },
+        {
+          "vuid": "VUID-vkCmdBeginQueryIndexedEXT-queryPool-03226",
+          "text": " If <code>queryPool</code> was created with a <code>queryType</code> of <code>VK_QUERY_TYPE_PERFORMANCE_QUERY_KHR</code> and another query pool with a <code>queryType</code> <code>VK_QUERY_TYPE_PERFORMANCE_QUERY_KHR</code> has been used within <code>commandBuffer</code>, its parent primary command buffer or secondary command buffer recorded within the same parent primary command buffer as <code>commandBuffer</code>, the <a href=\"#features-features-performanceCounterMultipleQueryPools\"><code>performanceCounterMultipleQueryPools</code></a> feature <strong class=\"purple\">must</strong> be enabled."
+        }
       ]
     },
     "vkCmdEndQuery": {
@@ -13271,6 +13463,16 @@
         {
           "vuid": "VUID-vkCmdEndQuery-query-00812",
           "text": " If <code>vkCmdEndQuery</code> is called within a render pass instance, the sum of <code>query</code> and the number of bits set in the current subpass&#8217;s view mask <strong class=\"purple\">must</strong> be less than or equal to the number of queries in <code>queryPool</code>"
+        }
+      ],
+      "(VK_KHR_performance_query)": [
+        {
+          "vuid": "VUID-vkCmdEndQuery-queryPool-03227",
+          "text": " If <code>queryPool</code> was created with a <code>queryType</code> of <code>VK_QUERY_TYPE_PERFORMANCE_QUERY_KHR</code> and one or more of the counters used to create <code>queryPool</code> was <code>VK_QUERY_SCOPE_COMMAND_BUFFER_KHR</code>, the <code>vkCmdEndQuery</code> <strong class=\"purple\">must</strong> be the last recorded command in <code>commandBuffer</code>."
+        },
+        {
+          "vuid": "VUID-vkCmdEndQuery-queryPool-03228",
+          "text": " If <code>queryPool</code> was created with a <code>queryType</code> of <code>VK_QUERY_TYPE_PERFORMANCE_QUERY_KHR</code> and one or more of the counters used to create <code>queryPool</code> was <code>VK_QUERY_SCOPE_RENDER_PASS_KHR</code>, the <code>vkCmdEndQuery</code> <strong class=\"purple\">must</strong> not be recorded within a render pass instance."
         }
       ]
     },
@@ -13338,7 +13540,7 @@
         },
         {
           "vuid": "VUID-vkGetQueryPoolResults-flags-00814",
-          "text": " If <code>VK_QUERY_RESULT_64_BIT</code> is not set in <code>flags</code> then <code>pData</code> and <code>stride</code> <strong class=\"purple\">must</strong> be multiples of <code>4</code>"
+          "text": " If <code>VK_QUERY_RESULT_64_BIT</code> is not set in <code>flags</code>"
         },
         {
           "vuid": "VUID-vkGetQueryPoolResults-flags-00815",
@@ -13379,6 +13581,20 @@
         {
           "vuid": "VUID-vkGetQueryPoolResults-queryPool-parent",
           "text": " <code>queryPool</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from <code>device</code>"
+        }
+      ],
+      "(VK_KHR_performance_query)": [
+        {
+          "vuid": "VUID-vkGetQueryPoolResults-queryType-03229",
+          "text": " If the <code>queryType</code> used to create <code>queryPool</code> was <code>VK_QUERY_TYPE_PERFORMANCE_QUERY_KHR</code>, then <code>pData</code> and <code>stride</code> <strong class=\"purple\">must</strong> be multiples of the size of <a href=\"#VkPerformanceCounterResultKHR\">VkPerformanceCounterResultKHR</a>"
+        },
+        {
+          "vuid": "VUID-vkGetQueryPoolResults-queryType-03230",
+          "text": " If the <code>queryType</code> used to create <code>queryPool</code> was <code>VK_QUERY_TYPE_PERFORMANCE_QUERY_KHR</code>, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_QUERY_RESULT_WITH_AVAILABILITY_BIT</code>, <code>VK_QUERY_RESULT_PARTIAL_BIT</code> or <code>VK_QUERY_RESULT_64_BIT</code>"
+        },
+        {
+          "vuid": "VUID-vkGetQueryPoolResults-queryType-03231",
+          "text": " If the <code>queryType</code> used to create <code>queryPool</code> was <code>VK_QUERY_TYPE_PERFORMANCE_QUERY_KHR</code>, the <code>queryPool</code> <strong class=\"purple\">must</strong> have been recorded once for each pass as retrieved via a call to <a href=\"#vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR\">vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR</a>."
         }
       ]
     },
@@ -13453,6 +13669,20 @@
           "text": " Each of <code>commandBuffer</code>, <code>dstBuffer</code>, and <code>queryPool</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <code>VkDevice</code>"
         }
       ],
+      "(VK_KHR_performance_query)": [
+        {
+          "vuid": "VUID-vkCmdCopyQueryPoolResults-queryType-03232",
+          "text": " If the <code>queryType</code> used to create <code>queryPool</code> was <code>VK_QUERY_TYPE_PERFORMANCE_QUERY_KHR</code>, <a href=\"#VkPhysicalDevicePerformanceQueryPropertiesKHR\">VkPhysicalDevicePerformanceQueryPropertiesKHR</a>::<code>allowCommandBufferQueryCopies</code> <strong class=\"purple\">must</strong> be <code>VK_TRUE</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdCopyQueryPoolResults-queryType-03233",
+          "text": " If the <code>queryType</code> used to create <code>queryPool</code> was <code>VK_QUERY_TYPE_PERFORMANCE_QUERY_KHR</code>, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_QUERY_RESULT_WITH_AVAILABILITY_BIT</code>, <code>VK_QUERY_RESULT_PARTIAL_BIT</code> or <code>VK_QUERY_RESULT_64_BIT</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdCopyQueryPoolResults-queryType-03234",
+          "text": " If the <code>queryType</code> used to create <code>queryPool</code> was <code>VK_QUERY_TYPE_PERFORMANCE_QUERY_KHR</code>, the <code>queryPool</code> <strong class=\"purple\">must</strong> have been submitted once for each pass as retrieved via a call to <a href=\"#vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR\">vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR</a>."
+        }
+      ],
       "(VK_INTEL_performance_query)": [
         {
           "vuid": "VUID-vkCmdCopyQueryPoolResults-queryType-02734",
@@ -13507,6 +13737,46 @@
         {
           "vuid": "VUID-vkCmdWriteTimestamp-query-00831",
           "text": " If <code>vkCmdWriteTimestamp</code> is called within a render pass instance, the sum of <code>query</code> and the number of bits set in the current subpass&#8217;s view mask <strong class=\"purple\">must</strong> be less than or equal to the number of queries in <code>queryPool</code>"
+        }
+      ]
+    },
+    "vkAcquireProfilingLockKHR": {
+      "(VK_KHR_performance_query)": [
+        {
+          "vuid": "VUID-vkAcquireProfilingLockKHR-device-parameter",
+          "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <code>VkDevice</code> handle"
+        },
+        {
+          "vuid": "VUID-vkAcquireProfilingLockKHR-pInfo-parameter",
+          "text": " <code>pInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <code>VkAcquireProfilingLockInfoKHR</code> structure"
+        }
+      ]
+    },
+    "VkAcquireProfilingLockInfoKHR": {
+      "(VK_KHR_performance_query)": [
+        {
+          "vuid": "VUID-VkAcquireProfilingLockInfoKHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_ACQUIRE_PROFILING_LOCK_INFO_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkAcquireProfilingLockInfoKHR-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkAcquireProfilingLockInfoKHR-flags-zerobitmask",
+          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be <code>0</code>"
+        }
+      ]
+    },
+    "vkReleaseProfilingLockKHR": {
+      "(VK_KHR_performance_query)": [
+        {
+          "vuid": "VUID-vkReleaseProfilingLockKHR-device-03235",
+          "text": " The profiling lock of <code>device</code> <strong class=\"purple\">must</strong> have been held via a previous successful call to <a href=\"#vkAcquireProfilingLockKHR\">vkAcquireProfilingLockKHR</a>."
+        },
+        {
+          "vuid": "VUID-vkReleaseProfilingLockKHR-device-parameter",
+          "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <code>VkDevice</code> handle"
         }
       ]
     },
@@ -18195,6 +18465,18 @@
           "text": " <code>scissorCount</code> and <code>viewportCount</code> <strong class=\"purple\">must</strong> be identical"
         },
         {
+          "vuid": "VUID-VkPipelineViewportStateCreateInfo-x-02821",
+          "text": " The <code>x</code> and <code>y</code> members of <code>offset</code> member of any element of <code>pScissors</code> <strong class=\"purple\">must</strong> be greater than or equal to <code>0</code>"
+        },
+        {
+          "vuid": "VUID-VkPipelineViewportStateCreateInfo-offset-02822",
+          "text": " Evaluation of <span class=\"eq\">(<code>offset.x</code> &#43; <code>extent.width</code>)</span> <strong class=\"purple\">must</strong> not cause a signed integer addition overflow for any element of <code>pScissors</code>"
+        },
+        {
+          "vuid": "VUID-VkPipelineViewportStateCreateInfo-offset-02823",
+          "text": " Evaluation of <span class=\"eq\">(<code>offset.y</code> &#43; <code>extent.height</code>)</span> <strong class=\"purple\">must</strong> not cause a signed integer addition overflow for any element of <code>pScissors</code>"
+        },
+        {
           "vuid": "VUID-VkPipelineViewportStateCreateInfo-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO</code>"
         },
@@ -19024,15 +19306,15 @@
         },
         {
           "vuid": "VUID-vkCmdSetScissor-x-00595",
-          "text": " The <code>x</code> and <code>y</code> members of <code>offset</code> <strong class=\"purple\">must</strong> be greater than or equal to <code>0</code>"
+          "text": " The <code>x</code> and <code>y</code> members of <code>offset</code> member of any element of <code>pScissors</code> <strong class=\"purple\">must</strong> be greater than or equal to <code>0</code>"
         },
         {
           "vuid": "VUID-vkCmdSetScissor-offset-00596",
-          "text": " Evaluation of <span class=\"eq\">(<code>offset.x</code> &#43; <code>extent.width</code>)</span> <strong class=\"purple\">must</strong> not cause a signed integer addition overflow"
+          "text": " Evaluation of <span class=\"eq\">(<code>offset.x</code> &#43; <code>extent.width</code>)</span> <strong class=\"purple\">must</strong> not cause a signed integer addition overflow for any element of <code>pScissors</code>"
         },
         {
           "vuid": "VUID-vkCmdSetScissor-offset-00597",
-          "text": " Evaluation of <span class=\"eq\">(<code>offset.y</code> &#43; <code>extent.height</code>)</span> <strong class=\"purple\">must</strong> not cause a signed integer addition overflow"
+          "text": " Evaluation of <span class=\"eq\">(<code>offset.y</code> &#43; <code>extent.height</code>)</span> <strong class=\"purple\">must</strong> not cause a signed integer addition overflow for any element of <code>pScissors</code>"
         },
         {
           "vuid": "VUID-vkCmdSetScissor-commandBuffer-parameter",
@@ -22201,7 +22483,7 @@
       ]
     },
     "vkGetPhysicalDeviceSurfaceCapabilities2KHR": {
-      "(VK_KHR_surface)+(VK_KHR_get_surface_capabilities2)+(VK_EXT_full_screen_exclusive,VK_KHR_win32_surface)": [
+      "(VK_KHR_surface)+(VK_KHR_get_surface_capabilities2)+(VK_EXT_full_screen_exclusive+VK_KHR_win32_surface)": [
         {
           "vuid": "VUID-vkGetPhysicalDeviceSurfaceCapabilities2KHR-pNext-02671",
           "text": " If an instance of <a href=\"#VkSurfaceCapabilitiesFullScreenExclusiveEXT\">VkSurfaceCapabilitiesFullScreenExclusiveEXT</a> is included in the <code>pNext</code> chain of <code>pSurfaceCapabilities</code>, an instance of <a href=\"#VkSurfaceFullScreenExclusiveWin32InfoEXT\">VkSurfaceFullScreenExclusiveWin32InfoEXT</a> <strong class=\"purple\">must</strong> be included in the <code>pNext</code> chain of <code>pSurfaceInfo</code>."
@@ -22223,7 +22505,7 @@
       ]
     },
     "VkPhysicalDeviceSurfaceInfo2KHR": {
-      "(VK_KHR_surface)+(VK_KHR_get_surface_capabilities2)+(VK_KHR_win32_surface,VK_EXT_full_screen_exclusive)": [
+      "(VK_KHR_surface)+(VK_KHR_get_surface_capabilities2)+(VK_KHR_win32_surface+VK_EXT_full_screen_exclusive)": [
         {
           "vuid": "VUID-VkPhysicalDeviceSurfaceInfo2KHR-pNext-02672",
           "text": " If the <code>pNext</code> chain includes an instance of <a href=\"#VkSurfaceFullScreenExclusiveInfoEXT\">VkSurfaceFullScreenExclusiveInfoEXT</a> with its <code>fullScreenExclusive</code> member set to <code>VK_FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT</code>, and <code>surface</code> was created using <a href=\"#vkCreateWin32SurfaceKHR\">vkCreateWin32SurfaceKHR</a>, an instance of <a href=\"#VkSurfaceFullScreenExclusiveWin32InfoEXT\">VkSurfaceFullScreenExclusiveWin32InfoEXT</a> <strong class=\"purple\">must</strong> be present in the <code>pNext</code> chain"
@@ -22841,7 +23123,7 @@
           "text": " If <code>flags</code> contains <code>VK_SWAPCHAIN_CREATE_PROTECTED_BIT_KHR</code>, then <code>VkSurfaceProtectedCapabilitiesKHR</code>::<code>supportsProtected</code> <strong class=\"purple\">must</strong> be <code>VK_TRUE</code> in the <a href=\"#VkSurfaceProtectedCapabilitiesKHR\">VkSurfaceProtectedCapabilitiesKHR</a> structure returned by <a href=\"#vkGetPhysicalDeviceSurfaceCapabilities2KHR\">vkGetPhysicalDeviceSurfaceCapabilities2KHR</a> for <code>surface</code>"
         }
       ],
-      "(VK_KHR_surface)+(VK_KHR_swapchain)+(VK_EXT_full_screen_exclusive,VK_KHR_win32_surface)": [
+      "(VK_KHR_surface)+(VK_KHR_swapchain)+(VK_EXT_full_screen_exclusive+VK_KHR_win32_surface)": [
         {
           "vuid": "VUID-VkSwapchainCreateInfoKHR-pNext-02679",
           "text": " If the <code>pNext</code> chain includes an instance of <a href=\"#VkSurfaceFullScreenExclusiveInfoEXT\">VkSurfaceFullScreenExclusiveInfoEXT</a> with its <code>fullScreenExclusive</code> member set to <code>VK_FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT</code>, and <code>surface</code> was created using <a href=\"#vkCreateWin32SurfaceKHR\">vkCreateWin32SurfaceKHR</a>, an instance of <a href=\"#VkSurfaceFullScreenExclusiveWin32InfoEXT\">VkSurfaceFullScreenExclusiveWin32InfoEXT</a> <strong class=\"purple\">must</strong> be present in the <code>pNext</code> chain"
@@ -24509,6 +24791,22 @@
         {
           "vuid": "VUID-VkPhysicalDeviceDepthStencilResolvePropertiesKHR-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES_KHR</code>"
+        }
+      ]
+    },
+    "VkPhysicalDevicePerformanceQueryFeaturesKHR": {
+      "(VK_KHR_performance_query)": [
+        {
+          "vuid": "VUID-VkPhysicalDevicePerformanceQueryFeaturesKHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_FEATURES_KHR</code>"
+        }
+      ]
+    },
+    "VkPhysicalDevicePerformanceQueryPropertiesKHR": {
+      "(VK_KHR_performance_query)": [
+        {
+          "vuid": "VUID-VkPhysicalDevicePerformanceQueryPropertiesKHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_PROPERTIES_KHR</code>"
         }
       ]
     },
