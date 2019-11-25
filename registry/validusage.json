@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.1.128",
-    "comment": "from git branch: github-master commit: d4b6925d02d0c917403fb8743c0289dd67b027f1",
-    "date": "2019-11-17 15:45:54Z"
+    "api version": "1.1.129",
+    "comment": "from git branch: github-master commit: 2735ce8edb84539d210651664719edd66ace57d8",
+    "date": "2019-11-24 13:26:36Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -425,6 +425,12 @@
           "text": " <code>ppEnabledExtensionNames</code> <strong class=\"purple\">must</strong> not contain both <code><a href=\"#VK_KHR_maintenance1\">VK_KHR_maintenance1</a></code> and <code><a href=\"#VK_AMD_negative_viewport_height\">VK_AMD_negative_viewport_height</a></code>"
         }
       ],
+      "(VK_EXT_buffer_device_address+VK_KHR_buffer_device_address)": [
+        {
+          "vuid": "VUID-VkDeviceCreateInfo-ppEnabledExtensionNames-03328",
+          "text": " <code>ppEnabledExtensionNames</code> <strong class=\"purple\">must</strong> not contain both <code><a href=\"#VK_KHR_buffer_device_address\">VK_KHR_buffer_device_address</a></code> and <code><a href=\"#VK_EXT_buffer_device_address\">VK_EXT_buffer_device_address</a></code>"
+        }
+      ],
       "core": [
         {
           "vuid": "VUID-VkDeviceCreateInfo-sType-sType",
@@ -432,7 +438,7 @@
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceMemoryOverallocationCreateInfoAMD\">VkDeviceMemoryOverallocationCreateInfoAMD</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice8BitStorageFeaturesKHR\">VkPhysicalDevice8BitStorageFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeaturesEXT\">VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCoherentMemoryFeaturesAMD\">VkPhysicalDeviceCoherentMemoryFeaturesAMD</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixFeaturesNV\">VkPhysicalDeviceCooperativeMatrixFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCoverageReductionModeFeaturesNV\">VkPhysicalDeviceCoverageReductionModeFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV\">VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDepthClipEnableFeaturesEXT\">VkPhysicalDeviceDepthClipEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeaturesEXT\">VkPhysicalDeviceDescriptorIndexingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapFeaturesEXT\">VkPhysicalDeviceFragmentDensityMapFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT\">VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceHostQueryResetFeaturesEXT\">VkPhysicalDeviceHostQueryResetFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceImagelessFramebufferFeaturesKHR\">VkPhysicalDeviceImagelessFramebufferFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceIndexTypeUint8FeaturesEXT\">VkPhysicalDeviceIndexTypeUint8FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeaturesEXT\">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceLineRasterizationFeaturesEXT\">VkPhysicalDeviceLineRasterizationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMemoryPriorityFeaturesEXT\">VkPhysicalDeviceMemoryPriorityFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDevicePerformanceQueryFeaturesKHR\">VkPhysicalDevicePerformanceQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR\">VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceScalarBlockLayoutFeaturesEXT\">VkPhysicalDeviceScalarBlockLayoutFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR\">VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64FeaturesKHR\">VkPhysicalDeviceShaderAtomicInt64FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderClockFeaturesKHR\">VkPhysicalDeviceShaderClockFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT\">VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderDrawParametersFeatures\">VkPhysicalDeviceShaderDrawParametersFeatures</a>, <a href=\"#VkPhysicalDeviceShaderFloat16Int8FeaturesKHR\">VkPhysicalDeviceShaderFloat16Int8FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL\">VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL</a>, <a href=\"#VkPhysicalDeviceShaderSMBuiltinsFeaturesNV\">VkPhysicalDeviceShaderSMBuiltinsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR\">VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSubgroupSizeControlFeaturesEXT\">VkPhysicalDeviceSubgroupSizeControlFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT\">VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT\">VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTimelineSemaphoreFeaturesKHR\">VkPhysicalDeviceTimelineSemaphoreFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackFeaturesEXT\">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR\">VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceVariablePointersFeatures\">VkPhysicalDeviceVariablePointersFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeaturesKHR\">VkPhysicalDeviceVulkanMemoryModelFeaturesKHR</a>, or <a href=\"#VkPhysicalDeviceYcbcrImageArraysFeaturesEXT\">VkPhysicalDeviceYcbcrImageArraysFeaturesEXT</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceMemoryOverallocationCreateInfoAMD\">VkDeviceMemoryOverallocationCreateInfoAMD</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice8BitStorageFeaturesKHR\">VkPhysicalDevice8BitStorageFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeaturesEXT\">VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeaturesKHR\">VkPhysicalDeviceBufferDeviceAddressFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceCoherentMemoryFeaturesAMD\">VkPhysicalDeviceCoherentMemoryFeaturesAMD</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixFeaturesNV\">VkPhysicalDeviceCooperativeMatrixFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCoverageReductionModeFeaturesNV\">VkPhysicalDeviceCoverageReductionModeFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV\">VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDepthClipEnableFeaturesEXT\">VkPhysicalDeviceDepthClipEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeaturesEXT\">VkPhysicalDeviceDescriptorIndexingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapFeaturesEXT\">VkPhysicalDeviceFragmentDensityMapFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT\">VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceHostQueryResetFeaturesEXT\">VkPhysicalDeviceHostQueryResetFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceImagelessFramebufferFeaturesKHR\">VkPhysicalDeviceImagelessFramebufferFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceIndexTypeUint8FeaturesEXT\">VkPhysicalDeviceIndexTypeUint8FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeaturesEXT\">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceLineRasterizationFeaturesEXT\">VkPhysicalDeviceLineRasterizationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMemoryPriorityFeaturesEXT\">VkPhysicalDeviceMemoryPriorityFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDevicePerformanceQueryFeaturesKHR\">VkPhysicalDevicePerformanceQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR\">VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceScalarBlockLayoutFeaturesEXT\">VkPhysicalDeviceScalarBlockLayoutFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR\">VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64FeaturesKHR\">VkPhysicalDeviceShaderAtomicInt64FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderClockFeaturesKHR\">VkPhysicalDeviceShaderClockFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT\">VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderDrawParametersFeatures\">VkPhysicalDeviceShaderDrawParametersFeatures</a>, <a href=\"#VkPhysicalDeviceShaderFloat16Int8FeaturesKHR\">VkPhysicalDeviceShaderFloat16Int8FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL\">VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL</a>, <a href=\"#VkPhysicalDeviceShaderSMBuiltinsFeaturesNV\">VkPhysicalDeviceShaderSMBuiltinsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR\">VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSubgroupSizeControlFeaturesEXT\">VkPhysicalDeviceSubgroupSizeControlFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT\">VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT\">VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTimelineSemaphoreFeaturesKHR\">VkPhysicalDeviceTimelineSemaphoreFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackFeaturesEXT\">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR\">VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceVariablePointersFeatures\">VkPhysicalDeviceVariablePointersFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeaturesKHR\">VkPhysicalDeviceVulkanMemoryModelFeaturesKHR</a>, or <a href=\"#VkPhysicalDeviceYcbcrImageArraysFeaturesEXT\">VkPhysicalDeviceYcbcrImageArraysFeaturesEXT</a>"
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-sType-unique",
@@ -2426,7 +2432,7 @@
         },
         {
           "vuid": "VUID-VkImportSemaphoreWin32HandleInfoKHR-flags-03322",
-          "text": " If <code>flags</code> contains VK_SEMAPHORE_IMPORT_TEMPORARY_BIT, the <a href=\"#VkSemaphoreTypeCreateInfoKHR\">VkSemaphoreTypeCreateInfoKHR</a>::<code>semaphoreType</code> field of the semaphore from which <code>handle</code> or <code>name</code> was exported <strong class=\"purple\">must</strong> not be <code>VK_SEMAPHORE_TYPE_TIMELINE_KHR</code>."
+          "text": " If <code>flags</code> contains <code>VK_SEMAPHORE_IMPORT_TEMPORARY_BIT</code>, the <a href=\"#VkSemaphoreTypeCreateInfoKHR\">VkSemaphoreTypeCreateInfoKHR</a>::<code>semaphoreType</code> field of the semaphore from which <code>handle</code> or <code>name</code> was exported <strong class=\"purple\">must</strong> not be <code>VK_SEMAPHORE_TYPE_TIMELINE_KHR</code>."
         }
       ]
     },
@@ -2488,7 +2494,7 @@
         },
         {
           "vuid": "VUID-VkImportSemaphoreFdInfoKHR-flags-03323",
-          "text": " If <code>flags</code> contains VK_SEMAPHORE_IMPORT_TEMPORARY_BIT, the <a href=\"#VkSemaphoreTypeCreateInfoKHR\">VkSemaphoreTypeCreateInfoKHR</a>::<code>semaphoreType</code> field of the semaphore from which <code>fd</code> was exported <strong class=\"purple\">must</strong> not be <code>VK_SEMAPHORE_TYPE_TIMELINE_KHR</code>."
+          "text": " If <code>flags</code> contains <code>VK_SEMAPHORE_IMPORT_TEMPORARY_BIT</code>, the <a href=\"#VkSemaphoreTypeCreateInfoKHR\">VkSemaphoreTypeCreateInfoKHR</a>::<code>semaphoreType</code> field of the semaphore from which <code>fd</code> was exported <strong class=\"purple\">must</strong> not be <code>VK_SEMAPHORE_TYPE_TIMELINE_KHR</code>."
         }
       ]
     },
@@ -7323,6 +7329,30 @@
           "text": " If the parameters define an import operation, the external handle is an Android hardware buffer, and the <code>pNext</code> chain includes an instance of <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a> with <code>image</code> that is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, each bit set in the usage of <code>image</code> <strong class=\"purple\">must</strong> be listed in <a href=\"#memory-external-android-hardware-buffer-usage\">AHardwareBuffer Usage Equivalence</a>, and if there is a corresponding <code>AHARDWAREBUFFER_USAGE</code> bit listed that bit <strong class=\"purple\">must</strong> be included in the Android hardware buffer&#8217;s <code>AHardwareBuffer_Desc</code>::<code>usage</code>."
         }
       ],
+      "(VK_KHR_buffer_device_address)": [
+        {
+          "vuid": "VUID-VkMemoryAllocateInfo-opaqueCaptureAddress-03329",
+          "text": " If <a href=\"#VkMemoryOpaqueCaptureAddressAllocateInfoKHR\">VkMemoryOpaqueCaptureAddressAllocateInfoKHR</a>::<code>opaqueCaptureAddress</code> is not zero, <code>VkMemoryAllocateFlagsInfo</code>::<code>flags</code> <strong class=\"purple\">must</strong> include <code>VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkMemoryAllocateInfo-flags-03330",
+          "text": " If <code>VkMemoryAllocateFlagsInfo</code>::<code>flags</code> includes <code>VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR</code>, the <a href=\"#features-bufferDeviceAddressCaptureReplay\">bufferDeviceAddressCaptureReplay</a> feature <strong class=\"purple\">must</strong> be enabled"
+        },
+        {
+          "vuid": "VUID-VkMemoryAllocateInfo-flags-03331",
+          "text": " If <code>VkMemoryAllocateFlagsInfo</code>::<code>flags</code> includes <code>VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT_KHR</code>, the <a href=\"#features-bufferDeviceAddress\">bufferDeviceAddress</a> feature <strong class=\"purple\">must</strong> be enabled"
+        },
+        {
+          "vuid": "VUID-VkMemoryAllocateInfo-opaqueCaptureAddress-03333",
+          "text": " If the parameters define an import operation, <a href=\"#VkMemoryOpaqueCaptureAddressAllocateInfoKHR\">VkMemoryOpaqueCaptureAddressAllocateInfoKHR</a>::<code>opaqueCaptureAddress</code> <strong class=\"purple\">must</strong> be zero"
+        }
+      ],
+      "(VK_KHR_buffer_device_address)+(VK_EXT_external_memory_host)": [
+        {
+          "vuid": "VUID-VkMemoryAllocateInfo-pNext-03332",
+          "text": " If the <code>pNext</code> chain contains an instance of <code>VkImportMemoryHostPointerInfoEXT</code>, <a href=\"#VkMemoryOpaqueCaptureAddressAllocateInfoKHR\">VkMemoryOpaqueCaptureAddressAllocateInfoKHR</a>::<code>opaqueCaptureAddress</code> <strong class=\"purple\">must</strong> be zero"
+        }
+      ],
       "core": [
         {
           "vuid": "VUID-VkMemoryAllocateInfo-sType-sType",
@@ -7330,7 +7360,7 @@
         },
         {
           "vuid": "VUID-VkMemoryAllocateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDedicatedAllocationMemoryAllocateInfoNV\">VkDedicatedAllocationMemoryAllocateInfoNV</a>, <a href=\"#VkExportMemoryAllocateInfo\">VkExportMemoryAllocateInfo</a>, <a href=\"#VkExportMemoryAllocateInfoNV\">VkExportMemoryAllocateInfoNV</a>, <a href=\"#VkExportMemoryWin32HandleInfoKHR\">VkExportMemoryWin32HandleInfoKHR</a>, <a href=\"#VkExportMemoryWin32HandleInfoNV\">VkExportMemoryWin32HandleInfoNV</a>, <a href=\"#VkImportAndroidHardwareBufferInfoANDROID\">VkImportAndroidHardwareBufferInfoANDROID</a>, <a href=\"#VkImportMemoryFdInfoKHR\">VkImportMemoryFdInfoKHR</a>, <a href=\"#VkImportMemoryHostPointerInfoEXT\">VkImportMemoryHostPointerInfoEXT</a>, <a href=\"#VkImportMemoryWin32HandleInfoKHR\">VkImportMemoryWin32HandleInfoKHR</a>, <a href=\"#VkImportMemoryWin32HandleInfoNV\">VkImportMemoryWin32HandleInfoNV</a>, <a href=\"#VkMemoryAllocateFlagsInfo\">VkMemoryAllocateFlagsInfo</a>, <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>, or <a href=\"#VkMemoryPriorityAllocateInfoEXT\">VkMemoryPriorityAllocateInfoEXT</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDedicatedAllocationMemoryAllocateInfoNV\">VkDedicatedAllocationMemoryAllocateInfoNV</a>, <a href=\"#VkExportMemoryAllocateInfo\">VkExportMemoryAllocateInfo</a>, <a href=\"#VkExportMemoryAllocateInfoNV\">VkExportMemoryAllocateInfoNV</a>, <a href=\"#VkExportMemoryWin32HandleInfoKHR\">VkExportMemoryWin32HandleInfoKHR</a>, <a href=\"#VkExportMemoryWin32HandleInfoNV\">VkExportMemoryWin32HandleInfoNV</a>, <a href=\"#VkImportAndroidHardwareBufferInfoANDROID\">VkImportAndroidHardwareBufferInfoANDROID</a>, <a href=\"#VkImportMemoryFdInfoKHR\">VkImportMemoryFdInfoKHR</a>, <a href=\"#VkImportMemoryHostPointerInfoEXT\">VkImportMemoryHostPointerInfoEXT</a>, <a href=\"#VkImportMemoryWin32HandleInfoKHR\">VkImportMemoryWin32HandleInfoKHR</a>, <a href=\"#VkImportMemoryWin32HandleInfoNV\">VkImportMemoryWin32HandleInfoNV</a>, <a href=\"#VkMemoryAllocateFlagsInfo\">VkMemoryAllocateFlagsInfo</a>, <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>, <a href=\"#VkMemoryOpaqueCaptureAddressAllocateInfoKHR\">VkMemoryOpaqueCaptureAddressAllocateInfoKHR</a>, or <a href=\"#VkMemoryPriorityAllocateInfoEXT\">VkMemoryPriorityAllocateInfoEXT</a>"
         },
         {
           "vuid": "VUID-VkMemoryAllocateInfo-sType-unique",
@@ -8018,6 +8048,14 @@
         }
       ]
     },
+    "VkMemoryOpaqueCaptureAddressAllocateInfoKHR": {
+      "(VK_KHR_buffer_device_address)": [
+        {
+          "vuid": "VUID-VkMemoryOpaqueCaptureAddressAllocateInfoKHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_MEMORY_OPAQUE_CAPTURE_ADDRESS_ALLOCATE_INFO_KHR</code>"
+        }
+      ]
+    },
     "vkFreeMemory": {
       "core": [
         {
@@ -8236,6 +8274,46 @@
         }
       ]
     },
+    "vkGetDeviceMemoryOpaqueCaptureAddressKHR": {
+      "(VK_KHR_buffer_device_address)": [
+        {
+          "vuid": "VUID-vkGetDeviceMemoryOpaqueCaptureAddressKHR-None-03334",
+          "text": " The <a href=\"#features-bufferDeviceAddress\">bufferDeviceAddress</a> feature <strong class=\"purple\">must</strong> be enabled"
+        },
+        {
+          "vuid": "VUID-vkGetDeviceMemoryOpaqueCaptureAddressKHR-device-03335",
+          "text": " If <code>device</code> was created with multiple physical devices, then the <a href=\"#features-bufferDeviceAddressMultiDevice\">bufferDeviceAddressMultiDevice</a> feature <strong class=\"purple\">must</strong> be enabled"
+        },
+        {
+          "vuid": "VUID-vkGetDeviceMemoryOpaqueCaptureAddressKHR-device-parameter",
+          "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <code>VkDevice</code> handle"
+        },
+        {
+          "vuid": "VUID-vkGetDeviceMemoryOpaqueCaptureAddressKHR-pInfo-parameter",
+          "text": " <code>pInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <code>VkDeviceMemoryOpaqueCaptureAddressInfoKHR</code> structure"
+        }
+      ]
+    },
+    "VkDeviceMemoryOpaqueCaptureAddressInfoKHR": {
+      "(VK_KHR_buffer_device_address)": [
+        {
+          "vuid": "VUID-VkDeviceMemoryOpaqueCaptureAddressInfoKHR-memory-03336",
+          "text": " <code>memory</code> <strong class=\"purple\">must</strong> have been allocated with <code>VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkDeviceMemoryOpaqueCaptureAddressInfoKHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkDeviceMemoryOpaqueCaptureAddressInfoKHR-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkDeviceMemoryOpaqueCaptureAddressInfoKHR-memory-parameter",
+          "text": " <code>memory</code> <strong class=\"purple\">must</strong> be a valid <code>VkDeviceMemory</code> handle"
+        }
+      ]
+    },
     "vkCreateBuffer": {
       "core": [
         {
@@ -8296,7 +8374,7 @@
         },
         {
           "vuid": "VUID-VkBufferCreateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkBufferDeviceAddressCreateInfoEXT\">VkBufferDeviceAddressCreateInfoEXT</a>, <a href=\"#VkDedicatedAllocationBufferCreateInfoNV\">VkDedicatedAllocationBufferCreateInfoNV</a>, or <a href=\"#VkExternalMemoryBufferCreateInfo\">VkExternalMemoryBufferCreateInfo</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkBufferDeviceAddressCreateInfoEXT\">VkBufferDeviceAddressCreateInfoEXT</a>, <a href=\"#VkBufferOpaqueCaptureAddressCreateInfoKHR\">VkBufferOpaqueCaptureAddressCreateInfoKHR</a>, <a href=\"#VkDedicatedAllocationBufferCreateInfoNV\">VkDedicatedAllocationBufferCreateInfoNV</a>, or <a href=\"#VkExternalMemoryBufferCreateInfo\">VkExternalMemoryBufferCreateInfo</a>"
         },
         {
           "vuid": "VUID-VkBufferCreateInfo-sType-unique",
@@ -8353,18 +8431,22 @@
           "text": " If the <code>pNext</code> chain contains an instance of <a href=\"#VkDedicatedAllocationBufferCreateInfoNV\">VkDedicatedAllocationBufferCreateInfoNV</a>, and the <code>dedicatedAllocation</code> member of the chained structure is <code>VK_TRUE</code>, then <code>flags</code> <strong class=\"purple\">must</strong> not include <code>VK_BUFFER_CREATE_SPARSE_BINDING_BIT</code>, <code>VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT</code>, or <code>VK_BUFFER_CREATE_SPARSE_ALIASED_BIT</code>"
         }
       ],
-      "(VK_EXT_buffer_device_address)": [
+      "(VK_EXT_buffer_device_address,VK_KHR_buffer_device_address)+(VK_EXT_buffer_device_address)": [
         {
           "vuid": "VUID-VkBufferCreateInfo-deviceAddress-02604",
-          "text": " If <a href=\"#VkBufferDeviceAddressCreateInfoEXT\">VkBufferDeviceAddressCreateInfoEXT</a>::<code>deviceAddress</code> is not zero, <code>flags</code> <strong class=\"purple\">must</strong> include <code>VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_EXT</code>"
-        },
+          "text": " If <a href=\"#VkBufferDeviceAddressCreateInfoEXT\">VkBufferDeviceAddressCreateInfoEXT</a>::<code>deviceAddress</code> is not zero, <code>flags</code> <strong class=\"purple\">must</strong> include <code>VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR</code>"
+        }
+      ],
+      "(VK_EXT_buffer_device_address,VK_KHR_buffer_device_address)+(VK_KHR_buffer_device_address)": [
         {
-          "vuid": "VUID-VkBufferCreateInfo-flags-02605",
-          "text": " If <code>flags</code> includes <code>VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_EXT</code>, the <a href=\"#features-bufferDeviceAddressCaptureReplay\">bufferDeviceAddressCaptureReplay</a> feature <strong class=\"purple\">must</strong> be enabled"
-        },
+          "vuid": "VUID-VkBufferCreateInfo-opaqueCaptureAddress-03337",
+          "text": " If <a href=\"#VkBufferOpaqueCaptureAddressCreateInfoKHR\">VkBufferOpaqueCaptureAddressCreateInfoKHR</a>::<code>opaqueCaptureAddress</code> is not zero, <code>flags</code> <strong class=\"purple\">must</strong> include <code>VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR</code>"
+        }
+      ],
+      "(VK_EXT_buffer_device_address,VK_KHR_buffer_device_address)": [
         {
-          "vuid": "VUID-VkBufferCreateInfo-usage-02606",
-          "text": " If <code>usage</code> includes <code>VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT_EXT</code>, the <a href=\"#features-bufferDeviceAddress\">bufferDeviceAddress</a> feature <strong class=\"purple\">must</strong> be enabled"
+          "vuid": "VUID-VkBufferCreateInfo-flags-03338",
+          "text": " If <code>flags</code> includes <code>VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR</code>, the <a href=\"#features-bufferDeviceAddressCaptureReplay\">bufferDeviceAddressCaptureReplay</a> or <a href=\"#features-bufferDeviceAddressCaptureReplayEXT\"><code>VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</code>::<code>bufferDeviceAddressCaptureReplay</code></a> feature <strong class=\"purple\">must</strong> be enabled"
         }
       ]
     },
@@ -8385,6 +8467,14 @@
         {
           "vuid": "VUID-VkExternalMemoryBufferCreateInfo-handleTypes-parameter",
           "text": " <code>handleTypes</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkExternalMemoryHandleTypeFlagBits\">VkExternalMemoryHandleTypeFlagBits</a> values"
+        }
+      ]
+    },
+    "VkBufferOpaqueCaptureAddressCreateInfoKHR": {
+      "(VK_KHR_buffer_device_address)": [
+        {
+          "vuid": "VUID-VkBufferOpaqueCaptureAddressCreateInfoKHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO_KHR</code>"
         }
       ]
     },
@@ -10093,6 +10183,12 @@
         {
           "vuid": "VUID-vkBindBufferMemory-memory-02727",
           "text": " If <code>memory</code> was created by a memory import operation, the external handle type of the imported memory <strong class=\"purple\">must</strong> also have been set in <a href=\"#VkExternalMemoryBufferCreateInfo\">VkExternalMemoryBufferCreateInfo</a>::<code>handleTypes</code> when <code>buffer</code> was created"
+        }
+      ],
+      "(VK_KHR_buffer_device_address)": [
+        {
+          "vuid": "VUID-vkBindBufferMemory-bufferDeviceAddress-03339",
+          "text": " If the <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeaturesKHR\">VkPhysicalDeviceBufferDeviceAddressFeaturesKHR</a>::<code>bufferDeviceAddress</code> feature is enabled and <code>buffer</code> was created with the <code>VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT_KHR</code> bit set, <code>memory</code> <strong class=\"purple\">must</strong> have been allocated with the <code>VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT_KHR</code> bit set"
         }
       ]
     },
@@ -12966,47 +13062,67 @@
         }
       ]
     },
-    "vkGetBufferDeviceAddressEXT": {
-      "(VK_EXT_buffer_device_address)": [
+    "vkGetBufferDeviceAddressKHR": {
+      "(VK_EXT_buffer_device_address,VK_KHR_buffer_device_address)": [
         {
-          "vuid": "VUID-vkGetBufferDeviceAddressEXT-None-02598",
-          "text": " The <a href=\"#features-bufferDeviceAddress\">bufferDeviceAddress</a> feature <strong class=\"purple\">must</strong> be enabled"
+          "vuid": "VUID-vkGetBufferDeviceAddressKHR-bufferDeviceAddress-03324",
+          "text": " The <a href=\"#features-bufferDeviceAddress\">bufferDeviceAddress</a> or <a href=\"#features-bufferDeviceAddressEXT\"><code>VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</code>::<code>bufferDeviceAddress</code></a> feature <strong class=\"purple\">must</strong> be enabled"
         },
         {
-          "vuid": "VUID-vkGetBufferDeviceAddressEXT-device-02599",
-          "text": " If <code>device</code> was created with multiple physical devices, then the <a href=\"#features-bufferDeviceAddressMultiDevice\">bufferDeviceAddressMultiDevice</a> feature <strong class=\"purple\">must</strong> be enabled"
+          "vuid": "VUID-vkGetBufferDeviceAddressKHR-device-03325",
+          "text": " If <code>device</code> was created with multiple physical devices, then the <a href=\"#features-bufferDeviceAddressMultiDevice\">bufferDeviceAddressMultiDevice</a> or <a href=\"#features-bufferDeviceAddressMultiDeviceEXT\"><code>VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</code>::<code>bufferDeviceAddressMultiDevice</code></a> feature <strong class=\"purple\">must</strong> be enabled"
         },
         {
-          "vuid": "VUID-vkGetBufferDeviceAddressEXT-device-parameter",
+          "vuid": "VUID-vkGetBufferDeviceAddressKHR-device-parameter",
           "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <code>VkDevice</code> handle"
         },
         {
-          "vuid": "VUID-vkGetBufferDeviceAddressEXT-pInfo-parameter",
-          "text": " <code>pInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <code>VkBufferDeviceAddressInfoEXT</code> structure"
+          "vuid": "VUID-vkGetBufferDeviceAddressKHR-pInfo-parameter",
+          "text": " <code>pInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <code>VkBufferDeviceAddressInfoKHR</code> structure"
         }
       ]
     },
-    "VkBufferDeviceAddressInfoEXT": {
-      "(VK_EXT_buffer_device_address)": [
+    "VkBufferDeviceAddressInfoKHR": {
+      "(VK_EXT_buffer_device_address,VK_KHR_buffer_device_address)": [
         {
-          "vuid": "VUID-VkBufferDeviceAddressInfoEXT-buffer-02600",
-          "text": " If <code>buffer</code> is non-sparse and was not created with the <code>VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_EXT</code> flag, then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
+          "vuid": "VUID-VkBufferDeviceAddressInfoKHR-buffer-02600",
+          "text": " If <code>buffer</code> is non-sparse and was not created with the <code>VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR</code> flag, then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
         },
         {
-          "vuid": "VUID-VkBufferDeviceAddressInfoEXT-buffer-02601",
-          "text": " <code>buffer</code> <strong class=\"purple\">must</strong> have been created with <code>VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT_EXT</code>"
+          "vuid": "VUID-VkBufferDeviceAddressInfoKHR-buffer-02601",
+          "text": " <code>buffer</code> <strong class=\"purple\">must</strong> have been created with <code>VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT_KHR</code>"
         },
         {
-          "vuid": "VUID-VkBufferDeviceAddressInfoEXT-sType-sType",
-          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO_EXT</code>"
+          "vuid": "VUID-VkBufferDeviceAddressInfoKHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO_KHR</code>"
         },
         {
-          "vuid": "VUID-VkBufferDeviceAddressInfoEXT-pNext-pNext",
+          "vuid": "VUID-VkBufferDeviceAddressInfoKHR-pNext-pNext",
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
         },
         {
-          "vuid": "VUID-VkBufferDeviceAddressInfoEXT-buffer-parameter",
+          "vuid": "VUID-VkBufferDeviceAddressInfoKHR-buffer-parameter",
           "text": " <code>buffer</code> <strong class=\"purple\">must</strong> be a valid <code>VkBuffer</code> handle"
+        }
+      ]
+    },
+    "vkGetBufferOpaqueCaptureAddressKHR": {
+      "(VK_KHR_buffer_device_address)": [
+        {
+          "vuid": "VUID-vkGetBufferOpaqueCaptureAddressKHR-None-03326",
+          "text": " The <a href=\"#features-bufferDeviceAddress\">bufferDeviceAddress</a> feature <strong class=\"purple\">must</strong> be enabled"
+        },
+        {
+          "vuid": "VUID-vkGetBufferOpaqueCaptureAddressKHR-device-03327",
+          "text": " If <code>device</code> was created with multiple physical devices, then the <a href=\"#features-bufferDeviceAddressMultiDevice\">bufferDeviceAddressMultiDevice</a> feature <strong class=\"purple\">must</strong> be enabled"
+        },
+        {
+          "vuid": "VUID-vkGetBufferOpaqueCaptureAddressKHR-device-parameter",
+          "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <code>VkDevice</code> handle"
+        },
+        {
+          "vuid": "VUID-vkGetBufferOpaqueCaptureAddressKHR-pInfo-parameter",
+          "text": " <code>pInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <code>VkBufferDeviceAddressInfoKHR</code> structure"
         }
       ]
     },
@@ -24442,8 +24558,16 @@
         }
       ]
     },
+    "VkPhysicalDeviceBufferDeviceAddressFeaturesKHR": {
+      "(VK_EXT_buffer_device_address,VK_KHR_buffer_device_address)": [
+        {
+          "vuid": "VUID-VkPhysicalDeviceBufferDeviceAddressFeaturesKHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES_KHR</code>"
+        }
+      ]
+    },
     "VkPhysicalDeviceBufferDeviceAddressFeaturesEXT": {
-      "(VK_EXT_buffer_device_address)": [
+      "(VK_EXT_buffer_device_address,VK_KHR_buffer_device_address)+(VK_EXT_buffer_device_address)": [
         {
           "vuid": "VUID-VkPhysicalDeviceBufferDeviceAddressFeaturesEXT-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES_EXT</code>"
