@@ -5193,8 +5193,6 @@ typedef void <name>CAMetalLayer</name>;
     <enums name="VkFenceCreateFlagBits" type="bitmask">
         <enum bitpos="0"    name="VK_FENCE_CREATE_SIGNALED_BIT"/>
     </enums>
-    <enums name="VkSemaphoreCreateFlagBits" type="bitmask">
-    </enums>
     <enums name="VkFormatFeatureFlagBits" type="bitmask">
         <enum bitpos="0"    name="VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT"               comment="Format can be used for sampled images (SAMPLED_IMAGE and COMBINED_IMAGE_SAMPLER descriptor types)"/>
         <enum bitpos="1"    name="VK_FORMAT_FEATURE_STORAGE_IMAGE_BIT"               comment="Format can be used for storage images (STORAGE_IMAGE descriptor type)"/>
