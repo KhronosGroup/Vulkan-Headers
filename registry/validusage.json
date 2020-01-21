@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.2.131",
-    "comment": "from git branch: github-master commit: ec1c5a0f6a10309a10cb636c67ba4b085ac437d4",
-    "date": "2020-01-14 15:04:42Z"
+    "api version": "1.2.132",
+    "comment": "from git branch: github-master commit: 3a774a05786d65cc18bc58694d6bfe24f5b21d69",
+    "date": "2020-01-21 10:31:48Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -958,11 +958,11 @@
       "core": [
         {
           "vuid": "VUID-vkBeginCommandBuffer-commandBuffer-00049",
-          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> not be in the <a href=\"#commandbuffers-lifecycle\">recording or pending state</a>."
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> not be in the <a href=\"#commandbuffers-lifecycle\">recording or pending state</a>"
         },
         {
           "vuid": "VUID-vkBeginCommandBuffer-commandBuffer-00050",
-          "text": " If <code>commandBuffer</code> was allocated from a <a href=\"#VkCommandPool\">VkCommandPool</a> which did not have the <code>VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT</code> flag set, <code>commandBuffer</code> <strong class=\"purple\">must</strong> be in the <a href=\"#commandbuffers-lifecycle\">initial state</a>."
+          "text": " If <code>commandBuffer</code> was allocated from a <a href=\"#VkCommandPool\">VkCommandPool</a> which did not have the <code>VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT</code> flag set, <code>commandBuffer</code> <strong class=\"purple\">must</strong> be in the <a href=\"#commandbuffers-lifecycle\">initial state</a>"
         },
         {
           "vuid": "VUID-vkBeginCommandBuffer-commandBuffer-00051",
@@ -971,6 +971,10 @@
         {
           "vuid": "VUID-vkBeginCommandBuffer-commandBuffer-00052",
           "text": " If <code>commandBuffer</code> is a secondary command buffer and either the <code>occlusionQueryEnable</code> member of the <code>pInheritanceInfo</code> member of <code>pBeginInfo</code> is <code>VK_FALSE</code>, or the precise occlusion queries feature is not enabled, the <code>queryFlags</code> member of the <code>pInheritanceInfo</code> member <code>pBeginInfo</code> <strong class=\"purple\">must</strong> not contain <code>VK_QUERY_CONTROL_PRECISE_BIT</code>"
+        },
+        {
+          "vuid": "VUID-vkBeginCommandBuffer-commandBuffer-02840",
+          "text": " If <code>commandBuffer</code> is a primary command buffer, then <code>pBeginInfo-&gt;flags</code> <strong class=\"purple\">must</strong> not set both the <code>VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT</code> and the <code>VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT</code> flags"
         },
         {
           "vuid": "VUID-vkBeginCommandBuffer-commandBuffer-parameter",
@@ -1465,32 +1469,24 @@
     "vkCmdExecuteCommands": {
       "core": [
         {
-          "vuid": "VUID-vkCmdExecuteCommands-commandBuffer-00087",
-          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> have been allocated with a <code>level</code> of <code>VK_COMMAND_BUFFER_LEVEL_PRIMARY</code>"
-        },
-        {
           "vuid": "VUID-vkCmdExecuteCommands-pCommandBuffers-00088",
           "text": " Each element of <code>pCommandBuffers</code> <strong class=\"purple\">must</strong> have been allocated with a <code>level</code> of <code>VK_COMMAND_BUFFER_LEVEL_SECONDARY</code>"
         },
         {
           "vuid": "VUID-vkCmdExecuteCommands-pCommandBuffers-00089",
-          "text": " Each element of <code>pCommandBuffers</code> <strong class=\"purple\">must</strong> be in the <a href=\"#commandbuffers-lifecycle\">pending or executable state</a>."
-        },
-        {
-          "vuid": "VUID-vkCmdExecuteCommands-pCommandBuffers-00090",
-          "text": " If any element of <code>pCommandBuffers</code> was not recorded with the <code>VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT</code> flag, and it was recorded into any other primary command buffer, that primary command buffer <strong class=\"purple\">must</strong> not be in the <a href=\"#commandbuffers-lifecycle\">pending state</a>"
+          "text": " Each element of <code>pCommandBuffers</code> <strong class=\"purple\">must</strong> be in the <a href=\"#commandbuffers-lifecycle\">pending or executable state</a>"
         },
         {
           "vuid": "VUID-vkCmdExecuteCommands-pCommandBuffers-00091",
-          "text": " If any element of <code>pCommandBuffers</code> was not recorded with the <code>VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT</code> flag, it <strong class=\"purple\">must</strong> not be in the <a href=\"#commandbuffers-lifecycle\">pending state</a>."
+          "text": " If any element of <code>pCommandBuffers</code> was not recorded with the <code>VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT</code> flag, it <strong class=\"purple\">must</strong> not be in the <a href=\"#commandbuffers-lifecycle\">pending state</a>"
         },
         {
           "vuid": "VUID-vkCmdExecuteCommands-pCommandBuffers-00092",
-          "text": " If any element of <code>pCommandBuffers</code> was not recorded with the <code>VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT</code> flag, it <strong class=\"purple\">must</strong> not have already been recorded to <code>commandBuffer</code>."
+          "text": " If any element of <code>pCommandBuffers</code> was not recorded with the <code>VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT</code> flag, it <strong class=\"purple\">must</strong> not have already been recorded to <code>commandBuffer</code>"
         },
         {
           "vuid": "VUID-vkCmdExecuteCommands-pCommandBuffers-00093",
-          "text": " If any element of <code>pCommandBuffers</code> was not recorded with the <code>VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT</code> flag, it <strong class=\"purple\">must</strong> not appear more than once in <code>pCommandBuffers</code>."
+          "text": " If any element of <code>pCommandBuffers</code> was not recorded with the <code>VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT</code> flag, it <strong class=\"purple\">must</strong> not appear more than once in <code>pCommandBuffers</code>"
         },
         {
           "vuid": "VUID-vkCmdExecuteCommands-pCommandBuffers-00094",
@@ -1510,7 +1506,7 @@
         },
         {
           "vuid": "VUID-vkCmdExecuteCommands-pInheritanceInfo-00098",
-          "text": " If <code>vkCmdExecuteCommands</code> is being called within a render pass instance, the render passes specified in the <code>pBeginInfo-&gt;pInheritanceInfo-&gt;renderPass</code> members of the <a href=\"#vkBeginCommandBuffer\">vkBeginCommandBuffer</a> commands used to begin recording each element of <code>pCommandBuffers</code> <strong class=\"purple\">must</strong> be <a href=\"#renderpass-compatibility\">compatible</a> with the current render pass."
+          "text": " If <code>vkCmdExecuteCommands</code> is being called within a render pass instance, the render passes specified in the <code>pBeginInfo-&gt;pInheritanceInfo-&gt;renderPass</code> members of the <a href=\"#vkBeginCommandBuffer\">vkBeginCommandBuffer</a> commands used to begin recording each element of <code>pCommandBuffers</code> <strong class=\"purple\">must</strong> be <a href=\"#renderpass-compatibility\">compatible</a> with the current render pass"
         },
         {
           "vuid": "VUID-vkCmdExecuteCommands-pCommandBuffers-00099",
@@ -1572,11 +1568,11 @@
       "(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdExecuteCommands-commandBuffer-01820",
-          "text": " If <code>commandBuffer</code> is a protected command buffer, then each element of <code>pCommandBuffers</code> <strong class=\"purple\">must</strong> be a protected command buffer."
+          "text": " If <code>commandBuffer</code> is a protected command buffer, then each element of <code>pCommandBuffers</code> <strong class=\"purple\">must</strong> be a protected command buffer"
         },
         {
           "vuid": "VUID-vkCmdExecuteCommands-commandBuffer-01821",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then each element of <code>pCommandBuffers</code> <strong class=\"purple\">must</strong> be an unprotected command buffer."
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then each element of <code>pCommandBuffers</code> <strong class=\"purple\">must</strong> be an unprotected command buffer"
         }
       ],
       "(VK_EXT_transform_feedback)": [
@@ -5054,6 +5050,16 @@
           "vuid": "VUID-vkCmdBeginRenderPass-initialLayout-01758",
           "text": " If any of the <code>initialLayout</code> or <code>finalLayout</code> member of the <code>VkAttachmentDescription</code> structures or the <code>layout</code> member of the <code>VkAttachmentReference</code> structures specified when creating the render pass specified in the <code>renderPass</code> member of <code>pRenderPassBegin</code> is <code>VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL</code>, <code>VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL</code>, <code>VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL</code>, or <code>VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL</code> then the corresponding attachment image view of the framebuffer specified in the <code>framebuffer</code> member of <code>pRenderPassBegin</code> <strong class=\"purple\">must</strong> have been created with a <code>usage</code> value including <code>VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</code>"
         }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_maintenance2)+(VK_VERSION_1_2,VK_KHR_separate_depth_stencil_layouts)": [
+        {
+          "vuid": "VUID-vkCmdBeginRenderPass-initialLayout-02842",
+          "text": " If any of the <code>initialLayout</code> or <code>finalLayout</code> member of the <code>VkAttachmentDescription</code> structures or the <code>layout</code> member of the <code>VkAttachmentReference</code> structures specified when creating the render pass specified in the <code>renderPass</code> member of <code>pRenderPassBegin</code> is <code>VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL</code>, or <code>VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL</code>, <code>VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL</code>, or <code>VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL</code> then the corresponding attachment image view of the framebuffer specified in the <code>framebuffer</code> member of <code>pRenderPassBegin</code> <strong class=\"purple\">must</strong> have been created with a <code>usage</code> value including <code>VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdBeginRenderPass-stencilInitialLayout-02843",
+          "text": " If any of the <code>stencilInitialLayout</code> or <code>stencilFinalLayout</code> member of the <code>VkAttachmentDescriptionStencilLayout</code> structures or the <code>stencilLayout</code> member of the <code>VkAttachmentReferenceStencilLayout</code> structures specified when creating the render pass specified in the <code>renderPass</code> member of <code>pRenderPassBegin</code> is <code>VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL</code>, or <code>VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL</code> then the corresponding attachment image view of the framebuffer specified in the <code>framebuffer</code> member of <code>pRenderPassBegin</code> <strong class=\"purple\">must</strong> have been created with a <code>usage</code> value including <code>VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</code>"
+        }
       ]
     },
     "vkCmdBeginRenderPass2": {
@@ -5122,6 +5128,16 @@
           "vuid": "VUID-vkCmdBeginRenderPass2-bufferlevel",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a primary <code>VkCommandBuffer</code>"
         }
+      ],
+      "(VK_VERSION_1_2,VK_KHR_create_renderpass2)+(VK_VERSION_1_2,VK_KHR_separate_depth_stencil_layouts)": [
+        {
+          "vuid": "VUID-vkCmdBeginRenderPass2-initialLayout-02844",
+          "text": " If any of the <code>initialLayout</code> or <code>finalLayout</code> member of the <code>VkAttachmentDescription</code> structures or the <code>layout</code> member of the <code>VkAttachmentReference</code> structures specified when creating the render pass specified in the <code>renderPass</code> member of <code>pRenderPassBegin</code> is <code>VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL</code>, or <code>VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL</code>, <code>VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL</code>, or <code>VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL</code> then the corresponding attachment image view of the framebuffer specified in the <code>framebuffer</code> member of <code>pRenderPassBegin</code> <strong class=\"purple\">must</strong> have been created with a <code>usage</code> value including <code>VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdBeginRenderPass2-stencilInitialLayout-02845",
+          "text": " If any of the <code>stencilInitialLayout</code> or <code>stencilFinalLayout</code> member of the <code>VkAttachmentDescriptionStencilLayout</code> structures or the <code>stencilLayout</code> member of the <code>VkAttachmentReferenceStencilLayout</code> structures specified when creating the render pass specified in the <code>renderPass</code> member of <code>pRenderPassBegin</code> is <code>VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL</code>, or <code>VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL</code> then the corresponding attachment image view of the framebuffer specified in the <code>framebuffer</code> member of <code>pRenderPassBegin</code> <strong class=\"purple\">must</strong> have been created with a <code>usage</code> value including <code>VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</code>"
+        }
       ]
     },
     "VkRenderPassBeginInfo": {
@@ -5132,7 +5148,7 @@
         },
         {
           "vuid": "VUID-VkRenderPassBeginInfo-renderPass-00904",
-          "text": " <code>renderPass</code> <strong class=\"purple\">must</strong> be <a href=\"#renderpass-compatibility\">compatible</a> with the <code>renderPass</code> member of the <code>VkFramebufferCreateInfo</code> structure specified when creating <code>framebuffer</code>."
+          "text": " <code>renderPass</code> <strong class=\"purple\">must</strong> be <a href=\"#renderpass-compatibility\">compatible</a> with the <code>renderPass</code> member of the <code>VkFramebufferCreateInfo</code> structure specified when creating <code>framebuffer</code>"
         },
         {
           "vuid": "VUID-VkRenderPassBeginInfo-sType-sType",
@@ -5161,6 +5177,58 @@
         {
           "vuid": "VUID-VkRenderPassBeginInfo-commonparent",
           "text": " Both of <code>framebuffer</code>, and <code>renderPass</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <a href=\"#VkDevice\">VkDevice</a>"
+        }
+      ],
+      "!(VK_VERSION_1_1,VK_KHR_device_group)": [
+        {
+          "vuid": "VUID-VkRenderPassBeginInfo-renderArea-02846",
+          "text": " <code>renderArea.offset.x</code> <strong class=\"purple\">must</strong> be greater than or equal to 0"
+        },
+        {
+          "vuid": "VUID-VkRenderPassBeginInfo-renderArea-02847",
+          "text": " <code>renderArea.offset.y</code> <strong class=\"purple\">must</strong> be greater than or equal to 0"
+        },
+        {
+          "vuid": "VUID-VkRenderPassBeginInfo-renderArea-02848",
+          "text": " <span class=\"eq\"><code>renderArea.offset.x</code> &#43; <code>renderArea.offset.width</code></span> <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#VkFramebufferCreateInfo\">VkFramebufferCreateInfo</a>::<code>width</code> the <code>framebuffer</code> was created with"
+        },
+        {
+          "vuid": "VUID-VkRenderPassBeginInfo-renderArea-02849",
+          "text": " <span class=\"eq\"><code>renderArea.offset.y</code> &#43; <code>renderArea.offset.height</code></span> <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#VkFramebufferCreateInfo\">VkFramebufferCreateInfo</a>::<code>height</code> the <code>framebuffer</code> was created with"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_device_group)": [
+        {
+          "vuid": "VUID-VkRenderPassBeginInfo-pNext-02850",
+          "text": " If the <code>pNext</code> chain does not contain <a href=\"#VkDeviceGroupRenderPassBeginInfo\">VkDeviceGroupRenderPassBeginInfo</a> or its <code>deviceRenderAreaCount</code> member is equal to 0, <code>renderArea.offset.x</code> <strong class=\"purple\">must</strong> be greater than or equal to 0"
+        },
+        {
+          "vuid": "VUID-VkRenderPassBeginInfo-pNext-02851",
+          "text": " If the <code>pNext</code> chain does not contain <a href=\"#VkDeviceGroupRenderPassBeginInfo\">VkDeviceGroupRenderPassBeginInfo</a> or its <code>deviceRenderAreaCount</code> member is equal to 0, <code>renderArea.offset.y</code> <strong class=\"purple\">must</strong> be greater than or equal to 0"
+        },
+        {
+          "vuid": "VUID-VkRenderPassBeginInfo-pNext-02852",
+          "text": " If the <code>pNext</code> chain does not contain <a href=\"#VkDeviceGroupRenderPassBeginInfo\">VkDeviceGroupRenderPassBeginInfo</a> or its <code>deviceRenderAreaCount</code> member is equal to 0, <span class=\"eq\"><code>renderArea.offset.x</code> &#43; <code>renderArea.offset.width</code></span> <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#VkFramebufferCreateInfo\">VkFramebufferCreateInfo</a>::<code>width</code> the <code>framebuffer</code> was created with"
+        },
+        {
+          "vuid": "VUID-VkRenderPassBeginInfo-pNext-02853",
+          "text": " If the <code>pNext</code> chain does not contain <a href=\"#VkDeviceGroupRenderPassBeginInfo\">VkDeviceGroupRenderPassBeginInfo</a> or its <code>deviceRenderAreaCount</code> member is equal to 0, <span class=\"eq\"><code>renderArea.offset.y</code> &#43; <code>renderArea.offset.height</code></span> <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#VkFramebufferCreateInfo\">VkFramebufferCreateInfo</a>::<code>height</code> the <code>framebuffer</code> was created with"
+        },
+        {
+          "vuid": "VUID-VkRenderPassBeginInfo-pNext-02854",
+          "text": " If the <code>pNext</code> chain contains <a href=\"#VkDeviceGroupRenderPassBeginInfo\">VkDeviceGroupRenderPassBeginInfo</a>, the <code>offset.x</code> member of each element of <code>pDeviceRenderAreas</code> <strong class=\"purple\">must</strong> be greater than or equal to 0"
+        },
+        {
+          "vuid": "VUID-VkRenderPassBeginInfo-pNext-02855",
+          "text": " If the <code>pNext</code> chain contains <a href=\"#VkDeviceGroupRenderPassBeginInfo\">VkDeviceGroupRenderPassBeginInfo</a>, the <code>offset.y</code> member of each element of <code>pDeviceRenderAreas</code> <strong class=\"purple\">must</strong> be greater than or equal to 0"
+        },
+        {
+          "vuid": "VUID-VkRenderPassBeginInfo-pNext-02856",
+          "text": " If the <code>pNext</code> chain contains <a href=\"#VkDeviceGroupRenderPassBeginInfo\">VkDeviceGroupRenderPassBeginInfo</a>, <span class=\"eq\"><code>offset.x</code> &#43; <code>offset.width</code></span> of each element of <code>pDeviceRenderAreas</code> <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#VkFramebufferCreateInfo\">VkFramebufferCreateInfo</a>::<code>width</code> the <code>framebuffer</code> was created with"
+        },
+        {
+          "vuid": "VUID-VkRenderPassBeginInfo-pNext-02857",
+          "text": " If the <code>pNext</code> chain contains <a href=\"#VkDeviceGroupRenderPassBeginInfo\">VkDeviceGroupRenderPassBeginInfo</a>, <span class=\"eq\"><code>offset.y</code> &#43; <code>offset.height</code></span> of each element of <code>pDeviceRenderAreas</code> <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#VkFramebufferCreateInfo\">VkFramebufferCreateInfo</a>::<code>height</code> the <code>framebuffer</code> was created with"
         }
       ],
       "(VK_VERSION_1_2,VK_KHR_imageless_framebuffer)": [
@@ -10555,6 +10623,12 @@
       ]
     },
     "vkBindImageMemory2": {
+      "(VK_VERSION_1_1,VK_KHR_bind_memory2)+(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
+        {
+          "vuid": "VUID-vkBindImageMemory2-pBindInfos-02858",
+          "text": " If any <a href=\"#VkBindImageMemoryInfo\">VkBindImageMemoryInfo</a>::image was created with <code>VK_IMAGE_CREATE_DISJOINT_BIT</code> then all planes of <a href=\"#VkBindImageMemoryInfo\">VkBindImageMemoryInfo</a>::image <strong class=\"purple\">must</strong> be bound individually in separate <code>pBindInfos</code>"
+        }
+      ],
       "(VK_VERSION_1_1,VK_KHR_bind_memory2)": [
         {
           "vuid": "VUID-vkBindImageMemory2-device-parameter",
@@ -10805,10 +10879,6 @@
         {
           "vuid": "VUID-VkBindImagePlaneMemoryInfo-planeAspect-02283",
           "text": " If the image&#8217;s tiling is <code>VK_IMAGE_TILING_LINEAR</code> or <code>VK_IMAGE_TILING_OPTIMAL</code>, then <code>planeAspect</code> <strong class=\"purple\">must</strong> be a single valid <em>format plane</em> for the image. (That is, <code>planeAspect</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code> or <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code> for &#8220;<code>_2PLANE</code>&#8221; formats and <code>planeAspect</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code>, <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code>, or <code>VK_IMAGE_ASPECT_PLANE_2_BIT</code> for &#8220;<code>_3PLANE</code>&#8221; formats.)"
-        },
-        {
-          "vuid": "VUID-VkBindImagePlaneMemoryInfo-None-01643",
-          "text": " A single call to <a href=\"#vkBindImageMemory2\">vkBindImageMemory2</a> <strong class=\"purple\">must</strong> bind all or none of the planes of an image (i.e. bindings to all planes of an image <strong class=\"purple\">must</strong> be made in a single <a href=\"#vkBindImageMemory2\">vkBindImageMemory2</a> call), as separate bindings"
         },
         {
           "vuid": "VUID-VkBindImagePlaneMemoryInfo-sType-sType",
@@ -13401,6 +13471,10 @@
         {
           "vuid": "VUID-vkCmdResetQueryPool-firstQuery-00797",
           "text": " The sum of <code>firstQuery</code> and <code>queryCount</code> <strong class=\"purple\">must</strong> be less than or equal to the number of queries in <code>queryPool</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdResetQueryPool-None-02841",
+          "text": " All queries used by the command <strong class=\"purple\">must</strong> not be active"
         },
         {
           "vuid": "VUID-vkCmdResetQueryPool-commandBuffer-parameter",
@@ -16368,7 +16442,11 @@
         },
         {
           "vuid": "VUID-vkCmdDraw-commandBuffer-02701",
-          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set for <code>commandBuffer</code>"
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set for <code>commandBuffer</code>, and done so after any previously bound pipeline with the corresponding state not specified as dynamic"
+        },
+        {
+          "vuid": "VUID-vkCmdDraw-None-02859",
+          "text": " There <strong class=\"purple\">must</strong> not have been any calls to dynamic state setting commands for any state not specified as dynamic in the <code>VkPipeline</code> object bound to the pipeline bind point used by this command, since that pipeline was bound"
         },
         {
           "vuid": "VUID-vkCmdDraw-None-02702",
@@ -16514,7 +16592,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexed-commandBuffer-02701",
-          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set for <code>commandBuffer</code>"
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set for <code>commandBuffer</code>, and done so after any previously bound pipeline with the corresponding state not specified as dynamic"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexed-None-02859",
+          "text": " There <strong class=\"purple\">must</strong> not have been any calls to dynamic state setting commands for any state not specified as dynamic in the <code>VkPipeline</code> object bound to the pipeline bind point used by this command, since that pipeline was bound"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexed-None-02702",
@@ -16664,7 +16746,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirect-commandBuffer-02701",
-          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set for <code>commandBuffer</code>"
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set for <code>commandBuffer</code>, and done so after any previously bound pipeline with the corresponding state not specified as dynamic"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirect-None-02859",
+          "text": " There <strong class=\"purple\">must</strong> not have been any calls to dynamic state setting commands for any state not specified as dynamic in the <code>VkPipeline</code> object bound to the pipeline bind point used by this command, since that pipeline was bound"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirect-None-02702",
@@ -16862,7 +16948,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCount-commandBuffer-02701",
-          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set for <code>commandBuffer</code>"
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set for <code>commandBuffer</code>, and done so after any previously bound pipeline with the corresponding state not specified as dynamic"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCount-None-02859",
+          "text": " There <strong class=\"purple\">must</strong> not have been any calls to dynamic state setting commands for any state not specified as dynamic in the <code>VkPipeline</code> object bound to the pipeline bind point used by this command, since that pipeline was bound"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCount-None-02702",
@@ -17066,7 +17156,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-commandBuffer-02701",
-          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set for <code>commandBuffer</code>"
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set for <code>commandBuffer</code>, and done so after any previously bound pipeline with the corresponding state not specified as dynamic"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirect-None-02859",
+          "text": " There <strong class=\"purple\">must</strong> not have been any calls to dynamic state setting commands for any state not specified as dynamic in the <code>VkPipeline</code> object bound to the pipeline bind point used by this command, since that pipeline was bound"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-None-02702",
@@ -17274,7 +17368,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount-commandBuffer-02701",
-          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set for <code>commandBuffer</code>"
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set for <code>commandBuffer</code>, and done so after any previously bound pipeline with the corresponding state not specified as dynamic"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-None-02859",
+          "text": " There <strong class=\"purple\">must</strong> not have been any calls to dynamic state setting commands for any state not specified as dynamic in the <code>VkPipeline</code> object bound to the pipeline bind point used by this command, since that pipeline was bound"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount-None-02702",
@@ -17472,7 +17570,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-commandBuffer-02701",
-          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set for <code>commandBuffer</code>"
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set for <code>commandBuffer</code>, and done so after any previously bound pipeline with the corresponding state not specified as dynamic"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-None-02859",
+          "text": " There <strong class=\"purple\">must</strong> not have been any calls to dynamic state setting commands for any state not specified as dynamic in the <code>VkPipeline</code> object bound to the pipeline bind point used by this command, since that pipeline was bound"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-None-02702",
@@ -17726,7 +17828,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksNV-commandBuffer-02701",
-          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set for <code>commandBuffer</code>"
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set for <code>commandBuffer</code>, and done so after any previously bound pipeline with the corresponding state not specified as dynamic"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksNV-None-02859",
+          "text": " There <strong class=\"purple\">must</strong> not have been any calls to dynamic state setting commands for any state not specified as dynamic in the <code>VkPipeline</code> object bound to the pipeline bind point used by this command, since that pipeline was bound"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksNV-None-02702",
@@ -17860,7 +17966,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-commandBuffer-02701",
-          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set for <code>commandBuffer</code>"
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set for <code>commandBuffer</code>, and done so after any previously bound pipeline with the corresponding state not specified as dynamic"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-None-02859",
+          "text": " There <strong class=\"purple\">must</strong> not have been any calls to dynamic state setting commands for any state not specified as dynamic in the <code>VkPipeline</code> object bound to the pipeline bind point used by this command, since that pipeline was bound"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-None-02702",
@@ -18042,7 +18152,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-commandBuffer-02701",
-          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set for <code>commandBuffer</code>"
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set for <code>commandBuffer</code>, and done so after any previously bound pipeline with the corresponding state not specified as dynamic"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-None-02859",
+          "text": " There <strong class=\"purple\">must</strong> not have been any calls to dynamic state setting commands for any state not specified as dynamic in the <code>VkPipeline</code> object bound to the pipeline bind point used by this command, since that pipeline was bound"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-None-02702",
@@ -18677,10 +18791,6 @@
     "vkCmdSetViewportWScalingNV": {
       "(VK_NV_clip_space_w_scaling)": [
         {
-          "vuid": "VUID-vkCmdSetViewportWScalingNV-None-01322",
-          "text": " The bound graphics pipeline <strong class=\"purple\">must</strong> have been created with the <code>VK_DYNAMIC_STATE_VIEWPORT_W_SCALING_NV</code> dynamic state enabled"
-        },
-        {
           "vuid": "VUID-vkCmdSetViewportWScalingNV-firstViewport-01323",
           "text": " <code>firstViewport</code> <strong class=\"purple\">must</strong> be less than <a href=\"#VkPhysicalDeviceLimits\">VkPhysicalDeviceLimits</a>::<code>maxViewports</code>"
         },
@@ -18778,10 +18888,6 @@
     },
     "vkCmdSetViewport": {
       "core": [
-        {
-          "vuid": "VUID-vkCmdSetViewport-None-01221",
-          "text": " The bound graphics pipeline <strong class=\"purple\">must</strong> have been created with the <code>VK_DYNAMIC_STATE_VIEWPORT</code> dynamic state enabled"
-        },
         {
           "vuid": "VUID-vkCmdSetViewport-firstViewport-01222",
           "text": " <code>firstViewport</code> <strong class=\"purple\">must</strong> be less than <code>VkPhysicalDeviceLimits</code>::<code>maxViewports</code>"
@@ -19073,10 +19179,6 @@
     "vkCmdSetSampleLocationsEXT": {
       "(VK_EXT_sample_locations)": [
         {
-          "vuid": "VUID-vkCmdSetSampleLocationsEXT-None-01528",
-          "text": " The bound graphics pipeline <strong class=\"purple\">must</strong> have been created with the <code>VK_DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT</code> dynamic state enabled"
-        },
-        {
           "vuid": "VUID-vkCmdSetSampleLocationsEXT-sampleLocationsPerPixel-01529",
           "text": " The <code>sampleLocationsPerPixel</code> member of <code>pSampleLocationsInfo</code> <strong class=\"purple\">must</strong> equal the <code>rasterizationSamples</code> member of the <a href=\"#VkPipelineMultisampleStateCreateInfo\">VkPipelineMultisampleStateCreateInfo</a> structure the bound graphics pipeline has been created with"
         },
@@ -19187,10 +19289,6 @@
         {
           "vuid": "VUID-vkCmdSetViewportShadingRatePaletteNV-None-02064",
           "text": " The <a href=\"#features-shadingRateImage\">shading rate image</a> feature <strong class=\"purple\">must</strong> be enabled."
-        },
-        {
-          "vuid": "VUID-vkCmdSetViewportShadingRatePaletteNV-None-02065",
-          "text": " The bound graphics pipeline <strong class=\"purple\">must</strong> have been created with the <code>VK_DYNAMIC_STATE_VIEWPORT_SHADING_RATE_PALETTE_NV</code> dynamic state enabled"
         },
         {
           "vuid": "VUID-vkCmdSetViewportShadingRatePaletteNV-firstViewport-02066",
@@ -19397,10 +19495,6 @@
     "vkCmdSetLineWidth": {
       "core": [
         {
-          "vuid": "VUID-vkCmdSetLineWidth-None-00787",
-          "text": " The bound graphics pipeline <strong class=\"purple\">must</strong> have been created with the <code>VK_DYNAMIC_STATE_LINE_WIDTH</code> dynamic state enabled"
-        },
-        {
           "vuid": "VUID-vkCmdSetLineWidth-lineWidth-00788",
           "text": " If the <a href=\"#features-wideLines\">wide lines</a> feature is not enabled, <code>lineWidth</code> <strong class=\"purple\">must</strong> be <code>1.0</code>"
         },
@@ -19421,10 +19515,6 @@
     "vkCmdSetLineStippleEXT": {
       "(VK_EXT_line_rasterization)": [
         {
-          "vuid": "VUID-vkCmdSetLineStippleEXT-None-02775",
-          "text": " The bound graphics pipeline <strong class=\"purple\">must</strong> have been created with the <code>VK_DYNAMIC_STATE_LINE_STIPPLE_EXT</code> dynamic state enabled"
-        },
-        {
           "vuid": "VUID-vkCmdSetLineStippleEXT-lineStippleFactor-02776",
           "text": " <code>lineStippleFactor</code> <strong class=\"purple\">must</strong> be in the range <span class=\"eq\">[1,256]</span>"
         },
@@ -19444,10 +19534,6 @@
     },
     "vkCmdSetDepthBias": {
       "core": [
-        {
-          "vuid": "VUID-vkCmdSetDepthBias-None-00789",
-          "text": " The bound graphics pipeline <strong class=\"purple\">must</strong> have been created with the <code>VK_DYNAMIC_STATE_DEPTH_BIAS</code> dynamic state enabled"
-        },
         {
           "vuid": "VUID-vkCmdSetDepthBias-depthBiasClamp-00790",
           "text": " If the <a href=\"#features-depthBiasClamp\">depth bias clamping</a> feature is not enabled, <code>depthBiasClamp</code> <strong class=\"purple\">must</strong> be <code>0.0</code>"
@@ -19509,10 +19595,6 @@
     "vkCmdSetDiscardRectangleEXT": {
       "(VK_EXT_discard_rectangles)": [
         {
-          "vuid": "VUID-vkCmdSetDiscardRectangleEXT-None-00583",
-          "text": " The bound graphics pipeline <strong class=\"purple\">must</strong> have been created with the <code>VK_DYNAMIC_STATE_DISCARD_RECTANGLE_EXT</code> dynamic state enabled"
-        },
-        {
           "vuid": "VUID-vkCmdSetDiscardRectangleEXT-firstDiscardRectangle-00585",
           "text": " The sum of <code>firstDiscardRectangle</code> and <code>discardRectangleCount</code> <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#VkPhysicalDeviceDiscardRectanglePropertiesEXT\">VkPhysicalDeviceDiscardRectanglePropertiesEXT</a>::<code>maxDiscardRectangles</code>"
         },
@@ -19552,10 +19634,6 @@
     },
     "vkCmdSetScissor": {
       "core": [
-        {
-          "vuid": "VUID-vkCmdSetScissor-None-00590",
-          "text": " The bound graphics pipeline <strong class=\"purple\">must</strong> have been created with the <code>VK_DYNAMIC_STATE_SCISSOR</code> dynamic state enabled"
-        },
         {
           "vuid": "VUID-vkCmdSetScissor-firstScissor-00591",
           "text": " <code>firstScissor</code> <strong class=\"purple\">must</strong> be less than <code>VkPhysicalDeviceLimits</code>::<code>maxViewports</code>"
@@ -19641,10 +19719,6 @@
           "text": " The <a href=\"#features-exclusiveScissor\">exclusive scissor</a> feature <strong class=\"purple\">must</strong> be enabled."
         },
         {
-          "vuid": "VUID-vkCmdSetExclusiveScissorNV-None-02032",
-          "text": " The bound graphics pipeline <strong class=\"purple\">must</strong> have been created with the <code>VK_DYNAMIC_STATE_EXCLUSIVE_SCISSOR_NV</code> dynamic state enabled"
-        },
-        {
           "vuid": "VUID-vkCmdSetExclusiveScissorNV-firstExclusiveScissor-02033",
           "text": " <code>firstExclusiveScissor</code> <strong class=\"purple\">must</strong> be less than <code>VkPhysicalDeviceLimits</code>::<code>maxViewports</code>"
         },
@@ -19727,24 +19801,6 @@
       ]
     },
     "vkCmdSetDepthBounds": {
-      "core": [
-        {
-          "vuid": "VUID-vkCmdSetDepthBounds-None-00599",
-          "text": " The bound graphics pipeline <strong class=\"purple\">must</strong> have been created with the <code>VK_DYNAMIC_STATE_DEPTH_BOUNDS</code> dynamic state enabled"
-        },
-        {
-          "vuid": "VUID-vkCmdSetDepthBounds-commandBuffer-parameter",
-          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCommandBuffer\">VkCommandBuffer</a> handle"
-        },
-        {
-          "vuid": "VUID-vkCmdSetDepthBounds-commandBuffer-recording",
-          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be in the <a href=\"#commandbuffers-lifecycle\">recording state</a>"
-        },
-        {
-          "vuid": "VUID-vkCmdSetDepthBounds-commandBuffer-cmdpool",
-          "text": " The <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from <strong class=\"purple\">must</strong> support graphics operations"
-        }
-      ],
       "(VK_EXT_depth_range_unrestricted)": [
         {
           "vuid": "VUID-vkCmdSetDepthBounds-minDepthBounds-00600",
@@ -19763,6 +19819,20 @@
         {
           "vuid": "VUID-vkCmdSetDepthBounds-maxDepthBounds-02509",
           "text": " <code>maxDepthBounds</code> <strong class=\"purple\">must</strong> be between <code>0.0</code> and <code>1.0</code>, inclusive"
+        }
+      ],
+      "core": [
+        {
+          "vuid": "VUID-vkCmdSetDepthBounds-commandBuffer-parameter",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCommandBuffer\">VkCommandBuffer</a> handle"
+        },
+        {
+          "vuid": "VUID-vkCmdSetDepthBounds-commandBuffer-recording",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be in the <a href=\"#commandbuffers-lifecycle\">recording state</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdSetDepthBounds-commandBuffer-cmdpool",
+          "text": " The <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from <strong class=\"purple\">must</strong> support graphics operations"
         }
       ]
     },
@@ -19789,10 +19859,6 @@
     "vkCmdSetStencilCompareMask": {
       "core": [
         {
-          "vuid": "VUID-vkCmdSetStencilCompareMask-None-00602",
-          "text": " The bound graphics pipeline <strong class=\"purple\">must</strong> have been created with the <code>VK_DYNAMIC_STATE_STENCIL_COMPARE_MASK</code> dynamic state enabled"
-        },
-        {
           "vuid": "VUID-vkCmdSetStencilCompareMask-commandBuffer-parameter",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCommandBuffer\">VkCommandBuffer</a> handle"
         },
@@ -19817,10 +19883,6 @@
     "vkCmdSetStencilWriteMask": {
       "core": [
         {
-          "vuid": "VUID-vkCmdSetStencilWriteMask-None-00603",
-          "text": " The bound graphics pipeline <strong class=\"purple\">must</strong> have been created with the <code>VK_DYNAMIC_STATE_STENCIL_WRITE_MASK</code> dynamic state enabled"
-        },
-        {
           "vuid": "VUID-vkCmdSetStencilWriteMask-commandBuffer-parameter",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCommandBuffer\">VkCommandBuffer</a> handle"
         },
@@ -19844,10 +19906,6 @@
     },
     "vkCmdSetStencilReference": {
       "core": [
-        {
-          "vuid": "VUID-vkCmdSetStencilReference-None-00604",
-          "text": " The bound graphics pipeline <strong class=\"purple\">must</strong> have been created with the <code>VK_DYNAMIC_STATE_STENCIL_REFERENCE</code> dynamic state enabled"
-        },
         {
           "vuid": "VUID-vkCmdSetStencilReference-commandBuffer-parameter",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCommandBuffer\">VkCommandBuffer</a> handle"
@@ -20063,10 +20121,6 @@
     "vkCmdSetBlendConstants": {
       "core": [
         {
-          "vuid": "VUID-vkCmdSetBlendConstants-None-00612",
-          "text": " The bound graphics pipeline <strong class=\"purple\">must</strong> have been created with the <code>VK_DYNAMIC_STATE_BLEND_CONSTANTS</code> dynamic state enabled"
-        },
-        {
           "vuid": "VUID-vkCmdSetBlendConstants-commandBuffer-parameter",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCommandBuffer\">VkCommandBuffer</a> handle"
         },
@@ -20132,7 +20186,11 @@
         },
         {
           "vuid": "VUID-vkCmdDispatch-commandBuffer-02701",
-          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set for <code>commandBuffer</code>"
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set for <code>commandBuffer</code>, and done so after any previously bound pipeline with the corresponding state not specified as dynamic"
+        },
+        {
+          "vuid": "VUID-vkCmdDispatch-None-02859",
+          "text": " There <strong class=\"purple\">must</strong> not have been any calls to dynamic state setting commands for any state not specified as dynamic in the <code>VkPipeline</code> object bound to the pipeline bind point used by this command, since that pipeline was bound"
         },
         {
           "vuid": "VUID-vkCmdDispatch-None-02702",
@@ -20254,7 +20312,11 @@
         },
         {
           "vuid": "VUID-vkCmdDispatchIndirect-commandBuffer-02701",
-          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set for <code>commandBuffer</code>"
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set for <code>commandBuffer</code>, and done so after any previously bound pipeline with the corresponding state not specified as dynamic"
+        },
+        {
+          "vuid": "VUID-vkCmdDispatchIndirect-None-02859",
+          "text": " There <strong class=\"purple\">must</strong> not have been any calls to dynamic state setting commands for any state not specified as dynamic in the <code>VkPipeline</code> object bound to the pipeline bind point used by this command, since that pipeline was bound"
         },
         {
           "vuid": "VUID-vkCmdDispatchIndirect-None-02702",
@@ -20400,7 +20462,11 @@
         },
         {
           "vuid": "VUID-vkCmdDispatchBase-commandBuffer-02701",
-          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set for <code>commandBuffer</code>"
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set for <code>commandBuffer</code>, and done so after any previously bound pipeline with the corresponding state not specified as dynamic"
+        },
+        {
+          "vuid": "VUID-vkCmdDispatchBase-None-02859",
+          "text": " There <strong class=\"purple\">must</strong> not have been any calls to dynamic state setting commands for any state not specified as dynamic in the <code>VkPipeline</code> object bound to the pipeline bind point used by this command, since that pipeline was bound"
         },
         {
           "vuid": "VUID-vkCmdDispatchBase-None-02702",
@@ -24020,7 +24086,11 @@
         },
         {
           "vuid": "VUID-vkCmdTraceRaysNV-commandBuffer-02701",
-          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set for <code>commandBuffer</code>"
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set for <code>commandBuffer</code>, and done so after any previously bound pipeline with the corresponding state not specified as dynamic"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-None-02859",
+          "text": " There <strong class=\"purple\">must</strong> not have been any calls to dynamic state setting commands for any state not specified as dynamic in the <code>VkPipeline</code> object bound to the pipeline bind point used by this command, since that pipeline was bound"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysNV-None-02702",
