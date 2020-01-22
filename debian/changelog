@@ -1,3 +1,15 @@
+vulkan-headers (1.2.131.0~rc2-1ubuntu16.04.1.1) xenial; urgency=medium
+
+  * Automated package build
+
+ -- John Zupin <john@odin>  Wed, 22 Jan 2020 15:57:02 -0700
+
+vulkan-headers (1.2.131.0~rc1-1ubuntu16.04.1.1) xenial; urgency=medium
+
+  * Automated package build
+
+ -- John Zupin <john@odin>  Tue, 21 Jan 2020 15:57:02 -0700
+
 vulkan-headers (1.1.130.0~rc1-1ubuntu16.04.1.1) xenial; urgency=medium
 
   * Automated package build
