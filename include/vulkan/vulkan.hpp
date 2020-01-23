@@ -278,7 +278,7 @@ namespace VULKAN_HPP_NAMESPACE
       : m_mask(static_cast<MaskType>(bit))
     {}
 
-    VULKAN_HPP_CONSTEXPR Flags(Flags<BitType> const& rhs) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR Flags(Flags<BitType, MaskType> const& rhs) VULKAN_HPP_NOEXCEPT
       : m_mask(rhs.m_mask)
     {}
 
@@ -287,32 +287,32 @@ namespace VULKAN_HPP_NAMESPACE
     {}
 
     // relational operators
-    VULKAN_HPP_CONSTEXPR bool operator<(Flags<BitType> const& rhs) const VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR bool operator<(Flags<BitType, MaskType> const& rhs) const VULKAN_HPP_NOEXCEPT
     {
       return m_mask < rhs.m_mask;
     }
 
-    VULKAN_HPP_CONSTEXPR bool operator<=(Flags<BitType> const& rhs) const VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR bool operator<=(Flags<BitType, MaskType> const& rhs) const VULKAN_HPP_NOEXCEPT
     {
       return m_mask <= rhs.m_mask;
     }
 
-    VULKAN_HPP_CONSTEXPR bool operator>(Flags<BitType> const& rhs) const VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR bool operator>(Flags<BitType, MaskType> const& rhs) const VULKAN_HPP_NOEXCEPT
     {
       return m_mask > rhs.m_mask;
     }
 
-    VULKAN_HPP_CONSTEXPR bool operator>=(Flags<BitType> const& rhs) const VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR bool operator>=(Flags<BitType, MaskType> const& rhs) const VULKAN_HPP_NOEXCEPT
     {
       return m_mask >= rhs.m_mask;
     }
 
-    VULKAN_HPP_CONSTEXPR bool operator==(Flags<BitType> const& rhs) const VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR bool operator==(Flags<BitType, MaskType> const& rhs) const VULKAN_HPP_NOEXCEPT
     {
       return m_mask == rhs.m_mask;
     }
 
-    VULKAN_HPP_CONSTEXPR bool operator!=(Flags<BitType> const& rhs) const VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR bool operator!=(Flags<BitType, MaskType> const& rhs) const VULKAN_HPP_NOEXCEPT
     {
       return m_mask != rhs.m_mask;
     }
@@ -324,46 +324,46 @@ namespace VULKAN_HPP_NAMESPACE
     }
 
     // bitwise operators
-    VULKAN_HPP_CONSTEXPR Flags<BitType> operator&(Flags<BitType> const& rhs) const VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR Flags<BitType, MaskType> operator&(Flags<BitType, MaskType> const& rhs) const VULKAN_HPP_NOEXCEPT
     {
-      return Flags<BitType>(m_mask & rhs.m_mask);
+      return Flags<BitType, MaskType>(m_mask & rhs.m_mask);
     }
 
-    VULKAN_HPP_CONSTEXPR Flags<BitType> operator|(Flags<BitType> const& rhs) const VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR Flags<BitType, MaskType> operator|(Flags<BitType, MaskType> const& rhs) const VULKAN_HPP_NOEXCEPT
     {
-      return Flags<BitType>(m_mask | rhs.m_mask);
+      return Flags<BitType, MaskType>(m_mask | rhs.m_mask);
     }
 
-    VULKAN_HPP_CONSTEXPR Flags<BitType> operator^(Flags<BitType> const& rhs) const VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR Flags<BitType, MaskType> operator^(Flags<BitType, MaskType> const& rhs) const VULKAN_HPP_NOEXCEPT
     {
-      return Flags<BitType>(m_mask ^ rhs.m_mask);
+      return Flags<BitType, MaskType>(m_mask ^ rhs.m_mask);
     }
 
-    VULKAN_HPP_CONSTEXPR Flags<BitType> operator~() const VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR Flags<BitType, MaskType> operator~() const VULKAN_HPP_NOEXCEPT
     {
-      return Flags<BitType>(m_mask ^ FlagTraits<BitType>::allFlags);
+      return Flags<BitType, MaskType>(m_mask ^ FlagTraits<BitType>::allFlags);
     }
 
     // assignment operators
-    Flags<BitType> & operator=(Flags<BitType> const& rhs) VULKAN_HPP_NOEXCEPT
+    Flags<BitType, MaskType> & operator=(Flags<BitType, MaskType> const& rhs) VULKAN_HPP_NOEXCEPT
     {
       m_mask = rhs.m_mask;
       return *this;
     }
 
-    Flags<BitType> & operator|=(Flags<BitType> const& rhs) VULKAN_HPP_NOEXCEPT
+    Flags<BitType, MaskType> & operator|=(Flags<BitType, MaskType> const& rhs) VULKAN_HPP_NOEXCEPT
     {
       m_mask |= rhs.m_mask;
       return *this;
     }
 
-    Flags<BitType> & operator&=(Flags<BitType> const& rhs) VULKAN_HPP_NOEXCEPT
+    Flags<BitType, MaskType> & operator&=(Flags<BitType, MaskType> const& rhs) VULKAN_HPP_NOEXCEPT
     {
       m_mask &= rhs.m_mask;
       return *this;
     }
 
-    Flags<BitType> & operator^=(Flags<BitType> const& rhs) VULKAN_HPP_NOEXCEPT
+    Flags<BitType, MaskType> & operator^=(Flags<BitType, MaskType> const& rhs) VULKAN_HPP_NOEXCEPT
     {
       m_mask ^= rhs.m_mask;
       return *this;
@@ -385,57 +385,57 @@ namespace VULKAN_HPP_NAMESPACE
   };
 
   // relational operators
-  template <typename BitType>
-  VULKAN_HPP_CONSTEXPR bool operator<(BitType bit, Flags<BitType> const& flags) VULKAN_HPP_NOEXCEPT
+  template <typename BitType, typename MaskType = VkFlags>
+  VULKAN_HPP_CONSTEXPR bool operator<(BitType bit, Flags<BitType, MaskType> const& flags) VULKAN_HPP_NOEXCEPT
   {
     return flags > bit;
   }
 
-  template <typename BitType>
-  VULKAN_HPP_CONSTEXPR bool operator<=(BitType bit, Flags<BitType> const& flags) VULKAN_HPP_NOEXCEPT
+  template <typename BitType, typename MaskType = VkFlags>
+  VULKAN_HPP_CONSTEXPR bool operator<=(BitType bit, Flags<BitType, MaskType> const& flags) VULKAN_HPP_NOEXCEPT
   {
     return flags >= bit;
   }
 
-  template <typename BitType>
-  VULKAN_HPP_CONSTEXPR bool operator>(BitType bit, Flags<BitType> const& flags) VULKAN_HPP_NOEXCEPT
+  template <typename BitType, typename MaskType = VkFlags>
+  VULKAN_HPP_CONSTEXPR bool operator>(BitType bit, Flags<BitType, MaskType> const& flags) VULKAN_HPP_NOEXCEPT
   {
     return flags < bit;
   }
 
-  template <typename BitType>
-  VULKAN_HPP_CONSTEXPR bool operator>=(BitType bit, Flags<BitType> const& flags) VULKAN_HPP_NOEXCEPT
+  template <typename BitType, typename MaskType = VkFlags>
+  VULKAN_HPP_CONSTEXPR bool operator>=(BitType bit, Flags<BitType, MaskType> const& flags) VULKAN_HPP_NOEXCEPT
   {
     return flags <= bit;
   }
 
-  template <typename BitType>
-  VULKAN_HPP_CONSTEXPR bool operator==(BitType bit, Flags<BitType> const& flags) VULKAN_HPP_NOEXCEPT
+  template <typename BitType, typename MaskType = VkFlags>
+  VULKAN_HPP_CONSTEXPR bool operator==(BitType bit, Flags<BitType, MaskType> const& flags) VULKAN_HPP_NOEXCEPT
   {
     return flags == bit;
   }
 
-  template <typename BitType>
-  VULKAN_HPP_CONSTEXPR bool operator!=(BitType bit, Flags<BitType> const& flags) VULKAN_HPP_NOEXCEPT
+  template <typename BitType, typename MaskType = VkFlags>
+  VULKAN_HPP_CONSTEXPR bool operator!=(BitType bit, Flags<BitType, MaskType> const& flags) VULKAN_HPP_NOEXCEPT
   {
     return flags != bit;
   }
 
   // bitwise operators
-  template <typename BitType>
-  VULKAN_HPP_CONSTEXPR Flags<BitType> operator&(BitType bit, Flags<BitType> const& flags) VULKAN_HPP_NOEXCEPT
+  template <typename BitType, typename MaskType = VkFlags>
+  VULKAN_HPP_CONSTEXPR Flags<BitType, MaskType> operator&(BitType bit, Flags<BitType, MaskType> const& flags) VULKAN_HPP_NOEXCEPT
   {
     return flags & bit;
   }
 
-  template <typename BitType>
-  VULKAN_HPP_CONSTEXPR Flags<BitType> operator|(BitType bit, Flags<BitType> const& flags) VULKAN_HPP_NOEXCEPT
+  template <typename BitType, typename MaskType = VkFlags>
+  VULKAN_HPP_CONSTEXPR Flags<BitType, MaskType> operator|(BitType bit, Flags<BitType, MaskType> const& flags) VULKAN_HPP_NOEXCEPT
   {
     return flags | bit;
   }
 
-  template <typename BitType>
-  VULKAN_HPP_CONSTEXPR Flags<BitType> operator^(BitType bit, Flags<BitType> const& flags) VULKAN_HPP_NOEXCEPT
+  template <typename BitType, typename MaskType = VkFlags>
+  VULKAN_HPP_CONSTEXPR Flags<BitType, MaskType> operator^(BitType bit, Flags<BitType, MaskType> const& flags) VULKAN_HPP_NOEXCEPT
   {
     return flags ^ bit;
   }
@@ -2814,7 +2814,7 @@ namespace VULKAN_HPP_NAMESPACE
         , m_dispatch( nullptr )
       {}
 
-      ObjectDestroy( OwnerType owner, Optional<const AllocationCallbacks> allocationCallbacks = nullptr, Dispatch const &dispatch = Dispatch() ) VULKAN_HPP_NOEXCEPT
+      ObjectDestroy( OwnerType owner, Optional<const AllocationCallbacks> allocationCallbacks = nullptr, Dispatch const &dispatch = VULKAN_HPP_DEFAULT_DISPATCHER ) VULKAN_HPP_NOEXCEPT
         : m_owner( owner )
         , m_allocationCallbacks( allocationCallbacks )
         , m_dispatch( &dispatch )
@@ -14732,7 +14732,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result begin( const VULKAN_HPP_NAMESPACE::CommandBufferBeginInfo* pBeginInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type begin( const CommandBufferBeginInfo & beginInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type begin( const CommandBufferBeginInfo & beginInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
@@ -15126,21 +15126,21 @@ namespace VULKAN_HPP_NAMESPACE
     Result setPerformanceMarkerINTEL( const VULKAN_HPP_NAMESPACE::PerformanceMarkerInfoINTEL* pMarkerInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type setPerformanceMarkerINTEL( const PerformanceMarkerInfoINTEL & markerInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type setPerformanceMarkerINTEL( const PerformanceMarkerInfoINTEL & markerInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     Result setPerformanceOverrideINTEL( const VULKAN_HPP_NAMESPACE::PerformanceOverrideInfoINTEL* pOverrideInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type setPerformanceOverrideINTEL( const PerformanceOverrideInfoINTEL & overrideInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type setPerformanceOverrideINTEL( const PerformanceOverrideInfoINTEL & overrideInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     Result setPerformanceStreamMarkerINTEL( const VULKAN_HPP_NAMESPACE::PerformanceStreamMarkerInfoINTEL* pMarkerInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type setPerformanceStreamMarkerINTEL( const PerformanceStreamMarkerInfoINTEL & markerInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type setPerformanceStreamMarkerINTEL( const PerformanceStreamMarkerInfoINTEL & markerInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
@@ -15222,7 +15222,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result end(Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #else
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type end(Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type end(Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
@@ -15230,7 +15230,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result reset( VULKAN_HPP_NAMESPACE::CommandBufferResetFlags flags, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #else
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type reset( VULKAN_HPP_NAMESPACE::CommandBufferResetFlags flags, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type reset( VULKAN_HPP_NAMESPACE::CommandBufferResetFlags flags, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     VULKAN_HPP_TYPESAFE_EXPLICIT operator VkCommandBuffer() const VULKAN_HPP_NOEXCEPT
@@ -16379,7 +16379,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result bindSparse( uint32_t bindInfoCount, const VULKAN_HPP_NAMESPACE::BindSparseInfo* pBindInfo, VULKAN_HPP_NAMESPACE::Fence fence, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type bindSparse( ArrayProxy<const VULKAN_HPP_NAMESPACE::BindSparseInfo> bindInfo, VULKAN_HPP_NAMESPACE::Fence fence, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type bindSparse( ArrayProxy<const VULKAN_HPP_NAMESPACE::BindSparseInfo> bindInfo, VULKAN_HPP_NAMESPACE::Fence fence, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
@@ -16404,14 +16404,14 @@ namespace VULKAN_HPP_NAMESPACE
     Result setPerformanceConfigurationINTEL( VULKAN_HPP_NAMESPACE::PerformanceConfigurationINTEL configuration, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #else
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type setPerformanceConfigurationINTEL( VULKAN_HPP_NAMESPACE::PerformanceConfigurationINTEL configuration, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type setPerformanceConfigurationINTEL( VULKAN_HPP_NAMESPACE::PerformanceConfigurationINTEL configuration, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     Result submit( uint32_t submitCount, const VULKAN_HPP_NAMESPACE::SubmitInfo* pSubmits, VULKAN_HPP_NAMESPACE::Fence fence, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type submit( ArrayProxy<const VULKAN_HPP_NAMESPACE::SubmitInfo> submits, VULKAN_HPP_NAMESPACE::Fence fence, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type submit( ArrayProxy<const VULKAN_HPP_NAMESPACE::SubmitInfo> submits, VULKAN_HPP_NAMESPACE::Fence fence, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
@@ -16419,7 +16419,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result waitIdle(Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #else
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type waitIdle(Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type waitIdle(Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     VULKAN_HPP_TYPESAFE_EXPLICIT operator VkQueue() const VULKAN_HPP_NOEXCEPT
@@ -16565,7 +16565,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result acquireFullScreenExclusiveModeEXT( VULKAN_HPP_NAMESPACE::SwapchainKHR swapchain, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #else
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type acquireFullScreenExclusiveModeEXT( VULKAN_HPP_NAMESPACE::SwapchainKHR swapchain, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type acquireFullScreenExclusiveModeEXT( VULKAN_HPP_NAMESPACE::SwapchainKHR swapchain, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
@@ -16587,14 +16587,14 @@ namespace VULKAN_HPP_NAMESPACE
     Result acquirePerformanceConfigurationINTEL( const VULKAN_HPP_NAMESPACE::PerformanceConfigurationAcquireInfoINTEL* pAcquireInfo, VULKAN_HPP_NAMESPACE::PerformanceConfigurationINTEL* pConfiguration, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::PerformanceConfigurationINTEL>::type acquirePerformanceConfigurationINTEL( const PerformanceConfigurationAcquireInfoINTEL & acquireInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::PerformanceConfigurationINTEL>::type acquirePerformanceConfigurationINTEL( const PerformanceConfigurationAcquireInfoINTEL & acquireInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     Result acquireProfilingLockKHR( const VULKAN_HPP_NAMESPACE::AcquireProfilingLockInfoKHR* pInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type acquireProfilingLockKHR( const AcquireProfilingLockInfoKHR & info, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type acquireProfilingLockKHR( const AcquireProfilingLockInfoKHR & info, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
@@ -16631,7 +16631,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result allocateMemory( const VULKAN_HPP_NAMESPACE::MemoryAllocateInfo* pAllocateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::DeviceMemory* pMemory, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::DeviceMemory>::type allocateMemory( const MemoryAllocateInfo & allocateInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::DeviceMemory>::type allocateMemory( const MemoryAllocateInfo & allocateInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<DeviceMemory,Dispatch>>::type allocateMemoryUnique( const MemoryAllocateInfo & allocateInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -16642,7 +16642,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result bindAccelerationStructureMemoryNV( uint32_t bindInfoCount, const VULKAN_HPP_NAMESPACE::BindAccelerationStructureMemoryInfoNV* pBindInfos, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type bindAccelerationStructureMemoryNV( ArrayProxy<const VULKAN_HPP_NAMESPACE::BindAccelerationStructureMemoryInfoNV> bindInfos, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type bindAccelerationStructureMemoryNV( ArrayProxy<const VULKAN_HPP_NAMESPACE::BindAccelerationStructureMemoryInfoNV> bindInfos, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
@@ -16650,21 +16650,21 @@ namespace VULKAN_HPP_NAMESPACE
     Result bindBufferMemory( VULKAN_HPP_NAMESPACE::Buffer buffer, VULKAN_HPP_NAMESPACE::DeviceMemory memory, VULKAN_HPP_NAMESPACE::DeviceSize memoryOffset, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #else
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type bindBufferMemory( VULKAN_HPP_NAMESPACE::Buffer buffer, VULKAN_HPP_NAMESPACE::DeviceMemory memory, VULKAN_HPP_NAMESPACE::DeviceSize memoryOffset, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type bindBufferMemory( VULKAN_HPP_NAMESPACE::Buffer buffer, VULKAN_HPP_NAMESPACE::DeviceMemory memory, VULKAN_HPP_NAMESPACE::DeviceSize memoryOffset, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     Result bindBufferMemory2( uint32_t bindInfoCount, const VULKAN_HPP_NAMESPACE::BindBufferMemoryInfo* pBindInfos, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type bindBufferMemory2( ArrayProxy<const VULKAN_HPP_NAMESPACE::BindBufferMemoryInfo> bindInfos, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type bindBufferMemory2( ArrayProxy<const VULKAN_HPP_NAMESPACE::BindBufferMemoryInfo> bindInfos, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     Result bindBufferMemory2KHR( uint32_t bindInfoCount, const VULKAN_HPP_NAMESPACE::BindBufferMemoryInfo* pBindInfos, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type bindBufferMemory2KHR( ArrayProxy<const VULKAN_HPP_NAMESPACE::BindBufferMemoryInfo> bindInfos, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type bindBufferMemory2KHR( ArrayProxy<const VULKAN_HPP_NAMESPACE::BindBufferMemoryInfo> bindInfos, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
@@ -16672,21 +16672,21 @@ namespace VULKAN_HPP_NAMESPACE
     Result bindImageMemory( VULKAN_HPP_NAMESPACE::Image image, VULKAN_HPP_NAMESPACE::DeviceMemory memory, VULKAN_HPP_NAMESPACE::DeviceSize memoryOffset, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #else
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type bindImageMemory( VULKAN_HPP_NAMESPACE::Image image, VULKAN_HPP_NAMESPACE::DeviceMemory memory, VULKAN_HPP_NAMESPACE::DeviceSize memoryOffset, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type bindImageMemory( VULKAN_HPP_NAMESPACE::Image image, VULKAN_HPP_NAMESPACE::DeviceMemory memory, VULKAN_HPP_NAMESPACE::DeviceSize memoryOffset, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     Result bindImageMemory2( uint32_t bindInfoCount, const VULKAN_HPP_NAMESPACE::BindImageMemoryInfo* pBindInfos, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type bindImageMemory2( ArrayProxy<const VULKAN_HPP_NAMESPACE::BindImageMemoryInfo> bindInfos, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type bindImageMemory2( ArrayProxy<const VULKAN_HPP_NAMESPACE::BindImageMemoryInfo> bindInfos, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     Result bindImageMemory2KHR( uint32_t bindInfoCount, const VULKAN_HPP_NAMESPACE::BindImageMemoryInfo* pBindInfos, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type bindImageMemory2KHR( ArrayProxy<const VULKAN_HPP_NAMESPACE::BindImageMemoryInfo> bindInfos, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type bindImageMemory2KHR( ArrayProxy<const VULKAN_HPP_NAMESPACE::BindImageMemoryInfo> bindInfos, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
@@ -16694,14 +16694,14 @@ namespace VULKAN_HPP_NAMESPACE
     Result compileDeferredNV( VULKAN_HPP_NAMESPACE::Pipeline pipeline, uint32_t shader, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #else
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type compileDeferredNV( VULKAN_HPP_NAMESPACE::Pipeline pipeline, uint32_t shader, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type compileDeferredNV( VULKAN_HPP_NAMESPACE::Pipeline pipeline, uint32_t shader, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     Result createAccelerationStructureNV( const VULKAN_HPP_NAMESPACE::AccelerationStructureCreateInfoNV* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::AccelerationStructureNV* pAccelerationStructure, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::AccelerationStructureNV>::type createAccelerationStructureNV( const AccelerationStructureCreateInfoNV & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::AccelerationStructureNV>::type createAccelerationStructureNV( const AccelerationStructureCreateInfoNV & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<AccelerationStructureNV,Dispatch>>::type createAccelerationStructureNVUnique( const AccelerationStructureCreateInfoNV & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -16712,7 +16712,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createBuffer( const VULKAN_HPP_NAMESPACE::BufferCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::Buffer* pBuffer, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::Buffer>::type createBuffer( const BufferCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::Buffer>::type createBuffer( const BufferCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<Buffer,Dispatch>>::type createBufferUnique( const BufferCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -16723,7 +16723,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createBufferView( const VULKAN_HPP_NAMESPACE::BufferViewCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::BufferView* pView, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::BufferView>::type createBufferView( const BufferViewCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::BufferView>::type createBufferView( const BufferViewCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<BufferView,Dispatch>>::type createBufferViewUnique( const BufferViewCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -16734,7 +16734,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createCommandPool( const VULKAN_HPP_NAMESPACE::CommandPoolCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::CommandPool* pCommandPool, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::CommandPool>::type createCommandPool( const CommandPoolCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::CommandPool>::type createCommandPool( const CommandPoolCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<CommandPool,Dispatch>>::type createCommandPoolUnique( const CommandPoolCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -16749,7 +16749,7 @@ namespace VULKAN_HPP_NAMESPACE
     template<typename Allocator = std::allocator<Pipeline>, typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<std::vector<Pipeline,Allocator>>::type createComputePipelines( VULKAN_HPP_NAMESPACE::PipelineCache pipelineCache, ArrayProxy<const VULKAN_HPP_NAMESPACE::ComputePipelineCreateInfo> createInfos, Optional<const AllocationCallbacks> allocator, Allocator const& vectorAllocator, Dispatch const &d ) const;
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<Pipeline>::type createComputePipeline( VULKAN_HPP_NAMESPACE::PipelineCache pipelineCache, const ComputePipelineCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<Pipeline>::type createComputePipeline( VULKAN_HPP_NAMESPACE::PipelineCache pipelineCache, const ComputePipelineCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Allocator = std::allocator<UniquePipeline>, typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<std::vector<UniqueHandle<Pipeline,Dispatch>,Allocator>>::type createComputePipelinesUnique( VULKAN_HPP_NAMESPACE::PipelineCache pipelineCache, ArrayProxy<const VULKAN_HPP_NAMESPACE::ComputePipelineCreateInfo> createInfos, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -16764,7 +16764,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createDescriptorPool( const VULKAN_HPP_NAMESPACE::DescriptorPoolCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::DescriptorPool* pDescriptorPool, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::DescriptorPool>::type createDescriptorPool( const DescriptorPoolCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::DescriptorPool>::type createDescriptorPool( const DescriptorPoolCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<DescriptorPool,Dispatch>>::type createDescriptorPoolUnique( const DescriptorPoolCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -16775,7 +16775,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createDescriptorSetLayout( const VULKAN_HPP_NAMESPACE::DescriptorSetLayoutCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::DescriptorSetLayout* pSetLayout, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::DescriptorSetLayout>::type createDescriptorSetLayout( const DescriptorSetLayoutCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::DescriptorSetLayout>::type createDescriptorSetLayout( const DescriptorSetLayoutCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<DescriptorSetLayout,Dispatch>>::type createDescriptorSetLayoutUnique( const DescriptorSetLayoutCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -16786,7 +16786,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createDescriptorUpdateTemplate( const VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplateCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplate* pDescriptorUpdateTemplate, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplate>::type createDescriptorUpdateTemplate( const DescriptorUpdateTemplateCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplate>::type createDescriptorUpdateTemplate( const DescriptorUpdateTemplateCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<DescriptorUpdateTemplate,Dispatch>>::type createDescriptorUpdateTemplateUnique( const DescriptorUpdateTemplateCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -16797,7 +16797,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createDescriptorUpdateTemplateKHR( const VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplateCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplate* pDescriptorUpdateTemplate, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplate>::type createDescriptorUpdateTemplateKHR( const DescriptorUpdateTemplateCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplate>::type createDescriptorUpdateTemplateKHR( const DescriptorUpdateTemplateCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<DescriptorUpdateTemplate,Dispatch>>::type createDescriptorUpdateTemplateKHRUnique( const DescriptorUpdateTemplateCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -16808,7 +16808,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createEvent( const VULKAN_HPP_NAMESPACE::EventCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::Event* pEvent, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::Event>::type createEvent( const EventCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::Event>::type createEvent( const EventCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<Event,Dispatch>>::type createEventUnique( const EventCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -16819,7 +16819,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createFence( const VULKAN_HPP_NAMESPACE::FenceCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::Fence* pFence, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::Fence>::type createFence( const FenceCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::Fence>::type createFence( const FenceCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<Fence,Dispatch>>::type createFenceUnique( const FenceCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -16830,7 +16830,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createFramebuffer( const VULKAN_HPP_NAMESPACE::FramebufferCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::Framebuffer* pFramebuffer, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::Framebuffer>::type createFramebuffer( const FramebufferCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::Framebuffer>::type createFramebuffer( const FramebufferCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<Framebuffer,Dispatch>>::type createFramebufferUnique( const FramebufferCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -16845,7 +16845,7 @@ namespace VULKAN_HPP_NAMESPACE
     template<typename Allocator = std::allocator<Pipeline>, typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<std::vector<Pipeline,Allocator>>::type createGraphicsPipelines( VULKAN_HPP_NAMESPACE::PipelineCache pipelineCache, ArrayProxy<const VULKAN_HPP_NAMESPACE::GraphicsPipelineCreateInfo> createInfos, Optional<const AllocationCallbacks> allocator, Allocator const& vectorAllocator, Dispatch const &d ) const;
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<Pipeline>::type createGraphicsPipeline( VULKAN_HPP_NAMESPACE::PipelineCache pipelineCache, const GraphicsPipelineCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<Pipeline>::type createGraphicsPipeline( VULKAN_HPP_NAMESPACE::PipelineCache pipelineCache, const GraphicsPipelineCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Allocator = std::allocator<UniquePipeline>, typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<std::vector<UniqueHandle<Pipeline,Dispatch>,Allocator>>::type createGraphicsPipelinesUnique( VULKAN_HPP_NAMESPACE::PipelineCache pipelineCache, ArrayProxy<const VULKAN_HPP_NAMESPACE::GraphicsPipelineCreateInfo> createInfos, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -16860,7 +16860,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createImage( const VULKAN_HPP_NAMESPACE::ImageCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::Image* pImage, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::Image>::type createImage( const ImageCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::Image>::type createImage( const ImageCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<Image,Dispatch>>::type createImageUnique( const ImageCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -16871,7 +16871,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createImageView( const VULKAN_HPP_NAMESPACE::ImageViewCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::ImageView* pView, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::ImageView>::type createImageView( const ImageViewCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::ImageView>::type createImageView( const ImageViewCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<ImageView,Dispatch>>::type createImageViewUnique( const ImageViewCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -16882,7 +16882,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createIndirectCommandsLayoutNVX( const VULKAN_HPP_NAMESPACE::IndirectCommandsLayoutCreateInfoNVX* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::IndirectCommandsLayoutNVX* pIndirectCommandsLayout, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::IndirectCommandsLayoutNVX>::type createIndirectCommandsLayoutNVX( const IndirectCommandsLayoutCreateInfoNVX & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::IndirectCommandsLayoutNVX>::type createIndirectCommandsLayoutNVX( const IndirectCommandsLayoutCreateInfoNVX & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<IndirectCommandsLayoutNVX,Dispatch>>::type createIndirectCommandsLayoutNVXUnique( const IndirectCommandsLayoutCreateInfoNVX & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -16893,7 +16893,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createObjectTableNVX( const VULKAN_HPP_NAMESPACE::ObjectTableCreateInfoNVX* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::ObjectTableNVX* pObjectTable, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::ObjectTableNVX>::type createObjectTableNVX( const ObjectTableCreateInfoNVX & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::ObjectTableNVX>::type createObjectTableNVX( const ObjectTableCreateInfoNVX & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<ObjectTableNVX,Dispatch>>::type createObjectTableNVXUnique( const ObjectTableCreateInfoNVX & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -16904,7 +16904,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createPipelineCache( const VULKAN_HPP_NAMESPACE::PipelineCacheCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::PipelineCache* pPipelineCache, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::PipelineCache>::type createPipelineCache( const PipelineCacheCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::PipelineCache>::type createPipelineCache( const PipelineCacheCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<PipelineCache,Dispatch>>::type createPipelineCacheUnique( const PipelineCacheCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -16915,7 +16915,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createPipelineLayout( const VULKAN_HPP_NAMESPACE::PipelineLayoutCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::PipelineLayout* pPipelineLayout, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::PipelineLayout>::type createPipelineLayout( const PipelineLayoutCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::PipelineLayout>::type createPipelineLayout( const PipelineLayoutCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<PipelineLayout,Dispatch>>::type createPipelineLayoutUnique( const PipelineLayoutCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -16926,7 +16926,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createQueryPool( const VULKAN_HPP_NAMESPACE::QueryPoolCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::QueryPool* pQueryPool, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::QueryPool>::type createQueryPool( const QueryPoolCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::QueryPool>::type createQueryPool( const QueryPoolCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<QueryPool,Dispatch>>::type createQueryPoolUnique( const QueryPoolCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -16941,7 +16941,7 @@ namespace VULKAN_HPP_NAMESPACE
     template<typename Allocator = std::allocator<Pipeline>, typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<std::vector<Pipeline,Allocator>>::type createRayTracingPipelinesNV( VULKAN_HPP_NAMESPACE::PipelineCache pipelineCache, ArrayProxy<const VULKAN_HPP_NAMESPACE::RayTracingPipelineCreateInfoNV> createInfos, Optional<const AllocationCallbacks> allocator, Allocator const& vectorAllocator, Dispatch const &d ) const;
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<Pipeline>::type createRayTracingPipelineNV( VULKAN_HPP_NAMESPACE::PipelineCache pipelineCache, const RayTracingPipelineCreateInfoNV & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<Pipeline>::type createRayTracingPipelineNV( VULKAN_HPP_NAMESPACE::PipelineCache pipelineCache, const RayTracingPipelineCreateInfoNV & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Allocator = std::allocator<UniquePipeline>, typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<std::vector<UniqueHandle<Pipeline,Dispatch>,Allocator>>::type createRayTracingPipelinesNVUnique( VULKAN_HPP_NAMESPACE::PipelineCache pipelineCache, ArrayProxy<const VULKAN_HPP_NAMESPACE::RayTracingPipelineCreateInfoNV> createInfos, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -16956,7 +16956,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createRenderPass( const VULKAN_HPP_NAMESPACE::RenderPassCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::RenderPass* pRenderPass, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::RenderPass>::type createRenderPass( const RenderPassCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::RenderPass>::type createRenderPass( const RenderPassCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<RenderPass,Dispatch>>::type createRenderPassUnique( const RenderPassCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -16967,7 +16967,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createRenderPass2( const VULKAN_HPP_NAMESPACE::RenderPassCreateInfo2* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::RenderPass* pRenderPass, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::RenderPass>::type createRenderPass2( const RenderPassCreateInfo2 & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::RenderPass>::type createRenderPass2( const RenderPassCreateInfo2 & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<RenderPass,Dispatch>>::type createRenderPass2Unique( const RenderPassCreateInfo2 & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -16978,7 +16978,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createRenderPass2KHR( const VULKAN_HPP_NAMESPACE::RenderPassCreateInfo2* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::RenderPass* pRenderPass, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::RenderPass>::type createRenderPass2KHR( const RenderPassCreateInfo2 & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::RenderPass>::type createRenderPass2KHR( const RenderPassCreateInfo2 & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<RenderPass,Dispatch>>::type createRenderPass2KHRUnique( const RenderPassCreateInfo2 & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -16989,7 +16989,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createSampler( const VULKAN_HPP_NAMESPACE::SamplerCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::Sampler* pSampler, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::Sampler>::type createSampler( const SamplerCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::Sampler>::type createSampler( const SamplerCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<Sampler,Dispatch>>::type createSamplerUnique( const SamplerCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -17000,7 +17000,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createSamplerYcbcrConversion( const VULKAN_HPP_NAMESPACE::SamplerYcbcrConversionCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::SamplerYcbcrConversion* pYcbcrConversion, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::SamplerYcbcrConversion>::type createSamplerYcbcrConversion( const SamplerYcbcrConversionCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::SamplerYcbcrConversion>::type createSamplerYcbcrConversion( const SamplerYcbcrConversionCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<SamplerYcbcrConversion,Dispatch>>::type createSamplerYcbcrConversionUnique( const SamplerYcbcrConversionCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -17011,7 +17011,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createSamplerYcbcrConversionKHR( const VULKAN_HPP_NAMESPACE::SamplerYcbcrConversionCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::SamplerYcbcrConversion* pYcbcrConversion, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::SamplerYcbcrConversion>::type createSamplerYcbcrConversionKHR( const SamplerYcbcrConversionCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::SamplerYcbcrConversion>::type createSamplerYcbcrConversionKHR( const SamplerYcbcrConversionCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<SamplerYcbcrConversion,Dispatch>>::type createSamplerYcbcrConversionKHRUnique( const SamplerYcbcrConversionCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -17022,7 +17022,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createSemaphore( const VULKAN_HPP_NAMESPACE::SemaphoreCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::Semaphore* pSemaphore, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::Semaphore>::type createSemaphore( const SemaphoreCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::Semaphore>::type createSemaphore( const SemaphoreCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<Semaphore,Dispatch>>::type createSemaphoreUnique( const SemaphoreCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -17033,7 +17033,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createShaderModule( const VULKAN_HPP_NAMESPACE::ShaderModuleCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::ShaderModule* pShaderModule, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::ShaderModule>::type createShaderModule( const ShaderModuleCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::ShaderModule>::type createShaderModule( const ShaderModuleCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<ShaderModule,Dispatch>>::type createShaderModuleUnique( const ShaderModuleCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -17048,7 +17048,7 @@ namespace VULKAN_HPP_NAMESPACE
     template<typename Allocator = std::allocator<SwapchainKHR>, typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<std::vector<SwapchainKHR,Allocator>>::type createSharedSwapchainsKHR( ArrayProxy<const VULKAN_HPP_NAMESPACE::SwapchainCreateInfoKHR> createInfos, Optional<const AllocationCallbacks> allocator, Allocator const& vectorAllocator, Dispatch const &d ) const;
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<SwapchainKHR>::type createSharedSwapchainKHR( const SwapchainCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<SwapchainKHR>::type createSharedSwapchainKHR( const SwapchainCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Allocator = std::allocator<UniqueSwapchainKHR>, typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<std::vector<UniqueHandle<SwapchainKHR,Dispatch>,Allocator>>::type createSharedSwapchainsKHRUnique( ArrayProxy<const VULKAN_HPP_NAMESPACE::SwapchainCreateInfoKHR> createInfos, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -17063,7 +17063,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createSwapchainKHR( const VULKAN_HPP_NAMESPACE::SwapchainCreateInfoKHR* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::SwapchainKHR* pSwapchain, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::SwapchainKHR>::type createSwapchainKHR( const SwapchainCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::SwapchainKHR>::type createSwapchainKHR( const SwapchainCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<SwapchainKHR,Dispatch>>::type createSwapchainKHRUnique( const SwapchainCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -17074,7 +17074,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createValidationCacheEXT( const VULKAN_HPP_NAMESPACE::ValidationCacheCreateInfoEXT* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::ValidationCacheEXT* pValidationCache, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::ValidationCacheEXT>::type createValidationCacheEXT( const ValidationCacheCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::ValidationCacheEXT>::type createValidationCacheEXT( const ValidationCacheCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<ValidationCacheEXT,Dispatch>>::type createValidationCacheEXTUnique( const ValidationCacheCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -17085,14 +17085,14 @@ namespace VULKAN_HPP_NAMESPACE
     Result debugMarkerSetObjectNameEXT( const VULKAN_HPP_NAMESPACE::DebugMarkerObjectNameInfoEXT* pNameInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type debugMarkerSetObjectNameEXT( const DebugMarkerObjectNameInfoEXT & nameInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type debugMarkerSetObjectNameEXT( const DebugMarkerObjectNameInfoEXT & nameInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     Result debugMarkerSetObjectTagEXT( const VULKAN_HPP_NAMESPACE::DebugMarkerObjectTagInfoEXT* pTagInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type debugMarkerSetObjectTagEXT( const DebugMarkerObjectTagInfoEXT & tagInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type debugMarkerSetObjectTagEXT( const DebugMarkerObjectTagInfoEXT & tagInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
@@ -17471,21 +17471,21 @@ namespace VULKAN_HPP_NAMESPACE
     Result waitIdle(Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #else
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type waitIdle(Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type waitIdle(Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     Result displayPowerControlEXT( VULKAN_HPP_NAMESPACE::DisplayKHR display, const VULKAN_HPP_NAMESPACE::DisplayPowerInfoEXT* pDisplayPowerInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type displayPowerControlEXT( VULKAN_HPP_NAMESPACE::DisplayKHR display, const DisplayPowerInfoEXT & displayPowerInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type displayPowerControlEXT( VULKAN_HPP_NAMESPACE::DisplayKHR display, const DisplayPowerInfoEXT & displayPowerInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     Result flushMappedMemoryRanges( uint32_t memoryRangeCount, const VULKAN_HPP_NAMESPACE::MappedMemoryRange* pMemoryRanges, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type flushMappedMemoryRanges( ArrayProxy<const VULKAN_HPP_NAMESPACE::MappedMemoryRange> memoryRanges, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type flushMappedMemoryRanges( ArrayProxy<const VULKAN_HPP_NAMESPACE::MappedMemoryRange> memoryRanges, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
@@ -17506,14 +17506,14 @@ namespace VULKAN_HPP_NAMESPACE
     Result freeDescriptorSets( VULKAN_HPP_NAMESPACE::DescriptorPool descriptorPool, uint32_t descriptorSetCount, const VULKAN_HPP_NAMESPACE::DescriptorSet* pDescriptorSets, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type freeDescriptorSets( VULKAN_HPP_NAMESPACE::DescriptorPool descriptorPool, ArrayProxy<const VULKAN_HPP_NAMESPACE::DescriptorSet> descriptorSets, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type freeDescriptorSets( VULKAN_HPP_NAMESPACE::DescriptorPool descriptorPool, ArrayProxy<const VULKAN_HPP_NAMESPACE::DescriptorSet> descriptorSets, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     Result free( VULKAN_HPP_NAMESPACE::DescriptorPool descriptorPool, uint32_t descriptorSetCount, const VULKAN_HPP_NAMESPACE::DescriptorSet* pDescriptorSets, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type free( VULKAN_HPP_NAMESPACE::DescriptorPool descriptorPool, ArrayProxy<const VULKAN_HPP_NAMESPACE::DescriptorSet> descriptorSets, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type free( VULKAN_HPP_NAMESPACE::DescriptorPool descriptorPool, ArrayProxy<const VULKAN_HPP_NAMESPACE::DescriptorSet> descriptorSets, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
@@ -17534,7 +17534,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result getAccelerationStructureHandleNV( VULKAN_HPP_NAMESPACE::AccelerationStructureNV accelerationStructure, size_t dataSize, void* pData, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename T, typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type getAccelerationStructureHandleNV( VULKAN_HPP_NAMESPACE::AccelerationStructureNV accelerationStructure, ArrayProxy<T> data, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type getAccelerationStructureHandleNV( VULKAN_HPP_NAMESPACE::AccelerationStructureNV accelerationStructure, ArrayProxy<T> data, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
@@ -17551,7 +17551,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result getAndroidHardwareBufferPropertiesANDROID( const struct AHardwareBuffer* buffer, VULKAN_HPP_NAMESPACE::AndroidHardwareBufferPropertiesANDROID* pProperties, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::AndroidHardwareBufferPropertiesANDROID>::type getAndroidHardwareBufferPropertiesANDROID( const struct AHardwareBuffer & buffer, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::AndroidHardwareBufferPropertiesANDROID>::type getAndroidHardwareBufferPropertiesANDROID( const struct AHardwareBuffer & buffer, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
     template<typename X, typename Y, typename ...Z, typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<StructureChain<X, Y, Z...>>::type getAndroidHardwareBufferPropertiesANDROID( const struct AHardwareBuffer & buffer, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -17621,7 +17621,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result getCalibratedTimestampsEXT( uint32_t timestampCount, const VULKAN_HPP_NAMESPACE::CalibratedTimestampInfoEXT* pTimestampInfos, uint64_t* pTimestamps, uint64_t* pMaxDeviation, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<uint64_t>::type getCalibratedTimestampsEXT( ArrayProxy<const VULKAN_HPP_NAMESPACE::CalibratedTimestampInfoEXT> timestampInfos, ArrayProxy<uint64_t> timestamps, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<uint64_t>::type getCalibratedTimestampsEXT( ArrayProxy<const VULKAN_HPP_NAMESPACE::CalibratedTimestampInfoEXT> timestampInfos, ArrayProxy<uint64_t> timestamps, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
@@ -17660,7 +17660,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result getGroupPresentCapabilitiesKHR( VULKAN_HPP_NAMESPACE::DeviceGroupPresentCapabilitiesKHR* pDeviceGroupPresentCapabilities, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::DeviceGroupPresentCapabilitiesKHR>::type getGroupPresentCapabilitiesKHR(Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::DeviceGroupPresentCapabilitiesKHR>::type getGroupPresentCapabilitiesKHR(Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
 #ifdef VK_USE_PLATFORM_WIN32_KHR
@@ -17668,7 +17668,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result getGroupSurfacePresentModes2EXT( const VULKAN_HPP_NAMESPACE::PhysicalDeviceSurfaceInfo2KHR* pSurfaceInfo, VULKAN_HPP_NAMESPACE::DeviceGroupPresentModeFlagsKHR* pModes, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::DeviceGroupPresentModeFlagsKHR>::type getGroupSurfacePresentModes2EXT( const PhysicalDeviceSurfaceInfo2KHR & surfaceInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::DeviceGroupPresentModeFlagsKHR>::type getGroupSurfacePresentModes2EXT( const PhysicalDeviceSurfaceInfo2KHR & surfaceInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
@@ -17676,7 +17676,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result getGroupSurfacePresentModesKHR( VULKAN_HPP_NAMESPACE::SurfaceKHR surface, VULKAN_HPP_NAMESPACE::DeviceGroupPresentModeFlagsKHR* pModes, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::DeviceGroupPresentModeFlagsKHR>::type getGroupSurfacePresentModesKHR( VULKAN_HPP_NAMESPACE::SurfaceKHR surface, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::DeviceGroupPresentModeFlagsKHR>::type getGroupSurfacePresentModesKHR( VULKAN_HPP_NAMESPACE::SurfaceKHR surface, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
@@ -17733,7 +17733,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result getFenceFdKHR( const VULKAN_HPP_NAMESPACE::FenceGetFdInfoKHR* pGetFdInfo, int* pFd, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<int>::type getFenceFdKHR( const FenceGetFdInfoKHR & getFdInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<int>::type getFenceFdKHR( const FenceGetFdInfoKHR & getFdInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
@@ -17749,7 +17749,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result getFenceWin32HandleKHR( const VULKAN_HPP_NAMESPACE::FenceGetWin32HandleInfoKHR* pGetWin32HandleInfo, HANDLE* pHandle, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<HANDLE>::type getFenceWin32HandleKHR( const FenceGetWin32HandleInfoKHR & getWin32HandleInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<HANDLE>::type getFenceWin32HandleKHR( const FenceGetWin32HandleInfoKHR & getWin32HandleInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
@@ -17757,7 +17757,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result getImageDrmFormatModifierPropertiesEXT( VULKAN_HPP_NAMESPACE::Image image, VULKAN_HPP_NAMESPACE::ImageDrmFormatModifierPropertiesEXT* pProperties, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::ImageDrmFormatModifierPropertiesEXT>::type getImageDrmFormatModifierPropertiesEXT( VULKAN_HPP_NAMESPACE::Image image, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::ImageDrmFormatModifierPropertiesEXT>::type getImageDrmFormatModifierPropertiesEXT( VULKAN_HPP_NAMESPACE::Image image, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
@@ -17831,7 +17831,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result getMemoryAndroidHardwareBufferANDROID( const VULKAN_HPP_NAMESPACE::MemoryGetAndroidHardwareBufferInfoANDROID* pInfo, struct AHardwareBuffer** pBuffer, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<struct AHardwareBuffer*>::type getMemoryAndroidHardwareBufferANDROID( const MemoryGetAndroidHardwareBufferInfoANDROID & info, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<struct AHardwareBuffer*>::type getMemoryAndroidHardwareBufferANDROID( const MemoryGetAndroidHardwareBufferInfoANDROID & info, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_ANDROID_KHR*/
 
@@ -17839,21 +17839,21 @@ namespace VULKAN_HPP_NAMESPACE
     Result getMemoryFdKHR( const VULKAN_HPP_NAMESPACE::MemoryGetFdInfoKHR* pGetFdInfo, int* pFd, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<int>::type getMemoryFdKHR( const MemoryGetFdInfoKHR & getFdInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<int>::type getMemoryFdKHR( const MemoryGetFdInfoKHR & getFdInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     Result getMemoryFdPropertiesKHR( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType, int fd, VULKAN_HPP_NAMESPACE::MemoryFdPropertiesKHR* pMemoryFdProperties, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::MemoryFdPropertiesKHR>::type getMemoryFdPropertiesKHR( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType, int fd, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::MemoryFdPropertiesKHR>::type getMemoryFdPropertiesKHR( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType, int fd, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     Result getMemoryHostPointerPropertiesEXT( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType, const void* pHostPointer, VULKAN_HPP_NAMESPACE::MemoryHostPointerPropertiesEXT* pMemoryHostPointerProperties, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::MemoryHostPointerPropertiesEXT>::type getMemoryHostPointerPropertiesEXT( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType, const void* pHostPointer, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::MemoryHostPointerPropertiesEXT>::type getMemoryHostPointerPropertiesEXT( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType, const void* pHostPointer, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
 #ifdef VK_USE_PLATFORM_WIN32_KHR
@@ -17861,7 +17861,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result getMemoryWin32HandleKHR( const VULKAN_HPP_NAMESPACE::MemoryGetWin32HandleInfoKHR* pGetWin32HandleInfo, HANDLE* pHandle, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<HANDLE>::type getMemoryWin32HandleKHR( const MemoryGetWin32HandleInfoKHR & getWin32HandleInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<HANDLE>::type getMemoryWin32HandleKHR( const MemoryGetWin32HandleInfoKHR & getWin32HandleInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
@@ -17870,7 +17870,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result getMemoryWin32HandleNV( VULKAN_HPP_NAMESPACE::DeviceMemory memory, VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagsNV handleType, HANDLE* pHandle, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<HANDLE>::type getMemoryWin32HandleNV( VULKAN_HPP_NAMESPACE::DeviceMemory memory, VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagsNV handleType, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<HANDLE>::type getMemoryWin32HandleNV( VULKAN_HPP_NAMESPACE::DeviceMemory memory, VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagsNV handleType, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
@@ -17879,7 +17879,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result getMemoryWin32HandlePropertiesKHR( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType, HANDLE handle, VULKAN_HPP_NAMESPACE::MemoryWin32HandlePropertiesKHR* pMemoryWin32HandleProperties, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::MemoryWin32HandlePropertiesKHR>::type getMemoryWin32HandlePropertiesKHR( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType, HANDLE handle, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::MemoryWin32HandlePropertiesKHR>::type getMemoryWin32HandlePropertiesKHR( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType, HANDLE handle, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
@@ -17896,7 +17896,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result getPerformanceParameterINTEL( VULKAN_HPP_NAMESPACE::PerformanceParameterTypeINTEL parameter, VULKAN_HPP_NAMESPACE::PerformanceValueINTEL* pValue, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::PerformanceValueINTEL>::type getPerformanceParameterINTEL( VULKAN_HPP_NAMESPACE::PerformanceParameterTypeINTEL parameter, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::PerformanceValueINTEL>::type getPerformanceParameterINTEL( VULKAN_HPP_NAMESPACE::PerformanceParameterTypeINTEL parameter, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
@@ -17946,14 +17946,14 @@ namespace VULKAN_HPP_NAMESPACE
     Result getRayTracingShaderGroupHandlesNV( VULKAN_HPP_NAMESPACE::Pipeline pipeline, uint32_t firstGroup, uint32_t groupCount, size_t dataSize, void* pData, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename T, typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type getRayTracingShaderGroupHandlesNV( VULKAN_HPP_NAMESPACE::Pipeline pipeline, uint32_t firstGroup, uint32_t groupCount, ArrayProxy<T> data, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type getRayTracingShaderGroupHandlesNV( VULKAN_HPP_NAMESPACE::Pipeline pipeline, uint32_t firstGroup, uint32_t groupCount, ArrayProxy<T> data, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     Result getRefreshCycleDurationGOOGLE( VULKAN_HPP_NAMESPACE::SwapchainKHR swapchain, VULKAN_HPP_NAMESPACE::RefreshCycleDurationGOOGLE* pDisplayTimingProperties, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::RefreshCycleDurationGOOGLE>::type getRefreshCycleDurationGOOGLE( VULKAN_HPP_NAMESPACE::SwapchainKHR swapchain, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::RefreshCycleDurationGOOGLE>::type getRefreshCycleDurationGOOGLE( VULKAN_HPP_NAMESPACE::SwapchainKHR swapchain, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
@@ -17967,21 +17967,21 @@ namespace VULKAN_HPP_NAMESPACE
     Result getSemaphoreCounterValue( VULKAN_HPP_NAMESPACE::Semaphore semaphore, uint64_t* pValue, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<uint64_t>::type getSemaphoreCounterValue( VULKAN_HPP_NAMESPACE::Semaphore semaphore, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<uint64_t>::type getSemaphoreCounterValue( VULKAN_HPP_NAMESPACE::Semaphore semaphore, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     Result getSemaphoreCounterValueKHR( VULKAN_HPP_NAMESPACE::Semaphore semaphore, uint64_t* pValue, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<uint64_t>::type getSemaphoreCounterValueKHR( VULKAN_HPP_NAMESPACE::Semaphore semaphore, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<uint64_t>::type getSemaphoreCounterValueKHR( VULKAN_HPP_NAMESPACE::Semaphore semaphore, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     Result getSemaphoreFdKHR( const VULKAN_HPP_NAMESPACE::SemaphoreGetFdInfoKHR* pGetFdInfo, int* pFd, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<int>::type getSemaphoreFdKHR( const SemaphoreGetFdInfoKHR & getFdInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<int>::type getSemaphoreFdKHR( const SemaphoreGetFdInfoKHR & getFdInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
 #ifdef VK_USE_PLATFORM_WIN32_KHR
@@ -17989,7 +17989,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result getSemaphoreWin32HandleKHR( const VULKAN_HPP_NAMESPACE::SemaphoreGetWin32HandleInfoKHR* pGetWin32HandleInfo, HANDLE* pHandle, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<HANDLE>::type getSemaphoreWin32HandleKHR( const SemaphoreGetWin32HandleInfoKHR & getWin32HandleInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<HANDLE>::type getSemaphoreWin32HandleKHR( const SemaphoreGetWin32HandleInfoKHR & getWin32HandleInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
@@ -18006,7 +18006,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result getSwapchainCounterEXT( VULKAN_HPP_NAMESPACE::SwapchainKHR swapchain, VULKAN_HPP_NAMESPACE::SurfaceCounterFlagBitsEXT counter, uint64_t* pCounterValue, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<uint64_t>::type getSwapchainCounterEXT( VULKAN_HPP_NAMESPACE::SwapchainKHR swapchain, VULKAN_HPP_NAMESPACE::SurfaceCounterFlagBitsEXT counter, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<uint64_t>::type getSwapchainCounterEXT( VULKAN_HPP_NAMESPACE::SwapchainKHR swapchain, VULKAN_HPP_NAMESPACE::SurfaceCounterFlagBitsEXT counter, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
@@ -18039,7 +18039,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result importFenceFdKHR( const VULKAN_HPP_NAMESPACE::ImportFenceFdInfoKHR* pImportFenceFdInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type importFenceFdKHR( const ImportFenceFdInfoKHR & importFenceFdInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type importFenceFdKHR( const ImportFenceFdInfoKHR & importFenceFdInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
 #ifdef VK_USE_PLATFORM_WIN32_KHR
@@ -18047,7 +18047,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result importFenceWin32HandleKHR( const VULKAN_HPP_NAMESPACE::ImportFenceWin32HandleInfoKHR* pImportFenceWin32HandleInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type importFenceWin32HandleKHR( const ImportFenceWin32HandleInfoKHR & importFenceWin32HandleInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type importFenceWin32HandleKHR( const ImportFenceWin32HandleInfoKHR & importFenceWin32HandleInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
@@ -18055,7 +18055,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result importSemaphoreFdKHR( const VULKAN_HPP_NAMESPACE::ImportSemaphoreFdInfoKHR* pImportSemaphoreFdInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type importSemaphoreFdKHR( const ImportSemaphoreFdInfoKHR & importSemaphoreFdInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type importSemaphoreFdKHR( const ImportSemaphoreFdInfoKHR & importSemaphoreFdInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
 #ifdef VK_USE_PLATFORM_WIN32_KHR
@@ -18063,7 +18063,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result importSemaphoreWin32HandleKHR( const VULKAN_HPP_NAMESPACE::ImportSemaphoreWin32HandleInfoKHR* pImportSemaphoreWin32HandleInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type importSemaphoreWin32HandleKHR( const ImportSemaphoreWin32HandleInfoKHR & importSemaphoreWin32HandleInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type importSemaphoreWin32HandleKHR( const ImportSemaphoreWin32HandleInfoKHR & importSemaphoreWin32HandleInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
@@ -18071,42 +18071,42 @@ namespace VULKAN_HPP_NAMESPACE
     Result initializePerformanceApiINTEL( const VULKAN_HPP_NAMESPACE::InitializePerformanceApiInfoINTEL* pInitializeInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type initializePerformanceApiINTEL( const InitializePerformanceApiInfoINTEL & initializeInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type initializePerformanceApiINTEL( const InitializePerformanceApiInfoINTEL & initializeInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     Result invalidateMappedMemoryRanges( uint32_t memoryRangeCount, const VULKAN_HPP_NAMESPACE::MappedMemoryRange* pMemoryRanges, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type invalidateMappedMemoryRanges( ArrayProxy<const VULKAN_HPP_NAMESPACE::MappedMemoryRange> memoryRanges, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type invalidateMappedMemoryRanges( ArrayProxy<const VULKAN_HPP_NAMESPACE::MappedMemoryRange> memoryRanges, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     Result mapMemory( VULKAN_HPP_NAMESPACE::DeviceMemory memory, VULKAN_HPP_NAMESPACE::DeviceSize offset, VULKAN_HPP_NAMESPACE::DeviceSize size, VULKAN_HPP_NAMESPACE::MemoryMapFlags flags, void** ppData, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void*>::type mapMemory( VULKAN_HPP_NAMESPACE::DeviceMemory memory, VULKAN_HPP_NAMESPACE::DeviceSize offset, VULKAN_HPP_NAMESPACE::DeviceSize size, VULKAN_HPP_NAMESPACE::MemoryMapFlags flags = MemoryMapFlags(), Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void*>::type mapMemory( VULKAN_HPP_NAMESPACE::DeviceMemory memory, VULKAN_HPP_NAMESPACE::DeviceSize offset, VULKAN_HPP_NAMESPACE::DeviceSize size, VULKAN_HPP_NAMESPACE::MemoryMapFlags flags = MemoryMapFlags(), Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     Result mergePipelineCaches( VULKAN_HPP_NAMESPACE::PipelineCache dstCache, uint32_t srcCacheCount, const VULKAN_HPP_NAMESPACE::PipelineCache* pSrcCaches, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type mergePipelineCaches( VULKAN_HPP_NAMESPACE::PipelineCache dstCache, ArrayProxy<const VULKAN_HPP_NAMESPACE::PipelineCache> srcCaches, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type mergePipelineCaches( VULKAN_HPP_NAMESPACE::PipelineCache dstCache, ArrayProxy<const VULKAN_HPP_NAMESPACE::PipelineCache> srcCaches, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     Result mergeValidationCachesEXT( VULKAN_HPP_NAMESPACE::ValidationCacheEXT dstCache, uint32_t srcCacheCount, const VULKAN_HPP_NAMESPACE::ValidationCacheEXT* pSrcCaches, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type mergeValidationCachesEXT( VULKAN_HPP_NAMESPACE::ValidationCacheEXT dstCache, ArrayProxy<const VULKAN_HPP_NAMESPACE::ValidationCacheEXT> srcCaches, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type mergeValidationCachesEXT( VULKAN_HPP_NAMESPACE::ValidationCacheEXT dstCache, ArrayProxy<const VULKAN_HPP_NAMESPACE::ValidationCacheEXT> srcCaches, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     Result registerEventEXT( const VULKAN_HPP_NAMESPACE::DeviceEventInfoEXT* pDeviceEventInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::Fence* pFence, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::Fence>::type registerEventEXT( const DeviceEventInfoEXT & deviceEventInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::Fence>::type registerEventEXT( const DeviceEventInfoEXT & deviceEventInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<Fence,Dispatch>>::type registerEventEXTUnique( const DeviceEventInfoEXT & deviceEventInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -18117,7 +18117,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result registerDisplayEventEXT( VULKAN_HPP_NAMESPACE::DisplayKHR display, const VULKAN_HPP_NAMESPACE::DisplayEventInfoEXT* pDisplayEventInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::Fence* pFence, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::Fence>::type registerDisplayEventEXT( VULKAN_HPP_NAMESPACE::DisplayKHR display, const DisplayEventInfoEXT & displayEventInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::Fence>::type registerDisplayEventEXT( VULKAN_HPP_NAMESPACE::DisplayKHR display, const DisplayEventInfoEXT & displayEventInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<Fence,Dispatch>>::type registerDisplayEventEXTUnique( VULKAN_HPP_NAMESPACE::DisplayKHR display, const DisplayEventInfoEXT & displayEventInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -18128,7 +18128,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result registerObjectsNVX( VULKAN_HPP_NAMESPACE::ObjectTableNVX objectTable, uint32_t objectCount, const VULKAN_HPP_NAMESPACE::ObjectTableEntryNVX* const* ppObjectTableEntries, const uint32_t* pObjectIndices, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type registerObjectsNVX( VULKAN_HPP_NAMESPACE::ObjectTableNVX objectTable, ArrayProxy<const VULKAN_HPP_NAMESPACE::ObjectTableEntryNVX* const> pObjectTableEntries, ArrayProxy<const uint32_t> objectIndices, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type registerObjectsNVX( VULKAN_HPP_NAMESPACE::ObjectTableNVX objectTable, ArrayProxy<const VULKAN_HPP_NAMESPACE::ObjectTableEntryNVX* const> pObjectTableEntries, ArrayProxy<const uint32_t> objectIndices, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
 #ifdef VK_USE_PLATFORM_WIN32_KHR
@@ -18137,7 +18137,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result releaseFullScreenExclusiveModeEXT( VULKAN_HPP_NAMESPACE::SwapchainKHR swapchain, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #else
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type releaseFullScreenExclusiveModeEXT( VULKAN_HPP_NAMESPACE::SwapchainKHR swapchain, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type releaseFullScreenExclusiveModeEXT( VULKAN_HPP_NAMESPACE::SwapchainKHR swapchain, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
@@ -18146,7 +18146,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result releasePerformanceConfigurationINTEL( VULKAN_HPP_NAMESPACE::PerformanceConfigurationINTEL configuration, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #else
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type releasePerformanceConfigurationINTEL( VULKAN_HPP_NAMESPACE::PerformanceConfigurationINTEL configuration, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type releasePerformanceConfigurationINTEL( VULKAN_HPP_NAMESPACE::PerformanceConfigurationINTEL configuration, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
@@ -18157,7 +18157,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result resetCommandPool( VULKAN_HPP_NAMESPACE::CommandPool commandPool, VULKAN_HPP_NAMESPACE::CommandPoolResetFlags flags, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #else
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type resetCommandPool( VULKAN_HPP_NAMESPACE::CommandPool commandPool, VULKAN_HPP_NAMESPACE::CommandPoolResetFlags flags, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type resetCommandPool( VULKAN_HPP_NAMESPACE::CommandPool commandPool, VULKAN_HPP_NAMESPACE::CommandPoolResetFlags flags, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
@@ -18165,7 +18165,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result resetDescriptorPool( VULKAN_HPP_NAMESPACE::DescriptorPool descriptorPool, VULKAN_HPP_NAMESPACE::DescriptorPoolResetFlags flags = DescriptorPoolResetFlags(), Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #else
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type resetDescriptorPool( VULKAN_HPP_NAMESPACE::DescriptorPool descriptorPool, VULKAN_HPP_NAMESPACE::DescriptorPoolResetFlags flags = DescriptorPoolResetFlags(), Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type resetDescriptorPool( VULKAN_HPP_NAMESPACE::DescriptorPool descriptorPool, VULKAN_HPP_NAMESPACE::DescriptorPoolResetFlags flags = DescriptorPoolResetFlags(), Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
@@ -18173,14 +18173,14 @@ namespace VULKAN_HPP_NAMESPACE
     Result resetEvent( VULKAN_HPP_NAMESPACE::Event event, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #else
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type resetEvent( VULKAN_HPP_NAMESPACE::Event event, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type resetEvent( VULKAN_HPP_NAMESPACE::Event event, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     Result resetFences( uint32_t fenceCount, const VULKAN_HPP_NAMESPACE::Fence* pFences, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type resetFences( ArrayProxy<const VULKAN_HPP_NAMESPACE::Fence> fences, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type resetFences( ArrayProxy<const VULKAN_HPP_NAMESPACE::Fence> fences, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
@@ -18193,14 +18193,14 @@ namespace VULKAN_HPP_NAMESPACE
     Result setDebugUtilsObjectNameEXT( const VULKAN_HPP_NAMESPACE::DebugUtilsObjectNameInfoEXT* pNameInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type setDebugUtilsObjectNameEXT( const DebugUtilsObjectNameInfoEXT & nameInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type setDebugUtilsObjectNameEXT( const DebugUtilsObjectNameInfoEXT & nameInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     Result setDebugUtilsObjectTagEXT( const VULKAN_HPP_NAMESPACE::DebugUtilsObjectTagInfoEXT* pTagInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type setDebugUtilsObjectTagEXT( const DebugUtilsObjectTagInfoEXT & tagInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type setDebugUtilsObjectTagEXT( const DebugUtilsObjectTagInfoEXT & tagInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
@@ -18208,7 +18208,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result setEvent( VULKAN_HPP_NAMESPACE::Event event, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #else
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type setEvent( VULKAN_HPP_NAMESPACE::Event event, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type setEvent( VULKAN_HPP_NAMESPACE::Event event, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
@@ -18225,14 +18225,14 @@ namespace VULKAN_HPP_NAMESPACE
     Result signalSemaphore( const VULKAN_HPP_NAMESPACE::SemaphoreSignalInfo* pSignalInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type signalSemaphore( const SemaphoreSignalInfo & signalInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type signalSemaphore( const SemaphoreSignalInfo & signalInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     Result signalSemaphoreKHR( const VULKAN_HPP_NAMESPACE::SemaphoreSignalInfo* pSignalInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type signalSemaphoreKHR( const SemaphoreSignalInfo & signalInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type signalSemaphoreKHR( const SemaphoreSignalInfo & signalInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
@@ -18251,7 +18251,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result unregisterObjectsNVX( VULKAN_HPP_NAMESPACE::ObjectTableNVX objectTable, uint32_t objectCount, const VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX* pObjectEntryTypes, const uint32_t* pObjectIndices, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type unregisterObjectsNVX( VULKAN_HPP_NAMESPACE::ObjectTableNVX objectTable, ArrayProxy<const VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX> objectEntryTypes, ArrayProxy<const uint32_t> objectIndices, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type unregisterObjectsNVX( VULKAN_HPP_NAMESPACE::ObjectTableNVX objectTable, ArrayProxy<const VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX> objectEntryTypes, ArrayProxy<const uint32_t> objectIndices, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
@@ -18448,7 +18448,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result acquireXlibDisplayEXT( Display* dpy, VULKAN_HPP_NAMESPACE::DisplayKHR display, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<Display>::type acquireXlibDisplayEXT( VULKAN_HPP_NAMESPACE::DisplayKHR display, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<Display>::type acquireXlibDisplayEXT( VULKAN_HPP_NAMESPACE::DisplayKHR display, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_XLIB_XRANDR_EXT*/
 
@@ -18456,7 +18456,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createDevice( const VULKAN_HPP_NAMESPACE::DeviceCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::Device* pDevice, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::Device>::type createDevice( const DeviceCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::Device>::type createDevice( const DeviceCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<Device,Dispatch>>::type createDeviceUnique( const DeviceCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -18467,7 +18467,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createDisplayModeKHR( VULKAN_HPP_NAMESPACE::DisplayKHR display, const VULKAN_HPP_NAMESPACE::DisplayModeCreateInfoKHR* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::DisplayModeKHR* pMode, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::DisplayModeKHR>::type createDisplayModeKHR( VULKAN_HPP_NAMESPACE::DisplayKHR display, const DisplayModeCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::DisplayModeKHR>::type createDisplayModeKHR( VULKAN_HPP_NAMESPACE::DisplayKHR display, const DisplayModeCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
@@ -18519,14 +18519,14 @@ namespace VULKAN_HPP_NAMESPACE
     Result getDisplayPlaneCapabilities2KHR( const VULKAN_HPP_NAMESPACE::DisplayPlaneInfo2KHR* pDisplayPlaneInfo, VULKAN_HPP_NAMESPACE::DisplayPlaneCapabilities2KHR* pCapabilities, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::DisplayPlaneCapabilities2KHR>::type getDisplayPlaneCapabilities2KHR( const DisplayPlaneInfo2KHR & displayPlaneInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::DisplayPlaneCapabilities2KHR>::type getDisplayPlaneCapabilities2KHR( const DisplayPlaneInfo2KHR & displayPlaneInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     Result getDisplayPlaneCapabilitiesKHR( VULKAN_HPP_NAMESPACE::DisplayModeKHR mode, uint32_t planeIndex, VULKAN_HPP_NAMESPACE::DisplayPlaneCapabilitiesKHR* pCapabilities, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::DisplayPlaneCapabilitiesKHR>::type getDisplayPlaneCapabilitiesKHR( VULKAN_HPP_NAMESPACE::DisplayModeKHR mode, uint32_t planeIndex, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::DisplayPlaneCapabilitiesKHR>::type getDisplayPlaneCapabilitiesKHR( VULKAN_HPP_NAMESPACE::DisplayModeKHR mode, uint32_t planeIndex, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
@@ -18624,7 +18624,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result getExternalImageFormatPropertiesNV( VULKAN_HPP_NAMESPACE::Format format, VULKAN_HPP_NAMESPACE::ImageType type, VULKAN_HPP_NAMESPACE::ImageTiling tiling, VULKAN_HPP_NAMESPACE::ImageUsageFlags usage, VULKAN_HPP_NAMESPACE::ImageCreateFlags flags, VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagsNV externalHandleType, VULKAN_HPP_NAMESPACE::ExternalImageFormatPropertiesNV* pExternalImageFormatProperties, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::ExternalImageFormatPropertiesNV>::type getExternalImageFormatPropertiesNV( VULKAN_HPP_NAMESPACE::Format format, VULKAN_HPP_NAMESPACE::ImageType type, VULKAN_HPP_NAMESPACE::ImageTiling tiling, VULKAN_HPP_NAMESPACE::ImageUsageFlags usage, VULKAN_HPP_NAMESPACE::ImageCreateFlags flags, VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagsNV externalHandleType, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::ExternalImageFormatPropertiesNV>::type getExternalImageFormatPropertiesNV( VULKAN_HPP_NAMESPACE::Format format, VULKAN_HPP_NAMESPACE::ImageType type, VULKAN_HPP_NAMESPACE::ImageTiling tiling, VULKAN_HPP_NAMESPACE::ImageUsageFlags usage, VULKAN_HPP_NAMESPACE::ImageCreateFlags flags, VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagsNV externalHandleType, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
@@ -18702,14 +18702,14 @@ namespace VULKAN_HPP_NAMESPACE
     Result getImageFormatProperties( VULKAN_HPP_NAMESPACE::Format format, VULKAN_HPP_NAMESPACE::ImageType type, VULKAN_HPP_NAMESPACE::ImageTiling tiling, VULKAN_HPP_NAMESPACE::ImageUsageFlags usage, VULKAN_HPP_NAMESPACE::ImageCreateFlags flags, VULKAN_HPP_NAMESPACE::ImageFormatProperties* pImageFormatProperties, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::ImageFormatProperties>::type getImageFormatProperties( VULKAN_HPP_NAMESPACE::Format format, VULKAN_HPP_NAMESPACE::ImageType type, VULKAN_HPP_NAMESPACE::ImageTiling tiling, VULKAN_HPP_NAMESPACE::ImageUsageFlags usage, VULKAN_HPP_NAMESPACE::ImageCreateFlags flags, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::ImageFormatProperties>::type getImageFormatProperties( VULKAN_HPP_NAMESPACE::Format format, VULKAN_HPP_NAMESPACE::ImageType type, VULKAN_HPP_NAMESPACE::ImageTiling tiling, VULKAN_HPP_NAMESPACE::ImageUsageFlags usage, VULKAN_HPP_NAMESPACE::ImageCreateFlags flags, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     Result getImageFormatProperties2( const VULKAN_HPP_NAMESPACE::PhysicalDeviceImageFormatInfo2* pImageFormatInfo, VULKAN_HPP_NAMESPACE::ImageFormatProperties2* pImageFormatProperties, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::ImageFormatProperties2>::type getImageFormatProperties2( const PhysicalDeviceImageFormatInfo2 & imageFormatInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::ImageFormatProperties2>::type getImageFormatProperties2( const PhysicalDeviceImageFormatInfo2 & imageFormatInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
     template<typename X, typename Y, typename ...Z, typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<StructureChain<X, Y, Z...>>::type getImageFormatProperties2( const PhysicalDeviceImageFormatInfo2 & imageFormatInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -18718,7 +18718,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result getImageFormatProperties2KHR( const VULKAN_HPP_NAMESPACE::PhysicalDeviceImageFormatInfo2* pImageFormatInfo, VULKAN_HPP_NAMESPACE::ImageFormatProperties2* pImageFormatProperties, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::ImageFormatProperties2>::type getImageFormatProperties2KHR( const PhysicalDeviceImageFormatInfo2 & imageFormatInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::ImageFormatProperties2>::type getImageFormatProperties2KHR( const PhysicalDeviceImageFormatInfo2 & imageFormatInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
     template<typename X, typename Y, typename ...Z, typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<StructureChain<X, Y, Z...>>::type getImageFormatProperties2KHR( const PhysicalDeviceImageFormatInfo2 & imageFormatInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -18871,14 +18871,14 @@ namespace VULKAN_HPP_NAMESPACE
     Result getSurfaceCapabilities2EXT( VULKAN_HPP_NAMESPACE::SurfaceKHR surface, VULKAN_HPP_NAMESPACE::SurfaceCapabilities2EXT* pSurfaceCapabilities, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceCapabilities2EXT>::type getSurfaceCapabilities2EXT( VULKAN_HPP_NAMESPACE::SurfaceKHR surface, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceCapabilities2EXT>::type getSurfaceCapabilities2EXT( VULKAN_HPP_NAMESPACE::SurfaceKHR surface, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     Result getSurfaceCapabilities2KHR( const VULKAN_HPP_NAMESPACE::PhysicalDeviceSurfaceInfo2KHR* pSurfaceInfo, VULKAN_HPP_NAMESPACE::SurfaceCapabilities2KHR* pSurfaceCapabilities, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceCapabilities2KHR>::type getSurfaceCapabilities2KHR( const PhysicalDeviceSurfaceInfo2KHR & surfaceInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceCapabilities2KHR>::type getSurfaceCapabilities2KHR( const PhysicalDeviceSurfaceInfo2KHR & surfaceInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
     template<typename X, typename Y, typename ...Z, typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<StructureChain<X, Y, Z...>>::type getSurfaceCapabilities2KHR( const PhysicalDeviceSurfaceInfo2KHR & surfaceInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
@@ -18887,7 +18887,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result getSurfaceCapabilitiesKHR( VULKAN_HPP_NAMESPACE::SurfaceKHR surface, VULKAN_HPP_NAMESPACE::SurfaceCapabilitiesKHR* pSurfaceCapabilities, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceCapabilitiesKHR>::type getSurfaceCapabilitiesKHR( VULKAN_HPP_NAMESPACE::SurfaceKHR surface, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceCapabilitiesKHR>::type getSurfaceCapabilitiesKHR( VULKAN_HPP_NAMESPACE::SurfaceKHR surface, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
@@ -18932,7 +18932,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result getSurfaceSupportKHR( uint32_t queueFamilyIndex, VULKAN_HPP_NAMESPACE::SurfaceKHR surface, VULKAN_HPP_NAMESPACE::Bool32* pSupported, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::Bool32>::type getSurfaceSupportKHR( uint32_t queueFamilyIndex, VULKAN_HPP_NAMESPACE::SurfaceKHR surface, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::Bool32>::type getSurfaceSupportKHR( uint32_t queueFamilyIndex, VULKAN_HPP_NAMESPACE::SurfaceKHR surface, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
@@ -18981,7 +18981,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result getRandROutputDisplayEXT( Display* dpy, RROutput rrOutput, VULKAN_HPP_NAMESPACE::DisplayKHR* pDisplay, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::DisplayKHR>::type getRandROutputDisplayEXT( Display & dpy, RROutput rrOutput, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::DisplayKHR>::type getRandROutputDisplayEXT( Display & dpy, RROutput rrOutput, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_XLIB_XRANDR_EXT*/
 
@@ -18990,7 +18990,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result releaseDisplayEXT( VULKAN_HPP_NAMESPACE::DisplayKHR display, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #else
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<void>::type releaseDisplayEXT( VULKAN_HPP_NAMESPACE::DisplayKHR display, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<void>::type releaseDisplayEXT( VULKAN_HPP_NAMESPACE::DisplayKHR display, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     VULKAN_HPP_TYPESAFE_EXPLICIT operator VkPhysicalDevice() const VULKAN_HPP_NOEXCEPT
@@ -19083,7 +19083,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createAndroidSurfaceKHR( const VULKAN_HPP_NAMESPACE::AndroidSurfaceCreateInfoKHR* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::SurfaceKHR* pSurface, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type createAndroidSurfaceKHR( const AndroidSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type createAndroidSurfaceKHR( const AndroidSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<SurfaceKHR,Dispatch>>::type createAndroidSurfaceKHRUnique( const AndroidSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -19095,7 +19095,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createDebugReportCallbackEXT( const VULKAN_HPP_NAMESPACE::DebugReportCallbackCreateInfoEXT* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::DebugReportCallbackEXT* pCallback, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::DebugReportCallbackEXT>::type createDebugReportCallbackEXT( const DebugReportCallbackCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::DebugReportCallbackEXT>::type createDebugReportCallbackEXT( const DebugReportCallbackCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<DebugReportCallbackEXT,Dispatch>>::type createDebugReportCallbackEXTUnique( const DebugReportCallbackCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -19106,7 +19106,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createDebugUtilsMessengerEXT( const VULKAN_HPP_NAMESPACE::DebugUtilsMessengerCreateInfoEXT* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::DebugUtilsMessengerEXT* pMessenger, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::DebugUtilsMessengerEXT>::type createDebugUtilsMessengerEXT( const DebugUtilsMessengerCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::DebugUtilsMessengerEXT>::type createDebugUtilsMessengerEXT( const DebugUtilsMessengerCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<DebugUtilsMessengerEXT,Dispatch>>::type createDebugUtilsMessengerEXTUnique( const DebugUtilsMessengerCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -19117,7 +19117,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createDisplayPlaneSurfaceKHR( const VULKAN_HPP_NAMESPACE::DisplaySurfaceCreateInfoKHR* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::SurfaceKHR* pSurface, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type createDisplayPlaneSurfaceKHR( const DisplaySurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type createDisplayPlaneSurfaceKHR( const DisplaySurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<SurfaceKHR,Dispatch>>::type createDisplayPlaneSurfaceKHRUnique( const DisplaySurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -19128,7 +19128,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createHeadlessSurfaceEXT( const VULKAN_HPP_NAMESPACE::HeadlessSurfaceCreateInfoEXT* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::SurfaceKHR* pSurface, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type createHeadlessSurfaceEXT( const HeadlessSurfaceCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type createHeadlessSurfaceEXT( const HeadlessSurfaceCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<SurfaceKHR,Dispatch>>::type createHeadlessSurfaceEXTUnique( const HeadlessSurfaceCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -19140,7 +19140,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createIOSSurfaceMVK( const VULKAN_HPP_NAMESPACE::IOSSurfaceCreateInfoMVK* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::SurfaceKHR* pSurface, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type createIOSSurfaceMVK( const IOSSurfaceCreateInfoMVK & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type createIOSSurfaceMVK( const IOSSurfaceCreateInfoMVK & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<SurfaceKHR,Dispatch>>::type createIOSSurfaceMVKUnique( const IOSSurfaceCreateInfoMVK & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -19153,7 +19153,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createImagePipeSurfaceFUCHSIA( const VULKAN_HPP_NAMESPACE::ImagePipeSurfaceCreateInfoFUCHSIA* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::SurfaceKHR* pSurface, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type createImagePipeSurfaceFUCHSIA( const ImagePipeSurfaceCreateInfoFUCHSIA & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type createImagePipeSurfaceFUCHSIA( const ImagePipeSurfaceCreateInfoFUCHSIA & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<SurfaceKHR,Dispatch>>::type createImagePipeSurfaceFUCHSIAUnique( const ImagePipeSurfaceCreateInfoFUCHSIA & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -19166,7 +19166,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createMacOSSurfaceMVK( const VULKAN_HPP_NAMESPACE::MacOSSurfaceCreateInfoMVK* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::SurfaceKHR* pSurface, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type createMacOSSurfaceMVK( const MacOSSurfaceCreateInfoMVK & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type createMacOSSurfaceMVK( const MacOSSurfaceCreateInfoMVK & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<SurfaceKHR,Dispatch>>::type createMacOSSurfaceMVKUnique( const MacOSSurfaceCreateInfoMVK & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -19179,7 +19179,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createMetalSurfaceEXT( const VULKAN_HPP_NAMESPACE::MetalSurfaceCreateInfoEXT* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::SurfaceKHR* pSurface, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type createMetalSurfaceEXT( const MetalSurfaceCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type createMetalSurfaceEXT( const MetalSurfaceCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<SurfaceKHR,Dispatch>>::type createMetalSurfaceEXTUnique( const MetalSurfaceCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -19192,7 +19192,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createStreamDescriptorSurfaceGGP( const VULKAN_HPP_NAMESPACE::StreamDescriptorSurfaceCreateInfoGGP* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::SurfaceKHR* pSurface, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type createStreamDescriptorSurfaceGGP( const StreamDescriptorSurfaceCreateInfoGGP & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type createStreamDescriptorSurfaceGGP( const StreamDescriptorSurfaceCreateInfoGGP & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<SurfaceKHR,Dispatch>>::type createStreamDescriptorSurfaceGGPUnique( const StreamDescriptorSurfaceCreateInfoGGP & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -19205,7 +19205,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createViSurfaceNN( const VULKAN_HPP_NAMESPACE::ViSurfaceCreateInfoNN* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::SurfaceKHR* pSurface, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type createViSurfaceNN( const ViSurfaceCreateInfoNN & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type createViSurfaceNN( const ViSurfaceCreateInfoNN & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<SurfaceKHR,Dispatch>>::type createViSurfaceNNUnique( const ViSurfaceCreateInfoNN & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -19218,7 +19218,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createWaylandSurfaceKHR( const VULKAN_HPP_NAMESPACE::WaylandSurfaceCreateInfoKHR* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::SurfaceKHR* pSurface, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type createWaylandSurfaceKHR( const WaylandSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type createWaylandSurfaceKHR( const WaylandSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<SurfaceKHR,Dispatch>>::type createWaylandSurfaceKHRUnique( const WaylandSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -19231,7 +19231,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createWin32SurfaceKHR( const VULKAN_HPP_NAMESPACE::Win32SurfaceCreateInfoKHR* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::SurfaceKHR* pSurface, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type createWin32SurfaceKHR( const Win32SurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type createWin32SurfaceKHR( const Win32SurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<SurfaceKHR,Dispatch>>::type createWin32SurfaceKHRUnique( const Win32SurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -19244,7 +19244,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createXcbSurfaceKHR( const VULKAN_HPP_NAMESPACE::XcbSurfaceCreateInfoKHR* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::SurfaceKHR* pSurface, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type createXcbSurfaceKHR( const XcbSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type createXcbSurfaceKHR( const XcbSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<SurfaceKHR,Dispatch>>::type createXcbSurfaceKHRUnique( const XcbSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -19257,7 +19257,7 @@ namespace VULKAN_HPP_NAMESPACE
     Result createXlibSurfaceKHR( const VULKAN_HPP_NAMESPACE::XlibSurfaceCreateInfoKHR* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::SurfaceKHR* pSurface, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type createXlibSurfaceKHR( const XlibSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+    typename ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type createXlibSurfaceKHR( const XlibSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<UniqueHandle<SurfaceKHR,Dispatch>>::type createXlibSurfaceKHRUnique( const XlibSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
@@ -19397,7 +19397,7 @@ namespace VULKAN_HPP_NAMESPACE
   Result createInstance( const VULKAN_HPP_NAMESPACE::InstanceCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::Instance* pInstance, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-  ResultValueType<VULKAN_HPP_NAMESPACE::Instance>::type createInstance( const InstanceCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER );
+  typename ResultValueType<VULKAN_HPP_NAMESPACE::Instance>::type createInstance( const InstanceCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER );
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
   typename ResultValueType<UniqueHandle<Instance,Dispatch>>::type createInstanceUnique( const InstanceCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER );
@@ -19426,7 +19426,7 @@ namespace VULKAN_HPP_NAMESPACE
   Result enumerateInstanceVersion( uint32_t* pApiVersion, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-  ResultValueType<uint32_t>::type enumerateInstanceVersion(Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER );
+  typename ResultValueType<uint32_t>::type enumerateInstanceVersion(Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER );
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
   struct GeometryTrianglesNV
@@ -19435,11 +19435,11 @@ namespace VULKAN_HPP_NAMESPACE
                                               VULKAN_HPP_NAMESPACE::DeviceSize vertexOffset_ = {},
                                               uint32_t vertexCount_ = {},
                                               VULKAN_HPP_NAMESPACE::DeviceSize vertexStride_ = {},
-                                              VULKAN_HPP_NAMESPACE::Format vertexFormat_ = {},
+                                              VULKAN_HPP_NAMESPACE::Format vertexFormat_ = VULKAN_HPP_NAMESPACE::Format::eUndefined,
                                               VULKAN_HPP_NAMESPACE::Buffer indexData_ = {},
                                               VULKAN_HPP_NAMESPACE::DeviceSize indexOffset_ = {},
                                               uint32_t indexCount_ = {},
-                                              VULKAN_HPP_NAMESPACE::IndexType indexType_ = {},
+                                              VULKAN_HPP_NAMESPACE::IndexType indexType_ = VULKAN_HPP_NAMESPACE::IndexType::eUint16,
                                               VULKAN_HPP_NAMESPACE::Buffer transformData_ = {},
                                               VULKAN_HPP_NAMESPACE::DeviceSize transformOffset_ = {} ) VULKAN_HPP_NOEXCEPT
       : vertexData( vertexData_ )
@@ -19583,11 +19583,11 @@ namespace VULKAN_HPP_NAMESPACE
     VULKAN_HPP_NAMESPACE::DeviceSize vertexOffset = {};
     uint32_t vertexCount = {};
     VULKAN_HPP_NAMESPACE::DeviceSize vertexStride = {};
-    VULKAN_HPP_NAMESPACE::Format vertexFormat = {};
+    VULKAN_HPP_NAMESPACE::Format vertexFormat = VULKAN_HPP_NAMESPACE::Format::eUndefined;
     VULKAN_HPP_NAMESPACE::Buffer indexData = {};
     VULKAN_HPP_NAMESPACE::DeviceSize indexOffset = {};
     uint32_t indexCount = {};
-    VULKAN_HPP_NAMESPACE::IndexType indexType = {};
+    VULKAN_HPP_NAMESPACE::IndexType indexType = VULKAN_HPP_NAMESPACE::IndexType::eUint16;
     VULKAN_HPP_NAMESPACE::Buffer transformData = {};
     VULKAN_HPP_NAMESPACE::DeviceSize transformOffset = {};
   };
@@ -19750,7 +19750,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct GeometryNV
   {
-    VULKAN_HPP_CONSTEXPR GeometryNV( VULKAN_HPP_NAMESPACE::GeometryTypeNV geometryType_ = {},
+    VULKAN_HPP_CONSTEXPR GeometryNV( VULKAN_HPP_NAMESPACE::GeometryTypeNV geometryType_ = VULKAN_HPP_NAMESPACE::GeometryTypeNV::eTriangles,
                                      VULKAN_HPP_NAMESPACE::GeometryDataNV geometry_ = {},
                                      VULKAN_HPP_NAMESPACE::GeometryFlagsNV flags_ = {} ) VULKAN_HPP_NOEXCEPT
       : geometryType( geometryType_ )
@@ -19826,7 +19826,7 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eGeometryNV;
     const void* pNext = {};
-    VULKAN_HPP_NAMESPACE::GeometryTypeNV geometryType = {};
+    VULKAN_HPP_NAMESPACE::GeometryTypeNV geometryType = VULKAN_HPP_NAMESPACE::GeometryTypeNV::eTriangles;
     VULKAN_HPP_NAMESPACE::GeometryDataNV geometry = {};
     VULKAN_HPP_NAMESPACE::GeometryFlagsNV flags = {};
   };
@@ -19835,7 +19835,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct AccelerationStructureInfoNV
   {
-    VULKAN_HPP_CONSTEXPR AccelerationStructureInfoNV( VULKAN_HPP_NAMESPACE::AccelerationStructureTypeNV type_ = {},
+    VULKAN_HPP_CONSTEXPR AccelerationStructureInfoNV( VULKAN_HPP_NAMESPACE::AccelerationStructureTypeNV type_ = VULKAN_HPP_NAMESPACE::AccelerationStructureTypeNV::eTopLevel,
                                                       VULKAN_HPP_NAMESPACE::BuildAccelerationStructureFlagsNV flags_ = {},
                                                       uint32_t instanceCount_ = {},
                                                       uint32_t geometryCount_ = {},
@@ -19929,7 +19929,7 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eAccelerationStructureInfoNV;
     const void* pNext = {};
-    VULKAN_HPP_NAMESPACE::AccelerationStructureTypeNV type = {};
+    VULKAN_HPP_NAMESPACE::AccelerationStructureTypeNV type = VULKAN_HPP_NAMESPACE::AccelerationStructureTypeNV::eTopLevel;
     VULKAN_HPP_NAMESPACE::BuildAccelerationStructureFlagsNV flags = {};
     uint32_t instanceCount = {};
     uint32_t geometryCount = {};
@@ -20015,7 +20015,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct AccelerationStructureMemoryRequirementsInfoNV
   {
-    VULKAN_HPP_CONSTEXPR AccelerationStructureMemoryRequirementsInfoNV( VULKAN_HPP_NAMESPACE::AccelerationStructureMemoryRequirementsTypeNV type_ = {},
+    VULKAN_HPP_CONSTEXPR AccelerationStructureMemoryRequirementsInfoNV( VULKAN_HPP_NAMESPACE::AccelerationStructureMemoryRequirementsTypeNV type_ = VULKAN_HPP_NAMESPACE::AccelerationStructureMemoryRequirementsTypeNV::eObject,
                                                                         VULKAN_HPP_NAMESPACE::AccelerationStructureNV accelerationStructure_ = {} ) VULKAN_HPP_NOEXCEPT
       : type( type_ )
       , accelerationStructure( accelerationStructure_ )
@@ -20082,7 +20082,7 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eAccelerationStructureMemoryRequirementsInfoNV;
     const void* pNext = {};
-    VULKAN_HPP_NAMESPACE::AccelerationStructureMemoryRequirementsTypeNV type = {};
+    VULKAN_HPP_NAMESPACE::AccelerationStructureMemoryRequirementsTypeNV type = VULKAN_HPP_NAMESPACE::AccelerationStructureMemoryRequirementsTypeNV::eObject;
     VULKAN_HPP_NAMESPACE::AccelerationStructureNV accelerationStructure = {};
   };
   static_assert( sizeof( AccelerationStructureMemoryRequirementsInfoNV ) == sizeof( VkAccelerationStructureMemoryRequirementsInfoNV ), "struct and wrapper have different size!" );
@@ -20369,10 +20369,10 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ComponentMapping
   {
-    VULKAN_HPP_CONSTEXPR ComponentMapping( VULKAN_HPP_NAMESPACE::ComponentSwizzle r_ = {},
-                                           VULKAN_HPP_NAMESPACE::ComponentSwizzle g_ = {},
-                                           VULKAN_HPP_NAMESPACE::ComponentSwizzle b_ = {},
-                                           VULKAN_HPP_NAMESPACE::ComponentSwizzle a_ = {} ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR ComponentMapping( VULKAN_HPP_NAMESPACE::ComponentSwizzle r_ = VULKAN_HPP_NAMESPACE::ComponentSwizzle::eIdentity,
+                                           VULKAN_HPP_NAMESPACE::ComponentSwizzle g_ = VULKAN_HPP_NAMESPACE::ComponentSwizzle::eIdentity,
+                                           VULKAN_HPP_NAMESPACE::ComponentSwizzle b_ = VULKAN_HPP_NAMESPACE::ComponentSwizzle::eIdentity,
+                                           VULKAN_HPP_NAMESPACE::ComponentSwizzle a_ = VULKAN_HPP_NAMESPACE::ComponentSwizzle::eIdentity ) VULKAN_HPP_NOEXCEPT
       : r( r_ )
       , g( g_ )
       , b( b_ )
@@ -20438,10 +20438,10 @@ namespace VULKAN_HPP_NAMESPACE
     }
 
   public:
-    VULKAN_HPP_NAMESPACE::ComponentSwizzle r = {};
-    VULKAN_HPP_NAMESPACE::ComponentSwizzle g = {};
-    VULKAN_HPP_NAMESPACE::ComponentSwizzle b = {};
-    VULKAN_HPP_NAMESPACE::ComponentSwizzle a = {};
+    VULKAN_HPP_NAMESPACE::ComponentSwizzle r = VULKAN_HPP_NAMESPACE::ComponentSwizzle::eIdentity;
+    VULKAN_HPP_NAMESPACE::ComponentSwizzle g = VULKAN_HPP_NAMESPACE::ComponentSwizzle::eIdentity;
+    VULKAN_HPP_NAMESPACE::ComponentSwizzle b = VULKAN_HPP_NAMESPACE::ComponentSwizzle::eIdentity;
+    VULKAN_HPP_NAMESPACE::ComponentSwizzle a = VULKAN_HPP_NAMESPACE::ComponentSwizzle::eIdentity;
   };
   static_assert( sizeof( ComponentMapping ) == sizeof( VkComponentMapping ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<ComponentMapping>::value, "struct wrapper is not a standard layout!" );
@@ -20450,14 +20450,14 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct AndroidHardwareBufferFormatPropertiesANDROID
   {
-    AndroidHardwareBufferFormatPropertiesANDROID( VULKAN_HPP_NAMESPACE::Format format_ = {},
+    AndroidHardwareBufferFormatPropertiesANDROID( VULKAN_HPP_NAMESPACE::Format format_ = VULKAN_HPP_NAMESPACE::Format::eUndefined,
                                                   uint64_t externalFormat_ = {},
                                                   VULKAN_HPP_NAMESPACE::FormatFeatureFlags formatFeatures_ = {},
                                                   VULKAN_HPP_NAMESPACE::ComponentMapping samplerYcbcrConversionComponents_ = {},
-                                                  VULKAN_HPP_NAMESPACE::SamplerYcbcrModelConversion suggestedYcbcrModel_ = {},
-                                                  VULKAN_HPP_NAMESPACE::SamplerYcbcrRange suggestedYcbcrRange_ = {},
-                                                  VULKAN_HPP_NAMESPACE::ChromaLocation suggestedXChromaOffset_ = {},
-                                                  VULKAN_HPP_NAMESPACE::ChromaLocation suggestedYChromaOffset_ = {} ) VULKAN_HPP_NOEXCEPT
+                                                  VULKAN_HPP_NAMESPACE::SamplerYcbcrModelConversion suggestedYcbcrModel_ = VULKAN_HPP_NAMESPACE::SamplerYcbcrModelConversion::eRgbIdentity,
+                                                  VULKAN_HPP_NAMESPACE::SamplerYcbcrRange suggestedYcbcrRange_ = VULKAN_HPP_NAMESPACE::SamplerYcbcrRange::eItuFull,
+                                                  VULKAN_HPP_NAMESPACE::ChromaLocation suggestedXChromaOffset_ = VULKAN_HPP_NAMESPACE::ChromaLocation::eCositedEven,
+                                                  VULKAN_HPP_NAMESPACE::ChromaLocation suggestedYChromaOffset_ = VULKAN_HPP_NAMESPACE::ChromaLocation::eCositedEven ) VULKAN_HPP_NOEXCEPT
       : format( format_ )
       , externalFormat( externalFormat_ )
       , formatFeatures( formatFeatures_ )
@@ -20517,14 +20517,14 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eAndroidHardwareBufferFormatPropertiesANDROID;
     void* pNext = {};
-    VULKAN_HPP_NAMESPACE::Format format = {};
+    VULKAN_HPP_NAMESPACE::Format format = VULKAN_HPP_NAMESPACE::Format::eUndefined;
     uint64_t externalFormat = {};
     VULKAN_HPP_NAMESPACE::FormatFeatureFlags formatFeatures = {};
     VULKAN_HPP_NAMESPACE::ComponentMapping samplerYcbcrConversionComponents = {};
-    VULKAN_HPP_NAMESPACE::SamplerYcbcrModelConversion suggestedYcbcrModel = {};
-    VULKAN_HPP_NAMESPACE::SamplerYcbcrRange suggestedYcbcrRange = {};
-    VULKAN_HPP_NAMESPACE::ChromaLocation suggestedXChromaOffset = {};
-    VULKAN_HPP_NAMESPACE::ChromaLocation suggestedYChromaOffset = {};
+    VULKAN_HPP_NAMESPACE::SamplerYcbcrModelConversion suggestedYcbcrModel = VULKAN_HPP_NAMESPACE::SamplerYcbcrModelConversion::eRgbIdentity;
+    VULKAN_HPP_NAMESPACE::SamplerYcbcrRange suggestedYcbcrRange = VULKAN_HPP_NAMESPACE::SamplerYcbcrRange::eItuFull;
+    VULKAN_HPP_NAMESPACE::ChromaLocation suggestedXChromaOffset = VULKAN_HPP_NAMESPACE::ChromaLocation::eCositedEven;
+    VULKAN_HPP_NAMESPACE::ChromaLocation suggestedYChromaOffset = VULKAN_HPP_NAMESPACE::ChromaLocation::eCositedEven;
   };
   static_assert( sizeof( AndroidHardwareBufferFormatPropertiesANDROID ) == sizeof( VkAndroidHardwareBufferFormatPropertiesANDROID ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<AndroidHardwareBufferFormatPropertiesANDROID>::value, "struct wrapper is not a standard layout!" );
@@ -20832,14 +20832,14 @@ namespace VULKAN_HPP_NAMESPACE
   struct AttachmentDescription
   {
     VULKAN_HPP_CONSTEXPR AttachmentDescription( VULKAN_HPP_NAMESPACE::AttachmentDescriptionFlags flags_ = {},
-                                                VULKAN_HPP_NAMESPACE::Format format_ = {},
-                                                VULKAN_HPP_NAMESPACE::SampleCountFlagBits samples_ = {},
-                                                VULKAN_HPP_NAMESPACE::AttachmentLoadOp loadOp_ = {},
-                                                VULKAN_HPP_NAMESPACE::AttachmentStoreOp storeOp_ = {},
-                                                VULKAN_HPP_NAMESPACE::AttachmentLoadOp stencilLoadOp_ = {},
-                                                VULKAN_HPP_NAMESPACE::AttachmentStoreOp stencilStoreOp_ = {},
-                                                VULKAN_HPP_NAMESPACE::ImageLayout initialLayout_ = {},
-                                                VULKAN_HPP_NAMESPACE::ImageLayout finalLayout_ = {} ) VULKAN_HPP_NOEXCEPT
+                                                VULKAN_HPP_NAMESPACE::Format format_ = VULKAN_HPP_NAMESPACE::Format::eUndefined,
+                                                VULKAN_HPP_NAMESPACE::SampleCountFlagBits samples_ = VULKAN_HPP_NAMESPACE::SampleCountFlagBits::e1,
+                                                VULKAN_HPP_NAMESPACE::AttachmentLoadOp loadOp_ = VULKAN_HPP_NAMESPACE::AttachmentLoadOp::eLoad,
+                                                VULKAN_HPP_NAMESPACE::AttachmentStoreOp storeOp_ = VULKAN_HPP_NAMESPACE::AttachmentStoreOp::eStore,
+                                                VULKAN_HPP_NAMESPACE::AttachmentLoadOp stencilLoadOp_ = VULKAN_HPP_NAMESPACE::AttachmentLoadOp::eLoad,
+                                                VULKAN_HPP_NAMESPACE::AttachmentStoreOp stencilStoreOp_ = VULKAN_HPP_NAMESPACE::AttachmentStoreOp::eStore,
+                                                VULKAN_HPP_NAMESPACE::ImageLayout initialLayout_ = VULKAN_HPP_NAMESPACE::ImageLayout::eUndefined,
+                                                VULKAN_HPP_NAMESPACE::ImageLayout finalLayout_ = VULKAN_HPP_NAMESPACE::ImageLayout::eUndefined ) VULKAN_HPP_NOEXCEPT
       : flags( flags_ )
       , format( format_ )
       , samples( samples_ )
@@ -20946,14 +20946,14 @@ namespace VULKAN_HPP_NAMESPACE
 
   public:
     VULKAN_HPP_NAMESPACE::AttachmentDescriptionFlags flags = {};
-    VULKAN_HPP_NAMESPACE::Format format = {};
-    VULKAN_HPP_NAMESPACE::SampleCountFlagBits samples = {};
-    VULKAN_HPP_NAMESPACE::AttachmentLoadOp loadOp = {};
-    VULKAN_HPP_NAMESPACE::AttachmentStoreOp storeOp = {};
-    VULKAN_HPP_NAMESPACE::AttachmentLoadOp stencilLoadOp = {};
-    VULKAN_HPP_NAMESPACE::AttachmentStoreOp stencilStoreOp = {};
-    VULKAN_HPP_NAMESPACE::ImageLayout initialLayout = {};
-    VULKAN_HPP_NAMESPACE::ImageLayout finalLayout = {};
+    VULKAN_HPP_NAMESPACE::Format format = VULKAN_HPP_NAMESPACE::Format::eUndefined;
+    VULKAN_HPP_NAMESPACE::SampleCountFlagBits samples = VULKAN_HPP_NAMESPACE::SampleCountFlagBits::e1;
+    VULKAN_HPP_NAMESPACE::AttachmentLoadOp loadOp = VULKAN_HPP_NAMESPACE::AttachmentLoadOp::eLoad;
+    VULKAN_HPP_NAMESPACE::AttachmentStoreOp storeOp = VULKAN_HPP_NAMESPACE::AttachmentStoreOp::eStore;
+    VULKAN_HPP_NAMESPACE::AttachmentLoadOp stencilLoadOp = VULKAN_HPP_NAMESPACE::AttachmentLoadOp::eLoad;
+    VULKAN_HPP_NAMESPACE::AttachmentStoreOp stencilStoreOp = VULKAN_HPP_NAMESPACE::AttachmentStoreOp::eStore;
+    VULKAN_HPP_NAMESPACE::ImageLayout initialLayout = VULKAN_HPP_NAMESPACE::ImageLayout::eUndefined;
+    VULKAN_HPP_NAMESPACE::ImageLayout finalLayout = VULKAN_HPP_NAMESPACE::ImageLayout::eUndefined;
   };
   static_assert( sizeof( AttachmentDescription ) == sizeof( VkAttachmentDescription ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<AttachmentDescription>::value, "struct wrapper is not a standard layout!" );
@@ -20961,14 +20961,14 @@ namespace VULKAN_HPP_NAMESPACE
   struct AttachmentDescription2
   {
     VULKAN_HPP_CONSTEXPR AttachmentDescription2( VULKAN_HPP_NAMESPACE::AttachmentDescriptionFlags flags_ = {},
-                                                 VULKAN_HPP_NAMESPACE::Format format_ = {},
-                                                 VULKAN_HPP_NAMESPACE::SampleCountFlagBits samples_ = {},
-                                                 VULKAN_HPP_NAMESPACE::AttachmentLoadOp loadOp_ = {},
-                                                 VULKAN_HPP_NAMESPACE::AttachmentStoreOp storeOp_ = {},
-                                                 VULKAN_HPP_NAMESPACE::AttachmentLoadOp stencilLoadOp_ = {},
-                                                 VULKAN_HPP_NAMESPACE::AttachmentStoreOp stencilStoreOp_ = {},
-                                                 VULKAN_HPP_NAMESPACE::ImageLayout initialLayout_ = {},
-                                                 VULKAN_HPP_NAMESPACE::ImageLayout finalLayout_ = {} ) VULKAN_HPP_NOEXCEPT
+                                                 VULKAN_HPP_NAMESPACE::Format format_ = VULKAN_HPP_NAMESPACE::Format::eUndefined,
+                                                 VULKAN_HPP_NAMESPACE::SampleCountFlagBits samples_ = VULKAN_HPP_NAMESPACE::SampleCountFlagBits::e1,
+                                                 VULKAN_HPP_NAMESPACE::AttachmentLoadOp loadOp_ = VULKAN_HPP_NAMESPACE::AttachmentLoadOp::eLoad,
+                                                 VULKAN_HPP_NAMESPACE::AttachmentStoreOp storeOp_ = VULKAN_HPP_NAMESPACE::AttachmentStoreOp::eStore,
+                                                 VULKAN_HPP_NAMESPACE::AttachmentLoadOp stencilLoadOp_ = VULKAN_HPP_NAMESPACE::AttachmentLoadOp::eLoad,
+                                                 VULKAN_HPP_NAMESPACE::AttachmentStoreOp stencilStoreOp_ = VULKAN_HPP_NAMESPACE::AttachmentStoreOp::eStore,
+                                                 VULKAN_HPP_NAMESPACE::ImageLayout initialLayout_ = VULKAN_HPP_NAMESPACE::ImageLayout::eUndefined,
+                                                 VULKAN_HPP_NAMESPACE::ImageLayout finalLayout_ = VULKAN_HPP_NAMESPACE::ImageLayout::eUndefined ) VULKAN_HPP_NOEXCEPT
       : flags( flags_ )
       , format( format_ )
       , samples( samples_ )
@@ -21091,22 +21091,22 @@ namespace VULKAN_HPP_NAMESPACE
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eAttachmentDescription2;
     const void* pNext = {};
     VULKAN_HPP_NAMESPACE::AttachmentDescriptionFlags flags = {};
-    VULKAN_HPP_NAMESPACE::Format format = {};
-    VULKAN_HPP_NAMESPACE::SampleCountFlagBits samples = {};
-    VULKAN_HPP_NAMESPACE::AttachmentLoadOp loadOp = {};
-    VULKAN_HPP_NAMESPACE::AttachmentStoreOp storeOp = {};
-    VULKAN_HPP_NAMESPACE::AttachmentLoadOp stencilLoadOp = {};
-    VULKAN_HPP_NAMESPACE::AttachmentStoreOp stencilStoreOp = {};
-    VULKAN_HPP_NAMESPACE::ImageLayout initialLayout = {};
-    VULKAN_HPP_NAMESPACE::ImageLayout finalLayout = {};
+    VULKAN_HPP_NAMESPACE::Format format = VULKAN_HPP_NAMESPACE::Format::eUndefined;
+    VULKAN_HPP_NAMESPACE::SampleCountFlagBits samples = VULKAN_HPP_NAMESPACE::SampleCountFlagBits::e1;
+    VULKAN_HPP_NAMESPACE::AttachmentLoadOp loadOp = VULKAN_HPP_NAMESPACE::AttachmentLoadOp::eLoad;
+    VULKAN_HPP_NAMESPACE::AttachmentStoreOp storeOp = VULKAN_HPP_NAMESPACE::AttachmentStoreOp::eStore;
+    VULKAN_HPP_NAMESPACE::AttachmentLoadOp stencilLoadOp = VULKAN_HPP_NAMESPACE::AttachmentLoadOp::eLoad;
+    VULKAN_HPP_NAMESPACE::AttachmentStoreOp stencilStoreOp = VULKAN_HPP_NAMESPACE::AttachmentStoreOp::eStore;
+    VULKAN_HPP_NAMESPACE::ImageLayout initialLayout = VULKAN_HPP_NAMESPACE::ImageLayout::eUndefined;
+    VULKAN_HPP_NAMESPACE::ImageLayout finalLayout = VULKAN_HPP_NAMESPACE::ImageLayout::eUndefined;
   };
   static_assert( sizeof( AttachmentDescription2 ) == sizeof( VkAttachmentDescription2 ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<AttachmentDescription2>::value, "struct wrapper is not a standard layout!" );
 
   struct AttachmentDescriptionStencilLayout
   {
-    VULKAN_HPP_CONSTEXPR AttachmentDescriptionStencilLayout( VULKAN_HPP_NAMESPACE::ImageLayout stencilInitialLayout_ = {},
-                                                             VULKAN_HPP_NAMESPACE::ImageLayout stencilFinalLayout_ = {} ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR AttachmentDescriptionStencilLayout( VULKAN_HPP_NAMESPACE::ImageLayout stencilInitialLayout_ = VULKAN_HPP_NAMESPACE::ImageLayout::eUndefined,
+                                                             VULKAN_HPP_NAMESPACE::ImageLayout stencilFinalLayout_ = VULKAN_HPP_NAMESPACE::ImageLayout::eUndefined ) VULKAN_HPP_NOEXCEPT
       : stencilInitialLayout( stencilInitialLayout_ )
       , stencilFinalLayout( stencilFinalLayout_ )
     {}
@@ -21172,8 +21172,8 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eAttachmentDescriptionStencilLayout;
     void* pNext = {};
-    VULKAN_HPP_NAMESPACE::ImageLayout stencilInitialLayout = {};
-    VULKAN_HPP_NAMESPACE::ImageLayout stencilFinalLayout = {};
+    VULKAN_HPP_NAMESPACE::ImageLayout stencilInitialLayout = VULKAN_HPP_NAMESPACE::ImageLayout::eUndefined;
+    VULKAN_HPP_NAMESPACE::ImageLayout stencilFinalLayout = VULKAN_HPP_NAMESPACE::ImageLayout::eUndefined;
   };
   static_assert( sizeof( AttachmentDescriptionStencilLayout ) == sizeof( VkAttachmentDescriptionStencilLayout ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<AttachmentDescriptionStencilLayout>::value, "struct wrapper is not a standard layout!" );
@@ -21181,7 +21181,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct AttachmentReference
   {
     VULKAN_HPP_CONSTEXPR AttachmentReference( uint32_t attachment_ = {},
-                                              VULKAN_HPP_NAMESPACE::ImageLayout layout_ = {} ) VULKAN_HPP_NOEXCEPT
+                                              VULKAN_HPP_NAMESPACE::ImageLayout layout_ = VULKAN_HPP_NAMESPACE::ImageLayout::eUndefined ) VULKAN_HPP_NOEXCEPT
       : attachment( attachment_ )
       , layout( layout_ )
     {}
@@ -21232,7 +21232,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   public:
     uint32_t attachment = {};
-    VULKAN_HPP_NAMESPACE::ImageLayout layout = {};
+    VULKAN_HPP_NAMESPACE::ImageLayout layout = VULKAN_HPP_NAMESPACE::ImageLayout::eUndefined;
   };
   static_assert( sizeof( AttachmentReference ) == sizeof( VkAttachmentReference ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<AttachmentReference>::value, "struct wrapper is not a standard layout!" );
@@ -21240,7 +21240,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct AttachmentReference2
   {
     VULKAN_HPP_CONSTEXPR AttachmentReference2( uint32_t attachment_ = {},
-                                               VULKAN_HPP_NAMESPACE::ImageLayout layout_ = {},
+                                               VULKAN_HPP_NAMESPACE::ImageLayout layout_ = VULKAN_HPP_NAMESPACE::ImageLayout::eUndefined,
                                                VULKAN_HPP_NAMESPACE::ImageAspectFlags aspectMask_ = {} ) VULKAN_HPP_NOEXCEPT
       : attachment( attachment_ )
       , layout( layout_ )
@@ -21316,7 +21316,7 @@ namespace VULKAN_HPP_NAMESPACE
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eAttachmentReference2;
     const void* pNext = {};
     uint32_t attachment = {};
-    VULKAN_HPP_NAMESPACE::ImageLayout layout = {};
+    VULKAN_HPP_NAMESPACE::ImageLayout layout = VULKAN_HPP_NAMESPACE::ImageLayout::eUndefined;
     VULKAN_HPP_NAMESPACE::ImageAspectFlags aspectMask = {};
   };
   static_assert( sizeof( AttachmentReference2 ) == sizeof( VkAttachmentReference2 ), "struct and wrapper have different size!" );
@@ -21324,7 +21324,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct AttachmentReferenceStencilLayout
   {
-    VULKAN_HPP_CONSTEXPR AttachmentReferenceStencilLayout( VULKAN_HPP_NAMESPACE::ImageLayout stencilLayout_ = {} ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR AttachmentReferenceStencilLayout( VULKAN_HPP_NAMESPACE::ImageLayout stencilLayout_ = VULKAN_HPP_NAMESPACE::ImageLayout::eUndefined ) VULKAN_HPP_NOEXCEPT
       : stencilLayout( stencilLayout_ )
     {}
 
@@ -21382,7 +21382,7 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eAttachmentReferenceStencilLayout;
     void* pNext = {};
-    VULKAN_HPP_NAMESPACE::ImageLayout stencilLayout = {};
+    VULKAN_HPP_NAMESPACE::ImageLayout stencilLayout = VULKAN_HPP_NAMESPACE::ImageLayout::eUndefined;
   };
   static_assert( sizeof( AttachmentReferenceStencilLayout ) == sizeof( VkAttachmentReferenceStencilLayout ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<AttachmentReferenceStencilLayout>::value, "struct wrapper is not a standard layout!" );
@@ -21507,7 +21507,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct SampleLocationsInfoEXT
   {
-    VULKAN_HPP_CONSTEXPR SampleLocationsInfoEXT( VULKAN_HPP_NAMESPACE::SampleCountFlagBits sampleLocationsPerPixel_ = {},
+    VULKAN_HPP_CONSTEXPR SampleLocationsInfoEXT( VULKAN_HPP_NAMESPACE::SampleCountFlagBits sampleLocationsPerPixel_ = VULKAN_HPP_NAMESPACE::SampleCountFlagBits::e1,
                                                  VULKAN_HPP_NAMESPACE::Extent2D sampleLocationGridSize_ = {},
                                                  uint32_t sampleLocationsCount_ = {},
                                                  const VULKAN_HPP_NAMESPACE::SampleLocationEXT* pSampleLocations_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -21592,7 +21592,7 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eSampleLocationsInfoEXT;
     const void* pNext = {};
-    VULKAN_HPP_NAMESPACE::SampleCountFlagBits sampleLocationsPerPixel = {};
+    VULKAN_HPP_NAMESPACE::SampleCountFlagBits sampleLocationsPerPixel = VULKAN_HPP_NAMESPACE::SampleCountFlagBits::e1;
     VULKAN_HPP_NAMESPACE::Extent2D sampleLocationGridSize = {};
     uint32_t sampleLocationsCount = {};
     const VULKAN_HPP_NAMESPACE::SampleLocationEXT* pSampleLocations = {};
@@ -22399,7 +22399,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct BindImagePlaneMemoryInfo
   {
-    VULKAN_HPP_CONSTEXPR BindImagePlaneMemoryInfo( VULKAN_HPP_NAMESPACE::ImageAspectFlagBits planeAspect_ = {} ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR BindImagePlaneMemoryInfo( VULKAN_HPP_NAMESPACE::ImageAspectFlagBits planeAspect_ = VULKAN_HPP_NAMESPACE::ImageAspectFlagBits::eColor ) VULKAN_HPP_NOEXCEPT
       : planeAspect( planeAspect_ )
     {}
 
@@ -22457,7 +22457,7 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eBindImagePlaneMemoryInfo;
     const void* pNext = {};
-    VULKAN_HPP_NAMESPACE::ImageAspectFlagBits planeAspect = {};
+    VULKAN_HPP_NAMESPACE::ImageAspectFlagBits planeAspect = VULKAN_HPP_NAMESPACE::ImageAspectFlagBits::eColor;
   };
   static_assert( sizeof( BindImagePlaneMemoryInfo ) == sizeof( VkBindImagePlaneMemoryInfo ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<BindImagePlaneMemoryInfo>::value, "struct wrapper is not a standard layout!" );
@@ -23307,7 +23307,7 @@ namespace VULKAN_HPP_NAMESPACE
     VULKAN_HPP_CONSTEXPR BufferCreateInfo( VULKAN_HPP_NAMESPACE::BufferCreateFlags flags_ = {},
                                            VULKAN_HPP_NAMESPACE::DeviceSize size_ = {},
                                            VULKAN_HPP_NAMESPACE::BufferUsageFlags usage_ = {},
-                                           VULKAN_HPP_NAMESPACE::SharingMode sharingMode_ = {},
+                                           VULKAN_HPP_NAMESPACE::SharingMode sharingMode_ = VULKAN_HPP_NAMESPACE::SharingMode::eExclusive,
                                            uint32_t queueFamilyIndexCount_ = {},
                                            const uint32_t* pQueueFamilyIndices_ = {} ) VULKAN_HPP_NOEXCEPT
       : flags( flags_ )
@@ -23410,7 +23410,7 @@ namespace VULKAN_HPP_NAMESPACE
     VULKAN_HPP_NAMESPACE::BufferCreateFlags flags = {};
     VULKAN_HPP_NAMESPACE::DeviceSize size = {};
     VULKAN_HPP_NAMESPACE::BufferUsageFlags usage = {};
-    VULKAN_HPP_NAMESPACE::SharingMode sharingMode = {};
+    VULKAN_HPP_NAMESPACE::SharingMode sharingMode = VULKAN_HPP_NAMESPACE::SharingMode::eExclusive;
     uint32_t queueFamilyIndexCount = {};
     const uint32_t* pQueueFamilyIndices = {};
   };
@@ -23984,7 +23984,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     VULKAN_HPP_CONSTEXPR BufferViewCreateInfo( VULKAN_HPP_NAMESPACE::BufferViewCreateFlags flags_ = {},
                                                VULKAN_HPP_NAMESPACE::Buffer buffer_ = {},
-                                               VULKAN_HPP_NAMESPACE::Format format_ = {},
+                                               VULKAN_HPP_NAMESPACE::Format format_ = VULKAN_HPP_NAMESPACE::Format::eUndefined,
                                                VULKAN_HPP_NAMESPACE::DeviceSize offset_ = {},
                                                VULKAN_HPP_NAMESPACE::DeviceSize range_ = {} ) VULKAN_HPP_NOEXCEPT
       : flags( flags_ )
@@ -24078,7 +24078,7 @@ namespace VULKAN_HPP_NAMESPACE
     const void* pNext = {};
     VULKAN_HPP_NAMESPACE::BufferViewCreateFlags flags = {};
     VULKAN_HPP_NAMESPACE::Buffer buffer = {};
-    VULKAN_HPP_NAMESPACE::Format format = {};
+    VULKAN_HPP_NAMESPACE::Format format = VULKAN_HPP_NAMESPACE::Format::eUndefined;
     VULKAN_HPP_NAMESPACE::DeviceSize offset = {};
     VULKAN_HPP_NAMESPACE::DeviceSize range = {};
   };
@@ -24087,7 +24087,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct CalibratedTimestampInfoEXT
   {
-    VULKAN_HPP_CONSTEXPR CalibratedTimestampInfoEXT( VULKAN_HPP_NAMESPACE::TimeDomainEXT timeDomain_ = {} ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR CalibratedTimestampInfoEXT( VULKAN_HPP_NAMESPACE::TimeDomainEXT timeDomain_ = VULKAN_HPP_NAMESPACE::TimeDomainEXT::eDevice ) VULKAN_HPP_NOEXCEPT
       : timeDomain( timeDomain_ )
     {}
 
@@ -24145,14 +24145,14 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eCalibratedTimestampInfoEXT;
     const void* pNext = {};
-    VULKAN_HPP_NAMESPACE::TimeDomainEXT timeDomain = {};
+    VULKAN_HPP_NAMESPACE::TimeDomainEXT timeDomain = VULKAN_HPP_NAMESPACE::TimeDomainEXT::eDevice;
   };
   static_assert( sizeof( CalibratedTimestampInfoEXT ) == sizeof( VkCalibratedTimestampInfoEXT ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<CalibratedTimestampInfoEXT>::value, "struct wrapper is not a standard layout!" );
 
   struct CheckpointDataNV
   {
-    CheckpointDataNV( VULKAN_HPP_NAMESPACE::PipelineStageFlagBits stage_ = {},
+    CheckpointDataNV( VULKAN_HPP_NAMESPACE::PipelineStageFlagBits stage_ = VULKAN_HPP_NAMESPACE::PipelineStageFlagBits::eTopOfPipe,
                       void* pCheckpointMarker_ = {} ) VULKAN_HPP_NOEXCEPT
       : stage( stage_ )
       , pCheckpointMarker( pCheckpointMarker_ )
@@ -24201,7 +24201,7 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eCheckpointDataNV;
     void* pNext = {};
-    VULKAN_HPP_NAMESPACE::PipelineStageFlagBits stage = {};
+    VULKAN_HPP_NAMESPACE::PipelineStageFlagBits stage = VULKAN_HPP_NAMESPACE::PipelineStageFlagBits::eTopOfPipe;
     void* pCheckpointMarker = {};
   };
   static_assert( sizeof( CheckpointDataNV ) == sizeof( VkCheckpointDataNV ), "struct and wrapper have different size!" );
@@ -24499,7 +24499,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct IndirectCommandsTokenNVX
   {
-    VULKAN_HPP_CONSTEXPR IndirectCommandsTokenNVX( VULKAN_HPP_NAMESPACE::IndirectCommandsTokenTypeNVX tokenType_ = {},
+    VULKAN_HPP_CONSTEXPR IndirectCommandsTokenNVX( VULKAN_HPP_NAMESPACE::IndirectCommandsTokenTypeNVX tokenType_ = VULKAN_HPP_NAMESPACE::IndirectCommandsTokenTypeNVX::ePipeline,
                                                    VULKAN_HPP_NAMESPACE::Buffer buffer_ = {},
                                                    VULKAN_HPP_NAMESPACE::DeviceSize offset_ = {} ) VULKAN_HPP_NOEXCEPT
       : tokenType( tokenType_ )
@@ -24559,7 +24559,7 @@ namespace VULKAN_HPP_NAMESPACE
     }
 
   public:
-    VULKAN_HPP_NAMESPACE::IndirectCommandsTokenTypeNVX tokenType = {};
+    VULKAN_HPP_NAMESPACE::IndirectCommandsTokenTypeNVX tokenType = VULKAN_HPP_NAMESPACE::IndirectCommandsTokenTypeNVX::ePipeline;
     VULKAN_HPP_NAMESPACE::Buffer buffer = {};
     VULKAN_HPP_NAMESPACE::DeviceSize offset = {};
   };
@@ -24877,7 +24877,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct CoarseSampleOrderCustomNV
   {
-    VULKAN_HPP_CONSTEXPR CoarseSampleOrderCustomNV( VULKAN_HPP_NAMESPACE::ShadingRatePaletteEntryNV shadingRate_ = {},
+    VULKAN_HPP_CONSTEXPR CoarseSampleOrderCustomNV( VULKAN_HPP_NAMESPACE::ShadingRatePaletteEntryNV shadingRate_ = VULKAN_HPP_NAMESPACE::ShadingRatePaletteEntryNV::eNoInvocations,
                                                     uint32_t sampleCount_ = {},
                                                     uint32_t sampleLocationCount_ = {},
                                                     const VULKAN_HPP_NAMESPACE::CoarseSampleLocationNV* pSampleLocations_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -24946,7 +24946,7 @@ namespace VULKAN_HPP_NAMESPACE
     }
 
   public:
-    VULKAN_HPP_NAMESPACE::ShadingRatePaletteEntryNV shadingRate = {};
+    VULKAN_HPP_NAMESPACE::ShadingRatePaletteEntryNV shadingRate = VULKAN_HPP_NAMESPACE::ShadingRatePaletteEntryNV::eNoInvocations;
     uint32_t sampleCount = {};
     uint32_t sampleLocationCount = {};
     const VULKAN_HPP_NAMESPACE::CoarseSampleLocationNV* pSampleLocations = {};
@@ -24957,7 +24957,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct CommandBufferAllocateInfo
   {
     VULKAN_HPP_CONSTEXPR CommandBufferAllocateInfo( VULKAN_HPP_NAMESPACE::CommandPool commandPool_ = {},
-                                                    VULKAN_HPP_NAMESPACE::CommandBufferLevel level_ = {},
+                                                    VULKAN_HPP_NAMESPACE::CommandBufferLevel level_ = VULKAN_HPP_NAMESPACE::CommandBufferLevel::ePrimary,
                                                     uint32_t commandBufferCount_ = {} ) VULKAN_HPP_NOEXCEPT
       : commandPool( commandPool_ )
       , level( level_ )
@@ -25033,7 +25033,7 @@ namespace VULKAN_HPP_NAMESPACE
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eCommandBufferAllocateInfo;
     const void* pNext = {};
     VULKAN_HPP_NAMESPACE::CommandPool commandPool = {};
-    VULKAN_HPP_NAMESPACE::CommandBufferLevel level = {};
+    VULKAN_HPP_NAMESPACE::CommandBufferLevel level = VULKAN_HPP_NAMESPACE::CommandBufferLevel::ePrimary;
     uint32_t commandBufferCount = {};
   };
   static_assert( sizeof( CommandBufferAllocateInfo ) == sizeof( VkCommandBufferAllocateInfo ), "struct and wrapper have different size!" );
@@ -25520,7 +25520,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct PipelineShaderStageCreateInfo
   {
     VULKAN_HPP_CONSTEXPR PipelineShaderStageCreateInfo( VULKAN_HPP_NAMESPACE::PipelineShaderStageCreateFlags flags_ = {},
-                                                        VULKAN_HPP_NAMESPACE::ShaderStageFlagBits stage_ = {},
+                                                        VULKAN_HPP_NAMESPACE::ShaderStageFlagBits stage_ = VULKAN_HPP_NAMESPACE::ShaderStageFlagBits::eVertex,
                                                         VULKAN_HPP_NAMESPACE::ShaderModule module_ = {},
                                                         const char* pName_ = {},
                                                         const VULKAN_HPP_NAMESPACE::SpecializationInfo* pSpecializationInfo_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -25614,7 +25614,7 @@ namespace VULKAN_HPP_NAMESPACE
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::ePipelineShaderStageCreateInfo;
     const void* pNext = {};
     VULKAN_HPP_NAMESPACE::PipelineShaderStageCreateFlags flags = {};
-    VULKAN_HPP_NAMESPACE::ShaderStageFlagBits stage = {};
+    VULKAN_HPP_NAMESPACE::ShaderStageFlagBits stage = VULKAN_HPP_NAMESPACE::ShaderStageFlagBits::eVertex;
     VULKAN_HPP_NAMESPACE::ShaderModule module = {};
     const char* pName = {};
     const VULKAN_HPP_NAMESPACE::SpecializationInfo* pSpecializationInfo = {};
@@ -25896,11 +25896,11 @@ namespace VULKAN_HPP_NAMESPACE
     VULKAN_HPP_CONSTEXPR CooperativeMatrixPropertiesNV( uint32_t MSize_ = {},
                                                         uint32_t NSize_ = {},
                                                         uint32_t KSize_ = {},
-                                                        VULKAN_HPP_NAMESPACE::ComponentTypeNV AType_ = {},
-                                                        VULKAN_HPP_NAMESPACE::ComponentTypeNV BType_ = {},
-                                                        VULKAN_HPP_NAMESPACE::ComponentTypeNV CType_ = {},
-                                                        VULKAN_HPP_NAMESPACE::ComponentTypeNV DType_ = {},
-                                                        VULKAN_HPP_NAMESPACE::ScopeNV scope_ = {} ) VULKAN_HPP_NOEXCEPT
+                                                        VULKAN_HPP_NAMESPACE::ComponentTypeNV AType_ = VULKAN_HPP_NAMESPACE::ComponentTypeNV::eFloat16,
+                                                        VULKAN_HPP_NAMESPACE::ComponentTypeNV BType_ = VULKAN_HPP_NAMESPACE::ComponentTypeNV::eFloat16,
+                                                        VULKAN_HPP_NAMESPACE::ComponentTypeNV CType_ = VULKAN_HPP_NAMESPACE::ComponentTypeNV::eFloat16,
+                                                        VULKAN_HPP_NAMESPACE::ComponentTypeNV DType_ = VULKAN_HPP_NAMESPACE::ComponentTypeNV::eFloat16,
+                                                        VULKAN_HPP_NAMESPACE::ScopeNV scope_ = VULKAN_HPP_NAMESPACE::ScopeNV::eDevice ) VULKAN_HPP_NOEXCEPT
       : MSize( MSize_ )
       , NSize( NSize_ )
       , KSize( KSize_ )
@@ -26017,11 +26017,11 @@ namespace VULKAN_HPP_NAMESPACE
     uint32_t MSize = {};
     uint32_t NSize = {};
     uint32_t KSize = {};
-    VULKAN_HPP_NAMESPACE::ComponentTypeNV AType = {};
-    VULKAN_HPP_NAMESPACE::ComponentTypeNV BType = {};
-    VULKAN_HPP_NAMESPACE::ComponentTypeNV CType = {};
-    VULKAN_HPP_NAMESPACE::ComponentTypeNV DType = {};
-    VULKAN_HPP_NAMESPACE::ScopeNV scope = {};
+    VULKAN_HPP_NAMESPACE::ComponentTypeNV AType = VULKAN_HPP_NAMESPACE::ComponentTypeNV::eFloat16;
+    VULKAN_HPP_NAMESPACE::ComponentTypeNV BType = VULKAN_HPP_NAMESPACE::ComponentTypeNV::eFloat16;
+    VULKAN_HPP_NAMESPACE::ComponentTypeNV CType = VULKAN_HPP_NAMESPACE::ComponentTypeNV::eFloat16;
+    VULKAN_HPP_NAMESPACE::ComponentTypeNV DType = VULKAN_HPP_NAMESPACE::ComponentTypeNV::eFloat16;
+    VULKAN_HPP_NAMESPACE::ScopeNV scope = VULKAN_HPP_NAMESPACE::ScopeNV::eDevice;
   };
   static_assert( sizeof( CooperativeMatrixPropertiesNV ) == sizeof( VkCooperativeMatrixPropertiesNV ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<CooperativeMatrixPropertiesNV>::value, "struct wrapper is not a standard layout!" );
@@ -26328,7 +26328,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DebugMarkerObjectNameInfoEXT
   {
-    VULKAN_HPP_CONSTEXPR DebugMarkerObjectNameInfoEXT( VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT objectType_ = {},
+    VULKAN_HPP_CONSTEXPR DebugMarkerObjectNameInfoEXT( VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT objectType_ = VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eUnknown,
                                                        uint64_t object_ = {},
                                                        const char* pObjectName_ = {} ) VULKAN_HPP_NOEXCEPT
       : objectType( objectType_ )
@@ -26404,7 +26404,7 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eDebugMarkerObjectNameInfoEXT;
     const void* pNext = {};
-    VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT objectType = {};
+    VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT objectType = VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eUnknown;
     uint64_t object = {};
     const char* pObjectName = {};
   };
@@ -26413,7 +26413,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DebugMarkerObjectTagInfoEXT
   {
-    VULKAN_HPP_CONSTEXPR DebugMarkerObjectTagInfoEXT( VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT objectType_ = {},
+    VULKAN_HPP_CONSTEXPR DebugMarkerObjectTagInfoEXT( VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT objectType_ = VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eUnknown,
                                                       uint64_t object_ = {},
                                                       uint64_t tagName_ = {},
                                                       size_t tagSize_ = {},
@@ -26507,7 +26507,7 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eDebugMarkerObjectTagInfoEXT;
     const void* pNext = {};
-    VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT objectType = {};
+    VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT objectType = VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eUnknown;
     uint64_t object = {};
     uint64_t tagName = {};
     size_t tagSize = {};
@@ -26680,7 +26680,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DebugUtilsObjectNameInfoEXT
   {
-    VULKAN_HPP_CONSTEXPR DebugUtilsObjectNameInfoEXT( VULKAN_HPP_NAMESPACE::ObjectType objectType_ = {},
+    VULKAN_HPP_CONSTEXPR DebugUtilsObjectNameInfoEXT( VULKAN_HPP_NAMESPACE::ObjectType objectType_ = VULKAN_HPP_NAMESPACE::ObjectType::eUnknown,
                                                       uint64_t objectHandle_ = {},
                                                       const char* pObjectName_ = {} ) VULKAN_HPP_NOEXCEPT
       : objectType( objectType_ )
@@ -26756,7 +26756,7 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eDebugUtilsObjectNameInfoEXT;
     const void* pNext = {};
-    VULKAN_HPP_NAMESPACE::ObjectType objectType = {};
+    VULKAN_HPP_NAMESPACE::ObjectType objectType = VULKAN_HPP_NAMESPACE::ObjectType::eUnknown;
     uint64_t objectHandle = {};
     const char* pObjectName = {};
   };
@@ -27025,7 +27025,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DebugUtilsObjectTagInfoEXT
   {
-    VULKAN_HPP_CONSTEXPR DebugUtilsObjectTagInfoEXT( VULKAN_HPP_NAMESPACE::ObjectType objectType_ = {},
+    VULKAN_HPP_CONSTEXPR DebugUtilsObjectTagInfoEXT( VULKAN_HPP_NAMESPACE::ObjectType objectType_ = VULKAN_HPP_NAMESPACE::ObjectType::eUnknown,
                                                      uint64_t objectHandle_ = {},
                                                      uint64_t tagName_ = {},
                                                      size_t tagSize_ = {},
@@ -27119,7 +27119,7 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eDebugUtilsObjectTagInfoEXT;
     const void* pNext = {};
-    VULKAN_HPP_NAMESPACE::ObjectType objectType = {};
+    VULKAN_HPP_NAMESPACE::ObjectType objectType = VULKAN_HPP_NAMESPACE::ObjectType::eUnknown;
     uint64_t objectHandle = {};
     uint64_t tagName = {};
     size_t tagSize = {};
@@ -27406,7 +27406,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     VULKAN_HPP_CONSTEXPR DescriptorImageInfo( VULKAN_HPP_NAMESPACE::Sampler sampler_ = {},
                                               VULKAN_HPP_NAMESPACE::ImageView imageView_ = {},
-                                              VULKAN_HPP_NAMESPACE::ImageLayout imageLayout_ = {} ) VULKAN_HPP_NOEXCEPT
+                                              VULKAN_HPP_NAMESPACE::ImageLayout imageLayout_ = VULKAN_HPP_NAMESPACE::ImageLayout::eUndefined ) VULKAN_HPP_NOEXCEPT
       : sampler( sampler_ )
       , imageView( imageView_ )
       , imageLayout( imageLayout_ )
@@ -27466,14 +27466,14 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     VULKAN_HPP_NAMESPACE::Sampler sampler = {};
     VULKAN_HPP_NAMESPACE::ImageView imageView = {};
-    VULKAN_HPP_NAMESPACE::ImageLayout imageLayout = {};
+    VULKAN_HPP_NAMESPACE::ImageLayout imageLayout = VULKAN_HPP_NAMESPACE::ImageLayout::eUndefined;
   };
   static_assert( sizeof( DescriptorImageInfo ) == sizeof( VkDescriptorImageInfo ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<DescriptorImageInfo>::value, "struct wrapper is not a standard layout!" );
 
   struct DescriptorPoolSize
   {
-    VULKAN_HPP_CONSTEXPR DescriptorPoolSize( VULKAN_HPP_NAMESPACE::DescriptorType type_ = {},
+    VULKAN_HPP_CONSTEXPR DescriptorPoolSize( VULKAN_HPP_NAMESPACE::DescriptorType type_ = VULKAN_HPP_NAMESPACE::DescriptorType::eSampler,
                                              uint32_t descriptorCount_ = {} ) VULKAN_HPP_NOEXCEPT
       : type( type_ )
       , descriptorCount( descriptorCount_ )
@@ -27524,7 +27524,7 @@ namespace VULKAN_HPP_NAMESPACE
     }
 
   public:
-    VULKAN_HPP_NAMESPACE::DescriptorType type = {};
+    VULKAN_HPP_NAMESPACE::DescriptorType type = VULKAN_HPP_NAMESPACE::DescriptorType::eSampler;
     uint32_t descriptorCount = {};
   };
   static_assert( sizeof( DescriptorPoolSize ) == sizeof( VkDescriptorPoolSize ), "struct and wrapper have different size!" );
@@ -27778,7 +27778,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct DescriptorSetLayoutBinding
   {
     VULKAN_HPP_CONSTEXPR DescriptorSetLayoutBinding( uint32_t binding_ = {},
-                                                     VULKAN_HPP_NAMESPACE::DescriptorType descriptorType_ = {},
+                                                     VULKAN_HPP_NAMESPACE::DescriptorType descriptorType_ = VULKAN_HPP_NAMESPACE::DescriptorType::eSampler,
                                                      uint32_t descriptorCount_ = {},
                                                      VULKAN_HPP_NAMESPACE::ShaderStageFlags stageFlags_ = {},
                                                      const VULKAN_HPP_NAMESPACE::Sampler* pImmutableSamplers_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -27856,7 +27856,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   public:
     uint32_t binding = {};
-    VULKAN_HPP_NAMESPACE::DescriptorType descriptorType = {};
+    VULKAN_HPP_NAMESPACE::DescriptorType descriptorType = VULKAN_HPP_NAMESPACE::DescriptorType::eSampler;
     uint32_t descriptorCount = {};
     VULKAN_HPP_NAMESPACE::ShaderStageFlags stageFlags = {};
     const VULKAN_HPP_NAMESPACE::Sampler* pImmutableSamplers = {};
@@ -28210,7 +28210,7 @@ namespace VULKAN_HPP_NAMESPACE
     VULKAN_HPP_CONSTEXPR DescriptorUpdateTemplateEntry( uint32_t dstBinding_ = {},
                                                         uint32_t dstArrayElement_ = {},
                                                         uint32_t descriptorCount_ = {},
-                                                        VULKAN_HPP_NAMESPACE::DescriptorType descriptorType_ = {},
+                                                        VULKAN_HPP_NAMESPACE::DescriptorType descriptorType_ = VULKAN_HPP_NAMESPACE::DescriptorType::eSampler,
                                                         size_t offset_ = {},
                                                         size_t stride_ = {} ) VULKAN_HPP_NOEXCEPT
       : dstBinding( dstBinding_ )
@@ -28297,7 +28297,7 @@ namespace VULKAN_HPP_NAMESPACE
     uint32_t dstBinding = {};
     uint32_t dstArrayElement = {};
     uint32_t descriptorCount = {};
-    VULKAN_HPP_NAMESPACE::DescriptorType descriptorType = {};
+    VULKAN_HPP_NAMESPACE::DescriptorType descriptorType = VULKAN_HPP_NAMESPACE::DescriptorType::eSampler;
     size_t offset = {};
     size_t stride = {};
   };
@@ -28309,9 +28309,9 @@ namespace VULKAN_HPP_NAMESPACE
     VULKAN_HPP_CONSTEXPR DescriptorUpdateTemplateCreateInfo( VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplateCreateFlags flags_ = {},
                                                              uint32_t descriptorUpdateEntryCount_ = {},
                                                              const VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplateEntry* pDescriptorUpdateEntries_ = {},
-                                                             VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplateType templateType_ = {},
+                                                             VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplateType templateType_ = VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplateType::eDescriptorSet,
                                                              VULKAN_HPP_NAMESPACE::DescriptorSetLayout descriptorSetLayout_ = {},
-                                                             VULKAN_HPP_NAMESPACE::PipelineBindPoint pipelineBindPoint_ = {},
+                                                             VULKAN_HPP_NAMESPACE::PipelineBindPoint pipelineBindPoint_ = VULKAN_HPP_NAMESPACE::PipelineBindPoint::eGraphics,
                                                              VULKAN_HPP_NAMESPACE::PipelineLayout pipelineLayout_ = {},
                                                              uint32_t set_ = {} ) VULKAN_HPP_NOEXCEPT
       : flags( flags_ )
@@ -28430,9 +28430,9 @@ namespace VULKAN_HPP_NAMESPACE
     VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplateCreateFlags flags = {};
     uint32_t descriptorUpdateEntryCount = {};
     const VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplateEntry* pDescriptorUpdateEntries = {};
-    VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplateType templateType = {};
+    VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplateType templateType = VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplateType::eDescriptorSet;
     VULKAN_HPP_NAMESPACE::DescriptorSetLayout descriptorSetLayout = {};
-    VULKAN_HPP_NAMESPACE::PipelineBindPoint pipelineBindPoint = {};
+    VULKAN_HPP_NAMESPACE::PipelineBindPoint pipelineBindPoint = VULKAN_HPP_NAMESPACE::PipelineBindPoint::eGraphics;
     VULKAN_HPP_NAMESPACE::PipelineLayout pipelineLayout = {};
     uint32_t set = {};
   };
@@ -29260,7 +29260,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DeviceEventInfoEXT
   {
-    VULKAN_HPP_CONSTEXPR DeviceEventInfoEXT( VULKAN_HPP_NAMESPACE::DeviceEventTypeEXT deviceEvent_ = {} ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR DeviceEventInfoEXT( VULKAN_HPP_NAMESPACE::DeviceEventTypeEXT deviceEvent_ = VULKAN_HPP_NAMESPACE::DeviceEventTypeEXT::eDisplayHotplug ) VULKAN_HPP_NOEXCEPT
       : deviceEvent( deviceEvent_ )
     {}
 
@@ -29318,7 +29318,7 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eDeviceEventInfoEXT;
     const void* pNext = {};
-    VULKAN_HPP_NAMESPACE::DeviceEventTypeEXT deviceEvent = {};
+    VULKAN_HPP_NAMESPACE::DeviceEventTypeEXT deviceEvent = VULKAN_HPP_NAMESPACE::DeviceEventTypeEXT::eDisplayHotplug;
   };
   static_assert( sizeof( DeviceEventInfoEXT ) == sizeof( VkDeviceEventInfoEXT ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<DeviceEventInfoEXT>::value, "struct wrapper is not a standard layout!" );
@@ -29771,7 +29771,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     VULKAN_HPP_CONSTEXPR DeviceGroupPresentInfoKHR( uint32_t swapchainCount_ = {},
                                                     const uint32_t* pDeviceMasks_ = {},
-                                                    VULKAN_HPP_NAMESPACE::DeviceGroupPresentModeFlagBitsKHR mode_ = {} ) VULKAN_HPP_NOEXCEPT
+                                                    VULKAN_HPP_NAMESPACE::DeviceGroupPresentModeFlagBitsKHR mode_ = VULKAN_HPP_NAMESPACE::DeviceGroupPresentModeFlagBitsKHR::eLocal ) VULKAN_HPP_NOEXCEPT
       : swapchainCount( swapchainCount_ )
       , pDeviceMasks( pDeviceMasks_ )
       , mode( mode_ )
@@ -29847,7 +29847,7 @@ namespace VULKAN_HPP_NAMESPACE
     const void* pNext = {};
     uint32_t swapchainCount = {};
     const uint32_t* pDeviceMasks = {};
-    VULKAN_HPP_NAMESPACE::DeviceGroupPresentModeFlagBitsKHR mode = {};
+    VULKAN_HPP_NAMESPACE::DeviceGroupPresentModeFlagBitsKHR mode = VULKAN_HPP_NAMESPACE::DeviceGroupPresentModeFlagBitsKHR::eLocal;
   };
   static_assert( sizeof( DeviceGroupPresentInfoKHR ) == sizeof( VkDeviceGroupPresentInfoKHR ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<DeviceGroupPresentInfoKHR>::value, "struct wrapper is not a standard layout!" );
@@ -30184,7 +30184,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DeviceMemoryOverallocationCreateInfoAMD
   {
-    VULKAN_HPP_CONSTEXPR DeviceMemoryOverallocationCreateInfoAMD( VULKAN_HPP_NAMESPACE::MemoryOverallocationBehaviorAMD overallocationBehavior_ = {} ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR DeviceMemoryOverallocationCreateInfoAMD( VULKAN_HPP_NAMESPACE::MemoryOverallocationBehaviorAMD overallocationBehavior_ = VULKAN_HPP_NAMESPACE::MemoryOverallocationBehaviorAMD::eDefault ) VULKAN_HPP_NOEXCEPT
       : overallocationBehavior( overallocationBehavior_ )
     {}
 
@@ -30242,14 +30242,14 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eDeviceMemoryOverallocationCreateInfoAMD;
     const void* pNext = {};
-    VULKAN_HPP_NAMESPACE::MemoryOverallocationBehaviorAMD overallocationBehavior = {};
+    VULKAN_HPP_NAMESPACE::MemoryOverallocationBehaviorAMD overallocationBehavior = VULKAN_HPP_NAMESPACE::MemoryOverallocationBehaviorAMD::eDefault;
   };
   static_assert( sizeof( DeviceMemoryOverallocationCreateInfoAMD ) == sizeof( VkDeviceMemoryOverallocationCreateInfoAMD ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<DeviceMemoryOverallocationCreateInfoAMD>::value, "struct wrapper is not a standard layout!" );
 
   struct DeviceQueueGlobalPriorityCreateInfoEXT
   {
-    VULKAN_HPP_CONSTEXPR DeviceQueueGlobalPriorityCreateInfoEXT( VULKAN_HPP_NAMESPACE::QueueGlobalPriorityEXT globalPriority_ = {} ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR DeviceQueueGlobalPriorityCreateInfoEXT( VULKAN_HPP_NAMESPACE::QueueGlobalPriorityEXT globalPriority_ = VULKAN_HPP_NAMESPACE::QueueGlobalPriorityEXT::eLow ) VULKAN_HPP_NOEXCEPT
       : globalPriority( globalPriority_ )
     {}
 
@@ -30307,7 +30307,7 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eDeviceQueueGlobalPriorityCreateInfoEXT;
     const void* pNext = {};
-    VULKAN_HPP_NAMESPACE::QueueGlobalPriorityEXT globalPriority = {};
+    VULKAN_HPP_NAMESPACE::QueueGlobalPriorityEXT globalPriority = VULKAN_HPP_NAMESPACE::QueueGlobalPriorityEXT::eLow;
   };
   static_assert( sizeof( DeviceQueueGlobalPriorityCreateInfoEXT ) == sizeof( VkDeviceQueueGlobalPriorityCreateInfoEXT ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<DeviceQueueGlobalPriorityCreateInfoEXT>::value, "struct wrapper is not a standard layout!" );
@@ -30468,7 +30468,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DisplayEventInfoEXT
   {
-    VULKAN_HPP_CONSTEXPR DisplayEventInfoEXT( VULKAN_HPP_NAMESPACE::DisplayEventTypeEXT displayEvent_ = {} ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR DisplayEventInfoEXT( VULKAN_HPP_NAMESPACE::DisplayEventTypeEXT displayEvent_ = VULKAN_HPP_NAMESPACE::DisplayEventTypeEXT::eFirstPixelOut ) VULKAN_HPP_NOEXCEPT
       : displayEvent( displayEvent_ )
     {}
 
@@ -30526,7 +30526,7 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eDisplayEventInfoEXT;
     const void* pNext = {};
-    VULKAN_HPP_NAMESPACE::DisplayEventTypeEXT displayEvent = {};
+    VULKAN_HPP_NAMESPACE::DisplayEventTypeEXT displayEvent = VULKAN_HPP_NAMESPACE::DisplayEventTypeEXT::eFirstPixelOut;
   };
   static_assert( sizeof( DisplayEventInfoEXT ) == sizeof( VkDisplayEventInfoEXT ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<DisplayEventInfoEXT>::value, "struct wrapper is not a standard layout!" );
@@ -31123,7 +31123,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DisplayPowerInfoEXT
   {
-    VULKAN_HPP_CONSTEXPR DisplayPowerInfoEXT( VULKAN_HPP_NAMESPACE::DisplayPowerStateEXT powerState_ = {} ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR DisplayPowerInfoEXT( VULKAN_HPP_NAMESPACE::DisplayPowerStateEXT powerState_ = VULKAN_HPP_NAMESPACE::DisplayPowerStateEXT::eOff ) VULKAN_HPP_NOEXCEPT
       : powerState( powerState_ )
     {}
 
@@ -31181,7 +31181,7 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eDisplayPowerInfoEXT;
     const void* pNext = {};
-    VULKAN_HPP_NAMESPACE::DisplayPowerStateEXT powerState = {};
+    VULKAN_HPP_NAMESPACE::DisplayPowerStateEXT powerState = VULKAN_HPP_NAMESPACE::DisplayPowerStateEXT::eOff;
   };
   static_assert( sizeof( DisplayPowerInfoEXT ) == sizeof( VkDisplayPowerInfoEXT ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<DisplayPowerInfoEXT>::value, "struct wrapper is not a standard layout!" );
@@ -31397,9 +31397,9 @@ namespace VULKAN_HPP_NAMESPACE
                                                       VULKAN_HPP_NAMESPACE::DisplayModeKHR displayMode_ = {},
                                                       uint32_t planeIndex_ = {},
                                                       uint32_t planeStackIndex_ = {},
-                                                      VULKAN_HPP_NAMESPACE::SurfaceTransformFlagBitsKHR transform_ = {},
+                                                      VULKAN_HPP_NAMESPACE::SurfaceTransformFlagBitsKHR transform_ = VULKAN_HPP_NAMESPACE::SurfaceTransformFlagBitsKHR::eIdentity,
                                                       float globalAlpha_ = {},
-                                                      VULKAN_HPP_NAMESPACE::DisplayPlaneAlphaFlagBitsKHR alphaMode_ = {},
+                                                      VULKAN_HPP_NAMESPACE::DisplayPlaneAlphaFlagBitsKHR alphaMode_ = VULKAN_HPP_NAMESPACE::DisplayPlaneAlphaFlagBitsKHR::eOpaque,
                                                       VULKAN_HPP_NAMESPACE::Extent2D imageExtent_ = {} ) VULKAN_HPP_NOEXCEPT
       : flags( flags_ )
       , displayMode( displayMode_ )
@@ -31518,9 +31518,9 @@ namespace VULKAN_HPP_NAMESPACE
     VULKAN_HPP_NAMESPACE::DisplayModeKHR displayMode = {};
     uint32_t planeIndex = {};
     uint32_t planeStackIndex = {};
-    VULKAN_HPP_NAMESPACE::SurfaceTransformFlagBitsKHR transform = {};
+    VULKAN_HPP_NAMESPACE::SurfaceTransformFlagBitsKHR transform = VULKAN_HPP_NAMESPACE::SurfaceTransformFlagBitsKHR::eIdentity;
     float globalAlpha = {};
-    VULKAN_HPP_NAMESPACE::DisplayPlaneAlphaFlagBitsKHR alphaMode = {};
+    VULKAN_HPP_NAMESPACE::DisplayPlaneAlphaFlagBitsKHR alphaMode = VULKAN_HPP_NAMESPACE::DisplayPlaneAlphaFlagBitsKHR::eOpaque;
     VULKAN_HPP_NAMESPACE::Extent2D imageExtent = {};
   };
   static_assert( sizeof( DisplaySurfaceCreateInfoKHR ) == sizeof( VkDisplaySurfaceCreateInfoKHR ), "struct and wrapper have different size!" );
@@ -33301,7 +33301,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct FenceGetFdInfoKHR
   {
     VULKAN_HPP_CONSTEXPR FenceGetFdInfoKHR( VULKAN_HPP_NAMESPACE::Fence fence_ = {},
-                                            VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlagBits handleType_ = {} ) VULKAN_HPP_NOEXCEPT
+                                            VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlagBits handleType_ = VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlagBits::eOpaqueFd ) VULKAN_HPP_NOEXCEPT
       : fence( fence_ )
       , handleType( handleType_ )
     {}
@@ -33368,7 +33368,7 @@ namespace VULKAN_HPP_NAMESPACE
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eFenceGetFdInfoKHR;
     const void* pNext = {};
     VULKAN_HPP_NAMESPACE::Fence fence = {};
-    VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlagBits handleType = {};
+    VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlagBits handleType = VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlagBits::eOpaqueFd;
   };
   static_assert( sizeof( FenceGetFdInfoKHR ) == sizeof( VkFenceGetFdInfoKHR ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<FenceGetFdInfoKHR>::value, "struct wrapper is not a standard layout!" );
@@ -33378,7 +33378,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct FenceGetWin32HandleInfoKHR
   {
     VULKAN_HPP_CONSTEXPR FenceGetWin32HandleInfoKHR( VULKAN_HPP_NAMESPACE::Fence fence_ = {},
-                                                     VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlagBits handleType_ = {} ) VULKAN_HPP_NOEXCEPT
+                                                     VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlagBits handleType_ = VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlagBits::eOpaqueFd ) VULKAN_HPP_NOEXCEPT
       : fence( fence_ )
       , handleType( handleType_ )
     {}
@@ -33445,7 +33445,7 @@ namespace VULKAN_HPP_NAMESPACE
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eFenceGetWin32HandleInfoKHR;
     const void* pNext = {};
     VULKAN_HPP_NAMESPACE::Fence fence = {};
-    VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlagBits handleType = {};
+    VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlagBits handleType = VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlagBits::eOpaqueFd;
   };
   static_assert( sizeof( FenceGetWin32HandleInfoKHR ) == sizeof( VkFenceGetWin32HandleInfoKHR ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<FenceGetWin32HandleInfoKHR>::value, "struct wrapper is not a standard layout!" );
@@ -33939,8 +33939,8 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct FramebufferMixedSamplesCombinationNV
   {
-    FramebufferMixedSamplesCombinationNV( VULKAN_HPP_NAMESPACE::CoverageReductionModeNV coverageReductionMode_ = {},
-                                          VULKAN_HPP_NAMESPACE::SampleCountFlagBits rasterizationSamples_ = {},
+    FramebufferMixedSamplesCombinationNV( VULKAN_HPP_NAMESPACE::CoverageReductionModeNV coverageReductionMode_ = VULKAN_HPP_NAMESPACE::CoverageReductionModeNV::eMerge,
+                                          VULKAN_HPP_NAMESPACE::SampleCountFlagBits rasterizationSamples_ = VULKAN_HPP_NAMESPACE::SampleCountFlagBits::e1,
                                           VULKAN_HPP_NAMESPACE::SampleCountFlags depthStencilSamples_ = {},
                                           VULKAN_HPP_NAMESPACE::SampleCountFlags colorSamples_ = {} ) VULKAN_HPP_NOEXCEPT
       : coverageReductionMode( coverageReductionMode_ )
@@ -33994,8 +33994,8 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eFramebufferMixedSamplesCombinationNV;
     void* pNext = {};
-    VULKAN_HPP_NAMESPACE::CoverageReductionModeNV coverageReductionMode = {};
-    VULKAN_HPP_NAMESPACE::SampleCountFlagBits rasterizationSamples = {};
+    VULKAN_HPP_NAMESPACE::CoverageReductionModeNV coverageReductionMode = VULKAN_HPP_NAMESPACE::CoverageReductionModeNV::eMerge;
+    VULKAN_HPP_NAMESPACE::SampleCountFlagBits rasterizationSamples = VULKAN_HPP_NAMESPACE::SampleCountFlagBits::e1;
     VULKAN_HPP_NAMESPACE::SampleCountFlags depthStencilSamples = {};
     VULKAN_HPP_NAMESPACE::SampleCountFlags colorSamples = {};
   };
@@ -34006,7 +34006,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     VULKAN_HPP_CONSTEXPR VertexInputBindingDescription( uint32_t binding_ = {},
                                                         uint32_t stride_ = {},
-                                                        VULKAN_HPP_NAMESPACE::VertexInputRate inputRate_ = {} ) VULKAN_HPP_NOEXCEPT
+                                                        VULKAN_HPP_NAMESPACE::VertexInputRate inputRate_ = VULKAN_HPP_NAMESPACE::VertexInputRate::eVertex ) VULKAN_HPP_NOEXCEPT
       : binding( binding_ )
       , stride( stride_ )
       , inputRate( inputRate_ )
@@ -34066,7 +34066,7 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     uint32_t binding = {};
     uint32_t stride = {};
-    VULKAN_HPP_NAMESPACE::VertexInputRate inputRate = {};
+    VULKAN_HPP_NAMESPACE::VertexInputRate inputRate = VULKAN_HPP_NAMESPACE::VertexInputRate::eVertex;
   };
   static_assert( sizeof( VertexInputBindingDescription ) == sizeof( VkVertexInputBindingDescription ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<VertexInputBindingDescription>::value, "struct wrapper is not a standard layout!" );
@@ -34075,7 +34075,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     VULKAN_HPP_CONSTEXPR VertexInputAttributeDescription( uint32_t location_ = {},
                                                           uint32_t binding_ = {},
-                                                          VULKAN_HPP_NAMESPACE::Format format_ = {},
+                                                          VULKAN_HPP_NAMESPACE::Format format_ = VULKAN_HPP_NAMESPACE::Format::eUndefined,
                                                           uint32_t offset_ = {} ) VULKAN_HPP_NOEXCEPT
       : location( location_ )
       , binding( binding_ )
@@ -34144,7 +34144,7 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     uint32_t location = {};
     uint32_t binding = {};
-    VULKAN_HPP_NAMESPACE::Format format = {};
+    VULKAN_HPP_NAMESPACE::Format format = VULKAN_HPP_NAMESPACE::Format::eUndefined;
     uint32_t offset = {};
   };
   static_assert( sizeof( VertexInputAttributeDescription ) == sizeof( VkVertexInputAttributeDescription ), "struct and wrapper have different size!" );
@@ -34258,7 +34258,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct PipelineInputAssemblyStateCreateInfo
   {
     VULKAN_HPP_CONSTEXPR PipelineInputAssemblyStateCreateInfo( VULKAN_HPP_NAMESPACE::PipelineInputAssemblyStateCreateFlags flags_ = {},
-                                                               VULKAN_HPP_NAMESPACE::PrimitiveTopology topology_ = {},
+                                                               VULKAN_HPP_NAMESPACE::PrimitiveTopology topology_ = VULKAN_HPP_NAMESPACE::PrimitiveTopology::ePointList,
                                                                VULKAN_HPP_NAMESPACE::Bool32 primitiveRestartEnable_ = {} ) VULKAN_HPP_NOEXCEPT
       : flags( flags_ )
       , topology( topology_ )
@@ -34334,7 +34334,7 @@ namespace VULKAN_HPP_NAMESPACE
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::ePipelineInputAssemblyStateCreateInfo;
     const void* pNext = {};
     VULKAN_HPP_NAMESPACE::PipelineInputAssemblyStateCreateFlags flags = {};
-    VULKAN_HPP_NAMESPACE::PrimitiveTopology topology = {};
+    VULKAN_HPP_NAMESPACE::PrimitiveTopology topology = VULKAN_HPP_NAMESPACE::PrimitiveTopology::ePointList;
     VULKAN_HPP_NAMESPACE::Bool32 primitiveRestartEnable = {};
   };
   static_assert( sizeof( PipelineInputAssemblyStateCreateInfo ) == sizeof( VkPipelineInputAssemblyStateCreateInfo ), "struct and wrapper have different size!" );
@@ -34624,9 +34624,9 @@ namespace VULKAN_HPP_NAMESPACE
     VULKAN_HPP_CONSTEXPR PipelineRasterizationStateCreateInfo( VULKAN_HPP_NAMESPACE::PipelineRasterizationStateCreateFlags flags_ = {},
                                                                VULKAN_HPP_NAMESPACE::Bool32 depthClampEnable_ = {},
                                                                VULKAN_HPP_NAMESPACE::Bool32 rasterizerDiscardEnable_ = {},
-                                                               VULKAN_HPP_NAMESPACE::PolygonMode polygonMode_ = {},
+                                                               VULKAN_HPP_NAMESPACE::PolygonMode polygonMode_ = VULKAN_HPP_NAMESPACE::PolygonMode::eFill,
                                                                VULKAN_HPP_NAMESPACE::CullModeFlags cullMode_ = {},
-                                                               VULKAN_HPP_NAMESPACE::FrontFace frontFace_ = {},
+                                                               VULKAN_HPP_NAMESPACE::FrontFace frontFace_ = VULKAN_HPP_NAMESPACE::FrontFace::eCounterClockwise,
                                                                VULKAN_HPP_NAMESPACE::Bool32 depthBiasEnable_ = {},
                                                                float depthBiasConstantFactor_ = {},
                                                                float depthBiasClamp_ = {},
@@ -34772,9 +34772,9 @@ namespace VULKAN_HPP_NAMESPACE
     VULKAN_HPP_NAMESPACE::PipelineRasterizationStateCreateFlags flags = {};
     VULKAN_HPP_NAMESPACE::Bool32 depthClampEnable = {};
     VULKAN_HPP_NAMESPACE::Bool32 rasterizerDiscardEnable = {};
-    VULKAN_HPP_NAMESPACE::PolygonMode polygonMode = {};
+    VULKAN_HPP_NAMESPACE::PolygonMode polygonMode = VULKAN_HPP_NAMESPACE::PolygonMode::eFill;
     VULKAN_HPP_NAMESPACE::CullModeFlags cullMode = {};
-    VULKAN_HPP_NAMESPACE::FrontFace frontFace = {};
+    VULKAN_HPP_NAMESPACE::FrontFace frontFace = VULKAN_HPP_NAMESPACE::FrontFace::eCounterClockwise;
     VULKAN_HPP_NAMESPACE::Bool32 depthBiasEnable = {};
     float depthBiasConstantFactor = {};
     float depthBiasClamp = {};
@@ -34787,7 +34787,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct PipelineMultisampleStateCreateInfo
   {
     VULKAN_HPP_CONSTEXPR PipelineMultisampleStateCreateInfo( VULKAN_HPP_NAMESPACE::PipelineMultisampleStateCreateFlags flags_ = {},
-                                                             VULKAN_HPP_NAMESPACE::SampleCountFlagBits rasterizationSamples_ = {},
+                                                             VULKAN_HPP_NAMESPACE::SampleCountFlagBits rasterizationSamples_ = VULKAN_HPP_NAMESPACE::SampleCountFlagBits::e1,
                                                              VULKAN_HPP_NAMESPACE::Bool32 sampleShadingEnable_ = {},
                                                              float minSampleShading_ = {},
                                                              const VULKAN_HPP_NAMESPACE::SampleMask* pSampleMask_ = {},
@@ -34899,7 +34899,7 @@ namespace VULKAN_HPP_NAMESPACE
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::ePipelineMultisampleStateCreateInfo;
     const void* pNext = {};
     VULKAN_HPP_NAMESPACE::PipelineMultisampleStateCreateFlags flags = {};
-    VULKAN_HPP_NAMESPACE::SampleCountFlagBits rasterizationSamples = {};
+    VULKAN_HPP_NAMESPACE::SampleCountFlagBits rasterizationSamples = VULKAN_HPP_NAMESPACE::SampleCountFlagBits::e1;
     VULKAN_HPP_NAMESPACE::Bool32 sampleShadingEnable = {};
     float minSampleShading = {};
     const VULKAN_HPP_NAMESPACE::SampleMask* pSampleMask = {};
@@ -34911,10 +34911,10 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct StencilOpState
   {
-    VULKAN_HPP_CONSTEXPR StencilOpState( VULKAN_HPP_NAMESPACE::StencilOp failOp_ = {},
-                                         VULKAN_HPP_NAMESPACE::StencilOp passOp_ = {},
-                                         VULKAN_HPP_NAMESPACE::StencilOp depthFailOp_ = {},
-                                         VULKAN_HPP_NAMESPACE::CompareOp compareOp_ = {},
+    VULKAN_HPP_CONSTEXPR StencilOpState( VULKAN_HPP_NAMESPACE::StencilOp failOp_ = VULKAN_HPP_NAMESPACE::StencilOp::eKeep,
+                                         VULKAN_HPP_NAMESPACE::StencilOp passOp_ = VULKAN_HPP_NAMESPACE::StencilOp::eKeep,
+                                         VULKAN_HPP_NAMESPACE::StencilOp depthFailOp_ = VULKAN_HPP_NAMESPACE::StencilOp::eKeep,
+                                         VULKAN_HPP_NAMESPACE::CompareOp compareOp_ = VULKAN_HPP_NAMESPACE::CompareOp::eNever,
                                          uint32_t compareMask_ = {},
                                          uint32_t writeMask_ = {},
                                          uint32_t reference_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -35007,10 +35007,10 @@ namespace VULKAN_HPP_NAMESPACE
     }
 
   public:
-    VULKAN_HPP_NAMESPACE::StencilOp failOp = {};
-    VULKAN_HPP_NAMESPACE::StencilOp passOp = {};
-    VULKAN_HPP_NAMESPACE::StencilOp depthFailOp = {};
-    VULKAN_HPP_NAMESPACE::CompareOp compareOp = {};
+    VULKAN_HPP_NAMESPACE::StencilOp failOp = VULKAN_HPP_NAMESPACE::StencilOp::eKeep;
+    VULKAN_HPP_NAMESPACE::StencilOp passOp = VULKAN_HPP_NAMESPACE::StencilOp::eKeep;
+    VULKAN_HPP_NAMESPACE::StencilOp depthFailOp = VULKAN_HPP_NAMESPACE::StencilOp::eKeep;
+    VULKAN_HPP_NAMESPACE::CompareOp compareOp = VULKAN_HPP_NAMESPACE::CompareOp::eNever;
     uint32_t compareMask = {};
     uint32_t writeMask = {};
     uint32_t reference = {};
@@ -35023,7 +35023,7 @@ namespace VULKAN_HPP_NAMESPACE
     VULKAN_HPP_CONSTEXPR PipelineDepthStencilStateCreateInfo( VULKAN_HPP_NAMESPACE::PipelineDepthStencilStateCreateFlags flags_ = {},
                                                               VULKAN_HPP_NAMESPACE::Bool32 depthTestEnable_ = {},
                                                               VULKAN_HPP_NAMESPACE::Bool32 depthWriteEnable_ = {},
-                                                              VULKAN_HPP_NAMESPACE::CompareOp depthCompareOp_ = {},
+                                                              VULKAN_HPP_NAMESPACE::CompareOp depthCompareOp_ = VULKAN_HPP_NAMESPACE::CompareOp::eNever,
                                                               VULKAN_HPP_NAMESPACE::Bool32 depthBoundsTestEnable_ = {},
                                                               VULKAN_HPP_NAMESPACE::Bool32 stencilTestEnable_ = {},
                                                               VULKAN_HPP_NAMESPACE::StencilOpState front_ = {},
@@ -35162,7 +35162,7 @@ namespace VULKAN_HPP_NAMESPACE
     VULKAN_HPP_NAMESPACE::PipelineDepthStencilStateCreateFlags flags = {};
     VULKAN_HPP_NAMESPACE::Bool32 depthTestEnable = {};
     VULKAN_HPP_NAMESPACE::Bool32 depthWriteEnable = {};
-    VULKAN_HPP_NAMESPACE::CompareOp depthCompareOp = {};
+    VULKAN_HPP_NAMESPACE::CompareOp depthCompareOp = VULKAN_HPP_NAMESPACE::CompareOp::eNever;
     VULKAN_HPP_NAMESPACE::Bool32 depthBoundsTestEnable = {};
     VULKAN_HPP_NAMESPACE::Bool32 stencilTestEnable = {};
     VULKAN_HPP_NAMESPACE::StencilOpState front = {};
@@ -35176,12 +35176,12 @@ namespace VULKAN_HPP_NAMESPACE
   struct PipelineColorBlendAttachmentState
   {
     VULKAN_HPP_CONSTEXPR PipelineColorBlendAttachmentState( VULKAN_HPP_NAMESPACE::Bool32 blendEnable_ = {},
-                                                            VULKAN_HPP_NAMESPACE::BlendFactor srcColorBlendFactor_ = {},
-                                                            VULKAN_HPP_NAMESPACE::BlendFactor dstColorBlendFactor_ = {},
-                                                            VULKAN_HPP_NAMESPACE::BlendOp colorBlendOp_ = {},
-                                                            VULKAN_HPP_NAMESPACE::BlendFactor srcAlphaBlendFactor_ = {},
-                                                            VULKAN_HPP_NAMESPACE::BlendFactor dstAlphaBlendFactor_ = {},
-                                                            VULKAN_HPP_NAMESPACE::BlendOp alphaBlendOp_ = {},
+                                                            VULKAN_HPP_NAMESPACE::BlendFactor srcColorBlendFactor_ = VULKAN_HPP_NAMESPACE::BlendFactor::eZero,
+                                                            VULKAN_HPP_NAMESPACE::BlendFactor dstColorBlendFactor_ = VULKAN_HPP_NAMESPACE::BlendFactor::eZero,
+                                                            VULKAN_HPP_NAMESPACE::BlendOp colorBlendOp_ = VULKAN_HPP_NAMESPACE::BlendOp::eAdd,
+                                                            VULKAN_HPP_NAMESPACE::BlendFactor srcAlphaBlendFactor_ = VULKAN_HPP_NAMESPACE::BlendFactor::eZero,
+                                                            VULKAN_HPP_NAMESPACE::BlendFactor dstAlphaBlendFactor_ = VULKAN_HPP_NAMESPACE::BlendFactor::eZero,
+                                                            VULKAN_HPP_NAMESPACE::BlendOp alphaBlendOp_ = VULKAN_HPP_NAMESPACE::BlendOp::eAdd,
                                                             VULKAN_HPP_NAMESPACE::ColorComponentFlags colorWriteMask_ = {} ) VULKAN_HPP_NOEXCEPT
       : blendEnable( blendEnable_ )
       , srcColorBlendFactor( srcColorBlendFactor_ )
@@ -35281,12 +35281,12 @@ namespace VULKAN_HPP_NAMESPACE
 
   public:
     VULKAN_HPP_NAMESPACE::Bool32 blendEnable = {};
-    VULKAN_HPP_NAMESPACE::BlendFactor srcColorBlendFactor = {};
-    VULKAN_HPP_NAMESPACE::BlendFactor dstColorBlendFactor = {};
-    VULKAN_HPP_NAMESPACE::BlendOp colorBlendOp = {};
-    VULKAN_HPP_NAMESPACE::BlendFactor srcAlphaBlendFactor = {};
-    VULKAN_HPP_NAMESPACE::BlendFactor dstAlphaBlendFactor = {};
-    VULKAN_HPP_NAMESPACE::BlendOp alphaBlendOp = {};
+    VULKAN_HPP_NAMESPACE::BlendFactor srcColorBlendFactor = VULKAN_HPP_NAMESPACE::BlendFactor::eZero;
+    VULKAN_HPP_NAMESPACE::BlendFactor dstColorBlendFactor = VULKAN_HPP_NAMESPACE::BlendFactor::eZero;
+    VULKAN_HPP_NAMESPACE::BlendOp colorBlendOp = VULKAN_HPP_NAMESPACE::BlendOp::eAdd;
+    VULKAN_HPP_NAMESPACE::BlendFactor srcAlphaBlendFactor = VULKAN_HPP_NAMESPACE::BlendFactor::eZero;
+    VULKAN_HPP_NAMESPACE::BlendFactor dstAlphaBlendFactor = VULKAN_HPP_NAMESPACE::BlendFactor::eZero;
+    VULKAN_HPP_NAMESPACE::BlendOp alphaBlendOp = VULKAN_HPP_NAMESPACE::BlendOp::eAdd;
     VULKAN_HPP_NAMESPACE::ColorComponentFlags colorWriteMask = {};
   };
   static_assert( sizeof( PipelineColorBlendAttachmentState ) == sizeof( VkPipelineColorBlendAttachmentState ), "struct and wrapper have different size!" );
@@ -35296,7 +35296,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     VULKAN_HPP_CONSTEXPR_14 PipelineColorBlendStateCreateInfo( VULKAN_HPP_NAMESPACE::PipelineColorBlendStateCreateFlags flags_ = {},
                                                                VULKAN_HPP_NAMESPACE::Bool32 logicOpEnable_ = {},
-                                                               VULKAN_HPP_NAMESPACE::LogicOp logicOp_ = {},
+                                                               VULKAN_HPP_NAMESPACE::LogicOp logicOp_ = VULKAN_HPP_NAMESPACE::LogicOp::eClear,
                                                                uint32_t attachmentCount_ = {},
                                                                const VULKAN_HPP_NAMESPACE::PipelineColorBlendAttachmentState* pAttachments_ = {},
                                                                std::array<float,4> const& blendConstants_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -35401,7 +35401,7 @@ namespace VULKAN_HPP_NAMESPACE
     const void* pNext = {};
     VULKAN_HPP_NAMESPACE::PipelineColorBlendStateCreateFlags flags = {};
     VULKAN_HPP_NAMESPACE::Bool32 logicOpEnable = {};
-    VULKAN_HPP_NAMESPACE::LogicOp logicOp = {};
+    VULKAN_HPP_NAMESPACE::LogicOp logicOp = VULKAN_HPP_NAMESPACE::LogicOp::eClear;
     uint32_t attachmentCount = {};
     const VULKAN_HPP_NAMESPACE::PipelineColorBlendAttachmentState* pAttachments = {};
     float blendConstants[4] = {};
@@ -36230,18 +36230,18 @@ namespace VULKAN_HPP_NAMESPACE
   struct ImageCreateInfo
   {
     VULKAN_HPP_CONSTEXPR ImageCreateInfo( VULKAN_HPP_NAMESPACE::ImageCreateFlags flags_ = {},
-                                          VULKAN_HPP_NAMESPACE::ImageType imageType_ = {},
-                                          VULKAN_HPP_NAMESPACE::Format format_ = {},
+                                          VULKAN_HPP_NAMESPACE::ImageType imageType_ = VULKAN_HPP_NAMESPACE::ImageType::e1D,
+                                          VULKAN_HPP_NAMESPACE::Format format_ = VULKAN_HPP_NAMESPACE::Format::eUndefined,
                                           VULKAN_HPP_NAMESPACE::Extent3D extent_ = {},
                                           uint32_t mipLevels_ = {},
                                           uint32_t arrayLayers_ = {},
-                                          VULKAN_HPP_NAMESPACE::SampleCountFlagBits samples_ = {},
-                                          VULKAN_HPP_NAMESPACE::ImageTiling tiling_ = {},
+                                          VULKAN_HPP_NAMESPACE::SampleCountFlagBits samples_ = VULKAN_HPP_NAMESPACE::SampleCountFlagBits::e1,
+                                          VULKAN_HPP_NAMESPACE::ImageTiling tiling_ = VULKAN_HPP_NAMESPACE::ImageTiling::eOptimal,
                                           VULKAN_HPP_NAMESPACE::ImageUsageFlags usage_ = {},
-                                          VULKAN_HPP_NAMESPACE::SharingMode sharingMode_ = {},
+                                          VULKAN_HPP_NAMESPACE::SharingMode sharingMode_ = VULKAN_HPP_NAMESPACE::SharingMode::eExclusive,
                                           uint32_t queueFamilyIndexCount_ = {},
                                           const uint32_t* pQueueFamilyIndices_ = {},
-                                          VULKAN_HPP_NAMESPACE::ImageLayout initialLayout_ = {} ) VULKAN_HPP_NOEXCEPT
+                                          VULKAN_HPP_NAMESPACE::ImageLayout initialLayout_ = VULKAN_HPP_NAMESPACE::ImageLayout::eUndefined ) VULKAN_HPP_NOEXCEPT
       : flags( flags_ )
       , imageType( imageType_ )
       , format( format_ )
@@ -36396,18 +36396,18 @@ namespace VULKAN_HPP_NAMESPACE
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eImageCreateInfo;
     const void* pNext = {};
     VULKAN_HPP_NAMESPACE::ImageCreateFlags flags = {};
-    VULKAN_HPP_NAMESPACE::ImageType imageType = {};
-    VULKAN_HPP_NAMESPACE::Format format = {};
+    VULKAN_HPP_NAMESPACE::ImageType imageType = VULKAN_HPP_NAMESPACE::ImageType::e1D;
+    VULKAN_HPP_NAMESPACE::Format format = VULKAN_HPP_NAMESPACE::Format::eUndefined;
     VULKAN_HPP_NAMESPACE::Extent3D extent = {};
     uint32_t mipLevels = {};
     uint32_t arrayLayers = {};
-    VULKAN_HPP_NAMESPACE::SampleCountFlagBits samples = {};
-    VULKAN_HPP_NAMESPACE::ImageTiling tiling = {};
+    VULKAN_HPP_NAMESPACE::SampleCountFlagBits samples = VULKAN_HPP_NAMESPACE::SampleCountFlagBits::e1;
+    VULKAN_HPP_NAMESPACE::ImageTiling tiling = VULKAN_HPP_NAMESPACE::ImageTiling::eOptimal;
     VULKAN_HPP_NAMESPACE::ImageUsageFlags usage = {};
-    VULKAN_HPP_NAMESPACE::SharingMode sharingMode = {};
+    VULKAN_HPP_NAMESPACE::SharingMode sharingMode = VULKAN_HPP_NAMESPACE::SharingMode::eExclusive;
     uint32_t queueFamilyIndexCount = {};
     const uint32_t* pQueueFamilyIndices = {};
-    VULKAN_HPP_NAMESPACE::ImageLayout initialLayout = {};
+    VULKAN_HPP_NAMESPACE::ImageLayout initialLayout = VULKAN_HPP_NAMESPACE::ImageLayout::eUndefined;
   };
   static_assert( sizeof( ImageCreateInfo ) == sizeof( VkImageCreateInfo ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<ImageCreateInfo>::value, "struct wrapper is not a standard layout!" );
@@ -36905,8 +36905,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     VULKAN_HPP_CONSTEXPR ImageMemoryBarrier( VULKAN_HPP_NAMESPACE::AccessFlags srcAccessMask_ = {},
                                              VULKAN_HPP_NAMESPACE::AccessFlags dstAccessMask_ = {},
-                                             VULKAN_HPP_NAMESPACE::ImageLayout oldLayout_ = {},
-                                             VULKAN_HPP_NAMESPACE::ImageLayout newLayout_ = {},
+                                             VULKAN_HPP_NAMESPACE::ImageLayout oldLayout_ = VULKAN_HPP_NAMESPACE::ImageLayout::eUndefined,
+                                             VULKAN_HPP_NAMESPACE::ImageLayout newLayout_ = VULKAN_HPP_NAMESPACE::ImageLayout::eUndefined,
                                              uint32_t srcQueueFamilyIndex_ = {},
                                              uint32_t dstQueueFamilyIndex_ = {},
                                              VULKAN_HPP_NAMESPACE::Image image_ = {},
@@ -37026,8 +37026,8 @@ namespace VULKAN_HPP_NAMESPACE
     const void* pNext = {};
     VULKAN_HPP_NAMESPACE::AccessFlags srcAccessMask = {};
     VULKAN_HPP_NAMESPACE::AccessFlags dstAccessMask = {};
-    VULKAN_HPP_NAMESPACE::ImageLayout oldLayout = {};
-    VULKAN_HPP_NAMESPACE::ImageLayout newLayout = {};
+    VULKAN_HPP_NAMESPACE::ImageLayout oldLayout = VULKAN_HPP_NAMESPACE::ImageLayout::eUndefined;
+    VULKAN_HPP_NAMESPACE::ImageLayout newLayout = VULKAN_HPP_NAMESPACE::ImageLayout::eUndefined;
     uint32_t srcQueueFamilyIndex = {};
     uint32_t dstQueueFamilyIndex = {};
     VULKAN_HPP_NAMESPACE::Image image = {};
@@ -37181,7 +37181,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ImagePlaneMemoryRequirementsInfo
   {
-    VULKAN_HPP_CONSTEXPR ImagePlaneMemoryRequirementsInfo( VULKAN_HPP_NAMESPACE::ImageAspectFlagBits planeAspect_ = {} ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR ImagePlaneMemoryRequirementsInfo( VULKAN_HPP_NAMESPACE::ImageAspectFlagBits planeAspect_ = VULKAN_HPP_NAMESPACE::ImageAspectFlagBits::eColor ) VULKAN_HPP_NOEXCEPT
       : planeAspect( planeAspect_ )
     {}
 
@@ -37239,7 +37239,7 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eImagePlaneMemoryRequirementsInfo;
     const void* pNext = {};
-    VULKAN_HPP_NAMESPACE::ImageAspectFlagBits planeAspect = {};
+    VULKAN_HPP_NAMESPACE::ImageAspectFlagBits planeAspect = VULKAN_HPP_NAMESPACE::ImageAspectFlagBits::eColor;
   };
   static_assert( sizeof( ImagePlaneMemoryRequirementsInfo ) == sizeof( VkImagePlaneMemoryRequirementsInfo ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<ImagePlaneMemoryRequirementsInfo>::value, "struct wrapper is not a standard layout!" );
@@ -37530,7 +37530,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ImageViewASTCDecodeModeEXT
   {
-    VULKAN_HPP_CONSTEXPR ImageViewASTCDecodeModeEXT( VULKAN_HPP_NAMESPACE::Format decodeMode_ = {} ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR ImageViewASTCDecodeModeEXT( VULKAN_HPP_NAMESPACE::Format decodeMode_ = VULKAN_HPP_NAMESPACE::Format::eUndefined ) VULKAN_HPP_NOEXCEPT
       : decodeMode( decodeMode_ )
     {}
 
@@ -37588,7 +37588,7 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eImageViewAstcDecodeModeEXT;
     const void* pNext = {};
-    VULKAN_HPP_NAMESPACE::Format decodeMode = {};
+    VULKAN_HPP_NAMESPACE::Format decodeMode = VULKAN_HPP_NAMESPACE::Format::eUndefined;
   };
   static_assert( sizeof( ImageViewASTCDecodeModeEXT ) == sizeof( VkImageViewASTCDecodeModeEXT ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<ImageViewASTCDecodeModeEXT>::value, "struct wrapper is not a standard layout!" );
@@ -37597,8 +37597,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     VULKAN_HPP_CONSTEXPR ImageViewCreateInfo( VULKAN_HPP_NAMESPACE::ImageViewCreateFlags flags_ = {},
                                               VULKAN_HPP_NAMESPACE::Image image_ = {},
-                                              VULKAN_HPP_NAMESPACE::ImageViewType viewType_ = {},
-                                              VULKAN_HPP_NAMESPACE::Format format_ = {},
+                                              VULKAN_HPP_NAMESPACE::ImageViewType viewType_ = VULKAN_HPP_NAMESPACE::ImageViewType::e1D,
+                                              VULKAN_HPP_NAMESPACE::Format format_ = VULKAN_HPP_NAMESPACE::Format::eUndefined,
                                               VULKAN_HPP_NAMESPACE::ComponentMapping components_ = {},
                                               VULKAN_HPP_NAMESPACE::ImageSubresourceRange subresourceRange_ = {} ) VULKAN_HPP_NOEXCEPT
       : flags( flags_ )
@@ -37700,8 +37700,8 @@ namespace VULKAN_HPP_NAMESPACE
     const void* pNext = {};
     VULKAN_HPP_NAMESPACE::ImageViewCreateFlags flags = {};
     VULKAN_HPP_NAMESPACE::Image image = {};
-    VULKAN_HPP_NAMESPACE::ImageViewType viewType = {};
-    VULKAN_HPP_NAMESPACE::Format format = {};
+    VULKAN_HPP_NAMESPACE::ImageViewType viewType = VULKAN_HPP_NAMESPACE::ImageViewType::e1D;
+    VULKAN_HPP_NAMESPACE::Format format = VULKAN_HPP_NAMESPACE::Format::eUndefined;
     VULKAN_HPP_NAMESPACE::ComponentMapping components = {};
     VULKAN_HPP_NAMESPACE::ImageSubresourceRange subresourceRange = {};
   };
@@ -37711,7 +37711,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct ImageViewHandleInfoNVX
   {
     VULKAN_HPP_CONSTEXPR ImageViewHandleInfoNVX( VULKAN_HPP_NAMESPACE::ImageView imageView_ = {},
-                                                 VULKAN_HPP_NAMESPACE::DescriptorType descriptorType_ = {},
+                                                 VULKAN_HPP_NAMESPACE::DescriptorType descriptorType_ = VULKAN_HPP_NAMESPACE::DescriptorType::eSampler,
                                                  VULKAN_HPP_NAMESPACE::Sampler sampler_ = {} ) VULKAN_HPP_NOEXCEPT
       : imageView( imageView_ )
       , descriptorType( descriptorType_ )
@@ -37787,7 +37787,7 @@ namespace VULKAN_HPP_NAMESPACE
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eImageViewHandleInfoNVX;
     const void* pNext = {};
     VULKAN_HPP_NAMESPACE::ImageView imageView = {};
-    VULKAN_HPP_NAMESPACE::DescriptorType descriptorType = {};
+    VULKAN_HPP_NAMESPACE::DescriptorType descriptorType = VULKAN_HPP_NAMESPACE::DescriptorType::eSampler;
     VULKAN_HPP_NAMESPACE::Sampler sampler = {};
   };
   static_assert( sizeof( ImageViewHandleInfoNVX ) == sizeof( VkImageViewHandleInfoNVX ), "struct and wrapper have different size!" );
@@ -37930,7 +37930,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     VULKAN_HPP_CONSTEXPR ImportFenceFdInfoKHR( VULKAN_HPP_NAMESPACE::Fence fence_ = {},
                                                VULKAN_HPP_NAMESPACE::FenceImportFlags flags_ = {},
-                                               VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlagBits handleType_ = {},
+                                               VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlagBits handleType_ = VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlagBits::eOpaqueFd,
                                                int fd_ = {} ) VULKAN_HPP_NOEXCEPT
       : fence( fence_ )
       , flags( flags_ )
@@ -38015,7 +38015,7 @@ namespace VULKAN_HPP_NAMESPACE
     const void* pNext = {};
     VULKAN_HPP_NAMESPACE::Fence fence = {};
     VULKAN_HPP_NAMESPACE::FenceImportFlags flags = {};
-    VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlagBits handleType = {};
+    VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlagBits handleType = VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlagBits::eOpaqueFd;
     int fd = {};
   };
   static_assert( sizeof( ImportFenceFdInfoKHR ) == sizeof( VkImportFenceFdInfoKHR ), "struct and wrapper have different size!" );
@@ -38027,7 +38027,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     VULKAN_HPP_CONSTEXPR ImportFenceWin32HandleInfoKHR( VULKAN_HPP_NAMESPACE::Fence fence_ = {},
                                                         VULKAN_HPP_NAMESPACE::FenceImportFlags flags_ = {},
-                                                        VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlagBits handleType_ = {},
+                                                        VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlagBits handleType_ = VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlagBits::eOpaqueFd,
                                                         HANDLE handle_ = {},
                                                         LPCWSTR name_ = {} ) VULKAN_HPP_NOEXCEPT
       : fence( fence_ )
@@ -38121,7 +38121,7 @@ namespace VULKAN_HPP_NAMESPACE
     const void* pNext = {};
     VULKAN_HPP_NAMESPACE::Fence fence = {};
     VULKAN_HPP_NAMESPACE::FenceImportFlags flags = {};
-    VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlagBits handleType = {};
+    VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlagBits handleType = VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlagBits::eOpaqueFd;
     HANDLE handle = {};
     LPCWSTR name = {};
   };
@@ -38131,7 +38131,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ImportMemoryFdInfoKHR
   {
-    VULKAN_HPP_CONSTEXPR ImportMemoryFdInfoKHR( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType_ = {},
+    VULKAN_HPP_CONSTEXPR ImportMemoryFdInfoKHR( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType_ = VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits::eOpaqueFd,
                                                 int fd_ = {} ) VULKAN_HPP_NOEXCEPT
       : handleType( handleType_ )
       , fd( fd_ )
@@ -38198,7 +38198,7 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eImportMemoryFdInfoKHR;
     const void* pNext = {};
-    VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType = {};
+    VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType = VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits::eOpaqueFd;
     int fd = {};
   };
   static_assert( sizeof( ImportMemoryFdInfoKHR ) == sizeof( VkImportMemoryFdInfoKHR ), "struct and wrapper have different size!" );
@@ -38206,7 +38206,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ImportMemoryHostPointerInfoEXT
   {
-    VULKAN_HPP_CONSTEXPR ImportMemoryHostPointerInfoEXT( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType_ = {},
+    VULKAN_HPP_CONSTEXPR ImportMemoryHostPointerInfoEXT( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType_ = VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits::eOpaqueFd,
                                                          void* pHostPointer_ = {} ) VULKAN_HPP_NOEXCEPT
       : handleType( handleType_ )
       , pHostPointer( pHostPointer_ )
@@ -38273,7 +38273,7 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eImportMemoryHostPointerInfoEXT;
     const void* pNext = {};
-    VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType = {};
+    VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType = VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits::eOpaqueFd;
     void* pHostPointer = {};
   };
   static_assert( sizeof( ImportMemoryHostPointerInfoEXT ) == sizeof( VkImportMemoryHostPointerInfoEXT ), "struct and wrapper have different size!" );
@@ -38283,7 +38283,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ImportMemoryWin32HandleInfoKHR
   {
-    VULKAN_HPP_CONSTEXPR ImportMemoryWin32HandleInfoKHR( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType_ = {},
+    VULKAN_HPP_CONSTEXPR ImportMemoryWin32HandleInfoKHR( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType_ = VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits::eOpaqueFd,
                                                          HANDLE handle_ = {},
                                                          LPCWSTR name_ = {} ) VULKAN_HPP_NOEXCEPT
       : handleType( handleType_ )
@@ -38359,7 +38359,7 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eImportMemoryWin32HandleInfoKHR;
     const void* pNext = {};
-    VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType = {};
+    VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType = VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits::eOpaqueFd;
     HANDLE handle = {};
     LPCWSTR name = {};
   };
@@ -38449,7 +38449,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     VULKAN_HPP_CONSTEXPR ImportSemaphoreFdInfoKHR( VULKAN_HPP_NAMESPACE::Semaphore semaphore_ = {},
                                                    VULKAN_HPP_NAMESPACE::SemaphoreImportFlags flags_ = {},
-                                                   VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits handleType_ = {},
+                                                   VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits handleType_ = VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits::eOpaqueFd,
                                                    int fd_ = {} ) VULKAN_HPP_NOEXCEPT
       : semaphore( semaphore_ )
       , flags( flags_ )
@@ -38534,7 +38534,7 @@ namespace VULKAN_HPP_NAMESPACE
     const void* pNext = {};
     VULKAN_HPP_NAMESPACE::Semaphore semaphore = {};
     VULKAN_HPP_NAMESPACE::SemaphoreImportFlags flags = {};
-    VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits handleType = {};
+    VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits handleType = VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits::eOpaqueFd;
     int fd = {};
   };
   static_assert( sizeof( ImportSemaphoreFdInfoKHR ) == sizeof( VkImportSemaphoreFdInfoKHR ), "struct and wrapper have different size!" );
@@ -38546,7 +38546,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     VULKAN_HPP_CONSTEXPR ImportSemaphoreWin32HandleInfoKHR( VULKAN_HPP_NAMESPACE::Semaphore semaphore_ = {},
                                                             VULKAN_HPP_NAMESPACE::SemaphoreImportFlags flags_ = {},
-                                                            VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits handleType_ = {},
+                                                            VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits handleType_ = VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits::eOpaqueFd,
                                                             HANDLE handle_ = {},
                                                             LPCWSTR name_ = {} ) VULKAN_HPP_NOEXCEPT
       : semaphore( semaphore_ )
@@ -38640,7 +38640,7 @@ namespace VULKAN_HPP_NAMESPACE
     const void* pNext = {};
     VULKAN_HPP_NAMESPACE::Semaphore semaphore = {};
     VULKAN_HPP_NAMESPACE::SemaphoreImportFlags flags = {};
-    VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits handleType = {};
+    VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits handleType = VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits::eOpaqueFd;
     HANDLE handle = {};
     LPCWSTR name = {};
   };
@@ -38650,7 +38650,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct IndirectCommandsLayoutTokenNVX
   {
-    VULKAN_HPP_CONSTEXPR IndirectCommandsLayoutTokenNVX( VULKAN_HPP_NAMESPACE::IndirectCommandsTokenTypeNVX tokenType_ = {},
+    VULKAN_HPP_CONSTEXPR IndirectCommandsLayoutTokenNVX( VULKAN_HPP_NAMESPACE::IndirectCommandsTokenTypeNVX tokenType_ = VULKAN_HPP_NAMESPACE::IndirectCommandsTokenTypeNVX::ePipeline,
                                                          uint32_t bindingUnit_ = {},
                                                          uint32_t dynamicCount_ = {},
                                                          uint32_t divisor_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -38719,7 +38719,7 @@ namespace VULKAN_HPP_NAMESPACE
     }
 
   public:
-    VULKAN_HPP_NAMESPACE::IndirectCommandsTokenTypeNVX tokenType = {};
+    VULKAN_HPP_NAMESPACE::IndirectCommandsTokenTypeNVX tokenType = VULKAN_HPP_NAMESPACE::IndirectCommandsTokenTypeNVX::ePipeline;
     uint32_t bindingUnit = {};
     uint32_t dynamicCount = {};
     uint32_t divisor = {};
@@ -38729,7 +38729,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct IndirectCommandsLayoutCreateInfoNVX
   {
-    VULKAN_HPP_CONSTEXPR IndirectCommandsLayoutCreateInfoNVX( VULKAN_HPP_NAMESPACE::PipelineBindPoint pipelineBindPoint_ = {},
+    VULKAN_HPP_CONSTEXPR IndirectCommandsLayoutCreateInfoNVX( VULKAN_HPP_NAMESPACE::PipelineBindPoint pipelineBindPoint_ = VULKAN_HPP_NAMESPACE::PipelineBindPoint::eGraphics,
                                                               VULKAN_HPP_NAMESPACE::IndirectCommandsLayoutUsageFlagsNVX flags_ = {},
                                                               uint32_t tokenCount_ = {},
                                                               const VULKAN_HPP_NAMESPACE::IndirectCommandsLayoutTokenNVX* pTokens_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -38814,7 +38814,7 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eIndirectCommandsLayoutCreateInfoNVX;
     const void* pNext = {};
-    VULKAN_HPP_NAMESPACE::PipelineBindPoint pipelineBindPoint = {};
+    VULKAN_HPP_NAMESPACE::PipelineBindPoint pipelineBindPoint = VULKAN_HPP_NAMESPACE::PipelineBindPoint::eGraphics;
     VULKAN_HPP_NAMESPACE::IndirectCommandsLayoutUsageFlagsNVX flags = {};
     uint32_t tokenCount = {};
     const VULKAN_HPP_NAMESPACE::IndirectCommandsLayoutTokenNVX* pTokens = {};
@@ -39773,7 +39773,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct MemoryGetFdInfoKHR
   {
     VULKAN_HPP_CONSTEXPR MemoryGetFdInfoKHR( VULKAN_HPP_NAMESPACE::DeviceMemory memory_ = {},
-                                             VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType_ = {} ) VULKAN_HPP_NOEXCEPT
+                                             VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType_ = VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits::eOpaqueFd ) VULKAN_HPP_NOEXCEPT
       : memory( memory_ )
       , handleType( handleType_ )
     {}
@@ -39840,7 +39840,7 @@ namespace VULKAN_HPP_NAMESPACE
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eMemoryGetFdInfoKHR;
     const void* pNext = {};
     VULKAN_HPP_NAMESPACE::DeviceMemory memory = {};
-    VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType = {};
+    VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType = VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits::eOpaqueFd;
   };
   static_assert( sizeof( MemoryGetFdInfoKHR ) == sizeof( VkMemoryGetFdInfoKHR ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<MemoryGetFdInfoKHR>::value, "struct wrapper is not a standard layout!" );
@@ -39850,7 +39850,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct MemoryGetWin32HandleInfoKHR
   {
     VULKAN_HPP_CONSTEXPR MemoryGetWin32HandleInfoKHR( VULKAN_HPP_NAMESPACE::DeviceMemory memory_ = {},
-                                                      VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType_ = {} ) VULKAN_HPP_NOEXCEPT
+                                                      VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType_ = VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits::eOpaqueFd ) VULKAN_HPP_NOEXCEPT
       : memory( memory_ )
       , handleType( handleType_ )
     {}
@@ -39917,7 +39917,7 @@ namespace VULKAN_HPP_NAMESPACE
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eMemoryGetWin32HandleInfoKHR;
     const void* pNext = {};
     VULKAN_HPP_NAMESPACE::DeviceMemory memory = {};
-    VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType = {};
+    VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType = VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits::eOpaqueFd;
   };
   static_assert( sizeof( MemoryGetWin32HandleInfoKHR ) == sizeof( VkMemoryGetWin32HandleInfoKHR ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<MemoryGetWin32HandleInfoKHR>::value, "struct wrapper is not a standard layout!" );
@@ -40638,7 +40638,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ObjectTableEntryNVX
   {
-    VULKAN_HPP_CONSTEXPR ObjectTableEntryNVX( VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX type_ = {},
+    VULKAN_HPP_CONSTEXPR ObjectTableEntryNVX( VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX type_ = VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX::eDescriptorSet,
                                               VULKAN_HPP_NAMESPACE::ObjectEntryUsageFlagsNVX flags_ = {} ) VULKAN_HPP_NOEXCEPT
       : type( type_ )
       , flags( flags_ )
@@ -40689,7 +40689,7 @@ namespace VULKAN_HPP_NAMESPACE
     }
 
   public:
-    VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX type = {};
+    VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX type = VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX::eDescriptorSet;
     VULKAN_HPP_NAMESPACE::ObjectEntryUsageFlagsNVX flags = {};
   };
   static_assert( sizeof( ObjectTableEntryNVX ) == sizeof( VkObjectTableEntryNVX ), "struct and wrapper have different size!" );
@@ -40697,7 +40697,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ObjectTableDescriptorSetEntryNVX
   {
-    VULKAN_HPP_CONSTEXPR ObjectTableDescriptorSetEntryNVX( VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX type_ = {},
+    VULKAN_HPP_CONSTEXPR ObjectTableDescriptorSetEntryNVX( VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX type_ = VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX::eDescriptorSet,
                                                            VULKAN_HPP_NAMESPACE::ObjectEntryUsageFlagsNVX flags_ = {},
                                                            VULKAN_HPP_NAMESPACE::PipelineLayout pipelineLayout_ = {},
                                                            VULKAN_HPP_NAMESPACE::DescriptorSet descriptorSet_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -40775,7 +40775,7 @@ namespace VULKAN_HPP_NAMESPACE
     }
 
   public:
-    VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX type = {};
+    VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX type = VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX::eDescriptorSet;
     VULKAN_HPP_NAMESPACE::ObjectEntryUsageFlagsNVX flags = {};
     VULKAN_HPP_NAMESPACE::PipelineLayout pipelineLayout = {};
     VULKAN_HPP_NAMESPACE::DescriptorSet descriptorSet = {};
@@ -40785,10 +40785,10 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ObjectTableIndexBufferEntryNVX
   {
-    VULKAN_HPP_CONSTEXPR ObjectTableIndexBufferEntryNVX( VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX type_ = {},
+    VULKAN_HPP_CONSTEXPR ObjectTableIndexBufferEntryNVX( VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX type_ = VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX::eDescriptorSet,
                                                          VULKAN_HPP_NAMESPACE::ObjectEntryUsageFlagsNVX flags_ = {},
                                                          VULKAN_HPP_NAMESPACE::Buffer buffer_ = {},
-                                                         VULKAN_HPP_NAMESPACE::IndexType indexType_ = {} ) VULKAN_HPP_NOEXCEPT
+                                                         VULKAN_HPP_NAMESPACE::IndexType indexType_ = VULKAN_HPP_NAMESPACE::IndexType::eUint16 ) VULKAN_HPP_NOEXCEPT
       : type( type_ )
       , flags( flags_ )
       , buffer( buffer_ )
@@ -40797,7 +40797,7 @@ namespace VULKAN_HPP_NAMESPACE
 
     explicit ObjectTableIndexBufferEntryNVX( ObjectTableEntryNVX const& objectTableEntryNVX,
                                              VULKAN_HPP_NAMESPACE::Buffer buffer_ = {},
-                                             VULKAN_HPP_NAMESPACE::IndexType indexType_ = {} )
+                                             VULKAN_HPP_NAMESPACE::IndexType indexType_ = VULKAN_HPP_NAMESPACE::IndexType::eUint16 )
       : type( objectTableEntryNVX.type )
       , flags( objectTableEntryNVX.flags )
       , buffer( buffer_ )
@@ -40863,17 +40863,17 @@ namespace VULKAN_HPP_NAMESPACE
     }
 
   public:
-    VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX type = {};
+    VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX type = VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX::eDescriptorSet;
     VULKAN_HPP_NAMESPACE::ObjectEntryUsageFlagsNVX flags = {};
     VULKAN_HPP_NAMESPACE::Buffer buffer = {};
-    VULKAN_HPP_NAMESPACE::IndexType indexType = {};
+    VULKAN_HPP_NAMESPACE::IndexType indexType = VULKAN_HPP_NAMESPACE::IndexType::eUint16;
   };
   static_assert( sizeof( ObjectTableIndexBufferEntryNVX ) == sizeof( VkObjectTableIndexBufferEntryNVX ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<ObjectTableIndexBufferEntryNVX>::value, "struct wrapper is not a standard layout!" );
 
   struct ObjectTablePipelineEntryNVX
   {
-    VULKAN_HPP_CONSTEXPR ObjectTablePipelineEntryNVX( VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX type_ = {},
+    VULKAN_HPP_CONSTEXPR ObjectTablePipelineEntryNVX( VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX type_ = VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX::eDescriptorSet,
                                                       VULKAN_HPP_NAMESPACE::ObjectEntryUsageFlagsNVX flags_ = {},
                                                       VULKAN_HPP_NAMESPACE::Pipeline pipeline_ = {} ) VULKAN_HPP_NOEXCEPT
       : type( type_ )
@@ -40940,7 +40940,7 @@ namespace VULKAN_HPP_NAMESPACE
     }
 
   public:
-    VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX type = {};
+    VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX type = VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX::eDescriptorSet;
     VULKAN_HPP_NAMESPACE::ObjectEntryUsageFlagsNVX flags = {};
     VULKAN_HPP_NAMESPACE::Pipeline pipeline = {};
   };
@@ -40949,7 +40949,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ObjectTablePushConstantEntryNVX
   {
-    VULKAN_HPP_CONSTEXPR ObjectTablePushConstantEntryNVX( VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX type_ = {},
+    VULKAN_HPP_CONSTEXPR ObjectTablePushConstantEntryNVX( VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX type_ = VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX::eDescriptorSet,
                                                           VULKAN_HPP_NAMESPACE::ObjectEntryUsageFlagsNVX flags_ = {},
                                                           VULKAN_HPP_NAMESPACE::PipelineLayout pipelineLayout_ = {},
                                                           VULKAN_HPP_NAMESPACE::ShaderStageFlags stageFlags_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -41027,7 +41027,7 @@ namespace VULKAN_HPP_NAMESPACE
     }
 
   public:
-    VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX type = {};
+    VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX type = VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX::eDescriptorSet;
     VULKAN_HPP_NAMESPACE::ObjectEntryUsageFlagsNVX flags = {};
     VULKAN_HPP_NAMESPACE::PipelineLayout pipelineLayout = {};
     VULKAN_HPP_NAMESPACE::ShaderStageFlags stageFlags = {};
@@ -41037,7 +41037,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ObjectTableVertexBufferEntryNVX
   {
-    VULKAN_HPP_CONSTEXPR ObjectTableVertexBufferEntryNVX( VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX type_ = {},
+    VULKAN_HPP_CONSTEXPR ObjectTableVertexBufferEntryNVX( VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX type_ = VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX::eDescriptorSet,
                                                           VULKAN_HPP_NAMESPACE::ObjectEntryUsageFlagsNVX flags_ = {},
                                                           VULKAN_HPP_NAMESPACE::Buffer buffer_ = {} ) VULKAN_HPP_NOEXCEPT
       : type( type_ )
@@ -41104,7 +41104,7 @@ namespace VULKAN_HPP_NAMESPACE
     }
 
   public:
-    VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX type = {};
+    VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX type = VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX::eDescriptorSet;
     VULKAN_HPP_NAMESPACE::ObjectEntryUsageFlagsNVX flags = {};
     VULKAN_HPP_NAMESPACE::Buffer buffer = {};
   };
@@ -41172,7 +41172,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PerformanceConfigurationAcquireInfoINTEL
   {
-    VULKAN_HPP_CONSTEXPR PerformanceConfigurationAcquireInfoINTEL( VULKAN_HPP_NAMESPACE::PerformanceConfigurationTypeINTEL type_ = {} ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR PerformanceConfigurationAcquireInfoINTEL( VULKAN_HPP_NAMESPACE::PerformanceConfigurationTypeINTEL type_ = VULKAN_HPP_NAMESPACE::PerformanceConfigurationTypeINTEL::eCommandQueueMetricsDiscoveryActivated ) VULKAN_HPP_NOEXCEPT
       : type( type_ )
     {}
 
@@ -41230,7 +41230,7 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::ePerformanceConfigurationAcquireInfoINTEL;
     const void* pNext = {};
-    VULKAN_HPP_NAMESPACE::PerformanceConfigurationTypeINTEL type = {};
+    VULKAN_HPP_NAMESPACE::PerformanceConfigurationTypeINTEL type = VULKAN_HPP_NAMESPACE::PerformanceConfigurationTypeINTEL::eCommandQueueMetricsDiscoveryActivated;
   };
   static_assert( sizeof( PerformanceConfigurationAcquireInfoINTEL ) == sizeof( VkPerformanceConfigurationAcquireInfoINTEL ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<PerformanceConfigurationAcquireInfoINTEL>::value, "struct wrapper is not a standard layout!" );
@@ -41306,9 +41306,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PerformanceCounterKHR
   {
-    PerformanceCounterKHR( VULKAN_HPP_NAMESPACE::PerformanceCounterUnitKHR unit_ = {},
-                           VULKAN_HPP_NAMESPACE::PerformanceCounterScopeKHR scope_ = {},
-                           VULKAN_HPP_NAMESPACE::PerformanceCounterStorageKHR storage_ = {},
+    PerformanceCounterKHR( VULKAN_HPP_NAMESPACE::PerformanceCounterUnitKHR unit_ = VULKAN_HPP_NAMESPACE::PerformanceCounterUnitKHR::eGeneric,
+                           VULKAN_HPP_NAMESPACE::PerformanceCounterScopeKHR scope_ = VULKAN_HPP_NAMESPACE::PerformanceCounterScopeKHR::eCommandBuffer,
+                           VULKAN_HPP_NAMESPACE::PerformanceCounterStorageKHR storage_ = VULKAN_HPP_NAMESPACE::PerformanceCounterStorageKHR::eInt32,
                            std::array<uint8_t,VK_UUID_SIZE> const& uuid_ = {} ) VULKAN_HPP_NOEXCEPT
       : unit( unit_ )
       , scope( scope_ )
@@ -41363,9 +41363,9 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::ePerformanceCounterKHR;
     const void* pNext = {};
-    VULKAN_HPP_NAMESPACE::PerformanceCounterUnitKHR unit = {};
-    VULKAN_HPP_NAMESPACE::PerformanceCounterScopeKHR scope = {};
-    VULKAN_HPP_NAMESPACE::PerformanceCounterStorageKHR storage = {};
+    VULKAN_HPP_NAMESPACE::PerformanceCounterUnitKHR unit = VULKAN_HPP_NAMESPACE::PerformanceCounterUnitKHR::eGeneric;
+    VULKAN_HPP_NAMESPACE::PerformanceCounterScopeKHR scope = VULKAN_HPP_NAMESPACE::PerformanceCounterScopeKHR::eCommandBuffer;
+    VULKAN_HPP_NAMESPACE::PerformanceCounterStorageKHR storage = VULKAN_HPP_NAMESPACE::PerformanceCounterStorageKHR::eInt32;
     uint8_t uuid[VK_UUID_SIZE] = {};
   };
   static_assert( sizeof( PerformanceCounterKHR ) == sizeof( VkPerformanceCounterKHR ), "struct and wrapper have different size!" );
@@ -41530,7 +41530,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PerformanceOverrideInfoINTEL
   {
-    VULKAN_HPP_CONSTEXPR PerformanceOverrideInfoINTEL( VULKAN_HPP_NAMESPACE::PerformanceOverrideTypeINTEL type_ = {},
+    VULKAN_HPP_CONSTEXPR PerformanceOverrideInfoINTEL( VULKAN_HPP_NAMESPACE::PerformanceOverrideTypeINTEL type_ = VULKAN_HPP_NAMESPACE::PerformanceOverrideTypeINTEL::eNullHardware,
                                                        VULKAN_HPP_NAMESPACE::Bool32 enable_ = {},
                                                        uint64_t parameter_ = {} ) VULKAN_HPP_NOEXCEPT
       : type( type_ )
@@ -41606,7 +41606,7 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::ePerformanceOverrideInfoINTEL;
     const void* pNext = {};
-    VULKAN_HPP_NAMESPACE::PerformanceOverrideTypeINTEL type = {};
+    VULKAN_HPP_NAMESPACE::PerformanceOverrideTypeINTEL type = VULKAN_HPP_NAMESPACE::PerformanceOverrideTypeINTEL::eNullHardware;
     VULKAN_HPP_NAMESPACE::Bool32 enable = {};
     uint64_t parameter = {};
   };
@@ -41828,7 +41828,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PerformanceValueINTEL
   {
-    PerformanceValueINTEL( VULKAN_HPP_NAMESPACE::PerformanceValueTypeINTEL type_ = {},
+    PerformanceValueINTEL( VULKAN_HPP_NAMESPACE::PerformanceValueTypeINTEL type_ = VULKAN_HPP_NAMESPACE::PerformanceValueTypeINTEL::eUint32,
                            VULKAN_HPP_NAMESPACE::PerformanceValueDataINTEL data_ = {} ) VULKAN_HPP_NOEXCEPT
       : type( type_ )
       , data( data_ )
@@ -41868,7 +41868,7 @@ namespace VULKAN_HPP_NAMESPACE
     }
 
   public:
-    VULKAN_HPP_NAMESPACE::PerformanceValueTypeINTEL type = {};
+    VULKAN_HPP_NAMESPACE::PerformanceValueTypeINTEL type = VULKAN_HPP_NAMESPACE::PerformanceValueTypeINTEL::eUint32;
     VULKAN_HPP_NAMESPACE::PerformanceValueDataINTEL data = {};
   };
   static_assert( sizeof( PerformanceValueINTEL ) == sizeof( VkPerformanceValueINTEL ), "struct and wrapper have different size!" );
@@ -43631,7 +43631,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceDriverProperties
   {
-    PhysicalDeviceDriverProperties( VULKAN_HPP_NAMESPACE::DriverId driverID_ = {},
+    PhysicalDeviceDriverProperties( VULKAN_HPP_NAMESPACE::DriverId driverID_ = VULKAN_HPP_NAMESPACE::DriverId::eAmdProprietary,
                                     std::array<char,VK_MAX_DRIVER_NAME_SIZE> const& driverName_ = {},
                                     std::array<char,VK_MAX_DRIVER_INFO_SIZE> const& driverInfo_ = {},
                                     VULKAN_HPP_NAMESPACE::ConformanceVersion conformanceVersion_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -43689,7 +43689,7 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::ePhysicalDeviceDriverProperties;
     void* pNext = {};
-    VULKAN_HPP_NAMESPACE::DriverId driverID = {};
+    VULKAN_HPP_NAMESPACE::DriverId driverID = VULKAN_HPP_NAMESPACE::DriverId::eAmdProprietary;
     char driverName[VK_MAX_DRIVER_NAME_SIZE] = {};
     char driverInfo[VK_MAX_DRIVER_INFO_SIZE] = {};
     VULKAN_HPP_NAMESPACE::ConformanceVersion conformanceVersion = {};
@@ -43766,7 +43766,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     VULKAN_HPP_CONSTEXPR PhysicalDeviceExternalBufferInfo( VULKAN_HPP_NAMESPACE::BufferCreateFlags flags_ = {},
                                                            VULKAN_HPP_NAMESPACE::BufferUsageFlags usage_ = {},
-                                                           VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType_ = {} ) VULKAN_HPP_NOEXCEPT
+                                                           VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType_ = VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits::eOpaqueFd ) VULKAN_HPP_NOEXCEPT
       : flags( flags_ )
       , usage( usage_ )
       , handleType( handleType_ )
@@ -43842,14 +43842,14 @@ namespace VULKAN_HPP_NAMESPACE
     const void* pNext = {};
     VULKAN_HPP_NAMESPACE::BufferCreateFlags flags = {};
     VULKAN_HPP_NAMESPACE::BufferUsageFlags usage = {};
-    VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType = {};
+    VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType = VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits::eOpaqueFd;
   };
   static_assert( sizeof( PhysicalDeviceExternalBufferInfo ) == sizeof( VkPhysicalDeviceExternalBufferInfo ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<PhysicalDeviceExternalBufferInfo>::value, "struct wrapper is not a standard layout!" );
 
   struct PhysicalDeviceExternalFenceInfo
   {
-    VULKAN_HPP_CONSTEXPR PhysicalDeviceExternalFenceInfo( VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlagBits handleType_ = {} ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceExternalFenceInfo( VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlagBits handleType_ = VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlagBits::eOpaqueFd ) VULKAN_HPP_NOEXCEPT
       : handleType( handleType_ )
     {}
 
@@ -43907,14 +43907,14 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::ePhysicalDeviceExternalFenceInfo;
     const void* pNext = {};
-    VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlagBits handleType = {};
+    VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlagBits handleType = VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlagBits::eOpaqueFd;
   };
   static_assert( sizeof( PhysicalDeviceExternalFenceInfo ) == sizeof( VkPhysicalDeviceExternalFenceInfo ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<PhysicalDeviceExternalFenceInfo>::value, "struct wrapper is not a standard layout!" );
 
   struct PhysicalDeviceExternalImageFormatInfo
   {
-    VULKAN_HPP_CONSTEXPR PhysicalDeviceExternalImageFormatInfo( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType_ = {} ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceExternalImageFormatInfo( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType_ = VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits::eOpaqueFd ) VULKAN_HPP_NOEXCEPT
       : handleType( handleType_ )
     {}
 
@@ -43972,7 +43972,7 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::ePhysicalDeviceExternalImageFormatInfo;
     const void* pNext = {};
-    VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType = {};
+    VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType = VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits::eOpaqueFd;
   };
   static_assert( sizeof( PhysicalDeviceExternalImageFormatInfo ) == sizeof( VkPhysicalDeviceExternalImageFormatInfo ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<PhysicalDeviceExternalImageFormatInfo>::value, "struct wrapper is not a standard layout!" );
@@ -44032,7 +44032,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceExternalSemaphoreInfo
   {
-    VULKAN_HPP_CONSTEXPR PhysicalDeviceExternalSemaphoreInfo( VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits handleType_ = {} ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceExternalSemaphoreInfo( VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits handleType_ = VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits::eOpaqueFd ) VULKAN_HPP_NOEXCEPT
       : handleType( handleType_ )
     {}
 
@@ -44090,7 +44090,7 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::ePhysicalDeviceExternalSemaphoreInfo;
     const void* pNext = {};
-    VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits handleType = {};
+    VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits handleType = VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits::eOpaqueFd;
   };
   static_assert( sizeof( PhysicalDeviceExternalSemaphoreInfo ) == sizeof( VkPhysicalDeviceExternalSemaphoreInfo ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<PhysicalDeviceExternalSemaphoreInfo>::value, "struct wrapper is not a standard layout!" );
@@ -44162,8 +44162,8 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceFloatControlsProperties
   {
-    PhysicalDeviceFloatControlsProperties( VULKAN_HPP_NAMESPACE::ShaderFloatControlsIndependence denormBehaviorIndependence_ = {},
-                                           VULKAN_HPP_NAMESPACE::ShaderFloatControlsIndependence roundingModeIndependence_ = {},
+    PhysicalDeviceFloatControlsProperties( VULKAN_HPP_NAMESPACE::ShaderFloatControlsIndependence denormBehaviorIndependence_ = VULKAN_HPP_NAMESPACE::ShaderFloatControlsIndependence::e32BitOnly,
+                                           VULKAN_HPP_NAMESPACE::ShaderFloatControlsIndependence roundingModeIndependence_ = VULKAN_HPP_NAMESPACE::ShaderFloatControlsIndependence::e32BitOnly,
                                            VULKAN_HPP_NAMESPACE::Bool32 shaderSignedZeroInfNanPreserveFloat16_ = {},
                                            VULKAN_HPP_NAMESPACE::Bool32 shaderSignedZeroInfNanPreserveFloat32_ = {},
                                            VULKAN_HPP_NAMESPACE::Bool32 shaderSignedZeroInfNanPreserveFloat64_ = {},
@@ -44256,8 +44256,8 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::ePhysicalDeviceFloatControlsProperties;
     void* pNext = {};
-    VULKAN_HPP_NAMESPACE::ShaderFloatControlsIndependence denormBehaviorIndependence = {};
-    VULKAN_HPP_NAMESPACE::ShaderFloatControlsIndependence roundingModeIndependence = {};
+    VULKAN_HPP_NAMESPACE::ShaderFloatControlsIndependence denormBehaviorIndependence = VULKAN_HPP_NAMESPACE::ShaderFloatControlsIndependence::e32BitOnly;
+    VULKAN_HPP_NAMESPACE::ShaderFloatControlsIndependence roundingModeIndependence = VULKAN_HPP_NAMESPACE::ShaderFloatControlsIndependence::e32BitOnly;
     VULKAN_HPP_NAMESPACE::Bool32 shaderSignedZeroInfNanPreserveFloat16 = {};
     VULKAN_HPP_NAMESPACE::Bool32 shaderSignedZeroInfNanPreserveFloat32 = {};
     VULKAN_HPP_NAMESPACE::Bool32 shaderSignedZeroInfNanPreserveFloat64 = {};
@@ -44753,7 +44753,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct PhysicalDeviceImageDrmFormatModifierInfoEXT
   {
     VULKAN_HPP_CONSTEXPR PhysicalDeviceImageDrmFormatModifierInfoEXT( uint64_t drmFormatModifier_ = {},
-                                                                      VULKAN_HPP_NAMESPACE::SharingMode sharingMode_ = {},
+                                                                      VULKAN_HPP_NAMESPACE::SharingMode sharingMode_ = VULKAN_HPP_NAMESPACE::SharingMode::eExclusive,
                                                                       uint32_t queueFamilyIndexCount_ = {},
                                                                       const uint32_t* pQueueFamilyIndices_ = {} ) VULKAN_HPP_NOEXCEPT
       : drmFormatModifier( drmFormatModifier_ )
@@ -44838,7 +44838,7 @@ namespace VULKAN_HPP_NAMESPACE
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::ePhysicalDeviceImageDrmFormatModifierInfoEXT;
     const void* pNext = {};
     uint64_t drmFormatModifier = {};
-    VULKAN_HPP_NAMESPACE::SharingMode sharingMode = {};
+    VULKAN_HPP_NAMESPACE::SharingMode sharingMode = VULKAN_HPP_NAMESPACE::SharingMode::eExclusive;
     uint32_t queueFamilyIndexCount = {};
     const uint32_t* pQueueFamilyIndices = {};
   };
@@ -44847,9 +44847,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceImageFormatInfo2
   {
-    VULKAN_HPP_CONSTEXPR PhysicalDeviceImageFormatInfo2( VULKAN_HPP_NAMESPACE::Format format_ = {},
-                                                         VULKAN_HPP_NAMESPACE::ImageType type_ = {},
-                                                         VULKAN_HPP_NAMESPACE::ImageTiling tiling_ = {},
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceImageFormatInfo2( VULKAN_HPP_NAMESPACE::Format format_ = VULKAN_HPP_NAMESPACE::Format::eUndefined,
+                                                         VULKAN_HPP_NAMESPACE::ImageType type_ = VULKAN_HPP_NAMESPACE::ImageType::e1D,
+                                                         VULKAN_HPP_NAMESPACE::ImageTiling tiling_ = VULKAN_HPP_NAMESPACE::ImageTiling::eOptimal,
                                                          VULKAN_HPP_NAMESPACE::ImageUsageFlags usage_ = {},
                                                          VULKAN_HPP_NAMESPACE::ImageCreateFlags flags_ = {} ) VULKAN_HPP_NOEXCEPT
       : format( format_ )
@@ -44941,9 +44941,9 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::ePhysicalDeviceImageFormatInfo2;
     const void* pNext = {};
-    VULKAN_HPP_NAMESPACE::Format format = {};
-    VULKAN_HPP_NAMESPACE::ImageType type = {};
-    VULKAN_HPP_NAMESPACE::ImageTiling tiling = {};
+    VULKAN_HPP_NAMESPACE::Format format = VULKAN_HPP_NAMESPACE::Format::eUndefined;
+    VULKAN_HPP_NAMESPACE::ImageType type = VULKAN_HPP_NAMESPACE::ImageType::e1D;
+    VULKAN_HPP_NAMESPACE::ImageTiling tiling = VULKAN_HPP_NAMESPACE::ImageTiling::eOptimal;
     VULKAN_HPP_NAMESPACE::ImageUsageFlags usage = {};
     VULKAN_HPP_NAMESPACE::ImageCreateFlags flags = {};
   };
@@ -44952,7 +44952,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceImageViewImageFormatInfoEXT
   {
-    VULKAN_HPP_CONSTEXPR PhysicalDeviceImageViewImageFormatInfoEXT( VULKAN_HPP_NAMESPACE::ImageViewType imageViewType_ = {} ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceImageViewImageFormatInfoEXT( VULKAN_HPP_NAMESPACE::ImageViewType imageViewType_ = VULKAN_HPP_NAMESPACE::ImageViewType::e1D ) VULKAN_HPP_NOEXCEPT
       : imageViewType( imageViewType_ )
     {}
 
@@ -45010,7 +45010,7 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::ePhysicalDeviceImageViewImageFormatInfoEXT;
     void* pNext = {};
-    VULKAN_HPP_NAMESPACE::ImageViewType imageViewType = {};
+    VULKAN_HPP_NAMESPACE::ImageViewType imageViewType = VULKAN_HPP_NAMESPACE::ImageViewType::e1D;
   };
   static_assert( sizeof( PhysicalDeviceImageViewImageFormatInfoEXT ) == sizeof( VkPhysicalDeviceImageViewImageFormatInfoEXT ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<PhysicalDeviceImageViewImageFormatInfoEXT>::value, "struct wrapper is not a standard layout!" );
@@ -46854,7 +46854,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDevicePointClippingProperties
   {
-    PhysicalDevicePointClippingProperties( VULKAN_HPP_NAMESPACE::PointClippingBehavior pointClippingBehavior_ = {} ) VULKAN_HPP_NOEXCEPT
+    PhysicalDevicePointClippingProperties( VULKAN_HPP_NAMESPACE::PointClippingBehavior pointClippingBehavior_ = VULKAN_HPP_NAMESPACE::PointClippingBehavior::eAllClipPlanes ) VULKAN_HPP_NOEXCEPT
       : pointClippingBehavior( pointClippingBehavior_ )
     {}
 
@@ -46900,7 +46900,7 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::ePhysicalDevicePointClippingProperties;
     void* pNext = {};
-    VULKAN_HPP_NAMESPACE::PointClippingBehavior pointClippingBehavior = {};
+    VULKAN_HPP_NAMESPACE::PointClippingBehavior pointClippingBehavior = VULKAN_HPP_NAMESPACE::PointClippingBehavior::eAllClipPlanes;
   };
   static_assert( sizeof( PhysicalDevicePointClippingProperties ) == sizeof( VkPhysicalDevicePointClippingProperties ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<PhysicalDevicePointClippingProperties>::value, "struct wrapper is not a standard layout!" );
@@ -46970,7 +46970,7 @@ namespace VULKAN_HPP_NAMESPACE
                               uint32_t driverVersion_ = {},
                               uint32_t vendorID_ = {},
                               uint32_t deviceID_ = {},
-                              VULKAN_HPP_NAMESPACE::PhysicalDeviceType deviceType_ = {},
+                              VULKAN_HPP_NAMESPACE::PhysicalDeviceType deviceType_ = VULKAN_HPP_NAMESPACE::PhysicalDeviceType::eOther,
                               std::array<char,VK_MAX_PHYSICAL_DEVICE_NAME_SIZE> const& deviceName_ = {},
                               std::array<uint8_t,VK_UUID_SIZE> const& pipelineCacheUUID_ = {},
                               VULKAN_HPP_NAMESPACE::PhysicalDeviceLimits limits_ = {},
@@ -47033,7 +47033,7 @@ namespace VULKAN_HPP_NAMESPACE
     uint32_t driverVersion = {};
     uint32_t vendorID = {};
     uint32_t deviceID = {};
-    VULKAN_HPP_NAMESPACE::PhysicalDeviceType deviceType = {};
+    VULKAN_HPP_NAMESPACE::PhysicalDeviceType deviceType = VULKAN_HPP_NAMESPACE::PhysicalDeviceType::eOther;
     char deviceName[VK_MAX_PHYSICAL_DEVICE_NAME_SIZE] = {};
     uint8_t pipelineCacheUUID[VK_UUID_SIZE] = {};
     VULKAN_HPP_NAMESPACE::PhysicalDeviceLimits limits = {};
@@ -48707,11 +48707,11 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceSparseImageFormatInfo2
   {
-    VULKAN_HPP_CONSTEXPR PhysicalDeviceSparseImageFormatInfo2( VULKAN_HPP_NAMESPACE::Format format_ = {},
-                                                               VULKAN_HPP_NAMESPACE::ImageType type_ = {},
-                                                               VULKAN_HPP_NAMESPACE::SampleCountFlagBits samples_ = {},
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceSparseImageFormatInfo2( VULKAN_HPP_NAMESPACE::Format format_ = VULKAN_HPP_NAMESPACE::Format::eUndefined,
+                                                               VULKAN_HPP_NAMESPACE::ImageType type_ = VULKAN_HPP_NAMESPACE::ImageType::e1D,
+                                                               VULKAN_HPP_NAMESPACE::SampleCountFlagBits samples_ = VULKAN_HPP_NAMESPACE::SampleCountFlagBits::e1,
                                                                VULKAN_HPP_NAMESPACE::ImageUsageFlags usage_ = {},
-                                                               VULKAN_HPP_NAMESPACE::ImageTiling tiling_ = {} ) VULKAN_HPP_NOEXCEPT
+                                                               VULKAN_HPP_NAMESPACE::ImageTiling tiling_ = VULKAN_HPP_NAMESPACE::ImageTiling::eOptimal ) VULKAN_HPP_NOEXCEPT
       : format( format_ )
       , type( type_ )
       , samples( samples_ )
@@ -48801,11 +48801,11 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::ePhysicalDeviceSparseImageFormatInfo2;
     const void* pNext = {};
-    VULKAN_HPP_NAMESPACE::Format format = {};
-    VULKAN_HPP_NAMESPACE::ImageType type = {};
-    VULKAN_HPP_NAMESPACE::SampleCountFlagBits samples = {};
+    VULKAN_HPP_NAMESPACE::Format format = VULKAN_HPP_NAMESPACE::Format::eUndefined;
+    VULKAN_HPP_NAMESPACE::ImageType type = VULKAN_HPP_NAMESPACE::ImageType::e1D;
+    VULKAN_HPP_NAMESPACE::SampleCountFlagBits samples = VULKAN_HPP_NAMESPACE::SampleCountFlagBits::e1;
     VULKAN_HPP_NAMESPACE::ImageUsageFlags usage = {};
-    VULKAN_HPP_NAMESPACE::ImageTiling tiling = {};
+    VULKAN_HPP_NAMESPACE::ImageTiling tiling = VULKAN_HPP_NAMESPACE::ImageTiling::eOptimal;
   };
   static_assert( sizeof( PhysicalDeviceSparseImageFormatInfo2 ) == sizeof( VkPhysicalDeviceSparseImageFormatInfo2 ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<PhysicalDeviceSparseImageFormatInfo2>::value, "struct wrapper is not a standard layout!" );
@@ -50085,7 +50085,7 @@ namespace VULKAN_HPP_NAMESPACE
                                                               VULKAN_HPP_NAMESPACE::ShaderStageFlags subgroupSupportedStages_ = {},
                                                               VULKAN_HPP_NAMESPACE::SubgroupFeatureFlags subgroupSupportedOperations_ = {},
                                                               VULKAN_HPP_NAMESPACE::Bool32 subgroupQuadOperationsInAllStages_ = {},
-                                                              VULKAN_HPP_NAMESPACE::PointClippingBehavior pointClippingBehavior_ = {},
+                                                              VULKAN_HPP_NAMESPACE::PointClippingBehavior pointClippingBehavior_ = VULKAN_HPP_NAMESPACE::PointClippingBehavior::eAllClipPlanes,
                                                               uint32_t maxMultiviewViewCount_ = {},
                                                               uint32_t maxMultiviewInstanceIndex_ = {},
                                                               VULKAN_HPP_NAMESPACE::Bool32 protectedNoFault_ = {},
@@ -50273,7 +50273,7 @@ namespace VULKAN_HPP_NAMESPACE
     VULKAN_HPP_NAMESPACE::ShaderStageFlags subgroupSupportedStages = {};
     VULKAN_HPP_NAMESPACE::SubgroupFeatureFlags subgroupSupportedOperations = {};
     VULKAN_HPP_NAMESPACE::Bool32 subgroupQuadOperationsInAllStages = {};
-    VULKAN_HPP_NAMESPACE::PointClippingBehavior pointClippingBehavior = {};
+    VULKAN_HPP_NAMESPACE::PointClippingBehavior pointClippingBehavior = VULKAN_HPP_NAMESPACE::PointClippingBehavior::eAllClipPlanes;
     uint32_t maxMultiviewViewCount = {};
     uint32_t maxMultiviewInstanceIndex = {};
     VULKAN_HPP_NAMESPACE::Bool32 protectedNoFault = {};
@@ -50810,12 +50810,12 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceVulkan12Properties
   {
-    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceVulkan12Properties( VULKAN_HPP_NAMESPACE::DriverId driverID_ = {},
+    VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceVulkan12Properties( VULKAN_HPP_NAMESPACE::DriverId driverID_ = VULKAN_HPP_NAMESPACE::DriverId::eAmdProprietary,
                                                               std::array<char,VK_MAX_DRIVER_NAME_SIZE> const& driverName_ = {},
                                                               std::array<char,VK_MAX_DRIVER_INFO_SIZE> const& driverInfo_ = {},
                                                               VULKAN_HPP_NAMESPACE::ConformanceVersion conformanceVersion_ = {},
-                                                              VULKAN_HPP_NAMESPACE::ShaderFloatControlsIndependence denormBehaviorIndependence_ = {},
-                                                              VULKAN_HPP_NAMESPACE::ShaderFloatControlsIndependence roundingModeIndependence_ = {},
+                                                              VULKAN_HPP_NAMESPACE::ShaderFloatControlsIndependence denormBehaviorIndependence_ = VULKAN_HPP_NAMESPACE::ShaderFloatControlsIndependence::e32BitOnly,
+                                                              VULKAN_HPP_NAMESPACE::ShaderFloatControlsIndependence roundingModeIndependence_ = VULKAN_HPP_NAMESPACE::ShaderFloatControlsIndependence::e32BitOnly,
                                                               VULKAN_HPP_NAMESPACE::Bool32 shaderSignedZeroInfNanPreserveFloat16_ = {},
                                                               VULKAN_HPP_NAMESPACE::Bool32 shaderSignedZeroInfNanPreserveFloat32_ = {},
                                                               VULKAN_HPP_NAMESPACE::Bool32 shaderSignedZeroInfNanPreserveFloat64_ = {},
@@ -51330,12 +51330,12 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::ePhysicalDeviceVulkan12Properties;
     void* pNext = {};
-    VULKAN_HPP_NAMESPACE::DriverId driverID = {};
+    VULKAN_HPP_NAMESPACE::DriverId driverID = VULKAN_HPP_NAMESPACE::DriverId::eAmdProprietary;
     char driverName[VK_MAX_DRIVER_NAME_SIZE] = {};
     char driverInfo[VK_MAX_DRIVER_INFO_SIZE] = {};
     VULKAN_HPP_NAMESPACE::ConformanceVersion conformanceVersion = {};
-    VULKAN_HPP_NAMESPACE::ShaderFloatControlsIndependence denormBehaviorIndependence = {};
-    VULKAN_HPP_NAMESPACE::ShaderFloatControlsIndependence roundingModeIndependence = {};
+    VULKAN_HPP_NAMESPACE::ShaderFloatControlsIndependence denormBehaviorIndependence = VULKAN_HPP_NAMESPACE::ShaderFloatControlsIndependence::e32BitOnly;
+    VULKAN_HPP_NAMESPACE::ShaderFloatControlsIndependence roundingModeIndependence = VULKAN_HPP_NAMESPACE::ShaderFloatControlsIndependence::e32BitOnly;
     VULKAN_HPP_NAMESPACE::Bool32 shaderSignedZeroInfNanPreserveFloat16 = {};
     VULKAN_HPP_NAMESPACE::Bool32 shaderSignedZeroInfNanPreserveFloat32 = {};
     VULKAN_HPP_NAMESPACE::Bool32 shaderSignedZeroInfNanPreserveFloat64 = {};
@@ -51625,7 +51625,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     VULKAN_HPP_CONSTEXPR PipelineColorBlendAdvancedStateCreateInfoEXT( VULKAN_HPP_NAMESPACE::Bool32 srcPremultiplied_ = {},
                                                                        VULKAN_HPP_NAMESPACE::Bool32 dstPremultiplied_ = {},
-                                                                       VULKAN_HPP_NAMESPACE::BlendOverlapEXT blendOverlap_ = {} ) VULKAN_HPP_NOEXCEPT
+                                                                       VULKAN_HPP_NAMESPACE::BlendOverlapEXT blendOverlap_ = VULKAN_HPP_NAMESPACE::BlendOverlapEXT::eUncorrelated ) VULKAN_HPP_NOEXCEPT
       : srcPremultiplied( srcPremultiplied_ )
       , dstPremultiplied( dstPremultiplied_ )
       , blendOverlap( blendOverlap_ )
@@ -51701,7 +51701,7 @@ namespace VULKAN_HPP_NAMESPACE
     const void* pNext = {};
     VULKAN_HPP_NAMESPACE::Bool32 srcPremultiplied = {};
     VULKAN_HPP_NAMESPACE::Bool32 dstPremultiplied = {};
-    VULKAN_HPP_NAMESPACE::BlendOverlapEXT blendOverlap = {};
+    VULKAN_HPP_NAMESPACE::BlendOverlapEXT blendOverlap = VULKAN_HPP_NAMESPACE::BlendOverlapEXT::eUncorrelated;
   };
   static_assert( sizeof( PipelineColorBlendAdvancedStateCreateInfoEXT ) == sizeof( VkPipelineColorBlendAdvancedStateCreateInfoEXT ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<PipelineColorBlendAdvancedStateCreateInfoEXT>::value, "struct wrapper is not a standard layout!" );
@@ -51774,7 +51774,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct PipelineCoverageModulationStateCreateInfoNV
   {
     VULKAN_HPP_CONSTEXPR PipelineCoverageModulationStateCreateInfoNV( VULKAN_HPP_NAMESPACE::PipelineCoverageModulationStateCreateFlagsNV flags_ = {},
-                                                                      VULKAN_HPP_NAMESPACE::CoverageModulationModeNV coverageModulationMode_ = {},
+                                                                      VULKAN_HPP_NAMESPACE::CoverageModulationModeNV coverageModulationMode_ = VULKAN_HPP_NAMESPACE::CoverageModulationModeNV::eNone,
                                                                       VULKAN_HPP_NAMESPACE::Bool32 coverageModulationTableEnable_ = {},
                                                                       uint32_t coverageModulationTableCount_ = {},
                                                                       const float* pCoverageModulationTable_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -51868,7 +51868,7 @@ namespace VULKAN_HPP_NAMESPACE
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::ePipelineCoverageModulationStateCreateInfoNV;
     const void* pNext = {};
     VULKAN_HPP_NAMESPACE::PipelineCoverageModulationStateCreateFlagsNV flags = {};
-    VULKAN_HPP_NAMESPACE::CoverageModulationModeNV coverageModulationMode = {};
+    VULKAN_HPP_NAMESPACE::CoverageModulationModeNV coverageModulationMode = VULKAN_HPP_NAMESPACE::CoverageModulationModeNV::eNone;
     VULKAN_HPP_NAMESPACE::Bool32 coverageModulationTableEnable = {};
     uint32_t coverageModulationTableCount = {};
     const float* pCoverageModulationTable = {};
@@ -51879,7 +51879,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct PipelineCoverageReductionStateCreateInfoNV
   {
     VULKAN_HPP_CONSTEXPR PipelineCoverageReductionStateCreateInfoNV( VULKAN_HPP_NAMESPACE::PipelineCoverageReductionStateCreateFlagsNV flags_ = {},
-                                                                     VULKAN_HPP_NAMESPACE::CoverageReductionModeNV coverageReductionMode_ = {} ) VULKAN_HPP_NOEXCEPT
+                                                                     VULKAN_HPP_NAMESPACE::CoverageReductionModeNV coverageReductionMode_ = VULKAN_HPP_NAMESPACE::CoverageReductionModeNV::eMerge ) VULKAN_HPP_NOEXCEPT
       : flags( flags_ )
       , coverageReductionMode( coverageReductionMode_ )
     {}
@@ -51946,7 +51946,7 @@ namespace VULKAN_HPP_NAMESPACE
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::ePipelineCoverageReductionStateCreateInfoNV;
     const void* pNext = {};
     VULKAN_HPP_NAMESPACE::PipelineCoverageReductionStateCreateFlagsNV flags = {};
-    VULKAN_HPP_NAMESPACE::CoverageReductionModeNV coverageReductionMode = {};
+    VULKAN_HPP_NAMESPACE::CoverageReductionModeNV coverageReductionMode = VULKAN_HPP_NAMESPACE::CoverageReductionModeNV::eMerge;
   };
   static_assert( sizeof( PipelineCoverageReductionStateCreateInfoNV ) == sizeof( VkPipelineCoverageReductionStateCreateInfoNV ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<PipelineCoverageReductionStateCreateInfoNV>::value, "struct wrapper is not a standard layout!" );
@@ -52171,7 +52171,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct PipelineDiscardRectangleStateCreateInfoEXT
   {
     VULKAN_HPP_CONSTEXPR PipelineDiscardRectangleStateCreateInfoEXT( VULKAN_HPP_NAMESPACE::PipelineDiscardRectangleStateCreateFlagsEXT flags_ = {},
-                                                                     VULKAN_HPP_NAMESPACE::DiscardRectangleModeEXT discardRectangleMode_ = {},
+                                                                     VULKAN_HPP_NAMESPACE::DiscardRectangleModeEXT discardRectangleMode_ = VULKAN_HPP_NAMESPACE::DiscardRectangleModeEXT::eInclusive,
                                                                      uint32_t discardRectangleCount_ = {},
                                                                      const VULKAN_HPP_NAMESPACE::Rect2D* pDiscardRectangles_ = {} ) VULKAN_HPP_NOEXCEPT
       : flags( flags_ )
@@ -52256,7 +52256,7 @@ namespace VULKAN_HPP_NAMESPACE
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::ePipelineDiscardRectangleStateCreateInfoEXT;
     const void* pNext = {};
     VULKAN_HPP_NAMESPACE::PipelineDiscardRectangleStateCreateFlagsEXT flags = {};
-    VULKAN_HPP_NAMESPACE::DiscardRectangleModeEXT discardRectangleMode = {};
+    VULKAN_HPP_NAMESPACE::DiscardRectangleModeEXT discardRectangleMode = VULKAN_HPP_NAMESPACE::DiscardRectangleModeEXT::eInclusive;
     uint32_t discardRectangleCount = {};
     const VULKAN_HPP_NAMESPACE::Rect2D* pDiscardRectangles = {};
   };
@@ -52513,7 +52513,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     PipelineExecutableStatisticKHR( std::array<char,VK_MAX_DESCRIPTION_SIZE> const& name_ = {},
                                     std::array<char,VK_MAX_DESCRIPTION_SIZE> const& description_ = {},
-                                    VULKAN_HPP_NAMESPACE::PipelineExecutableStatisticFormatKHR format_ = {},
+                                    VULKAN_HPP_NAMESPACE::PipelineExecutableStatisticFormatKHR format_ = VULKAN_HPP_NAMESPACE::PipelineExecutableStatisticFormatKHR::eBool32,
                                     VULKAN_HPP_NAMESPACE::PipelineExecutableStatisticValueKHR value_ = {} ) VULKAN_HPP_NOEXCEPT
       : name{}
       , description{}
@@ -52556,7 +52556,7 @@ namespace VULKAN_HPP_NAMESPACE
     void* pNext = {};
     char name[VK_MAX_DESCRIPTION_SIZE] = {};
     char description[VK_MAX_DESCRIPTION_SIZE] = {};
-    VULKAN_HPP_NAMESPACE::PipelineExecutableStatisticFormatKHR format = {};
+    VULKAN_HPP_NAMESPACE::PipelineExecutableStatisticFormatKHR format = VULKAN_HPP_NAMESPACE::PipelineExecutableStatisticFormatKHR::eBool32;
     VULKAN_HPP_NAMESPACE::PipelineExecutableStatisticValueKHR value = {};
   };
   static_assert( sizeof( PipelineExecutableStatisticKHR ) == sizeof( VkPipelineExecutableStatisticKHR ), "struct and wrapper have different size!" );
@@ -52804,7 +52804,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct PipelineRasterizationConservativeStateCreateInfoEXT
   {
     VULKAN_HPP_CONSTEXPR PipelineRasterizationConservativeStateCreateInfoEXT( VULKAN_HPP_NAMESPACE::PipelineRasterizationConservativeStateCreateFlagsEXT flags_ = {},
-                                                                              VULKAN_HPP_NAMESPACE::ConservativeRasterizationModeEXT conservativeRasterizationMode_ = {},
+                                                                              VULKAN_HPP_NAMESPACE::ConservativeRasterizationModeEXT conservativeRasterizationMode_ = VULKAN_HPP_NAMESPACE::ConservativeRasterizationModeEXT::eDisabled,
                                                                               float extraPrimitiveOverestimationSize_ = {} ) VULKAN_HPP_NOEXCEPT
       : flags( flags_ )
       , conservativeRasterizationMode( conservativeRasterizationMode_ )
@@ -52880,7 +52880,7 @@ namespace VULKAN_HPP_NAMESPACE
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::ePipelineRasterizationConservativeStateCreateInfoEXT;
     const void* pNext = {};
     VULKAN_HPP_NAMESPACE::PipelineRasterizationConservativeStateCreateFlagsEXT flags = {};
-    VULKAN_HPP_NAMESPACE::ConservativeRasterizationModeEXT conservativeRasterizationMode = {};
+    VULKAN_HPP_NAMESPACE::ConservativeRasterizationModeEXT conservativeRasterizationMode = VULKAN_HPP_NAMESPACE::ConservativeRasterizationModeEXT::eDisabled;
     float extraPrimitiveOverestimationSize = {};
   };
   static_assert( sizeof( PipelineRasterizationConservativeStateCreateInfoEXT ) == sizeof( VkPipelineRasterizationConservativeStateCreateInfoEXT ), "struct and wrapper have different size!" );
@@ -52963,7 +52963,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineRasterizationLineStateCreateInfoEXT
   {
-    VULKAN_HPP_CONSTEXPR PipelineRasterizationLineStateCreateInfoEXT( VULKAN_HPP_NAMESPACE::LineRasterizationModeEXT lineRasterizationMode_ = {},
+    VULKAN_HPP_CONSTEXPR PipelineRasterizationLineStateCreateInfoEXT( VULKAN_HPP_NAMESPACE::LineRasterizationModeEXT lineRasterizationMode_ = VULKAN_HPP_NAMESPACE::LineRasterizationModeEXT::eDefault,
                                                                       VULKAN_HPP_NAMESPACE::Bool32 stippledLineEnable_ = {},
                                                                       uint32_t lineStippleFactor_ = {},
                                                                       uint16_t lineStipplePattern_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -53048,7 +53048,7 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::ePipelineRasterizationLineStateCreateInfoEXT;
     const void* pNext = {};
-    VULKAN_HPP_NAMESPACE::LineRasterizationModeEXT lineRasterizationMode = {};
+    VULKAN_HPP_NAMESPACE::LineRasterizationModeEXT lineRasterizationMode = VULKAN_HPP_NAMESPACE::LineRasterizationModeEXT::eDefault;
     VULKAN_HPP_NAMESPACE::Bool32 stippledLineEnable = {};
     uint32_t lineStippleFactor = {};
     uint16_t lineStipplePattern = {};
@@ -53058,7 +53058,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineRasterizationStateRasterizationOrderAMD
   {
-    VULKAN_HPP_CONSTEXPR PipelineRasterizationStateRasterizationOrderAMD( VULKAN_HPP_NAMESPACE::RasterizationOrderAMD rasterizationOrder_ = {} ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR PipelineRasterizationStateRasterizationOrderAMD( VULKAN_HPP_NAMESPACE::RasterizationOrderAMD rasterizationOrder_ = VULKAN_HPP_NAMESPACE::RasterizationOrderAMD::eStrict ) VULKAN_HPP_NOEXCEPT
       : rasterizationOrder( rasterizationOrder_ )
     {}
 
@@ -53116,7 +53116,7 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::ePipelineRasterizationStateRasterizationOrderAMD;
     const void* pNext = {};
-    VULKAN_HPP_NAMESPACE::RasterizationOrderAMD rasterizationOrder = {};
+    VULKAN_HPP_NAMESPACE::RasterizationOrderAMD rasterizationOrder = VULKAN_HPP_NAMESPACE::RasterizationOrderAMD::eStrict;
   };
   static_assert( sizeof( PipelineRasterizationStateRasterizationOrderAMD ) == sizeof( VkPipelineRasterizationStateRasterizationOrderAMD ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<PipelineRasterizationStateRasterizationOrderAMD>::value, "struct wrapper is not a standard layout!" );
@@ -53391,7 +53391,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineTessellationDomainOriginStateCreateInfo
   {
-    VULKAN_HPP_CONSTEXPR PipelineTessellationDomainOriginStateCreateInfo( VULKAN_HPP_NAMESPACE::TessellationDomainOrigin domainOrigin_ = {} ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR PipelineTessellationDomainOriginStateCreateInfo( VULKAN_HPP_NAMESPACE::TessellationDomainOrigin domainOrigin_ = VULKAN_HPP_NAMESPACE::TessellationDomainOrigin::eUpperLeft ) VULKAN_HPP_NOEXCEPT
       : domainOrigin( domainOrigin_ )
     {}
 
@@ -53449,7 +53449,7 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::ePipelineTessellationDomainOriginStateCreateInfo;
     const void* pNext = {};
-    VULKAN_HPP_NAMESPACE::TessellationDomainOrigin domainOrigin = {};
+    VULKAN_HPP_NAMESPACE::TessellationDomainOrigin domainOrigin = VULKAN_HPP_NAMESPACE::TessellationDomainOrigin::eUpperLeft;
   };
   static_assert( sizeof( PipelineTessellationDomainOriginStateCreateInfo ) == sizeof( VkPipelineTessellationDomainOriginStateCreateInfo ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<PipelineTessellationDomainOriginStateCreateInfo>::value, "struct wrapper is not a standard layout!" );
@@ -53590,7 +53590,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineViewportCoarseSampleOrderStateCreateInfoNV
   {
-    VULKAN_HPP_CONSTEXPR PipelineViewportCoarseSampleOrderStateCreateInfoNV( VULKAN_HPP_NAMESPACE::CoarseSampleOrderTypeNV sampleOrderType_ = {},
+    VULKAN_HPP_CONSTEXPR PipelineViewportCoarseSampleOrderStateCreateInfoNV( VULKAN_HPP_NAMESPACE::CoarseSampleOrderTypeNV sampleOrderType_ = VULKAN_HPP_NAMESPACE::CoarseSampleOrderTypeNV::eDefault,
                                                                              uint32_t customSampleOrderCount_ = {},
                                                                              const VULKAN_HPP_NAMESPACE::CoarseSampleOrderCustomNV* pCustomSampleOrders_ = {} ) VULKAN_HPP_NOEXCEPT
       : sampleOrderType( sampleOrderType_ )
@@ -53666,7 +53666,7 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::ePipelineViewportCoarseSampleOrderStateCreateInfoNV;
     const void* pNext = {};
-    VULKAN_HPP_NAMESPACE::CoarseSampleOrderTypeNV sampleOrderType = {};
+    VULKAN_HPP_NAMESPACE::CoarseSampleOrderTypeNV sampleOrderType = VULKAN_HPP_NAMESPACE::CoarseSampleOrderTypeNV::eDefault;
     uint32_t customSampleOrderCount = {};
     const VULKAN_HPP_NAMESPACE::CoarseSampleOrderCustomNV* pCustomSampleOrders = {};
   };
@@ -53894,10 +53894,10 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ViewportSwizzleNV
   {
-    VULKAN_HPP_CONSTEXPR ViewportSwizzleNV( VULKAN_HPP_NAMESPACE::ViewportCoordinateSwizzleNV x_ = {},
-                                            VULKAN_HPP_NAMESPACE::ViewportCoordinateSwizzleNV y_ = {},
-                                            VULKAN_HPP_NAMESPACE::ViewportCoordinateSwizzleNV z_ = {},
-                                            VULKAN_HPP_NAMESPACE::ViewportCoordinateSwizzleNV w_ = {} ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR ViewportSwizzleNV( VULKAN_HPP_NAMESPACE::ViewportCoordinateSwizzleNV x_ = VULKAN_HPP_NAMESPACE::ViewportCoordinateSwizzleNV::ePositiveX,
+                                            VULKAN_HPP_NAMESPACE::ViewportCoordinateSwizzleNV y_ = VULKAN_HPP_NAMESPACE::ViewportCoordinateSwizzleNV::ePositiveX,
+                                            VULKAN_HPP_NAMESPACE::ViewportCoordinateSwizzleNV z_ = VULKAN_HPP_NAMESPACE::ViewportCoordinateSwizzleNV::ePositiveX,
+                                            VULKAN_HPP_NAMESPACE::ViewportCoordinateSwizzleNV w_ = VULKAN_HPP_NAMESPACE::ViewportCoordinateSwizzleNV::ePositiveX ) VULKAN_HPP_NOEXCEPT
       : x( x_ )
       , y( y_ )
       , z( z_ )
@@ -53963,10 +53963,10 @@ namespace VULKAN_HPP_NAMESPACE
     }
 
   public:
-    VULKAN_HPP_NAMESPACE::ViewportCoordinateSwizzleNV x = {};
-    VULKAN_HPP_NAMESPACE::ViewportCoordinateSwizzleNV y = {};
-    VULKAN_HPP_NAMESPACE::ViewportCoordinateSwizzleNV z = {};
-    VULKAN_HPP_NAMESPACE::ViewportCoordinateSwizzleNV w = {};
+    VULKAN_HPP_NAMESPACE::ViewportCoordinateSwizzleNV x = VULKAN_HPP_NAMESPACE::ViewportCoordinateSwizzleNV::ePositiveX;
+    VULKAN_HPP_NAMESPACE::ViewportCoordinateSwizzleNV y = VULKAN_HPP_NAMESPACE::ViewportCoordinateSwizzleNV::ePositiveX;
+    VULKAN_HPP_NAMESPACE::ViewportCoordinateSwizzleNV z = VULKAN_HPP_NAMESPACE::ViewportCoordinateSwizzleNV::ePositiveX;
+    VULKAN_HPP_NAMESPACE::ViewportCoordinateSwizzleNV w = VULKAN_HPP_NAMESPACE::ViewportCoordinateSwizzleNV::ePositiveX;
   };
   static_assert( sizeof( ViewportSwizzleNV ) == sizeof( VkViewportSwizzleNV ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<ViewportSwizzleNV>::value, "struct wrapper is not a standard layout!" );
@@ -54795,7 +54795,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct QueryPoolCreateInfo
   {
     VULKAN_HPP_CONSTEXPR QueryPoolCreateInfo( VULKAN_HPP_NAMESPACE::QueryPoolCreateFlags flags_ = {},
-                                              VULKAN_HPP_NAMESPACE::QueryType queryType_ = {},
+                                              VULKAN_HPP_NAMESPACE::QueryType queryType_ = VULKAN_HPP_NAMESPACE::QueryType::eOcclusion,
                                               uint32_t queryCount_ = {},
                                               VULKAN_HPP_NAMESPACE::QueryPipelineStatisticFlags pipelineStatistics_ = {} ) VULKAN_HPP_NOEXCEPT
       : flags( flags_ )
@@ -54880,7 +54880,7 @@ namespace VULKAN_HPP_NAMESPACE
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eQueryPoolCreateInfo;
     const void* pNext = {};
     VULKAN_HPP_NAMESPACE::QueryPoolCreateFlags flags = {};
-    VULKAN_HPP_NAMESPACE::QueryType queryType = {};
+    VULKAN_HPP_NAMESPACE::QueryType queryType = VULKAN_HPP_NAMESPACE::QueryType::eOcclusion;
     uint32_t queryCount = {};
     VULKAN_HPP_NAMESPACE::QueryPipelineStatisticFlags pipelineStatistics = {};
   };
@@ -54889,7 +54889,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct QueryPoolCreateInfoINTEL
   {
-    VULKAN_HPP_CONSTEXPR QueryPoolCreateInfoINTEL( VULKAN_HPP_NAMESPACE::QueryPoolSamplingModeINTEL performanceCountersSampling_ = {} ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR QueryPoolCreateInfoINTEL( VULKAN_HPP_NAMESPACE::QueryPoolSamplingModeINTEL performanceCountersSampling_ = VULKAN_HPP_NAMESPACE::QueryPoolSamplingModeINTEL::eManual ) VULKAN_HPP_NOEXCEPT
       : performanceCountersSampling( performanceCountersSampling_ )
     {}
 
@@ -54947,7 +54947,7 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eQueryPoolCreateInfoINTEL;
     const void* pNext = {};
-    VULKAN_HPP_NAMESPACE::QueryPoolSamplingModeINTEL performanceCountersSampling = {};
+    VULKAN_HPP_NAMESPACE::QueryPoolSamplingModeINTEL performanceCountersSampling = VULKAN_HPP_NAMESPACE::QueryPoolSamplingModeINTEL::eManual;
   };
   static_assert( sizeof( QueryPoolCreateInfoINTEL ) == sizeof( VkQueryPoolCreateInfoINTEL ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<QueryPoolCreateInfoINTEL>::value, "struct wrapper is not a standard layout!" );
@@ -55200,7 +55200,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct RayTracingShaderGroupCreateInfoNV
   {
-    VULKAN_HPP_CONSTEXPR RayTracingShaderGroupCreateInfoNV( VULKAN_HPP_NAMESPACE::RayTracingShaderGroupTypeNV type_ = {},
+    VULKAN_HPP_CONSTEXPR RayTracingShaderGroupCreateInfoNV( VULKAN_HPP_NAMESPACE::RayTracingShaderGroupTypeNV type_ = VULKAN_HPP_NAMESPACE::RayTracingShaderGroupTypeNV::eGeneral,
                                                             uint32_t generalShader_ = {},
                                                             uint32_t closestHitShader_ = {},
                                                             uint32_t anyHitShader_ = {},
@@ -55294,7 +55294,7 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eRayTracingShaderGroupCreateInfoNV;
     const void* pNext = {};
-    VULKAN_HPP_NAMESPACE::RayTracingShaderGroupTypeNV type = {};
+    VULKAN_HPP_NAMESPACE::RayTracingShaderGroupTypeNV type = VULKAN_HPP_NAMESPACE::RayTracingShaderGroupTypeNV::eGeneral;
     uint32_t generalShader = {};
     uint32_t closestHitShader = {};
     uint32_t anyHitShader = {};
@@ -55674,7 +55674,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct SubpassDescription
   {
     VULKAN_HPP_CONSTEXPR SubpassDescription( VULKAN_HPP_NAMESPACE::SubpassDescriptionFlags flags_ = {},
-                                             VULKAN_HPP_NAMESPACE::PipelineBindPoint pipelineBindPoint_ = {},
+                                             VULKAN_HPP_NAMESPACE::PipelineBindPoint pipelineBindPoint_ = VULKAN_HPP_NAMESPACE::PipelineBindPoint::eGraphics,
                                              uint32_t inputAttachmentCount_ = {},
                                              const VULKAN_HPP_NAMESPACE::AttachmentReference* pInputAttachments_ = {},
                                              uint32_t colorAttachmentCount_ = {},
@@ -55797,7 +55797,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   public:
     VULKAN_HPP_NAMESPACE::SubpassDescriptionFlags flags = {};
-    VULKAN_HPP_NAMESPACE::PipelineBindPoint pipelineBindPoint = {};
+    VULKAN_HPP_NAMESPACE::PipelineBindPoint pipelineBindPoint = VULKAN_HPP_NAMESPACE::PipelineBindPoint::eGraphics;
     uint32_t inputAttachmentCount = {};
     const VULKAN_HPP_NAMESPACE::AttachmentReference* pInputAttachments = {};
     uint32_t colorAttachmentCount = {};
@@ -56047,7 +56047,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct SubpassDescription2
   {
     VULKAN_HPP_CONSTEXPR SubpassDescription2( VULKAN_HPP_NAMESPACE::SubpassDescriptionFlags flags_ = {},
-                                              VULKAN_HPP_NAMESPACE::PipelineBindPoint pipelineBindPoint_ = {},
+                                              VULKAN_HPP_NAMESPACE::PipelineBindPoint pipelineBindPoint_ = VULKAN_HPP_NAMESPACE::PipelineBindPoint::eGraphics,
                                               uint32_t viewMask_ = {},
                                               uint32_t inputAttachmentCount_ = {},
                                               const VULKAN_HPP_NAMESPACE::AttachmentReference2* pInputAttachments_ = {},
@@ -56195,7 +56195,7 @@ namespace VULKAN_HPP_NAMESPACE
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eSubpassDescription2;
     const void* pNext = {};
     VULKAN_HPP_NAMESPACE::SubpassDescriptionFlags flags = {};
-    VULKAN_HPP_NAMESPACE::PipelineBindPoint pipelineBindPoint = {};
+    VULKAN_HPP_NAMESPACE::PipelineBindPoint pipelineBindPoint = VULKAN_HPP_NAMESPACE::PipelineBindPoint::eGraphics;
     uint32_t viewMask = {};
     uint32_t inputAttachmentCount = {};
     const VULKAN_HPP_NAMESPACE::AttachmentReference2* pInputAttachments = {};
@@ -56901,20 +56901,20 @@ namespace VULKAN_HPP_NAMESPACE
   struct SamplerCreateInfo
   {
     VULKAN_HPP_CONSTEXPR SamplerCreateInfo( VULKAN_HPP_NAMESPACE::SamplerCreateFlags flags_ = {},
-                                            VULKAN_HPP_NAMESPACE::Filter magFilter_ = {},
-                                            VULKAN_HPP_NAMESPACE::Filter minFilter_ = {},
-                                            VULKAN_HPP_NAMESPACE::SamplerMipmapMode mipmapMode_ = {},
-                                            VULKAN_HPP_NAMESPACE::SamplerAddressMode addressModeU_ = {},
-                                            VULKAN_HPP_NAMESPACE::SamplerAddressMode addressModeV_ = {},
-                                            VULKAN_HPP_NAMESPACE::SamplerAddressMode addressModeW_ = {},
+                                            VULKAN_HPP_NAMESPACE::Filter magFilter_ = VULKAN_HPP_NAMESPACE::Filter::eNearest,
+                                            VULKAN_HPP_NAMESPACE::Filter minFilter_ = VULKAN_HPP_NAMESPACE::Filter::eNearest,
+                                            VULKAN_HPP_NAMESPACE::SamplerMipmapMode mipmapMode_ = VULKAN_HPP_NAMESPACE::SamplerMipmapMode::eNearest,
+                                            VULKAN_HPP_NAMESPACE::SamplerAddressMode addressModeU_ = VULKAN_HPP_NAMESPACE::SamplerAddressMode::eRepeat,
+                                            VULKAN_HPP_NAMESPACE::SamplerAddressMode addressModeV_ = VULKAN_HPP_NAMESPACE::SamplerAddressMode::eRepeat,
+                                            VULKAN_HPP_NAMESPACE::SamplerAddressMode addressModeW_ = VULKAN_HPP_NAMESPACE::SamplerAddressMode::eRepeat,
                                             float mipLodBias_ = {},
                                             VULKAN_HPP_NAMESPACE::Bool32 anisotropyEnable_ = {},
                                             float maxAnisotropy_ = {},
                                             VULKAN_HPP_NAMESPACE::Bool32 compareEnable_ = {},
-                                            VULKAN_HPP_NAMESPACE::CompareOp compareOp_ = {},
+                                            VULKAN_HPP_NAMESPACE::CompareOp compareOp_ = VULKAN_HPP_NAMESPACE::CompareOp::eNever,
                                             float minLod_ = {},
                                             float maxLod_ = {},
-                                            VULKAN_HPP_NAMESPACE::BorderColor borderColor_ = {},
+                                            VULKAN_HPP_NAMESPACE::BorderColor borderColor_ = VULKAN_HPP_NAMESPACE::BorderColor::eFloatTransparentBlack,
                                             VULKAN_HPP_NAMESPACE::Bool32 unnormalizedCoordinates_ = {} ) VULKAN_HPP_NOEXCEPT
       : flags( flags_ )
       , magFilter( magFilter_ )
@@ -57094,20 +57094,20 @@ namespace VULKAN_HPP_NAMESPACE
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eSamplerCreateInfo;
     const void* pNext = {};
     VULKAN_HPP_NAMESPACE::SamplerCreateFlags flags = {};
-    VULKAN_HPP_NAMESPACE::Filter magFilter = {};
-    VULKAN_HPP_NAMESPACE::Filter minFilter = {};
-    VULKAN_HPP_NAMESPACE::SamplerMipmapMode mipmapMode = {};
-    VULKAN_HPP_NAMESPACE::SamplerAddressMode addressModeU = {};
-    VULKAN_HPP_NAMESPACE::SamplerAddressMode addressModeV = {};
-    VULKAN_HPP_NAMESPACE::SamplerAddressMode addressModeW = {};
+    VULKAN_HPP_NAMESPACE::Filter magFilter = VULKAN_HPP_NAMESPACE::Filter::eNearest;
+    VULKAN_HPP_NAMESPACE::Filter minFilter = VULKAN_HPP_NAMESPACE::Filter::eNearest;
+    VULKAN_HPP_NAMESPACE::SamplerMipmapMode mipmapMode = VULKAN_HPP_NAMESPACE::SamplerMipmapMode::eNearest;
+    VULKAN_HPP_NAMESPACE::SamplerAddressMode addressModeU = VULKAN_HPP_NAMESPACE::SamplerAddressMode::eRepeat;
+    VULKAN_HPP_NAMESPACE::SamplerAddressMode addressModeV = VULKAN_HPP_NAMESPACE::SamplerAddressMode::eRepeat;
+    VULKAN_HPP_NAMESPACE::SamplerAddressMode addressModeW = VULKAN_HPP_NAMESPACE::SamplerAddressMode::eRepeat;
     float mipLodBias = {};
     VULKAN_HPP_NAMESPACE::Bool32 anisotropyEnable = {};
     float maxAnisotropy = {};
     VULKAN_HPP_NAMESPACE::Bool32 compareEnable = {};
-    VULKAN_HPP_NAMESPACE::CompareOp compareOp = {};
+    VULKAN_HPP_NAMESPACE::CompareOp compareOp = VULKAN_HPP_NAMESPACE::CompareOp::eNever;
     float minLod = {};
     float maxLod = {};
-    VULKAN_HPP_NAMESPACE::BorderColor borderColor = {};
+    VULKAN_HPP_NAMESPACE::BorderColor borderColor = VULKAN_HPP_NAMESPACE::BorderColor::eFloatTransparentBlack;
     VULKAN_HPP_NAMESPACE::Bool32 unnormalizedCoordinates = {};
   };
   static_assert( sizeof( SamplerCreateInfo ) == sizeof( VkSamplerCreateInfo ), "struct and wrapper have different size!" );
@@ -57115,7 +57115,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct SamplerReductionModeCreateInfo
   {
-    VULKAN_HPP_CONSTEXPR SamplerReductionModeCreateInfo( VULKAN_HPP_NAMESPACE::SamplerReductionMode reductionMode_ = {} ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR SamplerReductionModeCreateInfo( VULKAN_HPP_NAMESPACE::SamplerReductionMode reductionMode_ = VULKAN_HPP_NAMESPACE::SamplerReductionMode::eWeightedAverage ) VULKAN_HPP_NOEXCEPT
       : reductionMode( reductionMode_ )
     {}
 
@@ -57173,20 +57173,20 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eSamplerReductionModeCreateInfo;
     const void* pNext = {};
-    VULKAN_HPP_NAMESPACE::SamplerReductionMode reductionMode = {};
+    VULKAN_HPP_NAMESPACE::SamplerReductionMode reductionMode = VULKAN_HPP_NAMESPACE::SamplerReductionMode::eWeightedAverage;
   };
   static_assert( sizeof( SamplerReductionModeCreateInfo ) == sizeof( VkSamplerReductionModeCreateInfo ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<SamplerReductionModeCreateInfo>::value, "struct wrapper is not a standard layout!" );
 
   struct SamplerYcbcrConversionCreateInfo
   {
-    VULKAN_HPP_CONSTEXPR SamplerYcbcrConversionCreateInfo( VULKAN_HPP_NAMESPACE::Format format_ = {},
-                                                           VULKAN_HPP_NAMESPACE::SamplerYcbcrModelConversion ycbcrModel_ = {},
-                                                           VULKAN_HPP_NAMESPACE::SamplerYcbcrRange ycbcrRange_ = {},
+    VULKAN_HPP_CONSTEXPR SamplerYcbcrConversionCreateInfo( VULKAN_HPP_NAMESPACE::Format format_ = VULKAN_HPP_NAMESPACE::Format::eUndefined,
+                                                           VULKAN_HPP_NAMESPACE::SamplerYcbcrModelConversion ycbcrModel_ = VULKAN_HPP_NAMESPACE::SamplerYcbcrModelConversion::eRgbIdentity,
+                                                           VULKAN_HPP_NAMESPACE::SamplerYcbcrRange ycbcrRange_ = VULKAN_HPP_NAMESPACE::SamplerYcbcrRange::eItuFull,
                                                            VULKAN_HPP_NAMESPACE::ComponentMapping components_ = {},
-                                                           VULKAN_HPP_NAMESPACE::ChromaLocation xChromaOffset_ = {},
-                                                           VULKAN_HPP_NAMESPACE::ChromaLocation yChromaOffset_ = {},
-                                                           VULKAN_HPP_NAMESPACE::Filter chromaFilter_ = {},
+                                                           VULKAN_HPP_NAMESPACE::ChromaLocation xChromaOffset_ = VULKAN_HPP_NAMESPACE::ChromaLocation::eCositedEven,
+                                                           VULKAN_HPP_NAMESPACE::ChromaLocation yChromaOffset_ = VULKAN_HPP_NAMESPACE::ChromaLocation::eCositedEven,
+                                                           VULKAN_HPP_NAMESPACE::Filter chromaFilter_ = VULKAN_HPP_NAMESPACE::Filter::eNearest,
                                                            VULKAN_HPP_NAMESPACE::Bool32 forceExplicitReconstruction_ = {} ) VULKAN_HPP_NOEXCEPT
       : format( format_ )
       , ycbcrModel( ycbcrModel_ )
@@ -57301,13 +57301,13 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eSamplerYcbcrConversionCreateInfo;
     const void* pNext = {};
-    VULKAN_HPP_NAMESPACE::Format format = {};
-    VULKAN_HPP_NAMESPACE::SamplerYcbcrModelConversion ycbcrModel = {};
-    VULKAN_HPP_NAMESPACE::SamplerYcbcrRange ycbcrRange = {};
+    VULKAN_HPP_NAMESPACE::Format format = VULKAN_HPP_NAMESPACE::Format::eUndefined;
+    VULKAN_HPP_NAMESPACE::SamplerYcbcrModelConversion ycbcrModel = VULKAN_HPP_NAMESPACE::SamplerYcbcrModelConversion::eRgbIdentity;
+    VULKAN_HPP_NAMESPACE::SamplerYcbcrRange ycbcrRange = VULKAN_HPP_NAMESPACE::SamplerYcbcrRange::eItuFull;
     VULKAN_HPP_NAMESPACE::ComponentMapping components = {};
-    VULKAN_HPP_NAMESPACE::ChromaLocation xChromaOffset = {};
-    VULKAN_HPP_NAMESPACE::ChromaLocation yChromaOffset = {};
-    VULKAN_HPP_NAMESPACE::Filter chromaFilter = {};
+    VULKAN_HPP_NAMESPACE::ChromaLocation xChromaOffset = VULKAN_HPP_NAMESPACE::ChromaLocation::eCositedEven;
+    VULKAN_HPP_NAMESPACE::ChromaLocation yChromaOffset = VULKAN_HPP_NAMESPACE::ChromaLocation::eCositedEven;
+    VULKAN_HPP_NAMESPACE::Filter chromaFilter = VULKAN_HPP_NAMESPACE::Filter::eNearest;
     VULKAN_HPP_NAMESPACE::Bool32 forceExplicitReconstruction = {};
   };
   static_assert( sizeof( SamplerYcbcrConversionCreateInfo ) == sizeof( VkSamplerYcbcrConversionCreateInfo ), "struct and wrapper have different size!" );
@@ -57499,7 +57499,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct SemaphoreGetFdInfoKHR
   {
     VULKAN_HPP_CONSTEXPR SemaphoreGetFdInfoKHR( VULKAN_HPP_NAMESPACE::Semaphore semaphore_ = {},
-                                                VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits handleType_ = {} ) VULKAN_HPP_NOEXCEPT
+                                                VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits handleType_ = VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits::eOpaqueFd ) VULKAN_HPP_NOEXCEPT
       : semaphore( semaphore_ )
       , handleType( handleType_ )
     {}
@@ -57566,7 +57566,7 @@ namespace VULKAN_HPP_NAMESPACE
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eSemaphoreGetFdInfoKHR;
     const void* pNext = {};
     VULKAN_HPP_NAMESPACE::Semaphore semaphore = {};
-    VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits handleType = {};
+    VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits handleType = VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits::eOpaqueFd;
   };
   static_assert( sizeof( SemaphoreGetFdInfoKHR ) == sizeof( VkSemaphoreGetFdInfoKHR ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<SemaphoreGetFdInfoKHR>::value, "struct wrapper is not a standard layout!" );
@@ -57576,7 +57576,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct SemaphoreGetWin32HandleInfoKHR
   {
     VULKAN_HPP_CONSTEXPR SemaphoreGetWin32HandleInfoKHR( VULKAN_HPP_NAMESPACE::Semaphore semaphore_ = {},
-                                                         VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits handleType_ = {} ) VULKAN_HPP_NOEXCEPT
+                                                         VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits handleType_ = VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits::eOpaqueFd ) VULKAN_HPP_NOEXCEPT
       : semaphore( semaphore_ )
       , handleType( handleType_ )
     {}
@@ -57643,7 +57643,7 @@ namespace VULKAN_HPP_NAMESPACE
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eSemaphoreGetWin32HandleInfoKHR;
     const void* pNext = {};
     VULKAN_HPP_NAMESPACE::Semaphore semaphore = {};
-    VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits handleType = {};
+    VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits handleType = VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits::eOpaqueFd;
   };
   static_assert( sizeof( SemaphoreGetWin32HandleInfoKHR ) == sizeof( VkSemaphoreGetWin32HandleInfoKHR ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<SemaphoreGetWin32HandleInfoKHR>::value, "struct wrapper is not a standard layout!" );
@@ -57726,7 +57726,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct SemaphoreTypeCreateInfo
   {
-    VULKAN_HPP_CONSTEXPR SemaphoreTypeCreateInfo( VULKAN_HPP_NAMESPACE::SemaphoreType semaphoreType_ = {},
+    VULKAN_HPP_CONSTEXPR SemaphoreTypeCreateInfo( VULKAN_HPP_NAMESPACE::SemaphoreType semaphoreType_ = VULKAN_HPP_NAMESPACE::SemaphoreType::eBinary,
                                                   uint64_t initialValue_ = {} ) VULKAN_HPP_NOEXCEPT
       : semaphoreType( semaphoreType_ )
       , initialValue( initialValue_ )
@@ -57793,7 +57793,7 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eSemaphoreTypeCreateInfo;
     const void* pNext = {};
-    VULKAN_HPP_NAMESPACE::SemaphoreType semaphoreType = {};
+    VULKAN_HPP_NAMESPACE::SemaphoreType semaphoreType = VULKAN_HPP_NAMESPACE::SemaphoreType::eBinary;
     uint64_t initialValue = {};
   };
   static_assert( sizeof( SemaphoreTypeCreateInfo ) == sizeof( VkSemaphoreTypeCreateInfo ), "struct and wrapper have different size!" );
@@ -58646,7 +58646,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct SubpassBeginInfo
   {
-    VULKAN_HPP_CONSTEXPR SubpassBeginInfo( VULKAN_HPP_NAMESPACE::SubpassContents contents_ = {} ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR SubpassBeginInfo( VULKAN_HPP_NAMESPACE::SubpassContents contents_ = VULKAN_HPP_NAMESPACE::SubpassContents::eInline ) VULKAN_HPP_NOEXCEPT
       : contents( contents_ )
     {}
 
@@ -58704,15 +58704,15 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eSubpassBeginInfo;
     const void* pNext = {};
-    VULKAN_HPP_NAMESPACE::SubpassContents contents = {};
+    VULKAN_HPP_NAMESPACE::SubpassContents contents = VULKAN_HPP_NAMESPACE::SubpassContents::eInline;
   };
   static_assert( sizeof( SubpassBeginInfo ) == sizeof( VkSubpassBeginInfo ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<SubpassBeginInfo>::value, "struct wrapper is not a standard layout!" );
 
   struct SubpassDescriptionDepthStencilResolve
   {
-    VULKAN_HPP_CONSTEXPR SubpassDescriptionDepthStencilResolve( VULKAN_HPP_NAMESPACE::ResolveModeFlagBits depthResolveMode_ = {},
-                                                                VULKAN_HPP_NAMESPACE::ResolveModeFlagBits stencilResolveMode_ = {},
+    VULKAN_HPP_CONSTEXPR SubpassDescriptionDepthStencilResolve( VULKAN_HPP_NAMESPACE::ResolveModeFlagBits depthResolveMode_ = VULKAN_HPP_NAMESPACE::ResolveModeFlagBits::eNone,
+                                                                VULKAN_HPP_NAMESPACE::ResolveModeFlagBits stencilResolveMode_ = VULKAN_HPP_NAMESPACE::ResolveModeFlagBits::eNone,
                                                                 const VULKAN_HPP_NAMESPACE::AttachmentReference2* pDepthStencilResolveAttachment_ = {} ) VULKAN_HPP_NOEXCEPT
       : depthResolveMode( depthResolveMode_ )
       , stencilResolveMode( stencilResolveMode_ )
@@ -58787,8 +58787,8 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eSubpassDescriptionDepthStencilResolve;
     const void* pNext = {};
-    VULKAN_HPP_NAMESPACE::ResolveModeFlagBits depthResolveMode = {};
-    VULKAN_HPP_NAMESPACE::ResolveModeFlagBits stencilResolveMode = {};
+    VULKAN_HPP_NAMESPACE::ResolveModeFlagBits depthResolveMode = VULKAN_HPP_NAMESPACE::ResolveModeFlagBits::eNone;
+    VULKAN_HPP_NAMESPACE::ResolveModeFlagBits stencilResolveMode = VULKAN_HPP_NAMESPACE::ResolveModeFlagBits::eNone;
     const VULKAN_HPP_NAMESPACE::AttachmentReference2* pDepthStencilResolveAttachment = {};
   };
   static_assert( sizeof( SubpassDescriptionDepthStencilResolve ) == sizeof( VkSubpassDescriptionDepthStencilResolve ), "struct and wrapper have different size!" );
@@ -58859,7 +58859,7 @@ namespace VULKAN_HPP_NAMESPACE
                              VULKAN_HPP_NAMESPACE::Extent2D maxImageExtent_ = {},
                              uint32_t maxImageArrayLayers_ = {},
                              VULKAN_HPP_NAMESPACE::SurfaceTransformFlagsKHR supportedTransforms_ = {},
-                             VULKAN_HPP_NAMESPACE::SurfaceTransformFlagBitsKHR currentTransform_ = {},
+                             VULKAN_HPP_NAMESPACE::SurfaceTransformFlagBitsKHR currentTransform_ = VULKAN_HPP_NAMESPACE::SurfaceTransformFlagBitsKHR::eIdentity,
                              VULKAN_HPP_NAMESPACE::CompositeAlphaFlagsKHR supportedCompositeAlpha_ = {},
                              VULKAN_HPP_NAMESPACE::ImageUsageFlags supportedUsageFlags_ = {},
                              VULKAN_HPP_NAMESPACE::SurfaceCounterFlagsEXT supportedSurfaceCounters_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -58935,7 +58935,7 @@ namespace VULKAN_HPP_NAMESPACE
     VULKAN_HPP_NAMESPACE::Extent2D maxImageExtent = {};
     uint32_t maxImageArrayLayers = {};
     VULKAN_HPP_NAMESPACE::SurfaceTransformFlagsKHR supportedTransforms = {};
-    VULKAN_HPP_NAMESPACE::SurfaceTransformFlagBitsKHR currentTransform = {};
+    VULKAN_HPP_NAMESPACE::SurfaceTransformFlagBitsKHR currentTransform = VULKAN_HPP_NAMESPACE::SurfaceTransformFlagBitsKHR::eIdentity;
     VULKAN_HPP_NAMESPACE::CompositeAlphaFlagsKHR supportedCompositeAlpha = {};
     VULKAN_HPP_NAMESPACE::ImageUsageFlags supportedUsageFlags = {};
     VULKAN_HPP_NAMESPACE::SurfaceCounterFlagsEXT supportedSurfaceCounters = {};
@@ -58952,7 +58952,7 @@ namespace VULKAN_HPP_NAMESPACE
                             VULKAN_HPP_NAMESPACE::Extent2D maxImageExtent_ = {},
                             uint32_t maxImageArrayLayers_ = {},
                             VULKAN_HPP_NAMESPACE::SurfaceTransformFlagsKHR supportedTransforms_ = {},
-                            VULKAN_HPP_NAMESPACE::SurfaceTransformFlagBitsKHR currentTransform_ = {},
+                            VULKAN_HPP_NAMESPACE::SurfaceTransformFlagBitsKHR currentTransform_ = VULKAN_HPP_NAMESPACE::SurfaceTransformFlagBitsKHR::eIdentity,
                             VULKAN_HPP_NAMESPACE::CompositeAlphaFlagsKHR supportedCompositeAlpha_ = {},
                             VULKAN_HPP_NAMESPACE::ImageUsageFlags supportedUsageFlags_ = {} ) VULKAN_HPP_NOEXCEPT
       : minImageCount( minImageCount_ )
@@ -59015,7 +59015,7 @@ namespace VULKAN_HPP_NAMESPACE
     VULKAN_HPP_NAMESPACE::Extent2D maxImageExtent = {};
     uint32_t maxImageArrayLayers = {};
     VULKAN_HPP_NAMESPACE::SurfaceTransformFlagsKHR supportedTransforms = {};
-    VULKAN_HPP_NAMESPACE::SurfaceTransformFlagBitsKHR currentTransform = {};
+    VULKAN_HPP_NAMESPACE::SurfaceTransformFlagBitsKHR currentTransform = VULKAN_HPP_NAMESPACE::SurfaceTransformFlagBitsKHR::eIdentity;
     VULKAN_HPP_NAMESPACE::CompositeAlphaFlagsKHR supportedCompositeAlpha = {};
     VULKAN_HPP_NAMESPACE::ImageUsageFlags supportedUsageFlags = {};
   };
@@ -59145,8 +59145,8 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct SurfaceFormatKHR
   {
-    SurfaceFormatKHR( VULKAN_HPP_NAMESPACE::Format format_ = {},
-                      VULKAN_HPP_NAMESPACE::ColorSpaceKHR colorSpace_ = {} ) VULKAN_HPP_NOEXCEPT
+    SurfaceFormatKHR( VULKAN_HPP_NAMESPACE::Format format_ = VULKAN_HPP_NAMESPACE::Format::eUndefined,
+                      VULKAN_HPP_NAMESPACE::ColorSpaceKHR colorSpace_ = VULKAN_HPP_NAMESPACE::ColorSpaceKHR::eSrgbNonlinear ) VULKAN_HPP_NOEXCEPT
       : format( format_ )
       , colorSpace( colorSpace_ )
     {}
@@ -59184,8 +59184,8 @@ namespace VULKAN_HPP_NAMESPACE
     }
 
   public:
-    VULKAN_HPP_NAMESPACE::Format format = {};
-    VULKAN_HPP_NAMESPACE::ColorSpaceKHR colorSpace = {};
+    VULKAN_HPP_NAMESPACE::Format format = VULKAN_HPP_NAMESPACE::Format::eUndefined;
+    VULKAN_HPP_NAMESPACE::ColorSpaceKHR colorSpace = VULKAN_HPP_NAMESPACE::ColorSpaceKHR::eSrgbNonlinear;
   };
   static_assert( sizeof( SurfaceFormatKHR ) == sizeof( VkSurfaceFormatKHR ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<SurfaceFormatKHR>::value, "struct wrapper is not a standard layout!" );
@@ -59247,7 +59247,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct SurfaceFullScreenExclusiveInfoEXT
   {
-    VULKAN_HPP_CONSTEXPR SurfaceFullScreenExclusiveInfoEXT( VULKAN_HPP_NAMESPACE::FullScreenExclusiveEXT fullScreenExclusive_ = {} ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR SurfaceFullScreenExclusiveInfoEXT( VULKAN_HPP_NAMESPACE::FullScreenExclusiveEXT fullScreenExclusive_ = VULKAN_HPP_NAMESPACE::FullScreenExclusiveEXT::eDefault ) VULKAN_HPP_NOEXCEPT
       : fullScreenExclusive( fullScreenExclusive_ )
     {}
 
@@ -59305,7 +59305,7 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::eSurfaceFullScreenExclusiveInfoEXT;
     void* pNext = {};
-    VULKAN_HPP_NAMESPACE::FullScreenExclusiveEXT fullScreenExclusive = {};
+    VULKAN_HPP_NAMESPACE::FullScreenExclusiveEXT fullScreenExclusive = VULKAN_HPP_NAMESPACE::FullScreenExclusiveEXT::eDefault;
   };
   static_assert( sizeof( SurfaceFullScreenExclusiveInfoEXT ) == sizeof( VkSurfaceFullScreenExclusiveInfoEXT ), "struct and wrapper have different size!" );
   static_assert( std::is_standard_layout<SurfaceFullScreenExclusiveInfoEXT>::value, "struct wrapper is not a standard layout!" );
@@ -59514,17 +59514,17 @@ namespace VULKAN_HPP_NAMESPACE
     VULKAN_HPP_CONSTEXPR SwapchainCreateInfoKHR( VULKAN_HPP_NAMESPACE::SwapchainCreateFlagsKHR flags_ = {},
                                                  VULKAN_HPP_NAMESPACE::SurfaceKHR surface_ = {},
                                                  uint32_t minImageCount_ = {},
-                                                 VULKAN_HPP_NAMESPACE::Format imageFormat_ = {},
-                                                 VULKAN_HPP_NAMESPACE::ColorSpaceKHR imageColorSpace_ = {},
+                                                 VULKAN_HPP_NAMESPACE::Format imageFormat_ = VULKAN_HPP_NAMESPACE::Format::eUndefined,
+                                                 VULKAN_HPP_NAMESPACE::ColorSpaceKHR imageColorSpace_ = VULKAN_HPP_NAMESPACE::ColorSpaceKHR::eSrgbNonlinear,
                                                  VULKAN_HPP_NAMESPACE::Extent2D imageExtent_ = {},
                                                  uint32_t imageArrayLayers_ = {},
                                                  VULKAN_HPP_NAMESPACE::ImageUsageFlags imageUsage_ = {},
-                                                 VULKAN_HPP_NAMESPACE::SharingMode imageSharingMode_ = {},
+                                                 VULKAN_HPP_NAMESPACE::SharingMode imageSharingMode_ = VULKAN_HPP_NAMESPACE::SharingMode::eExclusive,
                                                  uint32_t queueFamilyIndexCount_ = {},
                                                  const uint32_t* pQueueFamilyIndices_ = {},
-                                                 VULKAN_HPP_NAMESPACE::SurfaceTransformFlagBitsKHR preTransform_ = {},
-                                                 VULKAN_HPP_NAMESPACE::CompositeAlphaFlagBitsKHR compositeAlpha_ = {},
-                                                 VULKAN_HPP_NAMESPACE::PresentModeKHR presentMode_ = {},
+                                                 VULKAN_HPP_NAMESPACE::SurfaceTransformFlagBitsKHR preTransform_ = VULKAN_HPP_NAMESPACE::SurfaceTransformFlagBitsKHR::eIdentity,
+                                                 VULKAN_HPP_NAMESPACE::CompositeAlphaFlagBitsKHR compositeAlpha_ = VULKAN_HPP_NAMESPACE::CompositeAlphaFlagBitsKHR::eOpaque,
+                                                 VULKAN_HPP_NAMESPACE::PresentModeKHR presentMode_ = VULKAN_HPP_NAMESPACE::PresentModeKHR::eImmediate,
                                                  VULKAN_HPP_NAMESPACE::Bool32 clipped_ = {},
                                                  VULKAN_HPP_NAMESPACE::SwapchainKHR oldSwapchain_ = {} ) VULKAN_HPP_NOEXCEPT
       : flags( flags_ )
@@ -59707,17 +59707,17 @@ namespace VULKAN_HPP_NAMESPACE
     VULKAN_HPP_NAMESPACE::SwapchainCreateFlagsKHR flags = {};
     VULKAN_HPP_NAMESPACE::SurfaceKHR surface = {};
     uint32_t minImageCount = {};
-    VULKAN_HPP_NAMESPACE::Format imageFormat = {};
-    VULKAN_HPP_NAMESPACE::ColorSpaceKHR imageColorSpace = {};
+    VULKAN_HPP_NAMESPACE::Format imageFormat = VULKAN_HPP_NAMESPACE::Format::eUndefined;
+    VULKAN_HPP_NAMESPACE::ColorSpaceKHR imageColorSpace = VULKAN_HPP_NAMESPACE::ColorSpaceKHR::eSrgbNonlinear;
     VULKAN_HPP_NAMESPACE::Extent2D imageExtent = {};
     uint32_t imageArrayLayers = {};
     VULKAN_HPP_NAMESPACE::ImageUsageFlags imageUsage = {};
-    VULKAN_HPP_NAMESPACE::SharingMode imageSharingMode = {};
+    VULKAN_HPP_NAMESPACE::SharingMode imageSharingMode = VULKAN_HPP_NAMESPACE::SharingMode::eExclusive;
     uint32_t queueFamilyIndexCount = {};
     const uint32_t* pQueueFamilyIndices = {};
-    VULKAN_HPP_NAMESPACE::SurfaceTransformFlagBitsKHR preTransform = {};
-    VULKAN_HPP_NAMESPACE::CompositeAlphaFlagBitsKHR compositeAlpha = {};
-    VULKAN_HPP_NAMESPACE::PresentModeKHR presentMode = {};
+    VULKAN_HPP_NAMESPACE::SurfaceTransformFlagBitsKHR preTransform = VULKAN_HPP_NAMESPACE::SurfaceTransformFlagBitsKHR::eIdentity;
+    VULKAN_HPP_NAMESPACE::CompositeAlphaFlagBitsKHR compositeAlpha = VULKAN_HPP_NAMESPACE::CompositeAlphaFlagBitsKHR::eOpaque;
+    VULKAN_HPP_NAMESPACE::PresentModeKHR presentMode = VULKAN_HPP_NAMESPACE::PresentModeKHR::eImmediate;
     VULKAN_HPP_NAMESPACE::Bool32 clipped = {};
     VULKAN_HPP_NAMESPACE::SwapchainKHR oldSwapchain = {};
   };
@@ -60708,7 +60708,7 @@ namespace VULKAN_HPP_NAMESPACE
                                              uint32_t dstBinding_ = {},
                                              uint32_t dstArrayElement_ = {},
                                              uint32_t descriptorCount_ = {},
-                                             VULKAN_HPP_NAMESPACE::DescriptorType descriptorType_ = {},
+                                             VULKAN_HPP_NAMESPACE::DescriptorType descriptorType_ = VULKAN_HPP_NAMESPACE::DescriptorType::eSampler,
                                              const VULKAN_HPP_NAMESPACE::DescriptorImageInfo* pImageInfo_ = {},
                                              const VULKAN_HPP_NAMESPACE::DescriptorBufferInfo* pBufferInfo_ = {},
                                              const VULKAN_HPP_NAMESPACE::BufferView* pTexelBufferView_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -60829,7 +60829,7 @@ namespace VULKAN_HPP_NAMESPACE
     uint32_t dstBinding = {};
     uint32_t dstArrayElement = {};
     uint32_t descriptorCount = {};
-    VULKAN_HPP_NAMESPACE::DescriptorType descriptorType = {};
+    VULKAN_HPP_NAMESPACE::DescriptorType descriptorType = VULKAN_HPP_NAMESPACE::DescriptorType::eSampler;
     const VULKAN_HPP_NAMESPACE::DescriptorImageInfo* pImageInfo = {};
     const VULKAN_HPP_NAMESPACE::DescriptorBufferInfo* pBufferInfo = {};
     const VULKAN_HPP_NAMESPACE::BufferView* pTexelBufferView = {};
@@ -61170,7 +61170,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::Instance>::type createInstance( const InstanceCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d )
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::Instance>::type createInstance( const InstanceCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d )
   {
     VULKAN_HPP_NAMESPACE::Instance instance;
     Result result = static_cast<Result>( d.vkCreateInstance( reinterpret_cast<const VkInstanceCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkInstance*>( &instance ) ) );
@@ -61300,7 +61300,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<uint32_t>::type enumerateInstanceVersion(Dispatch const &d )
+  VULKAN_HPP_INLINE typename ResultValueType<uint32_t>::type enumerateInstanceVersion(Dispatch const &d )
   {
     uint32_t apiVersion;
     Result result = static_cast<Result>( d.vkEnumerateInstanceVersion( &apiVersion ) );
@@ -61315,7 +61315,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type CommandBuffer::begin( const CommandBufferBeginInfo & beginInfo, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type CommandBuffer::begin( const CommandBufferBeginInfo & beginInfo, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkBeginCommandBuffer( m_commandBuffer, reinterpret_cast<const VkCommandBufferBeginInfo*>( &beginInfo ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::CommandBuffer::begin" );
@@ -62475,7 +62475,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type CommandBuffer::setPerformanceMarkerINTEL( const PerformanceMarkerInfoINTEL & markerInfo, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type CommandBuffer::setPerformanceMarkerINTEL( const PerformanceMarkerInfoINTEL & markerInfo, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkCmdSetPerformanceMarkerINTEL( m_commandBuffer, reinterpret_cast<const VkPerformanceMarkerInfoINTEL*>( &markerInfo ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::CommandBuffer::setPerformanceMarkerINTEL" );
@@ -62489,7 +62489,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type CommandBuffer::setPerformanceOverrideINTEL( const PerformanceOverrideInfoINTEL & overrideInfo, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type CommandBuffer::setPerformanceOverrideINTEL( const PerformanceOverrideInfoINTEL & overrideInfo, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkCmdSetPerformanceOverrideINTEL( m_commandBuffer, reinterpret_cast<const VkPerformanceOverrideInfoINTEL*>( &overrideInfo ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::CommandBuffer::setPerformanceOverrideINTEL" );
@@ -62503,7 +62503,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type CommandBuffer::setPerformanceStreamMarkerINTEL( const PerformanceStreamMarkerInfoINTEL & markerInfo, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type CommandBuffer::setPerformanceStreamMarkerINTEL( const PerformanceStreamMarkerInfoINTEL & markerInfo, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkCmdSetPerformanceStreamMarkerINTEL( m_commandBuffer, reinterpret_cast<const VkPerformanceStreamMarkerInfoINTEL*>( &markerInfo ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::CommandBuffer::setPerformanceStreamMarkerINTEL" );
@@ -62706,7 +62706,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #else
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type CommandBuffer::end(Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type CommandBuffer::end(Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkEndCommandBuffer( m_commandBuffer ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::CommandBuffer::end" );
@@ -62721,7 +62721,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #else
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type CommandBuffer::reset( VULKAN_HPP_NAMESPACE::CommandBufferResetFlags flags, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type CommandBuffer::reset( VULKAN_HPP_NAMESPACE::CommandBufferResetFlags flags, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkResetCommandBuffer( m_commandBuffer, static_cast<VkCommandBufferResetFlags>( flags ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::CommandBuffer::reset" );
@@ -62737,7 +62737,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #else
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Device::acquireFullScreenExclusiveModeEXT( VULKAN_HPP_NAMESPACE::SwapchainKHR swapchain, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::acquireFullScreenExclusiveModeEXT( VULKAN_HPP_NAMESPACE::SwapchainKHR swapchain, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkAcquireFullScreenExclusiveModeEXT( m_device, static_cast<VkSwapchainKHR>( swapchain ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::acquireFullScreenExclusiveModeEXT" );
@@ -62782,7 +62782,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::PerformanceConfigurationINTEL>::type Device::acquirePerformanceConfigurationINTEL( const PerformanceConfigurationAcquireInfoINTEL & acquireInfo, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::PerformanceConfigurationINTEL>::type Device::acquirePerformanceConfigurationINTEL( const PerformanceConfigurationAcquireInfoINTEL & acquireInfo, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::PerformanceConfigurationINTEL configuration;
     Result result = static_cast<Result>( d.vkAcquirePerformanceConfigurationINTEL( m_device, reinterpret_cast<const VkPerformanceConfigurationAcquireInfoINTEL*>( &acquireInfo ), reinterpret_cast<VkPerformanceConfigurationINTEL*>( &configuration ) ) );
@@ -62797,7 +62797,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Device::acquireProfilingLockKHR( const AcquireProfilingLockInfoKHR & info, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::acquireProfilingLockKHR( const AcquireProfilingLockInfoKHR & info, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkAcquireProfilingLockKHR( m_device, reinterpret_cast<const VkAcquireProfilingLockInfoKHR*>( &info ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::acquireProfilingLockKHR" );
@@ -62833,7 +62833,7 @@ namespace VULKAN_HPP_NAMESPACE
     commandBuffers.reserve( allocateInfo.commandBufferCount );
     CommandBuffer* buffer = reinterpret_cast<CommandBuffer*>( reinterpret_cast<char*>( commandBuffers.data() ) + allocateInfo.commandBufferCount * ( sizeof( UniqueHandle<CommandBuffer, Dispatch> ) - sizeof( CommandBuffer ) ) );
     Result result = static_cast<Result>(d.vkAllocateCommandBuffers( m_device, reinterpret_cast<const VkCommandBufferAllocateInfo*>( &allocateInfo ), reinterpret_cast<VkCommandBuffer*>( buffer ) ) );
-    if (result == VULKAN_HPP_NAMESPACE::Result::eSuccess)
+    if ( result == VULKAN_HPP_NAMESPACE::Result::eSuccess )
     {
       PoolFree<Device,CommandPool,Dispatch> deleter( *this, allocateInfo.commandPool, d );
       for ( size_t i=0 ; i<allocateInfo.commandBufferCount ; i++ )
@@ -62852,7 +62852,7 @@ namespace VULKAN_HPP_NAMESPACE
     commandBuffers.reserve( allocateInfo.commandBufferCount );
     CommandBuffer* buffer = reinterpret_cast<CommandBuffer*>( reinterpret_cast<char*>( commandBuffers.data() ) + allocateInfo.commandBufferCount * ( sizeof( UniqueHandle<CommandBuffer, Dispatch> ) - sizeof( CommandBuffer ) ) );
     Result result = static_cast<Result>(d.vkAllocateCommandBuffers( m_device, reinterpret_cast<const VkCommandBufferAllocateInfo*>( &allocateInfo ), reinterpret_cast<VkCommandBuffer*>( buffer ) ) );
-    if (result == VULKAN_HPP_NAMESPACE::Result::eSuccess)
+    if ( result == VULKAN_HPP_NAMESPACE::Result::eSuccess )
     {
       PoolFree<Device,CommandPool,Dispatch> deleter( *this, allocateInfo.commandPool, d );
       for ( size_t i=0 ; i<allocateInfo.commandBufferCount ; i++ )
@@ -62895,7 +62895,7 @@ namespace VULKAN_HPP_NAMESPACE
     descriptorSets.reserve( allocateInfo.descriptorSetCount );
     DescriptorSet* buffer = reinterpret_cast<DescriptorSet*>( reinterpret_cast<char*>( descriptorSets.data() ) + allocateInfo.descriptorSetCount * ( sizeof( UniqueHandle<DescriptorSet, Dispatch> ) - sizeof( DescriptorSet ) ) );
     Result result = static_cast<Result>(d.vkAllocateDescriptorSets( m_device, reinterpret_cast<const VkDescriptorSetAllocateInfo*>( &allocateInfo ), reinterpret_cast<VkDescriptorSet*>( buffer ) ) );
-    if (result == VULKAN_HPP_NAMESPACE::Result::eSuccess)
+    if ( result == VULKAN_HPP_NAMESPACE::Result::eSuccess )
     {
       PoolFree<Device,DescriptorPool,Dispatch> deleter( *this, allocateInfo.descriptorPool, d );
       for ( size_t i=0 ; i<allocateInfo.descriptorSetCount ; i++ )
@@ -62914,7 +62914,7 @@ namespace VULKAN_HPP_NAMESPACE
     descriptorSets.reserve( allocateInfo.descriptorSetCount );
     DescriptorSet* buffer = reinterpret_cast<DescriptorSet*>( reinterpret_cast<char*>( descriptorSets.data() ) + allocateInfo.descriptorSetCount * ( sizeof( UniqueHandle<DescriptorSet, Dispatch> ) - sizeof( DescriptorSet ) ) );
     Result result = static_cast<Result>(d.vkAllocateDescriptorSets( m_device, reinterpret_cast<const VkDescriptorSetAllocateInfo*>( &allocateInfo ), reinterpret_cast<VkDescriptorSet*>( buffer ) ) );
-    if (result == VULKAN_HPP_NAMESPACE::Result::eSuccess)
+    if ( result == VULKAN_HPP_NAMESPACE::Result::eSuccess )
     {
       PoolFree<Device,DescriptorPool,Dispatch> deleter( *this, allocateInfo.descriptorPool, d );
       for ( size_t i=0 ; i<allocateInfo.descriptorSetCount ; i++ )
@@ -62935,7 +62935,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::DeviceMemory>::type Device::allocateMemory( const MemoryAllocateInfo & allocateInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::DeviceMemory>::type Device::allocateMemory( const MemoryAllocateInfo & allocateInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::DeviceMemory memory;
     Result result = static_cast<Result>( d.vkAllocateMemory( m_device, reinterpret_cast<const VkMemoryAllocateInfo*>( &allocateInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkDeviceMemory*>( &memory ) ) );
@@ -62961,7 +62961,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Device::bindAccelerationStructureMemoryNV( ArrayProxy<const VULKAN_HPP_NAMESPACE::BindAccelerationStructureMemoryInfoNV> bindInfos, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::bindAccelerationStructureMemoryNV( ArrayProxy<const VULKAN_HPP_NAMESPACE::BindAccelerationStructureMemoryInfoNV> bindInfos, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkBindAccelerationStructureMemoryNV( m_device, bindInfos.size() , reinterpret_cast<const VkBindAccelerationStructureMemoryInfoNV*>( bindInfos.data() ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::bindAccelerationStructureMemoryNV" );
@@ -62976,7 +62976,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #else
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Device::bindBufferMemory( VULKAN_HPP_NAMESPACE::Buffer buffer, VULKAN_HPP_NAMESPACE::DeviceMemory memory, VULKAN_HPP_NAMESPACE::DeviceSize memoryOffset, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::bindBufferMemory( VULKAN_HPP_NAMESPACE::Buffer buffer, VULKAN_HPP_NAMESPACE::DeviceMemory memory, VULKAN_HPP_NAMESPACE::DeviceSize memoryOffset, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkBindBufferMemory( m_device, static_cast<VkBuffer>( buffer ), static_cast<VkDeviceMemory>( memory ), static_cast<VkDeviceSize>( memoryOffset ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::bindBufferMemory" );
@@ -62990,7 +62990,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Device::bindBufferMemory2( ArrayProxy<const VULKAN_HPP_NAMESPACE::BindBufferMemoryInfo> bindInfos, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::bindBufferMemory2( ArrayProxy<const VULKAN_HPP_NAMESPACE::BindBufferMemoryInfo> bindInfos, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkBindBufferMemory2( m_device, bindInfos.size() , reinterpret_cast<const VkBindBufferMemoryInfo*>( bindInfos.data() ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::bindBufferMemory2" );
@@ -63004,7 +63004,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Device::bindBufferMemory2KHR( ArrayProxy<const VULKAN_HPP_NAMESPACE::BindBufferMemoryInfo> bindInfos, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::bindBufferMemory2KHR( ArrayProxy<const VULKAN_HPP_NAMESPACE::BindBufferMemoryInfo> bindInfos, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkBindBufferMemory2KHR( m_device, bindInfos.size() , reinterpret_cast<const VkBindBufferMemoryInfo*>( bindInfos.data() ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::bindBufferMemory2KHR" );
@@ -63019,7 +63019,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #else
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Device::bindImageMemory( VULKAN_HPP_NAMESPACE::Image image, VULKAN_HPP_NAMESPACE::DeviceMemory memory, VULKAN_HPP_NAMESPACE::DeviceSize memoryOffset, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::bindImageMemory( VULKAN_HPP_NAMESPACE::Image image, VULKAN_HPP_NAMESPACE::DeviceMemory memory, VULKAN_HPP_NAMESPACE::DeviceSize memoryOffset, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkBindImageMemory( m_device, static_cast<VkImage>( image ), static_cast<VkDeviceMemory>( memory ), static_cast<VkDeviceSize>( memoryOffset ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::bindImageMemory" );
@@ -63033,7 +63033,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Device::bindImageMemory2( ArrayProxy<const VULKAN_HPP_NAMESPACE::BindImageMemoryInfo> bindInfos, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::bindImageMemory2( ArrayProxy<const VULKAN_HPP_NAMESPACE::BindImageMemoryInfo> bindInfos, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkBindImageMemory2( m_device, bindInfos.size() , reinterpret_cast<const VkBindImageMemoryInfo*>( bindInfos.data() ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::bindImageMemory2" );
@@ -63047,7 +63047,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Device::bindImageMemory2KHR( ArrayProxy<const VULKAN_HPP_NAMESPACE::BindImageMemoryInfo> bindInfos, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::bindImageMemory2KHR( ArrayProxy<const VULKAN_HPP_NAMESPACE::BindImageMemoryInfo> bindInfos, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkBindImageMemory2KHR( m_device, bindInfos.size() , reinterpret_cast<const VkBindImageMemoryInfo*>( bindInfos.data() ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::bindImageMemory2KHR" );
@@ -63062,7 +63062,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #else
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Device::compileDeferredNV( VULKAN_HPP_NAMESPACE::Pipeline pipeline, uint32_t shader, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::compileDeferredNV( VULKAN_HPP_NAMESPACE::Pipeline pipeline, uint32_t shader, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkCompileDeferredNV( m_device, static_cast<VkPipeline>( pipeline ), shader ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::compileDeferredNV" );
@@ -63076,7 +63076,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::AccelerationStructureNV>::type Device::createAccelerationStructureNV( const AccelerationStructureCreateInfoNV & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::AccelerationStructureNV>::type Device::createAccelerationStructureNV( const AccelerationStructureCreateInfoNV & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::AccelerationStructureNV accelerationStructure;
     Result result = static_cast<Result>( d.vkCreateAccelerationStructureNV( m_device, reinterpret_cast<const VkAccelerationStructureCreateInfoNV*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkAccelerationStructureNV*>( &accelerationStructure ) ) );
@@ -63102,7 +63102,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::Buffer>::type Device::createBuffer( const BufferCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::Buffer>::type Device::createBuffer( const BufferCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::Buffer buffer;
     Result result = static_cast<Result>( d.vkCreateBuffer( m_device, reinterpret_cast<const VkBufferCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkBuffer*>( &buffer ) ) );
@@ -63128,7 +63128,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::BufferView>::type Device::createBufferView( const BufferViewCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::BufferView>::type Device::createBufferView( const BufferViewCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::BufferView view;
     Result result = static_cast<Result>( d.vkCreateBufferView( m_device, reinterpret_cast<const VkBufferViewCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkBufferView*>( &view ) ) );
@@ -63154,7 +63154,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::CommandPool>::type Device::createCommandPool( const CommandPoolCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::CommandPool>::type Device::createCommandPool( const CommandPoolCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::CommandPool commandPool;
     Result result = static_cast<Result>( d.vkCreateCommandPool( m_device, reinterpret_cast<const VkCommandPoolCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkCommandPool*>( &commandPool ) ) );
@@ -63194,7 +63194,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, pipelines, VULKAN_HPP_NAMESPACE_STRING"::Device::createComputePipelines" );
   }
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<Pipeline>::type Device::createComputePipeline( VULKAN_HPP_NAMESPACE::PipelineCache pipelineCache, const ComputePipelineCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<Pipeline>::type Device::createComputePipeline( VULKAN_HPP_NAMESPACE::PipelineCache pipelineCache, const ComputePipelineCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     Pipeline pipeline;
     Result result = static_cast<Result>( d.vkCreateComputePipelines( m_device, static_cast<VkPipelineCache>( pipelineCache ), 1 , reinterpret_cast<const VkComputePipelineCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkPipeline*>( &pipeline ) ) );
@@ -63209,7 +63209,7 @@ namespace VULKAN_HPP_NAMESPACE
     pipelines.reserve( createInfos.size() );
     Pipeline* buffer = reinterpret_cast<Pipeline*>( reinterpret_cast<char*>( pipelines.data() ) + createInfos.size() * ( sizeof( UniqueHandle<Pipeline, Dispatch> ) - sizeof( Pipeline ) ) );
     Result result = static_cast<Result>(d.vkCreateComputePipelines( m_device, static_cast<VkPipelineCache>( pipelineCache ), createInfos.size() , reinterpret_cast<const VkComputePipelineCreateInfo*>( createInfos.data() ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkPipeline*>( buffer ) ) );
-    if (result == VULKAN_HPP_NAMESPACE::Result::eSuccess)
+    if ( result == VULKAN_HPP_NAMESPACE::Result::eSuccess )
     {
       ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
       for ( size_t i=0 ; i<createInfos.size() ; i++ )
@@ -63228,7 +63228,7 @@ namespace VULKAN_HPP_NAMESPACE
     pipelines.reserve( createInfos.size() );
     Pipeline* buffer = reinterpret_cast<Pipeline*>( reinterpret_cast<char*>( pipelines.data() ) + createInfos.size() * ( sizeof( UniqueHandle<Pipeline, Dispatch> ) - sizeof( Pipeline ) ) );
     Result result = static_cast<Result>(d.vkCreateComputePipelines( m_device, static_cast<VkPipelineCache>( pipelineCache ), createInfos.size() , reinterpret_cast<const VkComputePipelineCreateInfo*>( createInfos.data() ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkPipeline*>( buffer ) ) );
-    if (result == VULKAN_HPP_NAMESPACE::Result::eSuccess)
+    if ( result == VULKAN_HPP_NAMESPACE::Result::eSuccess )
     {
       ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
       for ( size_t i=0 ; i<createInfos.size() ; i++ )
@@ -63258,7 +63258,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::DescriptorPool>::type Device::createDescriptorPool( const DescriptorPoolCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::DescriptorPool>::type Device::createDescriptorPool( const DescriptorPoolCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::DescriptorPool descriptorPool;
     Result result = static_cast<Result>( d.vkCreateDescriptorPool( m_device, reinterpret_cast<const VkDescriptorPoolCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkDescriptorPool*>( &descriptorPool ) ) );
@@ -63284,7 +63284,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::DescriptorSetLayout>::type Device::createDescriptorSetLayout( const DescriptorSetLayoutCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::DescriptorSetLayout>::type Device::createDescriptorSetLayout( const DescriptorSetLayoutCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::DescriptorSetLayout setLayout;
     Result result = static_cast<Result>( d.vkCreateDescriptorSetLayout( m_device, reinterpret_cast<const VkDescriptorSetLayoutCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkDescriptorSetLayout*>( &setLayout ) ) );
@@ -63310,7 +63310,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplate>::type Device::createDescriptorUpdateTemplate( const DescriptorUpdateTemplateCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplate>::type Device::createDescriptorUpdateTemplate( const DescriptorUpdateTemplateCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplate descriptorUpdateTemplate;
     Result result = static_cast<Result>( d.vkCreateDescriptorUpdateTemplate( m_device, reinterpret_cast<const VkDescriptorUpdateTemplateCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkDescriptorUpdateTemplate*>( &descriptorUpdateTemplate ) ) );
@@ -63336,7 +63336,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplate>::type Device::createDescriptorUpdateTemplateKHR( const DescriptorUpdateTemplateCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplate>::type Device::createDescriptorUpdateTemplateKHR( const DescriptorUpdateTemplateCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplate descriptorUpdateTemplate;
     Result result = static_cast<Result>( d.vkCreateDescriptorUpdateTemplateKHR( m_device, reinterpret_cast<const VkDescriptorUpdateTemplateCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkDescriptorUpdateTemplate*>( &descriptorUpdateTemplate ) ) );
@@ -63362,7 +63362,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::Event>::type Device::createEvent( const EventCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::Event>::type Device::createEvent( const EventCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::Event event;
     Result result = static_cast<Result>( d.vkCreateEvent( m_device, reinterpret_cast<const VkEventCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkEvent*>( &event ) ) );
@@ -63388,7 +63388,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::Fence>::type Device::createFence( const FenceCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::Fence>::type Device::createFence( const FenceCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::Fence fence;
     Result result = static_cast<Result>( d.vkCreateFence( m_device, reinterpret_cast<const VkFenceCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkFence*>( &fence ) ) );
@@ -63414,7 +63414,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::Framebuffer>::type Device::createFramebuffer( const FramebufferCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::Framebuffer>::type Device::createFramebuffer( const FramebufferCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::Framebuffer framebuffer;
     Result result = static_cast<Result>( d.vkCreateFramebuffer( m_device, reinterpret_cast<const VkFramebufferCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkFramebuffer*>( &framebuffer ) ) );
@@ -63454,7 +63454,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, pipelines, VULKAN_HPP_NAMESPACE_STRING"::Device::createGraphicsPipelines" );
   }
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<Pipeline>::type Device::createGraphicsPipeline( VULKAN_HPP_NAMESPACE::PipelineCache pipelineCache, const GraphicsPipelineCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<Pipeline>::type Device::createGraphicsPipeline( VULKAN_HPP_NAMESPACE::PipelineCache pipelineCache, const GraphicsPipelineCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     Pipeline pipeline;
     Result result = static_cast<Result>( d.vkCreateGraphicsPipelines( m_device, static_cast<VkPipelineCache>( pipelineCache ), 1 , reinterpret_cast<const VkGraphicsPipelineCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkPipeline*>( &pipeline ) ) );
@@ -63469,7 +63469,7 @@ namespace VULKAN_HPP_NAMESPACE
     pipelines.reserve( createInfos.size() );
     Pipeline* buffer = reinterpret_cast<Pipeline*>( reinterpret_cast<char*>( pipelines.data() ) + createInfos.size() * ( sizeof( UniqueHandle<Pipeline, Dispatch> ) - sizeof( Pipeline ) ) );
     Result result = static_cast<Result>(d.vkCreateGraphicsPipelines( m_device, static_cast<VkPipelineCache>( pipelineCache ), createInfos.size() , reinterpret_cast<const VkGraphicsPipelineCreateInfo*>( createInfos.data() ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkPipeline*>( buffer ) ) );
-    if (result == VULKAN_HPP_NAMESPACE::Result::eSuccess)
+    if ( result == VULKAN_HPP_NAMESPACE::Result::eSuccess )
     {
       ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
       for ( size_t i=0 ; i<createInfos.size() ; i++ )
@@ -63488,7 +63488,7 @@ namespace VULKAN_HPP_NAMESPACE
     pipelines.reserve( createInfos.size() );
     Pipeline* buffer = reinterpret_cast<Pipeline*>( reinterpret_cast<char*>( pipelines.data() ) + createInfos.size() * ( sizeof( UniqueHandle<Pipeline, Dispatch> ) - sizeof( Pipeline ) ) );
     Result result = static_cast<Result>(d.vkCreateGraphicsPipelines( m_device, static_cast<VkPipelineCache>( pipelineCache ), createInfos.size() , reinterpret_cast<const VkGraphicsPipelineCreateInfo*>( createInfos.data() ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkPipeline*>( buffer ) ) );
-    if (result == VULKAN_HPP_NAMESPACE::Result::eSuccess)
+    if ( result == VULKAN_HPP_NAMESPACE::Result::eSuccess )
     {
       ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
       for ( size_t i=0 ; i<createInfos.size() ; i++ )
@@ -63518,7 +63518,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::Image>::type Device::createImage( const ImageCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::Image>::type Device::createImage( const ImageCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::Image image;
     Result result = static_cast<Result>( d.vkCreateImage( m_device, reinterpret_cast<const VkImageCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkImage*>( &image ) ) );
@@ -63544,7 +63544,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::ImageView>::type Device::createImageView( const ImageViewCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::ImageView>::type Device::createImageView( const ImageViewCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::ImageView view;
     Result result = static_cast<Result>( d.vkCreateImageView( m_device, reinterpret_cast<const VkImageViewCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkImageView*>( &view ) ) );
@@ -63570,7 +63570,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::IndirectCommandsLayoutNVX>::type Device::createIndirectCommandsLayoutNVX( const IndirectCommandsLayoutCreateInfoNVX & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::IndirectCommandsLayoutNVX>::type Device::createIndirectCommandsLayoutNVX( const IndirectCommandsLayoutCreateInfoNVX & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::IndirectCommandsLayoutNVX indirectCommandsLayout;
     Result result = static_cast<Result>( d.vkCreateIndirectCommandsLayoutNVX( m_device, reinterpret_cast<const VkIndirectCommandsLayoutCreateInfoNVX*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkIndirectCommandsLayoutNVX*>( &indirectCommandsLayout ) ) );
@@ -63596,7 +63596,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::ObjectTableNVX>::type Device::createObjectTableNVX( const ObjectTableCreateInfoNVX & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::ObjectTableNVX>::type Device::createObjectTableNVX( const ObjectTableCreateInfoNVX & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::ObjectTableNVX objectTable;
     Result result = static_cast<Result>( d.vkCreateObjectTableNVX( m_device, reinterpret_cast<const VkObjectTableCreateInfoNVX*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkObjectTableNVX*>( &objectTable ) ) );
@@ -63622,7 +63622,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::PipelineCache>::type Device::createPipelineCache( const PipelineCacheCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::PipelineCache>::type Device::createPipelineCache( const PipelineCacheCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::PipelineCache pipelineCache;
     Result result = static_cast<Result>( d.vkCreatePipelineCache( m_device, reinterpret_cast<const VkPipelineCacheCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkPipelineCache*>( &pipelineCache ) ) );
@@ -63648,7 +63648,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::PipelineLayout>::type Device::createPipelineLayout( const PipelineLayoutCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::PipelineLayout>::type Device::createPipelineLayout( const PipelineLayoutCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::PipelineLayout pipelineLayout;
     Result result = static_cast<Result>( d.vkCreatePipelineLayout( m_device, reinterpret_cast<const VkPipelineLayoutCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkPipelineLayout*>( &pipelineLayout ) ) );
@@ -63674,7 +63674,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::QueryPool>::type Device::createQueryPool( const QueryPoolCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::QueryPool>::type Device::createQueryPool( const QueryPoolCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::QueryPool queryPool;
     Result result = static_cast<Result>( d.vkCreateQueryPool( m_device, reinterpret_cast<const VkQueryPoolCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkQueryPool*>( &queryPool ) ) );
@@ -63714,7 +63714,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, pipelines, VULKAN_HPP_NAMESPACE_STRING"::Device::createRayTracingPipelinesNV" );
   }
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<Pipeline>::type Device::createRayTracingPipelineNV( VULKAN_HPP_NAMESPACE::PipelineCache pipelineCache, const RayTracingPipelineCreateInfoNV & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<Pipeline>::type Device::createRayTracingPipelineNV( VULKAN_HPP_NAMESPACE::PipelineCache pipelineCache, const RayTracingPipelineCreateInfoNV & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     Pipeline pipeline;
     Result result = static_cast<Result>( d.vkCreateRayTracingPipelinesNV( m_device, static_cast<VkPipelineCache>( pipelineCache ), 1 , reinterpret_cast<const VkRayTracingPipelineCreateInfoNV*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkPipeline*>( &pipeline ) ) );
@@ -63729,7 +63729,7 @@ namespace VULKAN_HPP_NAMESPACE
     pipelines.reserve( createInfos.size() );
     Pipeline* buffer = reinterpret_cast<Pipeline*>( reinterpret_cast<char*>( pipelines.data() ) + createInfos.size() * ( sizeof( UniqueHandle<Pipeline, Dispatch> ) - sizeof( Pipeline ) ) );
     Result result = static_cast<Result>(d.vkCreateRayTracingPipelinesNV( m_device, static_cast<VkPipelineCache>( pipelineCache ), createInfos.size() , reinterpret_cast<const VkRayTracingPipelineCreateInfoNV*>( createInfos.data() ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkPipeline*>( buffer ) ) );
-    if (result == VULKAN_HPP_NAMESPACE::Result::eSuccess)
+    if ( result == VULKAN_HPP_NAMESPACE::Result::eSuccess )
     {
       ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
       for ( size_t i=0 ; i<createInfos.size() ; i++ )
@@ -63748,7 +63748,7 @@ namespace VULKAN_HPP_NAMESPACE
     pipelines.reserve( createInfos.size() );
     Pipeline* buffer = reinterpret_cast<Pipeline*>( reinterpret_cast<char*>( pipelines.data() ) + createInfos.size() * ( sizeof( UniqueHandle<Pipeline, Dispatch> ) - sizeof( Pipeline ) ) );
     Result result = static_cast<Result>(d.vkCreateRayTracingPipelinesNV( m_device, static_cast<VkPipelineCache>( pipelineCache ), createInfos.size() , reinterpret_cast<const VkRayTracingPipelineCreateInfoNV*>( createInfos.data() ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkPipeline*>( buffer ) ) );
-    if (result == VULKAN_HPP_NAMESPACE::Result::eSuccess)
+    if ( result == VULKAN_HPP_NAMESPACE::Result::eSuccess )
     {
       ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
       for ( size_t i=0 ; i<createInfos.size() ; i++ )
@@ -63778,7 +63778,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::RenderPass>::type Device::createRenderPass( const RenderPassCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::RenderPass>::type Device::createRenderPass( const RenderPassCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::RenderPass renderPass;
     Result result = static_cast<Result>( d.vkCreateRenderPass( m_device, reinterpret_cast<const VkRenderPassCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkRenderPass*>( &renderPass ) ) );
@@ -63804,7 +63804,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::RenderPass>::type Device::createRenderPass2( const RenderPassCreateInfo2 & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::RenderPass>::type Device::createRenderPass2( const RenderPassCreateInfo2 & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::RenderPass renderPass;
     Result result = static_cast<Result>( d.vkCreateRenderPass2( m_device, reinterpret_cast<const VkRenderPassCreateInfo2*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkRenderPass*>( &renderPass ) ) );
@@ -63830,7 +63830,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::RenderPass>::type Device::createRenderPass2KHR( const RenderPassCreateInfo2 & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::RenderPass>::type Device::createRenderPass2KHR( const RenderPassCreateInfo2 & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::RenderPass renderPass;
     Result result = static_cast<Result>( d.vkCreateRenderPass2KHR( m_device, reinterpret_cast<const VkRenderPassCreateInfo2*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkRenderPass*>( &renderPass ) ) );
@@ -63856,7 +63856,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::Sampler>::type Device::createSampler( const SamplerCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::Sampler>::type Device::createSampler( const SamplerCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::Sampler sampler;
     Result result = static_cast<Result>( d.vkCreateSampler( m_device, reinterpret_cast<const VkSamplerCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSampler*>( &sampler ) ) );
@@ -63882,7 +63882,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::SamplerYcbcrConversion>::type Device::createSamplerYcbcrConversion( const SamplerYcbcrConversionCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::SamplerYcbcrConversion>::type Device::createSamplerYcbcrConversion( const SamplerYcbcrConversionCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::SamplerYcbcrConversion ycbcrConversion;
     Result result = static_cast<Result>( d.vkCreateSamplerYcbcrConversion( m_device, reinterpret_cast<const VkSamplerYcbcrConversionCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSamplerYcbcrConversion*>( &ycbcrConversion ) ) );
@@ -63908,7 +63908,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::SamplerYcbcrConversion>::type Device::createSamplerYcbcrConversionKHR( const SamplerYcbcrConversionCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::SamplerYcbcrConversion>::type Device::createSamplerYcbcrConversionKHR( const SamplerYcbcrConversionCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::SamplerYcbcrConversion ycbcrConversion;
     Result result = static_cast<Result>( d.vkCreateSamplerYcbcrConversionKHR( m_device, reinterpret_cast<const VkSamplerYcbcrConversionCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSamplerYcbcrConversion*>( &ycbcrConversion ) ) );
@@ -63934,7 +63934,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::Semaphore>::type Device::createSemaphore( const SemaphoreCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::Semaphore>::type Device::createSemaphore( const SemaphoreCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::Semaphore semaphore;
     Result result = static_cast<Result>( d.vkCreateSemaphore( m_device, reinterpret_cast<const VkSemaphoreCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSemaphore*>( &semaphore ) ) );
@@ -63960,7 +63960,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::ShaderModule>::type Device::createShaderModule( const ShaderModuleCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::ShaderModule>::type Device::createShaderModule( const ShaderModuleCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::ShaderModule shaderModule;
     Result result = static_cast<Result>( d.vkCreateShaderModule( m_device, reinterpret_cast<const VkShaderModuleCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkShaderModule*>( &shaderModule ) ) );
@@ -64000,7 +64000,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, swapchains, VULKAN_HPP_NAMESPACE_STRING"::Device::createSharedSwapchainsKHR" );
   }
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<SwapchainKHR>::type Device::createSharedSwapchainKHR( const SwapchainCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<SwapchainKHR>::type Device::createSharedSwapchainKHR( const SwapchainCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     SwapchainKHR swapchain;
     Result result = static_cast<Result>( d.vkCreateSharedSwapchainsKHR( m_device, 1 , reinterpret_cast<const VkSwapchainCreateInfoKHR*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSwapchainKHR*>( &swapchain ) ) );
@@ -64015,7 +64015,7 @@ namespace VULKAN_HPP_NAMESPACE
     swapchainKHRs.reserve( createInfos.size() );
     SwapchainKHR* buffer = reinterpret_cast<SwapchainKHR*>( reinterpret_cast<char*>( swapchainKHRs.data() ) + createInfos.size() * ( sizeof( UniqueHandle<SwapchainKHR, Dispatch> ) - sizeof( SwapchainKHR ) ) );
     Result result = static_cast<Result>(d.vkCreateSharedSwapchainsKHR( m_device, createInfos.size() , reinterpret_cast<const VkSwapchainCreateInfoKHR*>( createInfos.data() ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSwapchainKHR*>( buffer ) ) );
-    if (result == VULKAN_HPP_NAMESPACE::Result::eSuccess)
+    if ( result == VULKAN_HPP_NAMESPACE::Result::eSuccess )
     {
       ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
       for ( size_t i=0 ; i<createInfos.size() ; i++ )
@@ -64034,7 +64034,7 @@ namespace VULKAN_HPP_NAMESPACE
     swapchainKHRs.reserve( createInfos.size() );
     SwapchainKHR* buffer = reinterpret_cast<SwapchainKHR*>( reinterpret_cast<char*>( swapchainKHRs.data() ) + createInfos.size() * ( sizeof( UniqueHandle<SwapchainKHR, Dispatch> ) - sizeof( SwapchainKHR ) ) );
     Result result = static_cast<Result>(d.vkCreateSharedSwapchainsKHR( m_device, createInfos.size() , reinterpret_cast<const VkSwapchainCreateInfoKHR*>( createInfos.data() ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSwapchainKHR*>( buffer ) ) );
-    if (result == VULKAN_HPP_NAMESPACE::Result::eSuccess)
+    if ( result == VULKAN_HPP_NAMESPACE::Result::eSuccess )
     {
       ObjectDestroy<Device,Dispatch> deleter( *this, allocator, d );
       for ( size_t i=0 ; i<createInfos.size() ; i++ )
@@ -64064,7 +64064,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::SwapchainKHR>::type Device::createSwapchainKHR( const SwapchainCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::SwapchainKHR>::type Device::createSwapchainKHR( const SwapchainCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::SwapchainKHR swapchain;
     Result result = static_cast<Result>( d.vkCreateSwapchainKHR( m_device, reinterpret_cast<const VkSwapchainCreateInfoKHR*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSwapchainKHR*>( &swapchain ) ) );
@@ -64090,7 +64090,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::ValidationCacheEXT>::type Device::createValidationCacheEXT( const ValidationCacheCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::ValidationCacheEXT>::type Device::createValidationCacheEXT( const ValidationCacheCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::ValidationCacheEXT validationCache;
     Result result = static_cast<Result>( d.vkCreateValidationCacheEXT( m_device, reinterpret_cast<const VkValidationCacheCreateInfoEXT*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkValidationCacheEXT*>( &validationCache ) ) );
@@ -64116,7 +64116,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Device::debugMarkerSetObjectNameEXT( const DebugMarkerObjectNameInfoEXT & nameInfo, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::debugMarkerSetObjectNameEXT( const DebugMarkerObjectNameInfoEXT & nameInfo, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkDebugMarkerSetObjectNameEXT( m_device, reinterpret_cast<const VkDebugMarkerObjectNameInfoEXT*>( &nameInfo ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::debugMarkerSetObjectNameEXT" );
@@ -64130,7 +64130,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Device::debugMarkerSetObjectTagEXT( const DebugMarkerObjectTagInfoEXT & tagInfo, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::debugMarkerSetObjectTagEXT( const DebugMarkerObjectTagInfoEXT & tagInfo, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkDebugMarkerSetObjectTagEXT( m_device, reinterpret_cast<const VkDebugMarkerObjectTagInfoEXT*>( &tagInfo ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::debugMarkerSetObjectTagEXT" );
@@ -64834,7 +64834,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #else
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Device::waitIdle(Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::waitIdle(Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkDeviceWaitIdle( m_device ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::waitIdle" );
@@ -64848,7 +64848,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Device::displayPowerControlEXT( VULKAN_HPP_NAMESPACE::DisplayKHR display, const DisplayPowerInfoEXT & displayPowerInfo, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::displayPowerControlEXT( VULKAN_HPP_NAMESPACE::DisplayKHR display, const DisplayPowerInfoEXT & displayPowerInfo, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkDisplayPowerControlEXT( m_device, static_cast<VkDisplayKHR>( display ), reinterpret_cast<const VkDisplayPowerInfoEXT*>( &displayPowerInfo ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::displayPowerControlEXT" );
@@ -64862,7 +64862,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Device::flushMappedMemoryRanges( ArrayProxy<const VULKAN_HPP_NAMESPACE::MappedMemoryRange> memoryRanges, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::flushMappedMemoryRanges( ArrayProxy<const VULKAN_HPP_NAMESPACE::MappedMemoryRange> memoryRanges, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkFlushMappedMemoryRanges( m_device, memoryRanges.size() , reinterpret_cast<const VkMappedMemoryRange*>( memoryRanges.data() ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::flushMappedMemoryRanges" );
@@ -64902,7 +64902,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Device::freeDescriptorSets( VULKAN_HPP_NAMESPACE::DescriptorPool descriptorPool, ArrayProxy<const VULKAN_HPP_NAMESPACE::DescriptorSet> descriptorSets, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::freeDescriptorSets( VULKAN_HPP_NAMESPACE::DescriptorPool descriptorPool, ArrayProxy<const VULKAN_HPP_NAMESPACE::DescriptorSet> descriptorSets, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkFreeDescriptorSets( m_device, static_cast<VkDescriptorPool>( descriptorPool ), descriptorSets.size() , reinterpret_cast<const VkDescriptorSet*>( descriptorSets.data() ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::freeDescriptorSets" );
@@ -64916,7 +64916,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Device::free( VULKAN_HPP_NAMESPACE::DescriptorPool descriptorPool, ArrayProxy<const VULKAN_HPP_NAMESPACE::DescriptorSet> descriptorSets, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::free( VULKAN_HPP_NAMESPACE::DescriptorPool descriptorPool, ArrayProxy<const VULKAN_HPP_NAMESPACE::DescriptorSet> descriptorSets, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkFreeDescriptorSets( m_device, static_cast<VkDescriptorPool>( descriptorPool ), descriptorSets.size() , reinterpret_cast<const VkDescriptorSet*>( descriptorSets.data() ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::free" );
@@ -64956,7 +64956,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename T, typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Device::getAccelerationStructureHandleNV( VULKAN_HPP_NAMESPACE::AccelerationStructureNV accelerationStructure, ArrayProxy<T> data, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::getAccelerationStructureHandleNV( VULKAN_HPP_NAMESPACE::AccelerationStructureNV accelerationStructure, ArrayProxy<T> data, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkGetAccelerationStructureHandleNV( m_device, static_cast<VkAccelerationStructureNV>( accelerationStructure ), data.size() * sizeof( T ) , reinterpret_cast<void*>( data.data() ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::getAccelerationStructureHandleNV" );
@@ -64994,7 +64994,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::AndroidHardwareBufferPropertiesANDROID>::type Device::getAndroidHardwareBufferPropertiesANDROID( const struct AHardwareBuffer & buffer, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::AndroidHardwareBufferPropertiesANDROID>::type Device::getAndroidHardwareBufferPropertiesANDROID( const struct AHardwareBuffer & buffer, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::AndroidHardwareBufferPropertiesANDROID properties;
     Result result = static_cast<Result>( d.vkGetAndroidHardwareBufferPropertiesANDROID( m_device, buffer, reinterpret_cast<VkAndroidHardwareBufferPropertiesANDROID*>( &properties ) ) );
@@ -65144,7 +65144,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<uint64_t>::type Device::getCalibratedTimestampsEXT( ArrayProxy<const VULKAN_HPP_NAMESPACE::CalibratedTimestampInfoEXT> timestampInfos, ArrayProxy<uint64_t> timestamps, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<uint64_t>::type Device::getCalibratedTimestampsEXT( ArrayProxy<const VULKAN_HPP_NAMESPACE::CalibratedTimestampInfoEXT> timestampInfos, ArrayProxy<uint64_t> timestamps, Dispatch const &d ) const
   {
 #ifdef VULKAN_HPP_NO_EXCEPTIONS
     VULKAN_HPP_ASSERT( timestampInfos.size() == timestamps.size() );
@@ -65243,7 +65243,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::DeviceGroupPresentCapabilitiesKHR>::type Device::getGroupPresentCapabilitiesKHR(Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::DeviceGroupPresentCapabilitiesKHR>::type Device::getGroupPresentCapabilitiesKHR(Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::DeviceGroupPresentCapabilitiesKHR deviceGroupPresentCapabilities;
     Result result = static_cast<Result>( d.vkGetDeviceGroupPresentCapabilitiesKHR( m_device, reinterpret_cast<VkDeviceGroupPresentCapabilitiesKHR*>( &deviceGroupPresentCapabilities ) ) );
@@ -65259,7 +65259,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::DeviceGroupPresentModeFlagsKHR>::type Device::getGroupSurfacePresentModes2EXT( const PhysicalDeviceSurfaceInfo2KHR & surfaceInfo, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::DeviceGroupPresentModeFlagsKHR>::type Device::getGroupSurfacePresentModes2EXT( const PhysicalDeviceSurfaceInfo2KHR & surfaceInfo, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::DeviceGroupPresentModeFlagsKHR modes;
     Result result = static_cast<Result>( d.vkGetDeviceGroupSurfacePresentModes2EXT( m_device, reinterpret_cast<const VkPhysicalDeviceSurfaceInfo2KHR*>( &surfaceInfo ), reinterpret_cast<VkDeviceGroupPresentModeFlagsKHR*>( &modes ) ) );
@@ -65275,7 +65275,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::DeviceGroupPresentModeFlagsKHR>::type Device::getGroupSurfacePresentModesKHR( VULKAN_HPP_NAMESPACE::SurfaceKHR surface, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::DeviceGroupPresentModeFlagsKHR>::type Device::getGroupSurfacePresentModesKHR( VULKAN_HPP_NAMESPACE::SurfaceKHR surface, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::DeviceGroupPresentModeFlagsKHR modes;
     Result result = static_cast<Result>( d.vkGetDeviceGroupSurfacePresentModesKHR( m_device, static_cast<VkSurfaceKHR>( surface ), reinterpret_cast<VkDeviceGroupPresentModeFlagsKHR*>( &modes ) ) );
@@ -65389,7 +65389,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<int>::type Device::getFenceFdKHR( const FenceGetFdInfoKHR & getFdInfo, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<int>::type Device::getFenceFdKHR( const FenceGetFdInfoKHR & getFdInfo, Dispatch const &d ) const
   {
     int fd;
     Result result = static_cast<Result>( d.vkGetFenceFdKHR( m_device, reinterpret_cast<const VkFenceGetFdInfoKHR*>( &getFdInfo ), &fd ) );
@@ -65420,7 +65420,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<HANDLE>::type Device::getFenceWin32HandleKHR( const FenceGetWin32HandleInfoKHR & getWin32HandleInfo, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<HANDLE>::type Device::getFenceWin32HandleKHR( const FenceGetWin32HandleInfoKHR & getWin32HandleInfo, Dispatch const &d ) const
   {
     HANDLE handle;
     Result result = static_cast<Result>( d.vkGetFenceWin32HandleKHR( m_device, reinterpret_cast<const VkFenceGetWin32HandleInfoKHR*>( &getWin32HandleInfo ), &handle ) );
@@ -65436,7 +65436,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::ImageDrmFormatModifierPropertiesEXT>::type Device::getImageDrmFormatModifierPropertiesEXT( VULKAN_HPP_NAMESPACE::Image image, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::ImageDrmFormatModifierPropertiesEXT>::type Device::getImageDrmFormatModifierPropertiesEXT( VULKAN_HPP_NAMESPACE::Image image, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::ImageDrmFormatModifierPropertiesEXT properties;
     Result result = static_cast<Result>( d.vkGetImageDrmFormatModifierPropertiesEXT( m_device, static_cast<VkImage>( image ), reinterpret_cast<VkImageDrmFormatModifierPropertiesEXT*>( &properties ) ) );
@@ -65625,7 +65625,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<struct AHardwareBuffer*>::type Device::getMemoryAndroidHardwareBufferANDROID( const MemoryGetAndroidHardwareBufferInfoANDROID & info, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<struct AHardwareBuffer*>::type Device::getMemoryAndroidHardwareBufferANDROID( const MemoryGetAndroidHardwareBufferInfoANDROID & info, Dispatch const &d ) const
   {
     struct AHardwareBuffer* buffer;
     Result result = static_cast<Result>( d.vkGetMemoryAndroidHardwareBufferANDROID( m_device, reinterpret_cast<const VkMemoryGetAndroidHardwareBufferInfoANDROID*>( &info ), &buffer ) );
@@ -65641,7 +65641,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<int>::type Device::getMemoryFdKHR( const MemoryGetFdInfoKHR & getFdInfo, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<int>::type Device::getMemoryFdKHR( const MemoryGetFdInfoKHR & getFdInfo, Dispatch const &d ) const
   {
     int fd;
     Result result = static_cast<Result>( d.vkGetMemoryFdKHR( m_device, reinterpret_cast<const VkMemoryGetFdInfoKHR*>( &getFdInfo ), &fd ) );
@@ -65656,7 +65656,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::MemoryFdPropertiesKHR>::type Device::getMemoryFdPropertiesKHR( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType, int fd, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::MemoryFdPropertiesKHR>::type Device::getMemoryFdPropertiesKHR( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType, int fd, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::MemoryFdPropertiesKHR memoryFdProperties;
     Result result = static_cast<Result>( d.vkGetMemoryFdPropertiesKHR( m_device, static_cast<VkExternalMemoryHandleTypeFlagBits>( handleType ), fd, reinterpret_cast<VkMemoryFdPropertiesKHR*>( &memoryFdProperties ) ) );
@@ -65671,7 +65671,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::MemoryHostPointerPropertiesEXT>::type Device::getMemoryHostPointerPropertiesEXT( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType, const void* pHostPointer, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::MemoryHostPointerPropertiesEXT>::type Device::getMemoryHostPointerPropertiesEXT( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType, const void* pHostPointer, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::MemoryHostPointerPropertiesEXT memoryHostPointerProperties;
     Result result = static_cast<Result>( d.vkGetMemoryHostPointerPropertiesEXT( m_device, static_cast<VkExternalMemoryHandleTypeFlagBits>( handleType ), pHostPointer, reinterpret_cast<VkMemoryHostPointerPropertiesEXT*>( &memoryHostPointerProperties ) ) );
@@ -65687,7 +65687,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<HANDLE>::type Device::getMemoryWin32HandleKHR( const MemoryGetWin32HandleInfoKHR & getWin32HandleInfo, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<HANDLE>::type Device::getMemoryWin32HandleKHR( const MemoryGetWin32HandleInfoKHR & getWin32HandleInfo, Dispatch const &d ) const
   {
     HANDLE handle;
     Result result = static_cast<Result>( d.vkGetMemoryWin32HandleKHR( m_device, reinterpret_cast<const VkMemoryGetWin32HandleInfoKHR*>( &getWin32HandleInfo ), &handle ) );
@@ -65704,7 +65704,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<HANDLE>::type Device::getMemoryWin32HandleNV( VULKAN_HPP_NAMESPACE::DeviceMemory memory, VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagsNV handleType, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<HANDLE>::type Device::getMemoryWin32HandleNV( VULKAN_HPP_NAMESPACE::DeviceMemory memory, VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagsNV handleType, Dispatch const &d ) const
   {
     HANDLE handle;
     Result result = static_cast<Result>( d.vkGetMemoryWin32HandleNV( m_device, static_cast<VkDeviceMemory>( memory ), static_cast<VkExternalMemoryHandleTypeFlagsNV>( handleType ), &handle ) );
@@ -65721,7 +65721,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::MemoryWin32HandlePropertiesKHR>::type Device::getMemoryWin32HandlePropertiesKHR( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType, HANDLE handle, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::MemoryWin32HandlePropertiesKHR>::type Device::getMemoryWin32HandlePropertiesKHR( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType, HANDLE handle, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::MemoryWin32HandlePropertiesKHR memoryWin32HandleProperties;
     Result result = static_cast<Result>( d.vkGetMemoryWin32HandlePropertiesKHR( m_device, static_cast<VkExternalMemoryHandleTypeFlagBits>( handleType ), handle, reinterpret_cast<VkMemoryWin32HandlePropertiesKHR*>( &memoryWin32HandleProperties ) ) );
@@ -65789,7 +65789,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::PerformanceValueINTEL>::type Device::getPerformanceParameterINTEL( VULKAN_HPP_NAMESPACE::PerformanceParameterTypeINTEL parameter, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::PerformanceValueINTEL>::type Device::getPerformanceParameterINTEL( VULKAN_HPP_NAMESPACE::PerformanceParameterTypeINTEL parameter, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::PerformanceValueINTEL value;
     Result result = static_cast<Result>( d.vkGetPerformanceParameterINTEL( m_device, static_cast<VkPerformanceParameterTypeINTEL>( parameter ), reinterpret_cast<VkPerformanceValueINTEL*>( &value ) ) );
@@ -66026,7 +66026,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename T, typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Device::getRayTracingShaderGroupHandlesNV( VULKAN_HPP_NAMESPACE::Pipeline pipeline, uint32_t firstGroup, uint32_t groupCount, ArrayProxy<T> data, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::getRayTracingShaderGroupHandlesNV( VULKAN_HPP_NAMESPACE::Pipeline pipeline, uint32_t firstGroup, uint32_t groupCount, ArrayProxy<T> data, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkGetRayTracingShaderGroupHandlesNV( m_device, static_cast<VkPipeline>( pipeline ), firstGroup, groupCount, data.size() * sizeof( T ) , reinterpret_cast<void*>( data.data() ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::getRayTracingShaderGroupHandlesNV" );
@@ -66040,7 +66040,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::RefreshCycleDurationGOOGLE>::type Device::getRefreshCycleDurationGOOGLE( VULKAN_HPP_NAMESPACE::SwapchainKHR swapchain, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::RefreshCycleDurationGOOGLE>::type Device::getRefreshCycleDurationGOOGLE( VULKAN_HPP_NAMESPACE::SwapchainKHR swapchain, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::RefreshCycleDurationGOOGLE displayTimingProperties;
     Result result = static_cast<Result>( d.vkGetRefreshCycleDurationGOOGLE( m_device, static_cast<VkSwapchainKHR>( swapchain ), reinterpret_cast<VkRefreshCycleDurationGOOGLE*>( &displayTimingProperties ) ) );
@@ -66070,7 +66070,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<uint64_t>::type Device::getSemaphoreCounterValue( VULKAN_HPP_NAMESPACE::Semaphore semaphore, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<uint64_t>::type Device::getSemaphoreCounterValue( VULKAN_HPP_NAMESPACE::Semaphore semaphore, Dispatch const &d ) const
   {
     uint64_t value;
     Result result = static_cast<Result>( d.vkGetSemaphoreCounterValue( m_device, static_cast<VkSemaphore>( semaphore ), &value ) );
@@ -66085,7 +66085,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<uint64_t>::type Device::getSemaphoreCounterValueKHR( VULKAN_HPP_NAMESPACE::Semaphore semaphore, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<uint64_t>::type Device::getSemaphoreCounterValueKHR( VULKAN_HPP_NAMESPACE::Semaphore semaphore, Dispatch const &d ) const
   {
     uint64_t value;
     Result result = static_cast<Result>( d.vkGetSemaphoreCounterValueKHR( m_device, static_cast<VkSemaphore>( semaphore ), &value ) );
@@ -66100,7 +66100,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<int>::type Device::getSemaphoreFdKHR( const SemaphoreGetFdInfoKHR & getFdInfo, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<int>::type Device::getSemaphoreFdKHR( const SemaphoreGetFdInfoKHR & getFdInfo, Dispatch const &d ) const
   {
     int fd;
     Result result = static_cast<Result>( d.vkGetSemaphoreFdKHR( m_device, reinterpret_cast<const VkSemaphoreGetFdInfoKHR*>( &getFdInfo ), &fd ) );
@@ -66116,7 +66116,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<HANDLE>::type Device::getSemaphoreWin32HandleKHR( const SemaphoreGetWin32HandleInfoKHR & getWin32HandleInfo, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<HANDLE>::type Device::getSemaphoreWin32HandleKHR( const SemaphoreGetWin32HandleInfoKHR & getWin32HandleInfo, Dispatch const &d ) const
   {
     HANDLE handle;
     Result result = static_cast<Result>( d.vkGetSemaphoreWin32HandleKHR( m_device, reinterpret_cast<const VkSemaphoreGetWin32HandleInfoKHR*>( &getWin32HandleInfo ), &handle ) );
@@ -66184,7 +66184,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<uint64_t>::type Device::getSwapchainCounterEXT( VULKAN_HPP_NAMESPACE::SwapchainKHR swapchain, VULKAN_HPP_NAMESPACE::SurfaceCounterFlagBitsEXT counter, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<uint64_t>::type Device::getSwapchainCounterEXT( VULKAN_HPP_NAMESPACE::SwapchainKHR swapchain, VULKAN_HPP_NAMESPACE::SurfaceCounterFlagBitsEXT counter, Dispatch const &d ) const
   {
     uint64_t counterValue;
     Result result = static_cast<Result>( d.vkGetSwapchainCounterEXT( m_device, static_cast<VkSwapchainKHR>( swapchain ), static_cast<VkSurfaceCounterFlagBitsEXT>( counter ), &counterValue ) );
@@ -66318,7 +66318,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Device::importFenceFdKHR( const ImportFenceFdInfoKHR & importFenceFdInfo, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::importFenceFdKHR( const ImportFenceFdInfoKHR & importFenceFdInfo, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkImportFenceFdKHR( m_device, reinterpret_cast<const VkImportFenceFdInfoKHR*>( &importFenceFdInfo ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::importFenceFdKHR" );
@@ -66333,7 +66333,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Device::importFenceWin32HandleKHR( const ImportFenceWin32HandleInfoKHR & importFenceWin32HandleInfo, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::importFenceWin32HandleKHR( const ImportFenceWin32HandleInfoKHR & importFenceWin32HandleInfo, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkImportFenceWin32HandleKHR( m_device, reinterpret_cast<const VkImportFenceWin32HandleInfoKHR*>( &importFenceWin32HandleInfo ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::importFenceWin32HandleKHR" );
@@ -66348,7 +66348,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Device::importSemaphoreFdKHR( const ImportSemaphoreFdInfoKHR & importSemaphoreFdInfo, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::importSemaphoreFdKHR( const ImportSemaphoreFdInfoKHR & importSemaphoreFdInfo, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkImportSemaphoreFdKHR( m_device, reinterpret_cast<const VkImportSemaphoreFdInfoKHR*>( &importSemaphoreFdInfo ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::importSemaphoreFdKHR" );
@@ -66363,7 +66363,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Device::importSemaphoreWin32HandleKHR( const ImportSemaphoreWin32HandleInfoKHR & importSemaphoreWin32HandleInfo, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::importSemaphoreWin32HandleKHR( const ImportSemaphoreWin32HandleInfoKHR & importSemaphoreWin32HandleInfo, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkImportSemaphoreWin32HandleKHR( m_device, reinterpret_cast<const VkImportSemaphoreWin32HandleInfoKHR*>( &importSemaphoreWin32HandleInfo ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::importSemaphoreWin32HandleKHR" );
@@ -66378,7 +66378,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Device::initializePerformanceApiINTEL( const InitializePerformanceApiInfoINTEL & initializeInfo, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::initializePerformanceApiINTEL( const InitializePerformanceApiInfoINTEL & initializeInfo, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkInitializePerformanceApiINTEL( m_device, reinterpret_cast<const VkInitializePerformanceApiInfoINTEL*>( &initializeInfo ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::initializePerformanceApiINTEL" );
@@ -66392,7 +66392,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Device::invalidateMappedMemoryRanges( ArrayProxy<const VULKAN_HPP_NAMESPACE::MappedMemoryRange> memoryRanges, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::invalidateMappedMemoryRanges( ArrayProxy<const VULKAN_HPP_NAMESPACE::MappedMemoryRange> memoryRanges, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkInvalidateMappedMemoryRanges( m_device, memoryRanges.size() , reinterpret_cast<const VkMappedMemoryRange*>( memoryRanges.data() ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::invalidateMappedMemoryRanges" );
@@ -66406,7 +66406,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void*>::type Device::mapMemory( VULKAN_HPP_NAMESPACE::DeviceMemory memory, VULKAN_HPP_NAMESPACE::DeviceSize offset, VULKAN_HPP_NAMESPACE::DeviceSize size, VULKAN_HPP_NAMESPACE::MemoryMapFlags flags, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void*>::type Device::mapMemory( VULKAN_HPP_NAMESPACE::DeviceMemory memory, VULKAN_HPP_NAMESPACE::DeviceSize offset, VULKAN_HPP_NAMESPACE::DeviceSize size, VULKAN_HPP_NAMESPACE::MemoryMapFlags flags, Dispatch const &d ) const
   {
     void* pData;
     Result result = static_cast<Result>( d.vkMapMemory( m_device, static_cast<VkDeviceMemory>( memory ), static_cast<VkDeviceSize>( offset ), static_cast<VkDeviceSize>( size ), static_cast<VkMemoryMapFlags>( flags ), &pData ) );
@@ -66421,7 +66421,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Device::mergePipelineCaches( VULKAN_HPP_NAMESPACE::PipelineCache dstCache, ArrayProxy<const VULKAN_HPP_NAMESPACE::PipelineCache> srcCaches, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::mergePipelineCaches( VULKAN_HPP_NAMESPACE::PipelineCache dstCache, ArrayProxy<const VULKAN_HPP_NAMESPACE::PipelineCache> srcCaches, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkMergePipelineCaches( m_device, static_cast<VkPipelineCache>( dstCache ), srcCaches.size() , reinterpret_cast<const VkPipelineCache*>( srcCaches.data() ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::mergePipelineCaches" );
@@ -66435,7 +66435,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Device::mergeValidationCachesEXT( VULKAN_HPP_NAMESPACE::ValidationCacheEXT dstCache, ArrayProxy<const VULKAN_HPP_NAMESPACE::ValidationCacheEXT> srcCaches, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::mergeValidationCachesEXT( VULKAN_HPP_NAMESPACE::ValidationCacheEXT dstCache, ArrayProxy<const VULKAN_HPP_NAMESPACE::ValidationCacheEXT> srcCaches, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkMergeValidationCachesEXT( m_device, static_cast<VkValidationCacheEXT>( dstCache ), srcCaches.size() , reinterpret_cast<const VkValidationCacheEXT*>( srcCaches.data() ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::mergeValidationCachesEXT" );
@@ -66449,7 +66449,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::Fence>::type Device::registerEventEXT( const DeviceEventInfoEXT & deviceEventInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::Fence>::type Device::registerEventEXT( const DeviceEventInfoEXT & deviceEventInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::Fence fence;
     Result result = static_cast<Result>( d.vkRegisterDeviceEventEXT( m_device, reinterpret_cast<const VkDeviceEventInfoEXT*>( &deviceEventInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkFence*>( &fence ) ) );
@@ -66475,7 +66475,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::Fence>::type Device::registerDisplayEventEXT( VULKAN_HPP_NAMESPACE::DisplayKHR display, const DisplayEventInfoEXT & displayEventInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::Fence>::type Device::registerDisplayEventEXT( VULKAN_HPP_NAMESPACE::DisplayKHR display, const DisplayEventInfoEXT & displayEventInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::Fence fence;
     Result result = static_cast<Result>( d.vkRegisterDisplayEventEXT( m_device, static_cast<VkDisplayKHR>( display ), reinterpret_cast<const VkDisplayEventInfoEXT*>( &displayEventInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkFence*>( &fence ) ) );
@@ -66501,7 +66501,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Device::registerObjectsNVX( VULKAN_HPP_NAMESPACE::ObjectTableNVX objectTable, ArrayProxy<const VULKAN_HPP_NAMESPACE::ObjectTableEntryNVX* const> pObjectTableEntries, ArrayProxy<const uint32_t> objectIndices, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::registerObjectsNVX( VULKAN_HPP_NAMESPACE::ObjectTableNVX objectTable, ArrayProxy<const VULKAN_HPP_NAMESPACE::ObjectTableEntryNVX* const> pObjectTableEntries, ArrayProxy<const uint32_t> objectIndices, Dispatch const &d ) const
   {
 #ifdef VULKAN_HPP_NO_EXCEPTIONS
     VULKAN_HPP_ASSERT( pObjectTableEntries.size() == objectIndices.size() );
@@ -66525,7 +66525,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #else
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Device::releaseFullScreenExclusiveModeEXT( VULKAN_HPP_NAMESPACE::SwapchainKHR swapchain, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::releaseFullScreenExclusiveModeEXT( VULKAN_HPP_NAMESPACE::SwapchainKHR swapchain, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkReleaseFullScreenExclusiveModeEXT( m_device, static_cast<VkSwapchainKHR>( swapchain ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::releaseFullScreenExclusiveModeEXT" );
@@ -66541,7 +66541,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #else
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Device::releasePerformanceConfigurationINTEL( VULKAN_HPP_NAMESPACE::PerformanceConfigurationINTEL configuration, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::releasePerformanceConfigurationINTEL( VULKAN_HPP_NAMESPACE::PerformanceConfigurationINTEL configuration, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkReleasePerformanceConfigurationINTEL( m_device, static_cast<VkPerformanceConfigurationINTEL>( configuration ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::releasePerformanceConfigurationINTEL" );
@@ -66570,7 +66570,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #else
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Device::resetCommandPool( VULKAN_HPP_NAMESPACE::CommandPool commandPool, VULKAN_HPP_NAMESPACE::CommandPoolResetFlags flags, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::resetCommandPool( VULKAN_HPP_NAMESPACE::CommandPool commandPool, VULKAN_HPP_NAMESPACE::CommandPoolResetFlags flags, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkResetCommandPool( m_device, static_cast<VkCommandPool>( commandPool ), static_cast<VkCommandPoolResetFlags>( flags ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::resetCommandPool" );
@@ -66585,7 +66585,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #else
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Device::resetDescriptorPool( VULKAN_HPP_NAMESPACE::DescriptorPool descriptorPool, VULKAN_HPP_NAMESPACE::DescriptorPoolResetFlags flags, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::resetDescriptorPool( VULKAN_HPP_NAMESPACE::DescriptorPool descriptorPool, VULKAN_HPP_NAMESPACE::DescriptorPoolResetFlags flags, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkResetDescriptorPool( m_device, static_cast<VkDescriptorPool>( descriptorPool ), static_cast<VkDescriptorPoolResetFlags>( flags ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::resetDescriptorPool" );
@@ -66600,7 +66600,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #else
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Device::resetEvent( VULKAN_HPP_NAMESPACE::Event event, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::resetEvent( VULKAN_HPP_NAMESPACE::Event event, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkResetEvent( m_device, static_cast<VkEvent>( event ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::resetEvent" );
@@ -66614,7 +66614,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Device::resetFences( ArrayProxy<const VULKAN_HPP_NAMESPACE::Fence> fences, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::resetFences( ArrayProxy<const VULKAN_HPP_NAMESPACE::Fence> fences, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkResetFences( m_device, fences.size() , reinterpret_cast<const VkFence*>( fences.data() ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::resetFences" );
@@ -66656,7 +66656,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Device::setDebugUtilsObjectNameEXT( const DebugUtilsObjectNameInfoEXT & nameInfo, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::setDebugUtilsObjectNameEXT( const DebugUtilsObjectNameInfoEXT & nameInfo, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkSetDebugUtilsObjectNameEXT( m_device, reinterpret_cast<const VkDebugUtilsObjectNameInfoEXT*>( &nameInfo ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::setDebugUtilsObjectNameEXT" );
@@ -66670,7 +66670,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Device::setDebugUtilsObjectTagEXT( const DebugUtilsObjectTagInfoEXT & tagInfo, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::setDebugUtilsObjectTagEXT( const DebugUtilsObjectTagInfoEXT & tagInfo, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkSetDebugUtilsObjectTagEXT( m_device, reinterpret_cast<const VkDebugUtilsObjectTagInfoEXT*>( &tagInfo ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::setDebugUtilsObjectTagEXT" );
@@ -66685,7 +66685,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #else
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Device::setEvent( VULKAN_HPP_NAMESPACE::Event event, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::setEvent( VULKAN_HPP_NAMESPACE::Event event, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkSetEvent( m_device, static_cast<VkEvent>( event ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::setEvent" );
@@ -66734,7 +66734,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Device::signalSemaphore( const SemaphoreSignalInfo & signalInfo, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::signalSemaphore( const SemaphoreSignalInfo & signalInfo, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkSignalSemaphore( m_device, reinterpret_cast<const VkSemaphoreSignalInfo*>( &signalInfo ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::signalSemaphore" );
@@ -66748,7 +66748,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Device::signalSemaphoreKHR( const SemaphoreSignalInfo & signalInfo, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::signalSemaphoreKHR( const SemaphoreSignalInfo & signalInfo, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkSignalSemaphoreKHR( m_device, reinterpret_cast<const VkSemaphoreSignalInfo*>( &signalInfo ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::signalSemaphoreKHR" );
@@ -66818,7 +66818,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Device::unregisterObjectsNVX( VULKAN_HPP_NAMESPACE::ObjectTableNVX objectTable, ArrayProxy<const VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX> objectEntryTypes, ArrayProxy<const uint32_t> objectIndices, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Device::unregisterObjectsNVX( VULKAN_HPP_NAMESPACE::ObjectTableNVX objectTable, ArrayProxy<const VULKAN_HPP_NAMESPACE::ObjectEntryTypeNVX> objectEntryTypes, ArrayProxy<const uint32_t> objectIndices, Dispatch const &d ) const
   {
 #ifdef VULKAN_HPP_NO_EXCEPTIONS
     VULKAN_HPP_ASSERT( objectEntryTypes.size() == objectIndices.size() );
@@ -66924,7 +66924,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type Instance::createAndroidSurfaceKHR( const AndroidSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type Instance::createAndroidSurfaceKHR( const AndroidSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::SurfaceKHR surface;
     Result result = static_cast<Result>( d.vkCreateAndroidSurfaceKHR( m_instance, reinterpret_cast<const VkAndroidSurfaceCreateInfoKHR*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSurfaceKHR*>( &surface ) ) );
@@ -66951,7 +66951,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::DebugReportCallbackEXT>::type Instance::createDebugReportCallbackEXT( const DebugReportCallbackCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::DebugReportCallbackEXT>::type Instance::createDebugReportCallbackEXT( const DebugReportCallbackCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::DebugReportCallbackEXT callback;
     Result result = static_cast<Result>( d.vkCreateDebugReportCallbackEXT( m_instance, reinterpret_cast<const VkDebugReportCallbackCreateInfoEXT*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkDebugReportCallbackEXT*>( &callback ) ) );
@@ -66977,7 +66977,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::DebugUtilsMessengerEXT>::type Instance::createDebugUtilsMessengerEXT( const DebugUtilsMessengerCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::DebugUtilsMessengerEXT>::type Instance::createDebugUtilsMessengerEXT( const DebugUtilsMessengerCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::DebugUtilsMessengerEXT messenger;
     Result result = static_cast<Result>( d.vkCreateDebugUtilsMessengerEXT( m_instance, reinterpret_cast<const VkDebugUtilsMessengerCreateInfoEXT*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkDebugUtilsMessengerEXT*>( &messenger ) ) );
@@ -67003,7 +67003,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type Instance::createDisplayPlaneSurfaceKHR( const DisplaySurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type Instance::createDisplayPlaneSurfaceKHR( const DisplaySurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::SurfaceKHR surface;
     Result result = static_cast<Result>( d.vkCreateDisplayPlaneSurfaceKHR( m_instance, reinterpret_cast<const VkDisplaySurfaceCreateInfoKHR*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSurfaceKHR*>( &surface ) ) );
@@ -67029,7 +67029,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type Instance::createHeadlessSurfaceEXT( const HeadlessSurfaceCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type Instance::createHeadlessSurfaceEXT( const HeadlessSurfaceCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::SurfaceKHR surface;
     Result result = static_cast<Result>( d.vkCreateHeadlessSurfaceEXT( m_instance, reinterpret_cast<const VkHeadlessSurfaceCreateInfoEXT*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSurfaceKHR*>( &surface ) ) );
@@ -67056,7 +67056,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type Instance::createIOSSurfaceMVK( const IOSSurfaceCreateInfoMVK & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type Instance::createIOSSurfaceMVK( const IOSSurfaceCreateInfoMVK & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::SurfaceKHR surface;
     Result result = static_cast<Result>( d.vkCreateIOSSurfaceMVK( m_instance, reinterpret_cast<const VkIOSSurfaceCreateInfoMVK*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSurfaceKHR*>( &surface ) ) );
@@ -67084,7 +67084,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type Instance::createImagePipeSurfaceFUCHSIA( const ImagePipeSurfaceCreateInfoFUCHSIA & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type Instance::createImagePipeSurfaceFUCHSIA( const ImagePipeSurfaceCreateInfoFUCHSIA & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::SurfaceKHR surface;
     Result result = static_cast<Result>( d.vkCreateImagePipeSurfaceFUCHSIA( m_instance, reinterpret_cast<const VkImagePipeSurfaceCreateInfoFUCHSIA*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSurfaceKHR*>( &surface ) ) );
@@ -67112,7 +67112,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type Instance::createMacOSSurfaceMVK( const MacOSSurfaceCreateInfoMVK & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type Instance::createMacOSSurfaceMVK( const MacOSSurfaceCreateInfoMVK & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::SurfaceKHR surface;
     Result result = static_cast<Result>( d.vkCreateMacOSSurfaceMVK( m_instance, reinterpret_cast<const VkMacOSSurfaceCreateInfoMVK*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSurfaceKHR*>( &surface ) ) );
@@ -67140,7 +67140,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type Instance::createMetalSurfaceEXT( const MetalSurfaceCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type Instance::createMetalSurfaceEXT( const MetalSurfaceCreateInfoEXT & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::SurfaceKHR surface;
     Result result = static_cast<Result>( d.vkCreateMetalSurfaceEXT( m_instance, reinterpret_cast<const VkMetalSurfaceCreateInfoEXT*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSurfaceKHR*>( &surface ) ) );
@@ -67168,7 +67168,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type Instance::createStreamDescriptorSurfaceGGP( const StreamDescriptorSurfaceCreateInfoGGP & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type Instance::createStreamDescriptorSurfaceGGP( const StreamDescriptorSurfaceCreateInfoGGP & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::SurfaceKHR surface;
     Result result = static_cast<Result>( d.vkCreateStreamDescriptorSurfaceGGP( m_instance, reinterpret_cast<const VkStreamDescriptorSurfaceCreateInfoGGP*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSurfaceKHR*>( &surface ) ) );
@@ -67196,7 +67196,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type Instance::createViSurfaceNN( const ViSurfaceCreateInfoNN & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type Instance::createViSurfaceNN( const ViSurfaceCreateInfoNN & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::SurfaceKHR surface;
     Result result = static_cast<Result>( d.vkCreateViSurfaceNN( m_instance, reinterpret_cast<const VkViSurfaceCreateInfoNN*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSurfaceKHR*>( &surface ) ) );
@@ -67224,7 +67224,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type Instance::createWaylandSurfaceKHR( const WaylandSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type Instance::createWaylandSurfaceKHR( const WaylandSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::SurfaceKHR surface;
     Result result = static_cast<Result>( d.vkCreateWaylandSurfaceKHR( m_instance, reinterpret_cast<const VkWaylandSurfaceCreateInfoKHR*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSurfaceKHR*>( &surface ) ) );
@@ -67252,7 +67252,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type Instance::createWin32SurfaceKHR( const Win32SurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type Instance::createWin32SurfaceKHR( const Win32SurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::SurfaceKHR surface;
     Result result = static_cast<Result>( d.vkCreateWin32SurfaceKHR( m_instance, reinterpret_cast<const VkWin32SurfaceCreateInfoKHR*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSurfaceKHR*>( &surface ) ) );
@@ -67280,7 +67280,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type Instance::createXcbSurfaceKHR( const XcbSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type Instance::createXcbSurfaceKHR( const XcbSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::SurfaceKHR surface;
     Result result = static_cast<Result>( d.vkCreateXcbSurfaceKHR( m_instance, reinterpret_cast<const VkXcbSurfaceCreateInfoKHR*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSurfaceKHR*>( &surface ) ) );
@@ -67308,7 +67308,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type Instance::createXlibSurfaceKHR( const XlibSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceKHR>::type Instance::createXlibSurfaceKHR( const XlibSurfaceCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::SurfaceKHR surface;
     Result result = static_cast<Result>( d.vkCreateXlibSurfaceKHR( m_instance, reinterpret_cast<const VkXlibSurfaceCreateInfoKHR*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkSurfaceKHR*>( &surface ) ) );
@@ -67630,7 +67630,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<Display>::type PhysicalDevice::acquireXlibDisplayEXT( VULKAN_HPP_NAMESPACE::DisplayKHR display, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<Display>::type PhysicalDevice::acquireXlibDisplayEXT( VULKAN_HPP_NAMESPACE::DisplayKHR display, Dispatch const &d ) const
   {
     Display dpy;
     Result result = static_cast<Result>( d.vkAcquireXlibDisplayEXT( m_physicalDevice, &dpy, static_cast<VkDisplayKHR>( display ) ) );
@@ -67646,7 +67646,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::Device>::type PhysicalDevice::createDevice( const DeviceCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::Device>::type PhysicalDevice::createDevice( const DeviceCreateInfo & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::Device device;
     Result result = static_cast<Result>( d.vkCreateDevice( m_physicalDevice, reinterpret_cast<const VkDeviceCreateInfo*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkDevice*>( &device ) ) );
@@ -67672,7 +67672,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::DisplayModeKHR>::type PhysicalDevice::createDisplayModeKHR( VULKAN_HPP_NAMESPACE::DisplayKHR display, const DisplayModeCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::DisplayModeKHR>::type PhysicalDevice::createDisplayModeKHR( VULKAN_HPP_NAMESPACE::DisplayKHR display, const DisplayModeCreateInfoKHR & createInfo, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::DisplayModeKHR mode;
     Result result = static_cast<Result>( d.vkCreateDisplayModeKHR( m_physicalDevice, static_cast<VkDisplayKHR>( display ), reinterpret_cast<const VkDisplayModeCreateInfoKHR*>( &createInfo ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ), reinterpret_cast<VkDisplayModeKHR*>( &mode ) ) );
@@ -67947,7 +67947,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::DisplayPlaneCapabilities2KHR>::type PhysicalDevice::getDisplayPlaneCapabilities2KHR( const DisplayPlaneInfo2KHR & displayPlaneInfo, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::DisplayPlaneCapabilities2KHR>::type PhysicalDevice::getDisplayPlaneCapabilities2KHR( const DisplayPlaneInfo2KHR & displayPlaneInfo, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::DisplayPlaneCapabilities2KHR capabilities;
     Result result = static_cast<Result>( d.vkGetDisplayPlaneCapabilities2KHR( m_physicalDevice, reinterpret_cast<const VkDisplayPlaneInfo2KHR*>( &displayPlaneInfo ), reinterpret_cast<VkDisplayPlaneCapabilities2KHR*>( &capabilities ) ) );
@@ -67962,7 +67962,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::DisplayPlaneCapabilitiesKHR>::type PhysicalDevice::getDisplayPlaneCapabilitiesKHR( VULKAN_HPP_NAMESPACE::DisplayModeKHR mode, uint32_t planeIndex, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::DisplayPlaneCapabilitiesKHR>::type PhysicalDevice::getDisplayPlaneCapabilitiesKHR( VULKAN_HPP_NAMESPACE::DisplayModeKHR mode, uint32_t planeIndex, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::DisplayPlaneCapabilitiesKHR capabilities;
     Result result = static_cast<Result>( d.vkGetDisplayPlaneCapabilitiesKHR( m_physicalDevice, static_cast<VkDisplayModeKHR>( mode ), planeIndex, reinterpret_cast<VkDisplayPlaneCapabilitiesKHR*>( &capabilities ) ) );
@@ -68401,7 +68401,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::ExternalImageFormatPropertiesNV>::type PhysicalDevice::getExternalImageFormatPropertiesNV( VULKAN_HPP_NAMESPACE::Format format, VULKAN_HPP_NAMESPACE::ImageType type, VULKAN_HPP_NAMESPACE::ImageTiling tiling, VULKAN_HPP_NAMESPACE::ImageUsageFlags usage, VULKAN_HPP_NAMESPACE::ImageCreateFlags flags, VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagsNV externalHandleType, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::ExternalImageFormatPropertiesNV>::type PhysicalDevice::getExternalImageFormatPropertiesNV( VULKAN_HPP_NAMESPACE::Format format, VULKAN_HPP_NAMESPACE::ImageType type, VULKAN_HPP_NAMESPACE::ImageTiling tiling, VULKAN_HPP_NAMESPACE::ImageUsageFlags usage, VULKAN_HPP_NAMESPACE::ImageCreateFlags flags, VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagsNV externalHandleType, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::ExternalImageFormatPropertiesNV externalImageFormatProperties;
     Result result = static_cast<Result>( d.vkGetPhysicalDeviceExternalImageFormatPropertiesNV( m_physicalDevice, static_cast<VkFormat>( format ), static_cast<VkImageType>( type ), static_cast<VkImageTiling>( tiling ), static_cast<VkImageUsageFlags>( usage ), static_cast<VkImageCreateFlags>( flags ), static_cast<VkExternalMemoryHandleTypeFlagsNV>( externalHandleType ), reinterpret_cast<VkExternalImageFormatPropertiesNV*>( &externalImageFormatProperties ) ) );
@@ -68583,7 +68583,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::ImageFormatProperties>::type PhysicalDevice::getImageFormatProperties( VULKAN_HPP_NAMESPACE::Format format, VULKAN_HPP_NAMESPACE::ImageType type, VULKAN_HPP_NAMESPACE::ImageTiling tiling, VULKAN_HPP_NAMESPACE::ImageUsageFlags usage, VULKAN_HPP_NAMESPACE::ImageCreateFlags flags, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::ImageFormatProperties>::type PhysicalDevice::getImageFormatProperties( VULKAN_HPP_NAMESPACE::Format format, VULKAN_HPP_NAMESPACE::ImageType type, VULKAN_HPP_NAMESPACE::ImageTiling tiling, VULKAN_HPP_NAMESPACE::ImageUsageFlags usage, VULKAN_HPP_NAMESPACE::ImageCreateFlags flags, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::ImageFormatProperties imageFormatProperties;
     Result result = static_cast<Result>( d.vkGetPhysicalDeviceImageFormatProperties( m_physicalDevice, static_cast<VkFormat>( format ), static_cast<VkImageType>( type ), static_cast<VkImageTiling>( tiling ), static_cast<VkImageUsageFlags>( usage ), static_cast<VkImageCreateFlags>( flags ), reinterpret_cast<VkImageFormatProperties*>( &imageFormatProperties ) ) );
@@ -68598,7 +68598,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::ImageFormatProperties2>::type PhysicalDevice::getImageFormatProperties2( const PhysicalDeviceImageFormatInfo2 & imageFormatInfo, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::ImageFormatProperties2>::type PhysicalDevice::getImageFormatProperties2( const PhysicalDeviceImageFormatInfo2 & imageFormatInfo, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::ImageFormatProperties2 imageFormatProperties;
     Result result = static_cast<Result>( d.vkGetPhysicalDeviceImageFormatProperties2( m_physicalDevice, reinterpret_cast<const VkPhysicalDeviceImageFormatInfo2*>( &imageFormatInfo ), reinterpret_cast<VkImageFormatProperties2*>( &imageFormatProperties ) ) );
@@ -68621,7 +68621,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::ImageFormatProperties2>::type PhysicalDevice::getImageFormatProperties2KHR( const PhysicalDeviceImageFormatInfo2 & imageFormatInfo, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::ImageFormatProperties2>::type PhysicalDevice::getImageFormatProperties2KHR( const PhysicalDeviceImageFormatInfo2 & imageFormatInfo, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::ImageFormatProperties2 imageFormatProperties;
     Result result = static_cast<Result>( d.vkGetPhysicalDeviceImageFormatProperties2KHR( m_physicalDevice, reinterpret_cast<const VkPhysicalDeviceImageFormatInfo2*>( &imageFormatInfo ), reinterpret_cast<VkImageFormatProperties2*>( &imageFormatProperties ) ) );
@@ -69144,7 +69144,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceCapabilities2EXT>::type PhysicalDevice::getSurfaceCapabilities2EXT( VULKAN_HPP_NAMESPACE::SurfaceKHR surface, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceCapabilities2EXT>::type PhysicalDevice::getSurfaceCapabilities2EXT( VULKAN_HPP_NAMESPACE::SurfaceKHR surface, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::SurfaceCapabilities2EXT surfaceCapabilities;
     Result result = static_cast<Result>( d.vkGetPhysicalDeviceSurfaceCapabilities2EXT( m_physicalDevice, static_cast<VkSurfaceKHR>( surface ), reinterpret_cast<VkSurfaceCapabilities2EXT*>( &surfaceCapabilities ) ) );
@@ -69159,7 +69159,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceCapabilities2KHR>::type PhysicalDevice::getSurfaceCapabilities2KHR( const PhysicalDeviceSurfaceInfo2KHR & surfaceInfo, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceCapabilities2KHR>::type PhysicalDevice::getSurfaceCapabilities2KHR( const PhysicalDeviceSurfaceInfo2KHR & surfaceInfo, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::SurfaceCapabilities2KHR surfaceCapabilities;
     Result result = static_cast<Result>( d.vkGetPhysicalDeviceSurfaceCapabilities2KHR( m_physicalDevice, reinterpret_cast<const VkPhysicalDeviceSurfaceInfo2KHR*>( &surfaceInfo ), reinterpret_cast<VkSurfaceCapabilities2KHR*>( &surfaceCapabilities ) ) );
@@ -69182,7 +69182,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceCapabilitiesKHR>::type PhysicalDevice::getSurfaceCapabilitiesKHR( VULKAN_HPP_NAMESPACE::SurfaceKHR surface, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::SurfaceCapabilitiesKHR>::type PhysicalDevice::getSurfaceCapabilitiesKHR( VULKAN_HPP_NAMESPACE::SurfaceKHR surface, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::SurfaceCapabilitiesKHR surfaceCapabilities;
     Result result = static_cast<Result>( d.vkGetPhysicalDeviceSurfaceCapabilitiesKHR( m_physicalDevice, static_cast<VkSurfaceKHR>( surface ), reinterpret_cast<VkSurfaceCapabilitiesKHR*>( &surfaceCapabilities ) ) );
@@ -69407,7 +69407,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::Bool32>::type PhysicalDevice::getSurfaceSupportKHR( uint32_t queueFamilyIndex, VULKAN_HPP_NAMESPACE::SurfaceKHR surface, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::Bool32>::type PhysicalDevice::getSurfaceSupportKHR( uint32_t queueFamilyIndex, VULKAN_HPP_NAMESPACE::SurfaceKHR surface, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::Bool32 supported;
     Result result = static_cast<Result>( d.vkGetPhysicalDeviceSurfaceSupportKHR( m_physicalDevice, queueFamilyIndex, static_cast<VkSurfaceKHR>( surface ), reinterpret_cast<VkBool32*>( &supported ) ) );
@@ -69536,7 +69536,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<VULKAN_HPP_NAMESPACE::DisplayKHR>::type PhysicalDevice::getRandROutputDisplayEXT( Display & dpy, RROutput rrOutput, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<VULKAN_HPP_NAMESPACE::DisplayKHR>::type PhysicalDevice::getRandROutputDisplayEXT( Display & dpy, RROutput rrOutput, Dispatch const &d ) const
   {
     VULKAN_HPP_NAMESPACE::DisplayKHR display;
     Result result = static_cast<Result>( d.vkGetRandROutputDisplayEXT( m_physicalDevice, &dpy, rrOutput, reinterpret_cast<VkDisplayKHR*>( &display ) ) );
@@ -69553,7 +69553,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #else
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type PhysicalDevice::releaseDisplayEXT( VULKAN_HPP_NAMESPACE::DisplayKHR display, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type PhysicalDevice::releaseDisplayEXT( VULKAN_HPP_NAMESPACE::DisplayKHR display, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkReleaseDisplayEXT( m_physicalDevice, static_cast<VkDisplayKHR>( display ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::PhysicalDevice::releaseDisplayEXT" );
@@ -69608,7 +69608,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Queue::bindSparse( ArrayProxy<const VULKAN_HPP_NAMESPACE::BindSparseInfo> bindInfo, VULKAN_HPP_NAMESPACE::Fence fence, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Queue::bindSparse( ArrayProxy<const VULKAN_HPP_NAMESPACE::BindSparseInfo> bindInfo, VULKAN_HPP_NAMESPACE::Fence fence, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkQueueBindSparse( m_queue, bindInfo.size() , reinterpret_cast<const VkBindSparseInfo*>( bindInfo.data() ), static_cast<VkFence>( fence ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Queue::bindSparse" );
@@ -69664,7 +69664,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #else
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Queue::setPerformanceConfigurationINTEL( VULKAN_HPP_NAMESPACE::PerformanceConfigurationINTEL configuration, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Queue::setPerformanceConfigurationINTEL( VULKAN_HPP_NAMESPACE::PerformanceConfigurationINTEL configuration, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkQueueSetPerformanceConfigurationINTEL( m_queue, static_cast<VkPerformanceConfigurationINTEL>( configuration ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Queue::setPerformanceConfigurationINTEL" );
@@ -69678,7 +69678,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Queue::submit( ArrayProxy<const VULKAN_HPP_NAMESPACE::SubmitInfo> submits, VULKAN_HPP_NAMESPACE::Fence fence, Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Queue::submit( ArrayProxy<const VULKAN_HPP_NAMESPACE::SubmitInfo> submits, VULKAN_HPP_NAMESPACE::Fence fence, Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkQueueSubmit( m_queue, submits.size() , reinterpret_cast<const VkSubmitInfo*>( submits.data() ), static_cast<VkFence>( fence ) ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Queue::submit" );
@@ -69693,7 +69693,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #else
   template<typename Dispatch>
-  VULKAN_HPP_INLINE ResultValueType<void>::type Queue::waitIdle(Dispatch const &d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type Queue::waitIdle(Dispatch const &d ) const
   {
     Result result = static_cast<Result>( d.vkQueueWaitIdle( m_queue ) );
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Queue::waitIdle" );
