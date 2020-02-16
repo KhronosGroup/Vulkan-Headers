@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.2.132",
-    "comment": "from git branch: github-master commit: 3a774a05786d65cc18bc58694d6bfe24f5b21d69",
-    "date": "2020-01-21 10:31:48Z"
+    "api version": "1.2.133",
+    "comment": "from git branch: github-master commit: c31cf1823ace0812c2fcc4681714fbfe5f067b09",
+    "date": "2020-02-16 01:33:08Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -70,7 +70,7 @@
         },
         {
           "vuid": "VUID-VkInstanceCreateInfo-sType-unique",
-          "text": " Each <code>sType</code> member in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
           "vuid": "VUID-VkInstanceCreateInfo-flags-zerobitmask",
@@ -218,7 +218,7 @@
         },
         {
           "vuid": "VUID-VkPhysicalDeviceProperties2-sType-unique",
-          "text": " Each <code>sType</code> member in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         }
       ]
     },
@@ -347,6 +347,10 @@
         {
           "vuid": "VUID-VkQueueFamilyProperties2-pNext-pNext",
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkQueueFamilyCheckpointPropertiesNV\">VkQueueFamilyCheckpointPropertiesNV</a>"
+        },
+        {
+          "vuid": "VUID-VkQueueFamilyProperties2-sType-unique",
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         }
       ]
     },
@@ -542,7 +546,7 @@
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-sType-unique",
-          "text": " Each <code>sType</code> member in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-flags-zerobitmask",
@@ -653,6 +657,10 @@
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceQueueGlobalPriorityCreateInfoEXT\">VkDeviceQueueGlobalPriorityCreateInfoEXT</a>"
         },
         {
+          "vuid": "VUID-VkDeviceQueueCreateInfo-sType-unique",
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+        },
+        {
           "vuid": "VUID-VkDeviceQueueCreateInfo-flags-parameter",
           "text": " <code>flags</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkDeviceQueueCreateFlagBits\">VkDeviceQueueCreateFlagBits</a> values"
         },
@@ -663,6 +671,12 @@
         {
           "vuid": "VUID-VkDeviceQueueCreateInfo-queueCount-arraylength",
           "text": " <code>queueCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
+        }
+      ],
+      "(VK_VERSION_1_1)": [
+        {
+          "vuid": "VUID-VkDeviceQueueCreateInfo-flags-02861",
+          "text": " If the <a href=\"#features-protectedMemory\">protected memory</a> feature is not enabled, the <code>VK_DEVICE_QUEUE_CREATE_PROTECTED_BIT</code> bit of <code>flags</code> <strong class=\"purple\">must</strong> not be set."
         }
       ]
     },
@@ -767,6 +781,12 @@
       ]
     },
     "VkCommandPoolCreateInfo": {
+      "(VK_VERSION_1_1)": [
+        {
+          "vuid": "VUID-VkCommandPoolCreateInfo-flags-02860",
+          "text": " If the protected memory feature is not enabled, the <code>VK_COMMAND_POOL_CREATE_PROTECTED_BIT</code> bit of <code>flags</code> <strong class=\"purple\">must</strong> not be set."
+        }
+      ],
       "core": [
         {
           "vuid": "VUID-VkCommandPoolCreateInfo-sType-sType",
@@ -1009,6 +1029,10 @@
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceGroupCommandBufferBeginInfo\">VkDeviceGroupCommandBufferBeginInfo</a>"
         },
         {
+          "vuid": "VUID-VkCommandBufferBeginInfo-sType-unique",
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+        },
+        {
           "vuid": "VUID-VkCommandBufferBeginInfo-flags-parameter",
           "text": " <code>flags</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkCommandBufferUsageFlagBits\">VkCommandBufferUsageFlagBits</a> values"
         }
@@ -1043,6 +1067,10 @@
         {
           "vuid": "VUID-VkCommandBufferInheritanceInfo-pNext-pNext",
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkCommandBufferInheritanceConditionalRenderingInfoEXT\">VkCommandBufferInheritanceConditionalRenderingInfoEXT</a>"
+        },
+        {
+          "vuid": "VUID-VkCommandBufferInheritanceInfo-sType-unique",
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
           "vuid": "VUID-VkCommandBufferInheritanceInfo-commonparent",
@@ -1218,7 +1246,7 @@
         },
         {
           "vuid": "VUID-VkSubmitInfo-sType-unique",
-          "text": " Each <code>sType</code> member in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
           "vuid": "VUID-VkSubmitInfo-pWaitSemaphores-parameter",
@@ -1662,7 +1690,7 @@
         },
         {
           "vuid": "VUID-VkFenceCreateInfo-sType-unique",
-          "text": " Each <code>sType</code> member in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
           "vuid": "VUID-VkFenceCreateInfo-flags-parameter",
@@ -2122,7 +2150,7 @@
         },
         {
           "vuid": "VUID-VkSemaphoreCreateInfo-sType-unique",
-          "text": " Each <code>sType</code> member in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
           "vuid": "VUID-VkSemaphoreCreateInfo-flags-zerobitmask",
@@ -3295,6 +3323,10 @@
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkSampleLocationsInfoEXT\">VkSampleLocationsInfoEXT</a>"
         },
         {
+          "vuid": "VUID-VkImageMemoryBarrier-sType-unique",
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+        },
+        {
           "vuid": "VUID-VkImageMemoryBarrier-oldLayout-parameter",
           "text": " <code>oldLayout</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImageLayout\">VkImageLayout</a> value"
         },
@@ -3510,7 +3542,7 @@
         },
         {
           "vuid": "VUID-VkRenderPassCreateInfo-sType-unique",
-          "text": " Each <code>sType</code> member in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
           "vuid": "VUID-VkRenderPassCreateInfo-flags-zerobitmask",
@@ -4103,6 +4135,10 @@
         {
           "vuid": "VUID-VkRenderPassCreateInfo2-pNext-pNext",
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkRenderPassFragmentDensityMapCreateInfoEXT\">VkRenderPassFragmentDensityMapCreateInfoEXT</a>"
+        },
+        {
+          "vuid": "VUID-VkRenderPassCreateInfo2-sType-unique",
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
           "vuid": "VUID-VkRenderPassCreateInfo2-flags-zerobitmask",
@@ -4743,6 +4779,10 @@
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkFramebufferAttachmentsCreateInfo\">VkFramebufferAttachmentsCreateInfo</a>"
         },
         {
+          "vuid": "VUID-VkFramebufferCreateInfo-sType-unique",
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+        },
+        {
           "vuid": "VUID-VkFramebufferCreateInfo-flags-parameter",
           "text": " <code>flags</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkFramebufferCreateFlagBits\">VkFramebufferCreateFlagBits</a> values"
         },
@@ -5160,7 +5200,7 @@
         },
         {
           "vuid": "VUID-VkRenderPassBeginInfo-sType-unique",
-          "text": " Each <code>sType</code> member in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
           "vuid": "VUID-VkRenderPassBeginInfo-renderPass-parameter",
@@ -5617,6 +5657,10 @@
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkShaderModuleValidationCacheCreateInfoEXT\">VkShaderModuleValidationCacheCreateInfoEXT</a>"
         },
         {
+          "vuid": "VUID-VkShaderModuleCreateInfo-sType-unique",
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+        },
+        {
           "vuid": "VUID-VkShaderModuleCreateInfo-flags-zerobitmask",
           "text": " <code>flags</code> <strong class=\"purple\">must</strong> be <code>0</code>"
         },
@@ -5962,7 +6006,7 @@
         },
         {
           "vuid": "VUID-VkComputePipelineCreateInfo-sType-unique",
-          "text": " Each <code>sType</code> member in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
           "vuid": "VUID-VkComputePipelineCreateInfo-flags-parameter",
@@ -6055,6 +6099,10 @@
         {
           "vuid": "VUID-VkPipelineShaderStageCreateInfo-pNext-pNext",
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT\">VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT</a>"
+        },
+        {
+          "vuid": "VUID-VkPipelineShaderStageCreateInfo-sType-unique",
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
           "vuid": "VUID-VkPipelineShaderStageCreateInfo-flags-parameter",
@@ -6356,7 +6404,7 @@
         },
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-sType-unique",
-          "text": " Each <code>sType</code> member in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-flags-parameter",
@@ -7133,6 +7181,10 @@
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkPipelineCreationFeedbackCreateInfoEXT\">VkPipelineCreationFeedbackCreateInfoEXT</a>"
         },
         {
+          "vuid": "VUID-VkRayTracingPipelineCreateInfoNV-sType-unique",
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+        },
+        {
           "vuid": "VUID-VkRayTracingPipelineCreateInfoNV-flags-parameter",
           "text": " <code>flags</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkPipelineCreateFlagBits\">VkPipelineCreateFlagBits</a> values"
         },
@@ -7345,6 +7397,10 @@
         {
           "vuid": "VUID-VkPhysicalDeviceMemoryProperties2-pNext-pNext",
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkPhysicalDeviceMemoryBudgetPropertiesEXT\">VkPhysicalDeviceMemoryBudgetPropertiesEXT</a>"
+        },
+        {
+          "vuid": "VUID-VkPhysicalDeviceMemoryProperties2-sType-unique",
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         }
       ]
     },
@@ -7558,7 +7614,7 @@
         },
         {
           "vuid": "VUID-VkMemoryAllocateInfo-sType-unique",
-          "text": " Each <code>sType</code> member in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         }
       ]
     },
@@ -8135,6 +8191,10 @@
         {
           "vuid": "VUID-VkAndroidHardwareBufferPropertiesANDROID-pNext-pNext",
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkAndroidHardwareBufferFormatPropertiesANDROID\">VkAndroidHardwareBufferFormatPropertiesANDROID</a>"
+        },
+        {
+          "vuid": "VUID-VkAndroidHardwareBufferPropertiesANDROID-sType-unique",
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         }
       ]
     },
@@ -8572,7 +8632,7 @@
         },
         {
           "vuid": "VUID-VkBufferCreateInfo-sType-unique",
-          "text": " Each <code>sType</code> member in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
           "vuid": "VUID-VkBufferCreateInfo-flags-parameter",
@@ -9032,7 +9092,7 @@
         },
         {
           "vuid": "VUID-VkImageCreateInfo-sType-unique",
-          "text": " Each <code>sType</code> member in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
           "vuid": "VUID-VkImageCreateInfo-flags-parameter",
@@ -9726,7 +9786,7 @@
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-sType-unique",
-          "text": " Each <code>sType</code> member in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-flags-parameter",
@@ -10243,6 +10303,10 @@
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkImagePlaneMemoryRequirementsInfo\">VkImagePlaneMemoryRequirementsInfo</a>"
         },
         {
+          "vuid": "VUID-VkImageMemoryRequirementsInfo2-sType-unique",
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+        },
+        {
           "vuid": "VUID-VkImageMemoryRequirementsInfo2-image-parameter",
           "text": " <code>image</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImage\">VkImage</a> handle"
         }
@@ -10279,6 +10343,10 @@
         {
           "vuid": "VUID-VkMemoryRequirements2-pNext-pNext",
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkMemoryDedicatedRequirements\">VkMemoryDedicatedRequirements</a>"
+        },
+        {
+          "vuid": "VUID-VkMemoryRequirements2-sType-unique",
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         }
       ]
     },
@@ -10437,6 +10505,10 @@
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkBindBufferMemoryDeviceGroupInfo\">VkBindBufferMemoryDeviceGroupInfo</a>"
         },
         {
+          "vuid": "VUID-VkBindBufferMemoryInfo-sType-unique",
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+        },
+        {
           "vuid": "VUID-VkBindBufferMemoryInfo-buffer-parameter",
           "text": " <code>buffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkBuffer\">VkBuffer</a> handle"
         },
@@ -10544,7 +10616,7 @@
         },
         {
           "vuid": "VUID-vkBindImageMemory-size-01049",
-          "text": " The <code>size</code> member of the <code>VkMemoryRequirements</code> structure returned from a call to <code>vkGetImageMemoryRequirements</code> with <code>image</code> <strong class=\"purple\">must</strong> be less than or equal to the size of <code>memory</code> minus <code>memoryOffset</code>"
+          "text": " The difference of the size of <code>memory</code> and <code>memoryOffset</code> <strong class=\"purple\">must</strong> be greater than or equal to the <code>size</code> member of the <a href=\"#VkMemoryRequirements\">VkMemoryRequirements</a> structure returned from a call to <a href=\"#vkGetImageMemoryRequirements\">vkGetImageMemoryRequirements</a> with the same <code>image</code>"
         },
         {
           "vuid": "VUID-vkBindImageMemory-device-parameter",
@@ -10668,7 +10740,7 @@
         },
         {
           "vuid": "VUID-VkBindImageMemoryInfo-sType-unique",
-          "text": " Each <code>sType</code> member in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
           "vuid": "VUID-VkBindImageMemoryInfo-image-parameter",
@@ -10712,15 +10784,15 @@
         },
         {
           "vuid": "VUID-VkBindImageMemoryInfo-pNext-01619",
-          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkBindImagePlaneMemoryInfo\">VkBindImagePlaneMemoryInfo</a> structure, <code>memory</code> <strong class=\"purple\">must</strong> have been allocated using one of the memory types allowed in the <code>memoryTypeBits</code> member of the <a href=\"#VkMemoryRequirements\">VkMemoryRequirements</a> structure returned from a call to <a href=\"#vkGetImageMemoryRequirements2\">vkGetImageMemoryRequirements2</a> with <code>image</code> and the correct <code>planeAspect</code> for this plane in the <a href=\"#VkImagePlaneMemoryRequirementsInfo\">VkImagePlaneMemoryRequirementsInfo</a> structure included in the <a href=\"#VkImageMemoryRequirementsInfo2\">VkImageMemoryRequirementsInfo2</a> structure&#8217;s <code>pNext</code> chain"
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkBindImagePlaneMemoryInfo\">VkBindImagePlaneMemoryInfo</a> structure, <code>memory</code> <strong class=\"purple\">must</strong> have been allocated using one of the memory types allowed in the <code>memoryTypeBits</code> member of the <a href=\"#VkMemoryRequirements\">VkMemoryRequirements</a> structure returned from a call to <a href=\"#vkGetImageMemoryRequirements2\">vkGetImageMemoryRequirements2</a> with <code>image</code> and where <a href=\"#VkBindImagePlaneMemoryInfo\">VkBindImagePlaneMemoryInfo</a>::<code>planeAspect</code> corresponds to the <a href=\"#VkImagePlaneMemoryRequirementsInfo\">VkImagePlaneMemoryRequirementsInfo</a>::<code>planeAspect</code> in the <a href=\"#VkImageMemoryRequirementsInfo2\">VkImageMemoryRequirementsInfo2</a> structure&#8217;s <code>pNext</code> chain"
         },
         {
           "vuid": "VUID-VkBindImageMemoryInfo-pNext-01620",
-          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkBindImagePlaneMemoryInfo\">VkBindImagePlaneMemoryInfo</a> structure, <code>memoryOffset</code> <strong class=\"purple\">must</strong> be an integer multiple of the <code>alignment</code> member of the <a href=\"#VkMemoryRequirements\">VkMemoryRequirements</a> structure returned from a call to <a href=\"#vkGetImageMemoryRequirements2\">vkGetImageMemoryRequirements2</a> with <code>image</code> and the correct <code>planeAspect</code> for this plane in the <a href=\"#VkImagePlaneMemoryRequirementsInfo\">VkImagePlaneMemoryRequirementsInfo</a> structure included in the <a href=\"#VkImageMemoryRequirementsInfo2\">VkImageMemoryRequirementsInfo2</a> structure&#8217;s <code>pNext</code> chain"
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkBindImagePlaneMemoryInfo\">VkBindImagePlaneMemoryInfo</a> structure, <code>memoryOffset</code> <strong class=\"purple\">must</strong> be an integer multiple of the <code>alignment</code> member of the <a href=\"#VkMemoryRequirements\">VkMemoryRequirements</a> structure returned from a call to <a href=\"#vkGetImageMemoryRequirements2\">vkGetImageMemoryRequirements2</a> with <code>image</code> and where <a href=\"#VkBindImagePlaneMemoryInfo\">VkBindImagePlaneMemoryInfo</a>::<code>planeAspect</code> corresponds to the <a href=\"#VkImagePlaneMemoryRequirementsInfo\">VkImagePlaneMemoryRequirementsInfo</a>::<code>planeAspect</code> in the <a href=\"#VkImageMemoryRequirementsInfo2\">VkImageMemoryRequirementsInfo2</a> structure&#8217;s <code>pNext</code> chain"
         },
         {
           "vuid": "VUID-VkBindImageMemoryInfo-pNext-01621",
-          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkBindImagePlaneMemoryInfo\">VkBindImagePlaneMemoryInfo</a> structure, the difference of the size of <code>memory</code> and <code>memoryOffset</code> <strong class=\"purple\">must</strong> be greater than or equal to the <code>size</code> member of the <a href=\"#VkMemoryRequirements\">VkMemoryRequirements</a> structure returned from a call to <a href=\"#vkGetImageMemoryRequirements2\">vkGetImageMemoryRequirements2</a> with the same <code>image</code> and the correct <code>planeAspect</code> for this plane in the <a href=\"#VkImagePlaneMemoryRequirementsInfo\">VkImagePlaneMemoryRequirementsInfo</a> structure included in the <a href=\"#VkImageMemoryRequirementsInfo2\">VkImageMemoryRequirementsInfo2</a> structure&#8217;s <code>pNext</code> chain"
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkBindImagePlaneMemoryInfo\">VkBindImagePlaneMemoryInfo</a> structure, the difference of the size of <code>memory</code> and <code>memoryOffset</code> <strong class=\"purple\">must</strong> be greater than or equal to the <code>size</code> member of the <a href=\"#VkMemoryRequirements\">VkMemoryRequirements</a> structure returned from a call to <a href=\"#vkGetImageMemoryRequirements2\">vkGetImageMemoryRequirements2</a> with the same <code>image</code> and where <a href=\"#VkBindImagePlaneMemoryInfo\">VkBindImagePlaneMemoryInfo</a>::<code>planeAspect</code> corresponds to the <a href=\"#VkImagePlaneMemoryRequirementsInfo\">VkImagePlaneMemoryRequirementsInfo</a>::<code>planeAspect</code> in the <a href=\"#VkImageMemoryRequirementsInfo2\">VkImageMemoryRequirementsInfo2</a> structure&#8217;s <code>pNext</code> chain"
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_bind_memory2)+(VK_VERSION_1_1,VK_KHR_dedicated_allocation)": [
@@ -11384,7 +11456,7 @@
         },
         {
           "vuid": "VUID-VkSamplerCreateInfo-sType-unique",
-          "text": " Each <code>sType</code> member in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
           "vuid": "VUID-VkSamplerCreateInfo-flags-parameter",
@@ -11626,11 +11698,11 @@
         },
         {
           "vuid": "VUID-VkSamplerYcbcrConversionCreateInfo-forceExplicitReconstruction-01656",
-          "text": " If the format does not support <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT</code>, <code>forceExplicitReconstruction</code> <strong class=\"purple\">must</strong> be FALSE"
+          "text": " If the format does not support <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT</code> <code>forceExplicitReconstruction</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>"
         },
         {
           "vuid": "VUID-VkSamplerYcbcrConversionCreateInfo-chromaFilter-01657",
-          "text": " If the format does not support <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT</code>, <code>chromaFilter</code> <strong class=\"purple\">must</strong> be <code>VK_FILTER_NEAREST</code>"
+          "text": " If the format does not support <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT</code>, <code>chromaFilter</code> <strong class=\"purple\">must</strong> not be <code>VK_FILTER_LINEAR</code>"
         },
         {
           "vuid": "VUID-VkSamplerYcbcrConversionCreateInfo-sType-sType",
@@ -11639,6 +11711,10 @@
         {
           "vuid": "VUID-VkSamplerYcbcrConversionCreateInfo-pNext-pNext",
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkExternalFormatANDROID\">VkExternalFormatANDROID</a>"
+        },
+        {
+          "vuid": "VUID-VkSamplerYcbcrConversionCreateInfo-sType-unique",
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
           "vuid": "VUID-VkSamplerYcbcrConversionCreateInfo-format-parameter",
@@ -11723,6 +11799,10 @@
         {
           "vuid": "VUID-VkDescriptorSetLayoutCreateInfo-pNext-pNext",
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDescriptorSetLayoutBindingFlagsCreateInfo\">VkDescriptorSetLayoutBindingFlagsCreateInfo</a>"
+        },
+        {
+          "vuid": "VUID-VkDescriptorSetLayoutCreateInfo-sType-unique",
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
           "vuid": "VUID-VkDescriptorSetLayoutCreateInfo-flags-parameter",
@@ -11891,6 +11971,10 @@
         {
           "vuid": "VUID-VkDescriptorSetLayoutSupport-pNext-pNext",
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDescriptorSetVariableDescriptorCountLayoutSupport\">VkDescriptorSetVariableDescriptorCountLayoutSupport</a>"
+        },
+        {
+          "vuid": "VUID-VkDescriptorSetLayoutSupport-sType-unique",
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         }
       ]
     },
@@ -12293,6 +12377,10 @@
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDescriptorPoolInlineUniformBlockCreateInfoEXT\">VkDescriptorPoolInlineUniformBlockCreateInfoEXT</a>"
         },
         {
+          "vuid": "VUID-VkDescriptorPoolCreateInfo-sType-unique",
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+        },
+        {
           "vuid": "VUID-VkDescriptorPoolCreateInfo-flags-parameter",
           "text": " <code>flags</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkDescriptorPoolCreateFlagBits\">VkDescriptorPoolCreateFlagBits</a> values"
         },
@@ -12415,6 +12503,10 @@
         {
           "vuid": "VUID-VkDescriptorSetAllocateInfo-pNext-pNext",
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDescriptorSetVariableDescriptorCountAllocateInfo\">VkDescriptorSetVariableDescriptorCountAllocateInfo</a>"
+        },
+        {
+          "vuid": "VUID-VkDescriptorSetAllocateInfo-sType-unique",
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
           "vuid": "VUID-VkDescriptorSetAllocateInfo-descriptorPool-parameter",
@@ -12682,7 +12774,7 @@
         },
         {
           "vuid": "VUID-VkWriteDescriptorSet-sType-unique",
-          "text": " Each <code>sType</code> member in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
           "vuid": "VUID-VkWriteDescriptorSet-descriptorType-parameter",
@@ -13371,6 +13463,10 @@
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkQueryPoolPerformanceCreateInfoKHR\">VkQueryPoolPerformanceCreateInfoKHR</a>"
         },
         {
+          "vuid": "VUID-VkQueryPoolCreateInfo-sType-unique",
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+        },
+        {
           "vuid": "VUID-VkQueryPoolCreateInfo-flags-zerobitmask",
           "text": " <code>flags</code> <strong class=\"purple\">must</strong> be <code>0</code>"
         },
@@ -13475,6 +13571,10 @@
         {
           "vuid": "VUID-vkCmdResetQueryPool-None-02841",
           "text": " All queries used by the command <strong class=\"purple\">must</strong> not be active"
+        },
+        {
+          "vuid": "VUID-vkCmdResetQueryPool-firstQuery-02862",
+          "text": " This command <strong class=\"purple\">must</strong> not be recorded in a command buffer that, either directly or through secondary command buffers, also contains, begin commands for a query from the set of queries <span class=\"eq\">[<code>firstQuery</code>, <code>firstQuery</code> &#43; <code>queryCount</code> - 1]</span>"
         },
         {
           "vuid": "VUID-vkCmdResetQueryPool-commandBuffer-parameter",
@@ -13635,6 +13735,10 @@
         {
           "vuid": "VUID-vkCmdBeginQuery-queryPool-03226",
           "text": " If <code>queryPool</code> was created with a <code>queryType</code> of <code>VK_QUERY_TYPE_PERFORMANCE_QUERY_KHR</code> and another query pool with a <code>queryType</code> <code>VK_QUERY_TYPE_PERFORMANCE_QUERY_KHR</code> has been used within <code>commandBuffer</code>, its parent primary command buffer or secondary command buffer recorded within the same parent primary command buffer as <code>commandBuffer</code>, the <a href=\"#features-features-performanceCounterMultipleQueryPools\"><code>performanceCounterMultipleQueryPools</code></a> feature <strong class=\"purple\">must</strong> be enabled"
+        },
+        {
+          "vuid": "VUID-vkCmdBeginQuery-None-02863",
+          "text": " This command <strong class=\"purple\">must</strong> not be recorded in a command buffer that, either directly or through secondary command buffers, also contains a <code>vkCmdResetQueryPool</code> command affecting the same query."
         }
       ]
     },
@@ -13741,6 +13845,10 @@
         {
           "vuid": "VUID-vkCmdBeginQueryIndexedEXT-queryPool-03226",
           "text": " If <code>queryPool</code> was created with a <code>queryType</code> of <code>VK_QUERY_TYPE_PERFORMANCE_QUERY_KHR</code> and another query pool with a <code>queryType</code> <code>VK_QUERY_TYPE_PERFORMANCE_QUERY_KHR</code> has been used within <code>commandBuffer</code>, its parent primary command buffer or secondary command buffer recorded within the same parent primary command buffer as <code>commandBuffer</code>, the <a href=\"#features-features-performanceCounterMultipleQueryPools\"><code>performanceCounterMultipleQueryPools</code></a> feature <strong class=\"purple\">must</strong> be enabled"
+        },
+        {
+          "vuid": "VUID-vkCmdBeginQueryIndexedEXT-None-02863",
+          "text": " This command <strong class=\"purple\">must</strong> not be recorded in a command buffer that, either directly or through secondary command buffers, also contains a <code>vkCmdResetQueryPool</code> command affecting the same query."
         }
       ]
     },
@@ -18349,6 +18457,10 @@
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkPipelineVertexInputDivisorStateCreateInfoEXT\">VkPipelineVertexInputDivisorStateCreateInfoEXT</a>"
         },
         {
+          "vuid": "VUID-VkPipelineVertexInputStateCreateInfo-sType-unique",
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+        },
+        {
           "vuid": "VUID-VkPipelineVertexInputStateCreateInfo-flags-zerobitmask",
           "text": " <code>flags</code> <strong class=\"purple\">must</strong> be <code>0</code>"
         },
@@ -18507,6 +18619,10 @@
         {
           "vuid": "VUID-VkPipelineTessellationStateCreateInfo-pNext-pNext",
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkPipelineTessellationDomainOriginStateCreateInfo\">VkPipelineTessellationDomainOriginStateCreateInfo</a>"
+        },
+        {
+          "vuid": "VUID-VkPipelineTessellationStateCreateInfo-sType-unique",
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
           "vuid": "VUID-VkPipelineTessellationStateCreateInfo-flags-zerobitmask",
@@ -18864,7 +18980,7 @@
         },
         {
           "vuid": "VUID-VkPipelineViewportStateCreateInfo-sType-unique",
-          "text": " Each <code>sType</code> member in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
           "vuid": "VUID-VkPipelineViewportStateCreateInfo-flags-zerobitmask",
@@ -19010,7 +19126,7 @@
         },
         {
           "vuid": "VUID-VkPipelineRasterizationStateCreateInfo-sType-unique",
-          "text": " Each <code>sType</code> member in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
           "vuid": "VUID-VkPipelineRasterizationStateCreateInfo-flags-zerobitmask",
@@ -19082,7 +19198,7 @@
         },
         {
           "vuid": "VUID-VkPipelineMultisampleStateCreateInfo-sType-unique",
-          "text": " Each <code>sType</code> member in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
           "vuid": "VUID-VkPipelineMultisampleStateCreateInfo-flags-zerobitmask",
@@ -20037,6 +20153,10 @@
         {
           "vuid": "VUID-VkPipelineColorBlendStateCreateInfo-pNext-pNext",
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkPipelineColorBlendAdvancedStateCreateInfoEXT\">VkPipelineColorBlendAdvancedStateCreateInfoEXT</a>"
+        },
+        {
+          "vuid": "VUID-VkPipelineColorBlendStateCreateInfo-sType-unique",
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
           "vuid": "VUID-VkPipelineColorBlendStateCreateInfo-flags-zerobitmask",
@@ -21724,7 +21844,7 @@
         },
         {
           "vuid": "VUID-VkBindSparseInfo-sType-unique",
-          "text": " Each <code>sType</code> member in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
           "vuid": "VUID-VkBindSparseInfo-pWaitSemaphores-parameter",
@@ -22856,7 +22976,7 @@
         },
         {
           "vuid": "VUID-VkPhysicalDeviceSurfaceInfo2KHR-sType-unique",
-          "text": " Each <code>sType</code> member in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
           "vuid": "VUID-VkPhysicalDeviceSurfaceInfo2KHR-surface-parameter",
@@ -22900,7 +23020,7 @@
         },
         {
           "vuid": "VUID-VkSurfaceCapabilities2KHR-sType-unique",
-          "text": " Each <code>sType</code> member in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         }
       ]
     },
@@ -23348,7 +23468,7 @@
         },
         {
           "vuid": "VUID-VkSwapchainCreateInfoKHR-sType-unique",
-          "text": " Each <code>sType</code> member in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
           "vuid": "VUID-VkSwapchainCreateInfoKHR-flags-parameter",
@@ -23858,7 +23978,7 @@
         },
         {
           "vuid": "VUID-VkPresentInfoKHR-sType-unique",
-          "text": " Each <code>sType</code> member in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
           "vuid": "VUID-VkPresentInfoKHR-pWaitSemaphores-parameter",
@@ -25309,6 +25429,10 @@
         {
           "vuid": "VUID-VkFormatProperties2-pNext-pNext",
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDrmFormatModifierPropertiesListEXT\">VkDrmFormatModifierPropertiesListEXT</a>"
+        },
+        {
+          "vuid": "VUID-VkFormatProperties2-sType-unique",
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         }
       ]
     },
@@ -25446,7 +25570,7 @@
         },
         {
           "vuid": "VUID-VkPhysicalDeviceImageFormatInfo2-sType-unique",
-          "text": " Each <code>sType</code> member in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
           "vuid": "VUID-VkPhysicalDeviceImageFormatInfo2-format-parameter",
@@ -25486,7 +25610,7 @@
         },
         {
           "vuid": "VUID-VkImageFormatProperties2-sType-unique",
-          "text": " Each <code>sType</code> member in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         }
       ]
     },
@@ -25663,6 +25787,10 @@
         {
           "vuid": "VUID-VkPhysicalDeviceExternalSemaphoreInfo-pNext-pNext",
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkSemaphoreTypeCreateInfo\">VkSemaphoreTypeCreateInfo</a>"
+        },
+        {
+          "vuid": "VUID-VkPhysicalDeviceExternalSemaphoreInfo-sType-unique",
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
           "vuid": "VUID-VkPhysicalDeviceExternalSemaphoreInfo-handleType-parameter",
