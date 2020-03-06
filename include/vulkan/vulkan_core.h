@@ -44,7 +44,10 @@ extern "C" {
 #define VK_VERSION_MINOR(version) (((uint32_t)(version) >> 12) & 0x3ff)
 #define VK_VERSION_PATCH(version) ((uint32_t)(version) & 0xfff)
 // Version of this file
-#define VK_HEADER_VERSION 133
+#define VK_HEADER_VERSION 134
+
+// Complete version of this file
+#define VK_HEADER_VERSION_COMPLETE VK_MAKE_VERSION(1, 2, VK_HEADER_VERSION)
 
 
 #define VK_NULL_HANDLE 0
@@ -560,6 +563,8 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES_EXT = 1000276000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_FEATURES_EXT = 1000281000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_PROPERTIES_EXT = 1000281001,
+    VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDER_PASS_TRANSFORM_INFO_QCOM = 1000282000,
+    VK_STRUCTURE_TYPE_RENDER_PASS_TRANSFORM_BEGIN_INFO_QCOM = 1000282001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETER_FEATURES = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES,
     VK_STRUCTURE_TYPE_DEBUG_REPORT_CREATE_INFO_EXT = VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT,
@@ -1868,6 +1873,7 @@ typedef enum VkFramebufferCreateFlagBits {
 typedef VkFlags VkFramebufferCreateFlags;
 
 typedef enum VkRenderPassCreateFlagBits {
+    VK_RENDER_PASS_CREATE_TRANSFORM_BIT_QCOM = 0x00000002,
     VK_RENDER_PASS_CREATE_FLAG_BITS_MAX_ENUM = 0x7FFFFFFF
 } VkRenderPassCreateFlagBits;
 typedef VkFlags VkRenderPassCreateFlags;
@@ -10714,6 +10720,24 @@ typedef struct VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT {
     VkDeviceSize       uniformTexelBufferOffsetAlignmentBytes;
     VkBool32           uniformTexelBufferOffsetSingleTexelAlignment;
 } VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT;
+
+
+
+#define VK_QCOM_render_pass_transform 1
+#define VK_QCOM_RENDER_PASS_TRANSFORM_SPEC_VERSION 1
+#define VK_QCOM_RENDER_PASS_TRANSFORM_EXTENSION_NAME "VK_QCOM_render_pass_transform"
+typedef struct VkRenderPassTransformBeginInfoQCOM {
+    VkStructureType                  sType;
+    void*                            pNext;
+    VkSurfaceTransformFlagBitsKHR    transform;
+} VkRenderPassTransformBeginInfoQCOM;
+
+typedef struct VkCommandBufferInheritanceRenderPassTransformInfoQCOM {
+    VkStructureType                  sType;
+    void*                            pNext;
+    VkSurfaceTransformFlagBitsKHR    transform;
+    VkRect2D                         renderArea;
+} VkCommandBufferInheritanceRenderPassTransformInfoQCOM;
 
 
 
