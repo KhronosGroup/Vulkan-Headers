@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.2.133",
-    "comment": "from git branch: github-master commit: c31cf1823ace0812c2fcc4681714fbfe5f067b09",
-    "date": "2020-02-16 01:33:08Z"
+    "api version": "1.2.134",
+    "comment": "from git branch: github-master commit: b27536168823d5e8b025fc5622eab7df54008589",
+    "date": "2020-03-06 14:02:32Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -508,31 +508,31 @@
       "(VK_VERSION_1_2)+(VK_KHR_draw_indirect_count)": [
         {
           "vuid": "VUID-VkDeviceCreateInfo-ppEnabledExtensions-02831",
-          "text": " If <code>ppEnabledExtensions</code> contains code:\"VK_KHR_draw_indirect_count\" and the <code>pNext</code> chain includes a <a href=\"#VkPhysicalDeviceVulkan12Features\">VkPhysicalDeviceVulkan12Features</a> structure, then <code>VkPhysicalDeviceVulkan12Features</code>::<code>drawIndirectCount</code> <strong class=\"purple\">must</strong> be <code>VK_TRUE</code>"
+          "text": " If <code>ppEnabledExtensions</code> contains <code>\"VK_KHR_draw_indirect_count\"</code> and the <code>pNext</code> chain includes a <a href=\"#VkPhysicalDeviceVulkan12Features\">VkPhysicalDeviceVulkan12Features</a> structure, then <code>VkPhysicalDeviceVulkan12Features</code>::<code>drawIndirectCount</code> <strong class=\"purple\">must</strong> be <code>VK_TRUE</code>"
         }
       ],
       "(VK_VERSION_1_2)+(VK_KHR_sampler_mirror_clamp_to_edge)": [
         {
           "vuid": "VUID-VkDeviceCreateInfo-ppEnabledExtensions-02832",
-          "text": " If <code>ppEnabledExtensions</code> contains code:\"VK_KHR_sampler_mirror_clamp_to_edge\" and the <code>pNext</code> chain includes a <a href=\"#VkPhysicalDeviceVulkan12Features\">VkPhysicalDeviceVulkan12Features</a> structure, then <code>VkPhysicalDeviceVulkan12Features</code>::<code>samplerMirrorClampToEdge</code> <strong class=\"purple\">must</strong> be <code>VK_TRUE</code>"
+          "text": " If <code>ppEnabledExtensions</code> contains <code>\"VK_KHR_sampler_mirror_clamp_to_edge\"</code> and the <code>pNext</code> chain includes a <a href=\"#VkPhysicalDeviceVulkan12Features\">VkPhysicalDeviceVulkan12Features</a> structure, then <code>VkPhysicalDeviceVulkan12Features</code>::<code>samplerMirrorClampToEdge</code> <strong class=\"purple\">must</strong> be <code>VK_TRUE</code>"
         }
       ],
       "(VK_VERSION_1_2)+(VK_EXT_descriptor_indexing)": [
         {
           "vuid": "VUID-VkDeviceCreateInfo-ppEnabledExtensions-02833",
-          "text": " If <code>ppEnabledExtensions</code> contains code:\"VK_EXT_descriptor_indexing\" and the <code>pNext</code> chain includes a <a href=\"#VkPhysicalDeviceVulkan12Features\">VkPhysicalDeviceVulkan12Features</a> structure, then <code>VkPhysicalDeviceVulkan12Features</code>::<code>descriptorIndexing</code> <strong class=\"purple\">must</strong> be <code>VK_TRUE</code>"
+          "text": " If <code>ppEnabledExtensions</code> contains <code>\"VK_EXT_descriptor_indexing\"</code> and the <code>pNext</code> chain includes a <a href=\"#VkPhysicalDeviceVulkan12Features\">VkPhysicalDeviceVulkan12Features</a> structure, then <code>VkPhysicalDeviceVulkan12Features</code>::<code>descriptorIndexing</code> <strong class=\"purple\">must</strong> be <code>VK_TRUE</code>"
         }
       ],
       "(VK_VERSION_1_2)+(VK_EXT_sampler_filter_minmax)": [
         {
           "vuid": "VUID-VkDeviceCreateInfo-ppEnabledExtensions-02834",
-          "text": " If <code>ppEnabledExtensions</code> contains code:\"VK_EXT_sampler_filter_minmax\" and the <code>pNext</code> chain includes a <a href=\"#VkPhysicalDeviceVulkan12Features\">VkPhysicalDeviceVulkan12Features</a> structure, then <code>VkPhysicalDeviceVulkan12Features</code>::<code>samplerFilterMinmax</code> <strong class=\"purple\">must</strong> be <code>VK_TRUE</code>"
+          "text": " If <code>ppEnabledExtensions</code> contains <code>\"VK_EXT_sampler_filter_minmax\"</code> and the <code>pNext</code> chain includes a <a href=\"#VkPhysicalDeviceVulkan12Features\">VkPhysicalDeviceVulkan12Features</a> structure, then <code>VkPhysicalDeviceVulkan12Features</code>::<code>samplerFilterMinmax</code> <strong class=\"purple\">must</strong> be <code>VK_TRUE</code>"
         }
       ],
       "(VK_VERSION_1_2)+(VK_EXT_shader_viewport_index_layer)": [
         {
           "vuid": "VUID-VkDeviceCreateInfo-ppEnabledExtensions-02835",
-          "text": " If <code>ppEnabledExtensions</code> contains code:\"VK_EXT_shader_viewport_index_layer\" and the <code>pNext</code> chain includes a <a href=\"#VkPhysicalDeviceVulkan12Features\">VkPhysicalDeviceVulkan12Features</a> structure, then <code>VkPhysicalDeviceVulkan12Features</code>::<code>shaderOutputViewportIndex</code> and <code>VkPhysicalDeviceVulkan12Features</code>::<code>shaderOutputLayer</code> <strong class=\"purple\">must</strong> both be <code>VK_TRUE</code>"
+          "text": " If <code>ppEnabledExtensions</code> contains <code>\"VK_EXT_shader_viewport_index_layer\"</code> and the <code>pNext</code> chain includes a <a href=\"#VkPhysicalDeviceVulkan12Features\">VkPhysicalDeviceVulkan12Features</a> structure, then <code>VkPhysicalDeviceVulkan12Features</code>::<code>shaderOutputViewportIndex</code> and <code>VkPhysicalDeviceVulkan12Features</code>::<code>shaderOutputLayer</code> <strong class=\"purple\">must</strong> both be <code>VK_TRUE</code>"
         }
       ],
       "core": [
@@ -1066,7 +1066,7 @@
         },
         {
           "vuid": "VUID-VkCommandBufferInheritanceInfo-pNext-pNext",
-          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkCommandBufferInheritanceConditionalRenderingInfoEXT\">VkCommandBufferInheritanceConditionalRenderingInfoEXT</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkCommandBufferInheritanceConditionalRenderingInfoEXT\">VkCommandBufferInheritanceConditionalRenderingInfoEXT</a> or <a href=\"#VkCommandBufferInheritanceRenderPassTransformInfoQCOM\">VkCommandBufferInheritanceRenderPassTransformInfoQCOM</a>"
         },
         {
           "vuid": "VUID-VkCommandBufferInheritanceInfo-sType-unique",
@@ -1087,6 +1087,18 @@
         {
           "vuid": "VUID-VkCommandBufferInheritanceConditionalRenderingInfoEXT-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_CONDITIONAL_RENDERING_INFO_EXT</code>"
+        }
+      ]
+    },
+    "VkCommandBufferInheritanceRenderPassTransformInfoQCOM": {
+      "(VK_QCOM_render_pass_transform)": [
+        {
+          "vuid": "VUID-VkCommandBufferInheritanceRenderPassTransformInfoQCOM-transform-02864",
+          "text": " <code>transform</code> <strong class=\"purple\">must</strong> be VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR, VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR, VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR, or VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR."
+        },
+        {
+          "vuid": "VUID-VkCommandBufferInheritanceRenderPassTransformInfoQCOM-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDER_PASS_TRANSFORM_INFO_QCOM</code>"
         }
       ]
     },
@@ -1176,7 +1188,7 @@
         },
         {
           "vuid": "VUID-vkQueueSubmit-pSubmits-02207",
-          "text": " If any element of <code>pSubmits-&gt;pCommandBuffers</code> includes a <a href=\"#synchronization-queue-transfers-acquire\">Queue Family Transfer Acquire Operation</a>, there <strong class=\"purple\">must</strong> exist a previously submitted <a href=\"#synchronization-queue-transfers-release\">Queue Family Transfer Release Operation</a> on a queue in the queue family identified by the acquire operation, with parameters matching the acquire operation as defined in the definition of such <a href=\"#synchronization-queue-transfers-acquire\">acquire operations</a>, and which happens before the acquire operation"
+          "text": " If any element of <code>pSubmits-&gt;pCommandBuffers</code> includes a <a href=\"#synchronization-queue-transfers-acquire\">Queue Family Transfer Acquire Operation</a>, there <strong class=\"purple\">must</strong> exist a previously submitted <a href=\"#synchronization-queue-transfers-release\">Queue Family Transfer Release Operation</a> on a queue in the queue family identified by the acquire operation, with parameters matching the acquire operation as defined in the definition of such <a href=\"#synchronization-queue-transfers-acquire\">acquire operations</a>, and which happens-before the acquire operation"
         },
         {
           "vuid": "VUID-vkQueueSubmit-pSubmits-02808",
@@ -1593,6 +1605,20 @@
           "text": " Both of <code>commandBuffer</code>, and the elements of <code>pCommandBuffers</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <a href=\"#VkDevice\">VkDevice</a>"
         }
       ],
+      "(VK_QCOM_render_pass_transform)": [
+        {
+          "vuid": "VUID-vkCmdExecuteCommands-pNext-02865",
+          "text": " If <code>vkCmdExecuteCommands</code> is being called within a render pass instance that included <a href=\"#VkRenderPassTransformBeginInfoQCOM\">VkRenderPassTransformBeginInfoQCOM</a> in the <code>pNext</code> chain of <a href=\"#VkRenderPassBeginInfo\">VkRenderPassBeginInfo</a>, then each element of <code>pCommandBuffers</code> <strong class=\"purple\">must</strong> have been recorded with <a href=\"#VkCommandBufferInheritanceRenderPassTransformInfoQCOM\">VkCommandBufferInheritanceRenderPassTransformInfoQCOM</a> in the <code>pNext</code> chain of VkCommandBufferBeginInfo"
+        },
+        {
+          "vuid": "VUID-vkCmdExecuteCommands-pNext-02866",
+          "text": " If <code>vkCmdExecuteCommands</code> is being called within a render pass instance that included <a href=\"#VkRenderPassTransformBeginInfoQCOM\">VkRenderPassTransformBeginInfoQCOM</a> in the <code>pNext</code> chain of <a href=\"#VkRenderPassBeginInfo\">VkRenderPassBeginInfo</a>, then each element of <code>pCommandBuffers</code> <strong class=\"purple\">must</strong> have been recorded with <a href=\"#VkCommandBufferInheritanceRenderPassTransformInfoQCOM\">VkCommandBufferInheritanceRenderPassTransformInfoQCOM</a>::<code>transform</code> identical to <a href=\"#VkRenderPassTransformBeginInfoQCOM\">VkRenderPassTransformBeginInfoQCOM</a>::<code>transform</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdExecuteCommands-pNext-02867",
+          "text": " If <code>vkCmdExecuteCommands</code> is being called within a render pass instance that included <a href=\"#VkRenderPassTransformBeginInfoQCOM\">VkRenderPassTransformBeginInfoQCOM</a> in the <code>pNext</code> chain of <a href=\"#VkRenderPassBeginInfo\">VkRenderPassBeginInfo</a>, then each element of <code>pCommandBuffers</code> <strong class=\"purple\">must</strong> have been recorded with <a href=\"#VkCommandBufferInheritanceRenderPassTransformInfoQCOM\">VkCommandBufferInheritanceRenderPassTransformInfoQCOM</a>::<code>renderArea</code> identical to <a href=\"#VkRenderPassBeginInfo\">VkRenderPassBeginInfo</a>::<code>renderArea</code>"
+        }
+      ],
       "(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdExecuteCommands-commandBuffer-01820",
@@ -1987,6 +2013,10 @@
         {
           "vuid": "VUID-vkRegisterDisplayEventEXT-pFence-parameter",
           "text": " <code>pFence</code> <strong class=\"purple\">must</strong> be a valid pointer to a <a href=\"#VkFence\">VkFence</a> handle"
+        },
+        {
+          "vuid": "VUID-vkRegisterDisplayEventEXT-commonparent",
+          "text": " Both of <code>device</code>, and <code>display</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <a href=\"#VkPhysicalDevice\">VkPhysicalDevice</a>"
         }
       ]
     },
@@ -3545,8 +3575,8 @@
           "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
-          "vuid": "VUID-VkRenderPassCreateInfo-flags-zerobitmask",
-          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be <code>0</code>"
+          "vuid": "VUID-VkRenderPassCreateInfo-flags-parameter",
+          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkRenderPassCreateFlagBits\">VkRenderPassCreateFlagBits</a> values"
         },
         {
           "vuid": "VUID-VkRenderPassCreateInfo-pAttachments-parameter",
@@ -3924,6 +3954,12 @@
           "vuid": "VUID-VkSubpassDescription-flags-00856",
           "text": " If <code>flags</code> includes <code>VK_SUBPASS_DESCRIPTION_PER_VIEW_POSITION_X_ONLY_BIT_NVX</code>, it <strong class=\"purple\">must</strong> also include <code>VK_SUBPASS_DESCRIPTION_PER_VIEW_ATTRIBUTES_BIT_NVX</code>."
         }
+      ],
+      "(VK_QCOM_render_pass_transform)": [
+        {
+          "vuid": "VUID-VkSubpassDescription-pInputAttachments-02868",
+          "text": " If the render pass is created with <code>VK_RENDER_PASS_CREATE_TRANSFORM_BIT_QCOM</code> each of the elements of <code>pInputAttachments</code> <strong class=\"purple\">must</strong> be <code>VK_ATTACHMENT_UNUSED</code>."
+        }
       ]
     },
     "VkAttachmentReference": {
@@ -4141,8 +4177,8 @@
           "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
-          "vuid": "VUID-VkRenderPassCreateInfo2-flags-zerobitmask",
-          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be <code>0</code>"
+          "vuid": "VUID-VkRenderPassCreateInfo2-flags-parameter",
+          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkRenderPassCreateFlagBits\">VkRenderPassCreateFlagBits</a> values"
         },
         {
           "vuid": "VUID-VkRenderPassCreateInfo2-pAttachments-parameter",
@@ -5196,7 +5232,7 @@
         },
         {
           "vuid": "VUID-VkRenderPassBeginInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceGroupRenderPassBeginInfo\">VkDeviceGroupRenderPassBeginInfo</a>, <a href=\"#VkRenderPassAttachmentBeginInfo\">VkRenderPassAttachmentBeginInfo</a>, or <a href=\"#VkRenderPassSampleLocationsBeginInfoEXT\">VkRenderPassSampleLocationsBeginInfoEXT</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceGroupRenderPassBeginInfo\">VkDeviceGroupRenderPassBeginInfo</a>, <a href=\"#VkRenderPassAttachmentBeginInfo\">VkRenderPassAttachmentBeginInfo</a>, <a href=\"#VkRenderPassSampleLocationsBeginInfoEXT\">VkRenderPassSampleLocationsBeginInfoEXT</a>, or <a href=\"#VkRenderPassTransformBeginInfoQCOM\">VkRenderPassTransformBeginInfoQCOM</a>"
         },
         {
           "vuid": "VUID-VkRenderPassBeginInfo-sType-unique",
@@ -5320,6 +5356,16 @@
           "vuid": "VUID-VkRenderPassBeginInfo-framebuffer-03217",
           "text": " If <code>framebuffer</code> was created with a <a href=\"#VkFramebufferCreateInfo\">VkFramebufferCreateInfo</a>::<code>flags</code> value that included <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT</code>, each element of the <code>pAttachments</code> member of a <a href=\"#VkRenderPassAttachmentBeginInfo\">VkRenderPassAttachmentBeginInfo</a> structure included in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be a <a href=\"#VkImageView\">VkImageView</a> of an image created with a value of <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>samples</code> equal to the corresponding value of <a href=\"#VkAttachmentDescription\">VkAttachmentDescription</a>::<code>samples</code> in <code>renderPass</code>"
         }
+      ],
+      "(VK_QCOM_render_pass_transform)": [
+        {
+          "vuid": "VUID-VkRenderPassBeginInfo-pNext-02869",
+          "text": " If the <code>pNext</code> chain includes <a href=\"#VkRenderPassTransformBeginInfoQCOM\">VkRenderPassTransformBeginInfoQCOM</a>, <code>renderArea</code>::<code>offset</code> <strong class=\"purple\">must</strong> equal (0,0)."
+        },
+        {
+          "vuid": "VUID-VkRenderPassBeginInfo-pNext-02870",
+          "text": " If the <code>pNext</code> chain includes <a href=\"#VkRenderPassTransformBeginInfoQCOM\">VkRenderPassTransformBeginInfoQCOM</a>, <code>renderArea</code>::<code>extent</code> transformed by <a href=\"#VkRenderPassTransformBeginInfoQCOM\">VkRenderPassTransformBeginInfoQCOM</a>::<code>transform</code> <strong class=\"purple\">must</strong> equal the <code>framebuffer</code> dimensions."
+        }
       ]
     },
     "VkRenderPassSampleLocationsBeginInfoEXT": {
@@ -5359,6 +5405,22 @@
         {
           "vuid": "VUID-VkSubpassSampleLocationsEXT-sampleLocationsInfo-parameter",
           "text": " <code>sampleLocationsInfo</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkSampleLocationsInfoEXT\">VkSampleLocationsInfoEXT</a> structure"
+        }
+      ]
+    },
+    "VkRenderPassTransformBeginInfoQCOM": {
+      "(VK_QCOM_render_pass_transform)": [
+        {
+          "vuid": "VUID-VkRenderPassTransformBeginInfoQCOM-transform-02871",
+          "text": " <code>transform</code> <strong class=\"purple\">must</strong> be VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR, VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR, VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR, or VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR."
+        },
+        {
+          "vuid": "VUID-VkRenderPassTransformBeginInfoQCOM-flags-02872",
+          "text": " The renderpass must have been created with <a href=\"#VkRenderPassCreateInfo\">VkRenderPassCreateInfo</a>::<code>flags</code> containing VK_RENDER_PASS_CREATE_TRANSFORM_BIT_QCOM."
+        },
+        {
+          "vuid": "VUID-VkRenderPassTransformBeginInfoQCOM-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_RENDER_PASS_TRANSFORM_BEGIN_INFO_QCOM</code>"
         }
       ]
     },
@@ -13460,7 +13522,7 @@
         },
         {
           "vuid": "VUID-VkQueryPoolCreateInfo-pNext-pNext",
-          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkQueryPoolPerformanceCreateInfoKHR\">VkQueryPoolPerformanceCreateInfoKHR</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkQueryPoolCreateInfoINTEL\">VkQueryPoolCreateInfoINTEL</a> or <a href=\"#VkQueryPoolPerformanceCreateInfoKHR\">VkQueryPoolPerformanceCreateInfoKHR</a>"
         },
         {
           "vuid": "VUID-VkQueryPoolCreateInfo-sType-unique",
@@ -13573,10 +13635,6 @@
           "text": " All queries used by the command <strong class=\"purple\">must</strong> not be active"
         },
         {
-          "vuid": "VUID-vkCmdResetQueryPool-firstQuery-02862",
-          "text": " This command <strong class=\"purple\">must</strong> not be recorded in a command buffer that, either directly or through secondary command buffers, also contains, begin commands for a query from the set of queries <span class=\"eq\">[<code>firstQuery</code>, <code>firstQuery</code> &#43; <code>queryCount</code> - 1]</span>"
-        },
-        {
           "vuid": "VUID-vkCmdResetQueryPool-commandBuffer-parameter",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCommandBuffer\">VkCommandBuffer</a> handle"
         },
@@ -13599,6 +13657,12 @@
         {
           "vuid": "VUID-vkCmdResetQueryPool-commonparent",
           "text": " Both of <code>commandBuffer</code>, and <code>queryPool</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <a href=\"#VkDevice\">VkDevice</a>"
+        }
+      ],
+      "(VK_KHR_performance_query)": [
+        {
+          "vuid": "VUID-vkCmdResetQueryPool-firstQuery-02862",
+          "text": " If <code>queryPool</code> was created with <code>VK_QUERY_TYPE_PERFORMANCE_QUERY_KHR</code>, this command <strong class=\"purple\">must</strong> not be recorded in a command buffer that, either directly or through secondary command buffers, also contains begin commands for a query from the set of queries <span class=\"eq\">[<code>firstQuery</code>, <code>firstQuery</code> &#43; <code>queryCount</code> - 1]</span>"
         }
       ]
     },
@@ -13738,7 +13802,7 @@
         },
         {
           "vuid": "VUID-vkCmdBeginQuery-None-02863",
-          "text": " This command <strong class=\"purple\">must</strong> not be recorded in a command buffer that, either directly or through secondary command buffers, also contains a <code>vkCmdResetQueryPool</code> command affecting the same query."
+          "text": " If <code>queryPool</code> was created with a <code>queryType</code> of <code>VK_QUERY_TYPE_PERFORMANCE_QUERY_KHR</code>, this command <strong class=\"purple\">must</strong> not be recorded in a command buffer that, either directly or through secondary command buffers, also contains a <code>vkCmdResetQueryPool</code> command affecting the same query."
         }
       ]
     },
@@ -13848,7 +13912,7 @@
         },
         {
           "vuid": "VUID-vkCmdBeginQueryIndexedEXT-None-02863",
-          "text": " This command <strong class=\"purple\">must</strong> not be recorded in a command buffer that, either directly or through secondary command buffers, also contains a <code>vkCmdResetQueryPool</code> command affecting the same query."
+          "text": " If <code>queryPool</code> was created with a <code>queryType</code> of <code>VK_QUERY_TYPE_PERFORMANCE_QUERY_KHR</code>, this command <strong class=\"purple\">must</strong> not be recorded in a command buffer that, either directly or through secondary command buffers, also contains a <code>vkCmdResetQueryPool</code> command affecting the same query."
         }
       ]
     },
@@ -14287,10 +14351,6 @@
         {
           "vuid": "VUID-VkQueryPoolCreateInfoINTEL-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO_INTEL</code>"
-        },
-        {
-          "vuid": "VUID-VkQueryPoolCreateInfoINTEL-pNext-pNext",
-          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
         },
         {
           "vuid": "VUID-VkQueryPoolCreateInfoINTEL-performanceCountersSampling-parameter",
@@ -22429,6 +22489,10 @@
         {
           "vuid": "VUID-vkAcquireXlibDisplayEXT-display-parameter",
           "text": " <code>display</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDisplayKHR\">VkDisplayKHR</a> handle"
+        },
+        {
+          "vuid": "VUID-vkAcquireXlibDisplayEXT-display-parent",
+          "text": " <code>display</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from <code>physicalDevice</code>"
         }
       ]
     },
@@ -22457,6 +22521,10 @@
         {
           "vuid": "VUID-vkReleaseDisplayEXT-display-parameter",
           "text": " <code>display</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDisplayKHR\">VkDisplayKHR</a> handle"
+        },
+        {
+          "vuid": "VUID-vkReleaseDisplayEXT-display-parent",
+          "text": " <code>display</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from <code>physicalDevice</code>"
         }
       ]
     },
@@ -22541,6 +22609,10 @@
         {
           "vuid": "VUID-vkGetDisplayModePropertiesKHR-pProperties-parameter",
           "text": " If the value referenced by <code>pPropertyCount</code> is not <code>0</code>, and <code>pProperties</code> is not <code>NULL</code>, <code>pProperties</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>pPropertyCount</code> <a href=\"#VkDisplayModePropertiesKHR\">VkDisplayModePropertiesKHR</a> structures"
+        },
+        {
+          "vuid": "VUID-vkGetDisplayModePropertiesKHR-display-parent",
+          "text": " <code>display</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from <code>physicalDevice</code>"
         }
       ]
     },
@@ -22561,6 +22633,10 @@
         {
           "vuid": "VUID-vkGetDisplayModeProperties2KHR-pProperties-parameter",
           "text": " If the value referenced by <code>pPropertyCount</code> is not <code>0</code>, and <code>pProperties</code> is not <code>NULL</code>, <code>pProperties</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>pPropertyCount</code> <a href=\"#VkDisplayModeProperties2KHR\">VkDisplayModeProperties2KHR</a> structures"
+        },
+        {
+          "vuid": "VUID-vkGetDisplayModeProperties2KHR-display-parent",
+          "text": " <code>display</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from <code>physicalDevice</code>"
         }
       ]
     },
@@ -22613,6 +22689,10 @@
         {
           "vuid": "VUID-vkCreateDisplayModeKHR-pMode-parameter",
           "text": " <code>pMode</code> <strong class=\"purple\">must</strong> be a valid pointer to a <a href=\"#VkDisplayModeKHR\">VkDisplayModeKHR</a> handle"
+        },
+        {
+          "vuid": "VUID-vkCreateDisplayModeKHR-display-parent",
+          "text": " <code>display</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from <code>physicalDevice</code>"
         }
       ]
     },
@@ -22709,6 +22789,10 @@
         {
           "vuid": "VUID-vkDisplayPowerControlEXT-pDisplayPowerInfo-parameter",
           "text": " <code>pDisplayPowerInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkDisplayPowerInfoEXT\">VkDisplayPowerInfoEXT</a> structure"
+        },
+        {
+          "vuid": "VUID-vkDisplayPowerControlEXT-commonparent",
+          "text": " Both of <code>device</code>, and <code>display</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <a href=\"#VkPhysicalDevice\">VkPhysicalDevice</a>"
         }
       ]
     },
@@ -25914,7 +25998,7 @@
         },
         {
           "vuid": "VUID-VkDebugUtilsObjectNameInfoEXT-pObjectName-parameter",
-          "text": " If <code>pObjectName</code> is not <code>NULL</code>, <code>pObjectName</code> <strong class=\"purple\">must</strong> be a null-terminated UTF-8 string"
+          "text": " <code>pObjectName</code> <strong class=\"purple\">must</strong> be a null-terminated UTF-8 string"
         }
       ]
     },
@@ -26558,11 +26642,7 @@
         },
         {
           "vuid": "VUID-vkGetPhysicalDeviceToolPropertiesEXT-pToolProperties-parameter",
-          "text": " If <code>pToolProperties</code> is not <code>NULL</code>, <code>pToolProperties</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>pToolCount</code> <a href=\"#VkPhysicalDeviceToolPropertiesEXT\">VkPhysicalDeviceToolPropertiesEXT</a> structures"
-        },
-        {
-          "vuid": "VUID-vkGetPhysicalDeviceToolPropertiesEXT-pToolCount-arraylength",
-          "text": " If <code>pToolProperties</code> is not <code>NULL</code>, the value referenced by <code>pToolCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
+          "text": " If the value referenced by <code>pToolCount</code> is not <code>0</code>, and <code>pToolProperties</code> is not <code>NULL</code>, <code>pToolProperties</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>pToolCount</code> <a href=\"#VkPhysicalDeviceToolPropertiesEXT\">VkPhysicalDeviceToolPropertiesEXT</a> structures"
         }
       ]
     },
