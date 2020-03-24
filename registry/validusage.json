@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.2.135",
-    "comment": "from git branch: github-master commit: 18caa8e0b823981992e6df876ec56d4cfa8bc89f",
-    "date": "2020-03-17 11:15:18Z"
+    "api version": "1.2.136",
+    "comment": "from git branch: github-master commit: 9d2243151f9d7a1ed0b37424ab74c1416c7d903c",
+    "date": "2020-03-24 15:02:01Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -10485,6 +10485,22 @@
           "text": " <code>subresourceRange</code> and <code>viewType</code> <strong class=\"purple\">must</strong> be compatible with the image, as described in the <a href=\"#resources-image-views-compatibility\">compatibility table</a>"
         },
         {
+          "vuid": "VUID-VkImageViewCreateInfo-viewType-02960",
+          "text": " If <code>viewType</code> is <code>VK_IMAGE_VIEW_TYPE_CUBE</code> and <code>subresourceRange.layerCount</code> is not <code>VK_REMAINING_ARRAY_LAYERS</code>, <code>subresourceRange.layerCount</code> <strong class=\"purple\">must</strong> be <code>6</code>"
+        },
+        {
+          "vuid": "VUID-VkImageViewCreateInfo-viewType-02961",
+          "text": " If <code>viewType</code> is <code>VK_IMAGE_VIEW_TYPE_CUBE_ARRAY</code> and <code>subresourceRange.layerCount</code> is not <code>VK_REMAINING_ARRAY_LAYERS</code>, <code>subresourceRange.layerCount</code> <strong class=\"purple\">must</strong> be a multiple of <code>6</code>"
+        },
+        {
+          "vuid": "VUID-VkImageViewCreateInfo-viewType-02962",
+          "text": " If <code>viewType</code> is <code>VK_IMAGE_VIEW_TYPE_CUBE</code> and <code>subresourceRange.layerCount</code> is <code>VK_REMAINING_ARRAY_LAYERS</code>, the remaining number of layers <strong class=\"purple\">must</strong> be <code>6</code>"
+        },
+        {
+          "vuid": "VUID-VkImageViewCreateInfo-viewType-02963",
+          "text": " If <code>viewType</code> is <code>VK_IMAGE_VIEW_TYPE_CUBE_ARRAY</code> and <code>subresourceRange.layerCount</code> is <code>VK_REMAINING_ARRAY_LAYERS</code>, the remaining number of layers <strong class=\"purple\">must</strong> be a multiple of <code>6</code>"
+        },
+        {
           "vuid": "VUID-VkImageViewCreateInfo-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO</code>"
         },
@@ -12420,7 +12436,7 @@
       "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
         {
           "vuid": "VUID-VkSamplerCreateInfo-minFilter-01645",
-          "text": " If <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a> is enabled and <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT</code> is not set for the format, <code>minFilter</code> and <code>magFilter</code> <strong class=\"purple\">must</strong> be equal to the sampler {YCbCr} conversion&#8217;s <code>chromaFilter</code>"
+          "text": " If <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a> is enabled and the <a href=\"#resources-sampler-ycbcr-conversion-format-features\">sampler {YCbCr} conversion&#8217;s features</a> do not support <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT</code>, <code>minFilter</code> and <code>magFilter</code> <strong class=\"purple\">must</strong> be equal to the sampler {YCbCr} conversion&#8217;s <code>chromaFilter</code>"
         },
         {
           "vuid": "VUID-VkSamplerCreateInfo-addressModeU-01646",
@@ -12588,15 +12604,15 @@
       "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
         {
           "vuid": "VUID-VkSamplerYcbcrConversionCreateInfo-format-01650",
-          "text": " <code>format</code> <strong class=\"purple\">must</strong> support <code>VK_FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT</code> or <code>VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT</code>"
+          "text": " The <a href=\"#resources-sampler-ycbcr-conversion-format-features\">sampler {YCbCr} conversion&#8217;s features</a> <strong class=\"purple\">must</strong> support <code>VK_FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT</code> or <code>VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT</code>"
         },
         {
           "vuid": "VUID-VkSamplerYcbcrConversionCreateInfo-xChromaOffset-01651",
-          "text": " If the format does not support <code>VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT</code>, <code>xChromaOffset</code> and <code>yChromaOffset</code> <strong class=\"purple\">must</strong> not be <code>VK_CHROMA_LOCATION_COSITED_EVEN</code>"
+          "text": " If the <a href=\"#resources-sampler-ycbcr-conversion-format-features\">sampler {YCbCr} conversion&#8217;s features</a> do not support <code>VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT</code>, <code>xChromaOffset</code> and <code>yChromaOffset</code> <strong class=\"purple\">must</strong> not be <code>VK_CHROMA_LOCATION_COSITED_EVEN</code>"
         },
         {
           "vuid": "VUID-VkSamplerYcbcrConversionCreateInfo-xChromaOffset-01652",
-          "text": " If the format does not support <code>VK_FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT</code>, <code>xChromaOffset</code> and <code>yChromaOffset</code> <strong class=\"purple\">must</strong> not be <code>VK_CHROMA_LOCATION_MIDPOINT</code>"
+          "text": " If the <a href=\"#resources-sampler-ycbcr-conversion-format-features\">sampler {YCbCr} conversion&#8217;s features</a> do not support <code>VK_FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT</code>, <code>xChromaOffset</code> and <code>yChromaOffset</code> <strong class=\"purple\">must</strong> not be <code>VK_CHROMA_LOCATION_MIDPOINT</code>"
         },
         {
           "vuid": "VUID-VkSamplerYcbcrConversionCreateInfo-components-02581",
@@ -12628,11 +12644,11 @@
         },
         {
           "vuid": "VUID-VkSamplerYcbcrConversionCreateInfo-forceExplicitReconstruction-01656",
-          "text": " If the format does not support <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT</code> <code>forceExplicitReconstruction</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>"
+          "text": " If the <a href=\"#resources-sampler-ycbcr-conversion-format-features\">sampler {YCbCr} conversion&#8217;s features</a> do not support <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT</code> <code>forceExplicitReconstruction</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>"
         },
         {
           "vuid": "VUID-VkSamplerYcbcrConversionCreateInfo-chromaFilter-01657",
-          "text": " If the format does not support <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT</code>, <code>chromaFilter</code> <strong class=\"purple\">must</strong> not be <code>VK_FILTER_LINEAR</code>"
+          "text": " If the <a href=\"#resources-sampler-ycbcr-conversion-format-features\">sampler {YCbCr} conversion&#8217;s features</a> do not support <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT</code>, <code>chromaFilter</code> <strong class=\"purple\">must</strong> not be <code>VK_FILTER_LINEAR</code>"
         },
         {
           "vuid": "VUID-VkSamplerYcbcrConversionCreateInfo-sType-sType",
@@ -15220,7 +15236,7 @@
       "(VK_INTEL_performance_query)+(VK_INTEL_performance_query)": [
         {
           "vuid": "VUID-VkQueryPoolPerformanceQueryCreateInfoINTEL-sType-sType",
-          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO_INTEL</code>"
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_QUERY_CREATE_INFO_INTEL</code>"
         },
         {
           "vuid": "VUID-VkQueryPoolPerformanceQueryCreateInfoINTEL-performanceCountersSampling-parameter",
@@ -16865,10 +16881,6 @@
         {
           "vuid": "VUID-vkCmdBlitImage-dstImageLayout-00226",
           "text": " <code>dstImageLayout</code> <strong class=\"purple\">must</strong> specify the layout of the image subresources of <code>dstImage</code> specified in <code>pRegions</code> at the time this command is executed on a <code>VkDevice</code>"
-        },
-        {
-          "vuid": "VUID-vkCmdBlitImage-srcImage-00228",
-          "text": " The sample count of <code>srcImage</code> and <code>dstImage</code> <strong class=\"purple\">must</strong> both be equal to <code>VK_SAMPLE_COUNT_1_BIT</code>"
         },
         {
           "vuid": "VUID-vkCmdBlitImage-srcImage-00229",
