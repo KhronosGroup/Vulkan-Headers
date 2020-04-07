@@ -44,7 +44,7 @@ extern "C" {
 #define VK_VERSION_MINOR(version) (((uint32_t)(version) >> 12) & 0x3ff)
 #define VK_VERSION_PATCH(version) ((uint32_t)(version) & 0xfff)
 // Version of this file
-#define VK_HEADER_VERSION 136
+#define VK_HEADER_VERSION 137
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_VERSION(1, 2, VK_HEADER_VERSION)
@@ -362,6 +362,7 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_PROPERTIES_EXT = 1000028001,
     VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_STREAM_CREATE_INFO_EXT = 1000028002,
     VK_STRUCTURE_TYPE_IMAGE_VIEW_HANDLE_INFO_NVX = 1000030000,
+    VK_STRUCTURE_TYPE_IMAGE_VIEW_ADDRESS_PROPERTIES_NVX = 1000030001,
     VK_STRUCTURE_TYPE_TEXTURE_LOD_GATHER_FORMAT_PROPERTIES_AMD = 1000041000,
     VK_STRUCTURE_TYPE_STREAM_DESCRIPTOR_SURFACE_CREATE_INFO_GGP = 1000049000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV = 1000050000,
@@ -466,7 +467,6 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_INSTANCES_DATA_KHR = 1000150004,
     VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_TRIANGLES_DATA_KHR = 1000150005,
     VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_KHR = 1000150006,
-    VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_INFO_KHR = 1000150007,
     VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_INFO_KHR = 1000150008,
     VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_VERSION_KHR = 1000150009,
     VK_STRUCTURE_TYPE_COPY_ACCELERATION_STRUCTURE_INFO_KHR = 1000150010,
@@ -1426,6 +1426,7 @@ typedef enum VkAttachmentLoadOp {
 typedef enum VkAttachmentStoreOp {
     VK_ATTACHMENT_STORE_OP_STORE = 0,
     VK_ATTACHMENT_STORE_OP_DONT_CARE = 1,
+    VK_ATTACHMENT_STORE_OP_NONE_QCOM = 1000301000,
     VK_ATTACHMENT_STORE_OP_BEGIN_RANGE = VK_ATTACHMENT_STORE_OP_STORE,
     VK_ATTACHMENT_STORE_OP_END_RANGE = VK_ATTACHMENT_STORE_OP_DONT_CARE,
     VK_ATTACHMENT_STORE_OP_RANGE_SIZE = (VK_ATTACHMENT_STORE_OP_DONT_CARE - VK_ATTACHMENT_STORE_OP_STORE + 1),
@@ -7793,7 +7794,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdDrawIndirectByteCountEXT(
 
 
 #define VK_NVX_image_view_handle 1
-#define VK_NVX_IMAGE_VIEW_HANDLE_SPEC_VERSION 1
+#define VK_NVX_IMAGE_VIEW_HANDLE_SPEC_VERSION 2
 #define VK_NVX_IMAGE_VIEW_HANDLE_EXTENSION_NAME "VK_NVX_image_view_handle"
 typedef struct VkImageViewHandleInfoNVX {
     VkStructureType     sType;
@@ -7803,12 +7804,25 @@ typedef struct VkImageViewHandleInfoNVX {
     VkSampler           sampler;
 } VkImageViewHandleInfoNVX;
 
+typedef struct VkImageViewAddressPropertiesNVX {
+    VkStructureType    sType;
+    void*              pNext;
+    VkDeviceAddress    deviceAddress;
+    VkDeviceSize       size;
+} VkImageViewAddressPropertiesNVX;
+
 typedef uint32_t (VKAPI_PTR *PFN_vkGetImageViewHandleNVX)(VkDevice device, const VkImageViewHandleInfoNVX* pInfo);
+typedef VkResult (VKAPI_PTR *PFN_vkGetImageViewAddressNVX)(VkDevice device, VkImageView imageView, VkImageViewAddressPropertiesNVX* pProperties);
 
 #ifndef VK_NO_PROTOTYPES
 VKAPI_ATTR uint32_t VKAPI_CALL vkGetImageViewHandleNVX(
     VkDevice                                    device,
     const VkImageViewHandleInfoNVX*             pInfo);
+
+VKAPI_ATTR VkResult VKAPI_CALL vkGetImageViewAddressNVX(
+    VkDevice                                    device,
+    VkImageView                                 imageView,
+    VkImageViewAddressPropertiesNVX*            pProperties);
 #endif
 
 
@@ -8502,7 +8516,7 @@ VKAPI_ATTR void VKAPI_CALL vkSetHdrMetadataEXT(
 
 #define VK_EXT_debug_utils 1
 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkDebugUtilsMessengerEXT)
-#define VK_EXT_DEBUG_UTILS_SPEC_VERSION   1
+#define VK_EXT_DEBUG_UTILS_SPEC_VERSION   2
 #define VK_EXT_DEBUG_UTILS_EXTENSION_NAME "VK_EXT_debug_utils"
 typedef VkFlags VkDebugUtilsMessengerCallbackDataFlagsEXT;
 typedef VkFlags VkDebugUtilsMessengerCreateFlagsEXT;
@@ -10934,6 +10948,11 @@ typedef struct VkDeviceDiagnosticsConfigCreateInfoNV {
     VkDeviceDiagnosticsConfigFlagsNV    flags;
 } VkDeviceDiagnosticsConfigCreateInfoNV;
 
+
+
+#define VK_QCOM_render_pass_store_ops 1
+#define VK_QCOM_render_pass_store_ops_SPEC_VERSION 2
+#define VK_QCOM_render_pass_store_ops_EXTENSION_NAME "VK_QCOM_render_pass_store_ops"
 
 #ifdef __cplusplus
 }
