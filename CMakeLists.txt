@@ -93,10 +93,17 @@ if(NOT VULKAN_HEADERS_SKIP_INSTALL)
         VERSION ${VK_VERSION_STRING}
         COMPATIBILITY AnyNewerVersion
     )
+    # set variables for configure helper to initialize legacy variables
+    # VulkanHeaders_INCLUDE_DIR(s) and VulkanRegistry_DIR
+    # configure_package_config_file will make the absolute paths to relative paths
+    # so that the resulting package is relocatable
+    set(VK_INCLUDE_DIR "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}")
+    set(VK_REGISTRY_DIR "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_DATADIR}/vulkan")
     configure_package_config_file(
         "cmake/Config.cmake.in"
         "${project_config}"
         INSTALL_DESTINATION "${config_install_dir}"
+        PATH_VARS VK_INCLUDE_DIR VK_REGISTRY_DIR
     )
     install(
         TARGETS Vulkan-Headers Vulkan-Registry
