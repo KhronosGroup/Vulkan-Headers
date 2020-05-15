@@ -69,10 +69,6 @@
 #  if defined(__linux__) || defined(__APPLE__)
 #   include <dlfcn.h>
 #  endif
-
-#  if defined(_WIN32)
-#   include <windows.h>
-#  endif
 #endif
 
 #if 201711 <= __cpp_impl_three_way_comparison
@@ -83,7 +79,7 @@
 #endif
 
 
-static_assert( VK_HEADER_VERSION ==  140 , "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION ==  141 , "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
@@ -247,16 +243,52 @@ namespace VULKAN_HPP_NAMESPACE
       , m_ptr(list.begin())
     {}
 
-    template <typename Container>
-    ArrayProxy(Container const& container) VULKAN_HPP_NOEXCEPT
-      : m_count(static_cast<uint32_t>(container.size()))
-      , m_ptr(container.data())
+    template <size_t N>
+    ArrayProxy(std::array<T, N> const & data) VULKAN_HPP_NOEXCEPT
+      : m_count(N)
+      , m_ptr(data.data())
     {}
 
-    template <typename Container>
-    ArrayProxy(Container & container) VULKAN_HPP_NOEXCEPT
-      : m_count(static_cast<uint32_t>(container.size()))
-      , m_ptr(container.data())
+    template <size_t N, typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
+    ArrayProxy(std::array<typename std::remove_const<T>::type, N> const & data) VULKAN_HPP_NOEXCEPT
+      : m_count(N)
+      , m_ptr(data.data())
+    {}
+
+    template <size_t N>
+    ArrayProxy(std::array<T, N> & data) VULKAN_HPP_NOEXCEPT
+      : m_count(N)
+      , m_ptr(data.data())
+    {}
+
+    template <size_t N, typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
+    ArrayProxy(std::array<typename std::remove_const<T>::type, N> & data) VULKAN_HPP_NOEXCEPT
+      : m_count(N)
+      , m_ptr(data.data())
+    {}
+
+    template <class Allocator = std::allocator<typename std::remove_const<T>::type>>
+    ArrayProxy(std::vector<T, Allocator> const & data) VULKAN_HPP_NOEXCEPT
+      : m_count(static_cast<uint32_t>(data.size()))
+      , m_ptr(data.data())
+    {}
+
+    template <class Allocator = std::allocator<typename std::remove_const<T>::type>, typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
+    ArrayProxy(std::vector<typename std::remove_const<T>::type, Allocator> const& data) VULKAN_HPP_NOEXCEPT
+      : m_count(static_cast<uint32_t>(data.size()))
+      , m_ptr(data.data())
+    {}
+
+    template <class Allocator = std::allocator<typename std::remove_const<T>::type>>
+    ArrayProxy(std::vector<T, Allocator> & data) VULKAN_HPP_NOEXCEPT
+      : m_count(static_cast<uint32_t>(data.size()))
+      , m_ptr(data.data())
+    {}
+
+    template <class Allocator = std::allocator<typename std::remove_const<T>::type>, typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
+    ArrayProxy(std::vector<typename std::remove_const<T>::type, Allocator> & data) VULKAN_HPP_NOEXCEPT
+      : m_count(static_cast<uint32_t>(data.size()))
+      , m_ptr(data.data())
     {}
 
     const T * begin() const VULKAN_HPP_NOEXCEPT
@@ -4593,6 +4625,7 @@ namespace VULKAN_HPP_NAMESPACE
     eGoogleSwiftshader = VK_DRIVER_ID_GOOGLE_SWIFTSHADER,
     eGgpProprietary = VK_DRIVER_ID_GGP_PROPRIETARY,
     eBroadcomProprietary = VK_DRIVER_ID_BROADCOM_PROPRIETARY,
+    eMesaLlvmpipe = VK_DRIVER_ID_MESA_LLVMPIPE,
     eIntelOpenSourceMesa = VK_DRIVER_ID_INTEL_OPEN_SOURCE_MESA_KHR
   };
   using DriverIdKHR = DriverId;
@@ -4613,6 +4646,7 @@ namespace VULKAN_HPP_NAMESPACE
       case DriverId::eGoogleSwiftshader : return "GoogleSwiftshader";
       case DriverId::eGgpProprietary : return "GgpProprietary";
       case DriverId::eBroadcomProprietary : return "BroadcomProprietary";
+      case DriverId::eMesaLlvmpipe : return "MesaLlvmpipe";
       default: return "invalid";
     }
   }
@@ -8875,7 +8909,8 @@ namespace VULKAN_HPP_NAMESPACE
     eVIV = VK_VENDOR_ID_VIV,
     eVSI = VK_VENDOR_ID_VSI,
     eKazan = VK_VENDOR_ID_KAZAN,
-    eCodeplay = VK_VENDOR_ID_CODEPLAY
+    eCodeplay = VK_VENDOR_ID_CODEPLAY,
+    eMESA = VK_VENDOR_ID_MESA
   };
 
   VULKAN_HPP_INLINE std::string to_string( VendorId value )
@@ -8886,6 +8921,7 @@ namespace VULKAN_HPP_NAMESPACE
       case VendorId::eVSI : return "VSI";
       case VendorId::eKazan : return "Kazan";
       case VendorId::eCodeplay : return "Codeplay";
+      case VendorId::eMESA : return "MESA";
       default: return "invalid";
     }
   }
@@ -13421,6 +13457,11 @@ namespace VULKAN_HPP_NAMESPACE
     operator T& () VULKAN_HPP_NOEXCEPT
     {
       return value;
+    }
+
+    operator T&& () && VULKAN_HPP_NOEXCEPT
+    {
+      return std::move( value );
     }
 #endif
   };
@@ -83683,26 +83724,52 @@ namespace VULKAN_HPP_NAMESPACE
   template <> struct isStructureChainValid<WriteDescriptorSet, WriteDescriptorSetInlineUniformBlockEXT>{ enum { value = true }; };
 
 #if VULKAN_HPP_ENABLE_DYNAMIC_LOADER_TOOL
+#  if defined( _WIN32 )
+  namespace detail
+  {
+    extern "C" __declspec( dllimport ) void * __stdcall LoadLibraryA( char const * lpLibFileName );
+    extern "C" __declspec( dllimport ) int __stdcall FreeLibrary( void * hLibModule );
+    extern "C" __declspec( dllimport ) void * __stdcall GetProcAddress( void * hModule, char const * lpProcName );
+  }  // namespace detail
+#  endif
+
   class DynamicLoader
   {
   public:
-#ifdef VULKAN_HPP_NO_EXCEPTIONS
-    DynamicLoader() VULKAN_HPP_NOEXCEPT : m_success( false )
-#else
-    DynamicLoader() : m_success( false )
-#endif
+#  ifdef VULKAN_HPP_NO_EXCEPTIONS
+    DynamicLoader( std::string const & vulkanLibraryName = {} ) VULKAN_HPP_NOEXCEPT : m_success( false )
+#  else
+    DynamicLoader( std::string const & vulkanLibraryName = {} ) : m_success( false )
+#  endif
     {
-#if defined(__linux__)
-      m_library = dlopen( "libvulkan.so", RTLD_NOW | RTLD_LOCAL );
-#elif defined(__APPLE__)
-      m_library = dlopen( "libvulkan.dylib", RTLD_NOW | RTLD_LOCAL );
-#elif defined(_WIN32)
-      m_library = LoadLibrary( TEXT( "vulkan-1.dll" ) );
-#else
-      VULKAN_HPP_ASSERT( false && "unsupported platform" );
-#endif
+      if ( !vulkanLibraryName.empty() )
+      {
+#  if defined( __linux__ ) || defined( __APPLE__ )
+        m_library = dlopen( vulkanLibraryName.c_str(), RTLD_NOW | RTLD_LOCAL );
+#  elif defined( _WIN32 )
+        m_library = detail::LoadLibraryA( vulkanLibraryName.c_str() );
+#  else
+#    error unsupported platform
+#  endif
+      }
+      else
+      {
+#  if defined( __linux__ )
+        m_library = dlopen( "libvulkan.so", RTLD_NOW | RTLD_LOCAL );
+        if ( m_library == nullptr )
+        {
+          m_library = dlopen( "libvulkan.so.1", RTLD_NOW | RTLD_LOCAL );
+        }
+#  elif defined( __APPLE__ )
+        m_library = dlopen( "libvulkan.dylib", RTLD_NOW | RTLD_LOCAL );
+#  elif defined( _WIN32 )
+        m_library = detail::LoadLibraryA( "vulkan-1.dll" );
+#  else
+#    error unsupported platform
+#  endif
+      }
 
-      m_success = m_library != 0;
+      m_success = (m_library != nullptr);
 #ifndef VULKAN_HPP_NO_EXCEPTIONS
       if ( !m_success )
       {
@@ -83734,35 +83801,37 @@ namespace VULKAN_HPP_NAMESPACE
     {
       if ( m_library )
       {
-#if defined(__linux__) || defined(__APPLE__)
+#  if defined( __linux__ ) || defined( __APPLE__ )
         dlclose( m_library );
-#elif defined(_WIN32)
-        FreeLibrary( m_library );
-#endif
+#  elif defined( _WIN32 )
+        detail::FreeLibrary( m_library );
+#  else
+#    error unsupported platform
+#  endif
       }
     }
 
     template <typename T>
     T getProcAddress( const char* function ) const VULKAN_HPP_NOEXCEPT
     {
-#if defined(__linux__) || defined(__APPLE__)
+#  if defined( __linux__ ) || defined( __APPLE__ )
       return (T)dlsym( m_library, function );
-#elif defined(_WIN32)
-      return (T)GetProcAddress( m_library, function );
-#endif
+#  elif defined( _WIN32 )
+      return (T)detail::GetProcAddress( m_library, function );
+#  else
+#    error unsupported platform
+#  endif
     }
 
     bool success() const VULKAN_HPP_NOEXCEPT { return m_success; }
 
   private:
     bool m_success;
-#if defined(__linux__) || defined(__APPLE__)
-    void *m_library;
-#elif defined(_WIN32)
-    HMODULE m_library;
-#else
-#error unsupported platform
-#endif
+#  if defined( __linux__ ) || defined( __APPLE__ ) || defined( _WIN32 )
+    void * m_library;
+#  else
+#    error unsupported platform
+#  endif
   };
 #endif
 

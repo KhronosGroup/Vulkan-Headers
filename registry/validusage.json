@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.2.140",
-    "comment": "from git branch: github-master commit: a79b923ed376c42e99ecdb9d2ad69a56fb850ddc",
-    "date": "2020-05-04 09:48:50Z"
+    "api version": "1.2.141",
+    "comment": "from git branch: github-master commit: 8bd1271c25ec56248494389b0cc2b6741cb28164",
+    "date": "2020-05-15 09:13:21Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -7933,8 +7933,12 @@
     "vkGetRayTracingShaderGroupHandlesKHR": {
       "(VK_NV_ray_tracing,VK_KHR_ray_tracing)": [
         {
+          "vuid": "VUID-vkGetRayTracingShaderGroupHandlesKHR-firstGroup-04050",
+          "text": " <code>firstGroup</code> <strong class=\"purple\">must</strong> be less than the number of shader groups in <code>pipeline</code>"
+        },
+        {
           "vuid": "VUID-vkGetRayTracingShaderGroupHandlesKHR-firstGroup-02419",
-          "text": " The sum of <code>firstGroup</code> and <code>groupCount</code> <strong class=\"purple\">must</strong> be less than the number of shader groups in <code>pipeline</code>"
+          "text": " The sum of <code>firstGroup</code> and <code>groupCount</code> <strong class=\"purple\">must</strong> be less than or equal to the number of shader groups in <code>pipeline</code>"
         },
         {
           "vuid": "VUID-vkGetRayTracingShaderGroupHandlesKHR-dataSize-02420",
@@ -7971,8 +7975,12 @@
     "vkGetRayTracingCaptureReplayShaderGroupHandlesKHR": {
       "(VK_NV_ray_tracing,VK_KHR_ray_tracing)+(VK_KHR_ray_tracing)": [
         {
+          "vuid": "VUID-vkGetRayTracingCaptureReplayShaderGroupHandlesKHR-firstGroup-04051",
+          "text": " <code>firstGroup</code> <strong class=\"purple\">must</strong> be less than the number of shader groups in <code>pipeline</code>"
+        },
+        {
           "vuid": "VUID-vkGetRayTracingCaptureReplayShaderGroupHandlesKHR-firstGroup-03483",
-          "text": " The sum of <code>firstGroup</code> and <code>groupCount</code> <strong class=\"purple\">must</strong> be less than the number of shader groups in <code>pipeline</code>"
+          "text": " The sum of <code>firstGroup</code> and <code>groupCount</code> <strong class=\"purple\">must</strong> be less than or equal to the number of shader groups in <code>pipeline</code>"
         },
         {
           "vuid": "VUID-vkGetRayTracingCaptureReplayShaderGroupHandlesKHR-dataSize-03484",
