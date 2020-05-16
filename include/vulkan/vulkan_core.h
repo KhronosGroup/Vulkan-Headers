@@ -35,10 +35,10 @@ extern "C" {
     (((major) << 22U) | ((minor) << 12U) | (patch))
 
 // DEPRECATED: This define has been removed. Specific version defines (e.g. VK_API_VERSION_1_0), or the VK_MAKE_VERSION macro, should be used instead.
-//#define VK_API_VERSION VK_MAKE_VERSION(1, 0, 0) // Patch version should always be set to 0
+//#define VK_API_VERSION VK_MAKE_VERSION(1U, 0U, 0U) // Patch version should always be set to 0
 
 // Vulkan 1.0 version number
-#define VK_API_VERSION_1_0 VK_MAKE_VERSION(1, 0, 0)// Patch version should always be set to 0
+#define VK_API_VERSION_1_0 VK_MAKE_VERSION(1U, 0U, 0U)// Patch version should always be set to 0
 
 #define VK_VERSION_MAJOR(version) ((uint32_t)(version) >> 22U)
 #define VK_VERSION_MINOR(version) (((uint32_t)(version) >> 12U) & 0x3ff)
@@ -4004,7 +4004,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdExecuteCommands(
 
 #define VK_VERSION_1_1 1
 // Vulkan 1.1 version number
-#define VK_API_VERSION_1_1 VK_MAKE_VERSION(1, 1, 0)// Patch version should always be set to 0
+#define VK_API_VERSION_1_1 VK_MAKE_VERSION(1U, 1U, 0U)// Patch version should always be set to 0
 
 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkSamplerYcbcrConversion)
 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkDescriptorUpdateTemplate)
@@ -4867,7 +4867,7 @@ VKAPI_ATTR void VKAPI_CALL vkGetDescriptorSetLayoutSupport(
 
 #define VK_VERSION_1_2 1
 // Vulkan 1.2 version number
-#define VK_API_VERSION_1_2 VK_MAKE_VERSION(1, 2, 0)// Patch version should always be set to 0
+#define VK_API_VERSION_1_2 VK_MAKE_VERSION(1U, 2U, 0U)// Patch version should always be set to 0
 
 typedef uint64_t VkDeviceAddress;
 #define VK_MAX_DRIVER_NAME_SIZE           256
