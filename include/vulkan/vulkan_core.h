@@ -32,7 +32,7 @@ extern "C" {
 #define VK_VERSION_1_0 1
 #include "vk_platform.h"
 #define VK_MAKE_VERSION(major, minor, patch) \
-    (((major) << 22) | ((minor) << 12) | (patch))
+    (((major) << 22U) | ((minor) << 12U) | (patch))
 
 // DEPRECATED: This define has been removed. Specific version defines (e.g. VK_API_VERSION_1_0), or the VK_MAKE_VERSION macro, should be used instead.
 //#define VK_API_VERSION VK_MAKE_VERSION(1, 0, 0) // Patch version should always be set to 0
