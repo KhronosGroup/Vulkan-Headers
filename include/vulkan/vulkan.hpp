@@ -79,7 +79,7 @@
 #endif
 
 
-static_assert( VK_HEADER_VERSION ==  141 , "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION ==  142 , "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
@@ -623,186 +623,227 @@ namespace VULKAN_HPP_NAMESPACE
     RefType *m_ptr;
   };
 
-  template <typename X, typename Y> struct isStructureChainValid { enum { value = false }; };
-
-  template <typename P, typename T>
-  struct TypeList
-  {
-    using list = P;
-    using last = T;
-  };
-
-  template <typename List, typename X>
-  struct extendCheck
-  {
-    static const bool valid = isStructureChainValid<typename List::last, X>::value || extendCheck<typename List::list,X>::valid;
-  };
-
-  template <typename T, typename X>
-  struct extendCheck<TypeList<void,T>,X>
-  {
-    static const bool valid = isStructureChainValid<T, X>::value;
-  };
-
-  template <typename X>
-  struct extendCheck<void,X>
-  {
-    static const bool valid = true;
-  };
+  template <typename X, typename Y> struct StructExtends { enum { value = false }; };
 
   template<typename Type, class...>
-  struct isPartOfStructureChain
+  struct IsPartOfStructureChain
   {
     static const bool valid = false;
   };
 
   template<typename Type, typename Head, typename... Tail>
-  struct isPartOfStructureChain<Type, Head, Tail...>
+  struct IsPartOfStructureChain<Type, Head, Tail...>
   {
-    static const bool valid = std::is_same<Type, Head>::value || isPartOfStructureChain<Type, Tail...>::valid;
+    static const bool valid = std::is_same<Type, Head>::value || IsPartOfStructureChain<Type, Tail...>::valid;
   };
 
-  template <class Element>
-  class StructureChainElement
+  template <size_t Index, typename T, typename... ChainElements>
+  struct StructureChainContains
   {
-  public:
-    explicit operator Element&() VULKAN_HPP_NOEXCEPT { return value; }
-    explicit operator const Element&() const VULKAN_HPP_NOEXCEPT { return value; }
-  private:
-    Element value;
+    static const bool value = std::is_same<T, typename std::tuple_element<Index, std::tuple<ChainElements...>>::type>::value ||
+                              StructureChainContains<Index - 1, T, ChainElements...>::value;
   };
 
-  template<typename ...StructureElements>
-  class StructureChain : private StructureChainElement<StructureElements>...
+  template <typename T, typename... ChainElements>
+  struct StructureChainContains<0, T, ChainElements...>
+  {
+    static const bool value = std::is_same<T, typename std::tuple_element<0, std::tuple<ChainElements...>>::type>::value;
+  };
+
+  template <size_t Index, typename... ChainElements>
+  struct StructureChainValidation
+  {
+    using TestType = typename std::tuple_element<Index, std::tuple<ChainElements...>>::type;
+    static const bool valid =
+      StructExtends<TestType, typename std::tuple_element<0, std::tuple<ChainElements...>>::type>::value &&
+      ( TestType::allowDuplicate || !StructureChainContains<Index - 1, TestType, ChainElements...>::value ) &&
+      StructureChainValidation<Index - 1, ChainElements...>::valid;
+  };
+
+  template <typename... ChainElements>
+  struct StructureChainValidation<0, ChainElements...>
+  {
+    static const bool valid = true;
+  };
+
+  template <typename... ChainElements>
+  class StructureChain : public std::tuple<ChainElements...>
   {
   public:
     StructureChain() VULKAN_HPP_NOEXCEPT
     {
-      link<void, StructureElements...>();
+      static_assert( StructureChainValidation<sizeof...( ChainElements ) - 1, ChainElements...>::valid,
+                     "The structure chain is not valid!" );
+      link<sizeof...( ChainElements ) - 1>();
     }
 
-    StructureChain(StructureChain const &rhs) VULKAN_HPP_NOEXCEPT
+    StructureChain( StructureChain const & rhs ) VULKAN_HPP_NOEXCEPT : std::tuple<ChainElements...>( rhs )
     {
-      linkAndCopy<void, StructureElements...>(rhs);
+      static_assert( StructureChainValidation<sizeof...( ChainElements ) - 1, ChainElements...>::valid,
+                     "The structure chain is not valid!" );
+      link<sizeof...( ChainElements ) - 1>();
     }
 
-    StructureChain(StructureElements const &... elems) VULKAN_HPP_NOEXCEPT
+    StructureChain( StructureChain && rhs ) VULKAN_HPP_NOEXCEPT
+      : std::tuple<ChainElements...>( std::forward<std::tuple<ChainElements...>>( rhs ) )
     {
-      linkAndCopyElements<void, StructureElements...>(elems...);
+      static_assert( StructureChainValidation<sizeof...( ChainElements ) - 1, ChainElements...>::valid,
+                     "The structure chain is not valid!" );
+      link<sizeof...( ChainElements ) - 1>();
     }
 
-    StructureChain& operator=(StructureChain const &rhs) VULKAN_HPP_NOEXCEPT
+    StructureChain( ChainElements const &... elems ) VULKAN_HPP_NOEXCEPT : std::tuple<ChainElements...>( elems... )
     {
-      linkAndCopy<void, StructureElements...>(rhs);
+      static_assert( StructureChainValidation<sizeof...( ChainElements ) - 1, ChainElements...>::valid,
+                     "The structure chain is not valid!" );
+      link<sizeof...( ChainElements ) - 1>();
+    }
+
+    StructureChain & operator=( StructureChain const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      std::tuple<ChainElements...>::operator=( rhs );
+      link<sizeof...( ChainElements ) - 1>();
       return *this;
     }
 
-    template<typename ClassType> ClassType& get() VULKAN_HPP_NOEXCEPT { return static_cast<ClassType&>(*this);}
+    StructureChain & operator=( StructureChain && rhs ) = delete;
 
-    template<typename ClassType> const ClassType& get() const VULKAN_HPP_NOEXCEPT { return static_cast<const ClassType&>(*this);}
-
-    template<typename ClassTypeA, typename ClassTypeB, typename ...ClassTypes>
-    std::tuple<ClassTypeA&, ClassTypeB&, ClassTypes&...> get()
+    template <typename T, size_t Which = 0>
+    T & get() VULKAN_HPP_NOEXCEPT
     {
-      return std::tie(get<ClassTypeA>(), get<ClassTypeB>(), get<ClassTypes>()...);
+      return std::get<ChainElementIndex<0, T, Which, void, ChainElements...>::value>( *this );
     }
 
-    template<typename ClassTypeA, typename ClassTypeB, typename ...ClassTypes>
-    std::tuple<const ClassTypeA&, const ClassTypeB&, const ClassTypes&...> get() const
+    template <typename T, size_t Which = 0>
+    T const & get() const VULKAN_HPP_NOEXCEPT
     {
-      return std::tie(get<ClassTypeA>(), get<ClassTypeB>(), get<ClassTypes>()...);
+      return std::get<ChainElementIndex<0, T, Which, void, ChainElements...>::value>( *this );
     }
 
-    template<typename ClassType>
-    void unlink() VULKAN_HPP_NOEXCEPT
+    template <typename T0, typename T1, typename... Ts>
+    std::tuple<T0 &, T1 &, Ts &...> get() VULKAN_HPP_NOEXCEPT
     {
-      static_assert(isPartOfStructureChain<ClassType, StructureElements...>::valid, "Can't unlink Structure that's not part of this StructureChain!");
-      static_assert(!std::is_same<ClassType, typename std::tuple_element<0, std::tuple<StructureElements...>>::type>::value, "It's not allowed to unlink the first element!");
-      VkBaseOutStructure * ptr = reinterpret_cast<VkBaseOutStructure*>(&get<ClassType>());
-      VULKAN_HPP_ASSERT(ptr != nullptr);
-      VkBaseOutStructure ** ppNext = &(reinterpret_cast<VkBaseOutStructure*>(this)->pNext);
-      VULKAN_HPP_ASSERT(*ppNext != nullptr);
-      while (*ppNext != ptr)
-      {
-        ppNext = &(*ppNext)->pNext;
-        VULKAN_HPP_ASSERT(*ppNext != nullptr);   // fires, if the ClassType member has already been unlinked !
-      }
-      VULKAN_HPP_ASSERT(*ppNext == ptr);
-      *ppNext = (*ppNext)->pNext;
+      return std::tie( get<T0>(), get<T1>(), get<Ts>()... );
     }
 
-    template <typename ClassType>
+    template <typename T0, typename T1, typename... Ts>
+    std::tuple<T0 const &, T1 const &, Ts const &...> get() const VULKAN_HPP_NOEXCEPT
+    {
+      return std::tie( get<T0>(), get<T1>(), get<Ts>()... );
+    }
+
+    template <typename ClassType, size_t Which = 0>
     void relink() VULKAN_HPP_NOEXCEPT
     {
-      static_assert(isPartOfStructureChain<ClassType, StructureElements...>::valid, "Can't relink Structure that's not part of this StructureChain!");
-      static_assert(!std::is_same<ClassType, typename std::tuple_element<0, std::tuple<StructureElements...>>::type>::value, "It's not allowed to have the first element unlinked!");
-      VkBaseOutStructure * ptr = reinterpret_cast<VkBaseOutStructure*>(&get<ClassType>());
-      VULKAN_HPP_ASSERT(ptr != nullptr);
-      VkBaseOutStructure ** ppNext = &(reinterpret_cast<VkBaseOutStructure*>(this)->pNext);
-      VULKAN_HPP_ASSERT(*ppNext != nullptr);
-#if !defined(NDEBUG)
-      while (*ppNext)
-      {
-        VULKAN_HPP_ASSERT(*ppNext != ptr);   // fires, if the ClassType member has not been unlinked before
-        ppNext = &(*ppNext)->pNext;
-      }
-      ppNext = &(reinterpret_cast<VkBaseOutStructure*>(this)->pNext);
-#endif
-      ptr->pNext = *ppNext;
-      *ppNext = ptr;
+      static_assert( IsPartOfStructureChain<ClassType, ChainElements...>::valid,
+                     "Can't relink Structure that's not part of this StructureChain!" );
+      static_assert(
+        !std::is_same<ClassType, typename std::tuple_element<0, std::tuple<ChainElements...>>::type>::value || (Which != 0),
+        "It's not allowed to have the first element unlinked!" );
+
+      auto pNext = reinterpret_cast<VkBaseInStructure *>( &get<ClassType, Which>() );
+      VULKAN_HPP_ASSERT( !isLinked( pNext ) );
+      auto & headElement = std::get<0>( *this );
+      pNext->pNext       = reinterpret_cast<VkBaseInStructure const*>(headElement.pNext);
+      headElement.pNext  = pNext;
+    }
+
+    template <typename ClassType, size_t Which = 0>
+    void unlink() VULKAN_HPP_NOEXCEPT
+    {
+      static_assert( IsPartOfStructureChain<ClassType, ChainElements...>::valid,
+                     "Can't unlink Structure that's not part of this StructureChain!" );
+      static_assert(
+        !std::is_same<ClassType, typename std::tuple_element<0, std::tuple<ChainElements...>>::type>::value || (Which != 0),
+        "It's not allowed to unlink the first element!" );
+
+      unlink<sizeof...( ChainElements ) - 1>( reinterpret_cast<VkBaseOutStructure const *>( &get<ClassType, Which>() ) );
     }
 
   private:
-    template<typename List, typename X>
-    void link() VULKAN_HPP_NOEXCEPT
+    template <int Index, typename T, int Which, typename, class First, class... Types>
+    struct ChainElementIndex : ChainElementIndex<Index + 1, T, Which, void, Types...>
+    {};
+
+    template <int Index, typename T, int Which, class First, class... Types>
+    struct ChainElementIndex<Index,
+                             T,
+                             Which,
+                             typename std::enable_if<!std::is_same<T, First>::value, void>::type,
+                             First,
+                             Types...> : ChainElementIndex<Index + 1, T, Which, void, Types...>
+    {};
+
+    template <int Index, typename T, int Which, class First, class... Types>
+    struct ChainElementIndex<Index,
+                             T,
+                             Which,
+                             typename std::enable_if<std::is_same<T, First>::value, void>::type,
+                             First,
+                             Types...> : ChainElementIndex<Index + 1, T, Which - 1, void, Types...>
+    {};
+
+    template <int Index, typename T, class First, class... Types>
+    struct ChainElementIndex<Index,
+                             T,
+                             0,
+                             typename std::enable_if<std::is_same<T, First>::value, void>::type,
+                             First,
+                             Types...> : std::integral_constant<int, Index>
+    {};
+
+    bool isLinked( VkBaseInStructure const * pNext )
     {
-      static_assert(extendCheck<List, X>::valid, "The structure chain is not valid!");
+      VkBaseInStructure const * elementPtr = reinterpret_cast<VkBaseInStructure const*>(&std::get<0>( *this ));
+      while ( elementPtr )
+      {
+        if ( elementPtr->pNext == pNext )
+        {
+          return true;
+        }
+        elementPtr = elementPtr->pNext;
+      }
+      return false;
     }
 
-    template<typename List, typename X, typename Y, typename ...Z>
-    void link() VULKAN_HPP_NOEXCEPT
+    template <size_t Index>
+    typename std::enable_if<Index != 0, void>::type link() VULKAN_HPP_NOEXCEPT
     {
-      static_assert(extendCheck<List,X>::valid, "The structure chain is not valid!");
-      X& x = static_cast<X&>(*this);
-      Y& y = static_cast<Y&>(*this);
-      x.pNext = &y;
-      link<TypeList<List, X>, Y, Z...>();
+      auto & x = std::get<Index - 1>( *this );
+      x.pNext  = &std::get<Index>( *this );
+      link<Index - 1>();
     }
 
-    template<typename List, typename X>
-    void linkAndCopy(StructureChain const &rhs) VULKAN_HPP_NOEXCEPT
+    template <size_t Index>
+    typename std::enable_if<Index == 0, void>::type link() VULKAN_HPP_NOEXCEPT
+    {}
+
+    template <size_t Index>
+    typename std::enable_if<Index != 0, void>::type unlink( VkBaseOutStructure const * pNext ) VULKAN_HPP_NOEXCEPT
     {
-      static_assert(extendCheck<List, X>::valid, "The structure chain is not valid!");
-      static_cast<X&>(*this) = static_cast<X const &>(rhs);
+      auto & element = std::get<Index>( *this );
+      if ( element.pNext == pNext )
+      {
+        element.pNext = pNext->pNext;
+      }
+      else
+      {
+        unlink<Index - 1>( pNext );
+      }
     }
 
-    template<typename List, typename X, typename Y, typename ...Z>
-    void linkAndCopy(StructureChain const &rhs) VULKAN_HPP_NOEXCEPT
+    template <size_t Index>
+    typename std::enable_if<Index == 0, void>::type unlink( VkBaseOutStructure const * pNext ) VULKAN_HPP_NOEXCEPT
     {
-      static_assert(extendCheck<List, X>::valid, "The structure chain is not valid!");
-      X& x = static_cast<X&>(*this);
-      Y& y = static_cast<Y&>(*this);
-      x = static_cast<X const &>(rhs);
-      x.pNext = &y;
-      linkAndCopy<TypeList<List, X>, Y, Z...>(rhs);
-    }
-
-    template<typename List, typename X>
-    void linkAndCopyElements(X const &xelem) VULKAN_HPP_NOEXCEPT
-    {
-      static_assert(extendCheck<List, X>::valid, "The structure chain is not valid!");
-      static_cast<X&>(*this) = xelem;
-    }
-
-    template<typename List, typename X, typename Y, typename ...Z>
-    void linkAndCopyElements(X const &xelem, Y const &yelem, Z const &... zelem) VULKAN_HPP_NOEXCEPT
-    {
-      static_assert(extendCheck<List, X>::valid, "The structure chain is not valid!");
-      X& x = static_cast<X&>(*this);
-      Y& y = static_cast<Y&>(*this);
-      x = xelem;
-      x.pNext = &y;
-      linkAndCopyElements<TypeList<List, X>, Y, Z...>(yelem, zelem...);
+      auto & element = std::get<0>( *this );
+      if ( element.pNext == pNext )
+      {
+        element.pNext = pNext->pNext;
+      }
+      else
+      {
+        VULKAN_HPP_ASSERT( false );  // fires, if the ClassType member has already been unlinked !
+      }
     }
   };
 
@@ -1483,10 +1524,12 @@ namespace VULKAN_HPP_NAMESPACE
       return ::vkCmdWaitEvents( commandBuffer, eventCount, pEvents, srcStageMask, dstStageMask, memoryBarrierCount, pMemoryBarriers, bufferMemoryBarrierCount, pBufferMemoryBarriers, imageMemoryBarrierCount, pImageMemoryBarriers );
     }
 
+#ifdef VK_ENABLE_BETA_EXTENSIONS
     void vkCmdWriteAccelerationStructuresPropertiesKHR( VkCommandBuffer commandBuffer, uint32_t accelerationStructureCount, const VkAccelerationStructureKHR* pAccelerationStructures, VkQueryType queryType, VkQueryPool queryPool, uint32_t firstQuery ) const VULKAN_HPP_NOEXCEPT
     {
       return ::vkCmdWriteAccelerationStructuresPropertiesKHR( commandBuffer, accelerationStructureCount, pAccelerationStructures, queryType, queryPool, firstQuery );
     }
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
     void vkCmdWriteAccelerationStructuresPropertiesNV( VkCommandBuffer commandBuffer, uint32_t accelerationStructureCount, const VkAccelerationStructureKHR* pAccelerationStructures, VkQueryType queryType, VkQueryPool queryPool, uint32_t firstQuery ) const VULKAN_HPP_NOEXCEPT
     {
@@ -1555,10 +1598,12 @@ namespace VULKAN_HPP_NAMESPACE
       return ::vkAllocateMemory( device, pAllocateInfo, pAllocator, pMemory );
     }
 
+#ifdef VK_ENABLE_BETA_EXTENSIONS
     VkResult vkBindAccelerationStructureMemoryKHR( VkDevice device, uint32_t bindInfoCount, const VkBindAccelerationStructureMemoryInfoKHR* pBindInfos ) const VULKAN_HPP_NOEXCEPT
     {
       return ::vkBindAccelerationStructureMemoryKHR( device, bindInfoCount, pBindInfos );
     }
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
     VkResult vkBindAccelerationStructureMemoryNV( VkDevice device, uint32_t bindInfoCount, const VkBindAccelerationStructureMemoryInfoKHR* pBindInfos ) const VULKAN_HPP_NOEXCEPT
     {
@@ -1826,10 +1871,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
+#ifdef VK_ENABLE_BETA_EXTENSIONS
     void vkDestroyAccelerationStructureKHR( VkDevice device, VkAccelerationStructureKHR accelerationStructure, const VkAllocationCallbacks* pAllocator ) const VULKAN_HPP_NOEXCEPT
     {
       return ::vkDestroyAccelerationStructureKHR( device, accelerationStructure, pAllocator );
     }
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
     void vkDestroyAccelerationStructureNV( VkDevice device, VkAccelerationStructureKHR accelerationStructure, const VkAllocationCallbacks* pAllocator ) const VULKAN_HPP_NOEXCEPT
     {
@@ -2339,10 +2386,12 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
+#ifdef VK_ENABLE_BETA_EXTENSIONS
     VkResult vkGetRayTracingShaderGroupHandlesKHR( VkDevice device, VkPipeline pipeline, uint32_t firstGroup, uint32_t groupCount, size_t dataSize, void* pData ) const VULKAN_HPP_NOEXCEPT
     {
       return ::vkGetRayTracingShaderGroupHandlesKHR( device, pipeline, firstGroup, groupCount, dataSize, pData );
     }
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
     VkResult vkGetRayTracingShaderGroupHandlesNV( VkDevice device, VkPipeline pipeline, uint32_t firstGroup, uint32_t groupCount, size_t dataSize, void* pData ) const VULKAN_HPP_NOEXCEPT
     {
@@ -3758,14 +3807,6 @@ namespace VULKAN_HPP_NAMESPACE
       case BufferUsageFlagBits::eRayTracingKHR : return "RayTracingKHR";
       default: return "invalid";
     }
-  }
-
-  enum class BufferViewCreateFlagBits
-  {};
-
-  VULKAN_HPP_INLINE std::string to_string( BufferViewCreateFlagBits )
-  {
-    return "(void)";
   }
 
   enum class BuildAccelerationStructureFlagBitsKHR : VkBuildAccelerationStructureFlagsKHR
@@ -6477,14 +6518,6 @@ namespace VULKAN_HPP_NAMESPACE
     }
   }
 
-  enum class PipelineColorBlendStateCreateFlagBits
-  {};
-
-  VULKAN_HPP_INLINE std::string to_string( PipelineColorBlendStateCreateFlagBits )
-  {
-    return "(void)";
-  }
-
   enum class PipelineCompilerControlFlagBitsAMD : VkPipelineCompilerControlFlagsAMD
   {};
 
@@ -6561,22 +6594,6 @@ namespace VULKAN_HPP_NAMESPACE
     }
   }
 
-  enum class PipelineDepthStencilStateCreateFlagBits
-  {};
-
-  VULKAN_HPP_INLINE std::string to_string( PipelineDepthStencilStateCreateFlagBits )
-  {
-    return "(void)";
-  }
-
-  enum class PipelineDynamicStateCreateFlagBits
-  {};
-
-  VULKAN_HPP_INLINE std::string to_string( PipelineDynamicStateCreateFlagBits )
-  {
-    return "(void)";
-  }
-
   enum class PipelineExecutableStatisticFormatKHR
   {
     eBool32 = VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_BOOL32_KHR,
@@ -6595,38 +6612,6 @@ namespace VULKAN_HPP_NAMESPACE
       case PipelineExecutableStatisticFormatKHR::eFloat64 : return "Float64";
       default: return "invalid";
     }
-  }
-
-  enum class PipelineInputAssemblyStateCreateFlagBits
-  {};
-
-  VULKAN_HPP_INLINE std::string to_string( PipelineInputAssemblyStateCreateFlagBits )
-  {
-    return "(void)";
-  }
-
-  enum class PipelineLayoutCreateFlagBits
-  {};
-
-  VULKAN_HPP_INLINE std::string to_string( PipelineLayoutCreateFlagBits )
-  {
-    return "(void)";
-  }
-
-  enum class PipelineMultisampleStateCreateFlagBits
-  {};
-
-  VULKAN_HPP_INLINE std::string to_string( PipelineMultisampleStateCreateFlagBits )
-  {
-    return "(void)";
-  }
-
-  enum class PipelineRasterizationStateCreateFlagBits
-  {};
-
-  VULKAN_HPP_INLINE std::string to_string( PipelineRasterizationStateCreateFlagBits )
-  {
-    return "(void)";
   }
 
   enum class PipelineShaderStageCreateFlagBits : VkPipelineShaderStageCreateFlags
@@ -6709,30 +6694,6 @@ namespace VULKAN_HPP_NAMESPACE
       case PipelineStageFlagBits::eCommandPreprocessNV : return "CommandPreprocessNV";
       default: return "invalid";
     }
-  }
-
-  enum class PipelineTessellationStateCreateFlagBits
-  {};
-
-  VULKAN_HPP_INLINE std::string to_string( PipelineTessellationStateCreateFlagBits )
-  {
-    return "(void)";
-  }
-
-  enum class PipelineVertexInputStateCreateFlagBits
-  {};
-
-  VULKAN_HPP_INLINE std::string to_string( PipelineVertexInputStateCreateFlagBits )
-  {
-    return "(void)";
-  }
-
-  enum class PipelineViewportStateCreateFlagBits
-  {};
-
-  VULKAN_HPP_INLINE std::string to_string( PipelineViewportStateCreateFlagBits )
-  {
-    return "(void)";
   }
 
   enum class PointClippingBehavior
@@ -9245,6 +9206,13 @@ namespace VULKAN_HPP_NAMESPACE
     return "{ " + result.substr(0, result.size() - 3) + " }";
   }
 
+  enum class BufferViewCreateFlagBits : VkFlags
+  {};
+
+  VULKAN_HPP_INLINE std::string to_string( BufferViewCreateFlagBits )
+  {
+    return "(void)";
+  }
 
   using BufferViewCreateFlags = Flags<BufferViewCreateFlagBits>;
 
@@ -11563,6 +11531,13 @@ namespace VULKAN_HPP_NAMESPACE
     return "{ " + result.substr(0, result.size() - 3) + " }";
   }
 
+  enum class PipelineColorBlendStateCreateFlagBits : VkFlags
+  {};
+
+  VULKAN_HPP_INLINE std::string to_string( PipelineColorBlendStateCreateFlagBits )
+  {
+    return "(void)";
+  }
 
   using PipelineColorBlendStateCreateFlags = Flags<PipelineColorBlendStateCreateFlagBits>;
 
@@ -11730,6 +11705,13 @@ namespace VULKAN_HPP_NAMESPACE
     return "{ " + result.substr(0, result.size() - 3) + " }";
   }
 
+  enum class PipelineDepthStencilStateCreateFlagBits : VkFlags
+  {};
+
+  VULKAN_HPP_INLINE std::string to_string( PipelineDepthStencilStateCreateFlagBits )
+  {
+    return "(void)";
+  }
 
   using PipelineDepthStencilStateCreateFlags = Flags<PipelineDepthStencilStateCreateFlagBits>;
 
@@ -11755,6 +11737,13 @@ namespace VULKAN_HPP_NAMESPACE
     return "{}";
   }
 
+  enum class PipelineDynamicStateCreateFlagBits : VkFlags
+  {};
+
+  VULKAN_HPP_INLINE std::string to_string( PipelineDynamicStateCreateFlagBits )
+  {
+    return "(void)";
+  }
 
   using PipelineDynamicStateCreateFlags = Flags<PipelineDynamicStateCreateFlagBits>;
 
@@ -11764,6 +11753,13 @@ namespace VULKAN_HPP_NAMESPACE
     return "{}";
   }
 
+  enum class PipelineInputAssemblyStateCreateFlagBits : VkFlags
+  {};
+
+  VULKAN_HPP_INLINE std::string to_string( PipelineInputAssemblyStateCreateFlagBits )
+  {
+    return "(void)";
+  }
 
   using PipelineInputAssemblyStateCreateFlags = Flags<PipelineInputAssemblyStateCreateFlagBits>;
 
@@ -11773,6 +11769,13 @@ namespace VULKAN_HPP_NAMESPACE
     return "{}";
   }
 
+  enum class PipelineLayoutCreateFlagBits : VkFlags
+  {};
+
+  VULKAN_HPP_INLINE std::string to_string( PipelineLayoutCreateFlagBits )
+  {
+    return "(void)";
+  }
 
   using PipelineLayoutCreateFlags = Flags<PipelineLayoutCreateFlagBits>;
 
@@ -11782,6 +11785,13 @@ namespace VULKAN_HPP_NAMESPACE
     return "{}";
   }
 
+  enum class PipelineMultisampleStateCreateFlagBits : VkFlags
+  {};
+
+  VULKAN_HPP_INLINE std::string to_string( PipelineMultisampleStateCreateFlagBits )
+  {
+    return "(void)";
+  }
 
   using PipelineMultisampleStateCreateFlags = Flags<PipelineMultisampleStateCreateFlagBits>;
 
@@ -11823,6 +11833,13 @@ namespace VULKAN_HPP_NAMESPACE
     return "{}";
   }
 
+  enum class PipelineRasterizationStateCreateFlagBits : VkFlags
+  {};
+
+  VULKAN_HPP_INLINE std::string to_string( PipelineRasterizationStateCreateFlagBits )
+  {
+    return "(void)";
+  }
 
   using PipelineRasterizationStateCreateFlags = Flags<PipelineRasterizationStateCreateFlagBits>;
 
@@ -11956,6 +11973,13 @@ namespace VULKAN_HPP_NAMESPACE
     return "{ " + result.substr(0, result.size() - 3) + " }";
   }
 
+  enum class PipelineTessellationStateCreateFlagBits : VkFlags
+  {};
+
+  VULKAN_HPP_INLINE std::string to_string( PipelineTessellationStateCreateFlagBits )
+  {
+    return "(void)";
+  }
 
   using PipelineTessellationStateCreateFlags = Flags<PipelineTessellationStateCreateFlagBits>;
 
@@ -11965,6 +11989,13 @@ namespace VULKAN_HPP_NAMESPACE
     return "{}";
   }
 
+  enum class PipelineVertexInputStateCreateFlagBits : VkFlags
+  {};
+
+  VULKAN_HPP_INLINE std::string to_string( PipelineVertexInputStateCreateFlagBits )
+  {
+    return "(void)";
+  }
 
   using PipelineVertexInputStateCreateFlags = Flags<PipelineVertexInputStateCreateFlagBits>;
 
@@ -11974,6 +12005,13 @@ namespace VULKAN_HPP_NAMESPACE
     return "{}";
   }
 
+  enum class PipelineViewportStateCreateFlagBits : VkFlags
+  {};
+
+  VULKAN_HPP_INLINE std::string to_string( PipelineViewportStateCreateFlagBits )
+  {
+    return "(void)";
+  }
 
   using PipelineViewportStateCreateFlags = Flags<PipelineViewportStateCreateFlagBits>;
 
@@ -16532,12 +16570,14 @@ namespace VULKAN_HPP_NAMESPACE
     void waitEvents( ArrayProxy<const VULKAN_HPP_NAMESPACE::Event> events, VULKAN_HPP_NAMESPACE::PipelineStageFlags srcStageMask, VULKAN_HPP_NAMESPACE::PipelineStageFlags dstStageMask, ArrayProxy<const VULKAN_HPP_NAMESPACE::MemoryBarrier> memoryBarriers, ArrayProxy<const VULKAN_HPP_NAMESPACE::BufferMemoryBarrier> bufferMemoryBarriers, ArrayProxy<const VULKAN_HPP_NAMESPACE::ImageMemoryBarrier> imageMemoryBarriers, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+#ifdef VK_ENABLE_BETA_EXTENSIONS
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     void writeAccelerationStructuresPropertiesKHR( uint32_t accelerationStructureCount, const VULKAN_HPP_NAMESPACE::AccelerationStructureKHR* pAccelerationStructures, VULKAN_HPP_NAMESPACE::QueryType queryType, VULKAN_HPP_NAMESPACE::QueryPool queryPool, uint32_t firstQuery, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     void writeAccelerationStructuresPropertiesKHR( ArrayProxy<const VULKAN_HPP_NAMESPACE::AccelerationStructureKHR> accelerationStructures, VULKAN_HPP_NAMESPACE::QueryType queryType, VULKAN_HPP_NAMESPACE::QueryPool queryPool, uint32_t firstQuery, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     void writeAccelerationStructuresPropertiesNV( uint32_t accelerationStructureCount, const VULKAN_HPP_NAMESPACE::AccelerationStructureKHR* pAccelerationStructures, VULKAN_HPP_NAMESPACE::QueryType queryType, VULKAN_HPP_NAMESPACE::QueryPool queryPool, uint32_t firstQuery, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
@@ -18225,12 +18265,14 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+#ifdef VK_ENABLE_BETA_EXTENSIONS
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     Result bindAccelerationStructureMemoryKHR( uint32_t bindInfoCount, const VULKAN_HPP_NAMESPACE::BindAccelerationStructureMemoryInfoKHR* pBindInfos, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<void>::type bindAccelerationStructureMemoryKHR( ArrayProxy<const VULKAN_HPP_NAMESPACE::BindAccelerationStructureMemoryInfoKHR> bindInfos, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     Result bindAccelerationStructureMemoryNV( uint32_t bindInfoCount, const VULKAN_HPP_NAMESPACE::BindAccelerationStructureMemoryInfoKHR* pBindInfos, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
@@ -18782,11 +18824,20 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
+#ifdef VK_ENABLE_BETA_EXTENSIONS
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     void destroyAccelerationStructureKHR( VULKAN_HPP_NAMESPACE::AccelerationStructureKHR accelerationStructure, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     void destroyAccelerationStructureKHR( VULKAN_HPP_NAMESPACE::AccelerationStructureKHR accelerationStructure, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
+
+    template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
+    void destroy( VULKAN_HPP_NAMESPACE::AccelerationStructureKHR accelerationStructure, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+    template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
+    void destroy( VULKAN_HPP_NAMESPACE::AccelerationStructureKHR accelerationStructure, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
@@ -18794,13 +18845,6 @@ namespace VULKAN_HPP_NAMESPACE
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     void destroyAccelerationStructureNV( VULKAN_HPP_NAMESPACE::AccelerationStructureKHR accelerationStructure, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
-#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
-
-    template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    void destroy( VULKAN_HPP_NAMESPACE::AccelerationStructureKHR accelerationStructure, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
-#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
-    template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    void destroy( VULKAN_HPP_NAMESPACE::AccelerationStructureKHR accelerationStructure, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
@@ -18897,17 +18941,17 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    void destroyDescriptorUpdateTemplateKHR( VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplate descriptorUpdateTemplate, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
-#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
-    template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    void destroyDescriptorUpdateTemplateKHR( VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplate descriptorUpdateTemplate, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
-#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
-
-    template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     void destroy( VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplate descriptorUpdateTemplate, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     void destroy( VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplate descriptorUpdateTemplate, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+    template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
+    void destroyDescriptorUpdateTemplateKHR( VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplate descriptorUpdateTemplate, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+    template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
+    void destroyDescriptorUpdateTemplateKHR( VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplate descriptorUpdateTemplate, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
@@ -19107,17 +19151,17 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    void destroySamplerYcbcrConversionKHR( VULKAN_HPP_NAMESPACE::SamplerYcbcrConversion ycbcrConversion, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
-#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
-    template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    void destroySamplerYcbcrConversionKHR( VULKAN_HPP_NAMESPACE::SamplerYcbcrConversion ycbcrConversion, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
-#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
-
-    template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     void destroy( VULKAN_HPP_NAMESPACE::SamplerYcbcrConversion ycbcrConversion, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     void destroy( VULKAN_HPP_NAMESPACE::SamplerYcbcrConversion ycbcrConversion, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+    template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
+    void destroySamplerYcbcrConversionKHR( VULKAN_HPP_NAMESPACE::SamplerYcbcrConversion ycbcrConversion, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+    template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
+    void destroySamplerYcbcrConversionKHR( VULKAN_HPP_NAMESPACE::SamplerYcbcrConversion ycbcrConversion, Optional<const AllocationCallbacks> allocator = nullptr, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
@@ -19728,12 +19772,14 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
+#ifdef VK_ENABLE_BETA_EXTENSIONS
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     Result getRayTracingShaderGroupHandlesKHR( VULKAN_HPP_NAMESPACE::Pipeline pipeline, uint32_t firstGroup, uint32_t groupCount, size_t dataSize, void* pData, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename T, typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     typename ResultValueType<void>::type getRayTracingShaderGroupHandlesKHR( VULKAN_HPP_NAMESPACE::Pipeline pipeline, uint32_t firstGroup, uint32_t groupCount, ArrayProxy<T> data, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     Result getRayTracingShaderGroupHandlesNV( VULKAN_HPP_NAMESPACE::Pipeline pipeline, uint32_t firstGroup, uint32_t groupCount, size_t dataSize, void* pData, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
@@ -21257,6 +21303,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct AabbPositionsKHR
   {
 
+
     VULKAN_HPP_CONSTEXPR AabbPositionsKHR( float minX_ = {},
                                            float minY_ = {},
                                            float minZ_ = {},
@@ -21420,6 +21467,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_ENABLE_BETA_EXTENSIONS
   struct AccelerationStructureGeometryTrianglesDataKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eAccelerationStructureGeometryTrianglesDataKHR;
 
     AccelerationStructureGeometryTrianglesDataKHR( VULKAN_HPP_NAMESPACE::Format vertexFormat_ = VULKAN_HPP_NAMESPACE::Format::eUndefined,
@@ -21533,6 +21581,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_ENABLE_BETA_EXTENSIONS
   struct AccelerationStructureGeometryAabbsDataKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eAccelerationStructureGeometryAabbsDataKHR;
 
     AccelerationStructureGeometryAabbsDataKHR( VULKAN_HPP_NAMESPACE::DeviceOrHostAddressConstKHR data_ = {},
@@ -21610,6 +21659,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_ENABLE_BETA_EXTENSIONS
   struct AccelerationStructureGeometryInstancesDataKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eAccelerationStructureGeometryInstancesDataKHR;
 
     AccelerationStructureGeometryInstancesDataKHR( VULKAN_HPP_NAMESPACE::Bool32 arrayOfPointers_ = {},
@@ -21753,6 +21803,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_ENABLE_BETA_EXTENSIONS
   struct AccelerationStructureGeometryKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eAccelerationStructureGeometryKHR;
 
     AccelerationStructureGeometryKHR( VULKAN_HPP_NAMESPACE::GeometryTypeKHR geometryType_ = VULKAN_HPP_NAMESPACE::GeometryTypeKHR::eTriangles,
@@ -21893,6 +21944,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_ENABLE_BETA_EXTENSIONS
   struct AccelerationStructureBuildGeometryInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eAccelerationStructureBuildGeometryInfoKHR;
 
     AccelerationStructureBuildGeometryInfoKHR( VULKAN_HPP_NAMESPACE::AccelerationStructureTypeKHR type_ = VULKAN_HPP_NAMESPACE::AccelerationStructureTypeKHR::eTopLevel,
@@ -22034,6 +22086,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct AccelerationStructureBuildOffsetInfoKHR
   {
 
+
     VULKAN_HPP_CONSTEXPR AccelerationStructureBuildOffsetInfoKHR( uint32_t primitiveCount_ = {},
                                                                   uint32_t primitiveOffset_ = {},
                                                                   uint32_t firstVertex_ = {},
@@ -22124,6 +22177,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_ENABLE_BETA_EXTENSIONS
   struct AccelerationStructureCreateGeometryTypeInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eAccelerationStructureCreateGeometryTypeInfoKHR;
 
     VULKAN_HPP_CONSTEXPR AccelerationStructureCreateGeometryTypeInfoKHR( VULKAN_HPP_NAMESPACE::GeometryTypeKHR geometryType_ = VULKAN_HPP_NAMESPACE::GeometryTypeKHR::eTriangles,
@@ -22258,6 +22312,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_ENABLE_BETA_EXTENSIONS
   struct AccelerationStructureCreateInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eAccelerationStructureCreateInfoKHR;
 
     VULKAN_HPP_CONSTEXPR AccelerationStructureCreateInfoKHR( VULKAN_HPP_NAMESPACE::DeviceSize compactedSize_ = {},
@@ -22391,6 +22446,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct GeometryTrianglesNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eGeometryTrianglesNV;
 
     VULKAN_HPP_CONSTEXPR GeometryTrianglesNV( VULKAN_HPP_NAMESPACE::Buffer vertexData_ = {},
@@ -22573,6 +22629,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct GeometryAABBNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eGeometryAabbNV;
 
     VULKAN_HPP_CONSTEXPR GeometryAABBNV( VULKAN_HPP_NAMESPACE::Buffer aabbData_ = {},
@@ -22686,6 +22743,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct GeometryDataNV
   {
 
+
     VULKAN_HPP_CONSTEXPR GeometryDataNV( VULKAN_HPP_NAMESPACE::GeometryTrianglesNV triangles_ = {},
                                          VULKAN_HPP_NAMESPACE::GeometryAABBNV aabbs_ = {} ) VULKAN_HPP_NOEXCEPT
       : triangles( triangles_ )
@@ -22754,6 +22812,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct GeometryNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eGeometryNV;
 
     VULKAN_HPP_CONSTEXPR GeometryNV( VULKAN_HPP_NAMESPACE::GeometryTypeKHR geometryType_ = VULKAN_HPP_NAMESPACE::GeometryTypeKHR::eTriangles,
@@ -22856,6 +22915,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct AccelerationStructureInfoNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eAccelerationStructureInfoNV;
 
     VULKAN_HPP_CONSTEXPR AccelerationStructureInfoNV( VULKAN_HPP_NAMESPACE::AccelerationStructureTypeNV type_ = {},
@@ -22978,6 +23038,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct AccelerationStructureCreateInfoNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eAccelerationStructureCreateInfoNV;
 
     VULKAN_HPP_CONSTEXPR AccelerationStructureCreateInfoNV( VULKAN_HPP_NAMESPACE::DeviceSize compactedSize_ = {},
@@ -23071,6 +23132,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_ENABLE_BETA_EXTENSIONS
   struct AccelerationStructureDeviceAddressInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eAccelerationStructureDeviceAddressInfoKHR;
 
     VULKAN_HPP_CONSTEXPR AccelerationStructureDeviceAddressInfoKHR( VULKAN_HPP_NAMESPACE::AccelerationStructureKHR accelerationStructure_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -23155,6 +23217,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct TransformMatrixKHR
   {
 
+
     VULKAN_HPP_CONSTEXPR_14 TransformMatrixKHR( std::array<std::array<float,4>,3> const& matrix_ = {} ) VULKAN_HPP_NOEXCEPT
       : matrix( matrix_ )
     {}
@@ -23213,6 +23276,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct AccelerationStructureInstanceKHR
   {
+
 
     VULKAN_HPP_CONSTEXPR_14 AccelerationStructureInstanceKHR( VULKAN_HPP_NAMESPACE::TransformMatrixKHR transform_ = {},
                                                               uint32_t instanceCustomIndex_ = {},
@@ -23323,6 +23387,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_ENABLE_BETA_EXTENSIONS
   struct AccelerationStructureMemoryRequirementsInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eAccelerationStructureMemoryRequirementsInfoKHR;
 
     VULKAN_HPP_CONSTEXPR AccelerationStructureMemoryRequirementsInfoKHR( VULKAN_HPP_NAMESPACE::AccelerationStructureMemoryRequirementsTypeKHR type_ = VULKAN_HPP_NAMESPACE::AccelerationStructureMemoryRequirementsTypeKHR::eObject,
@@ -23426,6 +23491,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct AccelerationStructureMemoryRequirementsInfoNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eAccelerationStructureMemoryRequirementsInfoNV;
 
     VULKAN_HPP_CONSTEXPR AccelerationStructureMemoryRequirementsInfoNV( VULKAN_HPP_NAMESPACE::AccelerationStructureMemoryRequirementsTypeNV type_ = {},
@@ -23519,6 +23585,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_ENABLE_BETA_EXTENSIONS
   struct AccelerationStructureVersionKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eAccelerationStructureVersionKHR;
 
     VULKAN_HPP_CONSTEXPR AccelerationStructureVersionKHR( const uint8_t* versionData_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -23602,6 +23669,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct AcquireNextImageInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eAcquireNextImageInfoKHR;
 
     VULKAN_HPP_CONSTEXPR AcquireNextImageInfoKHR( VULKAN_HPP_NAMESPACE::SwapchainKHR swapchain_ = {},
@@ -23724,6 +23792,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct AcquireProfilingLockInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eAcquireProfilingLockInfoKHR;
 
     VULKAN_HPP_CONSTEXPR AcquireProfilingLockInfoKHR( VULKAN_HPP_NAMESPACE::AcquireProfilingLockFlagsKHR flags_ = {},
@@ -23816,6 +23885,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct AllocationCallbacks
   {
+
 
     VULKAN_HPP_CONSTEXPR AllocationCallbacks( void* pUserData_ = {},
                                               PFN_vkAllocationFunction pfnAllocation_ = {},
@@ -23926,6 +23996,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct ComponentMapping
   {
 
+
     VULKAN_HPP_CONSTEXPR ComponentMapping( VULKAN_HPP_NAMESPACE::ComponentSwizzle r_ = VULKAN_HPP_NAMESPACE::ComponentSwizzle::eIdentity,
                                            VULKAN_HPP_NAMESPACE::ComponentSwizzle g_ = VULKAN_HPP_NAMESPACE::ComponentSwizzle::eIdentity,
                                            VULKAN_HPP_NAMESPACE::ComponentSwizzle b_ = VULKAN_HPP_NAMESPACE::ComponentSwizzle::eIdentity,
@@ -24015,6 +24086,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
   struct AndroidHardwareBufferFormatPropertiesANDROID
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eAndroidHardwareBufferFormatPropertiesANDROID;
 
     VULKAN_HPP_CONSTEXPR AndroidHardwareBufferFormatPropertiesANDROID( VULKAN_HPP_NAMESPACE::Format format_ = VULKAN_HPP_NAMESPACE::Format::eUndefined,
@@ -24115,6 +24187,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
   struct AndroidHardwareBufferPropertiesANDROID
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eAndroidHardwareBufferPropertiesANDROID;
 
     VULKAN_HPP_CONSTEXPR AndroidHardwareBufferPropertiesANDROID( VULKAN_HPP_NAMESPACE::DeviceSize allocationSize_ = {},
@@ -24191,6 +24264,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
   struct AndroidHardwareBufferUsageANDROID
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eAndroidHardwareBufferUsageANDROID;
 
     VULKAN_HPP_CONSTEXPR AndroidHardwareBufferUsageANDROID( uint64_t androidHardwareBufferUsage_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -24263,6 +24337,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
   struct AndroidSurfaceCreateInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eAndroidSurfaceCreateInfoKHR;
 
     VULKAN_HPP_CONSTEXPR AndroidSurfaceCreateInfoKHR( VULKAN_HPP_NAMESPACE::AndroidSurfaceCreateFlagsKHR flags_ = {},
@@ -24356,6 +24431,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ApplicationInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eApplicationInfo;
 
     VULKAN_HPP_CONSTEXPR ApplicationInfo( const char* pApplicationName_ = {},
@@ -24478,6 +24554,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct AttachmentDescription
   {
+
 
     VULKAN_HPP_CONSTEXPR AttachmentDescription( VULKAN_HPP_NAMESPACE::AttachmentDescriptionFlags flags_ = {},
                                                 VULKAN_HPP_NAMESPACE::Format format_ = VULKAN_HPP_NAMESPACE::Format::eUndefined,
@@ -24617,6 +24694,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct AttachmentDescription2
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eAttachmentDescription2;
 
     VULKAN_HPP_CONSTEXPR AttachmentDescription2( VULKAN_HPP_NAMESPACE::AttachmentDescriptionFlags flags_ = {},
@@ -24779,6 +24857,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct AttachmentDescriptionStencilLayout
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eAttachmentDescriptionStencilLayout;
 
     VULKAN_HPP_CONSTEXPR AttachmentDescriptionStencilLayout( VULKAN_HPP_NAMESPACE::ImageLayout stencilInitialLayout_ = VULKAN_HPP_NAMESPACE::ImageLayout::eUndefined,
@@ -24872,6 +24951,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct AttachmentReference
   {
 
+
     VULKAN_HPP_CONSTEXPR AttachmentReference( uint32_t attachment_ = {},
                                               VULKAN_HPP_NAMESPACE::ImageLayout layout_ = VULKAN_HPP_NAMESPACE::ImageLayout::eUndefined ) VULKAN_HPP_NOEXCEPT
       : attachment( attachment_ )
@@ -24940,6 +25020,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct AttachmentReference2
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eAttachmentReference2;
 
     VULKAN_HPP_CONSTEXPR AttachmentReference2( uint32_t attachment_ = {},
@@ -25042,6 +25123,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct AttachmentReferenceStencilLayout
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eAttachmentReferenceStencilLayout;
 
     VULKAN_HPP_CONSTEXPR AttachmentReferenceStencilLayout( VULKAN_HPP_NAMESPACE::ImageLayout stencilLayout_ = VULKAN_HPP_NAMESPACE::ImageLayout::eUndefined ) VULKAN_HPP_NOEXCEPT
@@ -25125,6 +25207,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct Extent2D
   {
 
+
     VULKAN_HPP_CONSTEXPR Extent2D( uint32_t width_ = {},
                                    uint32_t height_ = {} ) VULKAN_HPP_NOEXCEPT
       : width( width_ )
@@ -25194,6 +25277,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct SampleLocationEXT
   {
 
+
     VULKAN_HPP_CONSTEXPR SampleLocationEXT( float x_ = {},
                                             float y_ = {} ) VULKAN_HPP_NOEXCEPT
       : x( x_ )
@@ -25262,6 +25346,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct SampleLocationsInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSampleLocationsInfoEXT;
 
     VULKAN_HPP_CONSTEXPR SampleLocationsInfoEXT( VULKAN_HPP_NAMESPACE::SampleCountFlagBits sampleLocationsPerPixel_ = VULKAN_HPP_NAMESPACE::SampleCountFlagBits::e1,
@@ -25375,6 +25460,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct AttachmentSampleLocationsEXT
   {
 
+
     VULKAN_HPP_CONSTEXPR AttachmentSampleLocationsEXT( uint32_t attachmentIndex_ = {},
                                                        VULKAN_HPP_NAMESPACE::SampleLocationsInfoEXT sampleLocationsInfo_ = {} ) VULKAN_HPP_NOEXCEPT
       : attachmentIndex( attachmentIndex_ )
@@ -25444,6 +25530,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct BaseInStructure
   {
 
+
     BaseInStructure() VULKAN_HPP_NOEXCEPT
     {}
 
@@ -25504,6 +25591,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct BaseOutStructure
   {
 
+
     BaseOutStructure() VULKAN_HPP_NOEXCEPT
     {}
 
@@ -25563,6 +25651,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct BindAccelerationStructureMemoryInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eBindAccelerationStructureMemoryInfoKHR;
 
     VULKAN_HPP_CONSTEXPR BindAccelerationStructureMemoryInfoKHR( VULKAN_HPP_NAMESPACE::AccelerationStructureKHR accelerationStructure_ = {},
@@ -25685,6 +25774,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct BindBufferMemoryDeviceGroupInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eBindBufferMemoryDeviceGroupInfo;
 
     VULKAN_HPP_CONSTEXPR BindBufferMemoryDeviceGroupInfo( uint32_t deviceIndexCount_ = {},
@@ -25777,6 +25867,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct BindBufferMemoryInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eBindBufferMemoryInfo;
 
     VULKAN_HPP_CONSTEXPR BindBufferMemoryInfo( VULKAN_HPP_NAMESPACE::Buffer buffer_ = {},
@@ -25880,6 +25971,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct Offset2D
   {
 
+
     VULKAN_HPP_CONSTEXPR Offset2D( int32_t x_ = {},
                                    int32_t y_ = {} ) VULKAN_HPP_NOEXCEPT
       : x( x_ )
@@ -25949,6 +26041,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct Rect2D
   {
 
+
     VULKAN_HPP_CONSTEXPR Rect2D( VULKAN_HPP_NAMESPACE::Offset2D offset_ = {},
                                  VULKAN_HPP_NAMESPACE::Extent2D extent_ = {} ) VULKAN_HPP_NOEXCEPT
       : offset( offset_ )
@@ -26017,6 +26110,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct BindImageMemoryDeviceGroupInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eBindImageMemoryDeviceGroupInfo;
 
     VULKAN_HPP_CONSTEXPR BindImageMemoryDeviceGroupInfo( uint32_t deviceIndexCount_ = {},
@@ -26129,6 +26223,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct BindImageMemoryInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eBindImageMemoryInfo;
 
     VULKAN_HPP_CONSTEXPR BindImageMemoryInfo( VULKAN_HPP_NAMESPACE::Image image_ = {},
@@ -26231,6 +26326,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct BindImageMemorySwapchainInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eBindImageMemorySwapchainInfoKHR;
 
     VULKAN_HPP_CONSTEXPR BindImageMemorySwapchainInfoKHR( VULKAN_HPP_NAMESPACE::SwapchainKHR swapchain_ = {},
@@ -26323,6 +26419,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct BindImagePlaneMemoryInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eBindImagePlaneMemoryInfo;
 
     VULKAN_HPP_CONSTEXPR BindImagePlaneMemoryInfo( VULKAN_HPP_NAMESPACE::ImageAspectFlagBits planeAspect_ = VULKAN_HPP_NAMESPACE::ImageAspectFlagBits::eColor ) VULKAN_HPP_NOEXCEPT
@@ -26406,6 +26503,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct BindIndexBufferIndirectCommandNV
   {
 
+
     VULKAN_HPP_CONSTEXPR BindIndexBufferIndirectCommandNV( VULKAN_HPP_NAMESPACE::DeviceAddress bufferAddress_ = {},
                                                            uint32_t size_ = {},
                                                            VULKAN_HPP_NAMESPACE::IndexType indexType_ = VULKAN_HPP_NAMESPACE::IndexType::eUint16 ) VULKAN_HPP_NOEXCEPT
@@ -26485,6 +26583,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct BindShaderGroupIndirectCommandNV
   {
 
+
     VULKAN_HPP_CONSTEXPR BindShaderGroupIndirectCommandNV( uint32_t groupIndex_ = {} ) VULKAN_HPP_NOEXCEPT
       : groupIndex( groupIndex_ )
     {}
@@ -26543,6 +26642,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct SparseMemoryBind
   {
+
 
     VULKAN_HPP_CONSTEXPR SparseMemoryBind( VULKAN_HPP_NAMESPACE::DeviceSize resourceOffset_ = {},
                                            VULKAN_HPP_NAMESPACE::DeviceSize size_ = {},
@@ -26643,6 +26743,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct SparseBufferMemoryBindInfo
   {
 
+
     VULKAN_HPP_CONSTEXPR SparseBufferMemoryBindInfo( VULKAN_HPP_NAMESPACE::Buffer buffer_ = {},
                                                      uint32_t bindCount_ = {},
                                                      const VULKAN_HPP_NAMESPACE::SparseMemoryBind* pBinds_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -26721,6 +26822,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct SparseImageOpaqueMemoryBindInfo
   {
+
 
     VULKAN_HPP_CONSTEXPR SparseImageOpaqueMemoryBindInfo( VULKAN_HPP_NAMESPACE::Image image_ = {},
                                                           uint32_t bindCount_ = {},
@@ -26801,6 +26903,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct ImageSubresource
   {
 
+
     VULKAN_HPP_CONSTEXPR ImageSubresource( VULKAN_HPP_NAMESPACE::ImageAspectFlags aspectMask_ = {},
                                            uint32_t mipLevel_ = {},
                                            uint32_t arrayLayer_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -26879,6 +26982,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct Offset3D
   {
+
 
     VULKAN_HPP_CONSTEXPR Offset3D( int32_t x_ = {},
                                    int32_t y_ = {},
@@ -26966,6 +27070,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct Extent3D
   {
 
+
     VULKAN_HPP_CONSTEXPR Extent3D( uint32_t width_ = {},
                                    uint32_t height_ = {},
                                    uint32_t depth_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -27051,6 +27156,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct SparseImageMemoryBind
   {
+
 
     VULKAN_HPP_CONSTEXPR SparseImageMemoryBind( VULKAN_HPP_NAMESPACE::ImageSubresource subresource_ = {},
                                                 VULKAN_HPP_NAMESPACE::Offset3D offset_ = {},
@@ -27161,6 +27267,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct SparseImageMemoryBindInfo
   {
 
+
     VULKAN_HPP_CONSTEXPR SparseImageMemoryBindInfo( VULKAN_HPP_NAMESPACE::Image image_ = {},
                                                     uint32_t bindCount_ = {},
                                                     const VULKAN_HPP_NAMESPACE::SparseImageMemoryBind* pBinds_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -27239,6 +27346,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct BindSparseInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eBindSparseInfo;
 
     VULKAN_HPP_CONSTEXPR BindSparseInfo( uint32_t waitSemaphoreCount_ = {},
@@ -27412,6 +27520,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct BindVertexBufferIndirectCommandNV
   {
 
+
     VULKAN_HPP_CONSTEXPR BindVertexBufferIndirectCommandNV( VULKAN_HPP_NAMESPACE::DeviceAddress bufferAddress_ = {},
                                                             uint32_t size_ = {},
                                                             uint32_t stride_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -27491,6 +27600,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct BufferCopy
   {
 
+
     VULKAN_HPP_CONSTEXPR BufferCopy( VULKAN_HPP_NAMESPACE::DeviceSize srcOffset_ = {},
                                      VULKAN_HPP_NAMESPACE::DeviceSize dstOffset_ = {},
                                      VULKAN_HPP_NAMESPACE::DeviceSize size_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -27569,6 +27679,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct BufferCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eBufferCreateInfo;
 
     VULKAN_HPP_CONSTEXPR BufferCreateInfo( VULKAN_HPP_NAMESPACE::BufferCreateFlags flags_ = {},
@@ -27701,6 +27812,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct BufferDeviceAddressCreateInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eBufferDeviceAddressCreateInfoEXT;
 
     VULKAN_HPP_CONSTEXPR BufferDeviceAddressCreateInfoEXT( VULKAN_HPP_NAMESPACE::DeviceAddress deviceAddress_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -27783,6 +27895,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct BufferDeviceAddressInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eBufferDeviceAddressInfo;
 
     VULKAN_HPP_CONSTEXPR BufferDeviceAddressInfo( VULKAN_HPP_NAMESPACE::Buffer buffer_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -27865,6 +27978,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ImageSubresourceLayers
   {
+
 
     VULKAN_HPP_CONSTEXPR ImageSubresourceLayers( VULKAN_HPP_NAMESPACE::ImageAspectFlags aspectMask_ = {},
                                                  uint32_t mipLevel_ = {},
@@ -27954,6 +28068,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct BufferImageCopy
   {
+
 
     VULKAN_HPP_CONSTEXPR BufferImageCopy( VULKAN_HPP_NAMESPACE::DeviceSize bufferOffset_ = {},
                                           uint32_t bufferRowLength_ = {},
@@ -28063,6 +28178,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct BufferMemoryBarrier
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eBufferMemoryBarrier;
 
     VULKAN_HPP_CONSTEXPR BufferMemoryBarrier( VULKAN_HPP_NAMESPACE::AccessFlags srcAccessMask_ = {},
@@ -28205,6 +28321,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct BufferMemoryRequirementsInfo2
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eBufferMemoryRequirementsInfo2;
 
     VULKAN_HPP_CONSTEXPR BufferMemoryRequirementsInfo2( VULKAN_HPP_NAMESPACE::Buffer buffer_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -28287,6 +28404,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct BufferOpaqueCaptureAddressCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eBufferOpaqueCaptureAddressCreateInfo;
 
     VULKAN_HPP_CONSTEXPR BufferOpaqueCaptureAddressCreateInfo( uint64_t opaqueCaptureAddress_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -28369,6 +28487,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct BufferViewCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eBufferViewCreateInfo;
 
     VULKAN_HPP_CONSTEXPR BufferViewCreateInfo( VULKAN_HPP_NAMESPACE::BufferViewCreateFlags flags_ = {},
@@ -28491,6 +28610,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct CalibratedTimestampInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eCalibratedTimestampInfoEXT;
 
     VULKAN_HPP_CONSTEXPR CalibratedTimestampInfoEXT( VULKAN_HPP_NAMESPACE::TimeDomainEXT timeDomain_ = VULKAN_HPP_NAMESPACE::TimeDomainEXT::eDevice ) VULKAN_HPP_NOEXCEPT
@@ -28573,6 +28693,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct CheckpointDataNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eCheckpointDataNV;
 
     VULKAN_HPP_CONSTEXPR CheckpointDataNV( VULKAN_HPP_NAMESPACE::PipelineStageFlagBits stage_ = VULKAN_HPP_NAMESPACE::PipelineStageFlagBits::eTopOfPipe,
@@ -28706,6 +28827,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct ClearDepthStencilValue
   {
 
+
     VULKAN_HPP_CONSTEXPR ClearDepthStencilValue( float depth_ = {},
                                                  uint32_t stencil_ = {} ) VULKAN_HPP_NOEXCEPT
       : depth( depth_ )
@@ -28827,6 +28949,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct ClearAttachment
   {
 
+
     ClearAttachment( VULKAN_HPP_NAMESPACE::ImageAspectFlags aspectMask_ = {},
                      uint32_t colorAttachment_ = {},
                      VULKAN_HPP_NAMESPACE::ClearValue clearValue_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -28889,6 +29012,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ClearRect
   {
+
 
     VULKAN_HPP_CONSTEXPR ClearRect( VULKAN_HPP_NAMESPACE::Rect2D rect_ = {},
                                     uint32_t baseArrayLayer_ = {},
@@ -28969,6 +29093,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct CoarseSampleLocationNV
   {
 
+
     VULKAN_HPP_CONSTEXPR CoarseSampleLocationNV( uint32_t pixelX_ = {},
                                                  uint32_t pixelY_ = {},
                                                  uint32_t sample_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -29047,6 +29172,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct CoarseSampleOrderCustomNV
   {
+
 
     VULKAN_HPP_CONSTEXPR CoarseSampleOrderCustomNV( VULKAN_HPP_NAMESPACE::ShadingRatePaletteEntryNV shadingRate_ = VULKAN_HPP_NAMESPACE::ShadingRatePaletteEntryNV::eNoInvocations,
                                                     uint32_t sampleCount_ = {},
@@ -29136,6 +29262,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct CommandBufferAllocateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eCommandBufferAllocateInfo;
 
     VULKAN_HPP_CONSTEXPR CommandBufferAllocateInfo( VULKAN_HPP_NAMESPACE::CommandPool commandPool_ = {},
@@ -29238,6 +29365,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct CommandBufferInheritanceInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eCommandBufferInheritanceInfo;
 
     VULKAN_HPP_CONSTEXPR CommandBufferInheritanceInfo( VULKAN_HPP_NAMESPACE::RenderPass renderPass_ = {},
@@ -29370,6 +29498,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct CommandBufferBeginInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eCommandBufferBeginInfo;
 
     VULKAN_HPP_CONSTEXPR CommandBufferBeginInfo( VULKAN_HPP_NAMESPACE::CommandBufferUsageFlags flags_ = {},
@@ -29462,6 +29591,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct CommandBufferInheritanceConditionalRenderingInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eCommandBufferInheritanceConditionalRenderingInfoEXT;
 
     VULKAN_HPP_CONSTEXPR CommandBufferInheritanceConditionalRenderingInfoEXT( VULKAN_HPP_NAMESPACE::Bool32 conditionalRenderingEnable_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -29544,6 +29674,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct CommandBufferInheritanceRenderPassTransformInfoQCOM
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eCommandBufferInheritanceRenderPassTransformInfoQCOM;
 
     VULKAN_HPP_CONSTEXPR CommandBufferInheritanceRenderPassTransformInfoQCOM( VULKAN_HPP_NAMESPACE::SurfaceTransformFlagBitsKHR transform_ = VULKAN_HPP_NAMESPACE::SurfaceTransformFlagBitsKHR::eIdentity,
@@ -29636,6 +29767,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct CommandPoolCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eCommandPoolCreateInfo;
 
     VULKAN_HPP_CONSTEXPR CommandPoolCreateInfo( VULKAN_HPP_NAMESPACE::CommandPoolCreateFlags flags_ = {},
@@ -29729,6 +29861,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct SpecializationMapEntry
   {
 
+
     VULKAN_HPP_CONSTEXPR SpecializationMapEntry( uint32_t constantID_ = {},
                                                  uint32_t offset_ = {},
                                                  size_t size_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -29807,6 +29940,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct SpecializationInfo
   {
+
 
     VULKAN_HPP_CONSTEXPR SpecializationInfo( uint32_t mapEntryCount_ = {},
                                              const VULKAN_HPP_NAMESPACE::SpecializationMapEntry* pMapEntries_ = {},
@@ -29896,6 +30030,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineShaderStageCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineShaderStageCreateInfo;
 
     VULKAN_HPP_CONSTEXPR PipelineShaderStageCreateInfo( VULKAN_HPP_NAMESPACE::PipelineShaderStageCreateFlags flags_ = {},
@@ -30018,6 +30153,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ComputePipelineCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eComputePipelineCreateInfo;
 
     VULKAN_HPP_CONSTEXPR ComputePipelineCreateInfo( VULKAN_HPP_NAMESPACE::PipelineCreateFlags flags_ = {},
@@ -30140,6 +30276,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ConditionalRenderingBeginInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eConditionalRenderingBeginInfoEXT;
 
     VULKAN_HPP_CONSTEXPR ConditionalRenderingBeginInfoEXT( VULKAN_HPP_NAMESPACE::Buffer buffer_ = {},
@@ -30243,6 +30380,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct ConformanceVersion
   {
 
+
     VULKAN_HPP_CONSTEXPR ConformanceVersion( uint8_t major_ = {},
                                              uint8_t minor_ = {},
                                              uint8_t subminor_ = {},
@@ -30331,6 +30469,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct CooperativeMatrixPropertiesNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eCooperativeMatrixPropertiesNV;
 
     VULKAN_HPP_CONSTEXPR CooperativeMatrixPropertiesNV( uint32_t MSize_ = {},
@@ -30484,6 +30623,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_ENABLE_BETA_EXTENSIONS
   struct CopyAccelerationStructureInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eCopyAccelerationStructureInfoKHR;
 
     VULKAN_HPP_CONSTEXPR CopyAccelerationStructureInfoKHR( VULKAN_HPP_NAMESPACE::AccelerationStructureKHR src_ = {},
@@ -30588,6 +30728,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_ENABLE_BETA_EXTENSIONS
   struct CopyAccelerationStructureToMemoryInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eCopyAccelerationStructureToMemoryInfoKHR;
 
     CopyAccelerationStructureToMemoryInfoKHR( VULKAN_HPP_NAMESPACE::AccelerationStructureKHR src_ = {},
@@ -30673,6 +30814,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct CopyDescriptorSet
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eCopyDescriptorSet;
 
     VULKAN_HPP_CONSTEXPR CopyDescriptorSet( VULKAN_HPP_NAMESPACE::DescriptorSet srcSet_ = {},
@@ -30816,6 +30958,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_ENABLE_BETA_EXTENSIONS
   struct CopyMemoryToAccelerationStructureInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eCopyMemoryToAccelerationStructureInfoKHR;
 
     CopyMemoryToAccelerationStructureInfoKHR( VULKAN_HPP_NAMESPACE::DeviceOrHostAddressConstKHR src_ = {},
@@ -30902,6 +31045,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   struct D3D12FenceSubmitInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eD3D12FenceSubmitInfoKHR;
 
     VULKAN_HPP_CONSTEXPR D3D12FenceSubmitInfoKHR( uint32_t waitSemaphoreValuesCount_ = {},
@@ -31015,6 +31159,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DebugMarkerMarkerInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDebugMarkerMarkerInfoEXT;
 
     VULKAN_HPP_CONSTEXPR_14 DebugMarkerMarkerInfoEXT( const char* pMarkerName_ = {},
@@ -31107,6 +31252,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DebugMarkerObjectNameInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDebugMarkerObjectNameInfoEXT;
 
     VULKAN_HPP_CONSTEXPR DebugMarkerObjectNameInfoEXT( VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT objectType_ = VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eUnknown,
@@ -31209,6 +31355,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DebugMarkerObjectTagInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDebugMarkerObjectTagInfoEXT;
 
     VULKAN_HPP_CONSTEXPR DebugMarkerObjectTagInfoEXT( VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT objectType_ = VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eUnknown,
@@ -31331,6 +31478,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DebugReportCallbackCreateInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDebugReportCallbackCreateInfoEXT;
 
     VULKAN_HPP_CONSTEXPR DebugReportCallbackCreateInfoEXT( VULKAN_HPP_NAMESPACE::DebugReportFlagsEXT flags_ = {},
@@ -31433,6 +31581,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DebugUtilsLabelEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDebugUtilsLabelEXT;
 
     VULKAN_HPP_CONSTEXPR_14 DebugUtilsLabelEXT( const char* pLabelName_ = {},
@@ -31525,6 +31674,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DebugUtilsObjectNameInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDebugUtilsObjectNameInfoEXT;
 
     VULKAN_HPP_CONSTEXPR DebugUtilsObjectNameInfoEXT( VULKAN_HPP_NAMESPACE::ObjectType objectType_ = VULKAN_HPP_NAMESPACE::ObjectType::eUnknown,
@@ -31627,6 +31777,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DebugUtilsMessengerCallbackDataEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDebugUtilsMessengerCallbackDataEXT;
 
     VULKAN_HPP_CONSTEXPR_14 DebugUtilsMessengerCallbackDataEXT( VULKAN_HPP_NAMESPACE::DebugUtilsMessengerCallbackDataFlagsEXT flags_ = {},
@@ -31799,6 +31950,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DebugUtilsMessengerCreateInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDebugUtilsMessengerCreateInfoEXT;
 
     VULKAN_HPP_CONSTEXPR DebugUtilsMessengerCreateInfoEXT( VULKAN_HPP_NAMESPACE::DebugUtilsMessengerCreateFlagsEXT flags_ = {},
@@ -31921,6 +32073,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DebugUtilsObjectTagInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDebugUtilsObjectTagInfoEXT;
 
     VULKAN_HPP_CONSTEXPR DebugUtilsObjectTagInfoEXT( VULKAN_HPP_NAMESPACE::ObjectType objectType_ = VULKAN_HPP_NAMESPACE::ObjectType::eUnknown,
@@ -32043,6 +32196,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DedicatedAllocationBufferCreateInfoNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDedicatedAllocationBufferCreateInfoNV;
 
     VULKAN_HPP_CONSTEXPR DedicatedAllocationBufferCreateInfoNV( VULKAN_HPP_NAMESPACE::Bool32 dedicatedAllocation_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -32125,6 +32279,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DedicatedAllocationImageCreateInfoNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDedicatedAllocationImageCreateInfoNV;
 
     VULKAN_HPP_CONSTEXPR DedicatedAllocationImageCreateInfoNV( VULKAN_HPP_NAMESPACE::Bool32 dedicatedAllocation_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -32207,6 +32362,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DedicatedAllocationMemoryAllocateInfoNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDedicatedAllocationMemoryAllocateInfoNV;
 
     VULKAN_HPP_CONSTEXPR DedicatedAllocationMemoryAllocateInfoNV( VULKAN_HPP_NAMESPACE::Image image_ = {},
@@ -32300,6 +32456,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_ENABLE_BETA_EXTENSIONS
   struct DeferredOperationInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDeferredOperationInfoKHR;
 
     VULKAN_HPP_CONSTEXPR DeferredOperationInfoKHR( VULKAN_HPP_NAMESPACE::DeferredOperationKHR operationHandle_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -32384,6 +32541,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct DescriptorBufferInfo
   {
 
+
     VULKAN_HPP_CONSTEXPR DescriptorBufferInfo( VULKAN_HPP_NAMESPACE::Buffer buffer_ = {},
                                                VULKAN_HPP_NAMESPACE::DeviceSize offset_ = {},
                                                VULKAN_HPP_NAMESPACE::DeviceSize range_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -32462,6 +32620,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DescriptorImageInfo
   {
+
 
     VULKAN_HPP_CONSTEXPR DescriptorImageInfo( VULKAN_HPP_NAMESPACE::Sampler sampler_ = {},
                                               VULKAN_HPP_NAMESPACE::ImageView imageView_ = {},
@@ -32542,6 +32701,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct DescriptorPoolSize
   {
 
+
     VULKAN_HPP_CONSTEXPR DescriptorPoolSize( VULKAN_HPP_NAMESPACE::DescriptorType type_ = VULKAN_HPP_NAMESPACE::DescriptorType::eSampler,
                                              uint32_t descriptorCount_ = {} ) VULKAN_HPP_NOEXCEPT
       : type( type_ )
@@ -32610,6 +32770,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DescriptorPoolCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDescriptorPoolCreateInfo;
 
     VULKAN_HPP_CONSTEXPR DescriptorPoolCreateInfo( VULKAN_HPP_NAMESPACE::DescriptorPoolCreateFlags flags_ = {},
@@ -32722,6 +32883,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DescriptorPoolInlineUniformBlockCreateInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDescriptorPoolInlineUniformBlockCreateInfoEXT;
 
     VULKAN_HPP_CONSTEXPR DescriptorPoolInlineUniformBlockCreateInfoEXT( uint32_t maxInlineUniformBlockBindings_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -32804,6 +32966,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DescriptorSetAllocateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDescriptorSetAllocateInfo;
 
     VULKAN_HPP_CONSTEXPR DescriptorSetAllocateInfo( VULKAN_HPP_NAMESPACE::DescriptorPool descriptorPool_ = {},
@@ -32907,6 +33070,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct DescriptorSetLayoutBinding
   {
 
+
     VULKAN_HPP_CONSTEXPR DescriptorSetLayoutBinding( uint32_t binding_ = {},
                                                      VULKAN_HPP_NAMESPACE::DescriptorType descriptorType_ = VULKAN_HPP_NAMESPACE::DescriptorType::eSampler,
                                                      uint32_t descriptorCount_ = {},
@@ -33005,6 +33169,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DescriptorSetLayoutBindingFlagsCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDescriptorSetLayoutBindingFlagsCreateInfo;
 
     VULKAN_HPP_CONSTEXPR DescriptorSetLayoutBindingFlagsCreateInfo( uint32_t bindingCount_ = {},
@@ -33097,6 +33262,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DescriptorSetLayoutCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDescriptorSetLayoutCreateInfo;
 
     VULKAN_HPP_CONSTEXPR DescriptorSetLayoutCreateInfo( VULKAN_HPP_NAMESPACE::DescriptorSetLayoutCreateFlags flags_ = {},
@@ -33199,6 +33365,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DescriptorSetLayoutSupport
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDescriptorSetLayoutSupport;
 
     VULKAN_HPP_CONSTEXPR DescriptorSetLayoutSupport( VULKAN_HPP_NAMESPACE::Bool32 supported_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -33269,6 +33436,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DescriptorSetVariableDescriptorCountAllocateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDescriptorSetVariableDescriptorCountAllocateInfo;
 
     VULKAN_HPP_CONSTEXPR DescriptorSetVariableDescriptorCountAllocateInfo( uint32_t descriptorSetCount_ = {},
@@ -33361,6 +33529,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DescriptorSetVariableDescriptorCountLayoutSupport
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDescriptorSetVariableDescriptorCountLayoutSupport;
 
     VULKAN_HPP_CONSTEXPR DescriptorSetVariableDescriptorCountLayoutSupport( uint32_t maxVariableDescriptorCount_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -33431,6 +33600,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DescriptorUpdateTemplateEntry
   {
+
 
     VULKAN_HPP_CONSTEXPR DescriptorUpdateTemplateEntry( uint32_t dstBinding_ = {},
                                                         uint32_t dstArrayElement_ = {},
@@ -33540,6 +33710,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DescriptorUpdateTemplateCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDescriptorUpdateTemplateCreateInfo;
 
     VULKAN_HPP_CONSTEXPR DescriptorUpdateTemplateCreateInfo( VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplateCreateFlags flags_ = {},
@@ -33692,6 +33863,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DeviceQueueCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDeviceQueueCreateInfo;
 
     VULKAN_HPP_CONSTEXPR DeviceQueueCreateInfo( VULKAN_HPP_NAMESPACE::DeviceQueueCreateFlags flags_ = {},
@@ -33804,6 +33976,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceFeatures
   {
+
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceFeatures( VULKAN_HPP_NAMESPACE::Bool32 robustBufferAccess_ = {},
                                                  VULKAN_HPP_NAMESPACE::Bool32 fullDrawIndexUint32_ = {},
@@ -34403,6 +34576,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DeviceCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDeviceCreateInfo;
 
     VULKAN_HPP_CONSTEXPR DeviceCreateInfo( VULKAN_HPP_NAMESPACE::DeviceCreateFlags flags_ = {},
@@ -34555,6 +34729,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DeviceDiagnosticsConfigCreateInfoNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDeviceDiagnosticsConfigCreateInfoNV;
 
     VULKAN_HPP_CONSTEXPR DeviceDiagnosticsConfigCreateInfoNV( VULKAN_HPP_NAMESPACE::DeviceDiagnosticsConfigFlagsNV flags_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -34637,6 +34812,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DeviceEventInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDeviceEventInfoEXT;
 
     VULKAN_HPP_CONSTEXPR DeviceEventInfoEXT( VULKAN_HPP_NAMESPACE::DeviceEventTypeEXT deviceEvent_ = VULKAN_HPP_NAMESPACE::DeviceEventTypeEXT::eDisplayHotplug ) VULKAN_HPP_NOEXCEPT
@@ -34719,6 +34895,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DeviceGroupBindSparseInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDeviceGroupBindSparseInfo;
 
     VULKAN_HPP_CONSTEXPR DeviceGroupBindSparseInfo( uint32_t resourceDeviceIndex_ = {},
@@ -34811,6 +34988,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DeviceGroupCommandBufferBeginInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDeviceGroupCommandBufferBeginInfo;
 
     VULKAN_HPP_CONSTEXPR DeviceGroupCommandBufferBeginInfo( uint32_t deviceMask_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -34893,6 +35071,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DeviceGroupDeviceCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDeviceGroupDeviceCreateInfo;
 
     VULKAN_HPP_CONSTEXPR DeviceGroupDeviceCreateInfo( uint32_t physicalDeviceCount_ = {},
@@ -34985,6 +35164,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DeviceGroupPresentCapabilitiesKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDeviceGroupPresentCapabilitiesKHR;
 
     VULKAN_HPP_CONSTEXPR_14 DeviceGroupPresentCapabilitiesKHR( std::array<uint32_t,VK_MAX_DEVICE_GROUP_SIZE> const& presentMask_ = {},
@@ -35059,6 +35239,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DeviceGroupPresentInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDeviceGroupPresentInfoKHR;
 
     VULKAN_HPP_CONSTEXPR DeviceGroupPresentInfoKHR( uint32_t swapchainCount_ = {},
@@ -35161,6 +35342,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DeviceGroupRenderPassBeginInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDeviceGroupRenderPassBeginInfo;
 
     VULKAN_HPP_CONSTEXPR DeviceGroupRenderPassBeginInfo( uint32_t deviceMask_ = {},
@@ -35263,6 +35445,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DeviceGroupSubmitInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDeviceGroupSubmitInfo;
 
     VULKAN_HPP_CONSTEXPR DeviceGroupSubmitInfo( uint32_t waitSemaphoreCount_ = {},
@@ -35395,6 +35578,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DeviceGroupSwapchainCreateInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDeviceGroupSwapchainCreateInfoKHR;
 
     VULKAN_HPP_CONSTEXPR DeviceGroupSwapchainCreateInfoKHR( VULKAN_HPP_NAMESPACE::DeviceGroupPresentModeFlagsKHR modes_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -35477,6 +35661,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DeviceMemoryOpaqueCaptureAddressInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDeviceMemoryOpaqueCaptureAddressInfo;
 
     VULKAN_HPP_CONSTEXPR DeviceMemoryOpaqueCaptureAddressInfo( VULKAN_HPP_NAMESPACE::DeviceMemory memory_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -35559,6 +35744,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DeviceMemoryOverallocationCreateInfoAMD
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDeviceMemoryOverallocationCreateInfoAMD;
 
     VULKAN_HPP_CONSTEXPR DeviceMemoryOverallocationCreateInfoAMD( VULKAN_HPP_NAMESPACE::MemoryOverallocationBehaviorAMD overallocationBehavior_ = VULKAN_HPP_NAMESPACE::MemoryOverallocationBehaviorAMD::eDefault ) VULKAN_HPP_NOEXCEPT
@@ -35641,6 +35827,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DevicePrivateDataCreateInfoEXT
   {
+    static const bool allowDuplicate = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDevicePrivateDataCreateInfoEXT;
 
     VULKAN_HPP_CONSTEXPR DevicePrivateDataCreateInfoEXT( uint32_t privateDataSlotRequestCount_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -35723,6 +35910,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DeviceQueueGlobalPriorityCreateInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDeviceQueueGlobalPriorityCreateInfoEXT;
 
     VULKAN_HPP_CONSTEXPR DeviceQueueGlobalPriorityCreateInfoEXT( VULKAN_HPP_NAMESPACE::QueueGlobalPriorityEXT globalPriority_ = VULKAN_HPP_NAMESPACE::QueueGlobalPriorityEXT::eLow ) VULKAN_HPP_NOEXCEPT
@@ -35805,6 +35993,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DeviceQueueInfo2
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDeviceQueueInfo2;
 
     VULKAN_HPP_CONSTEXPR DeviceQueueInfo2( VULKAN_HPP_NAMESPACE::DeviceQueueCreateFlags flags_ = {},
@@ -35908,6 +36097,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct DispatchIndirectCommand
   {
 
+
     VULKAN_HPP_CONSTEXPR DispatchIndirectCommand( uint32_t x_ = {},
                                                   uint32_t y_ = {},
                                                   uint32_t z_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -35986,6 +36176,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DisplayEventInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDisplayEventInfoEXT;
 
     VULKAN_HPP_CONSTEXPR DisplayEventInfoEXT( VULKAN_HPP_NAMESPACE::DisplayEventTypeEXT displayEvent_ = VULKAN_HPP_NAMESPACE::DisplayEventTypeEXT::eFirstPixelOut ) VULKAN_HPP_NOEXCEPT
@@ -36069,6 +36260,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct DisplayModeParametersKHR
   {
 
+
     VULKAN_HPP_CONSTEXPR DisplayModeParametersKHR( VULKAN_HPP_NAMESPACE::Extent2D visibleRegion_ = {},
                                                    uint32_t refreshRate_ = {} ) VULKAN_HPP_NOEXCEPT
       : visibleRegion( visibleRegion_ )
@@ -36137,6 +36329,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DisplayModeCreateInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDisplayModeCreateInfoKHR;
 
     VULKAN_HPP_CONSTEXPR DisplayModeCreateInfoKHR( VULKAN_HPP_NAMESPACE::DisplayModeCreateFlagsKHR flags_ = {},
@@ -36230,6 +36423,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct DisplayModePropertiesKHR
   {
 
+
     VULKAN_HPP_CONSTEXPR DisplayModePropertiesKHR( VULKAN_HPP_NAMESPACE::DisplayModeKHR displayMode_ = {},
                                                    VULKAN_HPP_NAMESPACE::DisplayModeParametersKHR parameters_ = {} ) VULKAN_HPP_NOEXCEPT
       : displayMode( displayMode_ )
@@ -36286,6 +36480,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DisplayModeProperties2KHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDisplayModeProperties2KHR;
 
     VULKAN_HPP_CONSTEXPR DisplayModeProperties2KHR( VULKAN_HPP_NAMESPACE::DisplayModePropertiesKHR displayModeProperties_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -36356,6 +36551,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DisplayNativeHdrSurfaceCapabilitiesAMD
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDisplayNativeHdrSurfaceCapabilitiesAMD;
 
     VULKAN_HPP_CONSTEXPR DisplayNativeHdrSurfaceCapabilitiesAMD( VULKAN_HPP_NAMESPACE::Bool32 localDimmingSupport_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -36426,6 +36622,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DisplayPlaneCapabilitiesKHR
   {
+
 
     VULKAN_HPP_CONSTEXPR DisplayPlaneCapabilitiesKHR( VULKAN_HPP_NAMESPACE::DisplayPlaneAlphaFlagsKHR supportedAlpha_ = {},
                                                       VULKAN_HPP_NAMESPACE::Offset2D minSrcPosition_ = {},
@@ -36511,6 +36708,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DisplayPlaneCapabilities2KHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDisplayPlaneCapabilities2KHR;
 
     VULKAN_HPP_CONSTEXPR DisplayPlaneCapabilities2KHR( VULKAN_HPP_NAMESPACE::DisplayPlaneCapabilitiesKHR capabilities_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -36581,6 +36779,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DisplayPlaneInfo2KHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDisplayPlaneInfo2KHR;
 
     VULKAN_HPP_CONSTEXPR DisplayPlaneInfo2KHR( VULKAN_HPP_NAMESPACE::DisplayModeKHR mode_ = {},
@@ -36674,6 +36873,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct DisplayPlanePropertiesKHR
   {
 
+
     VULKAN_HPP_CONSTEXPR DisplayPlanePropertiesKHR( VULKAN_HPP_NAMESPACE::DisplayKHR currentDisplay_ = {},
                                                     uint32_t currentStackIndex_ = {} ) VULKAN_HPP_NOEXCEPT
       : currentDisplay( currentDisplay_ )
@@ -36730,6 +36930,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DisplayPlaneProperties2KHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDisplayPlaneProperties2KHR;
 
     VULKAN_HPP_CONSTEXPR DisplayPlaneProperties2KHR( VULKAN_HPP_NAMESPACE::DisplayPlanePropertiesKHR displayPlaneProperties_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -36800,6 +37001,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DisplayPowerInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDisplayPowerInfoEXT;
 
     VULKAN_HPP_CONSTEXPR DisplayPowerInfoEXT( VULKAN_HPP_NAMESPACE::DisplayPowerStateEXT powerState_ = VULKAN_HPP_NAMESPACE::DisplayPowerStateEXT::eOff ) VULKAN_HPP_NOEXCEPT
@@ -36882,6 +37084,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DisplayPresentInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDisplayPresentInfoKHR;
 
     VULKAN_HPP_CONSTEXPR DisplayPresentInfoKHR( VULKAN_HPP_NAMESPACE::Rect2D srcRect_ = {},
@@ -36985,6 +37188,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct DisplayPropertiesKHR
   {
 
+
     VULKAN_HPP_CONSTEXPR DisplayPropertiesKHR( VULKAN_HPP_NAMESPACE::DisplayKHR display_ = {},
                                                const char* displayName_ = {},
                                                VULKAN_HPP_NAMESPACE::Extent2D physicalDimensions_ = {},
@@ -37061,6 +37265,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DisplayProperties2KHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDisplayProperties2KHR;
 
     VULKAN_HPP_CONSTEXPR DisplayProperties2KHR( VULKAN_HPP_NAMESPACE::DisplayPropertiesKHR displayProperties_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -37131,6 +37336,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DisplaySurfaceCreateInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDisplaySurfaceCreateInfoKHR;
 
     VULKAN_HPP_CONSTEXPR DisplaySurfaceCreateInfoKHR( VULKAN_HPP_NAMESPACE::DisplaySurfaceCreateFlagsKHR flags_ = {},
@@ -37284,6 +37490,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct DrawIndexedIndirectCommand
   {
 
+
     VULKAN_HPP_CONSTEXPR DrawIndexedIndirectCommand( uint32_t indexCount_ = {},
                                                      uint32_t instanceCount_ = {},
                                                      uint32_t firstIndex_ = {},
@@ -37383,6 +37590,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct DrawIndirectCommand
   {
 
+
     VULKAN_HPP_CONSTEXPR DrawIndirectCommand( uint32_t vertexCount_ = {},
                                               uint32_t instanceCount_ = {},
                                               uint32_t firstVertex_ = {},
@@ -37472,6 +37680,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct DrawMeshTasksIndirectCommandNV
   {
 
+
     VULKAN_HPP_CONSTEXPR DrawMeshTasksIndirectCommandNV( uint32_t taskCount_ = {},
                                                          uint32_t firstTask_ = {} ) VULKAN_HPP_NOEXCEPT
       : taskCount( taskCount_ )
@@ -37541,6 +37750,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct DrmFormatModifierPropertiesEXT
   {
 
+
     VULKAN_HPP_CONSTEXPR DrmFormatModifierPropertiesEXT( uint64_t drmFormatModifier_ = {},
                                                          uint32_t drmFormatModifierPlaneCount_ = {},
                                                          VULKAN_HPP_NAMESPACE::FormatFeatureFlags drmFormatModifierTilingFeatures_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -37601,6 +37811,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct DrmFormatModifierPropertiesListEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDrmFormatModifierPropertiesListEXT;
 
     VULKAN_HPP_CONSTEXPR DrmFormatModifierPropertiesListEXT( uint32_t drmFormatModifierCount_ = {},
@@ -37675,6 +37886,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct EventCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eEventCreateInfo;
 
     VULKAN_HPP_CONSTEXPR EventCreateInfo( VULKAN_HPP_NAMESPACE::EventCreateFlags flags_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -37757,6 +37969,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ExportFenceCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eExportFenceCreateInfo;
 
     VULKAN_HPP_CONSTEXPR ExportFenceCreateInfo( VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlags handleTypes_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -37840,6 +38053,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   struct ExportFenceWin32HandleInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eExportFenceWin32HandleInfoKHR;
 
     VULKAN_HPP_CONSTEXPR ExportFenceWin32HandleInfoKHR( const SECURITY_ATTRIBUTES* pAttributes_ = {},
@@ -37943,6 +38157,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ExportMemoryAllocateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eExportMemoryAllocateInfo;
 
     VULKAN_HPP_CONSTEXPR ExportMemoryAllocateInfo( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlags handleTypes_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -38025,6 +38240,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ExportMemoryAllocateInfoNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eExportMemoryAllocateInfoNV;
 
     VULKAN_HPP_CONSTEXPR ExportMemoryAllocateInfoNV( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagsNV handleTypes_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -38108,6 +38324,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   struct ExportMemoryWin32HandleInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eExportMemoryWin32HandleInfoKHR;
 
     VULKAN_HPP_CONSTEXPR ExportMemoryWin32HandleInfoKHR( const SECURITY_ATTRIBUTES* pAttributes_ = {},
@@ -38212,6 +38429,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   struct ExportMemoryWin32HandleInfoNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eExportMemoryWin32HandleInfoNV;
 
     VULKAN_HPP_CONSTEXPR ExportMemoryWin32HandleInfoNV( const SECURITY_ATTRIBUTES* pAttributes_ = {},
@@ -38305,6 +38523,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ExportSemaphoreCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eExportSemaphoreCreateInfo;
 
     VULKAN_HPP_CONSTEXPR ExportSemaphoreCreateInfo( VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlags handleTypes_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -38388,6 +38607,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   struct ExportSemaphoreWin32HandleInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eExportSemaphoreWin32HandleInfoKHR;
 
     VULKAN_HPP_CONSTEXPR ExportSemaphoreWin32HandleInfoKHR( const SECURITY_ATTRIBUTES* pAttributes_ = {},
@@ -38492,6 +38712,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct ExtensionProperties
   {
 
+
     VULKAN_HPP_CONSTEXPR_14 ExtensionProperties( std::array<char,VK_MAX_EXTENSION_NAME_SIZE> const& extensionName_ = {},
                                                  uint32_t specVersion_ = {} ) VULKAN_HPP_NOEXCEPT
       : extensionName( extensionName_ )
@@ -38548,6 +38769,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ExternalMemoryProperties
   {
+
 
     VULKAN_HPP_CONSTEXPR ExternalMemoryProperties( VULKAN_HPP_NAMESPACE::ExternalMemoryFeatureFlags externalMemoryFeatures_ = {},
                                                    VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlags exportFromImportedHandleTypes_ = {},
@@ -38609,6 +38831,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ExternalBufferProperties
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eExternalBufferProperties;
 
     VULKAN_HPP_CONSTEXPR ExternalBufferProperties( VULKAN_HPP_NAMESPACE::ExternalMemoryProperties externalMemoryProperties_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -38679,6 +38902,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ExternalFenceProperties
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eExternalFenceProperties;
 
     VULKAN_HPP_CONSTEXPR ExternalFenceProperties( VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlags exportFromImportedHandleTypes_ = {},
@@ -38758,6 +38982,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
   struct ExternalFormatANDROID
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eExternalFormatANDROID;
 
     VULKAN_HPP_CONSTEXPR ExternalFormatANDROID( uint64_t externalFormat_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -38841,6 +39066,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ExternalImageFormatProperties
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eExternalImageFormatProperties;
 
     VULKAN_HPP_CONSTEXPR ExternalImageFormatProperties( VULKAN_HPP_NAMESPACE::ExternalMemoryProperties externalMemoryProperties_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -38912,6 +39138,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct ImageFormatProperties
   {
 
+
     VULKAN_HPP_CONSTEXPR ImageFormatProperties( VULKAN_HPP_NAMESPACE::Extent3D maxExtent_ = {},
                                                 uint32_t maxMipLevels_ = {},
                                                 uint32_t maxArrayLayers_ = {},
@@ -38981,6 +39208,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct ExternalImageFormatPropertiesNV
   {
 
+
     VULKAN_HPP_CONSTEXPR ExternalImageFormatPropertiesNV( VULKAN_HPP_NAMESPACE::ImageFormatProperties imageFormatProperties_ = {},
                                                           VULKAN_HPP_NAMESPACE::ExternalMemoryFeatureFlagsNV externalMemoryFeatures_ = {},
                                                           VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagsNV exportFromImportedHandleTypes_ = {},
@@ -39045,6 +39273,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ExternalMemoryBufferCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eExternalMemoryBufferCreateInfo;
 
     VULKAN_HPP_CONSTEXPR ExternalMemoryBufferCreateInfo( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlags handleTypes_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -39127,6 +39356,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ExternalMemoryImageCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eExternalMemoryImageCreateInfo;
 
     VULKAN_HPP_CONSTEXPR ExternalMemoryImageCreateInfo( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlags handleTypes_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -39209,6 +39439,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ExternalMemoryImageCreateInfoNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eExternalMemoryImageCreateInfoNV;
 
     VULKAN_HPP_CONSTEXPR ExternalMemoryImageCreateInfoNV( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagsNV handleTypes_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -39291,6 +39522,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ExternalSemaphoreProperties
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eExternalSemaphoreProperties;
 
     VULKAN_HPP_CONSTEXPR ExternalSemaphoreProperties( VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlags exportFromImportedHandleTypes_ = {},
@@ -39369,6 +39601,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct FenceCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eFenceCreateInfo;
 
     VULKAN_HPP_CONSTEXPR FenceCreateInfo( VULKAN_HPP_NAMESPACE::FenceCreateFlags flags_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -39451,6 +39684,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct FenceGetFdInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eFenceGetFdInfoKHR;
 
     VULKAN_HPP_CONSTEXPR FenceGetFdInfoKHR( VULKAN_HPP_NAMESPACE::Fence fence_ = {},
@@ -39544,6 +39778,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   struct FenceGetWin32HandleInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eFenceGetWin32HandleInfoKHR;
 
     VULKAN_HPP_CONSTEXPR FenceGetWin32HandleInfoKHR( VULKAN_HPP_NAMESPACE::Fence fence_ = {},
@@ -39637,6 +39872,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct FilterCubicImageViewImageFormatPropertiesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eFilterCubicImageViewImageFormatPropertiesEXT;
 
     VULKAN_HPP_CONSTEXPR FilterCubicImageViewImageFormatPropertiesEXT( VULKAN_HPP_NAMESPACE::Bool32 filterCubic_ = {},
@@ -39712,6 +39948,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct FormatProperties
   {
 
+
     VULKAN_HPP_CONSTEXPR FormatProperties( VULKAN_HPP_NAMESPACE::FormatFeatureFlags linearTilingFeatures_ = {},
                                            VULKAN_HPP_NAMESPACE::FormatFeatureFlags optimalTilingFeatures_ = {},
                                            VULKAN_HPP_NAMESPACE::FormatFeatureFlags bufferFeatures_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -39772,6 +40009,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct FormatProperties2
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eFormatProperties2;
 
     VULKAN_HPP_CONSTEXPR FormatProperties2( VULKAN_HPP_NAMESPACE::FormatProperties formatProperties_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -39842,6 +40080,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct FramebufferAttachmentImageInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eFramebufferAttachmentImageInfo;
 
     VULKAN_HPP_CONSTEXPR FramebufferAttachmentImageInfo( VULKAN_HPP_NAMESPACE::ImageCreateFlags flags_ = {},
@@ -39984,6 +40223,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct FramebufferAttachmentsCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eFramebufferAttachmentsCreateInfo;
 
     VULKAN_HPP_CONSTEXPR FramebufferAttachmentsCreateInfo( uint32_t attachmentImageInfoCount_ = {},
@@ -40076,6 +40316,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct FramebufferCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eFramebufferCreateInfo;
 
     VULKAN_HPP_CONSTEXPR FramebufferCreateInfo( VULKAN_HPP_NAMESPACE::FramebufferCreateFlags flags_ = {},
@@ -40218,6 +40459,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct FramebufferMixedSamplesCombinationNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eFramebufferMixedSamplesCombinationNV;
 
     VULKAN_HPP_CONSTEXPR FramebufferMixedSamplesCombinationNV( VULKAN_HPP_NAMESPACE::CoverageReductionModeNV coverageReductionMode_ = VULKAN_HPP_NAMESPACE::CoverageReductionModeNV::eMerge,
@@ -40301,6 +40543,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct IndirectCommandsStreamNV
   {
 
+
     VULKAN_HPP_CONSTEXPR IndirectCommandsStreamNV( VULKAN_HPP_NAMESPACE::Buffer buffer_ = {},
                                                    VULKAN_HPP_NAMESPACE::DeviceSize offset_ = {} ) VULKAN_HPP_NOEXCEPT
       : buffer( buffer_ )
@@ -40369,6 +40612,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct GeneratedCommandsInfoNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eGeneratedCommandsInfoNV;
 
     VULKAN_HPP_CONSTEXPR GeneratedCommandsInfoNV( VULKAN_HPP_NAMESPACE::PipelineBindPoint pipelineBindPoint_ = VULKAN_HPP_NAMESPACE::PipelineBindPoint::eGraphics,
@@ -40571,6 +40815,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct GeneratedCommandsMemoryRequirementsInfoNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eGeneratedCommandsMemoryRequirementsInfoNV;
 
     VULKAN_HPP_CONSTEXPR GeneratedCommandsMemoryRequirementsInfoNV( VULKAN_HPP_NAMESPACE::PipelineBindPoint pipelineBindPoint_ = VULKAN_HPP_NAMESPACE::PipelineBindPoint::eGraphics,
@@ -40684,6 +40929,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct VertexInputBindingDescription
   {
 
+
     VULKAN_HPP_CONSTEXPR VertexInputBindingDescription( uint32_t binding_ = {},
                                                         uint32_t stride_ = {},
                                                         VULKAN_HPP_NAMESPACE::VertexInputRate inputRate_ = VULKAN_HPP_NAMESPACE::VertexInputRate::eVertex ) VULKAN_HPP_NOEXCEPT
@@ -40762,6 +41008,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct VertexInputAttributeDescription
   {
+
 
     VULKAN_HPP_CONSTEXPR VertexInputAttributeDescription( uint32_t location_ = {},
                                                           uint32_t binding_ = {},
@@ -40851,6 +41098,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineVertexInputStateCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineVertexInputStateCreateInfo;
 
     VULKAN_HPP_CONSTEXPR PipelineVertexInputStateCreateInfo( VULKAN_HPP_NAMESPACE::PipelineVertexInputStateCreateFlags flags_ = {},
@@ -40973,6 +41221,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineInputAssemblyStateCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineInputAssemblyStateCreateInfo;
 
     VULKAN_HPP_CONSTEXPR PipelineInputAssemblyStateCreateInfo( VULKAN_HPP_NAMESPACE::PipelineInputAssemblyStateCreateFlags flags_ = {},
@@ -41075,6 +41324,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineTessellationStateCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineTessellationStateCreateInfo;
 
     VULKAN_HPP_CONSTEXPR PipelineTessellationStateCreateInfo( VULKAN_HPP_NAMESPACE::PipelineTessellationStateCreateFlags flags_ = {},
@@ -41167,6 +41417,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct Viewport
   {
+
 
     VULKAN_HPP_CONSTEXPR Viewport( float x_ = {},
                                    float y_ = {},
@@ -41276,6 +41527,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineViewportStateCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineViewportStateCreateInfo;
 
     VULKAN_HPP_CONSTEXPR PipelineViewportStateCreateInfo( VULKAN_HPP_NAMESPACE::PipelineViewportStateCreateFlags flags_ = {},
@@ -41398,6 +41650,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineRasterizationStateCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineRasterizationStateCreateInfo;
 
     VULKAN_HPP_CONSTEXPR PipelineRasterizationStateCreateInfo( VULKAN_HPP_NAMESPACE::PipelineRasterizationStateCreateFlags flags_ = {},
@@ -41580,6 +41833,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineMultisampleStateCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineMultisampleStateCreateInfo;
 
     VULKAN_HPP_CONSTEXPR PipelineMultisampleStateCreateInfo( VULKAN_HPP_NAMESPACE::PipelineMultisampleStateCreateFlags flags_ = {},
@@ -41723,6 +41977,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct StencilOpState
   {
 
+
     VULKAN_HPP_CONSTEXPR StencilOpState( VULKAN_HPP_NAMESPACE::StencilOp failOp_ = VULKAN_HPP_NAMESPACE::StencilOp::eKeep,
                                          VULKAN_HPP_NAMESPACE::StencilOp passOp_ = VULKAN_HPP_NAMESPACE::StencilOp::eKeep,
                                          VULKAN_HPP_NAMESPACE::StencilOp depthFailOp_ = VULKAN_HPP_NAMESPACE::StencilOp::eKeep,
@@ -41841,6 +42096,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineDepthStencilStateCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineDepthStencilStateCreateInfo;
 
     VULKAN_HPP_CONSTEXPR PipelineDepthStencilStateCreateInfo( VULKAN_HPP_NAMESPACE::PipelineDepthStencilStateCreateFlags flags_ = {},
@@ -42014,6 +42270,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct PipelineColorBlendAttachmentState
   {
 
+
     VULKAN_HPP_CONSTEXPR PipelineColorBlendAttachmentState( VULKAN_HPP_NAMESPACE::Bool32 blendEnable_ = {},
                                                             VULKAN_HPP_NAMESPACE::BlendFactor srcColorBlendFactor_ = VULKAN_HPP_NAMESPACE::BlendFactor::eZero,
                                                             VULKAN_HPP_NAMESPACE::BlendFactor dstColorBlendFactor_ = VULKAN_HPP_NAMESPACE::BlendFactor::eZero,
@@ -42142,6 +42399,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineColorBlendStateCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineColorBlendStateCreateInfo;
 
     VULKAN_HPP_CONSTEXPR_14 PipelineColorBlendStateCreateInfo( VULKAN_HPP_NAMESPACE::PipelineColorBlendStateCreateFlags flags_ = {},
@@ -42274,6 +42532,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineDynamicStateCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineDynamicStateCreateInfo;
 
     VULKAN_HPP_CONSTEXPR PipelineDynamicStateCreateInfo( VULKAN_HPP_NAMESPACE::PipelineDynamicStateCreateFlags flags_ = {},
@@ -42376,6 +42635,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct GraphicsPipelineCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eGraphicsPipelineCreateInfo;
 
     VULKAN_HPP_CONSTEXPR_14 GraphicsPipelineCreateInfo( VULKAN_HPP_NAMESPACE::PipelineCreateFlags flags_ = {},
@@ -42618,6 +42878,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct GraphicsShaderGroupCreateInfoNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eGraphicsShaderGroupCreateInfoNV;
 
     VULKAN_HPP_CONSTEXPR GraphicsShaderGroupCreateInfoNV( uint32_t stageCount_ = {},
@@ -42730,6 +42991,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct GraphicsPipelineShaderGroupsCreateInfoNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eGraphicsPipelineShaderGroupsCreateInfoNV;
 
     VULKAN_HPP_CONSTEXPR GraphicsPipelineShaderGroupsCreateInfoNV( uint32_t groupCount_ = {},
@@ -42843,6 +43105,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct XYColorEXT
   {
 
+
     VULKAN_HPP_CONSTEXPR XYColorEXT( float x_ = {},
                                      float y_ = {} ) VULKAN_HPP_NOEXCEPT
       : x( x_ )
@@ -42911,6 +43174,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct HdrMetadataEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eHdrMetadataEXT;
 
     VULKAN_HPP_CONSTEXPR HdrMetadataEXT( VULKAN_HPP_NAMESPACE::XYColorEXT displayPrimaryRed_ = {},
@@ -43063,6 +43327,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct HeadlessSurfaceCreateInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eHeadlessSurfaceCreateInfoEXT;
 
     VULKAN_HPP_CONSTEXPR HeadlessSurfaceCreateInfoEXT( VULKAN_HPP_NAMESPACE::HeadlessSurfaceCreateFlagsEXT flags_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -43146,6 +43411,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_IOS_MVK
   struct IOSSurfaceCreateInfoMVK
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eIosSurfaceCreateInfoMVK;
 
     VULKAN_HPP_CONSTEXPR IOSSurfaceCreateInfoMVK( VULKAN_HPP_NAMESPACE::IOSSurfaceCreateFlagsMVK flags_ = {},
@@ -43240,6 +43506,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct ImageBlit
   {
 
+
     VULKAN_HPP_CONSTEXPR_14 ImageBlit( VULKAN_HPP_NAMESPACE::ImageSubresourceLayers srcSubresource_ = {},
                                        std::array<VULKAN_HPP_NAMESPACE::Offset3D,2> const& srcOffsets_ = {},
                                        VULKAN_HPP_NAMESPACE::ImageSubresourceLayers dstSubresource_ = {},
@@ -43328,6 +43595,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ImageCopy
   {
+
 
     VULKAN_HPP_CONSTEXPR ImageCopy( VULKAN_HPP_NAMESPACE::ImageSubresourceLayers srcSubresource_ = {},
                                     VULKAN_HPP_NAMESPACE::Offset3D srcOffset_ = {},
@@ -43427,6 +43695,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ImageCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImageCreateInfo;
 
     VULKAN_HPP_CONSTEXPR ImageCreateInfo( VULKAN_HPP_NAMESPACE::ImageCreateFlags flags_ = {},
@@ -43630,6 +43899,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct SubresourceLayout
   {
 
+
     VULKAN_HPP_CONSTEXPR SubresourceLayout( VULKAN_HPP_NAMESPACE::DeviceSize offset_ = {},
                                             VULKAN_HPP_NAMESPACE::DeviceSize size_ = {},
                                             VULKAN_HPP_NAMESPACE::DeviceSize rowPitch_ = {},
@@ -43698,6 +43968,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ImageDrmFormatModifierExplicitCreateInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImageDrmFormatModifierExplicitCreateInfoEXT;
 
     VULKAN_HPP_CONSTEXPR ImageDrmFormatModifierExplicitCreateInfoEXT( uint64_t drmFormatModifier_ = {},
@@ -43800,6 +44071,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ImageDrmFormatModifierListCreateInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImageDrmFormatModifierListCreateInfoEXT;
 
     VULKAN_HPP_CONSTEXPR ImageDrmFormatModifierListCreateInfoEXT( uint32_t drmFormatModifierCount_ = {},
@@ -43892,6 +44164,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ImageDrmFormatModifierPropertiesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImageDrmFormatModifierPropertiesEXT;
 
     VULKAN_HPP_CONSTEXPR ImageDrmFormatModifierPropertiesEXT( uint64_t drmFormatModifier_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -43962,6 +44235,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ImageFormatListCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImageFormatListCreateInfo;
 
     VULKAN_HPP_CONSTEXPR ImageFormatListCreateInfo( uint32_t viewFormatCount_ = {},
@@ -44054,6 +44328,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ImageFormatProperties2
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImageFormatProperties2;
 
     VULKAN_HPP_CONSTEXPR ImageFormatProperties2( VULKAN_HPP_NAMESPACE::ImageFormatProperties imageFormatProperties_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -44124,6 +44399,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ImageSubresourceRange
   {
+
 
     VULKAN_HPP_CONSTEXPR ImageSubresourceRange( VULKAN_HPP_NAMESPACE::ImageAspectFlags aspectMask_ = {},
                                                 uint32_t baseMipLevel_ = {},
@@ -44223,6 +44499,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ImageMemoryBarrier
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImageMemoryBarrier;
 
     VULKAN_HPP_CONSTEXPR ImageMemoryBarrier( VULKAN_HPP_NAMESPACE::AccessFlags srcAccessMask_ = {},
@@ -44375,6 +44652,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ImageMemoryRequirementsInfo2
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImageMemoryRequirementsInfo2;
 
     VULKAN_HPP_CONSTEXPR ImageMemoryRequirementsInfo2( VULKAN_HPP_NAMESPACE::Image image_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -44458,6 +44736,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_FUCHSIA
   struct ImagePipeSurfaceCreateInfoFUCHSIA
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImagepipeSurfaceCreateInfoFUCHSIA;
 
     VULKAN_HPP_CONSTEXPR ImagePipeSurfaceCreateInfoFUCHSIA( VULKAN_HPP_NAMESPACE::ImagePipeSurfaceCreateFlagsFUCHSIA flags_ = {},
@@ -44551,6 +44830,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ImagePlaneMemoryRequirementsInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImagePlaneMemoryRequirementsInfo;
 
     VULKAN_HPP_CONSTEXPR ImagePlaneMemoryRequirementsInfo( VULKAN_HPP_NAMESPACE::ImageAspectFlagBits planeAspect_ = VULKAN_HPP_NAMESPACE::ImageAspectFlagBits::eColor ) VULKAN_HPP_NOEXCEPT
@@ -44633,6 +44913,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ImageResolve
   {
+
 
     VULKAN_HPP_CONSTEXPR ImageResolve( VULKAN_HPP_NAMESPACE::ImageSubresourceLayers srcSubresource_ = {},
                                        VULKAN_HPP_NAMESPACE::Offset3D srcOffset_ = {},
@@ -44732,6 +45013,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ImageSparseMemoryRequirementsInfo2
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImageSparseMemoryRequirementsInfo2;
 
     VULKAN_HPP_CONSTEXPR ImageSparseMemoryRequirementsInfo2( VULKAN_HPP_NAMESPACE::Image image_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -44814,6 +45096,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ImageStencilUsageCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImageStencilUsageCreateInfo;
 
     VULKAN_HPP_CONSTEXPR ImageStencilUsageCreateInfo( VULKAN_HPP_NAMESPACE::ImageUsageFlags stencilUsage_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -44896,6 +45179,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ImageSwapchainCreateInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImageSwapchainCreateInfoKHR;
 
     VULKAN_HPP_CONSTEXPR ImageSwapchainCreateInfoKHR( VULKAN_HPP_NAMESPACE::SwapchainKHR swapchain_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -44978,6 +45262,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ImageViewASTCDecodeModeEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImageViewAstcDecodeModeEXT;
 
     VULKAN_HPP_CONSTEXPR ImageViewASTCDecodeModeEXT( VULKAN_HPP_NAMESPACE::Format decodeMode_ = VULKAN_HPP_NAMESPACE::Format::eUndefined ) VULKAN_HPP_NOEXCEPT
@@ -45060,6 +45345,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ImageViewAddressPropertiesNVX
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImageViewAddressPropertiesNVX;
 
     VULKAN_HPP_CONSTEXPR ImageViewAddressPropertiesNVX( VULKAN_HPP_NAMESPACE::DeviceAddress deviceAddress_ = {},
@@ -45134,6 +45420,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ImageViewCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImageViewCreateInfo;
 
     VULKAN_HPP_CONSTEXPR ImageViewCreateInfo( VULKAN_HPP_NAMESPACE::ImageViewCreateFlags flags_ = {},
@@ -45266,6 +45553,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ImageViewHandleInfoNVX
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImageViewHandleInfoNVX;
 
     VULKAN_HPP_CONSTEXPR ImageViewHandleInfoNVX( VULKAN_HPP_NAMESPACE::ImageView imageView_ = {},
@@ -45368,6 +45656,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ImageViewUsageCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImageViewUsageCreateInfo;
 
     VULKAN_HPP_CONSTEXPR ImageViewUsageCreateInfo( VULKAN_HPP_NAMESPACE::ImageUsageFlags usage_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -45451,6 +45740,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
   struct ImportAndroidHardwareBufferInfoANDROID
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImportAndroidHardwareBufferInfoANDROID;
 
     VULKAN_HPP_CONSTEXPR ImportAndroidHardwareBufferInfoANDROID( struct AHardwareBuffer* buffer_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -45534,6 +45824,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ImportFenceFdInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImportFenceFdInfoKHR;
 
     VULKAN_HPP_CONSTEXPR ImportFenceFdInfoKHR( VULKAN_HPP_NAMESPACE::Fence fence_ = {},
@@ -45647,6 +45938,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   struct ImportFenceWin32HandleInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImportFenceWin32HandleInfoKHR;
 
     VULKAN_HPP_CONSTEXPR ImportFenceWin32HandleInfoKHR( VULKAN_HPP_NAMESPACE::Fence fence_ = {},
@@ -45770,6 +46062,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ImportMemoryFdInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImportMemoryFdInfoKHR;
 
     VULKAN_HPP_CONSTEXPR ImportMemoryFdInfoKHR( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType_ = VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits::eOpaqueFd,
@@ -45862,6 +46155,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ImportMemoryHostPointerInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImportMemoryHostPointerInfoEXT;
 
     VULKAN_HPP_CONSTEXPR ImportMemoryHostPointerInfoEXT( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType_ = VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits::eOpaqueFd,
@@ -45955,6 +46249,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   struct ImportMemoryWin32HandleInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImportMemoryWin32HandleInfoKHR;
 
     VULKAN_HPP_CONSTEXPR ImportMemoryWin32HandleInfoKHR( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType_ = VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits::eOpaqueFd,
@@ -46059,6 +46354,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   struct ImportMemoryWin32HandleInfoNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImportMemoryWin32HandleInfoNV;
 
     VULKAN_HPP_CONSTEXPR ImportMemoryWin32HandleInfoNV( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagsNV handleType_ = {},
@@ -46152,6 +46448,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ImportSemaphoreFdInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImportSemaphoreFdInfoKHR;
 
     VULKAN_HPP_CONSTEXPR ImportSemaphoreFdInfoKHR( VULKAN_HPP_NAMESPACE::Semaphore semaphore_ = {},
@@ -46265,6 +46562,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   struct ImportSemaphoreWin32HandleInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImportSemaphoreWin32HandleInfoKHR;
 
     VULKAN_HPP_CONSTEXPR ImportSemaphoreWin32HandleInfoKHR( VULKAN_HPP_NAMESPACE::Semaphore semaphore_ = {},
@@ -46388,6 +46686,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct IndirectCommandsLayoutTokenNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eIndirectCommandsLayoutTokenNV;
 
     VULKAN_HPP_CONSTEXPR IndirectCommandsLayoutTokenNV( VULKAN_HPP_NAMESPACE::IndirectCommandsTokenTypeNV tokenType_ = VULKAN_HPP_NAMESPACE::IndirectCommandsTokenTypeNV::eShaderGroup,
@@ -46590,6 +46889,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct IndirectCommandsLayoutCreateInfoNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eIndirectCommandsLayoutCreateInfoNV;
 
     VULKAN_HPP_CONSTEXPR IndirectCommandsLayoutCreateInfoNV( VULKAN_HPP_NAMESPACE::IndirectCommandsLayoutUsageFlagsNV flags_ = {},
@@ -46722,6 +47022,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct InitializePerformanceApiInfoINTEL
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eInitializePerformanceApiInfoINTEL;
 
     VULKAN_HPP_CONSTEXPR InitializePerformanceApiInfoINTEL( void* pUserData_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -46805,6 +47106,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct InputAttachmentAspectReference
   {
 
+
     VULKAN_HPP_CONSTEXPR InputAttachmentAspectReference( uint32_t subpass_ = {},
                                                          uint32_t inputAttachmentIndex_ = {},
                                                          VULKAN_HPP_NAMESPACE::ImageAspectFlags aspectMask_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -46883,6 +47185,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct InstanceCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eInstanceCreateInfo;
 
     VULKAN_HPP_CONSTEXPR InstanceCreateInfo( VULKAN_HPP_NAMESPACE::InstanceCreateFlags flags_ = {},
@@ -47016,6 +47319,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct LayerProperties
   {
 
+
     VULKAN_HPP_CONSTEXPR_14 LayerProperties( std::array<char,VK_MAX_EXTENSION_NAME_SIZE> const& layerName_ = {},
                                              uint32_t specVersion_ = {},
                                              uint32_t implementationVersion_ = {},
@@ -47081,6 +47385,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_MACOS_MVK
   struct MacOSSurfaceCreateInfoMVK
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eMacosSurfaceCreateInfoMVK;
 
     VULKAN_HPP_CONSTEXPR MacOSSurfaceCreateInfoMVK( VULKAN_HPP_NAMESPACE::MacOSSurfaceCreateFlagsMVK flags_ = {},
@@ -47174,6 +47479,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct MappedMemoryRange
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eMappedMemoryRange;
 
     VULKAN_HPP_CONSTEXPR MappedMemoryRange( VULKAN_HPP_NAMESPACE::DeviceMemory memory_ = {},
@@ -47276,6 +47582,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct MemoryAllocateFlagsInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eMemoryAllocateFlagsInfo;
 
     VULKAN_HPP_CONSTEXPR MemoryAllocateFlagsInfo( VULKAN_HPP_NAMESPACE::MemoryAllocateFlags flags_ = {},
@@ -47368,6 +47675,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct MemoryAllocateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eMemoryAllocateInfo;
 
     VULKAN_HPP_CONSTEXPR MemoryAllocateInfo( VULKAN_HPP_NAMESPACE::DeviceSize allocationSize_ = {},
@@ -47460,6 +47768,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct MemoryBarrier
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eMemoryBarrier;
 
     VULKAN_HPP_CONSTEXPR MemoryBarrier( VULKAN_HPP_NAMESPACE::AccessFlags srcAccessMask_ = {},
@@ -47552,6 +47861,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct MemoryDedicatedAllocateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eMemoryDedicatedAllocateInfo;
 
     VULKAN_HPP_CONSTEXPR MemoryDedicatedAllocateInfo( VULKAN_HPP_NAMESPACE::Image image_ = {},
@@ -47644,6 +47954,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct MemoryDedicatedRequirements
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eMemoryDedicatedRequirements;
 
     VULKAN_HPP_CONSTEXPR MemoryDedicatedRequirements( VULKAN_HPP_NAMESPACE::Bool32 prefersDedicatedAllocation_ = {},
@@ -47718,6 +48029,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct MemoryFdPropertiesKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eMemoryFdPropertiesKHR;
 
     VULKAN_HPP_CONSTEXPR MemoryFdPropertiesKHR( uint32_t memoryTypeBits_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -47789,6 +48101,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
   struct MemoryGetAndroidHardwareBufferInfoANDROID
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eMemoryGetAndroidHardwareBufferInfoANDROID;
 
     VULKAN_HPP_CONSTEXPR MemoryGetAndroidHardwareBufferInfoANDROID( VULKAN_HPP_NAMESPACE::DeviceMemory memory_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -47872,6 +48185,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct MemoryGetFdInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eMemoryGetFdInfoKHR;
 
     VULKAN_HPP_CONSTEXPR MemoryGetFdInfoKHR( VULKAN_HPP_NAMESPACE::DeviceMemory memory_ = {},
@@ -47965,6 +48279,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   struct MemoryGetWin32HandleInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eMemoryGetWin32HandleInfoKHR;
 
     VULKAN_HPP_CONSTEXPR MemoryGetWin32HandleInfoKHR( VULKAN_HPP_NAMESPACE::DeviceMemory memory_ = {},
@@ -48059,6 +48374,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct MemoryHeap
   {
 
+
     VULKAN_HPP_CONSTEXPR MemoryHeap( VULKAN_HPP_NAMESPACE::DeviceSize size_ = {},
                                      VULKAN_HPP_NAMESPACE::MemoryHeapFlags flags_ = {} ) VULKAN_HPP_NOEXCEPT
       : size( size_ )
@@ -48115,6 +48431,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct MemoryHostPointerPropertiesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eMemoryHostPointerPropertiesEXT;
 
     VULKAN_HPP_CONSTEXPR MemoryHostPointerPropertiesEXT( uint32_t memoryTypeBits_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -48185,6 +48502,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct MemoryOpaqueCaptureAddressAllocateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eMemoryOpaqueCaptureAddressAllocateInfo;
 
     VULKAN_HPP_CONSTEXPR MemoryOpaqueCaptureAddressAllocateInfo( uint64_t opaqueCaptureAddress_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -48267,6 +48585,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct MemoryPriorityAllocateInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eMemoryPriorityAllocateInfoEXT;
 
     VULKAN_HPP_CONSTEXPR MemoryPriorityAllocateInfoEXT( float priority_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -48350,6 +48669,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct MemoryRequirements
   {
 
+
     VULKAN_HPP_CONSTEXPR MemoryRequirements( VULKAN_HPP_NAMESPACE::DeviceSize size_ = {},
                                              VULKAN_HPP_NAMESPACE::DeviceSize alignment_ = {},
                                              uint32_t memoryTypeBits_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -48410,6 +48730,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct MemoryRequirements2
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eMemoryRequirements2;
 
     VULKAN_HPP_CONSTEXPR MemoryRequirements2( VULKAN_HPP_NAMESPACE::MemoryRequirements memoryRequirements_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -48481,6 +48802,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct MemoryType
   {
 
+
     VULKAN_HPP_CONSTEXPR MemoryType( VULKAN_HPP_NAMESPACE::MemoryPropertyFlags propertyFlags_ = {},
                                      uint32_t heapIndex_ = {} ) VULKAN_HPP_NOEXCEPT
       : propertyFlags( propertyFlags_ )
@@ -48538,6 +48860,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   struct MemoryWin32HandlePropertiesKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eMemoryWin32HandlePropertiesKHR;
 
     VULKAN_HPP_CONSTEXPR MemoryWin32HandlePropertiesKHR( uint32_t memoryTypeBits_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -48610,6 +48933,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_METAL_EXT
   struct MetalSurfaceCreateInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eMetalSurfaceCreateInfoEXT;
 
     VULKAN_HPP_CONSTEXPR MetalSurfaceCreateInfoEXT( VULKAN_HPP_NAMESPACE::MetalSurfaceCreateFlagsEXT flags_ = {},
@@ -48703,6 +49027,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct MultisamplePropertiesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eMultisamplePropertiesEXT;
 
     VULKAN_HPP_CONSTEXPR MultisamplePropertiesEXT( VULKAN_HPP_NAMESPACE::Extent2D maxSampleLocationGridSize_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -48774,6 +49099,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct PastPresentationTimingGOOGLE
   {
 
+
     VULKAN_HPP_CONSTEXPR PastPresentationTimingGOOGLE( uint32_t presentID_ = {},
                                                        uint64_t desiredPresentTime_ = {},
                                                        uint64_t actualPresentTime_ = {},
@@ -48842,6 +49168,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PerformanceConfigurationAcquireInfoINTEL
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePerformanceConfigurationAcquireInfoINTEL;
 
     VULKAN_HPP_CONSTEXPR PerformanceConfigurationAcquireInfoINTEL( VULKAN_HPP_NAMESPACE::PerformanceConfigurationTypeINTEL type_ = VULKAN_HPP_NAMESPACE::PerformanceConfigurationTypeINTEL::eCommandQueueMetricsDiscoveryActivated ) VULKAN_HPP_NOEXCEPT
@@ -48924,6 +49251,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PerformanceCounterDescriptionKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePerformanceCounterDescriptionKHR;
 
     VULKAN_HPP_CONSTEXPR_14 PerformanceCounterDescriptionKHR( VULKAN_HPP_NAMESPACE::PerformanceCounterDescriptionFlagsKHR flags_ = {},
@@ -49006,6 +49334,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PerformanceCounterKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePerformanceCounterKHR;
 
     VULKAN_HPP_CONSTEXPR_14 PerformanceCounterKHR( VULKAN_HPP_NAMESPACE::PerformanceCounterUnitKHR unit_ = VULKAN_HPP_NAMESPACE::PerformanceCounterUnitKHR::eGeneric,
@@ -49179,6 +49508,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PerformanceMarkerInfoINTEL
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePerformanceMarkerInfoINTEL;
 
     VULKAN_HPP_CONSTEXPR PerformanceMarkerInfoINTEL( uint64_t marker_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -49261,6 +49591,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PerformanceOverrideInfoINTEL
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePerformanceOverrideInfoINTEL;
 
     VULKAN_HPP_CONSTEXPR PerformanceOverrideInfoINTEL( VULKAN_HPP_NAMESPACE::PerformanceOverrideTypeINTEL type_ = VULKAN_HPP_NAMESPACE::PerformanceOverrideTypeINTEL::eNullHardware,
@@ -49363,6 +49694,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PerformanceQuerySubmitInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePerformanceQuerySubmitInfoKHR;
 
     VULKAN_HPP_CONSTEXPR PerformanceQuerySubmitInfoKHR( uint32_t counterPassIndex_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -49445,6 +49777,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PerformanceStreamMarkerInfoINTEL
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePerformanceStreamMarkerInfoINTEL;
 
     VULKAN_HPP_CONSTEXPR PerformanceStreamMarkerInfoINTEL( uint32_t marker_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -49612,6 +49945,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct PerformanceValueINTEL
   {
 
+
     PerformanceValueINTEL( VULKAN_HPP_NAMESPACE::PerformanceValueTypeINTEL type_ = VULKAN_HPP_NAMESPACE::PerformanceValueTypeINTEL::eUint32,
                            VULKAN_HPP_NAMESPACE::PerformanceValueDataINTEL data_ = {} ) VULKAN_HPP_NOEXCEPT
       : type( type_ )
@@ -49665,6 +49999,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDevice16BitStorageFeatures
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDevice16BitStorageFeatures;
 
     VULKAN_HPP_CONSTEXPR PhysicalDevice16BitStorageFeatures( VULKAN_HPP_NAMESPACE::Bool32 storageBuffer16BitAccess_ = {},
@@ -49777,6 +50112,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDevice8BitStorageFeatures
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDevice8BitStorageFeatures;
 
     VULKAN_HPP_CONSTEXPR PhysicalDevice8BitStorageFeatures( VULKAN_HPP_NAMESPACE::Bool32 storageBuffer8BitAccess_ = {},
@@ -49879,6 +50215,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceASTCDecodeFeaturesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceAstcDecodeFeaturesEXT;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceASTCDecodeFeaturesEXT( VULKAN_HPP_NAMESPACE::Bool32 decodeModeSharedExponent_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -49961,6 +50298,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceBlendOperationAdvancedFeaturesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceBlendOperationAdvancedFeaturesEXT;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceBlendOperationAdvancedFeaturesEXT( VULKAN_HPP_NAMESPACE::Bool32 advancedBlendCoherentOperations_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -50043,6 +50381,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceBlendOperationAdvancedPropertiesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceBlendOperationAdvancedPropertiesEXT;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceBlendOperationAdvancedPropertiesEXT( uint32_t advancedBlendMaxColorAttachments_ = {},
@@ -50133,6 +50472,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceBufferDeviceAddressFeatures
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceBufferDeviceAddressFeatures;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceBufferDeviceAddressFeatures( VULKAN_HPP_NAMESPACE::Bool32 bufferDeviceAddress_ = {},
@@ -50235,6 +50575,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceBufferDeviceAddressFeaturesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceBufferDeviceAddressFeaturesEXT;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceBufferDeviceAddressFeaturesEXT( VULKAN_HPP_NAMESPACE::Bool32 bufferDeviceAddress_ = {},
@@ -50337,6 +50678,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceCoherentMemoryFeaturesAMD
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceCoherentMemoryFeaturesAMD;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceCoherentMemoryFeaturesAMD( VULKAN_HPP_NAMESPACE::Bool32 deviceCoherentMemory_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -50419,6 +50761,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceComputeShaderDerivativesFeaturesNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceComputeShaderDerivativesFeaturesNV;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceComputeShaderDerivativesFeaturesNV( VULKAN_HPP_NAMESPACE::Bool32 computeDerivativeGroupQuads_ = {},
@@ -50511,6 +50854,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceConditionalRenderingFeaturesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceConditionalRenderingFeaturesEXT;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceConditionalRenderingFeaturesEXT( VULKAN_HPP_NAMESPACE::Bool32 conditionalRendering_ = {},
@@ -50603,6 +50947,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceConservativeRasterizationPropertiesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceConservativeRasterizationPropertiesEXT;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceConservativeRasterizationPropertiesEXT( float primitiveOverestimationSize_ = {},
@@ -50705,6 +51050,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceCooperativeMatrixFeaturesNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceCooperativeMatrixFeaturesNV;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceCooperativeMatrixFeaturesNV( VULKAN_HPP_NAMESPACE::Bool32 cooperativeMatrix_ = {},
@@ -50797,6 +51143,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceCooperativeMatrixPropertiesNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceCooperativeMatrixPropertiesNV;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceCooperativeMatrixPropertiesNV( VULKAN_HPP_NAMESPACE::ShaderStageFlags cooperativeMatrixSupportedStages_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -50867,6 +51214,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceCornerSampledImageFeaturesNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceCornerSampledImageFeaturesNV;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceCornerSampledImageFeaturesNV( VULKAN_HPP_NAMESPACE::Bool32 cornerSampledImage_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -50949,6 +51297,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceCoverageReductionModeFeaturesNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceCoverageReductionModeFeaturesNV;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceCoverageReductionModeFeaturesNV( VULKAN_HPP_NAMESPACE::Bool32 coverageReductionMode_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -51031,6 +51380,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceCustomBorderColorFeaturesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceCustomBorderColorFeaturesEXT;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceCustomBorderColorFeaturesEXT( VULKAN_HPP_NAMESPACE::Bool32 customBorderColors_ = {},
@@ -51123,6 +51473,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceCustomBorderColorPropertiesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceCustomBorderColorPropertiesEXT;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceCustomBorderColorPropertiesEXT( uint32_t maxCustomBorderColorSamplers_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -51193,6 +51544,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV( VULKAN_HPP_NAMESPACE::Bool32 dedicatedAllocationImageAliasing_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -51275,6 +51627,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceDepthClipEnableFeaturesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceDepthClipEnableFeaturesEXT;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceDepthClipEnableFeaturesEXT( VULKAN_HPP_NAMESPACE::Bool32 depthClipEnable_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -51357,6 +51710,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceDepthStencilResolveProperties
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceDepthStencilResolveProperties;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceDepthStencilResolveProperties( VULKAN_HPP_NAMESPACE::ResolveModeFlags supportedDepthResolveModes_ = {},
@@ -51439,6 +51793,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceDescriptorIndexingFeatures
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceDescriptorIndexingFeatures;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceDescriptorIndexingFeatures( VULKAN_HPP_NAMESPACE::Bool32 shaderInputAttachmentArrayDynamicIndexing_ = {},
@@ -51711,6 +52066,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceDescriptorIndexingProperties
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceDescriptorIndexingProperties;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceDescriptorIndexingProperties( uint32_t maxUpdateAfterBindDescriptorsInAllPools_ = {},
@@ -51869,6 +52225,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceDeviceGeneratedCommandsFeaturesNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceDeviceGeneratedCommandsFeaturesNV;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceDeviceGeneratedCommandsFeaturesNV( VULKAN_HPP_NAMESPACE::Bool32 deviceGeneratedCommands_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -51951,6 +52308,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceDeviceGeneratedCommandsPropertiesNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceDeviceGeneratedCommandsPropertiesNV;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceDeviceGeneratedCommandsPropertiesNV( uint32_t maxGraphicsShaderGroupCount_ = {},
@@ -52053,6 +52411,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceDiagnosticsConfigFeaturesNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceDiagnosticsConfigFeaturesNV;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceDiagnosticsConfigFeaturesNV( VULKAN_HPP_NAMESPACE::Bool32 diagnosticsConfig_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -52135,6 +52494,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceDiscardRectanglePropertiesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceDiscardRectanglePropertiesEXT;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceDiscardRectanglePropertiesEXT( uint32_t maxDiscardRectangles_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -52205,6 +52565,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceDriverProperties
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceDriverProperties;
 
     VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceDriverProperties( VULKAN_HPP_NAMESPACE::DriverId driverID_ = VULKAN_HPP_NAMESPACE::DriverId::eAmdProprietary,
@@ -52287,6 +52648,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceExclusiveScissorFeaturesNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceExclusiveScissorFeaturesNV;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceExclusiveScissorFeaturesNV( VULKAN_HPP_NAMESPACE::Bool32 exclusiveScissor_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -52369,6 +52731,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceExternalBufferInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceExternalBufferInfo;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceExternalBufferInfo( VULKAN_HPP_NAMESPACE::BufferCreateFlags flags_ = {},
@@ -52471,6 +52834,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceExternalFenceInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceExternalFenceInfo;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceExternalFenceInfo( VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlagBits handleType_ = VULKAN_HPP_NAMESPACE::ExternalFenceHandleTypeFlagBits::eOpaqueFd ) VULKAN_HPP_NOEXCEPT
@@ -52553,6 +52917,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceExternalImageFormatInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceExternalImageFormatInfo;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceExternalImageFormatInfo( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType_ = VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits::eOpaqueFd ) VULKAN_HPP_NOEXCEPT
@@ -52635,6 +53000,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceExternalMemoryHostPropertiesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceExternalMemoryHostPropertiesEXT;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceExternalMemoryHostPropertiesEXT( VULKAN_HPP_NAMESPACE::DeviceSize minImportedHostPointerAlignment_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -52705,6 +53071,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceExternalSemaphoreInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceExternalSemaphoreInfo;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceExternalSemaphoreInfo( VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits handleType_ = VULKAN_HPP_NAMESPACE::ExternalSemaphoreHandleTypeFlagBits::eOpaqueFd ) VULKAN_HPP_NOEXCEPT
@@ -52787,6 +53154,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceFeatures2
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceFeatures2;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceFeatures2( VULKAN_HPP_NAMESPACE::PhysicalDeviceFeatures features_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -52869,6 +53237,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceFloatControlsProperties
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceFloatControlsProperties;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceFloatControlsProperties( VULKAN_HPP_NAMESPACE::ShaderFloatControlsIndependence denormBehaviorIndependence_ = VULKAN_HPP_NAMESPACE::ShaderFloatControlsIndependence::e32BitOnly,
@@ -53003,6 +53372,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceFragmentDensityMapFeaturesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceFragmentDensityMapFeaturesEXT;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceFragmentDensityMapFeaturesEXT( VULKAN_HPP_NAMESPACE::Bool32 fragmentDensityMap_ = {},
@@ -53081,6 +53451,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceFragmentDensityMapPropertiesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceFragmentDensityMapPropertiesEXT;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceFragmentDensityMapPropertiesEXT( VULKAN_HPP_NAMESPACE::Extent2D minFragmentDensityTexelSize_ = {},
@@ -53159,6 +53530,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceFragmentShaderBarycentricFeaturesNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceFragmentShaderBarycentricFeaturesNV;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceFragmentShaderBarycentricFeaturesNV( VULKAN_HPP_NAMESPACE::Bool32 fragmentShaderBarycentric_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -53241,6 +53613,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceFragmentShaderInterlockFeaturesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceFragmentShaderInterlockFeaturesEXT;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceFragmentShaderInterlockFeaturesEXT( VULKAN_HPP_NAMESPACE::Bool32 fragmentShaderSampleInterlock_ = {},
@@ -53343,6 +53716,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceGroupProperties
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceGroupProperties;
 
     VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceGroupProperties( uint32_t physicalDeviceCount_ = {},
@@ -53421,6 +53795,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceHostQueryResetFeatures
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceHostQueryResetFeatures;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceHostQueryResetFeatures( VULKAN_HPP_NAMESPACE::Bool32 hostQueryReset_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -53503,6 +53878,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceIDProperties
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceIdProperties;
 
     VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceIDProperties( std::array<uint8_t,VK_UUID_SIZE> const& deviceUUID_ = {},
@@ -53589,6 +53965,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceImageDrmFormatModifierInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceImageDrmFormatModifierInfoEXT;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceImageDrmFormatModifierInfoEXT( uint64_t drmFormatModifier_ = {},
@@ -53701,6 +54078,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceImageFormatInfo2
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceImageFormatInfo2;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceImageFormatInfo2( VULKAN_HPP_NAMESPACE::Format format_ = VULKAN_HPP_NAMESPACE::Format::eUndefined,
@@ -53823,6 +54201,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceImageViewImageFormatInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceImageViewImageFormatInfoEXT;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceImageViewImageFormatInfoEXT( VULKAN_HPP_NAMESPACE::ImageViewType imageViewType_ = VULKAN_HPP_NAMESPACE::ImageViewType::e1D ) VULKAN_HPP_NOEXCEPT
@@ -53905,6 +54284,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceImagelessFramebufferFeatures
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceImagelessFramebufferFeatures;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceImagelessFramebufferFeatures( VULKAN_HPP_NAMESPACE::Bool32 imagelessFramebuffer_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -53987,6 +54367,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceIndexTypeUint8FeaturesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceIndexTypeUint8FeaturesEXT;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceIndexTypeUint8FeaturesEXT( VULKAN_HPP_NAMESPACE::Bool32 indexTypeUint8_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -54069,6 +54450,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceInlineUniformBlockFeaturesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceInlineUniformBlockFeaturesEXT;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceInlineUniformBlockFeaturesEXT( VULKAN_HPP_NAMESPACE::Bool32 inlineUniformBlock_ = {},
@@ -54161,6 +54543,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceInlineUniformBlockPropertiesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceInlineUniformBlockPropertiesEXT;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceInlineUniformBlockPropertiesEXT( uint32_t maxInlineUniformBlockSize_ = {},
@@ -54247,6 +54630,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceLimits
   {
+
 
     VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceLimits( uint32_t maxImageDimension1D_ = {},
                                                   uint32_t maxImageDimension2D_ = {},
@@ -54720,6 +55104,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceLineRasterizationFeaturesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceLineRasterizationFeaturesEXT;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceLineRasterizationFeaturesEXT( VULKAN_HPP_NAMESPACE::Bool32 rectangularLines_ = {},
@@ -54852,6 +55237,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceLineRasterizationPropertiesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceLineRasterizationPropertiesEXT;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceLineRasterizationPropertiesEXT( uint32_t lineSubPixelPrecisionBits_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -54922,6 +55308,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceMaintenance3Properties
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceMaintenance3Properties;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceMaintenance3Properties( uint32_t maxPerSetDescriptors_ = {},
@@ -54996,6 +55383,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceMemoryBudgetPropertiesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceMemoryBudgetPropertiesEXT;
 
     VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceMemoryBudgetPropertiesEXT( std::array<VULKAN_HPP_NAMESPACE::DeviceSize,VK_MAX_MEMORY_HEAPS> const& heapBudget_ = {},
@@ -55070,6 +55458,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceMemoryPriorityFeaturesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceMemoryPriorityFeaturesEXT;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceMemoryPriorityFeaturesEXT( VULKAN_HPP_NAMESPACE::Bool32 memoryPriority_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -55153,6 +55542,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct PhysicalDeviceMemoryProperties
   {
 
+
     VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceMemoryProperties( uint32_t memoryTypeCount_ = {},
                                                             std::array<VULKAN_HPP_NAMESPACE::MemoryType,VK_MAX_MEMORY_TYPES> const& memoryTypes_ = {},
                                                             uint32_t memoryHeapCount_ = {},
@@ -55217,6 +55607,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceMemoryProperties2
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceMemoryProperties2;
 
     VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceMemoryProperties2( VULKAN_HPP_NAMESPACE::PhysicalDeviceMemoryProperties memoryProperties_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -55287,6 +55678,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceMeshShaderFeaturesNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceMeshShaderFeaturesNV;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceMeshShaderFeaturesNV( VULKAN_HPP_NAMESPACE::Bool32 taskShader_ = {},
@@ -55379,6 +55771,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceMeshShaderPropertiesNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceMeshShaderPropertiesNV;
 
     VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceMeshShaderPropertiesNV( uint32_t maxDrawMeshTasksCount_ = {},
@@ -55497,6 +55890,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceMultiviewFeatures
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceMultiviewFeatures;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceMultiviewFeatures( VULKAN_HPP_NAMESPACE::Bool32 multiview_ = {},
@@ -55599,6 +55993,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceMultiviewPerViewAttributesPropertiesNVX
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceMultiviewPerViewAttributesPropertiesNVX;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceMultiviewPerViewAttributesPropertiesNVX( VULKAN_HPP_NAMESPACE::Bool32 perViewPositionAllComponents_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -55669,6 +56064,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceMultiviewProperties
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceMultiviewProperties;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceMultiviewProperties( uint32_t maxMultiviewViewCount_ = {},
@@ -55743,6 +56139,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDevicePCIBusInfoPropertiesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDevicePciBusInfoPropertiesEXT;
 
     VULKAN_HPP_CONSTEXPR PhysicalDevicePCIBusInfoPropertiesEXT( uint32_t pciDomain_ = {},
@@ -55825,6 +56222,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDevicePerformanceQueryFeaturesKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDevicePerformanceQueryFeaturesKHR;
 
     VULKAN_HPP_CONSTEXPR PhysicalDevicePerformanceQueryFeaturesKHR( VULKAN_HPP_NAMESPACE::Bool32 performanceCounterQueryPools_ = {},
@@ -55917,6 +56315,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDevicePerformanceQueryPropertiesKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDevicePerformanceQueryPropertiesKHR;
 
     VULKAN_HPP_CONSTEXPR PhysicalDevicePerformanceQueryPropertiesKHR( VULKAN_HPP_NAMESPACE::Bool32 allowCommandBufferQueryCopies_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -55987,6 +56386,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDevicePipelineCreationCacheControlFeaturesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDevicePipelineCreationCacheControlFeaturesEXT;
 
     VULKAN_HPP_CONSTEXPR PhysicalDevicePipelineCreationCacheControlFeaturesEXT( VULKAN_HPP_NAMESPACE::Bool32 pipelineCreationCacheControl_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -56069,6 +56469,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDevicePipelineExecutablePropertiesFeaturesKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDevicePipelineExecutablePropertiesFeaturesKHR;
 
     VULKAN_HPP_CONSTEXPR PhysicalDevicePipelineExecutablePropertiesFeaturesKHR( VULKAN_HPP_NAMESPACE::Bool32 pipelineExecutableInfo_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -56151,6 +56552,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDevicePointClippingProperties
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDevicePointClippingProperties;
 
     VULKAN_HPP_CONSTEXPR PhysicalDevicePointClippingProperties( VULKAN_HPP_NAMESPACE::PointClippingBehavior pointClippingBehavior_ = VULKAN_HPP_NAMESPACE::PointClippingBehavior::eAllClipPlanes ) VULKAN_HPP_NOEXCEPT
@@ -56221,6 +56623,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDevicePrivateDataFeaturesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDevicePrivateDataFeaturesEXT;
 
     VULKAN_HPP_CONSTEXPR PhysicalDevicePrivateDataFeaturesEXT( VULKAN_HPP_NAMESPACE::Bool32 privateData_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -56304,6 +56707,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct PhysicalDeviceSparseProperties
   {
 
+
     VULKAN_HPP_CONSTEXPR PhysicalDeviceSparseProperties( VULKAN_HPP_NAMESPACE::Bool32 residencyStandard2DBlockShape_ = {},
                                                          VULKAN_HPP_NAMESPACE::Bool32 residencyStandard2DMultisampleBlockShape_ = {},
                                                          VULKAN_HPP_NAMESPACE::Bool32 residencyStandard3DBlockShape_ = {},
@@ -56372,6 +56776,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceProperties
   {
+
 
     VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceProperties( uint32_t apiVersion_ = {},
                                                       uint32_t driverVersion_ = {},
@@ -56457,6 +56862,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceProperties2
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceProperties2;
 
     VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceProperties2( VULKAN_HPP_NAMESPACE::PhysicalDeviceProperties properties_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -56527,6 +56933,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceProtectedMemoryFeatures
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceProtectedMemoryFeatures;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceProtectedMemoryFeatures( VULKAN_HPP_NAMESPACE::Bool32 protectedMemory_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -56609,6 +57016,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceProtectedMemoryProperties
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceProtectedMemoryProperties;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceProtectedMemoryProperties( VULKAN_HPP_NAMESPACE::Bool32 protectedNoFault_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -56679,6 +57087,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDevicePushDescriptorPropertiesKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDevicePushDescriptorPropertiesKHR;
 
     VULKAN_HPP_CONSTEXPR PhysicalDevicePushDescriptorPropertiesKHR( uint32_t maxPushDescriptors_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -56750,6 +57159,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_ENABLE_BETA_EXTENSIONS
   struct PhysicalDeviceRayTracingFeaturesKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceRayTracingFeaturesKHR;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceRayTracingFeaturesKHR( VULKAN_HPP_NAMESPACE::Bool32 rayTracing_ = {},
@@ -56914,6 +57324,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_ENABLE_BETA_EXTENSIONS
   struct PhysicalDeviceRayTracingPropertiesKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceRayTracingPropertiesKHR;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceRayTracingPropertiesKHR( uint32_t shaderGroupHandleSize_ = {},
@@ -57017,6 +57428,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceRayTracingPropertiesNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceRayTracingPropertiesNV;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceRayTracingPropertiesNV( uint32_t shaderGroupHandleSize_ = {},
@@ -57115,6 +57527,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceRepresentativeFragmentTestFeaturesNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceRepresentativeFragmentTestFeaturesNV;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceRepresentativeFragmentTestFeaturesNV( VULKAN_HPP_NAMESPACE::Bool32 representativeFragmentTest_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -57197,6 +57610,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceRobustness2FeaturesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceRobustness2FeaturesEXT;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceRobustness2FeaturesEXT( VULKAN_HPP_NAMESPACE::Bool32 robustBufferAccess2_ = {},
@@ -57299,6 +57713,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceRobustness2PropertiesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceRobustness2PropertiesEXT;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceRobustness2PropertiesEXT( VULKAN_HPP_NAMESPACE::DeviceSize robustStorageBufferAccessSizeAlignment_ = {},
@@ -57373,6 +57788,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceSampleLocationsPropertiesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceSampleLocationsPropertiesEXT;
 
     VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceSampleLocationsPropertiesEXT( VULKAN_HPP_NAMESPACE::SampleCountFlags sampleLocationSampleCounts_ = {},
@@ -57459,6 +57875,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceSamplerFilterMinmaxProperties
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceSamplerFilterMinmaxProperties;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceSamplerFilterMinmaxProperties( VULKAN_HPP_NAMESPACE::Bool32 filterMinmaxSingleComponentFormats_ = {},
@@ -57533,6 +57950,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceSamplerYcbcrConversionFeatures
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceSamplerYcbcrConversionFeatures;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceSamplerYcbcrConversionFeatures( VULKAN_HPP_NAMESPACE::Bool32 samplerYcbcrConversion_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -57615,6 +58033,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceScalarBlockLayoutFeatures
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceScalarBlockLayoutFeatures;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceScalarBlockLayoutFeatures( VULKAN_HPP_NAMESPACE::Bool32 scalarBlockLayout_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -57697,6 +58116,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceSeparateDepthStencilLayoutsFeatures
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceSeparateDepthStencilLayoutsFeatures;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceSeparateDepthStencilLayoutsFeatures( VULKAN_HPP_NAMESPACE::Bool32 separateDepthStencilLayouts_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -57779,6 +58199,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceShaderAtomicInt64Features
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceShaderAtomicInt64Features;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceShaderAtomicInt64Features( VULKAN_HPP_NAMESPACE::Bool32 shaderBufferInt64Atomics_ = {},
@@ -57871,6 +58292,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceShaderClockFeaturesKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceShaderClockFeaturesKHR;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceShaderClockFeaturesKHR( VULKAN_HPP_NAMESPACE::Bool32 shaderSubgroupClock_ = {},
@@ -57963,6 +58385,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceShaderCoreProperties2AMD
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceShaderCoreProperties2AMD;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceShaderCoreProperties2AMD( VULKAN_HPP_NAMESPACE::ShaderCorePropertiesFlagsAMD shaderCoreFeatures_ = {},
@@ -58037,6 +58460,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceShaderCorePropertiesAMD
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceShaderCorePropertiesAMD;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceShaderCorePropertiesAMD( uint32_t shaderEngineCount_ = {},
@@ -58159,6 +58583,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT( VULKAN_HPP_NAMESPACE::Bool32 shaderDemoteToHelperInvocation_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -58241,6 +58666,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceShaderDrawParametersFeatures
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceShaderDrawParametersFeatures;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceShaderDrawParametersFeatures( VULKAN_HPP_NAMESPACE::Bool32 shaderDrawParameters_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -58323,6 +58749,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceShaderFloat16Int8Features
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceShaderFloat16Int8Features;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceShaderFloat16Int8Features( VULKAN_HPP_NAMESPACE::Bool32 shaderFloat16_ = {},
@@ -58415,6 +58842,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceShaderImageFootprintFeaturesNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceShaderImageFootprintFeaturesNV;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceShaderImageFootprintFeaturesNV( VULKAN_HPP_NAMESPACE::Bool32 imageFootprint_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -58497,6 +58925,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceShaderIntegerFunctions2FeaturesINTEL;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL( VULKAN_HPP_NAMESPACE::Bool32 shaderIntegerFunctions2_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -58579,6 +59008,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceShaderSMBuiltinsFeaturesNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceShaderSmBuiltinsFeaturesNV;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceShaderSMBuiltinsFeaturesNV( VULKAN_HPP_NAMESPACE::Bool32 shaderSMBuiltins_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -58661,6 +59091,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceShaderSMBuiltinsPropertiesNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceShaderSmBuiltinsPropertiesNV;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceShaderSMBuiltinsPropertiesNV( uint32_t shaderSMCount_ = {},
@@ -58735,6 +59166,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceShaderSubgroupExtendedTypesFeatures
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceShaderSubgroupExtendedTypesFeatures;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceShaderSubgroupExtendedTypesFeatures( VULKAN_HPP_NAMESPACE::Bool32 shaderSubgroupExtendedTypes_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -58817,6 +59249,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceShadingRateImageFeaturesNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceShadingRateImageFeaturesNV;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceShadingRateImageFeaturesNV( VULKAN_HPP_NAMESPACE::Bool32 shadingRateImage_ = {},
@@ -58909,6 +59342,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceShadingRateImagePropertiesNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceShadingRateImagePropertiesNV;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceShadingRateImagePropertiesNV( VULKAN_HPP_NAMESPACE::Extent2D shadingRateTexelSize_ = {},
@@ -58987,6 +59421,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceSparseImageFormatInfo2
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceSparseImageFormatInfo2;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceSparseImageFormatInfo2( VULKAN_HPP_NAMESPACE::Format format_ = VULKAN_HPP_NAMESPACE::Format::eUndefined,
@@ -59109,6 +59544,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceSubgroupProperties
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceSubgroupProperties;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceSubgroupProperties( uint32_t subgroupSize_ = {},
@@ -59191,6 +59627,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceSubgroupSizeControlFeaturesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceSubgroupSizeControlFeaturesEXT;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceSubgroupSizeControlFeaturesEXT( VULKAN_HPP_NAMESPACE::Bool32 subgroupSizeControl_ = {},
@@ -59283,6 +59720,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceSubgroupSizeControlPropertiesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceSubgroupSizeControlPropertiesEXT;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceSubgroupSizeControlPropertiesEXT( uint32_t minSubgroupSize_ = {},
@@ -59365,6 +59803,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceSurfaceInfo2KHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceSurfaceInfo2KHR;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceSurfaceInfo2KHR( VULKAN_HPP_NAMESPACE::SurfaceKHR surface_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -59447,6 +59886,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceTexelBufferAlignmentFeaturesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceTexelBufferAlignmentFeaturesEXT;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceTexelBufferAlignmentFeaturesEXT( VULKAN_HPP_NAMESPACE::Bool32 texelBufferAlignment_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -59529,6 +59969,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceTexelBufferAlignmentPropertiesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceTexelBufferAlignmentPropertiesEXT;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceTexelBufferAlignmentPropertiesEXT( VULKAN_HPP_NAMESPACE::DeviceSize storageTexelBufferOffsetAlignmentBytes_ = {},
@@ -59611,6 +60052,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceTextureCompressionASTCHDRFeaturesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceTextureCompressionAstcHdrFeaturesEXT;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceTextureCompressionASTCHDRFeaturesEXT( VULKAN_HPP_NAMESPACE::Bool32 textureCompressionASTC_HDR_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -59693,6 +60135,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceTimelineSemaphoreFeatures
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceTimelineSemaphoreFeatures;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceTimelineSemaphoreFeatures( VULKAN_HPP_NAMESPACE::Bool32 timelineSemaphore_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -59775,6 +60218,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceTimelineSemaphoreProperties
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceTimelineSemaphoreProperties;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceTimelineSemaphoreProperties( uint64_t maxTimelineSemaphoreValueDifference_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -59845,6 +60289,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceToolPropertiesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceToolPropertiesEXT;
 
     VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceToolPropertiesEXT( std::array<char,VK_MAX_EXTENSION_NAME_SIZE> const& name_ = {},
@@ -59931,6 +60376,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceTransformFeedbackFeaturesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceTransformFeedbackFeaturesEXT;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceTransformFeedbackFeaturesEXT( VULKAN_HPP_NAMESPACE::Bool32 transformFeedback_ = {},
@@ -60023,6 +60469,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceTransformFeedbackPropertiesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceTransformFeedbackPropertiesEXT;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceTransformFeedbackPropertiesEXT( uint32_t maxTransformFeedbackStreams_ = {},
@@ -60129,6 +60576,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceUniformBufferStandardLayoutFeatures
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceUniformBufferStandardLayoutFeatures;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceUniformBufferStandardLayoutFeatures( VULKAN_HPP_NAMESPACE::Bool32 uniformBufferStandardLayout_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -60211,6 +60659,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceVariablePointersFeatures
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceVariablePointersFeatures;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceVariablePointersFeatures( VULKAN_HPP_NAMESPACE::Bool32 variablePointersStorageBuffer_ = {},
@@ -60303,6 +60752,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceVertexAttributeDivisorFeaturesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceVertexAttributeDivisorFeaturesEXT;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceVertexAttributeDivisorFeaturesEXT( VULKAN_HPP_NAMESPACE::Bool32 vertexAttributeInstanceRateDivisor_ = {},
@@ -60395,6 +60845,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceVertexAttributeDivisorPropertiesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceVertexAttributeDivisorPropertiesEXT;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceVertexAttributeDivisorPropertiesEXT( uint32_t maxVertexAttribDivisor_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -60465,6 +60916,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceVulkan11Features
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceVulkan11Features;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceVulkan11Features( VULKAN_HPP_NAMESPACE::Bool32 storageBuffer16BitAccess_ = {},
@@ -60657,6 +61109,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceVulkan11Properties
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceVulkan11Properties;
 
     VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceVulkan11Properties( std::array<uint8_t,VK_UUID_SIZE> const& deviceUUID_ = {},
@@ -60783,6 +61236,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceVulkan12Features
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceVulkan12Features;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceVulkan12Features( VULKAN_HPP_NAMESPACE::Bool32 samplerMirrorClampToEdge_ = {},
@@ -61325,6 +61779,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceVulkan12Properties
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceVulkan12Properties;
 
     VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceVulkan12Properties( VULKAN_HPP_NAMESPACE::DriverId driverID_ = VULKAN_HPP_NAMESPACE::DriverId::eAmdProprietary,
@@ -61599,6 +62054,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceVulkanMemoryModelFeatures
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceVulkanMemoryModelFeatures;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceVulkanMemoryModelFeatures( VULKAN_HPP_NAMESPACE::Bool32 vulkanMemoryModel_ = {},
@@ -61701,6 +62157,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PhysicalDeviceYcbcrImageArraysFeaturesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceYcbcrImageArraysFeaturesEXT;
 
     VULKAN_HPP_CONSTEXPR PhysicalDeviceYcbcrImageArraysFeaturesEXT( VULKAN_HPP_NAMESPACE::Bool32 ycbcrImageArrays_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -61783,6 +62240,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineCacheCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineCacheCreateInfo;
 
     VULKAN_HPP_CONSTEXPR PipelineCacheCreateInfo( VULKAN_HPP_NAMESPACE::PipelineCacheCreateFlags flags_ = {},
@@ -61885,6 +62343,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineColorBlendAdvancedStateCreateInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineColorBlendAdvancedStateCreateInfoEXT;
 
     VULKAN_HPP_CONSTEXPR PipelineColorBlendAdvancedStateCreateInfoEXT( VULKAN_HPP_NAMESPACE::Bool32 srcPremultiplied_ = {},
@@ -61987,6 +62446,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineCompilerControlCreateInfoAMD
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineCompilerControlCreateInfoAMD;
 
     VULKAN_HPP_CONSTEXPR PipelineCompilerControlCreateInfoAMD( VULKAN_HPP_NAMESPACE::PipelineCompilerControlFlagsAMD compilerControlFlags_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -62069,6 +62529,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineCoverageModulationStateCreateInfoNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineCoverageModulationStateCreateInfoNV;
 
     VULKAN_HPP_CONSTEXPR PipelineCoverageModulationStateCreateInfoNV( VULKAN_HPP_NAMESPACE::PipelineCoverageModulationStateCreateFlagsNV flags_ = {},
@@ -62191,6 +62652,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineCoverageReductionStateCreateInfoNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineCoverageReductionStateCreateInfoNV;
 
     VULKAN_HPP_CONSTEXPR PipelineCoverageReductionStateCreateInfoNV( VULKAN_HPP_NAMESPACE::PipelineCoverageReductionStateCreateFlagsNV flags_ = {},
@@ -62283,6 +62745,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineCoverageToColorStateCreateInfoNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineCoverageToColorStateCreateInfoNV;
 
     VULKAN_HPP_CONSTEXPR PipelineCoverageToColorStateCreateInfoNV( VULKAN_HPP_NAMESPACE::PipelineCoverageToColorStateCreateFlagsNV flags_ = {},
@@ -62386,6 +62849,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct PipelineCreationFeedbackEXT
   {
 
+
     VULKAN_HPP_CONSTEXPR PipelineCreationFeedbackEXT( VULKAN_HPP_NAMESPACE::PipelineCreationFeedbackFlagsEXT flags_ = {},
                                                       uint64_t duration_ = {} ) VULKAN_HPP_NOEXCEPT
       : flags( flags_ )
@@ -62442,6 +62906,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineCreationFeedbackCreateInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineCreationFeedbackCreateInfoEXT;
 
     VULKAN_HPP_CONSTEXPR PipelineCreationFeedbackCreateInfoEXT( VULKAN_HPP_NAMESPACE::PipelineCreationFeedbackEXT* pPipelineCreationFeedback_ = {},
@@ -62544,6 +63009,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineDiscardRectangleStateCreateInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineDiscardRectangleStateCreateInfoEXT;
 
     VULKAN_HPP_CONSTEXPR PipelineDiscardRectangleStateCreateInfoEXT( VULKAN_HPP_NAMESPACE::PipelineDiscardRectangleStateCreateFlagsEXT flags_ = {},
@@ -62656,6 +63122,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineExecutableInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineExecutableInfoKHR;
 
     VULKAN_HPP_CONSTEXPR PipelineExecutableInfoKHR( VULKAN_HPP_NAMESPACE::Pipeline pipeline_ = {},
@@ -62748,6 +63215,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineExecutableInternalRepresentationKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineExecutableInternalRepresentationKHR;
 
     VULKAN_HPP_CONSTEXPR_14 PipelineExecutableInternalRepresentationKHR( std::array<char,VK_MAX_DESCRIPTION_SIZE> const& name_ = {},
@@ -62834,6 +63302,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineExecutablePropertiesKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineExecutablePropertiesKHR;
 
     VULKAN_HPP_CONSTEXPR_14 PipelineExecutablePropertiesKHR( VULKAN_HPP_NAMESPACE::ShaderStageFlags stages_ = {},
@@ -62992,6 +63461,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineExecutableStatisticKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineExecutableStatisticKHR;
 
     PipelineExecutableStatisticKHR( std::array<char,VK_MAX_DESCRIPTION_SIZE> const& name_ = {},
@@ -63055,6 +63525,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineInfoKHR;
 
     VULKAN_HPP_CONSTEXPR PipelineInfoKHR( VULKAN_HPP_NAMESPACE::Pipeline pipeline_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -63138,6 +63609,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct PushConstantRange
   {
 
+
     VULKAN_HPP_CONSTEXPR PushConstantRange( VULKAN_HPP_NAMESPACE::ShaderStageFlags stageFlags_ = {},
                                             uint32_t offset_ = {},
                                             uint32_t size_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -63216,6 +63688,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineLayoutCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineLayoutCreateInfo;
 
     VULKAN_HPP_CONSTEXPR PipelineLayoutCreateInfo( VULKAN_HPP_NAMESPACE::PipelineLayoutCreateFlags flags_ = {},
@@ -63339,6 +63812,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_ENABLE_BETA_EXTENSIONS
   struct PipelineLibraryCreateInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineLibraryCreateInfoKHR;
 
     VULKAN_HPP_CONSTEXPR PipelineLibraryCreateInfoKHR( uint32_t libraryCount_ = {},
@@ -63432,6 +63906,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineRasterizationConservativeStateCreateInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineRasterizationConservativeStateCreateInfoEXT;
 
     VULKAN_HPP_CONSTEXPR PipelineRasterizationConservativeStateCreateInfoEXT( VULKAN_HPP_NAMESPACE::PipelineRasterizationConservativeStateCreateFlagsEXT flags_ = {},
@@ -63534,6 +64009,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineRasterizationDepthClipStateCreateInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineRasterizationDepthClipStateCreateInfoEXT;
 
     VULKAN_HPP_CONSTEXPR PipelineRasterizationDepthClipStateCreateInfoEXT( VULKAN_HPP_NAMESPACE::PipelineRasterizationDepthClipStateCreateFlagsEXT flags_ = {},
@@ -63626,6 +64102,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineRasterizationLineStateCreateInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineRasterizationLineStateCreateInfoEXT;
 
     VULKAN_HPP_CONSTEXPR PipelineRasterizationLineStateCreateInfoEXT( VULKAN_HPP_NAMESPACE::LineRasterizationModeEXT lineRasterizationMode_ = VULKAN_HPP_NAMESPACE::LineRasterizationModeEXT::eDefault,
@@ -63738,6 +64215,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineRasterizationStateRasterizationOrderAMD
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineRasterizationStateRasterizationOrderAMD;
 
     VULKAN_HPP_CONSTEXPR PipelineRasterizationStateRasterizationOrderAMD( VULKAN_HPP_NAMESPACE::RasterizationOrderAMD rasterizationOrder_ = VULKAN_HPP_NAMESPACE::RasterizationOrderAMD::eStrict ) VULKAN_HPP_NOEXCEPT
@@ -63820,6 +64298,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineRasterizationStateStreamCreateInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineRasterizationStateStreamCreateInfoEXT;
 
     VULKAN_HPP_CONSTEXPR PipelineRasterizationStateStreamCreateInfoEXT( VULKAN_HPP_NAMESPACE::PipelineRasterizationStateStreamCreateFlagsEXT flags_ = {},
@@ -63912,6 +64391,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineRepresentativeFragmentTestStateCreateInfoNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineRepresentativeFragmentTestStateCreateInfoNV;
 
     VULKAN_HPP_CONSTEXPR PipelineRepresentativeFragmentTestStateCreateInfoNV( VULKAN_HPP_NAMESPACE::Bool32 representativeFragmentTestEnable_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -63994,6 +64474,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineSampleLocationsStateCreateInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineSampleLocationsStateCreateInfoEXT;
 
     VULKAN_HPP_CONSTEXPR PipelineSampleLocationsStateCreateInfoEXT( VULKAN_HPP_NAMESPACE::Bool32 sampleLocationsEnable_ = {},
@@ -64086,6 +64567,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineShaderStageRequiredSubgroupSizeCreateInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineShaderStageRequiredSubgroupSizeCreateInfoEXT;
 
     VULKAN_HPP_CONSTEXPR PipelineShaderStageRequiredSubgroupSizeCreateInfoEXT( uint32_t requiredSubgroupSize_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -64156,6 +64638,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineTessellationDomainOriginStateCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineTessellationDomainOriginStateCreateInfo;
 
     VULKAN_HPP_CONSTEXPR PipelineTessellationDomainOriginStateCreateInfo( VULKAN_HPP_NAMESPACE::TessellationDomainOrigin domainOrigin_ = VULKAN_HPP_NAMESPACE::TessellationDomainOrigin::eUpperLeft ) VULKAN_HPP_NOEXCEPT
@@ -64239,6 +64722,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct VertexInputBindingDivisorDescriptionEXT
   {
 
+
     VULKAN_HPP_CONSTEXPR VertexInputBindingDivisorDescriptionEXT( uint32_t binding_ = {},
                                                                   uint32_t divisor_ = {} ) VULKAN_HPP_NOEXCEPT
       : binding( binding_ )
@@ -64307,6 +64791,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineVertexInputDivisorStateCreateInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineVertexInputDivisorStateCreateInfoEXT;
 
     VULKAN_HPP_CONSTEXPR PipelineVertexInputDivisorStateCreateInfoEXT( uint32_t vertexBindingDivisorCount_ = {},
@@ -64399,6 +64884,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineViewportCoarseSampleOrderStateCreateInfoNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineViewportCoarseSampleOrderStateCreateInfoNV;
 
     VULKAN_HPP_CONSTEXPR PipelineViewportCoarseSampleOrderStateCreateInfoNV( VULKAN_HPP_NAMESPACE::CoarseSampleOrderTypeNV sampleOrderType_ = VULKAN_HPP_NAMESPACE::CoarseSampleOrderTypeNV::eDefault,
@@ -64501,6 +64987,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineViewportExclusiveScissorStateCreateInfoNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineViewportExclusiveScissorStateCreateInfoNV;
 
     VULKAN_HPP_CONSTEXPR PipelineViewportExclusiveScissorStateCreateInfoNV( uint32_t exclusiveScissorCount_ = {},
@@ -64594,6 +65081,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct ShadingRatePaletteNV
   {
 
+
     VULKAN_HPP_CONSTEXPR ShadingRatePaletteNV( uint32_t shadingRatePaletteEntryCount_ = {},
                                                const VULKAN_HPP_NAMESPACE::ShadingRatePaletteEntryNV* pShadingRatePaletteEntries_ = {} ) VULKAN_HPP_NOEXCEPT
       : shadingRatePaletteEntryCount( shadingRatePaletteEntryCount_ )
@@ -64662,6 +65150,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineViewportShadingRateImageStateCreateInfoNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineViewportShadingRateImageStateCreateInfoNV;
 
     VULKAN_HPP_CONSTEXPR PipelineViewportShadingRateImageStateCreateInfoNV( VULKAN_HPP_NAMESPACE::Bool32 shadingRateImageEnable_ = {},
@@ -64765,6 +65254,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct ViewportSwizzleNV
   {
 
+
     VULKAN_HPP_CONSTEXPR ViewportSwizzleNV( VULKAN_HPP_NAMESPACE::ViewportCoordinateSwizzleNV x_ = VULKAN_HPP_NAMESPACE::ViewportCoordinateSwizzleNV::ePositiveX,
                                             VULKAN_HPP_NAMESPACE::ViewportCoordinateSwizzleNV y_ = VULKAN_HPP_NAMESPACE::ViewportCoordinateSwizzleNV::ePositiveX,
                                             VULKAN_HPP_NAMESPACE::ViewportCoordinateSwizzleNV z_ = VULKAN_HPP_NAMESPACE::ViewportCoordinateSwizzleNV::ePositiveX,
@@ -64853,6 +65343,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineViewportSwizzleStateCreateInfoNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineViewportSwizzleStateCreateInfoNV;
 
     VULKAN_HPP_CONSTEXPR PipelineViewportSwizzleStateCreateInfoNV( VULKAN_HPP_NAMESPACE::PipelineViewportSwizzleStateCreateFlagsNV flags_ = {},
@@ -64956,6 +65447,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct ViewportWScalingNV
   {
 
+
     VULKAN_HPP_CONSTEXPR ViewportWScalingNV( float xcoeff_ = {},
                                              float ycoeff_ = {} ) VULKAN_HPP_NOEXCEPT
       : xcoeff( xcoeff_ )
@@ -65024,6 +65516,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PipelineViewportWScalingStateCreateInfoNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineViewportWScalingStateCreateInfoNV;
 
     VULKAN_HPP_CONSTEXPR PipelineViewportWScalingStateCreateInfoNV( VULKAN_HPP_NAMESPACE::Bool32 viewportWScalingEnable_ = {},
@@ -65127,6 +65620,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_GGP
   struct PresentFrameTokenGGP
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePresentFrameTokenGGP;
 
     VULKAN_HPP_CONSTEXPR PresentFrameTokenGGP( GgpFrameToken frameToken_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -65210,6 +65704,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PresentInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePresentInfoKHR;
 
     VULKAN_HPP_CONSTEXPR PresentInfoKHR( uint32_t waitSemaphoreCount_ = {},
@@ -65343,6 +65838,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct RectLayerKHR
   {
 
+
     VULKAN_HPP_CONSTEXPR RectLayerKHR( VULKAN_HPP_NAMESPACE::Offset2D offset_ = {},
                                        VULKAN_HPP_NAMESPACE::Extent2D extent_ = {},
                                        uint32_t layer_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -65429,6 +65925,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct PresentRegionKHR
   {
 
+
     VULKAN_HPP_CONSTEXPR PresentRegionKHR( uint32_t rectangleCount_ = {},
                                            const VULKAN_HPP_NAMESPACE::RectLayerKHR* pRectangles_ = {} ) VULKAN_HPP_NOEXCEPT
       : rectangleCount( rectangleCount_ )
@@ -65497,6 +65994,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PresentRegionsKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePresentRegionsKHR;
 
     VULKAN_HPP_CONSTEXPR PresentRegionsKHR( uint32_t swapchainCount_ = {},
@@ -65590,6 +66088,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct PresentTimeGOOGLE
   {
 
+
     VULKAN_HPP_CONSTEXPR PresentTimeGOOGLE( uint32_t presentID_ = {},
                                             uint64_t desiredPresentTime_ = {} ) VULKAN_HPP_NOEXCEPT
       : presentID( presentID_ )
@@ -65658,6 +66157,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PresentTimesInfoGOOGLE
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePresentTimesInfoGOOGLE;
 
     VULKAN_HPP_CONSTEXPR PresentTimesInfoGOOGLE( uint32_t swapchainCount_ = {},
@@ -65750,6 +66250,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct PrivateDataSlotCreateInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePrivateDataSlotCreateInfoEXT;
 
     VULKAN_HPP_CONSTEXPR PrivateDataSlotCreateInfoEXT( VULKAN_HPP_NAMESPACE::PrivateDataSlotCreateFlagsEXT flags_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -65832,6 +66333,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ProtectedSubmitInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eProtectedSubmitInfo;
 
     VULKAN_HPP_CONSTEXPR ProtectedSubmitInfo( VULKAN_HPP_NAMESPACE::Bool32 protectedSubmit_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -65914,6 +66416,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct QueryPoolCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eQueryPoolCreateInfo;
 
     VULKAN_HPP_CONSTEXPR QueryPoolCreateInfo( VULKAN_HPP_NAMESPACE::QueryPoolCreateFlags flags_ = {},
@@ -66026,6 +66529,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct QueryPoolPerformanceCreateInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eQueryPoolPerformanceCreateInfoKHR;
 
     VULKAN_HPP_CONSTEXPR QueryPoolPerformanceCreateInfoKHR( uint32_t queueFamilyIndex_ = {},
@@ -66128,6 +66632,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct QueryPoolPerformanceQueryCreateInfoINTEL
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eQueryPoolPerformanceQueryCreateInfoINTEL;
 
     VULKAN_HPP_CONSTEXPR QueryPoolPerformanceQueryCreateInfoINTEL( VULKAN_HPP_NAMESPACE::QueryPoolSamplingModeINTEL performanceCountersSampling_ = VULKAN_HPP_NAMESPACE::QueryPoolSamplingModeINTEL::eManual ) VULKAN_HPP_NOEXCEPT
@@ -66210,6 +66715,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct QueueFamilyCheckpointPropertiesNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eQueueFamilyCheckpointPropertiesNV;
 
     VULKAN_HPP_CONSTEXPR QueueFamilyCheckpointPropertiesNV( VULKAN_HPP_NAMESPACE::PipelineStageFlags checkpointExecutionStageMask_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -66281,6 +66787,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct QueueFamilyProperties
   {
 
+
     VULKAN_HPP_CONSTEXPR QueueFamilyProperties( VULKAN_HPP_NAMESPACE::QueueFlags queueFlags_ = {},
                                                 uint32_t queueCount_ = {},
                                                 uint32_t timestampValidBits_ = {},
@@ -66345,6 +66852,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct QueueFamilyProperties2
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eQueueFamilyProperties2;
 
     VULKAN_HPP_CONSTEXPR QueueFamilyProperties2( VULKAN_HPP_NAMESPACE::QueueFamilyProperties queueFamilyProperties_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -66416,6 +66924,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_ENABLE_BETA_EXTENSIONS
   struct RayTracingShaderGroupCreateInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eRayTracingShaderGroupCreateInfoKHR;
 
     VULKAN_HPP_CONSTEXPR RayTracingShaderGroupCreateInfoKHR( VULKAN_HPP_NAMESPACE::RayTracingShaderGroupTypeKHR type_ = VULKAN_HPP_NAMESPACE::RayTracingShaderGroupTypeKHR::eGeneral,
@@ -66550,6 +67059,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_ENABLE_BETA_EXTENSIONS
   struct RayTracingPipelineInterfaceCreateInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eRayTracingPipelineInterfaceCreateInfoKHR;
 
     VULKAN_HPP_CONSTEXPR RayTracingPipelineInterfaceCreateInfoKHR( uint32_t maxPayloadSize_ = {},
@@ -66654,6 +67164,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_ENABLE_BETA_EXTENSIONS
   struct RayTracingPipelineCreateInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eRayTracingPipelineCreateInfoKHR;
 
     VULKAN_HPP_CONSTEXPR RayTracingPipelineCreateInfoKHR( VULKAN_HPP_NAMESPACE::PipelineCreateFlags flags_ = {},
@@ -66837,6 +67348,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct RayTracingShaderGroupCreateInfoNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eRayTracingShaderGroupCreateInfoNV;
 
     VULKAN_HPP_CONSTEXPR RayTracingShaderGroupCreateInfoNV( VULKAN_HPP_NAMESPACE::RayTracingShaderGroupTypeKHR type_ = VULKAN_HPP_NAMESPACE::RayTracingShaderGroupTypeKHR::eGeneral,
@@ -66959,6 +67471,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct RayTracingPipelineCreateInfoNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eRayTracingPipelineCreateInfoNV;
 
     VULKAN_HPP_CONSTEXPR RayTracingPipelineCreateInfoNV( VULKAN_HPP_NAMESPACE::PipelineCreateFlags flags_ = {},
@@ -67122,6 +67635,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct RefreshCycleDurationGOOGLE
   {
 
+
     VULKAN_HPP_CONSTEXPR RefreshCycleDurationGOOGLE( uint64_t refreshDuration_ = {} ) VULKAN_HPP_NOEXCEPT
       : refreshDuration( refreshDuration_ )
     {}
@@ -67174,6 +67688,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct RenderPassAttachmentBeginInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eRenderPassAttachmentBeginInfo;
 
     VULKAN_HPP_CONSTEXPR RenderPassAttachmentBeginInfo( uint32_t attachmentCount_ = {},
@@ -67266,6 +67781,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct RenderPassBeginInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eRenderPassBeginInfo;
 
     VULKAN_HPP_CONSTEXPR_14 RenderPassBeginInfo( VULKAN_HPP_NAMESPACE::RenderPass renderPass_ = {},
@@ -67388,6 +67904,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct SubpassDescription
   {
+
 
     VULKAN_HPP_CONSTEXPR SubpassDescription( VULKAN_HPP_NAMESPACE::SubpassDescriptionFlags flags_ = {},
                                              VULKAN_HPP_NAMESPACE::PipelineBindPoint pipelineBindPoint_ = VULKAN_HPP_NAMESPACE::PipelineBindPoint::eGraphics,
@@ -67538,6 +68055,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct SubpassDependency
   {
 
+
     VULKAN_HPP_CONSTEXPR SubpassDependency( uint32_t srcSubpass_ = {},
                                             uint32_t dstSubpass_ = {},
                                             VULKAN_HPP_NAMESPACE::PipelineStageFlags srcStageMask_ = {},
@@ -67656,6 +68174,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct RenderPassCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eRenderPassCreateInfo;
 
     VULKAN_HPP_CONSTEXPR RenderPassCreateInfo( VULKAN_HPP_NAMESPACE::RenderPassCreateFlags flags_ = {},
@@ -67798,6 +68317,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct SubpassDescription2
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSubpassDescription2;
 
     VULKAN_HPP_CONSTEXPR SubpassDescription2( VULKAN_HPP_NAMESPACE::SubpassDescriptionFlags flags_ = {},
@@ -67980,6 +68500,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct SubpassDependency2
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSubpassDependency2;
 
     VULKAN_HPP_CONSTEXPR SubpassDependency2( uint32_t srcSubpass_ = {},
@@ -68132,6 +68653,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct RenderPassCreateInfo2
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eRenderPassCreateInfo2;
 
     VULKAN_HPP_CONSTEXPR RenderPassCreateInfo2( VULKAN_HPP_NAMESPACE::RenderPassCreateFlags flags_ = {},
@@ -68294,6 +68816,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct RenderPassFragmentDensityMapCreateInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eRenderPassFragmentDensityMapCreateInfoEXT;
 
     VULKAN_HPP_CONSTEXPR RenderPassFragmentDensityMapCreateInfoEXT( VULKAN_HPP_NAMESPACE::AttachmentReference fragmentDensityMapAttachment_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -68376,6 +68899,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct RenderPassInputAttachmentAspectCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eRenderPassInputAttachmentAspectCreateInfo;
 
     VULKAN_HPP_CONSTEXPR RenderPassInputAttachmentAspectCreateInfo( uint32_t aspectReferenceCount_ = {},
@@ -68468,6 +68992,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct RenderPassMultiviewCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eRenderPassMultiviewCreateInfo;
 
     VULKAN_HPP_CONSTEXPR RenderPassMultiviewCreateInfo( uint32_t subpassCount_ = {},
@@ -68601,6 +69126,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct SubpassSampleLocationsEXT
   {
 
+
     VULKAN_HPP_CONSTEXPR SubpassSampleLocationsEXT( uint32_t subpassIndex_ = {},
                                                     VULKAN_HPP_NAMESPACE::SampleLocationsInfoEXT sampleLocationsInfo_ = {} ) VULKAN_HPP_NOEXCEPT
       : subpassIndex( subpassIndex_ )
@@ -68669,6 +69195,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct RenderPassSampleLocationsBeginInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eRenderPassSampleLocationsBeginInfoEXT;
 
     VULKAN_HPP_CONSTEXPR RenderPassSampleLocationsBeginInfoEXT( uint32_t attachmentInitialSampleLocationsCount_ = {},
@@ -68781,6 +69308,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct RenderPassTransformBeginInfoQCOM
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eRenderPassTransformBeginInfoQCOM;
 
     VULKAN_HPP_CONSTEXPR RenderPassTransformBeginInfoQCOM( VULKAN_HPP_NAMESPACE::SurfaceTransformFlagBitsKHR transform_ = VULKAN_HPP_NAMESPACE::SurfaceTransformFlagBitsKHR::eIdentity ) VULKAN_HPP_NOEXCEPT
@@ -68863,6 +69391,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct SamplerCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSamplerCreateInfo;
 
     VULKAN_HPP_CONSTEXPR SamplerCreateInfo( VULKAN_HPP_NAMESPACE::SamplerCreateFlags flags_ = {},
@@ -69095,6 +69624,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct SamplerCustomBorderColorCreateInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSamplerCustomBorderColorCreateInfoEXT;
 
     SamplerCustomBorderColorCreateInfoEXT( VULKAN_HPP_NAMESPACE::ClearColorValue customBorderColor_ = {},
@@ -69170,6 +69700,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct SamplerReductionModeCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSamplerReductionModeCreateInfo;
 
     VULKAN_HPP_CONSTEXPR SamplerReductionModeCreateInfo( VULKAN_HPP_NAMESPACE::SamplerReductionMode reductionMode_ = VULKAN_HPP_NAMESPACE::SamplerReductionMode::eWeightedAverage ) VULKAN_HPP_NOEXCEPT
@@ -69252,6 +69783,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct SamplerYcbcrConversionCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSamplerYcbcrConversionCreateInfo;
 
     VULKAN_HPP_CONSTEXPR SamplerYcbcrConversionCreateInfo( VULKAN_HPP_NAMESPACE::Format format_ = VULKAN_HPP_NAMESPACE::Format::eUndefined,
@@ -69404,6 +69936,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct SamplerYcbcrConversionImageFormatProperties
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSamplerYcbcrConversionImageFormatProperties;
 
     VULKAN_HPP_CONSTEXPR SamplerYcbcrConversionImageFormatProperties( uint32_t combinedImageSamplerDescriptorCount_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -69474,6 +70007,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct SamplerYcbcrConversionInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSamplerYcbcrConversionInfo;
 
     VULKAN_HPP_CONSTEXPR SamplerYcbcrConversionInfo( VULKAN_HPP_NAMESPACE::SamplerYcbcrConversion conversion_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -69556,6 +70090,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct SemaphoreCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSemaphoreCreateInfo;
 
     VULKAN_HPP_CONSTEXPR SemaphoreCreateInfo( VULKAN_HPP_NAMESPACE::SemaphoreCreateFlags flags_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -69638,6 +70173,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct SemaphoreGetFdInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSemaphoreGetFdInfoKHR;
 
     VULKAN_HPP_CONSTEXPR SemaphoreGetFdInfoKHR( VULKAN_HPP_NAMESPACE::Semaphore semaphore_ = {},
@@ -69731,6 +70267,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   struct SemaphoreGetWin32HandleInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSemaphoreGetWin32HandleInfoKHR;
 
     VULKAN_HPP_CONSTEXPR SemaphoreGetWin32HandleInfoKHR( VULKAN_HPP_NAMESPACE::Semaphore semaphore_ = {},
@@ -69824,6 +70361,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct SemaphoreSignalInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSemaphoreSignalInfo;
 
     VULKAN_HPP_CONSTEXPR SemaphoreSignalInfo( VULKAN_HPP_NAMESPACE::Semaphore semaphore_ = {},
@@ -69916,6 +70454,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct SemaphoreTypeCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSemaphoreTypeCreateInfo;
 
     VULKAN_HPP_CONSTEXPR SemaphoreTypeCreateInfo( VULKAN_HPP_NAMESPACE::SemaphoreType semaphoreType_ = VULKAN_HPP_NAMESPACE::SemaphoreType::eBinary,
@@ -70008,6 +70547,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct SemaphoreWaitInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSemaphoreWaitInfo;
 
     VULKAN_HPP_CONSTEXPR SemaphoreWaitInfo( VULKAN_HPP_NAMESPACE::SemaphoreWaitFlags flags_ = {},
@@ -70121,6 +70661,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct SetStateFlagsIndirectCommandNV
   {
 
+
     VULKAN_HPP_CONSTEXPR SetStateFlagsIndirectCommandNV( uint32_t data_ = {} ) VULKAN_HPP_NOEXCEPT
       : data( data_ )
     {}
@@ -70179,6 +70720,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ShaderModuleCreateInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eShaderModuleCreateInfo;
 
     VULKAN_HPP_CONSTEXPR ShaderModuleCreateInfo( VULKAN_HPP_NAMESPACE::ShaderModuleCreateFlags flags_ = {},
@@ -70281,6 +70823,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ShaderModuleValidationCacheCreateInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eShaderModuleValidationCacheCreateInfoEXT;
 
     VULKAN_HPP_CONSTEXPR ShaderModuleValidationCacheCreateInfoEXT( VULKAN_HPP_NAMESPACE::ValidationCacheEXT validationCache_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -70364,6 +70907,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct ShaderResourceUsageAMD
   {
 
+
     VULKAN_HPP_CONSTEXPR ShaderResourceUsageAMD( uint32_t numUsedVgprs_ = {},
                                                  uint32_t numUsedSgprs_ = {},
                                                  uint32_t ldsSizePerLocalWorkGroup_ = {},
@@ -70432,6 +70976,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ShaderStatisticsInfoAMD
   {
+
 
     VULKAN_HPP_CONSTEXPR_14 ShaderStatisticsInfoAMD( VULKAN_HPP_NAMESPACE::ShaderStageFlags shaderStageMask_ = {},
                                                      VULKAN_HPP_NAMESPACE::ShaderResourceUsageAMD resourceUsage_ = {},
@@ -70509,6 +71054,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct SharedPresentSurfaceCapabilitiesKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSharedPresentSurfaceCapabilitiesKHR;
 
     VULKAN_HPP_CONSTEXPR SharedPresentSurfaceCapabilitiesKHR( VULKAN_HPP_NAMESPACE::ImageUsageFlags sharedPresentSupportedUsageFlags_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -70580,6 +71126,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct SparseImageFormatProperties
   {
 
+
     VULKAN_HPP_CONSTEXPR SparseImageFormatProperties( VULKAN_HPP_NAMESPACE::ImageAspectFlags aspectMask_ = {},
                                                       VULKAN_HPP_NAMESPACE::Extent3D imageGranularity_ = {},
                                                       VULKAN_HPP_NAMESPACE::SparseImageFormatFlags flags_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -70640,6 +71187,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct SparseImageFormatProperties2
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSparseImageFormatProperties2;
 
     VULKAN_HPP_CONSTEXPR SparseImageFormatProperties2( VULKAN_HPP_NAMESPACE::SparseImageFormatProperties properties_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -70711,6 +71259,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct SparseImageMemoryRequirements
   {
 
+
     VULKAN_HPP_CONSTEXPR SparseImageMemoryRequirements( VULKAN_HPP_NAMESPACE::SparseImageFormatProperties formatProperties_ = {},
                                                         uint32_t imageMipTailFirstLod_ = {},
                                                         VULKAN_HPP_NAMESPACE::DeviceSize imageMipTailSize_ = {},
@@ -70779,6 +71328,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct SparseImageMemoryRequirements2
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSparseImageMemoryRequirements2;
 
     VULKAN_HPP_CONSTEXPR SparseImageMemoryRequirements2( VULKAN_HPP_NAMESPACE::SparseImageMemoryRequirements memoryRequirements_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -70850,6 +71400,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_GGP
   struct StreamDescriptorSurfaceCreateInfoGGP
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eStreamDescriptorSurfaceCreateInfoGGP;
 
     VULKAN_HPP_CONSTEXPR StreamDescriptorSurfaceCreateInfoGGP( VULKAN_HPP_NAMESPACE::StreamDescriptorSurfaceCreateFlagsGGP flags_ = {},
@@ -70944,6 +71495,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_ENABLE_BETA_EXTENSIONS
   struct StridedBufferRegionKHR
   {
+
 
     VULKAN_HPP_CONSTEXPR StridedBufferRegionKHR( VULKAN_HPP_NAMESPACE::Buffer buffer_ = {},
                                                  VULKAN_HPP_NAMESPACE::DeviceSize offset_ = {},
@@ -71043,6 +71595,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct SubmitInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSubmitInfo;
 
     VULKAN_HPP_CONSTEXPR SubmitInfo( uint32_t waitSemaphoreCount_ = {},
@@ -71185,6 +71738,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct SubpassBeginInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSubpassBeginInfo;
 
     VULKAN_HPP_CONSTEXPR SubpassBeginInfo( VULKAN_HPP_NAMESPACE::SubpassContents contents_ = VULKAN_HPP_NAMESPACE::SubpassContents::eInline ) VULKAN_HPP_NOEXCEPT
@@ -71267,6 +71821,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct SubpassDescriptionDepthStencilResolve
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSubpassDescriptionDepthStencilResolve;
 
     VULKAN_HPP_CONSTEXPR SubpassDescriptionDepthStencilResolve( VULKAN_HPP_NAMESPACE::ResolveModeFlagBits depthResolveMode_ = VULKAN_HPP_NAMESPACE::ResolveModeFlagBits::eNone,
@@ -71369,6 +71924,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct SubpassEndInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSubpassEndInfo;
 
     VULKAN_HPP_CONSTEXPR SubpassEndInfo() VULKAN_HPP_NOEXCEPT
@@ -71442,6 +71998,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct SurfaceCapabilities2EXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSurfaceCapabilities2EXT;
 
     VULKAN_HPP_CONSTEXPR SurfaceCapabilities2EXT( uint32_t minImageCount_ = {},
@@ -71553,6 +72110,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct SurfaceCapabilitiesKHR
   {
 
+
     VULKAN_HPP_CONSTEXPR SurfaceCapabilitiesKHR( uint32_t minImageCount_ = {},
                                                  uint32_t maxImageCount_ = {},
                                                  VULKAN_HPP_NAMESPACE::Extent2D currentExtent_ = {},
@@ -71641,6 +72199,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct SurfaceCapabilities2KHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSurfaceCapabilities2KHR;
 
     VULKAN_HPP_CONSTEXPR SurfaceCapabilities2KHR( VULKAN_HPP_NAMESPACE::SurfaceCapabilitiesKHR surfaceCapabilities_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -71712,6 +72271,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   struct SurfaceCapabilitiesFullScreenExclusiveEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSurfaceCapabilitiesFullScreenExclusiveEXT;
 
     VULKAN_HPP_CONSTEXPR SurfaceCapabilitiesFullScreenExclusiveEXT( VULKAN_HPP_NAMESPACE::Bool32 fullScreenExclusiveSupported_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -71796,6 +72356,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct SurfaceFormatKHR
   {
 
+
     VULKAN_HPP_CONSTEXPR SurfaceFormatKHR( VULKAN_HPP_NAMESPACE::Format format_ = VULKAN_HPP_NAMESPACE::Format::eUndefined,
                                            VULKAN_HPP_NAMESPACE::ColorSpaceKHR colorSpace_ = VULKAN_HPP_NAMESPACE::ColorSpaceKHR::eSrgbNonlinear ) VULKAN_HPP_NOEXCEPT
       : format( format_ )
@@ -71852,6 +72413,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct SurfaceFormat2KHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSurfaceFormat2KHR;
 
     VULKAN_HPP_CONSTEXPR SurfaceFormat2KHR( VULKAN_HPP_NAMESPACE::SurfaceFormatKHR surfaceFormat_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -71923,6 +72485,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   struct SurfaceFullScreenExclusiveInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSurfaceFullScreenExclusiveInfoEXT;
 
     VULKAN_HPP_CONSTEXPR SurfaceFullScreenExclusiveInfoEXT( VULKAN_HPP_NAMESPACE::FullScreenExclusiveEXT fullScreenExclusive_ = VULKAN_HPP_NAMESPACE::FullScreenExclusiveEXT::eDefault ) VULKAN_HPP_NOEXCEPT
@@ -72007,6 +72570,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   struct SurfaceFullScreenExclusiveWin32InfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSurfaceFullScreenExclusiveWin32InfoEXT;
 
     VULKAN_HPP_CONSTEXPR SurfaceFullScreenExclusiveWin32InfoEXT( HMONITOR hmonitor_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -72090,6 +72654,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct SurfaceProtectedCapabilitiesKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSurfaceProtectedCapabilitiesKHR;
 
     VULKAN_HPP_CONSTEXPR SurfaceProtectedCapabilitiesKHR( VULKAN_HPP_NAMESPACE::Bool32 supportsProtected_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -72172,6 +72737,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct SwapchainCounterCreateInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSwapchainCounterCreateInfoEXT;
 
     VULKAN_HPP_CONSTEXPR SwapchainCounterCreateInfoEXT( VULKAN_HPP_NAMESPACE::SurfaceCounterFlagsEXT surfaceCounters_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -72254,6 +72820,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct SwapchainCreateInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSwapchainCreateInfoKHR;
 
     VULKAN_HPP_CONSTEXPR SwapchainCreateInfoKHR( VULKAN_HPP_NAMESPACE::SwapchainCreateFlagsKHR flags_ = {},
@@ -72486,6 +73053,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct SwapchainDisplayNativeHdrCreateInfoAMD
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSwapchainDisplayNativeHdrCreateInfoAMD;
 
     VULKAN_HPP_CONSTEXPR SwapchainDisplayNativeHdrCreateInfoAMD( VULKAN_HPP_NAMESPACE::Bool32 localDimmingEnable_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -72568,6 +73136,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct TextureLODGatherFormatPropertiesAMD
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eTextureLodGatherFormatPropertiesAMD;
 
     VULKAN_HPP_CONSTEXPR TextureLODGatherFormatPropertiesAMD( VULKAN_HPP_NAMESPACE::Bool32 supportsTextureGatherLODBiasAMD_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -72638,6 +73207,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct TimelineSemaphoreSubmitInfo
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eTimelineSemaphoreSubmitInfo;
 
     VULKAN_HPP_CONSTEXPR TimelineSemaphoreSubmitInfo( uint32_t waitSemaphoreValueCount_ = {},
@@ -72752,6 +73322,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct TraceRaysIndirectCommandKHR
   {
 
+
     VULKAN_HPP_CONSTEXPR TraceRaysIndirectCommandKHR( uint32_t width_ = {},
                                                       uint32_t height_ = {},
                                                       uint32_t depth_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -72838,6 +73409,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ValidationCacheCreateInfoEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eValidationCacheCreateInfoEXT;
 
     VULKAN_HPP_CONSTEXPR ValidationCacheCreateInfoEXT( VULKAN_HPP_NAMESPACE::ValidationCacheCreateFlagsEXT flags_ = {},
@@ -72940,6 +73512,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ValidationFeaturesEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eValidationFeaturesEXT;
 
     VULKAN_HPP_CONSTEXPR ValidationFeaturesEXT( uint32_t enabledValidationFeatureCount_ = {},
@@ -73052,6 +73625,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct ValidationFlagsEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eValidationFlagsEXT;
 
     VULKAN_HPP_CONSTEXPR ValidationFlagsEXT( uint32_t disabledValidationCheckCount_ = {},
@@ -73145,6 +73719,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_VI_NN
   struct ViSurfaceCreateInfoNN
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eViSurfaceCreateInfoNN;
 
     VULKAN_HPP_CONSTEXPR ViSurfaceCreateInfoNN( VULKAN_HPP_NAMESPACE::ViSurfaceCreateFlagsNN flags_ = {},
@@ -73239,6 +73814,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_WAYLAND_KHR
   struct WaylandSurfaceCreateInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eWaylandSurfaceCreateInfoKHR;
 
     VULKAN_HPP_CONSTEXPR WaylandSurfaceCreateInfoKHR( VULKAN_HPP_NAMESPACE::WaylandSurfaceCreateFlagsKHR flags_ = {},
@@ -73343,6 +73919,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   struct Win32KeyedMutexAcquireReleaseInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eWin32KeyedMutexAcquireReleaseInfoKHR;
 
     VULKAN_HPP_CONSTEXPR Win32KeyedMutexAcquireReleaseInfoKHR( uint32_t acquireCount_ = {},
@@ -73487,6 +74064,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   struct Win32KeyedMutexAcquireReleaseInfoNV
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eWin32KeyedMutexAcquireReleaseInfoNV;
 
     VULKAN_HPP_CONSTEXPR Win32KeyedMutexAcquireReleaseInfoNV( uint32_t acquireCount_ = {},
@@ -73631,6 +74209,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   struct Win32SurfaceCreateInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eWin32SurfaceCreateInfoKHR;
 
     VULKAN_HPP_CONSTEXPR Win32SurfaceCreateInfoKHR( VULKAN_HPP_NAMESPACE::Win32SurfaceCreateFlagsKHR flags_ = {},
@@ -73734,6 +74313,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct WriteDescriptorSet
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eWriteDescriptorSet;
 
     VULKAN_HPP_CONSTEXPR WriteDescriptorSet( VULKAN_HPP_NAMESPACE::DescriptorSet dstSet_ = {},
@@ -73886,6 +74466,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct WriteDescriptorSetAccelerationStructureKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eWriteDescriptorSetAccelerationStructureKHR;
 
     VULKAN_HPP_CONSTEXPR WriteDescriptorSetAccelerationStructureKHR( uint32_t accelerationStructureCount_ = {},
@@ -73978,6 +74559,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   struct WriteDescriptorSetInlineUniformBlockEXT
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eWriteDescriptorSetInlineUniformBlockEXT;
 
     VULKAN_HPP_CONSTEXPR WriteDescriptorSetInlineUniformBlockEXT( uint32_t dataSize_ = {},
@@ -74071,6 +74653,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_XCB_KHR
   struct XcbSurfaceCreateInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eXcbSurfaceCreateInfoKHR;
 
     VULKAN_HPP_CONSTEXPR XcbSurfaceCreateInfoKHR( VULKAN_HPP_NAMESPACE::XcbSurfaceCreateFlagsKHR flags_ = {},
@@ -74175,6 +74758,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_USE_PLATFORM_XLIB_KHR
   struct XlibSurfaceCreateInfoKHR
   {
+    static const bool allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eXlibSurfaceCreateInfoKHR;
 
     VULKAN_HPP_CONSTEXPR XlibSurfaceCreateInfoKHR( VULKAN_HPP_NAMESPACE::XlibSurfaceCreateFlagsKHR flags_ = {},
@@ -74302,6 +74886,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result enumerateInstanceExtensionProperties( const char* pLayerName, uint32_t* pPropertyCount, VULKAN_HPP_NAMESPACE::ExtensionProperties* pProperties, Dispatch const &d) VULKAN_HPP_NOEXCEPT
   {
@@ -74353,6 +74938,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, properties, VULKAN_HPP_NAMESPACE_STRING"::enumerateInstanceExtensionProperties" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result enumerateInstanceLayerProperties( uint32_t* pPropertyCount, VULKAN_HPP_NAMESPACE::LayerProperties* pProperties, Dispatch const &d) VULKAN_HPP_NOEXCEPT
@@ -74406,6 +74992,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result enumerateInstanceVersion( uint32_t* pApiVersion, Dispatch const &d) VULKAN_HPP_NOEXCEPT
   {
@@ -74421,6 +75008,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result CommandBuffer::begin( const VULKAN_HPP_NAMESPACE::CommandBufferBeginInfo* pBeginInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -74435,6 +75023,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::beginConditionalRenderingEXT( const VULKAN_HPP_NAMESPACE::ConditionalRenderingBeginInfoEXT* pConditionalRenderingBegin, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -74448,6 +75037,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::beginDebugUtilsLabelEXT( const VULKAN_HPP_NAMESPACE::DebugUtilsLabelEXT* pLabelInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -74460,6 +75050,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdBeginDebugUtilsLabelEXT( m_commandBuffer, reinterpret_cast<const VkDebugUtilsLabelEXT*>( &labelInfo ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -74475,6 +75066,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::beginQueryIndexedEXT( VULKAN_HPP_NAMESPACE::QueryPool queryPool, uint32_t query, VULKAN_HPP_NAMESPACE::QueryControlFlags flags, uint32_t index, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -74489,6 +75081,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::beginRenderPass( const VULKAN_HPP_NAMESPACE::RenderPassBeginInfo* pRenderPassBegin, VULKAN_HPP_NAMESPACE::SubpassContents contents, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -74501,6 +75094,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdBeginRenderPass( m_commandBuffer, reinterpret_cast<const VkRenderPassBeginInfo*>( &renderPassBegin ), static_cast<VkSubpassContents>( contents ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::beginRenderPass2( const VULKAN_HPP_NAMESPACE::RenderPassBeginInfo* pRenderPassBegin, const VULKAN_HPP_NAMESPACE::SubpassBeginInfo* pSubpassBeginInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -74515,6 +75109,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::beginRenderPass2KHR( const VULKAN_HPP_NAMESPACE::RenderPassBeginInfo* pRenderPassBegin, const VULKAN_HPP_NAMESPACE::SubpassBeginInfo* pSubpassBeginInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -74527,6 +75122,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdBeginRenderPass2KHR( m_commandBuffer, reinterpret_cast<const VkRenderPassBeginInfo*>( &renderPassBegin ), reinterpret_cast<const VkSubpassBeginInfo*>( &subpassBeginInfo ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::beginTransformFeedbackEXT( uint32_t firstCounterBuffer, uint32_t counterBufferCount, const VULKAN_HPP_NAMESPACE::Buffer* pCounterBuffers, const VULKAN_HPP_NAMESPACE::DeviceSize* pCounterBufferOffsets, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -74549,6 +75145,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::bindDescriptorSets( VULKAN_HPP_NAMESPACE::PipelineBindPoint pipelineBindPoint, VULKAN_HPP_NAMESPACE::PipelineLayout layout, uint32_t firstSet, uint32_t descriptorSetCount, const VULKAN_HPP_NAMESPACE::DescriptorSet* pDescriptorSets, uint32_t dynamicOffsetCount, const uint32_t* pDynamicOffsets, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -74561,6 +75158,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdBindDescriptorSets( m_commandBuffer, static_cast<VkPipelineBindPoint>( pipelineBindPoint ), static_cast<VkPipelineLayout>( layout ), firstSet, descriptorSets.size() , reinterpret_cast<const VkDescriptorSet*>( descriptorSets.data() ), dynamicOffsets.size() , dynamicOffsets.data() );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -74576,6 +75174,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::bindPipeline( VULKAN_HPP_NAMESPACE::PipelineBindPoint pipelineBindPoint, VULKAN_HPP_NAMESPACE::Pipeline pipeline, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -74589,6 +75188,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdBindPipeline( m_commandBuffer, static_cast<VkPipelineBindPoint>( pipelineBindPoint ), static_cast<VkPipeline>( pipeline ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -74604,6 +75204,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::bindShadingRateImageNV( VULKAN_HPP_NAMESPACE::ImageView imageView, VULKAN_HPP_NAMESPACE::ImageLayout imageLayout, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -74617,6 +75218,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdBindShadingRateImageNV( m_commandBuffer, static_cast<VkImageView>( imageView ), static_cast<VkImageLayout>( imageLayout ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::bindTransformFeedbackBuffersEXT( uint32_t firstBinding, uint32_t bindingCount, const VULKAN_HPP_NAMESPACE::Buffer* pBuffers, const VULKAN_HPP_NAMESPACE::DeviceSize* pOffsets, const VULKAN_HPP_NAMESPACE::DeviceSize* pSizes, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -74655,6 +75257,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::bindVertexBuffers( uint32_t firstBinding, uint32_t bindingCount, const VULKAN_HPP_NAMESPACE::Buffer* pBuffers, const VULKAN_HPP_NAMESPACE::DeviceSize* pOffsets, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -74676,6 +75279,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::blitImage( VULKAN_HPP_NAMESPACE::Image srcImage, VULKAN_HPP_NAMESPACE::ImageLayout srcImageLayout, VULKAN_HPP_NAMESPACE::Image dstImage, VULKAN_HPP_NAMESPACE::ImageLayout dstImageLayout, uint32_t regionCount, const VULKAN_HPP_NAMESPACE::ImageBlit* pRegions, VULKAN_HPP_NAMESPACE::Filter filter, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -74688,6 +75292,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdBlitImage( m_commandBuffer, static_cast<VkImage>( srcImage ), static_cast<VkImageLayout>( srcImageLayout ), static_cast<VkImage>( dstImage ), static_cast<VkImageLayout>( dstImageLayout ), regions.size() , reinterpret_cast<const VkImageBlit*>( regions.data() ), static_cast<VkFilter>( filter ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VK_ENABLE_BETA_EXTENSIONS
   template<typename Dispatch>
@@ -74703,6 +75308,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
+
 
 #ifdef VK_ENABLE_BETA_EXTENSIONS
   template<typename Dispatch>
@@ -74727,6 +75333,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::buildAccelerationStructureNV( const VULKAN_HPP_NAMESPACE::AccelerationStructureInfoNV* pInfo, VULKAN_HPP_NAMESPACE::Buffer instanceData, VULKAN_HPP_NAMESPACE::DeviceSize instanceOffset, VULKAN_HPP_NAMESPACE::Bool32 update, VULKAN_HPP_NAMESPACE::AccelerationStructureKHR dst, VULKAN_HPP_NAMESPACE::AccelerationStructureKHR src, VULKAN_HPP_NAMESPACE::Buffer scratch, VULKAN_HPP_NAMESPACE::DeviceSize scratchOffset, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -74739,6 +75346,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdBuildAccelerationStructureNV( m_commandBuffer, reinterpret_cast<const VkAccelerationStructureInfoNV*>( &info ), static_cast<VkBuffer>( instanceData ), static_cast<VkDeviceSize>( instanceOffset ), static_cast<VkBool32>( update ), static_cast<VkAccelerationStructureKHR>( dst ), static_cast<VkAccelerationStructureKHR>( src ), static_cast<VkBuffer>( scratch ), static_cast<VkDeviceSize>( scratchOffset ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::clearAttachments( uint32_t attachmentCount, const VULKAN_HPP_NAMESPACE::ClearAttachment* pAttachments, uint32_t rectCount, const VULKAN_HPP_NAMESPACE::ClearRect* pRects, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -74753,6 +75361,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::clearColorImage( VULKAN_HPP_NAMESPACE::Image image, VULKAN_HPP_NAMESPACE::ImageLayout imageLayout, const VULKAN_HPP_NAMESPACE::ClearColorValue* pColor, uint32_t rangeCount, const VULKAN_HPP_NAMESPACE::ImageSubresourceRange* pRanges, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -74766,6 +75375,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::clearDepthStencilImage( VULKAN_HPP_NAMESPACE::Image image, VULKAN_HPP_NAMESPACE::ImageLayout imageLayout, const VULKAN_HPP_NAMESPACE::ClearDepthStencilValue* pDepthStencil, uint32_t rangeCount, const VULKAN_HPP_NAMESPACE::ImageSubresourceRange* pRanges, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -74778,6 +75388,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdClearDepthStencilImage( m_commandBuffer, static_cast<VkImage>( image ), static_cast<VkImageLayout>( imageLayout ), reinterpret_cast<const VkClearDepthStencilValue*>( &depthStencil ), ranges.size() , reinterpret_cast<const VkImageSubresourceRange*>( ranges.data() ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VK_ENABLE_BETA_EXTENSIONS
   template<typename Dispatch>
@@ -74794,6 +75405,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::copyAccelerationStructureNV( VULKAN_HPP_NAMESPACE::AccelerationStructureKHR dst, VULKAN_HPP_NAMESPACE::AccelerationStructureKHR src, VULKAN_HPP_NAMESPACE::CopyAccelerationStructureModeKHR mode, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -74807,6 +75419,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdCopyAccelerationStructureNV( m_commandBuffer, static_cast<VkAccelerationStructureKHR>( dst ), static_cast<VkAccelerationStructureKHR>( src ), static_cast<VkCopyAccelerationStructureModeKHR>( mode ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VK_ENABLE_BETA_EXTENSIONS
   template<typename Dispatch>
@@ -74823,6 +75436,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::copyBuffer( VULKAN_HPP_NAMESPACE::Buffer srcBuffer, VULKAN_HPP_NAMESPACE::Buffer dstBuffer, uint32_t regionCount, const VULKAN_HPP_NAMESPACE::BufferCopy* pRegions, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -74835,6 +75449,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdCopyBuffer( m_commandBuffer, static_cast<VkBuffer>( srcBuffer ), static_cast<VkBuffer>( dstBuffer ), regions.size() , reinterpret_cast<const VkBufferCopy*>( regions.data() ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::copyBufferToImage( VULKAN_HPP_NAMESPACE::Buffer srcBuffer, VULKAN_HPP_NAMESPACE::Image dstImage, VULKAN_HPP_NAMESPACE::ImageLayout dstImageLayout, uint32_t regionCount, const VULKAN_HPP_NAMESPACE::BufferImageCopy* pRegions, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -74849,6 +75464,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::copyImage( VULKAN_HPP_NAMESPACE::Image srcImage, VULKAN_HPP_NAMESPACE::ImageLayout srcImageLayout, VULKAN_HPP_NAMESPACE::Image dstImage, VULKAN_HPP_NAMESPACE::ImageLayout dstImageLayout, uint32_t regionCount, const VULKAN_HPP_NAMESPACE::ImageCopy* pRegions, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -74862,6 +75478,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::copyImageToBuffer( VULKAN_HPP_NAMESPACE::Image srcImage, VULKAN_HPP_NAMESPACE::ImageLayout srcImageLayout, VULKAN_HPP_NAMESPACE::Buffer dstBuffer, uint32_t regionCount, const VULKAN_HPP_NAMESPACE::BufferImageCopy* pRegions, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -74874,6 +75491,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdCopyImageToBuffer( m_commandBuffer, static_cast<VkImage>( srcImage ), static_cast<VkImageLayout>( srcImageLayout ), static_cast<VkBuffer>( dstBuffer ), regions.size() , reinterpret_cast<const VkBufferImageCopy*>( regions.data() ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VK_ENABLE_BETA_EXTENSIONS
   template<typename Dispatch>
@@ -74890,6 +75508,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::copyQueryPoolResults( VULKAN_HPP_NAMESPACE::QueryPool queryPool, uint32_t firstQuery, uint32_t queryCount, VULKAN_HPP_NAMESPACE::Buffer dstBuffer, VULKAN_HPP_NAMESPACE::DeviceSize dstOffset, VULKAN_HPP_NAMESPACE::DeviceSize stride, VULKAN_HPP_NAMESPACE::QueryResultFlags flags, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -74904,6 +75523,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::debugMarkerBeginEXT( const VULKAN_HPP_NAMESPACE::DebugMarkerMarkerInfoEXT* pMarkerInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -74916,6 +75536,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdDebugMarkerBeginEXT( m_commandBuffer, reinterpret_cast<const VkDebugMarkerMarkerInfoEXT*>( &markerInfo ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -74931,6 +75552,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::debugMarkerInsertEXT( const VULKAN_HPP_NAMESPACE::DebugMarkerMarkerInfoEXT* pMarkerInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -74943,6 +75565,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdDebugMarkerInsertEXT( m_commandBuffer, reinterpret_cast<const VkDebugMarkerMarkerInfoEXT*>( &markerInfo ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -74958,6 +75581,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::dispatchBase( uint32_t baseGroupX, uint32_t baseGroupY, uint32_t baseGroupZ, uint32_t groupCountX, uint32_t groupCountY, uint32_t groupCountZ, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -74971,6 +75595,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdDispatchBase( m_commandBuffer, baseGroupX, baseGroupY, baseGroupZ, groupCountX, groupCountY, groupCountZ );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -74986,6 +75611,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::dispatchIndirect( VULKAN_HPP_NAMESPACE::Buffer buffer, VULKAN_HPP_NAMESPACE::DeviceSize offset, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -74999,6 +75625,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdDispatchIndirect( m_commandBuffer, static_cast<VkBuffer>( buffer ), static_cast<VkDeviceSize>( offset ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -75014,6 +75641,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::drawIndexed( uint32_t indexCount, uint32_t instanceCount, uint32_t firstIndex, int32_t vertexOffset, uint32_t firstInstance, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -75027,6 +75655,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdDrawIndexed( m_commandBuffer, indexCount, instanceCount, firstIndex, vertexOffset, firstInstance );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -75042,6 +75671,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::drawIndexedIndirectCount( VULKAN_HPP_NAMESPACE::Buffer buffer, VULKAN_HPP_NAMESPACE::DeviceSize offset, VULKAN_HPP_NAMESPACE::Buffer countBuffer, VULKAN_HPP_NAMESPACE::DeviceSize countBufferOffset, uint32_t maxDrawCount, uint32_t stride, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -75055,6 +75685,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdDrawIndexedIndirectCount( m_commandBuffer, static_cast<VkBuffer>( buffer ), static_cast<VkDeviceSize>( offset ), static_cast<VkBuffer>( countBuffer ), static_cast<VkDeviceSize>( countBufferOffset ), maxDrawCount, stride );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -75070,6 +75701,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::drawIndexedIndirectCountKHR( VULKAN_HPP_NAMESPACE::Buffer buffer, VULKAN_HPP_NAMESPACE::DeviceSize offset, VULKAN_HPP_NAMESPACE::Buffer countBuffer, VULKAN_HPP_NAMESPACE::DeviceSize countBufferOffset, uint32_t maxDrawCount, uint32_t stride, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -75083,6 +75715,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdDrawIndexedIndirectCountKHR( m_commandBuffer, static_cast<VkBuffer>( buffer ), static_cast<VkDeviceSize>( offset ), static_cast<VkBuffer>( countBuffer ), static_cast<VkDeviceSize>( countBufferOffset ), maxDrawCount, stride );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -75098,6 +75731,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::drawIndirectByteCountEXT( uint32_t instanceCount, uint32_t firstInstance, VULKAN_HPP_NAMESPACE::Buffer counterBuffer, VULKAN_HPP_NAMESPACE::DeviceSize counterBufferOffset, uint32_t counterOffset, uint32_t vertexStride, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -75111,6 +75745,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdDrawIndirectByteCountEXT( m_commandBuffer, instanceCount, firstInstance, static_cast<VkBuffer>( counterBuffer ), static_cast<VkDeviceSize>( counterBufferOffset ), counterOffset, vertexStride );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -75126,6 +75761,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::drawIndirectCountAMD( VULKAN_HPP_NAMESPACE::Buffer buffer, VULKAN_HPP_NAMESPACE::DeviceSize offset, VULKAN_HPP_NAMESPACE::Buffer countBuffer, VULKAN_HPP_NAMESPACE::DeviceSize countBufferOffset, uint32_t maxDrawCount, uint32_t stride, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -75139,6 +75775,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdDrawIndirectCountAMD( m_commandBuffer, static_cast<VkBuffer>( buffer ), static_cast<VkDeviceSize>( offset ), static_cast<VkBuffer>( countBuffer ), static_cast<VkDeviceSize>( countBufferOffset ), maxDrawCount, stride );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -75154,6 +75791,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::drawMeshTasksIndirectCountNV( VULKAN_HPP_NAMESPACE::Buffer buffer, VULKAN_HPP_NAMESPACE::DeviceSize offset, VULKAN_HPP_NAMESPACE::Buffer countBuffer, VULKAN_HPP_NAMESPACE::DeviceSize countBufferOffset, uint32_t maxDrawCount, uint32_t stride, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -75167,6 +75805,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdDrawMeshTasksIndirectCountNV( m_commandBuffer, static_cast<VkBuffer>( buffer ), static_cast<VkDeviceSize>( offset ), static_cast<VkBuffer>( countBuffer ), static_cast<VkDeviceSize>( countBufferOffset ), maxDrawCount, stride );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -75182,6 +75821,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::drawMeshTasksNV( uint32_t taskCount, uint32_t firstTask, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -75195,6 +75835,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdDrawMeshTasksNV( m_commandBuffer, taskCount, firstTask );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -75210,6 +75851,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::endDebugUtilsLabelEXT(Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -75223,6 +75865,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdEndDebugUtilsLabelEXT( m_commandBuffer );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -75238,6 +75881,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::endQueryIndexedEXT( VULKAN_HPP_NAMESPACE::QueryPool queryPool, uint32_t query, uint32_t index, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -75251,6 +75895,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdEndQueryIndexedEXT( m_commandBuffer, static_cast<VkQueryPool>( queryPool ), query, index );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -75266,6 +75911,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::endRenderPass2( const VULKAN_HPP_NAMESPACE::SubpassEndInfo* pSubpassEndInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -75279,6 +75925,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::endRenderPass2KHR( const VULKAN_HPP_NAMESPACE::SubpassEndInfo* pSubpassEndInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -75291,6 +75938,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdEndRenderPass2KHR( m_commandBuffer, reinterpret_cast<const VkSubpassEndInfo*>( &subpassEndInfo ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::endTransformFeedbackEXT( uint32_t firstCounterBuffer, uint32_t counterBufferCount, const VULKAN_HPP_NAMESPACE::Buffer* pCounterBuffers, const VULKAN_HPP_NAMESPACE::DeviceSize* pCounterBufferOffsets, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -75313,6 +75961,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::executeCommands( uint32_t commandBufferCount, const VULKAN_HPP_NAMESPACE::CommandBuffer* pCommandBuffers, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -75326,6 +75975,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::executeGeneratedCommandsNV( VULKAN_HPP_NAMESPACE::Bool32 isPreprocessed, const VULKAN_HPP_NAMESPACE::GeneratedCommandsInfoNV* pGeneratedCommandsInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -75338,6 +75988,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdExecuteGeneratedCommandsNV( m_commandBuffer, static_cast<VkBool32>( isPreprocessed ), reinterpret_cast<const VkGeneratedCommandsInfoNV*>( &generatedCommandsInfo ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -75353,6 +76004,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::insertDebugUtilsLabelEXT( const VULKAN_HPP_NAMESPACE::DebugUtilsLabelEXT* pLabelInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -75365,6 +76017,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdInsertDebugUtilsLabelEXT( m_commandBuffer, reinterpret_cast<const VkDebugUtilsLabelEXT*>( &labelInfo ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -75380,6 +76033,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::nextSubpass2( const VULKAN_HPP_NAMESPACE::SubpassBeginInfo* pSubpassBeginInfo, const VULKAN_HPP_NAMESPACE::SubpassEndInfo* pSubpassEndInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -75392,6 +76046,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdNextSubpass2( m_commandBuffer, reinterpret_cast<const VkSubpassBeginInfo*>( &subpassBeginInfo ), reinterpret_cast<const VkSubpassEndInfo*>( &subpassEndInfo ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::nextSubpass2KHR( const VULKAN_HPP_NAMESPACE::SubpassBeginInfo* pSubpassBeginInfo, const VULKAN_HPP_NAMESPACE::SubpassEndInfo* pSubpassEndInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -75406,6 +76061,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::pipelineBarrier( VULKAN_HPP_NAMESPACE::PipelineStageFlags srcStageMask, VULKAN_HPP_NAMESPACE::PipelineStageFlags dstStageMask, VULKAN_HPP_NAMESPACE::DependencyFlags dependencyFlags, uint32_t memoryBarrierCount, const VULKAN_HPP_NAMESPACE::MemoryBarrier* pMemoryBarriers, uint32_t bufferMemoryBarrierCount, const VULKAN_HPP_NAMESPACE::BufferMemoryBarrier* pBufferMemoryBarriers, uint32_t imageMemoryBarrierCount, const VULKAN_HPP_NAMESPACE::ImageMemoryBarrier* pImageMemoryBarriers, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -75418,6 +76074,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdPipelineBarrier( m_commandBuffer, static_cast<VkPipelineStageFlags>( srcStageMask ), static_cast<VkPipelineStageFlags>( dstStageMask ), static_cast<VkDependencyFlags>( dependencyFlags ), memoryBarriers.size() , reinterpret_cast<const VkMemoryBarrier*>( memoryBarriers.data() ), bufferMemoryBarriers.size() , reinterpret_cast<const VkBufferMemoryBarrier*>( bufferMemoryBarriers.data() ), imageMemoryBarriers.size() , reinterpret_cast<const VkImageMemoryBarrier*>( imageMemoryBarriers.data() ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::preprocessGeneratedCommandsNV( const VULKAN_HPP_NAMESPACE::GeneratedCommandsInfoNV* pGeneratedCommandsInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -75432,6 +76089,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::pushConstants( VULKAN_HPP_NAMESPACE::PipelineLayout layout, VULKAN_HPP_NAMESPACE::ShaderStageFlags stageFlags, uint32_t offset, uint32_t size, const void* pValues, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -75445,6 +76103,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::pushDescriptorSetKHR( VULKAN_HPP_NAMESPACE::PipelineBindPoint pipelineBindPoint, VULKAN_HPP_NAMESPACE::PipelineLayout layout, uint32_t set, uint32_t descriptorWriteCount, const VULKAN_HPP_NAMESPACE::WriteDescriptorSet* pDescriptorWrites, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -75457,6 +76116,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdPushDescriptorSetKHR( m_commandBuffer, static_cast<VkPipelineBindPoint>( pipelineBindPoint ), static_cast<VkPipelineLayout>( layout ), set, descriptorWrites.size() , reinterpret_cast<const VkWriteDescriptorSet*>( descriptorWrites.data() ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -75472,6 +76132,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::resetEvent( VULKAN_HPP_NAMESPACE::Event event, VULKAN_HPP_NAMESPACE::PipelineStageFlags stageMask, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -75485,6 +76146,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdResetEvent( m_commandBuffer, static_cast<VkEvent>( event ), static_cast<VkPipelineStageFlags>( stageMask ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -75500,6 +76162,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::resolveImage( VULKAN_HPP_NAMESPACE::Image srcImage, VULKAN_HPP_NAMESPACE::ImageLayout srcImageLayout, VULKAN_HPP_NAMESPACE::Image dstImage, VULKAN_HPP_NAMESPACE::ImageLayout dstImageLayout, uint32_t regionCount, const VULKAN_HPP_NAMESPACE::ImageResolve* pRegions, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -75512,6 +76175,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdResolveImage( m_commandBuffer, static_cast<VkImage>( srcImage ), static_cast<VkImageLayout>( srcImageLayout ), static_cast<VkImage>( dstImage ), static_cast<VkImageLayout>( dstImageLayout ), regions.size() , reinterpret_cast<const VkImageResolve*>( regions.data() ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -75527,6 +76191,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::setCheckpointNV( const void* pCheckpointMarker, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -75541,6 +76206,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::setCoarseSampleOrderNV( VULKAN_HPP_NAMESPACE::CoarseSampleOrderTypeNV sampleOrderType, uint32_t customSampleOrderCount, const VULKAN_HPP_NAMESPACE::CoarseSampleOrderCustomNV* pCustomSampleOrders, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -75553,6 +76219,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdSetCoarseSampleOrderNV( m_commandBuffer, static_cast<VkCoarseSampleOrderTypeNV>( sampleOrderType ), customSampleOrders.size() , reinterpret_cast<const VkCoarseSampleOrderCustomNV*>( customSampleOrders.data() ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -75568,6 +76235,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::setDepthBounds( float minDepthBounds, float maxDepthBounds, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -75581,6 +76249,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdSetDepthBounds( m_commandBuffer, minDepthBounds, maxDepthBounds );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -75596,6 +76265,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::setDeviceMaskKHR( uint32_t deviceMask, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -75610,6 +76280,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::setDiscardRectangleEXT( uint32_t firstDiscardRectangle, uint32_t discardRectangleCount, const VULKAN_HPP_NAMESPACE::Rect2D* pDiscardRectangles, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -75622,6 +76293,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdSetDiscardRectangleEXT( m_commandBuffer, firstDiscardRectangle, discardRectangles.size() , reinterpret_cast<const VkRect2D*>( discardRectangles.data() ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -75637,6 +76309,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::setExclusiveScissorNV( uint32_t firstExclusiveScissor, uint32_t exclusiveScissorCount, const VULKAN_HPP_NAMESPACE::Rect2D* pExclusiveScissors, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -75649,6 +76322,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdSetExclusiveScissorNV( m_commandBuffer, firstExclusiveScissor, exclusiveScissors.size() , reinterpret_cast<const VkRect2D*>( exclusiveScissors.data() ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -75664,6 +76338,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::setLineWidth( float lineWidth, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -75677,6 +76352,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdSetLineWidth( m_commandBuffer, lineWidth );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result CommandBuffer::setPerformanceMarkerINTEL( const VULKAN_HPP_NAMESPACE::PerformanceMarkerInfoINTEL* pMarkerInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -75692,6 +76368,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result CommandBuffer::setPerformanceOverrideINTEL( const VULKAN_HPP_NAMESPACE::PerformanceOverrideInfoINTEL* pOverrideInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -75705,6 +76382,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::CommandBuffer::setPerformanceOverrideINTEL" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result CommandBuffer::setPerformanceStreamMarkerINTEL( const VULKAN_HPP_NAMESPACE::PerformanceStreamMarkerInfoINTEL* pMarkerInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -75720,6 +76398,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::setSampleLocationsEXT( const VULKAN_HPP_NAMESPACE::SampleLocationsInfoEXT* pSampleLocationsInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -75733,6 +76412,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::setScissor( uint32_t firstScissor, uint32_t scissorCount, const VULKAN_HPP_NAMESPACE::Rect2D* pScissors, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -75745,6 +76425,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdSetScissor( m_commandBuffer, firstScissor, scissors.size() , reinterpret_cast<const VkRect2D*>( scissors.data() ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -75760,6 +76441,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::setStencilReference( VULKAN_HPP_NAMESPACE::StencilFaceFlags faceMask, uint32_t reference, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -75773,6 +76455,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdSetStencilReference( m_commandBuffer, static_cast<VkStencilFaceFlags>( faceMask ), reference );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -75788,6 +76471,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::setViewport( uint32_t firstViewport, uint32_t viewportCount, const VULKAN_HPP_NAMESPACE::Viewport* pViewports, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -75800,6 +76484,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdSetViewport( m_commandBuffer, firstViewport, viewports.size() , reinterpret_cast<const VkViewport*>( viewports.data() ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::setViewportShadingRatePaletteNV( uint32_t firstViewport, uint32_t viewportCount, const VULKAN_HPP_NAMESPACE::ShadingRatePaletteNV* pShadingRatePalettes, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -75814,6 +76499,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::setViewportWScalingNV( uint32_t firstViewport, uint32_t viewportCount, const VULKAN_HPP_NAMESPACE::ViewportWScalingNV* pViewportWScalings, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -75826,6 +76512,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdSetViewportWScalingNV( m_commandBuffer, firstViewport, viewportWScalings.size() , reinterpret_cast<const VkViewportWScalingNV*>( viewportWScalings.data() ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VK_ENABLE_BETA_EXTENSIONS
   template<typename Dispatch>
@@ -75842,6 +76529,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
+
 #ifdef VK_ENABLE_BETA_EXTENSIONS
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::traceRaysKHR( const VULKAN_HPP_NAMESPACE::StridedBufferRegionKHR* pRaygenShaderBindingTable, const VULKAN_HPP_NAMESPACE::StridedBufferRegionKHR* pMissShaderBindingTable, const VULKAN_HPP_NAMESPACE::StridedBufferRegionKHR* pHitShaderBindingTable, const VULKAN_HPP_NAMESPACE::StridedBufferRegionKHR* pCallableShaderBindingTable, uint32_t width, uint32_t height, uint32_t depth, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -75857,6 +76545,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::traceRaysNV( VULKAN_HPP_NAMESPACE::Buffer raygenShaderBindingTableBuffer, VULKAN_HPP_NAMESPACE::DeviceSize raygenShaderBindingOffset, VULKAN_HPP_NAMESPACE::Buffer missShaderBindingTableBuffer, VULKAN_HPP_NAMESPACE::DeviceSize missShaderBindingOffset, VULKAN_HPP_NAMESPACE::DeviceSize missShaderBindingStride, VULKAN_HPP_NAMESPACE::Buffer hitShaderBindingTableBuffer, VULKAN_HPP_NAMESPACE::DeviceSize hitShaderBindingOffset, VULKAN_HPP_NAMESPACE::DeviceSize hitShaderBindingStride, VULKAN_HPP_NAMESPACE::Buffer callableShaderBindingTableBuffer, VULKAN_HPP_NAMESPACE::DeviceSize callableShaderBindingOffset, VULKAN_HPP_NAMESPACE::DeviceSize callableShaderBindingStride, uint32_t width, uint32_t height, uint32_t depth, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -75871,6 +76560,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::updateBuffer( VULKAN_HPP_NAMESPACE::Buffer dstBuffer, VULKAN_HPP_NAMESPACE::DeviceSize dstOffset, VULKAN_HPP_NAMESPACE::DeviceSize dataSize, const void* pData, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -75883,6 +76573,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdUpdateBuffer( m_commandBuffer, static_cast<VkBuffer>( dstBuffer ), static_cast<VkDeviceSize>( dstOffset ), data.size() * sizeof( T ) , reinterpret_cast<const void*>( data.data() ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::waitEvents( uint32_t eventCount, const VULKAN_HPP_NAMESPACE::Event* pEvents, VULKAN_HPP_NAMESPACE::PipelineStageFlags srcStageMask, VULKAN_HPP_NAMESPACE::PipelineStageFlags dstStageMask, uint32_t memoryBarrierCount, const VULKAN_HPP_NAMESPACE::MemoryBarrier* pMemoryBarriers, uint32_t bufferMemoryBarrierCount, const VULKAN_HPP_NAMESPACE::BufferMemoryBarrier* pBufferMemoryBarriers, uint32_t imageMemoryBarrierCount, const VULKAN_HPP_NAMESPACE::ImageMemoryBarrier* pImageMemoryBarriers, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -75897,6 +76588,8 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
+#ifdef VK_ENABLE_BETA_EXTENSIONS
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::writeAccelerationStructuresPropertiesKHR( uint32_t accelerationStructureCount, const VULKAN_HPP_NAMESPACE::AccelerationStructureKHR* pAccelerationStructures, VULKAN_HPP_NAMESPACE::QueryType queryType, VULKAN_HPP_NAMESPACE::QueryPool queryPool, uint32_t firstQuery, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -75909,6 +76602,8 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdWriteAccelerationStructuresPropertiesKHR( m_commandBuffer, accelerationStructures.size() , reinterpret_cast<const VkAccelerationStructureKHR*>( accelerationStructures.data() ), static_cast<VkQueryType>( queryType ), static_cast<VkQueryPool>( queryPool ), firstQuery );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::writeAccelerationStructuresPropertiesNV( uint32_t accelerationStructureCount, const VULKAN_HPP_NAMESPACE::AccelerationStructureKHR* pAccelerationStructures, VULKAN_HPP_NAMESPACE::QueryType queryType, VULKAN_HPP_NAMESPACE::QueryPool queryPool, uint32_t firstQuery, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -75922,6 +76617,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdWriteAccelerationStructuresPropertiesNV( m_commandBuffer, accelerationStructures.size() , reinterpret_cast<const VkAccelerationStructureKHR*>( accelerationStructures.data() ), static_cast<VkQueryType>( queryType ), static_cast<VkQueryPool>( queryPool ), firstQuery );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -75937,6 +76633,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::writeTimestamp( VULKAN_HPP_NAMESPACE::PipelineStageFlagBits pipelineStage, VULKAN_HPP_NAMESPACE::QueryPool queryPool, uint32_t query, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -75950,6 +76647,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkCmdWriteTimestamp( m_commandBuffer, static_cast<VkPipelineStageFlagBits>( pipelineStage ), static_cast<VkQueryPool>( queryPool ), query );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -75966,6 +76664,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result CommandBuffer::reset( VULKAN_HPP_NAMESPACE::CommandBufferResetFlags flags, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -75980,6 +76679,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::CommandBuffer::reset" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
@@ -75998,6 +76698,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::acquireNextImage2KHR( const VULKAN_HPP_NAMESPACE::AcquireNextImageInfoKHR* pAcquireInfo, uint32_t* pImageIndex, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -76012,6 +76713,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, imageIndex, VULKAN_HPP_NAMESPACE_STRING"::Device::acquireNextImage2KHR", { Result::eSuccess, Result::eTimeout, Result::eNotReady, Result::eSuboptimalKHR } );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::acquireNextImageKHR( VULKAN_HPP_NAMESPACE::SwapchainKHR swapchain, uint64_t timeout, VULKAN_HPP_NAMESPACE::Semaphore semaphore, VULKAN_HPP_NAMESPACE::Fence fence, uint32_t* pImageIndex, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -76028,6 +76730,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::acquirePerformanceConfigurationINTEL( const VULKAN_HPP_NAMESPACE::PerformanceConfigurationAcquireInfoINTEL* pAcquireInfo, VULKAN_HPP_NAMESPACE::PerformanceConfigurationINTEL* pConfiguration, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -76043,6 +76746,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::acquireProfilingLockKHR( const VULKAN_HPP_NAMESPACE::AcquireProfilingLockInfoKHR* pInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -76056,6 +76760,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::acquireProfilingLockKHR" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::allocateCommandBuffers( const VULKAN_HPP_NAMESPACE::CommandBufferAllocateInfo* pAllocateInfo, VULKAN_HPP_NAMESPACE::CommandBuffer* pCommandBuffers, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -76117,6 +76822,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::allocateDescriptorSets( const VULKAN_HPP_NAMESPACE::DescriptorSetAllocateInfo* pAllocateInfo, VULKAN_HPP_NAMESPACE::DescriptorSet* pDescriptorSets, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -76177,6 +76883,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::allocateMemory( const VULKAN_HPP_NAMESPACE::MemoryAllocateInfo* pAllocateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::DeviceMemory* pMemory, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -76203,6 +76910,8 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
+#ifdef VK_ENABLE_BETA_EXTENSIONS
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::bindAccelerationStructureMemoryKHR( uint32_t bindInfoCount, const VULKAN_HPP_NAMESPACE::BindAccelerationStructureMemoryInfoKHR* pBindInfos, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -76216,6 +76925,8 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::bindAccelerationStructureMemoryKHR" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::bindAccelerationStructureMemoryNV( uint32_t bindInfoCount, const VULKAN_HPP_NAMESPACE::BindAccelerationStructureMemoryInfoKHR* pBindInfos, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -76230,6 +76941,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::bindAccelerationStructureMemoryNV" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -76246,6 +76958,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::bindBufferMemory2( uint32_t bindInfoCount, const VULKAN_HPP_NAMESPACE::BindBufferMemoryInfo* pBindInfos, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -76260,6 +76973,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::bindBufferMemory2KHR( uint32_t bindInfoCount, const VULKAN_HPP_NAMESPACE::BindBufferMemoryInfo* pBindInfos, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -76273,6 +76987,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::bindBufferMemory2KHR" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -76289,6 +77004,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::bindImageMemory2( uint32_t bindInfoCount, const VULKAN_HPP_NAMESPACE::BindImageMemoryInfo* pBindInfos, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -76303,6 +77019,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::bindImageMemory2KHR( uint32_t bindInfoCount, const VULKAN_HPP_NAMESPACE::BindImageMemoryInfo* pBindInfos, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -76316,6 +77033,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::bindImageMemory2KHR" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VK_ENABLE_BETA_EXTENSIONS
   template<typename Dispatch>
@@ -76341,6 +77059,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::compileDeferredNV( VULKAN_HPP_NAMESPACE::Pipeline pipeline, uint32_t shader, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -76355,6 +77074,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::compileDeferredNV" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VK_ENABLE_BETA_EXTENSIONS
   template<typename Dispatch>
@@ -76372,6 +77092,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
+
 #ifdef VK_ENABLE_BETA_EXTENSIONS
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::copyAccelerationStructureToMemoryKHR( const VULKAN_HPP_NAMESPACE::CopyAccelerationStructureToMemoryInfoKHR* pInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -76388,6 +77109,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
+
 #ifdef VK_ENABLE_BETA_EXTENSIONS
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::copyMemoryToAccelerationStructureKHR( const VULKAN_HPP_NAMESPACE::CopyMemoryToAccelerationStructureInfoKHR* pInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -76403,6 +77125,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
+
 
 #ifdef VK_ENABLE_BETA_EXTENSIONS
   template<typename Dispatch>
@@ -76432,6 +77155,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::createAccelerationStructureNV( const VULKAN_HPP_NAMESPACE::AccelerationStructureCreateInfoNV* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::AccelerationStructureNV* pAccelerationStructure, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -76457,6 +77181,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::createBuffer( const VULKAN_HPP_NAMESPACE::BufferCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::Buffer* pBuffer, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -76484,6 +77209,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::createBufferView( const VULKAN_HPP_NAMESPACE::BufferViewCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::BufferView* pView, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -76510,6 +77236,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::createCommandPool( const VULKAN_HPP_NAMESPACE::CommandPoolCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::CommandPool* pCommandPool, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -76535,6 +77262,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::createComputePipelines( VULKAN_HPP_NAMESPACE::PipelineCache pipelineCache, uint32_t createInfoCount, const VULKAN_HPP_NAMESPACE::ComputePipelineCreateInfo* pCreateInfos, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::Pipeline* pPipelines, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -76612,6 +77340,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
 #ifdef VK_ENABLE_BETA_EXTENSIONS
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::createDeferredOperationKHR( const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::DeferredOperationKHR* pDeferredOperation, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -76640,6 +77369,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::createDescriptorPool( const VULKAN_HPP_NAMESPACE::DescriptorPoolCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::DescriptorPool* pDescriptorPool, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -76665,6 +77395,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::createDescriptorSetLayout( const VULKAN_HPP_NAMESPACE::DescriptorSetLayoutCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::DescriptorSetLayout* pSetLayout, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -76692,6 +77423,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::createDescriptorUpdateTemplate( const VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplateCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplate* pDescriptorUpdateTemplate, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -76717,6 +77449,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::createDescriptorUpdateTemplateKHR( const VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplateCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplate* pDescriptorUpdateTemplate, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -76744,6 +77477,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::createEvent( const VULKAN_HPP_NAMESPACE::EventCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::Event* pEvent, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -76769,6 +77503,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::createFence( const VULKAN_HPP_NAMESPACE::FenceCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::Fence* pFence, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -76796,6 +77531,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::createFramebuffer( const VULKAN_HPP_NAMESPACE::FramebufferCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::Framebuffer* pFramebuffer, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -76821,6 +77557,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::createGraphicsPipelines( VULKAN_HPP_NAMESPACE::PipelineCache pipelineCache, uint32_t createInfoCount, const VULKAN_HPP_NAMESPACE::GraphicsPipelineCreateInfo* pCreateInfos, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::Pipeline* pPipelines, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -76898,6 +77635,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::createImage( const VULKAN_HPP_NAMESPACE::ImageCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::Image* pImage, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -76923,6 +77661,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::createImageView( const VULKAN_HPP_NAMESPACE::ImageViewCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::ImageView* pView, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -76950,6 +77689,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::createIndirectCommandsLayoutNV( const VULKAN_HPP_NAMESPACE::IndirectCommandsLayoutCreateInfoNV* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::IndirectCommandsLayoutNV* pIndirectCommandsLayout, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -76975,6 +77715,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::createPipelineCache( const VULKAN_HPP_NAMESPACE::PipelineCacheCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::PipelineCache* pPipelineCache, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -77002,6 +77743,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::createPipelineLayout( const VULKAN_HPP_NAMESPACE::PipelineLayoutCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::PipelineLayout* pPipelineLayout, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -77027,6 +77769,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::createPrivateDataSlotEXT( const VULKAN_HPP_NAMESPACE::PrivateDataSlotCreateInfoEXT* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::PrivateDataSlotEXT* pPrivateDataSlot, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -77054,6 +77797,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::createQueryPool( const VULKAN_HPP_NAMESPACE::QueryPoolCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::QueryPool* pQueryPool, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -77079,6 +77823,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VK_ENABLE_BETA_EXTENSIONS
   template<typename Dispatch>
@@ -77158,6 +77903,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::createRayTracingPipelinesNV( VULKAN_HPP_NAMESPACE::PipelineCache pipelineCache, uint32_t createInfoCount, const VULKAN_HPP_NAMESPACE::RayTracingPipelineCreateInfoNV* pCreateInfos, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::Pipeline* pPipelines, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -77234,6 +77980,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::createRenderPass( const VULKAN_HPP_NAMESPACE::RenderPassCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::RenderPass* pRenderPass, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -77259,6 +78006,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::createRenderPass2( const VULKAN_HPP_NAMESPACE::RenderPassCreateInfo2* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::RenderPass* pRenderPass, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -77286,6 +78034,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::createRenderPass2KHR( const VULKAN_HPP_NAMESPACE::RenderPassCreateInfo2* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::RenderPass* pRenderPass, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -77311,6 +78060,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::createSampler( const VULKAN_HPP_NAMESPACE::SamplerCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::Sampler* pSampler, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -77338,6 +78088,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::createSamplerYcbcrConversion( const VULKAN_HPP_NAMESPACE::SamplerYcbcrConversionCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::SamplerYcbcrConversion* pYcbcrConversion, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -77363,6 +78114,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::createSamplerYcbcrConversionKHR( const VULKAN_HPP_NAMESPACE::SamplerYcbcrConversionCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::SamplerYcbcrConversion* pYcbcrConversion, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -77390,6 +78142,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::createSemaphore( const VULKAN_HPP_NAMESPACE::SemaphoreCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::Semaphore* pSemaphore, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -77416,6 +78169,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::createShaderModule( const VULKAN_HPP_NAMESPACE::ShaderModuleCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::ShaderModule* pShaderModule, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -77441,6 +78195,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::createSharedSwapchainsKHR( uint32_t swapchainCount, const VULKAN_HPP_NAMESPACE::SwapchainCreateInfoKHR* pCreateInfos, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::SwapchainKHR* pSwapchains, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -77518,6 +78273,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::createSwapchainKHR( const VULKAN_HPP_NAMESPACE::SwapchainCreateInfoKHR* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::SwapchainKHR* pSwapchain, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -77543,6 +78299,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::createValidationCacheEXT( const VULKAN_HPP_NAMESPACE::ValidationCacheCreateInfoEXT* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::ValidationCacheEXT* pValidationCache, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -77570,6 +78327,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::debugMarkerSetObjectNameEXT( const VULKAN_HPP_NAMESPACE::DebugMarkerObjectNameInfoEXT* pNameInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -77584,6 +78342,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::debugMarkerSetObjectTagEXT( const VULKAN_HPP_NAMESPACE::DebugMarkerObjectTagInfoEXT* pTagInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -77597,6 +78356,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::debugMarkerSetObjectTagEXT" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VK_ENABLE_BETA_EXTENSIONS
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
@@ -77615,6 +78375,8 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
+
+#ifdef VK_ENABLE_BETA_EXTENSIONS
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Device::destroyAccelerationStructureKHR( VULKAN_HPP_NAMESPACE::AccelerationStructureKHR accelerationStructure, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -77627,6 +78389,31 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkDestroyAccelerationStructureKHR( m_device, static_cast<VkAccelerationStructureKHR>( accelerationStructure ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
+
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE void Device::destroy( VULKAN_HPP_NAMESPACE::AccelerationStructureKHR accelerationStructure, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
+  {
+#ifdef VK_ENABLE_BETA_EXTENSIONS
+    d.vkDestroyAccelerationStructureKHR( m_device, static_cast<VkAccelerationStructureKHR>( accelerationStructure ), reinterpret_cast<const VkAllocationCallbacks*>( pAllocator ) );
+#else
+    d.vkDestroyAccelerationStructureNV( m_device, static_cast<VkAccelerationStructureKHR>( accelerationStructure ), reinterpret_cast<const VkAllocationCallbacks*>( pAllocator ) );
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
+
+  }
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE void Device::destroy( VULKAN_HPP_NAMESPACE::AccelerationStructureKHR accelerationStructure, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const VULKAN_HPP_NOEXCEPT
+  {
+#ifdef VK_ENABLE_BETA_EXTENSIONS
+    d.vkDestroyAccelerationStructureKHR( m_device, static_cast<VkAccelerationStructureKHR>( accelerationStructure ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ) );
+#else
+    d.vkDestroyAccelerationStructureNV( m_device, static_cast<VkAccelerationStructureKHR>( accelerationStructure ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ) );
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
+
+  }
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Device::destroyAccelerationStructureNV( VULKAN_HPP_NAMESPACE::AccelerationStructureKHR accelerationStructure, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -77641,18 +78428,6 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
-  template<typename Dispatch>
-  VULKAN_HPP_INLINE void Device::destroy( VULKAN_HPP_NAMESPACE::AccelerationStructureKHR accelerationStructure, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
-  {
-    d.vkDestroyAccelerationStructureKHR( m_device, static_cast<VkAccelerationStructureKHR>( accelerationStructure ), reinterpret_cast<const VkAllocationCallbacks*>( pAllocator ) );
-  }
-#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
-  template<typename Dispatch>
-  VULKAN_HPP_INLINE void Device::destroy( VULKAN_HPP_NAMESPACE::AccelerationStructureKHR accelerationStructure, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const VULKAN_HPP_NOEXCEPT
-  {
-    d.vkDestroyAccelerationStructureKHR( m_device, static_cast<VkAccelerationStructureKHR>( accelerationStructure ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ) );
-  }
-#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Device::destroyBuffer( VULKAN_HPP_NAMESPACE::Buffer buffer, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -77826,19 +78601,6 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
   template<typename Dispatch>
-  VULKAN_HPP_INLINE void Device::destroyDescriptorUpdateTemplateKHR( VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplate descriptorUpdateTemplate, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
-  {
-    d.vkDestroyDescriptorUpdateTemplateKHR( m_device, static_cast<VkDescriptorUpdateTemplate>( descriptorUpdateTemplate ), reinterpret_cast<const VkAllocationCallbacks*>( pAllocator ) );
-  }
-#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
-  template<typename Dispatch>
-  VULKAN_HPP_INLINE void Device::destroyDescriptorUpdateTemplateKHR( VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplate descriptorUpdateTemplate, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const VULKAN_HPP_NOEXCEPT
-  {
-    d.vkDestroyDescriptorUpdateTemplateKHR( m_device, static_cast<VkDescriptorUpdateTemplate>( descriptorUpdateTemplate ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ) );
-  }
-#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
-
-  template<typename Dispatch>
   VULKAN_HPP_INLINE void Device::destroy( VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplate descriptorUpdateTemplate, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
     d.vkDestroyDescriptorUpdateTemplate( m_device, static_cast<VkDescriptorUpdateTemplate>( descriptorUpdateTemplate ), reinterpret_cast<const VkAllocationCallbacks*>( pAllocator ) );
@@ -77852,6 +78614,20 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
   template<typename Dispatch>
+  VULKAN_HPP_INLINE void Device::destroyDescriptorUpdateTemplateKHR( VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplate descriptorUpdateTemplate, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
+  {
+    d.vkDestroyDescriptorUpdateTemplateKHR( m_device, static_cast<VkDescriptorUpdateTemplate>( descriptorUpdateTemplate ), reinterpret_cast<const VkAllocationCallbacks*>( pAllocator ) );
+  }
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE void Device::destroyDescriptorUpdateTemplateKHR( VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplate descriptorUpdateTemplate, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const VULKAN_HPP_NOEXCEPT
+  {
+    d.vkDestroyDescriptorUpdateTemplateKHR( m_device, static_cast<VkDescriptorUpdateTemplate>( descriptorUpdateTemplate ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ) );
+  }
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+
+  template<typename Dispatch>
   VULKAN_HPP_INLINE void Device::destroy( const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
     d.vkDestroyDevice( m_device, reinterpret_cast<const VkAllocationCallbacks*>( pAllocator ) );
@@ -77863,6 +78639,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkDestroyDevice( m_device, reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Device::destroyEvent( VULKAN_HPP_NAMESPACE::Event event, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -78216,6 +78993,19 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
   template<typename Dispatch>
+  VULKAN_HPP_INLINE void Device::destroy( VULKAN_HPP_NAMESPACE::SamplerYcbcrConversion ycbcrConversion, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
+  {
+    d.vkDestroySamplerYcbcrConversion( m_device, static_cast<VkSamplerYcbcrConversion>( ycbcrConversion ), reinterpret_cast<const VkAllocationCallbacks*>( pAllocator ) );
+  }
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE void Device::destroy( VULKAN_HPP_NAMESPACE::SamplerYcbcrConversion ycbcrConversion, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const VULKAN_HPP_NOEXCEPT
+  {
+    d.vkDestroySamplerYcbcrConversion( m_device, static_cast<VkSamplerYcbcrConversion>( ycbcrConversion ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ) );
+  }
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+  template<typename Dispatch>
   VULKAN_HPP_INLINE void Device::destroySamplerYcbcrConversionKHR( VULKAN_HPP_NAMESPACE::SamplerYcbcrConversion ycbcrConversion, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
     d.vkDestroySamplerYcbcrConversionKHR( m_device, static_cast<VkSamplerYcbcrConversion>( ycbcrConversion ), reinterpret_cast<const VkAllocationCallbacks*>( pAllocator ) );
@@ -78228,18 +79018,6 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
-  template<typename Dispatch>
-  VULKAN_HPP_INLINE void Device::destroy( VULKAN_HPP_NAMESPACE::SamplerYcbcrConversion ycbcrConversion, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
-  {
-    d.vkDestroySamplerYcbcrConversion( m_device, static_cast<VkSamplerYcbcrConversion>( ycbcrConversion ), reinterpret_cast<const VkAllocationCallbacks*>( pAllocator ) );
-  }
-#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
-  template<typename Dispatch>
-  VULKAN_HPP_INLINE void Device::destroy( VULKAN_HPP_NAMESPACE::SamplerYcbcrConversion ycbcrConversion, Optional<const AllocationCallbacks> allocator, Dispatch const &d ) const VULKAN_HPP_NOEXCEPT
-  {
-    d.vkDestroySamplerYcbcrConversion( m_device, static_cast<VkSamplerYcbcrConversion>( ycbcrConversion ), reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ) );
-  }
-#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Device::destroySemaphore( VULKAN_HPP_NAMESPACE::Semaphore semaphore, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -78360,6 +79138,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::displayPowerControlEXT( VULKAN_HPP_NAMESPACE::DisplayKHR display, const VULKAN_HPP_NAMESPACE::DisplayPowerInfoEXT* pDisplayPowerInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -78374,6 +79153,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::flushMappedMemoryRanges( uint32_t memoryRangeCount, const VULKAN_HPP_NAMESPACE::MappedMemoryRange* pMemoryRanges, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -78387,6 +79167,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::flushMappedMemoryRanges" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Device::freeCommandBuffers( VULKAN_HPP_NAMESPACE::CommandPool commandPool, uint32_t commandBufferCount, const VULKAN_HPP_NAMESPACE::CommandBuffer* pCommandBuffers, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -78483,6 +79264,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::getAccelerationStructureHandleNV( VULKAN_HPP_NAMESPACE::AccelerationStructureKHR accelerationStructure, size_t dataSize, void* pData, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -78496,6 +79278,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::getAccelerationStructureHandleNV" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VK_ENABLE_BETA_EXTENSIONS
   template<typename Dispatch>
@@ -78522,6 +79305,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Device::getAccelerationStructureMemoryRequirementsNV( const VULKAN_HPP_NAMESPACE::AccelerationStructureMemoryRequirementsInfoNV* pInfo, VULKAN_HPP_NAMESPACE::MemoryRequirements2KHR* pMemoryRequirements, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -78544,6 +79328,7 @@ namespace VULKAN_HPP_NAMESPACE
     return structureChain;
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
   template<typename Dispatch>
@@ -78570,6 +79355,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_ANDROID_KHR*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE DeviceAddress Device::getBufferAddress( const VULKAN_HPP_NAMESPACE::BufferDeviceAddressInfo* pInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -78582,6 +79368,7 @@ namespace VULKAN_HPP_NAMESPACE
     return d.vkGetBufferDeviceAddress( m_device, reinterpret_cast<const VkBufferDeviceAddressInfo*>( &info ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE DeviceAddress Device::getBufferAddressEXT( const VULKAN_HPP_NAMESPACE::BufferDeviceAddressInfo* pInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -78596,6 +79383,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE DeviceAddress Device::getBufferAddressKHR( const VULKAN_HPP_NAMESPACE::BufferDeviceAddressInfo* pInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -78608,6 +79396,7 @@ namespace VULKAN_HPP_NAMESPACE
     return d.vkGetBufferDeviceAddressKHR( m_device, reinterpret_cast<const VkBufferDeviceAddressInfo*>( &info ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Device::getBufferMemoryRequirements( VULKAN_HPP_NAMESPACE::Buffer buffer, VULKAN_HPP_NAMESPACE::MemoryRequirements* pMemoryRequirements, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -78623,6 +79412,7 @@ namespace VULKAN_HPP_NAMESPACE
     return memoryRequirements;
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Device::getBufferMemoryRequirements2( const VULKAN_HPP_NAMESPACE::BufferMemoryRequirementsInfo2* pInfo, VULKAN_HPP_NAMESPACE::MemoryRequirements2* pMemoryRequirements, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -78647,6 +79437,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Device::getBufferMemoryRequirements2KHR( const VULKAN_HPP_NAMESPACE::BufferMemoryRequirementsInfo2* pInfo, VULKAN_HPP_NAMESPACE::MemoryRequirements2* pMemoryRequirements, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -78670,6 +79461,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE uint64_t Device::getBufferOpaqueCaptureAddress( const VULKAN_HPP_NAMESPACE::BufferDeviceAddressInfo* pInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -78683,6 +79475,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE uint64_t Device::getBufferOpaqueCaptureAddressKHR( const VULKAN_HPP_NAMESPACE::BufferDeviceAddressInfo* pInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -78695,6 +79488,7 @@ namespace VULKAN_HPP_NAMESPACE
     return d.vkGetBufferOpaqueCaptureAddressKHR( m_device, reinterpret_cast<const VkBufferDeviceAddressInfo*>( &info ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::getCalibratedTimestampsEXT( uint32_t timestampCount, const VULKAN_HPP_NAMESPACE::CalibratedTimestampInfoEXT* pTimestampInfos, uint64_t* pTimestamps, uint64_t* pMaxDeviation, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -78719,6 +79513,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
 #ifdef VK_ENABLE_BETA_EXTENSIONS
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -78734,6 +79529,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
+
 
 #ifdef VK_ENABLE_BETA_EXTENSIONS
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
@@ -78751,6 +79547,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Device::getDescriptorSetLayoutSupport( const VULKAN_HPP_NAMESPACE::DescriptorSetLayoutCreateInfo* pCreateInfo, VULKAN_HPP_NAMESPACE::DescriptorSetLayoutSupport* pSupport, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -78775,6 +79572,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Device::getDescriptorSetLayoutSupportKHR( const VULKAN_HPP_NAMESPACE::DescriptorSetLayoutCreateInfo* pCreateInfo, VULKAN_HPP_NAMESPACE::DescriptorSetLayoutSupport* pSupport, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -78798,6 +79596,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
 #ifdef VK_ENABLE_BETA_EXTENSIONS
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::getAccelerationStructureCompatibilityKHR( const VULKAN_HPP_NAMESPACE::AccelerationStructureVersionKHR* version, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -78814,6 +79613,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Device::getGroupPeerMemoryFeatures( uint32_t heapIndex, uint32_t localDeviceIndex, uint32_t remoteDeviceIndex, VULKAN_HPP_NAMESPACE::PeerMemoryFeatureFlags* pPeerMemoryFeatures, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -78828,6 +79628,7 @@ namespace VULKAN_HPP_NAMESPACE
     return peerMemoryFeatures;
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Device::getGroupPeerMemoryFeaturesKHR( uint32_t heapIndex, uint32_t localDeviceIndex, uint32_t remoteDeviceIndex, VULKAN_HPP_NAMESPACE::PeerMemoryFeatureFlags* pPeerMemoryFeatures, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -78844,6 +79645,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::getGroupPresentCapabilitiesKHR( VULKAN_HPP_NAMESPACE::DeviceGroupPresentCapabilitiesKHR* pDeviceGroupPresentCapabilities, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -78858,6 +79660,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, deviceGroupPresentCapabilities, VULKAN_HPP_NAMESPACE_STRING"::Device::getGroupPresentCapabilitiesKHR" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   template<typename Dispatch>
@@ -78876,6 +79679,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::getGroupSurfacePresentModesKHR( VULKAN_HPP_NAMESPACE::SurfaceKHR surface, VULKAN_HPP_NAMESPACE::DeviceGroupPresentModeFlagsKHR* pModes, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -78890,6 +79694,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, modes, VULKAN_HPP_NAMESPACE_STRING"::Device::getGroupSurfacePresentModesKHR" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Device::getMemoryCommitment( VULKAN_HPP_NAMESPACE::DeviceMemory memory, VULKAN_HPP_NAMESPACE::DeviceSize* pCommittedMemoryInBytes, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -78906,6 +79711,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE uint64_t Device::getMemoryOpaqueCaptureAddress( const VULKAN_HPP_NAMESPACE::DeviceMemoryOpaqueCaptureAddressInfo* pInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -78918,6 +79724,7 @@ namespace VULKAN_HPP_NAMESPACE
     return d.vkGetDeviceMemoryOpaqueCaptureAddress( m_device, reinterpret_cast<const VkDeviceMemoryOpaqueCaptureAddressInfo*>( &info ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE uint64_t Device::getMemoryOpaqueCaptureAddressKHR( const VULKAN_HPP_NAMESPACE::DeviceMemoryOpaqueCaptureAddressInfo* pInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -78932,6 +79739,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE PFN_vkVoidFunction Device::getProcAddr( const char* pName, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -78944,6 +79752,7 @@ namespace VULKAN_HPP_NAMESPACE
     return d.vkGetDeviceProcAddr( m_device, name.c_str() );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Device::getQueue( uint32_t queueFamilyIndex, uint32_t queueIndex, VULKAN_HPP_NAMESPACE::Queue* pQueue, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -78960,6 +79769,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Device::getQueue2( const VULKAN_HPP_NAMESPACE::DeviceQueueInfo2* pQueueInfo, VULKAN_HPP_NAMESPACE::Queue* pQueue, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -78974,6 +79784,7 @@ namespace VULKAN_HPP_NAMESPACE
     return queue;
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -78990,6 +79801,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::getFenceFdKHR( const VULKAN_HPP_NAMESPACE::FenceGetFdInfoKHR* pGetFdInfo, int* pFd, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -79005,6 +79817,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::getFenceStatus( VULKAN_HPP_NAMESPACE::Fence fence, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -79019,6 +79832,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::getFenceStatus", { Result::eSuccess, Result::eNotReady } );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   template<typename Dispatch>
@@ -79036,6 +79850,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Device::getGeneratedCommandsMemoryRequirementsNV( const VULKAN_HPP_NAMESPACE::GeneratedCommandsMemoryRequirementsInfoNV* pInfo, VULKAN_HPP_NAMESPACE::MemoryRequirements2* pMemoryRequirements, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -79060,6 +79875,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::getImageDrmFormatModifierPropertiesEXT( VULKAN_HPP_NAMESPACE::Image image, VULKAN_HPP_NAMESPACE::ImageDrmFormatModifierPropertiesEXT* pProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -79075,6 +79891,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Device::getImageMemoryRequirements( VULKAN_HPP_NAMESPACE::Image image, VULKAN_HPP_NAMESPACE::MemoryRequirements* pMemoryRequirements, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -79089,6 +79906,7 @@ namespace VULKAN_HPP_NAMESPACE
     return memoryRequirements;
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Device::getImageMemoryRequirements2( const VULKAN_HPP_NAMESPACE::ImageMemoryRequirementsInfo2* pInfo, VULKAN_HPP_NAMESPACE::MemoryRequirements2* pMemoryRequirements, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -79113,6 +79931,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Device::getImageMemoryRequirements2KHR( const VULKAN_HPP_NAMESPACE::ImageMemoryRequirementsInfo2* pInfo, VULKAN_HPP_NAMESPACE::MemoryRequirements2* pMemoryRequirements, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -79135,6 +79954,7 @@ namespace VULKAN_HPP_NAMESPACE
     return structureChain;
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Device::getImageSparseMemoryRequirements( VULKAN_HPP_NAMESPACE::Image image, uint32_t* pSparseMemoryRequirementCount, VULKAN_HPP_NAMESPACE::SparseImageMemoryRequirements* pSparseMemoryRequirements, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -79164,6 +79984,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Device::getImageSparseMemoryRequirements2( const VULKAN_HPP_NAMESPACE::ImageSparseMemoryRequirementsInfo2* pInfo, uint32_t* pSparseMemoryRequirementCount, VULKAN_HPP_NAMESPACE::SparseImageMemoryRequirements2* pSparseMemoryRequirements, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -79191,6 +80012,7 @@ namespace VULKAN_HPP_NAMESPACE
     return sparseMemoryRequirements;
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Device::getImageSparseMemoryRequirements2KHR( const VULKAN_HPP_NAMESPACE::ImageSparseMemoryRequirementsInfo2* pInfo, uint32_t* pSparseMemoryRequirementCount, VULKAN_HPP_NAMESPACE::SparseImageMemoryRequirements2* pSparseMemoryRequirements, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -79220,6 +80042,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Device::getImageSubresourceLayout( VULKAN_HPP_NAMESPACE::Image image, const VULKAN_HPP_NAMESPACE::ImageSubresource* pSubresource, VULKAN_HPP_NAMESPACE::SubresourceLayout* pLayout, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -79234,6 +80057,7 @@ namespace VULKAN_HPP_NAMESPACE
     return layout;
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::getImageViewAddressNVX( VULKAN_HPP_NAMESPACE::ImageView imageView, VULKAN_HPP_NAMESPACE::ImageViewAddressPropertiesNVX* pProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -79250,6 +80074,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE uint32_t Device::getImageViewHandleNVX( const VULKAN_HPP_NAMESPACE::ImageViewHandleInfoNVX* pInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -79262,6 +80087,7 @@ namespace VULKAN_HPP_NAMESPACE
     return d.vkGetImageViewHandleNVX( m_device, reinterpret_cast<const VkImageViewHandleInfoNVX*>( &info ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
   template<typename Dispatch>
@@ -79280,6 +80106,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_ANDROID_KHR*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::getMemoryFdKHR( const VULKAN_HPP_NAMESPACE::MemoryGetFdInfoKHR* pGetFdInfo, int* pFd, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -79294,6 +80121,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, fd, VULKAN_HPP_NAMESPACE_STRING"::Device::getMemoryFdKHR" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::getMemoryFdPropertiesKHR( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType, int fd, VULKAN_HPP_NAMESPACE::MemoryFdPropertiesKHR* pMemoryFdProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -79310,6 +80138,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::getMemoryHostPointerPropertiesEXT( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType, const void* pHostPointer, VULKAN_HPP_NAMESPACE::MemoryHostPointerPropertiesEXT* pMemoryHostPointerProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -79324,6 +80153,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, memoryHostPointerProperties, VULKAN_HPP_NAMESPACE_STRING"::Device::getMemoryHostPointerPropertiesEXT" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   template<typename Dispatch>
@@ -79342,6 +80172,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
+
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::getMemoryWin32HandleNV( VULKAN_HPP_NAMESPACE::DeviceMemory memory, VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagsNV handleType, HANDLE* pHandle, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -79359,6 +80190,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
+
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::getMemoryWin32HandlePropertiesKHR( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType, HANDLE handle, VULKAN_HPP_NAMESPACE::MemoryWin32HandlePropertiesKHR* pMemoryWin32HandleProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -79375,6 +80207,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::getPastPresentationTimingGOOGLE( VULKAN_HPP_NAMESPACE::SwapchainKHR swapchain, uint32_t* pPresentationTimingCount, VULKAN_HPP_NAMESPACE::PastPresentationTimingGOOGLE* pPresentationTimings, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -79428,6 +80261,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::getPerformanceParameterINTEL( VULKAN_HPP_NAMESPACE::PerformanceParameterTypeINTEL parameter, VULKAN_HPP_NAMESPACE::PerformanceValueINTEL* pValue, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -79442,6 +80276,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, value, VULKAN_HPP_NAMESPACE_STRING"::Device::getPerformanceParameterINTEL" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::getPipelineCacheData( VULKAN_HPP_NAMESPACE::PipelineCache pipelineCache, size_t* pDataSize, void* pData, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -79495,6 +80330,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::getPipelineExecutableInternalRepresentationsKHR( const VULKAN_HPP_NAMESPACE::PipelineExecutableInfoKHR* pExecutableInfo, uint32_t* pInternalRepresentationCount, VULKAN_HPP_NAMESPACE::PipelineExecutableInternalRepresentationKHR* pInternalRepresentations, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -79546,6 +80382,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, internalRepresentations, VULKAN_HPP_NAMESPACE_STRING"::Device::getPipelineExecutableInternalRepresentationsKHR" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::getPipelineExecutablePropertiesKHR( const VULKAN_HPP_NAMESPACE::PipelineInfoKHR* pPipelineInfo, uint32_t* pExecutableCount, VULKAN_HPP_NAMESPACE::PipelineExecutablePropertiesKHR* pProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -79599,6 +80436,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::getPipelineExecutableStatisticsKHR( const VULKAN_HPP_NAMESPACE::PipelineExecutableInfoKHR* pExecutableInfo, uint32_t* pStatisticCount, VULKAN_HPP_NAMESPACE::PipelineExecutableStatisticKHR* pStatistics, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -79651,6 +80489,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Device::getPrivateDataEXT( VULKAN_HPP_NAMESPACE::ObjectType objectType, uint64_t objectHandle, VULKAN_HPP_NAMESPACE::PrivateDataSlotEXT privateDataSlot, uint64_t* pData, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -79666,6 +80505,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::getQueryPoolResults( VULKAN_HPP_NAMESPACE::QueryPool queryPool, uint32_t firstQuery, uint32_t queryCount, size_t dataSize, void* pData, VULKAN_HPP_NAMESPACE::DeviceSize stride, VULKAN_HPP_NAMESPACE::QueryResultFlags flags, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -79679,6 +80519,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::getQueryPoolResults", { Result::eSuccess, Result::eNotReady } );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VK_ENABLE_BETA_EXTENSIONS
   template<typename Dispatch>
@@ -79696,6 +80537,8 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
+
+#ifdef VK_ENABLE_BETA_EXTENSIONS
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::getRayTracingShaderGroupHandlesKHR( VULKAN_HPP_NAMESPACE::Pipeline pipeline, uint32_t firstGroup, uint32_t groupCount, size_t dataSize, void* pData, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -79709,6 +80552,8 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::getRayTracingShaderGroupHandlesKHR" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::getRayTracingShaderGroupHandlesNV( VULKAN_HPP_NAMESPACE::Pipeline pipeline, uint32_t firstGroup, uint32_t groupCount, size_t dataSize, void* pData, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -79723,6 +80568,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::getRayTracingShaderGroupHandlesNV" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::getRefreshCycleDurationGOOGLE( VULKAN_HPP_NAMESPACE::SwapchainKHR swapchain, VULKAN_HPP_NAMESPACE::RefreshCycleDurationGOOGLE* pDisplayTimingProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -79739,6 +80585,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Device::getRenderAreaGranularity( VULKAN_HPP_NAMESPACE::RenderPass renderPass, VULKAN_HPP_NAMESPACE::Extent2D* pGranularity, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -79753,6 +80600,7 @@ namespace VULKAN_HPP_NAMESPACE
     return granularity;
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::getSemaphoreCounterValue( VULKAN_HPP_NAMESPACE::Semaphore semaphore, uint64_t* pValue, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -79769,6 +80617,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::getSemaphoreCounterValueKHR( VULKAN_HPP_NAMESPACE::Semaphore semaphore, uint64_t* pValue, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -79784,6 +80633,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::getSemaphoreFdKHR( const VULKAN_HPP_NAMESPACE::SemaphoreGetFdInfoKHR* pGetFdInfo, int* pFd, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -79798,6 +80648,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, fd, VULKAN_HPP_NAMESPACE_STRING"::Device::getSemaphoreFdKHR" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   template<typename Dispatch>
@@ -79815,6 +80666,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::getShaderInfoAMD( VULKAN_HPP_NAMESPACE::Pipeline pipeline, VULKAN_HPP_NAMESPACE::ShaderStageFlagBits shaderStage, VULKAN_HPP_NAMESPACE::ShaderInfoTypeAMD infoType, size_t* pInfoSize, void* pInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -79868,6 +80720,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::getSwapchainCounterEXT( VULKAN_HPP_NAMESPACE::SwapchainKHR swapchain, VULKAN_HPP_NAMESPACE::SurfaceCounterFlagBitsEXT counter, uint64_t* pCounterValue, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -79882,6 +80735,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, counterValue, VULKAN_HPP_NAMESPACE_STRING"::Device::getSwapchainCounterEXT" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::getSwapchainImagesKHR( VULKAN_HPP_NAMESPACE::SwapchainKHR swapchain, uint32_t* pSwapchainImageCount, VULKAN_HPP_NAMESPACE::Image* pSwapchainImages, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -79935,6 +80789,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::getSwapchainStatusKHR( VULKAN_HPP_NAMESPACE::SwapchainKHR swapchain, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -79949,6 +80804,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::getSwapchainStatusKHR", { Result::eSuccess, Result::eSuboptimalKHR } );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::getValidationCacheDataEXT( VULKAN_HPP_NAMESPACE::ValidationCacheEXT validationCache, size_t* pDataSize, void* pData, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -80002,6 +80858,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::importFenceFdKHR( const VULKAN_HPP_NAMESPACE::ImportFenceFdInfoKHR* pImportFenceFdInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -80015,6 +80872,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::importFenceFdKHR" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   template<typename Dispatch>
@@ -80032,6 +80890,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::importSemaphoreFdKHR( const VULKAN_HPP_NAMESPACE::ImportSemaphoreFdInfoKHR* pImportSemaphoreFdInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -80045,6 +80904,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::importSemaphoreFdKHR" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   template<typename Dispatch>
@@ -80062,6 +80922,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::initializePerformanceApiINTEL( const VULKAN_HPP_NAMESPACE::InitializePerformanceApiInfoINTEL* pInitializeInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -80076,6 +80937,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::invalidateMappedMemoryRanges( uint32_t memoryRangeCount, const VULKAN_HPP_NAMESPACE::MappedMemoryRange* pMemoryRanges, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -80089,6 +80951,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::invalidateMappedMemoryRanges" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::mapMemory( VULKAN_HPP_NAMESPACE::DeviceMemory memory, VULKAN_HPP_NAMESPACE::DeviceSize offset, VULKAN_HPP_NAMESPACE::DeviceSize size, VULKAN_HPP_NAMESPACE::MemoryMapFlags flags, void** ppData, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -80105,6 +80968,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::mergePipelineCaches( VULKAN_HPP_NAMESPACE::PipelineCache dstCache, uint32_t srcCacheCount, const VULKAN_HPP_NAMESPACE::PipelineCache* pSrcCaches, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -80119,6 +80983,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::mergeValidationCachesEXT( VULKAN_HPP_NAMESPACE::ValidationCacheEXT dstCache, uint32_t srcCacheCount, const VULKAN_HPP_NAMESPACE::ValidationCacheEXT* pSrcCaches, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -80132,6 +80997,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::mergeValidationCachesEXT" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::registerEventEXT( const VULKAN_HPP_NAMESPACE::DeviceEventInfoEXT* pDeviceEventInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::Fence* pFence, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -80159,6 +81025,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::registerDisplayEventEXT( VULKAN_HPP_NAMESPACE::DisplayKHR display, const VULKAN_HPP_NAMESPACE::DisplayEventInfoEXT* pDisplayEventInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::Fence* pFence, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -80185,6 +81052,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -80202,6 +81070,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::releasePerformanceConfigurationINTEL( VULKAN_HPP_NAMESPACE::PerformanceConfigurationINTEL configuration, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -80217,6 +81086,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Device::releaseProfilingLockKHR(Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -80230,6 +81100,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkReleaseProfilingLockKHR( m_device );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -80246,6 +81117,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::resetDescriptorPool( VULKAN_HPP_NAMESPACE::DescriptorPool descriptorPool, VULKAN_HPP_NAMESPACE::DescriptorPoolResetFlags flags, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -80260,6 +81132,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::resetDescriptorPool" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -80276,6 +81149,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::resetFences( uint32_t fenceCount, const VULKAN_HPP_NAMESPACE::Fence* pFences, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -80289,6 +81163,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::resetFences" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -80304,6 +81179,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Device::resetQueryPoolEXT( VULKAN_HPP_NAMESPACE::QueryPool queryPool, uint32_t firstQuery, uint32_t queryCount, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -80317,6 +81193,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkResetQueryPoolEXT( m_device, static_cast<VkQueryPool>( queryPool ), firstQuery, queryCount );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::setDebugUtilsObjectNameEXT( const VULKAN_HPP_NAMESPACE::DebugUtilsObjectNameInfoEXT* pNameInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -80332,6 +81209,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::setDebugUtilsObjectTagEXT( const VULKAN_HPP_NAMESPACE::DebugUtilsObjectTagInfoEXT* pTagInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -80345,6 +81223,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::setDebugUtilsObjectTagEXT" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -80360,6 +81239,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::setEvent" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Device::setHdrMetadataEXT( uint32_t swapchainCount, const VULKAN_HPP_NAMESPACE::SwapchainKHR* pSwapchains, const VULKAN_HPP_NAMESPACE::HdrMetadataEXT* pMetadata, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -80382,6 +81262,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Device::setLocalDimmingAMD( VULKAN_HPP_NAMESPACE::SwapchainKHR swapChain, VULKAN_HPP_NAMESPACE::Bool32 localDimmingEnable, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -80395,6 +81276,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkSetLocalDimmingAMD( m_device, static_cast<VkSwapchainKHR>( swapChain ), static_cast<VkBool32>( localDimmingEnable ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -80411,6 +81293,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::signalSemaphore( const VULKAN_HPP_NAMESPACE::SemaphoreSignalInfo* pSignalInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -80424,6 +81307,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::signalSemaphore" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::signalSemaphoreKHR( const VULKAN_HPP_NAMESPACE::SemaphoreSignalInfo* pSignalInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -80439,6 +81323,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Device::trimCommandPool( VULKAN_HPP_NAMESPACE::CommandPool commandPool, VULKAN_HPP_NAMESPACE::CommandPoolTrimFlags flags, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -80452,6 +81337,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkTrimCommandPool( m_device, static_cast<VkCommandPool>( commandPool ), static_cast<VkCommandPoolTrimFlags>( flags ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -80467,6 +81353,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Device::uninitializePerformanceApiINTEL(Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -80480,6 +81367,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkUninitializePerformanceApiINTEL( m_device );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -80495,6 +81383,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Device::updateDescriptorSetWithTemplate( VULKAN_HPP_NAMESPACE::DescriptorSet descriptorSet, VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplate descriptorUpdateTemplate, const void* pData, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -80508,6 +81397,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkUpdateDescriptorSetWithTemplate( m_device, static_cast<VkDescriptorSet>( descriptorSet ), static_cast<VkDescriptorUpdateTemplate>( descriptorUpdateTemplate ), pData );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -80523,6 +81413,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Device::updateDescriptorSets( uint32_t descriptorWriteCount, const VULKAN_HPP_NAMESPACE::WriteDescriptorSet* pDescriptorWrites, uint32_t descriptorCopyCount, const VULKAN_HPP_NAMESPACE::CopyDescriptorSet* pDescriptorCopies, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -80535,6 +81426,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkUpdateDescriptorSets( m_device, descriptorWrites.size() , reinterpret_cast<const VkWriteDescriptorSet*>( descriptorWrites.data() ), descriptorCopies.size() , reinterpret_cast<const VkCopyDescriptorSet*>( descriptorCopies.data() ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::waitForFences( uint32_t fenceCount, const VULKAN_HPP_NAMESPACE::Fence* pFences, VULKAN_HPP_NAMESPACE::Bool32 waitAll, uint64_t timeout, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -80550,6 +81442,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::waitSemaphores( const VULKAN_HPP_NAMESPACE::SemaphoreWaitInfo* pWaitInfo, uint64_t timeout, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -80564,6 +81457,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Device::waitSemaphoresKHR( const VULKAN_HPP_NAMESPACE::SemaphoreWaitInfo* pWaitInfo, uint64_t timeout, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -80577,6 +81471,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Device::waitSemaphoresKHR", { Result::eSuccess, Result::eTimeout } );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VK_ENABLE_BETA_EXTENSIONS
   template<typename Dispatch>
@@ -80593,6 +81488,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
+
 
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
   template<typename Dispatch>
@@ -80622,6 +81518,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_ANDROID_KHR*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Instance::createDebugReportCallbackEXT( const VULKAN_HPP_NAMESPACE::DebugReportCallbackCreateInfoEXT* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::DebugReportCallbackEXT* pCallback, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -80647,6 +81544,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Instance::createDebugUtilsMessengerEXT( const VULKAN_HPP_NAMESPACE::DebugUtilsMessengerCreateInfoEXT* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::DebugUtilsMessengerEXT* pMessenger, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -80674,6 +81572,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Instance::createDisplayPlaneSurfaceKHR( const VULKAN_HPP_NAMESPACE::DisplaySurfaceCreateInfoKHR* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::SurfaceKHR* pSurface, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -80700,6 +81599,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Instance::createHeadlessSurfaceEXT( const VULKAN_HPP_NAMESPACE::HeadlessSurfaceCreateInfoEXT* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::SurfaceKHR* pSurface, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -80725,6 +81625,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VK_USE_PLATFORM_IOS_MVK
   template<typename Dispatch>
@@ -80754,6 +81655,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_IOS_MVK*/
 
+
 #ifdef VK_USE_PLATFORM_FUCHSIA
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Instance::createImagePipeSurfaceFUCHSIA( const VULKAN_HPP_NAMESPACE::ImagePipeSurfaceCreateInfoFUCHSIA* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::SurfaceKHR* pSurface, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -80781,6 +81683,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_FUCHSIA*/
+
 
 #ifdef VK_USE_PLATFORM_MACOS_MVK
   template<typename Dispatch>
@@ -80810,6 +81713,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_MACOS_MVK*/
 
+
 #ifdef VK_USE_PLATFORM_METAL_EXT
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Instance::createMetalSurfaceEXT( const VULKAN_HPP_NAMESPACE::MetalSurfaceCreateInfoEXT* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::SurfaceKHR* pSurface, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -80837,6 +81741,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_METAL_EXT*/
+
 
 #ifdef VK_USE_PLATFORM_GGP
   template<typename Dispatch>
@@ -80866,6 +81771,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_GGP*/
 
+
 #ifdef VK_USE_PLATFORM_VI_NN
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Instance::createViSurfaceNN( const VULKAN_HPP_NAMESPACE::ViSurfaceCreateInfoNN* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::SurfaceKHR* pSurface, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -80893,6 +81799,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_VI_NN*/
+
 
 #ifdef VK_USE_PLATFORM_WAYLAND_KHR
   template<typename Dispatch>
@@ -80922,6 +81829,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_WAYLAND_KHR*/
 
+
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Instance::createWin32SurfaceKHR( const VULKAN_HPP_NAMESPACE::Win32SurfaceCreateInfoKHR* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::SurfaceKHR* pSurface, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -80949,6 +81857,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
+
 
 #ifdef VK_USE_PLATFORM_XCB_KHR
   template<typename Dispatch>
@@ -80978,6 +81887,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_XCB_KHR*/
 
+
 #ifdef VK_USE_PLATFORM_XLIB_KHR
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Instance::createXlibSurfaceKHR( const VULKAN_HPP_NAMESPACE::XlibSurfaceCreateInfoKHR* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::SurfaceKHR* pSurface, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -81006,6 +81916,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_XLIB_KHR*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Instance::debugReportMessageEXT( VULKAN_HPP_NAMESPACE::DebugReportFlagsEXT flags, VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT objectType, uint64_t object, size_t location, int32_t messageCode, const char* pLayerPrefix, const char* pMessage, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -81026,6 +81937,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkDebugReportMessageEXT( m_instance, static_cast<VkDebugReportFlagsEXT>( flags ), static_cast<VkDebugReportObjectTypeEXT>( objectType ), object, location, messageCode, layerPrefix.c_str(), message.c_str() );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Instance::destroyDebugReportCallbackEXT( VULKAN_HPP_NAMESPACE::DebugReportCallbackEXT callback, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -81091,6 +82003,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkDestroyInstance( m_instance, reinterpret_cast<const VkAllocationCallbacks*>( static_cast<const AllocationCallbacks*>( allocator ) ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Instance::destroySurfaceKHR( VULKAN_HPP_NAMESPACE::SurfaceKHR surface, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -81170,6 +82083,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Instance::enumeratePhysicalDeviceGroupsKHR( uint32_t* pPhysicalDeviceGroupCount, VULKAN_HPP_NAMESPACE::PhysicalDeviceGroupProperties* pPhysicalDeviceGroupProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -81221,6 +82135,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, physicalDeviceGroupProperties, VULKAN_HPP_NAMESPACE_STRING"::Instance::enumeratePhysicalDeviceGroupsKHR" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Instance::enumeratePhysicalDevices( uint32_t* pPhysicalDeviceCount, VULKAN_HPP_NAMESPACE::PhysicalDevice* pPhysicalDevices, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -81274,6 +82189,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE PFN_vkVoidFunction Instance::getProcAddr( const char* pName, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -81287,6 +82203,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Instance::submitDebugUtilsMessageEXT( VULKAN_HPP_NAMESPACE::DebugUtilsMessageSeverityFlagBitsEXT messageSeverity, VULKAN_HPP_NAMESPACE::DebugUtilsMessageTypeFlagsEXT messageTypes, const VULKAN_HPP_NAMESPACE::DebugUtilsMessengerCallbackDataEXT* pCallbackData, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -81299,6 +82216,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkSubmitDebugUtilsMessageEXT( m_instance, static_cast<VkDebugUtilsMessageSeverityFlagBitsEXT>( messageSeverity ), static_cast<VkDebugUtilsMessageTypeFlagsEXT>( messageTypes ), reinterpret_cast<const VkDebugUtilsMessengerCallbackDataEXT*>( &callbackData ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VK_USE_PLATFORM_XLIB_XRANDR_EXT
   template<typename Dispatch>
@@ -81316,6 +82234,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_XLIB_XRANDR_EXT*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result PhysicalDevice::createDevice( const VULKAN_HPP_NAMESPACE::DeviceCreateInfo* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::Device* pDevice, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -81343,6 +82262,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result PhysicalDevice::createDisplayModeKHR( VULKAN_HPP_NAMESPACE::DisplayKHR display, const VULKAN_HPP_NAMESPACE::DisplayModeCreateInfoKHR* pCreateInfo, const VULKAN_HPP_NAMESPACE::AllocationCallbacks* pAllocator, VULKAN_HPP_NAMESPACE::DisplayModeKHR* pMode, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -81357,6 +82277,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, mode, VULKAN_HPP_NAMESPACE_STRING"::PhysicalDevice::createDisplayModeKHR" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result PhysicalDevice::enumerateDeviceExtensionProperties( const char* pLayerName, uint32_t* pPropertyCount, VULKAN_HPP_NAMESPACE::ExtensionProperties* pProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -81410,6 +82331,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result PhysicalDevice::enumerateDeviceLayerProperties( uint32_t* pPropertyCount, VULKAN_HPP_NAMESPACE::LayerProperties* pProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -81461,6 +82383,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, properties, VULKAN_HPP_NAMESPACE_STRING"::PhysicalDevice::enumerateDeviceLayerProperties" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result PhysicalDevice::enumerateQueueFamilyPerformanceQueryCountersKHR( uint32_t queueFamilyIndex, uint32_t* pCounterCount, VULKAN_HPP_NAMESPACE::PerformanceCounterKHR* pCounters, VULKAN_HPP_NAMESPACE::PerformanceCounterDescriptionKHR* pCounterDescriptions, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -81514,6 +82437,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result PhysicalDevice::getDisplayModeProperties2KHR( VULKAN_HPP_NAMESPACE::DisplayKHR display, uint32_t* pPropertyCount, VULKAN_HPP_NAMESPACE::DisplayModeProperties2KHR* pProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -81565,6 +82489,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, properties, VULKAN_HPP_NAMESPACE_STRING"::PhysicalDevice::getDisplayModeProperties2KHR" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result PhysicalDevice::getDisplayModePropertiesKHR( VULKAN_HPP_NAMESPACE::DisplayKHR display, uint32_t* pPropertyCount, VULKAN_HPP_NAMESPACE::DisplayModePropertiesKHR* pProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -81618,6 +82543,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result PhysicalDevice::getDisplayPlaneCapabilities2KHR( const VULKAN_HPP_NAMESPACE::DisplayPlaneInfo2KHR* pDisplayPlaneInfo, VULKAN_HPP_NAMESPACE::DisplayPlaneCapabilities2KHR* pCapabilities, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -81633,6 +82559,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result PhysicalDevice::getDisplayPlaneCapabilitiesKHR( VULKAN_HPP_NAMESPACE::DisplayModeKHR mode, uint32_t planeIndex, VULKAN_HPP_NAMESPACE::DisplayPlaneCapabilitiesKHR* pCapabilities, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -81647,6 +82574,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, capabilities, VULKAN_HPP_NAMESPACE_STRING"::PhysicalDevice::getDisplayPlaneCapabilitiesKHR" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result PhysicalDevice::getDisplayPlaneSupportedDisplaysKHR( uint32_t planeIndex, uint32_t* pDisplayCount, VULKAN_HPP_NAMESPACE::DisplayKHR* pDisplays, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -81700,6 +82628,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result PhysicalDevice::getCalibrateableTimeDomainsEXT( uint32_t* pTimeDomainCount, VULKAN_HPP_NAMESPACE::TimeDomainEXT* pTimeDomains, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -81751,6 +82680,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, timeDomains, VULKAN_HPP_NAMESPACE_STRING"::PhysicalDevice::getCalibrateableTimeDomainsEXT" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result PhysicalDevice::getCooperativeMatrixPropertiesNV( uint32_t* pPropertyCount, VULKAN_HPP_NAMESPACE::CooperativeMatrixPropertiesNV* pProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -81804,6 +82734,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result PhysicalDevice::getDisplayPlaneProperties2KHR( uint32_t* pPropertyCount, VULKAN_HPP_NAMESPACE::DisplayPlaneProperties2KHR* pProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -81855,6 +82786,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, properties, VULKAN_HPP_NAMESPACE_STRING"::PhysicalDevice::getDisplayPlaneProperties2KHR" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result PhysicalDevice::getDisplayPlanePropertiesKHR( uint32_t* pPropertyCount, VULKAN_HPP_NAMESPACE::DisplayPlanePropertiesKHR* pProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -81908,6 +82840,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result PhysicalDevice::getDisplayProperties2KHR( uint32_t* pPropertyCount, VULKAN_HPP_NAMESPACE::DisplayProperties2KHR* pProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -81959,6 +82892,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, properties, VULKAN_HPP_NAMESPACE_STRING"::PhysicalDevice::getDisplayProperties2KHR" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result PhysicalDevice::getDisplayPropertiesKHR( uint32_t* pPropertyCount, VULKAN_HPP_NAMESPACE::DisplayPropertiesKHR* pProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -82012,6 +82946,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void PhysicalDevice::getExternalBufferProperties( const VULKAN_HPP_NAMESPACE::PhysicalDeviceExternalBufferInfo* pExternalBufferInfo, VULKAN_HPP_NAMESPACE::ExternalBufferProperties* pExternalBufferProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -82026,6 +82961,7 @@ namespace VULKAN_HPP_NAMESPACE
     return externalBufferProperties;
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE void PhysicalDevice::getExternalBufferPropertiesKHR( const VULKAN_HPP_NAMESPACE::PhysicalDeviceExternalBufferInfo* pExternalBufferInfo, VULKAN_HPP_NAMESPACE::ExternalBufferProperties* pExternalBufferProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -82042,6 +82978,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void PhysicalDevice::getExternalFenceProperties( const VULKAN_HPP_NAMESPACE::PhysicalDeviceExternalFenceInfo* pExternalFenceInfo, VULKAN_HPP_NAMESPACE::ExternalFenceProperties* pExternalFenceProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -82056,6 +82993,7 @@ namespace VULKAN_HPP_NAMESPACE
     return externalFenceProperties;
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE void PhysicalDevice::getExternalFencePropertiesKHR( const VULKAN_HPP_NAMESPACE::PhysicalDeviceExternalFenceInfo* pExternalFenceInfo, VULKAN_HPP_NAMESPACE::ExternalFenceProperties* pExternalFenceProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -82072,6 +83010,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result PhysicalDevice::getExternalImageFormatPropertiesNV( VULKAN_HPP_NAMESPACE::Format format, VULKAN_HPP_NAMESPACE::ImageType type, VULKAN_HPP_NAMESPACE::ImageTiling tiling, VULKAN_HPP_NAMESPACE::ImageUsageFlags usage, VULKAN_HPP_NAMESPACE::ImageCreateFlags flags, VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagsNV externalHandleType, VULKAN_HPP_NAMESPACE::ExternalImageFormatPropertiesNV* pExternalImageFormatProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -82086,6 +83025,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, externalImageFormatProperties, VULKAN_HPP_NAMESPACE_STRING"::PhysicalDevice::getExternalImageFormatPropertiesNV" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE void PhysicalDevice::getExternalSemaphoreProperties( const VULKAN_HPP_NAMESPACE::PhysicalDeviceExternalSemaphoreInfo* pExternalSemaphoreInfo, VULKAN_HPP_NAMESPACE::ExternalSemaphoreProperties* pExternalSemaphoreProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -82102,6 +83042,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void PhysicalDevice::getExternalSemaphorePropertiesKHR( const VULKAN_HPP_NAMESPACE::PhysicalDeviceExternalSemaphoreInfo* pExternalSemaphoreInfo, VULKAN_HPP_NAMESPACE::ExternalSemaphoreProperties* pExternalSemaphoreProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -82117,6 +83058,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void PhysicalDevice::getFeatures( VULKAN_HPP_NAMESPACE::PhysicalDeviceFeatures* pFeatures, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -82131,6 +83073,7 @@ namespace VULKAN_HPP_NAMESPACE
     return features;
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE void PhysicalDevice::getFeatures2( VULKAN_HPP_NAMESPACE::PhysicalDeviceFeatures2* pFeatures, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -82155,6 +83098,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void PhysicalDevice::getFeatures2KHR( VULKAN_HPP_NAMESPACE::PhysicalDeviceFeatures2* pFeatures, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -82178,6 +83122,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void PhysicalDevice::getFormatProperties( VULKAN_HPP_NAMESPACE::Format format, VULKAN_HPP_NAMESPACE::FormatProperties* pFormatProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -82192,6 +83137,7 @@ namespace VULKAN_HPP_NAMESPACE
     return formatProperties;
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE void PhysicalDevice::getFormatProperties2( VULKAN_HPP_NAMESPACE::Format format, VULKAN_HPP_NAMESPACE::FormatProperties2* pFormatProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -82216,6 +83162,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void PhysicalDevice::getFormatProperties2KHR( VULKAN_HPP_NAMESPACE::Format format, VULKAN_HPP_NAMESPACE::FormatProperties2* pFormatProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -82239,6 +83186,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result PhysicalDevice::getImageFormatProperties( VULKAN_HPP_NAMESPACE::Format format, VULKAN_HPP_NAMESPACE::ImageType type, VULKAN_HPP_NAMESPACE::ImageTiling tiling, VULKAN_HPP_NAMESPACE::ImageUsageFlags usage, VULKAN_HPP_NAMESPACE::ImageCreateFlags flags, VULKAN_HPP_NAMESPACE::ImageFormatProperties* pImageFormatProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -82253,6 +83201,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, imageFormatProperties, VULKAN_HPP_NAMESPACE_STRING"::PhysicalDevice::getImageFormatProperties" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result PhysicalDevice::getImageFormatProperties2( const VULKAN_HPP_NAMESPACE::PhysicalDeviceImageFormatInfo2* pImageFormatInfo, VULKAN_HPP_NAMESPACE::ImageFormatProperties2* pImageFormatProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -82277,6 +83226,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result PhysicalDevice::getImageFormatProperties2KHR( const VULKAN_HPP_NAMESPACE::PhysicalDeviceImageFormatInfo2* pImageFormatInfo, VULKAN_HPP_NAMESPACE::ImageFormatProperties2* pImageFormatProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -82300,6 +83250,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void PhysicalDevice::getMemoryProperties( VULKAN_HPP_NAMESPACE::PhysicalDeviceMemoryProperties* pMemoryProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -82314,6 +83265,7 @@ namespace VULKAN_HPP_NAMESPACE
     return memoryProperties;
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE void PhysicalDevice::getMemoryProperties2( VULKAN_HPP_NAMESPACE::PhysicalDeviceMemoryProperties2* pMemoryProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -82338,6 +83290,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void PhysicalDevice::getMemoryProperties2KHR( VULKAN_HPP_NAMESPACE::PhysicalDeviceMemoryProperties2* pMemoryProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -82361,6 +83314,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void PhysicalDevice::getMultisamplePropertiesEXT( VULKAN_HPP_NAMESPACE::SampleCountFlagBits samples, VULKAN_HPP_NAMESPACE::MultisamplePropertiesEXT* pMultisampleProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -82375,6 +83329,7 @@ namespace VULKAN_HPP_NAMESPACE
     return multisampleProperties;
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result PhysicalDevice::getPresentRectanglesKHR( VULKAN_HPP_NAMESPACE::SurfaceKHR surface, uint32_t* pRectCount, VULKAN_HPP_NAMESPACE::Rect2D* pRects, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -82428,6 +83383,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void PhysicalDevice::getProperties( VULKAN_HPP_NAMESPACE::PhysicalDeviceProperties* pProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -82442,6 +83398,7 @@ namespace VULKAN_HPP_NAMESPACE
     return properties;
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE void PhysicalDevice::getProperties2( VULKAN_HPP_NAMESPACE::PhysicalDeviceProperties2* pProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -82466,6 +83423,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void PhysicalDevice::getProperties2KHR( VULKAN_HPP_NAMESPACE::PhysicalDeviceProperties2* pProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -82489,6 +83447,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void PhysicalDevice::getQueueFamilyPerformanceQueryPassesKHR( const VULKAN_HPP_NAMESPACE::QueryPoolPerformanceCreateInfoKHR* pPerformanceQueryCreateInfo, uint32_t* pNumPasses, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -82503,6 +83462,7 @@ namespace VULKAN_HPP_NAMESPACE
     return numPasses;
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE void PhysicalDevice::getQueueFamilyProperties( uint32_t* pQueueFamilyPropertyCount, VULKAN_HPP_NAMESPACE::QueueFamilyProperties* pQueueFamilyProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -82531,6 +83491,7 @@ namespace VULKAN_HPP_NAMESPACE
     return queueFamilyProperties;
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE void PhysicalDevice::getQueueFamilyProperties2( uint32_t* pQueueFamilyPropertyCount, VULKAN_HPP_NAMESPACE::QueueFamilyProperties2* pQueueFamilyProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -82598,6 +83559,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void PhysicalDevice::getQueueFamilyProperties2KHR( uint32_t* pQueueFamilyPropertyCount, VULKAN_HPP_NAMESPACE::QueueFamilyProperties2* pQueueFamilyProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -82664,6 +83626,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void PhysicalDevice::getSparseImageFormatProperties( VULKAN_HPP_NAMESPACE::Format format, VULKAN_HPP_NAMESPACE::ImageType type, VULKAN_HPP_NAMESPACE::SampleCountFlagBits samples, VULKAN_HPP_NAMESPACE::ImageUsageFlags usage, VULKAN_HPP_NAMESPACE::ImageTiling tiling, uint32_t* pPropertyCount, VULKAN_HPP_NAMESPACE::SparseImageFormatProperties* pProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -82691,6 +83654,7 @@ namespace VULKAN_HPP_NAMESPACE
     return properties;
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE void PhysicalDevice::getSparseImageFormatProperties2( const VULKAN_HPP_NAMESPACE::PhysicalDeviceSparseImageFormatInfo2* pFormatInfo, uint32_t* pPropertyCount, VULKAN_HPP_NAMESPACE::SparseImageFormatProperties2* pProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -82720,6 +83684,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void PhysicalDevice::getSparseImageFormatProperties2KHR( const VULKAN_HPP_NAMESPACE::PhysicalDeviceSparseImageFormatInfo2* pFormatInfo, uint32_t* pPropertyCount, VULKAN_HPP_NAMESPACE::SparseImageFormatProperties2* pProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -82747,6 +83712,7 @@ namespace VULKAN_HPP_NAMESPACE
     return properties;
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result PhysicalDevice::getSupportedFramebufferMixedSamplesCombinationsNV( uint32_t* pCombinationCount, VULKAN_HPP_NAMESPACE::FramebufferMixedSamplesCombinationNV* pCombinations, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -82800,6 +83766,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result PhysicalDevice::getSurfaceCapabilities2EXT( VULKAN_HPP_NAMESPACE::SurfaceKHR surface, VULKAN_HPP_NAMESPACE::SurfaceCapabilities2EXT* pSurfaceCapabilities, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -82814,6 +83781,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, surfaceCapabilities, VULKAN_HPP_NAMESPACE_STRING"::PhysicalDevice::getSurfaceCapabilities2EXT" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result PhysicalDevice::getSurfaceCapabilities2KHR( const VULKAN_HPP_NAMESPACE::PhysicalDeviceSurfaceInfo2KHR* pSurfaceInfo, VULKAN_HPP_NAMESPACE::SurfaceCapabilities2KHR* pSurfaceCapabilities, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -82838,6 +83806,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result PhysicalDevice::getSurfaceCapabilitiesKHR( VULKAN_HPP_NAMESPACE::SurfaceKHR surface, VULKAN_HPP_NAMESPACE::SurfaceCapabilitiesKHR* pSurfaceCapabilities, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -82852,6 +83821,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, surfaceCapabilities, VULKAN_HPP_NAMESPACE_STRING"::PhysicalDevice::getSurfaceCapabilitiesKHR" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result PhysicalDevice::getSurfaceFormats2KHR( const VULKAN_HPP_NAMESPACE::PhysicalDeviceSurfaceInfo2KHR* pSurfaceInfo, uint32_t* pSurfaceFormatCount, VULKAN_HPP_NAMESPACE::SurfaceFormat2KHR* pSurfaceFormats, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -82905,6 +83875,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result PhysicalDevice::getSurfaceFormatsKHR( VULKAN_HPP_NAMESPACE::SurfaceKHR surface, uint32_t* pSurfaceFormatCount, VULKAN_HPP_NAMESPACE::SurfaceFormatKHR* pSurfaceFormats, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -82956,6 +83927,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, surfaceFormats, VULKAN_HPP_NAMESPACE_STRING"::PhysicalDevice::getSurfaceFormatsKHR" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VK_USE_PLATFORM_WIN32_KHR
   template<typename Dispatch>
@@ -83011,6 +83983,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result PhysicalDevice::getSurfacePresentModesKHR( VULKAN_HPP_NAMESPACE::SurfaceKHR surface, uint32_t* pPresentModeCount, VULKAN_HPP_NAMESPACE::PresentModeKHR* pPresentModes, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -83063,6 +84036,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result PhysicalDevice::getSurfaceSupportKHR( uint32_t queueFamilyIndex, VULKAN_HPP_NAMESPACE::SurfaceKHR surface, VULKAN_HPP_NAMESPACE::Bool32* pSupported, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -83077,6 +84051,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, supported, VULKAN_HPP_NAMESPACE_STRING"::PhysicalDevice::getSurfaceSupportKHR" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result PhysicalDevice::getToolPropertiesEXT( uint32_t* pToolCount, VULKAN_HPP_NAMESPACE::PhysicalDeviceToolPropertiesEXT* pToolProperties, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -83130,6 +84105,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
 #ifdef VK_USE_PLATFORM_WAYLAND_KHR
   template<typename Dispatch>
   VULKAN_HPP_INLINE Bool32 PhysicalDevice::getWaylandPresentationSupportKHR( uint32_t queueFamilyIndex, struct wl_display* display, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -83144,6 +84120,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_WAYLAND_KHR*/
+
 
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
@@ -83161,6 +84138,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
+
 #ifdef VK_USE_PLATFORM_XCB_KHR
   template<typename Dispatch>
   VULKAN_HPP_INLINE Bool32 PhysicalDevice::getXcbPresentationSupportKHR( uint32_t queueFamilyIndex, xcb_connection_t* connection, xcb_visualid_t visual_id, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -83176,6 +84154,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_XCB_KHR*/
 
+
 #ifdef VK_USE_PLATFORM_XLIB_KHR
   template<typename Dispatch>
   VULKAN_HPP_INLINE Bool32 PhysicalDevice::getXlibPresentationSupportKHR( uint32_t queueFamilyIndex, Display* dpy, VisualID visualID, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -83190,6 +84169,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_XLIB_KHR*/
+
 
 #ifdef VK_USE_PLATFORM_XLIB_XRANDR_EXT
   template<typename Dispatch>
@@ -83208,6 +84188,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 #endif /*VK_USE_PLATFORM_XLIB_XRANDR_EXT*/
 
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result PhysicalDevice::releaseDisplayEXT( VULKAN_HPP_NAMESPACE::DisplayKHR display, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -83222,6 +84203,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::PhysicalDevice::releaseDisplayEXT" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Queue::getCheckpointDataNV( uint32_t* pCheckpointDataCount, VULKAN_HPP_NAMESPACE::CheckpointDataNV* pCheckpointData, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -83251,6 +84233,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Queue::beginDebugUtilsLabelEXT( const VULKAN_HPP_NAMESPACE::DebugUtilsLabelEXT* pLabelInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -83263,6 +84246,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkQueueBeginDebugUtilsLabelEXT( m_queue, reinterpret_cast<const VkDebugUtilsLabelEXT*>( &labelInfo ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Queue::bindSparse( uint32_t bindInfoCount, const VULKAN_HPP_NAMESPACE::BindSparseInfo* pBindInfo, VULKAN_HPP_NAMESPACE::Fence fence, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -83278,6 +84262,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Queue::endDebugUtilsLabelEXT(Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -83292,6 +84277,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void Queue::insertDebugUtilsLabelEXT( const VULKAN_HPP_NAMESPACE::DebugUtilsLabelEXT* pLabelInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -83304,6 +84290,7 @@ namespace VULKAN_HPP_NAMESPACE
     d.vkQueueInsertDebugUtilsLabelEXT( m_queue, reinterpret_cast<const VkDebugUtilsLabelEXT*>( &labelInfo ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Queue::presentKHR( const VULKAN_HPP_NAMESPACE::PresentInfoKHR* pPresentInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -83318,6 +84305,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Queue::presentKHR", { Result::eSuccess, Result::eSuboptimalKHR } );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -83334,6 +84322,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE Result Queue::submit( uint32_t submitCount, const VULKAN_HPP_NAMESPACE::SubmitInfo* pSubmits, VULKAN_HPP_NAMESPACE::Fence fence, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -83347,6 +84336,7 @@ namespace VULKAN_HPP_NAMESPACE
     return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING"::Queue::submit" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
@@ -83364,364 +84354,365 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
-  template <> struct isStructureChainValid<AndroidHardwareBufferPropertiesANDROID, AndroidHardwareBufferFormatPropertiesANDROID>{ enum { value = true }; };
+  template <> struct StructExtends<AndroidHardwareBufferFormatPropertiesANDROID, AndroidHardwareBufferPropertiesANDROID>{ enum { value = true }; };
 #endif /*VK_USE_PLATFORM_ANDROID_KHR*/
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
-  template <> struct isStructureChainValid<ImageFormatProperties2, AndroidHardwareBufferUsageANDROID>{ enum { value = true }; };
+  template <> struct StructExtends<AndroidHardwareBufferUsageANDROID, ImageFormatProperties2>{ enum { value = true }; };
 #endif /*VK_USE_PLATFORM_ANDROID_KHR*/
-  template <> struct isStructureChainValid<AttachmentDescription2, AttachmentDescriptionStencilLayout>{ enum { value = true }; };
-  template <> struct isStructureChainValid<AttachmentReference2, AttachmentReferenceStencilLayout>{ enum { value = true }; };
-  template <> struct isStructureChainValid<BindBufferMemoryInfo, BindBufferMemoryDeviceGroupInfo>{ enum { value = true }; };
-  template <> struct isStructureChainValid<BindImageMemoryInfo, BindImageMemoryDeviceGroupInfo>{ enum { value = true }; };
-  template <> struct isStructureChainValid<BindImageMemoryInfo, BindImageMemorySwapchainInfoKHR>{ enum { value = true }; };
-  template <> struct isStructureChainValid<BindImageMemoryInfo, BindImagePlaneMemoryInfo>{ enum { value = true }; };
-  template <> struct isStructureChainValid<BufferCreateInfo, BufferDeviceAddressCreateInfoEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<BufferCreateInfo, BufferOpaqueCaptureAddressCreateInfo>{ enum { value = true }; };
-  template <> struct isStructureChainValid<CommandBufferInheritanceInfo, CommandBufferInheritanceConditionalRenderingInfoEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<CommandBufferInheritanceInfo, CommandBufferInheritanceRenderPassTransformInfoQCOM>{ enum { value = true }; };
+  template <> struct StructExtends<AttachmentDescriptionStencilLayout, AttachmentDescription2>{ enum { value = true }; };
+  template <> struct StructExtends<AttachmentReferenceStencilLayout, AttachmentReference2>{ enum { value = true }; };
+  template <> struct StructExtends<BindBufferMemoryDeviceGroupInfo, BindBufferMemoryInfo>{ enum { value = true }; };
+  template <> struct StructExtends<BindImageMemoryDeviceGroupInfo, BindImageMemoryInfo>{ enum { value = true }; };
+  template <> struct StructExtends<BindImageMemorySwapchainInfoKHR, BindImageMemoryInfo>{ enum { value = true }; };
+  template <> struct StructExtends<BindImagePlaneMemoryInfo, BindImageMemoryInfo>{ enum { value = true }; };
+  template <> struct StructExtends<BufferDeviceAddressCreateInfoEXT, BufferCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<BufferOpaqueCaptureAddressCreateInfo, BufferCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<CommandBufferInheritanceConditionalRenderingInfoEXT, CommandBufferInheritanceInfo>{ enum { value = true }; };
+  template <> struct StructExtends<CommandBufferInheritanceRenderPassTransformInfoQCOM, CommandBufferInheritanceInfo>{ enum { value = true }; };
 #ifdef VK_USE_PLATFORM_WIN32_KHR
-  template <> struct isStructureChainValid<SubmitInfo, D3D12FenceSubmitInfoKHR>{ enum { value = true }; };
+  template <> struct StructExtends<D3D12FenceSubmitInfoKHR, SubmitInfo>{ enum { value = true }; };
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
-  template <> struct isStructureChainValid<InstanceCreateInfo, DebugReportCallbackCreateInfoEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<InstanceCreateInfo, DebugUtilsMessengerCreateInfoEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<BufferCreateInfo, DedicatedAllocationBufferCreateInfoNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<ImageCreateInfo, DedicatedAllocationImageCreateInfoNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<MemoryAllocateInfo, DedicatedAllocationMemoryAllocateInfoNV>{ enum { value = true }; };
+  template <> struct StructExtends<DebugReportCallbackCreateInfoEXT, InstanceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<DebugUtilsMessengerCreateInfoEXT, InstanceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<DedicatedAllocationBufferCreateInfoNV, BufferCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<DedicatedAllocationImageCreateInfoNV, ImageCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<DedicatedAllocationMemoryAllocateInfoNV, MemoryAllocateInfo>{ enum { value = true }; };
 #ifdef VK_ENABLE_BETA_EXTENSIONS
-  template <> struct isStructureChainValid<RayTracingPipelineCreateInfoKHR, DeferredOperationInfoKHR>{ enum { value = true }; };
-  template <> struct isStructureChainValid<AccelerationStructureBuildGeometryInfoKHR, DeferredOperationInfoKHR>{ enum { value = true }; };
-  template <> struct isStructureChainValid<CopyAccelerationStructureInfoKHR, DeferredOperationInfoKHR>{ enum { value = true }; };
-  template <> struct isStructureChainValid<CopyMemoryToAccelerationStructureInfoKHR, DeferredOperationInfoKHR>{ enum { value = true }; };
-  template <> struct isStructureChainValid<CopyAccelerationStructureToMemoryInfoKHR, DeferredOperationInfoKHR>{ enum { value = true }; };
+  template <> struct StructExtends<DeferredOperationInfoKHR, RayTracingPipelineCreateInfoKHR>{ enum { value = true }; };
+  template <> struct StructExtends<DeferredOperationInfoKHR, AccelerationStructureBuildGeometryInfoKHR>{ enum { value = true }; };
+  template <> struct StructExtends<DeferredOperationInfoKHR, CopyAccelerationStructureInfoKHR>{ enum { value = true }; };
+  template <> struct StructExtends<DeferredOperationInfoKHR, CopyMemoryToAccelerationStructureInfoKHR>{ enum { value = true }; };
+  template <> struct StructExtends<DeferredOperationInfoKHR, CopyAccelerationStructureToMemoryInfoKHR>{ enum { value = true }; };
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
-  template <> struct isStructureChainValid<DescriptorPoolCreateInfo, DescriptorPoolInlineUniformBlockCreateInfoEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DescriptorSetLayoutCreateInfo, DescriptorSetLayoutBindingFlagsCreateInfo>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DescriptorSetAllocateInfo, DescriptorSetVariableDescriptorCountAllocateInfo>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DescriptorSetLayoutSupport, DescriptorSetVariableDescriptorCountLayoutSupport>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, DeviceDiagnosticsConfigCreateInfoNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<BindSparseInfo, DeviceGroupBindSparseInfo>{ enum { value = true }; };
-  template <> struct isStructureChainValid<CommandBufferBeginInfo, DeviceGroupCommandBufferBeginInfo>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, DeviceGroupDeviceCreateInfo>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PresentInfoKHR, DeviceGroupPresentInfoKHR>{ enum { value = true }; };
-  template <> struct isStructureChainValid<RenderPassBeginInfo, DeviceGroupRenderPassBeginInfo>{ enum { value = true }; };
-  template <> struct isStructureChainValid<SubmitInfo, DeviceGroupSubmitInfo>{ enum { value = true }; };
-  template <> struct isStructureChainValid<SwapchainCreateInfoKHR, DeviceGroupSwapchainCreateInfoKHR>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, DeviceMemoryOverallocationCreateInfoAMD>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceQueueCreateInfo, DeviceQueueGlobalPriorityCreateInfoEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<SurfaceCapabilities2KHR, DisplayNativeHdrSurfaceCapabilitiesAMD>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PresentInfoKHR, DisplayPresentInfoKHR>{ enum { value = true }; };
-  template <> struct isStructureChainValid<FormatProperties2, DrmFormatModifierPropertiesListEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<FenceCreateInfo, ExportFenceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<DescriptorPoolInlineUniformBlockCreateInfoEXT, DescriptorPoolCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<DescriptorSetLayoutBindingFlagsCreateInfo, DescriptorSetLayoutCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<DescriptorSetVariableDescriptorCountAllocateInfo, DescriptorSetAllocateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<DescriptorSetVariableDescriptorCountLayoutSupport, DescriptorSetLayoutSupport>{ enum { value = true }; };
+  template <> struct StructExtends<DeviceDiagnosticsConfigCreateInfoNV, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<DeviceGroupBindSparseInfo, BindSparseInfo>{ enum { value = true }; };
+  template <> struct StructExtends<DeviceGroupCommandBufferBeginInfo, CommandBufferBeginInfo>{ enum { value = true }; };
+  template <> struct StructExtends<DeviceGroupDeviceCreateInfo, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<DeviceGroupPresentInfoKHR, PresentInfoKHR>{ enum { value = true }; };
+  template <> struct StructExtends<DeviceGroupRenderPassBeginInfo, RenderPassBeginInfo>{ enum { value = true }; };
+  template <> struct StructExtends<DeviceGroupSubmitInfo, SubmitInfo>{ enum { value = true }; };
+  template <> struct StructExtends<DeviceGroupSwapchainCreateInfoKHR, SwapchainCreateInfoKHR>{ enum { value = true }; };
+  template <> struct StructExtends<DeviceMemoryOverallocationCreateInfoAMD, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<DevicePrivateDataCreateInfoEXT, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<DeviceQueueGlobalPriorityCreateInfoEXT, DeviceQueueCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<DisplayNativeHdrSurfaceCapabilitiesAMD, SurfaceCapabilities2KHR>{ enum { value = true }; };
+  template <> struct StructExtends<DisplayPresentInfoKHR, PresentInfoKHR>{ enum { value = true }; };
+  template <> struct StructExtends<DrmFormatModifierPropertiesListEXT, FormatProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<ExportFenceCreateInfo, FenceCreateInfo>{ enum { value = true }; };
 #ifdef VK_USE_PLATFORM_WIN32_KHR
-  template <> struct isStructureChainValid<FenceCreateInfo, ExportFenceWin32HandleInfoKHR>{ enum { value = true }; };
+  template <> struct StructExtends<ExportFenceWin32HandleInfoKHR, FenceCreateInfo>{ enum { value = true }; };
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
-  template <> struct isStructureChainValid<MemoryAllocateInfo, ExportMemoryAllocateInfo>{ enum { value = true }; };
-  template <> struct isStructureChainValid<MemoryAllocateInfo, ExportMemoryAllocateInfoNV>{ enum { value = true }; };
+  template <> struct StructExtends<ExportMemoryAllocateInfo, MemoryAllocateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<ExportMemoryAllocateInfoNV, MemoryAllocateInfo>{ enum { value = true }; };
 #ifdef VK_USE_PLATFORM_WIN32_KHR
-  template <> struct isStructureChainValid<MemoryAllocateInfo, ExportMemoryWin32HandleInfoKHR>{ enum { value = true }; };
+  template <> struct StructExtends<ExportMemoryWin32HandleInfoKHR, MemoryAllocateInfo>{ enum { value = true }; };
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 #ifdef VK_USE_PLATFORM_WIN32_KHR
-  template <> struct isStructureChainValid<MemoryAllocateInfo, ExportMemoryWin32HandleInfoNV>{ enum { value = true }; };
+  template <> struct StructExtends<ExportMemoryWin32HandleInfoNV, MemoryAllocateInfo>{ enum { value = true }; };
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
-  template <> struct isStructureChainValid<SemaphoreCreateInfo, ExportSemaphoreCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<ExportSemaphoreCreateInfo, SemaphoreCreateInfo>{ enum { value = true }; };
 #ifdef VK_USE_PLATFORM_WIN32_KHR
-  template <> struct isStructureChainValid<SemaphoreCreateInfo, ExportSemaphoreWin32HandleInfoKHR>{ enum { value = true }; };
+  template <> struct StructExtends<ExportSemaphoreWin32HandleInfoKHR, SemaphoreCreateInfo>{ enum { value = true }; };
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
-  template <> struct isStructureChainValid<ImageCreateInfo, ExternalFormatANDROID>{ enum { value = true }; };
-  template <> struct isStructureChainValid<SamplerYcbcrConversionCreateInfo, ExternalFormatANDROID>{ enum { value = true }; };
+  template <> struct StructExtends<ExternalFormatANDROID, ImageCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<ExternalFormatANDROID, SamplerYcbcrConversionCreateInfo>{ enum { value = true }; };
 #endif /*VK_USE_PLATFORM_ANDROID_KHR*/
-  template <> struct isStructureChainValid<ImageFormatProperties2, ExternalImageFormatProperties>{ enum { value = true }; };
-  template <> struct isStructureChainValid<BufferCreateInfo, ExternalMemoryBufferCreateInfo>{ enum { value = true }; };
-  template <> struct isStructureChainValid<ImageCreateInfo, ExternalMemoryImageCreateInfo>{ enum { value = true }; };
-  template <> struct isStructureChainValid<ImageCreateInfo, ExternalMemoryImageCreateInfoNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<ImageFormatProperties2, FilterCubicImageViewImageFormatPropertiesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<FramebufferCreateInfo, FramebufferAttachmentsCreateInfo>{ enum { value = true }; };
-  template <> struct isStructureChainValid<GraphicsPipelineCreateInfo, GraphicsPipelineShaderGroupsCreateInfoNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<ImageCreateInfo, ImageDrmFormatModifierExplicitCreateInfoEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<ImageCreateInfo, ImageDrmFormatModifierListCreateInfoEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<ImageCreateInfo, ImageFormatListCreateInfo>{ enum { value = true }; };
-  template <> struct isStructureChainValid<SwapchainCreateInfoKHR, ImageFormatListCreateInfo>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceImageFormatInfo2, ImageFormatListCreateInfo>{ enum { value = true }; };
-  template <> struct isStructureChainValid<ImageMemoryRequirementsInfo2, ImagePlaneMemoryRequirementsInfo>{ enum { value = true }; };
-  template <> struct isStructureChainValid<ImageCreateInfo, ImageStencilUsageCreateInfo>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceImageFormatInfo2, ImageStencilUsageCreateInfo>{ enum { value = true }; };
-  template <> struct isStructureChainValid<ImageCreateInfo, ImageSwapchainCreateInfoKHR>{ enum { value = true }; };
-  template <> struct isStructureChainValid<ImageViewCreateInfo, ImageViewASTCDecodeModeEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<ImageViewCreateInfo, ImageViewUsageCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<ExternalImageFormatProperties, ImageFormatProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<ExternalMemoryBufferCreateInfo, BufferCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<ExternalMemoryImageCreateInfo, ImageCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<ExternalMemoryImageCreateInfoNV, ImageCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<FilterCubicImageViewImageFormatPropertiesEXT, ImageFormatProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<FramebufferAttachmentsCreateInfo, FramebufferCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<GraphicsPipelineShaderGroupsCreateInfoNV, GraphicsPipelineCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<ImageDrmFormatModifierExplicitCreateInfoEXT, ImageCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<ImageDrmFormatModifierListCreateInfoEXT, ImageCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<ImageFormatListCreateInfo, ImageCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<ImageFormatListCreateInfo, SwapchainCreateInfoKHR>{ enum { value = true }; };
+  template <> struct StructExtends<ImageFormatListCreateInfo, PhysicalDeviceImageFormatInfo2>{ enum { value = true }; };
+  template <> struct StructExtends<ImagePlaneMemoryRequirementsInfo, ImageMemoryRequirementsInfo2>{ enum { value = true }; };
+  template <> struct StructExtends<ImageStencilUsageCreateInfo, ImageCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<ImageStencilUsageCreateInfo, PhysicalDeviceImageFormatInfo2>{ enum { value = true }; };
+  template <> struct StructExtends<ImageSwapchainCreateInfoKHR, ImageCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<ImageViewASTCDecodeModeEXT, ImageViewCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<ImageViewUsageCreateInfo, ImageViewCreateInfo>{ enum { value = true }; };
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
-  template <> struct isStructureChainValid<MemoryAllocateInfo, ImportAndroidHardwareBufferInfoANDROID>{ enum { value = true }; };
+  template <> struct StructExtends<ImportAndroidHardwareBufferInfoANDROID, MemoryAllocateInfo>{ enum { value = true }; };
 #endif /*VK_USE_PLATFORM_ANDROID_KHR*/
-  template <> struct isStructureChainValid<MemoryAllocateInfo, ImportMemoryFdInfoKHR>{ enum { value = true }; };
-  template <> struct isStructureChainValid<MemoryAllocateInfo, ImportMemoryHostPointerInfoEXT>{ enum { value = true }; };
+  template <> struct StructExtends<ImportMemoryFdInfoKHR, MemoryAllocateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<ImportMemoryHostPointerInfoEXT, MemoryAllocateInfo>{ enum { value = true }; };
 #ifdef VK_USE_PLATFORM_WIN32_KHR
-  template <> struct isStructureChainValid<MemoryAllocateInfo, ImportMemoryWin32HandleInfoKHR>{ enum { value = true }; };
+  template <> struct StructExtends<ImportMemoryWin32HandleInfoKHR, MemoryAllocateInfo>{ enum { value = true }; };
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 #ifdef VK_USE_PLATFORM_WIN32_KHR
-  template <> struct isStructureChainValid<MemoryAllocateInfo, ImportMemoryWin32HandleInfoNV>{ enum { value = true }; };
+  template <> struct StructExtends<ImportMemoryWin32HandleInfoNV, MemoryAllocateInfo>{ enum { value = true }; };
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
-  template <> struct isStructureChainValid<MemoryAllocateInfo, MemoryAllocateFlagsInfo>{ enum { value = true }; };
-  template <> struct isStructureChainValid<MemoryAllocateInfo, MemoryDedicatedAllocateInfo>{ enum { value = true }; };
-  template <> struct isStructureChainValid<MemoryRequirements2, MemoryDedicatedRequirements>{ enum { value = true }; };
-  template <> struct isStructureChainValid<MemoryAllocateInfo, MemoryOpaqueCaptureAddressAllocateInfo>{ enum { value = true }; };
-  template <> struct isStructureChainValid<MemoryAllocateInfo, MemoryPriorityAllocateInfoEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<SubmitInfo, PerformanceQuerySubmitInfoKHR>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDevice16BitStorageFeatures>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDevice16BitStorageFeatures>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDevice8BitStorageFeatures>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDevice8BitStorageFeatures>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceASTCDecodeFeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceASTCDecodeFeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceBlendOperationAdvancedFeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceBlendOperationAdvancedFeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceBlendOperationAdvancedPropertiesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceBufferDeviceAddressFeatures>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceBufferDeviceAddressFeatures>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceBufferDeviceAddressFeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceBufferDeviceAddressFeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceCoherentMemoryFeaturesAMD>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceCoherentMemoryFeaturesAMD>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceComputeShaderDerivativesFeaturesNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceComputeShaderDerivativesFeaturesNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceConditionalRenderingFeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceConditionalRenderingFeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceConservativeRasterizationPropertiesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceCooperativeMatrixFeaturesNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceCooperativeMatrixFeaturesNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceCooperativeMatrixPropertiesNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceCornerSampledImageFeaturesNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceCornerSampledImageFeaturesNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceCoverageReductionModeFeaturesNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceCoverageReductionModeFeaturesNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceCustomBorderColorFeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceCustomBorderColorFeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceCustomBorderColorPropertiesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceDepthClipEnableFeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceDepthClipEnableFeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceDepthStencilResolveProperties>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceDescriptorIndexingFeatures>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceDescriptorIndexingFeatures>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceDescriptorIndexingProperties>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceDeviceGeneratedCommandsFeaturesNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceDeviceGeneratedCommandsFeaturesNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceDeviceGeneratedCommandsPropertiesNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceDiagnosticsConfigFeaturesNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceDiagnosticsConfigFeaturesNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceDiscardRectanglePropertiesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceDriverProperties>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceExclusiveScissorFeaturesNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceExclusiveScissorFeaturesNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceImageFormatInfo2, PhysicalDeviceExternalImageFormatInfo>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceExternalMemoryHostPropertiesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceFeatures2>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceFloatControlsProperties>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceFragmentDensityMapFeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceFragmentDensityMapFeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceFragmentDensityMapPropertiesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceFragmentShaderBarycentricFeaturesNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceFragmentShaderBarycentricFeaturesNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceFragmentShaderInterlockFeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceFragmentShaderInterlockFeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceHostQueryResetFeatures>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceHostQueryResetFeatures>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceIDProperties>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceImageFormatInfo2, PhysicalDeviceImageDrmFormatModifierInfoEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceImageFormatInfo2, PhysicalDeviceImageViewImageFormatInfoEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceImagelessFramebufferFeatures>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceImagelessFramebufferFeatures>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceIndexTypeUint8FeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceIndexTypeUint8FeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceInlineUniformBlockFeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceInlineUniformBlockFeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceInlineUniformBlockPropertiesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceLineRasterizationFeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceLineRasterizationFeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceLineRasterizationPropertiesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceMaintenance3Properties>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceMemoryProperties2, PhysicalDeviceMemoryBudgetPropertiesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceMemoryPriorityFeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceMemoryPriorityFeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceMeshShaderFeaturesNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceMeshShaderFeaturesNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceMeshShaderPropertiesNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceMultiviewFeatures>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceMultiviewFeatures>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceMultiviewPerViewAttributesPropertiesNVX>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceMultiviewProperties>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDevicePCIBusInfoPropertiesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDevicePerformanceQueryFeaturesKHR>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDevicePerformanceQueryFeaturesKHR>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDevicePerformanceQueryPropertiesKHR>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDevicePipelineCreationCacheControlFeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDevicePipelineCreationCacheControlFeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDevicePipelineExecutablePropertiesFeaturesKHR>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDevicePipelineExecutablePropertiesFeaturesKHR>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDevicePointClippingProperties>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceProtectedMemoryFeatures>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceProtectedMemoryFeatures>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceProtectedMemoryProperties>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDevicePushDescriptorPropertiesKHR>{ enum { value = true }; };
+  template <> struct StructExtends<MemoryAllocateFlagsInfo, MemoryAllocateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<MemoryDedicatedAllocateInfo, MemoryAllocateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<MemoryDedicatedRequirements, MemoryRequirements2>{ enum { value = true }; };
+  template <> struct StructExtends<MemoryOpaqueCaptureAddressAllocateInfo, MemoryAllocateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<MemoryPriorityAllocateInfoEXT, MemoryAllocateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PerformanceQuerySubmitInfoKHR, SubmitInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDevice16BitStorageFeatures, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDevice16BitStorageFeatures, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDevice8BitStorageFeatures, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDevice8BitStorageFeatures, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceASTCDecodeFeaturesEXT, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceASTCDecodeFeaturesEXT, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceBlendOperationAdvancedFeaturesEXT, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceBlendOperationAdvancedFeaturesEXT, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceBlendOperationAdvancedPropertiesEXT, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceBufferDeviceAddressFeatures, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceBufferDeviceAddressFeatures, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceBufferDeviceAddressFeaturesEXT, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceBufferDeviceAddressFeaturesEXT, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceCoherentMemoryFeaturesAMD, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceCoherentMemoryFeaturesAMD, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceComputeShaderDerivativesFeaturesNV, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceComputeShaderDerivativesFeaturesNV, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceConditionalRenderingFeaturesEXT, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceConditionalRenderingFeaturesEXT, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceConservativeRasterizationPropertiesEXT, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceCooperativeMatrixFeaturesNV, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceCooperativeMatrixFeaturesNV, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceCooperativeMatrixPropertiesNV, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceCornerSampledImageFeaturesNV, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceCornerSampledImageFeaturesNV, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceCoverageReductionModeFeaturesNV, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceCoverageReductionModeFeaturesNV, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceCustomBorderColorFeaturesEXT, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceCustomBorderColorFeaturesEXT, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceCustomBorderColorPropertiesEXT, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceDepthClipEnableFeaturesEXT, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceDepthClipEnableFeaturesEXT, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceDepthStencilResolveProperties, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceDescriptorIndexingFeatures, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceDescriptorIndexingFeatures, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceDescriptorIndexingProperties, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceDeviceGeneratedCommandsFeaturesNV, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceDeviceGeneratedCommandsFeaturesNV, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceDeviceGeneratedCommandsPropertiesNV, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceDiagnosticsConfigFeaturesNV, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceDiagnosticsConfigFeaturesNV, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceDiscardRectanglePropertiesEXT, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceDriverProperties, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceExclusiveScissorFeaturesNV, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceExclusiveScissorFeaturesNV, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceExternalImageFormatInfo, PhysicalDeviceImageFormatInfo2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceExternalMemoryHostPropertiesEXT, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceFeatures2, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceFloatControlsProperties, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceFragmentDensityMapFeaturesEXT, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceFragmentDensityMapFeaturesEXT, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceFragmentDensityMapPropertiesEXT, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceFragmentShaderBarycentricFeaturesNV, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceFragmentShaderBarycentricFeaturesNV, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceFragmentShaderInterlockFeaturesEXT, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceFragmentShaderInterlockFeaturesEXT, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceHostQueryResetFeatures, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceHostQueryResetFeatures, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceIDProperties, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceImageDrmFormatModifierInfoEXT, PhysicalDeviceImageFormatInfo2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceImageViewImageFormatInfoEXT, PhysicalDeviceImageFormatInfo2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceImagelessFramebufferFeatures, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceImagelessFramebufferFeatures, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceIndexTypeUint8FeaturesEXT, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceIndexTypeUint8FeaturesEXT, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceInlineUniformBlockFeaturesEXT, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceInlineUniformBlockFeaturesEXT, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceInlineUniformBlockPropertiesEXT, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceLineRasterizationFeaturesEXT, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceLineRasterizationFeaturesEXT, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceLineRasterizationPropertiesEXT, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceMaintenance3Properties, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceMemoryBudgetPropertiesEXT, PhysicalDeviceMemoryProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceMemoryPriorityFeaturesEXT, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceMemoryPriorityFeaturesEXT, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceMeshShaderFeaturesNV, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceMeshShaderFeaturesNV, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceMeshShaderPropertiesNV, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceMultiviewFeatures, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceMultiviewFeatures, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceMultiviewPerViewAttributesPropertiesNVX, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceMultiviewProperties, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDevicePCIBusInfoPropertiesEXT, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDevicePerformanceQueryFeaturesKHR, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDevicePerformanceQueryFeaturesKHR, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDevicePerformanceQueryPropertiesKHR, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDevicePipelineCreationCacheControlFeaturesEXT, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDevicePipelineCreationCacheControlFeaturesEXT, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDevicePipelineExecutablePropertiesFeaturesKHR, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDevicePipelineExecutablePropertiesFeaturesKHR, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDevicePointClippingProperties, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceProtectedMemoryFeatures, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceProtectedMemoryFeatures, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceProtectedMemoryProperties, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDevicePushDescriptorPropertiesKHR, PhysicalDeviceProperties2>{ enum { value = true }; };
 #ifdef VK_ENABLE_BETA_EXTENSIONS
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceRayTracingFeaturesKHR>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceRayTracingFeaturesKHR>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceRayTracingFeaturesKHR, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceRayTracingFeaturesKHR, DeviceCreateInfo>{ enum { value = true }; };
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 #ifdef VK_ENABLE_BETA_EXTENSIONS
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceRayTracingPropertiesKHR>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceRayTracingPropertiesKHR, PhysicalDeviceProperties2>{ enum { value = true }; };
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceRayTracingPropertiesNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceRepresentativeFragmentTestFeaturesNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceRepresentativeFragmentTestFeaturesNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceRobustness2FeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceRobustness2FeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceRobustness2PropertiesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceSampleLocationsPropertiesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceSamplerFilterMinmaxProperties>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceSamplerYcbcrConversionFeatures>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceSamplerYcbcrConversionFeatures>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceScalarBlockLayoutFeatures>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceScalarBlockLayoutFeatures>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceSeparateDepthStencilLayoutsFeatures>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceSeparateDepthStencilLayoutsFeatures>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceShaderAtomicInt64Features>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceShaderAtomicInt64Features>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceShaderClockFeaturesKHR>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceShaderClockFeaturesKHR>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceShaderCoreProperties2AMD>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceShaderCorePropertiesAMD>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceShaderDrawParametersFeatures>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceShaderDrawParametersFeatures>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceShaderFloat16Int8Features>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceShaderFloat16Int8Features>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceShaderImageFootprintFeaturesNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceShaderImageFootprintFeaturesNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceShaderSMBuiltinsFeaturesNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceShaderSMBuiltinsFeaturesNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceShaderSMBuiltinsPropertiesNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceShaderSubgroupExtendedTypesFeatures>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceShaderSubgroupExtendedTypesFeatures>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceShadingRateImageFeaturesNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceShadingRateImageFeaturesNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceShadingRateImagePropertiesNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceSubgroupProperties>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceSubgroupSizeControlFeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceSubgroupSizeControlFeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceSubgroupSizeControlPropertiesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceTexelBufferAlignmentFeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceTexelBufferAlignmentFeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceTexelBufferAlignmentPropertiesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceTextureCompressionASTCHDRFeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceTextureCompressionASTCHDRFeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceTimelineSemaphoreFeatures>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceTimelineSemaphoreFeatures>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceTimelineSemaphoreProperties>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceTransformFeedbackFeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceTransformFeedbackFeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceTransformFeedbackPropertiesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceUniformBufferStandardLayoutFeatures>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceUniformBufferStandardLayoutFeatures>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceVariablePointersFeatures>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceVariablePointersFeatures>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceVertexAttributeDivisorFeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceVertexAttributeDivisorFeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceVertexAttributeDivisorPropertiesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceVulkan11Features>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceVulkan11Features>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceVulkan11Properties>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceVulkan12Features>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceVulkan12Features>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceProperties2, PhysicalDeviceVulkan12Properties>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceVulkanMemoryModelFeatures>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceVulkanMemoryModelFeatures>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceFeatures2, PhysicalDeviceYcbcrImageArraysFeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<DeviceCreateInfo, PhysicalDeviceYcbcrImageArraysFeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PipelineColorBlendStateCreateInfo, PipelineColorBlendAdvancedStateCreateInfoEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<GraphicsPipelineCreateInfo, PipelineCompilerControlCreateInfoAMD>{ enum { value = true }; };
-  template <> struct isStructureChainValid<ComputePipelineCreateInfo, PipelineCompilerControlCreateInfoAMD>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PipelineMultisampleStateCreateInfo, PipelineCoverageModulationStateCreateInfoNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PipelineMultisampleStateCreateInfo, PipelineCoverageReductionStateCreateInfoNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PipelineMultisampleStateCreateInfo, PipelineCoverageToColorStateCreateInfoNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<GraphicsPipelineCreateInfo, PipelineCreationFeedbackCreateInfoEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<ComputePipelineCreateInfo, PipelineCreationFeedbackCreateInfoEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<RayTracingPipelineCreateInfoNV, PipelineCreationFeedbackCreateInfoEXT>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceRayTracingPropertiesNV, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceRepresentativeFragmentTestFeaturesNV, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceRepresentativeFragmentTestFeaturesNV, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceRobustness2FeaturesEXT, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceRobustness2FeaturesEXT, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceRobustness2PropertiesEXT, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceSampleLocationsPropertiesEXT, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceSamplerFilterMinmaxProperties, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceSamplerYcbcrConversionFeatures, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceSamplerYcbcrConversionFeatures, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceScalarBlockLayoutFeatures, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceScalarBlockLayoutFeatures, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceSeparateDepthStencilLayoutsFeatures, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceSeparateDepthStencilLayoutsFeatures, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceShaderAtomicInt64Features, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceShaderAtomicInt64Features, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceShaderClockFeaturesKHR, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceShaderClockFeaturesKHR, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceShaderCoreProperties2AMD, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceShaderCorePropertiesAMD, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceShaderDrawParametersFeatures, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceShaderDrawParametersFeatures, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceShaderFloat16Int8Features, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceShaderFloat16Int8Features, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceShaderImageFootprintFeaturesNV, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceShaderImageFootprintFeaturesNV, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceShaderSMBuiltinsFeaturesNV, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceShaderSMBuiltinsFeaturesNV, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceShaderSMBuiltinsPropertiesNV, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceShaderSubgroupExtendedTypesFeatures, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceShaderSubgroupExtendedTypesFeatures, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceShadingRateImageFeaturesNV, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceShadingRateImageFeaturesNV, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceShadingRateImagePropertiesNV, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceSubgroupProperties, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceSubgroupSizeControlFeaturesEXT, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceSubgroupSizeControlFeaturesEXT, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceSubgroupSizeControlPropertiesEXT, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceTexelBufferAlignmentFeaturesEXT, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceTexelBufferAlignmentFeaturesEXT, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceTexelBufferAlignmentPropertiesEXT, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceTextureCompressionASTCHDRFeaturesEXT, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceTextureCompressionASTCHDRFeaturesEXT, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceTimelineSemaphoreFeatures, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceTimelineSemaphoreFeatures, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceTimelineSemaphoreProperties, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceTransformFeedbackFeaturesEXT, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceTransformFeedbackFeaturesEXT, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceTransformFeedbackPropertiesEXT, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceUniformBufferStandardLayoutFeatures, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceUniformBufferStandardLayoutFeatures, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceVariablePointersFeatures, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceVariablePointersFeatures, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceVertexAttributeDivisorFeaturesEXT, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceVertexAttributeDivisorFeaturesEXT, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceVertexAttributeDivisorPropertiesEXT, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceVulkan11Features, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceVulkan11Features, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceVulkan11Properties, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceVulkan12Features, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceVulkan12Features, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceVulkan12Properties, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceVulkanMemoryModelFeatures, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceVulkanMemoryModelFeatures, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceYcbcrImageArraysFeaturesEXT, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceYcbcrImageArraysFeaturesEXT, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PipelineColorBlendAdvancedStateCreateInfoEXT, PipelineColorBlendStateCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PipelineCompilerControlCreateInfoAMD, GraphicsPipelineCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PipelineCompilerControlCreateInfoAMD, ComputePipelineCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PipelineCoverageModulationStateCreateInfoNV, PipelineMultisampleStateCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PipelineCoverageReductionStateCreateInfoNV, PipelineMultisampleStateCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PipelineCoverageToColorStateCreateInfoNV, PipelineMultisampleStateCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PipelineCreationFeedbackCreateInfoEXT, GraphicsPipelineCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PipelineCreationFeedbackCreateInfoEXT, ComputePipelineCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PipelineCreationFeedbackCreateInfoEXT, RayTracingPipelineCreateInfoNV>{ enum { value = true }; };
 #ifdef VK_ENABLE_BETA_EXTENSIONS
-  template <> struct isStructureChainValid<RayTracingPipelineCreateInfoKHR, PipelineCreationFeedbackCreateInfoEXT>{ enum { value = true }; };
+  template <> struct StructExtends<PipelineCreationFeedbackCreateInfoEXT, RayTracingPipelineCreateInfoKHR>{ enum { value = true }; };
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
-  template <> struct isStructureChainValid<GraphicsPipelineCreateInfo, PipelineDiscardRectangleStateCreateInfoEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PipelineRasterizationStateCreateInfo, PipelineRasterizationConservativeStateCreateInfoEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PipelineRasterizationStateCreateInfo, PipelineRasterizationDepthClipStateCreateInfoEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PipelineRasterizationStateCreateInfo, PipelineRasterizationLineStateCreateInfoEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PipelineRasterizationStateCreateInfo, PipelineRasterizationStateRasterizationOrderAMD>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PipelineRasterizationStateCreateInfo, PipelineRasterizationStateStreamCreateInfoEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<GraphicsPipelineCreateInfo, PipelineRepresentativeFragmentTestStateCreateInfoNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PipelineMultisampleStateCreateInfo, PipelineSampleLocationsStateCreateInfoEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PipelineShaderStageCreateInfo, PipelineShaderStageRequiredSubgroupSizeCreateInfoEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PipelineTessellationStateCreateInfo, PipelineTessellationDomainOriginStateCreateInfo>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PipelineVertexInputStateCreateInfo, PipelineVertexInputDivisorStateCreateInfoEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PipelineViewportStateCreateInfo, PipelineViewportCoarseSampleOrderStateCreateInfoNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PipelineViewportStateCreateInfo, PipelineViewportExclusiveScissorStateCreateInfoNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PipelineViewportStateCreateInfo, PipelineViewportShadingRateImageStateCreateInfoNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PipelineViewportStateCreateInfo, PipelineViewportSwizzleStateCreateInfoNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PipelineViewportStateCreateInfo, PipelineViewportWScalingStateCreateInfoNV>{ enum { value = true }; };
+  template <> struct StructExtends<PipelineDiscardRectangleStateCreateInfoEXT, GraphicsPipelineCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PipelineRasterizationConservativeStateCreateInfoEXT, PipelineRasterizationStateCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PipelineRasterizationDepthClipStateCreateInfoEXT, PipelineRasterizationStateCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PipelineRasterizationLineStateCreateInfoEXT, PipelineRasterizationStateCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PipelineRasterizationStateRasterizationOrderAMD, PipelineRasterizationStateCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PipelineRasterizationStateStreamCreateInfoEXT, PipelineRasterizationStateCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PipelineRepresentativeFragmentTestStateCreateInfoNV, GraphicsPipelineCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PipelineSampleLocationsStateCreateInfoEXT, PipelineMultisampleStateCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PipelineShaderStageRequiredSubgroupSizeCreateInfoEXT, PipelineShaderStageCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PipelineTessellationDomainOriginStateCreateInfo, PipelineTessellationStateCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PipelineVertexInputDivisorStateCreateInfoEXT, PipelineVertexInputStateCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PipelineViewportCoarseSampleOrderStateCreateInfoNV, PipelineViewportStateCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PipelineViewportExclusiveScissorStateCreateInfoNV, PipelineViewportStateCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PipelineViewportShadingRateImageStateCreateInfoNV, PipelineViewportStateCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PipelineViewportSwizzleStateCreateInfoNV, PipelineViewportStateCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PipelineViewportWScalingStateCreateInfoNV, PipelineViewportStateCreateInfo>{ enum { value = true }; };
 #ifdef VK_USE_PLATFORM_GGP
-  template <> struct isStructureChainValid<PresentInfoKHR, PresentFrameTokenGGP>{ enum { value = true }; };
+  template <> struct StructExtends<PresentFrameTokenGGP, PresentInfoKHR>{ enum { value = true }; };
 #endif /*VK_USE_PLATFORM_GGP*/
-  template <> struct isStructureChainValid<PresentInfoKHR, PresentRegionsKHR>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PresentInfoKHR, PresentTimesInfoGOOGLE>{ enum { value = true }; };
-  template <> struct isStructureChainValid<SubmitInfo, ProtectedSubmitInfo>{ enum { value = true }; };
-  template <> struct isStructureChainValid<QueryPoolCreateInfo, QueryPoolPerformanceCreateInfoKHR>{ enum { value = true }; };
-  template <> struct isStructureChainValid<QueryPoolCreateInfo, QueryPoolPerformanceQueryCreateInfoINTEL>{ enum { value = true }; };
-  template <> struct isStructureChainValid<QueueFamilyProperties2, QueueFamilyCheckpointPropertiesNV>{ enum { value = true }; };
-  template <> struct isStructureChainValid<RenderPassBeginInfo, RenderPassAttachmentBeginInfo>{ enum { value = true }; };
-  template <> struct isStructureChainValid<RenderPassCreateInfo, RenderPassFragmentDensityMapCreateInfoEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<RenderPassCreateInfo2, RenderPassFragmentDensityMapCreateInfoEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<RenderPassCreateInfo, RenderPassInputAttachmentAspectCreateInfo>{ enum { value = true }; };
-  template <> struct isStructureChainValid<RenderPassCreateInfo, RenderPassMultiviewCreateInfo>{ enum { value = true }; };
-  template <> struct isStructureChainValid<RenderPassBeginInfo, RenderPassSampleLocationsBeginInfoEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<RenderPassBeginInfo, RenderPassTransformBeginInfoQCOM>{ enum { value = true }; };
-  template <> struct isStructureChainValid<ImageMemoryBarrier, SampleLocationsInfoEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<SamplerCreateInfo, SamplerCustomBorderColorCreateInfoEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<SamplerCreateInfo, SamplerReductionModeCreateInfo>{ enum { value = true }; };
-  template <> struct isStructureChainValid<ImageFormatProperties2, SamplerYcbcrConversionImageFormatProperties>{ enum { value = true }; };
-  template <> struct isStructureChainValid<SamplerCreateInfo, SamplerYcbcrConversionInfo>{ enum { value = true }; };
-  template <> struct isStructureChainValid<ImageViewCreateInfo, SamplerYcbcrConversionInfo>{ enum { value = true }; };
-  template <> struct isStructureChainValid<SemaphoreCreateInfo, SemaphoreTypeCreateInfo>{ enum { value = true }; };
-  template <> struct isStructureChainValid<PhysicalDeviceExternalSemaphoreInfo, SemaphoreTypeCreateInfo>{ enum { value = true }; };
-  template <> struct isStructureChainValid<ShaderModuleCreateInfo, ShaderModuleValidationCacheCreateInfoEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<SurfaceCapabilities2KHR, SharedPresentSurfaceCapabilitiesKHR>{ enum { value = true }; };
-  template <> struct isStructureChainValid<SubpassDescription2, SubpassDescriptionDepthStencilResolve>{ enum { value = true }; };
+  template <> struct StructExtends<PresentRegionsKHR, PresentInfoKHR>{ enum { value = true }; };
+  template <> struct StructExtends<PresentTimesInfoGOOGLE, PresentInfoKHR>{ enum { value = true }; };
+  template <> struct StructExtends<ProtectedSubmitInfo, SubmitInfo>{ enum { value = true }; };
+  template <> struct StructExtends<QueryPoolPerformanceCreateInfoKHR, QueryPoolCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<QueryPoolPerformanceQueryCreateInfoINTEL, QueryPoolCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<QueueFamilyCheckpointPropertiesNV, QueueFamilyProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<RenderPassAttachmentBeginInfo, RenderPassBeginInfo>{ enum { value = true }; };
+  template <> struct StructExtends<RenderPassFragmentDensityMapCreateInfoEXT, RenderPassCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<RenderPassFragmentDensityMapCreateInfoEXT, RenderPassCreateInfo2>{ enum { value = true }; };
+  template <> struct StructExtends<RenderPassInputAttachmentAspectCreateInfo, RenderPassCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<RenderPassMultiviewCreateInfo, RenderPassCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<RenderPassSampleLocationsBeginInfoEXT, RenderPassBeginInfo>{ enum { value = true }; };
+  template <> struct StructExtends<RenderPassTransformBeginInfoQCOM, RenderPassBeginInfo>{ enum { value = true }; };
+  template <> struct StructExtends<SampleLocationsInfoEXT, ImageMemoryBarrier>{ enum { value = true }; };
+  template <> struct StructExtends<SamplerCustomBorderColorCreateInfoEXT, SamplerCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<SamplerReductionModeCreateInfo, SamplerCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<SamplerYcbcrConversionImageFormatProperties, ImageFormatProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<SamplerYcbcrConversionInfo, SamplerCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<SamplerYcbcrConversionInfo, ImageViewCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<SemaphoreTypeCreateInfo, SemaphoreCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<SemaphoreTypeCreateInfo, PhysicalDeviceExternalSemaphoreInfo>{ enum { value = true }; };
+  template <> struct StructExtends<ShaderModuleValidationCacheCreateInfoEXT, ShaderModuleCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<SharedPresentSurfaceCapabilitiesKHR, SurfaceCapabilities2KHR>{ enum { value = true }; };
+  template <> struct StructExtends<SubpassDescriptionDepthStencilResolve, SubpassDescription2>{ enum { value = true }; };
 #ifdef VK_USE_PLATFORM_WIN32_KHR
-  template <> struct isStructureChainValid<SurfaceCapabilities2KHR, SurfaceCapabilitiesFullScreenExclusiveEXT>{ enum { value = true }; };
+  template <> struct StructExtends<SurfaceCapabilitiesFullScreenExclusiveEXT, SurfaceCapabilities2KHR>{ enum { value = true }; };
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 #ifdef VK_USE_PLATFORM_WIN32_KHR
-  template <> struct isStructureChainValid<PhysicalDeviceSurfaceInfo2KHR, SurfaceFullScreenExclusiveInfoEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<SwapchainCreateInfoKHR, SurfaceFullScreenExclusiveInfoEXT>{ enum { value = true }; };
+  template <> struct StructExtends<SurfaceFullScreenExclusiveInfoEXT, PhysicalDeviceSurfaceInfo2KHR>{ enum { value = true }; };
+  template <> struct StructExtends<SurfaceFullScreenExclusiveInfoEXT, SwapchainCreateInfoKHR>{ enum { value = true }; };
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 #ifdef VK_USE_PLATFORM_WIN32_KHR
-  template <> struct isStructureChainValid<PhysicalDeviceSurfaceInfo2KHR, SurfaceFullScreenExclusiveWin32InfoEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<SwapchainCreateInfoKHR, SurfaceFullScreenExclusiveWin32InfoEXT>{ enum { value = true }; };
+  template <> struct StructExtends<SurfaceFullScreenExclusiveWin32InfoEXT, PhysicalDeviceSurfaceInfo2KHR>{ enum { value = true }; };
+  template <> struct StructExtends<SurfaceFullScreenExclusiveWin32InfoEXT, SwapchainCreateInfoKHR>{ enum { value = true }; };
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
-  template <> struct isStructureChainValid<SurfaceCapabilities2KHR, SurfaceProtectedCapabilitiesKHR>{ enum { value = true }; };
-  template <> struct isStructureChainValid<SwapchainCreateInfoKHR, SwapchainCounterCreateInfoEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<SwapchainCreateInfoKHR, SwapchainDisplayNativeHdrCreateInfoAMD>{ enum { value = true }; };
-  template <> struct isStructureChainValid<ImageFormatProperties2, TextureLODGatherFormatPropertiesAMD>{ enum { value = true }; };
-  template <> struct isStructureChainValid<SubmitInfo, TimelineSemaphoreSubmitInfo>{ enum { value = true }; };
-  template <> struct isStructureChainValid<BindSparseInfo, TimelineSemaphoreSubmitInfo>{ enum { value = true }; };
-  template <> struct isStructureChainValid<InstanceCreateInfo, ValidationFeaturesEXT>{ enum { value = true }; };
-  template <> struct isStructureChainValid<InstanceCreateInfo, ValidationFlagsEXT>{ enum { value = true }; };
+  template <> struct StructExtends<SurfaceProtectedCapabilitiesKHR, SurfaceCapabilities2KHR>{ enum { value = true }; };
+  template <> struct StructExtends<SwapchainCounterCreateInfoEXT, SwapchainCreateInfoKHR>{ enum { value = true }; };
+  template <> struct StructExtends<SwapchainDisplayNativeHdrCreateInfoAMD, SwapchainCreateInfoKHR>{ enum { value = true }; };
+  template <> struct StructExtends<TextureLODGatherFormatPropertiesAMD, ImageFormatProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<TimelineSemaphoreSubmitInfo, SubmitInfo>{ enum { value = true }; };
+  template <> struct StructExtends<TimelineSemaphoreSubmitInfo, BindSparseInfo>{ enum { value = true }; };
+  template <> struct StructExtends<ValidationFeaturesEXT, InstanceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<ValidationFlagsEXT, InstanceCreateInfo>{ enum { value = true }; };
 #ifdef VK_USE_PLATFORM_WIN32_KHR
-  template <> struct isStructureChainValid<SubmitInfo, Win32KeyedMutexAcquireReleaseInfoKHR>{ enum { value = true }; };
+  template <> struct StructExtends<Win32KeyedMutexAcquireReleaseInfoKHR, SubmitInfo>{ enum { value = true }; };
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 #ifdef VK_USE_PLATFORM_WIN32_KHR
-  template <> struct isStructureChainValid<SubmitInfo, Win32KeyedMutexAcquireReleaseInfoNV>{ enum { value = true }; };
+  template <> struct StructExtends<Win32KeyedMutexAcquireReleaseInfoNV, SubmitInfo>{ enum { value = true }; };
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
-  template <> struct isStructureChainValid<WriteDescriptorSet, WriteDescriptorSetAccelerationStructureKHR>{ enum { value = true }; };
-  template <> struct isStructureChainValid<WriteDescriptorSet, WriteDescriptorSetInlineUniformBlockEXT>{ enum { value = true }; };
+  template <> struct StructExtends<WriteDescriptorSetAccelerationStructureKHR, WriteDescriptorSet>{ enum { value = true }; };
+  template <> struct StructExtends<WriteDescriptorSetInlineUniformBlockEXT, WriteDescriptorSet>{ enum { value = true }; };
 
 #if VULKAN_HPP_ENABLE_DYNAMIC_LOADER_TOOL
 #  if defined( _WIN32 )
@@ -83961,7 +84952,9 @@ namespace VULKAN_HPP_NAMESPACE
     PFN_vkCmdTraceRaysNV vkCmdTraceRaysNV = 0;
     PFN_vkCmdUpdateBuffer vkCmdUpdateBuffer = 0;
     PFN_vkCmdWaitEvents vkCmdWaitEvents = 0;
+#ifdef VK_ENABLE_BETA_EXTENSIONS
     PFN_vkCmdWriteAccelerationStructuresPropertiesKHR vkCmdWriteAccelerationStructuresPropertiesKHR = 0;
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
     PFN_vkCmdWriteAccelerationStructuresPropertiesNV vkCmdWriteAccelerationStructuresPropertiesNV = 0;
     PFN_vkCmdWriteBufferMarkerAMD vkCmdWriteBufferMarkerAMD = 0;
     PFN_vkCmdWriteTimestamp vkCmdWriteTimestamp = 0;
@@ -83977,7 +84970,9 @@ namespace VULKAN_HPP_NAMESPACE
     PFN_vkAllocateCommandBuffers vkAllocateCommandBuffers = 0;
     PFN_vkAllocateDescriptorSets vkAllocateDescriptorSets = 0;
     PFN_vkAllocateMemory vkAllocateMemory = 0;
+#ifdef VK_ENABLE_BETA_EXTENSIONS
     PFN_vkBindAccelerationStructureMemoryKHR vkBindAccelerationStructureMemoryKHR = 0;
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
     PFN_vkBindAccelerationStructureMemoryNV vkBindAccelerationStructureMemoryNV = 0;
     PFN_vkBindBufferMemory vkBindBufferMemory = 0;
     PFN_vkBindBufferMemory2 vkBindBufferMemory2 = 0;
@@ -84044,7 +85039,9 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_ENABLE_BETA_EXTENSIONS
     PFN_vkDeferredOperationJoinKHR vkDeferredOperationJoinKHR = 0;
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
+#ifdef VK_ENABLE_BETA_EXTENSIONS
     PFN_vkDestroyAccelerationStructureKHR vkDestroyAccelerationStructureKHR = 0;
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
     PFN_vkDestroyAccelerationStructureNV vkDestroyAccelerationStructureNV = 0;
     PFN_vkDestroyBuffer vkDestroyBuffer = 0;
     PFN_vkDestroyBufferView vkDestroyBufferView = 0;
@@ -84169,7 +85166,9 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_ENABLE_BETA_EXTENSIONS
     PFN_vkGetRayTracingCaptureReplayShaderGroupHandlesKHR vkGetRayTracingCaptureReplayShaderGroupHandlesKHR = 0;
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
+#ifdef VK_ENABLE_BETA_EXTENSIONS
     PFN_vkGetRayTracingShaderGroupHandlesKHR vkGetRayTracingShaderGroupHandlesKHR = 0;
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
     PFN_vkGetRayTracingShaderGroupHandlesNV vkGetRayTracingShaderGroupHandlesNV = 0;
     PFN_vkGetRefreshCycleDurationGOOGLE vkGetRefreshCycleDurationGOOGLE = 0;
     PFN_vkGetRenderAreaGranularity vkGetRenderAreaGranularity = 0;
@@ -84670,7 +85669,9 @@ namespace VULKAN_HPP_NAMESPACE
       vkCmdTraceRaysNV = PFN_vkCmdTraceRaysNV( vkGetInstanceProcAddr( instance, "vkCmdTraceRaysNV" ) );
       vkCmdUpdateBuffer = PFN_vkCmdUpdateBuffer( vkGetInstanceProcAddr( instance, "vkCmdUpdateBuffer" ) );
       vkCmdWaitEvents = PFN_vkCmdWaitEvents( vkGetInstanceProcAddr( instance, "vkCmdWaitEvents" ) );
+#ifdef VK_ENABLE_BETA_EXTENSIONS
       vkCmdWriteAccelerationStructuresPropertiesKHR = PFN_vkCmdWriteAccelerationStructuresPropertiesKHR( vkGetInstanceProcAddr( instance, "vkCmdWriteAccelerationStructuresPropertiesKHR" ) );
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
       vkCmdWriteAccelerationStructuresPropertiesNV = PFN_vkCmdWriteAccelerationStructuresPropertiesNV( vkGetInstanceProcAddr( instance, "vkCmdWriteAccelerationStructuresPropertiesNV" ) );
       vkCmdWriteBufferMarkerAMD = PFN_vkCmdWriteBufferMarkerAMD( vkGetInstanceProcAddr( instance, "vkCmdWriteBufferMarkerAMD" ) );
       vkCmdWriteTimestamp = PFN_vkCmdWriteTimestamp( vkGetInstanceProcAddr( instance, "vkCmdWriteTimestamp" ) );
@@ -84686,7 +85687,9 @@ namespace VULKAN_HPP_NAMESPACE
       vkAllocateCommandBuffers = PFN_vkAllocateCommandBuffers( vkGetInstanceProcAddr( instance, "vkAllocateCommandBuffers" ) );
       vkAllocateDescriptorSets = PFN_vkAllocateDescriptorSets( vkGetInstanceProcAddr( instance, "vkAllocateDescriptorSets" ) );
       vkAllocateMemory = PFN_vkAllocateMemory( vkGetInstanceProcAddr( instance, "vkAllocateMemory" ) );
+#ifdef VK_ENABLE_BETA_EXTENSIONS
       vkBindAccelerationStructureMemoryKHR = PFN_vkBindAccelerationStructureMemoryKHR( vkGetInstanceProcAddr( instance, "vkBindAccelerationStructureMemoryKHR" ) );
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
       vkBindAccelerationStructureMemoryNV = PFN_vkBindAccelerationStructureMemoryNV( vkGetInstanceProcAddr( instance, "vkBindAccelerationStructureMemoryNV" ) );
       vkBindBufferMemory = PFN_vkBindBufferMemory( vkGetInstanceProcAddr( instance, "vkBindBufferMemory" ) );
       vkBindBufferMemory2 = PFN_vkBindBufferMemory2( vkGetInstanceProcAddr( instance, "vkBindBufferMemory2" ) );
@@ -84753,7 +85756,9 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_ENABLE_BETA_EXTENSIONS
       vkDeferredOperationJoinKHR = PFN_vkDeferredOperationJoinKHR( vkGetInstanceProcAddr( instance, "vkDeferredOperationJoinKHR" ) );
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
+#ifdef VK_ENABLE_BETA_EXTENSIONS
       vkDestroyAccelerationStructureKHR = PFN_vkDestroyAccelerationStructureKHR( vkGetInstanceProcAddr( instance, "vkDestroyAccelerationStructureKHR" ) );
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
       vkDestroyAccelerationStructureNV = PFN_vkDestroyAccelerationStructureNV( vkGetInstanceProcAddr( instance, "vkDestroyAccelerationStructureNV" ) );
       vkDestroyBuffer = PFN_vkDestroyBuffer( vkGetInstanceProcAddr( instance, "vkDestroyBuffer" ) );
       vkDestroyBufferView = PFN_vkDestroyBufferView( vkGetInstanceProcAddr( instance, "vkDestroyBufferView" ) );
@@ -84878,7 +85883,9 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_ENABLE_BETA_EXTENSIONS
       vkGetRayTracingCaptureReplayShaderGroupHandlesKHR = PFN_vkGetRayTracingCaptureReplayShaderGroupHandlesKHR( vkGetInstanceProcAddr( instance, "vkGetRayTracingCaptureReplayShaderGroupHandlesKHR" ) );
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
+#ifdef VK_ENABLE_BETA_EXTENSIONS
       vkGetRayTracingShaderGroupHandlesKHR = PFN_vkGetRayTracingShaderGroupHandlesKHR( vkGetInstanceProcAddr( instance, "vkGetRayTracingShaderGroupHandlesKHR" ) );
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
       vkGetRayTracingShaderGroupHandlesNV = PFN_vkGetRayTracingShaderGroupHandlesNV( vkGetInstanceProcAddr( instance, "vkGetRayTracingShaderGroupHandlesNV" ) );
       vkGetRefreshCycleDurationGOOGLE = PFN_vkGetRefreshCycleDurationGOOGLE( vkGetInstanceProcAddr( instance, "vkGetRefreshCycleDurationGOOGLE" ) );
       vkGetRenderAreaGranularity = PFN_vkGetRenderAreaGranularity( vkGetInstanceProcAddr( instance, "vkGetRenderAreaGranularity" ) );
@@ -85072,7 +86079,9 @@ namespace VULKAN_HPP_NAMESPACE
       vkCmdTraceRaysNV = PFN_vkCmdTraceRaysNV( vkGetDeviceProcAddr( device, "vkCmdTraceRaysNV" ) );
       vkCmdUpdateBuffer = PFN_vkCmdUpdateBuffer( vkGetDeviceProcAddr( device, "vkCmdUpdateBuffer" ) );
       vkCmdWaitEvents = PFN_vkCmdWaitEvents( vkGetDeviceProcAddr( device, "vkCmdWaitEvents" ) );
+#ifdef VK_ENABLE_BETA_EXTENSIONS
       vkCmdWriteAccelerationStructuresPropertiesKHR = PFN_vkCmdWriteAccelerationStructuresPropertiesKHR( vkGetDeviceProcAddr( device, "vkCmdWriteAccelerationStructuresPropertiesKHR" ) );
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
       vkCmdWriteAccelerationStructuresPropertiesNV = PFN_vkCmdWriteAccelerationStructuresPropertiesNV( vkGetDeviceProcAddr( device, "vkCmdWriteAccelerationStructuresPropertiesNV" ) );
       vkCmdWriteBufferMarkerAMD = PFN_vkCmdWriteBufferMarkerAMD( vkGetDeviceProcAddr( device, "vkCmdWriteBufferMarkerAMD" ) );
       vkCmdWriteTimestamp = PFN_vkCmdWriteTimestamp( vkGetDeviceProcAddr( device, "vkCmdWriteTimestamp" ) );
@@ -85088,7 +86097,9 @@ namespace VULKAN_HPP_NAMESPACE
       vkAllocateCommandBuffers = PFN_vkAllocateCommandBuffers( vkGetDeviceProcAddr( device, "vkAllocateCommandBuffers" ) );
       vkAllocateDescriptorSets = PFN_vkAllocateDescriptorSets( vkGetDeviceProcAddr( device, "vkAllocateDescriptorSets" ) );
       vkAllocateMemory = PFN_vkAllocateMemory( vkGetDeviceProcAddr( device, "vkAllocateMemory" ) );
+#ifdef VK_ENABLE_BETA_EXTENSIONS
       vkBindAccelerationStructureMemoryKHR = PFN_vkBindAccelerationStructureMemoryKHR( vkGetDeviceProcAddr( device, "vkBindAccelerationStructureMemoryKHR" ) );
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
       vkBindAccelerationStructureMemoryNV = PFN_vkBindAccelerationStructureMemoryNV( vkGetDeviceProcAddr( device, "vkBindAccelerationStructureMemoryNV" ) );
       vkBindBufferMemory = PFN_vkBindBufferMemory( vkGetDeviceProcAddr( device, "vkBindBufferMemory" ) );
       vkBindBufferMemory2 = PFN_vkBindBufferMemory2( vkGetDeviceProcAddr( device, "vkBindBufferMemory2" ) );
@@ -85155,7 +86166,9 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_ENABLE_BETA_EXTENSIONS
       vkDeferredOperationJoinKHR = PFN_vkDeferredOperationJoinKHR( vkGetDeviceProcAddr( device, "vkDeferredOperationJoinKHR" ) );
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
+#ifdef VK_ENABLE_BETA_EXTENSIONS
       vkDestroyAccelerationStructureKHR = PFN_vkDestroyAccelerationStructureKHR( vkGetDeviceProcAddr( device, "vkDestroyAccelerationStructureKHR" ) );
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
       vkDestroyAccelerationStructureNV = PFN_vkDestroyAccelerationStructureNV( vkGetDeviceProcAddr( device, "vkDestroyAccelerationStructureNV" ) );
       vkDestroyBuffer = PFN_vkDestroyBuffer( vkGetDeviceProcAddr( device, "vkDestroyBuffer" ) );
       vkDestroyBufferView = PFN_vkDestroyBufferView( vkGetDeviceProcAddr( device, "vkDestroyBufferView" ) );
@@ -85280,7 +86293,9 @@ namespace VULKAN_HPP_NAMESPACE
 #ifdef VK_ENABLE_BETA_EXTENSIONS
       vkGetRayTracingCaptureReplayShaderGroupHandlesKHR = PFN_vkGetRayTracingCaptureReplayShaderGroupHandlesKHR( vkGetDeviceProcAddr( device, "vkGetRayTracingCaptureReplayShaderGroupHandlesKHR" ) );
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
+#ifdef VK_ENABLE_BETA_EXTENSIONS
       vkGetRayTracingShaderGroupHandlesKHR = PFN_vkGetRayTracingShaderGroupHandlesKHR( vkGetDeviceProcAddr( device, "vkGetRayTracingShaderGroupHandlesKHR" ) );
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
       vkGetRayTracingShaderGroupHandlesNV = PFN_vkGetRayTracingShaderGroupHandlesNV( vkGetDeviceProcAddr( device, "vkGetRayTracingShaderGroupHandlesNV" ) );
       vkGetRefreshCycleDurationGOOGLE = PFN_vkGetRefreshCycleDurationGOOGLE( vkGetDeviceProcAddr( device, "vkGetRefreshCycleDurationGOOGLE" ) );
       vkGetRenderAreaGranularity = PFN_vkGetRenderAreaGranularity( vkGetDeviceProcAddr( device, "vkGetRenderAreaGranularity" ) );
