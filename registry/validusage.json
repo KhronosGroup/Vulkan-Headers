@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.2.142",
-    "comment": "from git branch: github-master commit: dd7b521af03ed3ce13b7d2a54c4542f5af7cf370",
-    "date": "2020-06-01 11:06:45Z"
+    "api version": "1.2.143",
+    "comment": "from git branch: github-master commit: f6a10a5af095938e2a6ac8581b7f848a4b324f46",
+    "date": "2020-06-08 10:51:25Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -510,7 +510,7 @@
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceDiagnosticsConfigCreateInfoNV\">VkDeviceDiagnosticsConfigCreateInfoNV</a>, <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceMemoryOverallocationCreateInfoAMD\">VkDeviceMemoryOverallocationCreateInfoAMD</a>, <a href=\"#VkDevicePrivateDataCreateInfoEXT\">VkDevicePrivateDataCreateInfoEXT</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice8BitStorageFeatures\">VkPhysicalDevice8BitStorageFeatures</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeatures\">VkPhysicalDeviceBufferDeviceAddressFeatures</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeaturesEXT\">VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCoherentMemoryFeaturesAMD\">VkPhysicalDeviceCoherentMemoryFeaturesAMD</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixFeaturesNV\">VkPhysicalDeviceCooperativeMatrixFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCoverageReductionModeFeaturesNV\">VkPhysicalDeviceCoverageReductionModeFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCustomBorderColorFeaturesEXT\">VkPhysicalDeviceCustomBorderColorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV\">VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDepthClipEnableFeaturesEXT\">VkPhysicalDeviceDepthClipEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeatures\">VkPhysicalDeviceDescriptorIndexingFeatures</a>, <a href=\"#VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV\">VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDiagnosticsConfigFeaturesNV\">VkPhysicalDeviceDiagnosticsConfigFeaturesNV</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapFeaturesEXT\">VkPhysicalDeviceFragmentDensityMapFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT\">VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceHostQueryResetFeatures\">VkPhysicalDeviceHostQueryResetFeatures</a>, <a href=\"#VkPhysicalDeviceImagelessFramebufferFeatures\">VkPhysicalDeviceImagelessFramebufferFeatures</a>, <a href=\"#VkPhysicalDeviceIndexTypeUint8FeaturesEXT\">VkPhysicalDeviceIndexTypeUint8FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeaturesEXT\">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceLineRasterizationFeaturesEXT\">VkPhysicalDeviceLineRasterizationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMemoryPriorityFeaturesEXT\">VkPhysicalDeviceMemoryPriorityFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDevicePerformanceQueryFeaturesKHR\">VkPhysicalDevicePerformanceQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT\">VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT</a>, <a href=\"#VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR\">VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceRayTracingFeaturesKHR\">VkPhysicalDeviceRayTracingFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceRobustness2FeaturesEXT\">VkPhysicalDeviceRobustness2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceScalarBlockLayoutFeatures\">VkPhysicalDeviceScalarBlockLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures\">VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64Features\">VkPhysicalDeviceShaderAtomicInt64Features</a>, <a href=\"#VkPhysicalDeviceShaderClockFeaturesKHR\">VkPhysicalDeviceShaderClockFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT\">VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderDrawParametersFeatures\">VkPhysicalDeviceShaderDrawParametersFeatures</a>, <a href=\"#VkPhysicalDeviceShaderFloat16Int8Features\">VkPhysicalDeviceShaderFloat16Int8Features</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL\">VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL</a>, <a href=\"#VkPhysicalDeviceShaderSMBuiltinsFeaturesNV\">VkPhysicalDeviceShaderSMBuiltinsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures\">VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSubgroupSizeControlFeaturesEXT\">VkPhysicalDeviceSubgroupSizeControlFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT\">VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT\">VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTimelineSemaphoreFeatures\">VkPhysicalDeviceTimelineSemaphoreFeatures</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackFeaturesEXT\">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceUniformBufferStandardLayoutFeatures\">VkPhysicalDeviceUniformBufferStandardLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceVariablePointersFeatures\">VkPhysicalDeviceVariablePointersFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVulkan11Features\">VkPhysicalDeviceVulkan11Features</a>, <a href=\"#VkPhysicalDeviceVulkan12Features\">VkPhysicalDeviceVulkan12Features</a>, <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeatures\">VkPhysicalDeviceVulkanMemoryModelFeatures</a>, or <a href=\"#VkPhysicalDeviceYcbcrImageArraysFeaturesEXT\">VkPhysicalDeviceYcbcrImageArraysFeaturesEXT</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceDiagnosticsConfigCreateInfoNV\">VkDeviceDiagnosticsConfigCreateInfoNV</a>, <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceMemoryOverallocationCreateInfoAMD\">VkDeviceMemoryOverallocationCreateInfoAMD</a>, <a href=\"#VkDevicePrivateDataCreateInfoEXT\">VkDevicePrivateDataCreateInfoEXT</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice8BitStorageFeatures\">VkPhysicalDevice8BitStorageFeatures</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeatures\">VkPhysicalDeviceBufferDeviceAddressFeatures</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeaturesEXT\">VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCoherentMemoryFeaturesAMD\">VkPhysicalDeviceCoherentMemoryFeaturesAMD</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixFeaturesNV\">VkPhysicalDeviceCooperativeMatrixFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCoverageReductionModeFeaturesNV\">VkPhysicalDeviceCoverageReductionModeFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCustomBorderColorFeaturesEXT\">VkPhysicalDeviceCustomBorderColorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV\">VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDepthClipEnableFeaturesEXT\">VkPhysicalDeviceDepthClipEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeatures\">VkPhysicalDeviceDescriptorIndexingFeatures</a>, <a href=\"#VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV\">VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDiagnosticsConfigFeaturesNV\">VkPhysicalDeviceDiagnosticsConfigFeaturesNV</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapFeaturesEXT\">VkPhysicalDeviceFragmentDensityMapFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT\">VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceHostQueryResetFeatures\">VkPhysicalDeviceHostQueryResetFeatures</a>, <a href=\"#VkPhysicalDeviceImagelessFramebufferFeatures\">VkPhysicalDeviceImagelessFramebufferFeatures</a>, <a href=\"#VkPhysicalDeviceIndexTypeUint8FeaturesEXT\">VkPhysicalDeviceIndexTypeUint8FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeaturesEXT\">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceLineRasterizationFeaturesEXT\">VkPhysicalDeviceLineRasterizationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMemoryPriorityFeaturesEXT\">VkPhysicalDeviceMemoryPriorityFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDevicePerformanceQueryFeaturesKHR\">VkPhysicalDevicePerformanceQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT\">VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT</a>, <a href=\"#VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR\">VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePrivateDataFeaturesEXT\">VkPhysicalDevicePrivateDataFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceRayTracingFeaturesKHR\">VkPhysicalDeviceRayTracingFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceRobustness2FeaturesEXT\">VkPhysicalDeviceRobustness2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceScalarBlockLayoutFeatures\">VkPhysicalDeviceScalarBlockLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures\">VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64Features\">VkPhysicalDeviceShaderAtomicInt64Features</a>, <a href=\"#VkPhysicalDeviceShaderClockFeaturesKHR\">VkPhysicalDeviceShaderClockFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT\">VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderDrawParametersFeatures\">VkPhysicalDeviceShaderDrawParametersFeatures</a>, <a href=\"#VkPhysicalDeviceShaderFloat16Int8Features\">VkPhysicalDeviceShaderFloat16Int8Features</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL\">VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL</a>, <a href=\"#VkPhysicalDeviceShaderSMBuiltinsFeaturesNV\">VkPhysicalDeviceShaderSMBuiltinsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures\">VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSubgroupSizeControlFeaturesEXT\">VkPhysicalDeviceSubgroupSizeControlFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT\">VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT\">VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTimelineSemaphoreFeatures\">VkPhysicalDeviceTimelineSemaphoreFeatures</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackFeaturesEXT\">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceUniformBufferStandardLayoutFeatures\">VkPhysicalDeviceUniformBufferStandardLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceVariablePointersFeatures\">VkPhysicalDeviceVariablePointersFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVulkan11Features\">VkPhysicalDeviceVulkan11Features</a>, <a href=\"#VkPhysicalDeviceVulkan12Features\">VkPhysicalDeviceVulkan12Features</a>, <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeatures\">VkPhysicalDeviceVulkanMemoryModelFeatures</a>, or <a href=\"#VkPhysicalDeviceYcbcrImageArraysFeaturesEXT\">VkPhysicalDeviceYcbcrImageArraysFeaturesEXT</a>"
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-sType-unique",
@@ -2761,16 +2761,20 @@
     "vkCmdSetEvent": {
       "core": [
         {
+          "vuid": "VUID-vkCmdSetEvent-None-04090",
+          "text": " If the <a href=\"#features-geometryShader\">geometry shaders</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdSetEvent-None-04091",
+          "text": " If the <a href=\"#features-tessellationShader\">tessellation shaders</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdSetEvent-queueFamilyIndex-4098",
+          "text": " Any pipeline stage included in pname:{stageMaskName} <strong class=\"purple\">must</strong> be supported by the capabilities of the queue family specified by the <code>queueFamilyIndex</code> member of the <a href=\"#VkCommandPoolCreateInfo\">VkCommandPoolCreateInfo</a> structure that was used to create the <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from, as specified in the <a href=\"#synchronization-pipeline-stages-supported\">table of supported pipeline stages</a>"
+        },
+        {
           "vuid": "VUID-vkCmdSetEvent-stageMask-01149",
           "text": " <code>stageMask</code> <strong class=\"purple\">must</strong> not include <code>VK_PIPELINE_STAGE_HOST_BIT</code>"
-        },
-        {
-          "vuid": "VUID-vkCmdSetEvent-stageMask-01150",
-          "text": " If the <a href=\"#features-geometryShader\">geometry shaders</a> feature is not enabled, <code>stageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT</code>"
-        },
-        {
-          "vuid": "VUID-vkCmdSetEvent-stageMask-01151",
-          "text": " If the <a href=\"#features-tessellationShader\">tessellation shaders</a> feature is not enabled, <code>stageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
         },
         {
           "vuid": "VUID-vkCmdSetEvent-commandBuffer-parameter",
@@ -2805,36 +2809,64 @@
           "text": " Both of <code>commandBuffer</code>, and <code>event</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <a href=\"#VkDevice\">VkDevice</a>"
         }
       ],
-      "(VK_VERSION_1_1,VK_KHR_device_group)": [
+      "(VK_EXT_conditional_rendering)": [
         {
-          "vuid": "VUID-vkCmdSetEvent-commandBuffer-01152",
-          "text": " <code>commandBuffer</code>&#8217;s current device mask <strong class=\"purple\">must</strong> include exactly one physical device"
+          "vuid": "VUID-vkCmdSetEvent-None-04092",
+          "text": " If the <a href=\"#features-conditionalRendering\">conditional rendering</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_CONDITIONAL_RENDERING_BIT_EXT</code>"
+        }
+      ],
+      "(VK_EXT_fragment_density_map)": [
+        {
+          "vuid": "VUID-vkCmdSetEvent-None-04093",
+          "text": " If the <a href=\"#features-fragmentDensityMap\">fragment density map</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_FRAGMENT_DENSITY_PROCESS_BIT_EXT</code>"
+        }
+      ],
+      "(VK_EXT_transform_feedback)": [
+        {
+          "vuid": "VUID-vkCmdSetEvent-None-04094",
+          "text": " If the <a href=\"#features-transformFeedback\">transform feedback</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TRANSFORM_FEEDBACK_BIT_EXT</code>"
         }
       ],
       "(VK_NV_mesh_shader)": [
         {
-          "vuid": "VUID-vkCmdSetEvent-stageMask-02107",
-          "text": " If the <a href=\"#features-meshShader\">mesh shaders</a> feature is not enabled, <code>stageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV</code>"
+          "vuid": "VUID-vkCmdSetEvent-None-04095",
+          "text": " If the <a href=\"#features-meshShader\">mesh shaders</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV</code>"
         },
         {
-          "vuid": "VUID-vkCmdSetEvent-stageMask-02108",
-          "text": " If the <a href=\"#features-taskShader\">task shaders</a> feature is not enabled, <code>stageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV</code>"
+          "vuid": "VUID-vkCmdSetEvent-None-04096",
+          "text": " If the <a href=\"#features-taskShader\">task shaders</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV</code>"
+        }
+      ],
+      "(VK_NV_shading_rate_image)": [
+        {
+          "vuid": "VUID-vkCmdSetEvent-None-04097",
+          "text": " If the <a href=\"#features-shadingRateImage\">shading rate image</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_SHADING_RATE_IMAGE_BIT_NV</code>"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_device_group)": [
+        {
+          "vuid": "VUID-vkCmdSetEvent-commandBuffer-01152",
+          "text": " <code>commandBuffer</code>&#8217;s current device mask <strong class=\"purple\">must</strong> include exactly one physical device"
         }
       ]
     },
     "vkCmdResetEvent": {
       "core": [
         {
+          "vuid": "VUID-vkCmdResetEvent-None-04090",
+          "text": " If the <a href=\"#features-geometryShader\">geometry shaders</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdResetEvent-None-04091",
+          "text": " If the <a href=\"#features-tessellationShader\">tessellation shaders</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdResetEvent-queueFamilyIndex-4098",
+          "text": " Any pipeline stage included in pname:{stageMaskName} <strong class=\"purple\">must</strong> be supported by the capabilities of the queue family specified by the <code>queueFamilyIndex</code> member of the <a href=\"#VkCommandPoolCreateInfo\">VkCommandPoolCreateInfo</a> structure that was used to create the <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from, as specified in the <a href=\"#synchronization-pipeline-stages-supported\">table of supported pipeline stages</a>"
+        },
+        {
           "vuid": "VUID-vkCmdResetEvent-stageMask-01153",
           "text": " <code>stageMask</code> <strong class=\"purple\">must</strong> not include <code>VK_PIPELINE_STAGE_HOST_BIT</code>"
-        },
-        {
-          "vuid": "VUID-vkCmdResetEvent-stageMask-01154",
-          "text": " If the <a href=\"#features-geometryShader\">geometry shaders</a> feature is not enabled, <code>stageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT</code>"
-        },
-        {
-          "vuid": "VUID-vkCmdResetEvent-stageMask-01155",
-          "text": " If the <a href=\"#features-tessellationShader\">tessellation shaders</a> feature is not enabled, <code>stageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
         },
         {
           "vuid": "VUID-vkCmdResetEvent-event-01156",
@@ -2873,25 +2905,73 @@
           "text": " Both of <code>commandBuffer</code>, and <code>event</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <a href=\"#VkDevice\">VkDevice</a>"
         }
       ],
+      "(VK_EXT_conditional_rendering)": [
+        {
+          "vuid": "VUID-vkCmdResetEvent-None-04092",
+          "text": " If the <a href=\"#features-conditionalRendering\">conditional rendering</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_CONDITIONAL_RENDERING_BIT_EXT</code>"
+        }
+      ],
+      "(VK_EXT_fragment_density_map)": [
+        {
+          "vuid": "VUID-vkCmdResetEvent-None-04093",
+          "text": " If the <a href=\"#features-fragmentDensityMap\">fragment density map</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_FRAGMENT_DENSITY_PROCESS_BIT_EXT</code>"
+        }
+      ],
+      "(VK_EXT_transform_feedback)": [
+        {
+          "vuid": "VUID-vkCmdResetEvent-None-04094",
+          "text": " If the <a href=\"#features-transformFeedback\">transform feedback</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TRANSFORM_FEEDBACK_BIT_EXT</code>"
+        }
+      ],
+      "(VK_NV_mesh_shader)": [
+        {
+          "vuid": "VUID-vkCmdResetEvent-None-04095",
+          "text": " If the <a href=\"#features-meshShader\">mesh shaders</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdResetEvent-None-04096",
+          "text": " If the <a href=\"#features-taskShader\">task shaders</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV</code>"
+        }
+      ],
+      "(VK_NV_shading_rate_image)": [
+        {
+          "vuid": "VUID-vkCmdResetEvent-None-04097",
+          "text": " If the <a href=\"#features-shadingRateImage\">shading rate image</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_SHADING_RATE_IMAGE_BIT_NV</code>"
+        }
+      ],
       "(VK_VERSION_1_1,VK_KHR_device_group)": [
         {
           "vuid": "VUID-vkCmdResetEvent-commandBuffer-01157",
           "text": " <code>commandBuffer</code>&#8217;s current device mask <strong class=\"purple\">must</strong> include exactly one physical device"
         }
-      ],
-      "(VK_NV_mesh_shader)": [
-        {
-          "vuid": "VUID-vkCmdResetEvent-stageMask-02109",
-          "text": " If the <a href=\"#features-meshShader\">mesh shaders</a> feature is not enabled, <code>stageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV</code>"
-        },
-        {
-          "vuid": "VUID-vkCmdResetEvent-stageMask-02110",
-          "text": " If the <a href=\"#features-taskShader\">task shaders</a> feature is not enabled, <code>stageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV</code>"
-        }
       ]
     },
     "vkCmdWaitEvents": {
       "core": [
+        {
+          "vuid": "VUID-vkCmdWaitEvents-None-04090",
+          "text": " If the <a href=\"#features-geometryShader\">geometry shaders</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdWaitEvents-None-04091",
+          "text": " If the <a href=\"#features-tessellationShader\">tessellation shaders</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdWaitEvents-queueFamilyIndex-4098",
+          "text": " Any pipeline stage included in pname:{stageMaskName} <strong class=\"purple\">must</strong> be supported by the capabilities of the queue family specified by the <code>queueFamilyIndex</code> member of the <a href=\"#VkCommandPoolCreateInfo\">VkCommandPoolCreateInfo</a> structure that was used to create the <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from, as specified in the <a href=\"#synchronization-pipeline-stages-supported\">table of supported pipeline stages</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdWaitEvents-None-04090",
+          "text": " If the <a href=\"#features-geometryShader\">geometry shaders</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdWaitEvents-None-04091",
+          "text": " If the <a href=\"#features-tessellationShader\">tessellation shaders</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdWaitEvents-queueFamilyIndex-4098",
+          "text": " Any pipeline stage included in pname:{stageMaskName} <strong class=\"purple\">must</strong> be supported by the capabilities of the queue family specified by the <code>queueFamilyIndex</code> member of the <a href=\"#VkCommandPoolCreateInfo\">VkCommandPoolCreateInfo</a> structure that was used to create the <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from, as specified in the <a href=\"#synchronization-pipeline-stages-supported\">table of supported pipeline stages</a>"
+        },
         {
           "vuid": "VUID-vkCmdWaitEvents-srcAccessMask-02815",
           "text": " The <code>srcAccessMask</code> member of each element of <code>pMemoryBarriers</code> <strong class=\"purple\">must</strong> only include access flags that are supported by one or more of the pipeline stages in <code>srcStageMask</code>, as specified in the <a href=\"#synchronization-access-types-supported\">table of supported access types</a>"
@@ -2921,28 +3001,8 @@
           "text": " <code>srcStageMask</code> <strong class=\"purple\">must</strong> be the bitwise OR of the <code>stageMask</code> parameter used in previous calls to <code>vkCmdSetEvent</code> with any of the members of <code>pEvents</code> and <code>VK_PIPELINE_STAGE_HOST_BIT</code> if any of the members of <code>pEvents</code> was set using <code>vkSetEvent</code>"
         },
         {
-          "vuid": "VUID-vkCmdWaitEvents-srcStageMask-01159",
-          "text": " If the <a href=\"#features-geometryShader\">geometry shaders</a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT</code>"
-        },
-        {
-          "vuid": "VUID-vkCmdWaitEvents-dstStageMask-01160",
-          "text": " If the <a href=\"#features-geometryShader\">geometry shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT</code>"
-        },
-        {
-          "vuid": "VUID-vkCmdWaitEvents-srcStageMask-01161",
-          "text": " If the <a href=\"#features-tessellationShader\">tessellation shaders</a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
-        },
-        {
-          "vuid": "VUID-vkCmdWaitEvents-dstStageMask-01162",
-          "text": " If the <a href=\"#features-tessellationShader\">tessellation shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
-        },
-        {
           "vuid": "VUID-vkCmdWaitEvents-pEvents-01163",
           "text": " If <code>pEvents</code> includes one or more events that will be signaled by <code>vkSetEvent</code> after <code>commandBuffer</code> has been submitted to a queue, then <code>vkCmdWaitEvents</code> <strong class=\"purple\">must</strong> not be called inside a render pass instance"
-        },
-        {
-          "vuid": "VUID-vkCmdWaitEvents-srcStageMask-01164",
-          "text": " Any pipeline stage included in <code>srcStageMask</code> or <code>dstStageMask</code> <strong class=\"purple\">must</strong> be supported by the capabilities of the queue family specified by the <code>queueFamilyIndex</code> member of the <a href=\"#VkCommandPoolCreateInfo\">VkCommandPoolCreateInfo</a> structure that was used to create the <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from, as specified in the <a href=\"#synchronization-pipeline-stages-supported\">table of supported pipeline stages</a>"
         },
         {
           "vuid": "VUID-vkCmdWaitEvents-srcQueueFamilyIndex-02803",
@@ -3001,72 +3061,96 @@
           "text": " Both of <code>commandBuffer</code>, and the elements of <code>pEvents</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <a href=\"#VkDevice\">VkDevice</a>"
         }
       ],
-      "(VK_VERSION_1_1,VK_KHR_device_group)": [
+      "(VK_EXT_conditional_rendering)": [
         {
-          "vuid": "VUID-vkCmdWaitEvents-commandBuffer-01167",
-          "text": " <code>commandBuffer</code>&#8217;s current device mask <strong class=\"purple\">must</strong> include exactly one physical device"
+          "vuid": "VUID-vkCmdWaitEvents-None-04092",
+          "text": " If the <a href=\"#features-conditionalRendering\">conditional rendering</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_CONDITIONAL_RENDERING_BIT_EXT</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdWaitEvents-None-04092",
+          "text": " If the <a href=\"#features-conditionalRendering\">conditional rendering</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_CONDITIONAL_RENDERING_BIT_EXT</code>"
+        }
+      ],
+      "(VK_EXT_fragment_density_map)": [
+        {
+          "vuid": "VUID-vkCmdWaitEvents-None-04093",
+          "text": " If the <a href=\"#features-fragmentDensityMap\">fragment density map</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_FRAGMENT_DENSITY_PROCESS_BIT_EXT</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdWaitEvents-None-04093",
+          "text": " If the <a href=\"#features-fragmentDensityMap\">fragment density map</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_FRAGMENT_DENSITY_PROCESS_BIT_EXT</code>"
+        }
+      ],
+      "(VK_EXT_transform_feedback)": [
+        {
+          "vuid": "VUID-vkCmdWaitEvents-None-04094",
+          "text": " If the <a href=\"#features-transformFeedback\">transform feedback</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TRANSFORM_FEEDBACK_BIT_EXT</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdWaitEvents-None-04094",
+          "text": " If the <a href=\"#features-transformFeedback\">transform feedback</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TRANSFORM_FEEDBACK_BIT_EXT</code>"
         }
       ],
       "(VK_NV_mesh_shader)": [
         {
-          "vuid": "VUID-vkCmdWaitEvents-srcStageMask-02111",
-          "text": " If the <a href=\"#features-meshShader\">mesh shaders</a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV</code>"
+          "vuid": "VUID-vkCmdWaitEvents-None-04095",
+          "text": " If the <a href=\"#features-meshShader\">mesh shaders</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV</code>"
         },
         {
-          "vuid": "VUID-vkCmdWaitEvents-srcStageMask-02112",
-          "text": " If the <a href=\"#features-taskShader\">task shaders</a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV</code>"
+          "vuid": "VUID-vkCmdWaitEvents-None-04096",
+          "text": " If the <a href=\"#features-taskShader\">task shaders</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV</code>"
         },
         {
-          "vuid": "VUID-vkCmdWaitEvents-dstStageMask-02113",
-          "text": " If the <a href=\"#features-meshShader\">mesh shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV</code>"
+          "vuid": "VUID-vkCmdWaitEvents-None-04095",
+          "text": " If the <a href=\"#features-meshShader\">mesh shaders</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV</code>"
         },
         {
-          "vuid": "VUID-vkCmdWaitEvents-dstStageMask-02114",
-          "text": " If the <a href=\"#features-taskShader\">task shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV</code>"
+          "vuid": "VUID-vkCmdWaitEvents-None-04096",
+          "text": " If the <a href=\"#features-taskShader\">task shaders</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV</code>"
+        }
+      ],
+      "(VK_NV_shading_rate_image)": [
+        {
+          "vuid": "VUID-vkCmdWaitEvents-None-04097",
+          "text": " If the <a href=\"#features-shadingRateImage\">shading rate image</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_SHADING_RATE_IMAGE_BIT_NV</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdWaitEvents-None-04097",
+          "text": " If the <a href=\"#features-shadingRateImage\">shading rate image</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_SHADING_RATE_IMAGE_BIT_NV</code>"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_device_group)": [
+        {
+          "vuid": "VUID-vkCmdWaitEvents-commandBuffer-01167",
+          "text": " <code>commandBuffer</code>&#8217;s current device mask <strong class=\"purple\">must</strong> include exactly one physical device"
         }
       ]
     },
     "vkCmdPipelineBarrier": {
       "core": [
         {
-          "vuid": "VUID-vkCmdPipelineBarrier-pDependencies-02285",
-          "text": " If fname:{refpage} is called within a render pass instance, the render pass <strong class=\"purple\">must</strong> have been created with at least one <a href=\"#VkSubpassDependency\">VkSubpassDependency</a> instance in <code>VkRenderPassCreateInfo</code>::<code>pDependencies</code> that expresses a dependency from the current subpass to itself, with <a href=\"#synchronization-dependencies-scopes\">synchronization scopes</a> and <a href=\"#synchronization-dependencies-access-scopes\">access scopes</a> that are all supersets of the scopes defined in this command"
+          "vuid": "VUID-vkCmdPipelineBarrier-None-04090",
+          "text": " If the <a href=\"#features-geometryShader\">geometry shaders</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT</code>"
         },
         {
-          "vuid": "VUID-vkCmdPipelineBarrier-bufferMemoryBarrierCount-01178",
-          "text": " If fname:{refpage} is called within a render pass instance, it <strong class=\"purple\">must</strong> not include any buffer memory barriers"
+          "vuid": "VUID-vkCmdPipelineBarrier-None-04091",
+          "text": " If the <a href=\"#features-tessellationShader\">tessellation shaders</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
         },
         {
-          "vuid": "VUID-vkCmdPipelineBarrier-image-04073",
-          "text": " If fname:{refpage} is called within a render pass instance, the <code>image</code> member of any image memory barrier included in this command <strong class=\"purple\">must</strong> be an attachment used in the current subpass both as an input attachment, and as either a color or depth/stencil attachment"
+          "vuid": "VUID-vkCmdPipelineBarrier-queueFamilyIndex-4098",
+          "text": " Any pipeline stage included in pname:{stageMaskName} <strong class=\"purple\">must</strong> be supported by the capabilities of the queue family specified by the <code>queueFamilyIndex</code> member of the <a href=\"#VkCommandPoolCreateInfo\">VkCommandPoolCreateInfo</a> structure that was used to create the <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from, as specified in the <a href=\"#synchronization-pipeline-stages-supported\">table of supported pipeline stages</a>"
         },
         {
-          "vuid": "VUID-vkCmdPipelineBarrier-oldLayout-01181",
-          "text": " If fname:{refpage} is called within a render pass instance, the <code>oldLayout</code> and <code>newLayout</code> members of any image memory barrier included in this command <strong class=\"purple\">must</strong> be equal"
+          "vuid": "VUID-vkCmdPipelineBarrier-None-04090",
+          "text": " If the <a href=\"#features-geometryShader\">geometry shaders</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT</code>"
         },
         {
-          "vuid": "VUID-vkCmdPipelineBarrier-srcQueueFamilyIndex-01182",
-          "text": " If fname:{refpage} is called within a render pass instance, the <code>srcQueueFamilyIndex</code> and <code>dstQueueFamilyIndex</code> members of any image memory barrier included in this command <strong class=\"purple\">must</strong> be equal"
+          "vuid": "VUID-vkCmdPipelineBarrier-None-04091",
+          "text": " If the <a href=\"#features-tessellationShader\">tessellation shaders</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
         },
         {
-          "vuid": "VUID-vkCmdPipelineBarrier-srcStageMask-01168",
-          "text": " If the <a href=\"#features-geometryShader\">geometry shaders</a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT</code>"
-        },
-        {
-          "vuid": "VUID-vkCmdPipelineBarrier-dstStageMask-01169",
-          "text": " If the <a href=\"#features-geometryShader\">geometry shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT</code>"
-        },
-        {
-          "vuid": "VUID-vkCmdPipelineBarrier-srcStageMask-01170",
-          "text": " If the <a href=\"#features-tessellationShader\">tessellation shaders</a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
-        },
-        {
-          "vuid": "VUID-vkCmdPipelineBarrier-dstStageMask-01171",
-          "text": " If the <a href=\"#features-tessellationShader\">tessellation shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
-        },
-        {
-          "vuid": "VUID-vkCmdPipelineBarrier-srcStageMask-01183",
-          "text": " Any pipeline stage included in <code>srcStageMask</code> or <code>dstStageMask</code> <strong class=\"purple\">must</strong> be supported by the capabilities of the queue family specified by the <code>queueFamilyIndex</code> member of the <a href=\"#VkCommandPoolCreateInfo\">VkCommandPoolCreateInfo</a> structure that was used to create the <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from, as specified in the <a href=\"#synchronization-pipeline-stages-supported\">table of supported pipeline stages</a>"
+          "vuid": "VUID-vkCmdPipelineBarrier-queueFamilyIndex-4098",
+          "text": " Any pipeline stage included in pname:{stageMaskName} <strong class=\"purple\">must</strong> be supported by the capabilities of the queue family specified by the <code>queueFamilyIndex</code> member of the <a href=\"#VkCommandPoolCreateInfo\">VkCommandPoolCreateInfo</a> structure that was used to create the <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from, as specified in the <a href=\"#synchronization-pipeline-stages-supported\">table of supported pipeline stages</a>"
         },
         {
           "vuid": "VUID-vkCmdPipelineBarrier-srcAccessMask-02815",
@@ -3091,6 +3175,26 @@
         {
           "vuid": "VUID-vkCmdPipelineBarrier-pImageMemoryBarriers-02820",
           "text": " For any element of <code>pImageMemoryBarriers</code>, if its <code>srcQueueFamilyIndex</code> and <code>dstQueueFamilyIndex</code> members are equal, or if its <code>dstQueueFamilyIndex</code> is the queue family index that was used to create the command pool that <code>commandBuffer</code> was allocated from, then its <code>dstAccessMask</code> member <strong class=\"purple\">must</strong> only contain access flags that are supported by one or more of the pipeline stages in <code>dstStageMask</code>, as specified in the <a href=\"#synchronization-access-types-supported\">table of supported access types</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdPipelineBarrier-pDependencies-02285",
+          "text": " If fname:{refpage} is called within a render pass instance, the render pass <strong class=\"purple\">must</strong> have been created with at least one <a href=\"#VkSubpassDependency\">VkSubpassDependency</a> instance in <code>VkRenderPassCreateInfo</code>::<code>pDependencies</code> that expresses a dependency from the current subpass to itself, with <a href=\"#synchronization-dependencies-scopes\">synchronization scopes</a> and <a href=\"#synchronization-dependencies-access-scopes\">access scopes</a> that are all supersets of the scopes defined in this command"
+        },
+        {
+          "vuid": "VUID-vkCmdPipelineBarrier-bufferMemoryBarrierCount-01178",
+          "text": " If fname:{refpage} is called within a render pass instance, it <strong class=\"purple\">must</strong> not include any buffer memory barriers"
+        },
+        {
+          "vuid": "VUID-vkCmdPipelineBarrier-image-04073",
+          "text": " If fname:{refpage} is called within a render pass instance, the <code>image</code> member of any image memory barrier included in this command <strong class=\"purple\">must</strong> be an attachment used in the current subpass both as an input attachment, and as either a color or depth/stencil attachment"
+        },
+        {
+          "vuid": "VUID-vkCmdPipelineBarrier-oldLayout-01181",
+          "text": " If fname:{refpage} is called within a render pass instance, the <code>oldLayout</code> and <code>newLayout</code> members of any image memory barrier included in this command <strong class=\"purple\">must</strong> be equal"
+        },
+        {
+          "vuid": "VUID-vkCmdPipelineBarrier-srcQueueFamilyIndex-01182",
+          "text": " If fname:{refpage} is called within a render pass instance, the <code>srcQueueFamilyIndex</code> and <code>dstQueueFamilyIndex</code> members of any image memory barrier included in this command <strong class=\"purple\">must</strong> be equal"
         },
         {
           "vuid": "VUID-vkCmdPipelineBarrier-commandBuffer-parameter",
@@ -3137,28 +3241,68 @@
           "text": " The <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from <strong class=\"purple\">must</strong> support transfer, graphics, or compute operations"
         }
       ],
-      "(VK_VERSION_1_1,VK_KHR_multiview)": [
+      "(VK_EXT_conditional_rendering)": [
         {
-          "vuid": "VUID-vkCmdPipelineBarrier-dependencyFlags-01186",
-          "text": " If fname:{refpage} is called outside of a render pass instance, <code>VK_DEPENDENCY_VIEW_LOCAL_BIT</code> <strong class=\"purple\">must</strong> not be included in the dependency flags"
+          "vuid": "VUID-vkCmdPipelineBarrier-None-04092",
+          "text": " If the <a href=\"#features-conditionalRendering\">conditional rendering</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_CONDITIONAL_RENDERING_BIT_EXT</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdPipelineBarrier-None-04092",
+          "text": " If the <a href=\"#features-conditionalRendering\">conditional rendering</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_CONDITIONAL_RENDERING_BIT_EXT</code>"
+        }
+      ],
+      "(VK_EXT_fragment_density_map)": [
+        {
+          "vuid": "VUID-vkCmdPipelineBarrier-None-04093",
+          "text": " If the <a href=\"#features-fragmentDensityMap\">fragment density map</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_FRAGMENT_DENSITY_PROCESS_BIT_EXT</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdPipelineBarrier-None-04093",
+          "text": " If the <a href=\"#features-fragmentDensityMap\">fragment density map</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_FRAGMENT_DENSITY_PROCESS_BIT_EXT</code>"
+        }
+      ],
+      "(VK_EXT_transform_feedback)": [
+        {
+          "vuid": "VUID-vkCmdPipelineBarrier-None-04094",
+          "text": " If the <a href=\"#features-transformFeedback\">transform feedback</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TRANSFORM_FEEDBACK_BIT_EXT</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdPipelineBarrier-None-04094",
+          "text": " If the <a href=\"#features-transformFeedback\">transform feedback</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TRANSFORM_FEEDBACK_BIT_EXT</code>"
         }
       ],
       "(VK_NV_mesh_shader)": [
         {
-          "vuid": "VUID-vkCmdPipelineBarrier-srcStageMask-02115",
-          "text": " If the <a href=\"#features-meshShader\">mesh shaders</a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV</code>"
+          "vuid": "VUID-vkCmdPipelineBarrier-None-04095",
+          "text": " If the <a href=\"#features-meshShader\">mesh shaders</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV</code>"
         },
         {
-          "vuid": "VUID-vkCmdPipelineBarrier-srcStageMask-02116",
-          "text": " If the <a href=\"#features-taskShader\">task shaders</a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV</code>"
+          "vuid": "VUID-vkCmdPipelineBarrier-None-04096",
+          "text": " If the <a href=\"#features-taskShader\">task shaders</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV</code>"
         },
         {
-          "vuid": "VUID-vkCmdPipelineBarrier-dstStageMask-02117",
-          "text": " If the <a href=\"#features-meshShader\">mesh shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV</code>"
+          "vuid": "VUID-vkCmdPipelineBarrier-None-04095",
+          "text": " If the <a href=\"#features-meshShader\">mesh shaders</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV</code>"
         },
         {
-          "vuid": "VUID-vkCmdPipelineBarrier-dstStageMask-02118",
-          "text": " If the <a href=\"#features-taskShader\">task shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV</code>"
+          "vuid": "VUID-vkCmdPipelineBarrier-None-04096",
+          "text": " If the <a href=\"#features-taskShader\">task shaders</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV</code>"
+        }
+      ],
+      "(VK_NV_shading_rate_image)": [
+        {
+          "vuid": "VUID-vkCmdPipelineBarrier-None-04097",
+          "text": " If the <a href=\"#features-shadingRateImage\">shading rate image</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_SHADING_RATE_IMAGE_BIT_NV</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdPipelineBarrier-None-04097",
+          "text": " If the <a href=\"#features-shadingRateImage\">shading rate image</a> feature is not enabled, pname:{stageMaskName} <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_SHADING_RATE_IMAGE_BIT_NV</code>"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_multiview)": [
+        {
+          "vuid": "VUID-vkCmdPipelineBarrier-dependencyFlags-01186",
+          "text": " If fname:{refpage} is called outside of a render pass instance, <code>VK_DEPENDENCY_VIEW_LOCAL_BIT</code> <strong class=\"purple\">must</strong> not be included in the dependency flags"
         }
       ]
     },
@@ -3197,10 +3341,6 @@
           "text": " If <code>size</code> is not equal to <code>VK_WHOLE_SIZE</code>, <code>size</code> <strong class=\"purple\">must</strong> be less than or equal to than the size of <code>buffer</code> minus <code>offset</code>"
         },
         {
-          "vuid": "VUID-VkBufferMemoryBarrier-buffer-01196",
-          "text": " If <code>buffer</code> was created with a sharing mode of <code>VK_SHARING_MODE_EXCLUSIVE</code>, and <code>srcQueueFamilyIndex</code> and <code>dstQueueFamilyIndex</code> are not <code>VK_QUEUE_FAMILY_IGNORED</code>, at least one of them <strong class=\"purple\">must</strong> be the same as the family of the queue that will execute this barrier"
-        },
-        {
           "vuid": "VUID-VkBufferMemoryBarrier-buffer-01931",
           "text": " If <code>buffer</code> is non-sparse then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
         },
@@ -3219,34 +3359,30 @@
       ],
       "!(VK_VERSION_1_1,VK_KHR_external_memory)": [
         {
-          "vuid": "VUID-VkBufferMemoryBarrier-buffer-01190",
-          "text": " If <code>buffer</code> was created with a sharing mode of <code>VK_SHARING_MODE_CONCURRENT</code>, <code>srcQueueFamilyIndex</code> and <code>dstQueueFamilyIndex</code> <strong class=\"purple\">must</strong> both be <code>VK_QUEUE_FAMILY_IGNORED</code>"
+          "vuid": "VUID-VkBufferMemoryBarrier-buffer-04086",
+          "text": " If <code>buffer</code> was created with a sharing mode of <code>VK_SHARING_MODE_EXCLUSIVE</code>, and <code>srcQueueFamilyIndex</code> and <code>dstQueueFamilyIndex</code> are not equal, <code>srcQueueFamilyIndex</code> and <code>dstQueueFamilyIndex</code> <strong class=\"purple\">must</strong> be valid queue families"
         },
         {
-          "vuid": "VUID-VkBufferMemoryBarrier-buffer-01192",
-          "text": " If <code>buffer</code> was created with a sharing mode of <code>VK_SHARING_MODE_EXCLUSIVE</code>, <code>srcQueueFamilyIndex</code> and <code>dstQueueFamilyIndex</code> <strong class=\"purple\">must</strong> either both be <code>VK_QUEUE_FAMILY_IGNORED</code>, or both be a valid queue family (see <a href=\"#devsandqueues-queueprops\">Queue Family Properties</a>)"
+          "vuid": "VUID-VkBufferMemoryBarrier-buffer-01190",
+          "text": " If <code>buffer</code> was created with a sharing mode of <code>VK_SHARING_MODE_CONCURRENT</code>, <code>srcQueueFamilyIndex</code> and <code>dstQueueFamilyIndex</code> <strong class=\"purple\">must</strong> both be <code>VK_QUEUE_FAMILY_IGNORED</code>"
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_external_memory)": [
         {
+          "vuid": "VUID-VkBufferMemoryBarrier-srcQueueFamilyIndex-04087",
+          "text": " If <code>srcQueueFamilyIndex</code> is not equal to <code>dstQueueFamilyIndex</code>, at least one <strong class=\"purple\">must</strong> not be a special queue family reserved for external memory ownership transfers, as described in <a href=\"#synchronization-queue-transfers\">Queue Family Ownership Transfer</a>"
+        },
+        {
+          "vuid": "VUID-VkBufferMemoryBarrier-buffer-04088",
+          "text": " If <code>buffer</code> was created with a sharing mode of <code>VK_SHARING_MODE_CONCURRENT</code>, <code>srcQueueFamilyIndex</code> and <code>dstQueueFamilyIndex</code> are not equal, and one of <code>srcQueueFamilyIndex</code> and <code>dstQueueFamilyIndex</code> is a special queue family values reserved for external memory transfers, the other <strong class=\"purple\">must</strong> be <code>VK_QUEUE_FAMILY_IGNORED</code>"
+        },
+        {
+          "vuid": "VUID-VkBufferMemoryBarrier-buffer-04089",
+          "text": " If <code>buffer</code> was created with a sharing mode of <code>VK_SHARING_MODE_EXCLUSIVE</code>, and <code>srcQueueFamilyIndex</code> and <code>dstQueueFamilyIndex</code> are not equal, <code>srcQueueFamilyIndex</code> and <code>dstQueueFamilyIndex</code> <strong class=\"purple\">must</strong> both be valid queue families, or one of the special queue family values reserved for external memory transfers, as described in <a href=\"#synchronization-queue-transfers\">Queue Family Ownership Transfer</a>"
+        },
+        {
           "vuid": "VUID-VkBufferMemoryBarrier-buffer-01191",
           "text": " If <code>buffer</code> was created with a sharing mode of <code>VK_SHARING_MODE_CONCURRENT</code>, at least one of <code>srcQueueFamilyIndex</code> and <code>dstQueueFamilyIndex</code> <strong class=\"purple\">must</strong> be <code>VK_QUEUE_FAMILY_IGNORED</code>"
-        },
-        {
-          "vuid": "VUID-VkBufferMemoryBarrier-buffer-01763",
-          "text": " If <code>buffer</code> was created with a sharing mode of <code>VK_SHARING_MODE_CONCURRENT</code>, and one of <code>srcQueueFamilyIndex</code> and <code>dstQueueFamilyIndex</code> is <code>VK_QUEUE_FAMILY_IGNORED</code>, the other <strong class=\"purple\">must</strong> be <code>VK_QUEUE_FAMILY_IGNORED</code> or a special queue family reserved for external memory ownership transfers, as described in <a href=\"#synchronization-queue-transfers\">Queue Family Ownership Transfer</a>"
-        },
-        {
-          "vuid": "VUID-VkBufferMemoryBarrier-buffer-01193",
-          "text": " If <code>buffer</code> was created with a sharing mode of <code>VK_SHARING_MODE_EXCLUSIVE</code> and <code>srcQueueFamilyIndex</code> is <code>VK_QUEUE_FAMILY_IGNORED</code>, <code>dstQueueFamilyIndex</code> <strong class=\"purple\">must</strong> also be <code>VK_QUEUE_FAMILY_IGNORED</code>"
-        },
-        {
-          "vuid": "VUID-VkBufferMemoryBarrier-buffer-01764",
-          "text": " If <code>buffer</code> was created with a sharing mode of <code>VK_SHARING_MODE_EXCLUSIVE</code> and <code>srcQueueFamilyIndex</code> is not <code>VK_QUEUE_FAMILY_IGNORED</code>, it <strong class=\"purple\">must</strong> be a valid queue family or a special queue family reserved for external memory transfers, as described in <a href=\"#synchronization-queue-transfers\">Queue Family Ownership Transfer</a>"
-        },
-        {
-          "vuid": "VUID-VkBufferMemoryBarrier-buffer-01765",
-          "text": " If <code>buffer</code> was created with a sharing mode of <code>VK_SHARING_MODE_EXCLUSIVE</code> and <code>dstQueueFamilyIndex</code> is not <code>VK_QUEUE_FAMILY_IGNORED</code>, it <strong class=\"purple\">must</strong> be a valid queue family or a special queue family reserved for external memory transfers, as described in <a href=\"#synchronization-queue-transfers\">Queue Family Ownership Transfer</a>"
         }
       ]
     },
@@ -3282,10 +3418,6 @@
         },
         {
           "vuid": "VUID-VkImageMemoryBarrier-oldLayout-01210",
-          "text": ""
-        },
-        {
-          "vuid": "VUID-VkImageMemoryBarrier-srcQueueFamilyIndex-04064",
           "text": " If <code>srcQueueFamilyIndex</code> and <code>dstQueueFamilyIndex</code> define a <a href=\"#synchronization-queue-transfers\">queue family ownership transfer</a> or <code>oldLayout</code> and <code>newLayout</code> define a <a href=\"#synchronization-image-layout-transitions\">image layout transition</a>, and <code>oldLayout</code> or <code>newLayout</code> is <code>VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL</code> then <code>image</code> <strong class=\"purple\">must</strong> have been created with <code>VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</code> set"
         },
         {
@@ -4870,11 +5002,11 @@
         },
         {
           "vuid": "VUID-VkFramebufferCreateInfo-pAttachments-02555",
-          "text": " If <code>flags</code> does not include <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT</code>, an element of <code>pAttachments</code> that is referenced by <code>fragmentDensityMapAttachment</code> <strong class=\"purple\">must</strong> have a width at least as large as \\(\\lceil{\\frac{width}{maxFragmentDensityTexelSize_{width}}}\\rceil\\)"
+          "text": " If <code>flags</code> does not include <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT</code>, an element of <code>pAttachments</code> that is referenced by <code>fragmentDensityMapAttachment</code> <strong class=\"purple\">must</strong> have a width at least as large as \\(\\left\\lceil{\\frac{width}{maxFragmentDensityTexelSize_{width}}}\\right\\rceil\\)"
         },
         {
           "vuid": "VUID-VkFramebufferCreateInfo-pAttachments-02556",
-          "text": " If <code>flags</code> does not include <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT</code>, an element of <code>pAttachments</code> that is referenced by <code>fragmentDensityMapAttachment</code> <strong class=\"purple\">must</strong> have a height at least as large as \\(\\lceil{\\frac{height}{maxFragmentDensityTexelSize_{height}}}\\rceil\\)"
+          "text": " If <code>flags</code> does not include <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT</code>, an element of <code>pAttachments</code> that is referenced by <code>fragmentDensityMapAttachment</code> <strong class=\"purple\">must</strong> have a height at least as large as \\(\\left\\lceil{\\frac{height}{maxFragmentDensityTexelSize_{height}}}\\right\\rceil\\)"
         }
       ],
       "!(VK_EXT_fragment_density_map)": [
@@ -4972,11 +5104,11 @@
         },
         {
           "vuid": "VUID-VkFramebufferCreateInfo-flags-03196",
-          "text": " If <code>flags</code> includes <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT</code>, the <code>width</code> member of any element of the <code>pAttachmentImageInfos</code> member of a <a href=\"#VkFramebufferAttachmentsCreateInfo\">VkFramebufferAttachmentsCreateInfo</a> structure included in the <code>pNext</code> chain that is referenced by <a href=\"#VkRenderPassFragmentDensityMapCreateInfoEXT\">VkRenderPassFragmentDensityMapCreateInfoEXT</a>::<code>fragmentDensityMapAttachment</code> in <code>renderPass</code> <strong class=\"purple\">must</strong> be greater than or equal to \\(\\lceil{\\frac{width}{maxFragmentDensityTexelSize_{width}}}\\rceil\\)"
+          "text": " If <code>flags</code> includes <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT</code>, the <code>width</code> member of any element of the <code>pAttachmentImageInfos</code> member of a <a href=\"#VkFramebufferAttachmentsCreateInfo\">VkFramebufferAttachmentsCreateInfo</a> structure included in the <code>pNext</code> chain that is referenced by <a href=\"#VkRenderPassFragmentDensityMapCreateInfoEXT\">VkRenderPassFragmentDensityMapCreateInfoEXT</a>::<code>fragmentDensityMapAttachment</code> in <code>renderPass</code> <strong class=\"purple\">must</strong> be greater than or equal to \\(\\left\\lceil{\\frac{width}{maxFragmentDensityTexelSize_{width}}}\\right\\rceil\\)"
         },
         {
           "vuid": "VUID-VkFramebufferCreateInfo-flags-03197",
-          "text": " If <code>flags</code> includes <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT</code>, the <code>height</code> member of any element of the <code>pAttachmentImageInfos</code> member of a <a href=\"#VkFramebufferAttachmentsCreateInfo\">VkFramebufferAttachmentsCreateInfo</a> structure included in the <code>pNext</code> chain that is referenced by <a href=\"#VkRenderPassFragmentDensityMapCreateInfoEXT\">VkRenderPassFragmentDensityMapCreateInfoEXT</a>::<code>fragmentDensityMapAttachment</code> in <code>renderPass</code> <strong class=\"purple\">must</strong> be greater than or equal to \\(\\lceil{\\frac{height}{maxFragmentDensityTexelSize_{height}}}\\rceil\\)"
+          "text": " If <code>flags</code> includes <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT</code>, the <code>height</code> member of any element of the <code>pAttachmentImageInfos</code> member of a <a href=\"#VkFramebufferAttachmentsCreateInfo\">VkFramebufferAttachmentsCreateInfo</a> structure included in the <code>pNext</code> chain that is referenced by <a href=\"#VkRenderPassFragmentDensityMapCreateInfoEXT\">VkRenderPassFragmentDensityMapCreateInfoEXT</a>::<code>fragmentDensityMapAttachment</code> in <code>renderPass</code> <strong class=\"purple\">must</strong> be greater than or equal to \\(\\left\\lceil{\\frac{height}{maxFragmentDensityTexelSize_{height}}}\\right\\rceil\\)"
         }
       ],
       "(VK_VERSION_1_2,VK_KHR_imageless_framebuffer)+(VK_VERSION_1_1,VK_KHR_multiview)": [
@@ -9942,11 +10074,11 @@
         },
         {
           "vuid": "VUID-VkImageCreateInfo-usage-02559",
-          "text": " If <code>usage</code> includes <code>VK_IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT</code>, <code>extent.width</code> <strong class=\"purple\">must</strong> be less than or equal to \\(\\lceil{\\frac{maxFramebufferWidth}{minFragmentDensityTexelSize_{width}}}\\rceil\\)"
+          "text": " If <code>usage</code> includes <code>VK_IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT</code>, <code>extent.width</code> <strong class=\"purple\">must</strong> be less than or equal to \\(\\left\\lceil{\\frac{maxFramebufferWidth}{minFragmentDensityTexelSize_{width}}}\\right\\rceil\\)"
         },
         {
           "vuid": "VUID-VkImageCreateInfo-usage-02560",
-          "text": " If <code>usage</code> includes <code>VK_IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT</code>, <code>extent.height</code> <strong class=\"purple\">must</strong> be less than or equal to \\(\\lceil{\\frac{maxFramebufferHeight}{minFragmentDensityTexelSize_{height}}}\\rceil\\)"
+          "text": " If <code>usage</code> includes <code>VK_IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT</code>, <code>extent.height</code> <strong class=\"purple\">must</strong> be less than or equal to \\(\\left\\lceil{\\frac{maxFramebufferHeight}{minFragmentDensityTexelSize_{height}}}\\right\\rceil\\)"
         },
         {
           "vuid": "VUID-VkImageCreateInfo-flags-02565",
@@ -10232,18 +10364,6 @@
     },
     "VkImageFormatListCreateInfo": {
       "(VK_VERSION_1_2,VK_KHR_image_format_list)": [
-        {
-          "vuid": "VUID-VkImageFormatListCreateInfo-viewFormatCount-01578",
-          "text": " If <code>viewFormatCount</code> is not <code>0</code>, all of the formats in the <code>pViewFormats</code> array <strong class=\"purple\">must</strong> be compatible with the format specified in the <code>format</code> field of <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>, as described in the <a href=\"#formats-compatibility\">compatibility table</a>"
-        },
-        {
-          "vuid": "VUID-VkImageFormatListCreateInfo-flags-01579",
-          "text": " If <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>flags</code> does not contain <code>VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT</code>, <code>viewFormatCount</code> <strong class=\"purple\">must</strong> be <code>0</code> or <code>1</code>"
-        },
-        {
-          "vuid": "VUID-VkImageFormatListCreateInfo-viewFormatCount-01580",
-          "text": " If <code>viewFormatCount</code> is not <code>0</code>, <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>format</code> <strong class=\"purple\">must</strong> be in <code>pViewFormats</code>"
-        },
         {
           "vuid": "VUID-VkImageFormatListCreateInfo-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO</code>"
@@ -10684,7 +10804,15 @@
       "(VK_VERSION_1_2,VK_KHR_image_format_list)": [
         {
           "vuid": "VUID-VkImageViewCreateInfo-pNext-01585",
-          "text": " If a <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a> structure was included in the <code>pNext</code> chain of the <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> structure used when creating <code>image</code> and the <code>viewFormatCount</code> field of <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a> is not zero then <code>format</code> <strong class=\"purple\">must</strong> be one of the formats in <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a>::<code>pViewFormats</code>"
+          "text": " If a <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a> structure was included in the <code>pNext</code> chain of the <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> structure used when creating <code>image</code> and <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a>::<code>viewFormatCount</code> is not zero then <code>format</code> <strong class=\"purple\">must</strong> be one of the formats in <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a>::<code>pViewFormats</code>"
+        },
+        {
+          "vuid": "VUID-VkImageViewCreateInfo-pNext-04082",
+          "text": " If a <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a> structure was included in the <code>pNext</code> chain of the <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> structure used when creating <code>image</code> and <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a>::<code>viewFormatCount</code> is not zero then all of the formats in <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a>::<code>pViewFormats</code> <strong class=\"purple\">must</strong> be compatible with the <code>format</code> as described in the <a href=\"#formats-compatibility\">compatibility table</a>"
+        },
+        {
+          "vuid": "VUID-VkImageViewCreateInfo-flags-04083",
+          "text": " If <code>flags</code> dose not contain <code>VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT</code> and the <code>pNext</code> chain include a <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a> structure then <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a>::<code>viewFormatCount</code> <strong class=\"purple\">must</strong> be <code>0</code> or <code>1</code>"
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
@@ -10698,7 +10826,7 @@
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-pNext-01970",
-          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkSamplerYcbcrConversionInfo\">VkSamplerYcbcrConversionInfo</a> structure with a <code>conversion</code> value other than <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, all members of <code>components</code> <strong class=\"purple\">must</strong> have the value <code>VK_COMPONENT_SWIZZLE_IDENTITY</code>"
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkSamplerYcbcrConversionInfo\">VkSamplerYcbcrConversionInfo</a> structure with a <code>conversion</code> value other than <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, all members of <code>components</code> <strong class=\"purple\">must</strong> have the <a href=\"#resources-image-views-identity-mappings\">identity swizzle</a>"
         }
       ],
       "!(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
@@ -10718,7 +10846,7 @@
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-image-02401",
-          "text": " If <code>image</code> has an <a href=\"#memory-external-android-hardware-buffer-external-formats\">external format</a>, all members of <code>components</code> <strong class=\"purple\">must</strong> be <code>VK_COMPONENT_SWIZZLE_IDENTITY</code>"
+          "text": " If <code>image</code> has an <a href=\"#memory-external-android-hardware-buffer-external-formats\">external format</a>, all members of <code>components</code> <strong class=\"purple\">must</strong> be the <a href=\"#resources-image-views-identity-mappings\">identity swizzle</a>"
         }
       ],
       "(VK_NV_shading_rate_image)": [
@@ -10835,8 +10963,8 @@
           "text": " If <code>decodeMode</code> is <code>VK_FORMAT_R8G8B8A8_UNORM</code> the image view <strong class=\"purple\">must</strong> not include blocks using any of the ASTC HDR modes"
         },
         {
-          "vuid": "VUID-VkImageViewASTCDecodeModeEXT-format-02233",
-          "text": " <code>format</code> of the image view <strong class=\"purple\">must</strong> be one of <code>VK_FORMAT_ASTC_4x4_UNORM_BLOCK</code>, <code>VK_FORMAT_ASTC_4x4_SRGB_BLOCK</code>, <code>VK_FORMAT_ASTC_5x4_UNORM_BLOCK</code>, <code>VK_FORMAT_ASTC_5x4_SRGB_BLOCK</code>, <code>VK_FORMAT_ASTC_5x5_UNORM_BLOCK</code>, <code>VK_FORMAT_ASTC_5x5_SRGB_BLOCK</code>, <code>VK_FORMAT_ASTC_6x5_UNORM_BLOCK</code>, <code>VK_FORMAT_ASTC_6x5_SRGB_BLOCK</code>, <code>VK_FORMAT_ASTC_6x6_UNORM_BLOCK</code>, <code>VK_FORMAT_ASTC_6x6_SRGB_BLOCK</code>, <code>VK_FORMAT_ASTC_8x5_UNORM_BLOCK</code>, <code>VK_FORMAT_ASTC_8x5_SRGB_BLOCK</code>, <code>VK_FORMAT_ASTC_8x6_UNORM_BLOCK</code>, <code>VK_FORMAT_ASTC_8x6_SRGB_BLOCK</code>, <code>VK_FORMAT_ASTC_8x8_UNORM_BLOCK</code>, <code>VK_FORMAT_ASTC_8x8_SRGB_BLOCK</code>, <code>VK_FORMAT_ASTC_10x5_UNORM_BLOCK</code>, <code>VK_FORMAT_ASTC_10x5_SRGB_BLOCK</code>, <code>VK_FORMAT_ASTC_10x6_UNORM_BLOCK</code>, <code>VK_FORMAT_ASTC_10x6_SRGB_BLOCK</code>, <code>VK_FORMAT_ASTC_10x8_UNORM_BLOCK</code>, <code>VK_FORMAT_ASTC_10x8_SRGB_BLOCK</code>, <code>VK_FORMAT_ASTC_10x10_UNORM_BLOCK</code>, <code>VK_FORMAT_ASTC_10x10_SRGB_BLOCK</code>, <code>VK_FORMAT_ASTC_12x10_UNORM_BLOCK</code>, <code>VK_FORMAT_ASTC_12x10_SRGB_BLOCK</code>, <code>VK_FORMAT_ASTC_12x12_UNORM_BLOCK</code>, or <code>VK_FORMAT_ASTC_12x12_SRGB_BLOCK</code>"
+          "vuid": "VUID-VkImageViewASTCDecodeModeEXT-format-04084",
+          "text": " <code>format</code> of the image view <strong class=\"purple\">must</strong> be one of the <a href=\"#appendix-compressedtex-astc\">ASTC Compressed Image Formats</a>"
         },
         {
           "vuid": "VUID-VkImageViewASTCDecodeModeEXT-sType-sType",
@@ -12647,6 +12775,10 @@
           "text": " If <code>borderColor</code> is set to one of <code>VK_BORDER_COLOR_FLOAT_CUSTOM_EXT</code> or <code>VK_BORDER_COLOR_INT_CUSTOM_EXT</code>, then a <a href=\"#VkSamplerCustomBorderColorCreateInfoEXT\">VkSamplerCustomBorderColorCreateInfoEXT</a> <strong class=\"purple\">must</strong> be present in the <code>pNext</code> chain"
         },
         {
+          "vuid": "VUID-VkSamplerCreateInfo-customBorderColors-04085",
+          "text": " If the <a href=\"#features-customBorderColors\"><code>customBorderColors</code></a> feature is not enabled, <code>borderColor</code> <strong class=\"purple\">must</strong> not be set to <code>VK_BORDER_COLOR_FLOAT_CUSTOM_EXT</code> or <code>VK_BORDER_COLOR_INT_CUSTOM_EXT</code>"
+        },
+        {
           "vuid": "VUID-VkSamplerCreateInfo-None-04012",
           "text": " The maximum number of samplers with custom border colors which <strong class=\"purple\">can</strong> be simultaneously created on a device is implementation-dependent and specified by the <a href=\"#limits-maxCustomBorderColorSamplers\">maxCustomBorderColorSamplers</a> member of the <a href=\"#VkPhysicalDeviceCustomBorderColorPropertiesEXT\">VkPhysicalDeviceCustomBorderColorPropertiesEXT</a> structure"
         }
@@ -12764,23 +12896,23 @@
         },
         {
           "vuid": "VUID-VkSamplerYcbcrConversionCreateInfo-components-02581",
-          "text": " If the format has a <code>_422</code> or <code>_420</code> suffix, then <code>components.g</code> <strong class=\"purple\">must</strong> be <code>VK_COMPONENT_SWIZZLE_IDENTITY</code>"
+          "text": " If the format has a <code>_422</code> or <code>_420</code> suffix, then <code>components.g</code> <strong class=\"purple\">must</strong> be the <a href=\"#resources-image-views-identity-mappings\">identity swizzle</a>"
         },
         {
           "vuid": "VUID-VkSamplerYcbcrConversionCreateInfo-components-02582",
-          "text": " If the format has a <code>_422</code> or <code>_420</code> suffix, then <code>components.a</code> <strong class=\"purple\">must</strong> be <code>VK_COMPONENT_SWIZZLE_IDENTITY</code>, <code>VK_COMPONENT_SWIZZLE_ONE</code>, or <code>VK_COMPONENT_SWIZZLE_ZERO</code>"
+          "text": " If the format has a <code>_422</code> or <code>_420</code> suffix, then <code>components.a</code> <strong class=\"purple\">must</strong> be the <a href=\"#resources-image-views-identity-mappings\">identity swizzle</a>, <code>VK_COMPONENT_SWIZZLE_ONE</code>, or <code>VK_COMPONENT_SWIZZLE_ZERO</code>"
         },
         {
           "vuid": "VUID-VkSamplerYcbcrConversionCreateInfo-components-02583",
-          "text": " If the format has a <code>_422</code> or <code>_420</code> suffix, then <code>components.r</code> <strong class=\"purple\">must</strong> be <code>VK_COMPONENT_SWIZZLE_IDENTITY</code> or <code>VK_COMPONENT_SWIZZLE_B</code>"
+          "text": " If the format has a <code>_422</code> or <code>_420</code> suffix, then <code>components.r</code> <strong class=\"purple\">must</strong> be the <a href=\"#resources-image-views-identity-mappings\">identity swizzle</a> or <code>VK_COMPONENT_SWIZZLE_B</code>"
         },
         {
           "vuid": "VUID-VkSamplerYcbcrConversionCreateInfo-components-02584",
-          "text": " If the format has a <code>_422</code> or <code>_420</code> suffix, then <code>components.b</code> <strong class=\"purple\">must</strong> be <code>VK_COMPONENT_SWIZZLE_IDENTITY</code> or <code>VK_COMPONENT_SWIZZLE_R</code>"
+          "text": " If the format has a <code>_422</code> or <code>_420</code> suffix, then <code>components.b</code> <strong class=\"purple\">must</strong> be the <a href=\"#resources-image-views-identity-mappings\">identity swizzle</a> or <code>VK_COMPONENT_SWIZZLE_R</code>"
         },
         {
           "vuid": "VUID-VkSamplerYcbcrConversionCreateInfo-components-02585",
-          "text": " If the format has a <code>_422</code> or <code>_420</code> suffix, and if either <code>components.r</code> or <code>components.b</code> is <code>VK_COMPONENT_SWIZZLE_IDENTITY</code>, both values <strong class=\"purple\">must</strong> be <code>VK_COMPONENT_SWIZZLE_IDENTITY</code>"
+          "text": " If the format has a <code>_422</code> or <code>_420</code> suffix, and if either <code>components.r</code> or <code>components.b</code> is the <a href=\"#resources-image-views-identity-mappings\">identity swizzle</a>, both values <strong class=\"purple\">must</strong> be the identity swizzle"
         },
         {
           "vuid": "VUID-VkSamplerYcbcrConversionCreateInfo-ycbcrModel-01655",
@@ -17974,7 +18106,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexed-indexSize-00463",
-          "text": " <span class=\"eq\">(<code>indexSize</code> * (<code>firstIndex</code> &#43; <code>indexCount</code>) &#43; <code>offset</code>)</span> <strong class=\"purple\">must</strong> be less than or equal to the size of the bound index buffer, with <code>indexSize</code> being based on the type specified by <code>indexType</code>, where the index buffer, <code>indexType</code>, and <code>offset</code> are specified via <code>vkCmdBindIndexBuffer</code>"
+          "text": " <span class=\"eq\">(<code>indexSize</code> {times} (<code>firstIndex</code> &#43; <code>indexCount</code>) &#43; <code>offset</code>)</span> <strong class=\"purple\">must</strong> be less than or equal to the size of the bound index buffer, with <code>indexSize</code> being based on the type specified by <code>indexType</code>, where the index buffer, <code>indexType</code>, and <code>offset</code> are specified via <code>vkCmdBindIndexBuffer</code>"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexed-commandBuffer-parameter",
@@ -18674,7 +18806,7 @@
         },
         {
           "vuid": "VUID-VkDrawIndexedIndirectCommand-indexSize-00553",
-          "text": " <span class=\"eq\">(<code>indexSize</code> * (<code>firstIndex</code> &#43; <code>indexCount</code>) &#43; <code>offset</code>)</span> <strong class=\"purple\">must</strong> be less than or equal to the size of the bound index buffer, with <code>indexSize</code> being based on the type specified by <code>indexType</code>, where the index buffer, <code>indexType</code>, and <code>offset</code> are specified via <code>vkCmdBindIndexBuffer</code>"
+          "text": " <span class=\"eq\">(<code>indexSize</code> {times} (<code>firstIndex</code> &#43; <code>indexCount</code>) &#43; <code>offset</code>)</span> <strong class=\"purple\">must</strong> be less than or equal to the size of the bound index buffer, with <code>indexSize</code> being based on the type specified by <code>indexType</code>, where the index buffer, <code>indexType</code>, and <code>offset</code> are specified via <code>vkCmdBindIndexBuffer</code>"
         },
         {
           "vuid": "VUID-VkDrawIndexedIndirectCommand-firstInstance-00554",
@@ -24787,6 +24919,14 @@
         {
           "vuid": "VUID-VkSwapchainCreateInfoKHR-flags-03168",
           "text": " If <code>flags</code> contains <code>VK_SWAPCHAIN_CREATE_MUTABLE_FORMAT_BIT_KHR</code> then the <code>pNext</code> chain <strong class=\"purple\">must</strong> include a <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a> structure with a <code>viewFormatCount</code> greater than zero and <code>pViewFormats</code> <strong class=\"purple\">must</strong> have an element equal to <code>imageFormat</code>"
+        },
+        {
+          "vuid": "VUID-VkSwapchainCreateInfoKHR-pNext-04099",
+          "text": " If a <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a> structure was included in the <code>pNext</code> chain and <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a>::<code>viewFormatCount</code> is not zero then all of the formats in <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a>::<code>pViewFormats</code> <strong class=\"purple\">must</strong> be compatible with the <code>format</code> as described in the <a href=\"#formats-compatibility\">compatibility table</a>"
+        },
+        {
+          "vuid": "VUID-VkSwapchainCreateInfoKHR-flags-04100",
+          "text": " If <code>flags</code> dose not contain <code>VK_SWAPCHAIN_CREATE_MUTABLE_FORMAT_BIT_KHR</code> and the <code>pNext</code> chain include a <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a> structure then <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a>::<code>viewFormatCount</code> <strong class=\"purple\">must</strong> be <code>0</code> or <code>1</code>"
         }
       ],
       "(VK_KHR_surface)+(VK_KHR_swapchain)+(VK_KHR_surface_protected_capabilities)": [
@@ -28053,10 +28193,6 @@
         {
           "vuid": "VUID-VkPhysicalDevicePrivateDataFeaturesEXT-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIVATE_DATA_FEATURES_EXT</code>"
-        },
-        {
-          "vuid": "VUID-VkPhysicalDevicePrivateDataFeaturesEXT-pNext-pNext",
-          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
         }
       ]
     },
