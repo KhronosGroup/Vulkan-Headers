@@ -8,6 +8,24 @@
 #ifndef VULKAN_HPP
 #define VULKAN_HPP
 
+#if defined( _MSVC_LANG )
+#  define VULKAN_HPP_CPLUSPLUS _MSVC_LANG
+#else
+#  define VULKAN_HPP_CPLUSPLUS __cplusplus
+#endif
+
+#if VULKAN_HPP_CPLUSPLUS < 201103L
+static_assert( false, "vulkan.hpp needs at least c++ standard version 11" );
+#elif VULKAN_HPP_CPLUSPLUS < 201402L
+#  define VULKAN_HPP_CPP_VERSION 11
+#elif VULKAN_HPP_CPLUSPLUS < 201703L
+#  define VULKAN_HPP_CPP_VERSION 14
+#elif VULKAN_HPP_CPLUSPLUS < 202002L
+#  define VULKAN_HPP_CPP_VERSION 17
+#else
+#  define VULKAN_HPP_CPP_VERSION 20
+#endif
+
 #include <algorithm>
 #include <array>
 #include <cstddef>
@@ -20,6 +38,10 @@
 #include <tuple>
 #include <type_traits>
 #include <vulkan/vulkan.h>
+
+#if 17 <= VULKAN_HPP_CPP_VERSION
+#include <string_view>
+#endif
 
 #if defined(VULKAN_HPP_DISABLE_ENHANCED_MODE)
 # if !defined(VULKAN_HPP_NO_SMART_HANDLE)
@@ -53,7 +75,7 @@
 #endif
 
 
-static_assert( VK_HEADER_VERSION ==  144 , "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION ==  145 , "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
@@ -141,7 +163,7 @@ static_assert( VK_HEADER_VERSION ==  144 , "Wrong VK_HEADER_VERSION!" );
 # endif
 #endif
 
-#if __cplusplus >= 201402L
+#if 14 <= VULKAN_HPP_CPP_VERSION
 #  define VULKAN_HPP_DEPRECATED( msg ) [[deprecated( msg )]]
 #else
 #  define VULKAN_HPP_DEPRECATED( msg )
@@ -340,6 +362,56 @@ namespace VULKAN_HPP_NAMESPACE
     operator T * () VULKAN_HPP_NOEXCEPT
     {
       return this->data();
+    }
+
+    template <typename B = T, typename std::enable_if<std::is_same<B, char>::value, int>::type = 0>
+    operator std::string const () const VULKAN_HPP_NOEXCEPT
+    {
+      return std::string( this->data() );
+    }
+
+#if 17 <= VULKAN_HPP_CPP_VERSION
+    template <typename B = T, typename std::enable_if<std::is_same<B, char>::value, int>::type = 0>
+    operator std::string_view const () const VULKAN_HPP_NOEXCEPT
+    {
+      return std::string_view( this->data() );
+    }
+#endif
+
+    template <typename B = T, typename std::enable_if<std::is_same<B, char>::value, int>::type = 0>
+    bool operator<( ArrayWrapper1D<char, N> const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return *static_cast<std::array<char, N> const *>( this ) < *static_cast<std::array<char, N> const *>( &rhs );
+    }
+
+    template <typename B = T, typename std::enable_if<std::is_same<B, char>::value, int>::type = 0>
+    bool operator<=( ArrayWrapper1D<char, N> const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return *static_cast<std::array<char, N> const *>( this ) <= *static_cast<std::array<char, N> const *>( &rhs );
+    }
+
+    template <typename B = T, typename std::enable_if<std::is_same<B, char>::value, int>::type = 0>
+    bool operator>( ArrayWrapper1D<char, N> const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return *static_cast<std::array<char, N> const *>( this ) > *static_cast<std::array<char, N> const *>( &rhs );
+    }
+
+    template <typename B = T, typename std::enable_if<std::is_same<B, char>::value, int>::type = 0>
+    bool operator>=( ArrayWrapper1D<char, N> const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return *static_cast<std::array<char, N> const *>( this ) >= *static_cast<std::array<char, N> const *>( &rhs );
+    }
+
+    template <typename B = T, typename std::enable_if<std::is_same<B, char>::value, int>::type = 0>
+    bool operator==( ArrayWrapper1D<char, N> const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return *static_cast<std::array<char, N> const *>( this ) == *static_cast<std::array<char, N> const *>( &rhs );
+    }
+
+    template <typename B = T, typename std::enable_if<std::is_same<B, char>::value, int>::type = 0>
+    bool operator!=( ArrayWrapper1D<char, N> const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return *static_cast<std::array<char, N> const *>( this ) != *static_cast<std::array<char, N> const *>( &rhs );
     }
   };
 
@@ -1044,6 +1116,11 @@ namespace VULKAN_HPP_NAMESPACE
       return ::vkCmdBindVertexBuffers( commandBuffer, firstBinding, bindingCount, pBuffers, pOffsets );
     }
 
+    void vkCmdBindVertexBuffers2EXT( VkCommandBuffer commandBuffer, uint32_t firstBinding, uint32_t bindingCount, const VkBuffer* pBuffers, const VkDeviceSize* pOffsets, const VkDeviceSize* pSizes, const VkDeviceSize* pStrides ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkCmdBindVertexBuffers2EXT( commandBuffer, firstBinding, bindingCount, pBuffers, pOffsets, pSizes, pStrides );
+    }
+
     void vkCmdBlitImage( VkCommandBuffer commandBuffer, VkImage srcImage, VkImageLayout srcImageLayout, VkImage dstImage, VkImageLayout dstImageLayout, uint32_t regionCount, const VkImageBlit* pRegions, VkFilter filter ) const VULKAN_HPP_NOEXCEPT
     {
       return ::vkCmdBlitImage( commandBuffer, srcImage, srcImageLayout, dstImage, dstImageLayout, regionCount, pRegions, filter );
@@ -1369,6 +1446,11 @@ namespace VULKAN_HPP_NAMESPACE
       return ::vkCmdSetCoarseSampleOrderNV( commandBuffer, sampleOrderType, customSampleOrderCount, pCustomSampleOrders );
     }
 
+    void vkCmdSetCullModeEXT( VkCommandBuffer commandBuffer, VkCullModeFlags cullMode ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkCmdSetCullModeEXT( commandBuffer, cullMode );
+    }
+
     void vkCmdSetDepthBias( VkCommandBuffer commandBuffer, float depthBiasConstantFactor, float depthBiasClamp, float depthBiasSlopeFactor ) const VULKAN_HPP_NOEXCEPT
     {
       return ::vkCmdSetDepthBias( commandBuffer, depthBiasConstantFactor, depthBiasClamp, depthBiasSlopeFactor );
@@ -1377,6 +1459,26 @@ namespace VULKAN_HPP_NAMESPACE
     void vkCmdSetDepthBounds( VkCommandBuffer commandBuffer, float minDepthBounds, float maxDepthBounds ) const VULKAN_HPP_NOEXCEPT
     {
       return ::vkCmdSetDepthBounds( commandBuffer, minDepthBounds, maxDepthBounds );
+    }
+
+    void vkCmdSetDepthBoundsTestEnableEXT( VkCommandBuffer commandBuffer, VkBool32 depthBoundsTestEnable ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkCmdSetDepthBoundsTestEnableEXT( commandBuffer, depthBoundsTestEnable );
+    }
+
+    void vkCmdSetDepthCompareOpEXT( VkCommandBuffer commandBuffer, VkCompareOp depthCompareOp ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkCmdSetDepthCompareOpEXT( commandBuffer, depthCompareOp );
+    }
+
+    void vkCmdSetDepthTestEnableEXT( VkCommandBuffer commandBuffer, VkBool32 depthTestEnable ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkCmdSetDepthTestEnableEXT( commandBuffer, depthTestEnable );
+    }
+
+    void vkCmdSetDepthWriteEnableEXT( VkCommandBuffer commandBuffer, VkBool32 depthWriteEnable ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkCmdSetDepthWriteEnableEXT( commandBuffer, depthWriteEnable );
     }
 
     void vkCmdSetDeviceMask( VkCommandBuffer commandBuffer, uint32_t deviceMask ) const VULKAN_HPP_NOEXCEPT
@@ -1404,6 +1506,11 @@ namespace VULKAN_HPP_NAMESPACE
       return ::vkCmdSetExclusiveScissorNV( commandBuffer, firstExclusiveScissor, exclusiveScissorCount, pExclusiveScissors );
     }
 
+    void vkCmdSetFrontFaceEXT( VkCommandBuffer commandBuffer, VkFrontFace frontFace ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkCmdSetFrontFaceEXT( commandBuffer, frontFace );
+    }
+
     void vkCmdSetLineStippleEXT( VkCommandBuffer commandBuffer, uint32_t lineStippleFactor, uint16_t lineStipplePattern ) const VULKAN_HPP_NOEXCEPT
     {
       return ::vkCmdSetLineStippleEXT( commandBuffer, lineStippleFactor, lineStipplePattern );
@@ -1429,6 +1536,11 @@ namespace VULKAN_HPP_NAMESPACE
       return ::vkCmdSetPerformanceStreamMarkerINTEL( commandBuffer, pMarkerInfo );
     }
 
+    void vkCmdSetPrimitiveTopologyEXT( VkCommandBuffer commandBuffer, VkPrimitiveTopology primitiveTopology ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkCmdSetPrimitiveTopologyEXT( commandBuffer, primitiveTopology );
+    }
+
     void vkCmdSetSampleLocationsEXT( VkCommandBuffer commandBuffer, const VkSampleLocationsInfoEXT* pSampleLocationsInfo ) const VULKAN_HPP_NOEXCEPT
     {
       return ::vkCmdSetSampleLocationsEXT( commandBuffer, pSampleLocationsInfo );
@@ -1439,14 +1551,29 @@ namespace VULKAN_HPP_NAMESPACE
       return ::vkCmdSetScissor( commandBuffer, firstScissor, scissorCount, pScissors );
     }
 
+    void vkCmdSetScissorWithCountEXT( VkCommandBuffer commandBuffer, uint32_t scissorCount, const VkRect2D* pScissors ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkCmdSetScissorWithCountEXT( commandBuffer, scissorCount, pScissors );
+    }
+
     void vkCmdSetStencilCompareMask( VkCommandBuffer commandBuffer, VkStencilFaceFlags faceMask, uint32_t compareMask ) const VULKAN_HPP_NOEXCEPT
     {
       return ::vkCmdSetStencilCompareMask( commandBuffer, faceMask, compareMask );
     }
 
+    void vkCmdSetStencilOpEXT( VkCommandBuffer commandBuffer, VkStencilFaceFlags faceMask, VkStencilOp failOp, VkStencilOp passOp, VkStencilOp depthFailOp, VkCompareOp compareOp ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkCmdSetStencilOpEXT( commandBuffer, faceMask, failOp, passOp, depthFailOp, compareOp );
+    }
+
     void vkCmdSetStencilReference( VkCommandBuffer commandBuffer, VkStencilFaceFlags faceMask, uint32_t reference ) const VULKAN_HPP_NOEXCEPT
     {
       return ::vkCmdSetStencilReference( commandBuffer, faceMask, reference );
+    }
+
+    void vkCmdSetStencilTestEnableEXT( VkCommandBuffer commandBuffer, VkBool32 stencilTestEnable ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkCmdSetStencilTestEnableEXT( commandBuffer, stencilTestEnable );
     }
 
     void vkCmdSetStencilWriteMask( VkCommandBuffer commandBuffer, VkStencilFaceFlags faceMask, uint32_t writeMask ) const VULKAN_HPP_NOEXCEPT
@@ -1467,6 +1594,11 @@ namespace VULKAN_HPP_NAMESPACE
     void vkCmdSetViewportWScalingNV( VkCommandBuffer commandBuffer, uint32_t firstViewport, uint32_t viewportCount, const VkViewportWScalingNV* pViewportWScalings ) const VULKAN_HPP_NOEXCEPT
     {
       return ::vkCmdSetViewportWScalingNV( commandBuffer, firstViewport, viewportCount, pViewportWScalings );
+    }
+
+    void vkCmdSetViewportWithCountEXT( VkCommandBuffer commandBuffer, uint32_t viewportCount, const VkViewport* pViewports ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkCmdSetViewportWithCountEXT( commandBuffer, viewportCount, pViewports );
     }
 
 #ifdef VK_ENABLE_BETA_EXTENSIONS
@@ -3257,34 +3389,39 @@ namespace VULKAN_HPP_NAMESPACE
   template <typename OwnerType, typename Dispatch>
   class ObjectFree
   {
-    public:
-      ObjectFree()
-        : m_owner()
-        , m_allocationCallbacks( nullptr )
-        , m_dispatch( nullptr )
-      {}
+  public:
+    ObjectFree() : m_owner(), m_allocationCallbacks( nullptr ), m_dispatch( nullptr ) {}
 
-      ObjectFree( OwnerType owner, Optional<const AllocationCallbacks> allocationCallbacks, Dispatch const &dispatch ) VULKAN_HPP_NOEXCEPT
-        : m_owner( owner )
-        , m_allocationCallbacks( allocationCallbacks )
-        , m_dispatch( &dispatch )
-      {}
+    ObjectFree( OwnerType                           owner,
+                Optional<const AllocationCallbacks> allocationCallbacks = nullptr,
+                Dispatch const &                    dispatch = VULKAN_HPP_DEFAULT_DISPATCHER ) VULKAN_HPP_NOEXCEPT
+      : m_owner( owner )
+      , m_allocationCallbacks( allocationCallbacks )
+      , m_dispatch( &dispatch )
+    {}
 
-      OwnerType getOwner() const VULKAN_HPP_NOEXCEPT { return m_owner; }
-      Optional<const AllocationCallbacks> getAllocator() const VULKAN_HPP_NOEXCEPT { return m_allocationCallbacks; }
+    OwnerType getOwner() const VULKAN_HPP_NOEXCEPT
+    {
+      return m_owner;
+    }
 
-    protected:
-      template <typename T>
-      void destroy(T t) VULKAN_HPP_NOEXCEPT
-      {
-        VULKAN_HPP_ASSERT( m_owner && m_dispatch );
-        m_owner.free( t, m_allocationCallbacks, *m_dispatch );
-      }
+    Optional<const AllocationCallbacks> getAllocator() const VULKAN_HPP_NOEXCEPT
+    {
+      return m_allocationCallbacks;
+    }
 
-    private:
-      OwnerType m_owner;
-      Optional<const AllocationCallbacks> m_allocationCallbacks;
-      Dispatch const* m_dispatch;
+  protected:
+    template <typename T>
+    void destroy( T t ) VULKAN_HPP_NOEXCEPT
+    {
+      VULKAN_HPP_ASSERT( m_owner && m_dispatch );
+      m_owner.free( t, m_allocationCallbacks, *m_dispatch );
+    }
+
+  private:
+    OwnerType                           m_owner;
+    Optional<const AllocationCallbacks> m_allocationCallbacks;
+    Dispatch const *                    m_dispatch;
   };
 
   template <typename OwnerType, typename PoolType, typename Dispatch>
@@ -4683,7 +4820,19 @@ namespace VULKAN_HPP_NAMESPACE
     eViewportShadingRatePaletteNV = VK_DYNAMIC_STATE_VIEWPORT_SHADING_RATE_PALETTE_NV,
     eViewportCoarseSampleOrderNV = VK_DYNAMIC_STATE_VIEWPORT_COARSE_SAMPLE_ORDER_NV,
     eExclusiveScissorNV = VK_DYNAMIC_STATE_EXCLUSIVE_SCISSOR_NV,
-    eLineStippleEXT = VK_DYNAMIC_STATE_LINE_STIPPLE_EXT
+    eLineStippleEXT = VK_DYNAMIC_STATE_LINE_STIPPLE_EXT,
+    eCullModeEXT = VK_DYNAMIC_STATE_CULL_MODE_EXT,
+    eFrontFaceEXT = VK_DYNAMIC_STATE_FRONT_FACE_EXT,
+    ePrimitiveTopologyEXT = VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY_EXT,
+    eViewportWithCountEXT = VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT,
+    eScissorWithCountEXT = VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT,
+    eVertexInputBindingStrideEXT = VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT,
+    eDepthTestEnableEXT = VK_DYNAMIC_STATE_DEPTH_TEST_ENABLE_EXT,
+    eDepthWriteEnableEXT = VK_DYNAMIC_STATE_DEPTH_WRITE_ENABLE_EXT,
+    eDepthCompareOpEXT = VK_DYNAMIC_STATE_DEPTH_COMPARE_OP_EXT,
+    eDepthBoundsTestEnableEXT = VK_DYNAMIC_STATE_DEPTH_BOUNDS_TEST_ENABLE_EXT,
+    eStencilTestEnableEXT = VK_DYNAMIC_STATE_STENCIL_TEST_ENABLE_EXT,
+    eStencilOpEXT = VK_DYNAMIC_STATE_STENCIL_OP_EXT
   };
 
   VULKAN_HPP_INLINE std::string to_string( DynamicState value )
@@ -4706,6 +4855,18 @@ namespace VULKAN_HPP_NAMESPACE
       case DynamicState::eViewportCoarseSampleOrderNV : return "ViewportCoarseSampleOrderNV";
       case DynamicState::eExclusiveScissorNV : return "ExclusiveScissorNV";
       case DynamicState::eLineStippleEXT : return "LineStippleEXT";
+      case DynamicState::eCullModeEXT : return "CullModeEXT";
+      case DynamicState::eFrontFaceEXT : return "FrontFaceEXT";
+      case DynamicState::ePrimitiveTopologyEXT : return "PrimitiveTopologyEXT";
+      case DynamicState::eViewportWithCountEXT : return "ViewportWithCountEXT";
+      case DynamicState::eScissorWithCountEXT : return "ScissorWithCountEXT";
+      case DynamicState::eVertexInputBindingStrideEXT : return "VertexInputBindingStrideEXT";
+      case DynamicState::eDepthTestEnableEXT : return "DepthTestEnableEXT";
+      case DynamicState::eDepthWriteEnableEXT : return "DepthWriteEnableEXT";
+      case DynamicState::eDepthCompareOpEXT : return "DepthCompareOpEXT";
+      case DynamicState::eDepthBoundsTestEnableEXT : return "DepthBoundsTestEnableEXT";
+      case DynamicState::eStencilTestEnableEXT : return "StencilTestEnableEXT";
+      case DynamicState::eStencilOpEXT : return "StencilOpEXT";
       default: return "invalid";
     }
   }
@@ -6236,7 +6397,7 @@ namespace VULKAN_HPP_NAMESPACE
   }
 
   template<ObjectType value>
-  struct VULKAN_HPP_DEPRECATED("vk::cpp_type is deprecated. Use vk::CppType instead.") cpp_type
+  struct cpp_type
   {};
 
   enum class PeerMemoryFeatureFlagBits : VkPeerMemoryFeatureFlags
@@ -7957,6 +8118,7 @@ namespace VULKAN_HPP_NAMESPACE
     ePipelineRasterizationLineStateCreateInfoEXT = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO_EXT,
     ePhysicalDeviceLineRasterizationPropertiesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES_EXT,
     ePhysicalDeviceIndexTypeUint8FeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_EXT,
+    ePhysicalDeviceExtendedDynamicStateFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_FEATURES_EXT,
     eDeferredOperationInfoKHR = VK_STRUCTURE_TYPE_DEFERRED_OPERATION_INFO_KHR,
     ePhysicalDevicePipelineExecutablePropertiesFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_EXECUTABLE_PROPERTIES_FEATURES_KHR,
     ePipelineInfoKHR = VK_STRUCTURE_TYPE_PIPELINE_INFO_KHR,
@@ -8514,6 +8676,7 @@ namespace VULKAN_HPP_NAMESPACE
       case StructureType::ePipelineRasterizationLineStateCreateInfoEXT : return "PipelineRasterizationLineStateCreateInfoEXT";
       case StructureType::ePhysicalDeviceLineRasterizationPropertiesEXT : return "PhysicalDeviceLineRasterizationPropertiesEXT";
       case StructureType::ePhysicalDeviceIndexTypeUint8FeaturesEXT : return "PhysicalDeviceIndexTypeUint8FeaturesEXT";
+      case StructureType::ePhysicalDeviceExtendedDynamicStateFeaturesEXT : return "PhysicalDeviceExtendedDynamicStateFeaturesEXT";
       case StructureType::eDeferredOperationInfoKHR : return "DeferredOperationInfoKHR";
       case StructureType::ePhysicalDevicePipelineExecutablePropertiesFeaturesKHR : return "PhysicalDevicePipelineExecutablePropertiesFeaturesKHR";
       case StructureType::ePipelineInfoKHR : return "PipelineInfoKHR";
@@ -13488,15 +13651,6 @@ namespace VULKAN_HPP_NAMESPACE
   struct ResultValue<UniqueHandle<Type,Dispatch>>
   {
 #ifdef VULKAN_HPP_HAS_NOEXCEPT
-    ResultValue(Result r, UniqueHandle<Type, Dispatch> & v) VULKAN_HPP_NOEXCEPT
-#else
-    ResultValue(Result r, UniqueHandle<Type, Dispatch>& v)
-#endif
-      : result(r)
-      , value(v)
-    {}
-
-#ifdef VULKAN_HPP_HAS_NOEXCEPT
     ResultValue(Result r, UniqueHandle<Type, Dispatch> && v) VULKAN_HPP_NOEXCEPT
 #else
     ResultValue(Result r, UniqueHandle<Type, Dispatch> && v)
@@ -13509,6 +13663,11 @@ namespace VULKAN_HPP_NAMESPACE
     UniqueHandle<Type, Dispatch>  value;
 
     operator std::tuple<Result&, UniqueHandle<Type, Dispatch>&>() VULKAN_HPP_NOEXCEPT { return std::tuple<Result&, UniqueHandle<Type, Dispatch>&>(result, value); }
+
+    operator UniqueHandle<Type, Dispatch>& () & VULKAN_HPP_NOEXCEPT
+    {
+      return value;
+    }
 
     operator UniqueHandle<Type, Dispatch>() VULKAN_HPP_NOEXCEPT
     {
@@ -14069,6 +14228,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct PhysicalDeviceDriverProperties;
   using PhysicalDeviceDriverPropertiesKHR = PhysicalDeviceDriverProperties;
   struct PhysicalDeviceExclusiveScissorFeaturesNV;
+  struct PhysicalDeviceExtendedDynamicStateFeaturesEXT;
   struct PhysicalDeviceExternalBufferInfo;
   using PhysicalDeviceExternalBufferInfoKHR = PhysicalDeviceExternalBufferInfo;
   struct PhysicalDeviceExternalFenceInfo;
@@ -16096,6 +16256,13 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
+    void bindVertexBuffers2EXT( uint32_t firstBinding, uint32_t bindingCount, const VULKAN_HPP_NAMESPACE::Buffer* pBuffers, const VULKAN_HPP_NAMESPACE::DeviceSize* pOffsets, const VULKAN_HPP_NAMESPACE::DeviceSize* pSizes, const VULKAN_HPP_NAMESPACE::DeviceSize* pStrides, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+    template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
+    void bindVertexBuffers2EXT( uint32_t firstBinding, ArrayProxy<const VULKAN_HPP_NAMESPACE::Buffer> buffers, ArrayProxy<const VULKAN_HPP_NAMESPACE::DeviceSize> offsets, ArrayProxy<const VULKAN_HPP_NAMESPACE::DeviceSize> sizes, ArrayProxy<const VULKAN_HPP_NAMESPACE::DeviceSize> strides, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const;
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+    template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     void blitImage( VULKAN_HPP_NAMESPACE::Image srcImage, VULKAN_HPP_NAMESPACE::ImageLayout srcImageLayout, VULKAN_HPP_NAMESPACE::Image dstImage, VULKAN_HPP_NAMESPACE::ImageLayout dstImageLayout, uint32_t regionCount, const VULKAN_HPP_NAMESPACE::ImageBlit* pRegions, VULKAN_HPP_NAMESPACE::Filter filter, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
@@ -16415,10 +16582,25 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
+    void setCullModeEXT( VULKAN_HPP_NAMESPACE::CullModeFlags cullMode, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
+
+    template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     void setDepthBias( float depthBiasConstantFactor, float depthBiasClamp, float depthBiasSlopeFactor, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     void setDepthBounds( float minDepthBounds, float maxDepthBounds, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
+
+    template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
+    void setDepthBoundsTestEnableEXT( VULKAN_HPP_NAMESPACE::Bool32 depthBoundsTestEnable, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
+
+    template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
+    void setDepthCompareOpEXT( VULKAN_HPP_NAMESPACE::CompareOp depthCompareOp, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
+
+    template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
+    void setDepthTestEnableEXT( VULKAN_HPP_NAMESPACE::Bool32 depthTestEnable, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
+
+    template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
+    void setDepthWriteEnableEXT( VULKAN_HPP_NAMESPACE::Bool32 depthWriteEnable, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     void setDeviceMask( uint32_t deviceMask, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
@@ -16442,6 +16624,9 @@ namespace VULKAN_HPP_NAMESPACE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     void setExclusiveScissorNV( uint32_t firstExclusiveScissor, ArrayProxy<const VULKAN_HPP_NAMESPACE::Rect2D> exclusiveScissors, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+    template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
+    void setFrontFaceEXT( VULKAN_HPP_NAMESPACE::FrontFace frontFace, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     void setLineStippleEXT( uint32_t lineStippleFactor, uint16_t lineStipplePattern, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
@@ -16471,6 +16656,9 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
+    void setPrimitiveTopologyEXT( VULKAN_HPP_NAMESPACE::PrimitiveTopology primitiveTopology, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
+
+    template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     void setSampleLocationsEXT( const VULKAN_HPP_NAMESPACE::SampleLocationsInfoEXT* pSampleLocationsInfo, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
@@ -16485,10 +16673,23 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
+    void setScissorWithCountEXT( uint32_t scissorCount, const VULKAN_HPP_NAMESPACE::Rect2D* pScissors, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+    template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
+    void setScissorWithCountEXT( ArrayProxy<const VULKAN_HPP_NAMESPACE::Rect2D> scissors, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+    template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     void setStencilCompareMask( VULKAN_HPP_NAMESPACE::StencilFaceFlags faceMask, uint32_t compareMask, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
+    void setStencilOpEXT( VULKAN_HPP_NAMESPACE::StencilFaceFlags faceMask, VULKAN_HPP_NAMESPACE::StencilOp failOp, VULKAN_HPP_NAMESPACE::StencilOp passOp, VULKAN_HPP_NAMESPACE::StencilOp depthFailOp, VULKAN_HPP_NAMESPACE::CompareOp compareOp, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
+
+    template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     void setStencilReference( VULKAN_HPP_NAMESPACE::StencilFaceFlags faceMask, uint32_t reference, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
+
+    template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
+    void setStencilTestEnableEXT( VULKAN_HPP_NAMESPACE::Bool32 stencilTestEnable, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     void setStencilWriteMask( VULKAN_HPP_NAMESPACE::StencilFaceFlags faceMask, uint32_t writeMask, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
@@ -16512,6 +16713,13 @@ namespace VULKAN_HPP_NAMESPACE
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     void setViewportWScalingNV( uint32_t firstViewport, ArrayProxy<const VULKAN_HPP_NAMESPACE::ViewportWScalingNV> viewportWScalings, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+    template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
+    void setViewportWithCountEXT( uint32_t viewportCount, const VULKAN_HPP_NAMESPACE::Viewport* pViewports, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+    template<typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
+    void setViewportWithCountEXT( ArrayProxy<const VULKAN_HPP_NAMESPACE::Viewport> viewports, Dispatch const &d = VULKAN_HPP_DEFAULT_DISPATCHER ) const VULKAN_HPP_NOEXCEPT;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
 #ifdef VK_ENABLE_BETA_EXTENSIONS
@@ -44779,7 +44987,7 @@ namespace VULKAN_HPP_NAMESPACE
       return ( sType == rhs.sType )
           && ( pNext == rhs.pNext )
           && ( flags == rhs.flags )
-          && ( imagePipeHandle == rhs.imagePipeHandle );
+          && ( memcmp( &imagePipeHandle, &rhs.imagePipeHandle, sizeof( zx_handle_t ) ) == 0 );
     }
 
     bool operator!=( ImagePipeSurfaceCreateInfoFUCHSIA const& rhs ) const VULKAN_HPP_NOEXCEPT
@@ -52706,6 +52914,89 @@ namespace VULKAN_HPP_NAMESPACE
   struct CppType<StructureType, StructureType::ePhysicalDeviceExclusiveScissorFeaturesNV>
   {
     using Type = PhysicalDeviceExclusiveScissorFeaturesNV;
+  };
+
+  struct PhysicalDeviceExtendedDynamicStateFeaturesEXT
+  {
+    static const bool allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceExtendedDynamicStateFeaturesEXT;
+
+    VULKAN_HPP_CONSTEXPR PhysicalDeviceExtendedDynamicStateFeaturesEXT( VULKAN_HPP_NAMESPACE::Bool32 extendedDynamicState_ = {} ) VULKAN_HPP_NOEXCEPT
+      : extendedDynamicState( extendedDynamicState_ )
+    {}
+
+    PhysicalDeviceExtendedDynamicStateFeaturesEXT & operator=( PhysicalDeviceExtendedDynamicStateFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      memcpy( &pNext, &rhs.pNext, sizeof( PhysicalDeviceExtendedDynamicStateFeaturesEXT ) - offsetof( PhysicalDeviceExtendedDynamicStateFeaturesEXT, pNext ) );
+      return *this;
+    }
+
+    PhysicalDeviceExtendedDynamicStateFeaturesEXT( VkPhysicalDeviceExtendedDynamicStateFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = rhs;
+    }
+
+    PhysicalDeviceExtendedDynamicStateFeaturesEXT& operator=( VkPhysicalDeviceExtendedDynamicStateFeaturesEXT const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::PhysicalDeviceExtendedDynamicStateFeaturesEXT const *>(&rhs);
+      return *this;
+    }
+
+    PhysicalDeviceExtendedDynamicStateFeaturesEXT & setPNext( void* pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    PhysicalDeviceExtendedDynamicStateFeaturesEXT & setExtendedDynamicState( VULKAN_HPP_NAMESPACE::Bool32 extendedDynamicState_ ) VULKAN_HPP_NOEXCEPT
+    {
+      extendedDynamicState = extendedDynamicState_;
+      return *this;
+    }
+
+
+    operator VkPhysicalDeviceExtendedDynamicStateFeaturesEXT const&() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkPhysicalDeviceExtendedDynamicStateFeaturesEXT*>( this );
+    }
+
+    operator VkPhysicalDeviceExtendedDynamicStateFeaturesEXT &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkPhysicalDeviceExtendedDynamicStateFeaturesEXT*>( this );
+    }
+
+
+#if defined(VULKAN_HPP_HAS_SPACESHIP_OPERATOR)
+    auto operator<=>( PhysicalDeviceExtendedDynamicStateFeaturesEXT const& ) const = default;
+#else
+    bool operator==( PhysicalDeviceExtendedDynamicStateFeaturesEXT const& rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ( sType == rhs.sType )
+          && ( pNext == rhs.pNext )
+          && ( extendedDynamicState == rhs.extendedDynamicState );
+    }
+
+    bool operator!=( PhysicalDeviceExtendedDynamicStateFeaturesEXT const& rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+
+
+  public:
+    const VULKAN_HPP_NAMESPACE::StructureType sType = StructureType::ePhysicalDeviceExtendedDynamicStateFeaturesEXT;
+    void* pNext = {};
+    VULKAN_HPP_NAMESPACE::Bool32 extendedDynamicState = {};
+
+  };
+  static_assert( sizeof( PhysicalDeviceExtendedDynamicStateFeaturesEXT ) == sizeof( VkPhysicalDeviceExtendedDynamicStateFeaturesEXT ), "struct and wrapper have different size!" );
+  static_assert( std::is_standard_layout<PhysicalDeviceExtendedDynamicStateFeaturesEXT>::value, "struct wrapper is not a standard layout!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::ePhysicalDeviceExtendedDynamicStateFeaturesEXT>
+  {
+    using Type = PhysicalDeviceExtendedDynamicStateFeaturesEXT;
   };
 
   struct PhysicalDeviceExternalBufferInfo
@@ -65654,7 +65945,7 @@ namespace VULKAN_HPP_NAMESPACE
     {
       return ( sType == rhs.sType )
           && ( pNext == rhs.pNext )
-          && ( frameToken == rhs.frameToken );
+          && ( memcmp( &frameToken, &rhs.frameToken, sizeof( GgpFrameToken ) ) == 0 );
     }
 
     bool operator!=( PresentFrameTokenGGP const& rhs ) const VULKAN_HPP_NOEXCEPT
@@ -71443,7 +71734,7 @@ namespace VULKAN_HPP_NAMESPACE
       return ( sType == rhs.sType )
           && ( pNext == rhs.pNext )
           && ( flags == rhs.flags )
-          && ( streamDescriptor == rhs.streamDescriptor );
+          && ( memcmp( &streamDescriptor, &rhs.streamDescriptor, sizeof( GgpStreamDescriptor ) ) == 0 );
     }
 
     bool operator!=( StreamDescriptorSurfaceCreateInfoGGP const& rhs ) const VULKAN_HPP_NOEXCEPT
@@ -74705,7 +74996,7 @@ namespace VULKAN_HPP_NAMESPACE
           && ( pNext == rhs.pNext )
           && ( flags == rhs.flags )
           && ( connection == rhs.connection )
-          && ( window == rhs.window );
+          && ( memcmp( &window, &rhs.window, sizeof( xcb_window_t ) ) == 0 );
     }
 
     bool operator!=( XcbSurfaceCreateInfoKHR const& rhs ) const VULKAN_HPP_NOEXCEPT
@@ -74810,7 +75101,7 @@ namespace VULKAN_HPP_NAMESPACE
           && ( pNext == rhs.pNext )
           && ( flags == rhs.flags )
           && ( dpy == rhs.dpy )
-          && ( window == rhs.window );
+          && ( memcmp( &window, &rhs.window, sizeof( Window ) ) == 0 );
     }
 
     bool operator!=( XlibSurfaceCreateInfoKHR const& rhs ) const VULKAN_HPP_NOEXCEPT
@@ -75255,6 +75546,68 @@ namespace VULKAN_HPP_NAMESPACE
     }
 #endif  /*VULKAN_HPP_NO_EXCEPTIONS*/
     d.vkCmdBindVertexBuffers( m_commandBuffer, firstBinding, buffers.size() , reinterpret_cast<const VkBuffer*>( buffers.data() ), reinterpret_cast<const VkDeviceSize*>( offsets.data() ) );
+  }
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE void CommandBuffer::bindVertexBuffers2EXT( uint32_t firstBinding, uint32_t bindingCount, const VULKAN_HPP_NAMESPACE::Buffer* pBuffers, const VULKAN_HPP_NAMESPACE::DeviceSize* pOffsets, const VULKAN_HPP_NAMESPACE::DeviceSize* pSizes, const VULKAN_HPP_NAMESPACE::DeviceSize* pStrides, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
+  {
+    d.vkCmdBindVertexBuffers2EXT( m_commandBuffer, firstBinding, bindingCount, reinterpret_cast<const VkBuffer*>( pBuffers ), reinterpret_cast<const VkDeviceSize*>( pOffsets ), reinterpret_cast<const VkDeviceSize*>( pSizes ), reinterpret_cast<const VkDeviceSize*>( pStrides ) );
+  }
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE void CommandBuffer::bindVertexBuffers2EXT( uint32_t firstBinding, ArrayProxy<const VULKAN_HPP_NAMESPACE::Buffer> buffers, ArrayProxy<const VULKAN_HPP_NAMESPACE::DeviceSize> offsets, ArrayProxy<const VULKAN_HPP_NAMESPACE::DeviceSize> sizes, ArrayProxy<const VULKAN_HPP_NAMESPACE::DeviceSize> strides, Dispatch const &d ) const
+  {
+#ifdef VULKAN_HPP_NO_EXCEPTIONS
+    VULKAN_HPP_ASSERT( buffers.size() == offsets.size() );
+#else
+    if ( buffers.size() != offsets.size() )
+    {
+      throw LogicError( VULKAN_HPP_NAMESPACE_STRING "::VkCommandBuffer::bindVertexBuffers2EXT: buffers.size() != offsets.size()" );
+    }
+#endif  /*VULKAN_HPP_NO_EXCEPTIONS*/
+#ifdef VULKAN_HPP_NO_EXCEPTIONS
+    VULKAN_HPP_ASSERT( buffers.size() == sizes.size() );
+#else
+    if ( buffers.size() != sizes.size() )
+    {
+      throw LogicError( VULKAN_HPP_NAMESPACE_STRING "::VkCommandBuffer::bindVertexBuffers2EXT: buffers.size() != sizes.size()" );
+    }
+#endif  /*VULKAN_HPP_NO_EXCEPTIONS*/
+#ifdef VULKAN_HPP_NO_EXCEPTIONS
+    VULKAN_HPP_ASSERT( buffers.size() == strides.size() );
+#else
+    if ( buffers.size() != strides.size() )
+    {
+      throw LogicError( VULKAN_HPP_NAMESPACE_STRING "::VkCommandBuffer::bindVertexBuffers2EXT: buffers.size() != strides.size()" );
+    }
+#endif  /*VULKAN_HPP_NO_EXCEPTIONS*/
+#ifdef VULKAN_HPP_NO_EXCEPTIONS
+    VULKAN_HPP_ASSERT( offsets.size() == sizes.size() );
+#else
+    if ( offsets.size() != sizes.size() )
+    {
+      throw LogicError( VULKAN_HPP_NAMESPACE_STRING "::VkCommandBuffer::bindVertexBuffers2EXT: offsets.size() != sizes.size()" );
+    }
+#endif  /*VULKAN_HPP_NO_EXCEPTIONS*/
+#ifdef VULKAN_HPP_NO_EXCEPTIONS
+    VULKAN_HPP_ASSERT( offsets.size() == strides.size() );
+#else
+    if ( offsets.size() != strides.size() )
+    {
+      throw LogicError( VULKAN_HPP_NAMESPACE_STRING "::VkCommandBuffer::bindVertexBuffers2EXT: offsets.size() != strides.size()" );
+    }
+#endif  /*VULKAN_HPP_NO_EXCEPTIONS*/
+#ifdef VULKAN_HPP_NO_EXCEPTIONS
+    VULKAN_HPP_ASSERT( sizes.size() == strides.size() );
+#else
+    if ( sizes.size() != strides.size() )
+    {
+      throw LogicError( VULKAN_HPP_NAMESPACE_STRING "::VkCommandBuffer::bindVertexBuffers2EXT: sizes.size() != strides.size()" );
+    }
+#endif  /*VULKAN_HPP_NO_EXCEPTIONS*/
+    d.vkCmdBindVertexBuffers2EXT( m_commandBuffer, firstBinding, buffers.size() , reinterpret_cast<const VkBuffer*>( buffers.data() ), reinterpret_cast<const VkDeviceSize*>( offsets.data() ), reinterpret_cast<const VkDeviceSize*>( sizes.data() ), reinterpret_cast<const VkDeviceSize*>( strides.data() ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -76202,6 +76555,21 @@ namespace VULKAN_HPP_NAMESPACE
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
+  VULKAN_HPP_INLINE void CommandBuffer::setCullModeEXT( VULKAN_HPP_NAMESPACE::CullModeFlags cullMode, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
+  {
+    d.vkCmdSetCullModeEXT( m_commandBuffer, static_cast<VkCullModeFlags>( cullMode ) );
+  }
+#else
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE void CommandBuffer::setCullModeEXT( VULKAN_HPP_NAMESPACE::CullModeFlags cullMode, Dispatch const &d ) const VULKAN_HPP_NOEXCEPT
+  {
+    d.vkCmdSetCullModeEXT( m_commandBuffer, static_cast<VkCullModeFlags>( cullMode ) );
+  }
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+
+#ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::setDepthBias( float depthBiasConstantFactor, float depthBiasClamp, float depthBiasSlopeFactor, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
     d.vkCmdSetDepthBias( m_commandBuffer, depthBiasConstantFactor, depthBiasClamp, depthBiasSlopeFactor );
@@ -76226,6 +76594,66 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_INLINE void CommandBuffer::setDepthBounds( float minDepthBounds, float maxDepthBounds, Dispatch const &d ) const VULKAN_HPP_NOEXCEPT
   {
     d.vkCmdSetDepthBounds( m_commandBuffer, minDepthBounds, maxDepthBounds );
+  }
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+
+#ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE void CommandBuffer::setDepthBoundsTestEnableEXT( VULKAN_HPP_NAMESPACE::Bool32 depthBoundsTestEnable, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
+  {
+    d.vkCmdSetDepthBoundsTestEnableEXT( m_commandBuffer, static_cast<VkBool32>( depthBoundsTestEnable ) );
+  }
+#else
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE void CommandBuffer::setDepthBoundsTestEnableEXT( VULKAN_HPP_NAMESPACE::Bool32 depthBoundsTestEnable, Dispatch const &d ) const VULKAN_HPP_NOEXCEPT
+  {
+    d.vkCmdSetDepthBoundsTestEnableEXT( m_commandBuffer, static_cast<VkBool32>( depthBoundsTestEnable ) );
+  }
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+
+#ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE void CommandBuffer::setDepthCompareOpEXT( VULKAN_HPP_NAMESPACE::CompareOp depthCompareOp, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
+  {
+    d.vkCmdSetDepthCompareOpEXT( m_commandBuffer, static_cast<VkCompareOp>( depthCompareOp ) );
+  }
+#else
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE void CommandBuffer::setDepthCompareOpEXT( VULKAN_HPP_NAMESPACE::CompareOp depthCompareOp, Dispatch const &d ) const VULKAN_HPP_NOEXCEPT
+  {
+    d.vkCmdSetDepthCompareOpEXT( m_commandBuffer, static_cast<VkCompareOp>( depthCompareOp ) );
+  }
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+
+#ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE void CommandBuffer::setDepthTestEnableEXT( VULKAN_HPP_NAMESPACE::Bool32 depthTestEnable, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
+  {
+    d.vkCmdSetDepthTestEnableEXT( m_commandBuffer, static_cast<VkBool32>( depthTestEnable ) );
+  }
+#else
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE void CommandBuffer::setDepthTestEnableEXT( VULKAN_HPP_NAMESPACE::Bool32 depthTestEnable, Dispatch const &d ) const VULKAN_HPP_NOEXCEPT
+  {
+    d.vkCmdSetDepthTestEnableEXT( m_commandBuffer, static_cast<VkBool32>( depthTestEnable ) );
+  }
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+
+#ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE void CommandBuffer::setDepthWriteEnableEXT( VULKAN_HPP_NAMESPACE::Bool32 depthWriteEnable, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
+  {
+    d.vkCmdSetDepthWriteEnableEXT( m_commandBuffer, static_cast<VkBool32>( depthWriteEnable ) );
+  }
+#else
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE void CommandBuffer::setDepthWriteEnableEXT( VULKAN_HPP_NAMESPACE::Bool32 depthWriteEnable, Dispatch const &d ) const VULKAN_HPP_NOEXCEPT
+  {
+    d.vkCmdSetDepthWriteEnableEXT( m_commandBuffer, static_cast<VkBool32>( depthWriteEnable ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -76305,6 +76733,21 @@ namespace VULKAN_HPP_NAMESPACE
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
+  VULKAN_HPP_INLINE void CommandBuffer::setFrontFaceEXT( VULKAN_HPP_NAMESPACE::FrontFace frontFace, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
+  {
+    d.vkCmdSetFrontFaceEXT( m_commandBuffer, static_cast<VkFrontFace>( frontFace ) );
+  }
+#else
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE void CommandBuffer::setFrontFaceEXT( VULKAN_HPP_NAMESPACE::FrontFace frontFace, Dispatch const &d ) const VULKAN_HPP_NOEXCEPT
+  {
+    d.vkCmdSetFrontFaceEXT( m_commandBuffer, static_cast<VkFrontFace>( frontFace ) );
+  }
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+
+#ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::setLineStippleEXT( uint32_t lineStippleFactor, uint16_t lineStipplePattern, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
     d.vkCmdSetLineStippleEXT( m_commandBuffer, lineStippleFactor, lineStipplePattern );
@@ -76378,6 +76821,21 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
 
+#ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE void CommandBuffer::setPrimitiveTopologyEXT( VULKAN_HPP_NAMESPACE::PrimitiveTopology primitiveTopology, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
+  {
+    d.vkCmdSetPrimitiveTopologyEXT( m_commandBuffer, static_cast<VkPrimitiveTopology>( primitiveTopology ) );
+  }
+#else
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE void CommandBuffer::setPrimitiveTopologyEXT( VULKAN_HPP_NAMESPACE::PrimitiveTopology primitiveTopology, Dispatch const &d ) const VULKAN_HPP_NOEXCEPT
+  {
+    d.vkCmdSetPrimitiveTopologyEXT( m_commandBuffer, static_cast<VkPrimitiveTopology>( primitiveTopology ) );
+  }
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::setSampleLocationsEXT( const VULKAN_HPP_NAMESPACE::SampleLocationsInfoEXT* pSampleLocationsInfo, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
@@ -76406,6 +76864,20 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
 
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE void CommandBuffer::setScissorWithCountEXT( uint32_t scissorCount, const VULKAN_HPP_NAMESPACE::Rect2D* pScissors, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
+  {
+    d.vkCmdSetScissorWithCountEXT( m_commandBuffer, scissorCount, reinterpret_cast<const VkRect2D*>( pScissors ) );
+  }
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE void CommandBuffer::setScissorWithCountEXT( ArrayProxy<const VULKAN_HPP_NAMESPACE::Rect2D> scissors, Dispatch const &d ) const VULKAN_HPP_NOEXCEPT
+  {
+    d.vkCmdSetScissorWithCountEXT( m_commandBuffer, scissors.size() , reinterpret_cast<const VkRect2D*>( scissors.data() ) );
+  }
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::setStencilCompareMask( VULKAN_HPP_NAMESPACE::StencilFaceFlags faceMask, uint32_t compareMask, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
@@ -76423,6 +76895,21 @@ namespace VULKAN_HPP_NAMESPACE
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template<typename Dispatch>
+  VULKAN_HPP_INLINE void CommandBuffer::setStencilOpEXT( VULKAN_HPP_NAMESPACE::StencilFaceFlags faceMask, VULKAN_HPP_NAMESPACE::StencilOp failOp, VULKAN_HPP_NAMESPACE::StencilOp passOp, VULKAN_HPP_NAMESPACE::StencilOp depthFailOp, VULKAN_HPP_NAMESPACE::CompareOp compareOp, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
+  {
+    d.vkCmdSetStencilOpEXT( m_commandBuffer, static_cast<VkStencilFaceFlags>( faceMask ), static_cast<VkStencilOp>( failOp ), static_cast<VkStencilOp>( passOp ), static_cast<VkStencilOp>( depthFailOp ), static_cast<VkCompareOp>( compareOp ) );
+  }
+#else
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE void CommandBuffer::setStencilOpEXT( VULKAN_HPP_NAMESPACE::StencilFaceFlags faceMask, VULKAN_HPP_NAMESPACE::StencilOp failOp, VULKAN_HPP_NAMESPACE::StencilOp passOp, VULKAN_HPP_NAMESPACE::StencilOp depthFailOp, VULKAN_HPP_NAMESPACE::CompareOp compareOp, Dispatch const &d ) const VULKAN_HPP_NOEXCEPT
+  {
+    d.vkCmdSetStencilOpEXT( m_commandBuffer, static_cast<VkStencilFaceFlags>( faceMask ), static_cast<VkStencilOp>( failOp ), static_cast<VkStencilOp>( passOp ), static_cast<VkStencilOp>( depthFailOp ), static_cast<VkCompareOp>( compareOp ) );
+  }
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+
+#ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  template<typename Dispatch>
   VULKAN_HPP_INLINE void CommandBuffer::setStencilReference( VULKAN_HPP_NAMESPACE::StencilFaceFlags faceMask, uint32_t reference, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
   {
     d.vkCmdSetStencilReference( m_commandBuffer, static_cast<VkStencilFaceFlags>( faceMask ), reference );
@@ -76432,6 +76919,21 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_INLINE void CommandBuffer::setStencilReference( VULKAN_HPP_NAMESPACE::StencilFaceFlags faceMask, uint32_t reference, Dispatch const &d ) const VULKAN_HPP_NOEXCEPT
   {
     d.vkCmdSetStencilReference( m_commandBuffer, static_cast<VkStencilFaceFlags>( faceMask ), reference );
+  }
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+
+#ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE void CommandBuffer::setStencilTestEnableEXT( VULKAN_HPP_NAMESPACE::Bool32 stencilTestEnable, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
+  {
+    d.vkCmdSetStencilTestEnableEXT( m_commandBuffer, static_cast<VkBool32>( stencilTestEnable ) );
+  }
+#else
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE void CommandBuffer::setStencilTestEnableEXT( VULKAN_HPP_NAMESPACE::Bool32 stencilTestEnable, Dispatch const &d ) const VULKAN_HPP_NOEXCEPT
+  {
+    d.vkCmdSetStencilTestEnableEXT( m_commandBuffer, static_cast<VkBool32>( stencilTestEnable ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -76489,6 +76991,20 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_INLINE void CommandBuffer::setViewportWScalingNV( uint32_t firstViewport, ArrayProxy<const VULKAN_HPP_NAMESPACE::ViewportWScalingNV> viewportWScalings, Dispatch const &d ) const VULKAN_HPP_NOEXCEPT
   {
     d.vkCmdSetViewportWScalingNV( m_commandBuffer, firstViewport, viewportWScalings.size() , reinterpret_cast<const VkViewportWScalingNV*>( viewportWScalings.data() ) );
+  }
+#endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE void CommandBuffer::setViewportWithCountEXT( uint32_t viewportCount, const VULKAN_HPP_NAMESPACE::Viewport* pViewports, Dispatch const &d) const VULKAN_HPP_NOEXCEPT
+  {
+    d.vkCmdSetViewportWithCountEXT( m_commandBuffer, viewportCount, reinterpret_cast<const VkViewport*>( pViewports ) );
+  }
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  template<typename Dispatch>
+  VULKAN_HPP_INLINE void CommandBuffer::setViewportWithCountEXT( ArrayProxy<const VULKAN_HPP_NAMESPACE::Viewport> viewports, Dispatch const &d ) const VULKAN_HPP_NOEXCEPT
+  {
+    d.vkCmdSetViewportWithCountEXT( m_commandBuffer, viewports.size() , reinterpret_cast<const VkViewport*>( viewports.data() ) );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -84483,6 +84999,8 @@ namespace VULKAN_HPP_NAMESPACE
   template <> struct StructExtends<PhysicalDeviceDriverProperties, PhysicalDeviceProperties2>{ enum { value = true }; };
   template <> struct StructExtends<PhysicalDeviceExclusiveScissorFeaturesNV, PhysicalDeviceFeatures2>{ enum { value = true }; };
   template <> struct StructExtends<PhysicalDeviceExclusiveScissorFeaturesNV, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceExtendedDynamicStateFeaturesEXT, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceExtendedDynamicStateFeaturesEXT, DeviceCreateInfo>{ enum { value = true }; };
   template <> struct StructExtends<PhysicalDeviceExternalImageFormatInfo, PhysicalDeviceImageFormatInfo2>{ enum { value = true }; };
   template <> struct StructExtends<PhysicalDeviceExternalMemoryHostPropertiesEXT, PhysicalDeviceProperties2>{ enum { value = true }; };
   template <> struct StructExtends<PhysicalDeviceFeatures2, DeviceCreateInfo>{ enum { value = true }; };
@@ -84831,6 +85349,7 @@ namespace VULKAN_HPP_NAMESPACE
     PFN_vkCmdBindShadingRateImageNV vkCmdBindShadingRateImageNV = 0;
     PFN_vkCmdBindTransformFeedbackBuffersEXT vkCmdBindTransformFeedbackBuffersEXT = 0;
     PFN_vkCmdBindVertexBuffers vkCmdBindVertexBuffers = 0;
+    PFN_vkCmdBindVertexBuffers2EXT vkCmdBindVertexBuffers2EXT = 0;
     PFN_vkCmdBlitImage vkCmdBlitImage = 0;
 #ifdef VK_ENABLE_BETA_EXTENSIONS
     PFN_vkCmdBuildAccelerationStructureIndirectKHR vkCmdBuildAccelerationStructureIndirectKHR = 0;
@@ -84904,26 +85423,37 @@ namespace VULKAN_HPP_NAMESPACE
     PFN_vkCmdSetBlendConstants vkCmdSetBlendConstants = 0;
     PFN_vkCmdSetCheckpointNV vkCmdSetCheckpointNV = 0;
     PFN_vkCmdSetCoarseSampleOrderNV vkCmdSetCoarseSampleOrderNV = 0;
+    PFN_vkCmdSetCullModeEXT vkCmdSetCullModeEXT = 0;
     PFN_vkCmdSetDepthBias vkCmdSetDepthBias = 0;
     PFN_vkCmdSetDepthBounds vkCmdSetDepthBounds = 0;
+    PFN_vkCmdSetDepthBoundsTestEnableEXT vkCmdSetDepthBoundsTestEnableEXT = 0;
+    PFN_vkCmdSetDepthCompareOpEXT vkCmdSetDepthCompareOpEXT = 0;
+    PFN_vkCmdSetDepthTestEnableEXT vkCmdSetDepthTestEnableEXT = 0;
+    PFN_vkCmdSetDepthWriteEnableEXT vkCmdSetDepthWriteEnableEXT = 0;
     PFN_vkCmdSetDeviceMask vkCmdSetDeviceMask = 0;
     PFN_vkCmdSetDeviceMaskKHR vkCmdSetDeviceMaskKHR = 0;
     PFN_vkCmdSetDiscardRectangleEXT vkCmdSetDiscardRectangleEXT = 0;
     PFN_vkCmdSetEvent vkCmdSetEvent = 0;
     PFN_vkCmdSetExclusiveScissorNV vkCmdSetExclusiveScissorNV = 0;
+    PFN_vkCmdSetFrontFaceEXT vkCmdSetFrontFaceEXT = 0;
     PFN_vkCmdSetLineStippleEXT vkCmdSetLineStippleEXT = 0;
     PFN_vkCmdSetLineWidth vkCmdSetLineWidth = 0;
     PFN_vkCmdSetPerformanceMarkerINTEL vkCmdSetPerformanceMarkerINTEL = 0;
     PFN_vkCmdSetPerformanceOverrideINTEL vkCmdSetPerformanceOverrideINTEL = 0;
     PFN_vkCmdSetPerformanceStreamMarkerINTEL vkCmdSetPerformanceStreamMarkerINTEL = 0;
+    PFN_vkCmdSetPrimitiveTopologyEXT vkCmdSetPrimitiveTopologyEXT = 0;
     PFN_vkCmdSetSampleLocationsEXT vkCmdSetSampleLocationsEXT = 0;
     PFN_vkCmdSetScissor vkCmdSetScissor = 0;
+    PFN_vkCmdSetScissorWithCountEXT vkCmdSetScissorWithCountEXT = 0;
     PFN_vkCmdSetStencilCompareMask vkCmdSetStencilCompareMask = 0;
+    PFN_vkCmdSetStencilOpEXT vkCmdSetStencilOpEXT = 0;
     PFN_vkCmdSetStencilReference vkCmdSetStencilReference = 0;
+    PFN_vkCmdSetStencilTestEnableEXT vkCmdSetStencilTestEnableEXT = 0;
     PFN_vkCmdSetStencilWriteMask vkCmdSetStencilWriteMask = 0;
     PFN_vkCmdSetViewport vkCmdSetViewport = 0;
     PFN_vkCmdSetViewportShadingRatePaletteNV vkCmdSetViewportShadingRatePaletteNV = 0;
     PFN_vkCmdSetViewportWScalingNV vkCmdSetViewportWScalingNV = 0;
+    PFN_vkCmdSetViewportWithCountEXT vkCmdSetViewportWithCountEXT = 0;
 #ifdef VK_ENABLE_BETA_EXTENSIONS
     PFN_vkCmdTraceRaysIndirectKHR vkCmdTraceRaysIndirectKHR = 0;
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
@@ -85548,6 +86078,7 @@ namespace VULKAN_HPP_NAMESPACE
       vkCmdBindShadingRateImageNV = PFN_vkCmdBindShadingRateImageNV( vkGetInstanceProcAddr( instance, "vkCmdBindShadingRateImageNV" ) );
       vkCmdBindTransformFeedbackBuffersEXT = PFN_vkCmdBindTransformFeedbackBuffersEXT( vkGetInstanceProcAddr( instance, "vkCmdBindTransformFeedbackBuffersEXT" ) );
       vkCmdBindVertexBuffers = PFN_vkCmdBindVertexBuffers( vkGetInstanceProcAddr( instance, "vkCmdBindVertexBuffers" ) );
+      vkCmdBindVertexBuffers2EXT = PFN_vkCmdBindVertexBuffers2EXT( vkGetInstanceProcAddr( instance, "vkCmdBindVertexBuffers2EXT" ) );
       vkCmdBlitImage = PFN_vkCmdBlitImage( vkGetInstanceProcAddr( instance, "vkCmdBlitImage" ) );
 #ifdef VK_ENABLE_BETA_EXTENSIONS
       vkCmdBuildAccelerationStructureIndirectKHR = PFN_vkCmdBuildAccelerationStructureIndirectKHR( vkGetInstanceProcAddr( instance, "vkCmdBuildAccelerationStructureIndirectKHR" ) );
@@ -85621,26 +86152,37 @@ namespace VULKAN_HPP_NAMESPACE
       vkCmdSetBlendConstants = PFN_vkCmdSetBlendConstants( vkGetInstanceProcAddr( instance, "vkCmdSetBlendConstants" ) );
       vkCmdSetCheckpointNV = PFN_vkCmdSetCheckpointNV( vkGetInstanceProcAddr( instance, "vkCmdSetCheckpointNV" ) );
       vkCmdSetCoarseSampleOrderNV = PFN_vkCmdSetCoarseSampleOrderNV( vkGetInstanceProcAddr( instance, "vkCmdSetCoarseSampleOrderNV" ) );
+      vkCmdSetCullModeEXT = PFN_vkCmdSetCullModeEXT( vkGetInstanceProcAddr( instance, "vkCmdSetCullModeEXT" ) );
       vkCmdSetDepthBias = PFN_vkCmdSetDepthBias( vkGetInstanceProcAddr( instance, "vkCmdSetDepthBias" ) );
       vkCmdSetDepthBounds = PFN_vkCmdSetDepthBounds( vkGetInstanceProcAddr( instance, "vkCmdSetDepthBounds" ) );
+      vkCmdSetDepthBoundsTestEnableEXT = PFN_vkCmdSetDepthBoundsTestEnableEXT( vkGetInstanceProcAddr( instance, "vkCmdSetDepthBoundsTestEnableEXT" ) );
+      vkCmdSetDepthCompareOpEXT = PFN_vkCmdSetDepthCompareOpEXT( vkGetInstanceProcAddr( instance, "vkCmdSetDepthCompareOpEXT" ) );
+      vkCmdSetDepthTestEnableEXT = PFN_vkCmdSetDepthTestEnableEXT( vkGetInstanceProcAddr( instance, "vkCmdSetDepthTestEnableEXT" ) );
+      vkCmdSetDepthWriteEnableEXT = PFN_vkCmdSetDepthWriteEnableEXT( vkGetInstanceProcAddr( instance, "vkCmdSetDepthWriteEnableEXT" ) );
       vkCmdSetDeviceMask = PFN_vkCmdSetDeviceMask( vkGetInstanceProcAddr( instance, "vkCmdSetDeviceMask" ) );
       vkCmdSetDeviceMaskKHR = PFN_vkCmdSetDeviceMaskKHR( vkGetInstanceProcAddr( instance, "vkCmdSetDeviceMaskKHR" ) );
       vkCmdSetDiscardRectangleEXT = PFN_vkCmdSetDiscardRectangleEXT( vkGetInstanceProcAddr( instance, "vkCmdSetDiscardRectangleEXT" ) );
       vkCmdSetEvent = PFN_vkCmdSetEvent( vkGetInstanceProcAddr( instance, "vkCmdSetEvent" ) );
       vkCmdSetExclusiveScissorNV = PFN_vkCmdSetExclusiveScissorNV( vkGetInstanceProcAddr( instance, "vkCmdSetExclusiveScissorNV" ) );
+      vkCmdSetFrontFaceEXT = PFN_vkCmdSetFrontFaceEXT( vkGetInstanceProcAddr( instance, "vkCmdSetFrontFaceEXT" ) );
       vkCmdSetLineStippleEXT = PFN_vkCmdSetLineStippleEXT( vkGetInstanceProcAddr( instance, "vkCmdSetLineStippleEXT" ) );
       vkCmdSetLineWidth = PFN_vkCmdSetLineWidth( vkGetInstanceProcAddr( instance, "vkCmdSetLineWidth" ) );
       vkCmdSetPerformanceMarkerINTEL = PFN_vkCmdSetPerformanceMarkerINTEL( vkGetInstanceProcAddr( instance, "vkCmdSetPerformanceMarkerINTEL" ) );
       vkCmdSetPerformanceOverrideINTEL = PFN_vkCmdSetPerformanceOverrideINTEL( vkGetInstanceProcAddr( instance, "vkCmdSetPerformanceOverrideINTEL" ) );
       vkCmdSetPerformanceStreamMarkerINTEL = PFN_vkCmdSetPerformanceStreamMarkerINTEL( vkGetInstanceProcAddr( instance, "vkCmdSetPerformanceStreamMarkerINTEL" ) );
+      vkCmdSetPrimitiveTopologyEXT = PFN_vkCmdSetPrimitiveTopologyEXT( vkGetInstanceProcAddr( instance, "vkCmdSetPrimitiveTopologyEXT" ) );
       vkCmdSetSampleLocationsEXT = PFN_vkCmdSetSampleLocationsEXT( vkGetInstanceProcAddr( instance, "vkCmdSetSampleLocationsEXT" ) );
       vkCmdSetScissor = PFN_vkCmdSetScissor( vkGetInstanceProcAddr( instance, "vkCmdSetScissor" ) );
+      vkCmdSetScissorWithCountEXT = PFN_vkCmdSetScissorWithCountEXT( vkGetInstanceProcAddr( instance, "vkCmdSetScissorWithCountEXT" ) );
       vkCmdSetStencilCompareMask = PFN_vkCmdSetStencilCompareMask( vkGetInstanceProcAddr( instance, "vkCmdSetStencilCompareMask" ) );
+      vkCmdSetStencilOpEXT = PFN_vkCmdSetStencilOpEXT( vkGetInstanceProcAddr( instance, "vkCmdSetStencilOpEXT" ) );
       vkCmdSetStencilReference = PFN_vkCmdSetStencilReference( vkGetInstanceProcAddr( instance, "vkCmdSetStencilReference" ) );
+      vkCmdSetStencilTestEnableEXT = PFN_vkCmdSetStencilTestEnableEXT( vkGetInstanceProcAddr( instance, "vkCmdSetStencilTestEnableEXT" ) );
       vkCmdSetStencilWriteMask = PFN_vkCmdSetStencilWriteMask( vkGetInstanceProcAddr( instance, "vkCmdSetStencilWriteMask" ) );
       vkCmdSetViewport = PFN_vkCmdSetViewport( vkGetInstanceProcAddr( instance, "vkCmdSetViewport" ) );
       vkCmdSetViewportShadingRatePaletteNV = PFN_vkCmdSetViewportShadingRatePaletteNV( vkGetInstanceProcAddr( instance, "vkCmdSetViewportShadingRatePaletteNV" ) );
       vkCmdSetViewportWScalingNV = PFN_vkCmdSetViewportWScalingNV( vkGetInstanceProcAddr( instance, "vkCmdSetViewportWScalingNV" ) );
+      vkCmdSetViewportWithCountEXT = PFN_vkCmdSetViewportWithCountEXT( vkGetInstanceProcAddr( instance, "vkCmdSetViewportWithCountEXT" ) );
 #ifdef VK_ENABLE_BETA_EXTENSIONS
       vkCmdTraceRaysIndirectKHR = PFN_vkCmdTraceRaysIndirectKHR( vkGetInstanceProcAddr( instance, "vkCmdTraceRaysIndirectKHR" ) );
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
@@ -85958,6 +86500,7 @@ namespace VULKAN_HPP_NAMESPACE
       vkCmdBindShadingRateImageNV = PFN_vkCmdBindShadingRateImageNV( vkGetDeviceProcAddr( device, "vkCmdBindShadingRateImageNV" ) );
       vkCmdBindTransformFeedbackBuffersEXT = PFN_vkCmdBindTransformFeedbackBuffersEXT( vkGetDeviceProcAddr( device, "vkCmdBindTransformFeedbackBuffersEXT" ) );
       vkCmdBindVertexBuffers = PFN_vkCmdBindVertexBuffers( vkGetDeviceProcAddr( device, "vkCmdBindVertexBuffers" ) );
+      vkCmdBindVertexBuffers2EXT = PFN_vkCmdBindVertexBuffers2EXT( vkGetDeviceProcAddr( device, "vkCmdBindVertexBuffers2EXT" ) );
       vkCmdBlitImage = PFN_vkCmdBlitImage( vkGetDeviceProcAddr( device, "vkCmdBlitImage" ) );
 #ifdef VK_ENABLE_BETA_EXTENSIONS
       vkCmdBuildAccelerationStructureIndirectKHR = PFN_vkCmdBuildAccelerationStructureIndirectKHR( vkGetDeviceProcAddr( device, "vkCmdBuildAccelerationStructureIndirectKHR" ) );
@@ -86031,26 +86574,37 @@ namespace VULKAN_HPP_NAMESPACE
       vkCmdSetBlendConstants = PFN_vkCmdSetBlendConstants( vkGetDeviceProcAddr( device, "vkCmdSetBlendConstants" ) );
       vkCmdSetCheckpointNV = PFN_vkCmdSetCheckpointNV( vkGetDeviceProcAddr( device, "vkCmdSetCheckpointNV" ) );
       vkCmdSetCoarseSampleOrderNV = PFN_vkCmdSetCoarseSampleOrderNV( vkGetDeviceProcAddr( device, "vkCmdSetCoarseSampleOrderNV" ) );
+      vkCmdSetCullModeEXT = PFN_vkCmdSetCullModeEXT( vkGetDeviceProcAddr( device, "vkCmdSetCullModeEXT" ) );
       vkCmdSetDepthBias = PFN_vkCmdSetDepthBias( vkGetDeviceProcAddr( device, "vkCmdSetDepthBias" ) );
       vkCmdSetDepthBounds = PFN_vkCmdSetDepthBounds( vkGetDeviceProcAddr( device, "vkCmdSetDepthBounds" ) );
+      vkCmdSetDepthBoundsTestEnableEXT = PFN_vkCmdSetDepthBoundsTestEnableEXT( vkGetDeviceProcAddr( device, "vkCmdSetDepthBoundsTestEnableEXT" ) );
+      vkCmdSetDepthCompareOpEXT = PFN_vkCmdSetDepthCompareOpEXT( vkGetDeviceProcAddr( device, "vkCmdSetDepthCompareOpEXT" ) );
+      vkCmdSetDepthTestEnableEXT = PFN_vkCmdSetDepthTestEnableEXT( vkGetDeviceProcAddr( device, "vkCmdSetDepthTestEnableEXT" ) );
+      vkCmdSetDepthWriteEnableEXT = PFN_vkCmdSetDepthWriteEnableEXT( vkGetDeviceProcAddr( device, "vkCmdSetDepthWriteEnableEXT" ) );
       vkCmdSetDeviceMask = PFN_vkCmdSetDeviceMask( vkGetDeviceProcAddr( device, "vkCmdSetDeviceMask" ) );
       vkCmdSetDeviceMaskKHR = PFN_vkCmdSetDeviceMaskKHR( vkGetDeviceProcAddr( device, "vkCmdSetDeviceMaskKHR" ) );
       vkCmdSetDiscardRectangleEXT = PFN_vkCmdSetDiscardRectangleEXT( vkGetDeviceProcAddr( device, "vkCmdSetDiscardRectangleEXT" ) );
       vkCmdSetEvent = PFN_vkCmdSetEvent( vkGetDeviceProcAddr( device, "vkCmdSetEvent" ) );
       vkCmdSetExclusiveScissorNV = PFN_vkCmdSetExclusiveScissorNV( vkGetDeviceProcAddr( device, "vkCmdSetExclusiveScissorNV" ) );
+      vkCmdSetFrontFaceEXT = PFN_vkCmdSetFrontFaceEXT( vkGetDeviceProcAddr( device, "vkCmdSetFrontFaceEXT" ) );
       vkCmdSetLineStippleEXT = PFN_vkCmdSetLineStippleEXT( vkGetDeviceProcAddr( device, "vkCmdSetLineStippleEXT" ) );
       vkCmdSetLineWidth = PFN_vkCmdSetLineWidth( vkGetDeviceProcAddr( device, "vkCmdSetLineWidth" ) );
       vkCmdSetPerformanceMarkerINTEL = PFN_vkCmdSetPerformanceMarkerINTEL( vkGetDeviceProcAddr( device, "vkCmdSetPerformanceMarkerINTEL" ) );
       vkCmdSetPerformanceOverrideINTEL = PFN_vkCmdSetPerformanceOverrideINTEL( vkGetDeviceProcAddr( device, "vkCmdSetPerformanceOverrideINTEL" ) );
       vkCmdSetPerformanceStreamMarkerINTEL = PFN_vkCmdSetPerformanceStreamMarkerINTEL( vkGetDeviceProcAddr( device, "vkCmdSetPerformanceStreamMarkerINTEL" ) );
+      vkCmdSetPrimitiveTopologyEXT = PFN_vkCmdSetPrimitiveTopologyEXT( vkGetDeviceProcAddr( device, "vkCmdSetPrimitiveTopologyEXT" ) );
       vkCmdSetSampleLocationsEXT = PFN_vkCmdSetSampleLocationsEXT( vkGetDeviceProcAddr( device, "vkCmdSetSampleLocationsEXT" ) );
       vkCmdSetScissor = PFN_vkCmdSetScissor( vkGetDeviceProcAddr( device, "vkCmdSetScissor" ) );
+      vkCmdSetScissorWithCountEXT = PFN_vkCmdSetScissorWithCountEXT( vkGetDeviceProcAddr( device, "vkCmdSetScissorWithCountEXT" ) );
       vkCmdSetStencilCompareMask = PFN_vkCmdSetStencilCompareMask( vkGetDeviceProcAddr( device, "vkCmdSetStencilCompareMask" ) );
+      vkCmdSetStencilOpEXT = PFN_vkCmdSetStencilOpEXT( vkGetDeviceProcAddr( device, "vkCmdSetStencilOpEXT" ) );
       vkCmdSetStencilReference = PFN_vkCmdSetStencilReference( vkGetDeviceProcAddr( device, "vkCmdSetStencilReference" ) );
+      vkCmdSetStencilTestEnableEXT = PFN_vkCmdSetStencilTestEnableEXT( vkGetDeviceProcAddr( device, "vkCmdSetStencilTestEnableEXT" ) );
       vkCmdSetStencilWriteMask = PFN_vkCmdSetStencilWriteMask( vkGetDeviceProcAddr( device, "vkCmdSetStencilWriteMask" ) );
       vkCmdSetViewport = PFN_vkCmdSetViewport( vkGetDeviceProcAddr( device, "vkCmdSetViewport" ) );
       vkCmdSetViewportShadingRatePaletteNV = PFN_vkCmdSetViewportShadingRatePaletteNV( vkGetDeviceProcAddr( device, "vkCmdSetViewportShadingRatePaletteNV" ) );
       vkCmdSetViewportWScalingNV = PFN_vkCmdSetViewportWScalingNV( vkGetDeviceProcAddr( device, "vkCmdSetViewportWScalingNV" ) );
+      vkCmdSetViewportWithCountEXT = PFN_vkCmdSetViewportWithCountEXT( vkGetDeviceProcAddr( device, "vkCmdSetViewportWithCountEXT" ) );
 #ifdef VK_ENABLE_BETA_EXTENSIONS
       vkCmdTraceRaysIndirectKHR = PFN_vkCmdTraceRaysIndirectKHR( vkGetDeviceProcAddr( device, "vkCmdTraceRaysIndirectKHR" ) );
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
