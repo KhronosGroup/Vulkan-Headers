@@ -4,23 +4,48 @@ Vulkan header files and API registry
 
 ## Repository Content
 
-The contents of this repository are largely obtained from other repositories and are
-collected, coordinated, and curated here.
+The contents of this repository are largely obtained from other repositories
+and are collected, coordinated, and curated here.
 
-Do not propose pull requests to this repository which modify any files under
-include/vulkan/ or registry/. All such files are generated from the
-Vulkan-Docs repository and, in the case of include/vulkan/vulkan.hpp, the
-Vulkan-Hpp repository. Any changes must be made in those repositories.
+If proposing changes to any file originating from a different repository,
+please propose such changes in that repository, rather than Vulkan-Headers.
+Files in this repository originate from:
 
-The projects for these repositories are:
+### Specification repository (https://github.com/KhronosGroup/Vulkan-Docs)
 
-- [KhronosGroup/Vulkan-Docs](https://github.com/KhronosGroup/Vulkan-Docs)
-  - Core Vulkan headers and Registry
-- [KhronosGroup/Vulkan-Hpp](https://github.com/KhronosGroup/Vulkan-Hpp)
-  - C++ Bindings for Vulkan
+* registry/cgenerator.py
+* registry/conventions.py
+* registry/generator.py
+* registry/genvk.py
+* registry/reg.py
+* registry/spec_tools/util.py
+* registry/validusage.json
+* registry/vk.xml
+* registry/vkconventions.py
+* All files under include/vulkan/ which are *not* listed explicitly as originating from another repository.
 
-Please visit the appropriate project in the above list for obtaining additional information,
-asking questions, or opening issues.
+### This repository (https://github.com/KhronosGroup/Vulkan-Headers)
+
+* .cmake-format.py
+* BUILD.gn
+* BUILD.md
+* CMakeLists.txt
+* CODE_OF_CONDUCT.md
+* LICENSE.txt
+* README.md
+* cmake/Copyright_cmake.txt
+* cmake/cmake_uninstall.cmake.in
+* include/vulkan/vk_icd.h - from Vulkan-Headers
+
+### Vulkan C++ Binding Repository (https://github.com/KhronosGroup/Vulkan-Hpp)
+
+* include/vulkan/vulkan.hpp
+
+### Originating repository unknown:
+
+* include/vulkan/vk_layer.h
+* include/vulkan/vk_sdk_platform.h
+
 
 ## Version Tagging Scheme
 
