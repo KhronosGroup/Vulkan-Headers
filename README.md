@@ -35,17 +35,14 @@ Files in this repository originate from:
 * README.md
 * cmake/Copyright_cmake.txt
 * cmake/cmake_uninstall.cmake.in
-* include/vulkan/vk_icd.h - from Vulkan-Headers
+* Non-API headers (report issues against @lenny-lunarg)
+  * include/vulkan/vk_icd.h
+  * include/vulkan/vk_layer.h
+  * include/vulkan/vk_sdk_platform.h
 
 ### Vulkan C++ Binding Repository (https://github.com/KhronosGroup/Vulkan-Hpp)
 
 * include/vulkan/vulkan.hpp
-
-### Originating repository unknown:
-
-* include/vulkan/vk_layer.h
-* include/vulkan/vk_sdk_platform.h
-
 
 ## Version Tagging Scheme
 
