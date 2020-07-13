@@ -135,7 +135,7 @@ server.
         <type category="define">// Vulkan 1.2 version number
 #define <name>VK_API_VERSION_1_2</name> <type>VK_MAKE_VERSION</type>(1, 2, 0)// Patch version should always be set to 0</type>
         <type category="define">// Version of this file
-#define <name>VK_HEADER_VERSION</name> 146</type>
+#define <name>VK_HEADER_VERSION</name> 147</type>
         <type category="define" requires="VK_HEADER_VERSION">// Complete version of this file
 #define <name>VK_HEADER_VERSION_COMPLETE</name> <type>VK_MAKE_VERSION</type>(1, 2, VK_HEADER_VERSION)</type>
 
@@ -13375,7 +13375,6 @@ typedef void <name>CAMetalLayer</name>;
                 <enum offset="0" extends="VkStructureType"                  name="VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDER_PASS_TRANSFORM_INFO_QCOM"/>
                 <enum offset="1" extends="VkStructureType"                  name="VK_STRUCTURE_TYPE_RENDER_PASS_TRANSFORM_BEGIN_INFO_QCOM"/>
                 <enum bitpos="1" extends="VkRenderPassCreateFlagBits"       name="VK_RENDER_PASS_CREATE_TRANSFORM_BIT_QCOM"/>
-                <type name="VkRenderPassCreateFlags"/>
                 <type name="VkRenderPassTransformBeginInfoQCOM"/>
                 <type name="VkCommandBufferInheritanceRenderPassTransformInfoQCOM"/>
             </require>
@@ -13870,6 +13869,12 @@ typedef void <name>CAMetalLayer</name>;
             <require>
                 <enum value="0"                                             name="VK_KHR_EXTENSION_349_SPEC_VERSION"/>
                 <enum value="&quot;VK_KHR_extension_349&quot;"              name="VK_KHR_EXTENSION_349_EXTENSION_NAME"/>
+            </require>
+        </extension>
+        <extension name="VK_KHR_extension_350" number="350" author="KHR" contact="Mark Bellamy @mark.bellamy_arm" supported="disabled">
+            <require>
+                <enum value="0"                                             name="VK_KHR_EXTENSION_350_SPEC_VERSION"/>
+                <enum value="&quot;VK_KHR_extension_350&quot;"              name="VK_KHR_EXTENSION_350_EXTENSION_NAME"/>
             </require>
         </extension>
     </extensions>

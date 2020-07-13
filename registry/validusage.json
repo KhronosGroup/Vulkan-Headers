@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.2.146",
-    "comment": "from git branch: github-master commit: d91f3e239932cd5d418bc83db4ae649101097b5f",
-    "date": "2020-07-04 02:44:27Z"
+    "api version": "1.2.147",
+    "comment": "from git branch: github-master commit: ca63a59cc3803c95e9ce67bac3a2ee3bbcba34d1",
+    "date": "2020-07-13 09:42:30Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -1308,6 +1308,12 @@
           "vuid": "VUID-VkSubmitInfo-pWaitDstStageMask-02090",
           "text": " If the <a href=\"#features-taskShader\">task shaders</a> feature is not enabled, each element of <code>pWaitDstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV</code>"
         }
+      ],
+      "(VK_VERSION_1_1)": [
+        {
+          "vuid": "VUID-VkSubmitInfo-pNext-04120",
+          "text": " If the <code>pNext</code> chain of this structure does not include a <code>VkProtectedSubmitInfo</code> structure with <code>protectedSubmit</code> set to <code>VK_TRUE</code>, then each element of the command buffer of the <code>pCommandBuffers</code> array <strong class=\"purple\">must</strong> be an unprotected command buffer"
+        }
       ]
     },
     "VkTimelineSemaphoreSubmitInfo": {
@@ -1427,14 +1433,6 @@
         {
           "vuid": "VUID-VkProtectedSubmitInfo-protectedSubmit-01817",
           "text": " If <code>protectedSubmit</code> is <code>VK_TRUE</code>, then each element of the <code>pCommandBuffers</code> array <strong class=\"purple\">must</strong> be a protected command buffer"
-        },
-        {
-          "vuid": "VUID-VkProtectedSubmitInfo-protectedSubmit-01818",
-          "text": " If <code>protectedSubmit</code> is <code>VK_FALSE</code>, then each element of the <code>pCommandBuffers</code> array <strong class=\"purple\">must</strong> be an unprotected command buffer"
-        },
-        {
-          "vuid": "VUID-VkProtectedSubmitInfo-pNext-01819",
-          "text": " If the <code>VkSubmitInfo</code>::<code>pNext</code> chain does not include a <code>VkProtectedSubmitInfo</code> structure, then each element of the command buffer of the <code>pCommandBuffers</code> array <strong class=\"purple\">must</strong> be an unprotected command buffer"
         },
         {
           "vuid": "VUID-VkProtectedSubmitInfo-sType-sType",
@@ -9989,6 +9987,10 @@
           "text": " If the <a href=\"#features-sparseResidencyAliased\">sparse aliased residency</a> feature is not enabled, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_IMAGE_CREATE_SPARSE_ALIASED_BIT</code>"
         },
         {
+          "vuid": "VUID-VkImageCreateInfo-tiling-04121",
+          "text": " If <code>tiling</code> is <code>VK_IMAGE_TILING_LINEAR</code>, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</code>"
+        },
+        {
           "vuid": "VUID-VkImageCreateInfo-imageType-00970",
           "text": " If <code>imageType</code> is <code>VK_IMAGE_TYPE_1D</code>, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</code>"
         },
@@ -11173,12 +11175,6 @@
       ]
     },
     "vkGetBufferMemoryRequirements": {
-      "(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-vkGetBufferMemoryRequirements-buffer-04003",
-          "text": " If <code>buffer</code> was created with the <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID</code> external memory handle type, then <code>buffer</code> <strong class=\"purple\">must</strong> be bound to memory"
-        }
-      ],
       "core": [
         {
           "vuid": "VUID-vkGetBufferMemoryRequirements-device-parameter",
@@ -11247,12 +11243,6 @@
       ]
     },
     "VkBufferMemoryRequirementsInfo2": {
-      "(VK_VERSION_1_1,VK_KHR_get_memory_requirements2)+(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-VkBufferMemoryRequirementsInfo2-buffer-04005",
-          "text": " If <code>buffer</code> was created with the <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID</code> external memory handle type, then <code>buffer</code> <strong class=\"purple\">must</strong> be bound to memory"
-        }
-      ],
       "(VK_VERSION_1_1,VK_KHR_get_memory_requirements2)": [
         {
           "vuid": "VUID-VkBufferMemoryRequirementsInfo2-sType-sType",
@@ -11567,6 +11557,16 @@
           "text": " If the <code>VkMemoryAllocateInfo</code> provided when <code>memory</code> was allocated included a <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a> structure in its <code>pNext</code> chain, and <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>buffer</code> was not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, then <code>buffer</code> <strong class=\"purple\">must</strong> equal <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>buffer</code> and <code>memoryOffset</code> <strong class=\"purple\">must</strong> be zero"
         }
       ],
+      "(VK_VERSION_1_1,VK_KHR_bind_memory2)+(VK_VERSION_1_1)": [
+        {
+          "vuid": "VUID-VkBindBufferMemoryInfo-buffer-04122",
+          "text": " If <code>buffer</code> was created with the <code>VK_BUFFER_CREATE_PROTECTED_BIT</code> bit set, the buffer <strong class=\"purple\">must</strong> be bound to a memory object allocated with a memory type that reports <code>VK_MEMORY_PROPERTY_PROTECTED_BIT</code>"
+        },
+        {
+          "vuid": "VUID-VkBindBufferMemoryInfo-buffer-04123",
+          "text": " If <code>buffer</code> was created with the <code>VK_BUFFER_CREATE_PROTECTED_BIT</code> bit not set, the buffer <strong class=\"purple\">must</strong> not be bound to a memory object created with a memory type that reports <code>VK_MEMORY_PROPERTY_PROTECTED_BIT</code>"
+        }
+      ],
       "(VK_VERSION_1_1,VK_KHR_bind_memory2)+(VK_NV_dedicated_allocation)": [
         {
           "vuid": "VUID-VkBindBufferMemoryInfo-buffer-01603",
@@ -11879,6 +11879,16 @@
         {
           "vuid": "VUID-VkBindImageMemoryInfo-memory-02631",
           "text": " If the <a href=\"#features-dedicatedAllocationImageAliasing\">dedicated allocation image aliasing</a> feature is enabled, and the <code>VkMemoryAllocateInfo</code> provided when <code>memory</code> was allocated included a <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a> structure in its <code>pNext</code> chain, and <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>image</code> was not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, then <code>memoryOffset</code> <strong class=\"purple\">must</strong> be zero, and <code>image</code> <strong class=\"purple\">must</strong> be either equal to <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>image</code> or an image that was created using the same parameters in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>, with the exception that <code>extent</code> and <code>arrayLayers</code> <strong class=\"purple\">may</strong> differ subject to the following restrictions: every dimension in the <code>extent</code> parameter of the image being bound <strong class=\"purple\">must</strong> be equal to or smaller than the original image for which the allocation was created; and the <code>arrayLayers</code> parameter of the image being bound <strong class=\"purple\">must</strong> be equal to or smaller than the original image for which the allocation was created"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_bind_memory2)+(VK_VERSION_1_1,VK_KHR_dedicated_allocation)+(VK_VERSION_1_1)": [
+        {
+          "vuid": "VUID-VkBindImageMemoryInfo-None-04124",
+          "text": " If image was created with the <code>VK_IMAGE_CREATE_PROTECTED_BIT</code> bit set, the image <strong class=\"purple\">must</strong> be bound to a memory object allocated with a memory type that reports <code>VK_MEMORY_PROPERTY_PROTECTED_BIT</code>"
+        },
+        {
+          "vuid": "VUID-VkBindImageMemoryInfo-None-04125",
+          "text": " If image was created with the <code>VK_IMAGE_CREATE_PROTECTED_BIT</code> bit not set, the image <strong class=\"purple\">must</strong> not be bound to a memory object created with a memory type that reports <code>VK_MEMORY_PROPERTY_PROTECTED_BIT</code>"
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_bind_memory2)+(VK_NV_dedicated_allocation)": [
@@ -12968,11 +12978,11 @@
         },
         {
           "vuid": "VUID-VkSamplerYcbcrConversionCreateInfo-xChromaOffset-01651",
-          "text": " If the <a href=\"#potential-format-features\">potential format features</a> of the sampler {YCbCr} conversion do not support <code>VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT</code>, <code>xChromaOffset</code> and <code>yChromaOffset</code> <strong class=\"purple\">must</strong> not be <code>VK_CHROMA_LOCATION_COSITED_EVEN</code>"
+          "text": " If the <a href=\"#potential-format-features\">potential format features</a> of the sampler {YCbCr} conversion do not support <code>VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT</code>, <code>xChromaOffset</code> and <code>yChromaOffset</code> <strong class=\"purple\">must</strong> not be <code>VK_CHROMA_LOCATION_COSITED_EVEN</code> if the corresponding channels are <a href=\"#textures-chroma-reconstruction\">downsampled</a>"
         },
         {
           "vuid": "VUID-VkSamplerYcbcrConversionCreateInfo-xChromaOffset-01652",
-          "text": " If the <a href=\"#potential-format-features\">potential format features</a> of the sampler {YCbCr} conversion do not support <code>VK_FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT</code>, <code>xChromaOffset</code> and <code>yChromaOffset</code> <strong class=\"purple\">must</strong> not be <code>VK_CHROMA_LOCATION_MIDPOINT</code>"
+          "text": " If the <a href=\"#potential-format-features\">potential format features</a> of the sampler {YCbCr} conversion do not support <code>VK_FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT</code>, <code>xChromaOffset</code> and <code>yChromaOffset</code> <strong class=\"purple\">must</strong> not be <code>VK_CHROMA_LOCATION_MIDPOINT</code> if the corresponding channels are <a href=\"#textures-chroma-reconstruction\">downsampled</a>"
         },
         {
           "vuid": "VUID-VkSamplerYcbcrConversionCreateInfo-components-02581",
