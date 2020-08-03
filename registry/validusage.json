@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.2.148",
-    "comment": "from git branch: github-master commit: 3c1ca55f2e0b4b9423cf9c0b30400b1a4d61c5d1",
-    "date": "2020-07-20 07:12:48Z"
+    "api version": "1.2.149",
+    "comment": "from git branch: github-master commit: 7c18dc68a98f4145ea730b764b0f1c4bf596e5ee",
+    "date": "2020-08-03 10:36:40Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -510,7 +510,7 @@
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceDiagnosticsConfigCreateInfoNV\">VkDeviceDiagnosticsConfigCreateInfoNV</a>, <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceMemoryOverallocationCreateInfoAMD\">VkDeviceMemoryOverallocationCreateInfoAMD</a>, <a href=\"#VkDevicePrivateDataCreateInfoEXT\">VkDevicePrivateDataCreateInfoEXT</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice8BitStorageFeatures\">VkPhysicalDevice8BitStorageFeatures</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeatures\">VkPhysicalDeviceBufferDeviceAddressFeatures</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeaturesEXT\">VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCoherentMemoryFeaturesAMD\">VkPhysicalDeviceCoherentMemoryFeaturesAMD</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixFeaturesNV\">VkPhysicalDeviceCooperativeMatrixFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCoverageReductionModeFeaturesNV\">VkPhysicalDeviceCoverageReductionModeFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCustomBorderColorFeaturesEXT\">VkPhysicalDeviceCustomBorderColorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV\">VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDepthClipEnableFeaturesEXT\">VkPhysicalDeviceDepthClipEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeatures\">VkPhysicalDeviceDescriptorIndexingFeatures</a>, <a href=\"#VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV\">VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDiagnosticsConfigFeaturesNV\">VkPhysicalDeviceDiagnosticsConfigFeaturesNV</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceExtendedDynamicStateFeaturesEXT\">VkPhysicalDeviceExtendedDynamicStateFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMap2FeaturesEXT\">VkPhysicalDeviceFragmentDensityMap2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapFeaturesEXT\">VkPhysicalDeviceFragmentDensityMapFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT\">VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceHostQueryResetFeatures\">VkPhysicalDeviceHostQueryResetFeatures</a>, <a href=\"#VkPhysicalDeviceImageRobustnessFeaturesEXT\">VkPhysicalDeviceImageRobustnessFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceImagelessFramebufferFeatures\">VkPhysicalDeviceImagelessFramebufferFeatures</a>, <a href=\"#VkPhysicalDeviceIndexTypeUint8FeaturesEXT\">VkPhysicalDeviceIndexTypeUint8FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeaturesEXT\">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceLineRasterizationFeaturesEXT\">VkPhysicalDeviceLineRasterizationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMemoryPriorityFeaturesEXT\">VkPhysicalDeviceMemoryPriorityFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDevicePerformanceQueryFeaturesKHR\">VkPhysicalDevicePerformanceQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT\">VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT</a>, <a href=\"#VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR\">VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePrivateDataFeaturesEXT\">VkPhysicalDevicePrivateDataFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceRayTracingFeaturesKHR\">VkPhysicalDeviceRayTracingFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceRobustness2FeaturesEXT\">VkPhysicalDeviceRobustness2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceScalarBlockLayoutFeatures\">VkPhysicalDeviceScalarBlockLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures\">VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures</a>, <a href=\"#VkPhysicalDeviceShaderAtomicFloatFeaturesEXT\">VkPhysicalDeviceShaderAtomicFloatFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64Features\">VkPhysicalDeviceShaderAtomicInt64Features</a>, <a href=\"#VkPhysicalDeviceShaderClockFeaturesKHR\">VkPhysicalDeviceShaderClockFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT\">VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderDrawParametersFeatures\">VkPhysicalDeviceShaderDrawParametersFeatures</a>, <a href=\"#VkPhysicalDeviceShaderFloat16Int8Features\">VkPhysicalDeviceShaderFloat16Int8Features</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL\">VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL</a>, <a href=\"#VkPhysicalDeviceShaderSMBuiltinsFeaturesNV\">VkPhysicalDeviceShaderSMBuiltinsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures\">VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSubgroupSizeControlFeaturesEXT\">VkPhysicalDeviceSubgroupSizeControlFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT\">VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT\">VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTimelineSemaphoreFeatures\">VkPhysicalDeviceTimelineSemaphoreFeatures</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackFeaturesEXT\">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceUniformBufferStandardLayoutFeatures\">VkPhysicalDeviceUniformBufferStandardLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceVariablePointersFeatures\">VkPhysicalDeviceVariablePointersFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVulkan11Features\">VkPhysicalDeviceVulkan11Features</a>, <a href=\"#VkPhysicalDeviceVulkan12Features\">VkPhysicalDeviceVulkan12Features</a>, <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeatures\">VkPhysicalDeviceVulkanMemoryModelFeatures</a>, or <a href=\"#VkPhysicalDeviceYcbcrImageArraysFeaturesEXT\">VkPhysicalDeviceYcbcrImageArraysFeaturesEXT</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceDiagnosticsConfigCreateInfoNV\">VkDeviceDiagnosticsConfigCreateInfoNV</a>, <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceMemoryOverallocationCreateInfoAMD\">VkDeviceMemoryOverallocationCreateInfoAMD</a>, <a href=\"#VkDevicePrivateDataCreateInfoEXT\">VkDevicePrivateDataCreateInfoEXT</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice4444FormatsFeaturesEXT\">VkPhysicalDevice4444FormatsFeaturesEXT</a>, <a href=\"#VkPhysicalDevice8BitStorageFeatures\">VkPhysicalDevice8BitStorageFeatures</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeatures\">VkPhysicalDeviceBufferDeviceAddressFeatures</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeaturesEXT\">VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCoherentMemoryFeaturesAMD\">VkPhysicalDeviceCoherentMemoryFeaturesAMD</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixFeaturesNV\">VkPhysicalDeviceCooperativeMatrixFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCoverageReductionModeFeaturesNV\">VkPhysicalDeviceCoverageReductionModeFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCustomBorderColorFeaturesEXT\">VkPhysicalDeviceCustomBorderColorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV\">VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDepthClipEnableFeaturesEXT\">VkPhysicalDeviceDepthClipEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeatures\">VkPhysicalDeviceDescriptorIndexingFeatures</a>, <a href=\"#VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV\">VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDiagnosticsConfigFeaturesNV\">VkPhysicalDeviceDiagnosticsConfigFeaturesNV</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceExtendedDynamicStateFeaturesEXT\">VkPhysicalDeviceExtendedDynamicStateFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMap2FeaturesEXT\">VkPhysicalDeviceFragmentDensityMap2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapFeaturesEXT\">VkPhysicalDeviceFragmentDensityMapFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT\">VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceHostQueryResetFeatures\">VkPhysicalDeviceHostQueryResetFeatures</a>, <a href=\"#VkPhysicalDeviceImageRobustnessFeaturesEXT\">VkPhysicalDeviceImageRobustnessFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceImagelessFramebufferFeatures\">VkPhysicalDeviceImagelessFramebufferFeatures</a>, <a href=\"#VkPhysicalDeviceIndexTypeUint8FeaturesEXT\">VkPhysicalDeviceIndexTypeUint8FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeaturesEXT\">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceLineRasterizationFeaturesEXT\">VkPhysicalDeviceLineRasterizationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMemoryPriorityFeaturesEXT\">VkPhysicalDeviceMemoryPriorityFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDevicePerformanceQueryFeaturesKHR\">VkPhysicalDevicePerformanceQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT\">VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT</a>, <a href=\"#VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR\">VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePrivateDataFeaturesEXT\">VkPhysicalDevicePrivateDataFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceRayTracingFeaturesKHR\">VkPhysicalDeviceRayTracingFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceRobustness2FeaturesEXT\">VkPhysicalDeviceRobustness2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceScalarBlockLayoutFeatures\">VkPhysicalDeviceScalarBlockLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures\">VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures</a>, <a href=\"#VkPhysicalDeviceShaderAtomicFloatFeaturesEXT\">VkPhysicalDeviceShaderAtomicFloatFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64Features\">VkPhysicalDeviceShaderAtomicInt64Features</a>, <a href=\"#VkPhysicalDeviceShaderClockFeaturesKHR\">VkPhysicalDeviceShaderClockFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT\">VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderDrawParametersFeatures\">VkPhysicalDeviceShaderDrawParametersFeatures</a>, <a href=\"#VkPhysicalDeviceShaderFloat16Int8Features\">VkPhysicalDeviceShaderFloat16Int8Features</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL\">VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL</a>, <a href=\"#VkPhysicalDeviceShaderSMBuiltinsFeaturesNV\">VkPhysicalDeviceShaderSMBuiltinsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures\">VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSubgroupSizeControlFeaturesEXT\">VkPhysicalDeviceSubgroupSizeControlFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT\">VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT\">VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTimelineSemaphoreFeatures\">VkPhysicalDeviceTimelineSemaphoreFeatures</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackFeaturesEXT\">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceUniformBufferStandardLayoutFeatures\">VkPhysicalDeviceUniformBufferStandardLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceVariablePointersFeatures\">VkPhysicalDeviceVariablePointersFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVulkan11Features\">VkPhysicalDeviceVulkan11Features</a>, <a href=\"#VkPhysicalDeviceVulkan12Features\">VkPhysicalDeviceVulkan12Features</a>, <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeatures\">VkPhysicalDeviceVulkanMemoryModelFeatures</a>, or <a href=\"#VkPhysicalDeviceYcbcrImageArraysFeaturesEXT\">VkPhysicalDeviceYcbcrImageArraysFeaturesEXT</a>"
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-sType-unique",
@@ -6637,14 +6637,6 @@
           "text": " If rasterization is not disabled and the subpass uses color attachments, the <code>attachmentCount</code> member of <code>pColorBlendState</code> <strong class=\"purple\">must</strong> be equal to the <code>colorAttachmentCount</code> used to create <code>subpass</code>"
         },
         {
-          "vuid": "VUID-VkGraphicsPipelineCreateInfo-pDynamicStates-00747",
-          "text": " If no element of the <code>pDynamicStates</code> member of <code>pDynamicState</code> is <code>VK_DYNAMIC_STATE_VIEWPORT</code>, the <code>pViewports</code> member of <code>pViewportState</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>pViewportState-&gt;viewportCount</code> valid <code>VkViewport</code> structures"
-        },
-        {
-          "vuid": "VUID-VkGraphicsPipelineCreateInfo-pDynamicStates-00748",
-          "text": " If no element of the <code>pDynamicStates</code> member of <code>pDynamicState</code> is <code>VK_DYNAMIC_STATE_SCISSOR</code>, the <code>pScissors</code> member of <code>pViewportState</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>pViewportState-&gt;scissorCount</code> <code>VkRect2D</code> structures"
-        },
-        {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-pDynamicStates-00749",
           "text": " If the wide lines feature is not enabled, and no element of the <code>pDynamicStates</code> member of <code>pDynamicState</code> is <code>VK_DYNAMIC_STATE_LINE_WIDTH</code>, the <code>lineWidth</code> member of <code>pRasterizationState</code> <strong class=\"purple\">must</strong> be <code>1.0</code>"
         },
@@ -6775,6 +6767,46 @@
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-subpass-01757",
           "text": " If rasterization is not disabled and <code>subpass</code> uses a depth/stencil attachment in <code>renderPass</code> that has a layout of <code>VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL</code> or <code>VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL</code> in the <code>VkAttachmentReference</code> defined by <code>subpass</code>, the <code>failOp</code>, <code>passOp</code> and <code>depthFailOp</code> members of each of the <code>front</code> and <code>back</code> members of <code>pDepthStencilState</code> <strong class=\"purple\">must</strong> be <code>VK_STENCIL_OP_KEEP</code>"
+        }
+      ],
+      "!(VK_EXT_extended_dynamic_state)": [
+        {
+          "vuid": "VUID-VkGraphicsPipelineCreateInfo-pDynamicStates-00747",
+          "text": " If no element of the <code>pDynamicStates</code> member of <code>pDynamicState</code> is <code>VK_DYNAMIC_STATE_VIEWPORT</code>, the <code>pViewports</code> member of <code>pViewportState</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>pViewportState-&gt;viewportCount</code> valid <code>VkViewport</code> structures"
+        },
+        {
+          "vuid": "VUID-VkGraphicsPipelineCreateInfo-pDynamicStates-00748",
+          "text": " If no element of the <code>pDynamicStates</code> member of <code>pDynamicState</code> is <code>VK_DYNAMIC_STATE_SCISSOR</code>, the <code>pScissors</code> member of <code>pViewportState</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>pViewportState-&gt;scissorCount</code> <code>VkRect2D</code> structures"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)": [
+        {
+          "vuid": "VUID-VkGraphicsPipelineCreateInfo-pDynamicStates-04130",
+          "text": " If no element of the <code>pDynamicStates</code> member of <code>pDynamicState</code> is <code>VK_DYNAMIC_STATE_VIEWPORT</code> or <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code>, the <code>pViewports</code> member of <code>pViewportState</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>pViewportState-&gt;viewportCount</code> valid <code>VkViewport</code> structures"
+        },
+        {
+          "vuid": "VUID-VkGraphicsPipelineCreateInfo-pDynamicStates-04131",
+          "text": " If no element of the <code>pDynamicStates</code> member of <code>pDynamicState</code> is <code>VK_DYNAMIC_STATE_SCISSOR</code> or <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code>, the <code>pScissors</code> member of <code>pViewportState</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>pViewportState-&gt;scissorCount</code> <code>VkRect2D</code> structures"
+        },
+        {
+          "vuid": "VUID-VkGraphicsPipelineCreateInfo-pDynamicStates-03378",
+          "text": " If the <a href=\"#features-extendedDynamicState\">extendedDynamicState</a> feature is not enabled, there <strong class=\"purple\">must</strong> be no element of the <code>pDynamicStates</code> member of <code>pDynamicState</code> set to <code>VK_DYNAMIC_STATE_CULL_MODE_EXT</code>, <code>VK_DYNAMIC_STATE_FRONT_FACE_EXT</code>, <code>VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY_EXT</code>, <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code>, <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code>, <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code>, <code>VK_DYNAMIC_STATE_DEPTH_TEST_ENABLE_EXT</code>, <code>VK_DYNAMIC_STATE_DEPTH_WRITE_ENABLE_EXT</code>, <code>VK_DYNAMIC_STATE_DEPTH_COMPARE_OP_EXT</code>, <code>VK_DYNAMIC_STATE_DEPTH_BOUNDS_TEST_ENABLE_EXT</code>, <code>VK_DYNAMIC_STATE_STENCIL_TEST_ENABLE_EXT</code>, or <code>VK_DYNAMIC_STATE_STENCIL_OP_EXT</code>"
+        },
+        {
+          "vuid": "VUID-VkGraphicsPipelineCreateInfo-pDynamicStates-03379",
+          "text": " If <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> is included in the <code>pDynamicStates</code> array then <code>viewportCount</code> <strong class=\"purple\">must</strong> be zero"
+        },
+        {
+          "vuid": "VUID-VkGraphicsPipelineCreateInfo-pDynamicStates-03380",
+          "text": " If <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> is included in the <code>pDynamicStates</code> array then <code>scissorCount</code> <strong class=\"purple\">must</strong> be zero"
+        },
+        {
+          "vuid": "VUID-VkGraphicsPipelineCreateInfo-pDynamicStates-04132",
+          "text": " If <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> is included in the <code>pDynamicStates</code> array then <code>VK_DYNAMIC_STATE_VIEWPORT</code> <strong class=\"purple\">must</strong> not be present"
+        },
+        {
+          "vuid": "VUID-VkGraphicsPipelineCreateInfo-pDynamicStates-04133",
+          "text": " If <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> is included in the <code>pDynamicStates</code> array then <code>VK_DYNAMIC_STATE_SCISSOR</code> <strong class=\"purple\">must</strong> not be present"
         }
       ],
       "!(VK_EXT_depth_range_unrestricted)": [
@@ -6951,20 +6983,6 @@
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-flags-03377",
           "text": " <code>flags</code> <strong class=\"purple\">must</strong> not include <code>VK_PIPELINE_CREATE_RAY_TRACING_SKIP_AABBS_BIT_KHR</code>"
-        }
-      ],
-      "(VK_EXT_extended_dynamic_state)": [
-        {
-          "vuid": "VUID-VkGraphicsPipelineCreateInfo-pDynamicStates-03378",
-          "text": " If the <a href=\"#features-extendedDynamicState\">extendedDynamicState</a> feature is not enabled, there <strong class=\"purple\">must</strong> be no element of the <code>pDynamicStates</code> member of <code>pDynamicState</code> set to <code>VK_DYNAMIC_STATE_CULL_MODE_EXT</code>, <code>VK_DYNAMIC_STATE_FRONT_FACE_EXT</code>, <code>VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY_EXT</code>, <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code>, <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code>, <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code>, <code>VK_DYNAMIC_STATE_DEPTH_TEST_ENABLE_EXT</code>, <code>VK_DYNAMIC_STATE_DEPTH_WRITE_ENABLE_EXT</code>, <code>VK_DYNAMIC_STATE_DEPTH_COMPARE_OP_EXT</code>, <code>VK_DYNAMIC_STATE_DEPTH_BOUNDS_TEST_ENABLE_EXT</code>, <code>VK_DYNAMIC_STATE_STENCIL_TEST_ENABLE_EXT</code>, or <code>VK_DYNAMIC_STATE_STENCIL_OP_EXT</code>"
-        },
-        {
-          "vuid": "VUID-VkGraphicsPipelineCreateInfo-pDynamicStates-03379",
-          "text": " If <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> is included in the <code>pDynamicStates</code> array then <code>viewportCount</code> <strong class=\"purple\">must</strong> be zero"
-        },
-        {
-          "vuid": "VUID-VkGraphicsPipelineCreateInfo-pDynamicStates-03380",
-          "text": " If <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> is included in the <code>pDynamicStates</code> array then <code>scissorCount</code> <strong class=\"purple\">must</strong> be zero"
         }
       ],
       "(VK_NV_device_generated_commands)": [
@@ -11493,31 +11511,99 @@
       ]
     },
     "VkBindBufferMemoryInfo": {
-      "(VK_VERSION_1_1,VK_KHR_bind_memory2)": [
+      "core": [
         {
-          "vuid": "VUID-VkBindBufferMemoryInfo-buffer-01593",
+          "vuid": "VUID-VkBindBufferMemoryInfo-buffer-01029",
           "text": " <code>buffer</code> <strong class=\"purple\">must</strong> not already be backed by a memory object"
         },
         {
-          "vuid": "VUID-VkBindBufferMemoryInfo-buffer-01594",
+          "vuid": "VUID-VkBindBufferMemoryInfo-buffer-01030",
           "text": " <code>buffer</code> <strong class=\"purple\">must</strong> not have been created with any sparse memory binding flags"
         },
         {
-          "vuid": "VUID-VkBindBufferMemoryInfo-memoryOffset-01595",
+          "vuid": "VUID-VkBindBufferMemoryInfo-memoryOffset-01031",
           "text": " <code>memoryOffset</code> <strong class=\"purple\">must</strong> be less than the size of <code>memory</code>"
         },
         {
-          "vuid": "VUID-VkBindBufferMemoryInfo-memory-01599",
+          "vuid": "VUID-VkBindBufferMemoryInfo-memory-01035",
           "text": " <code>memory</code> <strong class=\"purple\">must</strong> have been allocated using one of the memory types allowed in the <code>memoryTypeBits</code> member of the <code>VkMemoryRequirements</code> structure returned from a call to <code>vkGetBufferMemoryRequirements</code> with <code>buffer</code>"
         },
         {
-          "vuid": "VUID-VkBindBufferMemoryInfo-memoryOffset-01600",
+          "vuid": "VUID-VkBindBufferMemoryInfo-memoryOffset-01036",
           "text": " <code>memoryOffset</code> <strong class=\"purple\">must</strong> be an integer multiple of the <code>alignment</code> member of the <code>VkMemoryRequirements</code> structure returned from a call to <code>vkGetBufferMemoryRequirements</code> with <code>buffer</code>"
         },
         {
-          "vuid": "VUID-VkBindBufferMemoryInfo-size-01601",
+          "vuid": "VUID-VkBindBufferMemoryInfo-size-01037",
           "text": " The <code>size</code> member of the <code>VkMemoryRequirements</code> structure returned from a call to <code>vkGetBufferMemoryRequirements</code> with <code>buffer</code> <strong class=\"purple\">must</strong> be less than or equal to the size of <code>memory</code> minus <code>memoryOffset</code>"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_dedicated_allocation)": [
+        {
+          "vuid": "VUID-VkBindBufferMemoryInfo-buffer-01444",
+          "text": " If <code>buffer</code> requires a dedicated allocation(as reported by <a href=\"#vkGetBufferMemoryRequirements2\">vkGetBufferMemoryRequirements2</a> in <a href=\"#VkMemoryDedicatedRequirements\">VkMemoryDedicatedRequirements</a>::requiresDedicatedAllocation for <code>buffer</code>), <code>memory</code> <strong class=\"purple\">must</strong> have been created with <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>buffer</code> equal to <code>buffer</code>"
         },
+        {
+          "vuid": "VUID-VkBindBufferMemoryInfo-memory-01508",
+          "text": " If the <code>VkMemoryAllocateInfo</code> provided when <code>memory</code> was allocated included a <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a> structure in its <code>pNext</code> chain, and <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>buffer</code> was not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, then <code>buffer</code> <strong class=\"purple\">must</strong> equal <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>buffer</code>, and <code>memoryOffset</code> <strong class=\"purple\">must</strong> be zero"
+        }
+      ],
+      "(VK_VERSION_1_1)": [
+        {
+          "vuid": "VUID-VkBindBufferMemoryInfo-None-01898",
+          "text": " If buffer was created with the <code>VK_BUFFER_CREATE_PROTECTED_BIT</code> bit set, the buffer <strong class=\"purple\">must</strong> be bound to a memory object allocated with a memory type that reports <code>VK_MEMORY_PROPERTY_PROTECTED_BIT</code>"
+        },
+        {
+          "vuid": "VUID-VkBindBufferMemoryInfo-None-01899",
+          "text": " If buffer was created with the <code>VK_BUFFER_CREATE_PROTECTED_BIT</code> bit not set, the buffer <strong class=\"purple\">must</strong> not be bound to a memory object created with a memory type that reports <code>VK_MEMORY_PROPERTY_PROTECTED_BIT</code>"
+        }
+      ],
+      "(VK_NV_dedicated_allocation)": [
+        {
+          "vuid": "VUID-VkBindBufferMemoryInfo-buffer-01038",
+          "text": " If <code>buffer</code> was created with <a href=\"#VkDedicatedAllocationBufferCreateInfoNV\">VkDedicatedAllocationBufferCreateInfoNV</a>::<code>dedicatedAllocation</code> equal to <code>VK_TRUE</code>, <code>memory</code> <strong class=\"purple\">must</strong> have been created with <a href=\"#VkDedicatedAllocationMemoryAllocateInfoNV\">VkDedicatedAllocationMemoryAllocateInfoNV</a>::<code>buffer</code> equal to a buffer handle created with identical creation parameters to <code>buffer</code> and <code>memoryOffset</code> <strong class=\"purple\">must</strong> be zero"
+        }
+      ],
+      "(VK_NV_dedicated_allocation)+!(VK_VERSION_1_1,VK_KHR_dedicated_allocation)": [
+        {
+          "vuid": "VUID-VkBindBufferMemoryInfo-buffer-01039",
+          "text": " If <code>buffer</code> was not created with <a href=\"#VkDedicatedAllocationBufferCreateInfoNV\">VkDedicatedAllocationBufferCreateInfoNV</a>::<code>dedicatedAllocation</code> equal to <code>VK_TRUE</code>, <code>memory</code> <strong class=\"purple\">must</strong> not have been allocated dedicated for a specific buffer or image"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_external_memory)": [
+        {
+          "vuid": "VUID-VkBindBufferMemoryInfo-memory-02726",
+          "text": " If the value of <a href=\"#VkExportMemoryAllocateInfo\">VkExportMemoryAllocateInfo</a>::<code>handleTypes</code> used to allocate <code>memory</code> is not <code>0</code>, it <strong class=\"purple\">must</strong> include at least one of the handles set in <a href=\"#VkExternalMemoryBufferCreateInfo\">VkExternalMemoryBufferCreateInfo</a>::<code>handleTypes</code> when <code>buffer</code> was created"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_external_memory)+!(VK_ANDROID_external_memory_android_hardware_buffer)": [
+        {
+          "vuid": "VUID-VkBindBufferMemoryInfo-memory-02727",
+          "text": " If <code>memory</code> was created by a memory import operation, the external handle type of the imported memory <strong class=\"purple\">must</strong> also have been set in <a href=\"#VkExternalMemoryBufferCreateInfo\">VkExternalMemoryBufferCreateInfo</a>::<code>handleTypes</code> when <code>buffer</code> was created"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_external_memory)+(VK_ANDROID_external_memory_android_hardware_buffer)": [
+        {
+          "vuid": "VUID-VkBindBufferMemoryInfo-memory-02985",
+          "text": " If <code>memory</code> was created by a memory import operation, that is not <a href=\"#VkImportAndroidHardwareBufferInfoANDROID\">VkImportAndroidHardwareBufferInfoANDROID</a> with a non-<code>NULL</code> <code>buffer</code> value, the external handle type of the imported memory <strong class=\"purple\">must</strong> also have been set in <a href=\"#VkExternalMemoryBufferCreateInfo\">VkExternalMemoryBufferCreateInfo</a>::<code>handleTypes</code> when <code>buffer</code> was created"
+        },
+        {
+          "vuid": "VUID-VkBindBufferMemoryInfo-memory-02986",
+          "text": " If <code>memory</code> was created with the <a href=\"#VkImportAndroidHardwareBufferInfoANDROID\">VkImportAndroidHardwareBufferInfoANDROID</a> memory import operation with a non-<code>NULL</code> <code>buffer</code> value, <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID</code> <strong class=\"purple\">must</strong> also have been set in <a href=\"#VkExternalMemoryBufferCreateInfo\">VkExternalMemoryBufferCreateInfo</a>::<code>handleTypes</code> when <code>buffer</code> was created"
+        }
+      ],
+      "(VK_VERSION_1_2,VK_KHR_buffer_device_address)": [
+        {
+          "vuid": "VUID-VkBindBufferMemoryInfo-bufferDeviceAddress-03339",
+          "text": " If the <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeatures\">VkPhysicalDeviceBufferDeviceAddressFeatures</a>::<code>bufferDeviceAddress</code> feature is enabled and <code>buffer</code> was created with the <code>VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT</code> bit set, <code>memory</code> <strong class=\"purple\">must</strong> have been allocated with the <code>VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT</code> bit set"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_device_group)": [
+        {
+          "vuid": "VUID-VkBindBufferMemoryInfo-pNext-01605",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkBindBufferMemoryDeviceGroupInfo\">VkBindBufferMemoryDeviceGroupInfo</a> structure, all instances of <code>memory</code> specified by <a href=\"#VkBindBufferMemoryDeviceGroupInfo\">VkBindBufferMemoryDeviceGroupInfo</a>::<code>pDeviceIndices</code> <strong class=\"purple\">must</strong> have been allocated"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_bind_memory2)": [
         {
           "vuid": "VUID-VkBindBufferMemoryInfo-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO</code>"
@@ -11542,72 +11628,6 @@
           "vuid": "VUID-VkBindBufferMemoryInfo-commonparent",
           "text": " Both of <code>buffer</code>, and <code>memory</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <a href=\"#VkDevice\">VkDevice</a>"
         }
-      ],
-      "(VK_VERSION_1_1,VK_KHR_bind_memory2)+(VK_VERSION_1_1,VK_KHR_dedicated_allocation)": [
-        {
-          "vuid": "VUID-VkBindBufferMemoryInfo-buffer-01602",
-          "text": " If <code>buffer</code> requires a dedicated allocation(as reported by <a href=\"#vkGetBufferMemoryRequirements2\">vkGetBufferMemoryRequirements2</a> in <a href=\"#VkMemoryDedicatedRequirements\">VkMemoryDedicatedRequirements</a>::requiresDedicatedAllocation for <code>buffer</code>), <code>memory</code> <strong class=\"purple\">must</strong> have been created with <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>buffer</code> equal to <code>buffer</code> and <code>memoryOffset</code> <strong class=\"purple\">must</strong> be zero"
-        },
-        {
-          "vuid": "VUID-VkBindBufferMemoryInfo-memory-01900",
-          "text": " If the <code>VkMemoryAllocateInfo</code> provided when <code>memory</code> was allocated included a <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a> structure in its <code>pNext</code> chain, and <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>buffer</code> was not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, then <code>buffer</code> <strong class=\"purple\">must</strong> equal <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>buffer</code> and <code>memoryOffset</code> <strong class=\"purple\">must</strong> be zero"
-        }
-      ],
-      "(VK_VERSION_1_1,VK_KHR_bind_memory2)+(VK_VERSION_1_1)": [
-        {
-          "vuid": "VUID-VkBindBufferMemoryInfo-buffer-04122",
-          "text": " If <code>buffer</code> was created with the <code>VK_BUFFER_CREATE_PROTECTED_BIT</code> bit set, the buffer <strong class=\"purple\">must</strong> be bound to a memory object allocated with a memory type that reports <code>VK_MEMORY_PROPERTY_PROTECTED_BIT</code>"
-        },
-        {
-          "vuid": "VUID-VkBindBufferMemoryInfo-buffer-04123",
-          "text": " If <code>buffer</code> was created with the <code>VK_BUFFER_CREATE_PROTECTED_BIT</code> bit not set, the buffer <strong class=\"purple\">must</strong> not be bound to a memory object created with a memory type that reports <code>VK_MEMORY_PROPERTY_PROTECTED_BIT</code>"
-        }
-      ],
-      "(VK_VERSION_1_1,VK_KHR_bind_memory2)+(VK_NV_dedicated_allocation)": [
-        {
-          "vuid": "VUID-VkBindBufferMemoryInfo-buffer-01603",
-          "text": " If <code>buffer</code> was created with <a href=\"#VkDedicatedAllocationBufferCreateInfoNV\">VkDedicatedAllocationBufferCreateInfoNV</a>::<code>dedicatedAllocation</code> equal to <code>VK_TRUE</code>, <code>memory</code> <strong class=\"purple\">must</strong> have been created with <a href=\"#VkDedicatedAllocationMemoryAllocateInfoNV\">VkDedicatedAllocationMemoryAllocateInfoNV</a>::<code>buffer</code> equal to <code>buffer</code> and <code>memoryOffset</code> <strong class=\"purple\">must</strong> be zero"
-        }
-      ],
-      "(VK_VERSION_1_1,VK_KHR_bind_memory2)+(VK_NV_dedicated_allocation)+!(VK_VERSION_1_1,VK_KHR_dedicated_allocation)": [
-        {
-          "vuid": "VUID-VkBindBufferMemoryInfo-buffer-01604",
-          "text": " If <code>buffer</code> was not created with <a href=\"#VkDedicatedAllocationBufferCreateInfoNV\">VkDedicatedAllocationBufferCreateInfoNV</a>::<code>dedicatedAllocation</code> equal to <code>VK_TRUE</code>, <code>memory</code> <strong class=\"purple\">must</strong> not have been allocated dedicated for a specific buffer or image"
-        }
-      ],
-      "(VK_VERSION_1_1,VK_KHR_bind_memory2)+(VK_VERSION_1_1,VK_KHR_device_group)": [
-        {
-          "vuid": "VUID-VkBindBufferMemoryInfo-pNext-01605",
-          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkBindBufferMemoryDeviceGroupInfo\">VkBindBufferMemoryDeviceGroupInfo</a> structure, all instances of <code>memory</code> specified by <a href=\"#VkBindBufferMemoryDeviceGroupInfo\">VkBindBufferMemoryDeviceGroupInfo</a>::<code>pDeviceIndices</code> <strong class=\"purple\">must</strong> have been allocated"
-        }
-      ],
-      "(VK_VERSION_1_1,VK_KHR_bind_memory2)+(VK_VERSION_1_1,VK_KHR_external_memory)": [
-        {
-          "vuid": "VUID-VkBindBufferMemoryInfo-handleTypes-02791",
-          "text": " If the value of <a href=\"#VkExportMemoryAllocateInfo\">VkExportMemoryAllocateInfo</a>::<code>handleTypes</code> used to allocate <code>memory</code> is not <code>0</code>, it <strong class=\"purple\">must</strong> include at least one of the handles set in <a href=\"#VkExternalMemoryBufferCreateInfo\">VkExternalMemoryBufferCreateInfo</a>::<code>handleTypes</code> when <code>buffer</code> was created"
-        }
-      ],
-      "(VK_VERSION_1_1,VK_KHR_bind_memory2)+(VK_VERSION_1_1,VK_KHR_external_memory)+!(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-VkBindBufferMemoryInfo-memory-02792",
-          "text": " If <code>memory</code> was created by a memory import operation, the external handle type of the imported memory <strong class=\"purple\">must</strong> also have been set in <a href=\"#VkExternalMemoryBufferCreateInfo\">VkExternalMemoryBufferCreateInfo</a>::<code>handleTypes</code> when <code>buffer</code> was created"
-        }
-      ],
-      "(VK_VERSION_1_1,VK_KHR_bind_memory2)+(VK_VERSION_1_1,VK_KHR_external_memory)+(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-VkBindBufferMemoryInfo-memory-02987",
-          "text": " If <code>memory</code> was created by a memory import operation, that is not <a href=\"#VkImportAndroidHardwareBufferInfoANDROID\">VkImportAndroidHardwareBufferInfoANDROID</a> with a non-<code>NULL</code> <code>buffer</code> value, the external handle type of the imported memory <strong class=\"purple\">must</strong> also have been set in <a href=\"#VkExternalMemoryBufferCreateInfo\">VkExternalMemoryBufferCreateInfo</a>::<code>handleTypes</code> when <code>buffer</code> was created"
-        },
-        {
-          "vuid": "VUID-VkBindBufferMemoryInfo-memory-02988",
-          "text": " If <code>memory</code> was created with the <a href=\"#VkImportAndroidHardwareBufferInfoANDROID\">VkImportAndroidHardwareBufferInfoANDROID</a> memory import operation with a non-<code>NULL</code> <code>buffer</code> value, <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID</code> <strong class=\"purple\">must</strong> also have been set in <a href=\"#VkExternalMemoryBufferCreateInfo\">VkExternalMemoryBufferCreateInfo</a>::<code>handleTypes</code> when <code>buffer</code> was created"
-        }
-      ],
-      "(VK_VERSION_1_1,VK_KHR_bind_memory2)+(VK_KHR_buffer_device_address)": [
-        {
-          "vuid": "VUID-VkBindBufferMemoryInfo-bufferDeviceAddress-02838",
-          "text": " If the <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeaturesKHR\">VkPhysicalDeviceBufferDeviceAddressFeaturesKHR</a>::<code>bufferDeviceAddress</code> feature is enabled and <code>buffer</code> was created with the <code>VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT_KHR</code> bit set, <code>memory</code> <strong class=\"purple\">must</strong> have been allocated with the <code>VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT_KHR</code> bit set"
-        }
       ]
     },
     "VkBindBufferMemoryDeviceGroupInfo": {
@@ -11631,12 +11651,6 @@
       ]
     },
     "vkBindImageMemory": {
-      "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
-        {
-          "vuid": "VUID-vkBindImageMemory-image-01608",
-          "text": " <code>image</code> <strong class=\"purple\">must</strong> not have been created with the <code>VK_IMAGE_CREATE_DISJOINT_BIT</code> set"
-        }
-      ],
       "core": [
         {
           "vuid": "VUID-vkBindImageMemory-image-01044",
@@ -11748,6 +11762,12 @@
           "vuid": "VUID-vkBindImageMemory-memory-02990",
           "text": " If <code>memory</code> was created with the <a href=\"#VkImportAndroidHardwareBufferInfoANDROID\">VkImportAndroidHardwareBufferInfoANDROID</a> memory import operation with a non-<code>NULL</code> <code>buffer</code> value, <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID</code> <strong class=\"purple\">must</strong> also have been set in <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a>::<code>handleTypes</code> when <code>image</code> was created"
         }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
+        {
+          "vuid": "VUID-vkBindImageMemory-image-01608",
+          "text": " <code>image</code> <strong class=\"purple\">must</strong> not have been created with the <code>VK_IMAGE_CREATE_DISJOINT_BIT</code> set"
+        }
       ]
     },
     "vkBindImageMemory2": {
@@ -11777,41 +11797,87 @@
       ]
     },
     "VkBindImageMemoryInfo": {
-      "(VK_VERSION_1_1,VK_KHR_bind_memory2)": [
+      "core": [
         {
-          "vuid": "VUID-VkBindImageMemoryInfo-image-01609",
+          "vuid": "VUID-VkBindImageMemoryInfo-image-01044",
           "text": " <code>image</code> <strong class=\"purple\">must</strong> not already be backed by a memory object"
         },
         {
-          "vuid": "VUID-VkBindImageMemoryInfo-image-01610",
+          "vuid": "VUID-VkBindImageMemoryInfo-image-01045",
           "text": " <code>image</code> <strong class=\"purple\">must</strong> not have been created with any sparse memory binding flags"
         },
         {
-          "vuid": "VUID-VkBindImageMemoryInfo-memoryOffset-01611",
+          "vuid": "VUID-VkBindImageMemoryInfo-memoryOffset-01046",
           "text": " <code>memoryOffset</code> <strong class=\"purple\">must</strong> be less than the size of <code>memory</code>"
-        },
-        {
-          "vuid": "VUID-VkBindImageMemoryInfo-sType-sType",
-          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO</code>"
-        },
-        {
-          "vuid": "VUID-VkBindImageMemoryInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkBindImageMemoryDeviceGroupInfo\">VkBindImageMemoryDeviceGroupInfo</a>, <a href=\"#VkBindImageMemorySwapchainInfoKHR\">VkBindImageMemorySwapchainInfoKHR</a>, or <a href=\"#VkBindImagePlaneMemoryInfo\">VkBindImagePlaneMemoryInfo</a>"
-        },
-        {
-          "vuid": "VUID-VkBindImageMemoryInfo-sType-unique",
-          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
-        },
-        {
-          "vuid": "VUID-VkBindImageMemoryInfo-image-parameter",
-          "text": " <code>image</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImage\">VkImage</a> handle"
-        },
-        {
-          "vuid": "VUID-VkBindImageMemoryInfo-commonparent",
-          "text": " Both of <code>image</code>, and <code>memory</code> that are valid handles of non-ignored parameters <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <a href=\"#VkDevice\">VkDevice</a>"
         }
       ],
-      "(VK_VERSION_1_1,VK_KHR_bind_memory2)+!(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
+      "(VK_VERSION_1_1,VK_KHR_dedicated_allocation)": [
+        {
+          "vuid": "VUID-VkBindImageMemoryInfo-image-01445",
+          "text": " If <code>image</code> requires a dedicated allocation (as reported by <a href=\"#vkGetImageMemoryRequirements2\">vkGetImageMemoryRequirements2</a> in <a href=\"#VkMemoryDedicatedRequirements\">VkMemoryDedicatedRequirements</a>::requiresDedicatedAllocation for <code>image</code>), <code>memory</code> <strong class=\"purple\">must</strong> have been created with <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>image</code> equal to <code>image</code>"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_dedicated_allocation)+!(VK_NV_dedicated_allocation_image_aliasing)": [
+        {
+          "vuid": "VUID-VkBindImageMemoryInfo-memory-01509",
+          "text": " If the <code>VkMemoryAllocateInfo</code> provided when <code>memory</code> was allocated included a <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a> structure in its <code>pNext</code> chain, and <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>image</code> was not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, then <code>image</code> <strong class=\"purple\">must</strong> equal <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>image</code> and <code>memoryOffset</code> <strong class=\"purple\">must</strong> be zero"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_dedicated_allocation)+(VK_NV_dedicated_allocation_image_aliasing)": [
+        {
+          "vuid": "VUID-VkBindImageMemoryInfo-memory-02628",
+          "text": " If the <a href=\"#features-dedicatedAllocationImageAliasing\">dedicated allocation image aliasing</a> feature is not enabled, and the <code>VkMemoryAllocateInfo</code> provided when <code>memory</code> was allocated included a <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a> structure in its <code>pNext</code> chain, and <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>image</code> was not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, then <code>image</code> <strong class=\"purple\">must</strong> equal <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>image</code> and <code>memoryOffset</code> <strong class=\"purple\">must</strong> be zero"
+        },
+        {
+          "vuid": "VUID-VkBindImageMemoryInfo-memory-02629",
+          "text": " If the <a href=\"#features-dedicatedAllocationImageAliasing\">dedicated allocation image aliasing</a> feature is enabled, and the <code>VkMemoryAllocateInfo</code> provided when <code>memory</code> was allocated included a <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a> structure in its <code>pNext</code> chain, and <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>image</code> was not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, then <code>memoryOffset</code> <strong class=\"purple\">must</strong> be zero, and <code>image</code> <strong class=\"purple\">must</strong> be either equal to <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>image</code> or an image that was created using the same parameters in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>, with the exception that <code>extent</code> and <code>arrayLayers</code> <strong class=\"purple\">may</strong> differ subject to the following restrictions: every dimension in the <code>extent</code> parameter of the image being bound <strong class=\"purple\">must</strong> be equal to or smaller than the original image for which the allocation was created; and the <code>arrayLayers</code> parameter of the image being bound <strong class=\"purple\">must</strong> be equal to or smaller than the original image for which the allocation was created"
+        }
+      ],
+      "(VK_VERSION_1_1)": [
+        {
+          "vuid": "VUID-VkBindImageMemoryInfo-None-01901",
+          "text": " If image was created with the <code>VK_IMAGE_CREATE_PROTECTED_BIT</code> bit set, the image <strong class=\"purple\">must</strong> be bound to a memory object allocated with a memory type that reports <code>VK_MEMORY_PROPERTY_PROTECTED_BIT</code>"
+        },
+        {
+          "vuid": "VUID-VkBindImageMemoryInfo-None-01902",
+          "text": " If image was created with the <code>VK_IMAGE_CREATE_PROTECTED_BIT</code> bit not set, the image <strong class=\"purple\">must</strong> not be bound to a memory object created with a memory type that reports <code>VK_MEMORY_PROPERTY_PROTECTED_BIT</code>"
+        }
+      ],
+      "(VK_NV_dedicated_allocation)": [
+        {
+          "vuid": "VUID-VkBindImageMemoryInfo-image-01050",
+          "text": " If <code>image</code> was created with <a href=\"#VkDedicatedAllocationImageCreateInfoNV\">VkDedicatedAllocationImageCreateInfoNV</a>::<code>dedicatedAllocation</code> equal to <code>VK_TRUE</code>, <code>memory</code> <strong class=\"purple\">must</strong> have been created with <a href=\"#VkDedicatedAllocationMemoryAllocateInfoNV\">VkDedicatedAllocationMemoryAllocateInfoNV</a>::<code>image</code> equal to an image handle created with identical creation parameters to <code>image</code> and <code>memoryOffset</code> <strong class=\"purple\">must</strong> be zero"
+        }
+      ],
+      "(VK_NV_dedicated_allocation)+!(VK_VERSION_1_1,VK_KHR_dedicated_allocation)": [
+        {
+          "vuid": "VUID-VkBindImageMemoryInfo-image-01051",
+          "text": " If <code>image</code> was not created with <a href=\"#VkDedicatedAllocationImageCreateInfoNV\">VkDedicatedAllocationImageCreateInfoNV</a>::<code>dedicatedAllocation</code> equal to <code>VK_TRUE</code>, <code>memory</code> <strong class=\"purple\">must</strong> not have been allocated dedicated for a specific buffer or image"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_external_memory)": [
+        {
+          "vuid": "VUID-VkBindImageMemoryInfo-memory-02728",
+          "text": " If the value of <a href=\"#VkExportMemoryAllocateInfo\">VkExportMemoryAllocateInfo</a>::<code>handleTypes</code> used to allocate <code>memory</code> is not <code>0</code>, it <strong class=\"purple\">must</strong> include at least one of the handles set in <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a>::<code>handleTypes</code> when <code>image</code> was created"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_external_memory)+!(VK_ANDROID_external_memory_android_hardware_buffer)": [
+        {
+          "vuid": "VUID-VkBindImageMemoryInfo-memory-02729",
+          "text": " If <code>memory</code> was created by a memory import operation, the external handle type of the imported memory <strong class=\"purple\">must</strong> also have been set in <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a>::<code>handleTypes</code> when <code>image</code> was created"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_external_memory)+(VK_ANDROID_external_memory_android_hardware_buffer)": [
+        {
+          "vuid": "VUID-VkBindImageMemoryInfo-memory-02989",
+          "text": " If <code>memory</code> was created by a memory import operation, that is not <a href=\"#VkImportAndroidHardwareBufferInfoANDROID\">VkImportAndroidHardwareBufferInfoANDROID</a> with a non-<code>NULL</code> <code>buffer</code> value, the external handle type of the imported memory <strong class=\"purple\">must</strong> also have been set in <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a>::<code>handleTypes</code> when <code>image</code> was created"
+        },
+        {
+          "vuid": "VUID-VkBindImageMemoryInfo-memory-02990",
+          "text": " If <code>memory</code> was created with the <a href=\"#VkImportAndroidHardwareBufferInfoANDROID\">VkImportAndroidHardwareBufferInfoANDROID</a> memory import operation with a non-<code>NULL</code> <code>buffer</code> value, <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID</code> <strong class=\"purple\">must</strong> also have been set in <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a>::<code>handleTypes</code> when <code>image</code> was created"
+        }
+      ],
+      "!(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
         {
           "vuid": "VUID-VkBindImageMemoryInfo-memory-01612",
           "text": " <code>memory</code> <strong class=\"purple\">must</strong> have been allocated using one of the memory types allowed in the <code>memoryTypeBits</code> member of the <a href=\"#VkMemoryRequirements\">VkMemoryRequirements</a> structure returned from a call to <a href=\"#vkGetImageMemoryRequirements\">vkGetImageMemoryRequirements</a> with <code>image</code>"
@@ -11825,7 +11891,7 @@
           "text": " The difference of the size of <code>memory</code> and <code>memoryOffset</code> <strong class=\"purple\">must</strong> be greater than or equal to the <code>size</code> member of the <a href=\"#VkMemoryRequirements\">VkMemoryRequirements</a> structure returned from a call to <a href=\"#vkGetImageMemoryRequirements\">vkGetImageMemoryRequirements</a> with the same <code>image</code>"
         }
       ],
-      "(VK_VERSION_1_1,VK_KHR_bind_memory2)+(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
+      "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
         {
           "vuid": "VUID-VkBindImageMemoryInfo-pNext-01615",
           "text": " If the <code>pNext</code> chain does not include a <a href=\"#VkBindImagePlaneMemoryInfo\">VkBindImagePlaneMemoryInfo</a> structure, <code>memory</code> <strong class=\"purple\">must</strong> have been allocated using one of the memory types allowed in the <code>memoryTypeBits</code> member of the <a href=\"#VkMemoryRequirements\">VkMemoryRequirements</a> structure returned from a call to <a href=\"#vkGetImageMemoryRequirements2\">vkGetImageMemoryRequirements2</a> with <code>image</code>"
@@ -11855,57 +11921,13 @@
           "text": " If the <code>pNext</code> chain includes a <a href=\"#VkBindImagePlaneMemoryInfo\">VkBindImagePlaneMemoryInfo</a> structure, the difference of the size of <code>memory</code> and <code>memoryOffset</code> <strong class=\"purple\">must</strong> be greater than or equal to the <code>size</code> member of the <a href=\"#VkMemoryRequirements\">VkMemoryRequirements</a> structure returned from a call to <a href=\"#vkGetImageMemoryRequirements2\">vkGetImageMemoryRequirements2</a> with the same <code>image</code> and where <a href=\"#VkBindImagePlaneMemoryInfo\">VkBindImagePlaneMemoryInfo</a>::<code>planeAspect</code> corresponds to the <a href=\"#VkImagePlaneMemoryRequirementsInfo\">VkImagePlaneMemoryRequirementsInfo</a>::<code>planeAspect</code> in the <a href=\"#VkImageMemoryRequirementsInfo2\">VkImageMemoryRequirementsInfo2</a> structure&#8217;s <code>pNext</code> chain"
         }
       ],
-      "(VK_VERSION_1_1,VK_KHR_bind_memory2)+(VK_VERSION_1_1,VK_KHR_dedicated_allocation)": [
-        {
-          "vuid": "VUID-VkBindImageMemoryInfo-image-01622",
-          "text": " If <code>image</code> requires a dedicated allocation (as reported by <a href=\"#vkGetImageMemoryRequirements2\">vkGetImageMemoryRequirements2</a> in <a href=\"#VkMemoryDedicatedRequirements\">VkMemoryDedicatedRequirements</a>::requiresDedicatedAllocation for <code>image</code>), <code>memory</code> <strong class=\"purple\">must</strong> have been created with <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>image</code> equal to <code>image</code> and <code>memoryOffset</code> <strong class=\"purple\">must</strong> be zero"
-        }
-      ],
-      "(VK_VERSION_1_1,VK_KHR_bind_memory2)+(VK_VERSION_1_1,VK_KHR_dedicated_allocation)+!(VK_NV_dedicated_allocation_image_aliasing)": [
-        {
-          "vuid": "VUID-VkBindImageMemoryInfo-memory-01903",
-          "text": " If the <code>VkMemoryAllocateInfo</code> provided when <code>memory</code> was allocated included a <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a> structure in its <code>pNext</code> chain, and <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>image</code> was not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, then <code>image</code> <strong class=\"purple\">must</strong> equal <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>image</code> and <code>memoryOffset</code> <strong class=\"purple\">must</strong> be zero"
-        }
-      ],
-      "(VK_VERSION_1_1,VK_KHR_bind_memory2)+(VK_VERSION_1_1,VK_KHR_dedicated_allocation)+(VK_NV_dedicated_allocation_image_aliasing)": [
-        {
-          "vuid": "VUID-VkBindImageMemoryInfo-memory-02630",
-          "text": " If the <a href=\"#features-dedicatedAllocationImageAliasing\">dedicated allocation image aliasing</a> feature is not enabled, and the <code>VkMemoryAllocateInfo</code> provided when <code>memory</code> was allocated included a <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a> structure in its <code>pNext</code> chain, and <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>image</code> was not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, then <code>image</code> <strong class=\"purple\">must</strong> equal <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>image</code> and <code>memoryOffset</code> <strong class=\"purple\">must</strong> be zero"
-        },
-        {
-          "vuid": "VUID-VkBindImageMemoryInfo-memory-02631",
-          "text": " If the <a href=\"#features-dedicatedAllocationImageAliasing\">dedicated allocation image aliasing</a> feature is enabled, and the <code>VkMemoryAllocateInfo</code> provided when <code>memory</code> was allocated included a <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a> structure in its <code>pNext</code> chain, and <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>image</code> was not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, then <code>memoryOffset</code> <strong class=\"purple\">must</strong> be zero, and <code>image</code> <strong class=\"purple\">must</strong> be either equal to <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>image</code> or an image that was created using the same parameters in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>, with the exception that <code>extent</code> and <code>arrayLayers</code> <strong class=\"purple\">may</strong> differ subject to the following restrictions: every dimension in the <code>extent</code> parameter of the image being bound <strong class=\"purple\">must</strong> be equal to or smaller than the original image for which the allocation was created; and the <code>arrayLayers</code> parameter of the image being bound <strong class=\"purple\">must</strong> be equal to or smaller than the original image for which the allocation was created"
-        }
-      ],
-      "(VK_VERSION_1_1,VK_KHR_bind_memory2)+(VK_VERSION_1_1,VK_KHR_dedicated_allocation)+(VK_VERSION_1_1)": [
-        {
-          "vuid": "VUID-VkBindImageMemoryInfo-None-04124",
-          "text": " If image was created with the <code>VK_IMAGE_CREATE_PROTECTED_BIT</code> bit set, the image <strong class=\"purple\">must</strong> be bound to a memory object allocated with a memory type that reports <code>VK_MEMORY_PROPERTY_PROTECTED_BIT</code>"
-        },
-        {
-          "vuid": "VUID-VkBindImageMemoryInfo-None-04125",
-          "text": " If image was created with the <code>VK_IMAGE_CREATE_PROTECTED_BIT</code> bit not set, the image <strong class=\"purple\">must</strong> not be bound to a memory object created with a memory type that reports <code>VK_MEMORY_PROPERTY_PROTECTED_BIT</code>"
-        }
-      ],
-      "(VK_VERSION_1_1,VK_KHR_bind_memory2)+(VK_NV_dedicated_allocation)": [
-        {
-          "vuid": "VUID-VkBindImageMemoryInfo-image-01623",
-          "text": " If <code>image</code> was created with <a href=\"#VkDedicatedAllocationImageCreateInfoNV\">VkDedicatedAllocationImageCreateInfoNV</a>::<code>dedicatedAllocation</code> equal to <code>VK_TRUE</code>, <code>memory</code> <strong class=\"purple\">must</strong> have been created with <a href=\"#VkDedicatedAllocationMemoryAllocateInfoNV\">VkDedicatedAllocationMemoryAllocateInfoNV</a>::<code>image</code> equal to <code>image</code> and <code>memoryOffset</code> <strong class=\"purple\">must</strong> be zero"
-        }
-      ],
-      "(VK_VERSION_1_1,VK_KHR_bind_memory2)+(VK_NV_dedicated_allocation)+!(VK_VERSION_1_1,VK_KHR_dedicated_allocation)": [
-        {
-          "vuid": "VUID-VkBindImageMemoryInfo-image-01624",
-          "text": " If <code>image</code> was not created with <a href=\"#VkDedicatedAllocationImageCreateInfoNV\">VkDedicatedAllocationImageCreateInfoNV</a>::<code>dedicatedAllocation</code> equal to <code>VK_TRUE</code>, <code>memory</code> <strong class=\"purple\">must</strong> not have been allocated dedicated for a specific buffer or image"
-        }
-      ],
-      "(VK_VERSION_1_1,VK_KHR_bind_memory2)+!(VK_VERSION_1_1+VK_KHR_swapchain)+!(VK_KHR_device_group+VK_KHR_swapchain)": [
+      "!(VK_VERSION_1_1+VK_KHR_swapchain)+!(VK_KHR_device_group+VK_KHR_swapchain)": [
         {
           "vuid": "VUID-VkBindImageMemoryInfo-memory-01625",
           "text": " <code>memory</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDeviceMemory\">VkDeviceMemory</a> handle"
         }
       ],
-      "(VK_VERSION_1_1,VK_KHR_bind_memory2)+(VK_VERSION_1_1,VK_KHR_device_group)": [
+      "(VK_VERSION_1_1,VK_KHR_device_group)": [
         {
           "vuid": "VUID-VkBindImageMemoryInfo-pNext-01626",
           "text": " If the <code>pNext</code> chain includes a <a href=\"#VkBindImageMemoryDeviceGroupInfo\">VkBindImageMemoryDeviceGroupInfo</a> structure, all instances of <code>memory</code> specified by <a href=\"#VkBindImageMemoryDeviceGroupInfo\">VkBindImageMemoryDeviceGroupInfo</a>::<code>pDeviceIndices</code> <strong class=\"purple\">must</strong> have been allocated"
@@ -11923,7 +11945,7 @@
           "text": " If the <code>pNext</code> chain includes a <a href=\"#VkBindImageMemoryDeviceGroupInfo\">VkBindImageMemoryDeviceGroupInfo</a> structure, the union of the areas of all elements of <a href=\"#VkBindImageMemoryDeviceGroupInfo\">VkBindImageMemoryDeviceGroupInfo</a>::<code>pSplitInstanceBindRegions</code> that correspond to the same instance of <code>image</code> <strong class=\"purple\">must</strong> cover the entire image"
         }
       ],
-      "(VK_VERSION_1_1,VK_KHR_bind_memory2)+(VK_VERSION_1_1,VK_KHR_device_group)+(VK_KHR_swapchain)": [
+      "(VK_VERSION_1_1,VK_KHR_device_group)+(VK_KHR_swapchain)": [
         {
           "vuid": "VUID-VkBindImageMemoryInfo-image-01630",
           "text": " If <code>image</code> was created with a valid swapchain handle in <a href=\"#VkImageSwapchainCreateInfoKHR\">VkImageSwapchainCreateInfoKHR</a>::<code>swapchain</code>, then the <code>pNext</code> chain <strong class=\"purple\">must</strong> include a <a href=\"#VkBindImageMemorySwapchainInfoKHR\">VkBindImageMemorySwapchainInfoKHR</a> structure containing the same swapchain handle"
@@ -11937,26 +11959,26 @@
           "text": " If the <code>pNext</code> chain does not include a <a href=\"#VkBindImageMemorySwapchainInfoKHR\">VkBindImageMemorySwapchainInfoKHR</a> structure, <code>memory</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDeviceMemory\">VkDeviceMemory</a> handle"
         }
       ],
-      "(VK_VERSION_1_1,VK_KHR_bind_memory2)+(VK_VERSION_1_1,VK_KHR_external_memory)": [
+      "(VK_VERSION_1_1,VK_KHR_bind_memory2)": [
         {
-          "vuid": "VUID-VkBindImageMemoryInfo-handleTypes-02793",
-          "text": " If the value of <a href=\"#VkExportMemoryAllocateInfo\">VkExportMemoryAllocateInfo</a>::<code>handleTypes</code> used to allocate <code>memory</code> is not <code>0</code>, it <strong class=\"purple\">must</strong> include at least one of the handles set in <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a>::<code>handleTypes</code> when <code>image</code> was created"
-        }
-      ],
-      "(VK_VERSION_1_1,VK_KHR_bind_memory2)+(VK_VERSION_1_1,VK_KHR_external_memory)+!(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-VkBindImageMemoryInfo-memory-02794",
-          "text": " If <code>memory</code> was created by a memory import operation, the external handle type of the imported memory <strong class=\"purple\">must</strong> also have been set in <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a>::<code>handleTypes</code> when <code>image</code> was created"
-        }
-      ],
-      "(VK_VERSION_1_1,VK_KHR_bind_memory2)+(VK_VERSION_1_1,VK_KHR_external_memory)+(VK_ANDROID_external_memory_android_hardware_buffer)": [
-        {
-          "vuid": "VUID-VkBindImageMemoryInfo-memory-02991",
-          "text": " If <code>memory</code> was created by a memory import operation, that is not <a href=\"#VkImportAndroidHardwareBufferInfoANDROID\">VkImportAndroidHardwareBufferInfoANDROID</a> with a non-<code>NULL</code> <code>buffer</code> value, the external handle type of the imported memory <strong class=\"purple\">must</strong> also have been set in <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a>::<code>handleTypes</code> when <code>image</code> was created"
+          "vuid": "VUID-VkBindImageMemoryInfo-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO</code>"
         },
         {
-          "vuid": "VUID-VkBindImageMemoryInfo-memory-02992",
-          "text": " If <code>memory</code> was created with the <a href=\"#VkImportAndroidHardwareBufferInfoANDROID\">VkImportAndroidHardwareBufferInfoANDROID</a> memory import operation with a non-<code>NULL</code> <code>buffer</code> value, <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID</code> <strong class=\"purple\">must</strong> also have been set in <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a>::<code>handleTypes</code> when <code>image</code> was created"
+          "vuid": "VUID-VkBindImageMemoryInfo-pNext-pNext",
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkBindImageMemoryDeviceGroupInfo\">VkBindImageMemoryDeviceGroupInfo</a>, <a href=\"#VkBindImageMemorySwapchainInfoKHR\">VkBindImageMemorySwapchainInfoKHR</a>, or <a href=\"#VkBindImagePlaneMemoryInfo\">VkBindImagePlaneMemoryInfo</a>"
+        },
+        {
+          "vuid": "VUID-VkBindImageMemoryInfo-sType-unique",
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+        },
+        {
+          "vuid": "VUID-VkBindImageMemoryInfo-image-parameter",
+          "text": " <code>image</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImage\">VkImage</a> handle"
+        },
+        {
+          "vuid": "VUID-VkBindImageMemoryInfo-commonparent",
+          "text": " Both of <code>image</code>, and <code>memory</code> that are valid handles of non-ignored parameters <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <a href=\"#VkDevice\">VkDevice</a>"
         }
       ]
     },
@@ -18140,11 +18162,11 @@
       "(VK_EXT_extended_dynamic_state)": [
         {
           "vuid": "VUID-vkCmdDraw-viewportCount-03417",
-          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, then then <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>viewportCount</code> parameter of <code>vkCmdSetViewportWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>scissorCount</code> of the pipeline"
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>viewportCount</code> parameter of <code>vkCmdSetViewportWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>scissorCount</code> of the pipeline"
         },
         {
           "vuid": "VUID-vkCmdDraw-scissorCount-03418",
-          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, then then <a href=\"#vkCmdSetScissorWithCountEXT\">vkCmdSetScissorWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>scissorCount</code> parameter of <code>vkCmdSetScissorWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>viewportCount</code> of the pipeline"
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdSetScissorWithCountEXT\">vkCmdSetScissorWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>scissorCount</code> parameter of <code>vkCmdSetScissorWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>viewportCount</code> of the pipeline"
         },
         {
           "vuid": "VUID-vkCmdDraw-viewportCount-03419",
@@ -18153,6 +18175,38 @@
         {
           "vuid": "VUID-vkCmdDraw-primitiveTopology-03420",
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPrimitiveTopologyEXT\">vkCmdSetPrimitiveTopologyEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>primitiveTopology</code> parameter of <code>vkCmdSetPrimitiveTopologyEXT</code> <strong class=\"purple\">must</strong> be of the same <a href=\"#drawing-primitive-topology-class\">topology class</a> as the pipeline <a href=\"#VkPipelineInputAssemblyStateCreateInfo\">VkPipelineInputAssemblyStateCreateInfo</a>::<code>topology</code> state"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_clip_space_w_scaling)": [
+        {
+          "vuid": "VUID-vkCmdDraw-viewportCount-04137",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_W_SCALING_NV</code> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportWScalingStateCreateInfoNV\">VkPipelineViewportWScalingStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdDraw-viewportCount-04138",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> and <code>VK_DYNAMIC_STATE_VIEWPORT_W_SCALING_NV</code> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWScalingNV\">vkCmdSetViewportWScalingNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_shading_rate_image)": [
+        {
+          "vuid": "VUID-vkCmdDraw-viewportCount-04139",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_SHADING_RATE_PALETTE_NV</code> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportShadingRateImageStateCreateInfoNV\">VkPipelineViewportShadingRateImageStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdDraw-viewportCount-04140",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> and <code>VK_DYNAMIC_STATE_VIEWPORT_SHADING_RATE_PALETTE_NV</code> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportShadingRatePaletteNV\">vkCmdSetViewportShadingRatePaletteNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_viewport_swizzle)": [
+        {
+          "vuid": "VUID-vkCmdDraw-VkPipelineVieportCreateInfo-04141",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled and an instance of <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> chained from <code>VkPipelineVieportCreateInfo</code>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_scissor_exclusive)": [
+        {
+          "vuid": "VUID-vkCmdDraw-VkPipelineVieportCreateInfo-04142",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled and an instance of <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a> chained from <code>VkPipelineVieportCreateInfo</code>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a>::<code>exclusiveScissorCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
         }
       ]
     },
@@ -18320,11 +18374,11 @@
       "(VK_EXT_extended_dynamic_state)": [
         {
           "vuid": "VUID-vkCmdDrawIndexed-viewportCount-03417",
-          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, then then <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>viewportCount</code> parameter of <code>vkCmdSetViewportWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>scissorCount</code> of the pipeline"
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>viewportCount</code> parameter of <code>vkCmdSetViewportWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>scissorCount</code> of the pipeline"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexed-scissorCount-03418",
-          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, then then <a href=\"#vkCmdSetScissorWithCountEXT\">vkCmdSetScissorWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>scissorCount</code> parameter of <code>vkCmdSetScissorWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>viewportCount</code> of the pipeline"
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdSetScissorWithCountEXT\">vkCmdSetScissorWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>scissorCount</code> parameter of <code>vkCmdSetScissorWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>viewportCount</code> of the pipeline"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexed-viewportCount-03419",
@@ -18333,6 +18387,38 @@
         {
           "vuid": "VUID-vkCmdDrawIndexed-primitiveTopology-03420",
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPrimitiveTopologyEXT\">vkCmdSetPrimitiveTopologyEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>primitiveTopology</code> parameter of <code>vkCmdSetPrimitiveTopologyEXT</code> <strong class=\"purple\">must</strong> be of the same <a href=\"#drawing-primitive-topology-class\">topology class</a> as the pipeline <a href=\"#VkPipelineInputAssemblyStateCreateInfo\">VkPipelineInputAssemblyStateCreateInfo</a>::<code>topology</code> state"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_clip_space_w_scaling)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexed-viewportCount-04137",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_W_SCALING_NV</code> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportWScalingStateCreateInfoNV\">VkPipelineViewportWScalingStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexed-viewportCount-04138",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> and <code>VK_DYNAMIC_STATE_VIEWPORT_W_SCALING_NV</code> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWScalingNV\">vkCmdSetViewportWScalingNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_shading_rate_image)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexed-viewportCount-04139",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_SHADING_RATE_PALETTE_NV</code> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportShadingRateImageStateCreateInfoNV\">VkPipelineViewportShadingRateImageStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexed-viewportCount-04140",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> and <code>VK_DYNAMIC_STATE_VIEWPORT_SHADING_RATE_PALETTE_NV</code> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportShadingRatePaletteNV\">vkCmdSetViewportShadingRatePaletteNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_viewport_swizzle)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexed-VkPipelineVieportCreateInfo-04141",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled and an instance of <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> chained from <code>VkPipelineVieportCreateInfo</code>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_scissor_exclusive)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexed-VkPipelineVieportCreateInfo-04142",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled and an instance of <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a> chained from <code>VkPipelineVieportCreateInfo</code>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a>::<code>exclusiveScissorCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
         }
       ]
     },
@@ -18536,11 +18622,11 @@
       "(VK_EXT_extended_dynamic_state)": [
         {
           "vuid": "VUID-vkCmdDrawIndirect-viewportCount-03417",
-          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, then then <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>viewportCount</code> parameter of <code>vkCmdSetViewportWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>scissorCount</code> of the pipeline"
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>viewportCount</code> parameter of <code>vkCmdSetViewportWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>scissorCount</code> of the pipeline"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirect-scissorCount-03418",
-          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, then then <a href=\"#vkCmdSetScissorWithCountEXT\">vkCmdSetScissorWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>scissorCount</code> parameter of <code>vkCmdSetScissorWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>viewportCount</code> of the pipeline"
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdSetScissorWithCountEXT\">vkCmdSetScissorWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>scissorCount</code> parameter of <code>vkCmdSetScissorWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>viewportCount</code> of the pipeline"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirect-viewportCount-03419",
@@ -18549,6 +18635,38 @@
         {
           "vuid": "VUID-vkCmdDrawIndirect-primitiveTopology-03420",
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPrimitiveTopologyEXT\">vkCmdSetPrimitiveTopologyEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>primitiveTopology</code> parameter of <code>vkCmdSetPrimitiveTopologyEXT</code> <strong class=\"purple\">must</strong> be of the same <a href=\"#drawing-primitive-topology-class\">topology class</a> as the pipeline <a href=\"#VkPipelineInputAssemblyStateCreateInfo\">VkPipelineInputAssemblyStateCreateInfo</a>::<code>topology</code> state"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_clip_space_w_scaling)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirect-viewportCount-04137",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_W_SCALING_NV</code> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportWScalingStateCreateInfoNV\">VkPipelineViewportWScalingStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirect-viewportCount-04138",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> and <code>VK_DYNAMIC_STATE_VIEWPORT_W_SCALING_NV</code> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWScalingNV\">vkCmdSetViewportWScalingNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_shading_rate_image)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirect-viewportCount-04139",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_SHADING_RATE_PALETTE_NV</code> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportShadingRateImageStateCreateInfoNV\">VkPipelineViewportShadingRateImageStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirect-viewportCount-04140",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> and <code>VK_DYNAMIC_STATE_VIEWPORT_SHADING_RATE_PALETTE_NV</code> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportShadingRatePaletteNV\">vkCmdSetViewportShadingRatePaletteNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_viewport_swizzle)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirect-VkPipelineVieportCreateInfo-04141",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled and an instance of <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> chained from <code>VkPipelineVieportCreateInfo</code>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_scissor_exclusive)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirect-VkPipelineVieportCreateInfo-04142",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled and an instance of <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a> chained from <code>VkPipelineVieportCreateInfo</code>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a>::<code>exclusiveScissorCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
         }
       ]
     },
@@ -18752,11 +18870,11 @@
       "(VK_EXT_extended_dynamic_state)": [
         {
           "vuid": "VUID-vkCmdDrawIndirectCount-viewportCount-03417",
-          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, then then <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>viewportCount</code> parameter of <code>vkCmdSetViewportWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>scissorCount</code> of the pipeline"
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>viewportCount</code> parameter of <code>vkCmdSetViewportWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>scissorCount</code> of the pipeline"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCount-scissorCount-03418",
-          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, then then <a href=\"#vkCmdSetScissorWithCountEXT\">vkCmdSetScissorWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>scissorCount</code> parameter of <code>vkCmdSetScissorWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>viewportCount</code> of the pipeline"
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdSetScissorWithCountEXT\">vkCmdSetScissorWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>scissorCount</code> parameter of <code>vkCmdSetScissorWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>viewportCount</code> of the pipeline"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCount-viewportCount-03419",
@@ -18765,6 +18883,38 @@
         {
           "vuid": "VUID-vkCmdDrawIndirectCount-primitiveTopology-03420",
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPrimitiveTopologyEXT\">vkCmdSetPrimitiveTopologyEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>primitiveTopology</code> parameter of <code>vkCmdSetPrimitiveTopologyEXT</code> <strong class=\"purple\">must</strong> be of the same <a href=\"#drawing-primitive-topology-class\">topology class</a> as the pipeline <a href=\"#VkPipelineInputAssemblyStateCreateInfo\">VkPipelineInputAssemblyStateCreateInfo</a>::<code>topology</code> state"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_clip_space_w_scaling)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCount-viewportCount-04137",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_W_SCALING_NV</code> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportWScalingStateCreateInfoNV\">VkPipelineViewportWScalingStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCount-viewportCount-04138",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> and <code>VK_DYNAMIC_STATE_VIEWPORT_W_SCALING_NV</code> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWScalingNV\">vkCmdSetViewportWScalingNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_shading_rate_image)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCount-viewportCount-04139",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_SHADING_RATE_PALETTE_NV</code> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportShadingRateImageStateCreateInfoNV\">VkPipelineViewportShadingRateImageStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCount-viewportCount-04140",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> and <code>VK_DYNAMIC_STATE_VIEWPORT_SHADING_RATE_PALETTE_NV</code> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportShadingRatePaletteNV\">vkCmdSetViewportShadingRatePaletteNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_viewport_swizzle)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCount-VkPipelineVieportCreateInfo-04141",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled and an instance of <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> chained from <code>VkPipelineVieportCreateInfo</code>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_scissor_exclusive)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCount-VkPipelineVieportCreateInfo-04142",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled and an instance of <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a> chained from <code>VkPipelineVieportCreateInfo</code>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a>::<code>exclusiveScissorCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
         }
       ],
       "(VK_VERSION_1_2)": [
@@ -19004,11 +19154,11 @@
       "(VK_EXT_extended_dynamic_state)": [
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-viewportCount-03417",
-          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, then then <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>viewportCount</code> parameter of <code>vkCmdSetViewportWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>scissorCount</code> of the pipeline"
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>viewportCount</code> parameter of <code>vkCmdSetViewportWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>scissorCount</code> of the pipeline"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-scissorCount-03418",
-          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, then then <a href=\"#vkCmdSetScissorWithCountEXT\">vkCmdSetScissorWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>scissorCount</code> parameter of <code>vkCmdSetScissorWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>viewportCount</code> of the pipeline"
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdSetScissorWithCountEXT\">vkCmdSetScissorWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>scissorCount</code> parameter of <code>vkCmdSetScissorWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>viewportCount</code> of the pipeline"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-viewportCount-03419",
@@ -19017,6 +19167,38 @@
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-primitiveTopology-03420",
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPrimitiveTopologyEXT\">vkCmdSetPrimitiveTopologyEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>primitiveTopology</code> parameter of <code>vkCmdSetPrimitiveTopologyEXT</code> <strong class=\"purple\">must</strong> be of the same <a href=\"#drawing-primitive-topology-class\">topology class</a> as the pipeline <a href=\"#VkPipelineInputAssemblyStateCreateInfo\">VkPipelineInputAssemblyStateCreateInfo</a>::<code>topology</code> state"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_clip_space_w_scaling)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirect-viewportCount-04137",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_W_SCALING_NV</code> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportWScalingStateCreateInfoNV\">VkPipelineViewportWScalingStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirect-viewportCount-04138",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> and <code>VK_DYNAMIC_STATE_VIEWPORT_W_SCALING_NV</code> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWScalingNV\">vkCmdSetViewportWScalingNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_shading_rate_image)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirect-viewportCount-04139",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_SHADING_RATE_PALETTE_NV</code> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportShadingRateImageStateCreateInfoNV\">VkPipelineViewportShadingRateImageStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirect-viewportCount-04140",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> and <code>VK_DYNAMIC_STATE_VIEWPORT_SHADING_RATE_PALETTE_NV</code> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportShadingRatePaletteNV\">vkCmdSetViewportShadingRatePaletteNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_viewport_swizzle)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirect-VkPipelineVieportCreateInfo-04141",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled and an instance of <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> chained from <code>VkPipelineVieportCreateInfo</code>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_scissor_exclusive)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirect-VkPipelineVieportCreateInfo-04142",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled and an instance of <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a> chained from <code>VkPipelineVieportCreateInfo</code>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a>::<code>exclusiveScissorCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
         }
       ],
       "(VK_VERSION_1_2)": [
@@ -19230,11 +19412,11 @@
       "(VK_EXT_extended_dynamic_state)": [
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount-viewportCount-03417",
-          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, then then <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>viewportCount</code> parameter of <code>vkCmdSetViewportWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>scissorCount</code> of the pipeline"
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>viewportCount</code> parameter of <code>vkCmdSetViewportWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>scissorCount</code> of the pipeline"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount-scissorCount-03418",
-          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, then then <a href=\"#vkCmdSetScissorWithCountEXT\">vkCmdSetScissorWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>scissorCount</code> parameter of <code>vkCmdSetScissorWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>viewportCount</code> of the pipeline"
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdSetScissorWithCountEXT\">vkCmdSetScissorWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>scissorCount</code> parameter of <code>vkCmdSetScissorWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>viewportCount</code> of the pipeline"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount-viewportCount-03419",
@@ -19243,6 +19425,38 @@
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount-primitiveTopology-03420",
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPrimitiveTopologyEXT\">vkCmdSetPrimitiveTopologyEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>primitiveTopology</code> parameter of <code>vkCmdSetPrimitiveTopologyEXT</code> <strong class=\"purple\">must</strong> be of the same <a href=\"#drawing-primitive-topology-class\">topology class</a> as the pipeline <a href=\"#VkPipelineInputAssemblyStateCreateInfo\">VkPipelineInputAssemblyStateCreateInfo</a>::<code>topology</code> state"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_clip_space_w_scaling)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-viewportCount-04137",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_W_SCALING_NV</code> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportWScalingStateCreateInfoNV\">VkPipelineViewportWScalingStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-viewportCount-04138",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> and <code>VK_DYNAMIC_STATE_VIEWPORT_W_SCALING_NV</code> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWScalingNV\">vkCmdSetViewportWScalingNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_shading_rate_image)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-viewportCount-04139",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_SHADING_RATE_PALETTE_NV</code> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportShadingRateImageStateCreateInfoNV\">VkPipelineViewportShadingRateImageStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-viewportCount-04140",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> and <code>VK_DYNAMIC_STATE_VIEWPORT_SHADING_RATE_PALETTE_NV</code> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportShadingRatePaletteNV\">vkCmdSetViewportShadingRatePaletteNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_viewport_swizzle)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-VkPipelineVieportCreateInfo-04141",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled and an instance of <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> chained from <code>VkPipelineVieportCreateInfo</code>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_scissor_exclusive)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-VkPipelineVieportCreateInfo-04142",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled and an instance of <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a> chained from <code>VkPipelineVieportCreateInfo</code>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a>::<code>exclusiveScissorCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
         }
       ],
       "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)": [
@@ -19432,11 +19646,11 @@
       "(VK_EXT_extended_dynamic_state)": [
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-viewportCount-03417",
-          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, then then <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>viewportCount</code> parameter of <code>vkCmdSetViewportWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>scissorCount</code> of the pipeline"
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>viewportCount</code> parameter of <code>vkCmdSetViewportWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>scissorCount</code> of the pipeline"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-scissorCount-03418",
-          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, then then <a href=\"#vkCmdSetScissorWithCountEXT\">vkCmdSetScissorWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>scissorCount</code> parameter of <code>vkCmdSetScissorWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>viewportCount</code> of the pipeline"
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdSetScissorWithCountEXT\">vkCmdSetScissorWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>scissorCount</code> parameter of <code>vkCmdSetScissorWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>viewportCount</code> of the pipeline"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-viewportCount-03419",
@@ -19445,6 +19659,38 @@
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-primitiveTopology-03420",
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPrimitiveTopologyEXT\">vkCmdSetPrimitiveTopologyEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>primitiveTopology</code> parameter of <code>vkCmdSetPrimitiveTopologyEXT</code> <strong class=\"purple\">must</strong> be of the same <a href=\"#drawing-primitive-topology-class\">topology class</a> as the pipeline <a href=\"#VkPipelineInputAssemblyStateCreateInfo\">VkPipelineInputAssemblyStateCreateInfo</a>::<code>topology</code> state"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_clip_space_w_scaling)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-viewportCount-04137",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_W_SCALING_NV</code> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportWScalingStateCreateInfoNV\">VkPipelineViewportWScalingStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-viewportCount-04138",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> and <code>VK_DYNAMIC_STATE_VIEWPORT_W_SCALING_NV</code> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWScalingNV\">vkCmdSetViewportWScalingNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_shading_rate_image)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-viewportCount-04139",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_SHADING_RATE_PALETTE_NV</code> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportShadingRateImageStateCreateInfoNV\">VkPipelineViewportShadingRateImageStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-viewportCount-04140",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> and <code>VK_DYNAMIC_STATE_VIEWPORT_SHADING_RATE_PALETTE_NV</code> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportShadingRatePaletteNV\">vkCmdSetViewportShadingRatePaletteNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_viewport_swizzle)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-VkPipelineVieportCreateInfo-04141",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled and an instance of <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> chained from <code>VkPipelineVieportCreateInfo</code>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_scissor_exclusive)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-VkPipelineVieportCreateInfo-04142",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled and an instance of <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a> chained from <code>VkPipelineVieportCreateInfo</code>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a>::<code>exclusiveScissorCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
         }
       ],
       "(VK_EXT_transform_feedback)": [
@@ -19690,11 +19936,11 @@
       "(VK_EXT_extended_dynamic_state)": [
         {
           "vuid": "VUID-vkCmdDrawMeshTasksNV-viewportCount-03417",
-          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, then then <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>viewportCount</code> parameter of <code>vkCmdSetViewportWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>scissorCount</code> of the pipeline"
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>viewportCount</code> parameter of <code>vkCmdSetViewportWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>scissorCount</code> of the pipeline"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksNV-scissorCount-03418",
-          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, then then <a href=\"#vkCmdSetScissorWithCountEXT\">vkCmdSetScissorWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>scissorCount</code> parameter of <code>vkCmdSetScissorWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>viewportCount</code> of the pipeline"
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdSetScissorWithCountEXT\">vkCmdSetScissorWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>scissorCount</code> parameter of <code>vkCmdSetScissorWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>viewportCount</code> of the pipeline"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksNV-viewportCount-03419",
@@ -19703,6 +19949,38 @@
         {
           "vuid": "VUID-vkCmdDrawMeshTasksNV-primitiveTopology-03420",
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPrimitiveTopologyEXT\">vkCmdSetPrimitiveTopologyEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>primitiveTopology</code> parameter of <code>vkCmdSetPrimitiveTopologyEXT</code> <strong class=\"purple\">must</strong> be of the same <a href=\"#drawing-primitive-topology-class\">topology class</a> as the pipeline <a href=\"#VkPipelineInputAssemblyStateCreateInfo\">VkPipelineInputAssemblyStateCreateInfo</a>::<code>topology</code> state"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_clip_space_w_scaling)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksNV-viewportCount-04137",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_W_SCALING_NV</code> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportWScalingStateCreateInfoNV\">VkPipelineViewportWScalingStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksNV-viewportCount-04138",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> and <code>VK_DYNAMIC_STATE_VIEWPORT_W_SCALING_NV</code> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWScalingNV\">vkCmdSetViewportWScalingNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_shading_rate_image)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksNV-viewportCount-04139",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_SHADING_RATE_PALETTE_NV</code> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportShadingRateImageStateCreateInfoNV\">VkPipelineViewportShadingRateImageStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksNV-viewportCount-04140",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> and <code>VK_DYNAMIC_STATE_VIEWPORT_SHADING_RATE_PALETTE_NV</code> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportShadingRatePaletteNV\">vkCmdSetViewportShadingRatePaletteNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_viewport_swizzle)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksNV-VkPipelineVieportCreateInfo-04141",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled and an instance of <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> chained from <code>VkPipelineVieportCreateInfo</code>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_scissor_exclusive)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksNV-VkPipelineVieportCreateInfo-04142",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled and an instance of <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a> chained from <code>VkPipelineVieportCreateInfo</code>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a>::<code>exclusiveScissorCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
         }
       ],
       "(VK_NV_mesh_shader)": [
@@ -19884,11 +20162,11 @@
       "(VK_EXT_extended_dynamic_state)": [
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-viewportCount-03417",
-          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, then then <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>viewportCount</code> parameter of <code>vkCmdSetViewportWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>scissorCount</code> of the pipeline"
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>viewportCount</code> parameter of <code>vkCmdSetViewportWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>scissorCount</code> of the pipeline"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-scissorCount-03418",
-          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, then then <a href=\"#vkCmdSetScissorWithCountEXT\">vkCmdSetScissorWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>scissorCount</code> parameter of <code>vkCmdSetScissorWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>viewportCount</code> of the pipeline"
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdSetScissorWithCountEXT\">vkCmdSetScissorWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>scissorCount</code> parameter of <code>vkCmdSetScissorWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>viewportCount</code> of the pipeline"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-viewportCount-03419",
@@ -19897,6 +20175,38 @@
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-primitiveTopology-03420",
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPrimitiveTopologyEXT\">vkCmdSetPrimitiveTopologyEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>primitiveTopology</code> parameter of <code>vkCmdSetPrimitiveTopologyEXT</code> <strong class=\"purple\">must</strong> be of the same <a href=\"#drawing-primitive-topology-class\">topology class</a> as the pipeline <a href=\"#VkPipelineInputAssemblyStateCreateInfo\">VkPipelineInputAssemblyStateCreateInfo</a>::<code>topology</code> state"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_clip_space_w_scaling)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-viewportCount-04137",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_W_SCALING_NV</code> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportWScalingStateCreateInfoNV\">VkPipelineViewportWScalingStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-viewportCount-04138",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> and <code>VK_DYNAMIC_STATE_VIEWPORT_W_SCALING_NV</code> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWScalingNV\">vkCmdSetViewportWScalingNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_shading_rate_image)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-viewportCount-04139",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_SHADING_RATE_PALETTE_NV</code> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportShadingRateImageStateCreateInfoNV\">VkPipelineViewportShadingRateImageStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-viewportCount-04140",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> and <code>VK_DYNAMIC_STATE_VIEWPORT_SHADING_RATE_PALETTE_NV</code> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportShadingRatePaletteNV\">vkCmdSetViewportShadingRatePaletteNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_viewport_swizzle)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-VkPipelineVieportCreateInfo-04141",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled and an instance of <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> chained from <code>VkPipelineVieportCreateInfo</code>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_scissor_exclusive)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-VkPipelineVieportCreateInfo-04142",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled and an instance of <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a> chained from <code>VkPipelineVieportCreateInfo</code>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a>::<code>exclusiveScissorCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
         }
       ],
       "(VK_NV_mesh_shader)": [
@@ -20110,11 +20420,11 @@
       "(VK_EXT_extended_dynamic_state)": [
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-viewportCount-03417",
-          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, then then <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>viewportCount</code> parameter of <code>vkCmdSetViewportWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>scissorCount</code> of the pipeline"
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>viewportCount</code> parameter of <code>vkCmdSetViewportWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>scissorCount</code> of the pipeline"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-scissorCount-03418",
-          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, then then <a href=\"#vkCmdSetScissorWithCountEXT\">vkCmdSetScissorWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>scissorCount</code> parameter of <code>vkCmdSetScissorWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>viewportCount</code> of the pipeline"
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdSetScissorWithCountEXT\">vkCmdSetScissorWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>scissorCount</code> parameter of <code>vkCmdSetScissorWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>viewportCount</code> of the pipeline"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-viewportCount-03419",
@@ -20123,6 +20433,38 @@
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-primitiveTopology-03420",
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPrimitiveTopologyEXT\">vkCmdSetPrimitiveTopologyEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>primitiveTopology</code> parameter of <code>vkCmdSetPrimitiveTopologyEXT</code> <strong class=\"purple\">must</strong> be of the same <a href=\"#drawing-primitive-topology-class\">topology class</a> as the pipeline <a href=\"#VkPipelineInputAssemblyStateCreateInfo\">VkPipelineInputAssemblyStateCreateInfo</a>::<code>topology</code> state"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_clip_space_w_scaling)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-viewportCount-04137",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_W_SCALING_NV</code> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportWScalingStateCreateInfoNV\">VkPipelineViewportWScalingStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-viewportCount-04138",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> and <code>VK_DYNAMIC_STATE_VIEWPORT_W_SCALING_NV</code> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWScalingNV\">vkCmdSetViewportWScalingNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_shading_rate_image)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-viewportCount-04139",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_SHADING_RATE_PALETTE_NV</code> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportShadingRateImageStateCreateInfoNV\">VkPipelineViewportShadingRateImageStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-viewportCount-04140",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> and <code>VK_DYNAMIC_STATE_VIEWPORT_SHADING_RATE_PALETTE_NV</code> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportShadingRatePaletteNV\">vkCmdSetViewportShadingRatePaletteNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_viewport_swizzle)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-VkPipelineVieportCreateInfo-04141",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled and an instance of <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> chained from <code>VkPipelineVieportCreateInfo</code>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_scissor_exclusive)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-VkPipelineVieportCreateInfo-04142",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled and an instance of <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a> chained from <code>VkPipelineVieportCreateInfo</code>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a>::<code>exclusiveScissorCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
         }
       ],
       "(VK_NV_mesh_shader)": [
@@ -20678,7 +21020,7 @@
       "(VK_NV_viewport_swizzle)": [
         {
           "vuid": "VUID-VkPipelineViewportSwizzleStateCreateInfoNV-viewportCount-01215",
-          "text": " <code>viewportCount</code> <strong class=\"purple\">must</strong> match the <code>viewportCount</code> set in <code>VkPipelineViewportStateCreateInfo</code>"
+          "text": " <code>viewportCount</code> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> set in <code>VkPipelineViewportStateCreateInfo</code>"
         },
         {
           "vuid": "VUID-VkPipelineViewportSwizzleStateCreateInfoNV-sType-sType",
@@ -20766,23 +21108,19 @@
       "core": [
         {
           "vuid": "VUID-VkPipelineViewportStateCreateInfo-viewportCount-01216",
-          "text": " If the <a href=\"#features-multiViewport\">multiple viewports</a> feature is not enabled, <code>viewportCount</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+          "text": " If the <a href=\"#features-multiViewport\">multiple viewports</a> feature is not enabled, <code>viewportCount</code> <strong class=\"purple\">must</strong> not be greater than <code>1</code>"
         },
         {
           "vuid": "VUID-VkPipelineViewportStateCreateInfo-scissorCount-01217",
-          "text": " If the <a href=\"#features-multiViewport\">multiple viewports</a> feature is not enabled, <code>scissorCount</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+          "text": " If the <a href=\"#features-multiViewport\">multiple viewports</a> feature is not enabled, <code>scissorCount</code> <strong class=\"purple\">must</strong> not be greater than <code>1</code>"
         },
         {
           "vuid": "VUID-VkPipelineViewportStateCreateInfo-viewportCount-01218",
-          "text": " <code>viewportCount</code> <strong class=\"purple\">must</strong> be between <code>1</code> and <code>VkPhysicalDeviceLimits</code>::<code>maxViewports</code>, inclusive"
+          "text": " <code>viewportCount</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceLimits</code>::<code>maxViewports</code>"
         },
         {
           "vuid": "VUID-VkPipelineViewportStateCreateInfo-scissorCount-01219",
-          "text": " <code>scissorCount</code> <strong class=\"purple\">must</strong> be between <code>1</code> and <code>VkPhysicalDeviceLimits</code>::<code>maxViewports</code>, inclusive"
-        },
-        {
-          "vuid": "VUID-VkPipelineViewportStateCreateInfo-scissorCount-01220",
-          "text": " <code>scissorCount</code> and <code>viewportCount</code> <strong class=\"purple\">must</strong> be identical"
+          "text": " <code>scissorCount</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceLimits</code>::<code>maxViewports</code>"
         },
         {
           "vuid": "VUID-VkPipelineViewportStateCreateInfo-x-02821",
@@ -20811,6 +21149,12 @@
         {
           "vuid": "VUID-VkPipelineViewportStateCreateInfo-flags-zerobitmask",
           "text": " <code>flags</code> <strong class=\"purple\">must</strong> be <code>0</code>"
+        }
+      ],
+      "!(VK_EXT_extended_dynamic_state)": [
+        {
+          "vuid": "VUID-VkPipelineViewportStateCreateInfo-scissorCount-01220",
+          "text": " <code>scissorCount</code> and <code>viewportCount</code> <strong class=\"purple\">must</strong> be identical"
         },
         {
           "vuid": "VUID-VkPipelineViewportStateCreateInfo-viewportCount-arraylength",
@@ -20821,10 +21165,24 @@
           "text": " <code>scissorCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
         }
       ],
+      "(VK_EXT_extended_dynamic_state)": [
+        {
+          "vuid": "VUID-VkPipelineViewportStateCreateInfo-scissorCount-04134",
+          "text": " If the graphics pipeline is being created without <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> and <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> set then <code>scissorCount</code> and <code>viewportCount</code> <strong class=\"purple\">must</strong> be identical"
+        },
+        {
+          "vuid": "VUID-VkPipelineViewportStateCreateInfo-viewportCount-04135",
+          "text": " If the graphics pipeline is being created with <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> set then <code>viewportCount</code> <strong class=\"purple\">must</strong> be <code>0</code>, otherwise it <strong class=\"purple\">must</strong> be greater than <code>0</code>"
+        },
+        {
+          "vuid": "VUID-VkPipelineViewportStateCreateInfo-scissorCount-04136",
+          "text": " If the graphics pipeline is being created with <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> set then <code>scissorCount</code> <strong class=\"purple\">must</strong> be <code>0</code>, otherwise it <strong class=\"purple\">must</strong> be greater than <code>0</code>"
+        }
+      ],
       "(VK_NV_clip_space_w_scaling)": [
         {
           "vuid": "VUID-VkPipelineViewportStateCreateInfo-viewportWScalingEnable-01726",
-          "text": " If the <code>viewportWScalingEnable</code> member of a <a href=\"#VkPipelineViewportWScalingStateCreateInfoNV\">VkPipelineViewportWScalingStateCreateInfoNV</a> structure included in the <code>pNext</code> chain is <code>VK_TRUE</code>, the <code>viewportCount</code> member of the <a href=\"#VkPipelineViewportWScalingStateCreateInfoNV\">VkPipelineViewportWScalingStateCreateInfoNV</a> structure <strong class=\"purple\">must</strong> be equal to <code>viewportCount</code>"
+          "text": " If the <code>viewportWScalingEnable</code> member of a <a href=\"#VkPipelineViewportWScalingStateCreateInfoNV\">VkPipelineViewportWScalingStateCreateInfoNV</a> structure included in the <code>pNext</code> chain is <code>VK_TRUE</code>, the <code>viewportCount</code> member of the <a href=\"#VkPipelineViewportWScalingStateCreateInfoNV\">VkPipelineViewportWScalingStateCreateInfoNV</a> structure <strong class=\"purple\">must</strong> be greater than or equal to <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>::<code>viewportCount</code>"
         }
       ]
     },
@@ -21242,7 +21600,7 @@
         },
         {
           "vuid": "VUID-VkPipelineViewportShadingRateImageStateCreateInfoNV-shadingRateImageEnable-02056",
-          "text": " If <code>shadingRateImageEnable</code> is <code>VK_TRUE</code>, <code>viewportCount</code> <strong class=\"purple\">must</strong> be equal to the <code>viewportCount</code> member of <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>"
+          "text": " If <code>shadingRateImageEnable</code> is <code>VK_TRUE</code>, <code>viewportCount</code> <strong class=\"purple\">must</strong> be greater or equal to the <code>viewportCount</code> member of <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>"
         },
         {
           "vuid": "VUID-VkPipelineViewportShadingRateImageStateCreateInfoNV-sType-sType",
@@ -21766,7 +22124,7 @@
         },
         {
           "vuid": "VUID-VkPipelineViewportExclusiveScissorStateCreateInfoNV-exclusiveScissorCount-02029",
-          "text": " <code>exclusiveScissorCount</code> <strong class=\"purple\">must</strong> be <code>0</code> or identical to the <code>viewportCount</code> member of <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>"
+          "text": " <code>exclusiveScissorCount</code> <strong class=\"purple\">must</strong> be <code>0</code> or greater than or equal to the <code>viewportCount</code> member of <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>"
         },
         {
           "vuid": "VUID-VkPipelineViewportExclusiveScissorStateCreateInfoNV-sType-sType",
@@ -23276,11 +23634,11 @@
       "(VK_EXT_extended_dynamic_state)": [
         {
           "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-viewportCount-03417",
-          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, then then <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>viewportCount</code> parameter of <code>vkCmdSetViewportWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>scissorCount</code> of the pipeline"
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>viewportCount</code> parameter of <code>vkCmdSetViewportWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>scissorCount</code> of the pipeline"
         },
         {
           "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-scissorCount-03418",
-          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, then then <a href=\"#vkCmdSetScissorWithCountEXT\">vkCmdSetScissorWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>scissorCount</code> parameter of <code>vkCmdSetScissorWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>viewportCount</code> of the pipeline"
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdSetScissorWithCountEXT\">vkCmdSetScissorWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>scissorCount</code> parameter of <code>vkCmdSetScissorWithCountEXT</code> <strong class=\"purple\">must</strong> match the <code>VkPipelineViewportStateCreateInfo</code>::<code>viewportCount</code> of the pipeline"
         },
         {
           "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-viewportCount-03419",
@@ -23289,6 +23647,38 @@
         {
           "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-primitiveTopology-03420",
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPrimitiveTopologyEXT\">vkCmdSetPrimitiveTopologyEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>primitiveTopology</code> parameter of <code>vkCmdSetPrimitiveTopologyEXT</code> <strong class=\"purple\">must</strong> be of the same <a href=\"#drawing-primitive-topology-class\">topology class</a> as the pipeline <a href=\"#VkPipelineInputAssemblyStateCreateInfo\">VkPipelineInputAssemblyStateCreateInfo</a>::<code>topology</code> state"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_clip_space_w_scaling)": [
+        {
+          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-viewportCount-04137",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_W_SCALING_NV</code> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportWScalingStateCreateInfoNV\">VkPipelineViewportWScalingStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-viewportCount-04138",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> and <code>VK_DYNAMIC_STATE_VIEWPORT_W_SCALING_NV</code> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWScalingNV\">vkCmdSetViewportWScalingNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_shading_rate_image)": [
+        {
+          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-viewportCount-04139",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VIEWPORT_SHADING_RATE_PALETTE_NV</code> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportShadingRateImageStateCreateInfoNV\">VkPipelineViewportShadingRateImageStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-viewportCount-04140",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> and <code>VK_DYNAMIC_STATE_VIEWPORT_SHADING_RATE_PALETTE_NV</code> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportShadingRatePaletteNV\">vkCmdSetViewportShadingRatePaletteNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_viewport_swizzle)": [
+        {
+          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-VkPipelineVieportCreateInfo-04141",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled and an instance of <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> chained from <code>VkPipelineVieportCreateInfo</code>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_NV_scissor_exclusive)": [
+        {
+          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-VkPipelineVieportCreateInfo-04142",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled and an instance of <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a> chained from <code>VkPipelineVieportCreateInfo</code>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a>::<code>exclusiveScissorCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
         }
       ],
       "(VK_EXT_transform_feedback)": [
@@ -29103,6 +29493,14 @@
         {
           "vuid": "VUID-VkPhysicalDevicePerformanceQueryFeaturesKHR-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_FEATURES_KHR</code>"
+        }
+      ]
+    },
+    "VkPhysicalDevice4444FormatsFeaturesEXT": {
+      "(VK_EXT_4444_formats)": [
+        {
+          "vuid": "VUID-VkPhysicalDevice4444FormatsFeaturesEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_4444_FORMATS_FEATURES_EXT</code>"
         }
       ]
     },
