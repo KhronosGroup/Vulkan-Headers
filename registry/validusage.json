@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.2.150",
-    "comment": "from git branch: github-master commit: 792c6d18f64b73463a2023cf7610a694c11e5bd2",
-    "date": "2020-08-10 07:17:14Z"
+    "api version": "1.2.149",
+    "comment": "from git branch: github-master commit: 7c18dc68a98f4145ea730b764b0f1c4bf596e5ee",
+    "date": "2020-08-03 10:36:40Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -70,7 +70,7 @@
         },
         {
           "vuid": "VUID-VkInstanceCreateInfo-sType-unique",
-          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique, with the exception of structures of type <a href=\"#VkDebugUtilsMessengerCreateInfoEXT\">VkDebugUtilsMessengerCreateInfoEXT</a>"
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
           "vuid": "VUID-VkInstanceCreateInfo-flags-zerobitmask",
@@ -1312,7 +1312,7 @@
       "(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-VkSubmitInfo-pNext-04120",
-          "text": " If the <code>pNext</code> chain of this structure does not include a <code>VkProtectedSubmitInfo</code> structure with <code>protectedSubmit</code> set to <code>VK_TRUE</code>, then each element of the <code>pCommandBuffers</code> array <strong class=\"purple\">must</strong> be an unprotected command buffer"
+          "text": " If the <code>pNext</code> chain of this structure does not include a <code>VkProtectedSubmitInfo</code> structure with <code>protectedSubmit</code> set to <code>VK_TRUE</code>, then each element of the command buffer of the <code>pCommandBuffers</code> array <strong class=\"purple\">must</strong> be an unprotected command buffer"
         }
       ]
     },
@@ -5498,11 +5498,11 @@
         },
         {
           "vuid": "VUID-VkRenderPassBeginInfo-framebuffer-02780",
-          "text": " If <code>framebuffer</code> was created with a <a href=\"#VkFramebufferCreateInfo\">VkFramebufferCreateInfo</a>::<code>flags</code> value that included <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT</code>, each element of the <code>pAttachments</code> member of a <a href=\"#VkRenderPassAttachmentBeginInfo\">VkRenderPassAttachmentBeginInfo</a> structure included in the <code>pNext</code> chain <strong class=\"purple\">must</strong> have been created on the same <a href=\"#VkDevice\">VkDevice</a> as <code>framebuffer</code> and <code>renderPass</code>"
+          "text": " If <code>framebuffer</code> was created with a <a href=\"#VkFramebufferCreateInfo\">VkFramebufferCreateInfo</a>::<code>flags</code> value that included <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT_KHR</code>, each element of the <code>pAttachments</code> member of a <a href=\"#VkRenderPassAttachmentBeginInfo\">VkRenderPassAttachmentBeginInfo</a> structure included in the <code>pNext</code> chain <strong class=\"purple\">must</strong> have been created on the same <a href=\"#VkDevice\">VkDevice</a> as <code>framebuffer</code> and <code>renderPass</code>"
         },
         {
           "vuid": "VUID-VkRenderPassBeginInfo-framebuffer-03209",
-          "text": " If <code>framebuffer</code> was created with a <a href=\"#VkFramebufferCreateInfo\">VkFramebufferCreateInfo</a>::<code>flags</code> value that included <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT</code>, each element of the <code>pAttachments</code> member of a <a href=\"#VkRenderPassAttachmentBeginInfo\">VkRenderPassAttachmentBeginInfo</a> structure included in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be a <a href=\"#VkImageView\">VkImageView</a> of an image created with a value of <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>flags</code> equal to the <code>flags</code> member of the corresponding element of <a href=\"#VkFramebufferAttachmentsCreateInfo\">VkFramebufferAttachmentsCreateInfo</a>::<code>pAttachments</code> used to create <code>framebuffer</code>"
+          "text": " If <code>framebuffer</code> was created with a <a href=\"#VkFramebufferCreateInfo\">VkFramebufferCreateInfo</a>::<code>flags</code> value that included <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT</code>, each element of the <code>pAttachments</code> member of a <a href=\"#VkRenderPassAttachmentBeginInfo\">VkRenderPassAttachmentBeginInfo</a> structure included in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be a <a href=\"#VkImageView\">VkImageView</a> of an image created with a value of <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>flags</code> equal to the <code>flags</code> member of the corresponding element of <a href=\"#VkFramebufferAttachmentsCreateInfoKHR\">VkFramebufferAttachmentsCreateInfoKHR</a>::<code>pAttachments</code> used to create <code>framebuffer</code>"
         },
         {
           "vuid": "VUID-VkRenderPassBeginInfo-framebuffer-03210",
@@ -24727,12 +24727,8 @@
     "VkIOSSurfaceCreateInfoMVK": {
       "(VK_KHR_surface)+(VK_MVK_ios_surface)": [
         {
-          "vuid": "VUID-VkIOSSurfaceCreateInfoMVK-pView-04143",
-          "text": " If <code>pView</code> is a <code>CAMetalLayer</code> object, it <strong class=\"purple\">must</strong> be a valid <code>CAMetalLayer</code>."
-        },
-        {
           "vuid": "VUID-VkIOSSurfaceCreateInfoMVK-pView-01316",
-          "text": " If <code>pView</code> is a <code>UIView</code> object, it <strong class=\"purple\">must</strong> be a valid <code>UIView</code>, <strong class=\"purple\">must</strong> be backed by a <code>CALayer</code> object of type <code>CAMetalLayer</code>, and <a href=\"#vkCreateIOSSurfaceMVK\">vkCreateIOSSurfaceMVK</a> <strong class=\"purple\">must</strong> be called on the main thread."
+          "text": " <code>pView</code> <strong class=\"purple\">must</strong> be a valid <code>UIView</code> and <strong class=\"purple\">must</strong> be backed by a <code>CALayer</code> instance of type <code>CAMetalLayer</code>"
         },
         {
           "vuid": "VUID-VkIOSSurfaceCreateInfoMVK-sType-sType",
@@ -24771,12 +24767,8 @@
     "VkMacOSSurfaceCreateInfoMVK": {
       "(VK_KHR_surface)+(VK_MVK_macos_surface)": [
         {
-          "vuid": "VUID-VkMacOSSurfaceCreateInfoMVK-pView-04144",
-          "text": " If <code>pView</code> is a <code>CAMetalLayer</code> object, it <strong class=\"purple\">must</strong> be a valid <code>CAMetalLayer</code>."
-        },
-        {
           "vuid": "VUID-VkMacOSSurfaceCreateInfoMVK-pView-01317",
-          "text": " If <code>pView</code> is an <code>NSView</code> object, it <strong class=\"purple\">must</strong> be a valid <code>NSView</code>, <strong class=\"purple\">must</strong> be backed by a <code>CALayer</code> object of type <code>CAMetalLayer</code>, and <a href=\"#vkCreateMacOSSurfaceMVK\">vkCreateMacOSSurfaceMVK</a> <strong class=\"purple\">must</strong> be called on the main thread."
+          "text": " <code>pView</code> <strong class=\"purple\">must</strong> be a valid <code>NSView</code> and <strong class=\"purple\">must</strong> be backed by a <code>CALayer</code> instance of type <code>CAMetalLayer</code>"
         },
         {
           "vuid": "VUID-VkMacOSSurfaceCreateInfoMVK-sType-sType",

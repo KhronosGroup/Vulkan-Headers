@@ -370,7 +370,7 @@ class OutputGenerator:
         return [None, None]
 
     def checkDuplicateEnums(self, enums):
-        """Check enumerated values for duplicates.
+        """Sanity check enumerated values.
 
         -  enums - list of `<enum>` Elements
 
