@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.2.150",
-    "comment": "from git branch: github-master commit: 792c6d18f64b73463a2023cf7610a694c11e5bd2",
-    "date": "2020-08-10 07:17:14Z"
+    "api version": "1.2.151",
+    "comment": "from git branch: github-master commit: 68bedacc6014941d5c04d168ef62df82031e0ddc",
+    "date": "2020-08-17 01:41:53Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -5895,6 +5895,14 @@
           "text": " If <code>pCode</code> declares any of the capabilities listed in the <a href=\"#spirvenv-capabilities-table\">SPIR-V Environment</a> appendix, one of the corresponding requirements <strong class=\"purple\">must</strong> be satisfied"
         },
         {
+          "vuid": "VUID-VkShaderModuleCreateInfo-pCode-04146",
+          "text": " <code>pCode</code> <strong class=\"purple\">must</strong> not declare any SPIR-V extension that is not supported by the API, as described by the <a href=\"#spirvenv-extensions\">Extension</a> section of the <a href=\"#spirvenv-capabilities\">SPIR-V Environment</a> appendix"
+        },
+        {
+          "vuid": "VUID-VkShaderModuleCreateInfo-pCode-04147",
+          "text": " If <code>pCode</code> declares any of the SPIR-V extensions listed in the <a href=\"#spirvenv-extensions-table\">SPIR-V Environment</a> appendix, one of the corresponding requirements <strong class=\"purple\">must</strong> be satisfied"
+        },
+        {
           "vuid": "VUID-VkShaderModuleCreateInfo-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO</code>"
         },
@@ -6387,6 +6395,10 @@
         {
           "vuid": "VUID-VkPipelineShaderStageCreateInfo-stage-00719",
           "text": " If <code>stage</code> is <code>VK_SHADER_STAGE_FRAGMENT_BIT</code>, and the identified entry point writes to <code>FragDepth</code> in any execution path, it <strong class=\"purple\">must</strong> write to <code>FragDepth</code> in all execution paths"
+        },
+        {
+          "vuid": "VUID-VkPipelineShaderStageCreateInfo-module-04145",
+          "text": " The SPIR-V code that was used to create <code>module</code> <strong class=\"purple\">must</strong> be valid as described by the <a href=\"#spirv-spec\">Khronos SPIR-V Specification</a> after applying the specializations provided in <code>pSpecializationInfo</code>, if any, and then converting all specialization constants into fixed constants."
         },
         {
           "vuid": "VUID-VkPipelineShaderStageCreateInfo-sType-sType",
@@ -10890,7 +10902,7 @@
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-flags-04083",
-          "text": " If <code>flags</code> dose not contain <code>VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT</code> and the <code>pNext</code> chain include a <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a> structure then <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a>::<code>viewFormatCount</code> <strong class=\"purple\">must</strong> be <code>0</code> or <code>1</code>"
+          "text": " If <code>flags</code> does not contain <code>VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT</code> and the <code>pNext</code> chain include a <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a> structure then <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a>::<code>viewFormatCount</code> <strong class=\"purple\">must</strong> be <code>0</code> or <code>1</code>"
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
@@ -26148,7 +26160,7 @@
         },
         {
           "vuid": "VUID-VkSwapchainCreateInfoKHR-flags-04100",
-          "text": " If <code>flags</code> dose not contain <code>VK_SWAPCHAIN_CREATE_MUTABLE_FORMAT_BIT_KHR</code> and the <code>pNext</code> chain include a <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a> structure then <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a>::<code>viewFormatCount</code> <strong class=\"purple\">must</strong> be <code>0</code> or <code>1</code>"
+          "text": " If <code>flags</code> does not contain <code>VK_SWAPCHAIN_CREATE_MUTABLE_FORMAT_BIT_KHR</code> and the <code>pNext</code> chain include a <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a> structure then <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a>::<code>viewFormatCount</code> <strong class=\"purple\">must</strong> be <code>0</code> or <code>1</code>"
         }
       ],
       "(VK_KHR_surface)+(VK_KHR_swapchain)+(VK_KHR_surface_protected_capabilities)": [
