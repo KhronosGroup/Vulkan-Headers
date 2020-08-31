@@ -4752,6 +4752,10 @@ typedef void <name>CAMetalLayer</name>;
             <member><type>float</type>                                                   <name>matrix</name>[3][4]</member>
         </type>
         <type category="struct" name="VkTransformMatrixNV"                                     alias="VkTransformMatrixKHR"/>
+        <type category="union" name="VkAccelerationStructureReferenceKHR">
+            <member><type>VkDeviceAddress</type>                                         <name>deviceReference</name></member>
+            <member><type>VkAccelerationStructureKHR</type>                              <name>hostReference</name></member>
+        </type>
         <type category="struct" name="VkAccelerationStructureInstanceKHR">
             <comment>The bitfields in this structure are non-normative since bitfield ordering is implementation-defined in C. The specification defines the normative layout.</comment>
             <member><type>VkTransformMatrixKHR</type>                                    <name>transform</name></member>
@@ -4759,7 +4763,7 @@ typedef void <name>CAMetalLayer</name>;
             <member><type>uint32_t</type>                                                <name>mask</name>:8</member>
             <member><type>uint32_t</type>                                                <name>instanceShaderBindingTableRecordOffset</name>:24</member>
             <member optional="true"><type>VkGeometryInstanceFlagsKHR</type>              <name>flags</name>:8</member>
-            <member><type>uint64_t</type>                                                <name>accelerationStructureReference</name></member>
+            <member><type>VkAccelerationStructureReferenceKHR</type>                     <name>accelerationStructureReference</name></member>
         </type>
         <type category="struct" name="VkAccelerationStructureInstanceNV"                       alias="VkAccelerationStructureInstanceKHR"/>
         <type category="struct" name="VkAccelerationStructureDeviceAddressInfoKHR">
