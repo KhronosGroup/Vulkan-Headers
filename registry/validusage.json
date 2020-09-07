@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.2.152",
-    "comment": "from git branch: github-master commit: ef2bc9f8b9b6693634b9e3ac345ac5ca15233208",
-    "date": "2020-08-26 13:27:20Z"
+    "api version": "1.2.153",
+    "comment": "from git branch: github-main commit: 72254079510ec0616b711a570d83a6f1476ebc97",
+    "date": "2020-09-07 02:44:48Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -2024,6 +2024,10 @@
     },
     "vkImportFenceWin32HandleKHR": {
       "(VK_KHR_external_fence_win32)": [
+        {
+          "vuid": "VUID-vkImportFenceWin32HandleKHR-fence-04448",
+          "text": " <code>fence</code> <strong class=\"purple\">must</strong> not be associated with any queue command that has not yet completed execution on that queue"
+        },
         {
           "vuid": "VUID-vkImportFenceWin32HandleKHR-device-parameter",
           "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDevice\">VkDevice</a> handle"
@@ -27731,7 +27735,7 @@
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_SWAPCHAIN_DISPLAY_NATIVE_HDR_CREATE_INFO_AMD</code>"
         },
         {
-          "vuid": "VUID-VkSwapchainDisplayNativeHdrCreateInfoAMD-localDimmingEnable-XXXXX",
+          "vuid": "VUID-VkSwapchainDisplayNativeHdrCreateInfoAMD-localDimmingEnable-04449",
           "text": " It is only valid to set <code>localDimmingEnable</code> to <code>VK_TRUE</code> if <a href=\"#VkDisplayNativeHdrSurfaceCapabilitiesAMD\">VkDisplayNativeHdrSurfaceCapabilitiesAMD</a>::<code>localDimmingSupport</code> is supported"
         }
       ]
