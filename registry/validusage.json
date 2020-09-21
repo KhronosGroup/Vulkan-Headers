@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.2.153",
-    "comment": "from git branch: github-main commit: 72254079510ec0616b711a570d83a6f1476ebc97",
-    "date": "2020-09-07 02:44:48Z"
+    "api version": "1.2.154",
+    "comment": "from git branch: github-main commit: 5c8259673b722a86525f5a9dbee1ffd92371656b",
+    "date": "2020-09-20 10:24:47Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -226,7 +226,7 @@
         },
         {
           "vuid": "VUID-VkPhysicalDeviceProperties2-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT\">VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceConservativeRasterizationPropertiesEXT\">VkPhysicalDeviceConservativeRasterizationPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixPropertiesNV\">VkPhysicalDeviceCooperativeMatrixPropertiesNV</a>, <a href=\"#VkPhysicalDeviceCustomBorderColorPropertiesEXT\">VkPhysicalDeviceCustomBorderColorPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDepthStencilResolveProperties\">VkPhysicalDeviceDepthStencilResolveProperties</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingProperties\">VkPhysicalDeviceDescriptorIndexingProperties</a>, <a href=\"#VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV\">VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV</a>, <a href=\"#VkPhysicalDeviceDiscardRectanglePropertiesEXT\">VkPhysicalDeviceDiscardRectanglePropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDriverProperties\">VkPhysicalDeviceDriverProperties</a>, <a href=\"#VkPhysicalDeviceExternalMemoryHostPropertiesEXT\">VkPhysicalDeviceExternalMemoryHostPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceFloatControlsProperties\">VkPhysicalDeviceFloatControlsProperties</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMap2PropertiesEXT\">VkPhysicalDeviceFragmentDensityMap2PropertiesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapPropertiesEXT\">VkPhysicalDeviceFragmentDensityMapPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceIDProperties\">VkPhysicalDeviceIDProperties</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockPropertiesEXT\">VkPhysicalDeviceInlineUniformBlockPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceLineRasterizationPropertiesEXT\">VkPhysicalDeviceLineRasterizationPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceMaintenance3Properties\">VkPhysicalDeviceMaintenance3Properties</a>, <a href=\"#VkPhysicalDeviceMeshShaderPropertiesNV\">VkPhysicalDeviceMeshShaderPropertiesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX\">VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX</a>, <a href=\"#VkPhysicalDeviceMultiviewProperties\">VkPhysicalDeviceMultiviewProperties</a>, <a href=\"#VkPhysicalDevicePCIBusInfoPropertiesEXT\">VkPhysicalDevicePCIBusInfoPropertiesEXT</a>, <a href=\"#VkPhysicalDevicePerformanceQueryPropertiesKHR\">VkPhysicalDevicePerformanceQueryPropertiesKHR</a>, <a href=\"#VkPhysicalDevicePointClippingProperties\">VkPhysicalDevicePointClippingProperties</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryProperties\">VkPhysicalDeviceProtectedMemoryProperties</a>, <a href=\"#VkPhysicalDevicePushDescriptorPropertiesKHR\">VkPhysicalDevicePushDescriptorPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceRayTracingPropertiesKHR\">VkPhysicalDeviceRayTracingPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceRayTracingPropertiesNV\">VkPhysicalDeviceRayTracingPropertiesNV</a>, <a href=\"#VkPhysicalDeviceRobustness2PropertiesEXT\">VkPhysicalDeviceRobustness2PropertiesEXT</a>, <a href=\"#VkPhysicalDeviceSampleLocationsPropertiesEXT\">VkPhysicalDeviceSampleLocationsPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerFilterMinmaxProperties\">VkPhysicalDeviceSamplerFilterMinmaxProperties</a>, <a href=\"#VkPhysicalDeviceShaderCoreProperties2AMD\">VkPhysicalDeviceShaderCoreProperties2AMD</a>, <a href=\"#VkPhysicalDeviceShaderCorePropertiesAMD\">VkPhysicalDeviceShaderCorePropertiesAMD</a>, <a href=\"#VkPhysicalDeviceShaderSMBuiltinsPropertiesNV\">VkPhysicalDeviceShaderSMBuiltinsPropertiesNV</a>, <a href=\"#VkPhysicalDeviceShadingRateImagePropertiesNV\">VkPhysicalDeviceShadingRateImagePropertiesNV</a>, <a href=\"#VkPhysicalDeviceSubgroupProperties\">VkPhysicalDeviceSubgroupProperties</a>, <a href=\"#VkPhysicalDeviceSubgroupSizeControlPropertiesEXT\">VkPhysicalDeviceSubgroupSizeControlPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT\">VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceTimelineSemaphoreProperties\">VkPhysicalDeviceTimelineSemaphoreProperties</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackPropertiesEXT\">VkPhysicalDeviceTransformFeedbackPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT\">VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceVulkan11Properties\">VkPhysicalDeviceVulkan11Properties</a>, or <a href=\"#VkPhysicalDeviceVulkan12Properties\">VkPhysicalDeviceVulkan12Properties</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT\">VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceConservativeRasterizationPropertiesEXT\">VkPhysicalDeviceConservativeRasterizationPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixPropertiesNV\">VkPhysicalDeviceCooperativeMatrixPropertiesNV</a>, <a href=\"#VkPhysicalDeviceCustomBorderColorPropertiesEXT\">VkPhysicalDeviceCustomBorderColorPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDepthStencilResolveProperties\">VkPhysicalDeviceDepthStencilResolveProperties</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingProperties\">VkPhysicalDeviceDescriptorIndexingProperties</a>, <a href=\"#VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV\">VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV</a>, <a href=\"#VkPhysicalDeviceDiscardRectanglePropertiesEXT\">VkPhysicalDeviceDiscardRectanglePropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDriverProperties\">VkPhysicalDeviceDriverProperties</a>, <a href=\"#VkPhysicalDeviceExternalMemoryHostPropertiesEXT\">VkPhysicalDeviceExternalMemoryHostPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceFloatControlsProperties\">VkPhysicalDeviceFloatControlsProperties</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMap2PropertiesEXT\">VkPhysicalDeviceFragmentDensityMap2PropertiesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapPropertiesEXT\">VkPhysicalDeviceFragmentDensityMapPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceIDProperties\">VkPhysicalDeviceIDProperties</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockPropertiesEXT\">VkPhysicalDeviceInlineUniformBlockPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceLineRasterizationPropertiesEXT\">VkPhysicalDeviceLineRasterizationPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceMaintenance3Properties\">VkPhysicalDeviceMaintenance3Properties</a>, <a href=\"#VkPhysicalDeviceMeshShaderPropertiesNV\">VkPhysicalDeviceMeshShaderPropertiesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX\">VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX</a>, <a href=\"#VkPhysicalDeviceMultiviewProperties\">VkPhysicalDeviceMultiviewProperties</a>, <a href=\"#VkPhysicalDevicePCIBusInfoPropertiesEXT\">VkPhysicalDevicePCIBusInfoPropertiesEXT</a>, <a href=\"#VkPhysicalDevicePerformanceQueryPropertiesKHR\">VkPhysicalDevicePerformanceQueryPropertiesKHR</a>, <a href=\"#VkPhysicalDevicePointClippingProperties\">VkPhysicalDevicePointClippingProperties</a>, <a href=\"#VkPhysicalDevicePortabilitySubsetPropertiesKHR\">VkPhysicalDevicePortabilitySubsetPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryProperties\">VkPhysicalDeviceProtectedMemoryProperties</a>, <a href=\"#VkPhysicalDevicePushDescriptorPropertiesKHR\">VkPhysicalDevicePushDescriptorPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceRayTracingPropertiesKHR\">VkPhysicalDeviceRayTracingPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceRayTracingPropertiesNV\">VkPhysicalDeviceRayTracingPropertiesNV</a>, <a href=\"#VkPhysicalDeviceRobustness2PropertiesEXT\">VkPhysicalDeviceRobustness2PropertiesEXT</a>, <a href=\"#VkPhysicalDeviceSampleLocationsPropertiesEXT\">VkPhysicalDeviceSampleLocationsPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerFilterMinmaxProperties\">VkPhysicalDeviceSamplerFilterMinmaxProperties</a>, <a href=\"#VkPhysicalDeviceShaderCoreProperties2AMD\">VkPhysicalDeviceShaderCoreProperties2AMD</a>, <a href=\"#VkPhysicalDeviceShaderCorePropertiesAMD\">VkPhysicalDeviceShaderCorePropertiesAMD</a>, <a href=\"#VkPhysicalDeviceShaderSMBuiltinsPropertiesNV\">VkPhysicalDeviceShaderSMBuiltinsPropertiesNV</a>, <a href=\"#VkPhysicalDeviceShadingRateImagePropertiesNV\">VkPhysicalDeviceShadingRateImagePropertiesNV</a>, <a href=\"#VkPhysicalDeviceSubgroupProperties\">VkPhysicalDeviceSubgroupProperties</a>, <a href=\"#VkPhysicalDeviceSubgroupSizeControlPropertiesEXT\">VkPhysicalDeviceSubgroupSizeControlPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT\">VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceTimelineSemaphoreProperties\">VkPhysicalDeviceTimelineSemaphoreProperties</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackPropertiesEXT\">VkPhysicalDeviceTransformFeedbackPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT\">VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceVulkan11Properties\">VkPhysicalDeviceVulkan11Properties</a>, or <a href=\"#VkPhysicalDeviceVulkan12Properties\">VkPhysicalDeviceVulkan12Properties</a>"
         },
         {
           "vuid": "VUID-VkPhysicalDeviceProperties2-sType-unique",
@@ -503,6 +503,12 @@
           "text": " If <code>ppEnabledExtensions</code> contains <code>\"VK_EXT_shader_viewport_index_layer\"</code> and the <code>pNext</code> chain includes a <a href=\"#VkPhysicalDeviceVulkan12Features\">VkPhysicalDeviceVulkan12Features</a> structure, then <code>VkPhysicalDeviceVulkan12Features</code>::<code>shaderOutputViewportIndex</code> and <code>VkPhysicalDeviceVulkan12Features</code>::<code>shaderOutputLayer</code> <strong class=\"purple\">must</strong> both be <code>VK_TRUE</code>"
         }
       ],
+      "(VK_KHR_portability_subset)": [
+        {
+          "vuid": "VUID-VkDeviceCreateInfo-pProperties-04451",
+          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">[VK_KHR_portability_subset]</a></code> extension is included in <code>pProperties</code> of <a href=\"#vkEnumerateDeviceExtensionProperties\">vkEnumerateDeviceExtensionProperties</a>, <code>ppEnabledExtensions</code> <strong class=\"purple\">must</strong> include \"VK_KHR_portability_subset\"."
+        }
+      ],
       "core": [
         {
           "vuid": "VUID-VkDeviceCreateInfo-sType-sType",
@@ -510,7 +516,7 @@
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceDiagnosticsConfigCreateInfoNV\">VkDeviceDiagnosticsConfigCreateInfoNV</a>, <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceMemoryOverallocationCreateInfoAMD\">VkDeviceMemoryOverallocationCreateInfoAMD</a>, <a href=\"#VkDevicePrivateDataCreateInfoEXT\">VkDevicePrivateDataCreateInfoEXT</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice4444FormatsFeaturesEXT\">VkPhysicalDevice4444FormatsFeaturesEXT</a>, <a href=\"#VkPhysicalDevice8BitStorageFeatures\">VkPhysicalDevice8BitStorageFeatures</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeatures\">VkPhysicalDeviceBufferDeviceAddressFeatures</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeaturesEXT\">VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCoherentMemoryFeaturesAMD\">VkPhysicalDeviceCoherentMemoryFeaturesAMD</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixFeaturesNV\">VkPhysicalDeviceCooperativeMatrixFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCoverageReductionModeFeaturesNV\">VkPhysicalDeviceCoverageReductionModeFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCustomBorderColorFeaturesEXT\">VkPhysicalDeviceCustomBorderColorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV\">VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDepthClipEnableFeaturesEXT\">VkPhysicalDeviceDepthClipEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeatures\">VkPhysicalDeviceDescriptorIndexingFeatures</a>, <a href=\"#VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV\">VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDiagnosticsConfigFeaturesNV\">VkPhysicalDeviceDiagnosticsConfigFeaturesNV</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceExtendedDynamicStateFeaturesEXT\">VkPhysicalDeviceExtendedDynamicStateFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMap2FeaturesEXT\">VkPhysicalDeviceFragmentDensityMap2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapFeaturesEXT\">VkPhysicalDeviceFragmentDensityMapFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT\">VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceHostQueryResetFeatures\">VkPhysicalDeviceHostQueryResetFeatures</a>, <a href=\"#VkPhysicalDeviceImageRobustnessFeaturesEXT\">VkPhysicalDeviceImageRobustnessFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceImagelessFramebufferFeatures\">VkPhysicalDeviceImagelessFramebufferFeatures</a>, <a href=\"#VkPhysicalDeviceIndexTypeUint8FeaturesEXT\">VkPhysicalDeviceIndexTypeUint8FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeaturesEXT\">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceLineRasterizationFeaturesEXT\">VkPhysicalDeviceLineRasterizationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMemoryPriorityFeaturesEXT\">VkPhysicalDeviceMemoryPriorityFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDevicePerformanceQueryFeaturesKHR\">VkPhysicalDevicePerformanceQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT\">VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT</a>, <a href=\"#VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR\">VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePrivateDataFeaturesEXT\">VkPhysicalDevicePrivateDataFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceRayTracingFeaturesKHR\">VkPhysicalDeviceRayTracingFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceRobustness2FeaturesEXT\">VkPhysicalDeviceRobustness2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceScalarBlockLayoutFeatures\">VkPhysicalDeviceScalarBlockLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures\">VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures</a>, <a href=\"#VkPhysicalDeviceShaderAtomicFloatFeaturesEXT\">VkPhysicalDeviceShaderAtomicFloatFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64Features\">VkPhysicalDeviceShaderAtomicInt64Features</a>, <a href=\"#VkPhysicalDeviceShaderClockFeaturesKHR\">VkPhysicalDeviceShaderClockFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT\">VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderDrawParametersFeatures\">VkPhysicalDeviceShaderDrawParametersFeatures</a>, <a href=\"#VkPhysicalDeviceShaderFloat16Int8Features\">VkPhysicalDeviceShaderFloat16Int8Features</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL\">VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL</a>, <a href=\"#VkPhysicalDeviceShaderSMBuiltinsFeaturesNV\">VkPhysicalDeviceShaderSMBuiltinsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures\">VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSubgroupSizeControlFeaturesEXT\">VkPhysicalDeviceSubgroupSizeControlFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT\">VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT\">VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTimelineSemaphoreFeatures\">VkPhysicalDeviceTimelineSemaphoreFeatures</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackFeaturesEXT\">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceUniformBufferStandardLayoutFeatures\">VkPhysicalDeviceUniformBufferStandardLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceVariablePointersFeatures\">VkPhysicalDeviceVariablePointersFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVulkan11Features\">VkPhysicalDeviceVulkan11Features</a>, <a href=\"#VkPhysicalDeviceVulkan12Features\">VkPhysicalDeviceVulkan12Features</a>, <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeatures\">VkPhysicalDeviceVulkanMemoryModelFeatures</a>, or <a href=\"#VkPhysicalDeviceYcbcrImageArraysFeaturesEXT\">VkPhysicalDeviceYcbcrImageArraysFeaturesEXT</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceDiagnosticsConfigCreateInfoNV\">VkDeviceDiagnosticsConfigCreateInfoNV</a>, <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceMemoryOverallocationCreateInfoAMD\">VkDeviceMemoryOverallocationCreateInfoAMD</a>, <a href=\"#VkDevicePrivateDataCreateInfoEXT\">VkDevicePrivateDataCreateInfoEXT</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice4444FormatsFeaturesEXT\">VkPhysicalDevice4444FormatsFeaturesEXT</a>, <a href=\"#VkPhysicalDevice8BitStorageFeatures\">VkPhysicalDevice8BitStorageFeatures</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeatures\">VkPhysicalDeviceBufferDeviceAddressFeatures</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeaturesEXT\">VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCoherentMemoryFeaturesAMD\">VkPhysicalDeviceCoherentMemoryFeaturesAMD</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixFeaturesNV\">VkPhysicalDeviceCooperativeMatrixFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCoverageReductionModeFeaturesNV\">VkPhysicalDeviceCoverageReductionModeFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCustomBorderColorFeaturesEXT\">VkPhysicalDeviceCustomBorderColorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV\">VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDepthClipEnableFeaturesEXT\">VkPhysicalDeviceDepthClipEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeatures\">VkPhysicalDeviceDescriptorIndexingFeatures</a>, <a href=\"#VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV\">VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDiagnosticsConfigFeaturesNV\">VkPhysicalDeviceDiagnosticsConfigFeaturesNV</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceExtendedDynamicStateFeaturesEXT\">VkPhysicalDeviceExtendedDynamicStateFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMap2FeaturesEXT\">VkPhysicalDeviceFragmentDensityMap2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapFeaturesEXT\">VkPhysicalDeviceFragmentDensityMapFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT\">VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceHostQueryResetFeatures\">VkPhysicalDeviceHostQueryResetFeatures</a>, <a href=\"#VkPhysicalDeviceImageRobustnessFeaturesEXT\">VkPhysicalDeviceImageRobustnessFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceImagelessFramebufferFeatures\">VkPhysicalDeviceImagelessFramebufferFeatures</a>, <a href=\"#VkPhysicalDeviceIndexTypeUint8FeaturesEXT\">VkPhysicalDeviceIndexTypeUint8FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeaturesEXT\">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceLineRasterizationFeaturesEXT\">VkPhysicalDeviceLineRasterizationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMemoryPriorityFeaturesEXT\">VkPhysicalDeviceMemoryPriorityFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDevicePerformanceQueryFeaturesKHR\">VkPhysicalDevicePerformanceQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT\">VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT</a>, <a href=\"#VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR\">VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePrivateDataFeaturesEXT\">VkPhysicalDevicePrivateDataFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceRayTracingFeaturesKHR\">VkPhysicalDeviceRayTracingFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceRobustness2FeaturesEXT\">VkPhysicalDeviceRobustness2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceScalarBlockLayoutFeatures\">VkPhysicalDeviceScalarBlockLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures\">VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures</a>, <a href=\"#VkPhysicalDeviceShaderAtomicFloatFeaturesEXT\">VkPhysicalDeviceShaderAtomicFloatFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64Features\">VkPhysicalDeviceShaderAtomicInt64Features</a>, <a href=\"#VkPhysicalDeviceShaderClockFeaturesKHR\">VkPhysicalDeviceShaderClockFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT\">VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderDrawParametersFeatures\">VkPhysicalDeviceShaderDrawParametersFeatures</a>, <a href=\"#VkPhysicalDeviceShaderFloat16Int8Features\">VkPhysicalDeviceShaderFloat16Int8Features</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL\">VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL</a>, <a href=\"#VkPhysicalDeviceShaderSMBuiltinsFeaturesNV\">VkPhysicalDeviceShaderSMBuiltinsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures\">VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSubgroupSizeControlFeaturesEXT\">VkPhysicalDeviceSubgroupSizeControlFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT\">VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT\">VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTimelineSemaphoreFeatures\">VkPhysicalDeviceTimelineSemaphoreFeatures</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackFeaturesEXT\">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceUniformBufferStandardLayoutFeatures\">VkPhysicalDeviceUniformBufferStandardLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceVariablePointersFeatures\">VkPhysicalDeviceVariablePointersFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVulkan11Features\">VkPhysicalDeviceVulkan11Features</a>, <a href=\"#VkPhysicalDeviceVulkan12Features\">VkPhysicalDeviceVulkan12Features</a>, <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeatures\">VkPhysicalDeviceVulkanMemoryModelFeatures</a>, or <a href=\"#VkPhysicalDeviceYcbcrImageArraysFeaturesEXT\">VkPhysicalDeviceYcbcrImageArraysFeaturesEXT</a>"
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-sType-unique",
@@ -2641,6 +2647,12 @@
       ]
     },
     "vkCreateEvent": {
+      "(VK_KHR_portability_subset)": [
+        {
+          "vuid": "VUID-vkCreateEvent-events-04468",
+          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">[VK_KHR_portability_subset]</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>events</code> is <code>VK_FALSE</code>, then the implementation does not support <a href=\"#synchronization-events\">events</a>, and <a href=\"#vkCreateEvent\">vkCreateEvent</a> <strong class=\"purple\">must</strong> not be used."
+        }
+      ],
       "core": [
         {
           "vuid": "VUID-vkCreateEvent-device-parameter",
@@ -10382,6 +10394,16 @@
           "vuid": "VUID-VkImageCreateInfo-tiling-02084",
           "text": " If <code>usage</code> includes <code>VK_IMAGE_USAGE_SHADING_RATE_IMAGE_BIT_NV</code>, <code>tiling</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_TILING_OPTIMAL</code>"
         }
+      ],
+      "(VK_KHR_portability_subset)": [
+        {
+          "vuid": "VUID-VkImageCreateInfo-imageView2DOn3DImage-04459",
+          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">[VK_KHR_portability_subset]</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>imageView2DOn3DImage</code> is <code>VK_FALSE</code>, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT</code>."
+        },
+        {
+          "vuid": "VUID-VkImageCreateInfo-multisampleArrayImage-04460",
+          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">[VK_KHR_portability_subset]</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>multisampleArrayImage</code> is <code>VK_FALSE</code>, and <code>samples</code> is not <code>VK_SAMPLE_COUNT_1_BIT</code>, then <code>arrayLayers</code> <strong class=\"purple\">must</strong> be <code>1</code>."
+        }
       ]
     },
     "VkImageStencilUsageCreateInfo": {
@@ -10565,6 +10587,22 @@
         {
           "vuid": "VUID-vkGetImageSubresourceLayout-arrayLayer-01717",
           "text": " The <code>arrayLayer</code> member of <code>pSubresource</code> <strong class=\"purple\">must</strong> be less than the <code>arrayLayers</code> specified in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> when <code>image</code> was created"
+        },
+        {
+          "vuid": "VUID-vkGetImageSubresourceLayout-format-04461",
+          "text": " If <code>format</code> is a color format, the <code>aspectMask</code> member of <code>pSubresource</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_COLOR_BIT</code>"
+        },
+        {
+          "vuid": "VUID-vkGetImageSubresourceLayout-format-04462",
+          "text": " If <code>format</code> has a depth component, the <code>aspectMask</code> member of <code>pSubresource</code> <strong class=\"purple\">must</strong> contain <code>VK_IMAGE_ASPECT_DEPTH_BIT</code>"
+        },
+        {
+          "vuid": "VUID-vkGetImageSubresourceLayout-format-04463",
+          "text": " If <code>format</code> has a stencil component, the <code>aspectMask</code> member of <code>pSubresource</code> <strong class=\"purple\">must</strong> contain <code>VK_IMAGE_ASPECT_STENCIL_BIT</code>"
+        },
+        {
+          "vuid": "VUID-vkGetImageSubresourceLayout-format-04464",
+          "text": " If <code>format</code> does not contain a stencil or depth component, the <code>aspectMask</code> member of <code>pSubresource</code> <strong class=\"purple\">must</strong> not contain <code>VK_IMAGE_ASPECT_DEPTH_BIT</code> or <code>VK_IMAGE_ASPECT_STENCIL_BIT</code>"
         },
         {
           "vuid": "VUID-vkGetImageSubresourceLayout-device-parameter",
@@ -10981,6 +11019,16 @@
         {
           "vuid": "VUID-VkImageViewCreateInfo-pNext-02664",
           "text": " If the <code>pNext</code> chain includes a <a href=\"#VkImageViewUsageCreateInfo\">VkImageViewUsageCreateInfo</a> structure, <code>image</code> was created with a <a href=\"#VkImageStencilUsageCreateInfo\">VkImageStencilUsageCreateInfo</a> structure included in the <code>pNext</code> chain of <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>, and <code>subResourceRange.aspectMask</code> includes bits other than <code>VK_IMAGE_ASPECT_STENCIL_BIT</code>, the <code>usage</code> member of the <a href=\"#VkImageViewUsageCreateInfo\">VkImageViewUsageCreateInfo</a> structure <strong class=\"purple\">must</strong> not include any bits that were not set in the <code>usage</code> member of the <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> structure used to create <code>image</code>"
+        }
+      ],
+      "(VK_KHR_portability_subset)": [
+        {
+          "vuid": "VUID-VkImageViewCreateInfo-imageViewFormatSwizzle-04465",
+          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">[VK_KHR_portability_subset]</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>imageViewFormatSwizzle</code> is <code>VK_FALSE</code>, all elements of <code>components</code> <strong class=\"purple\">must</strong> be <code>VK_COMPONENT_SWIZZLE_IDENTITY</code>."
+        },
+        {
+          "vuid": "VUID-VkImageViewCreateInfo-imageViewFormatReinterpretation-04466",
+          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">[VK_KHR_portability_subset]</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>imageViewFormatReinterpretation</code> is <code>VK_FALSE</code>, the <a href=\"#VkFormat\">VkFormat</a> in <code>format</code> <strong class=\"purple\">must</strong> not contain a different number of components, or a different number of bits in each component, than the format of the <code>VkImage</code> in <code>image</code>."
         }
       ]
     },
@@ -12819,6 +12867,12 @@
           "text": " <code>addressModeW</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkSamplerAddressMode\">VkSamplerAddressMode</a> value"
         }
       ],
+      "(VK_KHR_portability_subset)": [
+        {
+          "vuid": "VUID-VkSamplerCreateInfo-samplerMipLodBias-04467",
+          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">[VK_KHR_portability_subset]</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>samplerMipLodBias</code> is <code>VK_FALSE</code>, <code>mipLodBias</code> <strong class=\"purple\">must</strong> be zero."
+        }
+      ],
       "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
         {
           "vuid": "VUID-VkSamplerCreateInfo-minFilter-01645",
@@ -14279,6 +14333,12 @@
         {
           "vuid": "VUID-VkDescriptorImageInfo-sampler-01564",
           "text": " If <code>sampler</code> is used and the <a href=\"#VkFormat\">VkFormat</a> of the image is a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">multi-planar format</a>, the image <strong class=\"purple\">must</strong> have been created with <code>VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT</code>, and the <code>aspectMask</code> of the <code>imageView</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code>, <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code> or (for three-plane formats only) <code>VK_IMAGE_ASPECT_PLANE_2_BIT</code>"
+        }
+      ],
+      "(VK_KHR_portability_subset)": [
+        {
+          "vuid": "VUID-VkDescriptorImageInfo-mutableComparisonSamplers-04450",
+          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">[VK_KHR_portability_subset]</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>mutableComparisonSamplers</code> is <code>VK_FALSE</code>, then <code>sampler</code> <strong class=\"purple\">must</strong> have been created with <a href=\"#VkSamplerCreateInfo\">VkSamplerCreateInfo</a>::<code>compareEnable</code> set to <code>VK_FALSE</code>."
         }
       ]
     },
@@ -18026,6 +18086,132 @@
         }
       ]
     },
+    "vkCmdCopyBuffer2KHR": {
+      "(VK_VERSION_1_1)": [
+        {
+          "vuid": "VUID-vkCmdCopyBuffer2KHR-commandBuffer-01822",
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then <code>srcBuffer</code> <strong class=\"purple\">must</strong> not be a protected buffer"
+        },
+        {
+          "vuid": "VUID-vkCmdCopyBuffer2KHR-commandBuffer-01823",
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then <code>dstBuffer</code> <strong class=\"purple\">must</strong> not be a protected buffer"
+        },
+        {
+          "vuid": "VUID-vkCmdCopyBuffer2KHR-commandBuffer-01824",
+          "text": " If <code>commandBuffer</code> is a protected command buffer, then <code>dstBuffer</code> <strong class=\"purple\">must</strong> not be an unprotected buffer"
+        }
+      ],
+      "(VK_KHR_copy_commands2)": [
+        {
+          "vuid": "VUID-vkCmdCopyBuffer2KHR-commandBuffer-parameter",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCommandBuffer\">VkCommandBuffer</a> handle"
+        },
+        {
+          "vuid": "VUID-vkCmdCopyBuffer2KHR-pCopyBufferInfo-parameter",
+          "text": " <code>pCopyBufferInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkCopyBufferInfo2KHR\">VkCopyBufferInfo2KHR</a> structure"
+        },
+        {
+          "vuid": "VUID-vkCmdCopyBuffer2KHR-commandBuffer-recording",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be in the <a href=\"#commandbuffers-lifecycle\">recording state</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdCopyBuffer2KHR-commandBuffer-cmdpool",
+          "text": " The <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from <strong class=\"purple\">must</strong> support transfer, graphics, or compute operations"
+        },
+        {
+          "vuid": "VUID-vkCmdCopyBuffer2KHR-renderpass",
+          "text": " This command <strong class=\"purple\">must</strong> only be called outside of a render pass instance"
+        }
+      ]
+    },
+    "VkCopyBufferInfo2KHR": {
+      "core": [
+        {
+          "vuid": "VUID-VkCopyBufferInfo2KHR-srcOffset-00113",
+          "text": " The <code>srcOffset</code> member of each element of <code>pRegions</code> <strong class=\"purple\">must</strong> be less than the size of <code>srcBuffer</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferInfo2KHR-dstOffset-00114",
+          "text": " The <code>dstOffset</code> member of each element of <code>pRegions</code> <strong class=\"purple\">must</strong> be less than the size of <code>dstBuffer</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferInfo2KHR-size-00115",
+          "text": " The <code>size</code> member of each element of <code>pRegions</code> <strong class=\"purple\">must</strong> be less than or equal to the size of <code>srcBuffer</code> minus <code>srcOffset</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferInfo2KHR-size-00116",
+          "text": " The <code>size</code> member of each element of <code>pRegions</code> <strong class=\"purple\">must</strong> be less than or equal to the size of <code>dstBuffer</code> minus <code>dstOffset</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferInfo2KHR-pRegions-00117",
+          "text": " The union of the source regions, and the union of the destination regions, specified by the elements of <code>pRegions</code>, <strong class=\"purple\">must</strong> not overlap in memory"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferInfo2KHR-srcBuffer-00118",
+          "text": " <code>srcBuffer</code> <strong class=\"purple\">must</strong> have been created with <code>VK_BUFFER_USAGE_TRANSFER_SRC_BIT</code> usage flag"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferInfo2KHR-srcBuffer-00119",
+          "text": " If <code>srcBuffer</code> is non-sparse then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferInfo2KHR-dstBuffer-00120",
+          "text": " <code>dstBuffer</code> <strong class=\"purple\">must</strong> have been created with <code>VK_BUFFER_USAGE_TRANSFER_DST_BIT</code> usage flag"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferInfo2KHR-dstBuffer-00121",
+          "text": " If <code>dstBuffer</code> is non-sparse then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
+        }
+      ],
+      "(VK_KHR_copy_commands2)": [
+        {
+          "vuid": "VUID-VkCopyBufferInfo2KHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_COPY_BUFFER_INFO_2_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferInfo2KHR-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferInfo2KHR-srcBuffer-parameter",
+          "text": " <code>srcBuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkBuffer\">VkBuffer</a> handle"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferInfo2KHR-dstBuffer-parameter",
+          "text": " <code>dstBuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkBuffer\">VkBuffer</a> handle"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferInfo2KHR-pRegions-parameter",
+          "text": " <code>pRegions</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>regionCount</code> valid <a href=\"#VkBufferCopy2KHR\">VkBufferCopy2KHR</a> structures"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferInfo2KHR-regionCount-arraylength",
+          "text": " <code>regionCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferInfo2KHR-commonparent",
+          "text": " Both of <code>dstBuffer</code>, and <code>srcBuffer</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <a href=\"#VkDevice\">VkDevice</a>"
+        }
+      ]
+    },
+    "VkBufferCopy2KHR": {
+      "core": [
+        {
+          "vuid": "VUID-VkBufferCopy2KHR-size-01988",
+          "text": " The <code>size</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
+        }
+      ],
+      "(VK_KHR_copy_commands2)": [
+        {
+          "vuid": "VUID-VkBufferCopy2KHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_BUFFER_COPY_2_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkBufferCopy2KHR-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        }
+      ]
+    },
     "vkCmdCopyImage": {
       "(VK_VERSION_1_1)": [
         {
@@ -18407,6 +18593,386 @@
         {
           "vuid": "VUID-VkImageSubresourceLayers-aspectMask-02247",
           "text": " <code>aspectMask</code> <strong class=\"purple\">must</strong> not include <code>VK_IMAGE_ASPECT_MEMORY_PLANE_i_BIT_EXT</code> for any index <code>i</code>"
+        }
+      ]
+    },
+    "vkCmdCopyImage2KHR": {
+      "(VK_VERSION_1_1)": [
+        {
+          "vuid": "VUID-vkCmdCopyImage2KHR-commandBuffer-01825",
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then <code>srcImage</code> <strong class=\"purple\">must</strong> not be a protected image"
+        },
+        {
+          "vuid": "VUID-vkCmdCopyImage2KHR-commandBuffer-01826",
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then <code>dstImage</code> <strong class=\"purple\">must</strong> not be a protected image"
+        },
+        {
+          "vuid": "VUID-vkCmdCopyImage2KHR-commandBuffer-01827",
+          "text": " If <code>commandBuffer</code> is a protected command buffer, then <code>dstImage</code> <strong class=\"purple\">must</strong> not be an unprotected image"
+        }
+      ],
+      "(VK_KHR_copy_commands2)": [
+        {
+          "vuid": "VUID-vkCmdCopyImage2KHR-commandBuffer-parameter",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCommandBuffer\">VkCommandBuffer</a> handle"
+        },
+        {
+          "vuid": "VUID-vkCmdCopyImage2KHR-pCopyImageInfo-parameter",
+          "text": " <code>pCopyImageInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkCopyImageInfo2KHR\">VkCopyImageInfo2KHR</a> structure"
+        },
+        {
+          "vuid": "VUID-vkCmdCopyImage2KHR-commandBuffer-recording",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be in the <a href=\"#commandbuffers-lifecycle\">recording state</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdCopyImage2KHR-commandBuffer-cmdpool",
+          "text": " The <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from <strong class=\"purple\">must</strong> support transfer, graphics, or compute operations"
+        },
+        {
+          "vuid": "VUID-vkCmdCopyImage2KHR-renderpass",
+          "text": " This command <strong class=\"purple\">must</strong> only be called outside of a render pass instance"
+        }
+      ]
+    },
+    "VkCopyImageInfo2KHR": {
+      "core": [
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-pRegions-00124",
+          "text": " The union of all source regions, and the union of all destination regions, specified by the elements of <code>pRegions</code>, <strong class=\"purple\">must</strong> not overlap in memory"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-srcImage-00126",
+          "text": " <code>srcImage</code> <strong class=\"purple\">must</strong> have been created with <code>VK_IMAGE_USAGE_TRANSFER_SRC_BIT</code> usage flag"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-srcImageLayout-00128",
+          "text": " <code>srcImageLayout</code> <strong class=\"purple\">must</strong> specify the layout of the image subresources of <code>srcImage</code> specified in <code>pRegions</code> at the time this command is executed on a <code>VkDevice</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-dstImage-00131",
+          "text": " <code>dstImage</code> <strong class=\"purple\">must</strong> have been created with <code>VK_IMAGE_USAGE_TRANSFER_DST_BIT</code> usage flag"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-dstImageLayout-00133",
+          "text": " <code>dstImageLayout</code> <strong class=\"purple\">must</strong> specify the layout of the image subresources of <code>dstImage</code> specified in <code>pRegions</code> at the time this command is executed on a <code>VkDevice</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-srcImage-00136",
+          "text": " The sample count of <code>srcImage</code> and <code>dstImage</code> <strong class=\"purple\">must</strong> match"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-srcSubresource-01696",
+          "text": " The <code>srcSubresource.mipLevel</code> member of each element of <code>pRegions</code> <strong class=\"purple\">must</strong> be less than the <code>mipLevels</code> specified in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> when <code>srcImage</code> was created"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-dstSubresource-01697",
+          "text": " The <code>dstSubresource.mipLevel</code> member of each element of <code>pRegions</code> <strong class=\"purple\">must</strong> be less than the <code>mipLevels</code> specified in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> when <code>dstImage</code> was created"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-srcSubresource-01698",
+          "text": " The <span class=\"eq\"><code>srcSubresource.baseArrayLayer</code> &#43; <code>srcSubresource.layerCount</code></span> of each element of <code>pRegions</code> <strong class=\"purple\">must</strong> be less than or equal to the <code>arrayLayers</code> specified in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> when <code>srcImage</code> was created"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-dstSubresource-01699",
+          "text": " The <span class=\"eq\"><code>dstSubresource.baseArrayLayer</code> &#43; <code>dstSubresource.layerCount</code></span> of each element of <code>pRegions</code> <strong class=\"purple\">must</strong> be less than or equal to the <code>arrayLayers</code> specified in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> when <code>dstImage</code> was created"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-srcOffset-01783",
+          "text": " The <code>srcOffset</code> and <code>extent</code> members of each element of <code>pRegions</code> <strong class=\"purple\">must</strong> respect the image transfer granularity requirements of <code>commandBuffer</code>&#8217;s command pool&#8217;s queue family, as described in <a href=\"#VkQueueFamilyProperties\">VkQueueFamilyProperties</a>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-dstOffset-01784",
+          "text": " The <code>dstOffset</code> and <code>extent</code> members of each element of <code>pRegions</code> <strong class=\"purple\">must</strong> respect the image transfer granularity requirements of <code>commandBuffer</code>&#8217;s command pool&#8217;s queue family, as described in <a href=\"#VkQueueFamilyProperties\">VkQueueFamilyProperties</a>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-aspectMask-00142",
+          "text": " For each element of <code>pRegions</code>, <code>srcSubresource.aspectMask</code> <strong class=\"purple\">must</strong> specify aspects present in <code>srcImage</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-aspectMask-00143",
+          "text": " For each element of <code>pRegions</code>, <code>dstSubresource.aspectMask</code> <strong class=\"purple\">must</strong> specify aspects present in <code>dstImage</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-srcOffset-00144",
+          "text": " For each element of <code>pRegions</code>, <code>srcOffset.x</code> and <span class=\"eq\">(<code>extent.width</code> &#43; <code>srcOffset.x</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the width of the specified <code>srcSubresource</code> of <code>srcImage</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-srcOffset-00145",
+          "text": " For each element of <code>pRegions</code>, <code>srcOffset.y</code> and <span class=\"eq\">(<code>extent.height</code> &#43; <code>srcOffset.y</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the height of the specified <code>srcSubresource</code> of <code>srcImage</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-srcImage-00146",
+          "text": " If <code>srcImage</code> is of type <code>VK_IMAGE_TYPE_1D</code>, then for each element of <code>pRegions</code>, <code>srcOffset.y</code> <strong class=\"purple\">must</strong> be <code>0</code> and <code>extent.height</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-srcOffset-00147",
+          "text": " For each element of <code>pRegions</code>, <code>srcOffset.z</code> and <span class=\"eq\">(<code>extent.depth</code> &#43; <code>srcOffset.z</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the depth of the specified <code>srcSubresource</code> of <code>srcImage</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-srcImage-01785",
+          "text": " If <code>srcImage</code> is of type <code>VK_IMAGE_TYPE_1D</code>, then for each element of <code>pRegions</code>, <code>srcOffset.z</code> <strong class=\"purple\">must</strong> be <code>0</code> and <code>extent.depth</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-dstImage-01786",
+          "text": " If <code>dstImage</code> is of type <code>VK_IMAGE_TYPE_1D</code>, then for each element of <code>pRegions</code>, <code>dstOffset.z</code> <strong class=\"purple\">must</strong> be <code>0</code> and <code>extent.depth</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-srcImage-01787",
+          "text": " If <code>srcImage</code> is of type <code>VK_IMAGE_TYPE_2D</code>, then for each element of <code>pRegions</code>, <code>srcOffset.z</code> <strong class=\"purple\">must</strong> be <code>0</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-dstImage-01788",
+          "text": " If <code>dstImage</code> is of type <code>VK_IMAGE_TYPE_2D</code>, then for each element of <code>pRegions</code>, <code>dstOffset.z</code> <strong class=\"purple\">must</strong> be <code>0</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-dstOffset-00150",
+          "text": " For each element of <code>pRegions</code>, <code>dstOffset.x</code> and <span class=\"eq\">(<code>extent.width</code> &#43; <code>dstOffset.x</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the width of the specified <code>dstSubresource</code> of <code>dstImage</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-dstOffset-00151",
+          "text": " For each element of <code>pRegions</code>, <code>dstOffset.y</code> and <span class=\"eq\">(<code>extent.height</code> &#43; <code>dstOffset.y</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the height of the specified <code>dstSubresource</code> of <code>dstImage</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-dstImage-00152",
+          "text": " If <code>dstImage</code> is of type <code>VK_IMAGE_TYPE_1D</code>, then for each element of <code>pRegions</code>, <code>dstOffset.y</code> <strong class=\"purple\">must</strong> be <code>0</code> and <code>extent.height</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-dstOffset-00153",
+          "text": " For each element of <code>pRegions</code>, <code>dstOffset.z</code> and <span class=\"eq\">(<code>extent.depth</code> &#43; <code>dstOffset.z</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the depth of the specified <code>dstSubresource</code> of <code>dstImage</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-srcImage-01727",
+          "text": " If <code>srcImage</code> is a <a href=\"#blocked-image\">blocked image</a>, then for each element of <code>pRegions</code>, all members of <code>srcOffset</code> <strong class=\"purple\">must</strong> be a multiple of the corresponding dimensions of the compressed texel block"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-srcImage-01728",
+          "text": " If <code>srcImage</code> is a <a href=\"#blocked-image\">blocked image</a>, then for each element of <code>pRegions</code>, <code>extent.width</code> <strong class=\"purple\">must</strong> be a multiple of the compressed texel block width or <span class=\"eq\">(<code>extent.width</code> &#43; <code>srcOffset.x</code>)</span> <strong class=\"purple\">must</strong> equal the width of the specified <code>srcSubresource</code> of <code>srcImage</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-srcImage-01729",
+          "text": " If <code>srcImage</code> is a <a href=\"#blocked-image\">blocked image</a>, then for each element of <code>pRegions</code>, <code>extent.height</code> <strong class=\"purple\">must</strong> be a multiple of the compressed texel block height or <span class=\"eq\">(<code>extent.height</code> &#43; <code>srcOffset.y</code>)</span> <strong class=\"purple\">must</strong> equal the height of the specified <code>srcSubresource</code> of <code>srcImage</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-srcImage-01730",
+          "text": " If <code>srcImage</code> is a <a href=\"#blocked-image\">blocked image</a>, then for each element of <code>pRegions</code>, <code>extent.depth</code> <strong class=\"purple\">must</strong> be a multiple of the compressed texel block depth or <span class=\"eq\">(<code>extent.depth</code> &#43; <code>srcOffset.z</code>)</span> <strong class=\"purple\">must</strong> equal the depth of the specified <code>srcSubresource</code> of <code>srcImage</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-dstImage-01731",
+          "text": " If <code>dstImage</code> is a <a href=\"#blocked-image\">blocked image</a>, then for each element of <code>pRegions</code>, all members of <code>dstOffset</code> <strong class=\"purple\">must</strong> be a multiple of the corresponding dimensions of the compressed texel block"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-dstImage-01732",
+          "text": " If <code>dstImage</code> is a <a href=\"#blocked-image\">blocked image</a>, then for each element of <code>pRegions</code>, <code>extent.width</code> <strong class=\"purple\">must</strong> be a multiple of the compressed texel block width or <span class=\"eq\">(<code>extent.width</code> &#43; <code>dstOffset.x</code>)</span> <strong class=\"purple\">must</strong> equal the width of the specified <code>dstSubresource</code> of <code>dstImage</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-dstImage-01733",
+          "text": " If <code>dstImage</code> is a <a href=\"#blocked-image\">blocked image</a>, then for each element of <code>pRegions</code>, <code>extent.height</code> <strong class=\"purple\">must</strong> be a multiple of the compressed texel block height or <span class=\"eq\">(<code>extent.height</code> &#43; <code>dstOffset.y</code>)</span> <strong class=\"purple\">must</strong> equal the height of the specified <code>dstSubresource</code> of <code>dstImage</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-dstImage-01734",
+          "text": " If <code>dstImage</code> is a <a href=\"#blocked-image\">blocked image</a>, then for each element of <code>pRegions</code>, <code>extent.depth</code> <strong class=\"purple\">must</strong> be a multiple of the compressed texel block depth or <span class=\"eq\">(<code>extent.depth</code> &#43; <code>dstOffset.z</code>)</span> <strong class=\"purple\">must</strong> equal the depth of the specified <code>dstSubresource</code> of <code>dstImage</code>"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_maintenance1)": [
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-srcImage-01995",
+          "text": " The <a href=\"#resources-image-format-features\">format features</a> of <code>srcImage</code> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_TRANSFER_SRC_BIT</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-dstImage-01996",
+          "text": " The <a href=\"#resources-image-format-features\">format features</a> of <code>dstImage</code> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_TRANSFER_DST_BIT</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-srcImage-04443",
+          "text": " If <code>srcImage</code> is of type <code>VK_IMAGE_TYPE_3D</code>, then for each element of <code>pRegions</code>, <code>srcSubresource.baseArrayLayer</code> <strong class=\"purple\">must</strong> be <code>0</code> and and <code>srcSubresource.layerCount</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-dstImage-04444",
+          "text": " If <code>dstImage</code> is of type <code>VK_IMAGE_TYPE_3D</code>, then for each element of <code>pRegions</code>, <code>dstSubresource.baseArrayLayer</code> <strong class=\"purple\">must</strong> be <code>0</code> and and <code>dstSubresource.layerCount</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-srcImage-01790",
+          "text": " If <code>srcImage</code> and <code>dstImage</code> are both of type <code>VK_IMAGE_TYPE_2D</code>, then for each element of <code>pRegions</code>, <code>extent.depth</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-srcImage-01791",
+          "text": " If <code>srcImage</code> is of type <code>VK_IMAGE_TYPE_2D</code>, and <code>dstImage</code> is of type <code>VK_IMAGE_TYPE_3D</code>, then for each element of <code>pRegions</code>, <code>extent.depth</code> <strong class=\"purple\">must</strong> equal <code>srcSubresource.layerCount</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-dstImage-01792",
+          "text": " If <code>dstImage</code> is of type <code>VK_IMAGE_TYPE_2D</code>, and <code>srcImage</code> is of type <code>VK_IMAGE_TYPE_3D</code>, then for each element of <code>pRegions</code>, <code>extent.depth</code> <strong class=\"purple\">must</strong> equal <code>dstSubresource.layerCount</code>"
+        }
+      ],
+      "!(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-srcImage-00127",
+          "text": " If <code>srcImage</code> is non-sparse then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-dstImage-00132",
+          "text": " If <code>dstImage</code> is non-sparse then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-srcImage-00135",
+          "text": " The <a href=\"#VkFormat\">VkFormat</a> of each of <code>srcImage</code> and <code>dstImage</code> <strong class=\"purple\">must</strong> be compatible, as defined <a href=\"#copies-images-format-compatibility\">above</a>"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-srcImage-01546",
+          "text": " If <code>srcImage</code> is non-sparse then the image or <em>disjoint</em> plane to be copied <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-dstImage-01547",
+          "text": " If <code>dstImage</code> is non-sparse then the image or <em>disjoint</em> plane that is the destination of the copy <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-srcImage-01548",
+          "text": " If the <a href=\"#VkFormat\">VkFormat</a> of each of <code>srcImage</code> and <code>dstImage</code> is not a <a href=\"#formats-requiring-sampler-ycbcr-conversion\"><em>multi-planar format</em></a>, the <a href=\"#VkFormat\">VkFormat</a> of each of <code>srcImage</code> and <code>dstImage</code> <strong class=\"purple\">must</strong> be compatible, as defined <a href=\"#copies-images-format-compatibility\">above</a>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-None-01549",
+          "text": " In a copy to or from a plane of a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">multi-planar image</a>, the <a href=\"#VkFormat\">VkFormat</a> of the image and plane <strong class=\"purple\">must</strong> be compatible according to <a href=\"#formats-compatible-planes\">the description of compatible planes</a> for the plane being copied"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-srcImage-01551",
+          "text": " If neither <code>srcImage</code> nor <code>dstImage</code> has a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">multi-planar image format</a> then for each element of <code>pRegions</code>, <code>srcSubresource.aspectMask</code> and <code>dstSubresource.aspectMask</code> <strong class=\"purple\">must</strong> match"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-srcImage-01552",
+          "text": " If <code>srcImage</code> has a <a href=\"#VkFormat\">VkFormat</a> with <a href=\"#formats-requiring-sampler-ycbcr-conversion\">two planes</a> then for each element of <code>pRegions</code>, <code>srcSubresource.aspectMask</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code> or <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-srcImage-01553",
+          "text": " If <code>srcImage</code> has a <a href=\"#VkFormat\">VkFormat</a> with <a href=\"#formats-requiring-sampler-ycbcr-conversion\">three planes</a> then for each element of <code>pRegions</code>, <code>srcSubresource.aspectMask</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code>, <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code>, or <code>VK_IMAGE_ASPECT_PLANE_2_BIT</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-dstImage-01554",
+          "text": " If <code>dstImage</code> has a <a href=\"#VkFormat\">VkFormat</a> with <a href=\"#formats-requiring-sampler-ycbcr-conversion\">two planes</a> then for each element of <code>pRegions</code>, <code>dstSubresource.aspectMask</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code> or <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-dstImage-01555",
+          "text": " If <code>dstImage</code> has a <a href=\"#VkFormat\">VkFormat</a> with <a href=\"#formats-requiring-sampler-ycbcr-conversion\">three planes</a> then for each element of <code>pRegions</code>, <code>dstSubresource.aspectMask</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code>, <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code>, or <code>VK_IMAGE_ASPECT_PLANE_2_BIT</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-srcImage-01556",
+          "text": " If <code>srcImage</code> has a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">multi-planar image format</a> and the <code>dstImage</code> does not have a multi-planar image format, then for each element of <code>pRegions</code>, <code>dstSubresource.aspectMask</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_COLOR_BIT</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-dstImage-01557",
+          "text": " If <code>dstImage</code> has a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">multi-planar image format</a> and the <code>srcImage</code> does not have a multi-planar image format, then for each element of <code>pRegions</code>, <code>srcSubresource.aspectMask</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_COLOR_BIT</code>"
+        }
+      ],
+      "!(VK_KHR_shared_presentable_image)": [
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-srcImageLayout-00129",
+          "text": " <code>srcImageLayout</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL</code> or <code>VK_IMAGE_LAYOUT_GENERAL</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-dstImageLayout-00134",
+          "text": " <code>dstImageLayout</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL</code> or <code>VK_IMAGE_LAYOUT_GENERAL</code>"
+        }
+      ],
+      "(VK_KHR_shared_presentable_image)": [
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-srcImageLayout-01917",
+          "text": " <code>srcImageLayout</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL</code>, <code>VK_IMAGE_LAYOUT_GENERAL</code>, or <code>VK_IMAGE_LAYOUT_SHARED_PRESENT_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-dstImageLayout-01395",
+          "text": " <code>dstImageLayout</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL</code>, <code>VK_IMAGE_LAYOUT_GENERAL</code>, or <code>VK_IMAGE_LAYOUT_SHARED_PRESENT_KHR</code>"
+        }
+      ],
+      "(VK_EXT_fragment_density_map)": [
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-dstImage-02542",
+          "text": " <code>dstImage</code> and <code>srcImage</code> <strong class=\"purple\">must</strong> not have been created with <code>flags</code> containing <code>VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT</code>"
+        }
+      ],
+      "!(VK_VERSION_1_1,VK_KHR_maintenance1)": [
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-srcImage-00139",
+          "text": " If either <code>srcImage</code> or <code>dstImage</code> is of type <code>VK_IMAGE_TYPE_3D</code>, then for each element of <code>pRegions</code>, <code>srcSubresource.baseArrayLayer</code> and <code>dstSubresource.baseArrayLayer</code> <strong class=\"purple\">must</strong> each be <code>0</code>, and <code>srcSubresource.layerCount</code> and <code>dstSubresource.layerCount</code> <strong class=\"purple\">must</strong> each be <code>1</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-srcImage-01789",
+          "text": " If <code>srcImage</code> or <code>dstImage</code> is of type <code>VK_IMAGE_TYPE_2D</code>, then for each element of <code>pRegions</code>, <code>extent.depth</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+        }
+      ],
+      "(VK_KHR_copy_commands2)": [
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_COPY_IMAGE_INFO_2_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-srcImage-parameter",
+          "text": " <code>srcImage</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImage\">VkImage</a> handle"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-srcImageLayout-parameter",
+          "text": " <code>srcImageLayout</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImageLayout\">VkImageLayout</a> value"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-dstImage-parameter",
+          "text": " <code>dstImage</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImage\">VkImage</a> handle"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-dstImageLayout-parameter",
+          "text": " <code>dstImageLayout</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImageLayout\">VkImageLayout</a> value"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-pRegions-parameter",
+          "text": " <code>pRegions</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>regionCount</code> valid <a href=\"#VkImageCopy2KHR\">VkImageCopy2KHR</a> structures"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-regionCount-arraylength",
+          "text": " <code>regionCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2KHR-commonparent",
+          "text": " Both of <code>dstImage</code>, and <code>srcImage</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <a href=\"#VkDevice\">VkDevice</a>"
+        }
+      ]
+    },
+    "VkImageCopy2KHR": {
+      "!(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
+        {
+          "vuid": "VUID-VkImageCopy2KHR-aspectMask-00137",
+          "text": " The <code>aspectMask</code> member of <code>srcSubresource</code> and <code>dstSubresource</code> <strong class=\"purple\">must</strong> match"
+        }
+      ],
+      "!(VK_VERSION_1_1,VK_KHR_maintenance1)": [
+        {
+          "vuid": "VUID-VkImageCopy2KHR-layerCount-00138",
+          "text": " The <code>layerCount</code> member of <code>srcSubresource</code> and <code>dstSubresource</code> <strong class=\"purple\">must</strong> match"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_maintenance1)": [
+        {
+          "vuid": "VUID-VkImageCopy2KHR-extent-00140",
+          "text": " The number of slices of the <code>extent</code> (for 3D) or layers of the <code>srcSubresource</code> (for non-3D) <strong class=\"purple\">must</strong> match the number of slices of the <code>extent</code> (for 3D) or layers of the <code>dstSubresource</code> (for non-3D)"
+        }
+      ],
+      "(VK_KHR_copy_commands2)": [
+        {
+          "vuid": "VUID-VkImageCopy2KHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_IMAGE_COPY_2_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkImageCopy2KHR-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkImageCopy2KHR-srcSubresource-parameter",
+          "text": " <code>srcSubresource</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImageSubresourceLayers\">VkImageSubresourceLayers</a> structure"
+        },
+        {
+          "vuid": "VUID-VkImageCopy2KHR-dstSubresource-parameter",
+          "text": " <code>dstSubresource</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImageSubresourceLayers\">VkImageSubresourceLayers</a> structure"
         }
       ]
     },
@@ -18864,6 +19430,506 @@
         }
       ]
     },
+    "vkCmdCopyBufferToImage2KHR": {
+      "(VK_VERSION_1_1)": [
+        {
+          "vuid": "VUID-vkCmdCopyBufferToImage2KHR-commandBuffer-01828",
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then <code>srcBuffer</code> <strong class=\"purple\">must</strong> not be a protected buffer"
+        },
+        {
+          "vuid": "VUID-vkCmdCopyBufferToImage2KHR-commandBuffer-01829",
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then <code>dstImage</code> <strong class=\"purple\">must</strong> not be a protected image"
+        },
+        {
+          "vuid": "VUID-vkCmdCopyBufferToImage2KHR-commandBuffer-01830",
+          "text": " If <code>commandBuffer</code> is a protected command buffer, then <code>dstImage</code> <strong class=\"purple\">must</strong> not be an unprotected image"
+        }
+      ],
+      "(VK_KHR_copy_commands2)": [
+        {
+          "vuid": "VUID-vkCmdCopyBufferToImage2KHR-commandBuffer-parameter",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCommandBuffer\">VkCommandBuffer</a> handle"
+        },
+        {
+          "vuid": "VUID-vkCmdCopyBufferToImage2KHR-pCopyBufferToImageInfo-parameter",
+          "text": " <code>pCopyBufferToImageInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkCopyBufferToImageInfo2KHR\">VkCopyBufferToImageInfo2KHR</a> structure"
+        },
+        {
+          "vuid": "VUID-vkCmdCopyBufferToImage2KHR-commandBuffer-recording",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be in the <a href=\"#commandbuffers-lifecycle\">recording state</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdCopyBufferToImage2KHR-commandBuffer-cmdpool",
+          "text": " The <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from <strong class=\"purple\">must</strong> support transfer, graphics, or compute operations"
+        },
+        {
+          "vuid": "VUID-vkCmdCopyBufferToImage2KHR-renderpass",
+          "text": " This command <strong class=\"purple\">must</strong> only be called outside of a render pass instance"
+        }
+      ]
+    },
+    "VkCopyBufferToImageInfo2KHR": {
+      "core": [
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-pRegions-00171",
+          "text": " <code>srcBuffer</code> <strong class=\"purple\">must</strong> be large enough to contain all buffer locations that are accessed according to <a href=\"#copies-buffers-images-addressing\">Buffer and Image Addressing</a>, for each element of <code>pRegions</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-pRegions-00172",
+          "text": " The image region specified by each element of <code>pRegions</code> <strong class=\"purple\">must</strong> be a region that is contained within <code>dstImage</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-pRegions-00173",
+          "text": " The union of all source regions, and the union of all destination regions, specified by the elements of <code>pRegions</code>, <strong class=\"purple\">must</strong> not overlap in memory"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-srcBuffer-00174",
+          "text": " <code>srcBuffer</code> <strong class=\"purple\">must</strong> have been created with <code>VK_BUFFER_USAGE_TRANSFER_SRC_BIT</code> usage flag"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-srcBuffer-00176",
+          "text": " If <code>srcBuffer</code> is non-sparse then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-dstImage-00177",
+          "text": " <code>dstImage</code> <strong class=\"purple\">must</strong> have been created with <code>VK_IMAGE_USAGE_TRANSFER_DST_BIT</code> usage flag"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-dstImage-00178",
+          "text": " If <code>dstImage</code> is non-sparse then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-dstImage-00179",
+          "text": " <code>dstImage</code> <strong class=\"purple\">must</strong> have a sample count equal to <code>VK_SAMPLE_COUNT_1_BIT</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-dstImageLayout-00180",
+          "text": " <code>dstImageLayout</code> <strong class=\"purple\">must</strong> specify the layout of the image subresources of <code>dstImage</code> specified in <code>pRegions</code> at the time this command is executed on a <code>VkDevice</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-imageSubresource-01701",
+          "text": " The <code>imageSubresource.mipLevel</code> member of each element of <code>pRegions</code> <strong class=\"purple\">must</strong> be less than the <code>mipLevels</code> specified in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> when <code>dstImage</code> was created"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-imageSubresource-01702",
+          "text": " The <span class=\"eq\"><code>imageSubresource.baseArrayLayer</code> &#43; <code>imageSubresource.layerCount</code></span> of each element of <code>pRegions</code> <strong class=\"purple\">must</strong> be less than or equal to the <code>arrayLayers</code> specified in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> when <code>dstImage</code> was created"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-imageOffset-01793",
+          "text": " The <code>imageOffset</code> and <code>imageExtent</code> members of each element of <code>pRegions</code> <strong class=\"purple\">must</strong> respect the image transfer granularity requirements of <code>commandBuffer</code>&#8217;s command pool&#8217;s queue family, as described in <a href=\"#VkQueueFamilyProperties\">VkQueueFamilyProperties</a>"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-commandBuffer-04052",
+          "text": " If the queue family used to create the <a href=\"#VkCommandPool\">VkCommandPool</a> which <code>commandBuffer</code> was allocated from does not support <code>VK_QUEUE_GRAPHICS_BIT</code> or <code>VK_QUEUE_COMPUTE_BIT</code>, the <code>bufferOffset</code> member of any element of <code>pRegions</code> <strong class=\"purple\">must</strong> be a multiple of <code>4</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-dstImage-04053",
+          "text": " If <code>dstImage</code> has a depth/stencil format, the <code>bufferOffset</code> member of any element of <code>pRegions</code> <strong class=\"purple\">must</strong> be a multiple of <code>4</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-imageOffset-00197",
+          "text": " For each element of <code>pRegions</code>, <code>imageOffset.x</code> and <span class=\"eq\">(<code>imageExtent.width</code> &#43; <code>imageOffset.x</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the width of the specified <code>imageSubresource</code> of {imageparam}"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-imageOffset-00198",
+          "text": " For each element of <code>pRegions</code>, <code>imageOffset.y</code> and <span class=\"eq\">(imageExtent.height &#43; <code>imageOffset.y</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the height of the specified <code>imageSubresource</code> of {imageparam}"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-srcImage-00199",
+          "text": " If {imageparam} is of type <code>VK_IMAGE_TYPE_1D</code>, then for each element of <code>pRegions</code>, <code>imageOffset.y</code> <strong class=\"purple\">must</strong> be <code>0</code> and <code>imageExtent.height</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-imageOffset-00200",
+          "text": " For each element of <code>pRegions</code>, <code>imageOffset.z</code> and <span class=\"eq\">(imageExtent.depth &#43; <code>imageOffset.z</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the depth of the specified <code>imageSubresource</code> of {imageparam}"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-srcImage-00201",
+          "text": " If {imageparam} is of type <code>VK_IMAGE_TYPE_1D</code> or <code>VK_IMAGE_TYPE_2D</code>, then for each element of <code>pRegions</code>, <code>imageOffset.z</code> <strong class=\"purple\">must</strong> be <code>0</code> and <code>imageExtent.depth</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-bufferRowLength-00203",
+          "text": " If {imageparam} is a <a href=\"#blocked-image\">blocked image</a>, for each element of <code>pRegions</code>, <code>bufferRowLength</code> <strong class=\"purple\">must</strong> be a multiple of the compressed texel block width"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-bufferImageHeight-00204",
+          "text": " If {imageparam} is a <a href=\"#blocked-image\">blocked image</a>, for each element of <code>pRegions</code>, <code>bufferImageHeight</code> <strong class=\"purple\">must</strong> be a multiple of the compressed texel block height"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-imageOffset-00205",
+          "text": " If {imageparam} is a <a href=\"#blocked-image\">blocked image</a>, for each element of <code>pRegions</code>, all members of <code>imageOffset</code> <strong class=\"purple\">must</strong> be a multiple of the corresponding dimensions of the compressed texel block"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-bufferOffset-00206",
+          "text": " If {imageparam} is a <a href=\"#blocked-image\">blocked image</a>, for each element of <code>pRegions</code>, <code>bufferOffset</code> <strong class=\"purple\">must</strong> be a multiple of the compressed texel block size in bytes"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-imageExtent-00207",
+          "text": " If {imageparam} is a <a href=\"#blocked-image\">blocked image</a>, for each element of <code>pRegions</code>, <code>imageExtent.width</code> <strong class=\"purple\">must</strong> be a multiple of the compressed texel block width or <span class=\"eq\">(<code>imageExtent.width</code> &#43; <code>imageOffset.x</code>)</span> <strong class=\"purple\">must</strong> equal the width of the specified <code>imageSubresource</code> of {imageparam}"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-imageExtent-00208",
+          "text": " If {imageparam} is a <a href=\"#blocked-image\">blocked image</a>, for each element of <code>pRegions</code>, <code>imageExtent.height</code> <strong class=\"purple\">must</strong> be a multiple of the compressed texel block height or <span class=\"eq\">(<code>imageExtent.height</code> &#43; <code>imageOffset.y</code>)</span> <strong class=\"purple\">must</strong> equal the height of the specified <code>imageSubresource</code> of {imageparam}"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-imageExtent-00209",
+          "text": " If {imageparam} is a <a href=\"#blocked-image\">blocked image</a>, for each element of <code>pRegions</code>, <code>imageExtent.depth</code> <strong class=\"purple\">must</strong> be a multiple of the compressed texel block depth or <span class=\"eq\">(<code>imageExtent.depth</code> &#43; <code>imageOffset.z</code>)</span> <strong class=\"purple\">must</strong> equal the depth of the specified <code>imageSubresource</code> of {imageparam}"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-aspectMask-00211",
+          "text": " For each element of <code>pRegions</code>, <code>imageSubresource.aspectMask</code> <strong class=\"purple\">must</strong> specify aspects present in {imageparam}"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-baseArrayLayer-00213",
+          "text": " If {imageparam} is of type <code>VK_IMAGE_TYPE_3D</code>, for each element of <code>pRegions</code>, <code>imageSubresource.baseArrayLayer</code> <strong class=\"purple\">must</strong> be <code>0</code> and <code>imageSubresource.layerCount</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_maintenance1)": [
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-dstImage-01997",
+          "text": " The <a href=\"#resources-image-format-features\">format features</a> of <code>dstImage</code> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_TRANSFER_DST_BIT</code>"
+        }
+      ],
+      "!(VK_KHR_shared_presentable_image)": [
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-dstImageLayout-00181",
+          "text": " <code>dstImageLayout</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL</code> or <code>VK_IMAGE_LAYOUT_GENERAL</code>"
+        }
+      ],
+      "(VK_KHR_shared_presentable_image)": [
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-dstImageLayout-01396",
+          "text": " <code>dstImageLayout</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL</code>, <code>VK_IMAGE_LAYOUT_GENERAL</code>, or <code>VK_IMAGE_LAYOUT_SHARED_PRESENT_KHR</code>"
+        }
+      ],
+      "(VK_EXT_fragment_density_map)": [
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-dstImage-02543",
+          "text": " <code>dstImage</code> <strong class=\"purple\">must</strong> not have been created with <code>flags</code> containing <code>VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT</code>"
+        }
+      ],
+      "!(VK_EXT_depth_range_unrestricted)": [
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-None-00214",
+          "text": " For each element of <code>pRegions</code> whose <code>imageSubresource</code> contains a depth aspect, the data in <code>srcBuffer</code> <strong class=\"purple\">must</strong> be in the range <span class=\"eq\">[0,1]</span>"
+        }
+      ],
+      "!(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-bufferOffset-00193",
+          "text": " If {imageparam} does not have a depth/stencil format, then for each element of <code>pRegions</code>, <code>bufferOffset</code> <strong class=\"purple\">must</strong> be a multiple of the format&#8217;s texel block size"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-bufferOffset-01558",
+          "text": " If {imageparam} does not have either a depth/stencil or a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">multi-planar format</a>, then for each element of <code>pRegions</code>, <code>bufferOffset</code> <strong class=\"purple\">must</strong> be a multiple of the format&#8217;s texel block size"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-bufferOffset-01559",
+          "text": " If {imageparam} has a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">multi-planar format</a>, then for each element of <code>pRegions</code>, <code>bufferOffset</code> <strong class=\"purple\">must</strong> be a multiple of the element size of the compatible format for the format and the <code>aspectMask</code> of the <code>imageSubresource</code> as defined in <a href=\"#formats-compatible-planes\">Compatible formats of planes of multi-planar formats</a>"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-aspectMask-01560",
+          "text": " If {imageparam} has a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">multi-planar format</a>, then for each element of <code>pRegions</code>, <code>imageSubresource.aspectMask</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code>, <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code>, or <code>VK_IMAGE_ASPECT_PLANE_2_BIT</code> (with <code>VK_IMAGE_ASPECT_PLANE_2_BIT</code> valid only for image formats with three planes)"
+        }
+      ],
+      "(VK_KHR_copy_commands2)": [
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_COPY_BUFFER_TO_IMAGE_INFO_2_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-srcBuffer-parameter",
+          "text": " <code>srcBuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkBuffer\">VkBuffer</a> handle"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-dstImage-parameter",
+          "text": " <code>dstImage</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImage\">VkImage</a> handle"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-dstImageLayout-parameter",
+          "text": " <code>dstImageLayout</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImageLayout\">VkImageLayout</a> value"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-pRegions-parameter",
+          "text": " <code>pRegions</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>regionCount</code> valid <a href=\"#VkBufferImageCopy2KHR\">VkBufferImageCopy2KHR</a> structures"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-regionCount-arraylength",
+          "text": " <code>regionCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-commonparent",
+          "text": " Both of <code>dstImage</code>, and <code>srcBuffer</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <a href=\"#VkDevice\">VkDevice</a>"
+        }
+      ]
+    },
+    "vkCmdCopyImageToBuffer2KHR": {
+      "(VK_VERSION_1_1)": [
+        {
+          "vuid": "VUID-vkCmdCopyImageToBuffer2KHR-commandBuffer-01831",
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then <code>srcImage</code> <strong class=\"purple\">must</strong> not be a protected image"
+        },
+        {
+          "vuid": "VUID-vkCmdCopyImageToBuffer2KHR-commandBuffer-01832",
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then <code>dstBuffer</code> <strong class=\"purple\">must</strong> not be a protected buffer"
+        },
+        {
+          "vuid": "VUID-vkCmdCopyImageToBuffer2KHR-commandBuffer-01833",
+          "text": " If <code>commandBuffer</code> is a protected command buffer, then <code>dstBuffer</code> <strong class=\"purple\">must</strong> not be an unprotected buffer"
+        }
+      ],
+      "(VK_KHR_copy_commands2)": [
+        {
+          "vuid": "VUID-vkCmdCopyImageToBuffer2KHR-commandBuffer-parameter",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCommandBuffer\">VkCommandBuffer</a> handle"
+        },
+        {
+          "vuid": "VUID-vkCmdCopyImageToBuffer2KHR-pCopyImageToBufferInfo-parameter",
+          "text": " <code>pCopyImageToBufferInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkCopyImageToBufferInfo2KHR\">VkCopyImageToBufferInfo2KHR</a> structure"
+        },
+        {
+          "vuid": "VUID-vkCmdCopyImageToBuffer2KHR-commandBuffer-recording",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be in the <a href=\"#commandbuffers-lifecycle\">recording state</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdCopyImageToBuffer2KHR-commandBuffer-cmdpool",
+          "text": " The <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from <strong class=\"purple\">must</strong> support transfer, graphics, or compute operations"
+        },
+        {
+          "vuid": "VUID-vkCmdCopyImageToBuffer2KHR-renderpass",
+          "text": " This command <strong class=\"purple\">must</strong> only be called outside of a render pass instance"
+        }
+      ]
+    },
+    "VkCopyImageToBufferInfo2KHR": {
+      "core": [
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-pRegions-00183",
+          "text": " <code>dstBuffer</code> <strong class=\"purple\">must</strong> be large enough to contain all buffer locations that are accessed according to <a href=\"#copies-buffers-images-addressing\">Buffer and Image Addressing</a>, for each element of <code>pRegions</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-pRegions-00182",
+          "text": " The image region specified by each element of <code>pRegions</code> <strong class=\"purple\">must</strong> be a region that is contained within <code>srcImage</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-pRegions-00184",
+          "text": " The union of all source regions, and the union of all destination regions, specified by the elements of <code>pRegions</code>, <strong class=\"purple\">must</strong> not overlap in memory"
+        },
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-srcImage-00186",
+          "text": " <code>srcImage</code> <strong class=\"purple\">must</strong> have been created with <code>VK_IMAGE_USAGE_TRANSFER_SRC_BIT</code> usage flag"
+        },
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-srcImage-00187",
+          "text": " If <code>srcImage</code> is non-sparse then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
+        },
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-dstBuffer-00191",
+          "text": " <code>dstBuffer</code> <strong class=\"purple\">must</strong> have been created with <code>VK_BUFFER_USAGE_TRANSFER_DST_BIT</code> usage flag"
+        },
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-dstBuffer-00192",
+          "text": " If <code>dstBuffer</code> is non-sparse then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
+        },
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-srcImage-00188",
+          "text": " <code>srcImage</code> <strong class=\"purple\">must</strong> have a sample count equal to <code>VK_SAMPLE_COUNT_1_BIT</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-srcImageLayout-00189",
+          "text": " <code>srcImageLayout</code> <strong class=\"purple\">must</strong> specify the layout of the image subresources of <code>srcImage</code> specified in <code>pRegions</code> at the time this command is executed on a <code>VkDevice</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-imageSubresource-01703",
+          "text": " The <code>imageSubresource.mipLevel</code> member of each element of <code>pRegions</code> <strong class=\"purple\">must</strong> be less than the <code>mipLevels</code> specified in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> when <code>srcImage</code> was created"
+        },
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-imageSubresource-01704",
+          "text": " The <span class=\"eq\"><code>imageSubresource.baseArrayLayer</code> &#43; <code>imageSubresource.layerCount</code></span> of each element of <code>pRegions</code> <strong class=\"purple\">must</strong> be less than or equal to the <code>arrayLayers</code> specified in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> when <code>srcImage</code> was created"
+        },
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-imageOffset-01794",
+          "text": " The <code>imageOffset</code> and <code>imageExtent</code> members of each element of <code>pRegions</code> <strong class=\"purple\">must</strong> respect the image transfer granularity requirements of <code>commandBuffer</code>&#8217;s command pool&#8217;s queue family, as described in <a href=\"#VkQueueFamilyProperties\">VkQueueFamilyProperties</a>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-commandBuffer-04054",
+          "text": " If the queue family used to create the <a href=\"#VkCommandPool\">VkCommandPool</a> which <code>commandBuffer</code> was allocated from does not support <code>VK_QUEUE_GRAPHICS_BIT</code> or <code>VK_QUEUE_COMPUTE_BIT</code>, the <code>bufferOffset</code> member of any element of <code>pRegions</code> <strong class=\"purple\">must</strong> be a multiple of <code>4</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-srcImage-04055",
+          "text": " If <code>srcImage</code> has a depth/stencil format, the <code>bufferOffset</code> member of any element of <code>pRegions</code> <strong class=\"purple\">must</strong> be a multiple of <code>4</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-imageOffset-00197",
+          "text": " For each element of <code>pRegions</code>, <code>imageOffset.x</code> and <span class=\"eq\">(<code>imageExtent.width</code> &#43; <code>imageOffset.x</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the width of the specified <code>imageSubresource</code> of {imageparam}"
+        },
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-imageOffset-00198",
+          "text": " For each element of <code>pRegions</code>, <code>imageOffset.y</code> and <span class=\"eq\">(imageExtent.height &#43; <code>imageOffset.y</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the height of the specified <code>imageSubresource</code> of {imageparam}"
+        },
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-srcImage-00199",
+          "text": " If {imageparam} is of type <code>VK_IMAGE_TYPE_1D</code>, then for each element of <code>pRegions</code>, <code>imageOffset.y</code> <strong class=\"purple\">must</strong> be <code>0</code> and <code>imageExtent.height</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-imageOffset-00200",
+          "text": " For each element of <code>pRegions</code>, <code>imageOffset.z</code> and <span class=\"eq\">(imageExtent.depth &#43; <code>imageOffset.z</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the depth of the specified <code>imageSubresource</code> of {imageparam}"
+        },
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-srcImage-00201",
+          "text": " If {imageparam} is of type <code>VK_IMAGE_TYPE_1D</code> or <code>VK_IMAGE_TYPE_2D</code>, then for each element of <code>pRegions</code>, <code>imageOffset.z</code> <strong class=\"purple\">must</strong> be <code>0</code> and <code>imageExtent.depth</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-bufferRowLength-00203",
+          "text": " If {imageparam} is a <a href=\"#blocked-image\">blocked image</a>, for each element of <code>pRegions</code>, <code>bufferRowLength</code> <strong class=\"purple\">must</strong> be a multiple of the compressed texel block width"
+        },
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-bufferImageHeight-00204",
+          "text": " If {imageparam} is a <a href=\"#blocked-image\">blocked image</a>, for each element of <code>pRegions</code>, <code>bufferImageHeight</code> <strong class=\"purple\">must</strong> be a multiple of the compressed texel block height"
+        },
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-imageOffset-00205",
+          "text": " If {imageparam} is a <a href=\"#blocked-image\">blocked image</a>, for each element of <code>pRegions</code>, all members of <code>imageOffset</code> <strong class=\"purple\">must</strong> be a multiple of the corresponding dimensions of the compressed texel block"
+        },
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-bufferOffset-00206",
+          "text": " If {imageparam} is a <a href=\"#blocked-image\">blocked image</a>, for each element of <code>pRegions</code>, <code>bufferOffset</code> <strong class=\"purple\">must</strong> be a multiple of the compressed texel block size in bytes"
+        },
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-imageExtent-00207",
+          "text": " If {imageparam} is a <a href=\"#blocked-image\">blocked image</a>, for each element of <code>pRegions</code>, <code>imageExtent.width</code> <strong class=\"purple\">must</strong> be a multiple of the compressed texel block width or <span class=\"eq\">(<code>imageExtent.width</code> &#43; <code>imageOffset.x</code>)</span> <strong class=\"purple\">must</strong> equal the width of the specified <code>imageSubresource</code> of {imageparam}"
+        },
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-imageExtent-00208",
+          "text": " If {imageparam} is a <a href=\"#blocked-image\">blocked image</a>, for each element of <code>pRegions</code>, <code>imageExtent.height</code> <strong class=\"purple\">must</strong> be a multiple of the compressed texel block height or <span class=\"eq\">(<code>imageExtent.height</code> &#43; <code>imageOffset.y</code>)</span> <strong class=\"purple\">must</strong> equal the height of the specified <code>imageSubresource</code> of {imageparam}"
+        },
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-imageExtent-00209",
+          "text": " If {imageparam} is a <a href=\"#blocked-image\">blocked image</a>, for each element of <code>pRegions</code>, <code>imageExtent.depth</code> <strong class=\"purple\">must</strong> be a multiple of the compressed texel block depth or <span class=\"eq\">(<code>imageExtent.depth</code> &#43; <code>imageOffset.z</code>)</span> <strong class=\"purple\">must</strong> equal the depth of the specified <code>imageSubresource</code> of {imageparam}"
+        },
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-aspectMask-00211",
+          "text": " For each element of <code>pRegions</code>, <code>imageSubresource.aspectMask</code> <strong class=\"purple\">must</strong> specify aspects present in {imageparam}"
+        },
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-baseArrayLayer-00213",
+          "text": " If {imageparam} is of type <code>VK_IMAGE_TYPE_3D</code>, for each element of <code>pRegions</code>, <code>imageSubresource.baseArrayLayer</code> <strong class=\"purple\">must</strong> be <code>0</code> and <code>imageSubresource.layerCount</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_maintenance1)": [
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-srcImage-01998",
+          "text": " The <a href=\"#resources-image-format-features\">format features</a> of <code>srcImage</code> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_TRANSFER_SRC_BIT</code>"
+        }
+      ],
+      "!(VK_KHR_shared_presentable_image)": [
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-srcImageLayout-00190",
+          "text": " <code>srcImageLayout</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL</code> or <code>VK_IMAGE_LAYOUT_GENERAL</code>"
+        }
+      ],
+      "(VK_KHR_shared_presentable_image)": [
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-srcImageLayout-01397",
+          "text": " <code>srcImageLayout</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL</code>, <code>VK_IMAGE_LAYOUT_GENERAL</code>, or <code>VK_IMAGE_LAYOUT_SHARED_PRESENT_KHR</code>"
+        }
+      ],
+      "(VK_EXT_fragment_density_map)": [
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-srcImage-02544",
+          "text": " <code>srcImage</code> <strong class=\"purple\">must</strong> not have been created with <code>flags</code> containing <code>VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT</code>"
+        }
+      ],
+      "!(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-bufferOffset-00193",
+          "text": " If {imageparam} does not have a depth/stencil format, then for each element of <code>pRegions</code>, <code>bufferOffset</code> <strong class=\"purple\">must</strong> be a multiple of the format&#8217;s texel block size"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-bufferOffset-01558",
+          "text": " If {imageparam} does not have either a depth/stencil or a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">multi-planar format</a>, then for each element of <code>pRegions</code>, <code>bufferOffset</code> <strong class=\"purple\">must</strong> be a multiple of the format&#8217;s texel block size"
+        },
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-bufferOffset-01559",
+          "text": " If {imageparam} has a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">multi-planar format</a>, then for each element of <code>pRegions</code>, <code>bufferOffset</code> <strong class=\"purple\">must</strong> be a multiple of the element size of the compatible format for the format and the <code>aspectMask</code> of the <code>imageSubresource</code> as defined in <a href=\"#formats-compatible-planes\">Compatible formats of planes of multi-planar formats</a>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-aspectMask-01560",
+          "text": " If {imageparam} has a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">multi-planar format</a>, then for each element of <code>pRegions</code>, <code>imageSubresource.aspectMask</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code>, <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code>, or <code>VK_IMAGE_ASPECT_PLANE_2_BIT</code> (with <code>VK_IMAGE_ASPECT_PLANE_2_BIT</code> valid only for image formats with three planes)"
+        }
+      ],
+      "(VK_KHR_copy_commands2)": [
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_COPY_IMAGE_TO_BUFFER_INFO_2_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-srcImage-parameter",
+          "text": " <code>srcImage</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImage\">VkImage</a> handle"
+        },
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-srcImageLayout-parameter",
+          "text": " <code>srcImageLayout</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImageLayout\">VkImageLayout</a> value"
+        },
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-dstBuffer-parameter",
+          "text": " <code>dstBuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkBuffer\">VkBuffer</a> handle"
+        },
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-pRegions-parameter",
+          "text": " <code>pRegions</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>regionCount</code> valid <a href=\"#VkBufferImageCopy2KHR\">VkBufferImageCopy2KHR</a> structures"
+        },
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-regionCount-arraylength",
+          "text": " <code>regionCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-commonparent",
+          "text": " Both of <code>dstBuffer</code>, and <code>srcImage</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <a href=\"#VkDevice\">VkDevice</a>"
+        }
+      ]
+    },
+    "VkBufferImageCopy2KHR": {
+      "core": [
+        {
+          "vuid": "VUID-VkBufferImageCopy2KHR-bufferRowLength-00195",
+          "text": " <code>bufferRowLength</code> <strong class=\"purple\">must</strong> be <code>0</code>, or greater than or equal to the <code>width</code> member of <code>imageExtent</code>"
+        },
+        {
+          "vuid": "VUID-VkBufferImageCopy2KHR-bufferImageHeight-00196",
+          "text": " <code>bufferImageHeight</code> <strong class=\"purple\">must</strong> be <code>0</code>, or greater than or equal to the <code>height</code> member of <code>imageExtent</code>"
+        },
+        {
+          "vuid": "VUID-VkBufferImageCopy2KHR-aspectMask-00212",
+          "text": " The <code>aspectMask</code> member of <code>imageSubresource</code> <strong class=\"purple\">must</strong> only have a single bit set"
+        }
+      ],
+      "(VK_KHR_copy_commands2)": [
+        {
+          "vuid": "VUID-VkBufferImageCopy2KHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkBufferImageCopy2KHR-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkBufferImageCopy2KHR-imageSubresource-parameter",
+          "text": " <code>imageSubresource</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImageSubresourceLayers\">VkImageSubresourceLayers</a> structure"
+        }
+      ]
+    },
     "vkCmdBlitImage": {
       "(VK_VERSION_1_1)": [
         {
@@ -19132,6 +20198,306 @@
         },
         {
           "vuid": "VUID-VkImageBlit-dstSubresource-parameter",
+          "text": " <code>dstSubresource</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImageSubresourceLayers\">VkImageSubresourceLayers</a> structure"
+        }
+      ]
+    },
+    "vkCmdBlitImage2KHR": {
+      "(VK_VERSION_1_1)": [
+        {
+          "vuid": "VUID-vkCmdBlitImage2KHR-commandBuffer-01834",
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then <code>srcImage</code> <strong class=\"purple\">must</strong> not be a protected image"
+        },
+        {
+          "vuid": "VUID-vkCmdBlitImage2KHR-commandBuffer-01835",
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then <code>dstImage</code> <strong class=\"purple\">must</strong> not be a protected image"
+        },
+        {
+          "vuid": "VUID-vkCmdBlitImage2KHR-commandBuffer-01836",
+          "text": " If <code>commandBuffer</code> is a protected command buffer, then <code>dstImage</code> <strong class=\"purple\">must</strong> not be an unprotected image"
+        }
+      ],
+      "(VK_KHR_copy_commands2)": [
+        {
+          "vuid": "VUID-vkCmdBlitImage2KHR-commandBuffer-parameter",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCommandBuffer\">VkCommandBuffer</a> handle"
+        },
+        {
+          "vuid": "VUID-vkCmdBlitImage2KHR-pBlitImageInfo-parameter",
+          "text": " <code>pBlitImageInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkBlitImageInfo2KHR\">VkBlitImageInfo2KHR</a> structure"
+        },
+        {
+          "vuid": "VUID-vkCmdBlitImage2KHR-commandBuffer-recording",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be in the <a href=\"#commandbuffers-lifecycle\">recording state</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdBlitImage2KHR-commandBuffer-cmdpool",
+          "text": " The <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from <strong class=\"purple\">must</strong> support graphics operations"
+        },
+        {
+          "vuid": "VUID-vkCmdBlitImage2KHR-renderpass",
+          "text": " This command <strong class=\"purple\">must</strong> only be called outside of a render pass instance"
+        }
+      ]
+    },
+    "VkBlitImageInfo2KHR": {
+      "core": [
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-pRegions-00215",
+          "text": " The source region specified by each element of <code>pRegions</code> <strong class=\"purple\">must</strong> be a region that is contained within <code>srcImage</code>"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-pRegions-00216",
+          "text": " The destination region specified by each element of <code>pRegions</code> <strong class=\"purple\">must</strong> be a region that is contained within <code>dstImage</code>"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-pRegions-00217",
+          "text": " The union of all destination regions, specified by the elements of <code>pRegions</code>, <strong class=\"purple\">must</strong> not overlap in memory with any texel that <strong class=\"purple\">may</strong> be sampled during the blit operation"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-srcImage-01999",
+          "text": " The <a href=\"#resources-image-format-features\">format features</a> of <code>srcImage</code> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_BLIT_SRC_BIT</code>"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-srcImage-00219",
+          "text": " <code>srcImage</code> <strong class=\"purple\">must</strong> have been created with <code>VK_IMAGE_USAGE_TRANSFER_SRC_BIT</code> usage flag"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-srcImage-00220",
+          "text": " If <code>srcImage</code> is non-sparse then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-srcImageLayout-00221",
+          "text": " <code>srcImageLayout</code> <strong class=\"purple\">must</strong> specify the layout of the image subresources of <code>srcImage</code> specified in <code>pRegions</code> at the time this command is executed on a <code>VkDevice</code>"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-dstImage-02000",
+          "text": " The <a href=\"#resources-image-format-features\">format features</a> of <code>dstImage</code> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_BLIT_DST_BIT</code>"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-dstImage-00224",
+          "text": " <code>dstImage</code> <strong class=\"purple\">must</strong> have been created with <code>VK_IMAGE_USAGE_TRANSFER_DST_BIT</code> usage flag"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-dstImage-00225",
+          "text": " If <code>dstImage</code> is non-sparse then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-dstImageLayout-00226",
+          "text": " <code>dstImageLayout</code> <strong class=\"purple\">must</strong> specify the layout of the image subresources of <code>dstImage</code> specified in <code>pRegions</code> at the time this command is executed on a <code>VkDevice</code>"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-srcImage-00229",
+          "text": " If either of <code>srcImage</code> or <code>dstImage</code> was created with a signed integer <a href=\"#VkFormat\">VkFormat</a>, the other <strong class=\"purple\">must</strong> also have been created with a signed integer <a href=\"#VkFormat\">VkFormat</a>"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-srcImage-00230",
+          "text": " If either of <code>srcImage</code> or <code>dstImage</code> was created with an unsigned integer <a href=\"#VkFormat\">VkFormat</a>, the other <strong class=\"purple\">must</strong> also have been created with an unsigned integer <a href=\"#VkFormat\">VkFormat</a>"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-srcImage-00231",
+          "text": " If either of <code>srcImage</code> or <code>dstImage</code> was created with a depth/stencil format, the other <strong class=\"purple\">must</strong> have exactly the same format"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-srcImage-00232",
+          "text": " If <code>srcImage</code> was created with a depth/stencil format, <code>filter</code> <strong class=\"purple\">must</strong> be <code>VK_FILTER_NEAREST</code>"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-srcImage-00233",
+          "text": " <code>srcImage</code> <strong class=\"purple\">must</strong> have been created with a <code>samples</code> value of <code>VK_SAMPLE_COUNT_1_BIT</code>"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-dstImage-00234",
+          "text": " <code>dstImage</code> <strong class=\"purple\">must</strong> have been created with a <code>samples</code> value of <code>VK_SAMPLE_COUNT_1_BIT</code>"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-filter-02001",
+          "text": " If <code>filter</code> is <code>VK_FILTER_LINEAR</code>, then the <a href=\"#resources-image-format-features\">format features</a> of <code>srcImage</code> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</code>"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-srcSubresource-01705",
+          "text": " The <code>srcSubresource.mipLevel</code> member of each element of <code>pRegions</code> <strong class=\"purple\">must</strong> be less than the <code>mipLevels</code> specified in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> when <code>srcImage</code> was created"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-dstSubresource-01706",
+          "text": " The <code>dstSubresource.mipLevel</code> member of each element of <code>pRegions</code> <strong class=\"purple\">must</strong> be less than the <code>mipLevels</code> specified in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> when <code>dstImage</code> was created"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-srcSubresource-01707",
+          "text": " The <span class=\"eq\"><code>srcSubresource.baseArrayLayer</code> &#43; <code>srcSubresource.layerCount</code></span> of each element of <code>pRegions</code> <strong class=\"purple\">must</strong> be less than or equal to the <code>arrayLayers</code> specified in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> when <code>srcImage</code> was created"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-dstSubresource-01708",
+          "text": " The <span class=\"eq\"><code>dstSubresource.baseArrayLayer</code> &#43; <code>dstSubresource.layerCount</code></span> of each element of <code>pRegions</code> <strong class=\"purple\">must</strong> be less than or equal to the <code>arrayLayers</code> specified in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> when <code>dstImage</code> was created"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-srcImage-00240",
+          "text": " If either <code>srcImage</code> or <code>dstImage</code> is of type <code>VK_IMAGE_TYPE_3D</code>, then for each element of <code>pRegions</code>, <code>srcSubresource.baseArrayLayer</code> and <code>dstSubresource.baseArrayLayer</code> <strong class=\"purple\">must</strong> each be <code>0</code>, and <code>srcSubresource.layerCount</code> and <code>dstSubresource.layerCount</code> <strong class=\"purple\">must</strong> each be <code>1</code>."
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-aspectMask-00241",
+          "text": " For each element of <code>pRegions</code>, <code>srcSubresource.aspectMask</code> <strong class=\"purple\">must</strong> specify aspects present in <code>srcImage</code>"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-aspectMask-00242",
+          "text": " For each element of <code>pRegions</code>, <code>dstSubresource.aspectMask</code> <strong class=\"purple\">must</strong> specify aspects present in <code>dstImage</code>"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-srcOffset-00243",
+          "text": " For each element of <code>pRegions</code>, <code>srcOffset</code>[0].x and <code>srcOffset</code>[1].x <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the width of the specified <code>srcSubresource</code> of <code>srcImage</code>"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-srcOffset-00244",
+          "text": " For each element of <code>pRegions</code>, <code>srcOffset</code>[0].y and <code>srcOffset</code>[1].y <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the height of the specified <code>srcSubresource</code> of <code>srcImage</code>"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-srcImage-00245",
+          "text": " If <code>srcImage</code> is of type <code>VK_IMAGE_TYPE_1D</code>, then for each element of <code>pRegions</code>, <code>srcOffset</code>[0].y <strong class=\"purple\">must</strong> be <code>0</code> and <code>srcOffset</code>[1].y <strong class=\"purple\">must</strong> be <code>1</code>"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-srcOffset-00246",
+          "text": " For each element of <code>pRegions</code>, <code>srcOffset</code>[0].z and <code>srcOffset</code>[1].z <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the depth of the specified <code>srcSubresource</code> of <code>srcImage</code>"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-srcImage-00247",
+          "text": " If <code>srcImage</code> is of type <code>VK_IMAGE_TYPE_1D</code> or <code>VK_IMAGE_TYPE_2D</code>, then for each element of <code>pRegions</code>, <code>srcOffset</code>[0].z <strong class=\"purple\">must</strong> be <code>0</code> and <code>srcOffset</code>[1].z <strong class=\"purple\">must</strong> be <code>1</code>"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-dstOffset-00248",
+          "text": " For each element of <code>pRegions</code>, <code>dstOffset</code>[0].x and <code>dstOffset</code>[1].x <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the width of the specified <code>dstSubresource</code> of <code>dstImage</code>"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-dstOffset-00249",
+          "text": " For each element of <code>pRegions</code>, <code>dstOffset</code>[0].y and <code>dstOffset</code>[1].y <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the height of the specified <code>dstSubresource</code> of <code>dstImage</code>"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-dstImage-00250",
+          "text": " If <code>dstImage</code> is of type <code>VK_IMAGE_TYPE_1D</code>, then for each element of <code>pRegions</code>, <code>dstOffset</code>[0].y <strong class=\"purple\">must</strong> be <code>0</code> and <code>dstOffset</code>[1].y <strong class=\"purple\">must</strong> be <code>1</code>"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-dstOffset-00251",
+          "text": " For each element of <code>pRegions</code>, <code>dstOffset</code>[0].z and <code>dstOffset</code>[1].z <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the depth of the specified <code>dstSubresource</code> of <code>dstImage</code>"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-dstImage-00252",
+          "text": " If <code>dstImage</code> is of type <code>VK_IMAGE_TYPE_1D</code> or <code>VK_IMAGE_TYPE_2D</code>, then for each element of <code>pRegions</code>, <code>dstOffset</code>[0].z <strong class=\"purple\">must</strong> be <code>0</code> and <code>dstOffset</code>[1].z <strong class=\"purple\">must</strong> be <code>1</code>"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-srcImage-01561",
+          "text": " <code>srcImage</code> <strong class=\"purple\">must</strong> not use a format listed in <a href=\"#formats-requiring-sampler-ycbcr-conversion\">Formats requiring sampler Y′C<sub>B</sub>C<sub>R</sub> conversion for <code>VK_IMAGE_ASPECT_COLOR_BIT</code> image views</a>"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-dstImage-01562",
+          "text": " <code>dstImage</code> <strong class=\"purple\">must</strong> not use a format listed in <a href=\"#formats-requiring-sampler-ycbcr-conversion\">Formats requiring sampler Y′C<sub>B</sub>C<sub>R</sub> conversion for <code>VK_IMAGE_ASPECT_COLOR_BIT</code> image views</a>"
+        }
+      ],
+      "!(VK_KHR_shared_presentable_image)": [
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-srcImageLayout-00222",
+          "text": " <code>srcImageLayout</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL</code> or <code>VK_IMAGE_LAYOUT_GENERAL</code>"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-dstImageLayout-00227",
+          "text": " <code>dstImageLayout</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL</code> or <code>VK_IMAGE_LAYOUT_GENERAL</code>"
+        }
+      ],
+      "(VK_KHR_shared_presentable_image)": [
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-srcImageLayout-01398",
+          "text": " <code>srcImageLayout</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_LAYOUT_SHARED_PRESENT_KHR</code>, <code>VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL</code> or <code>VK_IMAGE_LAYOUT_GENERAL</code>"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-dstImageLayout-01399",
+          "text": " <code>dstImageLayout</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_LAYOUT_SHARED_PRESENT_KHR</code>, <code>VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL</code> or <code>VK_IMAGE_LAYOUT_GENERAL</code>"
+        }
+      ],
+      "(VK_IMG_filter_cubic,VK_EXT_filter_cubic)": [
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-filter-02002",
+          "text": " If <code>filter</code> is <code>VK_FILTER_CUBIC_EXT</code>, then the <a href=\"#resources-image-format-features\">format features</a> of <code>srcImage</code> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_EXT</code>"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-filter-00237",
+          "text": " If <code>filter</code> is <code>VK_FILTER_CUBIC_EXT</code>, <code>srcImage</code> <strong class=\"purple\">must</strong> be of type <code>VK_IMAGE_TYPE_2D</code>"
+        }
+      ],
+      "(VK_EXT_fragment_density_map)": [
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-dstImage-02545",
+          "text": " <code>dstImage</code> and <code>srcImage</code> <strong class=\"purple\">must</strong> not have been created with <code>flags</code> containing <code>VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT</code>"
+        }
+      ],
+      "(VK_KHR_copy_commands2)": [
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_BLIT_IMAGE_INFO_2_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-srcImage-parameter",
+          "text": " <code>srcImage</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImage\">VkImage</a> handle"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-srcImageLayout-parameter",
+          "text": " <code>srcImageLayout</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImageLayout\">VkImageLayout</a> value"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-dstImage-parameter",
+          "text": " <code>dstImage</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImage\">VkImage</a> handle"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-dstImageLayout-parameter",
+          "text": " <code>dstImageLayout</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImageLayout\">VkImageLayout</a> value"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-pRegions-parameter",
+          "text": " <code>pRegions</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>regionCount</code> valid <a href=\"#VkImageBlit2KHR\">VkImageBlit2KHR</a> structures"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-filter-parameter",
+          "text": " <code>filter</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkFilter\">VkFilter</a> value"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-regionCount-arraylength",
+          "text": " <code>regionCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-commonparent",
+          "text": " Both of <code>dstImage</code>, and <code>srcImage</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <a href=\"#VkDevice\">VkDevice</a>"
+        }
+      ]
+    },
+    "VkImageBlit2KHR": {
+      "core": [
+        {
+          "vuid": "VUID-VkImageBlit2KHR-aspectMask-00238",
+          "text": " The <code>aspectMask</code> member of <code>srcSubresource</code> and <code>dstSubresource</code> <strong class=\"purple\">must</strong> match"
+        },
+        {
+          "vuid": "VUID-VkImageBlit2KHR-layerCount-00239",
+          "text": " The <code>layerCount</code> member of <code>srcSubresource</code> and <code>dstSubresource</code> <strong class=\"purple\">must</strong> match"
+        }
+      ],
+      "(VK_KHR_copy_commands2)": [
+        {
+          "vuid": "VUID-VkImageBlit2KHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_IMAGE_BLIT_2_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkImageBlit2KHR-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkImageBlit2KHR-srcSubresource-parameter",
+          "text": " <code>srcSubresource</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImageSubresourceLayers\">VkImageSubresourceLayers</a> structure"
+        },
+        {
+          "vuid": "VUID-VkImageBlit2KHR-dstSubresource-parameter",
           "text": " <code>dstSubresource</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImageSubresourceLayers\">VkImageSubresourceLayers</a> structure"
         }
       ]
@@ -19432,6 +20798,242 @@
         }
       ]
     },
+    "vkCmdResolveImage2KHR": {
+      "(VK_VERSION_1_1)": [
+        {
+          "vuid": "VUID-vkCmdResolveImage2KHR-commandBuffer-01837",
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then <code>srcImage</code> <strong class=\"purple\">must</strong> not be a protected image"
+        },
+        {
+          "vuid": "VUID-vkCmdResolveImage2KHR-commandBuffer-01838",
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then <code>dstImage</code> <strong class=\"purple\">must</strong> not be a protected image"
+        },
+        {
+          "vuid": "VUID-vkCmdResolveImage2KHR-commandBuffer-01839",
+          "text": " If <code>commandBuffer</code> is a protected command buffer, then <code>dstImage</code> <strong class=\"purple\">must</strong> not be an unprotected image"
+        }
+      ],
+      "(VK_KHR_copy_commands2)": [
+        {
+          "vuid": "VUID-vkCmdResolveImage2KHR-commandBuffer-parameter",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCommandBuffer\">VkCommandBuffer</a> handle"
+        },
+        {
+          "vuid": "VUID-vkCmdResolveImage2KHR-pResolveImageInfo-parameter",
+          "text": " <code>pResolveImageInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkResolveImageInfo2KHR\">VkResolveImageInfo2KHR</a> structure"
+        },
+        {
+          "vuid": "VUID-vkCmdResolveImage2KHR-commandBuffer-recording",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be in the <a href=\"#commandbuffers-lifecycle\">recording state</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdResolveImage2KHR-commandBuffer-cmdpool",
+          "text": " The <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from <strong class=\"purple\">must</strong> support graphics operations"
+        },
+        {
+          "vuid": "VUID-vkCmdResolveImage2KHR-renderpass",
+          "text": " This command <strong class=\"purple\">must</strong> only be called outside of a render pass instance"
+        }
+      ]
+    },
+    "VkResolveImageInfo2KHR": {
+      "core": [
+        {
+          "vuid": "VUID-VkResolveImageInfo2KHR-pRegions-00255",
+          "text": " The union of all source regions, and the union of all destination regions, specified by the elements of <code>pRegions</code>, <strong class=\"purple\">must</strong> not overlap in memory"
+        },
+        {
+          "vuid": "VUID-VkResolveImageInfo2KHR-srcImage-00256",
+          "text": " If <code>srcImage</code> is non-sparse then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
+        },
+        {
+          "vuid": "VUID-VkResolveImageInfo2KHR-srcImage-00257",
+          "text": " <code>srcImage</code> <strong class=\"purple\">must</strong> have a sample count equal to any valid sample count value other than <code>VK_SAMPLE_COUNT_1_BIT</code>"
+        },
+        {
+          "vuid": "VUID-VkResolveImageInfo2KHR-dstImage-00258",
+          "text": " If <code>dstImage</code> is non-sparse then it <strong class=\"purple\">must</strong> be bound completely and contiguously to a single <code>VkDeviceMemory</code> object"
+        },
+        {
+          "vuid": "VUID-VkResolveImageInfo2KHR-dstImage-00259",
+          "text": " <code>dstImage</code> <strong class=\"purple\">must</strong> have a sample count equal to <code>VK_SAMPLE_COUNT_1_BIT</code>"
+        },
+        {
+          "vuid": "VUID-VkResolveImageInfo2KHR-srcImageLayout-00260",
+          "text": " <code>srcImageLayout</code> <strong class=\"purple\">must</strong> specify the layout of the image subresources of <code>srcImage</code> specified in <code>pRegions</code> at the time this command is executed on a <code>VkDevice</code>"
+        },
+        {
+          "vuid": "VUID-VkResolveImageInfo2KHR-dstImageLayout-00262",
+          "text": " <code>dstImageLayout</code> <strong class=\"purple\">must</strong> specify the layout of the image subresources of <code>dstImage</code> specified in <code>pRegions</code> at the time this command is executed on a <code>VkDevice</code>"
+        },
+        {
+          "vuid": "VUID-VkResolveImageInfo2KHR-dstImage-02003",
+          "text": " The <a href=\"#resources-image-format-features\">format features</a> of <code>dstImage</code> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT</code>"
+        },
+        {
+          "vuid": "VUID-VkResolveImageInfo2KHR-srcImage-01386",
+          "text": " <code>srcImage</code> and <code>dstImage</code> <strong class=\"purple\">must</strong> have been created with the same image format"
+        },
+        {
+          "vuid": "VUID-VkResolveImageInfo2KHR-srcSubresource-01709",
+          "text": " The <code>srcSubresource.mipLevel</code> member of each element of <code>pRegions</code> <strong class=\"purple\">must</strong> be less than the <code>mipLevels</code> specified in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> when <code>srcImage</code> was created"
+        },
+        {
+          "vuid": "VUID-VkResolveImageInfo2KHR-dstSubresource-01710",
+          "text": " The <code>dstSubresource.mipLevel</code> member of each element of <code>pRegions</code> <strong class=\"purple\">must</strong> be less than the <code>mipLevels</code> specified in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> when <code>dstImage</code> was created"
+        },
+        {
+          "vuid": "VUID-VkResolveImageInfo2KHR-srcSubresource-01711",
+          "text": " The <span class=\"eq\"><code>srcSubresource.baseArrayLayer</code> &#43; <code>srcSubresource.layerCount</code></span> of each element of <code>pRegions</code> <strong class=\"purple\">must</strong> be less than or equal to the <code>arrayLayers</code> specified in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> when <code>srcImage</code> was created"
+        },
+        {
+          "vuid": "VUID-VkResolveImageInfo2KHR-dstSubresource-01712",
+          "text": " The <span class=\"eq\"><code>dstSubresource.baseArrayLayer</code> &#43; <code>dstSubresource.layerCount</code></span> of each element of <code>pRegions</code> <strong class=\"purple\">must</strong> be less than or equal to the <code>arrayLayers</code> specified in <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> when <code>dstImage</code> was created"
+        },
+        {
+          "vuid": "VUID-VkResolveImageInfo2KHR-srcImage-04446",
+          "text": " If either <code>srcImage</code> or <code>dstImage</code> are of type <code>VK_IMAGE_TYPE_3D</code>, then for each element of <code>pRegions</code>, <code>srcSubresource.baseArrayLayer</code> <strong class=\"purple\">must</strong> be <code>0</code> and <code>srcSubresource.layerCount</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+        },
+        {
+          "vuid": "VUID-VkResolveImageInfo2KHR-srcImage-04447",
+          "text": " If either <code>srcImage</code> or <code>dstImage</code> are of type <code>VK_IMAGE_TYPE_3D</code>, then for each element of <code>pRegions</code>, <code>dstSubresource.baseArrayLayer</code> <strong class=\"purple\">must</strong> be <code>0</code> and <code>dstSubresource.layerCount</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+        },
+        {
+          "vuid": "VUID-VkResolveImageInfo2KHR-srcOffset-00269",
+          "text": " For each element of <code>pRegions</code>, <code>srcOffset.x</code> and <span class=\"eq\">(<code>extent.width</code> &#43; <code>srcOffset.x</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the width of the specified <code>srcSubresource</code> of <code>srcImage</code>"
+        },
+        {
+          "vuid": "VUID-VkResolveImageInfo2KHR-srcOffset-00270",
+          "text": " For each element of <code>pRegions</code>, <code>srcOffset.y</code> and <span class=\"eq\">(<code>extent.height</code> &#43; <code>srcOffset.y</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the height of the specified <code>srcSubresource</code> of <code>srcImage</code>"
+        },
+        {
+          "vuid": "VUID-VkResolveImageInfo2KHR-srcImage-00271",
+          "text": " If <code>srcImage</code> is of type <code>VK_IMAGE_TYPE_1D</code>, then for each element of <code>pRegions</code>, <code>srcOffset.y</code> <strong class=\"purple\">must</strong> be <code>0</code> and <code>extent.height</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+        },
+        {
+          "vuid": "VUID-VkResolveImageInfo2KHR-srcOffset-00272",
+          "text": " For each element of <code>pRegions</code>, <code>srcOffset.z</code> and <span class=\"eq\">(<code>extent.depth</code> &#43; <code>srcOffset.z</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the depth of the specified <code>srcSubresource</code> of <code>srcImage</code>"
+        },
+        {
+          "vuid": "VUID-VkResolveImageInfo2KHR-srcImage-00273",
+          "text": " If <code>srcImage</code> is of type <code>VK_IMAGE_TYPE_1D</code> or <code>VK_IMAGE_TYPE_2D</code>, then for each element of <code>pRegions</code>, <code>srcOffset.z</code> <strong class=\"purple\">must</strong> be <code>0</code> and <code>extent.depth</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+        },
+        {
+          "vuid": "VUID-VkResolveImageInfo2KHR-dstOffset-00274",
+          "text": " For each element of <code>pRegions</code>, <code>dstOffset.x</code> and <span class=\"eq\">(<code>extent.width</code> &#43; <code>dstOffset.x</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the width of the specified <code>dstSubresource</code> of <code>dstImage</code>"
+        },
+        {
+          "vuid": "VUID-VkResolveImageInfo2KHR-dstOffset-00275",
+          "text": " For each element of <code>pRegions</code>, <code>dstOffset.y</code> and <span class=\"eq\">(<code>extent.height</code> &#43; <code>dstOffset.y</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the height of the specified <code>dstSubresource</code> of <code>dstImage</code>"
+        },
+        {
+          "vuid": "VUID-VkResolveImageInfo2KHR-dstImage-00276",
+          "text": " If <code>dstImage</code> is of type <code>VK_IMAGE_TYPE_1D</code>, then for each element of <code>pRegions</code>, <code>dstOffset.y</code> <strong class=\"purple\">must</strong> be <code>0</code> and <code>extent.height</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+        },
+        {
+          "vuid": "VUID-VkResolveImageInfo2KHR-dstOffset-00277",
+          "text": " For each element of <code>pRegions</code>, <code>dstOffset.z</code> and <span class=\"eq\">(<code>extent.depth</code> &#43; <code>dstOffset.z</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the depth of the specified <code>dstSubresource</code> of <code>dstImage</code>"
+        },
+        {
+          "vuid": "VUID-VkResolveImageInfo2KHR-dstImage-00278",
+          "text": " If <code>dstImage</code> is of type <code>VK_IMAGE_TYPE_1D</code> or <code>VK_IMAGE_TYPE_2D</code>, then for each element of <code>pRegions</code>, <code>dstOffset.z</code> <strong class=\"purple\">must</strong> be <code>0</code> and <code>extent.depth</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+        }
+      ],
+      "!(VK_KHR_shared_presentable_image)": [
+        {
+          "vuid": "VUID-VkResolveImageInfo2KHR-srcImageLayout-00261",
+          "text": " <code>srcImageLayout</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL</code> or <code>VK_IMAGE_LAYOUT_GENERAL</code>"
+        },
+        {
+          "vuid": "VUID-VkResolveImageInfo2KHR-dstImageLayout-00263",
+          "text": " <code>dstImageLayout</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL</code> or <code>VK_IMAGE_LAYOUT_GENERAL</code>"
+        }
+      ],
+      "(VK_KHR_shared_presentable_image)": [
+        {
+          "vuid": "VUID-VkResolveImageInfo2KHR-srcImageLayout-01400",
+          "text": " <code>srcImageLayout</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_LAYOUT_SHARED_PRESENT_KHR</code>, <code>VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL</code> or <code>VK_IMAGE_LAYOUT_GENERAL</code>"
+        },
+        {
+          "vuid": "VUID-VkResolveImageInfo2KHR-dstImageLayout-01401",
+          "text": " <code>dstImageLayout</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_LAYOUT_SHARED_PRESENT_KHR</code>, <code>VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL</code> or <code>VK_IMAGE_LAYOUT_GENERAL</code>"
+        }
+      ],
+      "(VK_EXT_fragment_density_map)": [
+        {
+          "vuid": "VUID-VkResolveImageInfo2KHR-dstImage-02546",
+          "text": " <code>dstImage</code> and <code>srcImage</code> <strong class=\"purple\">must</strong> not have been created with <code>flags</code> containing <code>VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT</code>"
+        }
+      ],
+      "(VK_KHR_copy_commands2)": [
+        {
+          "vuid": "VUID-VkResolveImageInfo2KHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_RESOLVE_IMAGE_INFO_2_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkResolveImageInfo2KHR-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkResolveImageInfo2KHR-srcImage-parameter",
+          "text": " <code>srcImage</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImage\">VkImage</a> handle"
+        },
+        {
+          "vuid": "VUID-VkResolveImageInfo2KHR-srcImageLayout-parameter",
+          "text": " <code>srcImageLayout</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImageLayout\">VkImageLayout</a> value"
+        },
+        {
+          "vuid": "VUID-VkResolveImageInfo2KHR-dstImage-parameter",
+          "text": " <code>dstImage</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImage\">VkImage</a> handle"
+        },
+        {
+          "vuid": "VUID-VkResolveImageInfo2KHR-dstImageLayout-parameter",
+          "text": " <code>dstImageLayout</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImageLayout\">VkImageLayout</a> value"
+        },
+        {
+          "vuid": "VUID-VkResolveImageInfo2KHR-pRegions-parameter",
+          "text": " <code>pRegions</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>regionCount</code> valid <a href=\"#VkImageResolve2KHR\">VkImageResolve2KHR</a> structures"
+        },
+        {
+          "vuid": "VUID-VkResolveImageInfo2KHR-regionCount-arraylength",
+          "text": " <code>regionCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
+        },
+        {
+          "vuid": "VUID-VkResolveImageInfo2KHR-commonparent",
+          "text": " Both of <code>dstImage</code>, and <code>srcImage</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <a href=\"#VkDevice\">VkDevice</a>"
+        }
+      ]
+    },
+    "VkImageResolve2KHR": {
+      "core": [
+        {
+          "vuid": "VUID-VkImageResolve2KHR-aspectMask-00266",
+          "text": " The <code>aspectMask</code> member of <code>srcSubresource</code> and <code>dstSubresource</code> <strong class=\"purple\">must</strong> only contain <code>VK_IMAGE_ASPECT_COLOR_BIT</code>"
+        },
+        {
+          "vuid": "VUID-VkImageResolve2KHR-layerCount-00267",
+          "text": " The <code>layerCount</code> member of <code>srcSubresource</code> and <code>dstSubresource</code> <strong class=\"purple\">must</strong> match"
+        }
+      ],
+      "(VK_KHR_copy_commands2)": [
+        {
+          "vuid": "VUID-VkImageResolve2KHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_IMAGE_RESOLVE_2_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkImageResolve2KHR-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkImageResolve2KHR-srcSubresource-parameter",
+          "text": " <code>srcSubresource</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImageSubresourceLayers\">VkImageSubresourceLayers</a> structure"
+        },
+        {
+          "vuid": "VUID-VkImageResolve2KHR-dstSubresource-parameter",
+          "text": " <code>dstSubresource</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImageSubresourceLayers\">VkImageSubresourceLayers</a> structure"
+        }
+      ]
+    },
     "VkPipelineInputAssemblyStateCreateInfo": {
       "core": [
         {
@@ -19461,6 +21063,12 @@
         {
           "vuid": "VUID-VkPipelineInputAssemblyStateCreateInfo-topology-parameter",
           "text": " <code>topology</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkPrimitiveTopology\">VkPrimitiveTopology</a> value"
+        }
+      ],
+      "(VK_KHR_portability_subset)": [
+        {
+          "vuid": "VUID-VkPipelineInputAssemblyStateCreateInfo-triangleFans-04452",
+          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">[VK_KHR_portability_subset]</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>triangleFans</code> is <code>VK_FALSE</code>, <code>topology</code> <strong class=\"purple\">must</strong> not be <code>VK_PRIMITIVE_TOPOLOGY_TRIANGLE_FAN</code>."
         }
       ]
     },
@@ -22108,6 +23716,12 @@
           "vuid": "VUID-VkVertexInputBindingDescription-inputRate-parameter",
           "text": " <code>inputRate</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkVertexInputRate\">VkVertexInputRate</a> value"
         }
+      ],
+      "(VK_KHR_portability_subset)": [
+        {
+          "vuid": "VUID-VkVertexInputBindingDescription-stride-04456",
+          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">[VK_KHR_portability_subset]</a></code> extension is enabled, <code>stride</code> <strong class=\"purple\">must</strong> be a multiple of, and at least as large as, <a href=\"#VkPhysicalDevicePortabilitySubsetPropertiesKHR\">VkPhysicalDevicePortabilitySubsetPropertiesKHR</a>::<code>minVertexInputBindingStrideAlignment</code>."
+        }
       ]
     },
     "VkVertexInputAttributeDescription": {
@@ -22131,6 +23745,12 @@
         {
           "vuid": "VUID-VkVertexInputAttributeDescription-format-parameter",
           "text": " <code>format</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkFormat\">VkFormat</a> value"
+        }
+      ],
+      "(VK_KHR_portability_subset)": [
+        {
+          "vuid": "VUID-VkVertexInputAttributeDescription-vertexAttributeAccessBeyondStride-04457",
+          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">[VK_KHR_portability_subset]</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>vertexAttributeAccessBeyondStride</code> is <code>VK_FALSE</code>, the sum of <code>offset</code> plus the size of the vertex attribute data described by <code>format</code> <strong class=\"purple\">must</strong> not be greater than <code>stride</code> in the <a href=\"#VkVertexInputBindingDescription\">VkVertexInputBindingDescription</a> referenced in <code>binding</code>."
         }
       ]
     },
@@ -22976,6 +24596,12 @@
           "vuid": "VUID-VkPipelineRasterizationStateCreateInfo-polygonMode-01414",
           "text": " If the <code><a href=\"#VK_NV_fill_rectangle\">VK_NV_fill_rectangle</a></code> extension is not enabled, <code>polygonMode</code> <strong class=\"purple\">must</strong> not be <code>VK_POLYGON_MODE_FILL_RECTANGLE_NV</code>"
         }
+      ],
+      "(VK_KHR_portability_subset)": [
+        {
+          "vuid": "VUID-VkPipelineRasterizationStateCreateInfo-pointPolygons-04458",
+          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">[VK_KHR_portability_subset]</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>pointPolygons</code> is <code>VK_FALSE</code>, and <code>rasterizerDiscardEnable</code> is <code>VK_FALSE</code>, <code>polygonMode</code> <strong class=\"purple\">must</strong> not be <code>VK_POLYGON_MODE_POINT</code>."
+        }
       ]
     },
     "VkPipelineRasterizationDepthClipStateCreateInfoEXT": {
@@ -23766,6 +25392,12 @@
           "vuid": "VUID-VkPipelineDepthStencilStateCreateInfo-back-parameter",
           "text": " <code>back</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkStencilOpState\">VkStencilOpState</a> structure"
         }
+      ],
+      "(VK_KHR_portability_subset)": [
+        {
+          "vuid": "VUID-VkPipelineDepthStencilStateCreateInfo-separateStencilMaskRef-04453",
+          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">[VK_KHR_portability_subset]</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>separateStencilMaskRef</code> is <code>VK_FALSE</code>, and the value of <a href=\"#VkPipelineDepthStencilStateCreateInfo\">VkPipelineDepthStencilStateCreateInfo</a>::<code>stencilTestEnable</code> is <code>VK_TRUE</code>, and the value of <a href=\"#VkPipelineRasterizationStateCreateInfo\">VkPipelineRasterizationStateCreateInfo</a>::<code>cullMode</code> is <code>VK_CULL_MODE_NONE</code>, the value of <code>reference</code> in each of the <a href=\"#VkStencilOpState\">VkStencilOpState</a> structs in <code>front</code> and <code>back</code> <strong class=\"purple\">must</strong> be the same."
+        }
       ]
     },
     "vkCmdSetDepthBoundsTestEnableEXT": {
@@ -24235,6 +25867,16 @@
         {
           "vuid": "VUID-VkPipelineColorBlendAttachmentState-colorBlendOp-01410",
           "text": " If <code>colorBlendOp</code> or <code>alphaBlendOp</code> is an <a href=\"#framebuffer-blend-advanced\">advanced blend operation</a>, then <a href=\"#VkSubpassDescription\">VkSubpassDescription</a>::<code>colorAttachmentCount</code> of the subpass this pipeline is compiled against <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT\">VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT</a>::advancedBlendMaxColorAttachments"
+        }
+      ],
+      "(VK_KHR_portability_subset)": [
+        {
+          "vuid": "VUID-VkPipelineColorBlendAttachmentState-constantAlphaColorBlendFactors-04454",
+          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">[VK_KHR_portability_subset]</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>constantAlphaColorBlendFactors</code> is <code>VK_FALSE</code>, <code>srcColorBlendFactor</code> <strong class=\"purple\">must</strong> not be <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code> or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>."
+        },
+        {
+          "vuid": "VUID-VkPipelineColorBlendAttachmentState-constantAlphaColorBlendFactors-04455",
+          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">[VK_KHR_portability_subset]</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>constantAlphaColorBlendFactors</code> is <code>VK_FALSE</code>, <code>dstColorBlendFactor</code> <strong class=\"purple\">must</strong> not be <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code> or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>."
         }
       ]
     },
@@ -31038,6 +32680,14 @@
         }
       ]
     },
+    "VkPhysicalDevicePortabilitySubsetFeaturesKHR": {
+      "(VK_KHR_portability_subset)": [
+        {
+          "vuid": "VUID-VkPhysicalDevicePortabilitySubsetFeaturesKHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PORTABILITY_SUBSET_FEATURES_KHR</code>"
+        }
+      ]
+    },
     "VkPhysicalDevicePerformanceQueryFeaturesKHR": {
       "(VK_KHR_performance_query)": [
         {
@@ -31339,6 +32989,14 @@
         {
           "vuid": "VUID-VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_NV</code>"
+        }
+      ]
+    },
+    "VkPhysicalDevicePortabilitySubsetPropertiesKHR": {
+      "(VK_KHR_portability_subset)": [
+        {
+          "vuid": "VUID-VkPhysicalDevicePortabilitySubsetPropertiesKHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PORTABILITY_SUBSET_PROPERTIES_KHR</code>"
         }
       ]
     },
