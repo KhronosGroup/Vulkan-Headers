@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.2.154",
-    "comment": "from git branch: github-main commit: 5c8259673b722a86525f5a9dbee1ffd92371656b",
-    "date": "2020-09-20 10:24:47Z"
+    "api version": "1.2.155",
+    "comment": "from git branch: github-main commit: 2ffe5b06dd338347636c961399eaca384b864d60",
+    "date": "2020-09-28 05:04:42Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -516,7 +516,7 @@
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceDiagnosticsConfigCreateInfoNV\">VkDeviceDiagnosticsConfigCreateInfoNV</a>, <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceMemoryOverallocationCreateInfoAMD\">VkDeviceMemoryOverallocationCreateInfoAMD</a>, <a href=\"#VkDevicePrivateDataCreateInfoEXT\">VkDevicePrivateDataCreateInfoEXT</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice4444FormatsFeaturesEXT\">VkPhysicalDevice4444FormatsFeaturesEXT</a>, <a href=\"#VkPhysicalDevice8BitStorageFeatures\">VkPhysicalDevice8BitStorageFeatures</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeatures\">VkPhysicalDeviceBufferDeviceAddressFeatures</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeaturesEXT\">VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCoherentMemoryFeaturesAMD\">VkPhysicalDeviceCoherentMemoryFeaturesAMD</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixFeaturesNV\">VkPhysicalDeviceCooperativeMatrixFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCoverageReductionModeFeaturesNV\">VkPhysicalDeviceCoverageReductionModeFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCustomBorderColorFeaturesEXT\">VkPhysicalDeviceCustomBorderColorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV\">VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDepthClipEnableFeaturesEXT\">VkPhysicalDeviceDepthClipEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeatures\">VkPhysicalDeviceDescriptorIndexingFeatures</a>, <a href=\"#VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV\">VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDiagnosticsConfigFeaturesNV\">VkPhysicalDeviceDiagnosticsConfigFeaturesNV</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceExtendedDynamicStateFeaturesEXT\">VkPhysicalDeviceExtendedDynamicStateFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMap2FeaturesEXT\">VkPhysicalDeviceFragmentDensityMap2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapFeaturesEXT\">VkPhysicalDeviceFragmentDensityMapFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT\">VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceHostQueryResetFeatures\">VkPhysicalDeviceHostQueryResetFeatures</a>, <a href=\"#VkPhysicalDeviceImageRobustnessFeaturesEXT\">VkPhysicalDeviceImageRobustnessFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceImagelessFramebufferFeatures\">VkPhysicalDeviceImagelessFramebufferFeatures</a>, <a href=\"#VkPhysicalDeviceIndexTypeUint8FeaturesEXT\">VkPhysicalDeviceIndexTypeUint8FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeaturesEXT\">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceLineRasterizationFeaturesEXT\">VkPhysicalDeviceLineRasterizationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMemoryPriorityFeaturesEXT\">VkPhysicalDeviceMemoryPriorityFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDevicePerformanceQueryFeaturesKHR\">VkPhysicalDevicePerformanceQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT\">VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT</a>, <a href=\"#VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR\">VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePrivateDataFeaturesEXT\">VkPhysicalDevicePrivateDataFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceRayTracingFeaturesKHR\">VkPhysicalDeviceRayTracingFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceRobustness2FeaturesEXT\">VkPhysicalDeviceRobustness2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceScalarBlockLayoutFeatures\">VkPhysicalDeviceScalarBlockLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures\">VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures</a>, <a href=\"#VkPhysicalDeviceShaderAtomicFloatFeaturesEXT\">VkPhysicalDeviceShaderAtomicFloatFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64Features\">VkPhysicalDeviceShaderAtomicInt64Features</a>, <a href=\"#VkPhysicalDeviceShaderClockFeaturesKHR\">VkPhysicalDeviceShaderClockFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT\">VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderDrawParametersFeatures\">VkPhysicalDeviceShaderDrawParametersFeatures</a>, <a href=\"#VkPhysicalDeviceShaderFloat16Int8Features\">VkPhysicalDeviceShaderFloat16Int8Features</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL\">VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL</a>, <a href=\"#VkPhysicalDeviceShaderSMBuiltinsFeaturesNV\">VkPhysicalDeviceShaderSMBuiltinsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures\">VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSubgroupSizeControlFeaturesEXT\">VkPhysicalDeviceSubgroupSizeControlFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT\">VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT\">VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTimelineSemaphoreFeatures\">VkPhysicalDeviceTimelineSemaphoreFeatures</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackFeaturesEXT\">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceUniformBufferStandardLayoutFeatures\">VkPhysicalDeviceUniformBufferStandardLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceVariablePointersFeatures\">VkPhysicalDeviceVariablePointersFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVulkan11Features\">VkPhysicalDeviceVulkan11Features</a>, <a href=\"#VkPhysicalDeviceVulkan12Features\">VkPhysicalDeviceVulkan12Features</a>, <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeatures\">VkPhysicalDeviceVulkanMemoryModelFeatures</a>, or <a href=\"#VkPhysicalDeviceYcbcrImageArraysFeaturesEXT\">VkPhysicalDeviceYcbcrImageArraysFeaturesEXT</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceDiagnosticsConfigCreateInfoNV\">VkDeviceDiagnosticsConfigCreateInfoNV</a>, <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceMemoryOverallocationCreateInfoAMD\">VkDeviceMemoryOverallocationCreateInfoAMD</a>, <a href=\"#VkDevicePrivateDataCreateInfoEXT\">VkDevicePrivateDataCreateInfoEXT</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice4444FormatsFeaturesEXT\">VkPhysicalDevice4444FormatsFeaturesEXT</a>, <a href=\"#VkPhysicalDevice8BitStorageFeatures\">VkPhysicalDevice8BitStorageFeatures</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeatures\">VkPhysicalDeviceBufferDeviceAddressFeatures</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeaturesEXT\">VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCoherentMemoryFeaturesAMD\">VkPhysicalDeviceCoherentMemoryFeaturesAMD</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixFeaturesNV\">VkPhysicalDeviceCooperativeMatrixFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCoverageReductionModeFeaturesNV\">VkPhysicalDeviceCoverageReductionModeFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCustomBorderColorFeaturesEXT\">VkPhysicalDeviceCustomBorderColorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV\">VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDepthClipEnableFeaturesEXT\">VkPhysicalDeviceDepthClipEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeatures\">VkPhysicalDeviceDescriptorIndexingFeatures</a>, <a href=\"#VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV\">VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDiagnosticsConfigFeaturesNV\">VkPhysicalDeviceDiagnosticsConfigFeaturesNV</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceExtendedDynamicStateFeaturesEXT\">VkPhysicalDeviceExtendedDynamicStateFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMap2FeaturesEXT\">VkPhysicalDeviceFragmentDensityMap2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapFeaturesEXT\">VkPhysicalDeviceFragmentDensityMapFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT\">VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceHostQueryResetFeatures\">VkPhysicalDeviceHostQueryResetFeatures</a>, <a href=\"#VkPhysicalDeviceImageRobustnessFeaturesEXT\">VkPhysicalDeviceImageRobustnessFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceImagelessFramebufferFeatures\">VkPhysicalDeviceImagelessFramebufferFeatures</a>, <a href=\"#VkPhysicalDeviceIndexTypeUint8FeaturesEXT\">VkPhysicalDeviceIndexTypeUint8FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeaturesEXT\">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceLineRasterizationFeaturesEXT\">VkPhysicalDeviceLineRasterizationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMemoryPriorityFeaturesEXT\">VkPhysicalDeviceMemoryPriorityFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDevicePerformanceQueryFeaturesKHR\">VkPhysicalDevicePerformanceQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT\">VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT</a>, <a href=\"#VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR\">VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePrivateDataFeaturesEXT\">VkPhysicalDevicePrivateDataFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceRayTracingFeaturesKHR\">VkPhysicalDeviceRayTracingFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceRobustness2FeaturesEXT\">VkPhysicalDeviceRobustness2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceScalarBlockLayoutFeatures\">VkPhysicalDeviceScalarBlockLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures\">VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures</a>, <a href=\"#VkPhysicalDeviceShaderAtomicFloatFeaturesEXT\">VkPhysicalDeviceShaderAtomicFloatFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64Features\">VkPhysicalDeviceShaderAtomicInt64Features</a>, <a href=\"#VkPhysicalDeviceShaderClockFeaturesKHR\">VkPhysicalDeviceShaderClockFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT\">VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderDrawParametersFeatures\">VkPhysicalDeviceShaderDrawParametersFeatures</a>, <a href=\"#VkPhysicalDeviceShaderFloat16Int8Features\">VkPhysicalDeviceShaderFloat16Int8Features</a>, <a href=\"#VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT\">VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL\">VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL</a>, <a href=\"#VkPhysicalDeviceShaderSMBuiltinsFeaturesNV\">VkPhysicalDeviceShaderSMBuiltinsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures\">VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSubgroupSizeControlFeaturesEXT\">VkPhysicalDeviceSubgroupSizeControlFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT\">VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT\">VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTimelineSemaphoreFeatures\">VkPhysicalDeviceTimelineSemaphoreFeatures</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackFeaturesEXT\">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceUniformBufferStandardLayoutFeatures\">VkPhysicalDeviceUniformBufferStandardLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceVariablePointersFeatures\">VkPhysicalDeviceVariablePointersFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVulkan11Features\">VkPhysicalDeviceVulkan11Features</a>, <a href=\"#VkPhysicalDeviceVulkan12Features\">VkPhysicalDeviceVulkan12Features</a>, <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeatures\">VkPhysicalDeviceVulkanMemoryModelFeatures</a>, or <a href=\"#VkPhysicalDeviceYcbcrImageArraysFeaturesEXT\">VkPhysicalDeviceYcbcrImageArraysFeaturesEXT</a>"
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-sType-unique",
@@ -21208,7 +21208,11 @@
         },
         {
           "vuid": "VUID-vkCmdDraw-None-04115",
-          "text": " If a <code>VkImageView</code> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+        },
+        {
+          "vuid": "VUID-vkCmdDraw-OpImageWrite-04469",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
         },
         {
           "vuid": "VUID-vkCmdDraw-renderPass-02684",
@@ -21295,6 +21299,32 @@
         {
           "vuid": "VUID-vkCmdDraw-commandBuffer-02713",
           "text": " If <code>commandBuffer</code> is a protected command buffer, pipeline stages other than the framebuffer-space and compute stages in the <code>VkPipeline</code> object bound to the pipeline bind point <strong class=\"purple\">must</strong> not write to any resource"
+        }
+      ],
+      "(VK_EXT_shader_image_atomic_int64)": [
+        {
+          "vuid": "VUID-vkCmdDraw-SampledType-04470",
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64."
+        },
+        {
+          "vuid": "VUID-vkCmdDraw-SampledType-04471",
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32."
+        },
+        {
+          "vuid": "VUID-vkCmdDraw-SampledType-04472",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64."
+        },
+        {
+          "vuid": "VUID-vkCmdDraw-SampledType-04473",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32."
+        },
+        {
+          "vuid": "VUID-vkCmdDraw-sparseImageInt64Atomics-04474",
+          "text": " If the <a href=\"#features-sparseImageInt64Atomics\"><code>sparseImageInt64Atomics</code></a> feature is not enabled, <a href=\"#VkImage\">VkImage</a> objects created with the <code>VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</code> flag <strong class=\"purple\">must</strong> not be accessed by atomic instructions through an <code>OpTypeImage</code> with a <code>SampledType</code> with a <code>Width</code> of 64 by this command."
+        },
+        {
+          "vuid": "VUID-vkCmdDraw-sparseImageInt64Atomics-04475",
+          "text": " If the <a href=\"#features-sparseImageInt64Atomics\"><code>sparseImageInt64Atomics</code></a> feature is not enabled, <a href=\"#VkBuffer\">VkBuffer</a> objects created with the <code>VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT</code> flag <strong class=\"purple\">must</strong> not be accessed by atomic instructions through an <code>OpTypeImage</code> with a <code>SampledType</code> with a <code>Width</code> of 64 by this command."
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_multiview)": [
@@ -21416,7 +21446,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexed-None-04115",
-          "text": " If a <code>VkImageView</code> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexed-OpImageWrite-04469",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
         },
         {
           "vuid": "VUID-vkCmdDrawIndexed-renderPass-02684",
@@ -21507,6 +21541,32 @@
         {
           "vuid": "VUID-vkCmdDrawIndexed-commandBuffer-02713",
           "text": " If <code>commandBuffer</code> is a protected command buffer, pipeline stages other than the framebuffer-space and compute stages in the <code>VkPipeline</code> object bound to the pipeline bind point <strong class=\"purple\">must</strong> not write to any resource"
+        }
+      ],
+      "(VK_EXT_shader_image_atomic_int64)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexed-SampledType-04470",
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexed-SampledType-04471",
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexed-SampledType-04472",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexed-SampledType-04473",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexed-sparseImageInt64Atomics-04474",
+          "text": " If the <a href=\"#features-sparseImageInt64Atomics\"><code>sparseImageInt64Atomics</code></a> feature is not enabled, <a href=\"#VkImage\">VkImage</a> objects created with the <code>VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</code> flag <strong class=\"purple\">must</strong> not be accessed by atomic instructions through an <code>OpTypeImage</code> with a <code>SampledType</code> with a <code>Width</code> of 64 by this command."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexed-sparseImageInt64Atomics-04475",
+          "text": " If the <a href=\"#features-sparseImageInt64Atomics\"><code>sparseImageInt64Atomics</code></a> feature is not enabled, <a href=\"#VkBuffer\">VkBuffer</a> objects created with the <code>VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT</code> flag <strong class=\"purple\">must</strong> not be accessed by atomic instructions through an <code>OpTypeImage</code> with a <code>SampledType</code> with a <code>Width</code> of 64 by this command."
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_multiview)": [
@@ -21628,7 +21688,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirect-None-04115",
-          "text": " If a <code>VkImageView</code> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirect-OpImageWrite-04469",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
         },
         {
           "vuid": "VUID-vkCmdDrawIndirect-renderPass-02684",
@@ -21755,6 +21819,32 @@
         {
           "vuid": "VUID-vkCmdDrawIndirect-commandBuffer-02711",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> not be a protected command buffer"
+        }
+      ],
+      "(VK_EXT_shader_image_atomic_int64)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirect-SampledType-04470",
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirect-SampledType-04471",
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirect-SampledType-04472",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirect-SampledType-04473",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirect-sparseImageInt64Atomics-04474",
+          "text": " If the <a href=\"#features-sparseImageInt64Atomics\"><code>sparseImageInt64Atomics</code></a> feature is not enabled, <a href=\"#VkImage\">VkImage</a> objects created with the <code>VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</code> flag <strong class=\"purple\">must</strong> not be accessed by atomic instructions through an <code>OpTypeImage</code> with a <code>SampledType</code> with a <code>Width</code> of 64 by this command."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirect-sparseImageInt64Atomics-04475",
+          "text": " If the <a href=\"#features-sparseImageInt64Atomics\"><code>sparseImageInt64Atomics</code></a> feature is not enabled, <a href=\"#VkBuffer\">VkBuffer</a> objects created with the <code>VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT</code> flag <strong class=\"purple\">must</strong> not be accessed by atomic instructions through an <code>OpTypeImage</code> with a <code>SampledType</code> with a <code>Width</code> of 64 by this command."
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_multiview)": [
@@ -21888,7 +21978,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCount-None-04115",
-          "text": " If a <code>VkImageView</code> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCount-OpImageWrite-04469",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCount-renderPass-02684",
@@ -22003,6 +22097,32 @@
         {
           "vuid": "VUID-vkCmdDrawIndirectCount-commandBuffer-02711",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> not be a protected command buffer"
+        }
+      ],
+      "(VK_EXT_shader_image_atomic_int64)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCount-SampledType-04470",
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCount-SampledType-04471",
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCount-SampledType-04472",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCount-SampledType-04473",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCount-sparseImageInt64Atomics-04474",
+          "text": " If the <a href=\"#features-sparseImageInt64Atomics\"><code>sparseImageInt64Atomics</code></a> feature is not enabled, <a href=\"#VkImage\">VkImage</a> objects created with the <code>VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</code> flag <strong class=\"purple\">must</strong> not be accessed by atomic instructions through an <code>OpTypeImage</code> with a <code>SampledType</code> with a <code>Width</code> of 64 by this command."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCount-sparseImageInt64Atomics-04475",
+          "text": " If the <a href=\"#features-sparseImageInt64Atomics\"><code>sparseImageInt64Atomics</code></a> feature is not enabled, <a href=\"#VkBuffer\">VkBuffer</a> objects created with the <code>VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT</code> flag <strong class=\"purple\">must</strong> not be accessed by atomic instructions through an <code>OpTypeImage</code> with a <code>SampledType</code> with a <code>Width</code> of 64 by this command."
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_multiview)": [
@@ -22160,7 +22280,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-None-04115",
-          "text": " If a <code>VkImageView</code> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirect-OpImageWrite-04469",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-renderPass-02684",
@@ -22287,6 +22411,32 @@
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-commandBuffer-02711",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> not be a protected command buffer"
+        }
+      ],
+      "(VK_EXT_shader_image_atomic_int64)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirect-SampledType-04470",
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirect-SampledType-04471",
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirect-SampledType-04472",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirect-SampledType-04473",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirect-sparseImageInt64Atomics-04474",
+          "text": " If the <a href=\"#features-sparseImageInt64Atomics\"><code>sparseImageInt64Atomics</code></a> feature is not enabled, <a href=\"#VkImage\">VkImage</a> objects created with the <code>VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</code> flag <strong class=\"purple\">must</strong> not be accessed by atomic instructions through an <code>OpTypeImage</code> with a <code>SampledType</code> with a <code>Width</code> of 64 by this command."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirect-sparseImageInt64Atomics-04475",
+          "text": " If the <a href=\"#features-sparseImageInt64Atomics\"><code>sparseImageInt64Atomics</code></a> feature is not enabled, <a href=\"#VkBuffer\">VkBuffer</a> objects created with the <code>VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT</code> flag <strong class=\"purple\">must</strong> not be accessed by atomic instructions through an <code>OpTypeImage</code> with a <code>SampledType</code> with a <code>Width</code> of 64 by this command."
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_multiview)": [
@@ -22424,7 +22574,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount-None-04115",
-          "text": " If a <code>VkImageView</code> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-OpImageWrite-04469",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount-renderPass-02684",
@@ -22539,6 +22693,32 @@
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount-commandBuffer-02711",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> not be a protected command buffer"
+        }
+      ],
+      "(VK_EXT_shader_image_atomic_int64)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-SampledType-04470",
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-SampledType-04471",
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-SampledType-04472",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-SampledType-04473",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-sparseImageInt64Atomics-04474",
+          "text": " If the <a href=\"#features-sparseImageInt64Atomics\"><code>sparseImageInt64Atomics</code></a> feature is not enabled, <a href=\"#VkImage\">VkImage</a> objects created with the <code>VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</code> flag <strong class=\"purple\">must</strong> not be accessed by atomic instructions through an <code>OpTypeImage</code> with a <code>SampledType</code> with a <code>Width</code> of 64 by this command."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-sparseImageInt64Atomics-04475",
+          "text": " If the <a href=\"#features-sparseImageInt64Atomics\"><code>sparseImageInt64Atomics</code></a> feature is not enabled, <a href=\"#VkBuffer\">VkBuffer</a> objects created with the <code>VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT</code> flag <strong class=\"purple\">must</strong> not be accessed by atomic instructions through an <code>OpTypeImage</code> with a <code>SampledType</code> with a <code>Width</code> of 64 by this command."
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_multiview)": [
@@ -22696,7 +22876,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-None-04115",
-          "text": " If a <code>VkImageView</code> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-OpImageWrite-04469",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-renderPass-02684",
@@ -22779,6 +22963,32 @@
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-commandBuffer-02646",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> not be a protected command buffer"
+        }
+      ],
+      "(VK_EXT_shader_image_atomic_int64)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-SampledType-04470",
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-SampledType-04471",
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-SampledType-04472",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-SampledType-04473",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-sparseImageInt64Atomics-04474",
+          "text": " If the <a href=\"#features-sparseImageInt64Atomics\"><code>sparseImageInt64Atomics</code></a> feature is not enabled, <a href=\"#VkImage\">VkImage</a> objects created with the <code>VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</code> flag <strong class=\"purple\">must</strong> not be accessed by atomic instructions through an <code>OpTypeImage</code> with a <code>SampledType</code> with a <code>Width</code> of 64 by this command."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-sparseImageInt64Atomics-04475",
+          "text": " If the <a href=\"#features-sparseImageInt64Atomics\"><code>sparseImageInt64Atomics</code></a> feature is not enabled, <a href=\"#VkBuffer\">VkBuffer</a> objects created with the <code>VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT</code> flag <strong class=\"purple\">must</strong> not be accessed by atomic instructions through an <code>OpTypeImage</code> with a <code>SampledType</code> with a <code>Width</code> of 64 by this command."
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_multiview)": [
@@ -23014,7 +23224,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksNV-None-04115",
-          "text": " If a <code>VkImageView</code> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksNV-OpImageWrite-04469",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksNV-renderPass-02684",
@@ -23069,6 +23283,32 @@
         {
           "vuid": "VUID-vkCmdDrawMeshTasksNV-commandBuffer-02707",
           "text": " If <code>commandBuffer</code> is an unprotected command buffer, any resource accessed by the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
+        }
+      ],
+      "(VK_EXT_shader_image_atomic_int64)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksNV-SampledType-04470",
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksNV-SampledType-04471",
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksNV-SampledType-04472",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksNV-SampledType-04473",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksNV-sparseImageInt64Atomics-04474",
+          "text": " If the <a href=\"#features-sparseImageInt64Atomics\"><code>sparseImageInt64Atomics</code></a> feature is not enabled, <a href=\"#VkImage\">VkImage</a> objects created with the <code>VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</code> flag <strong class=\"purple\">must</strong> not be accessed by atomic instructions through an <code>OpTypeImage</code> with a <code>SampledType</code> with a <code>Width</code> of 64 by this command."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksNV-sparseImageInt64Atomics-04475",
+          "text": " If the <a href=\"#features-sparseImageInt64Atomics\"><code>sparseImageInt64Atomics</code></a> feature is not enabled, <a href=\"#VkBuffer\">VkBuffer</a> objects created with the <code>VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT</code> flag <strong class=\"purple\">must</strong> not be accessed by atomic instructions through an <code>OpTypeImage</code> with a <code>SampledType</code> with a <code>Width</code> of 64 by this command."
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_multiview)": [
@@ -23208,7 +23448,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-None-04115",
-          "text": " If a <code>VkImageView</code> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-OpImageWrite-04469",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-renderPass-02684",
@@ -23295,6 +23539,32 @@
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-commandBuffer-02711",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> not be a protected command buffer"
+        }
+      ],
+      "(VK_EXT_shader_image_atomic_int64)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-SampledType-04470",
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-SampledType-04471",
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-SampledType-04472",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-SampledType-04473",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-sparseImageInt64Atomics-04474",
+          "text": " If the <a href=\"#features-sparseImageInt64Atomics\"><code>sparseImageInt64Atomics</code></a> feature is not enabled, <a href=\"#VkImage\">VkImage</a> objects created with the <code>VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</code> flag <strong class=\"purple\">must</strong> not be accessed by atomic instructions through an <code>OpTypeImage</code> with a <code>SampledType</code> with a <code>Width</code> of 64 by this command."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-sparseImageInt64Atomics-04475",
+          "text": " If the <a href=\"#features-sparseImageInt64Atomics\"><code>sparseImageInt64Atomics</code></a> feature is not enabled, <a href=\"#VkBuffer\">VkBuffer</a> objects created with the <code>VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT</code> flag <strong class=\"purple\">must</strong> not be accessed by atomic instructions through an <code>OpTypeImage</code> with a <code>SampledType</code> with a <code>Width</code> of 64 by this command."
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_multiview)": [
@@ -23450,7 +23720,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-None-04115",
-          "text": " If a <code>VkImageView</code> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-OpImageWrite-04469",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-renderPass-02684",
@@ -23553,6 +23827,32 @@
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-commandBuffer-02711",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> not be a protected command buffer"
+        }
+      ],
+      "(VK_EXT_shader_image_atomic_int64)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-SampledType-04470",
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-SampledType-04471",
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-SampledType-04472",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-SampledType-04473",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-sparseImageInt64Atomics-04474",
+          "text": " If the <a href=\"#features-sparseImageInt64Atomics\"><code>sparseImageInt64Atomics</code></a> feature is not enabled, <a href=\"#VkImage\">VkImage</a> objects created with the <code>VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</code> flag <strong class=\"purple\">must</strong> not be accessed by atomic instructions through an <code>OpTypeImage</code> with a <code>SampledType</code> with a <code>Width</code> of 64 by this command."
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-sparseImageInt64Atomics-04475",
+          "text": " If the <a href=\"#features-sparseImageInt64Atomics\"><code>sparseImageInt64Atomics</code></a> feature is not enabled, <a href=\"#VkBuffer\">VkBuffer</a> objects created with the <code>VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT</code> flag <strong class=\"purple\">must</strong> not be accessed by atomic instructions through an <code>OpTypeImage</code> with a <code>SampledType</code> with a <code>Width</code> of 64 by this command."
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_multiview)": [
@@ -25976,7 +26276,11 @@
         },
         {
           "vuid": "VUID-vkCmdDispatch-None-04115",
-          "text": " If a <code>VkImageView</code> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+        },
+        {
+          "vuid": "VUID-vkCmdDispatch-OpImageWrite-04469",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
         },
         {
           "vuid": "VUID-vkCmdDispatch-groupCountX-00386",
@@ -26048,6 +26352,32 @@
           "vuid": "VUID-vkCmdDispatch-commandBuffer-02713",
           "text": " If <code>commandBuffer</code> is a protected command buffer, pipeline stages other than the framebuffer-space and compute stages in the <code>VkPipeline</code> object bound to the pipeline bind point <strong class=\"purple\">must</strong> not write to any resource"
         }
+      ],
+      "(VK_EXT_shader_image_atomic_int64)": [
+        {
+          "vuid": "VUID-vkCmdDispatch-SampledType-04470",
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64."
+        },
+        {
+          "vuid": "VUID-vkCmdDispatch-SampledType-04471",
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32."
+        },
+        {
+          "vuid": "VUID-vkCmdDispatch-SampledType-04472",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64."
+        },
+        {
+          "vuid": "VUID-vkCmdDispatch-SampledType-04473",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32."
+        },
+        {
+          "vuid": "VUID-vkCmdDispatch-sparseImageInt64Atomics-04474",
+          "text": " If the <a href=\"#features-sparseImageInt64Atomics\"><code>sparseImageInt64Atomics</code></a> feature is not enabled, <a href=\"#VkImage\">VkImage</a> objects created with the <code>VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</code> flag <strong class=\"purple\">must</strong> not be accessed by atomic instructions through an <code>OpTypeImage</code> with a <code>SampledType</code> with a <code>Width</code> of 64 by this command."
+        },
+        {
+          "vuid": "VUID-vkCmdDispatch-sparseImageInt64Atomics-04475",
+          "text": " If the <a href=\"#features-sparseImageInt64Atomics\"><code>sparseImageInt64Atomics</code></a> feature is not enabled, <a href=\"#VkBuffer\">VkBuffer</a> objects created with the <code>VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT</code> flag <strong class=\"purple\">must</strong> not be accessed by atomic instructions through an <code>OpTypeImage</code> with a <code>SampledType</code> with a <code>Width</code> of 64 by this command."
+        }
       ]
     },
     "vkCmdDispatchIndirect": {
@@ -26106,7 +26436,11 @@
         },
         {
           "vuid": "VUID-vkCmdDispatchIndirect-None-04115",
-          "text": " If a <code>VkImageView</code> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+        },
+        {
+          "vuid": "VUID-vkCmdDispatchIndirect-OpImageWrite-04469",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
         },
         {
           "vuid": "VUID-vkCmdDispatchIndirect-buffer-02708",
@@ -26186,6 +26520,32 @@
           "vuid": "VUID-vkCmdDispatchIndirect-commandBuffer-02711",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> not be a protected command buffer"
         }
+      ],
+      "(VK_EXT_shader_image_atomic_int64)": [
+        {
+          "vuid": "VUID-vkCmdDispatchIndirect-SampledType-04470",
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64."
+        },
+        {
+          "vuid": "VUID-vkCmdDispatchIndirect-SampledType-04471",
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32."
+        },
+        {
+          "vuid": "VUID-vkCmdDispatchIndirect-SampledType-04472",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64."
+        },
+        {
+          "vuid": "VUID-vkCmdDispatchIndirect-SampledType-04473",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32."
+        },
+        {
+          "vuid": "VUID-vkCmdDispatchIndirect-sparseImageInt64Atomics-04474",
+          "text": " If the <a href=\"#features-sparseImageInt64Atomics\"><code>sparseImageInt64Atomics</code></a> feature is not enabled, <a href=\"#VkImage\">VkImage</a> objects created with the <code>VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</code> flag <strong class=\"purple\">must</strong> not be accessed by atomic instructions through an <code>OpTypeImage</code> with a <code>SampledType</code> with a <code>Width</code> of 64 by this command."
+        },
+        {
+          "vuid": "VUID-vkCmdDispatchIndirect-sparseImageInt64Atomics-04475",
+          "text": " If the <a href=\"#features-sparseImageInt64Atomics\"><code>sparseImageInt64Atomics</code></a> feature is not enabled, <a href=\"#VkBuffer\">VkBuffer</a> objects created with the <code>VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT</code> flag <strong class=\"purple\">must</strong> not be accessed by atomic instructions through an <code>OpTypeImage</code> with a <code>SampledType</code> with a <code>Width</code> of 64 by this command."
+        }
       ]
     },
     "VkDispatchIndirectCommand": {
@@ -26260,7 +26620,11 @@
         },
         {
           "vuid": "VUID-vkCmdDispatchBase-None-04115",
-          "text": " If a <code>VkImageView</code> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+        },
+        {
+          "vuid": "VUID-vkCmdDispatchBase-OpImageWrite-04469",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
         },
         {
           "vuid": "VUID-vkCmdDispatchBase-baseGroupX-00421",
@@ -26323,6 +26687,32 @@
         {
           "vuid": "VUID-vkCmdDispatchBase-commandBuffer-02707",
           "text": " If <code>commandBuffer</code> is an unprotected command buffer, any resource accessed by the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
+        }
+      ],
+      "(VK_EXT_shader_image_atomic_int64)": [
+        {
+          "vuid": "VUID-vkCmdDispatchBase-SampledType-04470",
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64."
+        },
+        {
+          "vuid": "VUID-vkCmdDispatchBase-SampledType-04471",
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32."
+        },
+        {
+          "vuid": "VUID-vkCmdDispatchBase-SampledType-04472",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64."
+        },
+        {
+          "vuid": "VUID-vkCmdDispatchBase-SampledType-04473",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32."
+        },
+        {
+          "vuid": "VUID-vkCmdDispatchBase-sparseImageInt64Atomics-04474",
+          "text": " If the <a href=\"#features-sparseImageInt64Atomics\"><code>sparseImageInt64Atomics</code></a> feature is not enabled, <a href=\"#VkImage\">VkImage</a> objects created with the <code>VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</code> flag <strong class=\"purple\">must</strong> not be accessed by atomic instructions through an <code>OpTypeImage</code> with a <code>SampledType</code> with a <code>Width</code> of 64 by this command."
+        },
+        {
+          "vuid": "VUID-vkCmdDispatchBase-sparseImageInt64Atomics-04475",
+          "text": " If the <a href=\"#features-sparseImageInt64Atomics\"><code>sparseImageInt64Atomics</code></a> feature is not enabled, <a href=\"#VkBuffer\">VkBuffer</a> objects created with the <code>VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT</code> flag <strong class=\"purple\">must</strong> not be accessed by atomic instructions through an <code>OpTypeImage</code> with a <code>SampledType</code> with a <code>Width</code> of 64 by this command."
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_device_group)": [
@@ -26728,7 +27118,11 @@
         },
         {
           "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-None-04115",
-          "text": " If a <code>VkImageView</code> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+        },
+        {
+          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-OpImageWrite-04469",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
         },
         {
           "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-renderPass-02684",
@@ -26807,6 +27201,32 @@
         {
           "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-commandBuffer-02970",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> not be a protected command buffer"
+        }
+      ],
+      "(VK_EXT_shader_image_atomic_int64)": [
+        {
+          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-SampledType-04470",
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64."
+        },
+        {
+          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-SampledType-04471",
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32."
+        },
+        {
+          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-SampledType-04472",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64."
+        },
+        {
+          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-SampledType-04473",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32."
+        },
+        {
+          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-sparseImageInt64Atomics-04474",
+          "text": " If the <a href=\"#features-sparseImageInt64Atomics\"><code>sparseImageInt64Atomics</code></a> feature is not enabled, <a href=\"#VkImage\">VkImage</a> objects created with the <code>VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</code> flag <strong class=\"purple\">must</strong> not be accessed by atomic instructions through an <code>OpTypeImage</code> with a <code>SampledType</code> with a <code>Width</code> of 64 by this command."
+        },
+        {
+          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-sparseImageInt64Atomics-04475",
+          "text": " If the <a href=\"#features-sparseImageInt64Atomics\"><code>sparseImageInt64Atomics</code></a> feature is not enabled, <a href=\"#VkBuffer\">VkBuffer</a> objects created with the <code>VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT</code> flag <strong class=\"purple\">must</strong> not be accessed by atomic instructions through an <code>OpTypeImage</code> with a <code>SampledType</code> with a <code>Width</code> of 64 by this command."
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_multiview)": [
@@ -30222,7 +30642,11 @@
         },
         {
           "vuid": "VUID-vkCmdTraceRaysNV-None-04115",
-          "text": " If a <code>VkImageView</code> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-OpImageWrite-04469",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
         },
         {
           "vuid": "VUID-vkCmdTraceRaysNV-None-03429",
@@ -30359,6 +30783,32 @@
           "text": " If <code>commandBuffer</code> is a protected command buffer, pipeline stages other than the framebuffer-space and compute stages in the <code>VkPipeline</code> object bound to the pipeline bind point <strong class=\"purple\">must</strong> not write to any resource"
         }
       ],
+      "(VK_EXT_shader_image_atomic_int64)": [
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-SampledType-04470",
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64."
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-SampledType-04471",
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32."
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-SampledType-04472",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64."
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-SampledType-04473",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32."
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-sparseImageInt64Atomics-04474",
+          "text": " If the <a href=\"#features-sparseImageInt64Atomics\"><code>sparseImageInt64Atomics</code></a> feature is not enabled, <a href=\"#VkImage\">VkImage</a> objects created with the <code>VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</code> flag <strong class=\"purple\">must</strong> not be accessed by atomic instructions through an <code>OpTypeImage</code> with a <code>SampledType</code> with a <code>Width</code> of 64 by this command."
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-sparseImageInt64Atomics-04475",
+          "text": " If the <a href=\"#features-sparseImageInt64Atomics\"><code>sparseImageInt64Atomics</code></a> feature is not enabled, <a href=\"#VkBuffer\">VkBuffer</a> objects created with the <code>VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT</code> flag <strong class=\"purple\">must</strong> not be accessed by atomic instructions through an <code>OpTypeImage</code> with a <code>SampledType</code> with a <code>Width</code> of 64 by this command."
+        }
+      ],
       "(VK_NV_ray_tracing,VK_KHR_ray_tracing)+(VK_NV_ray_tracing)": [
         {
           "vuid": "VUID-vkCmdTraceRaysNV-commandBuffer-parameter",
@@ -30454,7 +30904,11 @@
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-None-04115",
-          "text": " If a <code>VkImageView</code> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysKHR-OpImageWrite-04469",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-None-03429",
@@ -30639,6 +31093,32 @@
           "text": " If <code>commandBuffer</code> is a protected command buffer, pipeline stages other than the framebuffer-space and compute stages in the <code>VkPipeline</code> object bound to the pipeline bind point <strong class=\"purple\">must</strong> not write to any resource"
         }
       ],
+      "(VK_EXT_shader_image_atomic_int64)": [
+        {
+          "vuid": "VUID-vkCmdTraceRaysKHR-SampledType-04470",
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64."
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysKHR-SampledType-04471",
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32."
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysKHR-SampledType-04472",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64."
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysKHR-SampledType-04473",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32."
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysKHR-sparseImageInt64Atomics-04474",
+          "text": " If the <a href=\"#features-sparseImageInt64Atomics\"><code>sparseImageInt64Atomics</code></a> feature is not enabled, <a href=\"#VkImage\">VkImage</a> objects created with the <code>VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</code> flag <strong class=\"purple\">must</strong> not be accessed by atomic instructions through an <code>OpTypeImage</code> with a <code>SampledType</code> with a <code>Width</code> of 64 by this command."
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysKHR-sparseImageInt64Atomics-04475",
+          "text": " If the <a href=\"#features-sparseImageInt64Atomics\"><code>sparseImageInt64Atomics</code></a> feature is not enabled, <a href=\"#VkBuffer\">VkBuffer</a> objects created with the <code>VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT</code> flag <strong class=\"purple\">must</strong> not be accessed by atomic instructions through an <code>OpTypeImage</code> with a <code>SampledType</code> with a <code>Width</code> of 64 by this command."
+        }
+      ],
       "(VK_NV_ray_tracing,VK_KHR_ray_tracing)+(VK_KHR_ray_tracing)": [
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-commandBuffer-parameter",
@@ -30746,7 +31226,11 @@
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-None-04115",
-          "text": " If a <code>VkImageView</code> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirectKHR-OpImageWrite-04469",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-None-03429",
@@ -30933,6 +31417,32 @@
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-commandBuffer-02711",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> not be a protected command buffer"
+        }
+      ],
+      "(VK_EXT_shader_image_atomic_int64)": [
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirectKHR-SampledType-04470",
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64."
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirectKHR-SampledType-04471",
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32."
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirectKHR-SampledType-04472",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64."
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirectKHR-SampledType-04473",
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32."
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirectKHR-sparseImageInt64Atomics-04474",
+          "text": " If the <a href=\"#features-sparseImageInt64Atomics\"><code>sparseImageInt64Atomics</code></a> feature is not enabled, <a href=\"#VkImage\">VkImage</a> objects created with the <code>VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</code> flag <strong class=\"purple\">must</strong> not be accessed by atomic instructions through an <code>OpTypeImage</code> with a <code>SampledType</code> with a <code>Width</code> of 64 by this command."
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirectKHR-sparseImageInt64Atomics-04475",
+          "text": " If the <a href=\"#features-sparseImageInt64Atomics\"><code>sparseImageInt64Atomics</code></a> feature is not enabled, <a href=\"#VkBuffer\">VkBuffer</a> objects created with the <code>VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT</code> flag <strong class=\"purple\">must</strong> not be accessed by atomic instructions through an <code>OpTypeImage</code> with a <code>SampledType</code> with a <code>Width</code> of 64 by this command."
         }
       ],
       "(VK_NV_ray_tracing,VK_KHR_ray_tracing)+(VK_KHR_ray_tracing)": [
@@ -32189,6 +32699,14 @@
         {
           "vuid": "VUID-VkPhysicalDeviceShaderAtomicInt64Features-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES</code>"
+        }
+      ]
+    },
+    "VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT": {
+      "(VK_EXT_shader_image_atomic_int64)": [
+        {
+          "vuid": "VUID-VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_IMAGE_ATOMIC_INT64_FEATURES_EXT</code>"
         }
       ]
     },
