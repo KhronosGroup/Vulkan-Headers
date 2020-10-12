@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.2.156",
-    "comment": "from git branch: github-main commit: cee0f4b12acde766e64d0d038b03458c74bb67f1",
-    "date": "2020-10-05 02:08:31Z"
+    "api version": "1.2.157",
+    "comment": "from git branch: github-main commit: fa50015cb517fc3105ffdab1fc055e322a682265",
+    "date": "2020-10-12 06:23:36Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -471,6 +471,12 @@
         {
           "vuid": "VUID-VkDeviceCreateInfo-pNext-02830",
           "text": " If the <code>pNext</code> chain includes a <a href=\"#VkPhysicalDeviceVulkan12Features\">VkPhysicalDeviceVulkan12Features</a> structure, then it <strong class=\"purple\">must</strong> not include a <a href=\"#VkPhysicalDevice8BitStorageFeatures\">VkPhysicalDevice8BitStorageFeatures</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64Features\">VkPhysicalDeviceShaderAtomicInt64Features</a>, <a href=\"#VkPhysicalDeviceShaderFloat16Int8Features\">VkPhysicalDeviceShaderFloat16Int8Features</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeatures\">VkPhysicalDeviceDescriptorIndexingFeatures</a>, <a href=\"#VkPhysicalDeviceScalarBlockLayoutFeatures\">VkPhysicalDeviceScalarBlockLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceImagelessFramebufferFeatures\">VkPhysicalDeviceImagelessFramebufferFeatures</a>, <a href=\"#VkPhysicalDeviceUniformBufferStandardLayoutFeatures\">VkPhysicalDeviceUniformBufferStandardLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures\">VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures</a>, <a href=\"#VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures\">VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures</a>, <a href=\"#VkPhysicalDeviceHostQueryResetFeatures\">VkPhysicalDeviceHostQueryResetFeatures</a>, <a href=\"#VkPhysicalDeviceTimelineSemaphoreFeatures\">VkPhysicalDeviceTimelineSemaphoreFeatures</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeatures\">VkPhysicalDeviceBufferDeviceAddressFeatures</a>, or <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeatures\">VkPhysicalDeviceVulkanMemoryModelFeatures</a> structure"
+        }
+      ],
+      "(VK_VERSION_1_2)+(VK_KHR_shader_draw_parameters)": [
+        {
+          "vuid": "VUID-VkDeviceCreateInfo-ppEnabledExtensions-04476",
+          "text": " If <code>ppEnabledExtensions</code> contains <code>\"VK_KHR_shader_draw_parameters\"</code> and the <code>pNext</code> chain includes a <a href=\"#VkPhysicalDeviceVulkan11Features\">VkPhysicalDeviceVulkan11Features</a> structure, then <code>VkPhysicalDeviceVulkan11Features</code>::<code>shaderDrawParameters</code> <strong class=\"purple\">must</strong> be <code>VK_TRUE</code>"
         }
       ],
       "(VK_VERSION_1_2)+(VK_KHR_draw_indirect_count)": [
@@ -19081,6 +19087,10 @@
           "text": " If <code>dstImage</code> has a depth/stencil format, the <code>bufferOffset</code> member of any element of <code>pRegions</code> <strong class=\"purple\">must</strong> be a multiple of <code>4</code>"
         },
         {
+          "vuid": "VUID-vkCmdCopyBufferToImage-commandBuffer-04477",
+          "text": " If the queue family used to create the <a href=\"#VkCommandPool\">VkCommandPool</a> which <code>commandBuffer</code> was allocated from does not support <code>VK_QUEUE_GRAPHICS_BIT</code>, for each element of <code>pRegions</code>, the <code>aspectMask</code> member of <code>imageSubresource</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_ASPECT_DEPTH_BIT</code> or <code>VK_IMAGE_ASPECT_STENCIL_BIT</code>."
+        },
+        {
           "vuid": "VUID-vkCmdCopyBufferToImage-imageOffset-00197",
           "text": " For each element of <code>pRegions</code>, <code>imageOffset.x</code> and <span class=\"eq\">(<code>imageExtent.width</code> &#43; <code>imageOffset.x</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the width of the specified <code>imageSubresource</code> of {imageparam}"
         },
@@ -19557,6 +19567,10 @@
         {
           "vuid": "VUID-VkCopyBufferToImageInfo2KHR-dstImage-04053",
           "text": " If <code>dstImage</code> has a depth/stencil format, the <code>bufferOffset</code> member of any element of <code>pRegions</code> <strong class=\"purple\">must</strong> be a multiple of <code>4</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-commandBuffer-04477",
+          "text": " If the queue family used to create the <a href=\"#VkCommandPool\">VkCommandPool</a> which <code>commandBuffer</code> was allocated from does not support <code>VK_QUEUE_GRAPHICS_BIT</code>, for each element of <code>pRegions</code>, the <code>aspectMask</code> member of <code>imageSubresource</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_ASPECT_DEPTH_BIT</code> or <code>VK_IMAGE_ASPECT_STENCIL_BIT</code>."
         },
         {
           "vuid": "VUID-VkCopyBufferToImageInfo2KHR-imageOffset-00197",
