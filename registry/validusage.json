@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.2.160",
-    "comment": "from git branch: github-main commit: f90136facacd25f016e523064f03713bdfe1b22d",
-    "date": "2020-11-09 03:02:15Z"
+    "api version": "1.2.161",
+    "comment": "from git branch: github-main commit: 9f9fd160c8dbd8752447a4a8a2e32fbb92b9722d",
+    "date": "2020-11-16 06:16:55Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -3841,10 +3841,6 @@
         {
           "vuid": "VUID-VkRenderPassCreateInfo-pNext-02515",
           "text": " If the <code>pNext</code> chain includes a <a href=\"#VkRenderPassMultiviewCreateInfo\">VkRenderPassMultiviewCreateInfo</a> structure, and each element of its <code>pViewMasks</code> member is <code>0</code>, <code>correlatedViewMaskCount</code> <strong class=\"purple\">must</strong> be <code>0</code>"
-        },
-        {
-          "vuid": "VUID-VkRenderPassCreateInfo-pNext-02516",
-          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkRenderPassMultiviewCreateInfo\">VkRenderPassMultiviewCreateInfo</a> structure, each element of its <code>pViewMask</code> member <strong class=\"purple\">must</strong> not have a bit set at an index greater than or equal to <a href=\"#VkPhysicalDeviceLimits\">VkPhysicalDeviceLimits</a>::<code>maxFramebufferLayers</code>"
         }
       ]
     },
@@ -4375,10 +4371,6 @@
           "text": " For any element of <code>pDependencies</code> where its <code>srcSubpass</code> member equals its <code>dstSubpass</code> member, if the <code>viewMask</code> member of the corresponding element of <code>pSubpasses</code> includes more than one bit, its <code>dependencyFlags</code> member <strong class=\"purple\">must</strong> include <code>VK_DEPENDENCY_VIEW_LOCAL_BIT</code>"
         },
         {
-          "vuid": "VUID-VkRenderPassCreateInfo2-viewMask-02524",
-          "text": " The <code>viewMask</code> member <strong class=\"purple\">must</strong> not have a bit set at an index greater than or equal to <a href=\"#VkPhysicalDeviceLimits\">VkPhysicalDeviceLimits</a>::<code>maxFramebufferLayers</code>"
-        },
-        {
           "vuid": "VUID-VkRenderPassCreateInfo2-attachment-02525",
           "text": " If the <code>attachment</code> member of any element of the <code>pInputAttachments</code> member of any element of <code>pSubpasses</code> is not <code>VK_ATTACHMENT_UNUSED</code>, the <code>aspectMask</code> member of that element of <code>pInputAttachments</code> <strong class=\"purple\">must</strong> only include aspects that are present in images of the format specified by the element of <code>pAttachments</code> specified by <code>attachment</code>"
         },
@@ -4429,8 +4421,12 @@
       ],
       "(VK_VERSION_1_2,VK_KHR_create_renderpass2)+(VK_KHR_fragment_shading_rate)": [
         {
-          "vuid": "VUID-VkRenderPassCreateInfo2-pAttachmentImageInfos-04520",
-          "text": " If any element of <code>pAttachmentImageInfos</code> is used as a fragment shading rate attachment in any subpass, it <strong class=\"purple\">must</strong> not be used as any other attachment in the render pass"
+          "vuid": "VUID-VkRenderPassCreateInfo2-pAttachments-04585",
+          "text": " If any element of <code>pAttachments</code> is used as a fragment shading rate attachment in any subpass, it <strong class=\"purple\">must</strong> not be used as any other attachment in the render pass"
+        },
+        {
+          "vuid": "VUID-VkRenderPassCreateInfo2-pAttachments-04586",
+          "text": " If any element of <code>pAttachments</code> is used as a fragment shading rate attachment in any subpass, it <strong class=\"purple\">must</strong> have an image format whose <a href=\"#potential-format-features\">potential format features</a> contain <code>VK_FORMAT_FEATURE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR</code>"
         }
       ],
       "(VK_VERSION_1_2,VK_KHR_create_renderpass2)+(VK_KHR_fragment_shading_rate)+(VK_QCOM_render_pass_transform)": [
@@ -4726,12 +4722,6 @@
           "vuid": "VUID-VkSubpassDescription2-attachment-04563",
           "text": " If the <code>attachment</code> member of any element of <code>pInputAttachments</code> is not <code>VK_ATTACHMENT_UNUSED</code>, then the <code>aspectMask</code> member <strong class=\"purple\">must</strong> not include <code>VK_IMAGE_ASPECT_MEMORY_PLANE_i_BIT_EXT</code> for any index <code>i</code>"
         }
-      ],
-      "(VK_VERSION_1_2,VK_KHR_create_renderpass2)+(VK_KHR_fragment_shading_rate)": [
-        {
-          "vuid": "VUID-VkSubpassDescription2-pFragmentShadingRateAttachment-04522",
-          "text": " If the <code>pFragmentShadingRateAttachment</code> member of a <a href=\"#VkFragmentShadingRateAttachmentInfoKHR\">VkFragmentShadingRateAttachmentInfoKHR</a> structure included in the <code>pNext</code> chain is not <code>NULL</code>, and its <code>attachment</code> member is not <code>VK_ATTACHMENT_UNUSED</code>, that attachment <strong class=\"purple\">must</strong> not be used as any other attachment in this subpass"
-        }
       ]
     },
     "VkSubpassDescriptionDepthStencilResolve": {
@@ -4800,10 +4790,6 @@
     },
     "VkFragmentShadingRateAttachmentInfoKHR": {
       "(VK_VERSION_1_2,VK_KHR_create_renderpass2)+(VK_KHR_fragment_shading_rate)": [
-        {
-          "vuid": "VUID-VkFragmentShadingRateAttachmentInfoKHR-pFragmentShadingRateAttachment-04523",
-          "text": " If <code>pFragmentShadingRateAttachment</code> is not <code>NULL</code> and its <code>attachment</code> member is not <code>VK_ATTACHMENT_UNUSED</code> then it <strong class=\"purple\">must</strong> have a format whose features contain <code>VK_FORMAT_FEATURE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR</code>"
-        },
         {
           "vuid": "VUID-VkFragmentShadingRateAttachmentInfoKHR-pFragmentShadingRateAttachment-04524",
           "text": " If <code>pFragmentShadingRateAttachment</code> is not <code>NULL</code> and its <code>attachment</code> member is not <code>VK_ATTACHMENT_UNUSED</code>, its <code>layout</code> member <strong class=\"purple\">must</strong> be equal to <code>VK_IMAGE_LAYOUT_GENERAL</code> or <code>VK_IMAGE_LAYOUT_FRAGMENT_SHADING_RATE_ATTACHMENT_OPTIMAL_KHR</code>"
@@ -5309,6 +5295,10 @@
         {
           "vuid": "VUID-VkFramebufferCreateInfo-flags-04545",
           "text": " If <code>flags</code> includes <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT</code>, the <code>layerCount</code> member of any element of the <code>pAttachmentImageInfos</code> member of an instance of <a href=\"#VkFramebufferAttachmentsCreateInfo\">VkFramebufferAttachmentsCreateInfo</a> in the <code>pNext</code> chain that is used as a <a href=\"#primsrast-fragment-shading-rate-attachment\">fragment shading rate attachment</a> <strong class=\"purple\">must</strong> be either <code>1</code>, or greater than or equal to <code>layers</code>"
+        },
+        {
+          "vuid": "VUID-VkFramebufferCreateInfo-flags-04587",
+          "text": " If <code>flags</code> includes <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT</code>, and <code>renderPass</code> was specified with non-zero view masks, each element of <code>pAttachments</code> that is used as a <a href=\"#primsrast-fragment-shading-rate-attachment\">fragment shading rate attachment</a> by <code>renderPass</code> <strong class=\"purple\">must</strong> have a <code>layerCount</code> that is either <code>1</code>, or greater than the index of the most significant bit set in any of those view masks"
         }
       ],
       "(VK_VERSION_1_2,VK_KHR_imageless_framebuffer)+(VK_VERSION_1_1,VK_KHR_multiview)": [
@@ -10715,10 +10705,6 @@
         {
           "vuid": "VUID-VkExternalMemoryImageCreateInfo-handleTypes-parameter",
           "text": " <code>handleTypes</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkExternalMemoryHandleTypeFlagBits\">VkExternalMemoryHandleTypeFlagBits</a> values"
-        },
-        {
-          "vuid": "VUID-VkExternalMemoryImageCreateInfo-handleTypes-requiredbitmask",
-          "text": " <code>handleTypes</code> <strong class=\"purple\">must</strong> not be <code>0</code>"
         }
       ]
     },
@@ -11254,17 +11240,17 @@
       "(VK_NV_shading_rate_image)": [
         {
           "vuid": "VUID-VkImageViewCreateInfo-image-02087",
-          "text": " If <code>image</code> was created with <code>usage</code> containing <code>VK_IMAGE_USAGE_SHADING_RATE_IMAGE_BIT_NV</code>, <code>format</code> <strong class=\"purple\">must</strong> be <code>VK_FORMAT_R8_UINT</code>"
+          "text": " If the <a href=\"#features-shadingRateImage\"><code>shadingRateImage</code> feature</a> is enabled, and If <code>image</code> was created with <code>usage</code> containing <code>VK_IMAGE_USAGE_SHADING_RATE_IMAGE_BIT_NV</code>, <code>format</code> <strong class=\"purple\">must</strong> be <code>VK_FORMAT_R8_UINT</code>"
         }
       ],
       "(VK_KHR_fragment_shading_rate)": [
         {
           "vuid": "VUID-VkImageViewCreateInfo-usage-04550",
-          "text": " If the <code>usage</code> for the image view includes <code>VK_IMAGE_USAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR</code>, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR</code>"
+          "text": " If the <a href=\"#features-attachmentFragmentShadingRate\"><code>attachmentFragmentShadingRate</code> feature</a> is enabled, and the <code>usage</code> for the image view includes <code>VK_IMAGE_USAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR</code>, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR</code>"
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-usage-04551",
-          "text": " If the <code>usage</code> for the image view includes <code>VK_IMAGE_USAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR</code> and <a href=\"#limits-layeredShadingRateAttachments\"><code>layeredShadingRateAttachments</code></a> is <code>VK_FALSE</code>, <code>subresourceRange.layerCount</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+          "text": " If the <a href=\"#features-attachmentFragmentShadingRate\"><code>attachmentFragmentShadingRate</code> feature</a> is enabled, the <code>usage</code> for the image view includes <code>VK_IMAGE_USAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR</code>, and <a href=\"#limits-layeredShadingRateAttachments\"><code>layeredShadingRateAttachments</code></a> is <code>VK_FALSE</code>, <code>subresourceRange.layerCount</code> <strong class=\"purple\">must</strong> be <code>1</code>"
         }
       ],
       "(VK_EXT_fragment_density_map)+(VK_EXT_fragment_density_map2)": [
