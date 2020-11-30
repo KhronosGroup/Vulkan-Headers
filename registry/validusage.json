@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.2.162",
-    "comment": "from git branch: github-main commit: c5d94a31766e91607473ca0049a293e3f632c6ff",
-    "date": "2020-11-23 06:47:01Z"
+    "api version": "1.2.163",
+    "comment": "from git branch: github-main commit: a48d8432aacf8a23de3c471d6fa074d0a326cfcc",
+    "date": "2020-11-30 07:53:12Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -7360,7 +7360,7 @@
         },
         {
           "vuid": "VUID-VkGraphicsPipelineShaderGroupsCreateInfoNV-pPipelines-02886",
-          "text": " Each element of the <code>pPipelines</code> member of <code>libraries</code> <strong class=\"purple\">must</strong> have been created with identical state to the pipeline currently created except the state that can be overriden by <a href=\"#VkGraphicsShaderGroupCreateInfoNV\">VkGraphicsShaderGroupCreateInfoNV</a>"
+          "text": " Each element of <code>pPipelines</code> <strong class=\"purple\">must</strong> have been created with identical state to the pipeline currently created except the state that can be overridden by <a href=\"#VkGraphicsShaderGroupCreateInfoNV\">VkGraphicsShaderGroupCreateInfoNV</a>"
         },
         {
           "vuid": "VUID-VkGraphicsPipelineShaderGroupsCreateInfoNV-deviceGeneratedCommands-02887",
@@ -31370,7 +31370,7 @@
       "(VK_EXT_private_data)": [
         {
           "vuid": "VUID-vkGetPrivateDataEXT-objectType-04018",
-          "text": " <code>objectType</code> <strong class=\"purple\">must</strong> be <a href=\"#VkDevice\">VkDevice</a> or an object type whose parent is <a href=\"#VkDevice\">VkDevice</a>"
+          "text": " <code>objectType</code> <strong class=\"purple\">must</strong> be <code>VK_OBJECT_TYPE_DEVICE</code>, or an object type whose parent is <a href=\"#VkDevice\">VkDevice</a>"
         },
         {
           "vuid": "VUID-vkGetPrivateDataEXT-device-parameter",
