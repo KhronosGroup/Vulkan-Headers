@@ -1083,7 +1083,7 @@ typedef void <name>CAMetalLayer</name>;
             <member optional="true">const <type>void</type>*            <name>pNext</name></member>
             <member><type>VkDescriptorPool</type>       <name>descriptorPool</name></member>
             <member><type>uint32_t</type>               <name>descriptorSetCount</name></member>
-            <member>const <type>VkDescriptorSetLayout</type>* <name>pSetLayouts</name></member>
+            <member len="descriptorSetCount">const <type>VkDescriptorSetLayout</type>* <name>pSetLayouts</name></member>
         </type>
         <type category="struct" name="VkSpecializationMapEntry">
             <member><type>uint32_t</type>                     <name>constantID</name><comment>The SpecConstant ID specified in the BIL</comment></member>
