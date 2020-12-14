@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.2.164",
-    "comment": "from git branch: github-main commit: 8f718b4194ed1e0a572d37072e5558dd9ceabcb0",
-    "date": "2020-12-07 11:19:04Z"
+    "api version": "1.2.165",
+    "comment": "from git branch: github-main commit: ffbc67c499b92e864ad51275e606468975b5e397",
+    "date": "2020-12-14 05:44:28Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -1249,6 +1249,10 @@
         {
           "vuid": "VUID-vkQueueSubmit-pSubmits-02808",
           "text": " Any resource created with <code>VK_SHARING_MODE_EXCLUSIVE</code> that is read by an operation specified by <code>pSubmits</code> <strong class=\"purple\">must</strong> not be owned by any queue family other than the one which <code>queue</code> belongs to, at the time it is executed"
+        },
+        {
+          "vuid": "VUID-vkQueueSubmit-pSubmits-04626",
+          "text": " Any resource created with <code>VK_SHARING_MODE_CONCURRENT</code> that is accessed by an operation specified by <code>pSubmits</code> <strong class=\"purple\">must</strong> have included the queue family of <code>queue</code> at resource creation time"
         },
         {
           "vuid": "VUID-vkQueueSubmit-queue-parameter",
@@ -5088,7 +5092,7 @@
         },
         {
           "vuid": "VUID-VkFramebufferCreateInfo-flags-04535",
-          "text": " If <code>flags</code> does not include <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT</code>, each element of <code>pAttachments</code> that is used as an input, color, resolve, or depth/stencil attachment by <code>renderPass</code> <strong class=\"purple\">must</strong> have been created with a VkImageViewCreateInfo::<code>subresourceRange.pname</code>:layerCount greater than or equal to <code>layers</code>"
+          "text": " If <code>flags</code> does not include <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT</code>, each element of <code>pAttachments</code> that is used as an input, color, resolve, or depth/stencil attachment by <code>renderPass</code> <strong class=\"purple\">must</strong> have been created with a VkImageViewCreateInfo::<code>subresourceRange.layerCount</code> greater than or equal to <code>layers</code>"
         },
         {
           "vuid": "VUID-VkFramebufferCreateInfo-pAttachments-00883",
@@ -5664,31 +5668,31 @@
         },
         {
           "vuid": "VUID-VkRenderPassBeginInfo-framebuffer-03209",
-          "text": " If <code>framebuffer</code> was created with a <a href=\"#VkFramebufferCreateInfo\">VkFramebufferCreateInfo</a>::<code>flags</code> value that included <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT</code>, each element of the <code>pAttachments</code> member of a <a href=\"#VkRenderPassAttachmentBeginInfo\">VkRenderPassAttachmentBeginInfo</a> structure included in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be a <a href=\"#VkImageView\">VkImageView</a> of an image created with a value of <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>flags</code> equal to the <code>flags</code> member of the corresponding element of <a href=\"#VkFramebufferAttachmentsCreateInfo\">VkFramebufferAttachmentsCreateInfo</a>::<code>pAttachments</code> used to create <code>framebuffer</code>"
+          "text": " If <code>framebuffer</code> was created with a <a href=\"#VkFramebufferCreateInfo\">VkFramebufferCreateInfo</a>::<code>flags</code> value that included <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT</code>, each element of the <code>pAttachments</code> member of a <a href=\"#VkRenderPassAttachmentBeginInfo\">VkRenderPassAttachmentBeginInfo</a> structure included in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be a <a href=\"#VkImageView\">VkImageView</a> of an image created with a value of <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>flags</code> equal to the <code>flags</code> member of the corresponding element of <a href=\"#VkFramebufferAttachmentsCreateInfo\">VkFramebufferAttachmentsCreateInfo</a>::<code>pAttachmentImageInfos</code> used to create <code>framebuffer</code>"
         },
         {
-          "vuid": "VUID-VkRenderPassBeginInfo-framebuffer-03210",
-          "text": " If <code>framebuffer</code> was created with a <a href=\"#VkFramebufferCreateInfo\">VkFramebufferCreateInfo</a>::<code>flags</code> value that included <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT</code>, each element of the <code>pAttachments</code> member of a <a href=\"#VkRenderPassAttachmentBeginInfo\">VkRenderPassAttachmentBeginInfo</a> structure included in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be a <a href=\"#VkImageView\">VkImageView</a> of an image created with a value of <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>usage</code> equal to the <code>usage</code> member of the corresponding element of <a href=\"#VkFramebufferAttachmentsCreateInfo\">VkFramebufferAttachmentsCreateInfo</a>::<code>pAttachments</code> used to create <code>framebuffer</code>"
+          "vuid": "VUID-VkRenderPassBeginInfo-framebuffer-04627",
+          "text": " If <code>framebuffer</code> was created with a <a href=\"#VkFramebufferCreateInfo\">VkFramebufferCreateInfo</a>::<code>flags</code> value that included <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT</code>, each element of the <code>pAttachments</code> member of a <a href=\"#VkRenderPassAttachmentBeginInfo\">VkRenderPassAttachmentBeginInfo</a> structure included in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be a <a href=\"#VkImageView\">VkImageView</a> with <a href=\"#resources-image-inherited-usage\">an inherited usage</a> equal to the <code>usage</code> member of the corresponding element of <a href=\"#VkFramebufferAttachmentsCreateInfo\">VkFramebufferAttachmentsCreateInfo</a>::<code>pAttachmentImageInfos</code> used to create <code>framebuffer</code>"
         },
         {
           "vuid": "VUID-VkRenderPassBeginInfo-framebuffer-03211",
-          "text": " If <code>framebuffer</code> was created with a <a href=\"#VkFramebufferCreateInfo\">VkFramebufferCreateInfo</a>::<code>flags</code> value that included <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT</code>, each element of the <code>pAttachments</code> member of a <a href=\"#VkRenderPassAttachmentBeginInfo\">VkRenderPassAttachmentBeginInfo</a> structure included in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be a <a href=\"#VkImageView\">VkImageView</a> with a width equal to the <code>width</code> member of the corresponding element of <a href=\"#VkFramebufferAttachmentsCreateInfo\">VkFramebufferAttachmentsCreateInfo</a>::<code>pAttachments</code> used to create <code>framebuffer</code>"
+          "text": " If <code>framebuffer</code> was created with a <a href=\"#VkFramebufferCreateInfo\">VkFramebufferCreateInfo</a>::<code>flags</code> value that included <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT</code>, each element of the <code>pAttachments</code> member of a <a href=\"#VkRenderPassAttachmentBeginInfo\">VkRenderPassAttachmentBeginInfo</a> structure included in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be a <a href=\"#VkImageView\">VkImageView</a> with a width equal to the <code>width</code> member of the corresponding element of <a href=\"#VkFramebufferAttachmentsCreateInfo\">VkFramebufferAttachmentsCreateInfo</a>::<code>pAttachmentImageInfos</code> used to create <code>framebuffer</code>"
         },
         {
           "vuid": "VUID-VkRenderPassBeginInfo-framebuffer-03212",
-          "text": " If <code>framebuffer</code> was created with a <a href=\"#VkFramebufferCreateInfo\">VkFramebufferCreateInfo</a>::<code>flags</code> value that included <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT</code>, each element of the <code>pAttachments</code> member of a <a href=\"#VkRenderPassAttachmentBeginInfo\">VkRenderPassAttachmentBeginInfo</a> structure included in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be a <a href=\"#VkImageView\">VkImageView</a> with a height equal to the <code>height</code> member of the corresponding element of <a href=\"#VkFramebufferAttachmentsCreateInfo\">VkFramebufferAttachmentsCreateInfo</a>::<code>pAttachments</code> used to create <code>framebuffer</code>"
+          "text": " If <code>framebuffer</code> was created with a <a href=\"#VkFramebufferCreateInfo\">VkFramebufferCreateInfo</a>::<code>flags</code> value that included <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT</code>, each element of the <code>pAttachments</code> member of a <a href=\"#VkRenderPassAttachmentBeginInfo\">VkRenderPassAttachmentBeginInfo</a> structure included in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be a <a href=\"#VkImageView\">VkImageView</a> with a height equal to the <code>height</code> member of the corresponding element of <a href=\"#VkFramebufferAttachmentsCreateInfo\">VkFramebufferAttachmentsCreateInfo</a>::<code>pAttachmentImageInfos</code> used to create <code>framebuffer</code>"
         },
         {
           "vuid": "VUID-VkRenderPassBeginInfo-framebuffer-03213",
-          "text": " If <code>framebuffer</code> was created with a <a href=\"#VkFramebufferCreateInfo\">VkFramebufferCreateInfo</a>::<code>flags</code> value that included <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT</code>, each element of the <code>pAttachments</code> member of a <a href=\"#VkRenderPassAttachmentBeginInfo\">VkRenderPassAttachmentBeginInfo</a> structure included in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be a <a href=\"#VkImageView\">VkImageView</a> of an image created with a value of <a href=\"#VkImageViewCreateInfo\">VkImageViewCreateInfo</a>::<code>subresourceRange.layerCount</code> equal to the <code>layerCount</code> member of the corresponding element of <a href=\"#VkFramebufferAttachmentsCreateInfo\">VkFramebufferAttachmentsCreateInfo</a>::<code>pAttachments</code> used to create <code>framebuffer</code>"
+          "text": " If <code>framebuffer</code> was created with a <a href=\"#VkFramebufferCreateInfo\">VkFramebufferCreateInfo</a>::<code>flags</code> value that included <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT</code>, each element of the <code>pAttachments</code> member of a <a href=\"#VkRenderPassAttachmentBeginInfo\">VkRenderPassAttachmentBeginInfo</a> structure included in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be a <a href=\"#VkImageView\">VkImageView</a> of an image created with a value of <a href=\"#VkImageViewCreateInfo\">VkImageViewCreateInfo</a>::<code>subresourceRange.layerCount</code> equal to the <code>layerCount</code> member of the corresponding element of <a href=\"#VkFramebufferAttachmentsCreateInfo\">VkFramebufferAttachmentsCreateInfo</a>::<code>pAttachmentImageInfos</code> used to create <code>framebuffer</code>"
         },
         {
           "vuid": "VUID-VkRenderPassBeginInfo-framebuffer-03214",
-          "text": " If <code>framebuffer</code> was created with a <a href=\"#VkFramebufferCreateInfo\">VkFramebufferCreateInfo</a>::<code>flags</code> value that included <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT</code>, each element of the <code>pAttachments</code> member of a <a href=\"#VkRenderPassAttachmentBeginInfo\">VkRenderPassAttachmentBeginInfo</a> structure included in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be a <a href=\"#VkImageView\">VkImageView</a> of an image created with a value of <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a>::<code>viewFormatCount</code> equal to the <code>viewFormatCount</code> member of the corresponding element of <a href=\"#VkFramebufferAttachmentsCreateInfo\">VkFramebufferAttachmentsCreateInfo</a>::<code>pAttachments</code> used to create <code>framebuffer</code>"
+          "text": " If <code>framebuffer</code> was created with a <a href=\"#VkFramebufferCreateInfo\">VkFramebufferCreateInfo</a>::<code>flags</code> value that included <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT</code>, each element of the <code>pAttachments</code> member of a <a href=\"#VkRenderPassAttachmentBeginInfo\">VkRenderPassAttachmentBeginInfo</a> structure included in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be a <a href=\"#VkImageView\">VkImageView</a> of an image created with a value of <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a>::<code>viewFormatCount</code> equal to the <code>viewFormatCount</code> member of the corresponding element of <a href=\"#VkFramebufferAttachmentsCreateInfo\">VkFramebufferAttachmentsCreateInfo</a>::<code>pAttachmentImageInfos</code> used to create <code>framebuffer</code>"
         },
         {
           "vuid": "VUID-VkRenderPassBeginInfo-framebuffer-03215",
-          "text": " If <code>framebuffer</code> was created with a <a href=\"#VkFramebufferCreateInfo\">VkFramebufferCreateInfo</a>::<code>flags</code> value that included <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT</code>, each element of the <code>pAttachments</code> member of a <a href=\"#VkRenderPassAttachmentBeginInfo\">VkRenderPassAttachmentBeginInfo</a> structure included in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be a <a href=\"#VkImageView\">VkImageView</a> of an image created with a set of elements in <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a>::<code>pViewFormats</code> equal to the set of elements in the <code>pViewFormats</code> member of the corresponding element of <a href=\"#VkFramebufferAttachmentsCreateInfo\">VkFramebufferAttachmentsCreateInfo</a>::<code>pAttachments</code> used to create <code>framebuffer</code>"
+          "text": " If <code>framebuffer</code> was created with a <a href=\"#VkFramebufferCreateInfo\">VkFramebufferCreateInfo</a>::<code>flags</code> value that included <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT</code>, each element of the <code>pAttachments</code> member of a <a href=\"#VkRenderPassAttachmentBeginInfo\">VkRenderPassAttachmentBeginInfo</a> structure included in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be a <a href=\"#VkImageView\">VkImageView</a> of an image created with a set of elements in <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a>::<code>pViewFormats</code> equal to the set of elements in the <code>pViewFormats</code> member of the corresponding element of <a href=\"#VkFramebufferAttachmentsCreateInfo\">VkFramebufferAttachmentsCreateInfo</a>::<code>pAttachmentImageInfos</code> used to create <code>framebuffer</code>"
         },
         {
           "vuid": "VUID-VkRenderPassBeginInfo-framebuffer-03216",
@@ -7108,11 +7112,11 @@
         },
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-rasterizationStream-02319",
-          "text": " If a <a href=\"#VkPipelineRasterizationStateStreamCreateInfoEXT\">VkPipelineRasterizationStateStreamCreateInfoEXT</a>::<code>rasterizationStream</code> value other than zero is specified, all variables in the output interface of the entry point being compiled decorated with <code>Position</code>, <code>PointSize</code>, <code>ClipDistance</code>, or <code>CullDistance</code> <strong class=\"purple\">must</strong> all be decorated with identical <code>Stream</code> values that match the <code>rasterizationStream</code>"
+          "text": " If a <a href=\"#VkPipelineRasterizationStateStreamCreateInfoEXT\">VkPipelineRasterizationStateStreamCreateInfoEXT</a>::<code>rasterizationStream</code> value other than zero is specified, all variables in the output interface of the entry point being compiled decorated with <code>Position</code>, <code>PointSize</code>, <code>ClipDistance</code>, or <code>CullDistance</code> <strong class=\"purple\">must</strong> be decorated with identical <code>Stream</code> values that match the <code>rasterizationStream</code>"
         },
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-rasterizationStream-02320",
-          "text": " If <a href=\"#VkPipelineRasterizationStateStreamCreateInfoEXT\">VkPipelineRasterizationStateStreamCreateInfoEXT</a>::<code>rasterizationStream</code> is zero, or not specified, all variables in the output interface of the entry point being compiled decorated with <code>Position</code>, <code>PointSize</code>, <code>ClipDistance</code>, or <code>CullDistance</code> <strong class=\"purple\">must</strong> all be decorated with a <code>Stream</code> value of zero, or <strong class=\"purple\">must</strong> not specify the <code>Stream</code> decoration"
+          "text": " If <a href=\"#VkPipelineRasterizationStateStreamCreateInfoEXT\">VkPipelineRasterizationStateStreamCreateInfoEXT</a>::<code>rasterizationStream</code> is zero, or not specified, all variables in the output interface of the entry point being compiled decorated with <code>Position</code>, <code>PointSize</code>, <code>ClipDistance</code>, or <code>CullDistance</code> <strong class=\"purple\">must</strong> be decorated with a <code>Stream</code> value of zero, or <strong class=\"purple\">must</strong> not specify the <code>Stream</code> decoration"
         },
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-geometryStreams-02321",
@@ -14478,11 +14482,15 @@
         },
         {
           "vuid": "VUID-VkDescriptorSetAllocateInfo-pSetLayouts-parameter",
-          "text": " <code>pSetLayouts</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkDescriptorSetLayout\">VkDescriptorSetLayout</a> handle"
+          "text": " <code>pSetLayouts</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>descriptorSetCount</code> valid <a href=\"#VkDescriptorSetLayout\">VkDescriptorSetLayout</a> handles"
+        },
+        {
+          "vuid": "VUID-VkDescriptorSetAllocateInfo-descriptorSetCount-arraylength",
+          "text": " <code>descriptorSetCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
         },
         {
           "vuid": "VUID-VkDescriptorSetAllocateInfo-commonparent",
-          "text": " Both of <code>descriptorPool</code>, and <code>pSetLayouts</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <a href=\"#VkDevice\">VkDevice</a>"
+          "text": " Both of <code>descriptorPool</code>, and the elements of <code>pSetLayouts</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <a href=\"#VkDevice\">VkDevice</a>"
         }
       ]
     },
@@ -29922,7 +29930,7 @@
         },
         {
           "vuid": "VUID-VkDisplaySurfaceCreateInfoKHR-width-01256",
-          "text": " The <code>width</code> and <code>height</code> members of <code>imageExtent</code> <strong class=\"purple\">must</strong> be less than <a href=\"#VkPhysicalDeviceLimits\">VkPhysicalDeviceLimits</a>::<code>maxImageDimension2D</code>"
+          "text": " The <code>width</code> and <code>height</code> members of <code>imageExtent</code> <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#VkPhysicalDeviceLimits\">VkPhysicalDeviceLimits</a>::<code>maxImageDimension2D</code>"
         },
         {
           "vuid": "VUID-VkDisplaySurfaceCreateInfoKHR-sType-sType",
@@ -30810,7 +30818,7 @@
         },
         {
           "vuid": "VUID-vkSetLocalDimmingAMD-localDimmingSupport-04618",
-          "text": " It is only valid to call <a href=\"#vkSetLocalDimmingAMD\">vkSetLocalDimmingAMD</a> if <a href=\"#VkDisplayNativeHdrSurfaceCapabilitiesAMD\">VkDisplayNativeHdrSurfaceCapabilitiesAMD</a>::<code>localDimmingSupport</code> is supported"
+          "text": " <a href=\"#VkDisplayNativeHdrSurfaceCapabilitiesAMD\">VkDisplayNativeHdrSurfaceCapabilitiesAMD</a>::<code>localDimmingSupport</code> <strong class=\"purple\">must</strong> be supported"
         }
       ]
     },
@@ -32129,12 +32137,12 @@
     "VkStridedDeviceAddressRegionKHR": {
       "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline,VK_KHR_acceleration_structure)+(VK_KHR_ray_tracing_pipeline,VK_NV_ray_tracing)+(VK_KHR_ray_tracing_pipeline)": [
         {
-          "vuid": "VUID-VkStridedDeviceAddressRegionKHR-deviceAddress-03630",
-          "text": " If <code>deviceAddress</code> is not zero, all addresses between <code>deviceAddress</code> and <span class=\"eq\"><code>deviceAddress</code> &#43; <code>size</code> - 1</span> <strong class=\"purple\">must</strong> be in the buffer device address range of the same buffer"
+          "vuid": "VUID-VkStridedDeviceAddressRegionKHR-size-04631",
+          "text": " If <code>size</code> is not zero, all addresses between <code>deviceAddress</code> and <span class=\"eq\"><code>deviceAddress</code> &#43; <code>size</code> - 1</span> <strong class=\"purple\">must</strong> be in the buffer device address range of the same buffer"
         },
         {
-          "vuid": "VUID-VkStridedDeviceAddressRegionKHR-deviceAddress-03631",
-          "text": " If <code>deviceAddress</code> is not zero, <code>stride</code> <strong class=\"purple\">must</strong> be less than the size of the buffer from which <code>deviceAddress</code> was queried"
+          "vuid": "VUID-VkStridedDeviceAddressRegionKHR-size-04632",
+          "text": " If <code>size</code> is not zero, <code>stride</code> <strong class=\"purple\">must</strong> be less than the size of the buffer from which <code>deviceAddress</code> was queried"
         }
       ]
     },
@@ -32555,6 +32563,18 @@
     "vkCmdBuildAccelerationStructuresKHR": {
       "core": [
         {
+          "vuid": "VUID-vkCmdBuildAccelerationStructuresKHR-mode-04628",
+          "text": " The <code>mode</code> member of each element of <code>pInfos</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkBuildAccelerationStructureModeKHR\">VkBuildAccelerationStructureModeKHR</a> value"
+        },
+        {
+          "vuid": "VUID-vkCmdBuildAccelerationStructuresKHR-srcAccelerationStructure-04629",
+          "text": " If the <code>srcAccelerationStructure</code> member of any element of <code>pInfos</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, the <code>srcAccelerationStructure</code> member <strong class=\"purple\">must</strong> be a valid <a href=\"#VkAccelerationStructureKHR\">VkAccelerationStructureKHR</a> handle"
+        },
+        {
+          "vuid": "VUID-vkCmdBuildAccelerationStructuresKHR-pInfos-04630",
+          "text": " For each element of <code>pInfos</code>, if its <code>mode</code> member is <code>VK_BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR</code>, its <code>srcAccelerationStructure</code> member <strong class=\"purple\">must</strong> not be <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>"
+        },
+        {
           "vuid": "VUID-vkCmdBuildAccelerationStructuresKHR-pInfos-03403",
           "text": " The <code>srcAccelerationStructure</code> member of any element of <code>pInfos</code> <strong class=\"purple\">must</strong> not be the same acceleration structure as the <code>dstAccelerationStructure</code> member of any other element of <code>pInfos</code>"
         },
@@ -32832,6 +32852,18 @@
     },
     "vkCmdBuildAccelerationStructuresIndirectKHR": {
       "core": [
+        {
+          "vuid": "VUID-vkCmdBuildAccelerationStructuresIndirectKHR-mode-04628",
+          "text": " The <code>mode</code> member of each element of <code>pInfos</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkBuildAccelerationStructureModeKHR\">VkBuildAccelerationStructureModeKHR</a> value"
+        },
+        {
+          "vuid": "VUID-vkCmdBuildAccelerationStructuresIndirectKHR-srcAccelerationStructure-04629",
+          "text": " If the <code>srcAccelerationStructure</code> member of any element of <code>pInfos</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, the <code>srcAccelerationStructure</code> member <strong class=\"purple\">must</strong> be a valid <a href=\"#VkAccelerationStructureKHR\">VkAccelerationStructureKHR</a> handle"
+        },
+        {
+          "vuid": "VUID-vkCmdBuildAccelerationStructuresIndirectKHR-pInfos-04630",
+          "text": " For each element of <code>pInfos</code>, if its <code>mode</code> member is <code>VK_BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR</code>, its <code>srcAccelerationStructure</code> member <strong class=\"purple\">must</strong> not be <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>"
+        },
         {
           "vuid": "VUID-vkCmdBuildAccelerationStructuresIndirectKHR-pInfos-03403",
           "text": " The <code>srcAccelerationStructure</code> member of any element of <code>pInfos</code> <strong class=\"purple\">must</strong> not be the same acceleration structure as the <code>dstAccelerationStructure</code> member of any other element of <code>pInfos</code>"
@@ -33205,18 +33237,6 @@
         {
           "vuid": "VUID-VkAccelerationStructureBuildGeometryInfoKHR-flags-parameter",
           "text": " <code>flags</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkBuildAccelerationStructureFlagBitsKHR\">VkBuildAccelerationStructureFlagBitsKHR</a> values"
-        },
-        {
-          "vuid": "VUID-VkAccelerationStructureBuildGeometryInfoKHR-mode-parameter",
-          "text": " <code>mode</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkBuildAccelerationStructureModeKHR\">VkBuildAccelerationStructureModeKHR</a> value"
-        },
-        {
-          "vuid": "VUID-VkAccelerationStructureBuildGeometryInfoKHR-srcAccelerationStructure-parameter",
-          "text": " If <code>srcAccelerationStructure</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>srcAccelerationStructure</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkAccelerationStructureKHR\">VkAccelerationStructureKHR</a> handle"
-        },
-        {
-          "vuid": "VUID-VkAccelerationStructureBuildGeometryInfoKHR-dstAccelerationStructure-parameter",
-          "text": " If <code>dstAccelerationStructure</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>dstAccelerationStructure</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkAccelerationStructureKHR\">VkAccelerationStructureKHR</a> handle"
         },
         {
           "vuid": "VUID-VkAccelerationStructureBuildGeometryInfoKHR-pGeometries-parameter",
@@ -33870,6 +33890,18 @@
     },
     "vkBuildAccelerationStructuresKHR": {
       "core": [
+        {
+          "vuid": "VUID-vkBuildAccelerationStructuresKHR-mode-04628",
+          "text": " The <code>mode</code> member of each element of <code>pInfos</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkBuildAccelerationStructureModeKHR\">VkBuildAccelerationStructureModeKHR</a> value"
+        },
+        {
+          "vuid": "VUID-vkBuildAccelerationStructuresKHR-srcAccelerationStructure-04629",
+          "text": " If the <code>srcAccelerationStructure</code> member of any element of <code>pInfos</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, the <code>srcAccelerationStructure</code> member <strong class=\"purple\">must</strong> be a valid <a href=\"#VkAccelerationStructureKHR\">VkAccelerationStructureKHR</a> handle"
+        },
+        {
+          "vuid": "VUID-vkBuildAccelerationStructuresKHR-pInfos-04630",
+          "text": " For each element of <code>pInfos</code>, if its <code>mode</code> member is <code>VK_BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR</code>, its <code>srcAccelerationStructure</code> member <strong class=\"purple\">must</strong> not be <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>"
+        },
         {
           "vuid": "VUID-vkBuildAccelerationStructuresKHR-pInfos-03403",
           "text": " The <code>srcAccelerationStructure</code> member of any element of <code>pInfos</code> <strong class=\"purple\">must</strong> not be the same acceleration structure as the <code>dstAccelerationStructure</code> member of any other element of <code>pInfos</code>"
@@ -36607,6 +36639,326 @@
         {
           "vuid": "VUID-VkPhysicalDeviceToolPropertiesEXT-pNext-pNext",
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        }
+      ]
+    },
+    "StandaloneSpirv": {
+      "core": [
+        {
+          "vuid": "VUID-StandaloneSpirv-None-04633",
+          "text": " Every entry point <strong class=\"purple\">must</strong> have no return value and accept no arguments"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-None-04634",
+          "text": " The static function-call graph for an entry point <strong class=\"purple\">must</strong> not contain cycles; that is, static recursion is not allowed"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-None-04635",
+          "text": " The <strong>Logical</strong> or <strong>PhysicalStorageBuffer64</strong> addressing model <strong class=\"purple\">must</strong> be selected"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-None-04636",
+          "text": " <strong>Scope</strong> for execution <strong class=\"purple\">must</strong> be limited to <strong>Workgroup</strong> or <strong>Subgroup</strong>"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-None-04637",
+          "text": " If the <strong>Scope</strong> for execution is <strong>Workgroup</strong>, then it <strong class=\"purple\">must</strong> only be used in the task, mesh, tessellation control, or compute execution models"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-None-04638",
+          "text": " <strong>Scope</strong> for memory <strong class=\"purple\">must</strong> be limited to <strong>Device</strong>, <strong>QueueFamily</strong>, <strong>Workgroup</strong>, <strong>ShaderCallKHR</strong>, <strong>Subgroup</strong>, or <strong>Invocation</strong>"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-None-04639",
+          "text": " If the <strong>Scope</strong> for memory is <strong>Workgroup</strong>, then it <strong class=\"purple\">must</strong> only be used in the task, mesh, or compute execution models"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-None-04640",
+          "text": " If the <strong>Scope</strong> for memory is <strong>ShaderCallKHR</strong>, then it <strong class=\"purple\">must</strong> only be used in ray generation, intersection, closest hit, any-hit, miss, and callable execution models"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-None-04641",
+          "text": " If the <strong>Scope</strong> for memory is <strong>Invocation</strong>, then memory semantics <strong class=\"purple\">must</strong> be <strong>None</strong>"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-None-04642",
+          "text": " <strong>Scope</strong> for <strong>Non Uniform Group Operations</strong> <strong class=\"purple\">must</strong> be limited to <strong>Subgroup</strong>"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-None-04643",
+          "text": " <strong>Storage Class</strong> <strong class=\"purple\">must</strong> be limited to <strong>UniformConstant</strong>, <strong>Input</strong>, <strong>Uniform</strong>, <strong>Output</strong>, <strong>Workgroup</strong>, <strong>Private</strong>, <strong>Function</strong>, <strong>PushConstant</strong>, <strong>Image</strong>, <strong>StorageBuffer</strong>, <strong>RayPayloadKHR</strong>, <strong>IncomingRayPayloadKHR</strong>, <strong>HitAttributeKHR</strong>, <strong>CallableDataKHR</strong>, <strong>IncomingCallableDataKHR</strong>, <strong>ShaderRecordBufferKHR</strong>, or <strong>PhysicalStorageBuffer</strong>"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-None-04644",
+          "text": " If the <strong>Storage Class</strong> is <strong>Output</strong>, then it <strong class=\"purple\">must</strong> not be used in the <strong>RayGenerationKHR</strong>, <strong>IntersectionKHR</strong>, <strong>AnyHitKHR</strong>, <strong>ClosestHitKHR</strong>, <strong>MissKHR</strong>, or <strong>CallableKHR</strong> execution models"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-None-04645",
+          "text": " If the <strong>Storage Class</strong> is <strong>Workgroup</strong>, then it <strong class=\"purple\">must</strong> only be used in the task, mesh, or compute execution models"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-OpAtomicStore-04646",
+          "text": " <strong>Acquire</strong> memory semantics <strong class=\"purple\">must</strong> not be used with <code>OpAtomicStore</code>"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-OpAtomicLoad-04647",
+          "text": " <strong>Release</strong> memory semantics <strong class=\"purple\">must</strong> not be used with <code>OpAtomicLoad</code>"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-OpAtomicStore-04648",
+          "text": " <strong>AcquireRelease</strong> memory semantics <strong class=\"purple\">must</strong> not be used with <code>OpAtomicStore</code> or <code>OpAtomicLoad</code>"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-OpMemoryBarrier-04649",
+          "text": " <code>OpMemoryBarrier</code> <strong class=\"purple\">must</strong> use one of <strong>Acquire</strong>, <strong>Release</strong>, <strong>AcquireRelease</strong>, or <strong>SequentiallyConsistent</strong> memory semantics and <strong class=\"purple\">must</strong> include at least one storage class"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-OpControlBarrier-04650",
+          "text": " If the semantics for <code>OpControlBarrier</code> includes one of <strong>Acquire</strong>, <strong>Release</strong>, <strong>AcquireRelease</strong>, or <strong>SequentiallyConsistent</strong> memory semantics, then it <strong class=\"purple\">must</strong> include at least one storage class"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-OpVariable-04651",
+          "text": " Any <code>OpVariable</code> with an <code>Initializer</code> operand <strong class=\"purple\">must</strong> have <strong>Output</strong>, <strong>Private</strong>, or <strong>Function</strong> as its <strong>Storage Class</strong> operand"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-OpReadClockKHR-04652",
+          "text": " <strong>Scope</strong> for <code>OpReadClockKHR</code> <strong class=\"purple\">must</strong> be limited to <strong>Subgroup</strong> or <strong>Device</strong>"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-OriginLowerLeft-04653",
+          "text": " The <code>OriginLowerLeft</code> execution mode <strong class=\"purple\">must</strong> not be used; fragment entry points <strong class=\"purple\">must</strong> declare <code>OriginUpperLeft</code>"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-PixelCenterInteger-04654",
+          "text": " The <code>PixelCenterInteger</code> execution mode <strong class=\"purple\">must</strong> not be used (pixels are always centered at half-integer coordinates)"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-UniformConstant-04655",
+          "text": " Any variable in the <code>UniformConstant</code> storage class <strong class=\"purple\">must</strong> be typed as either <code>OpTypeImage</code>, <code>OpTypeSampler</code>, <code>OpTypeSampledImage</code>, <code>OpTypeAccelerationStructureKHR</code>, or an array of one of these types"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-OpTypeImage-04656",
+          "text": " <code>OpTypeImage</code> <strong class=\"purple\">must</strong> declare a scalar 32-bit float, 64-bit integer, or 32-bit integer type for the &#8220;Sampled Type&#8221; (<code>RelaxedPrecision</code> <strong class=\"purple\">can</strong> be applied to a sampling instruction and to the variable holding the result of a sampling instruction)"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-OpTypeImage-04657",
+          "text": " <code>OpTypeImage</code> <strong class=\"purple\">must</strong> have a &#8220;Sampled&#8221; operand of 1 (sampled image) or 2 (storage image)"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-OpImageTexelPointer-04658",
+          "text": " If an <code>OpImageTexelPointer</code> is used in an atomic operation, the image type of the <code>image</code> parameter to <code>OpImageTexelPointer</code> <strong class=\"purple\">must</strong> have an image format of <code>R64i</code>, <code>R64ui</code>, <code>R32f</code>, <code>R32i</code>, or <code>R32ui</code>"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-OpImageQuerySizeLod-04659",
+          "text": " <code>OpImageQuerySizeLod</code>, and <code>OpImageQueryLevels</code> <strong class=\"purple\">must</strong> only consume an &#8220;Image&#8221; operand whose type has its &#8220;Sampled&#8221; operand set to 1"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-SubpassData-04660",
+          "text": " The <span class=\"eq\">(u,v)</span> coordinates used for a <code>SubpassData</code> <strong class=\"purple\">must</strong> be the &lt;id&gt; of a constant vector <span class=\"eq\">(0,0)</span>, or if a layer coordinate is used, <strong class=\"purple\">must</strong> be a vector that was formed with constant 0 for the <span class=\"eq\">u</span> and <span class=\"eq\">v</span> components"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-OpTypeImage-04661",
+          "text": " Objects of types <code>OpTypeImage</code>, <code>OpTypeSampler</code>, <code>OpTypeSampledImage</code>, and arrays of these types <strong class=\"purple\">must</strong> not be stored to or modified"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-Offset-04662",
+          "text": " Any image operation <strong class=\"purple\">must</strong> use at most one of the <code>Offset</code>, <code>ConstOffset</code>, and <code>ConstOffsets</code> image operands"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-Offset-04663",
+          "text": " Image operand <code>Offset</code> <strong class=\"purple\">must</strong> only be used with <code>OpImage</code>*<code>Gather</code> instructions"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-OpImageGather-04664",
+          "text": " The &#8220;Component&#8221; operand of <code>OpImageGather</code>, and <code>OpImageSparseGather</code> <strong class=\"purple\">must</strong> be the &lt;id&gt; of a constant instruction"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-OpTypeAccelerationStructureKHR-04665",
+          "text": " Objects of types <code>OpTypeAccelerationStructureKHR</code> and arrays of this type <strong class=\"purple\">must</strong> not be stored to or modified"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-OpReportIntersectionKHR-04666",
+          "text": " The value of the &#8220;Hit Kind&#8221; operand of <code>OpReportIntersectionKHR</code> <strong class=\"purple\">must</strong> be in the range <span class=\"eq\">[0,127]</span>"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-None-04667",
+          "text": " Structure types <strong class=\"purple\">must</strong> not contain opaque types"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-BuiltIn-04668",
+          "text": " Any <code>BuiltIn</code> decoration not listed in <a href=\"#interfaces-builtin-variables\">Built-In Variables</a> <strong class=\"purple\">must</strong> not be used"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-GLSLShared-04669",
+          "text": " The <code>GLSLShared</code> and <code>GLSLPacked</code> decorations <strong class=\"purple\">must</strong> not be used"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-Flat-04670",
+          "text": " The <code>Flat</code>, <code>NoPerspective</code>, <code>Sample</code>, and <code>Centroid</code> decorations <strong class=\"purple\">must</strong> not be used on variables with storage class other than <code>Input</code> or on variables used in the interface of non-fragment shader entry points"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-Patch-04671",
+          "text": " The <code>Patch</code> decoration <strong class=\"purple\">must</strong> not be used on variables in the interface of a vertex, geometry, or fragment shader stage&#8217;s entry point"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-ViewportRelativeNV-04672",
+          "text": " The <code>ViewportRelativeNV</code> decoration <strong class=\"purple\">must</strong> only be used on a variable decorated with <code>Layer</code> in the vertex, tessellation evaluation, or geometry shader stages"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-ViewportRelativeNV-04673",
+          "text": " The <code>ViewportRelativeNV</code> decoration <strong class=\"purple\">must</strong> not be used unless a variable decorated with one of <code>ViewportIndex</code> or <code>ViewportMaskNV</code> is also statically used by the same <code>OpEntryPoint</code>"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-ViewportMaskNV-04674",
+          "text": " The <code>ViewportMaskNV</code> and <code>ViewportIndex</code> decorations <strong class=\"purple\">must</strong> not both be statically used by one or more <code>OpEntryPoint</code>&#8217;s that form the vertex processing stages of a graphics pipeline"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-FPRoundingMode-04675",
+          "text": " Only the round-to-nearest-even and the round-towards-zero rounding modes <strong class=\"purple\">can</strong> be used for the <code>FPRoundingMode</code> decoration"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-FPRoundingMode-04676",
+          "text": " The <code>FPRoundingMode</code> decoration <strong class=\"purple\">can</strong> only be used for the floating-point conversion instructions as described in the <a href=\"https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_16bit_storage.html\"><code>SPV_KHR_16bit_storage</code></a> SPIR-V extension"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-Invariant-04677",
+          "text": " Variables decorated with <code>Invariant</code> and variables with structure types that have any members decorated with <code>Invariant</code> <strong class=\"purple\">must</strong> be in the <code>Output</code> or <code>Input</code> storage class, <code>Invariant</code> used on an <code>Input</code> storage class variable or structure member has no effect"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-VulkanMemoryModel-04678",
+          "text": " <a id=\"builtin-volatile-semantics\"></a> If the <code>VulkanMemoryModel</code> capability is not declared, the <code>Volatile</code> decoration <strong class=\"purple\">must</strong> be used on any variable declaration that includes one of the <code>SMIDNV</code>, <code>WarpIDNV</code>, <code>SubgroupSize</code>, <code>SubgroupLocalInvocationId</code>, <code>SubgroupEqMask</code>, <code>SubgroupGeMask</code>, <code>SubgroupGtMask</code>, <code>SubgroupLeMask</code>, or <code>SubgroupLtMask</code> <code>BuiltIn</code> decorations when used in the ray generation, closest hit, miss, intersection, or callable shaders, or with the <code>RayTmaxKHR</code> <code>Builtin</code> decoration when used in an intersection shader"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-VulkanMemoryModel-04679",
+          "text": " If the <code>VulkanMemoryModel</code> capability is declared, the <code>OpLoad</code> instruction <strong class=\"purple\">must</strong> use the <code>Volatile</code> memory semantics when it accesses into any variable that includes one of the <code>SMIDNV</code>, <code>WarpIDNV</code>, <code>SubgroupSize</code>, <code>SubgroupLocalInvocationId</code>, <code>SubgroupEqMask</code>, <code>SubgroupGeMask</code>, <code>SubgroupGtMask</code>, <code>SubgroupLeMask</code>, or <code>SubgroupLtMask</code> <code>BuiltIn</code> decorations when used in the ray generation, closest hit, miss, intersection, or callable shaders, or with the <code>RayTmaxKHR</code> <code>Builtin</code> decoration when used in an intersection shader"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-OpTypeRuntimeArray-04680",
+          "text": " <code>OpTypeRuntimeArray</code> <strong class=\"purple\">must</strong> only be used for the last member of an <code>OpTypeStruct</code> that is in the <code>StorageBuffer</code> or <code>PhysicalStorageBuffer</code> storage class decorated as <code>Block</code>, or that is in the <code>Uniform</code> storage class decorated as <code>BufferBlock</code>"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-Function-04681",
+          "text": " A type <em>T</em> that is an array sized with a specialization constant <strong class=\"purple\">can</strong> be, or be contained in, the type of a Variable <em>V</em> only if: <em>T</em> is the (top-level) type of <em>V</em>; <em>V</em> is declared in the <code>Function</code>, <code>Private</code>, or <code>Workgroup</code> storage classes; <em>V</em> is an interface variable with an additional level of arrayness, <a href=\"#interfaces-iointerfaces-matching\">as described in interface matching</a>, in which case <em>T</em> is allowed to be the element type of the (top-level) type of <em>V</em>"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-OpControlBarrier-04682",
+          "text": " If <code>OpControlBarrier</code> is used in ray generation, intersection, any-hit, closest hit, miss, fragment, vertex, tessellation evaluation, or geometry shaders, the execution Scope <strong class=\"purple\">must</strong> be <code>Subgroup</code>"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-LocalSize-04683",
+          "text": " For each compute shader entry point, either a <code>LocalSize</code> execution mode or an object decorated with the <code>WorkgroupSize</code> decoration <strong class=\"purple\">must</strong> be specified"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-DerivativeGroupQuadsNV-04684",
+          "text": " For compute shaders using the <code>DerivativeGroupQuadsNV</code> execution mode, the first two dimensions of the local workgroup size <strong class=\"purple\">must</strong> be a multiple of two"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-OpGroupNonUniformBallotBitCount-04685",
+          "text": " If <code>OpGroupNonUniformBallotBitCount</code> is used, the group operation <strong class=\"purple\">must</strong> be limited to <strong>Reduce</strong>, <strong>InclusiveScan</strong>, or <strong>ExclusiveScan</strong>"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-None-04686",
+          "text": " The <em>Pointer</em> operand of all atomic instructions <strong class=\"purple\">must</strong> have a <strong>Storage Class</strong> limited to <strong>Uniform</strong>, <strong>Workgroup</strong>, <strong>Image</strong>, <strong>StorageBuffer</strong>"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-Offset-04687",
+          "text": " Output variables or block members decorated with <code>Offset</code> that have a 64-bit type, or a composite type containing a 64-bit type, <strong class=\"purple\">must</strong> specify an <code>Offset</code> value aligned to a 8 byte boundary"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-Offset-04688",
+          "text": " Any output block or block member decorated with <code>Offset</code> containing a 64-bit type consumes a multiple of 8 bytes"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-Offset-04689",
+          "text": " The size of any output block containing any member decorated with <code>Offset</code> that is a 64-bit type <strong class=\"purple\">must</strong> be a multiple of 8"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-Offset-04690",
+          "text": " The first member of an output block that specifies a <code>Offset</code> decoration <strong class=\"purple\">must</strong> specify a <code>Offset</code> value that is aligned to an 8 byte boundary if that block contains any member decorated with <code>Offset</code> and is a 64-bit type"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-Offset-04691",
+          "text": " Output variables or block members decorated with <code>Offset</code> that have a 32-bit type, or a composite type contains a 32-bit type, <strong class=\"purple\">must</strong> specify an <code>Offset</code> value aligned to a 4 byte boundary"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-Offset-04692",
+          "text": " Output variables, blocks or block members decorated with <code>Offset</code> <strong class=\"purple\">must</strong> only contain base types that have components that are either 32-bit or 64-bit in size"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-XfbBuffer-04693",
+          "text": " All variables or block members in the output interface of the entry point being compiled decorated with a specific <code>XfbBuffer</code> value <strong class=\"purple\">must</strong> all be decorated with identical <code>XfbStride</code> values"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-Stream-04694",
+          "text": " If any variables or block members in the output interface of the entry point being compiled are decorated with <code>Stream</code>, then all variables belonging to the same <code>XfbBuffer</code> <strong class=\"purple\">must</strong> specify the same <code>Stream</code> value"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-Stream-04695",
+          "text": " Output variables, blocks or block members that are not decorated with <code>Stream</code> default to vertex stream zero"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-XfbBuffer-04696",
+          "text": " For any two variables or block members in the output interface of the entry point being compiled with the same <code>XfbBuffer</code> value, the ranges determined by the <code>Offset</code> decoration and the size of the type <strong class=\"purple\">must</strong> not overlap"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-XfbBuffer-04697",
+          "text": " All block members in the output interface of the entry point being compiled that are in the same block and have a declared or inherited <code>XfbBuffer</code> decoration <strong class=\"purple\">must</strong> specify the same <code>XfbBuffer</code> value"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-RayPayloadKHR-04698",
+          "text": " <code>RayPayloadKHR</code> storage class <strong class=\"purple\">must</strong> only be used in ray generation, any-hit, closest hit or miss shaders"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-IncomingRayPayloadKHR-04699",
+          "text": " <code>IncomingRayPayloadKHR</code> storage class <strong class=\"purple\">must</strong> only be used in closest hit, any-hit, or miss shaders"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-IncomingRayPayloadKHR-04700",
+          "text": " There <strong class=\"purple\">must</strong> be at most one variable with the <code>IncomingRayPayloadKHR</code> storage class in the input interface of an entry point"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-HitAttributeKHR-04701",
+          "text": " <code>HitAttributeKHR</code> storage class <strong class=\"purple\">must</strong> only be used in intersection, any-hit, or closest hit shaders"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-HitAttributeKHR-04702",
+          "text": " There <strong class=\"purple\">must</strong> be at most one variable with the <code>HitAttributeKHR</code> storage class in the input interface of an entry point"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-HitAttributeKHR-04703",
+          "text": " A variable with <code>HitAttributeKHR</code> storage class <strong class=\"purple\">must</strong> only be written to in an intersection shader"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-CallableDataKHR-04704",
+          "text": " <code>CallableDataKHR</code> storage class <strong class=\"purple\">must</strong> only be used in ray generation, closest hit, miss, and callable shaders"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-IncomingCallableDataKHR-04705",
+          "text": " <code>IncomingCallableDataKHR</code> storage class <strong class=\"purple\">must</strong> only be used in callable shaders"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-IncomingCallableDataKHR-04706",
+          "text": " There <strong class=\"purple\">must</strong> be at most one variable with the <code>IncomingCallableDataKHR</code> storage class in the input interface of an entry point"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-Base-04707",
+          "text": " The <code>Base</code> operand of <code>OpPtrAccessChain</code> <strong class=\"purple\">must</strong> point to one of the following: <strong>Workgroup</strong>, if <code>VariablePointers</code> is enabled; <strong>StorageBuffer</strong>, if <code>VariablePointers</code> or <code>VariablePointersStorageBuffer</code> is enabled; <strong>PhysicalStorageBuffer</strong>, if the <code>PhysicalStorageBuffer64</code> addressing model is enabled"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-PhysicalStorageBuffer64-04708",
+          "text": " If the <code>PhysicalStorageBuffer64</code> addressing model is enabled, all instructions that support memory access operands and that use a physical pointer <strong class=\"purple\">must</strong> include the <code>Aligned</code> operand"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-PhysicalStorageBuffer64-04709",
+          "text": " If the <code>PhysicalStorageBuffer64</code> addressing model is enabled, any access chain instruction that accesses into a <code>RowMajor</code> matrix <strong class=\"purple\">must</strong> only be used as the <code>Pointer</code> operand to <code>OpLoad</code> or <code>OpStore</code>"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-PhysicalStorageBuffer64-04710",
+          "text": " If the <code>PhysicalStorageBuffer64</code> addressing model is enabled, <code>OpConvertUToPtr</code> and <code>OpConvertPtrToU</code> <strong class=\"purple\">must</strong> use an integer type whose <code>Width</code> is 64"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-OpTypeForwardPointer-04711",
+          "text": " <code>OpTypeForwardPointer</code> <strong class=\"purple\">must</strong> have a storage class of <code>PhysicalStorageBuffer</code>"
         }
       ]
     }
