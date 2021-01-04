@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.2.165",
-    "comment": "from git branch: github-main commit: ffbc67c499b92e864ad51275e606468975b5e397",
-    "date": "2020-12-14 05:44:28Z"
+    "api version": "1.2.166",
+    "comment": "from git branch: github-main commit: d7aab06b9be7a245945ec3f9cee772c27fbadc26",
+    "date": "2021-01-04 03:26:33Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -10673,6 +10673,14 @@
         {
           "vuid": "VUID-VkImageCreateInfo-format-01577",
           "text": " If <code>format</code> is not a <em>multi-planar</em> format, and <code>flags</code> does not include <code>VK_IMAGE_CREATE_ALIAS_BIT</code>, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_IMAGE_CREATE_DISJOINT_BIT</code>"
+        },
+        {
+          "vuid": "VUID-VkImageCreateInfo-format-04712",
+          "text": " If <code>format</code> has a <code>_422</code> or <code>_420</code> suffix, <code>width</code> <strong class=\"purple\">must</strong> be a multiple of 2"
+        },
+        {
+          "vuid": "VUID-VkImageCreateInfo-format-04713",
+          "text": " If <code>format</code> has a <code>_420</code> suffix, <code>height</code> <strong class=\"purple\">must</strong> be a multiple of 2"
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)+(VK_EXT_ycbcr_image_arrays)": [
@@ -11323,6 +11331,14 @@
         {
           "vuid": "VUID-VkImageViewCreateInfo-image-01762",
           "text": " If <code>image</code> was not created with the <code>VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT</code> flag, or if the <code>format</code> of the <code>image</code> is a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">multi-planar</a> format and if <code>subresourceRange.aspectMask</code> is <code>VK_IMAGE_ASPECT_COLOR_BIT</code>, <code>format</code> <strong class=\"purple\">must</strong> be identical to the <code>format</code> used to create <code>image</code>"
+        },
+        {
+          "vuid": "VUID-VkImageViewCreateInfo-format-04714",
+          "text": " If <code>format</code> has a <code>_422</code> or <code>_420</code> suffix then <code>image</code> <strong class=\"purple\">must</strong> have been created with a width that is a multiple of 2"
+        },
+        {
+          "vuid": "VUID-VkImageViewCreateInfo-format-04715",
+          "text": " If <code>format</code> has a <code>_420</code> suffix then <code>image</code> <strong class=\"purple\">must</strong> have been created with a height that is a multiple of 2"
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-pNext-01970",
@@ -13205,6 +13221,10 @@
           "text": " If any of <code>addressModeU</code>, <code>addressModeV</code> or <code>addressModeW</code> are <code>VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER</code>, <code>borderColor</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkBorderColor\">VkBorderColor</a> value"
         },
         {
+          "vuid": "VUID-VkSamplerCreateInfo-addressModeU-01079",
+          "text": " If <a href=\"#features-samplerMirrorClampToEdge\">samplerMirrorClampToEdge</a> is not enabled, and if the <code><a href=\"#VK_KHR_sampler_mirror_clamp_to_edge\">VK_KHR_sampler_mirror_clamp_to_edge</a></code> extension is not enabled, <code>addressModeU</code>, <code>addressModeV</code> and <code>addressModeW</code> <strong class=\"purple\">must</strong> not be <code>VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE</code>"
+        },
+        {
           "vuid": "VUID-VkSamplerCreateInfo-compareEnable-01080",
           "text": " If <code>compareEnable</code> is <code>VK_TRUE</code>, <code>compareOp</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCompareOp\">VkCompareOp</a> value"
         },
@@ -13269,12 +13289,6 @@
         {
           "vuid": "VUID-VkSamplerCreateInfo-None-01647",
           "text": " The sampler reduction mode <strong class=\"purple\">must</strong> be set to <code>VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE</code> if <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a> is enabled"
-        }
-      ],
-      "(VK_VERSION_1_2,VK_KHR_sampler_mirror_clamp_to_edge)": [
-        {
-          "vuid": "VUID-VkSamplerCreateInfo-addressModeU-01079",
-          "text": "     If ifdef::VK_VERSION_1_2[<a href=\"#features-samplerMirrorClampToEdge\">samplerMirrorClampToEdge</a> is not enabled, and if]     the <code><a href=\"#VK_KHR_sampler_mirror_clamp_to_edge\">VK_KHR_sampler_mirror_clamp_to_edge</a></code> extension is not enabled,     <code>addressModeU</code>, <code>addressModeV</code> and <code>addressModeW</code> <strong class=\"purple\">must</strong> not     be <code>VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE</code>"
         }
       ],
       "(VK_IMG_filter_cubic,VK_EXT_filter_cubic)": [
@@ -14902,7 +14916,11 @@
         },
         {
           "vuid": "VUID-VkWriteDescriptorSetAccelerationStructureKHR-pAccelerationStructures-03579",
-          "text": " Each acceleration structure in <code>pAccelerationStructures</code> <strong class=\"purple\">must</strong> have been created with <code>VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_KHR</code> or <code>VK_ACCELERATION_STRUCTURE_TYPE_GENERIC_KHR</code> and built with <code>VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_KHR</code>"
+          "text": " Each acceleration structure in <code>pAccelerationStructures</code> <strong class=\"purple\">must</strong> have been created with a <code>type</code> of <code>VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_KHR</code> or <code>VK_ACCELERATION_STRUCTURE_TYPE_GENERIC_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkWriteDescriptorSetAccelerationStructureKHR-pAccelerationStructures-03580",
+          "text": " If the <a href=\"#features-nullDescriptor\">nullDescriptor</a> feature is not enabled, each member of <code>pAccelerationStructures</code> <strong class=\"purple\">must</strong> not be <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>"
         },
         {
           "vuid": "VUID-VkWriteDescriptorSetAccelerationStructureKHR-sType-sType",
@@ -14915,12 +14933,6 @@
         {
           "vuid": "VUID-VkWriteDescriptorSetAccelerationStructureKHR-accelerationStructureCount-arraylength",
           "text": " <code>accelerationStructureCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
-        }
-      ],
-      "(VK_NV_ray_tracing,VK_KHR_acceleration_structure)+(VK_KHR_acceleration_structure)": [
-        {
-          "vuid": "VUID-VkWriteDescriptorSetAccelerationStructureKHR-pAccelerationStructures-03580",
-          "text": " If the <a href=\"#features-nullDescriptor\">nullDescriptor</a> feature is not enabled, each member of <code>pAccelerationStructures</code> <strong class=\"purple\">must</strong> not be <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>"
         }
       ]
     },
@@ -26053,10 +26065,6 @@
         {
           "vuid": "VUID-VkPipelineViewportShadingRateImageStateCreateInfoNV-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_SHADING_RATE_IMAGE_STATE_CREATE_INFO_NV</code>"
-        },
-        {
-          "vuid": "VUID-VkPipelineViewportShadingRateImageStateCreateInfoNV-viewportCount-arraylength",
-          "text": " <code>viewportCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
         }
       ]
     },
@@ -33303,10 +33311,6 @@
     "VkAccelerationStructureGeometryTrianglesDataKHR": {
       "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline,VK_KHR_acceleration_structure)+(VK_KHR_acceleration_structure,VK_NV_ray_tracing)+(VK_KHR_acceleration_structure)": [
         {
-          "vuid": "VUID-VkAccelerationStructureGeometryTrianglesDataKHR-maxVertex-03655",
-          "text": " <code>maxVertex</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
-        },
-        {
           "vuid": "VUID-VkAccelerationStructureGeometryTrianglesDataKHR-vertexStride-03735",
           "text": " <code>vertexStride</code> <strong class=\"purple\">must</strong> be a multiple of the size in bytes of the smallest component of <code>vertexFormat</code>"
         },
@@ -36883,6 +36887,10 @@
         {
           "vuid": "VUID-StandaloneSpirv-Offset-04692",
           "text": " Output variables, blocks or block members decorated with <code>Offset</code> <strong class=\"purple\">must</strong> only contain base types that have components that are either 32-bit or 64-bit in size"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-Offset-04716",
+          "text": " Only variables or block members in the output interface decorated with <code>Offset</code> <strong class=\"purple\">can</strong> be captured for transform feedback, and those variables or block members <strong class=\"purple\">must</strong> also be decorated with <code>XfbBuffer</code> and <code>XfbStride</code>, or inherit <code>XfbBuffer</code> and <code>XfbStride</code> decorations from a block containing them"
         },
         {
           "vuid": "VUID-StandaloneSpirv-XfbBuffer-04693",
