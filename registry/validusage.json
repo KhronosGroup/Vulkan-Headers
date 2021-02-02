@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.2.168",
-    "comment": "from git branch: github-main commit: cd10a156f111cfc930c1821cc41b987661a22c76",
-    "date": "2021-01-25 04:50:56Z"
+    "api version": "1.2.169",
+    "comment": "from git branch: github-main commit: 1eae55f4c780fb0f0aa990071fe158d2a70e7429",
+    "date": "2021-02-02 06:53:27Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -1388,7 +1388,7 @@
         },
         {
           "vuid": "VUID-VkSubmitInfo-pNext-04148",
-          "text": " If the <code>pNext</code> chain of this structure includes a <code>VkProtectedSubmitInfo</code> structure with <code>protectedSubmit</code> set to <code>VK_TRUE</code>, then each element of the <code>pCommandBuffers</code> array <strong class=\"purple\">must</strong> be an protected command buffer"
+          "text": " If the <code>pNext</code> chain of this structure includes a <code>VkProtectedSubmitInfo</code> structure with <code>protectedSubmit</code> set to <code>VK_TRUE</code>, then each element of the <code>pCommandBuffers</code> array <strong class=\"purple\">must</strong> be a protected command buffer"
         }
       ]
     },
@@ -4080,7 +4080,7 @@
         },
         {
           "vuid": "VUID-VkSubpassDescription-pDepthStencilAttachment-02650",
-          "text": " If <code>pDepthStencilAttachment</code> is not <code>NULL</code> and the attachment is not <code>VK_ATTACHMENT_UNUSED</code> then it <strong class=\"purple\">must</strong> have a image format whose <a href=\"#potential-format-features\">potential format features</a> contain <code>VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT</code>"
+          "text": " If <code>pDepthStencilAttachment</code> is not <code>NULL</code> and the attachment is not <code>VK_ATTACHMENT_UNUSED</code> then it <strong class=\"purple\">must</strong> have an image format whose <a href=\"#potential-format-features\">potential format features</a> contain <code>VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT</code>"
         },
         {
           "vuid": "VUID-VkSubpassDescription-pDepthStencilAttachment-01418",
@@ -4618,7 +4618,7 @@
         },
         {
           "vuid": "VUID-VkSubpassDescription2-pDepthStencilAttachment-02900",
-          "text": " If <code>pDepthStencilAttachment</code> is not <code>NULL</code> and the attachment is not <code>VK_ATTACHMENT_UNUSED</code> then it <strong class=\"purple\">must</strong> have a image format whose <a href=\"#potential-format-features\">potential format features</a> contain <code>VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT</code>"
+          "text": " If <code>pDepthStencilAttachment</code> is not <code>NULL</code> and the attachment is not <code>VK_ATTACHMENT_UNUSED</code> then it <strong class=\"purple\">must</strong> have an image format whose <a href=\"#potential-format-features\">potential format features</a> contain <code>VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT</code>"
         },
         {
           "vuid": "VUID-VkSubpassDescription2-pDepthStencilAttachment-03071",
@@ -5583,10 +5583,6 @@
         {
           "vuid": "VUID-VkRenderPassBeginInfo-framebuffer-parameter",
           "text": " <code>framebuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkFramebuffer\">VkFramebuffer</a> handle"
-        },
-        {
-          "vuid": "VUID-VkRenderPassBeginInfo-pClearValues-parameter",
-          "text": " If <code>clearValueCount</code> is not <code>0</code>, <code>pClearValues</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>clearValueCount</code> <a href=\"#VkClearValue\">VkClearValue</a> unions"
         },
         {
           "vuid": "VUID-VkRenderPassBeginInfo-commonparent",
@@ -18229,10 +18225,6 @@
           "text": " <code>imageLayout</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImageLayout\">VkImageLayout</a> value"
         },
         {
-          "vuid": "VUID-vkCmdClearColorImage-pColor-parameter",
-          "text": " <code>pColor</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkClearColorValue\">VkClearColorValue</a> union"
-        },
-        {
           "vuid": "VUID-vkCmdClearColorImage-pRanges-parameter",
           "text": " <code>pRanges</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>rangeCount</code> valid <a href=\"#VkImageSubresourceRange\">VkImageSubresourceRange</a> structures"
         },
@@ -19737,14 +19729,6 @@
           "text": " The <code>imageOffset</code> and <code>imageExtent</code> members of each element of <code>pRegions</code> <strong class=\"purple\">must</strong> respect the image transfer granularity requirements of <code>commandBuffer</code>&#8217;s command pool&#8217;s queue family, as described in <a href=\"#VkQueueFamilyProperties\">VkQueueFamilyProperties</a>"
         },
         {
-          "vuid": "VUID-vkCmdCopyBufferToImage-commandBuffer-04052",
-          "text": " If the queue family used to create the <a href=\"#VkCommandPool\">VkCommandPool</a> which <code>commandBuffer</code> was allocated from does not support <code>VK_QUEUE_GRAPHICS_BIT</code> or <code>VK_QUEUE_COMPUTE_BIT</code>, the <code>bufferOffset</code> member of any element of <code>pRegions</code> <strong class=\"purple\">must</strong> be a multiple of <code>4</code>"
-        },
-        {
-          "vuid": "VUID-vkCmdCopyBufferToImage-dstImage-04053",
-          "text": " If <code>dstImage</code> has a depth/stencil format, the <code>bufferOffset</code> member of any element of <code>pRegions</code> <strong class=\"purple\">must</strong> be a multiple of <code>4</code>"
-        },
-        {
           "vuid": "VUID-vkCmdCopyBufferToImage-commandBuffer-04477",
           "text": " If the queue family used to create the <a href=\"#VkCommandPool\">VkCommandPool</a> which <code>commandBuffer</code> was allocated from does not support <code>VK_QUEUE_GRAPHICS_BIT</code>, for each element of <code>pRegions</code>, the <code>aspectMask</code> member of <code>imageSubresource</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_ASPECT_DEPTH_BIT</code> or <code>VK_IMAGE_ASPECT_STENCIL_BIT</code>."
         },
@@ -19811,6 +19795,14 @@
         {
           "vuid": "VUID-vkCmdCopyBufferToImage-pRegions-04726",
           "text": " If {imageparam} is a <a href=\"#blocked-image\">blocked image</a>, for each element of <code>pRegions</code>, <code>bufferRowLength</code> divided by the compressed texel block width and then multiplied by the texel block size of {imageparam} <strong class=\"purple\">must</strong> be less than or equal to <span class=\"eq\">2<sup>31</sup>-1</span>"
+        },
+        {
+          "vuid": "VUID-vkCmdCopyBufferToImage-commandBuffer-04052",
+          "text": " If the queue family used to create the <a href=\"#VkCommandPool\">VkCommandPool</a> which <code>commandBuffer</code> was allocated from does not support <code>VK_QUEUE_GRAPHICS_BIT</code> or <code>VK_QUEUE_COMPUTE_BIT</code>, the <code>bufferOffset</code> member of any element of <code>pRegions</code> <strong class=\"purple\">must</strong> be a multiple of <code>4</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdCopyBufferToImage-srcImage-04053",
+          "text": " If {imageparam} has a depth/stencil format, the <code>bufferOffset</code> member of any element of <code>pRegions</code> <strong class=\"purple\">must</strong> be a multiple of <code>4</code>"
         },
         {
           "vuid": "VUID-vkCmdCopyBufferToImage-commandBuffer-parameter",
@@ -19969,14 +19961,6 @@
           "text": " The <code>imageOffset</code> and <code>imageExtent</code> members of each element of <code>pRegions</code> <strong class=\"purple\">must</strong> respect the image transfer granularity requirements of <code>commandBuffer</code>&#8217;s command pool&#8217;s queue family, as described in <a href=\"#VkQueueFamilyProperties\">VkQueueFamilyProperties</a>"
         },
         {
-          "vuid": "VUID-vkCmdCopyImageToBuffer-commandBuffer-04054",
-          "text": " If the queue family used to create the <a href=\"#VkCommandPool\">VkCommandPool</a> which <code>commandBuffer</code> was allocated from does not support <code>VK_QUEUE_GRAPHICS_BIT</code> or <code>VK_QUEUE_COMPUTE_BIT</code>, the <code>bufferOffset</code> member of any element of <code>pRegions</code> <strong class=\"purple\">must</strong> be a multiple of <code>4</code>"
-        },
-        {
-          "vuid": "VUID-vkCmdCopyImageToBuffer-srcImage-04055",
-          "text": " If <code>srcImage</code> has a depth/stencil format, the <code>bufferOffset</code> member of any element of <code>pRegions</code> <strong class=\"purple\">must</strong> be a multiple of <code>4</code>"
-        },
-        {
           "vuid": "VUID-vkCmdCopyImageToBuffer-imageOffset-00197",
           "text": " For each element of <code>pRegions</code> , <code>imageOffset.x</code> and <span class=\"eq\">(<code>imageExtent.width</code> &#43; <code>imageOffset.x</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the width of the specified <code>imageSubresource</code> of <code>srcImage</code>"
         },
@@ -20039,6 +20023,14 @@
         {
           "vuid": "VUID-vkCmdCopyImageToBuffer-pRegions-04726",
           "text": " If {imageparam} is a <a href=\"#blocked-image\">blocked image</a>, for each element of <code>pRegions</code>, <code>bufferRowLength</code> divided by the compressed texel block width and then multiplied by the texel block size of {imageparam} <strong class=\"purple\">must</strong> be less than or equal to <span class=\"eq\">2<sup>31</sup>-1</span>"
+        },
+        {
+          "vuid": "VUID-vkCmdCopyImageToBuffer-commandBuffer-04052",
+          "text": " If the queue family used to create the <a href=\"#VkCommandPool\">VkCommandPool</a> which <code>commandBuffer</code> was allocated from does not support <code>VK_QUEUE_GRAPHICS_BIT</code> or <code>VK_QUEUE_COMPUTE_BIT</code>, the <code>bufferOffset</code> member of any element of <code>pRegions</code> <strong class=\"purple\">must</strong> be a multiple of <code>4</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdCopyImageToBuffer-srcImage-04053",
+          "text": " If {imageparam} has a depth/stencil format, the <code>bufferOffset</code> member of any element of <code>pRegions</code> <strong class=\"purple\">must</strong> be a multiple of <code>4</code>"
         },
         {
           "vuid": "VUID-vkCmdCopyImageToBuffer-commandBuffer-parameter",
@@ -20255,14 +20247,6 @@
           "text": " The <code>imageOffset</code> and <code>imageExtent</code> members of each element of <code>pRegions</code> <strong class=\"purple\">must</strong> respect the image transfer granularity requirements of <code>commandBuffer</code>&#8217;s command pool&#8217;s queue family, as described in <a href=\"#VkQueueFamilyProperties\">VkQueueFamilyProperties</a>"
         },
         {
-          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-commandBuffer-04052",
-          "text": " If the queue family used to create the <a href=\"#VkCommandPool\">VkCommandPool</a> which <code>commandBuffer</code> was allocated from does not support <code>VK_QUEUE_GRAPHICS_BIT</code> or <code>VK_QUEUE_COMPUTE_BIT</code>, the <code>bufferOffset</code> member of any element of <code>pRegions</code> <strong class=\"purple\">must</strong> be a multiple of <code>4</code>"
-        },
-        {
-          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-dstImage-04053",
-          "text": " If <code>dstImage</code> has a depth/stencil format, the <code>bufferOffset</code> member of any element of <code>pRegions</code> <strong class=\"purple\">must</strong> be a multiple of <code>4</code>"
-        },
-        {
           "vuid": "VUID-VkCopyBufferToImageInfo2KHR-commandBuffer-04477",
           "text": " If the queue family used to create the <a href=\"#VkCommandPool\">VkCommandPool</a> which <code>commandBuffer</code> was allocated from does not support <code>VK_QUEUE_GRAPHICS_BIT</code>, for each element of <code>pRegions</code>, the <code>aspectMask</code> member of <code>imageSubresource</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_ASPECT_DEPTH_BIT</code> or <code>VK_IMAGE_ASPECT_STENCIL_BIT</code>."
         },
@@ -20329,6 +20313,14 @@
         {
           "vuid": "VUID-VkCopyBufferToImageInfo2KHR-pRegions-04726",
           "text": " If {imageparam} is a <a href=\"#blocked-image\">blocked image</a>, for each element of <code>pRegions</code>, <code>bufferRowLength</code> divided by the compressed texel block width and then multiplied by the texel block size of {imageparam} <strong class=\"purple\">must</strong> be less than or equal to <span class=\"eq\">2<sup>31</sup>-1</span>"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-commandBuffer-04052",
+          "text": " If the queue family used to create the <a href=\"#VkCommandPool\">VkCommandPool</a> which <code>commandBuffer</code> was allocated from does not support <code>VK_QUEUE_GRAPHICS_BIT</code> or <code>VK_QUEUE_COMPUTE_BIT</code>, the <code>bufferOffset</code> member of any element of <code>pRegions</code> <strong class=\"purple\">must</strong> be a multiple of <code>4</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-srcImage-04053",
+          "text": " If {imageparam} has a depth/stencil format, the <code>bufferOffset</code> member of any element of <code>pRegions</code> <strong class=\"purple\">must</strong> be a multiple of <code>4</code>"
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_maintenance1)": [
@@ -20525,14 +20517,6 @@
           "text": " The <code>imageOffset</code> and <code>imageExtent</code> members of each element of <code>pRegions</code> <strong class=\"purple\">must</strong> respect the image transfer granularity requirements of <code>commandBuffer</code>&#8217;s command pool&#8217;s queue family, as described in <a href=\"#VkQueueFamilyProperties\">VkQueueFamilyProperties</a>"
         },
         {
-          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-commandBuffer-04054",
-          "text": " If the queue family used to create the <a href=\"#VkCommandPool\">VkCommandPool</a> which <code>commandBuffer</code> was allocated from does not support <code>VK_QUEUE_GRAPHICS_BIT</code> or <code>VK_QUEUE_COMPUTE_BIT</code>, the <code>bufferOffset</code> member of any element of <code>pRegions</code> <strong class=\"purple\">must</strong> be a multiple of <code>4</code>"
-        },
-        {
-          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-srcImage-04055",
-          "text": " If <code>srcImage</code> has a depth/stencil format, the <code>bufferOffset</code> member of any element of <code>pRegions</code> <strong class=\"purple\">must</strong> be a multiple of <code>4</code>"
-        },
-        {
           "vuid": "VUID-VkCopyImageToBufferInfo2KHR-imageOffset-00197",
           "text": " For each element of <code>pRegions</code>"
         },
@@ -20595,6 +20579,14 @@
         {
           "vuid": "VUID-VkCopyImageToBufferInfo2KHR-pRegions-04726",
           "text": " If {imageparam} is a <a href=\"#blocked-image\">blocked image</a>, for each element of <code>pRegions</code>, <code>bufferRowLength</code> divided by the compressed texel block width and then multiplied by the texel block size of {imageparam} <strong class=\"purple\">must</strong> be less than or equal to <span class=\"eq\">2<sup>31</sup>-1</span>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-commandBuffer-04052",
+          "text": " If the queue family used to create the <a href=\"#VkCommandPool\">VkCommandPool</a> which <code>commandBuffer</code> was allocated from does not support <code>VK_QUEUE_GRAPHICS_BIT</code> or <code>VK_QUEUE_COMPUTE_BIT</code>, the <code>bufferOffset</code> member of any element of <code>pRegions</code> <strong class=\"purple\">must</strong> be a multiple of <code>4</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-srcImage-04053",
+          "text": " If {imageparam} has a depth/stencil format, the <code>bufferOffset</code> member of any element of <code>pRegions</code> <strong class=\"purple\">must</strong> be a multiple of <code>4</code>"
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_maintenance1)": [
@@ -32481,10 +32473,6 @@
           "text": " If <code>geometryCount</code> is not <code>0</code>, and <code>ppGeometries</code> is not <code>NULL</code>, <code>ppGeometries</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>geometryCount</code> valid pointers to valid <a href=\"#VkAccelerationStructureGeometryKHR\">VkAccelerationStructureGeometryKHR</a> structures"
         },
         {
-          "vuid": "VUID-VkAccelerationStructureBuildGeometryInfoKHR-scratchData-parameter",
-          "text": " <code>scratchData</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDeviceOrHostAddressKHR\">VkDeviceOrHostAddressKHR</a> union"
-        },
-        {
           "vuid": "VUID-VkAccelerationStructureBuildGeometryInfoKHR-commonparent",
           "text": " Both of <code>dstAccelerationStructure</code>, and <code>srcAccelerationStructure</code> that are valid handles of non-ignored parameters <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <a href=\"#VkDevice\">VkDevice</a>"
         }
@@ -32565,20 +32553,8 @@
           "text": " <code>vertexFormat</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkFormat\">VkFormat</a> value"
         },
         {
-          "vuid": "VUID-VkAccelerationStructureGeometryTrianglesDataKHR-vertexData-parameter",
-          "text": " <code>vertexData</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDeviceOrHostAddressConstKHR\">VkDeviceOrHostAddressConstKHR</a> union"
-        },
-        {
           "vuid": "VUID-VkAccelerationStructureGeometryTrianglesDataKHR-indexType-parameter",
           "text": " <code>indexType</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkIndexType\">VkIndexType</a> value"
-        },
-        {
-          "vuid": "VUID-VkAccelerationStructureGeometryTrianglesDataKHR-indexData-parameter",
-          "text": " <code>indexData</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDeviceOrHostAddressConstKHR\">VkDeviceOrHostAddressConstKHR</a> union"
-        },
-        {
-          "vuid": "VUID-VkAccelerationStructureGeometryTrianglesDataKHR-transformData-parameter",
-          "text": " <code>transformData</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDeviceOrHostAddressConstKHR\">VkDeviceOrHostAddressConstKHR</a> union"
         }
       ]
     },
@@ -32607,10 +32583,6 @@
         {
           "vuid": "VUID-VkAccelerationStructureGeometryAabbsDataKHR-pNext-pNext",
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
-        },
-        {
-          "vuid": "VUID-VkAccelerationStructureGeometryAabbsDataKHR-data-parameter",
-          "text": " <code>data</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDeviceOrHostAddressConstKHR\">VkDeviceOrHostAddressConstKHR</a> union"
         }
       ]
     },
@@ -32639,10 +32611,6 @@
         {
           "vuid": "VUID-VkAccelerationStructureGeometryInstancesDataKHR-pNext-pNext",
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
-        },
-        {
-          "vuid": "VUID-VkAccelerationStructureGeometryInstancesDataKHR-data-parameter",
-          "text": " <code>data</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDeviceOrHostAddressConstKHR\">VkDeviceOrHostAddressConstKHR</a> union"
         }
       ]
     },
@@ -32995,10 +32963,6 @@
           "text": " <code>src</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkAccelerationStructureKHR\">VkAccelerationStructureKHR</a> handle"
         },
         {
-          "vuid": "VUID-VkCopyAccelerationStructureToMemoryInfoKHR-dst-parameter",
-          "text": " <code>dst</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDeviceOrHostAddressKHR\">VkDeviceOrHostAddressKHR</a> union"
-        },
-        {
           "vuid": "VUID-VkCopyAccelerationStructureToMemoryInfoKHR-mode-parameter",
           "text": " <code>mode</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCopyAccelerationStructureModeKHR\">VkCopyAccelerationStructureModeKHR</a> value"
         }
@@ -33065,10 +33029,6 @@
         {
           "vuid": "VUID-VkCopyMemoryToAccelerationStructureInfoKHR-pNext-pNext",
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
-        },
-        {
-          "vuid": "VUID-VkCopyMemoryToAccelerationStructureInfoKHR-src-parameter",
-          "text": " <code>src</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDeviceOrHostAddressConstKHR\">VkDeviceOrHostAddressConstKHR</a> union"
         },
         {
           "vuid": "VUID-VkCopyMemoryToAccelerationStructureInfoKHR-dst-parameter",
@@ -36848,19 +36808,7 @@
         },
         {
           "vuid": "VUID-StandaloneSpirv-OpControlBarrier-04650",
-          "text": "     If the semantics for <code>OpControlBarrier</code> includes one of <strong>Acquire</strong>,     <strong>Release</strong>, <strong>AcquireRelease</strong>, or <strong>SequentiallyConsistent</strong> memory     semantics, then it <strong class=\"purple\">must</strong> include at least one storage class #ifndef::VK_KHR_zero_initialize_workgroup_memory"
-        },
-        {
-          "vuid": "VUID-StandaloneSpirv-OpVariable-04651",
-          "text": "     Any <code>OpVariable</code> with an <code>Initializer</code> operand <strong class=\"purple\">must</strong> have     <strong>Output</strong>, <strong>Private</strong>, or <strong>Function</strong> as its <strong>Storage Class</strong> operand #endif::VK_KHR_zero_initialize_workgroup_memory #ifdef::VK_KHR_zero_initialize_workgroup_memory"
-        },
-        {
-          "vuid": "VUID-StandaloneSpirv-OpVariable-04651",
-          "text": " Any <code>OpVariable</code> with an <code>Initializer</code> operand <strong class=\"purple\">must</strong> have <strong>Output</strong>, <strong>Private</strong>, <strong>Function</strong>, or <strong>Workgroup</strong> as its <strong>Storage Class</strong> operand"
-        },
-        {
-          "vuid": "VUID-StandaloneSpirv-OpVariable-04734",
-          "text": "     Any <code>OpVariable</code> with an <code>Initializer</code> operand and <strong>Workgroup</strong> as     its <strong>Storage Class</strong> operand <strong class=\"purple\">must</strong> use <code>OpConstantNull</code> as the     initializer. #endif::VK_KHR_zero_initialize_workgroup_memory"
+          "text": " If the semantics for <code>OpControlBarrier</code> includes one of <strong>Acquire</strong>, <strong>Release</strong>, <strong>AcquireRelease</strong>, or <strong>SequentiallyConsistent</strong> memory semantics, then it <strong class=\"purple\">must</strong> include at least one storage class"
         },
         {
           "vuid": "VUID-StandaloneSpirv-OpReadClockKHR-04652",
@@ -36979,10 +36927,6 @@
           "text": " <code>OpTypeRuntimeArray</code> <strong class=\"purple\">must</strong> only be used for the last member of an <code>OpTypeStruct</code> that is in the <code>StorageBuffer</code> or <code>PhysicalStorageBuffer</code> storage class decorated as <code>Block</code>, or that is in the <code>Uniform</code> storage class decorated as <code>BufferBlock</code>"
         },
         {
-          "vuid": "VUID-StandaloneSpirv-Function-04681",
-          "text": " A type <em>T</em> that is an array sized with a specialization constant <strong class=\"purple\">must</strong> neither be, nor be contained in, the type <em>T2</em> of a variable <em>V</em>, unless:"
-        },
-        {
           "vuid": "VUID-StandaloneSpirv-OpControlBarrier-04682",
           "text": " If <code>OpControlBarrier</code> is used in ray generation, intersection, any-hit, closest hit, miss, fragment, vertex, tessellation evaluation, or geometry shaders, the execution Scope <strong class=\"purple\">must</strong> be <code>Subgroup</code>"
         },
@@ -37097,6 +37041,34 @@
         {
           "vuid": "VUID-StandaloneSpirv-OpTypeForwardPointer-04711",
           "text": " <code>OpTypeForwardPointer</code> <strong class=\"purple\">must</strong> have a storage class of <code>PhysicalStorageBuffer</code>"
+        }
+      ],
+      "!(VK_KHR_zero_initialize_workgroup_memory)": [
+        {
+          "vuid": "VUID-StandaloneSpirv-OpVariable-04651",
+          "text": " Any <code>OpVariable</code> with an <code>Initializer</code> operand <strong class=\"purple\">must</strong> have <strong>Output</strong>, <strong>Private</strong>, or <strong>Function</strong> as its <strong>Storage Class</strong> operand"
+        }
+      ],
+      "(VK_KHR_zero_initialize_workgroup_memory)": [
+        {
+          "vuid": "VUID-StandaloneSpirv-OpVariable-04651",
+          "text": " Any <code>OpVariable</code> with an <code>Initializer</code> operand <strong class=\"purple\">must</strong> have <strong>Output</strong>, <strong>Private</strong>, <strong>Function</strong>, or <strong>Workgroup</strong> as its <strong>Storage Class</strong> operand"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-OpVariable-04734",
+          "text": " Any <code>OpVariable</code> with an <code>Initializer</code> operand and <strong>Workgroup</strong> as its <strong>Storage Class</strong> operand <strong class=\"purple\">must</strong> use <code>OpConstantNull</code> as the initializer."
+        }
+      ],
+      "!(VK_KHR_workgroup_memory_explicit_layout)": [
+        {
+          "vuid": "VUID-StandaloneSpirv-Function-04681",
+          "text": " A type <em>T</em> that is an array sized with a specialization constant <strong class=\"purple\">must</strong> neither be, nor be contained in, the type <em>T2</em> of a variable <em>V</em>, unless either: a) <em>T</em> is equal to <em>T2</em>, b) <em>V</em> is declared in the <code>Function</code>, <code>Private</code>, or <code>Workgroup</code> storage classes, or c) <em>V</em> is an interface variable with an additional level of arrayness, <a href=\"#interfaces-iointerfaces-matching\">as described in interface matching</a>, and <em>T</em> is the member type of the array type <em>T2</em>."
+        }
+      ],
+      "(VK_KHR_workgroup_memory_explicit_layout)": [
+        {
+          "vuid": "VUID-StandaloneSpirv-Function-04681",
+          "text": " A type <em>T</em> that is an array sized with a specialization constant <strong class=\"purple\">must</strong> neither be, nor be contained in, the type <em>T2</em> of a variable <em>V</em>, unless either: a) <em>T</em> is equal to <em>T2</em>, b) <em>V</em> is declared in the <code>Function</code>, or <code>Private</code> storage classes, c) <em>V</em> is a non-Block variable in the <code>Workgroup</code> storage class, or d) <em>V</em> is an interface variable with an additional level of arrayness, <a href=\"#interfaces-iointerfaces-matching\">as described in interface matching</a>, and <em>T</em> is the member type of the array type <em>T2</em>."
         }
       ]
     }
