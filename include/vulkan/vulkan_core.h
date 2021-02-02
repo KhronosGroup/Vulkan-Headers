@@ -2,7 +2,7 @@
 #define VULKAN_CORE_H_ 1
 
 /*
-** Copyright (c) 2015-2020 The Khronos Group Inc.
+** Copyright 2015-2021 The Khronos Group Inc.
 **
 ** SPDX-License-Identifier: Apache-2.0
 */
@@ -43,7 +43,7 @@ extern "C" {
 #define VK_API_VERSION_1_0 VK_MAKE_VERSION(1, 0, 0)// Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 168
+#define VK_HEADER_VERSION 169
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_VERSION(1, 2, VK_HEADER_VERSION)
@@ -11397,8 +11397,8 @@ typedef struct VkPhysicalDeviceFragmentDensityMap2PropertiesEXT {
 
 
 #define VK_QCOM_rotated_copy_commands 1
-#define VK_QCOM_rotated_copy_commands_SPEC_VERSION 0
-#define VK_QCOM_rotated_copy_commands_EXTENSION_NAME "VK_QCOM_rotated_copy_commands"
+#define VK_QCOM_ROTATED_COPY_COMMANDS_SPEC_VERSION 0
+#define VK_QCOM_ROTATED_COPY_COMMANDS_EXTENSION_NAME "VK_QCOM_rotated_copy_commands"
 typedef struct VkCopyCommandTransformInfoQCOM {
     VkStructureType                  sType;
     const void*                      pNext;
