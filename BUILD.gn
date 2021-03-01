@@ -48,6 +48,7 @@ source_set("vulkan_headers") {
     "include/vulkan/vulkan.h",
     "include/vulkan/vulkan.hpp",
     "include/vulkan/vulkan_core.h",
+    "include/vulkan/vulkan_screen.h",
   ]
   public_configs = [ ":vulkan_headers_config" ]
 }
