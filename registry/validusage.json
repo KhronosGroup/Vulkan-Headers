@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.2.170",
-    "comment": "from git branch: github-main commit: 815e07c850d642d996292f5cdec25d41ecdff0d0",
-    "date": "2021-02-15 05:28:41Z"
+    "api version": "1.2.171",
+    "comment": "from git branch: github-main commit: 31a6292b5f23b4d79b3056a087d3e2a337a285e3",
+    "date": "2021-03-01 04:45:17Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -5218,7 +5218,7 @@
       "(VK_KHR_synchronization2)": [
         {
           "vuid": "VUID-VkImageMemoryBarrier2KHR-srcQueueFamilyIndex-03938",
-          "text": " If <code>srcQueueFamilyIndex</code> and <code>dstQueueFamilyIndex</code> define a <a href=\"#synchronization-queue-transfers\">queue family ownership transfer</a> or <code>oldLayout</code> and <code>newLayout</code> define an <a href=\"#synchronization-image-layout-transitions\">image layout transition</a>, and <code>oldLayout</code> or <code>newLayout</code> is <code>VK_IMAGE_LAYOUT_ATTACHMENT_OPTIMAL_KHR</code>, <code>image</code> <strong class=\"purple\">must</strong> have been created with <code>VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT</code> or <code>VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL</code>"
+          "text": " If <code>srcQueueFamilyIndex</code> and <code>dstQueueFamilyIndex</code> define a <a href=\"#synchronization-queue-transfers\">queue family ownership transfer</a> or <code>oldLayout</code> and <code>newLayout</code> define an <a href=\"#synchronization-image-layout-transitions\">image layout transition</a>, and <code>oldLayout</code> or <code>newLayout</code> is <code>VK_IMAGE_LAYOUT_ATTACHMENT_OPTIMAL_KHR</code>, <code>image</code> <strong class=\"purple\">must</strong> have been created with <code>VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT</code> or <code>VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</code>"
         },
         {
           "vuid": "VUID-VkImageMemoryBarrier2KHR-srcQueueFamilyIndex-03939",
@@ -5446,7 +5446,7 @@
       "(VK_KHR_synchronization2)": [
         {
           "vuid": "VUID-VkImageMemoryBarrier-srcQueueFamilyIndex-03938",
-          "text": " If <code>srcQueueFamilyIndex</code> and <code>dstQueueFamilyIndex</code> define a <a href=\"#synchronization-queue-transfers\">queue family ownership transfer</a> or <code>oldLayout</code> and <code>newLayout</code> define an <a href=\"#synchronization-image-layout-transitions\">image layout transition</a>, and <code>oldLayout</code> or <code>newLayout</code> is <code>VK_IMAGE_LAYOUT_ATTACHMENT_OPTIMAL_KHR</code>, <code>image</code> <strong class=\"purple\">must</strong> have been created with <code>VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT</code> or <code>VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL</code>"
+          "text": " If <code>srcQueueFamilyIndex</code> and <code>dstQueueFamilyIndex</code> define a <a href=\"#synchronization-queue-transfers\">queue family ownership transfer</a> or <code>oldLayout</code> and <code>newLayout</code> define an <a href=\"#synchronization-image-layout-transitions\">image layout transition</a>, and <code>oldLayout</code> or <code>newLayout</code> is <code>VK_IMAGE_LAYOUT_ATTACHMENT_OPTIMAL_KHR</code>, <code>image</code> <strong class=\"purple\">must</strong> have been created with <code>VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT</code> or <code>VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</code>"
         },
         {
           "vuid": "VUID-VkImageMemoryBarrier-srcQueueFamilyIndex-03939",
@@ -5968,7 +5968,7 @@
         },
         {
           "vuid": "VUID-VkSubpassDescription-pDepthStencilAttachment-01418",
-          "text": " If neither the <code>VK_AMD_mixed_attachment_samples</code> nor the <code>VK_NV_framebuffer_mixed_samples</code> extensions are enabled, and if <code>pDepthStencilAttachment</code> is not <code>VK_ATTACHMENT_UNUSED</code> and any attachments in <code>pColorAttachments</code> are not <code>VK_ATTACHMENT_UNUSED</code>, they <strong class=\"purple\">must</strong> have the same sample count"
+          "text": " If neither the <code><a href=\"#VK_AMD_mixed_attachment_samples\">VK_AMD_mixed_attachment_samples</a></code> nor the <code><a href=\"#VK_NV_framebuffer_mixed_samples\">VK_NV_framebuffer_mixed_samples</a></code> extensions are enabled, and if <code>pDepthStencilAttachment</code> is not <code>VK_ATTACHMENT_UNUSED</code> and any attachments in <code>pColorAttachments</code> are not <code>VK_ATTACHMENT_UNUSED</code>, they <strong class=\"purple\">must</strong> have the same sample count"
         },
         {
           "vuid": "VUID-VkSubpassDescription-attachment-00853",
@@ -6022,7 +6022,7 @@
       "(VK_AMD_mixed_attachment_samples)": [
         {
           "vuid": "VUID-VkSubpassDescription-pColorAttachments-01506",
-          "text": " If the <code>VK_AMD_mixed_attachment_samples</code> extension is enabled, and all attachments in <code>pColorAttachments</code> that are not <code>VK_ATTACHMENT_UNUSED</code> <strong class=\"purple\">must</strong> have a sample count that is smaller than or equal to the sample count of <code>pDepthStencilAttachment</code> if it is not <code>VK_ATTACHMENT_UNUSED</code>"
+          "text": " If the <code><a href=\"#VK_AMD_mixed_attachment_samples\">VK_AMD_mixed_attachment_samples</a></code> extension is enabled, and all attachments in <code>pColorAttachments</code> that are not <code>VK_ATTACHMENT_UNUSED</code> <strong class=\"purple\">must</strong> have a sample count that is smaller than or equal to the sample count of <code>pDepthStencilAttachment</code> if it is not <code>VK_ATTACHMENT_UNUSED</code>"
         }
       ],
       "(VK_NVX_multiview_per_view_attributes)": [
@@ -6498,7 +6498,7 @@
         },
         {
           "vuid": "VUID-VkSubpassDescription2-pDepthStencilAttachment-03071",
-          "text": " If neither the <code>VK_AMD_mixed_attachment_samples</code> nor the <code>VK_NV_framebuffer_mixed_samples</code> extensions are enabled, and if <code>pDepthStencilAttachment</code> is not <code>VK_ATTACHMENT_UNUSED</code> and any attachments in <code>pColorAttachments</code> are not <code>VK_ATTACHMENT_UNUSED</code>, they <strong class=\"purple\">must</strong> have the same sample count"
+          "text": " If neither the <code><a href=\"#VK_AMD_mixed_attachment_samples\">VK_AMD_mixed_attachment_samples</a></code> nor the <code><a href=\"#VK_NV_framebuffer_mixed_samples\">VK_NV_framebuffer_mixed_samples</a></code> extensions are enabled, and if <code>pDepthStencilAttachment</code> is not <code>VK_ATTACHMENT_UNUSED</code> and any attachments in <code>pColorAttachments</code> are not <code>VK_ATTACHMENT_UNUSED</code>, they <strong class=\"purple\">must</strong> have the same sample count"
         },
         {
           "vuid": "VUID-VkSubpassDescription2-attachment-03073",
@@ -6576,7 +6576,7 @@
       "(VK_VERSION_1_2,VK_KHR_create_renderpass2)+(VK_AMD_mixed_attachment_samples)": [
         {
           "vuid": "VUID-VkSubpassDescription2-pColorAttachments-03070",
-          "text": " If the <code>VK_AMD_mixed_attachment_samples</code> extension is enabled, all attachments in <code>pColorAttachments</code> that are not <code>VK_ATTACHMENT_UNUSED</code> <strong class=\"purple\">must</strong> have a sample count that is smaller than or equal to the sample count of <code>pDepthStencilAttachment</code> if it is not <code>VK_ATTACHMENT_UNUSED</code>"
+          "text": " If the <code><a href=\"#VK_AMD_mixed_attachment_samples\">VK_AMD_mixed_attachment_samples</a></code> extension is enabled, all attachments in <code>pColorAttachments</code> that are not <code>VK_ATTACHMENT_UNUSED</code> <strong class=\"purple\">must</strong> have a sample count that is smaller than or equal to the sample count of <code>pDepthStencilAttachment</code> if it is not <code>VK_ATTACHMENT_UNUSED</code>"
         }
       ],
       "(VK_VERSION_1_2,VK_KHR_create_renderpass2)+(VK_NVX_multiview_per_view_attributes)": [
@@ -8712,7 +8712,7 @@
         },
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-subpass-00757",
-          "text": " If neither the <code>VK_AMD_mixed_attachment_samples</code> nor the <code>VK_NV_framebuffer_mixed_samples</code> extensions are enabled, and if <code>subpass</code> uses color and/or depth/stencil attachments, then the <code>rasterizationSamples</code> member of <code>pMultisampleState</code> <strong class=\"purple\">must</strong> be the same as the sample count for those subpass attachments"
+          "text": " If neither the <code><a href=\"#VK_AMD_mixed_attachment_samples\">VK_AMD_mixed_attachment_samples</a></code> nor the <code><a href=\"#VK_NV_framebuffer_mixed_samples\">VK_NV_framebuffer_mixed_samples</a></code> extensions are enabled, and if <code>subpass</code> uses color and/or depth/stencil attachments, then the <code>rasterizationSamples</code> member of <code>pMultisampleState</code> <strong class=\"purple\">must</strong> be the same as the sample count for those subpass attachments"
         },
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-subpass-00758",
@@ -8888,23 +8888,23 @@
       "(VK_AMD_mixed_attachment_samples)": [
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-subpass-01505",
-          "text": " If the <code>VK_AMD_mixed_attachment_samples</code> extension is enabled, and if <code>subpass</code> uses color and/or depth/stencil attachments, then the <code>rasterizationSamples</code> member of <code>pMultisampleState</code> <strong class=\"purple\">must</strong> equal the maximum of the sample counts of those subpass attachments"
+          "text": " If the <code><a href=\"#VK_AMD_mixed_attachment_samples\">VK_AMD_mixed_attachment_samples</a></code> extension is enabled, and if <code>subpass</code> uses color and/or depth/stencil attachments, then the <code>rasterizationSamples</code> member of <code>pMultisampleState</code> <strong class=\"purple\">must</strong> equal the maximum of the sample counts of those subpass attachments"
         }
       ],
       "(VK_NV_framebuffer_mixed_samples)": [
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-subpass-01411",
-          "text": " If the <code>VK_NV_framebuffer_mixed_samples</code> extension is enabled, and if <code>subpass</code> has a depth/stencil attachment and depth test, stencil test, or depth bounds test are enabled, then the <code>rasterizationSamples</code> member of <code>pMultisampleState</code> <strong class=\"purple\">must</strong> be the same as the sample count of the depth/stencil attachment"
+          "text": " If the <code><a href=\"#VK_NV_framebuffer_mixed_samples\">VK_NV_framebuffer_mixed_samples</a></code> extension is enabled, and if <code>subpass</code> has a depth/stencil attachment and depth test, stencil test, or depth bounds test are enabled, then the <code>rasterizationSamples</code> member of <code>pMultisampleState</code> <strong class=\"purple\">must</strong> be the same as the sample count of the depth/stencil attachment"
         },
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-subpass-01412",
-          "text": " If the <code>VK_NV_framebuffer_mixed_samples</code> extension is enabled, and if <code>subpass</code> has any color attachments, then the <code>rasterizationSamples</code> member of <code>pMultisampleState</code> <strong class=\"purple\">must</strong> be greater than or equal to the sample count for those subpass attachments"
+          "text": " If the <code><a href=\"#VK_NV_framebuffer_mixed_samples\">VK_NV_framebuffer_mixed_samples</a></code> extension is enabled, and if <code>subpass</code> has any color attachments, then the <code>rasterizationSamples</code> member of <code>pMultisampleState</code> <strong class=\"purple\">must</strong> be greater than or equal to the sample count for those subpass attachments"
         }
       ],
       "(VK_NV_coverage_reduction_mode)": [
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-coverageReductionMode-02722",
-          "text": " If the <code>VK_NV_coverage_reduction_mode</code> extension is enabled, the coverage reduction mode specified by <a href=\"#VkPipelineCoverageReductionStateCreateInfoNV\">VkPipelineCoverageReductionStateCreateInfoNV</a>::<code>coverageReductionMode</code>, the <code>rasterizationSamples</code> member of <code>pMultisampleState</code> and the sample counts for the color and depth/stencil attachments (if the subpass has them) <strong class=\"purple\">must</strong> be a valid combination returned by <code>vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV</code>"
+          "text": " If the <code><a href=\"#VK_NV_coverage_reduction_mode\">VK_NV_coverage_reduction_mode</a></code> extension is enabled, the coverage reduction mode specified by <a href=\"#VkPipelineCoverageReductionStateCreateInfoNV\">VkPipelineCoverageReductionStateCreateInfoNV</a>::<code>coverageReductionMode</code>, the <code>rasterizationSamples</code> member of <code>pMultisampleState</code> and the sample counts for the color and depth/stencil attachments (if the subpass has them) <strong class=\"purple\">must</strong> be a valid combination returned by <code>vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV</code>"
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_multiview)": [
@@ -10408,7 +10408,7 @@
         },
         {
           "vuid": "VUID-vkGetPipelineExecutableStatisticsKHR-pipeline-03274",
-          "text": " <code>pipeline</code> member of <code>pExecutableInfo</code> <strong class=\"purple\">must</strong> have been created with <code>VK_PIPELINE_CREATE_CAPTURE_STATISTICS_BIT_KHR</code> set in the <code>flags</code> field of <a href=\"#VkGraphicsPipelineCreateInfo\">VkGraphicsPipelineCreateInfo</a> or <a href=\"#VkComputePipelineCreateInfo\">VkComputePipelineCreateInfo</a>"
+          "text": " <code>pipeline</code> member of <code>pExecutableInfo</code> <strong class=\"purple\">must</strong> have been created with <code>VK_PIPELINE_CREATE_CAPTURE_STATISTICS_BIT_KHR</code>"
         },
         {
           "vuid": "VUID-vkGetPipelineExecutableStatisticsKHR-device-parameter",
@@ -10472,7 +10472,7 @@
         },
         {
           "vuid": "VUID-vkGetPipelineExecutableInternalRepresentationsKHR-pipeline-03278",
-          "text": " <code>pipeline</code> member of <code>pExecutableInfo</code> <strong class=\"purple\">must</strong> have been created with <code>VK_PIPELINE_CREATE_CAPTURE_INTERNAL_REPRESENTATIONS_BIT_KHR</code> set in the <code>flags</code> field of <a href=\"#VkGraphicsPipelineCreateInfo\">VkGraphicsPipelineCreateInfo</a> or <a href=\"#VkComputePipelineCreateInfo\">VkComputePipelineCreateInfo</a>"
+          "text": " <code>pipeline</code> member of <code>pExecutableInfo</code> <strong class=\"purple\">must</strong> have been created with <code>VK_PIPELINE_CREATE_CAPTURE_INTERNAL_REPRESENTATIONS_BIT_KHR</code>"
         },
         {
           "vuid": "VUID-vkGetPipelineExecutableInternalRepresentationsKHR-device-parameter",
@@ -11687,12 +11687,12 @@
           "text": " If <code>size</code> is equal to <code>VK_WHOLE_SIZE</code>, <code>offset</code> <strong class=\"purple\">must</strong> be within the currently mapped range of <code>memory</code>"
         },
         {
-          "vuid": "VUID-VkMappedMemoryRange-size-01389",
-          "text": " If <code>size</code> is equal to <code>VK_WHOLE_SIZE</code>, the end of the current mapping of <code>memory</code> <strong class=\"purple\">must</strong> be a multiple of <a href=\"#VkPhysicalDeviceLimits\">VkPhysicalDeviceLimits</a>::<code>nonCoherentAtomSize</code> bytes from the beginning of the memory object"
-        },
-        {
           "vuid": "VUID-VkMappedMemoryRange-offset-00687",
           "text": " <code>offset</code> <strong class=\"purple\">must</strong> be a multiple of <a href=\"#VkPhysicalDeviceLimits\">VkPhysicalDeviceLimits</a>::<code>nonCoherentAtomSize</code>"
+        },
+        {
+          "vuid": "VUID-VkMappedMemoryRange-size-01389",
+          "text": " If <code>size</code> is equal to <code>VK_WHOLE_SIZE</code>, the end of the current mapping of <code>memory</code> <strong class=\"purple\">must</strong> either be a multiple of <a href=\"#VkPhysicalDeviceLimits\">VkPhysicalDeviceLimits</a>::<code>nonCoherentAtomSize</code> bytes from the beginning of the memory object, or be equal to the end of the memory object"
         },
         {
           "vuid": "VUID-VkMappedMemoryRange-size-01390",
@@ -12672,6 +12672,16 @@
           "vuid": "VUID-VkImageCreateInfo-multisampleArrayImage-04460",
           "text": " If the <code><a href=\"#VK_KHR_portability_subset\">[VK_KHR_portability_subset]</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>multisampleArrayImage</code> is <code>VK_FALSE</code>, and <code>samples</code> is not <code>VK_SAMPLE_COUNT_1_BIT</code>, then <code>arrayLayers</code> <strong class=\"purple\">must</strong> be <code>1</code>."
         }
+      ],
+      "(VK_VERSION_1_2,VK_KHR_image_format_list)": [
+        {
+          "vuid": "VUID-VkImageCreateInfo-pNext-04737",
+          "text": " If a <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a> structure was included in the <code>pNext</code> chain and <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a>::<code>viewFormatCount</code> is not zero then all of the formats in <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a>::<code>pViewFormats</code> <strong class=\"purple\">must</strong> be compatible with the <code>format</code> as described in the <a href=\"#formats-compatibility\">compatibility table</a>"
+        },
+        {
+          "vuid": "VUID-VkImageCreateInfo-flags-04738",
+          "text": " If <code>flags</code> does not contain <code>VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT</code> and the <code>pNext</code> chain include a <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a> structure then <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a>::<code>viewFormatCount</code> <strong class=\"purple\">must</strong> be <code>0</code> or <code>1</code>"
+        }
       ]
     },
     "VkImageStencilUsageCreateInfo": {
@@ -13191,20 +13201,16 @@
         {
           "vuid": "VUID-VkImageViewCreateInfo-image-01584",
           "text": " If <code>image</code> was created with the <code>VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT</code> flag, the <code>levelCount</code> and <code>layerCount</code> members of <code>subresourceRange</code> <strong class=\"purple\">must</strong> both be <code>1</code>"
+        },
+        {
+          "vuid": "VUID-VkImageViewCreateInfo-image-04739",
+          "text": " If <code>image</code> was created with the <code>VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT</code> flag and <code>format</code> is a non-compressed format, <code>viewType</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_VIEW_TYPE_3D</code>"
         }
       ],
       "(VK_VERSION_1_2,VK_KHR_image_format_list)": [
         {
           "vuid": "VUID-VkImageViewCreateInfo-pNext-01585",
           "text": " If a <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a> structure was included in the <code>pNext</code> chain of the <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> structure used when creating <code>image</code> and <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a>::<code>viewFormatCount</code> is not zero then <code>format</code> <strong class=\"purple\">must</strong> be one of the formats in <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a>::<code>pViewFormats</code>"
-        },
-        {
-          "vuid": "VUID-VkImageViewCreateInfo-pNext-04082",
-          "text": " If a <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a> structure was included in the <code>pNext</code> chain of the <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> structure used when creating <code>image</code> and <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a>::<code>viewFormatCount</code> is not zero then all of the formats in <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a>::<code>pViewFormats</code> <strong class=\"purple\">must</strong> be compatible with the <code>format</code> as described in the <a href=\"#formats-compatibility\">compatibility table</a>"
-        },
-        {
-          "vuid": "VUID-VkImageViewCreateInfo-flags-04083",
-          "text": " If <code>flags</code> does not contain <code>VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT</code> and the <code>pNext</code> chain include a <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a> structure then <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a>::<code>viewFormatCount</code> <strong class=\"purple\">must</strong> be <code>0</code> or <code>1</code>"
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
@@ -24119,6 +24125,10 @@
           "text": " If rasterization is not disabled in the bound graphics pipeline, then for each color attachment in the subpass, if the corresponding image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> do not contain <code>VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BLEND_BIT</code>, then the <code>blendEnable</code> member of the corresponding element of the <code>pAttachments</code> member of <code>pColorBlendState</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>"
         },
         {
+          "vuid": "VUID-vkCmdDraw-rasterizationSamples-04740",
+          "text": " If rasterization is not disabled in the bound graphics pipeline, and neither the <code><a href=\"#VK_AMD_mixed_attachment_samples\">VK_AMD_mixed_attachment_samples</a></code> nor the <code><a href=\"#VK_NV_framebuffer_mixed_samples\">VK_NV_framebuffer_mixed_samples</a></code> extensions are enabled, then <a href=\"#VkPipelineMultisampleStateCreateInfo\">VkPipelineMultisampleStateCreateInfo</a>::<code>rasterizationSamples</code> <strong class=\"purple\">must</strong> be the same as the current subpass color and/or depth/stencil attachments"
+        },
+        {
           "vuid": "VUID-vkCmdDraw-None-04007",
           "text": " All vertex input bindings accessed via vertex input variables declared in the vertex shader entry point&#8217;s interface <strong class=\"purple\">must</strong> have either valid or <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a> buffers bound"
         },
@@ -24369,6 +24379,10 @@
         {
           "vuid": "VUID-vkCmdDrawIndexed-blendEnable-04727",
           "text": " If rasterization is not disabled in the bound graphics pipeline, then for each color attachment in the subpass, if the corresponding image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> do not contain <code>VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BLEND_BIT</code>, then the <code>blendEnable</code> member of the corresponding element of the <code>pAttachments</code> member of <code>pColorBlendState</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexed-rasterizationSamples-04740",
+          "text": " If rasterization is not disabled in the bound graphics pipeline, and neither the <code><a href=\"#VK_AMD_mixed_attachment_samples\">VK_AMD_mixed_attachment_samples</a></code> nor the <code><a href=\"#VK_NV_framebuffer_mixed_samples\">VK_NV_framebuffer_mixed_samples</a></code> extensions are enabled, then <a href=\"#VkPipelineMultisampleStateCreateInfo\">VkPipelineMultisampleStateCreateInfo</a>::<code>rasterizationSamples</code> <strong class=\"purple\">must</strong> be the same as the current subpass color and/or depth/stencil attachments"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexed-None-04007",
@@ -24625,6 +24639,10 @@
         {
           "vuid": "VUID-vkCmdDrawIndirect-blendEnable-04727",
           "text": " If rasterization is not disabled in the bound graphics pipeline, then for each color attachment in the subpass, if the corresponding image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> do not contain <code>VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BLEND_BIT</code>, then the <code>blendEnable</code> member of the corresponding element of the <code>pAttachments</code> member of <code>pColorBlendState</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirect-rasterizationSamples-04740",
+          "text": " If rasterization is not disabled in the bound graphics pipeline, and neither the <code><a href=\"#VK_AMD_mixed_attachment_samples\">VK_AMD_mixed_attachment_samples</a></code> nor the <code><a href=\"#VK_NV_framebuffer_mixed_samples\">VK_NV_framebuffer_mixed_samples</a></code> extensions are enabled, then <a href=\"#VkPipelineMultisampleStateCreateInfo\">VkPipelineMultisampleStateCreateInfo</a>::<code>rasterizationSamples</code> <strong class=\"purple\">must</strong> be the same as the current subpass color and/or depth/stencil attachments"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirect-None-04007",
@@ -24925,6 +24943,10 @@
         {
           "vuid": "VUID-vkCmdDrawIndirectCount-blendEnable-04727",
           "text": " If rasterization is not disabled in the bound graphics pipeline, then for each color attachment in the subpass, if the corresponding image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> do not contain <code>VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BLEND_BIT</code>, then the <code>blendEnable</code> member of the corresponding element of the <code>pAttachments</code> member of <code>pColorBlendState</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCount-rasterizationSamples-04740",
+          "text": " If rasterization is not disabled in the bound graphics pipeline, and neither the <code><a href=\"#VK_AMD_mixed_attachment_samples\">VK_AMD_mixed_attachment_samples</a></code> nor the <code><a href=\"#VK_NV_framebuffer_mixed_samples\">VK_NV_framebuffer_mixed_samples</a></code> extensions are enabled, then <a href=\"#VkPipelineMultisampleStateCreateInfo\">VkPipelineMultisampleStateCreateInfo</a>::<code>rasterizationSamples</code> <strong class=\"purple\">must</strong> be the same as the current subpass color and/or depth/stencil attachments"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCount-None-04007",
@@ -25239,6 +25261,10 @@
           "text": " If rasterization is not disabled in the bound graphics pipeline, then for each color attachment in the subpass, if the corresponding image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> do not contain <code>VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BLEND_BIT</code>, then the <code>blendEnable</code> member of the corresponding element of the <code>pAttachments</code> member of <code>pColorBlendState</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>"
         },
         {
+          "vuid": "VUID-vkCmdDrawIndexedIndirect-rasterizationSamples-04740",
+          "text": " If rasterization is not disabled in the bound graphics pipeline, and neither the <code><a href=\"#VK_AMD_mixed_attachment_samples\">VK_AMD_mixed_attachment_samples</a></code> nor the <code><a href=\"#VK_NV_framebuffer_mixed_samples\">VK_NV_framebuffer_mixed_samples</a></code> extensions are enabled, then <a href=\"#VkPipelineMultisampleStateCreateInfo\">VkPipelineMultisampleStateCreateInfo</a>::<code>rasterizationSamples</code> <strong class=\"purple\">must</strong> be the same as the current subpass color and/or depth/stencil attachments"
+        },
+        {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-None-04007",
           "text": " All vertex input bindings accessed via vertex input variables declared in the vertex shader entry point&#8217;s interface <strong class=\"purple\">must</strong> have either valid or <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a> buffers bound"
         },
@@ -25541,6 +25567,10 @@
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount-blendEnable-04727",
           "text": " If rasterization is not disabled in the bound graphics pipeline, then for each color attachment in the subpass, if the corresponding image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> do not contain <code>VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BLEND_BIT</code>, then the <code>blendEnable</code> member of the corresponding element of the <code>pAttachments</code> member of <code>pColorBlendState</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-rasterizationSamples-04740",
+          "text": " If rasterization is not disabled in the bound graphics pipeline, and neither the <code><a href=\"#VK_AMD_mixed_attachment_samples\">VK_AMD_mixed_attachment_samples</a></code> nor the <code><a href=\"#VK_NV_framebuffer_mixed_samples\">VK_NV_framebuffer_mixed_samples</a></code> extensions are enabled, then <a href=\"#VkPipelineMultisampleStateCreateInfo\">VkPipelineMultisampleStateCreateInfo</a>::<code>rasterizationSamples</code> <strong class=\"purple\">must</strong> be the same as the current subpass color and/or depth/stencil attachments"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount-None-04007",
@@ -25853,6 +25883,10 @@
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-blendEnable-04727",
           "text": " If rasterization is not disabled in the bound graphics pipeline, then for each color attachment in the subpass, if the corresponding image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> do not contain <code>VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BLEND_BIT</code>, then the <code>blendEnable</code> member of the corresponding element of the <code>pAttachments</code> member of <code>pColorBlendState</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-rasterizationSamples-04740",
+          "text": " If rasterization is not disabled in the bound graphics pipeline, and neither the <code><a href=\"#VK_AMD_mixed_attachment_samples\">VK_AMD_mixed_attachment_samples</a></code> nor the <code><a href=\"#VK_NV_framebuffer_mixed_samples\">VK_NV_framebuffer_mixed_samples</a></code> extensions are enabled, then <a href=\"#VkPipelineMultisampleStateCreateInfo\">VkPipelineMultisampleStateCreateInfo</a>::<code>rasterizationSamples</code> <strong class=\"purple\">must</strong> be the same as the current subpass color and/or depth/stencil attachments"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-None-04007",
@@ -26221,6 +26255,10 @@
           "text": " If rasterization is not disabled in the bound graphics pipeline, then for each color attachment in the subpass, if the corresponding image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> do not contain <code>VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BLEND_BIT</code>, then the <code>blendEnable</code> member of the corresponding element of the <code>pAttachments</code> member of <code>pColorBlendState</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>"
         },
         {
+          "vuid": "VUID-vkCmdDrawMeshTasksNV-rasterizationSamples-04740",
+          "text": " If rasterization is not disabled in the bound graphics pipeline, and neither the <code><a href=\"#VK_AMD_mixed_attachment_samples\">VK_AMD_mixed_attachment_samples</a></code> nor the <code><a href=\"#VK_NV_framebuffer_mixed_samples\">VK_NV_framebuffer_mixed_samples</a></code> extensions are enabled, then <a href=\"#VkPipelineMultisampleStateCreateInfo\">VkPipelineMultisampleStateCreateInfo</a>::<code>rasterizationSamples</code> <strong class=\"purple\">must</strong> be the same as the current subpass color and/or depth/stencil attachments"
+        },
+        {
           "vuid": "VUID-vkCmdDrawMeshTasksNV-taskCount-02119",
           "text": " <code>taskCount</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceMeshShaderPropertiesNV</code>::<code>maxDrawMeshTasksCount</code>"
         }
@@ -26453,6 +26491,10 @@
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-blendEnable-04727",
           "text": " If rasterization is not disabled in the bound graphics pipeline, then for each color attachment in the subpass, if the corresponding image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> do not contain <code>VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BLEND_BIT</code>, then the <code>blendEnable</code> member of the corresponding element of the <code>pAttachments</code> member of <code>pColorBlendState</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-rasterizationSamples-04740",
+          "text": " If rasterization is not disabled in the bound graphics pipeline, and neither the <code><a href=\"#VK_AMD_mixed_attachment_samples\">VK_AMD_mixed_attachment_samples</a></code> nor the <code><a href=\"#VK_NV_framebuffer_mixed_samples\">VK_NV_framebuffer_mixed_samples</a></code> extensions are enabled, then <a href=\"#VkPipelineMultisampleStateCreateInfo\">VkPipelineMultisampleStateCreateInfo</a>::<code>rasterizationSamples</code> <strong class=\"purple\">must</strong> be the same as the current subpass color and/or depth/stencil attachments"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-buffer-02708",
@@ -26735,6 +26777,10 @@
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-blendEnable-04727",
           "text": " If rasterization is not disabled in the bound graphics pipeline, then for each color attachment in the subpass, if the corresponding image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> do not contain <code>VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BLEND_BIT</code>, then the <code>blendEnable</code> member of the corresponding element of the <code>pAttachments</code> member of <code>pColorBlendState</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-rasterizationSamples-04740",
+          "text": " If rasterization is not disabled in the bound graphics pipeline, and neither the <code><a href=\"#VK_AMD_mixed_attachment_samples\">VK_AMD_mixed_attachment_samples</a></code> nor the <code><a href=\"#VK_NV_framebuffer_mixed_samples\">VK_NV_framebuffer_mixed_samples</a></code> extensions are enabled, then <a href=\"#VkPipelineMultisampleStateCreateInfo\">VkPipelineMultisampleStateCreateInfo</a>::<code>rasterizationSamples</code> <strong class=\"purple\">must</strong> be the same as the current subpass color and/or depth/stencil attachments"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-buffer-02708",
@@ -27950,7 +27996,7 @@
       "(VK_NV_framebuffer_mixed_samples)": [
         {
           "vuid": "VUID-VkPipelineMultisampleStateCreateInfo-rasterizationSamples-01415",
-          "text": " If the <code>VK_NV_framebuffer_mixed_samples</code> extension is enabled, and if the subpass has any color attachments and <code>rasterizationSamples</code> is greater than the number of color samples, then <code>sampleShadingEnable</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>"
+          "text": " If the <code><a href=\"#VK_NV_framebuffer_mixed_samples\">VK_NV_framebuffer_mixed_samples</a></code> extension is enabled, and if the subpass has any color attachments and <code>rasterizationSamples</code> is greater than the number of color samples, then <code>sampleShadingEnable</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>"
         }
       ]
     },
@@ -30309,6 +30355,10 @@
           "text": " If rasterization is not disabled in the bound graphics pipeline, then for each color attachment in the subpass, if the corresponding image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> do not contain <code>VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BLEND_BIT</code>, then the <code>blendEnable</code> member of the corresponding element of the <code>pAttachments</code> member of <code>pColorBlendState</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>"
         },
         {
+          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-rasterizationSamples-04740",
+          "text": " If rasterization is not disabled in the bound graphics pipeline, and neither the <code><a href=\"#VK_AMD_mixed_attachment_samples\">VK_AMD_mixed_attachment_samples</a></code> nor the <code><a href=\"#VK_NV_framebuffer_mixed_samples\">VK_NV_framebuffer_mixed_samples</a></code> extensions are enabled, then <a href=\"#VkPipelineMultisampleStateCreateInfo\">VkPipelineMultisampleStateCreateInfo</a>::<code>rasterizationSamples</code> <strong class=\"purple\">must</strong> be the same as the current subpass color and/or depth/stencil attachments"
+        },
+        {
           "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-None-04007",
           "text": " All vertex input bindings accessed via vertex input variables declared in the vertex shader entry point&#8217;s interface <strong class=\"purple\">must</strong> have either valid or <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a> buffers bound"
         },
@@ -31652,6 +31702,50 @@
         }
       ]
     },
+    "vkCreateScreenSurfaceQNX": {
+      "(VK_KHR_surface)+(VK_QNX_screen_surface)": [
+        {
+          "vuid": "VUID-vkCreateScreenSurfaceQNX-instance-parameter",
+          "text": " <code>instance</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkInstance\">VkInstance</a> handle"
+        },
+        {
+          "vuid": "VUID-vkCreateScreenSurfaceQNX-pCreateInfo-parameter",
+          "text": " <code>pCreateInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkScreenSurfaceCreateInfoQNX\">VkScreenSurfaceCreateInfoQNX</a> structure"
+        },
+        {
+          "vuid": "VUID-vkCreateScreenSurfaceQNX-pAllocator-parameter",
+          "text": " If <code>pAllocator</code> is not <code>NULL</code>, <code>pAllocator</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkAllocationCallbacks\">VkAllocationCallbacks</a> structure"
+        },
+        {
+          "vuid": "VUID-vkCreateScreenSurfaceQNX-pSurface-parameter",
+          "text": " <code>pSurface</code> <strong class=\"purple\">must</strong> be a valid pointer to a <a href=\"#VkSurfaceKHR\">VkSurfaceKHR</a> handle"
+        }
+      ]
+    },
+    "VkScreenSurfaceCreateInfoQNX": {
+      "(VK_KHR_surface)+(VK_QNX_screen_surface)": [
+        {
+          "vuid": "VUID-VkScreenSurfaceCreateInfoQNX-context-04741",
+          "text": " <code>context</code> <strong class=\"purple\">must</strong> point to a valid QNX Screen <code>struct</code> _screen_context"
+        },
+        {
+          "vuid": "VUID-VkScreenSurfaceCreateInfoQNX-window-04742",
+          "text": " <code>window</code> <strong class=\"purple\">must</strong> point to a valid QNX Screen <code>struct</code> _screen_window"
+        },
+        {
+          "vuid": "VUID-VkScreenSurfaceCreateInfoQNX-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_SCREEN_SURFACE_CREATE_INFO_QNX</code>"
+        },
+        {
+          "vuid": "VUID-VkScreenSurfaceCreateInfoQNX-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkScreenSurfaceCreateInfoQNX-flags-zerobitmask",
+          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be <code>0</code>"
+        }
+      ]
+    },
     "vkDestroySurfaceKHR": {
       "(VK_KHR_surface)": [
         {
@@ -32293,6 +32387,22 @@
         {
           "vuid": "VUID-vkGetPhysicalDeviceDirectFBPresentationSupportEXT-dfb-parameter",
           "text": " <code>dfb</code> <strong class=\"purple\">must</strong> be a valid pointer to an <code>IDirectFB</code> value"
+        }
+      ]
+    },
+    "vkGetPhysicalDeviceScreenPresentationSupportQNX": {
+      "(VK_KHR_surface)+(VK_QNX_screen_surface)": [
+        {
+          "vuid": "VUID-vkGetPhysicalDeviceScreenPresentationSupportQNX-queueFamilyIndex-04743",
+          "text": " <code>queueFamilyIndex</code> <strong class=\"purple\">must</strong> be less than <code>pQueueFamilyPropertyCount</code> returned by <code>vkGetPhysicalDeviceQueueFamilyProperties</code> for the given <code>physicalDevice</code>"
+        },
+        {
+          "vuid": "VUID-vkGetPhysicalDeviceScreenPresentationSupportQNX-physicalDevice-parameter",
+          "text": " <code>physicalDevice</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkPhysicalDevice\">VkPhysicalDevice</a> handle"
+        },
+        {
+          "vuid": "VUID-vkGetPhysicalDeviceScreenPresentationSupportQNX-window-parameter",
+          "text": " <code>window</code> <strong class=\"purple\">must</strong> be a valid pointer to a <code>_screen_window</code> value"
         }
       ]
     },
@@ -39005,6 +39115,10 @@
           "text": " The <code>Flat</code>, <code>NoPerspective</code>, <code>Sample</code>, and <code>Centroid</code> decorations <strong class=\"purple\">must</strong> not be used on variables with storage class other than <code>Input</code> or on variables used in the interface of non-fragment shader entry points"
         },
         {
+          "vuid": "VUID-StandaloneSpirv-Flat-04744",
+          "text": " The <code>Flat</code> decorations <strong class=\"purple\">must</strong> be used on variables with storage class of <code>Input</code> in a fragment shader stage that are a scalar integer, vector of integer, or any double-precision floating-point type"
+        },
+        {
           "vuid": "VUID-StandaloneSpirv-Patch-04671",
           "text": " The <code>Patch</code> decoration <strong class=\"purple\">must</strong> not be used on variables in the interface of a vertex, geometry, or fragment shader stage&#8217;s entry point"
         },
@@ -39043,6 +39157,10 @@
         {
           "vuid": "VUID-StandaloneSpirv-OpTypeRuntimeArray-04680",
           "text": " <code>OpTypeRuntimeArray</code> <strong class=\"purple\">must</strong> only be used for the last member of an <code>OpTypeStruct</code> that is in the <code>StorageBuffer</code> or <code>PhysicalStorageBuffer</code> storage class decorated as <code>Block</code>, or that is in the <code>Uniform</code> storage class decorated as <code>BufferBlock</code>"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-Function-04681",
+          "text": " A type <em>T</em> that is an array sized with a specialization constant <strong class=\"purple\">must</strong> neither be, nor be contained in, the type <em>T2</em> of a variable <em>V</em>, unless either: a) <em>T</em> is equal to <em>T2</em>, b) <em>V</em> is declared in the <code>Function</code>, or <code>Private</code> storage classes, c) <em>V</em> is a non-Block variable in the <code>Workgroup</code> storage class, or d) <em>V</em> is an interface variable with an additional level of arrayness, <a href=\"#interfaces-iointerfaces-matching\">as described in interface matching</a>, and <em>T</em> is the member type of the array type <em>T2</em>."
         },
         {
           "vuid": "VUID-StandaloneSpirv-OpControlBarrier-04682",
@@ -39159,6 +39277,10 @@
         {
           "vuid": "VUID-StandaloneSpirv-OpTypeForwardPointer-04711",
           "text": " <code>OpTypeForwardPointer</code> <strong class=\"purple\">must</strong> have a storage class of <code>PhysicalStorageBuffer</code>"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-None-04745",
+          "text": " All variables with a storage class of <strong>PushConstant</strong> declared as an array <strong class=\"purple\">must</strong> only be accessed by dynamically uniform indices"
         }
       ],
       "!(VK_KHR_zero_initialize_workgroup_memory)": [
@@ -39175,18 +39297,6 @@
         {
           "vuid": "VUID-StandaloneSpirv-OpVariable-04734",
           "text": " Any <code>OpVariable</code> with an <code>Initializer</code> operand and <strong>Workgroup</strong> as its <strong>Storage Class</strong> operand <strong class=\"purple\">must</strong> use <code>OpConstantNull</code> as the initializer."
-        }
-      ],
-      "!(VK_KHR_workgroup_memory_explicit_layout)": [
-        {
-          "vuid": "VUID-StandaloneSpirv-Function-04681",
-          "text": " A type <em>T</em> that is an array sized with a specialization constant <strong class=\"purple\">must</strong> neither be, nor be contained in, the type <em>T2</em> of a variable <em>V</em>, unless either: a) <em>T</em> is equal to <em>T2</em>, b) <em>V</em> is declared in the <code>Function</code>, <code>Private</code>, or <code>Workgroup</code> storage classes, or c) <em>V</em> is an interface variable with an additional level of arrayness, <a href=\"#interfaces-iointerfaces-matching\">as described in interface matching</a>, and <em>T</em> is the member type of the array type <em>T2</em>."
-        }
-      ],
-      "(VK_KHR_workgroup_memory_explicit_layout)": [
-        {
-          "vuid": "VUID-StandaloneSpirv-Function-04681",
-          "text": " A type <em>T</em> that is an array sized with a specialization constant <strong class=\"purple\">must</strong> neither be, nor be contained in, the type <em>T2</em> of a variable <em>V</em>, unless either: a) <em>T</em> is equal to <em>T2</em>, b) <em>V</em> is declared in the <code>Function</code>, or <code>Private</code> storage classes, c) <em>V</em> is a non-Block variable in the <code>Workgroup</code> storage class, or d) <em>V</em> is an interface variable with an additional level of arrayness, <a href=\"#interfaces-iointerfaces-matching\">as described in interface matching</a>, and <em>T</em> is the member type of the array type <em>T2</em>."
         }
       ]
     }
