@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.2.171",
-    "comment": "from git branch: github-main commit: 31a6292b5f23b4d79b3056a087d3e2a337a285e3",
-    "date": "2021-03-01 04:45:17Z"
+    "api version": "1.2.172",
+    "comment": "from git branch: github-main commit: d2d9ed985ef74f3c5252ac713367b98815e9188f",
+    "date": "2021-03-08 09:10:03Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -4239,8 +4239,8 @@
           "text": " If pname:srcAccessMask includes <code>VK_ACCESS_2_TRANSFORM_FEEDBACK_WRITE_BIT_EXT</code>, pname:srcStageMask <strong class=\"purple\">must</strong> include <code>VK_PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT</code>, <code>VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT_KHR</code>, or <code>VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR</code>"
         },
         {
-          "vuid": "VUID-VkMemoryBarrier2KHR-srcAccessMask-03921",
-          "text": " If pname:srcAccessMask includes <code>VK_ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_READ_BIT_EXT</code>, pname:srcStageMask <strong class=\"purple\">must</strong> include <code>VK_PIPELINE_STAGE_2_DRAW_INDIRECT_BIT_KHR</code>, <code>VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT_KHR</code>, or <code>VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR</code>"
+          "vuid": "VUID-VkMemoryBarrier2KHR-srcAccessMask-04747",
+          "text": " If pname:srcAccessMask includes <code>VK_ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_READ_BIT_EXT</code>, pname:srcStageMask <strong class=\"purple\">must</strong> include <code>VK_PIPELINE_STAGE_2_DRAW_INDIRECT_BIT_KHR</code>, <code>VK_PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT</code>, <code>VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT_KHR</code>, or <code>VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR</code>"
         },
         {
           "vuid": "VUID-VkMemoryBarrier2KHR-srcAccessMask-03922",
@@ -4255,8 +4255,8 @@
           "text": " If pname:dstAccessMask includes <code>VK_ACCESS_2_TRANSFORM_FEEDBACK_WRITE_BIT_EXT</code>, pname:dstStageMask <strong class=\"purple\">must</strong> include <code>VK_PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT</code>, <code>VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT_KHR</code>, or <code>VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR</code>"
         },
         {
-          "vuid": "VUID-VkMemoryBarrier2KHR-dstAccessMask-03921",
-          "text": " If pname:dstAccessMask includes <code>VK_ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_READ_BIT_EXT</code>, pname:dstStageMask <strong class=\"purple\">must</strong> include <code>VK_PIPELINE_STAGE_2_DRAW_INDIRECT_BIT_KHR</code>, <code>VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT_KHR</code>, or <code>VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR</code>"
+          "vuid": "VUID-VkMemoryBarrier2KHR-dstAccessMask-04747",
+          "text": " If pname:dstAccessMask includes <code>VK_ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_READ_BIT_EXT</code>, pname:dstStageMask <strong class=\"purple\">must</strong> include <code>VK_PIPELINE_STAGE_2_DRAW_INDIRECT_BIT_KHR</code>, <code>VK_PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT</code>, <code>VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT_KHR</code>, or <code>VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR</code>"
         },
         {
           "vuid": "VUID-VkMemoryBarrier2KHR-dstAccessMask-03922",
@@ -4595,8 +4595,8 @@
           "text": " If pname:srcAccessMask includes <code>VK_ACCESS_2_TRANSFORM_FEEDBACK_WRITE_BIT_EXT</code>, pname:srcStageMask <strong class=\"purple\">must</strong> include <code>VK_PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT</code>, <code>VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT_KHR</code>, or <code>VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR</code>"
         },
         {
-          "vuid": "VUID-VkBufferMemoryBarrier2KHR-srcAccessMask-03921",
-          "text": " If pname:srcAccessMask includes <code>VK_ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_READ_BIT_EXT</code>, pname:srcStageMask <strong class=\"purple\">must</strong> include <code>VK_PIPELINE_STAGE_2_DRAW_INDIRECT_BIT_KHR</code>, <code>VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT_KHR</code>, or <code>VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR</code>"
+          "vuid": "VUID-VkBufferMemoryBarrier2KHR-srcAccessMask-04747",
+          "text": " If pname:srcAccessMask includes <code>VK_ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_READ_BIT_EXT</code>, pname:srcStageMask <strong class=\"purple\">must</strong> include <code>VK_PIPELINE_STAGE_2_DRAW_INDIRECT_BIT_KHR</code>, <code>VK_PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT</code>, <code>VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT_KHR</code>, or <code>VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR</code>"
         },
         {
           "vuid": "VUID-VkBufferMemoryBarrier2KHR-srcAccessMask-03922",
@@ -4611,8 +4611,8 @@
           "text": " If pname:dstAccessMask includes <code>VK_ACCESS_2_TRANSFORM_FEEDBACK_WRITE_BIT_EXT</code>, pname:dstStageMask <strong class=\"purple\">must</strong> include <code>VK_PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT</code>, <code>VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT_KHR</code>, or <code>VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR</code>"
         },
         {
-          "vuid": "VUID-VkBufferMemoryBarrier2KHR-dstAccessMask-03921",
-          "text": " If pname:dstAccessMask includes <code>VK_ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_READ_BIT_EXT</code>, pname:dstStageMask <strong class=\"purple\">must</strong> include <code>VK_PIPELINE_STAGE_2_DRAW_INDIRECT_BIT_KHR</code>, <code>VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT_KHR</code>, or <code>VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR</code>"
+          "vuid": "VUID-VkBufferMemoryBarrier2KHR-dstAccessMask-04747",
+          "text": " If pname:dstAccessMask includes <code>VK_ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_READ_BIT_EXT</code>, pname:dstStageMask <strong class=\"purple\">must</strong> include <code>VK_PIPELINE_STAGE_2_DRAW_INDIRECT_BIT_KHR</code>, <code>VK_PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT</code>, <code>VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT_KHR</code>, or <code>VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR</code>"
         },
         {
           "vuid": "VUID-VkBufferMemoryBarrier2KHR-dstAccessMask-03922",
@@ -5081,8 +5081,8 @@
           "text": " If pname:srcAccessMask includes <code>VK_ACCESS_2_TRANSFORM_FEEDBACK_WRITE_BIT_EXT</code>, pname:srcStageMask <strong class=\"purple\">must</strong> include <code>VK_PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT</code>, <code>VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT_KHR</code>, or <code>VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR</code>"
         },
         {
-          "vuid": "VUID-VkImageMemoryBarrier2KHR-srcAccessMask-03921",
-          "text": " If pname:srcAccessMask includes <code>VK_ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_READ_BIT_EXT</code>, pname:srcStageMask <strong class=\"purple\">must</strong> include <code>VK_PIPELINE_STAGE_2_DRAW_INDIRECT_BIT_KHR</code>, <code>VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT_KHR</code>, or <code>VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR</code>"
+          "vuid": "VUID-VkImageMemoryBarrier2KHR-srcAccessMask-04747",
+          "text": " If pname:srcAccessMask includes <code>VK_ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_READ_BIT_EXT</code>, pname:srcStageMask <strong class=\"purple\">must</strong> include <code>VK_PIPELINE_STAGE_2_DRAW_INDIRECT_BIT_KHR</code>, <code>VK_PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT</code>, <code>VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT_KHR</code>, or <code>VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR</code>"
         },
         {
           "vuid": "VUID-VkImageMemoryBarrier2KHR-srcAccessMask-03922",
@@ -5097,8 +5097,8 @@
           "text": " If pname:dstAccessMask includes <code>VK_ACCESS_2_TRANSFORM_FEEDBACK_WRITE_BIT_EXT</code>, pname:dstStageMask <strong class=\"purple\">must</strong> include <code>VK_PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT</code>, <code>VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT_KHR</code>, or <code>VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR</code>"
         },
         {
-          "vuid": "VUID-VkImageMemoryBarrier2KHR-dstAccessMask-03921",
-          "text": " If pname:dstAccessMask includes <code>VK_ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_READ_BIT_EXT</code>, pname:dstStageMask <strong class=\"purple\">must</strong> include <code>VK_PIPELINE_STAGE_2_DRAW_INDIRECT_BIT_KHR</code>, <code>VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT_KHR</code>, or <code>VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR</code>"
+          "vuid": "VUID-VkImageMemoryBarrier2KHR-dstAccessMask-04747",
+          "text": " If pname:dstAccessMask includes <code>VK_ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_READ_BIT_EXT</code>, pname:dstStageMask <strong class=\"purple\">must</strong> include <code>VK_PIPELINE_STAGE_2_DRAW_INDIRECT_BIT_KHR</code>, <code>VK_PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT</code>, <code>VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT_KHR</code>, or <code>VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR</code>"
         },
         {
           "vuid": "VUID-VkImageMemoryBarrier2KHR-dstAccessMask-03922",
@@ -24102,7 +24102,7 @@
         },
         {
           "vuid": "VUID-vkCmdDraw-OpImageWrite-04469",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the buffer view&#8217;s format."
         },
         {
           "vuid": "VUID-vkCmdDraw-renderPass-02684",
@@ -24358,7 +24358,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexed-OpImageWrite-04469",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the buffer view&#8217;s format."
         },
         {
           "vuid": "VUID-vkCmdDrawIndexed-renderPass-02684",
@@ -24618,7 +24618,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirect-OpImageWrite-04469",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the buffer view&#8217;s format."
         },
         {
           "vuid": "VUID-vkCmdDrawIndirect-renderPass-02684",
@@ -24922,7 +24922,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCount-OpImageWrite-04469",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the buffer view&#8217;s format."
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCount-renderPass-02684",
@@ -25238,7 +25238,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-OpImageWrite-04469",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the buffer view&#8217;s format."
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-renderPass-02684",
@@ -25546,7 +25546,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount-OpImageWrite-04469",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the buffer view&#8217;s format."
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount-renderPass-02684",
@@ -25862,7 +25862,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-OpImageWrite-04469",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the buffer view&#8217;s format."
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-renderPass-02684",
@@ -26232,7 +26232,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksNV-OpImageWrite-04469",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the buffer view&#8217;s format."
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksNV-renderPass-02684",
@@ -26470,7 +26470,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-OpImageWrite-04469",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the buffer view&#8217;s format."
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-renderPass-02684",
@@ -26756,7 +26756,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-OpImageWrite-04469",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the buffer view&#8217;s format."
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-renderPass-02684",
@@ -29486,7 +29486,7 @@
         },
         {
           "vuid": "VUID-vkCmdDispatch-OpImageWrite-04469",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the buffer view&#8217;s format."
         },
         {
           "vuid": "VUID-vkCmdDispatch-groupCountX-00386",
@@ -29650,7 +29650,7 @@
         },
         {
           "vuid": "VUID-vkCmdDispatchIndirect-OpImageWrite-04469",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the buffer view&#8217;s format."
         },
         {
           "vuid": "VUID-vkCmdDispatchIndirect-buffer-02708",
@@ -29834,7 +29834,7 @@
         },
         {
           "vuid": "VUID-vkCmdDispatchBase-OpImageWrite-04469",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the buffer view&#8217;s format."
         },
         {
           "vuid": "VUID-vkCmdDispatchBase-baseGroupX-00421",
@@ -30332,7 +30332,7 @@
         },
         {
           "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-OpImageWrite-04469",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the buffer view&#8217;s format."
         },
         {
           "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-renderPass-02684",
@@ -35808,7 +35808,7 @@
         },
         {
           "vuid": "VUID-vkCmdTraceRaysNV-OpImageWrite-04469",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the buffer view&#8217;s format."
         },
         {
           "vuid": "VUID-vkCmdTraceRaysNV-None-03429",
@@ -36066,7 +36066,7 @@
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-OpImageWrite-04469",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the buffer view&#8217;s format."
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-None-03429",
@@ -36372,7 +36372,7 @@
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-OpImageWrite-04469",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the image view&#8217;s format."
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> is accessed using <code>OpImageWrite</code> as a result of this command, then the <code>Type</code> of the <code>Texel</code> operand of that instruction <strong class=\"purple\">must</strong> have at least as many components as the buffer view&#8217;s format."
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-None-03429",
@@ -39039,6 +39039,14 @@
           "text": " If the semantics for <code>OpControlBarrier</code> includes one of <strong>Acquire</strong>, <strong>Release</strong>, <strong>AcquireRelease</strong>, or <strong>SequentiallyConsistent</strong> memory semantics, then it <strong class=\"purple\">must</strong> include at least one storage class"
         },
         {
+          "vuid": "VUID-StandaloneSpirv-OpVariable-04651",
+          "text": " Any <code>OpVariable</code> with an <code>Initializer</code> operand <strong class=\"purple\">must</strong> have <strong>Output</strong>, <strong>Private</strong>, <strong>Function</strong>, or <strong>Workgroup</strong> as its <strong>Storage Class</strong> operand"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-OpVariable-04734",
+          "text": " Any <code>OpVariable</code> with an <code>Initializer</code> operand and <strong>Workgroup</strong> as its <strong>Storage Class</strong> operand <strong class=\"purple\">must</strong> use <code>OpConstantNull</code> as the initializer."
+        },
+        {
           "vuid": "VUID-StandaloneSpirv-OpReadClockKHR-04652",
           "text": " <strong>Scope</strong> for <code>OpReadClockKHR</code> <strong class=\"purple\">must</strong> be limited to <strong>Subgroup</strong> or <strong>Device</strong>"
         },
@@ -39281,22 +39289,6 @@
         {
           "vuid": "VUID-StandaloneSpirv-None-04745",
           "text": " All variables with a storage class of <strong>PushConstant</strong> declared as an array <strong class=\"purple\">must</strong> only be accessed by dynamically uniform indices"
-        }
-      ],
-      "!(VK_KHR_zero_initialize_workgroup_memory)": [
-        {
-          "vuid": "VUID-StandaloneSpirv-OpVariable-04651",
-          "text": " Any <code>OpVariable</code> with an <code>Initializer</code> operand <strong class=\"purple\">must</strong> have <strong>Output</strong>, <strong>Private</strong>, or <strong>Function</strong> as its <strong>Storage Class</strong> operand"
-        }
-      ],
-      "(VK_KHR_zero_initialize_workgroup_memory)": [
-        {
-          "vuid": "VUID-StandaloneSpirv-OpVariable-04651",
-          "text": " Any <code>OpVariable</code> with an <code>Initializer</code> operand <strong class=\"purple\">must</strong> have <strong>Output</strong>, <strong>Private</strong>, <strong>Function</strong>, or <strong>Workgroup</strong> as its <strong>Storage Class</strong> operand"
-        },
-        {
-          "vuid": "VUID-StandaloneSpirv-OpVariable-04734",
-          "text": " Any <code>OpVariable</code> with an <code>Initializer</code> operand and <strong>Workgroup</strong> as its <strong>Storage Class</strong> operand <strong class=\"purple\">must</strong> use <code>OpConstantNull</code> as the initializer."
         }
       ]
     }
