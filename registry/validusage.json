@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.2.173",
-    "comment": "from git branch: github-main commit: 0d5fb72f39c4282edf1754ce5eed0654f7960cb4",
-    "date": "2021-03-21 13:46:07Z"
+    "api version": "1.2.174",
+    "comment": "from git branch: github-main commit: 3fefdc503242ce529330c51a869ed99a069a3010",
+    "date": "2021-03-29 07:16:58Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -39543,8 +39543,12 @@
           "text": " All variables with a storage class of <strong>PushConstant</strong> declared as an array <strong class=\"purple\">must</strong> only be accessed by dynamically uniform indices"
         },
         {
-          "vuid": "VUID-StandaloneSpirv-Result-04779",
+          "vuid": "VUID-StandaloneSpirv-Result-04780",
           "text": " The <code>Result</code> <code>Type</code> operand of any <code>OpImageRead</code> or <code>OpImageSparseRead</code> instruction <strong class=\"purple\">must</strong> be a vector of four components"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-Base-04781",
+          "text": " The <code>Base</code> operand of any <code>OpBitCount</code>, <code>OpBitReverse</code>, <code>OpBitFieldInsert</code>, <code>OpBitFieldSExtract</code>, or <code>OpBitFieldUExtract</code> instruction <strong class=\"purple\">must</strong> be a 32-bit integer scalar or a vector of 32-bit integers"
         }
       ]
     }
