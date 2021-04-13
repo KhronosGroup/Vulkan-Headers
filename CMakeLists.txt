@@ -46,6 +46,7 @@ target_include_directories(Vulkan-Registry INTERFACE "${CMAKE_CURRENT_SOURCE_DIR
 add_library(Vulkan::Registry ALIAS Vulkan-Registry)
 
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/vulkan" DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/vk_video" DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/registry" DESTINATION ${CMAKE_INSTALL_DATADIR}/vulkan)
 
 # uninstall target
