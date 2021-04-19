@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.2.175",
-    "comment": "from git branch: github-main commit: b82ae46bb82c7a522509fd7b8f3d92a311c1b5a5",
-    "date": "2021-04-13 08:38:27Z"
+    "api version": "1.2.176",
+    "comment": "from git branch: github-main commit: 67f599afee77b0e598e7a325f13b9878edcacdfd",
+    "date": "2021-04-19 04:31:54Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -564,7 +564,7 @@
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceDeviceMemoryReportCreateInfoEXT\">VkDeviceDeviceMemoryReportCreateInfoEXT</a>, <a href=\"#VkDeviceDiagnosticsConfigCreateInfoNV\">VkDeviceDiagnosticsConfigCreateInfoNV</a>, <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceMemoryOverallocationCreateInfoAMD\">VkDeviceMemoryOverallocationCreateInfoAMD</a>, <a href=\"#VkDevicePrivateDataCreateInfoEXT\">VkDevicePrivateDataCreateInfoEXT</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice4444FormatsFeaturesEXT\">VkPhysicalDevice4444FormatsFeaturesEXT</a>, <a href=\"#VkPhysicalDevice8BitStorageFeatures\">VkPhysicalDevice8BitStorageFeatures</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceAccelerationStructureFeaturesKHR\">VkPhysicalDeviceAccelerationStructureFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeatures\">VkPhysicalDeviceBufferDeviceAddressFeatures</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeaturesEXT\">VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCoherentMemoryFeaturesAMD\">VkPhysicalDeviceCoherentMemoryFeaturesAMD</a>, <a href=\"#VkPhysicalDeviceColorWriteEnableFeaturesEXT\">VkPhysicalDeviceColorWriteEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixFeaturesNV\">VkPhysicalDeviceCooperativeMatrixFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCoverageReductionModeFeaturesNV\">VkPhysicalDeviceCoverageReductionModeFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCustomBorderColorFeaturesEXT\">VkPhysicalDeviceCustomBorderColorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV\">VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDepthClipEnableFeaturesEXT\">VkPhysicalDeviceDepthClipEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeatures\">VkPhysicalDeviceDescriptorIndexingFeatures</a>, <a href=\"#VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV\">VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDeviceMemoryReportFeaturesEXT\">VkPhysicalDeviceDeviceMemoryReportFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDiagnosticsConfigFeaturesNV\">VkPhysicalDeviceDiagnosticsConfigFeaturesNV</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceExtendedDynamicStateFeaturesEXT\">VkPhysicalDeviceExtendedDynamicStateFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMap2FeaturesEXT\">VkPhysicalDeviceFragmentDensityMap2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapFeaturesEXT\">VkPhysicalDeviceFragmentDensityMapFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT\">VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV\">VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShadingRateFeaturesKHR\">VkPhysicalDeviceFragmentShadingRateFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceHostQueryResetFeatures\">VkPhysicalDeviceHostQueryResetFeatures</a>, <a href=\"#VkPhysicalDeviceImageRobustnessFeaturesEXT\">VkPhysicalDeviceImageRobustnessFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceImagelessFramebufferFeatures\">VkPhysicalDeviceImagelessFramebufferFeatures</a>, <a href=\"#VkPhysicalDeviceIndexTypeUint8FeaturesEXT\">VkPhysicalDeviceIndexTypeUint8FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceInheritedViewportScissorFeaturesNV\">VkPhysicalDeviceInheritedViewportScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeaturesEXT\">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceLineRasterizationFeaturesEXT\">VkPhysicalDeviceLineRasterizationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMemoryPriorityFeaturesEXT\">VkPhysicalDeviceMemoryPriorityFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE\">VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE</a>, <a href=\"#VkPhysicalDevicePerformanceQueryFeaturesKHR\">VkPhysicalDevicePerformanceQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT\">VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT</a>, <a href=\"#VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR\">VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePrivateDataFeaturesEXT\">VkPhysicalDevicePrivateDataFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceRayQueryFeaturesKHR\">VkPhysicalDeviceRayQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceRayTracingPipelineFeaturesKHR\">VkPhysicalDeviceRayTracingPipelineFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceRobustness2FeaturesEXT\">VkPhysicalDeviceRobustness2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceScalarBlockLayoutFeatures\">VkPhysicalDeviceScalarBlockLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures\">VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures</a>, <a href=\"#VkPhysicalDeviceShaderAtomicFloatFeaturesEXT\">VkPhysicalDeviceShaderAtomicFloatFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64Features\">VkPhysicalDeviceShaderAtomicInt64Features</a>, <a href=\"#VkPhysicalDeviceShaderClockFeaturesKHR\">VkPhysicalDeviceShaderClockFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT\">VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderDrawParametersFeatures\">VkPhysicalDeviceShaderDrawParametersFeatures</a>, <a href=\"#VkPhysicalDeviceShaderFloat16Int8Features\">VkPhysicalDeviceShaderFloat16Int8Features</a>, <a href=\"#VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT\">VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL\">VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL</a>, <a href=\"#VkPhysicalDeviceShaderSMBuiltinsFeaturesNV\">VkPhysicalDeviceShaderSMBuiltinsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures\">VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures</a>, <a href=\"#VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR\">VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSubgroupSizeControlFeaturesEXT\">VkPhysicalDeviceSubgroupSizeControlFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSynchronization2FeaturesKHR\">VkPhysicalDeviceSynchronization2FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT\">VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT\">VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTimelineSemaphoreFeatures\">VkPhysicalDeviceTimelineSemaphoreFeatures</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackFeaturesEXT\">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceUniformBufferStandardLayoutFeatures\">VkPhysicalDeviceUniformBufferStandardLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceVariablePointersFeatures\">VkPhysicalDeviceVariablePointersFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT\">VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVulkan11Features\">VkPhysicalDeviceVulkan11Features</a>, <a href=\"#VkPhysicalDeviceVulkan12Features\">VkPhysicalDeviceVulkan12Features</a>, <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeatures\">VkPhysicalDeviceVulkanMemoryModelFeatures</a>, <a href=\"#VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR\">VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT\">VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceYcbcrImageArraysFeaturesEXT\">VkPhysicalDeviceYcbcrImageArraysFeaturesEXT</a>, or <a href=\"#VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR\">VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceDeviceMemoryReportCreateInfoEXT\">VkDeviceDeviceMemoryReportCreateInfoEXT</a>, <a href=\"#VkDeviceDiagnosticsConfigCreateInfoNV\">VkDeviceDiagnosticsConfigCreateInfoNV</a>, <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceMemoryOverallocationCreateInfoAMD\">VkDeviceMemoryOverallocationCreateInfoAMD</a>, <a href=\"#VkDevicePrivateDataCreateInfoEXT\">VkDevicePrivateDataCreateInfoEXT</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice4444FormatsFeaturesEXT\">VkPhysicalDevice4444FormatsFeaturesEXT</a>, <a href=\"#VkPhysicalDevice8BitStorageFeatures\">VkPhysicalDevice8BitStorageFeatures</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceAccelerationStructureFeaturesKHR\">VkPhysicalDeviceAccelerationStructureFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeatures\">VkPhysicalDeviceBufferDeviceAddressFeatures</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeaturesEXT\">VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCoherentMemoryFeaturesAMD\">VkPhysicalDeviceCoherentMemoryFeaturesAMD</a>, <a href=\"#VkPhysicalDeviceColorWriteEnableFeaturesEXT\">VkPhysicalDeviceColorWriteEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixFeaturesNV\">VkPhysicalDeviceCooperativeMatrixFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCoverageReductionModeFeaturesNV\">VkPhysicalDeviceCoverageReductionModeFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCustomBorderColorFeaturesEXT\">VkPhysicalDeviceCustomBorderColorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV\">VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDepthClipEnableFeaturesEXT\">VkPhysicalDeviceDepthClipEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeatures\">VkPhysicalDeviceDescriptorIndexingFeatures</a>, <a href=\"#VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV\">VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDeviceMemoryReportFeaturesEXT\">VkPhysicalDeviceDeviceMemoryReportFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDiagnosticsConfigFeaturesNV\">VkPhysicalDeviceDiagnosticsConfigFeaturesNV</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceExtendedDynamicState2FeaturesEXT\">VkPhysicalDeviceExtendedDynamicState2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExtendedDynamicStateFeaturesEXT\">VkPhysicalDeviceExtendedDynamicStateFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMap2FeaturesEXT\">VkPhysicalDeviceFragmentDensityMap2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapFeaturesEXT\">VkPhysicalDeviceFragmentDensityMapFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT\">VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV\">VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShadingRateFeaturesKHR\">VkPhysicalDeviceFragmentShadingRateFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceHostQueryResetFeatures\">VkPhysicalDeviceHostQueryResetFeatures</a>, <a href=\"#VkPhysicalDeviceImageRobustnessFeaturesEXT\">VkPhysicalDeviceImageRobustnessFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceImagelessFramebufferFeatures\">VkPhysicalDeviceImagelessFramebufferFeatures</a>, <a href=\"#VkPhysicalDeviceIndexTypeUint8FeaturesEXT\">VkPhysicalDeviceIndexTypeUint8FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceInheritedViewportScissorFeaturesNV\">VkPhysicalDeviceInheritedViewportScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeaturesEXT\">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceLineRasterizationFeaturesEXT\">VkPhysicalDeviceLineRasterizationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMemoryPriorityFeaturesEXT\">VkPhysicalDeviceMemoryPriorityFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE\">VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE</a>, <a href=\"#VkPhysicalDevicePerformanceQueryFeaturesKHR\">VkPhysicalDevicePerformanceQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT\">VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT</a>, <a href=\"#VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR\">VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePrivateDataFeaturesEXT\">VkPhysicalDevicePrivateDataFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceRayQueryFeaturesKHR\">VkPhysicalDeviceRayQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceRayTracingPipelineFeaturesKHR\">VkPhysicalDeviceRayTracingPipelineFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceRobustness2FeaturesEXT\">VkPhysicalDeviceRobustness2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceScalarBlockLayoutFeatures\">VkPhysicalDeviceScalarBlockLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures\">VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures</a>, <a href=\"#VkPhysicalDeviceShaderAtomicFloatFeaturesEXT\">VkPhysicalDeviceShaderAtomicFloatFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64Features\">VkPhysicalDeviceShaderAtomicInt64Features</a>, <a href=\"#VkPhysicalDeviceShaderClockFeaturesKHR\">VkPhysicalDeviceShaderClockFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT\">VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderDrawParametersFeatures\">VkPhysicalDeviceShaderDrawParametersFeatures</a>, <a href=\"#VkPhysicalDeviceShaderFloat16Int8Features\">VkPhysicalDeviceShaderFloat16Int8Features</a>, <a href=\"#VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT\">VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL\">VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL</a>, <a href=\"#VkPhysicalDeviceShaderSMBuiltinsFeaturesNV\">VkPhysicalDeviceShaderSMBuiltinsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures\">VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures</a>, <a href=\"#VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR\">VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSubgroupSizeControlFeaturesEXT\">VkPhysicalDeviceSubgroupSizeControlFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSynchronization2FeaturesKHR\">VkPhysicalDeviceSynchronization2FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT\">VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT\">VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTimelineSemaphoreFeatures\">VkPhysicalDeviceTimelineSemaphoreFeatures</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackFeaturesEXT\">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceUniformBufferStandardLayoutFeatures\">VkPhysicalDeviceUniformBufferStandardLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceVariablePointersFeatures\">VkPhysicalDeviceVariablePointersFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT\">VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVulkan11Features\">VkPhysicalDeviceVulkan11Features</a>, <a href=\"#VkPhysicalDeviceVulkan12Features\">VkPhysicalDeviceVulkan12Features</a>, <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeatures\">VkPhysicalDeviceVulkanMemoryModelFeatures</a>, <a href=\"#VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR\">VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT\">VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceYcbcrImageArraysFeaturesEXT\">VkPhysicalDeviceYcbcrImageArraysFeaturesEXT</a>, or <a href=\"#VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR\">VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR</a>"
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-sType-unique",
@@ -8288,6 +8288,30 @@
         }
       ]
     },
+    "vkCmdSetPatchControlPointsEXT": {
+      "(VK_EXT_extended_dynamic_state2)": [
+        {
+          "vuid": "VUID-vkCmdSetPatchControlPointsEXT-None-04873",
+          "text": " The <a href=\"#features-extendedDynamicState2PatchControlPoints\">extendedDynamicState2PatchControlPoints</a> feature <strong class=\"purple\">must</strong> be enabled"
+        },
+        {
+          "vuid": "VUID-vkCmdSetPatchControlPointsEXT-patchControlPoints-04874",
+          "text": " <code>patchControlPoints</code> <strong class=\"purple\">must</strong> be greater than zero and less than or equal to <code>VkPhysicalDeviceLimits</code>::<code>maxTessellationPatchSize</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdSetPatchControlPointsEXT-commandBuffer-parameter",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCommandBuffer\">VkCommandBuffer</a> handle"
+        },
+        {
+          "vuid": "VUID-vkCmdSetPatchControlPointsEXT-commandBuffer-recording",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be in the <a href=\"#commandbuffers-lifecycle\">recording state</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdSetPatchControlPointsEXT-commandBuffer-cmdpool",
+          "text": " The <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from <strong class=\"purple\">must</strong> support graphics operations"
+        }
+      ]
+    },
     "vkGetPhysicalDeviceCooperativeMatrixPropertiesNV": {
       "(VK_NV_cooperative_matrix)": [
         {
@@ -8950,23 +8974,23 @@
         },
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-rasterizerDiscardEnable-00750",
-          "text": " If the <code>rasterizerDiscardEnable</code> member of <code>pRasterizationState</code> is <code>VK_FALSE</code>, <code>pViewportState</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a> structure"
+          "text": " If the <code>rasterizerDiscardEnable</code> member of <code>pRasterizationState</code> is <code>VK_FALSE</code>,"
         },
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-rasterizerDiscardEnable-00751",
-          "text": " If the <code>rasterizerDiscardEnable</code> member of <code>pRasterizationState</code> is <code>VK_FALSE</code>, <code>pMultisampleState</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkPipelineMultisampleStateCreateInfo\">VkPipelineMultisampleStateCreateInfo</a> structure"
+          "text": " If the <code>rasterizerDiscardEnable</code> member of <code>pRasterizationState</code> is <code>VK_FALSE</code>,"
         },
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-rasterizerDiscardEnable-00752",
-          "text": " If the <code>rasterizerDiscardEnable</code> member of <code>pRasterizationState</code> is <code>VK_FALSE</code>, and <code>subpass</code> uses a depth/stencil attachment, <code>pDepthStencilState</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkPipelineDepthStencilStateCreateInfo\">VkPipelineDepthStencilStateCreateInfo</a> structure"
+          "text": " If the <code>rasterizerDiscardEnable</code> member of <code>pRasterizationState</code> is <code>VK_FALSE</code>,"
         },
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-rasterizerDiscardEnable-00753",
-          "text": " If the <code>rasterizerDiscardEnable</code> member of <code>pRasterizationState</code> is <code>VK_FALSE</code>, and <code>subpass</code> uses color attachments, <code>pColorBlendState</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkPipelineColorBlendStateCreateInfo\">VkPipelineColorBlendStateCreateInfo</a> structure"
+          "text": " If the <code>rasterizerDiscardEnable</code> member of <code>pRasterizationState</code> is <code>VK_FALSE</code>,"
         },
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-rasterizerDiscardEnable-04493",
-          "text": " If the <code>rasterizerDiscardEnable</code> member of <code>pRasterizationState</code> is <code>VK_FALSE</code>, <code>pColorBlendState-&gt;attachmentCount</code> <strong class=\"purple\">must</strong> be greater than the index of all color attachments that are not <code>VK_ATTACHMENT_UNUSED</code> for the <code>subpass</code> index in <code>renderPass</code>"
+          "text": " If the <code>rasterizerDiscardEnable</code> member of <code>pRasterizationState</code> is <code>VK_FALSE</code>,"
         },
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-pDynamicStates-00754",
@@ -9303,6 +9327,20 @@
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-pDynamicStates-03578",
           "text": " All elements of the <code>pDynamicStates</code> member of <code>pDynamicState</code> <strong class=\"purple\">must</strong> not be <code>VK_DYNAMIC_STATE_RAY_TRACING_PIPELINE_STACK_SIZE_KHR</code>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state2)": [
+        {
+          "vuid": "VUID-VkGraphicsPipelineCreateInfo-pDynamicStates-04868",
+          "text": " If the <a href=\"#features-extendedDynamicState2\">extendedDynamicState2</a> feature is not enabled, there <strong class=\"purple\">must</strong> be no element of the <code>pDynamicStates</code> member of <code>pDynamicState</code> set to <code>VK_DYNAMIC_STATE_DEPTH_BIAS_ENABLE_EXT</code>, <code>VK_DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE_EXT</code>, or <code>VK_DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE_EXT</code>"
+        },
+        {
+          "vuid": "VUID-VkGraphicsPipelineCreateInfo-pDynamicStates-04869",
+          "text": " If the <a href=\"#features-extendedDynamicState2LogicOp\">extendedDynamicState2LogicOp</a> feature is not enabled, there <strong class=\"purple\">must</strong> be no element of the <code>pDynamicStates</code> member of <code>pDynamicState</code> set to <code>VK_DYNAMIC_STATE_LOGIC_OP_EXT</code>"
+        },
+        {
+          "vuid": "VUID-VkGraphicsPipelineCreateInfo-pDynamicStates-04870",
+          "text": " If the <a href=\"#features-extendedDynamicState2PatchControlPoints\">extendedDynamicState2PatchControlPoints</a> feature is not enabled, there <strong class=\"purple\">must</strong> be no element of the <code>pDynamicStates</code> member of <code>pDynamicState</code> set to <code>VK_DYNAMIC_STATE_PATCH_CONTROL_POINTS_EXT</code>"
         }
       ],
       "(VK_NV_device_generated_commands)": [
@@ -16200,7 +16238,7 @@
       "(VK_VERSION_1_2,VK_EXT_descriptor_indexing)+(VK_KHR_acceleration_structure)": [
         {
           "vuid": "VUID-VkDescriptorSetLayoutBindingFlagsCreateInfo-descriptorBindingAccelerationStructureUpdateAfterBind-03570",
-          "text": " If <a href=\"#VkPhysicalDeviceAccelerationStructureFeaturesKHR\">VkPhysicalDeviceAccelerationStructureFeaturesKHR</a>::<code>descriptorBindingAccelerationStructureUpdateAfterBind</code> is not enabled, all bindings with descriptor type <code>VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR</code> or <code>VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_NV</code> <strong class=\"purple\">must</strong> not use <code>VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT</code>"
+          "text": " If <a href=\"#VkPhysicalDeviceAccelerationStructureFeaturesKHR\">VkPhysicalDeviceAccelerationStructureFeaturesKHR</a>::<code>descriptorBindingAccelerationStructureUpdateAfterBind</code> is not enabled, all bindings with descriptor type <code>VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR</code>"
         }
       ]
     },
@@ -16536,7 +16574,7 @@
         },
         {
           "vuid": "VUID-VkPipelineLayoutCreateInfo-descriptorType-03572",
-          "text": " The total number of bindings with a <code>descriptorType</code> of <code>VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR</code> to any given shader stage across all elements of <code>pSetLayouts</code> <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#VkPhysicalDeviceAccelerationStructurePropertiesKHR\">VkPhysicalDeviceAccelerationStructurePropertiesKHR</a>::<code>maxPerStageDescriptorUpdateAfterBindAccelerationStructures</code>"
+          "text": " The total number of bindings with a <code>descriptorType</code> of <code>VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR</code> accessible to any given shader stage across all elements of <code>pSetLayouts</code> <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#VkPhysicalDeviceAccelerationStructurePropertiesKHR\">VkPhysicalDeviceAccelerationStructurePropertiesKHR</a>::<code>maxPerStageDescriptorUpdateAfterBindAccelerationStructures</code>"
         },
         {
           "vuid": "VUID-VkPipelineLayoutCreateInfo-descriptorType-03573",
@@ -17252,7 +17290,7 @@
         },
         {
           "vuid": "VUID-VkWriteDescriptorSetAccelerationStructureKHR-pAccelerationStructures-03580",
-          "text": " If the <a href=\"#features-nullDescriptor\">nullDescriptor</a> feature is not enabled, each member of <code>pAccelerationStructures</code> <strong class=\"purple\">must</strong> not be <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>"
+          "text": " If the <a href=\"#features-nullDescriptor\">nullDescriptor</a> feature is not enabled, each element of <code>pAccelerationStructures</code> <strong class=\"purple\">must</strong> not be <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>"
         },
         {
           "vuid": "VUID-VkWriteDescriptorSetAccelerationStructureKHR-sType-sType",
@@ -17500,11 +17538,11 @@
       "(VK_VERSION_1_1,VK_KHR_descriptor_update_template)": [
         {
           "vuid": "VUID-vkDestroyDescriptorUpdateTemplate-descriptorSetLayout-00356",
-          "text": " If <code>VkAllocationCallbacks</code> were provided when <code>descriptorSetLayout</code> was created, a compatible set of callbacks <strong class=\"purple\">must</strong> be provided here"
+          "text": " If <code>VkAllocationCallbacks</code> were provided when <code>descriptorUpdateTemplate</code> was created, a compatible set of callbacks <strong class=\"purple\">must</strong> be provided here"
         },
         {
           "vuid": "VUID-vkDestroyDescriptorUpdateTemplate-descriptorSetLayout-00357",
-          "text": " If no <code>VkAllocationCallbacks</code> were provided when <code>descriptorSetLayout</code> was created, <code>pAllocator</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+          "text": " If no <code>VkAllocationCallbacks</code> were provided when <code>descriptorUpdateTemplate</code> was created, <code>pAllocator</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
         },
         {
           "vuid": "VUID-vkDestroyDescriptorUpdateTemplate-device-parameter",
@@ -17774,11 +17812,11 @@
       "(VK_VERSION_1_2,VK_EXT_buffer_device_address,VK_KHR_buffer_device_address)": [
         {
           "vuid": "VUID-vkGetBufferDeviceAddress-bufferDeviceAddress-03324",
-          "text": " The <a href=\"#features-bufferDeviceAddress\">bufferDeviceAddress</a> or <a href=\"#features-bufferDeviceAddressEXT\"><code>VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</code>::<code>bufferDeviceAddress</code></a> feature <strong class=\"purple\">must</strong> be enabled"
+          "text": " The <a href=\"#features-bufferDeviceAddress\">bufferDeviceAddress</a>"
         },
         {
           "vuid": "VUID-vkGetBufferDeviceAddress-device-03325",
-          "text": " If <code>device</code> was created with multiple physical devices, then the <a href=\"#features-bufferDeviceAddressMultiDevice\">bufferDeviceAddressMultiDevice</a> or <a href=\"#features-bufferDeviceAddressMultiDeviceEXT\"><code>VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</code>::<code>bufferDeviceAddressMultiDevice</code></a> feature <strong class=\"purple\">must</strong> be enabled"
+          "text": " If <code>device</code> was created with multiple physical devices, then the <a href=\"#features-bufferDeviceAddressMultiDevice\">bufferDeviceAddressMultiDevice</a>"
         },
         {
           "vuid": "VUID-vkGetBufferDeviceAddress-device-parameter",
@@ -19955,10 +19993,6 @@
           "text": " <code>firstQuery</code> <strong class=\"purple\">must</strong> be less than the number of queries in <code>queryPool</code>"
         },
         {
-          "vuid": "VUID-vkGetQueryPoolResults-flags-02827",
-          "text": " If <code>VK_QUERY_RESULT_64_BIT</code> is not set in <code>flags</code>, then <code>pData</code> and <code>stride</code> <strong class=\"purple\">must</strong> be multiples of <code>4</code>"
-        },
-        {
           "vuid": "VUID-vkGetQueryPoolResults-flags-00815",
           "text": " If <code>VK_QUERY_RESULT_64_BIT</code> is set in <code>flags</code> then <code>pData</code> and <code>stride</code> <strong class=\"purple\">must</strong> be multiples of <code>8</code>"
         },
@@ -19997,6 +20031,12 @@
         {
           "vuid": "VUID-vkGetQueryPoolResults-queryPool-parent",
           "text": " <code>queryPool</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from <code>device</code>"
+        }
+      ],
+      "!(VK_KHR_performance_query)": [
+        {
+          "vuid": "VUID-vkGetQueryPoolResults-flags-02827",
+          "text": " If <code>VK_QUERY_RESULT_64_BIT</code> is not set in <code>flags</code>, then <code>pData</code> and <code>stride</code> <strong class=\"purple\">must</strong> be multiples of <code>4</code>"
         }
       ],
       "(VK_KHR_performance_query)": [
@@ -21554,11 +21594,11 @@
         },
         {
           "vuid": "VUID-vkCmdCopyImage-srcImage-04443",
-          "text": " If <code>srcImage</code> is of type <code>VK_IMAGE_TYPE_3D</code>, then for each element of <code>pRegions</code>, <code>srcSubresource.baseArrayLayer</code> <strong class=\"purple\">must</strong> be <code>0</code> and and <code>srcSubresource.layerCount</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+          "text": " If <code>srcImage</code> is of type <code>VK_IMAGE_TYPE_3D</code>, then for each element of <code>pRegions</code>, <code>srcSubresource.baseArrayLayer</code> <strong class=\"purple\">must</strong> be <code>0</code> and <code>srcSubresource.layerCount</code> <strong class=\"purple\">must</strong> be <code>1</code>"
         },
         {
           "vuid": "VUID-vkCmdCopyImage-dstImage-04444",
-          "text": " If <code>dstImage</code> is of type <code>VK_IMAGE_TYPE_3D</code>, then for each element of <code>pRegions</code>, <code>dstSubresource.baseArrayLayer</code> <strong class=\"purple\">must</strong> be <code>0</code> and and <code>dstSubresource.layerCount</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+          "text": " If <code>dstImage</code> is of type <code>VK_IMAGE_TYPE_3D</code>, then for each element of <code>pRegions</code>, <code>dstSubresource.baseArrayLayer</code> <strong class=\"purple\">must</strong> be <code>0</code> and <code>dstSubresource.layerCount</code> <strong class=\"purple\">must</strong> be <code>1</code>"
         },
         {
           "vuid": "VUID-vkCmdCopyImage-srcImage-01790",
@@ -21954,11 +21994,11 @@
         },
         {
           "vuid": "VUID-VkCopyImageInfo2KHR-srcImage-04443",
-          "text": " If <code>srcImage</code> is of type <code>VK_IMAGE_TYPE_3D</code>, then for each element of <code>pRegions</code>, <code>srcSubresource.baseArrayLayer</code> <strong class=\"purple\">must</strong> be <code>0</code> and and <code>srcSubresource.layerCount</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+          "text": " If <code>srcImage</code> is of type <code>VK_IMAGE_TYPE_3D</code>, then for each element of <code>pRegions</code>, <code>srcSubresource.baseArrayLayer</code> <strong class=\"purple\">must</strong> be <code>0</code> and <code>srcSubresource.layerCount</code> <strong class=\"purple\">must</strong> be <code>1</code>"
         },
         {
           "vuid": "VUID-VkCopyImageInfo2KHR-dstImage-04444",
-          "text": " If <code>dstImage</code> is of type <code>VK_IMAGE_TYPE_3D</code>, then for each element of <code>pRegions</code>, <code>dstSubresource.baseArrayLayer</code> <strong class=\"purple\">must</strong> be <code>0</code> and and <code>dstSubresource.layerCount</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+          "text": " If <code>dstImage</code> is of type <code>VK_IMAGE_TYPE_3D</code>, then for each element of <code>pRegions</code>, <code>dstSubresource.baseArrayLayer</code> <strong class=\"purple\">must</strong> be <code>0</code> and <code>dstSubresource.layerCount</code> <strong class=\"purple\">must</strong> be <code>1</code>"
         },
         {
           "vuid": "VUID-VkCopyImageInfo2KHR-srcImage-01790",
@@ -22182,7 +22222,7 @@
         },
         {
           "vuid": "VUID-vkCmdCopyBufferToImage-imageOffset-00198",
-          "text": " For each element of <code>pRegions</code>, <code>imageOffset.y</code> and <span class=\"eq\">(imageExtent.height &#43; <code>imageOffset.y</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the height of the specified <code>imageSubresource</code> of <code>dstImage</code>"
+          "text": " For each element of <code>pRegions</code>, <code>imageOffset.y</code> and <span class=\"eq\">(<code>imageExtent.height</code> &#43; <code>imageOffset.y</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the height of the specified <code>imageSubresource</code> of <code>dstImage</code>"
         },
         {
           "vuid": "VUID-vkCmdCopyBufferToImage-srcImage-00199",
@@ -22190,7 +22230,7 @@
         },
         {
           "vuid": "VUID-vkCmdCopyBufferToImage-imageOffset-00200",
-          "text": " For each element of <code>pRegions</code>, <code>imageOffset.z</code> and <span class=\"eq\">(imageExtent.depth &#43; <code>imageOffset.z</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the depth of the specified <code>imageSubresource</code> of {imageparam}"
+          "text": " For each element of <code>pRegions</code>, <code>imageOffset.z</code> and <span class=\"eq\">(<code>imageExtent.depth</code> &#43; <code>imageOffset.z</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the depth of the specified <code>imageSubresource</code> of {imageparam}"
         },
         {
           "vuid": "VUID-vkCmdCopyBufferToImage-srcImage-00201",
@@ -22418,7 +22458,7 @@
         },
         {
           "vuid": "VUID-vkCmdCopyImageToBuffer-imageOffset-00200",
-          "text": " For each element of <code>pRegions</code>, <code>imageOffset.z</code> and <span class=\"eq\">(imageExtent.depth &#43; <code>imageOffset.z</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the depth of the specified <code>imageSubresource</code> of {imageparam}"
+          "text": " For each element of <code>pRegions</code>, <code>imageOffset.z</code> and <span class=\"eq\">(<code>imageExtent.depth</code> &#43; <code>imageOffset.z</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the depth of the specified <code>imageSubresource</code> of {imageparam}"
         },
         {
           "vuid": "VUID-vkCmdCopyImageToBuffer-srcImage-00201",
@@ -22708,7 +22748,7 @@
         },
         {
           "vuid": "VUID-VkCopyBufferToImageInfo2KHR-imageOffset-00200",
-          "text": " For each element of <code>pRegions</code>, <code>imageOffset.z</code> and <span class=\"eq\">(imageExtent.depth &#43; <code>imageOffset.z</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the depth of the specified <code>imageSubresource</code> of {imageparam}"
+          "text": " For each element of <code>pRegions</code>, <code>imageOffset.z</code> and <span class=\"eq\">(<code>imageExtent.depth</code> &#43; <code>imageOffset.z</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the depth of the specified <code>imageSubresource</code> of {imageparam}"
         },
         {
           "vuid": "VUID-VkCopyBufferToImageInfo2KHR-srcImage-00201",
@@ -22972,7 +23012,7 @@
         },
         {
           "vuid": "VUID-VkCopyImageToBufferInfo2KHR-imageOffset-00200",
-          "text": " For each element of <code>pRegions</code>, <code>imageOffset.z</code> and <span class=\"eq\">(imageExtent.depth &#43; <code>imageOffset.z</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the depth of the specified <code>imageSubresource</code> of {imageparam}"
+          "text": " For each element of <code>pRegions</code>, <code>imageOffset.z</code> and <span class=\"eq\">(<code>imageExtent.depth</code> &#43; <code>imageOffset.z</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the depth of the specified <code>imageSubresource</code> of {imageparam}"
         },
         {
           "vuid": "VUID-VkCopyImageToBufferInfo2KHR-srcImage-00201",
@@ -23270,43 +23310,43 @@
         },
         {
           "vuid": "VUID-vkCmdBlitImage-srcOffset-00243",
-          "text": " For each element of <code>pRegions</code>, <code>srcOffset</code>[0].x and <code>srcOffset</code>[1].x <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the width of the specified <code>srcSubresource</code> of <code>srcImage</code>"
+          "text": " For each element of <code>pRegions</code>, <code>srcOffsets</code>[0].x and <code>srcOffsets</code>[1].x <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the width of the specified <code>srcSubresource</code> of <code>srcImage</code>"
         },
         {
           "vuid": "VUID-vkCmdBlitImage-srcOffset-00244",
-          "text": " For each element of <code>pRegions</code>, <code>srcOffset</code>[0].y and <code>srcOffset</code>[1].y <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the height of the specified <code>srcSubresource</code> of <code>srcImage</code>"
+          "text": " For each element of <code>pRegions</code>, <code>srcOffsets</code>[0].y and <code>srcOffsets</code>[1].y <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the height of the specified <code>srcSubresource</code> of <code>srcImage</code>"
         },
         {
           "vuid": "VUID-vkCmdBlitImage-srcImage-00245",
-          "text": " If <code>srcImage</code> is of type <code>VK_IMAGE_TYPE_1D</code>, then for each element of <code>pRegions</code>, <code>srcOffset</code>[0].y <strong class=\"purple\">must</strong> be <code>0</code> and <code>srcOffset</code>[1].y <strong class=\"purple\">must</strong> be <code>1</code>"
+          "text": " If <code>srcImage</code> is of type <code>VK_IMAGE_TYPE_1D</code>, then for each element of <code>pRegions</code>, <code>srcOffsets</code>[0].y <strong class=\"purple\">must</strong> be <code>0</code> and <code>srcOffsets</code>[1].y <strong class=\"purple\">must</strong> be <code>1</code>"
         },
         {
           "vuid": "VUID-vkCmdBlitImage-srcOffset-00246",
-          "text": " For each element of <code>pRegions</code>, <code>srcOffset</code>[0].z and <code>srcOffset</code>[1].z <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the depth of the specified <code>srcSubresource</code> of <code>srcImage</code>"
+          "text": " For each element of <code>pRegions</code>, <code>srcOffsets</code>[0].z and <code>srcOffsets</code>[1].z <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the depth of the specified <code>srcSubresource</code> of <code>srcImage</code>"
         },
         {
           "vuid": "VUID-vkCmdBlitImage-srcImage-00247",
-          "text": " If <code>srcImage</code> is of type <code>VK_IMAGE_TYPE_1D</code> or <code>VK_IMAGE_TYPE_2D</code>, then for each element of <code>pRegions</code>, <code>srcOffset</code>[0].z <strong class=\"purple\">must</strong> be <code>0</code> and <code>srcOffset</code>[1].z <strong class=\"purple\">must</strong> be <code>1</code>"
+          "text": " If <code>srcImage</code> is of type <code>VK_IMAGE_TYPE_1D</code> or <code>VK_IMAGE_TYPE_2D</code>, then for each element of <code>pRegions</code>, <code>srcOffsets</code>[0].z <strong class=\"purple\">must</strong> be <code>0</code> and <code>srcOffsets</code>[1].z <strong class=\"purple\">must</strong> be <code>1</code>"
         },
         {
           "vuid": "VUID-vkCmdBlitImage-dstOffset-00248",
-          "text": " For each element of <code>pRegions</code>, <code>dstOffset</code>[0].x and <code>dstOffset</code>[1].x <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the width of the specified <code>dstSubresource</code> of <code>dstImage</code>"
+          "text": " For each element of <code>pRegions</code>, <code>dstOffsets</code>[0].x and <code>dstOffsets</code>[1].x <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the width of the specified <code>dstSubresource</code> of <code>dstImage</code>"
         },
         {
           "vuid": "VUID-vkCmdBlitImage-dstOffset-00249",
-          "text": " For each element of <code>pRegions</code>, <code>dstOffset</code>[0].y and <code>dstOffset</code>[1].y <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the height of the specified <code>dstSubresource</code> of <code>dstImage</code>"
+          "text": " For each element of <code>pRegions</code>, <code>dstOffsets</code>[0].y and <code>dstOffsets</code>[1].y <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the height of the specified <code>dstSubresource</code> of <code>dstImage</code>"
         },
         {
           "vuid": "VUID-vkCmdBlitImage-dstImage-00250",
-          "text": " If <code>dstImage</code> is of type <code>VK_IMAGE_TYPE_1D</code>, then for each element of <code>pRegions</code>, <code>dstOffset</code>[0].y <strong class=\"purple\">must</strong> be <code>0</code> and <code>dstOffset</code>[1].y <strong class=\"purple\">must</strong> be <code>1</code>"
+          "text": " If <code>dstImage</code> is of type <code>VK_IMAGE_TYPE_1D</code>, then for each element of <code>pRegions</code>, <code>dstOffsets</code>[0].y <strong class=\"purple\">must</strong> be <code>0</code> and <code>dstOffsets</code>[1].y <strong class=\"purple\">must</strong> be <code>1</code>"
         },
         {
           "vuid": "VUID-vkCmdBlitImage-dstOffset-00251",
-          "text": " For each element of <code>pRegions</code>, <code>dstOffset</code>[0].z and <code>dstOffset</code>[1].z <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the depth of the specified <code>dstSubresource</code> of <code>dstImage</code>"
+          "text": " For each element of <code>pRegions</code>, <code>dstOffsets</code>[0].z and <code>dstOffsets</code>[1].z <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the depth of the specified <code>dstSubresource</code> of <code>dstImage</code>"
         },
         {
           "vuid": "VUID-vkCmdBlitImage-dstImage-00252",
-          "text": " If <code>dstImage</code> is of type <code>VK_IMAGE_TYPE_1D</code> or <code>VK_IMAGE_TYPE_2D</code>, then for each element of <code>pRegions</code>, <code>dstOffset</code>[0].z <strong class=\"purple\">must</strong> be <code>0</code> and <code>dstOffset</code>[1].z <strong class=\"purple\">must</strong> be <code>1</code>"
+          "text": " If <code>dstImage</code> is of type <code>VK_IMAGE_TYPE_1D</code> or <code>VK_IMAGE_TYPE_2D</code>, then for each element of <code>pRegions</code>, <code>dstOffsets</code>[0].z <strong class=\"purple\">must</strong> be <code>0</code> and <code>dstOffsets</code>[1].z <strong class=\"purple\">must</strong> be <code>1</code>"
         },
         {
           "vuid": "VUID-vkCmdBlitImage-commandBuffer-parameter",
@@ -23566,43 +23606,43 @@
         },
         {
           "vuid": "VUID-VkBlitImageInfo2KHR-srcOffset-00243",
-          "text": " For each element of <code>pRegions</code>, <code>srcOffset</code>[0].x and <code>srcOffset</code>[1].x <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the width of the specified <code>srcSubresource</code> of <code>srcImage</code>"
+          "text": " For each element of <code>pRegions</code>, <code>srcOffsets</code>[0].x and <code>srcOffsets</code>[1].x <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the width of the specified <code>srcSubresource</code> of <code>srcImage</code>"
         },
         {
           "vuid": "VUID-VkBlitImageInfo2KHR-srcOffset-00244",
-          "text": " For each element of <code>pRegions</code>, <code>srcOffset</code>[0].y and <code>srcOffset</code>[1].y <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the height of the specified <code>srcSubresource</code> of <code>srcImage</code>"
+          "text": " For each element of <code>pRegions</code>, <code>srcOffsets</code>[0].y and <code>srcOffsets</code>[1].y <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the height of the specified <code>srcSubresource</code> of <code>srcImage</code>"
         },
         {
           "vuid": "VUID-VkBlitImageInfo2KHR-srcImage-00245",
-          "text": " If <code>srcImage</code> is of type <code>VK_IMAGE_TYPE_1D</code>, then for each element of <code>pRegions</code>, <code>srcOffset</code>[0].y <strong class=\"purple\">must</strong> be <code>0</code> and <code>srcOffset</code>[1].y <strong class=\"purple\">must</strong> be <code>1</code>"
+          "text": " If <code>srcImage</code> is of type <code>VK_IMAGE_TYPE_1D</code>, then for each element of <code>pRegions</code>, <code>srcOffsets</code>[0].y <strong class=\"purple\">must</strong> be <code>0</code> and <code>srcOffsets</code>[1].y <strong class=\"purple\">must</strong> be <code>1</code>"
         },
         {
           "vuid": "VUID-VkBlitImageInfo2KHR-srcOffset-00246",
-          "text": " For each element of <code>pRegions</code>, <code>srcOffset</code>[0].z and <code>srcOffset</code>[1].z <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the depth of the specified <code>srcSubresource</code> of <code>srcImage</code>"
+          "text": " For each element of <code>pRegions</code>, <code>srcOffsets</code>[0].z and <code>srcOffsets</code>[1].z <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the depth of the specified <code>srcSubresource</code> of <code>srcImage</code>"
         },
         {
           "vuid": "VUID-VkBlitImageInfo2KHR-srcImage-00247",
-          "text": " If <code>srcImage</code> is of type <code>VK_IMAGE_TYPE_1D</code> or <code>VK_IMAGE_TYPE_2D</code>, then for each element of <code>pRegions</code>, <code>srcOffset</code>[0].z <strong class=\"purple\">must</strong> be <code>0</code> and <code>srcOffset</code>[1].z <strong class=\"purple\">must</strong> be <code>1</code>"
+          "text": " If <code>srcImage</code> is of type <code>VK_IMAGE_TYPE_1D</code> or <code>VK_IMAGE_TYPE_2D</code>, then for each element of <code>pRegions</code>, <code>srcOffsets</code>[0].z <strong class=\"purple\">must</strong> be <code>0</code> and <code>srcOffsets</code>[1].z <strong class=\"purple\">must</strong> be <code>1</code>"
         },
         {
           "vuid": "VUID-VkBlitImageInfo2KHR-dstOffset-00248",
-          "text": " For each element of <code>pRegions</code>, <code>dstOffset</code>[0].x and <code>dstOffset</code>[1].x <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the width of the specified <code>dstSubresource</code> of <code>dstImage</code>"
+          "text": " For each element of <code>pRegions</code>, <code>dstOffsets</code>[0].x and <code>dstOffsets</code>[1].x <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the width of the specified <code>dstSubresource</code> of <code>dstImage</code>"
         },
         {
           "vuid": "VUID-VkBlitImageInfo2KHR-dstOffset-00249",
-          "text": " For each element of <code>pRegions</code>, <code>dstOffset</code>[0].y and <code>dstOffset</code>[1].y <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the height of the specified <code>dstSubresource</code> of <code>dstImage</code>"
+          "text": " For each element of <code>pRegions</code>, <code>dstOffsets</code>[0].y and <code>dstOffsets</code>[1].y <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the height of the specified <code>dstSubresource</code> of <code>dstImage</code>"
         },
         {
           "vuid": "VUID-VkBlitImageInfo2KHR-dstImage-00250",
-          "text": " If <code>dstImage</code> is of type <code>VK_IMAGE_TYPE_1D</code>, then for each element of <code>pRegions</code>, <code>dstOffset</code>[0].y <strong class=\"purple\">must</strong> be <code>0</code> and <code>dstOffset</code>[1].y <strong class=\"purple\">must</strong> be <code>1</code>"
+          "text": " If <code>dstImage</code> is of type <code>VK_IMAGE_TYPE_1D</code>, then for each element of <code>pRegions</code>, <code>dstOffsets</code>[0].y <strong class=\"purple\">must</strong> be <code>0</code> and <code>dstOffsets</code>[1].y <strong class=\"purple\">must</strong> be <code>1</code>"
         },
         {
           "vuid": "VUID-VkBlitImageInfo2KHR-dstOffset-00251",
-          "text": " For each element of <code>pRegions</code>, <code>dstOffset</code>[0].z and <code>dstOffset</code>[1].z <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the depth of the specified <code>dstSubresource</code> of <code>dstImage</code>"
+          "text": " For each element of <code>pRegions</code>, <code>dstOffsets</code>[0].z and <code>dstOffsets</code>[1].z <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the depth of the specified <code>dstSubresource</code> of <code>dstImage</code>"
         },
         {
           "vuid": "VUID-VkBlitImageInfo2KHR-dstImage-00252",
-          "text": " If <code>dstImage</code> is of type <code>VK_IMAGE_TYPE_1D</code> or <code>VK_IMAGE_TYPE_2D</code>, then for each element of <code>pRegions</code>, <code>dstOffset</code>[0].z <strong class=\"purple\">must</strong> be <code>0</code> and <code>dstOffset</code>[1].z <strong class=\"purple\">must</strong> be <code>1</code>"
+          "text": " If <code>dstImage</code> is of type <code>VK_IMAGE_TYPE_1D</code> or <code>VK_IMAGE_TYPE_2D</code>, then for each element of <code>pRegions</code>, <code>dstOffsets</code>[0].z <strong class=\"purple\">must</strong> be <code>0</code> and <code>dstOffsets</code>[1].z <strong class=\"purple\">must</strong> be <code>1</code>"
         },
         {
           "vuid": "VUID-VkBlitImageInfo2KHR-sType-sType",
@@ -24400,6 +24440,26 @@
         }
       ]
     },
+    "vkCmdSetPrimitiveRestartEnableEXT": {
+      "(VK_EXT_extended_dynamic_state2)": [
+        {
+          "vuid": "VUID-vkCmdSetPrimitiveRestartEnableEXT-None-04866",
+          "text": " The <a href=\"#features-extendedDynamicState2\">extendedDynamicState2</a> feature <strong class=\"purple\">must</strong> be enabled"
+        },
+        {
+          "vuid": "VUID-vkCmdSetPrimitiveRestartEnableEXT-commandBuffer-parameter",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCommandBuffer\">VkCommandBuffer</a> handle"
+        },
+        {
+          "vuid": "VUID-vkCmdSetPrimitiveRestartEnableEXT-commandBuffer-recording",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be in the <a href=\"#commandbuffers-lifecycle\">recording state</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdSetPrimitiveRestartEnableEXT-commandBuffer-cmdpool",
+          "text": " The <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from <strong class=\"purple\">must</strong> support graphics operations"
+        }
+      ]
+    },
     "vkCmdSetPrimitiveTopologyEXT": {
       "(VK_EXT_extended_dynamic_state)": [
         {
@@ -24638,7 +24698,7 @@
         },
         {
           "vuid": "VUID-vkCmdDraw-commandBuffer-02713",
-          "text": " If <code>commandBuffer</code> is a protected command buffer, pipeline stages other than the framebuffer-space and compute stages in the <code>VkPipeline</code> object bound to the pipeline bind point <strong class=\"purple\">must</strong> not write to any resource"
+          "text": " If <code>commandBuffer</code> is a protected command buffer, pipeline stages other than the framebuffer-space and compute stages in the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not write to any resource"
         },
         {
           "vuid": "VUID-vkCmdDraw-commandBuffer-04617",
@@ -24731,6 +24791,28 @@
         {
           "vuid": "VUID-vkCmdDraw-VkPipelineVieportCreateInfo-04142",
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled and an instance of <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a> chained from <code>VkPipelineVieportCreateInfo</code>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a>::<code>exclusiveScissorCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state2)": [
+        {
+          "vuid": "VUID-vkCmdDraw-None-04875",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PATCH_CONTROL_POINTS_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPatchControlPointsEXT\">vkCmdSetPatchControlPointsEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdDraw-None-04876",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetRasterizerDiscardEnableEXT\">vkCmdSetRasterizerDiscardEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdDraw-None-04877",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_DEPTH_BIAS_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetDepthBiasEnableEXT\">vkCmdSetDepthBiasEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdDraw-logicOp-04878",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_LOGIC_OP_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetLogicOpEXT\">vkCmdSetLogicOpEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command and the <code>logicOp</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkLogicOp\">VkLogicOp</a> value"
+        },
+        {
+          "vuid": "VUID-vkCmdDraw-None-04879",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPrimitiveRestartEnableEXT\">vkCmdSetPrimitiveRestartEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
         }
       ],
       "(VK_KHR_fragment_shading_rate+VK_EXT_extended_dynamic_state)": [
@@ -24902,7 +24984,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexed-commandBuffer-02713",
-          "text": " If <code>commandBuffer</code> is a protected command buffer, pipeline stages other than the framebuffer-space and compute stages in the <code>VkPipeline</code> object bound to the pipeline bind point <strong class=\"purple\">must</strong> not write to any resource"
+          "text": " If <code>commandBuffer</code> is a protected command buffer, pipeline stages other than the framebuffer-space and compute stages in the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not write to any resource"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexed-commandBuffer-04617",
@@ -24995,6 +25077,28 @@
         {
           "vuid": "VUID-vkCmdDrawIndexed-VkPipelineVieportCreateInfo-04142",
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled and an instance of <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a> chained from <code>VkPipelineVieportCreateInfo</code>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a>::<code>exclusiveScissorCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state2)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexed-None-04875",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PATCH_CONTROL_POINTS_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPatchControlPointsEXT\">vkCmdSetPatchControlPointsEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexed-None-04876",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetRasterizerDiscardEnableEXT\">vkCmdSetRasterizerDiscardEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexed-None-04877",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_DEPTH_BIAS_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetDepthBiasEnableEXT\">vkCmdSetDepthBiasEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexed-logicOp-04878",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_LOGIC_OP_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetLogicOpEXT\">vkCmdSetLogicOpEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command and the <code>logicOp</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkLogicOp\">VkLogicOp</a> value"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexed-None-04879",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPrimitiveRestartEnableEXT\">vkCmdSetPrimitiveRestartEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
         }
       ],
       "(VK_KHR_fragment_shading_rate+VK_EXT_extended_dynamic_state)": [
@@ -25291,6 +25395,28 @@
         {
           "vuid": "VUID-vkCmdDrawIndirect-VkPipelineVieportCreateInfo-04142",
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled and an instance of <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a> chained from <code>VkPipelineVieportCreateInfo</code>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a>::<code>exclusiveScissorCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state2)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirect-None-04875",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PATCH_CONTROL_POINTS_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPatchControlPointsEXT\">vkCmdSetPatchControlPointsEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirect-None-04876",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetRasterizerDiscardEnableEXT\">vkCmdSetRasterizerDiscardEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirect-None-04877",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_DEPTH_BIAS_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetDepthBiasEnableEXT\">vkCmdSetDepthBiasEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirect-logicOp-04878",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_LOGIC_OP_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetLogicOpEXT\">vkCmdSetLogicOpEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command and the <code>logicOp</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkLogicOp\">VkLogicOp</a> value"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirect-None-04879",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPrimitiveRestartEnableEXT\">vkCmdSetPrimitiveRestartEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
         }
       ],
       "(VK_KHR_fragment_shading_rate+VK_EXT_extended_dynamic_state)": [
@@ -25617,6 +25743,28 @@
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled and an instance of <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a> chained from <code>VkPipelineVieportCreateInfo</code>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a>::<code>exclusiveScissorCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
         }
       ],
+      "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_EXT_extended_dynamic_state2)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCount-None-04875",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PATCH_CONTROL_POINTS_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPatchControlPointsEXT\">vkCmdSetPatchControlPointsEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCount-None-04876",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetRasterizerDiscardEnableEXT\">vkCmdSetRasterizerDiscardEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCount-None-04877",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_DEPTH_BIAS_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetDepthBiasEnableEXT\">vkCmdSetDepthBiasEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCount-logicOp-04878",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_LOGIC_OP_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetLogicOpEXT\">vkCmdSetLogicOpEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command and the <code>logicOp</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkLogicOp\">VkLogicOp</a> value"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCount-None-04879",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPrimitiveRestartEnableEXT\">vkCmdSetPrimitiveRestartEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        }
+      ],
       "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_KHR_fragment_shading_rate+VK_EXT_extended_dynamic_state)": [
         {
           "vuid": "VUID-vkCmdDrawIndirectCount-primitiveFragmentShadingRateWithMultipleViewports-04552",
@@ -25917,6 +26065,28 @@
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-VkPipelineVieportCreateInfo-04142",
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled and an instance of <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a> chained from <code>VkPipelineVieportCreateInfo</code>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a>::<code>exclusiveScissorCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state2)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirect-None-04875",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PATCH_CONTROL_POINTS_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPatchControlPointsEXT\">vkCmdSetPatchControlPointsEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirect-None-04876",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetRasterizerDiscardEnableEXT\">vkCmdSetRasterizerDiscardEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirect-None-04877",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_DEPTH_BIAS_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetDepthBiasEnableEXT\">vkCmdSetDepthBiasEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirect-logicOp-04878",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_LOGIC_OP_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetLogicOpEXT\">vkCmdSetLogicOpEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command and the <code>logicOp</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkLogicOp\">VkLogicOp</a> value"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirect-None-04879",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPrimitiveRestartEnableEXT\">vkCmdSetPrimitiveRestartEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
         }
       ],
       "(VK_KHR_fragment_shading_rate+VK_EXT_extended_dynamic_state)": [
@@ -26247,6 +26417,28 @@
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled and an instance of <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a> chained from <code>VkPipelineVieportCreateInfo</code>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a>::<code>exclusiveScissorCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
         }
       ],
+      "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_EXT_extended_dynamic_state2)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-None-04875",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PATCH_CONTROL_POINTS_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPatchControlPointsEXT\">vkCmdSetPatchControlPointsEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-None-04876",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetRasterizerDiscardEnableEXT\">vkCmdSetRasterizerDiscardEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-None-04877",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_DEPTH_BIAS_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetDepthBiasEnableEXT\">vkCmdSetDepthBiasEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-logicOp-04878",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_LOGIC_OP_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetLogicOpEXT\">vkCmdSetLogicOpEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command and the <code>logicOp</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkLogicOp\">VkLogicOp</a> value"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-None-04879",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPrimitiveRestartEnableEXT\">vkCmdSetPrimitiveRestartEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        }
+      ],
       "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_KHR_fragment_shading_rate+VK_EXT_extended_dynamic_state)": [
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount-primitiveFragmentShadingRateWithMultipleViewports-04552",
@@ -26535,6 +26727,28 @@
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-VkPipelineVieportCreateInfo-04142",
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled and an instance of <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a> chained from <code>VkPipelineVieportCreateInfo</code>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a>::<code>exclusiveScissorCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_EXT_transform_feedback)+(VK_EXT_extended_dynamic_state2)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-None-04875",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PATCH_CONTROL_POINTS_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPatchControlPointsEXT\">vkCmdSetPatchControlPointsEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-None-04876",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetRasterizerDiscardEnableEXT\">vkCmdSetRasterizerDiscardEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-None-04877",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_DEPTH_BIAS_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetDepthBiasEnableEXT\">vkCmdSetDepthBiasEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-logicOp-04878",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_LOGIC_OP_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetLogicOpEXT\">vkCmdSetLogicOpEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command and the <code>logicOp</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkLogicOp\">VkLogicOp</a> value"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-None-04879",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPrimitiveRestartEnableEXT\">vkCmdSetPrimitiveRestartEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
         }
       ],
       "(VK_EXT_transform_feedback)+(VK_KHR_fragment_shading_rate+VK_EXT_extended_dynamic_state)": [
@@ -26865,6 +27079,28 @@
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled and an instance of <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a> chained from <code>VkPipelineVieportCreateInfo</code>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a>::<code>exclusiveScissorCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
         }
       ],
+      "(VK_NV_mesh_shader)+(VK_EXT_extended_dynamic_state2)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksNV-None-04875",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PATCH_CONTROL_POINTS_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPatchControlPointsEXT\">vkCmdSetPatchControlPointsEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksNV-None-04876",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetRasterizerDiscardEnableEXT\">vkCmdSetRasterizerDiscardEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksNV-None-04877",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_DEPTH_BIAS_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetDepthBiasEnableEXT\">vkCmdSetDepthBiasEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksNV-logicOp-04878",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_LOGIC_OP_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetLogicOpEXT\">vkCmdSetLogicOpEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command and the <code>logicOp</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkLogicOp\">VkLogicOp</a> value"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksNV-None-04879",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPrimitiveRestartEnableEXT\">vkCmdSetPrimitiveRestartEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        }
+      ],
       "(VK_NV_mesh_shader)+(VK_KHR_fragment_shading_rate+VK_EXT_extended_dynamic_state)": [
         {
           "vuid": "VUID-vkCmdDrawMeshTasksNV-primitiveFragmentShadingRateWithMultipleViewports-04552",
@@ -27143,6 +27379,28 @@
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-VkPipelineVieportCreateInfo-04142",
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled and an instance of <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a> chained from <code>VkPipelineVieportCreateInfo</code>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a>::<code>exclusiveScissorCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_NV_mesh_shader)+(VK_EXT_extended_dynamic_state2)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-None-04875",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PATCH_CONTROL_POINTS_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPatchControlPointsEXT\">vkCmdSetPatchControlPointsEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-None-04876",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetRasterizerDiscardEnableEXT\">vkCmdSetRasterizerDiscardEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-None-04877",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_DEPTH_BIAS_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetDepthBiasEnableEXT\">vkCmdSetDepthBiasEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-logicOp-04878",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_LOGIC_OP_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetLogicOpEXT\">vkCmdSetLogicOpEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command and the <code>logicOp</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkLogicOp\">VkLogicOp</a> value"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-None-04879",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPrimitiveRestartEnableEXT\">vkCmdSetPrimitiveRestartEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
         }
       ],
       "(VK_NV_mesh_shader)+(VK_KHR_fragment_shading_rate+VK_EXT_extended_dynamic_state)": [
@@ -27451,6 +27709,28 @@
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-VkPipelineVieportCreateInfo-04142",
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled and an instance of <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a> chained from <code>VkPipelineVieportCreateInfo</code>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a>::<code>exclusiveScissorCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_NV_mesh_shader)+(VK_EXT_extended_dynamic_state2)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-None-04875",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PATCH_CONTROL_POINTS_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPatchControlPointsEXT\">vkCmdSetPatchControlPointsEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-None-04876",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetRasterizerDiscardEnableEXT\">vkCmdSetRasterizerDiscardEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-None-04877",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_DEPTH_BIAS_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetDepthBiasEnableEXT\">vkCmdSetDepthBiasEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-logicOp-04878",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_LOGIC_OP_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetLogicOpEXT\">vkCmdSetLogicOpEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command and the <code>logicOp</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkLogicOp\">VkLogicOp</a> value"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-None-04879",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPrimitiveRestartEnableEXT\">vkCmdSetPrimitiveRestartEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
         }
       ],
       "(VK_NV_mesh_shader)+(VK_KHR_fragment_shading_rate+VK_EXT_extended_dynamic_state)": [
@@ -28602,6 +28882,26 @@
         }
       ]
     },
+    "vkCmdSetRasterizerDiscardEnableEXT": {
+      "(VK_EXT_extended_dynamic_state2)": [
+        {
+          "vuid": "VUID-vkCmdSetRasterizerDiscardEnableEXT-None-04871",
+          "text": " The <a href=\"#features-extendedDynamicState2\">extendedDynamicState2</a> feature <strong class=\"purple\">must</strong> be enabled"
+        },
+        {
+          "vuid": "VUID-vkCmdSetRasterizerDiscardEnableEXT-commandBuffer-parameter",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCommandBuffer\">VkCommandBuffer</a> handle"
+        },
+        {
+          "vuid": "VUID-vkCmdSetRasterizerDiscardEnableEXT-commandBuffer-recording",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be in the <a href=\"#commandbuffers-lifecycle\">recording state</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdSetRasterizerDiscardEnableEXT-commandBuffer-cmdpool",
+          "text": " The <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from <strong class=\"purple\">must</strong> support graphics operations"
+        }
+      ]
+    },
     "VkPipelineRasterizationStateStreamCreateInfoEXT": {
       "(VK_EXT_transform_feedback)": [
         {
@@ -29266,6 +29566,26 @@
         },
         {
           "vuid": "VUID-vkCmdSetDepthBias-commandBuffer-cmdpool",
+          "text": " The <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from <strong class=\"purple\">must</strong> support graphics operations"
+        }
+      ]
+    },
+    "vkCmdSetDepthBiasEnableEXT": {
+      "(VK_EXT_extended_dynamic_state2)": [
+        {
+          "vuid": "VUID-vkCmdSetDepthBiasEnableEXT-None-04872",
+          "text": " The <a href=\"#features-extendedDynamicState2\">extendedDynamicState2</a> feature <strong class=\"purple\">must</strong> be enabled"
+        },
+        {
+          "vuid": "VUID-vkCmdSetDepthBiasEnableEXT-commandBuffer-parameter",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCommandBuffer\">VkCommandBuffer</a> handle"
+        },
+        {
+          "vuid": "VUID-vkCmdSetDepthBiasEnableEXT-commandBuffer-recording",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be in the <a href=\"#commandbuffers-lifecycle\">recording state</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdSetDepthBiasEnableEXT-commandBuffer-cmdpool",
           "text": " The <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from <strong class=\"purple\">must</strong> support graphics operations"
         }
       ]
@@ -30040,6 +30360,30 @@
         }
       ]
     },
+    "vkCmdSetLogicOpEXT": {
+      "(VK_EXT_extended_dynamic_state2)": [
+        {
+          "vuid": "VUID-vkCmdSetLogicOpEXT-None-04867",
+          "text": " The <a href=\"#features-extendedDynamicState2LogicOp\">extendedDynamicState2LogicOp</a> feature <strong class=\"purple\">must</strong> be enabled"
+        },
+        {
+          "vuid": "VUID-vkCmdSetLogicOpEXT-commandBuffer-parameter",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCommandBuffer\">VkCommandBuffer</a> handle"
+        },
+        {
+          "vuid": "VUID-vkCmdSetLogicOpEXT-logicOp-parameter",
+          "text": " <code>logicOp</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkLogicOp\">VkLogicOp</a> value"
+        },
+        {
+          "vuid": "VUID-vkCmdSetLogicOpEXT-commandBuffer-recording",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be in the <a href=\"#commandbuffers-lifecycle\">recording state</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdSetLogicOpEXT-commandBuffer-cmdpool",
+          "text": " The <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from <strong class=\"purple\">must</strong> support graphics operations"
+        }
+      ]
+    },
     "VkPipelineColorWriteCreateInfoEXT": {
       "(VK_EXT_color_write_enable)": [
         {
@@ -30226,7 +30570,7 @@
         },
         {
           "vuid": "VUID-vkCmdDispatch-commandBuffer-02713",
-          "text": " If <code>commandBuffer</code> is a protected command buffer, pipeline stages other than the framebuffer-space and compute stages in the <code>VkPipeline</code> object bound to the pipeline bind point <strong class=\"purple\">must</strong> not write to any resource"
+          "text": " If <code>commandBuffer</code> is a protected command buffer, pipeline stages other than the framebuffer-space and compute stages in the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not write to any resource"
         },
         {
           "vuid": "VUID-vkCmdDispatch-commandBuffer-04617",
@@ -30520,7 +30864,7 @@
         },
         {
           "vuid": "VUID-vkCmdDispatchBase-baseGroupX-00422",
-          "text": " <code>baseGroupX</code> <strong class=\"purple\">must</strong> be less than <code>VkPhysicalDeviceLimits</code>::<code>maxComputeWorkGroupCount</code>[1]"
+          "text": " <code>baseGroupY</code> <strong class=\"purple\">must</strong> be less than <code>VkPhysicalDeviceLimits</code>::<code>maxComputeWorkGroupCount</code>[1]"
         },
         {
           "vuid": "VUID-vkCmdDispatchBase-baseGroupZ-00423",
@@ -30689,10 +31033,6 @@
         {
           "vuid": "VUID-VkIndirectCommandsLayoutCreateInfoNV-flags-parameter",
           "text": " <code>flags</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkIndirectCommandsLayoutUsageFlagBitsNV\">VkIndirectCommandsLayoutUsageFlagBitsNV</a> values"
-        },
-        {
-          "vuid": "VUID-VkIndirectCommandsLayoutCreateInfoNV-flags-requiredbitmask",
-          "text": " <code>flags</code> <strong class=\"purple\">must</strong> not be <code>0</code>"
         },
         {
           "vuid": "VUID-VkIndirectCommandsLayoutCreateInfoNV-pipelineBindPoint-parameter",
@@ -31207,6 +31547,28 @@
         {
           "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-VkPipelineVieportCreateInfo-04142",
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled and an instance of <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a> chained from <code>VkPipelineVieportCreateInfo</code>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportExclusiveScissorStateCreateInfoNV\">VkPipelineViewportExclusiveScissorStateCreateInfoNV</a>::<code>exclusiveScissorCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a>"
+        }
+      ],
+      "(VK_NV_device_generated_commands)+(VK_EXT_extended_dynamic_state2)": [
+        {
+          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-None-04875",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PATCH_CONTROL_POINTS_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPatchControlPointsEXT\">vkCmdSetPatchControlPointsEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-None-04876",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetRasterizerDiscardEnableEXT\">vkCmdSetRasterizerDiscardEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-None-04877",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_DEPTH_BIAS_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetDepthBiasEnableEXT\">vkCmdSetDepthBiasEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-logicOp-04878",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_LOGIC_OP_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetLogicOpEXT\">vkCmdSetLogicOpEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command and the <code>logicOp</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkLogicOp\">VkLogicOp</a> value"
+        },
+        {
+          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-None-04879",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPrimitiveRestartEnableEXT\">vkCmdSetPrimitiveRestartEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
         }
       ],
       "(VK_NV_device_generated_commands)+(VK_KHR_fragment_shading_rate+VK_EXT_extended_dynamic_state)": [
@@ -31764,7 +32126,7 @@
         },
         {
           "vuid": "VUID-vkQueueBindSparse-pWaitSemaphores-01117",
-          "text": " All elements of the <code>pWaitSemaphores</code> member of all elements of <code>pBindInfo</code> member referring to a binary semaphore <strong class=\"purple\">must</strong> be semaphores that are signaled, or have <a href=\"#synchronization-semaphores-signaling\">semaphore signal operations</a> previously submitted for execution"
+          "text": " All elements of the <code>pWaitSemaphores</code> member of all elements of the <code>pBindInfo</code> parameter referring to a binary semaphore <strong class=\"purple\">must</strong> be semaphores that are signaled, or have <a href=\"#synchronization-semaphores-signaling\">semaphore signal operations</a> previously submitted for execution"
         },
         {
           "vuid": "VUID-vkQueueBindSparse-queue-parameter",
@@ -34228,7 +34590,7 @@
         },
         {
           "vuid": "VUID-VkDisplayPresentInfoKHR-persistentContent-01259",
-          "text": " If the <code>persistentContent</code> member of the <code>VkDisplayPropertiesKHR</code> structure returned by <code>vkGetPhysicalDeviceDisplayPropertiesKHR</code> for the display the present operation targets then <code>persistent</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>"
+          "text": " If the <code>persistentContent</code> member of the <code>VkDisplayPropertiesKHR</code> structure returned by <code>vkGetPhysicalDeviceDisplayPropertiesKHR</code> for the display the present operation targets is <code>VK_FALSE</code>, then <code>persistent</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>"
         },
         {
           "vuid": "VUID-VkDisplayPresentInfoKHR-sType-sType",
@@ -36474,7 +36836,7 @@
         },
         {
           "vuid": "VUID-vkCmdTraceRaysNV-None-03429",
-          "text": " Any shader group handle referenced by this call <strong class=\"purple\">must</strong> have been queried from the currently bound ray tracing shader pipeline"
+          "text": " Any shader group handle referenced by this call <strong class=\"purple\">must</strong> have been queried from the currently bound ray tracing pipeline"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysNV-commandBuffer-04624",
@@ -36734,7 +37096,7 @@
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-None-03429",
-          "text": " Any shader group handle referenced by this call <strong class=\"purple\">must</strong> have been queried from the currently bound ray tracing shader pipeline"
+          "text": " Any shader group handle referenced by this call <strong class=\"purple\">must</strong> have been queried from the currently bound ray tracing pipeline"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-maxPipelineRayRecursionDepth-03679",
@@ -37042,7 +37404,7 @@
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-None-03429",
-          "text": " Any shader group handle referenced by this call <strong class=\"purple\">must</strong> have been queried from the currently bound ray tracing shader pipeline"
+          "text": " Any shader group handle referenced by this call <strong class=\"purple\">must</strong> have been queried from the currently bound ray tracing pipeline"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-maxPipelineRayRecursionDepth-03679",
@@ -39223,6 +39585,14 @@
         {
           "vuid": "VUID-VkPhysicalDeviceExtendedDynamicStateFeaturesEXT-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_FEATURES_EXT</code>"
+        }
+      ]
+    },
+    "VkPhysicalDeviceExtendedDynamicState2FeaturesEXT": {
+      "(VK_EXT_extended_dynamic_state2)": [
+        {
+          "vuid": "VUID-VkPhysicalDeviceExtendedDynamicState2FeaturesEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_2_FEATURES_EXT</code>"
         }
       ]
     },
