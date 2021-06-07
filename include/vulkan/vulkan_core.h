@@ -72,7 +72,7 @@ extern "C" {
 #define VK_API_VERSION_1_0 VK_MAKE_API_VERSION(0, 1, 0, 0)// Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 179
+#define VK_HEADER_VERSION 180
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 2, VK_HEADER_VERSION)
@@ -787,6 +787,7 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES_KHR = 1000314007,
     VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_2_NV = 1000314008,
     VK_STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV = 1000314009,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_FEATURES_KHR = 1000323000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES_KHR = 1000325000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_PROPERTIES_NV = 1000326000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_FEATURES_NV = 1000326001,
@@ -824,6 +825,8 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_SCREEN_SURFACE_CREATE_INFO_QNX = 1000378000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COLOR_WRITE_ENABLE_FEATURES_EXT = 1000381000,
     VK_STRUCTURE_TYPE_PIPELINE_COLOR_WRITE_CREATE_INFO_EXT = 1000381001,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_EXT = 1000388000,
+    VK_STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_EXT = 1000388001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETER_FEATURES = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES,
     VK_STRUCTURE_TYPE_DEBUG_REPORT_CREATE_INFO_EXT = VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT,
@@ -8092,6 +8095,17 @@ VKAPI_ATTR void VKAPI_CALL vkGetQueueCheckpointData2NV(
 #endif
 
 
+#define VK_KHR_shader_subgroup_uniform_control_flow 1
+#define VK_KHR_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_SPEC_VERSION 1
+#define VK_KHR_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_EXTENSION_NAME "VK_KHR_shader_subgroup_uniform_control_flow"
+typedef struct VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           shaderSubgroupUniformControlFlow;
+} VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR;
+
+
+
 #define VK_KHR_zero_initialize_workgroup_memory 1
 #define VK_KHR_ZERO_INITIALIZE_WORKGROUP_MEMORY_SPEC_VERSION 1
 #define VK_KHR_ZERO_INITIALIZE_WORKGROUP_MEMORY_EXTENSION_NAME "VK_KHR_zero_initialize_workgroup_memory"
@@ -11166,7 +11180,7 @@ typedef VkImageStencilUsageCreateInfo VkImageStencilUsageCreateInfoEXT;
 
 
 #define VK_EXT_validation_features 1
-#define VK_EXT_VALIDATION_FEATURES_SPEC_VERSION 4
+#define VK_EXT_VALIDATION_FEATURES_SPEC_VERSION 5
 #define VK_EXT_VALIDATION_FEATURES_EXTENSION_NAME "VK_EXT_validation_features"
 
 typedef enum VkValidationFeatureEnableEXT {
@@ -11186,6 +11200,7 @@ typedef enum VkValidationFeatureDisableEXT {
     VK_VALIDATION_FEATURE_DISABLE_OBJECT_LIFETIMES_EXT = 4,
     VK_VALIDATION_FEATURE_DISABLE_CORE_CHECKS_EXT = 5,
     VK_VALIDATION_FEATURE_DISABLE_UNIQUE_HANDLES_EXT = 6,
+    VK_VALIDATION_FEATURE_DISABLE_SHADER_VALIDATION_CACHE_EXT = 7,
     VK_VALIDATION_FEATURE_DISABLE_MAX_ENUM_EXT = 0x7FFFFFFF
 } VkValidationFeatureDisableEXT;
 typedef struct VkValidationFeaturesEXT {
@@ -12279,6 +12294,25 @@ VKAPI_ATTR void                                    VKAPI_CALL vkCmdSetColorWrite
     uint32_t                                    attachmentCount,
     const VkBool32*                             pColorWriteEnables);
 #endif
+
+
+#define VK_EXT_global_priority_query 1
+#define VK_MAX_GLOBAL_PRIORITY_SIZE_EXT   16U
+#define VK_EXT_GLOBAL_PRIORITY_QUERY_SPEC_VERSION 1
+#define VK_EXT_GLOBAL_PRIORITY_QUERY_EXTENSION_NAME "VK_EXT_global_priority_query"
+typedef struct VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           globalPriorityQuery;
+} VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT;
+
+typedef struct VkQueueFamilyGlobalPriorityPropertiesEXT {
+    VkStructureType             sType;
+    void*                       pNext;
+    uint32_t                    priorityCount;
+    VkQueueGlobalPriorityEXT    priorities[VK_MAX_GLOBAL_PRIORITY_SIZE_EXT];
+} VkQueueFamilyGlobalPriorityPropertiesEXT;
+
 
 
 #define VK_KHR_acceleration_structure 1

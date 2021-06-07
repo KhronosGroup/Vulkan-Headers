@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.2.179",
-    "comment": "from git branch: github-main commit: 112e8218bb35cc70ba2cf67bdc61e3412c864eec",
-    "date": "2021-05-24 07:24:39Z"
+    "api version": "1.2.180",
+    "comment": "from git branch: github-main commit: b4e8cd820b2487bc892b391fb26b49501473a6a6",
+    "date": "2021-06-06 12:24:39Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -314,11 +314,23 @@
         },
         {
           "vuid": "VUID-VkQueueFamilyProperties2-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkQueueFamilyCheckpointProperties2NV\">VkQueueFamilyCheckpointProperties2NV</a>, <a href=\"#VkQueueFamilyCheckpointPropertiesNV\">VkQueueFamilyCheckpointPropertiesNV</a>, or <a href=\"#VkVideoQueueFamilyProperties2KHR\">VkVideoQueueFamilyProperties2KHR</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkQueueFamilyCheckpointProperties2NV\">VkQueueFamilyCheckpointProperties2NV</a>, <a href=\"#VkQueueFamilyCheckpointPropertiesNV\">VkQueueFamilyCheckpointPropertiesNV</a>, <a href=\"#VkQueueFamilyGlobalPriorityPropertiesEXT\">VkQueueFamilyGlobalPriorityPropertiesEXT</a>, or <a href=\"#VkVideoQueueFamilyProperties2KHR\">VkVideoQueueFamilyProperties2KHR</a>"
         },
         {
           "vuid": "VUID-VkQueueFamilyProperties2-sType-unique",
           "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+        }
+      ]
+    },
+    "VkQueueFamilyGlobalPriorityPropertiesEXT": {
+      "(VK_VERSION_1_1,VK_KHR_get_physical_device_properties2)+(VK_EXT_global_priority_query)": [
+        {
+          "vuid": "VUID-VkQueueFamilyGlobalPriorityPropertiesEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_EXT</code>"
+        },
+        {
+          "vuid": "VUID-VkQueueFamilyGlobalPriorityPropertiesEXT-priorities-parameter",
+          "text": " Any given element of <code>priorities</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkQueueGlobalPriorityEXT\">VkQueueGlobalPriorityEXT</a> value"
         }
       ]
     },
@@ -580,7 +592,7 @@
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceDeviceMemoryReportCreateInfoEXT\">VkDeviceDeviceMemoryReportCreateInfoEXT</a>, <a href=\"#VkDeviceDiagnosticsConfigCreateInfoNV\">VkDeviceDiagnosticsConfigCreateInfoNV</a>, <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceMemoryOverallocationCreateInfoAMD\">VkDeviceMemoryOverallocationCreateInfoAMD</a>, <a href=\"#VkDevicePrivateDataCreateInfoEXT\">VkDevicePrivateDataCreateInfoEXT</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice4444FormatsFeaturesEXT\">VkPhysicalDevice4444FormatsFeaturesEXT</a>, <a href=\"#VkPhysicalDevice8BitStorageFeatures\">VkPhysicalDevice8BitStorageFeatures</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceAccelerationStructureFeaturesKHR\">VkPhysicalDeviceAccelerationStructureFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeatures\">VkPhysicalDeviceBufferDeviceAddressFeatures</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeaturesEXT\">VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCoherentMemoryFeaturesAMD\">VkPhysicalDeviceCoherentMemoryFeaturesAMD</a>, <a href=\"#VkPhysicalDeviceColorWriteEnableFeaturesEXT\">VkPhysicalDeviceColorWriteEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixFeaturesNV\">VkPhysicalDeviceCooperativeMatrixFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCoverageReductionModeFeaturesNV\">VkPhysicalDeviceCoverageReductionModeFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCustomBorderColorFeaturesEXT\">VkPhysicalDeviceCustomBorderColorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV\">VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDepthClipEnableFeaturesEXT\">VkPhysicalDeviceDepthClipEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeatures\">VkPhysicalDeviceDescriptorIndexingFeatures</a>, <a href=\"#VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV\">VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDeviceMemoryReportFeaturesEXT\">VkPhysicalDeviceDeviceMemoryReportFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDiagnosticsConfigFeaturesNV\">VkPhysicalDeviceDiagnosticsConfigFeaturesNV</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceExtendedDynamicState2FeaturesEXT\">VkPhysicalDeviceExtendedDynamicState2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExtendedDynamicStateFeaturesEXT\">VkPhysicalDeviceExtendedDynamicStateFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMap2FeaturesEXT\">VkPhysicalDeviceFragmentDensityMap2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapFeaturesEXT\">VkPhysicalDeviceFragmentDensityMapFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT\">VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV\">VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShadingRateFeaturesKHR\">VkPhysicalDeviceFragmentShadingRateFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceHostQueryResetFeatures\">VkPhysicalDeviceHostQueryResetFeatures</a>, <a href=\"#VkPhysicalDeviceImageRobustnessFeaturesEXT\">VkPhysicalDeviceImageRobustnessFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceImagelessFramebufferFeatures\">VkPhysicalDeviceImagelessFramebufferFeatures</a>, <a href=\"#VkPhysicalDeviceIndexTypeUint8FeaturesEXT\">VkPhysicalDeviceIndexTypeUint8FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceInheritedViewportScissorFeaturesNV\">VkPhysicalDeviceInheritedViewportScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeaturesEXT\">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceLineRasterizationFeaturesEXT\">VkPhysicalDeviceLineRasterizationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMemoryPriorityFeaturesEXT\">VkPhysicalDeviceMemoryPriorityFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE\">VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE</a>, <a href=\"#VkPhysicalDevicePerformanceQueryFeaturesKHR\">VkPhysicalDevicePerformanceQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT\">VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT</a>, <a href=\"#VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR\">VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePrivateDataFeaturesEXT\">VkPhysicalDevicePrivateDataFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceProvokingVertexFeaturesEXT\">VkPhysicalDeviceProvokingVertexFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceRayQueryFeaturesKHR\">VkPhysicalDeviceRayQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceRayTracingPipelineFeaturesKHR\">VkPhysicalDeviceRayTracingPipelineFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceRobustness2FeaturesEXT\">VkPhysicalDeviceRobustness2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceScalarBlockLayoutFeatures\">VkPhysicalDeviceScalarBlockLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures\">VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures</a>, <a href=\"#VkPhysicalDeviceShaderAtomicFloatFeaturesEXT\">VkPhysicalDeviceShaderAtomicFloatFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64Features\">VkPhysicalDeviceShaderAtomicInt64Features</a>, <a href=\"#VkPhysicalDeviceShaderClockFeaturesKHR\">VkPhysicalDeviceShaderClockFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT\">VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderDrawParametersFeatures\">VkPhysicalDeviceShaderDrawParametersFeatures</a>, <a href=\"#VkPhysicalDeviceShaderFloat16Int8Features\">VkPhysicalDeviceShaderFloat16Int8Features</a>, <a href=\"#VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT\">VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL\">VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL</a>, <a href=\"#VkPhysicalDeviceShaderSMBuiltinsFeaturesNV\">VkPhysicalDeviceShaderSMBuiltinsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures\">VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures</a>, <a href=\"#VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR\">VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSubgroupSizeControlFeaturesEXT\">VkPhysicalDeviceSubgroupSizeControlFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSynchronization2FeaturesKHR\">VkPhysicalDeviceSynchronization2FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT\">VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT\">VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTimelineSemaphoreFeatures\">VkPhysicalDeviceTimelineSemaphoreFeatures</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackFeaturesEXT\">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceUniformBufferStandardLayoutFeatures\">VkPhysicalDeviceUniformBufferStandardLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceVariablePointersFeatures\">VkPhysicalDeviceVariablePointersFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT\">VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVulkan11Features\">VkPhysicalDeviceVulkan11Features</a>, <a href=\"#VkPhysicalDeviceVulkan12Features\">VkPhysicalDeviceVulkan12Features</a>, <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeatures\">VkPhysicalDeviceVulkanMemoryModelFeatures</a>, <a href=\"#VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR\">VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT\">VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceYcbcrImageArraysFeaturesEXT\">VkPhysicalDeviceYcbcrImageArraysFeaturesEXT</a>, or <a href=\"#VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR\">VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceDeviceMemoryReportCreateInfoEXT\">VkDeviceDeviceMemoryReportCreateInfoEXT</a>, <a href=\"#VkDeviceDiagnosticsConfigCreateInfoNV\">VkDeviceDiagnosticsConfigCreateInfoNV</a>, <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceMemoryOverallocationCreateInfoAMD\">VkDeviceMemoryOverallocationCreateInfoAMD</a>, <a href=\"#VkDevicePrivateDataCreateInfoEXT\">VkDevicePrivateDataCreateInfoEXT</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice4444FormatsFeaturesEXT\">VkPhysicalDevice4444FormatsFeaturesEXT</a>, <a href=\"#VkPhysicalDevice8BitStorageFeatures\">VkPhysicalDevice8BitStorageFeatures</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceAccelerationStructureFeaturesKHR\">VkPhysicalDeviceAccelerationStructureFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeatures\">VkPhysicalDeviceBufferDeviceAddressFeatures</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeaturesEXT\">VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCoherentMemoryFeaturesAMD\">VkPhysicalDeviceCoherentMemoryFeaturesAMD</a>, <a href=\"#VkPhysicalDeviceColorWriteEnableFeaturesEXT\">VkPhysicalDeviceColorWriteEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixFeaturesNV\">VkPhysicalDeviceCooperativeMatrixFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCoverageReductionModeFeaturesNV\">VkPhysicalDeviceCoverageReductionModeFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCustomBorderColorFeaturesEXT\">VkPhysicalDeviceCustomBorderColorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV\">VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDepthClipEnableFeaturesEXT\">VkPhysicalDeviceDepthClipEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeatures\">VkPhysicalDeviceDescriptorIndexingFeatures</a>, <a href=\"#VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV\">VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDeviceMemoryReportFeaturesEXT\">VkPhysicalDeviceDeviceMemoryReportFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDiagnosticsConfigFeaturesNV\">VkPhysicalDeviceDiagnosticsConfigFeaturesNV</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceExtendedDynamicState2FeaturesEXT\">VkPhysicalDeviceExtendedDynamicState2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExtendedDynamicStateFeaturesEXT\">VkPhysicalDeviceExtendedDynamicStateFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMap2FeaturesEXT\">VkPhysicalDeviceFragmentDensityMap2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapFeaturesEXT\">VkPhysicalDeviceFragmentDensityMapFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT\">VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV\">VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShadingRateFeaturesKHR\">VkPhysicalDeviceFragmentShadingRateFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceHostQueryResetFeatures\">VkPhysicalDeviceHostQueryResetFeatures</a>, <a href=\"#VkPhysicalDeviceImageRobustnessFeaturesEXT\">VkPhysicalDeviceImageRobustnessFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceImagelessFramebufferFeatures\">VkPhysicalDeviceImagelessFramebufferFeatures</a>, <a href=\"#VkPhysicalDeviceIndexTypeUint8FeaturesEXT\">VkPhysicalDeviceIndexTypeUint8FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceInheritedViewportScissorFeaturesNV\">VkPhysicalDeviceInheritedViewportScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeaturesEXT\">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceLineRasterizationFeaturesEXT\">VkPhysicalDeviceLineRasterizationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMemoryPriorityFeaturesEXT\">VkPhysicalDeviceMemoryPriorityFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE\">VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE</a>, <a href=\"#VkPhysicalDevicePerformanceQueryFeaturesKHR\">VkPhysicalDevicePerformanceQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT\">VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT</a>, <a href=\"#VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR\">VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePrivateDataFeaturesEXT\">VkPhysicalDevicePrivateDataFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceProvokingVertexFeaturesEXT\">VkPhysicalDeviceProvokingVertexFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceRayQueryFeaturesKHR\">VkPhysicalDeviceRayQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceRayTracingPipelineFeaturesKHR\">VkPhysicalDeviceRayTracingPipelineFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceRobustness2FeaturesEXT\">VkPhysicalDeviceRobustness2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceScalarBlockLayoutFeatures\">VkPhysicalDeviceScalarBlockLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures\">VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures</a>, <a href=\"#VkPhysicalDeviceShaderAtomicFloatFeaturesEXT\">VkPhysicalDeviceShaderAtomicFloatFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64Features\">VkPhysicalDeviceShaderAtomicInt64Features</a>, <a href=\"#VkPhysicalDeviceShaderClockFeaturesKHR\">VkPhysicalDeviceShaderClockFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT\">VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderDrawParametersFeatures\">VkPhysicalDeviceShaderDrawParametersFeatures</a>, <a href=\"#VkPhysicalDeviceShaderFloat16Int8Features\">VkPhysicalDeviceShaderFloat16Int8Features</a>, <a href=\"#VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT\">VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL\">VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL</a>, <a href=\"#VkPhysicalDeviceShaderSMBuiltinsFeaturesNV\">VkPhysicalDeviceShaderSMBuiltinsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures\">VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR\">VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR\">VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSubgroupSizeControlFeaturesEXT\">VkPhysicalDeviceSubgroupSizeControlFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSynchronization2FeaturesKHR\">VkPhysicalDeviceSynchronization2FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT\">VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT\">VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTimelineSemaphoreFeatures\">VkPhysicalDeviceTimelineSemaphoreFeatures</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackFeaturesEXT\">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceUniformBufferStandardLayoutFeatures\">VkPhysicalDeviceUniformBufferStandardLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceVariablePointersFeatures\">VkPhysicalDeviceVariablePointersFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT\">VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVulkan11Features\">VkPhysicalDeviceVulkan11Features</a>, <a href=\"#VkPhysicalDeviceVulkan12Features\">VkPhysicalDeviceVulkan12Features</a>, <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeatures\">VkPhysicalDeviceVulkanMemoryModelFeatures</a>, <a href=\"#VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR\">VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT\">VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceYcbcrImageArraysFeaturesEXT\">VkPhysicalDeviceYcbcrImageArraysFeaturesEXT</a>, or <a href=\"#VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR\">VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR</a>"
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-sType-unique",
@@ -9067,10 +9079,6 @@
           "text": " The number of resources in <code>layout</code> accessible to each shader stage that is used by the pipeline <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceLimits</code>::<code>maxPerStageResources</code>"
         },
         {
-          "vuid": "VUID-VkGraphicsPipelineCreateInfo-pStages-02097",
-          "text": " If the pipeline is being created with <a href=\"#pipeline-graphics-subsets-vertex-input\">vertex input state</a>, <code>pVertexInputState</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkPipelineVertexInputStateCreateInfo\">VkPipelineVertexInputStateCreateInfo</a> structure"
-        },
-        {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-pStages-02098",
           "text": " If the pipeline is being created with <a href=\"#pipeline-graphics-subsets-vertex-input\">vertex input state</a>, <code>pInputAssemblyState</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkPipelineInputAssemblyStateCreateInfo\">VkPipelineInputAssemblyStateCreateInfo</a> structure"
         },
@@ -9301,6 +9309,16 @@
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-pDynamicStates-04058",
           "text": " If the pipeline is being created with <a href=\"#pipeline-graphics-subsets-pre-rasterization\">pre-rasterization shader state</a>, and no element of the <code>pDynamicStates</code> member of <code>pDynamicState</code> is <code>VK_DYNAMIC_STATE_DISCARD_RECTANGLE_EXT</code>, and if <code>pNext</code> chain includes a <a href=\"#VkPipelineDiscardRectangleStateCreateInfoEXT\">VkPipelineDiscardRectangleStateCreateInfoEXT</a> structure, and if its <code>discardRectangleCount</code> member is not <code>0</code>, then its <code>pDiscardRectangles</code> member <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>discardRectangleCount</code> <a href=\"#VkRect2D\">VkRect2D</a> structures"
+        }
+      ],
+      "!(VK_EXT_vertex_input_dynamic_state)": [
+        {
+          "vuid": "VUID-VkGraphicsPipelineCreateInfo-pStages-02097",
+          "text": " If the pipeline is being created with <a href=\"#pipeline-graphics-subsets-vertex-input\">vertex input state</a>, <code>pVertexInputState</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkPipelineVertexInputStateCreateInfo\">VkPipelineVertexInputStateCreateInfo</a> structure"
+        },
+        {
+          "vuid": "VUID-VkGraphicsPipelineCreateInfo-pVertexInputState-04910",
+          "text": " If the pipeline is being created with <a href=\"#pipeline-graphics-subsets-vertex-input\">vertex input state</a>, and <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> is not set, <code>pVertexInputState</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkPipelineVertexInputStateCreateInfo\">VkPipelineVertexInputStateCreateInfo</a> structure"
         }
       ],
       "(VK_EXT_transform_feedback)": [
@@ -10547,6 +10565,10 @@
         {
           "vuid": "VUID-VkSpecializationInfo-pMapEntries-00774",
           "text": " The <code>size</code> member of each element of <code>pMapEntries</code> <strong class=\"purple\">must</strong> be less than or equal to <code>dataSize</code> minus <code>offset</code>"
+        },
+        {
+          "vuid": "VUID-VkSpecializationInfo-constantID-04911",
+          "text": " The <code>constantID</code> value of each element of <code>pMapEntries</code> <strong class=\"purple\">must</strong> be unique within <code>pMapEntries</code>"
         },
         {
           "vuid": "VUID-VkSpecializationInfo-pMapEntries-parameter",
@@ -12466,13 +12488,13 @@
       "(VK_KHR_video_decode_queue)": [
         {
           "vuid": "VUID-VkBufferCreateInfo-usage-04813",
-          "text": " If <code>usage</code> includes <code>VK_BUFFER_USAGE_VIDEO_DECODE_SRC_BIT_KHR</code>, <code>VK_BUFFER_USAGE_VIDEO_DECODE_DST_BIT_KHR</code>, then the pNext chain <strong class=\"purple\">must</strong> include a valid <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a> structure which includes at least one <a href=\"#VkVideoProfileKHR\">VkVideoProfileKHR</a> with a decode codec-operation."
+          "text": " If <code>usage</code> includes <code>VK_BUFFER_USAGE_VIDEO_DECODE_SRC_BIT_KHR</code>, <code>VK_BUFFER_USAGE_VIDEO_DECODE_DST_BIT_KHR</code>, then the <code>pNext</code> chain <strong class=\"purple\">must</strong> include a valid <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a> structure which includes at least one <a href=\"#VkVideoProfileKHR\">VkVideoProfileKHR</a> with a decode codec-operation."
         }
       ],
       "(VK_KHR_video_encode_queue)": [
         {
           "vuid": "VUID-VkBufferCreateInfo-usage-04814",
-          "text": " If <code>usage</code> includes <code>VK_BUFFER_USAGE_VIDEO_ENCODE_SRC_BIT_KHR</code>, <code>VK_BUFFER_USAGE_VIDEO_ENCODE_DST_BIT_KHR</code>, then the pNext chain <strong class=\"purple\">must</strong> include a valid <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a> structure which includes at least one <a href=\"#VkVideoProfileKHR\">VkVideoProfileKHR</a> with a encode codec-operation."
+          "text": " If <code>usage</code> includes <code>VK_BUFFER_USAGE_VIDEO_ENCODE_SRC_BIT_KHR</code>, <code>VK_BUFFER_USAGE_VIDEO_ENCODE_DST_BIT_KHR</code>, then the <code>pNext</code> chain <strong class=\"purple\">must</strong> include a valid <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a> structure which includes at least one <a href=\"#VkVideoProfileKHR\">VkVideoProfileKHR</a> with a encode codec-operation."
         }
       ]
     },
@@ -13202,13 +13224,13 @@
       "(VK_KHR_video_decode_queue)": [
         {
           "vuid": "VUID-VkImageCreateInfo-usage-04815",
-          "text": " If <code>usage</code> includes <code>VK_IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR</code>, <code>VK_IMAGE_USAGE_VIDEO_DECODE_SRC_BIT_KHR</code>, <code>VK_IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR</code>, then the pNext chain <strong class=\"purple\">must</strong> include a valid <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a> structure which includes at least one <a href=\"#VkVideoProfileKHR\">VkVideoProfileKHR</a> with a decode codec-operation."
+          "text": " If <code>usage</code> includes <code>VK_IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR</code>, <code>VK_IMAGE_USAGE_VIDEO_DECODE_SRC_BIT_KHR</code>, <code>VK_IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR</code>, then the <code>pNext</code> chain <strong class=\"purple\">must</strong> include a valid <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a> structure which includes at least one <a href=\"#VkVideoProfileKHR\">VkVideoProfileKHR</a> with a decode codec-operation."
         }
       ],
       "(VK_KHR_video_encode_queue)": [
         {
           "vuid": "VUID-VkImageCreateInfo-usage-04816",
-          "text": " If <code>usage</code> includes <code>VK_IMAGE_USAGE_VIDEO_ENCODE_DST_BIT_KHR</code>, <code>VK_IMAGE_USAGE_VIDEO_ENCODE_SRC_BIT_KHR</code>, <code>VK_IMAGE_USAGE_VIDEO_ENCODE_DPB_BIT_KHR</code>, then the pNext chain <strong class=\"purple\">must</strong> include a valid <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a> structure which includes at least one <a href=\"#VkVideoProfileKHR\">VkVideoProfileKHR</a> with a encode codec-operation."
+          "text": " If <code>usage</code> includes <code>VK_IMAGE_USAGE_VIDEO_ENCODE_DST_BIT_KHR</code>, <code>VK_IMAGE_USAGE_VIDEO_ENCODE_SRC_BIT_KHR</code>, <code>VK_IMAGE_USAGE_VIDEO_ENCODE_DPB_BIT_KHR</code>, then the <code>pNext</code> chain <strong class=\"purple\">must</strong> include a valid <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a> structure which includes at least one <a href=\"#VkVideoProfileKHR\">VkVideoProfileKHR</a> with a encode codec-operation."
         }
       ]
     },
@@ -13756,7 +13778,7 @@
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-format-04724",
-          "text": " If <code>format</code> is one of those listed in <a href=\"#formats-requiring-sampler-ycbcr-conversion\">Formats requiring sampler Y′C<sub>B</sub>C<sub>R</sub> conversion for <code>VK_IMAGE_ASPECT_COLOR_BIT</code> image views</a>, then the pNext chain <strong class=\"purple\">must</strong> include a <a href=\"#VkSamplerYcbcrConversionInfo\">VkSamplerYcbcrConversionInfo</a> structure with a conversion value other than VK_NULL_HANDLE"
+          "text": " If <code>format</code> is one of those listed in <a href=\"#formats-requiring-sampler-ycbcr-conversion\">Formats requiring sampler Y′C<sub>B</sub>C<sub>R</sub> conversion for <code>VK_IMAGE_ASPECT_COLOR_BIT</code> image views</a>, then the <code>pNext</code> chain <strong class=\"purple\">must</strong> include a <a href=\"#VkSamplerYcbcrConversionInfo\">VkSamplerYcbcrConversionInfo</a> structure with a conversion value other than VK_NULL_HANDLE"
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-format-04714",
@@ -24841,10 +24863,6 @@
         {
           "vuid": "VUID-vkCmdDraw-primitiveTopology-03420",
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPrimitiveTopologyEXT\">vkCmdSetPrimitiveTopologyEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>primitiveTopology</code> parameter of <code>vkCmdSetPrimitiveTopologyEXT</code> <strong class=\"purple\">must</strong> be of the same <a href=\"#drawing-primitive-topology-class\">topology class</a> as the pipeline <a href=\"#VkPipelineInputAssemblyStateCreateInfo\">VkPipelineInputAssemblyStateCreateInfo</a>::<code>topology</code> state"
-        },
-        {
-          "vuid": "VUID-vkCmdDraw-pStrides-04884",
-          "text": " If the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic state enabled, then <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>pStrides</code> parameter of <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> not be <code>NULL</code>"
         }
       ],
       "(VK_EXT_extended_dynamic_state)+(VK_NV_clip_space_w_scaling)": [
@@ -24905,6 +24923,28 @@
         {
           "vuid": "VUID-vkCmdDraw-primitiveFragmentShadingRateWithMultipleViewports-04552",
           "text": " If the <a href=\"#limits-primitiveFragmentShadingRateWithMultipleViewports\"><code>primitiveFragmentShadingRateWithMultipleViewports</code></a> limit is not supported, the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, and any of the shader stages of the bound graphics pipeline write to the <code>PrimitiveShadingRateKHR</code> built-in, then <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>viewportCount</code> parameter of <code>vkCmdSetViewportWithCountEXT</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_EXT_vertex_input_dynamic_state)": [
+        {
+          "vuid": "VUID-vkCmdDraw-None-04912",
+          "text": " If the bound graphics pipeline was created with both the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> and <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic states enabled, then <a href=\"#vkCmdSetVertexInputEXT\">vkCmdSetVertexInputEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdDraw-pStrides-04913",
+          "text": " If the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>pStrides</code> parameter of <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> not be <code>NULL</code>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+!(VK_EXT_vertex_input_dynamic_state)": [
+        {
+          "vuid": "VUID-vkCmdDraw-pStrides-04884",
+          "text": " If the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic state enabled, then <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>pStrides</code> parameter of <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> not be <code>NULL</code>"
+        }
+      ],
+      "(VK_EXT_vertex_input_dynamic_state)": [
+        {
+          "vuid": "VUID-vkCmdDraw-None-04914",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdSetVertexInputEXT\">vkCmdSetVertexInputEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
         }
       ]
     },
@@ -25131,10 +25171,6 @@
         {
           "vuid": "VUID-vkCmdDrawIndexed-primitiveTopology-03420",
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPrimitiveTopologyEXT\">vkCmdSetPrimitiveTopologyEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>primitiveTopology</code> parameter of <code>vkCmdSetPrimitiveTopologyEXT</code> <strong class=\"purple\">must</strong> be of the same <a href=\"#drawing-primitive-topology-class\">topology class</a> as the pipeline <a href=\"#VkPipelineInputAssemblyStateCreateInfo\">VkPipelineInputAssemblyStateCreateInfo</a>::<code>topology</code> state"
-        },
-        {
-          "vuid": "VUID-vkCmdDrawIndexed-pStrides-04884",
-          "text": " If the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic state enabled, then <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>pStrides</code> parameter of <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> not be <code>NULL</code>"
         }
       ],
       "(VK_EXT_extended_dynamic_state)+(VK_NV_clip_space_w_scaling)": [
@@ -25195,6 +25231,28 @@
         {
           "vuid": "VUID-vkCmdDrawIndexed-primitiveFragmentShadingRateWithMultipleViewports-04552",
           "text": " If the <a href=\"#limits-primitiveFragmentShadingRateWithMultipleViewports\"><code>primitiveFragmentShadingRateWithMultipleViewports</code></a> limit is not supported, the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, and any of the shader stages of the bound graphics pipeline write to the <code>PrimitiveShadingRateKHR</code> built-in, then <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>viewportCount</code> parameter of <code>vkCmdSetViewportWithCountEXT</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_EXT_vertex_input_dynamic_state)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexed-None-04912",
+          "text": " If the bound graphics pipeline was created with both the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> and <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic states enabled, then <a href=\"#vkCmdSetVertexInputEXT\">vkCmdSetVertexInputEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexed-pStrides-04913",
+          "text": " If the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>pStrides</code> parameter of <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> not be <code>NULL</code>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+!(VK_EXT_vertex_input_dynamic_state)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexed-pStrides-04884",
+          "text": " If the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic state enabled, then <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>pStrides</code> parameter of <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> not be <code>NULL</code>"
+        }
+      ],
+      "(VK_EXT_vertex_input_dynamic_state)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexed-None-04914",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdSetVertexInputEXT\">vkCmdSetVertexInputEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
         }
       ]
     },
@@ -25453,10 +25511,6 @@
         {
           "vuid": "VUID-vkCmdDrawIndirect-primitiveTopology-03420",
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPrimitiveTopologyEXT\">vkCmdSetPrimitiveTopologyEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>primitiveTopology</code> parameter of <code>vkCmdSetPrimitiveTopologyEXT</code> <strong class=\"purple\">must</strong> be of the same <a href=\"#drawing-primitive-topology-class\">topology class</a> as the pipeline <a href=\"#VkPipelineInputAssemblyStateCreateInfo\">VkPipelineInputAssemblyStateCreateInfo</a>::<code>topology</code> state"
-        },
-        {
-          "vuid": "VUID-vkCmdDrawIndirect-pStrides-04884",
-          "text": " If the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic state enabled, then <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>pStrides</code> parameter of <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> not be <code>NULL</code>"
         }
       ],
       "(VK_EXT_extended_dynamic_state)+(VK_NV_clip_space_w_scaling)": [
@@ -25517,6 +25571,28 @@
         {
           "vuid": "VUID-vkCmdDrawIndirect-primitiveFragmentShadingRateWithMultipleViewports-04552",
           "text": " If the <a href=\"#limits-primitiveFragmentShadingRateWithMultipleViewports\"><code>primitiveFragmentShadingRateWithMultipleViewports</code></a> limit is not supported, the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, and any of the shader stages of the bound graphics pipeline write to the <code>PrimitiveShadingRateKHR</code> built-in, then <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>viewportCount</code> parameter of <code>vkCmdSetViewportWithCountEXT</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_EXT_vertex_input_dynamic_state)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirect-None-04912",
+          "text": " If the bound graphics pipeline was created with both the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> and <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic states enabled, then <a href=\"#vkCmdSetVertexInputEXT\">vkCmdSetVertexInputEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirect-pStrides-04913",
+          "text": " If the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>pStrides</code> parameter of <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> not be <code>NULL</code>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+!(VK_EXT_vertex_input_dynamic_state)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirect-pStrides-04884",
+          "text": " If the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic state enabled, then <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>pStrides</code> parameter of <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> not be <code>NULL</code>"
+        }
+      ],
+      "(VK_EXT_vertex_input_dynamic_state)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirect-None-04914",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdSetVertexInputEXT\">vkCmdSetVertexInputEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
         }
       ]
     },
@@ -25803,10 +25879,6 @@
         {
           "vuid": "VUID-vkCmdDrawIndirectCount-primitiveTopology-03420",
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPrimitiveTopologyEXT\">vkCmdSetPrimitiveTopologyEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>primitiveTopology</code> parameter of <code>vkCmdSetPrimitiveTopologyEXT</code> <strong class=\"purple\">must</strong> be of the same <a href=\"#drawing-primitive-topology-class\">topology class</a> as the pipeline <a href=\"#VkPipelineInputAssemblyStateCreateInfo\">VkPipelineInputAssemblyStateCreateInfo</a>::<code>topology</code> state"
-        },
-        {
-          "vuid": "VUID-vkCmdDrawIndirectCount-pStrides-04884",
-          "text": " If the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic state enabled, then <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>pStrides</code> parameter of <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> not be <code>NULL</code>"
         }
       ],
       "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_EXT_extended_dynamic_state)+(VK_NV_clip_space_w_scaling)": [
@@ -25867,6 +25939,28 @@
         {
           "vuid": "VUID-vkCmdDrawIndirectCount-primitiveFragmentShadingRateWithMultipleViewports-04552",
           "text": " If the <a href=\"#limits-primitiveFragmentShadingRateWithMultipleViewports\"><code>primitiveFragmentShadingRateWithMultipleViewports</code></a> limit is not supported, the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, and any of the shader stages of the bound graphics pipeline write to the <code>PrimitiveShadingRateKHR</code> built-in, then <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>viewportCount</code> parameter of <code>vkCmdSetViewportWithCountEXT</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+        }
+      ],
+      "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_EXT_extended_dynamic_state)+(VK_EXT_vertex_input_dynamic_state)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCount-None-04912",
+          "text": " If the bound graphics pipeline was created with both the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> and <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic states enabled, then <a href=\"#vkCmdSetVertexInputEXT\">vkCmdSetVertexInputEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCount-pStrides-04913",
+          "text": " If the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>pStrides</code> parameter of <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> not be <code>NULL</code>"
+        }
+      ],
+      "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_EXT_extended_dynamic_state)+!(VK_EXT_vertex_input_dynamic_state)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCount-pStrides-04884",
+          "text": " If the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic state enabled, then <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>pStrides</code> parameter of <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> not be <code>NULL</code>"
+        }
+      ],
+      "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_EXT_vertex_input_dynamic_state)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCount-None-04914",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdSetVertexInputEXT\">vkCmdSetVertexInputEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
         }
       ],
       "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_VERSION_1_2)": [
@@ -26131,10 +26225,6 @@
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-primitiveTopology-03420",
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPrimitiveTopologyEXT\">vkCmdSetPrimitiveTopologyEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>primitiveTopology</code> parameter of <code>vkCmdSetPrimitiveTopologyEXT</code> <strong class=\"purple\">must</strong> be of the same <a href=\"#drawing-primitive-topology-class\">topology class</a> as the pipeline <a href=\"#VkPipelineInputAssemblyStateCreateInfo\">VkPipelineInputAssemblyStateCreateInfo</a>::<code>topology</code> state"
-        },
-        {
-          "vuid": "VUID-vkCmdDrawIndexedIndirect-pStrides-04884",
-          "text": " If the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic state enabled, then <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>pStrides</code> parameter of <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> not be <code>NULL</code>"
         }
       ],
       "(VK_EXT_extended_dynamic_state)+(VK_NV_clip_space_w_scaling)": [
@@ -26195,6 +26285,28 @@
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-primitiveFragmentShadingRateWithMultipleViewports-04552",
           "text": " If the <a href=\"#limits-primitiveFragmentShadingRateWithMultipleViewports\"><code>primitiveFragmentShadingRateWithMultipleViewports</code></a> limit is not supported, the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, and any of the shader stages of the bound graphics pipeline write to the <code>PrimitiveShadingRateKHR</code> built-in, then <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>viewportCount</code> parameter of <code>vkCmdSetViewportWithCountEXT</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+(VK_EXT_vertex_input_dynamic_state)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirect-None-04912",
+          "text": " If the bound graphics pipeline was created with both the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> and <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic states enabled, then <a href=\"#vkCmdSetVertexInputEXT\">vkCmdSetVertexInputEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirect-pStrides-04913",
+          "text": " If the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>pStrides</code> parameter of <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> not be <code>NULL</code>"
+        }
+      ],
+      "(VK_EXT_extended_dynamic_state)+!(VK_EXT_vertex_input_dynamic_state)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirect-pStrides-04884",
+          "text": " If the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic state enabled, then <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>pStrides</code> parameter of <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> not be <code>NULL</code>"
+        }
+      ],
+      "(VK_EXT_vertex_input_dynamic_state)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirect-None-04914",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdSetVertexInputEXT\">vkCmdSetVertexInputEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
         }
       ]
     },
@@ -26485,10 +26597,6 @@
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount-primitiveTopology-03420",
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPrimitiveTopologyEXT\">vkCmdSetPrimitiveTopologyEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>primitiveTopology</code> parameter of <code>vkCmdSetPrimitiveTopologyEXT</code> <strong class=\"purple\">must</strong> be of the same <a href=\"#drawing-primitive-topology-class\">topology class</a> as the pipeline <a href=\"#VkPipelineInputAssemblyStateCreateInfo\">VkPipelineInputAssemblyStateCreateInfo</a>::<code>topology</code> state"
-        },
-        {
-          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-pStrides-04884",
-          "text": " If the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic state enabled, then <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>pStrides</code> parameter of <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> not be <code>NULL</code>"
         }
       ],
       "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_EXT_extended_dynamic_state)+(VK_NV_clip_space_w_scaling)": [
@@ -26549,6 +26657,28 @@
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount-primitiveFragmentShadingRateWithMultipleViewports-04552",
           "text": " If the <a href=\"#limits-primitiveFragmentShadingRateWithMultipleViewports\"><code>primitiveFragmentShadingRateWithMultipleViewports</code></a> limit is not supported, the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, and any of the shader stages of the bound graphics pipeline write to the <code>PrimitiveShadingRateKHR</code> built-in, then <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>viewportCount</code> parameter of <code>vkCmdSetViewportWithCountEXT</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+        }
+      ],
+      "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_EXT_extended_dynamic_state)+(VK_EXT_vertex_input_dynamic_state)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-None-04912",
+          "text": " If the bound graphics pipeline was created with both the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> and <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic states enabled, then <a href=\"#vkCmdSetVertexInputEXT\">vkCmdSetVertexInputEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-pStrides-04913",
+          "text": " If the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>pStrides</code> parameter of <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> not be <code>NULL</code>"
+        }
+      ],
+      "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_EXT_extended_dynamic_state)+!(VK_EXT_vertex_input_dynamic_state)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-pStrides-04884",
+          "text": " If the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic state enabled, then <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>pStrides</code> parameter of <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> not be <code>NULL</code>"
+        }
+      ],
+      "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_EXT_vertex_input_dynamic_state)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-None-04914",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdSetVertexInputEXT\">vkCmdSetVertexInputEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
         }
       ],
       "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_VERSION_1_2)": [
@@ -26801,10 +26931,6 @@
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-primitiveTopology-03420",
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPrimitiveTopologyEXT\">vkCmdSetPrimitiveTopologyEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>primitiveTopology</code> parameter of <code>vkCmdSetPrimitiveTopologyEXT</code> <strong class=\"purple\">must</strong> be of the same <a href=\"#drawing-primitive-topology-class\">topology class</a> as the pipeline <a href=\"#VkPipelineInputAssemblyStateCreateInfo\">VkPipelineInputAssemblyStateCreateInfo</a>::<code>topology</code> state"
-        },
-        {
-          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-pStrides-04884",
-          "text": " If the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic state enabled, then <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>pStrides</code> parameter of <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> not be <code>NULL</code>"
         }
       ],
       "(VK_EXT_transform_feedback)+(VK_EXT_extended_dynamic_state)+(VK_NV_clip_space_w_scaling)": [
@@ -26865,6 +26991,28 @@
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-primitiveFragmentShadingRateWithMultipleViewports-04552",
           "text": " If the <a href=\"#limits-primitiveFragmentShadingRateWithMultipleViewports\"><code>primitiveFragmentShadingRateWithMultipleViewports</code></a> limit is not supported, the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, and any of the shader stages of the bound graphics pipeline write to the <code>PrimitiveShadingRateKHR</code> built-in, then <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>viewportCount</code> parameter of <code>vkCmdSetViewportWithCountEXT</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+        }
+      ],
+      "(VK_EXT_transform_feedback)+(VK_EXT_extended_dynamic_state)+(VK_EXT_vertex_input_dynamic_state)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-None-04912",
+          "text": " If the bound graphics pipeline was created with both the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> and <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic states enabled, then <a href=\"#vkCmdSetVertexInputEXT\">vkCmdSetVertexInputEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-pStrides-04913",
+          "text": " If the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>pStrides</code> parameter of <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> not be <code>NULL</code>"
+        }
+      ],
+      "(VK_EXT_transform_feedback)+(VK_EXT_extended_dynamic_state)+!(VK_EXT_vertex_input_dynamic_state)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-pStrides-04884",
+          "text": " If the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic state enabled, then <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>pStrides</code> parameter of <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> not be <code>NULL</code>"
+        }
+      ],
+      "(VK_EXT_transform_feedback)+(VK_EXT_vertex_input_dynamic_state)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-None-04914",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdSetVertexInputEXT\">vkCmdSetVertexInputEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
         }
       ]
     },
@@ -27155,10 +27303,6 @@
         {
           "vuid": "VUID-vkCmdDrawMeshTasksNV-primitiveTopology-03420",
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPrimitiveTopologyEXT\">vkCmdSetPrimitiveTopologyEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>primitiveTopology</code> parameter of <code>vkCmdSetPrimitiveTopologyEXT</code> <strong class=\"purple\">must</strong> be of the same <a href=\"#drawing-primitive-topology-class\">topology class</a> as the pipeline <a href=\"#VkPipelineInputAssemblyStateCreateInfo\">VkPipelineInputAssemblyStateCreateInfo</a>::<code>topology</code> state"
-        },
-        {
-          "vuid": "VUID-vkCmdDrawMeshTasksNV-pStrides-04884",
-          "text": " If the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic state enabled, then <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>pStrides</code> parameter of <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> not be <code>NULL</code>"
         }
       ],
       "(VK_NV_mesh_shader)+(VK_EXT_extended_dynamic_state)+(VK_NV_clip_space_w_scaling)": [
@@ -27219,6 +27363,28 @@
         {
           "vuid": "VUID-vkCmdDrawMeshTasksNV-primitiveFragmentShadingRateWithMultipleViewports-04552",
           "text": " If the <a href=\"#limits-primitiveFragmentShadingRateWithMultipleViewports\"><code>primitiveFragmentShadingRateWithMultipleViewports</code></a> limit is not supported, the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, and any of the shader stages of the bound graphics pipeline write to the <code>PrimitiveShadingRateKHR</code> built-in, then <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>viewportCount</code> parameter of <code>vkCmdSetViewportWithCountEXT</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+        }
+      ],
+      "(VK_NV_mesh_shader)+(VK_EXT_extended_dynamic_state)+(VK_EXT_vertex_input_dynamic_state)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksNV-None-04912",
+          "text": " If the bound graphics pipeline was created with both the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> and <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic states enabled, then <a href=\"#vkCmdSetVertexInputEXT\">vkCmdSetVertexInputEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksNV-pStrides-04913",
+          "text": " If the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>pStrides</code> parameter of <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> not be <code>NULL</code>"
+        }
+      ],
+      "(VK_NV_mesh_shader)+(VK_EXT_extended_dynamic_state)+!(VK_EXT_vertex_input_dynamic_state)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksNV-pStrides-04884",
+          "text": " If the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic state enabled, then <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>pStrides</code> parameter of <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> not be <code>NULL</code>"
+        }
+      ],
+      "(VK_NV_mesh_shader)+(VK_EXT_vertex_input_dynamic_state)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksNV-None-04914",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdSetVertexInputEXT\">vkCmdSetVertexInputEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
         }
       ]
     },
@@ -27461,10 +27627,6 @@
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-primitiveTopology-03420",
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPrimitiveTopologyEXT\">vkCmdSetPrimitiveTopologyEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>primitiveTopology</code> parameter of <code>vkCmdSetPrimitiveTopologyEXT</code> <strong class=\"purple\">must</strong> be of the same <a href=\"#drawing-primitive-topology-class\">topology class</a> as the pipeline <a href=\"#VkPipelineInputAssemblyStateCreateInfo\">VkPipelineInputAssemblyStateCreateInfo</a>::<code>topology</code> state"
-        },
-        {
-          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-pStrides-04884",
-          "text": " If the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic state enabled, then <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>pStrides</code> parameter of <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> not be <code>NULL</code>"
         }
       ],
       "(VK_NV_mesh_shader)+(VK_EXT_extended_dynamic_state)+(VK_NV_clip_space_w_scaling)": [
@@ -27525,6 +27687,28 @@
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-primitiveFragmentShadingRateWithMultipleViewports-04552",
           "text": " If the <a href=\"#limits-primitiveFragmentShadingRateWithMultipleViewports\"><code>primitiveFragmentShadingRateWithMultipleViewports</code></a> limit is not supported, the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, and any of the shader stages of the bound graphics pipeline write to the <code>PrimitiveShadingRateKHR</code> built-in, then <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>viewportCount</code> parameter of <code>vkCmdSetViewportWithCountEXT</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+        }
+      ],
+      "(VK_NV_mesh_shader)+(VK_EXT_extended_dynamic_state)+(VK_EXT_vertex_input_dynamic_state)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-None-04912",
+          "text": " If the bound graphics pipeline was created with both the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> and <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic states enabled, then <a href=\"#vkCmdSetVertexInputEXT\">vkCmdSetVertexInputEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-pStrides-04913",
+          "text": " If the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>pStrides</code> parameter of <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> not be <code>NULL</code>"
+        }
+      ],
+      "(VK_NV_mesh_shader)+(VK_EXT_extended_dynamic_state)+!(VK_EXT_vertex_input_dynamic_state)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-pStrides-04884",
+          "text": " If the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic state enabled, then <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>pStrides</code> parameter of <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> not be <code>NULL</code>"
+        }
+      ],
+      "(VK_NV_mesh_shader)+(VK_EXT_vertex_input_dynamic_state)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-None-04914",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdSetVertexInputEXT\">vkCmdSetVertexInputEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
         }
       ]
     },
@@ -27795,10 +27979,6 @@
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-primitiveTopology-03420",
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPrimitiveTopologyEXT\">vkCmdSetPrimitiveTopologyEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>primitiveTopology</code> parameter of <code>vkCmdSetPrimitiveTopologyEXT</code> <strong class=\"purple\">must</strong> be of the same <a href=\"#drawing-primitive-topology-class\">topology class</a> as the pipeline <a href=\"#VkPipelineInputAssemblyStateCreateInfo\">VkPipelineInputAssemblyStateCreateInfo</a>::<code>topology</code> state"
-        },
-        {
-          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-pStrides-04884",
-          "text": " If the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic state enabled, then <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>pStrides</code> parameter of <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> not be <code>NULL</code>"
         }
       ],
       "(VK_NV_mesh_shader)+(VK_EXT_extended_dynamic_state)+(VK_NV_clip_space_w_scaling)": [
@@ -27859,6 +28039,28 @@
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-primitiveFragmentShadingRateWithMultipleViewports-04552",
           "text": " If the <a href=\"#limits-primitiveFragmentShadingRateWithMultipleViewports\"><code>primitiveFragmentShadingRateWithMultipleViewports</code></a> limit is not supported, the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, and any of the shader stages of the bound graphics pipeline write to the <code>PrimitiveShadingRateKHR</code> built-in, then <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>viewportCount</code> parameter of <code>vkCmdSetViewportWithCountEXT</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+        }
+      ],
+      "(VK_NV_mesh_shader)+(VK_EXT_extended_dynamic_state)+(VK_EXT_vertex_input_dynamic_state)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-None-04912",
+          "text": " If the bound graphics pipeline was created with both the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> and <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic states enabled, then <a href=\"#vkCmdSetVertexInputEXT\">vkCmdSetVertexInputEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-pStrides-04913",
+          "text": " If the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>pStrides</code> parameter of <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> not be <code>NULL</code>"
+        }
+      ],
+      "(VK_NV_mesh_shader)+(VK_EXT_extended_dynamic_state)+!(VK_EXT_vertex_input_dynamic_state)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-pStrides-04884",
+          "text": " If the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic state enabled, then <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>pStrides</code> parameter of <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> not be <code>NULL</code>"
+        }
+      ],
+      "(VK_NV_mesh_shader)+(VK_EXT_vertex_input_dynamic_state)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-None-04914",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdSetVertexInputEXT\">vkCmdSetVertexInputEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
         }
       ],
       "(VK_NV_mesh_shader)+(VK_VERSION_1_2)": [
@@ -31661,10 +31863,6 @@
         {
           "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-primitiveTopology-03420",
           "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetPrimitiveTopologyEXT\">vkCmdSetPrimitiveTopologyEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>primitiveTopology</code> parameter of <code>vkCmdSetPrimitiveTopologyEXT</code> <strong class=\"purple\">must</strong> be of the same <a href=\"#drawing-primitive-topology-class\">topology class</a> as the pipeline <a href=\"#VkPipelineInputAssemblyStateCreateInfo\">VkPipelineInputAssemblyStateCreateInfo</a>::<code>topology</code> state"
-        },
-        {
-          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-pStrides-04884",
-          "text": " If the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic state enabled, then <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>pStrides</code> parameter of <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> not be <code>NULL</code>"
         }
       ],
       "(VK_NV_device_generated_commands)+(VK_EXT_extended_dynamic_state)+(VK_NV_clip_space_w_scaling)": [
@@ -31725,6 +31923,28 @@
         {
           "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-primitiveFragmentShadingRateWithMultipleViewports-04552",
           "text": " If the <a href=\"#limits-primitiveFragmentShadingRateWithMultipleViewports\"><code>primitiveFragmentShadingRateWithMultipleViewports</code></a> limit is not supported, the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT</code> dynamic state enabled, and any of the shader stages of the bound graphics pipeline write to the <code>PrimitiveShadingRateKHR</code> built-in, then <a href=\"#vkCmdSetViewportWithCountEXT\">vkCmdSetViewportWithCountEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>viewportCount</code> parameter of <code>vkCmdSetViewportWithCountEXT</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+        }
+      ],
+      "(VK_NV_device_generated_commands)+(VK_EXT_extended_dynamic_state)+(VK_EXT_vertex_input_dynamic_state)": [
+        {
+          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-None-04912",
+          "text": " If the bound graphics pipeline was created with both the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> and <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic states enabled, then <a href=\"#vkCmdSetVertexInputEXT\">vkCmdSetVertexInputEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
+        },
+        {
+          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-pStrides-04913",
+          "text": " If the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic state enabled, but not the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command, and the <code>pStrides</code> parameter of <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> not be <code>NULL</code>"
+        }
+      ],
+      "(VK_NV_device_generated_commands)+(VK_EXT_extended_dynamic_state)+!(VK_EXT_vertex_input_dynamic_state)": [
+        {
+          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-pStrides-04884",
+          "text": " If the bound graphics pipeline was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT</code> dynamic state enabled, then <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>pStrides</code> parameter of <a href=\"#vkCmdBindVertexBuffers2EXT\">vkCmdBindVertexBuffers2EXT</a> <strong class=\"purple\">must</strong> not be <code>NULL</code>"
+        }
+      ],
+      "(VK_NV_device_generated_commands)+(VK_EXT_vertex_input_dynamic_state)": [
+        {
+          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-None-04914",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_VERTEX_INPUT_EXT</code> dynamic state enabled, then <a href=\"#vkCmdSetVertexInputEXT\">vkCmdSetVertexInputEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this draw command"
         }
       ],
       "(VK_NV_device_generated_commands)+(VK_EXT_transform_feedback)": [
@@ -35284,11 +35504,11 @@
         },
         {
           "vuid": "VUID-vkCmdBuildAccelerationStructuresKHR-pInfos-03766",
-          "text": " For each element of <code>pInfos</code>, if its <code>mode</code> member is <code>VK_BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR</code>, then for each <code>VkAccelerationStructureGeometryKHR</code> structure referred to by its <code>pGeometries</code> or <code>ppGeometries</code> members, if <code>geometryType</code> is <code>VK_GEOMETRY_TYPE_TRIANGLES_KHR</code>, if its <code>geometry.triangles.transformData</code> member was NULL when <code>srcAccelerationStructure</code> was last built, then it <strong class=\"purple\">must</strong> be NULL"
+          "text": " For each element of <code>pInfos</code>, if its <code>mode</code> member is <code>VK_BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR</code>, then for each <code>VkAccelerationStructureGeometryKHR</code> structure referred to by its <code>pGeometries</code> or <code>ppGeometries</code> members, if <code>geometryType</code> is <code>VK_GEOMETRY_TYPE_TRIANGLES_KHR</code>, if its <code>geometry.triangles.transformData</code> address was <code>NULL</code> when <code>srcAccelerationStructure</code> was last built, then it <strong class=\"purple\">must</strong> be <code>NULL</code>"
         },
         {
           "vuid": "VUID-vkCmdBuildAccelerationStructuresKHR-pInfos-03767",
-          "text": " For each element of <code>pInfos</code>, if its <code>mode</code> member is <code>VK_BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR</code>, then for each <code>VkAccelerationStructureGeometryKHR</code> structure referred to by its <code>pGeometries</code> or <code>ppGeometries</code> members, if <code>geometryType</code> is <code>VK_GEOMETRY_TYPE_TRIANGLES_KHR</code>, if its <code>geometry.triangles.transformData</code> member was not NULL when <code>srcAccelerationStructure</code> was last built, then it may not be NULL"
+          "text": " For each element of <code>pInfos</code>, if its <code>mode</code> member is <code>VK_BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR</code>, then for each <code>VkAccelerationStructureGeometryKHR</code> structure referred to by its <code>pGeometries</code> or <code>ppGeometries</code> members, if <code>geometryType</code> is <code>VK_GEOMETRY_TYPE_TRIANGLES_KHR</code>, if its <code>geometry.triangles.transformData</code> address was not <code>NULL</code> when <code>srcAccelerationStructure</code> was last built, then it <strong class=\"purple\">must</strong> not be <code>NULL</code>"
         },
         {
           "vuid": "VUID-vkCmdBuildAccelerationStructuresKHR-pInfos-03768",
@@ -35568,11 +35788,11 @@
         },
         {
           "vuid": "VUID-vkCmdBuildAccelerationStructuresIndirectKHR-pInfos-03766",
-          "text": " For each element of <code>pInfos</code>, if its <code>mode</code> member is <code>VK_BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR</code>, then for each <code>VkAccelerationStructureGeometryKHR</code> structure referred to by its <code>pGeometries</code> or <code>ppGeometries</code> members, if <code>geometryType</code> is <code>VK_GEOMETRY_TYPE_TRIANGLES_KHR</code>, if its <code>geometry.triangles.transformData</code> member was NULL when <code>srcAccelerationStructure</code> was last built, then it <strong class=\"purple\">must</strong> be NULL"
+          "text": " For each element of <code>pInfos</code>, if its <code>mode</code> member is <code>VK_BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR</code>, then for each <code>VkAccelerationStructureGeometryKHR</code> structure referred to by its <code>pGeometries</code> or <code>ppGeometries</code> members, if <code>geometryType</code> is <code>VK_GEOMETRY_TYPE_TRIANGLES_KHR</code>, if its <code>geometry.triangles.transformData</code> address was <code>NULL</code> when <code>srcAccelerationStructure</code> was last built, then it <strong class=\"purple\">must</strong> be <code>NULL</code>"
         },
         {
           "vuid": "VUID-vkCmdBuildAccelerationStructuresIndirectKHR-pInfos-03767",
-          "text": " For each element of <code>pInfos</code>, if its <code>mode</code> member is <code>VK_BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR</code>, then for each <code>VkAccelerationStructureGeometryKHR</code> structure referred to by its <code>pGeometries</code> or <code>ppGeometries</code> members, if <code>geometryType</code> is <code>VK_GEOMETRY_TYPE_TRIANGLES_KHR</code>, if its <code>geometry.triangles.transformData</code> member was not NULL when <code>srcAccelerationStructure</code> was last built, then it may not be NULL"
+          "text": " For each element of <code>pInfos</code>, if its <code>mode</code> member is <code>VK_BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR</code>, then for each <code>VkAccelerationStructureGeometryKHR</code> structure referred to by its <code>pGeometries</code> or <code>ppGeometries</code> members, if <code>geometryType</code> is <code>VK_GEOMETRY_TYPE_TRIANGLES_KHR</code>, if its <code>geometry.triangles.transformData</code> address was not <code>NULL</code> when <code>srcAccelerationStructure</code> was last built, then it <strong class=\"purple\">must</strong> not be <code>NULL</code>"
         },
         {
           "vuid": "VUID-vkCmdBuildAccelerationStructuresIndirectKHR-pInfos-03768",
@@ -36548,11 +36768,11 @@
         },
         {
           "vuid": "VUID-vkBuildAccelerationStructuresKHR-pInfos-03766",
-          "text": " For each element of <code>pInfos</code>, if its <code>mode</code> member is <code>VK_BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR</code>, then for each <code>VkAccelerationStructureGeometryKHR</code> structure referred to by its <code>pGeometries</code> or <code>ppGeometries</code> members, if <code>geometryType</code> is <code>VK_GEOMETRY_TYPE_TRIANGLES_KHR</code>, if its <code>geometry.triangles.transformData</code> member was NULL when <code>srcAccelerationStructure</code> was last built, then it <strong class=\"purple\">must</strong> be NULL"
+          "text": " For each element of <code>pInfos</code>, if its <code>mode</code> member is <code>VK_BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR</code>, then for each <code>VkAccelerationStructureGeometryKHR</code> structure referred to by its <code>pGeometries</code> or <code>ppGeometries</code> members, if <code>geometryType</code> is <code>VK_GEOMETRY_TYPE_TRIANGLES_KHR</code>, if its <code>geometry.triangles.transformData</code> address was <code>NULL</code> when <code>srcAccelerationStructure</code> was last built, then it <strong class=\"purple\">must</strong> be <code>NULL</code>"
         },
         {
           "vuid": "VUID-vkBuildAccelerationStructuresKHR-pInfos-03767",
-          "text": " For each element of <code>pInfos</code>, if its <code>mode</code> member is <code>VK_BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR</code>, then for each <code>VkAccelerationStructureGeometryKHR</code> structure referred to by its <code>pGeometries</code> or <code>ppGeometries</code> members, if <code>geometryType</code> is <code>VK_GEOMETRY_TYPE_TRIANGLES_KHR</code>, if its <code>geometry.triangles.transformData</code> member was not NULL when <code>srcAccelerationStructure</code> was last built, then it may not be NULL"
+          "text": " For each element of <code>pInfos</code>, if its <code>mode</code> member is <code>VK_BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR</code>, then for each <code>VkAccelerationStructureGeometryKHR</code> structure referred to by its <code>pGeometries</code> or <code>ppGeometries</code> members, if <code>geometryType</code> is <code>VK_GEOMETRY_TYPE_TRIANGLES_KHR</code>, if its <code>geometry.triangles.transformData</code> address was not <code>NULL</code> when <code>srcAccelerationStructure</code> was last built, then it <strong class=\"purple\">must</strong> not be <code>NULL</code>"
         },
         {
           "vuid": "VUID-vkBuildAccelerationStructuresKHR-pInfos-03768",
@@ -37318,7 +37538,7 @@
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-flags-03511",
-          "text": " If the currently bound ray tracing pipeline was created with <code>flags</code> that included <code>VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_MISS_SHADERS_BIT_KHR</code>, the shader group handle identified by <code>pMissShaderBindingTable</code> <strong class=\"purple\">must</strong> contain a valid miss shader"
+          "text": " If the currently bound ray tracing pipeline was created with <code>flags</code> that included <code>VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_MISS_SHADERS_BIT_KHR</code>, the shader group handle identified by <code>pMissShaderBindingTable</code> <strong class=\"purple\">must</strong> not be set to zero"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-flags-03512",
@@ -37334,11 +37554,11 @@
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-pHitShaderBindingTable-04735",
-          "text": " Any non-zero hit group entries in <code>pHitShaderBindingTable</code> accessed by this call from a geometry with a <code>geometryType</code> of <code>VK_GEOMETRY_TYPE_TRIANGLES_KHR</code> <strong class=\"purple\">must</strong> have been created with <code>VK_RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_KHR</code>"
+          "text": " Any non-zero hit shader group entries in <code>pHitShaderBindingTable</code> accessed by this call from a geometry with a <code>geometryType</code> of <code>VK_GEOMETRY_TYPE_TRIANGLES_KHR</code> <strong class=\"purple\">must</strong> have been created with <code>VK_RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_KHR</code>"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-pHitShaderBindingTable-04736",
-          "text": " Any non-zero hit group entries in <code>pHitShaderBindingTable</code> accessed by this call from a geometry with a <code>geometryType</code> of <code>VK_GEOMETRY_TYPE_AABBS_KHR</code> <strong class=\"purple\">must</strong> have been created with <code>VK_RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_KHR</code>"
+          "text": " Any non-zero hit shader group entries in <code>pHitShaderBindingTable</code> accessed by this call from a geometry with a <code>geometryType</code> of <code>VK_GEOMETRY_TYPE_AABBS_KHR</code> <strong class=\"purple\">must</strong> have been created with <code>VK_RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_KHR</code>"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-commandBuffer-04625",
@@ -37626,7 +37846,7 @@
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-flags-03511",
-          "text": " If the currently bound ray tracing pipeline was created with <code>flags</code> that included <code>VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_MISS_SHADERS_BIT_KHR</code>, the shader group handle identified by <code>pMissShaderBindingTable</code> <strong class=\"purple\">must</strong> contain a valid miss shader"
+          "text": " If the currently bound ray tracing pipeline was created with <code>flags</code> that included <code>VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_MISS_SHADERS_BIT_KHR</code>, the shader group handle identified by <code>pMissShaderBindingTable</code> <strong class=\"purple\">must</strong> not be set to zero"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-flags-03512",
@@ -37642,11 +37862,11 @@
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-pHitShaderBindingTable-04735",
-          "text": " Any non-zero hit group entries in <code>pHitShaderBindingTable</code> accessed by this call from a geometry with a <code>geometryType</code> of <code>VK_GEOMETRY_TYPE_TRIANGLES_KHR</code> <strong class=\"purple\">must</strong> have been created with <code>VK_RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_KHR</code>"
+          "text": " Any non-zero hit shader group entries in <code>pHitShaderBindingTable</code> accessed by this call from a geometry with a <code>geometryType</code> of <code>VK_GEOMETRY_TYPE_TRIANGLES_KHR</code> <strong class=\"purple\">must</strong> have been created with <code>VK_RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_KHR</code>"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-pHitShaderBindingTable-04736",
-          "text": " Any non-zero hit group entries in <code>pHitShaderBindingTable</code> accessed by this call from a geometry with a <code>geometryType</code> of <code>VK_GEOMETRY_TYPE_AABBS_KHR</code> <strong class=\"purple\">must</strong> have been created with <code>VK_RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_KHR</code>"
+          "text": " Any non-zero hit shader group entries in <code>pHitShaderBindingTable</code> accessed by this call from a geometry with a <code>geometryType</code> of <code>VK_GEOMETRY_TYPE_AABBS_KHR</code> <strong class=\"purple\">must</strong> have been created with <code>VK_RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_KHR</code>"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-indirectDeviceAddress-03632",
@@ -37954,11 +38174,11 @@
       "(VK_KHR_video_queue)": [
         {
           "vuid": "VUID-VkVideoSessionCreateInfoKHR-pVideoProfile-04845",
-          "text": " <code>pVideoProfile</code> <strong class=\"purple\">must</strong> be a pointer to a valid <a href=\"#VkVideoProfileKHR\">VkVideoProfileKHR</a> structure whose pNext chain <strong class=\"purple\">must</strong> include a valid codec-specific profile structure."
+          "text": " <code>pVideoProfile</code> <strong class=\"purple\">must</strong> be a pointer to a valid <a href=\"#VkVideoProfileKHR\">VkVideoProfileKHR</a> structure whose <code>pNext</code> chain <strong class=\"purple\">must</strong> include a valid codec-specific profile structure."
         },
         {
           "vuid": "VUID-VkVideoSessionCreateInfoKHR-maxReferencePicturesSlotsCount-04846",
-          "text": " If <a href=\"#reference-picture\">Reference Pictures</a> are required for use with the created video session, the <code>maxReferencePicturesSlotsCount</code> <strong class=\"purple\">must</strong> be set to a value bigger than \"zero\"."
+          "text": " If <a href=\"#reference-picture\">Reference Pictures</a> are required for use with the created video session, the <code>maxReferencePicturesSlotsCount</code> <strong class=\"purple\">must</strong> be set to a value bigger than <code>0</code>."
         },
         {
           "vuid": "VUID-VkVideoSessionCreateInfoKHR-maxReferencePicturesSlotsCount-04847",
@@ -37966,7 +38186,7 @@
         },
         {
           "vuid": "VUID-VkVideoSessionCreateInfoKHR-maxReferencePicturesActiveCount-04848",
-          "text": " If <a href=\"#reference-picture\">Reference Pictures</a> are required for use with the created video session, the <code>maxReferencePicturesActiveCount</code> <strong class=\"purple\">must</strong> be set to a value bigger than \"zero\"."
+          "text": " If <a href=\"#reference-picture\">Reference Pictures</a> are required for use with the created video session, the <code>maxReferencePicturesActiveCount</code> <strong class=\"purple\">must</strong> be set to a value bigger than <code>0</code>."
         },
         {
           "vuid": "VUID-VkVideoSessionCreateInfoKHR-maxReferencePicturesActiveCount-04849",
@@ -39746,6 +39966,14 @@
         }
       ]
     },
+    "VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT": {
+      "(VK_EXT_global_priority_query)": [
+        {
+          "vuid": "VUID-VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_EXT</code>"
+        }
+      ]
+    },
     "VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT": {
       "(VK_EXT_pipeline_creation_cache_control)": [
         {
@@ -39767,6 +39995,14 @@
         {
           "vuid": "VUID-VkPhysicalDevicePrivateDataFeaturesEXT-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIVATE_DATA_FEATURES_EXT</code>"
+        }
+      ]
+    },
+    "VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR": {
+      "(VK_KHR_shader_subgroup_uniform_control_flow)": [
+        {
+          "vuid": "VUID-VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_FEATURES_KHR</code>"
         }
       ]
     },
@@ -41661,6 +41897,46 @@
         {
           "vuid": "VUID-StandaloneSpirv-BuiltIn-04668",
           "text": " Any <code>BuiltIn</code> decoration not listed in <a href=\"#interfaces-builtin-variables\">Built-In Variables</a> <strong class=\"purple\">must</strong> not be used"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-Location-04915",
+          "text": " The <code>Location</code> or <code>Component</code> decorations <strong class=\"purple\">must</strong> not be used with <code>BuiltIn</code>"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-Location-04916",
+          "text": " The <code>Location</code> decorations <strong class=\"purple\">must</strong> be used on <a href=\"#interfaces-iointerfaces-user\">user-defined variables</a>"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-Location-04917",
+          "text": " The <code>Location</code> decorations <strong class=\"purple\">must</strong> be used on an <code>OpVariable</code> with a structure type that is not a block"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-Location-04918",
+          "text": " The <code>Location</code> decorations <strong class=\"purple\">must</strong> not be used on the members of <code>OpVariable</code> with a structure type that is a block decorated with <code>Location</code>"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-Location-04919",
+          "text": " The <code>Location</code> decorations <strong class=\"purple\">must</strong> be used on each member of <code>OpVariable</code> with a structure type that is a block not decorated with <code>Location</code>"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-Component-04920",
+          "text": " The <code>Component</code> decoration value <strong class=\"purple\">must</strong> not be greater than 3"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-Component-04921",
+          "text": " If the <code>Component</code> decoration is used on an <code>OpVariable</code> that has a <code>OpTypeVector</code> type with a <code>Component</code> <code>Type</code> with a <code>Width</code> that is less than or equal to 32, the sum of its <code>Component</code> <code>Count</code> and the <code>Component</code> decoration value <strong class=\"purple\">must</strong> be less than 4"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-Component-04922",
+          "text": " If the <code>Component</code> decoration is used on an <code>OpVariable</code> that has a <code>OpTypeVector</code> type with a <code>Component</code> <code>Type</code> with a <code>Width</code> that is equal to 64, the sum of two times its <code>Component</code> <code>Count</code> and the <code>Component</code> decoration value <strong class=\"purple\">must</strong> be less than 4"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-Component-04923",
+          "text": " The <code>Component</code> decorations value <strong class=\"purple\">must</strong> not be 1 or 3 for scalar or two-component 64-bit data types"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-Component-04924",
+          "text": " The <code>Component</code> decorations <strong class=\"purple\">must</strong> not used with any type that is not a scalar or vector"
         },
         {
           "vuid": "VUID-StandaloneSpirv-GLSLShared-04669",
