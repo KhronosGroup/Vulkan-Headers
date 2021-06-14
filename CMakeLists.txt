@@ -40,7 +40,7 @@ set(VK_VERSION_STRING "${VK_VERSION_MAJOR}.${VK_VERSION_MINOR}.${VK_HEADER_VERSI
 message(STATUS "Found Vulkan-Headers VK_VERSION_STRING '${VK_VERSION_STRING}'")
 
 # this project has no language toolchain requirement.
-project(Vulkan-Headers VERSION ${VK_VERSION_STRING})
+project(Vulkan-Headers LANGUAGES NONE VERSION ${VK_VERSION_STRING})
 
 option(VULKAN_HEADERS_EXPORT_CMAKE_TARGETS "Export relocatable CMake targets" OFF)
 
