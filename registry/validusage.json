@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.2.180",
-    "comment": "from git branch: github-main commit: b4e8cd820b2487bc892b391fb26b49501473a6a6",
-    "date": "2021-06-06 12:24:39Z"
+    "api version": "1.2.181",
+    "comment": "from git branch: github-main commit: ee9ed265a687fc31837081c6594530c6979235a4",
+    "date": "2021-06-14 04:12:47Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -59,6 +59,18 @@
       ]
     },
     "VkInstanceCreateInfo": {
+      "(VK_EXT_debug_report,VK_EXT_debug_utils)+(VK_EXT_debug_report)": [
+        {
+          "vuid": "VUID-VkInstanceCreateInfo-pNext-04925",
+          "text": " If the <code>pNext</code> chain of <code>VkInstanceCreateInfo</code> includes a <code>VkDebugReportCallbackCreateInfoEXT</code> structure, the list of enabled extensions in <code>ppEnabledExtensionNames</code> <strong class=\"purple\">must</strong> contain VK_EXT_debug_report."
+        }
+      ],
+      "(VK_EXT_debug_report,VK_EXT_debug_utils)+(VK_EXT_debug_utils)": [
+        {
+          "vuid": "VUID-VkInstanceCreateInfo-pNext-04926",
+          "text": " If the <code>pNext</code> chain of <code>VkInstanceCreateInfo</code> includes a <code>VkDebugUtilsMessengerCreateInfoEXT</code> structure, the list of enabled extensions in <code>ppEnabledExtensionNames</code> <strong class=\"purple\">must</strong> contain VK_EXT_debug_utils."
+        }
+      ],
       "core": [
         {
           "vuid": "VUID-VkInstanceCreateInfo-sType-sType",
@@ -572,17 +584,17 @@
       "(VK_EXT_shader_image_atomic_int64)": [
         {
           "vuid": "VUID-VkDeviceCreateInfo-None-04896",
-          "text": " If <a href=\"#features-sparseImageInt64Atomics\">sparseImageInt64Atomics</a> is enabled, <a href=\"#features-shaderImageInt64Atomics\">shaderImageInt64Atomics</a> <strong class=\"purple\">must</strong> be enabled"
+          "text": " If <a href=\"#features-sparseImageInt64Atomics\"><code>sparseImageInt64Atomics</code></a> is enabled, <a href=\"#features-shaderImageInt64Atomics\"><code>shaderImageInt64Atomics</code></a> <strong class=\"purple\">must</strong> be enabled"
         }
       ],
       "(VK_EXT_shader_atomic_float)": [
         {
           "vuid": "VUID-VkDeviceCreateInfo-None-04897",
-          "text": " If <a href=\"#features-sparseImageFloat32Atomics\">sparseImageFloat32Atomics</a> is enabled, <a href=\"#features-shaderImageFloat32Atomics\">shaderImageFloat32Atomics</a> <strong class=\"purple\">must</strong> be enabled"
+          "text": " If <a href=\"#features-sparseImageFloat32Atomics\"><code>sparseImageFloat32Atomics</code></a> is enabled, <a href=\"#features-shaderImageFloat32Atomics\"><code>shaderImageFloat32Atomics</code></a> <strong class=\"purple\">must</strong> be enabled"
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-None-04898",
-          "text": " If <a href=\"#features-sparseImageFloat32AtomicAdd\">sparseImageFloat32AtomicAdd</a> is enabled, <a href=\"#features-shaderImageFloat32AtomicAdd\">shaderImageFloat32AtomicAdd</a> <strong class=\"purple\">must</strong> be enabled"
+          "text": " If <a href=\"#features-sparseImageFloat32AtomicAdd\"><code>sparseImageFloat32AtomicAdd</code></a> is enabled, <a href=\"#features-shaderImageFloat32AtomicAdd\"><code>shaderImageFloat32AtomicAdd</code></a> <strong class=\"purple\">must</strong> be enabled"
         }
       ],
       "core": [
