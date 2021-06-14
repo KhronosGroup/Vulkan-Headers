@@ -7,3 +7,24 @@ check_required_components("@PROJECT_NAME@")
 set (VulkanHeaders_INCLUDE_DIR  "@PACKAGE_VK_INCLUDE_DIR@")
 set (VulkanHeaders_INCLUDE_DIRS "@PACKAGE_VK_INCLUDE_DIR@")
 set (VulkanRegistry_DIR "@PACKAGE_VK_REGISTRY_DIR@")
+
+# ALIAS for imported target requires CMake >= 3.11:
+# - https://cmake.org/cmake/help/latest/release/3.11.html#other
+if(NOT CMAKE_VERSION VERSION_LESS 3.11)
+    if(NOT TARGET Vulkan::Headers)
+        set_target_properties(
+            Vulkan::Vulkan-Headers
+            PROPERTIES
+            IMPORTED_GLOBAL True
+        )
+        add_library(Vulkan::Headers ALIAS Vulkan::Vulkan-Headers)
+      endif()
+      if(NOT TARGET Vulkan::Registry)
+        set_target_properties(
+            Vulkan::Vulkan-Registry
+            PROPERTIES
+            IMPORTED_GLOBAL True
+        )
+        add_library(Vulkan::Registry ALIAS Vulkan::Vulkan-Registry)
+    endif()
+endif()

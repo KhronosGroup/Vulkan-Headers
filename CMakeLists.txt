@@ -20,12 +20,10 @@
 
 cmake_minimum_required(VERSION 3.10.2)
 
-# NONE = this project has no language toolchain requirement.
-project(Vulkan-Headers NONE)
 file(READ "include/vulkan/vulkan_core.h" ver)
-string(REGEX MATCH "#define[ ]+VK_HEADER_VERSION_COMPLETE[ ]+VK_MAKE_VERSION\\([ ]*([0-9]+),[ ]*([0-9]+),[ ]*VK_HEADER_VERSION[ ]*\\)" _ ${ver})
-set(VK_VERSION_MAJOR "${CMAKE_MATCH_1}")
-set(VK_VERSION_MINOR "${CMAKE_MATCH_2}")
+string(REGEX MATCH "#define[ ]+VK_HEADER_VERSION_COMPLETE[ ]+VK_MAKE_API_VERSION\\([ ]*([0-9]+),[ ]*([0-9]+),[ ]*([0-9]+),[ ]*VK_HEADER_VERSION[ ]*\\)" _ ${ver})
+set(VK_VERSION_MAJOR "${CMAKE_MATCH_2}")
+set(VK_VERSION_MINOR "${CMAKE_MATCH_3}")
 string(REGEX MATCH "#define[ ]+VK_HEADER_VERSION[ ]+([0-9]+)" _ ${ver})
 set(VK_HEADER_VERSION "${CMAKE_MATCH_1}")
 # check if version parsing was successful
@@ -41,7 +39,10 @@ endif()
 set(VK_VERSION_STRING "${VK_VERSION_MAJOR}.${VK_VERSION_MINOR}.${VK_HEADER_VERSION}")
 message(STATUS "Found Vulkan-Headers VK_VERSION_STRING '${VK_VERSION_STRING}'")
 
-option(VULKAN_HEADERS_SKIP_INSTALL "Skip install" OFF)
+# this project has no language toolchain requirement.
+project(Vulkan-Headers VERSION ${VK_VERSION_STRING})
+
+option(VULKAN_HEADERS_EXPORT_CMAKE_TARGETS "Export relocatable CMake targets" OFF)
 
 # User-interface declarations ----------------------------------------------------------------------------------------------------
 # This section contains variables that affect development GUIs (e.g. CMake GUI and IDEs), such as option(), folders, and variables
@@ -58,18 +59,39 @@ endif()
 
 # define exported targets for nested project builds to consume
 add_library(Vulkan-Headers INTERFACE)
-target_include_directories(Vulkan-Headers INTERFACE
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
-)
+if(VULKAN_HEADERS_EXPORT_CMAKE_TARGETS)
+    target_include_directories(Vulkan-Headers INTERFACE
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+    )
+else()
+    target_include_directories(Vulkan-Headers INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+endif()
 add_library(Vulkan::Headers ALIAS Vulkan-Headers)
 
 add_library(Vulkan-Registry INTERFACE)
-target_include_directories(Vulkan-Registry INTERFACE
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/registry>
-    $<INSTALL_INTERFACE:${CMAKE_INSTALL_DATADIR}/vulkan>
-)
+if(VULKAN_HEADERS_EXPORT_CMAKE_TARGETS)
+    target_include_directories(Vulkan-Registry INTERFACE
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/registry>
+        $<INSTALL_INTERFACE:${CMAKE_INSTALL_DATADIR}/vulkan>
+    )
+else()
+    target_include_directories(Vulkan-Registry INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/registry")
+endif()
 add_library(Vulkan::Registry ALIAS Vulkan-Registry)
+
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/vulkan" DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/vk_video" DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/registry" DESTINATION ${CMAKE_INSTALL_DATADIR}/vulkan)
+
+# uninstall target
+if(NOT TARGET uninstall)
+    configure_file("${CMAKE_CURRENT_SOURCE_DIR}/cmake/cmake_uninstall.cmake.in"
+                   "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
+                   IMMEDIATE
+                   @ONLY)
+    add_custom_target(uninstall COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake)
+endif()
 
 # Installation
 # This adds the following files to the install target
@@ -79,7 +101,7 @@ add_library(Vulkan::Registry ALIAS Vulkan-Registry)
 #   - VulkanHeadersConfig.cmake:        searched for by find_package(VulkanHeaders)
 #   - VulkanHeadersConfigVersion.cmake: provides version numbers
 #   - VulkanHeadersTargets.cmake:       CMake target definitions used by config file
-if(NOT VULKAN_HEADERS_SKIP_INSTALL)
+if(VULKAN_HEADERS_EXPORT_CMAKE_TARGETS)
     set(config_install_dir "${CMAKE_INSTALL_DATADIR}/cmake/VulkanHeaders")
     set(generated_dir "${CMAKE_CURRENT_BINARY_DIR}/generated")
     set(version_config "${generated_dir}/VulkanHeadersConfigVersion.cmake")
@@ -112,15 +134,6 @@ if(NOT VULKAN_HEADERS_SKIP_INSTALL)
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
     )
-    install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/vulkan"
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-    )
-    install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/vk_video"
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-    )
-    install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/registry"
-        DESTINATION ${CMAKE_INSTALL_DATADIR}/vulkan
-    )
     install(FILES "${project_config}" "${version_config}"
         DESTINATION "${config_install_dir}"
     )
@@ -128,14 +141,4 @@ if(NOT VULKAN_HEADERS_SKIP_INSTALL)
         EXPORT "${TARGETS_EXPORT_NAME}"
         NAMESPACE "${namespace}"
         DESTINATION "${config_install_dir}")
-
-    # uninstall target
-    if(NOT TARGET uninstall)
-        configure_file(
-            "${CMAKE_CURRENT_SOURCE_DIR}/cmake/cmake_uninstall.cmake.in"
-            "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
-            IMMEDIATE
-            @ONLY)
-        add_custom_target(uninstall COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake)
-    endif()
 endif()
