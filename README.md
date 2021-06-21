@@ -42,7 +42,16 @@ Files in this repository originate from:
 
 ### Vulkan C++ Binding Repository (https://github.com/KhronosGroup/Vulkan-Hpp)
 
+As of the Vulkan-Docs 1.2.182 spec update, the Vulkan-Hpp headers have been
+split into multiple files. All of those files are now included in this
+repository.
+
 * include/vulkan/vulkan.hpp
+* include/vulkan/vulkan_enums.hpp
+* include/vulkan/vulkan_funcs.hpp
+* include/vulkan/vulkan_handles.hpp
+* include/vulkan/vulkan_raii.hpp
+* include/vulkan/vulkan_structs.hpp
 
 ## Version Tagging Scheme
 
