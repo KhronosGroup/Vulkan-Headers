@@ -72,7 +72,7 @@ extern "C" {
 #define VK_API_VERSION_1_0 VK_MAKE_API_VERSION(0, 1, 0, 0)// Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 181
+#define VK_HEADER_VERSION 182
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 2, VK_HEADER_VERSION)
@@ -792,6 +792,9 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_PROPERTIES_NV = 1000326000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_FEATURES_NV = 1000326001,
     VK_STRUCTURE_TYPE_PIPELINE_FRAGMENT_SHADING_RATE_ENUM_STATE_CREATE_INFO_NV = 1000326002,
+    VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_MOTION_TRIANGLES_DATA_NV = 1000327000,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_MOTION_BLUR_FEATURES_NV = 1000327001,
+    VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_MOTION_INFO_NV = 1000327002,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_2_PLANE_444_FORMATS_FEATURES_EXT = 1000330000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_FEATURES_EXT = 1000332000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_PROPERTIES_EXT = 1000332001,
@@ -816,17 +819,23 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_INPUT_DYNAMIC_STATE_FEATURES_EXT = 1000352000,
     VK_STRUCTURE_TYPE_VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT = 1000352001,
     VK_STRUCTURE_TYPE_VERTEX_INPUT_ATTRIBUTE_DESCRIPTION_2_EXT = 1000352002,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRM_PROPERTIES_EXT = 1000353000,
     VK_STRUCTURE_TYPE_IMPORT_MEMORY_ZIRCON_HANDLE_INFO_FUCHSIA = 1000364000,
     VK_STRUCTURE_TYPE_MEMORY_ZIRCON_HANDLE_PROPERTIES_FUCHSIA = 1000364001,
     VK_STRUCTURE_TYPE_MEMORY_GET_ZIRCON_HANDLE_INFO_FUCHSIA = 1000364002,
     VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_ZIRCON_HANDLE_INFO_FUCHSIA = 1000365000,
     VK_STRUCTURE_TYPE_SEMAPHORE_GET_ZIRCON_HANDLE_INFO_FUCHSIA = 1000365001,
+    VK_STRUCTURE_TYPE_SUBPASSS_SHADING_PIPELINE_CREATE_INFO_HUAWEI = 1000369000,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_FEATURES_HUAWEI = 1000369001,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_PROPERTIES_HUAWEI = 1000369002,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_2_FEATURES_EXT = 1000377000,
     VK_STRUCTURE_TYPE_SCREEN_SURFACE_CREATE_INFO_QNX = 1000378000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COLOR_WRITE_ENABLE_FEATURES_EXT = 1000381000,
     VK_STRUCTURE_TYPE_PIPELINE_COLOR_WRITE_CREATE_INFO_EXT = 1000381001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_EXT = 1000388000,
     VK_STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_EXT = 1000388001,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT = 1000392000,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTI_DRAW_PROPERTIES_EXT = 1000392001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETER_FEATURES = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES,
     VK_STRUCTURE_TYPE_DEBUG_REPORT_CREATE_INFO_EXT = VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT,
@@ -1704,6 +1713,7 @@ typedef enum VkPipelineBindPoint {
     VK_PIPELINE_BIND_POINT_GRAPHICS = 0,
     VK_PIPELINE_BIND_POINT_COMPUTE = 1,
     VK_PIPELINE_BIND_POINT_RAY_TRACING_KHR = 1000165000,
+    VK_PIPELINE_BIND_POINT_SUBPASS_SHADING_HUAWEI = 1000369003,
     VK_PIPELINE_BIND_POINT_RAY_TRACING_NV = VK_PIPELINE_BIND_POINT_RAY_TRACING_KHR,
     VK_PIPELINE_BIND_POINT_MAX_ENUM = 0x7FFFFFFF
 } VkPipelineBindPoint;
@@ -2145,6 +2155,7 @@ typedef enum VkPipelineCreateFlagBits {
     VK_PIPELINE_CREATE_LIBRARY_BIT_KHR = 0x00000800,
     VK_PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT_EXT = 0x00000100,
     VK_PIPELINE_CREATE_EARLY_RETURN_ON_FAILURE_BIT_EXT = 0x00000200,
+    VK_PIPELINE_CREATE_RAY_TRACING_ALLOW_MOTION_BIT_NV = 0x00100000,
     VK_PIPELINE_CREATE_DISPATCH_BASE = VK_PIPELINE_CREATE_DISPATCH_BASE_BIT,
     VK_PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT_KHR = VK_PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT,
     VK_PIPELINE_CREATE_DISPATCH_BASE_KHR = VK_PIPELINE_CREATE_DISPATCH_BASE,
@@ -2176,6 +2187,7 @@ typedef enum VkShaderStageFlagBits {
     VK_SHADER_STAGE_CALLABLE_BIT_KHR = 0x00002000,
     VK_SHADER_STAGE_TASK_BIT_NV = 0x00000040,
     VK_SHADER_STAGE_MESH_BIT_NV = 0x00000080,
+    VK_SHADER_STAGE_SUBPASS_SHADING_BIT_HUAWEI = 0x00004000,
     VK_SHADER_STAGE_RAYGEN_BIT_NV = VK_SHADER_STAGE_RAYGEN_BIT_KHR,
     VK_SHADER_STAGE_ANY_HIT_BIT_NV = VK_SHADER_STAGE_ANY_HIT_BIT_KHR,
     VK_SHADER_STAGE_CLOSEST_HIT_BIT_NV = VK_SHADER_STAGE_CLOSEST_HIT_BIT_KHR,
@@ -7883,6 +7895,7 @@ static const VkPipelineStageFlagBits2KHR VK_PIPELINE_STAGE_2_ACCELERATION_STRUCT
 static const VkPipelineStageFlagBits2KHR VK_PIPELINE_STAGE_2_FRAGMENT_DENSITY_PROCESS_BIT_EXT = 0x00800000ULL;
 static const VkPipelineStageFlagBits2KHR VK_PIPELINE_STAGE_2_TASK_SHADER_BIT_NV = 0x00080000ULL;
 static const VkPipelineStageFlagBits2KHR VK_PIPELINE_STAGE_2_MESH_SHADER_BIT_NV = 0x00100000ULL;
+static const VkPipelineStageFlagBits2KHR VK_PIPELINE_STAGE_2_SUBPASS_SHADING_BIT_HUAWEI = 0x8000000000ULL;
 
 typedef VkFlags64 VkAccessFlags2KHR;
 
@@ -10083,6 +10096,7 @@ typedef enum VkBuildAccelerationStructureFlagBitsKHR {
     VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_KHR = 0x00000004,
     VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_KHR = 0x00000008,
     VK_BUILD_ACCELERATION_STRUCTURE_LOW_MEMORY_BIT_KHR = 0x00000010,
+    VK_BUILD_ACCELERATION_STRUCTURE_MOTION_BIT_NV = 0x00000020,
     VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_NV = VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_KHR,
     VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_NV = VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_KHR,
     VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_NV = VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_KHR,
@@ -11877,6 +11891,26 @@ typedef struct VkDeviceDeviceMemoryReportCreateInfoEXT {
 
 
 
+#define VK_EXT_acquire_drm_display 1
+#define VK_EXT_ACQUIRE_DRM_DISPLAY_SPEC_VERSION 1
+#define VK_EXT_ACQUIRE_DRM_DISPLAY_EXTENSION_NAME "VK_EXT_acquire_drm_display"
+typedef VkResult (VKAPI_PTR *PFN_vkAcquireDrmDisplayEXT)(VkPhysicalDevice physicalDevice, int32_t drmFd, VkDisplayKHR display);
+typedef VkResult (VKAPI_PTR *PFN_vkGetDrmDisplayEXT)(VkPhysicalDevice physicalDevice, int32_t drmFd, uint32_t connectorId, VkDisplayKHR* display);
+
+#ifndef VK_NO_PROTOTYPES
+VKAPI_ATTR VkResult VKAPI_CALL vkAcquireDrmDisplayEXT(
+    VkPhysicalDevice                            physicalDevice,
+    int32_t                                     drmFd,
+    VkDisplayKHR                                display);
+
+VKAPI_ATTR VkResult VKAPI_CALL vkGetDrmDisplayEXT(
+    VkPhysicalDevice                            physicalDevice,
+    int32_t                                     drmFd,
+    uint32_t                                    connectorId,
+    VkDisplayKHR*                               display);
+#endif
+
+
 #define VK_EXT_robustness2 1
 #define VK_EXT_ROBUSTNESS_2_SPEC_VERSION  1
 #define VK_EXT_ROBUSTNESS_2_EXTENSION_NAME "VK_EXT_robustness2"
@@ -12085,6 +12119,96 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetFragmentShadingRateEnumNV(
 #endif
 
 
+#define VK_NV_ray_tracing_motion_blur 1
+#define VK_NV_RAY_TRACING_MOTION_BLUR_SPEC_VERSION 1
+#define VK_NV_RAY_TRACING_MOTION_BLUR_EXTENSION_NAME "VK_NV_ray_tracing_motion_blur"
+
+typedef enum VkAccelerationStructureMotionInstanceTypeNV {
+    VK_ACCELERATION_STRUCTURE_MOTION_INSTANCE_TYPE_STATIC_NV = 0,
+    VK_ACCELERATION_STRUCTURE_MOTION_INSTANCE_TYPE_MATRIX_MOTION_NV = 1,
+    VK_ACCELERATION_STRUCTURE_MOTION_INSTANCE_TYPE_SRT_MOTION_NV = 2,
+    VK_ACCELERATION_STRUCTURE_MOTION_INSTANCE_TYPE_MAX_ENUM_NV = 0x7FFFFFFF
+} VkAccelerationStructureMotionInstanceTypeNV;
+typedef VkFlags VkAccelerationStructureMotionInfoFlagsNV;
+typedef VkFlags VkAccelerationStructureMotionInstanceFlagsNV;
+typedef union VkDeviceOrHostAddressConstKHR {
+    VkDeviceAddress    deviceAddress;
+    const void*        hostAddress;
+} VkDeviceOrHostAddressConstKHR;
+
+typedef struct VkAccelerationStructureGeometryMotionTrianglesDataNV {
+    VkStructureType                  sType;
+    const void*                      pNext;
+    VkDeviceOrHostAddressConstKHR    vertexData;
+} VkAccelerationStructureGeometryMotionTrianglesDataNV;
+
+typedef struct VkAccelerationStructureMotionInfoNV {
+    VkStructureType                             sType;
+    const void*                                 pNext;
+    uint32_t                                    maxInstances;
+    VkAccelerationStructureMotionInfoFlagsNV    flags;
+} VkAccelerationStructureMotionInfoNV;
+
+typedef struct VkAccelerationStructureMatrixMotionInstanceNV {
+    VkTransformMatrixKHR          transformT0;
+    VkTransformMatrixKHR          transformT1;
+    uint32_t                      instanceCustomIndex:24;
+    uint32_t                      mask:8;
+    uint32_t                      instanceShaderBindingTableRecordOffset:24;
+    VkGeometryInstanceFlagsKHR    flags:8;
+    uint64_t                      accelerationStructureReference;
+} VkAccelerationStructureMatrixMotionInstanceNV;
+
+typedef struct VkSRTDataNV {
+    float    sx;
+    float    a;
+    float    b;
+    float    pvx;
+    float    sy;
+    float    c;
+    float    pvy;
+    float    sz;
+    float    pvz;
+    float    qx;
+    float    qy;
+    float    qz;
+    float    qw;
+    float    tx;
+    float    ty;
+    float    tz;
+} VkSRTDataNV;
+
+typedef struct VkAccelerationStructureSRTMotionInstanceNV {
+    VkSRTDataNV                   transformT0;
+    VkSRTDataNV                   transformT1;
+    uint32_t                      instanceCustomIndex:24;
+    uint32_t                      mask:8;
+    uint32_t                      instanceShaderBindingTableRecordOffset:24;
+    VkGeometryInstanceFlagsKHR    flags:8;
+    uint64_t                      accelerationStructureReference;
+} VkAccelerationStructureSRTMotionInstanceNV;
+
+typedef union VkAccelerationStructureMotionInstanceDataNV {
+    VkAccelerationStructureInstanceKHR               staticInstance;
+    VkAccelerationStructureMatrixMotionInstanceNV    matrixMotionInstance;
+    VkAccelerationStructureSRTMotionInstanceNV       srtMotionInstance;
+} VkAccelerationStructureMotionInstanceDataNV;
+
+typedef struct VkAccelerationStructureMotionInstanceNV {
+    VkAccelerationStructureMotionInstanceTypeNV     type;
+    VkAccelerationStructureMotionInstanceFlagsNV    flags;
+    VkAccelerationStructureMotionInstanceDataNV     data;
+} VkAccelerationStructureMotionInstanceNV;
+
+typedef struct VkPhysicalDeviceRayTracingMotionBlurFeaturesNV {
+    VkStructureType    sType;
+    const void*        pNext;
+    VkBool32           rayTracingMotionBlur;
+    VkBool32           rayTracingMotionBlurPipelineTraceRaysIndirect;
+} VkPhysicalDeviceRayTracingMotionBlurFeaturesNV;
+
+
+
 #define VK_EXT_ycbcr_2plane_444_formats 1
 #define VK_EXT_YCBCR_2PLANE_444_FORMATS_SPEC_VERSION 1
 #define VK_EXT_YCBCR_2PLANE_444_FORMATS_EXTENSION_NAME "VK_EXT_ycbcr_2plane_444_formats"
@@ -12230,6 +12354,57 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetVertexInputEXT(
 #endif
 
 
+#define VK_EXT_physical_device_drm 1
+#define VK_EXT_PHYSICAL_DEVICE_DRM_SPEC_VERSION 1
+#define VK_EXT_PHYSICAL_DEVICE_DRM_EXTENSION_NAME "VK_EXT_physical_device_drm"
+typedef struct VkPhysicalDeviceDrmPropertiesEXT {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           hasPrimary;
+    VkBool32           hasRender;
+    int64_t            primaryMajor;
+    int64_t            primaryMinor;
+    int64_t            renderMajor;
+    int64_t            renderMinor;
+} VkPhysicalDeviceDrmPropertiesEXT;
+
+
+
+#define VK_HUAWEI_subpass_shading 1
+#define VK_HUAWEI_SUBPASS_SHADING_SPEC_VERSION 0
+#define VK_HUAWEI_SUBPASS_SHADING_EXTENSION_NAME "VK_HUAWEI_subpass_shading"
+typedef struct VkSubpassShadingPipelineCreateInfoHUAWEI {
+    VkStructureType    sType;
+    void*              pNext;
+    VkRenderPass       renderPass;
+    uint32_t           subpass;
+} VkSubpassShadingPipelineCreateInfoHUAWEI;
+
+typedef struct VkPhysicalDeviceSubpassShadingFeaturesHUAWEI {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           subpassShading;
+} VkPhysicalDeviceSubpassShadingFeaturesHUAWEI;
+
+typedef struct VkPhysicalDeviceSubpassShadingPropertiesHUAWEI {
+    VkStructureType    sType;
+    void*              pNext;
+    uint32_t           maxSubpassShadingWorkgroupSizeAspectRatio;
+} VkPhysicalDeviceSubpassShadingPropertiesHUAWEI;
+
+typedef VkResult (VKAPI_PTR *PFN_vkGetSubpassShadingMaxWorkgroupSizeHUAWEI)(VkRenderPass renderpass, VkExtent2D* pMaxWorkgroupSize);
+typedef void (VKAPI_PTR *PFN_vkCmdSubpassShadingHUAWEI)(VkCommandBuffer commandBuffer);
+
+#ifndef VK_NO_PROTOTYPES
+VKAPI_ATTR VkResult VKAPI_CALL vkGetSubpassShadingMaxWorkgroupSizeHUAWEI(
+    VkRenderPass                                renderpass,
+    VkExtent2D*                                 pMaxWorkgroupSize);
+
+VKAPI_ATTR void VKAPI_CALL vkCmdSubpassShadingHUAWEI(
+    VkCommandBuffer                             commandBuffer);
+#endif
+
+
 #define VK_EXT_extended_dynamic_state2 1
 #define VK_EXT_EXTENDED_DYNAMIC_STATE_2_SPEC_VERSION 1
 #define VK_EXT_EXTENDED_DYNAMIC_STATE_2_EXTENSION_NAME "VK_EXT_extended_dynamic_state2"
@@ -12315,6 +12490,55 @@ typedef struct VkQueueFamilyGlobalPriorityPropertiesEXT {
 
 
 
+#define VK_EXT_multi_draw 1
+#define VK_EXT_MULTI_DRAW_SPEC_VERSION    1
+#define VK_EXT_MULTI_DRAW_EXTENSION_NAME  "VK_EXT_multi_draw"
+typedef struct VkPhysicalDeviceMultiDrawFeaturesEXT {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           multiDraw;
+} VkPhysicalDeviceMultiDrawFeaturesEXT;
+
+typedef struct VkPhysicalDeviceMultiDrawPropertiesEXT {
+    VkStructureType    sType;
+    void*              pNext;
+    uint32_t           maxMultiDrawCount;
+} VkPhysicalDeviceMultiDrawPropertiesEXT;
+
+typedef struct VkMultiDrawInfoEXT {
+    uint32_t    firstVertex;
+    uint32_t    vertexCount;
+} VkMultiDrawInfoEXT;
+
+typedef struct VkMultiDrawIndexedInfoEXT {
+    uint32_t    firstIndex;
+    uint32_t    indexCount;
+    int32_t     vertexOffset;
+} VkMultiDrawIndexedInfoEXT;
+
+typedef void (VKAPI_PTR *PFN_vkCmdDrawMultiEXT)(VkCommandBuffer commandBuffer, uint32_t drawCount, const VkMultiDrawInfoEXT* pVertexInfo, uint32_t instanceCount, uint32_t firstInstance, uint32_t stride);
+typedef void (VKAPI_PTR *PFN_vkCmdDrawMultiIndexedEXT)(VkCommandBuffer commandBuffer, uint32_t drawCount, const VkMultiDrawIndexedInfoEXT* pIndexInfo, uint32_t instanceCount, uint32_t firstInstance, uint32_t stride, const int32_t* pVertexOffset);
+
+#ifndef VK_NO_PROTOTYPES
+VKAPI_ATTR void VKAPI_CALL vkCmdDrawMultiEXT(
+    VkCommandBuffer                             commandBuffer,
+    uint32_t                                    drawCount,
+    const VkMultiDrawInfoEXT*                   pVertexInfo,
+    uint32_t                                    instanceCount,
+    uint32_t                                    firstInstance,
+    uint32_t                                    stride);
+
+VKAPI_ATTR void VKAPI_CALL vkCmdDrawMultiIndexedEXT(
+    VkCommandBuffer                             commandBuffer,
+    uint32_t                                    drawCount,
+    const VkMultiDrawIndexedInfoEXT*            pIndexInfo,
+    uint32_t                                    instanceCount,
+    uint32_t                                    firstInstance,
+    uint32_t                                    stride,
+    const int32_t*                              pVertexOffset);
+#endif
+
+
 #define VK_KHR_acceleration_structure 1
 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkAccelerationStructureKHR)
 #define VK_KHR_ACCELERATION_STRUCTURE_SPEC_VERSION 11
@@ -12341,6 +12565,7 @@ typedef enum VkAccelerationStructureCompatibilityKHR {
 
 typedef enum VkAccelerationStructureCreateFlagBitsKHR {
     VK_ACCELERATION_STRUCTURE_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR = 0x00000001,
+    VK_ACCELERATION_STRUCTURE_CREATE_MOTION_BIT_NV = 0x00000004,
     VK_ACCELERATION_STRUCTURE_CREATE_FLAG_BITS_MAX_ENUM_KHR = 0x7FFFFFFF
 } VkAccelerationStructureCreateFlagBitsKHR;
 typedef VkFlags VkAccelerationStructureCreateFlagsKHR;
@@ -12348,11 +12573,6 @@ typedef union VkDeviceOrHostAddressKHR {
     VkDeviceAddress    deviceAddress;
     void*              hostAddress;
 } VkDeviceOrHostAddressKHR;
-
-typedef union VkDeviceOrHostAddressConstKHR {
-    VkDeviceAddress    deviceAddress;
-    const void*        hostAddress;
-} VkDeviceOrHostAddressConstKHR;
 
 typedef struct VkAccelerationStructureBuildRangeInfoKHR {
     uint32_t    primitiveCount;
