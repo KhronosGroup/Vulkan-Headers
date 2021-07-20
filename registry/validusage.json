@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.2.184",
-    "comment": "from git branch: github-main commit: 02c265fb0af1eb5e82651e6c001d3790101adf96",
-    "date": "2021-07-05 12:24:53Z"
+    "api version": "1.2.185",
+    "comment": "from git branch: github-main commit: 62e02d5234fbbbd997d7c71099373a273a27dbf8",
+    "date": "2021-07-20 09:50:17Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -446,7 +446,7 @@
       "core": [
         {
           "vuid": "VUID-vkCreateDevice-ppEnabledExtensionNames-01387",
-          "text": " All <a href=\"#extendingvulkan-extensions-extensiondependencies\">required extensions</a> for each extension in the <a href=\"#VkDeviceCreateInfo\">VkDeviceCreateInfo</a>::<code>ppEnabledExtensionNames</code> list <strong class=\"purple\">must</strong> also be present in that list"
+          "text": " All <a href=\"#extendingvulkan-extensions-extensiondependencies\">required device extensions</a> for each extension in the <a href=\"#VkDeviceCreateInfo\">VkDeviceCreateInfo</a>::<code>ppEnabledExtensionNames</code> list <strong class=\"purple\">must</strong> also be present in that list"
         },
         {
           "vuid": "VUID-vkCreateDevice-physicalDevice-parameter",
@@ -605,6 +605,12 @@
           "text": " If <a href=\"#features-sparseImageFloat32AtomicAdd\"><code>sparseImageFloat32AtomicAdd</code></a> is enabled, <a href=\"#features-shaderImageFloat32AtomicAdd\"><code>shaderImageFloat32AtomicAdd</code></a> <strong class=\"purple\">must</strong> be enabled"
         }
       ],
+      "(VK_EXT_shader_atomic_float2)": [
+        {
+          "vuid": "VUID-VkDeviceCreateInfo-sparseImageFloat32AtomicMinMax-04975",
+          "text": " If <a href=\"#features-sparseImageFloat32AtomicMinMax\"><code>sparseImageFloat32AtomicMinMax</code></a> is enabled, <a href=\"#features-shaderImageFloat32AtomicMinMax\"><code>shaderImageFloat32AtomicMinMax</code></a> <strong class=\"purple\">must</strong> be enabled"
+        }
+      ],
       "core": [
         {
           "vuid": "VUID-VkDeviceCreateInfo-sType-sType",
@@ -612,7 +618,7 @@
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceDeviceMemoryReportCreateInfoEXT\">VkDeviceDeviceMemoryReportCreateInfoEXT</a>, <a href=\"#VkDeviceDiagnosticsConfigCreateInfoNV\">VkDeviceDiagnosticsConfigCreateInfoNV</a>, <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceMemoryOverallocationCreateInfoAMD\">VkDeviceMemoryOverallocationCreateInfoAMD</a>, <a href=\"#VkDevicePrivateDataCreateInfoEXT\">VkDevicePrivateDataCreateInfoEXT</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice4444FormatsFeaturesEXT\">VkPhysicalDevice4444FormatsFeaturesEXT</a>, <a href=\"#VkPhysicalDevice8BitStorageFeatures\">VkPhysicalDevice8BitStorageFeatures</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceAccelerationStructureFeaturesKHR\">VkPhysicalDeviceAccelerationStructureFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeatures\">VkPhysicalDeviceBufferDeviceAddressFeatures</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeaturesEXT\">VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCoherentMemoryFeaturesAMD\">VkPhysicalDeviceCoherentMemoryFeaturesAMD</a>, <a href=\"#VkPhysicalDeviceColorWriteEnableFeaturesEXT\">VkPhysicalDeviceColorWriteEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixFeaturesNV\">VkPhysicalDeviceCooperativeMatrixFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCoverageReductionModeFeaturesNV\">VkPhysicalDeviceCoverageReductionModeFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCustomBorderColorFeaturesEXT\">VkPhysicalDeviceCustomBorderColorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV\">VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDepthClipEnableFeaturesEXT\">VkPhysicalDeviceDepthClipEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeatures\">VkPhysicalDeviceDescriptorIndexingFeatures</a>, <a href=\"#VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV\">VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDeviceMemoryReportFeaturesEXT\">VkPhysicalDeviceDeviceMemoryReportFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDiagnosticsConfigFeaturesNV\">VkPhysicalDeviceDiagnosticsConfigFeaturesNV</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceExtendedDynamicState2FeaturesEXT\">VkPhysicalDeviceExtendedDynamicState2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExtendedDynamicStateFeaturesEXT\">VkPhysicalDeviceExtendedDynamicStateFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExternalMemoryRDMAFeaturesNV\">VkPhysicalDeviceExternalMemoryRDMAFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMap2FeaturesEXT\">VkPhysicalDeviceFragmentDensityMap2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapFeaturesEXT\">VkPhysicalDeviceFragmentDensityMapFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT\">VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV\">VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShadingRateFeaturesKHR\">VkPhysicalDeviceFragmentShadingRateFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT\">VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceHostQueryResetFeatures\">VkPhysicalDeviceHostQueryResetFeatures</a>, <a href=\"#VkPhysicalDeviceImageRobustnessFeaturesEXT\">VkPhysicalDeviceImageRobustnessFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceImagelessFramebufferFeatures\">VkPhysicalDeviceImagelessFramebufferFeatures</a>, <a href=\"#VkPhysicalDeviceIndexTypeUint8FeaturesEXT\">VkPhysicalDeviceIndexTypeUint8FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceInheritedViewportScissorFeaturesNV\">VkPhysicalDeviceInheritedViewportScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeaturesEXT\">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceLineRasterizationFeaturesEXT\">VkPhysicalDeviceLineRasterizationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMemoryPriorityFeaturesEXT\">VkPhysicalDeviceMemoryPriorityFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiDrawFeaturesEXT\">VkPhysicalDeviceMultiDrawFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE\">VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE</a>, <a href=\"#VkPhysicalDevicePerformanceQueryFeaturesKHR\">VkPhysicalDevicePerformanceQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT\">VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT</a>, <a href=\"#VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR\">VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePrivateDataFeaturesEXT\">VkPhysicalDevicePrivateDataFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceProvokingVertexFeaturesEXT\">VkPhysicalDeviceProvokingVertexFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceRayQueryFeaturesKHR\">VkPhysicalDeviceRayQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceRayTracingMotionBlurFeaturesNV\">VkPhysicalDeviceRayTracingMotionBlurFeaturesNV</a>, <a href=\"#VkPhysicalDeviceRayTracingPipelineFeaturesKHR\">VkPhysicalDeviceRayTracingPipelineFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceRobustness2FeaturesEXT\">VkPhysicalDeviceRobustness2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceScalarBlockLayoutFeatures\">VkPhysicalDeviceScalarBlockLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures\">VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures</a>, <a href=\"#VkPhysicalDeviceShaderAtomicFloatFeaturesEXT\">VkPhysicalDeviceShaderAtomicFloatFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64Features\">VkPhysicalDeviceShaderAtomicInt64Features</a>, <a href=\"#VkPhysicalDeviceShaderClockFeaturesKHR\">VkPhysicalDeviceShaderClockFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT\">VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderDrawParametersFeatures\">VkPhysicalDeviceShaderDrawParametersFeatures</a>, <a href=\"#VkPhysicalDeviceShaderFloat16Int8Features\">VkPhysicalDeviceShaderFloat16Int8Features</a>, <a href=\"#VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT\">VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL\">VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL</a>, <a href=\"#VkPhysicalDeviceShaderSMBuiltinsFeaturesNV\">VkPhysicalDeviceShaderSMBuiltinsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures\">VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR\">VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR\">VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSubgroupSizeControlFeaturesEXT\">VkPhysicalDeviceSubgroupSizeControlFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSubpassShadingFeaturesHUAWEI\">VkPhysicalDeviceSubpassShadingFeaturesHUAWEI</a>, <a href=\"#VkPhysicalDeviceSynchronization2FeaturesKHR\">VkPhysicalDeviceSynchronization2FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT\">VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT\">VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTimelineSemaphoreFeatures\">VkPhysicalDeviceTimelineSemaphoreFeatures</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackFeaturesEXT\">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceUniformBufferStandardLayoutFeatures\">VkPhysicalDeviceUniformBufferStandardLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceVariablePointersFeatures\">VkPhysicalDeviceVariablePointersFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT\">VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVulkan11Features\">VkPhysicalDeviceVulkan11Features</a>, <a href=\"#VkPhysicalDeviceVulkan12Features\">VkPhysicalDeviceVulkan12Features</a>, <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeatures\">VkPhysicalDeviceVulkanMemoryModelFeatures</a>, <a href=\"#VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR\">VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT\">VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceYcbcrImageArraysFeaturesEXT\">VkPhysicalDeviceYcbcrImageArraysFeaturesEXT</a>, or <a href=\"#VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR\">VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceDeviceMemoryReportCreateInfoEXT\">VkDeviceDeviceMemoryReportCreateInfoEXT</a>, <a href=\"#VkDeviceDiagnosticsConfigCreateInfoNV\">VkDeviceDiagnosticsConfigCreateInfoNV</a>, <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceMemoryOverallocationCreateInfoAMD\">VkDeviceMemoryOverallocationCreateInfoAMD</a>, <a href=\"#VkDevicePrivateDataCreateInfoEXT\">VkDevicePrivateDataCreateInfoEXT</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice4444FormatsFeaturesEXT\">VkPhysicalDevice4444FormatsFeaturesEXT</a>, <a href=\"#VkPhysicalDevice8BitStorageFeatures\">VkPhysicalDevice8BitStorageFeatures</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceAccelerationStructureFeaturesKHR\">VkPhysicalDeviceAccelerationStructureFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeatures\">VkPhysicalDeviceBufferDeviceAddressFeatures</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeaturesEXT\">VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCoherentMemoryFeaturesAMD\">VkPhysicalDeviceCoherentMemoryFeaturesAMD</a>, <a href=\"#VkPhysicalDeviceColorWriteEnableFeaturesEXT\">VkPhysicalDeviceColorWriteEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixFeaturesNV\">VkPhysicalDeviceCooperativeMatrixFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCoverageReductionModeFeaturesNV\">VkPhysicalDeviceCoverageReductionModeFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCustomBorderColorFeaturesEXT\">VkPhysicalDeviceCustomBorderColorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV\">VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDepthClipEnableFeaturesEXT\">VkPhysicalDeviceDepthClipEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeatures\">VkPhysicalDeviceDescriptorIndexingFeatures</a>, <a href=\"#VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV\">VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDeviceMemoryReportFeaturesEXT\">VkPhysicalDeviceDeviceMemoryReportFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDiagnosticsConfigFeaturesNV\">VkPhysicalDeviceDiagnosticsConfigFeaturesNV</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceExtendedDynamicState2FeaturesEXT\">VkPhysicalDeviceExtendedDynamicState2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExtendedDynamicStateFeaturesEXT\">VkPhysicalDeviceExtendedDynamicStateFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExternalMemoryRDMAFeaturesNV\">VkPhysicalDeviceExternalMemoryRDMAFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMap2FeaturesEXT\">VkPhysicalDeviceFragmentDensityMap2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapFeaturesEXT\">VkPhysicalDeviceFragmentDensityMapFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT\">VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV\">VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShadingRateFeaturesKHR\">VkPhysicalDeviceFragmentShadingRateFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT\">VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceHostQueryResetFeatures\">VkPhysicalDeviceHostQueryResetFeatures</a>, <a href=\"#VkPhysicalDeviceImageRobustnessFeaturesEXT\">VkPhysicalDeviceImageRobustnessFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceImagelessFramebufferFeatures\">VkPhysicalDeviceImagelessFramebufferFeatures</a>, <a href=\"#VkPhysicalDeviceIndexTypeUint8FeaturesEXT\">VkPhysicalDeviceIndexTypeUint8FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceInheritedViewportScissorFeaturesNV\">VkPhysicalDeviceInheritedViewportScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeaturesEXT\">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceInvocationMaskFeaturesHUAWEI\">VkPhysicalDeviceInvocationMaskFeaturesHUAWEI</a>, <a href=\"#VkPhysicalDeviceLineRasterizationFeaturesEXT\">VkPhysicalDeviceLineRasterizationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMemoryPriorityFeaturesEXT\">VkPhysicalDeviceMemoryPriorityFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiDrawFeaturesEXT\">VkPhysicalDeviceMultiDrawFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE\">VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE</a>, <a href=\"#VkPhysicalDevicePerformanceQueryFeaturesKHR\">VkPhysicalDevicePerformanceQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT\">VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT</a>, <a href=\"#VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR\">VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePresentIdFeaturesKHR\">VkPhysicalDevicePresentIdFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePresentWaitFeaturesKHR\">VkPhysicalDevicePresentWaitFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePrivateDataFeaturesEXT\">VkPhysicalDevicePrivateDataFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceProvokingVertexFeaturesEXT\">VkPhysicalDeviceProvokingVertexFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceRayQueryFeaturesKHR\">VkPhysicalDeviceRayQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceRayTracingMotionBlurFeaturesNV\">VkPhysicalDeviceRayTracingMotionBlurFeaturesNV</a>, <a href=\"#VkPhysicalDeviceRayTracingPipelineFeaturesKHR\">VkPhysicalDeviceRayTracingPipelineFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceRobustness2FeaturesEXT\">VkPhysicalDeviceRobustness2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceScalarBlockLayoutFeatures\">VkPhysicalDeviceScalarBlockLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures\">VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures</a>, <a href=\"#VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT\">VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicFloatFeaturesEXT\">VkPhysicalDeviceShaderAtomicFloatFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64Features\">VkPhysicalDeviceShaderAtomicInt64Features</a>, <a href=\"#VkPhysicalDeviceShaderClockFeaturesKHR\">VkPhysicalDeviceShaderClockFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT\">VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderDrawParametersFeatures\">VkPhysicalDeviceShaderDrawParametersFeatures</a>, <a href=\"#VkPhysicalDeviceShaderFloat16Int8Features\">VkPhysicalDeviceShaderFloat16Int8Features</a>, <a href=\"#VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT\">VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL\">VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL</a>, <a href=\"#VkPhysicalDeviceShaderSMBuiltinsFeaturesNV\">VkPhysicalDeviceShaderSMBuiltinsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures\">VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR\">VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR\">VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSubgroupSizeControlFeaturesEXT\">VkPhysicalDeviceSubgroupSizeControlFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSubpassShadingFeaturesHUAWEI\">VkPhysicalDeviceSubpassShadingFeaturesHUAWEI</a>, <a href=\"#VkPhysicalDeviceSynchronization2FeaturesKHR\">VkPhysicalDeviceSynchronization2FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT\">VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT\">VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTimelineSemaphoreFeatures\">VkPhysicalDeviceTimelineSemaphoreFeatures</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackFeaturesEXT\">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceUniformBufferStandardLayoutFeatures\">VkPhysicalDeviceUniformBufferStandardLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceVariablePointersFeatures\">VkPhysicalDeviceVariablePointersFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT\">VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVulkan11Features\">VkPhysicalDeviceVulkan11Features</a>, <a href=\"#VkPhysicalDeviceVulkan12Features\">VkPhysicalDeviceVulkan12Features</a>, <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeatures\">VkPhysicalDeviceVulkanMemoryModelFeatures</a>, <a href=\"#VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR\">VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT\">VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceYcbcrImageArraysFeaturesEXT\">VkPhysicalDeviceYcbcrImageArraysFeaturesEXT</a>, or <a href=\"#VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR\">VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR</a>"
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-sType-unique",
@@ -1511,6 +1517,12 @@
         {
           "vuid": "VUID-VkSemaphoreSubmitInfoKHR-stageMask-04957",
           "text": " If the <a href=\"#features-subpassShading\">subpass shading</a> feature is not enabled, pname:stageMask <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_2_SUBPASS_SHADING_BIT_HUAWEI</code>"
+        }
+      ],
+      "(VK_KHR_synchronization2)+(VK_HUAWEI_invocation_mask)": [
+        {
+          "vuid": "VUID-VkSemaphoreSubmitInfoKHR-stageMask-04995",
+          "text": " If the <a href=\"#features-invocationMask\">invocation mask image</a> feature is not enabled, pname:stageMask <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI</code>"
         }
       ],
       "(VK_KHR_synchronization2)+(VK_KHR_device_group_creation,VK_VERSION_1_1)": [
@@ -3433,10 +3445,6 @@
           "text": " <code>stageMask</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkPipelineStageFlagBits\">VkPipelineStageFlagBits</a> values"
         },
         {
-          "vuid": "VUID-vkCmdSetEvent-stageMask-requiredbitmask",
-          "text": " <code>stageMask</code> <strong class=\"purple\">must</strong> not be <code>0</code>"
-        },
-        {
           "vuid": "VUID-vkCmdSetEvent-commandBuffer-recording",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be in the <a href=\"#commandbuffers-lifecycle\">recording state</a>"
         },
@@ -3491,6 +3499,12 @@
         {
           "vuid": "VUID-vkCmdSetEvent-stageMask-03937",
           "text": " If the <a href=\"#features-synchronization2\"><code>synchronization2</code></a> feature is not enabled, pname:stageMask <strong class=\"purple\">must</strong> not be <code>0</code>"
+        }
+      ],
+      "!(VK_KHR_synchronization2)": [
+        {
+          "vuid": "VUID-vkCmdSetEvent-stageMask-04996",
+          "text": " pname:stageMask <strong class=\"purple\">must</strong> not be <code>0</code>"
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_device_group)": [
@@ -3599,6 +3613,12 @@
           "text": " If the <a href=\"#features-subpassShading\">subpass shading</a> feature is not enabled, pname:stageMask <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_2_SUBPASS_SHADING_BIT_HUAWEI</code>"
         }
       ],
+      "(VK_KHR_synchronization2)+(VK_HUAWEI_invocation_mask)": [
+        {
+          "vuid": "VUID-vkCmdResetEvent2KHR-stageMask-04995",
+          "text": " If the <a href=\"#features-invocationMask\">invocation mask image</a> feature is not enabled, pname:stageMask <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI</code>"
+        }
+      ],
       "(VK_KHR_synchronization2)+(VK_VERSION_1_1,VK_KHR_device_group)": [
         {
           "vuid": "VUID-vkCmdResetEvent2KHR-commandBuffer-03833",
@@ -3639,10 +3659,6 @@
         {
           "vuid": "VUID-vkCmdResetEvent-stageMask-parameter",
           "text": " <code>stageMask</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkPipelineStageFlagBits\">VkPipelineStageFlagBits</a> values"
-        },
-        {
-          "vuid": "VUID-vkCmdResetEvent-stageMask-requiredbitmask",
-          "text": " <code>stageMask</code> <strong class=\"purple\">must</strong> not be <code>0</code>"
         },
         {
           "vuid": "VUID-vkCmdResetEvent-commandBuffer-recording",
@@ -3703,6 +3719,12 @@
         {
           "vuid": "VUID-vkCmdResetEvent-event-03835",
           "text": " There <strong class=\"purple\">must</strong> be an execution dependency between <code>vkCmdResetEvent</code> and the execution of any <a href=\"#vkCmdWaitEvents2KHR\">vkCmdWaitEvents2KHR</a> that includes <code>event</code> in its <code>pEvents</code> parameter"
+        }
+      ],
+      "!(VK_KHR_synchronization2)": [
+        {
+          "vuid": "VUID-vkCmdResetEvent-stageMask-04996",
+          "text": " pname:stageMask <strong class=\"purple\">must</strong> not be <code>0</code>"
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_device_group)": [
@@ -3967,6 +3989,16 @@
           "text": " Elements of <code>pEvents</code> <strong class=\"purple\">must</strong> not have been signaled by <a href=\"#vkCmdSetEvent2KHR\">vkCmdSetEvent2KHR</a>"
         }
       ],
+      "!(VK_KHR_synchronization2)": [
+        {
+          "vuid": "VUID-vkCmdWaitEvents-srcStageMask-04996",
+          "text": " pname:srcStageMask <strong class=\"purple\">must</strong> not be <code>0</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdWaitEvents-dstStageMask-04996",
+          "text": " pname:dstStageMask <strong class=\"purple\">must</strong> not be <code>0</code>"
+        }
+      ],
       "(VK_VERSION_1_1,VK_KHR_device_group)": [
         {
           "vuid": "VUID-vkCmdWaitEvents-commandBuffer-01167",
@@ -4111,16 +4143,8 @@
           "text": " <code>srcStageMask</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkPipelineStageFlagBits\">VkPipelineStageFlagBits</a> values"
         },
         {
-          "vuid": "VUID-vkCmdPipelineBarrier-srcStageMask-requiredbitmask",
-          "text": " <code>srcStageMask</code> <strong class=\"purple\">must</strong> not be <code>0</code>"
-        },
-        {
           "vuid": "VUID-vkCmdPipelineBarrier-dstStageMask-parameter",
           "text": " <code>dstStageMask</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkPipelineStageFlagBits\">VkPipelineStageFlagBits</a> values"
-        },
-        {
-          "vuid": "VUID-vkCmdPipelineBarrier-dstStageMask-requiredbitmask",
-          "text": " <code>dstStageMask</code> <strong class=\"purple\">must</strong> not be <code>0</code>"
         },
         {
           "vuid": "VUID-vkCmdPipelineBarrier-dependencyFlags-parameter",
@@ -4213,6 +4237,16 @@
         {
           "vuid": "VUID-vkCmdPipelineBarrier-dstStageMask-03937",
           "text": " If the <a href=\"#features-synchronization2\"><code>synchronization2</code></a> feature is not enabled, pname:dstStageMask <strong class=\"purple\">must</strong> not be <code>0</code>"
+        }
+      ],
+      "!(VK_KHR_synchronization2)": [
+        {
+          "vuid": "VUID-vkCmdPipelineBarrier-srcStageMask-04996",
+          "text": " pname:srcStageMask <strong class=\"purple\">must</strong> not be <code>0</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdPipelineBarrier-dstStageMask-04996",
+          "text": " pname:dstStageMask <strong class=\"purple\">must</strong> not be <code>0</code>"
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_multiview)": [
@@ -4519,6 +4553,24 @@
         {
           "vuid": "VUID-VkMemoryBarrier2KHR-dstStageMask-04957",
           "text": " If the <a href=\"#features-subpassShading\">subpass shading</a> feature is not enabled, pname:dstStageMask <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_2_SUBPASS_SHADING_BIT_HUAWEI</code>"
+        }
+      ],
+      "(VK_KHR_synchronization2)+(VK_HUAWEI_invocation_mask)": [
+        {
+          "vuid": "VUID-VkMemoryBarrier2KHR-srcStageMask-04995",
+          "text": " If the <a href=\"#features-invocationMask\">invocation mask image</a> feature is not enabled, pname:srcStageMask <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI</code>"
+        },
+        {
+          "vuid": "VUID-VkMemoryBarrier2KHR-srcAccessMask-04994",
+          "text": " If pname:srcAccessMask includes <code>VK_ACCESS_2_INVOCATION_MASK_READ_BIT_HUAWEI</code>, pname:srcStageMask <strong class=\"purple\">must</strong> include <code>VK_PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI</code>"
+        },
+        {
+          "vuid": "VUID-VkMemoryBarrier2KHR-dstStageMask-04995",
+          "text": " If the <a href=\"#features-invocationMask\">invocation mask image</a> feature is not enabled, pname:dstStageMask <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI</code>"
+        },
+        {
+          "vuid": "VUID-VkMemoryBarrier2KHR-dstAccessMask-04994",
+          "text": " If pname:dstAccessMask includes <code>VK_ACCESS_2_INVOCATION_MASK_READ_BIT_HUAWEI</code>, pname:dstStageMask <strong class=\"purple\">must</strong> include <code>VK_PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI</code>"
         }
       ],
       "(VK_KHR_synchronization2)+(VK_NV_device_generated_commands)": [
@@ -4949,6 +5001,24 @@
         {
           "vuid": "VUID-VkBufferMemoryBarrier2KHR-dstStageMask-04957",
           "text": " If the <a href=\"#features-subpassShading\">subpass shading</a> feature is not enabled, pname:dstStageMask <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_2_SUBPASS_SHADING_BIT_HUAWEI</code>"
+        }
+      ],
+      "(VK_KHR_synchronization2)+(VK_HUAWEI_invocation_mask)": [
+        {
+          "vuid": "VUID-VkBufferMemoryBarrier2KHR-srcStageMask-04995",
+          "text": " If the <a href=\"#features-invocationMask\">invocation mask image</a> feature is not enabled, pname:srcStageMask <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI</code>"
+        },
+        {
+          "vuid": "VUID-VkBufferMemoryBarrier2KHR-srcAccessMask-04994",
+          "text": " If pname:srcAccessMask includes <code>VK_ACCESS_2_INVOCATION_MASK_READ_BIT_HUAWEI</code>, pname:srcStageMask <strong class=\"purple\">must</strong> include <code>VK_PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI</code>"
+        },
+        {
+          "vuid": "VUID-VkBufferMemoryBarrier2KHR-dstStageMask-04995",
+          "text": " If the <a href=\"#features-invocationMask\">invocation mask image</a> feature is not enabled, pname:dstStageMask <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI</code>"
+        },
+        {
+          "vuid": "VUID-VkBufferMemoryBarrier2KHR-dstAccessMask-04994",
+          "text": " If pname:dstAccessMask includes <code>VK_ACCESS_2_INVOCATION_MASK_READ_BIT_HUAWEI</code>, pname:dstStageMask <strong class=\"purple\">must</strong> include <code>VK_PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI</code>"
         }
       ],
       "(VK_KHR_synchronization2)+(VK_NV_device_generated_commands)": [
@@ -5495,6 +5565,24 @@
         {
           "vuid": "VUID-VkImageMemoryBarrier2KHR-dstStageMask-04957",
           "text": " If the <a href=\"#features-subpassShading\">subpass shading</a> feature is not enabled, pname:dstStageMask <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_2_SUBPASS_SHADING_BIT_HUAWEI</code>"
+        }
+      ],
+      "(VK_KHR_synchronization2)+(VK_HUAWEI_invocation_mask)": [
+        {
+          "vuid": "VUID-VkImageMemoryBarrier2KHR-srcStageMask-04995",
+          "text": " If the <a href=\"#features-invocationMask\">invocation mask image</a> feature is not enabled, pname:srcStageMask <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI</code>"
+        },
+        {
+          "vuid": "VUID-VkImageMemoryBarrier2KHR-srcAccessMask-04994",
+          "text": " If pname:srcAccessMask includes <code>VK_ACCESS_2_INVOCATION_MASK_READ_BIT_HUAWEI</code>, pname:srcStageMask <strong class=\"purple\">must</strong> include <code>VK_PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI</code>"
+        },
+        {
+          "vuid": "VUID-VkImageMemoryBarrier2KHR-dstStageMask-04995",
+          "text": " If the <a href=\"#features-invocationMask\">invocation mask image</a> feature is not enabled, pname:dstStageMask <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI</code>"
+        },
+        {
+          "vuid": "VUID-VkImageMemoryBarrier2KHR-dstAccessMask-04994",
+          "text": " If pname:dstAccessMask includes <code>VK_ACCESS_2_INVOCATION_MASK_READ_BIT_HUAWEI</code>, pname:dstStageMask <strong class=\"purple\">must</strong> include <code>VK_PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI</code>"
         }
       ],
       "(VK_KHR_synchronization2)+(VK_NV_device_generated_commands)": [
@@ -6514,6 +6602,26 @@
           "vuid": "VUID-VkSubpassDependency-dstStageMask-02102",
           "text": " If the <a href=\"#features-taskShader\">task shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV</code>"
         }
+      ],
+      "(VK_KHR_synchronization2)": [
+        {
+          "vuid": "VUID-VkSubpassDependency-synchronization2-04984",
+          "text": " If the <a href=\"#features-synchronization2\"><code>synchronization2</code></a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not be <code>0</code>"
+        },
+        {
+          "vuid": "VUID-VkSubpassDependency-synchronization2-04985",
+          "text": " If the <a href=\"#features-synchronization2\"><code>synchronization2</code></a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not be <code>0</code>"
+        }
+      ],
+      "!(VK_KHR_synchronization2)": [
+        {
+          "vuid": "VUID-VkSubpassDependency-srcStageMask-04986",
+          "text": " <code>srcStageMask</code> <strong class=\"purple\">must</strong> not be <code>0</code>"
+        },
+        {
+          "vuid": "VUID-VkSubpassDependency-dstStageMask-04987",
+          "text": " <code>dstStageMask</code> <strong class=\"purple\">must</strong> not be <code>0</code>"
+        }
       ]
     },
     "vkCreateRenderPass2": {
@@ -7251,6 +7359,26 @@
         {
           "vuid": "VUID-VkSubpassDependency2-dstStageMask-02106",
           "text": " If the <a href=\"#features-taskShader\">task shaders</a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV</code>"
+        }
+      ],
+      "(VK_VERSION_1_2,VK_KHR_create_renderpass2)+(VK_KHR_synchronization2)": [
+        {
+          "vuid": "VUID-VkSubpassDependency2-synchronization2-04988",
+          "text": " If the <a href=\"#features-synchronization2\"><code>synchronization2</code></a> feature is not enabled, <code>srcStageMask</code> <strong class=\"purple\">must</strong> not be <code>0</code>"
+        },
+        {
+          "vuid": "VUID-VkSubpassDependency2-synchronization2-04989",
+          "text": " If the <a href=\"#features-synchronization2\"><code>synchronization2</code></a> feature is not enabled, <code>dstStageMask</code> <strong class=\"purple\">must</strong> not be <code>0</code>"
+        }
+      ],
+      "(VK_VERSION_1_2,VK_KHR_create_renderpass2)+!(VK_KHR_synchronization2)": [
+        {
+          "vuid": "VUID-VkSubpassDependency2-srcStageMask-04990",
+          "text": " <code>srcStageMask</code> <strong class=\"purple\">must</strong> not be <code>0</code>"
+        },
+        {
+          "vuid": "VUID-VkSubpassDependency2-dstStageMask-04991",
+          "text": " <code>dstStageMask</code> <strong class=\"purple\">must</strong> not be <code>0</code>"
         }
       ]
     },
@@ -12129,8 +12257,8 @@
           "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDevice\">VkDevice</a> handle"
         },
         {
-          "vuid": "VUID-vkGetMemoryRemoteAddressNV-getMemoryRemoteAddressInfo-parameter",
-          "text": " <code>getMemoryRemoteAddressInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkMemoryGetRemoteAddressInfoNV\">VkMemoryGetRemoteAddressInfoNV</a> structure"
+          "vuid": "VUID-vkGetMemoryRemoteAddressNV-pMemoryGetRemoteAddressInfo-parameter",
+          "text": " <code>pMemoryGetRemoteAddressInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkMemoryGetRemoteAddressInfoNV\">VkMemoryGetRemoteAddressInfoNV</a> structure"
         },
         {
           "vuid": "VUID-vkGetMemoryRemoteAddressNV-pAddress-parameter",
@@ -13399,6 +13527,12 @@
           "text": " If <code>usage</code> includes <code>VK_IMAGE_USAGE_SHADING_RATE_IMAGE_BIT_NV</code>, <code>tiling</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_TILING_OPTIMAL</code>"
         }
       ],
+      "(VK_HUAWEI_invocation_mask)": [
+        {
+          "vuid": "VUID-VkImageCreateInfo-usage-04992",
+          "text": " If <code>usage</code> includes <code>VK_IMAGE_USAGE_INVOCATION_MASK_BIT_HUAWEI</code>, <code>tiling</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_TILING_LINEAR</code>"
+        }
+      ],
       "(VK_KHR_portability_subset)": [
         {
           "vuid": "VUID-VkImageCreateInfo-imageView2DOn3DImage-04459",
@@ -13771,10 +13905,6 @@
     "VkImageViewCreateInfo": {
       "core": [
         {
-          "vuid": "VUID-VkImageViewCreateInfo-imageViewType-04969",
-          "text": " <code>imageViewType</code> <strong class=\"purple\">must</strong> be compatible with the type of <code>image</code> as shown in the <a href=\"#resources-image-views-compatibility\">view type compatibility table</a>"
-        },
-        {
           "vuid": "VUID-VkImageViewCreateInfo-image-01003",
           "text": " If <code>image</code> was not created with <code>VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT</code> then <code>viewType</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_VIEW_TYPE_CUBE</code> or <code>VK_IMAGE_VIEW_TYPE_CUBE_ARRAY</code>"
         },
@@ -13824,15 +13954,15 @@
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-subResourceRange-01021",
-          "text": " <code>subresourceRange</code> and <code>viewType</code> <strong class=\"purple\">must</strong> be compatible with the image, as described in the <a href=\"#resources-image-views-compatibility\">compatibility table</a>"
+          "text": " <code>viewType</code> <strong class=\"purple\">must</strong> be compatible with the type of <code>image</code> as shown in the <a href=\"#resources-image-views-compatibility\">view type compatibility table</a>"
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-imageViewType-04973",
-          "text": " If <code>imageViewType</code> is <code>VK_IMAGE_VIEW_TYPE_1D</code>, <code>VK_IMAGE_VIEW_TYPE_2D</code>, or <code>VK_IMAGE_VIEW_TYPE_3D</code>; and <code>subresourceRange.layerCount</code> is not <code>VK_REMAINING_ARRAY_LAYERS</code>, then <code>subresourceRange.layerCount</code> <strong class=\"purple\">must</strong> be 1"
+          "text": " If <code>viewType</code> is <code>VK_IMAGE_VIEW_TYPE_1D</code>, <code>VK_IMAGE_VIEW_TYPE_2D</code>, or <code>VK_IMAGE_VIEW_TYPE_3D</code>; and <code>subresourceRange.layerCount</code> is not <code>VK_REMAINING_ARRAY_LAYERS</code>, then <code>subresourceRange.layerCount</code> <strong class=\"purple\">must</strong> be 1"
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-imageViewType-04974",
-          "text": " If <code>imageViewType</code> is <code>VK_IMAGE_VIEW_TYPE_1D</code>, <code>VK_IMAGE_VIEW_TYPE_2D</code>, or <code>VK_IMAGE_VIEW_TYPE_3D</code>; and <code>subresourceRange.layerCount</code> is <code>VK_REMAINING_ARRAY_LAYERS</code>, then the remaining number of layers <strong class=\"purple\">must</strong> be 1"
+          "text": " If <code>viewType</code> is <code>VK_IMAGE_VIEW_TYPE_1D</code>, <code>VK_IMAGE_VIEW_TYPE_2D</code>, or <code>VK_IMAGE_VIEW_TYPE_3D</code>; and <code>subresourceRange.layerCount</code> is <code>VK_REMAINING_ARRAY_LAYERS</code>, then the remaining number of layers <strong class=\"purple\">must</strong> be 1"
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-viewType-02960",
@@ -13894,15 +14024,15 @@
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-image-04970",
-          "text": " If <code>image</code> was created with <code>VK_IMAGE_TYPE_3D</code> and <code>imageViewType</code> is <code>VK_IMAGE_VIEW_TYPE_2D</code> or <code>VK_IMAGE_VIEW_TYPE_2D_ARRAY</code> then <code>subresourceRange.levelCount</code> <strong class=\"purple\">must</strong> be 1"
+          "text": " If <code>image</code> was created with <code>VK_IMAGE_TYPE_3D</code> and <code>viewType</code> is <code>VK_IMAGE_VIEW_TYPE_2D</code> or <code>VK_IMAGE_VIEW_TYPE_2D_ARRAY</code> then <code>subresourceRange.levelCount</code> <strong class=\"purple\">must</strong> be 1"
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-image-04971",
-          "text": " If <code>image</code> was created with <code>VK_IMAGE_TYPE_3D</code> and <code>imageViewType</code> is <code>VK_IMAGE_VIEW_TYPE_2D</code> or <code>VK_IMAGE_VIEW_TYPE_2D_ARRAY</code> then <code>flags</code> <strong class=\"purple\">must</strong> not contain any of <code>VK_IMAGE_CREATE_SPARSE_BINDING_BIT</code>, <code>VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</code>, and <code>VK_IMAGE_CREATE_SPARSE_ALIASED_BIT</code>"
+          "text": " If <code>image</code> was created with <code>VK_IMAGE_TYPE_3D</code> and <code>viewType</code> is <code>VK_IMAGE_VIEW_TYPE_2D</code> or <code>VK_IMAGE_VIEW_TYPE_2D_ARRAY</code> then <code>flags</code> <strong class=\"purple\">must</strong> not contain any of <code>VK_IMAGE_CREATE_SPARSE_BINDING_BIT</code>, <code>VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</code>, and <code>VK_IMAGE_CREATE_SPARSE_ALIASED_BIT</code>"
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-image-04972",
-          "text": " If <code>image</code> was created with a <code>samples</code> value not equal to <code>VK_SAMPLE_COUNT_1_BIT</code> then <code>imageViewType</code> <strong class=\"purple\">must</strong> be either <code>VK_IMAGE_VIEW_TYPE_2D</code> or <code>VK_IMAGE_VIEW_TYPE_2D_ARRAY</code>"
+          "text": " If <code>image</code> was created with a <code>samples</code> value not equal to <code>VK_SAMPLE_COUNT_1_BIT</code> then <code>viewType</code> <strong class=\"purple\">must</strong> be either <code>VK_IMAGE_VIEW_TYPE_2D</code> or <code>VK_IMAGE_VIEW_TYPE_2D_ARRAY</code>"
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-image-01482",
@@ -14071,6 +14201,12 @@
           "text": " If <code>image</code> was created with <code>flags</code> containing <code>VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT</code> and <code>usage</code> containing <code>VK_IMAGE_USAGE_SAMPLED_BIT</code>, <code>subresourceRange.layerCount</code> <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#limits-maxSubsampledArrayLayers\"><code>VkPhysicalDeviceFragmentDensityMap2PropertiesEXT</code>::<code>maxSubsampledArrayLayers</code></a>"
         }
       ],
+      "(VK_EXT_fragment_density_map)+(VK_HUAWEI_invocation_mask)": [
+        {
+          "vuid": "VUID-VkImageViewCreateInfo-invocationMask-04993",
+          "text": " If the <a href=\"#features-invocationMask\"><code>invocationMask</code> feature</a> is enabled, and if <code>image</code> was created with <code>usage</code> containing <code>VK_IMAGE_USAGE_INVOCATION_MASK_BIT_HUAWEI</code>, <code>format</code> <strong class=\"purple\">must</strong> be <code>VK_FORMAT_R8_UINT</code>"
+        }
+      ],
       "(VK_VERSION_1_1,VK_KHR_maintenance2)+!(VK_VERSION_1_2+VK_EXT_separate_stencil_usage)": [
         {
           "vuid": "VUID-VkImageViewCreateInfo-pNext-02661",
@@ -14084,17 +14220,17 @@
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-pNext-02663",
-          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkImageViewUsageCreateInfo\">VkImageViewUsageCreateInfo</a> structure, <code>image</code> was created with a <a href=\"#VkImageStencilUsageCreateInfo\">VkImageStencilUsageCreateInfo</a> structure included in the <code>pNext</code> chain of <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>, and <code>subResourceRange.aspectMask</code> includes <code>VK_IMAGE_ASPECT_STENCIL_BIT</code>, the <code>usage</code> member of the <a href=\"#VkImageViewUsageCreateInfo\">VkImageViewUsageCreateInfo</a> instance <strong class=\"purple\">must</strong> not include any bits that were not set in the <code>usage</code> member of the <a href=\"#VkImageStencilUsageCreateInfo\">VkImageStencilUsageCreateInfo</a> structure used to create <code>image</code>"
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkImageViewUsageCreateInfo\">VkImageViewUsageCreateInfo</a> structure, <code>image</code> was created with a <a href=\"#VkImageStencilUsageCreateInfo\">VkImageStencilUsageCreateInfo</a> structure included in the <code>pNext</code> chain of <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>, and <code>subresourceRange.aspectMask</code> includes <code>VK_IMAGE_ASPECT_STENCIL_BIT</code>, the <code>usage</code> member of the <a href=\"#VkImageViewUsageCreateInfo\">VkImageViewUsageCreateInfo</a> instance <strong class=\"purple\">must</strong> not include any bits that were not set in the <code>usage</code> member of the <a href=\"#VkImageStencilUsageCreateInfo\">VkImageStencilUsageCreateInfo</a> structure used to create <code>image</code>"
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-pNext-02664",
-          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkImageViewUsageCreateInfo\">VkImageViewUsageCreateInfo</a> structure, <code>image</code> was created with a <a href=\"#VkImageStencilUsageCreateInfo\">VkImageStencilUsageCreateInfo</a> structure included in the <code>pNext</code> chain of <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>, and <code>subResourceRange.aspectMask</code> includes bits other than <code>VK_IMAGE_ASPECT_STENCIL_BIT</code>, the <code>usage</code> member of the <a href=\"#VkImageViewUsageCreateInfo\">VkImageViewUsageCreateInfo</a> structure <strong class=\"purple\">must</strong> not include any bits that were not set in the <code>usage</code> member of the <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> structure used to create <code>image</code>"
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkImageViewUsageCreateInfo\">VkImageViewUsageCreateInfo</a> structure, <code>image</code> was created with a <a href=\"#VkImageStencilUsageCreateInfo\">VkImageStencilUsageCreateInfo</a> structure included in the <code>pNext</code> chain of <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>, and <code>subresourceRange.aspectMask</code> includes bits other than <code>VK_IMAGE_ASPECT_STENCIL_BIT</code>, the <code>usage</code> member of the <a href=\"#VkImageViewUsageCreateInfo\">VkImageViewUsageCreateInfo</a> structure <strong class=\"purple\">must</strong> not include any bits that were not set in the <code>usage</code> member of the <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> structure used to create <code>image</code>"
         }
       ],
       "(VK_KHR_portability_subset)": [
         {
           "vuid": "VUID-VkImageViewCreateInfo-imageViewFormatSwizzle-04465",
-          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">[VK_KHR_portability_subset]</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>imageViewFormatSwizzle</code> is <code>VK_FALSE</code>, all elements of <code>components</code> <strong class=\"purple\">must</strong> be <code>VK_COMPONENT_SWIZZLE_IDENTITY</code>."
+          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">[VK_KHR_portability_subset]</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>imageViewFormatSwizzle</code> is <code>VK_FALSE</code>, all elements of <code>components</code> <strong class=\"purple\">must</strong> have the <a href=\"#resources-image-views-identity-mappings\">identity swizzle</a>"
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-imageViewFormatReinterpretation-04466",
@@ -16046,7 +16182,7 @@
       "(VK_EXT_custom_border_color)": [
         {
           "vuid": "VUID-VkSamplerCreateInfo-borderColor-04011",
-          "text": " If <code>borderColor</code> is one of <code>VK_BORDER_COLOR_FLOAT_CUSTOM_EXT</code> or <code>VK_BORDER_COLOR_INT_CUSTOM_EXT</code>, then a <a href=\"#VkSamplerCustomBorderColorCreateInfoEXT\">VkSamplerCustomBorderColorCreateInfoEXT</a> <strong class=\"purple\">must</strong> be present in the <code>pNext</code> chain"
+          "text": " If <code>borderColor</code> is one of <code>VK_BORDER_COLOR_FLOAT_CUSTOM_EXT</code> or <code>VK_BORDER_COLOR_INT_CUSTOM_EXT</code>, then a <a href=\"#VkSamplerCustomBorderColorCreateInfoEXT\">VkSamplerCustomBorderColorCreateInfoEXT</a> <strong class=\"purple\">must</strong> be included in the <code>pNext</code> chain"
         },
         {
           "vuid": "VUID-VkSamplerCreateInfo-customBorderColors-04085",
@@ -20637,6 +20773,12 @@
           "text": " If the <a href=\"#features-subpassShading\">subpass shading</a> feature is not enabled, pname:stage <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_2_SUBPASS_SHADING_BIT_HUAWEI</code>"
         }
       ],
+      "(VK_KHR_synchronization2)+(VK_HUAWEI_invocation_mask)": [
+        {
+          "vuid": "VUID-vkCmdWriteTimestamp2KHR-stage-04995",
+          "text": " If the <a href=\"#features-invocationMask\">invocation mask image</a> feature is not enabled, pname:stage <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI</code>"
+        }
+      ],
       "(VK_KHR_synchronization2)+(VK_VERSION_1_1,VK_KHR_multiview)": [
         {
           "vuid": "VUID-vkCmdWriteTimestamp2KHR-None-03864",
@@ -24465,6 +24607,12 @@
         {
           "vuid": "VUID-vkCmdWriteBufferMarker2AMD-stage-04957",
           "text": " If the <a href=\"#features-subpassShading\">subpass shading</a> feature is not enabled, pname:stage <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_2_SUBPASS_SHADING_BIT_HUAWEI</code>"
+        }
+      ],
+      "(VK_AMD_buffer_marker)+(VK_KHR_synchronization2)+(VK_HUAWEI_invocation_mask)": [
+        {
+          "vuid": "VUID-vkCmdWriteBufferMarker2AMD-stage-04995",
+          "text": " If the <a href=\"#features-invocationMask\">invocation mask image</a> feature is not enabled, pname:stage <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI</code>"
         }
       ]
     },
@@ -29322,7 +29470,7 @@
         },
         {
           "vuid": "VUID-vkCmdBindVertexBuffers2EXT-pBuffers-parameter",
-          "text": " <code>pBuffers</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>bindingCount</code> valid <a href=\"#VkBuffer\">VkBuffer</a> handles"
+          "text": " <code>pBuffers</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>bindingCount</code> valid or <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a> <a href=\"#VkBuffer\">VkBuffer</a> handles"
         },
         {
           "vuid": "VUID-vkCmdBindVertexBuffers2EXT-pOffsets-parameter",
@@ -29350,7 +29498,7 @@
         },
         {
           "vuid": "VUID-vkCmdBindVertexBuffers2EXT-commonparent",
-          "text": " Both of <code>commandBuffer</code>, and the elements of <code>pBuffers</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <a href=\"#VkDevice\">VkDevice</a>"
+          "text": " Both of <code>commandBuffer</code>, and the elements of <code>pBuffers</code> that are valid handles of non-ignored parameters <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <a href=\"#VkDevice\">VkDevice</a>"
         }
       ],
       "(VK_EXT_extended_dynamic_state)+(VK_EXT_robustness2)": [
@@ -35980,7 +36128,7 @@
         },
         {
           "vuid": "VUID-VkPresentInfoKHR-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceGroupPresentInfoKHR\">VkDeviceGroupPresentInfoKHR</a>, <a href=\"#VkDisplayPresentInfoKHR\">VkDisplayPresentInfoKHR</a>, <a href=\"#VkPresentFrameTokenGGP\">VkPresentFrameTokenGGP</a>, <a href=\"#VkPresentRegionsKHR\">VkPresentRegionsKHR</a>, or <a href=\"#VkPresentTimesInfoGOOGLE\">VkPresentTimesInfoGOOGLE</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceGroupPresentInfoKHR\">VkDeviceGroupPresentInfoKHR</a>, <a href=\"#VkDisplayPresentInfoKHR\">VkDisplayPresentInfoKHR</a>, <a href=\"#VkPresentFrameTokenGGP\">VkPresentFrameTokenGGP</a>, <a href=\"#VkPresentIdKHR\">VkPresentIdKHR</a>, <a href=\"#VkPresentRegionsKHR\">VkPresentRegionsKHR</a>, or <a href=\"#VkPresentTimesInfoGOOGLE\">VkPresentTimesInfoGOOGLE</a>"
         },
         {
           "vuid": "VUID-VkPresentInfoKHR-sType-unique",
@@ -36133,6 +36281,50 @@
         {
           "vuid": "VUID-VkPresentTimesInfoGOOGLE-swapchainCount-arraylength",
           "text": " <code>swapchainCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
+        }
+      ]
+    },
+    "VkPresentIdKHR": {
+      "(VK_KHR_surface)+(VK_KHR_swapchain)+(VK_KHR_present_id)": [
+        {
+          "vuid": "VUID-VkPresentIdKHR-swapchainCount-04998",
+          "text": " <code>swapchainCount</code> <strong class=\"purple\">must</strong> be the same value as <code>VkPresentInfoKHR</code>::<code>swapchainCount</code>, where this <code>VkPresentIdKHR</code> is in the pNext-chain of the <code>VkPresentInfoKHR</code> structure"
+        },
+        {
+          "vuid": "VUID-VkPresentIdKHR-presentIds-04999",
+          "text": " Each <code>presentIds</code> entry <strong class=\"purple\">must</strong> be greater than any previous <code>presentIds</code> entry passed for the associated <code>pSwapchains</code> entry"
+        },
+        {
+          "vuid": "VUID-VkPresentIdKHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PRESENT_ID_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkPresentIdKHR-pPresentIds-parameter",
+          "text": " If <code>pPresentIds</code> is not <code>NULL</code>, <code>pPresentIds</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>swapchainCount</code> <code>uint64_t</code> values"
+        },
+        {
+          "vuid": "VUID-VkPresentIdKHR-swapchainCount-arraylength",
+          "text": " <code>swapchainCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
+        }
+      ]
+    },
+    "vkWaitForPresentKHR": {
+      "(VK_KHR_surface)+(VK_KHR_swapchain)+(VK_KHR_present_id)+(VK_KHR_present_wait)": [
+        {
+          "vuid": "VUID-vkWaitForPresentKHR-swapchain-04997",
+          "text": " <code>swapchain</code> <strong class=\"purple\">must</strong> not be in the retired state"
+        },
+        {
+          "vuid": "VUID-vkWaitForPresentKHR-device-parameter",
+          "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDevice\">VkDevice</a> handle"
+        },
+        {
+          "vuid": "VUID-vkWaitForPresentKHR-swapchain-parameter",
+          "text": " <code>swapchain</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkSwapchainKHR\">VkSwapchainKHR</a> handle"
+        },
+        {
+          "vuid": "VUID-vkWaitForPresentKHR-commonparent",
+          "text": " Both of <code>device</code>, and <code>swapchain</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <a href=\"#VkInstance\">VkInstance</a>"
         }
       ]
     },
@@ -38890,6 +39082,70 @@
         }
       ]
     },
+    "vkCmdBindInvocationMaskHUAWEI": {
+      "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_pipeline)+(VK_HUAWEI_invocation_mask)": [
+        {
+          "vuid": "VUID-vkCmdBindInvocationMaskHUAWEI-None-04976",
+          "text": " The <a href=\"#features-invocationMask\">invocation mask image</a> feature <strong class=\"purple\">must</strong> be enabled"
+        },
+        {
+          "vuid": "VUID-vkCmdBindInvocationMaskHUAWEI-imageView-04977",
+          "text": " If <code>imageView</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, it <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImageView\">VkImageView</a> handle of type <code>VK_IMAGE_VIEW_TYPE_2D</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdBindInvocationMaskHUAWEI-imageView-04978",
+          "text": " If <code>imageView</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, it <strong class=\"purple\">must</strong> have a format of <code>VK_FORMAT_R8_UINT</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdBindInvocationMaskHUAWEI-imageView-04979",
+          "text": " If <code>imageView</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, it <strong class=\"purple\">must</strong> have been created with <code>VK_IMAGE_USAGE_INVOCATION_MASK_BIT_HUAWEI</code> set"
+        },
+        {
+          "vuid": "VUID-vkCmdBindInvocationMaskHUAWEI-imageView-04980",
+          "text": " If <code>imageView</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>imageLayout</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_LAYOUT_GENERAL</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdBindInvocationMaskHUAWEI-width-04981",
+          "text": " Thread mask image resolution must match the <code>width</code> and <code>height</code> in <a href=\"#vkCmdTraceRaysKHR\">vkCmdTraceRaysKHR</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdBindInvocationMaskHUAWEI-None-04982",
+          "text": " Each element in the invocation mask image <strong class=\"purple\">must</strong> have the value <code>0</code> or <code>1</code>. The value 1 means the invocation is active"
+        },
+        {
+          "vuid": "VUID-vkCmdBindInvocationMaskHUAWEI-width-04983",
+          "text": " <code>width</code> in <a href=\"#vkCmdTraceRaysKHR\">vkCmdTraceRaysKHR</a> should be 1"
+        },
+        {
+          "vuid": "VUID-vkCmdBindInvocationMaskHUAWEI-commandBuffer-parameter",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCommandBuffer\">VkCommandBuffer</a> handle"
+        },
+        {
+          "vuid": "VUID-vkCmdBindInvocationMaskHUAWEI-imageView-parameter",
+          "text": " If <code>imageView</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>imageView</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImageView\">VkImageView</a> handle"
+        },
+        {
+          "vuid": "VUID-vkCmdBindInvocationMaskHUAWEI-imageLayout-parameter",
+          "text": " <code>imageLayout</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImageLayout\">VkImageLayout</a> value"
+        },
+        {
+          "vuid": "VUID-vkCmdBindInvocationMaskHUAWEI-commandBuffer-recording",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be in the <a href=\"#commandbuffers-lifecycle\">recording state</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdBindInvocationMaskHUAWEI-commandBuffer-cmdpool",
+          "text": " The <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from <strong class=\"purple\">must</strong> support compute operations"
+        },
+        {
+          "vuid": "VUID-vkCmdBindInvocationMaskHUAWEI-renderpass",
+          "text": " This command <strong class=\"purple\">must</strong> only be called outside of a render pass instance"
+        },
+        {
+          "vuid": "VUID-vkCmdBindInvocationMaskHUAWEI-commonparent",
+          "text": " Both of <code>commandBuffer</code>, and <code>imageView</code> that are valid handles of non-ignored parameters <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from the same <a href=\"#VkDevice\">VkDevice</a>"
+        }
+      ]
+    },
     "vkCmdTraceRaysIndirectKHR": {
       "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_pipeline)": [
         {
@@ -40680,6 +40936,14 @@
         }
       ]
     },
+    "VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT": {
+      "(VK_EXT_shader_atomic_float2)": [
+        {
+          "vuid": "VUID-VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_2_FEATURES_EXT</code>"
+        }
+      ]
+    },
     "VkPhysicalDeviceShaderAtomicInt64Features": {
       "(VK_VERSION_1_2,VK_KHR_shader_atomic_int64)": [
         {
@@ -40893,6 +41157,14 @@
         {
           "vuid": "VUID-VkPhysicalDeviceFragmentDensityMap2FeaturesEXT-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_FEATURES_EXT</code>"
+        }
+      ]
+    },
+    "VkPhysicalDeviceInvocationMaskFeaturesHUAWEI": {
+      "(VK_HUAWEI_invocation_mask)": [
+        {
+          "vuid": "VUID-VkPhysicalDeviceInvocationMaskFeaturesHUAWEI-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INVOCATION_MASK_FEATURES_HUAWEI</code>"
         }
       ]
     },
@@ -41381,6 +41653,22 @@
         {
           "vuid": "VUID-VkPhysicalDeviceExternalMemoryRDMAFeaturesNV-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_RDMA_FEATURES_NV</code>"
+        }
+      ]
+    },
+    "VkPhysicalDevicePresentIdFeaturesKHR": {
+      "(VK_KHR_present_id)": [
+        {
+          "vuid": "VUID-VkPhysicalDevicePresentIdFeaturesKHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_ID_FEATURES_KHR</code>"
+        }
+      ]
+    },
+    "VkPhysicalDevicePresentWaitFeaturesKHR": {
+      "(VK_KHR_present_wait)": [
+        {
+          "vuid": "VUID-VkPhysicalDevicePresentWaitFeaturesKHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_WAIT_FEATURES_KHR</code>"
         }
       ]
     },
@@ -43202,11 +43490,19 @@
         },
         {
           "vuid": "VUID-StandaloneSpirv-Flat-04670",
-          "text": " The <code>Flat</code>, <code>NoPerspective</code>, <code>Sample</code>, and <code>Centroid</code> decorations <strong class=\"purple\">must</strong> not be used on variables with storage class other than <code>Input</code> or on variables used in the interface of non-fragment shader entry points"
+          "text": " The <code>Flat</code>, <code>NoPerspective</code>, <code>Sample</code>, and <code>Centroid</code> decorations <strong class=\"purple\">must</strong> only be used on variables with the <code>Output</code> or <code>Input</code> storage class"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-Flat-06201",
+          "text": " The <code>Flat</code>, <code>NoPerspective</code>, <code>Sample</code>, and <code>Centroid</code> decorations <strong class=\"purple\">must</strong> not be used on variables with the <code>Output</code> storage class in a fragment shader"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-Flat-06202",
+          "text": " The <code>Flat</code>, <code>NoPerspective</code>, <code>Sample</code>, and <code>Centroid</code> decorations <strong class=\"purple\">must</strong> not be used on variables with the <code>Input</code> storage class in a vertex shader"
         },
         {
           "vuid": "VUID-StandaloneSpirv-Flat-04744",
-          "text": " The <code>Flat</code> decorations <strong class=\"purple\">must</strong> be used on variables with storage class of <code>Input</code> in a fragment shader stage that are a scalar integer, vector of integer, or any double-precision floating-point type"
+          "text": " Any variable with integer or double-precision floating-point type and with <code>Input</code> storage class in a fragment shader, <strong class=\"purple\">must</strong> be decorated <code>Flat</code>"
         },
         {
           "vuid": "VUID-StandaloneSpirv-ViewportRelativeNV-04672",
