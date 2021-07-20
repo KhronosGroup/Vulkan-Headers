@@ -563,7 +563,9 @@ namespace VULKAN_HPP_NAMESPACE
         vkCmdBindDescriptorSets =
           PFN_vkCmdBindDescriptorSets( vkGetDeviceProcAddr( device, "vkCmdBindDescriptorSets" ) );
         vkCmdBindIndexBuffer = PFN_vkCmdBindIndexBuffer( vkGetDeviceProcAddr( device, "vkCmdBindIndexBuffer" ) );
-        vkCmdBindPipeline    = PFN_vkCmdBindPipeline( vkGetDeviceProcAddr( device, "vkCmdBindPipeline" ) );
+        vkCmdBindInvocationMaskHUAWEI =
+          PFN_vkCmdBindInvocationMaskHUAWEI( vkGetDeviceProcAddr( device, "vkCmdBindInvocationMaskHUAWEI" ) );
+        vkCmdBindPipeline = PFN_vkCmdBindPipeline( vkGetDeviceProcAddr( device, "vkCmdBindPipeline" ) );
         vkCmdBindPipelineShaderGroupNV =
           PFN_vkCmdBindPipelineShaderGroupNV( vkGetDeviceProcAddr( device, "vkCmdBindPipelineShaderGroupNV" ) );
         vkCmdBindShadingRateImageNV =
@@ -1232,6 +1234,7 @@ namespace VULKAN_HPP_NAMESPACE
           PFN_vkUpdateVideoSessionParametersKHR( vkGetDeviceProcAddr( device, "vkUpdateVideoSessionParametersKHR" ) );
 #  endif /*VK_ENABLE_BETA_EXTENSIONS*/
         vkWaitForFences     = PFN_vkWaitForFences( vkGetDeviceProcAddr( device, "vkWaitForFences" ) );
+        vkWaitForPresentKHR = PFN_vkWaitForPresentKHR( vkGetDeviceProcAddr( device, "vkWaitForPresentKHR" ) );
         vkWaitSemaphores    = PFN_vkWaitSemaphores( vkGetDeviceProcAddr( device, "vkWaitSemaphores" ) );
         vkWaitSemaphoresKHR = PFN_vkWaitSemaphoresKHR( vkGetDeviceProcAddr( device, "vkWaitSemaphoresKHR" ) );
         if ( !vkWaitSemaphores )
@@ -1276,6 +1279,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  endif /*VK_ENABLE_BETA_EXTENSIONS*/
       PFN_vkCmdBindDescriptorSets                     vkCmdBindDescriptorSets                     = 0;
       PFN_vkCmdBindIndexBuffer                        vkCmdBindIndexBuffer                        = 0;
+      PFN_vkCmdBindInvocationMaskHUAWEI               vkCmdBindInvocationMaskHUAWEI               = 0;
       PFN_vkCmdBindPipeline                           vkCmdBindPipeline                           = 0;
       PFN_vkCmdBindPipelineShaderGroupNV              vkCmdBindPipelineShaderGroupNV              = 0;
       PFN_vkCmdBindShadingRateImageNV                 vkCmdBindShadingRateImageNV                 = 0;
@@ -1683,10 +1687,15 @@ namespace VULKAN_HPP_NAMESPACE
       PFN_vkUpdateVideoSessionParametersKHR vkUpdateVideoSessionParametersKHR = 0;
 #  endif /*VK_ENABLE_BETA_EXTENSIONS*/
       PFN_vkWaitForFences                            vkWaitForFences                            = 0;
+      PFN_vkWaitForPresentKHR                        vkWaitForPresentKHR                        = 0;
       PFN_vkWaitSemaphores                           vkWaitSemaphores                           = 0;
       PFN_vkWaitSemaphoresKHR                        vkWaitSemaphoresKHR                        = 0;
       PFN_vkWriteAccelerationStructuresPropertiesKHR vkWriteAccelerationStructuresPropertiesKHR = 0;
     };
+
+    //====================
+    //=== RAII HANDLES ===
+    //====================
 
     class Context
     {
@@ -2798,7 +2807,7 @@ namespace VULKAN_HPP_NAMESPACE
       //=== VK_NV_external_memory_rdma ===
 
       VULKAN_HPP_NODISCARD VULKAN_HPP_NAMESPACE::RemoteAddressNV
-                           getMemoryRemoteAddressNV( const MemoryGetRemoteAddressInfoNV & getMemoryRemoteAddressInfo ) const;
+                           getMemoryRemoteAddressNV( const MemoryGetRemoteAddressInfoNV & memoryGetRemoteAddressInfo ) const;
 
     private:
       VULKAN_HPP_NAMESPACE::Device                                      m_device;
@@ -3606,10 +3615,12 @@ namespace VULKAN_HPP_NAMESPACE
                       ArrayProxy<const VULKAN_HPP_NAMESPACE::ImageResolve> const & regions ) const VULKAN_HPP_NOEXCEPT;
 
       void setEvent( VULKAN_HPP_NAMESPACE::Event              event,
-                     VULKAN_HPP_NAMESPACE::PipelineStageFlags stageMask ) const VULKAN_HPP_NOEXCEPT;
+                     VULKAN_HPP_NAMESPACE::PipelineStageFlags stageMask
+                                                              VULKAN_HPP_DEFAULT_ARGUMENT_ASSIGNMENT ) const VULKAN_HPP_NOEXCEPT;
 
       void resetEvent( VULKAN_HPP_NAMESPACE::Event              event,
-                       VULKAN_HPP_NAMESPACE::PipelineStageFlags stageMask ) const VULKAN_HPP_NOEXCEPT;
+                       VULKAN_HPP_NAMESPACE::PipelineStageFlags stageMask
+                                                                VULKAN_HPP_DEFAULT_ARGUMENT_ASSIGNMENT ) const VULKAN_HPP_NOEXCEPT;
 
       void waitEvents( ArrayProxy<const VULKAN_HPP_NAMESPACE::Event> const &               events,
                        VULKAN_HPP_NAMESPACE::PipelineStageFlags                            srcStageMask,
@@ -4122,6 +4133,11 @@ namespace VULKAN_HPP_NAMESPACE
       //=== VK_HUAWEI_subpass_shading ===
 
       void subpassShadingHUAWEI() const VULKAN_HPP_NOEXCEPT;
+
+      //=== VK_HUAWEI_invocation_mask ===
+
+      void bindInvocationMaskHUAWEI( VULKAN_HPP_NAMESPACE::ImageView   imageView,
+                                     VULKAN_HPP_NAMESPACE::ImageLayout imageLayout ) const VULKAN_HPP_NOEXCEPT;
 
       //=== VK_EXT_extended_dynamic_state2 ===
 
@@ -7626,7 +7642,7 @@ namespace VULKAN_HPP_NAMESPACE
       //=== VK_HUAWEI_subpass_shading ===
 
       VULKAN_HPP_NODISCARD std::pair<VULKAN_HPP_NAMESPACE::Result, VULKAN_HPP_NAMESPACE::Extent2D>
-                           getDeviceSubpassShadingMaxWorkgroupSizeHUAWEI() const;
+                           getSubpassShadingMaxWorkgroupSizeHUAWEI() const;
 
     private:
       VULKAN_HPP_NAMESPACE::RenderPass                                          m_renderPass;
@@ -8624,6 +8640,10 @@ namespace VULKAN_HPP_NAMESPACE
       //=== VK_AMD_display_native_hdr ===
 
       void setLocalDimmingAMD( VULKAN_HPP_NAMESPACE::Bool32 localDimmingEnable ) const VULKAN_HPP_NOEXCEPT;
+
+      //=== VK_KHR_present_wait ===
+
+      VULKAN_HPP_NODISCARD VULKAN_HPP_NAMESPACE::Result waitForPresent( uint64_t presentId, uint64_t timeout ) const;
 
 #  if defined( VK_USE_PLATFORM_WIN32_KHR )
       //=== VK_EXT_full_screen_exclusive ===
@@ -14761,6 +14781,25 @@ namespace VULKAN_HPP_NAMESPACE
       return toolProperties;
     }
 
+    //=== VK_KHR_present_wait ===
+
+    VULKAN_HPP_NODISCARD VULKAN_HPP_INLINE VULKAN_HPP_NAMESPACE::Result
+                                           SwapchainKHR::waitForPresent( uint64_t presentId, uint64_t timeout ) const
+    {
+      VULKAN_HPP_ASSERT( getDispatcher()->vkWaitForPresentKHR &&
+                         "Function <vkWaitForPresentKHR> needs extension <VK_KHR_present_wait> enabled!" );
+
+      VULKAN_HPP_NAMESPACE::Result result =
+        static_cast<VULKAN_HPP_NAMESPACE::Result>( getDispatcher()->vkWaitForPresentKHR(
+          static_cast<VkDevice>( m_device ), static_cast<VkSwapchainKHR>( m_swapchainKHR ), presentId, timeout ) );
+      if ( ( result != VULKAN_HPP_NAMESPACE::Result::eSuccess ) &&
+           ( result != VULKAN_HPP_NAMESPACE::Result::eTimeout ) )
+      {
+        throwResultException( result, VULKAN_HPP_NAMESPACE_STRING "::SwapchainKHR::waitForPresent" );
+      }
+      return result;
+    }
+
     //=== VK_NV_cooperative_matrix ===
 
     VULKAN_HPP_NODISCARD VULKAN_HPP_INLINE std::vector<VULKAN_HPP_NAMESPACE::CooperativeMatrixPropertiesNV>
@@ -15980,7 +16019,7 @@ namespace VULKAN_HPP_NAMESPACE
     //=== VK_HUAWEI_subpass_shading ===
 
     VULKAN_HPP_NODISCARD VULKAN_HPP_INLINE std::pair<VULKAN_HPP_NAMESPACE::Result, VULKAN_HPP_NAMESPACE::Extent2D>
-                                           RenderPass::getDeviceSubpassShadingMaxWorkgroupSizeHUAWEI() const
+                                           RenderPass::getSubpassShadingMaxWorkgroupSizeHUAWEI() const
     {
       VULKAN_HPP_ASSERT(
         getDispatcher()->vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI &&
@@ -15995,8 +16034,8 @@ namespace VULKAN_HPP_NAMESPACE
       if ( ( result != VULKAN_HPP_NAMESPACE::Result::eSuccess ) &&
            ( result != VULKAN_HPP_NAMESPACE::Result::eIncomplete ) )
       {
-        throwResultException(
-          result, VULKAN_HPP_NAMESPACE_STRING "::RenderPass::getDeviceSubpassShadingMaxWorkgroupSizeHUAWEI" );
+        throwResultException( result,
+                              VULKAN_HPP_NAMESPACE_STRING "::RenderPass::getSubpassShadingMaxWorkgroupSizeHUAWEI" );
       }
       return std::make_pair( result, maxWorkgroupSize );
     }
@@ -16009,10 +16048,25 @@ namespace VULKAN_HPP_NAMESPACE
       getDispatcher()->vkCmdSubpassShadingHUAWEI( static_cast<VkCommandBuffer>( m_commandBuffer ) );
     }
 
+    //=== VK_HUAWEI_invocation_mask ===
+
+    VULKAN_HPP_INLINE void
+      CommandBuffer::bindInvocationMaskHUAWEI( VULKAN_HPP_NAMESPACE::ImageView   imageView,
+                                               VULKAN_HPP_NAMESPACE::ImageLayout imageLayout ) const VULKAN_HPP_NOEXCEPT
+    {
+      VULKAN_HPP_ASSERT(
+        getDispatcher()->vkCmdBindInvocationMaskHUAWEI &&
+        "Function <vkCmdBindInvocationMaskHUAWEI> needs extension <VK_HUAWEI_invocation_mask> enabled!" );
+
+      getDispatcher()->vkCmdBindInvocationMaskHUAWEI( static_cast<VkCommandBuffer>( m_commandBuffer ),
+                                                      static_cast<VkImageView>( imageView ),
+                                                      static_cast<VkImageLayout>( imageLayout ) );
+    }
+
     //=== VK_NV_external_memory_rdma ===
 
     VULKAN_HPP_NODISCARD VULKAN_HPP_INLINE VULKAN_HPP_NAMESPACE::RemoteAddressNV
-                                           Device::getMemoryRemoteAddressNV( const MemoryGetRemoteAddressInfoNV & getMemoryRemoteAddressInfo ) const
+                                           Device::getMemoryRemoteAddressNV( const MemoryGetRemoteAddressInfoNV & memoryGetRemoteAddressInfo ) const
     {
       VULKAN_HPP_ASSERT(
         getDispatcher()->vkGetMemoryRemoteAddressNV &&
@@ -16022,7 +16076,7 @@ namespace VULKAN_HPP_NAMESPACE
       VULKAN_HPP_NAMESPACE::Result          result =
         static_cast<VULKAN_HPP_NAMESPACE::Result>( getDispatcher()->vkGetMemoryRemoteAddressNV(
           static_cast<VkDevice>( m_device ),
-          reinterpret_cast<const VkMemoryGetRemoteAddressInfoNV *>( &getMemoryRemoteAddressInfo ),
+          reinterpret_cast<const VkMemoryGetRemoteAddressInfoNV *>( &memoryGetRemoteAddressInfo ),
           reinterpret_cast<VkRemoteAddressNV *>( &address ) ) );
       if ( result != VULKAN_HPP_NAMESPACE::Result::eSuccess )
       {
