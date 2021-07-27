@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.2.185",
-    "comment": "from git branch: github-main commit: 62e02d5234fbbbd997d7c71099373a273a27dbf8",
-    "date": "2021-07-20 09:50:17Z"
+    "api version": "1.2.186",
+    "comment": "from git branch: github-main commit: 907c556530050b0f4af073753335f23c885c02bf",
+    "date": "2021-07-27 09:51:57Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -11396,7 +11396,7 @@
       "(VK_KHR_external_memory)+(VK_KHR_dedicated_allocation,VK_NV_dedicated_allocation)": [
         {
           "vuid": "VUID-VkMemoryAllocateInfo-pNext-00639",
-          "text": "     If the <code>pNext</code> chain includes a <code>VkExportMemoryAllocateInfo</code>     structure, and any of the handle types specified in     <code>VkExportMemoryAllocateInfo</code>::<code>handleTypes</code> require a dedicated     allocation, as reported by     <a href=\"#vkGetPhysicalDeviceImageFormatProperties2\">vkGetPhysicalDeviceImageFormatProperties2</a> in     <code>VkExternalImageFormatProperties</code>::<code>externalMemoryProperties.externalMemoryFeatures</code>     or     <code>VkExternalBufferProperties</code>::<code>externalMemoryProperties.externalMemoryFeatures</code>,     the <code>pNext</code> chain <strong class=\"purple\">must</strong> include a ifdef::VK_KHR_dedicated_allocation[<a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>]"
+          "text": " If the <code>pNext</code> chain includes a <code>VkExportMemoryAllocateInfo</code> structure, and any of the handle types specified in <code>VkExportMemoryAllocateInfo</code>::<code>handleTypes</code> require a dedicated allocation, as reported by <a href=\"#vkGetPhysicalDeviceImageFormatProperties2\">vkGetPhysicalDeviceImageFormatProperties2</a> in <code>VkExternalImageFormatProperties</code>::<code>externalMemoryProperties.externalMemoryFeatures</code> or <code>VkExternalBufferProperties</code>::<code>externalMemoryProperties.externalMemoryFeatures</code>, the <code>pNext</code> chain <strong class=\"purple\">must</strong> include a <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a> or <a href=\"#VkDedicatedAllocationMemoryAllocateInfoNV\">VkDedicatedAllocationMemoryAllocateInfoNV</a> structure with either its <code>image</code> or <code>buffer</code> member set to a value other than <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>."
         }
       ],
       "(VK_KHR_external_memory)+(VK_NV_external_memory)": [
@@ -11966,7 +11966,7 @@
         },
         {
           "vuid": "VUID-VkImportMemoryFdInfoKHR-handleType-00669",
-          "text": " If <code>handleType</code> is not <code>0</code>, it <strong class=\"purple\">must</strong> be <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT</code>"
+          "text": " If <code>handleType</code> is not <code>0</code>, it <strong class=\"purple\">must</strong> be <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT</code> or <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT</code>"
         },
         {
           "vuid": "VUID-VkImportMemoryFdInfoKHR-handleType-00670",
@@ -12014,7 +12014,7 @@
         },
         {
           "vuid": "VUID-VkMemoryGetFdInfoKHR-handleType-00672",
-          "text": " <code>handleType</code> <strong class=\"purple\">must</strong> be <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT</code>"
+          "text": " <code>handleType</code> <strong class=\"purple\">must</strong> be <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT</code> or <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT</code>"
         },
         {
           "vuid": "VUID-VkMemoryGetFdInfoKHR-sType-sType",
@@ -13398,7 +13398,7 @@
       "(VK_VERSION_1_1,VK_KHR_external_memory,VK_NV_external_memory)": [
         {
           "vuid": "VUID-VkImageCreateInfo-pNext-01443",
-          "text": "     If the <code>pNext</code> chain includes a ifdef::VK_VERSION_1_1,VK_KHR_external_memory[<a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a>]"
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a> or <a href=\"#VkExternalMemoryImageCreateInfoNV\">VkExternalMemoryImageCreateInfoNV</a> structure whose <code>handleTypes</code> member is not <code>0</code>, <code>initialLayout</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_LAYOUT_UNDEFINED</code>"
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
@@ -20662,7 +20662,7 @@
       "(VK_KHR_video_queue)": [
         {
           "vuid": "VUID-vkCmdCopyQueryPoolResults-queryType-04812",
-          "text": " <a href=\"#vkCmdCopyQueryPoolResults\">vkCmdCopyQueryPoolResults</a> <strong class=\"purple\">must</strong> not be called if the <code>queryType</code> used to create <code>queryPool</code> was"
+          "text": " <a href=\"#vkCmdCopyQueryPoolResults\">vkCmdCopyQueryPoolResults</a> <strong class=\"purple\">must</strong> not be called if the <code>queryType</code> used to create <code>queryPool</code> was <code>VK_QUERY_TYPE_VIDEO_ENCODE_BITSTREAM_BUFFER_RANGE_KHR</code> or <code>VK_QUERY_TYPE_RESULT_STATUS_ONLY_KHR</code>."
         }
       ]
     },
@@ -22686,7 +22686,7 @@
       "core": [
         {
           "vuid": "VUID-vkCmdCopyBufferToImage-pRegions-00172",
-          "text": " The image region specified by each element of <code>pRegions</code> <strong class=\"purple\">must</strong> be a region that is contained within <code>dstImage</code>"
+          "text": " The image region specified by each element of <code>pRegions</code> <strong class=\"purple\">must</strong> be contained within the specified <code>imageSubresource</code> of <code>dstImage</code>"
         },
         {
           "vuid": "VUID-vkCmdCopyBufferToImage-pRegions-00171",
@@ -22918,7 +22918,7 @@
       "core": [
         {
           "vuid": "VUID-vkCmdCopyImageToBuffer-pRegions-00182",
-          "text": " The image region specified by each element of <code>pRegions</code> <strong class=\"purple\">must</strong> be a region that is contained within <code>srcImage</code>"
+          "text": " The image region specified by each element of <code>pRegions</code> <strong class=\"purple\">must</strong> be contained within the specified <code>imageSubresource</code> of <code>srcImage</code>"
         },
         {
           "vuid": "VUID-vkCmdCopyImageToBuffer-pRegions-00183",
@@ -23184,25 +23184,29 @@
       "(VK_KHR_copy_commands2)+!(VK_QCOM_rotated_copy_commands)": [
         {
           "vuid": "VUID-VkCopyBufferToImageInfo2KHR-pRegions-00172",
-          "text": " The image region specified by each element of <code>pRegions</code> <strong class=\"purple\">must</strong> be a region that is contained within <code>dstImage</code>"
+          "text": " The image region specified by each element of <code>pRegions</code> <strong class=\"purple\">must</strong> be contained within the specified <code>imageSubresource</code> of <code>dstImage</code>"
         }
       ],
       "(VK_KHR_copy_commands2)+(VK_QCOM_rotated_copy_commands)": [
         {
           "vuid": "VUID-VkCopyBufferToImageInfo2KHR-pRegions-04565",
-          "text": " If the image region specified by each element of <code>pRegions</code> does not contain <a href=\"#VkCopyCommandTransformInfoQCOM\">VkCopyCommandTransformInfoQCOM</a> in its <code>pNext</code> chain, it <strong class=\"purple\">must</strong> be a region that is contained within <code>dstImage</code>"
+          "text": " If the image region specified by each element of <code>pRegions</code> does not contain <a href=\"#VkCopyCommandTransformInfoQCOM\">VkCopyCommandTransformInfoQCOM</a> in its <code>pNext</code> chain, it <strong class=\"purple\">must</strong> be a region that is contained within the specified <code>imageSubresource</code> of <code>dstImage</code>"
         },
         {
           "vuid": "VUID-VkCopyBufferToImageInfo2KHR-pRegions-04554",
-          "text": " If the image region specified by each element of <code>pRegions</code> does contain <a href=\"#VkCopyCommandTransformInfoQCOM\">VkCopyCommandTransformInfoQCOM</a> in its <code>pNext</code> chain, the rotated destination region as described in <a href=\"#copies-buffers-images-rotation-addressing\">Buffer and Image Addressing with Rotation</a> <strong class=\"purple\">must</strong> be contained within <code>dstImage</code>."
+          "text": " If the image region specified by each element of <code>pRegions</code> contains <a href=\"#VkCopyCommandTransformInfoQCOM\">VkCopyCommandTransformInfoQCOM</a> in its <code>pNext</code> chain, the rotated destination region as described in <a href=\"#copies-buffers-images-rotation-addressing\">Buffer and Image Addressing with Rotation</a> <strong class=\"purple\">must</strong> be contained within <code>dstImage</code>"
         },
         {
           "vuid": "VUID-VkCopyBufferToImageInfo2KHR-pRegions-04555",
-          "text": " If any element of <code>pRegions</code> contains <a href=\"#VkCopyCommandTransformInfoQCOM\">VkCopyCommandTransformInfoQCOM</a> in its <code>pNext</code> chain, then the <code>dstImage</code> <strong class=\"purple\">must</strong> not be a <a href=\"#blocked-image\">blocked image</a>."
+          "text": " If any element of <code>pRegions</code> contains <a href=\"#VkCopyCommandTransformInfoQCOM\">VkCopyCommandTransformInfoQCOM</a> in its <code>pNext</code> chain, then <code>dstImage</code> <strong class=\"purple\">must</strong> not be a <a href=\"#blocked-image\">blocked image</a>"
         },
         {
-          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-pRegions-04556",
-          "text": " If any element of <code>pRegions</code> contains <a href=\"#VkCopyCommandTransformInfoQCOM\">VkCopyCommandTransformInfoQCOM</a> in its <code>pNext</code> chain, then the <code>dstImage</code> <strong class=\"purple\">must</strong> be of type <code>VK_IMAGE_TYPE_2D</code> and <strong class=\"purple\">must</strong> not be a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">multi-planar format</a>."
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-pRegions-06203",
+          "text": " If any element of <code>pRegions</code> contains <a href=\"#VkCopyCommandTransformInfoQCOM\">VkCopyCommandTransformInfoQCOM</a> in its <code>pNext</code> chain, then <code>dstImage</code> <strong class=\"purple\">must</strong> be of type <code>VK_IMAGE_TYPE_2D</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-pRegions-06204",
+          "text": " If any element of <code>pRegions</code> contains <a href=\"#VkCopyCommandTransformInfoQCOM\">VkCopyCommandTransformInfoQCOM</a> in its <code>pNext</code> chain, then <code>dstImage</code> <strong class=\"purple\">must</strong> not have a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">multi-planar format</a>."
         }
       ],
       "(VK_KHR_copy_commands2)": [
@@ -23256,11 +23260,11 @@
         },
         {
           "vuid": "VUID-VkCopyBufferToImageInfo2KHR-imageOffset-00197",
-          "text": " For each element of <code>pRegions</code>"
+          "text": " For each element of <code>pRegions</code> not containing <a href=\"#VkCopyCommandTransformInfoQCOM\">VkCopyCommandTransformInfoQCOM</a> in its <code>pNext</code> chain, <code>imageOffset.x</code> and <span class=\"eq\">(<code>imageExtent.width</code> &#43; <code>imageOffset.x</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the width of the specified <code>imageSubresource</code> of <code>dstImage</code>"
         },
         {
           "vuid": "VUID-VkCopyBufferToImageInfo2KHR-imageOffset-00198",
-          "text": " For each element of <code>pRegions</code>"
+          "text": " For each element of <code>pRegions</code> not containing <a href=\"#VkCopyCommandTransformInfoQCOM\">VkCopyCommandTransformInfoQCOM</a> in its <code>pNext</code> chain, <code>imageOffset.y</code> and <span class=\"eq\">(<code>imageExtent.height</code> &#43; <code>imageOffset.y</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the height of the specified <code>imageSubresource</code> of <code>dstImage</code>"
         },
         {
           "vuid": "VUID-VkCopyBufferToImageInfo2KHR-srcImage-00199",
@@ -23452,25 +23456,29 @@
       "(VK_KHR_copy_commands2)+!(VK_QCOM_rotated_copy_commands)": [
         {
           "vuid": "VUID-VkCopyImageToBufferInfo2KHR-pRegions-00182",
-          "text": " The image region specified by each element of <code>pRegions</code> <strong class=\"purple\">must</strong> be a region that is contained within <code>srcImage</code>"
+          "text": " The image region specified by each element of <code>pRegions</code> <strong class=\"purple\">must</strong> be contained within the specified <code>imageSubresource</code> of <code>srcImage</code>"
         }
       ],
       "(VK_KHR_copy_commands2)+(VK_QCOM_rotated_copy_commands)": [
         {
           "vuid": "VUID-VkCopyImageToBufferInfo2KHR-pRegions-04566",
-          "text": " If the image region specified by each element of <code>pRegions</code> does not contain <a href=\"#VkCopyCommandTransformInfoQCOM\">VkCopyCommandTransformInfoQCOM</a> in its <code>pNext</code> chain, it <strong class=\"purple\">must</strong> be a region that is contained within <code>srcImage</code>"
+          "text": " If the image region specified by each element of <code>pRegions</code> does not contain <a href=\"#VkCopyCommandTransformInfoQCOM\">VkCopyCommandTransformInfoQCOM</a> in its <code>pNext</code> chain, it <strong class=\"purple\">must</strong> be contained within the specified <code>imageSubresource</code> of <code>srcImage</code>"
         },
         {
           "vuid": "VUID-VkCopyImageToBufferInfo2KHR-pRegions-04557",
-          "text": " If the image region specified by each element of <code>pRegions</code> does contain <a href=\"#VkCopyCommandTransformInfoQCOM\">VkCopyCommandTransformInfoQCOM</a> in its <code>pNext</code> chain, the rotated source region as described in <a href=\"#copies-buffers-images-rotation-addressing\">Buffer and Image Addressing with Rotation</a> <strong class=\"purple\">must</strong> be contained within <code>srcImage</code>."
+          "text": " If the image region specified by each element of <code>pRegions</code> contains <a href=\"#VkCopyCommandTransformInfoQCOM\">VkCopyCommandTransformInfoQCOM</a> in its <code>pNext</code> chain, the rotated source region as described in <a href=\"#copies-buffers-images-rotation-addressing\">Buffer and Image Addressing with Rotation</a> <strong class=\"purple\">must</strong> be contained within <code>srcImage</code>"
         },
         {
           "vuid": "VUID-VkCopyImageToBufferInfo2KHR-pRegions-04558",
-          "text": " If any element of <code>pRegions</code> contains <a href=\"#VkCopyCommandTransformInfoQCOM\">VkCopyCommandTransformInfoQCOM</a> in its <code>pNext</code> chain, then the <code>srcImage</code> <strong class=\"purple\">must</strong> not be a <a href=\"#blocked-image\">blocked image</a>"
+          "text": " If any element of <code>pRegions</code> contains <a href=\"#VkCopyCommandTransformInfoQCOM\">VkCopyCommandTransformInfoQCOM</a> in its <code>pNext</code> chain, then <code>srcImage</code> <strong class=\"purple\">must</strong> not be a <a href=\"#blocked-image\">blocked image</a>"
         },
         {
-          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-pRegions-04559",
-          "text": " If any element of <code>pRegions</code> contains <a href=\"#VkCopyCommandTransformInfoQCOM\">VkCopyCommandTransformInfoQCOM</a> in its <code>pNext</code> chain, then the <code>srcImage</code> <strong class=\"purple\">must</strong> be of type <code>VK_IMAGE_TYPE_2D</code>, and <strong class=\"purple\">must</strong> not be a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">multi-planar format</a>."
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-pRegions-06205",
+          "text": " If any element of <code>pRegions</code> contains <a href=\"#VkCopyCommandTransformInfoQCOM\">VkCopyCommandTransformInfoQCOM</a> in its <code>pNext</code> chain, then <code>srcImage</code> <strong class=\"purple\">must</strong> be of type <code>VK_IMAGE_TYPE_2D</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageToBufferInfo2KHR-pRegions-06206",
+          "text": " If any element of <code>pRegions</code> contains <a href=\"#VkCopyCommandTransformInfoQCOM\">VkCopyCommandTransformInfoQCOM</a> in its <code>pNext</code> chain, then <code>srcImage</code> <strong class=\"purple\">must</strong> not have a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">multi-planar format</a>"
         }
       ],
       "(VK_KHR_copy_commands2)": [
@@ -23520,11 +23528,11 @@
         },
         {
           "vuid": "VUID-VkCopyImageToBufferInfo2KHR-imageOffset-00197",
-          "text": " For each element of <code>pRegions</code>"
+          "text": " For each element of <code>pRegions</code> not containing <a href=\"#VkCopyCommandTransformInfoQCOM\">VkCopyCommandTransformInfoQCOM</a> in its <code>pNext</code> chain, <code>imageOffset.x</code> and <span class=\"eq\">(<code>imageExtent.width</code> &#43; <code>imageOffset.x</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the width of the specified <code>imageSubresource</code> of <code>srcImage</code>"
         },
         {
           "vuid": "VUID-VkCopyImageToBufferInfo2KHR-imageOffset-00198",
-          "text": " For each element of <code>pRegions</code>"
+          "text": " For each element of <code>pRegions</code> not containing <a href=\"#VkCopyCommandTransformInfoQCOM\">VkCopyCommandTransformInfoQCOM</a> in its <code>pNext</code> chain, <code>imageOffset.y</code> and <span class=\"eq\">(<code>imageExtent.height</code> &#43; <code>imageOffset.y</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the height of the specified <code>imageSubresource</code> of <code>srcImage</code>"
         },
         {
           "vuid": "VUID-VkCopyImageToBufferInfo2KHR-srcImage-00199",
@@ -24254,11 +24262,15 @@
       "(VK_KHR_copy_commands2)+(VK_QCOM_rotated_copy_commands)": [
         {
           "vuid": "VUID-VkBlitImageInfo2KHR-pRegions-04561",
-          "text": " If any element of <code>pRegions</code> contains <a href=\"#VkCopyCommandTransformInfoQCOM\">VkCopyCommandTransformInfoQCOM</a> in its <code>pNext</code> chain, then <code>srcImage</code> and <code>dstImage</code> <strong class=\"purple\">must</strong> not be a block-compressed image."
+          "text": " If any element of <code>pRegions</code> contains <a href=\"#VkCopyCommandTransformInfoQCOM\">VkCopyCommandTransformInfoQCOM</a> in its <code>pNext</code> chain, then <code>srcImage</code> and <code>dstImage</code> <strong class=\"purple\">must</strong> not be block-compressed images"
         },
         {
-          "vuid": "VUID-VkBlitImageInfo2KHR-pRegions-04562",
-          "text": " If any element of <code>pRegions</code> contains <a href=\"#VkCopyCommandTransformInfoQCOM\">VkCopyCommandTransformInfoQCOM</a> in its <code>pNext</code> chain, then the <code>srcImage</code> <strong class=\"purple\">must</strong> be of type <code>VK_IMAGE_TYPE_2D</code> and <strong class=\"purple\">must</strong> not be a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">multi-planar format</a>."
+          "vuid": "VUID-VkBlitImageInfo2KHR-pRegions-06207",
+          "text": " If any element of <code>pRegions</code> contains <a href=\"#VkCopyCommandTransformInfoQCOM\">VkCopyCommandTransformInfoQCOM</a> in its <code>pNext</code> chain, then <code>srcImage</code> <strong class=\"purple\">must</strong> be of type <code>VK_IMAGE_TYPE_2D</code>"
+        },
+        {
+          "vuid": "VUID-VkBlitImageInfo2KHR-pRegions-06208",
+          "text": " If any element of <code>pRegions</code> contains <a href=\"#VkCopyCommandTransformInfoQCOM\">VkCopyCommandTransformInfoQCOM</a> in its <code>pNext</code> chain, then <code>srcImage</code> <strong class=\"purple\">must</strong> not have a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">multi-planar format</a>"
         }
       ]
     },
@@ -25104,7 +25116,7 @@
         },
         {
           "vuid": "VUID-vkCmdDraw-commandBuffer-02701",
-          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set"
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set or inherited (if the <code><a href=\"#VK_NV_inherited_viewport_scissor\">VK_NV_inherited_viewport_scissor</a></code> extension is enabled) for <code>commandBuffer</code>, and done so after any previously bound pipeline with the corresponding state not specified as dynamic"
         },
         {
           "vuid": "VUID-vkCmdDraw-None-02859",
@@ -25408,7 +25420,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexed-commandBuffer-02701",
-          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set"
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set or inherited (if the <code><a href=\"#VK_NV_inherited_viewport_scissor\">VK_NV_inherited_viewport_scissor</a></code> extension is enabled) for <code>commandBuffer</code>, and done so after any previously bound pipeline with the corresponding state not specified as dynamic"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexed-None-02859",
@@ -25716,7 +25728,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMultiEXT-commandBuffer-02701",
-          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set"
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set or inherited (if the <code><a href=\"#VK_NV_inherited_viewport_scissor\">VK_NV_inherited_viewport_scissor</a></code> extension is enabled) for <code>commandBuffer</code>, and done so after any previously bound pipeline with the corresponding state not specified as dynamic"
         },
         {
           "vuid": "VUID-vkCmdDrawMultiEXT-None-02859",
@@ -26036,7 +26048,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMultiIndexedEXT-commandBuffer-02701",
-          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set"
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set or inherited (if the <code><a href=\"#VK_NV_inherited_viewport_scissor\">VK_NV_inherited_viewport_scissor</a></code> extension is enabled) for <code>commandBuffer</code>, and done so after any previously bound pipeline with the corresponding state not specified as dynamic"
         },
         {
           "vuid": "VUID-vkCmdDrawMultiIndexedEXT-None-02859",
@@ -26364,7 +26376,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirect-commandBuffer-02701",
-          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set"
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set or inherited (if the <code><a href=\"#VK_NV_inherited_viewport_scissor\">VK_NV_inherited_viewport_scissor</a></code> extension is enabled) for <code>commandBuffer</code>, and done so after any previously bound pipeline with the corresponding state not specified as dynamic"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirect-None-02859",
@@ -26716,7 +26728,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCount-commandBuffer-02701",
-          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set"
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set or inherited (if the <code><a href=\"#VK_NV_inherited_viewport_scissor\">VK_NV_inherited_viewport_scissor</a></code> extension is enabled) for <code>commandBuffer</code>, and done so after any previously bound pipeline with the corresponding state not specified as dynamic"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCount-None-02859",
@@ -27078,7 +27090,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-commandBuffer-02701",
-          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set"
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set or inherited (if the <code><a href=\"#VK_NV_inherited_viewport_scissor\">VK_NV_inherited_viewport_scissor</a></code> extension is enabled) for <code>commandBuffer</code>, and done so after any previously bound pipeline with the corresponding state not specified as dynamic"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-None-02859",
@@ -27434,7 +27446,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount-commandBuffer-02701",
-          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set"
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set or inherited (if the <code><a href=\"#VK_NV_inherited_viewport_scissor\">VK_NV_inherited_viewport_scissor</a></code> extension is enabled) for <code>commandBuffer</code>, and done so after any previously bound pipeline with the corresponding state not specified as dynamic"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount-None-02859",
@@ -27796,7 +27808,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-commandBuffer-02701",
-          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set"
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set or inherited (if the <code><a href=\"#VK_NV_inherited_viewport_scissor\">VK_NV_inherited_viewport_scissor</a></code> extension is enabled) for <code>commandBuffer</code>, and done so after any previously bound pipeline with the corresponding state not specified as dynamic"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-None-02859",
@@ -28212,7 +28224,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksNV-commandBuffer-02701",
-          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set"
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set or inherited (if the <code><a href=\"#VK_NV_inherited_viewport_scissor\">VK_NV_inherited_viewport_scissor</a></code> extension is enabled) for <code>commandBuffer</code>, and done so after any previously bound pipeline with the corresponding state not specified as dynamic"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksNV-None-02859",
@@ -28496,7 +28508,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-commandBuffer-02701",
-          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set"
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set or inherited (if the <code><a href=\"#VK_NV_inherited_viewport_scissor\">VK_NV_inherited_viewport_scissor</a></code> extension is enabled) for <code>commandBuffer</code>, and done so after any previously bound pipeline with the corresponding state not specified as dynamic"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-None-02859",
@@ -28828,7 +28840,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-commandBuffer-02701",
-          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set"
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set or inherited (if the <code><a href=\"#VK_NV_inherited_viewport_scissor\">VK_NV_inherited_viewport_scissor</a></code> extension is enabled) for <code>commandBuffer</code>, and done so after any previously bound pipeline with the corresponding state not specified as dynamic"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-None-02859",
@@ -29461,8 +29473,8 @@
           "text": " If <code>pStrides</code> is not <code>NULL</code> each element of <code>pStrides</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceLimits</code>::<code>maxVertexInputBindingStride</code>"
         },
         {
-          "vuid": "VUID-vkCmdBindVertexBuffers2EXT-pStrides-03363",
-          "text": " If <code>pStrides</code> is not <code>NULL</code> each element of <code>pStrides</code> <strong class=\"purple\">must</strong> be greater than or equal to the maximum extent of all vertex input attributes fetched from the corresponding binding, where the extent is calculated as the <a href=\"#VkVertexInputAttributeDescription\">VkVertexInputAttributeDescription</a>::<code>offset</code> plus <a href=\"#VkVertexInputAttributeDescription\">VkVertexInputAttributeDescription</a>::<code>format</code> size"
+          "vuid": "VUID-vkCmdBindVertexBuffers2EXT-pStrides-06209",
+          "text": " If <code>pStrides</code> is not <code>NULL</code> each element of <code>pStrides</code> <strong class=\"purple\">must</strong> be either 0 or greater than or equal to the maximum extent of all vertex input attributes fetched from the corresponding binding, where the extent is calculated as the <a href=\"#VkVertexInputAttributeDescription\">VkVertexInputAttributeDescription</a>::<code>offset</code> plus <a href=\"#VkVertexInputAttributeDescription\">VkVertexInputAttributeDescription</a>::<code>format</code> size"
         },
         {
           "vuid": "VUID-vkCmdBindVertexBuffers2EXT-commandBuffer-parameter",
@@ -31880,7 +31892,7 @@
         },
         {
           "vuid": "VUID-vkCmdDispatch-commandBuffer-02701",
-          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set"
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set or inherited (if the <code><a href=\"#VK_NV_inherited_viewport_scissor\">VK_NV_inherited_viewport_scissor</a></code> extension is enabled) for <code>commandBuffer</code>, and done so after any previously bound pipeline with the corresponding state not specified as dynamic"
         },
         {
           "vuid": "VUID-vkCmdDispatch-None-02859",
@@ -32048,7 +32060,7 @@
         },
         {
           "vuid": "VUID-vkCmdDispatchIndirect-commandBuffer-02701",
-          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set"
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set or inherited (if the <code><a href=\"#VK_NV_inherited_viewport_scissor\">VK_NV_inherited_viewport_scissor</a></code> extension is enabled) for <code>commandBuffer</code>, and done so after any previously bound pipeline with the corresponding state not specified as dynamic"
         },
         {
           "vuid": "VUID-vkCmdDispatchIndirect-None-02859",
@@ -32236,7 +32248,7 @@
         },
         {
           "vuid": "VUID-vkCmdDispatchBase-commandBuffer-02701",
-          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set"
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set or inherited (if the <code><a href=\"#VK_NV_inherited_viewport_scissor\">VK_NV_inherited_viewport_scissor</a></code> extension is enabled) for <code>commandBuffer</code>, and done so after any previously bound pipeline with the corresponding state not specified as dynamic"
         },
         {
           "vuid": "VUID-vkCmdDispatchBase-None-02859",
@@ -32420,7 +32432,7 @@
         },
         {
           "vuid": "VUID-vkCmdSubpassShadingHUAWEI-commandBuffer-02701",
-          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set"
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set or inherited (if the <code><a href=\"#VK_NV_inherited_viewport_scissor\">VK_NV_inherited_viewport_scissor</a></code> extension is enabled) for <code>commandBuffer</code>, and done so after any previously bound pipeline with the corresponding state not specified as dynamic"
         },
         {
           "vuid": "VUID-vkCmdSubpassShadingHUAWEI-None-02859",
@@ -32892,7 +32904,7 @@
         },
         {
           "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-commandBuffer-02701",
-          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set"
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set or inherited (if the <code><a href=\"#VK_NV_inherited_viewport_scissor\">VK_NV_inherited_viewport_scissor</a></code> extension is enabled) for <code>commandBuffer</code>, and done so after any previously bound pipeline with the corresponding state not specified as dynamic"
         },
         {
           "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-None-02859",
@@ -35071,6 +35083,10 @@
     "vkGetPhysicalDeviceSurfaceCapabilitiesKHR": {
       "(VK_KHR_surface)": [
         {
+          "vuid": "VUID-vkGetPhysicalDeviceSurfaceCapabilitiesKHR-surface-06211",
+          "text": " <code>surface</code> <strong class=\"purple\">must</strong> be supported by <code>physicalDevice</code>, as reported by <a href=\"#vkGetPhysicalDeviceSurfaceSupportKHR\">vkGetPhysicalDeviceSurfaceSupportKHR</a> or an equivalent platform-specific mechanism"
+        },
+        {
           "vuid": "VUID-vkGetPhysicalDeviceSurfaceCapabilitiesKHR-physicalDevice-parameter",
           "text": " <code>physicalDevice</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkPhysicalDevice\">VkPhysicalDevice</a> handle"
         },
@@ -35090,6 +35106,10 @@
     },
     "vkGetPhysicalDeviceSurfaceCapabilities2KHR": {
       "(VK_KHR_surface)+(VK_KHR_get_surface_capabilities2)+(VK_EXT_full_screen_exclusive+VK_KHR_win32_surface)": [
+        {
+          "vuid": "VUID-vkGetPhysicalDeviceSurfaceCapabilities2KHR-pSurfaceInfo-06210",
+          "text": " <code>pSurfaceInfo-&gt;surface</code> <strong class=\"purple\">must</strong> be supported by <code>physicalDevice</code>, as reported by <a href=\"#vkGetPhysicalDeviceSurfaceSupportKHR\">vkGetPhysicalDeviceSurfaceSupportKHR</a> or an equivalent platform-specific mechanism"
+        },
         {
           "vuid": "VUID-vkGetPhysicalDeviceSurfaceCapabilities2KHR-pNext-02671",
           "text": " If a <a href=\"#VkSurfaceCapabilitiesFullScreenExclusiveEXT\">VkSurfaceCapabilitiesFullScreenExclusiveEXT</a> structure is included in the <code>pNext</code> chain of <code>pSurfaceCapabilities</code>, a <a href=\"#VkSurfaceFullScreenExclusiveWin32InfoEXT\">VkSurfaceFullScreenExclusiveWin32InfoEXT</a> structure <strong class=\"purple\">must</strong> be included in the <code>pNext</code> chain of <code>pSurfaceInfo</code>"
@@ -35211,6 +35231,10 @@
     "vkGetPhysicalDeviceSurfaceCapabilities2EXT": {
       "(VK_KHR_surface)+(VK_EXT_display_surface_counter)": [
         {
+          "vuid": "VUID-vkGetPhysicalDeviceSurfaceCapabilities2EXT-surface-06211",
+          "text": " <code>surface</code> <strong class=\"purple\">must</strong> be supported by <code>physicalDevice</code>, as reported by <a href=\"#vkGetPhysicalDeviceSurfaceSupportKHR\">vkGetPhysicalDeviceSurfaceSupportKHR</a> or an equivalent platform-specific mechanism"
+        },
+        {
           "vuid": "VUID-vkGetPhysicalDeviceSurfaceCapabilities2EXT-physicalDevice-parameter",
           "text": " <code>physicalDevice</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkPhysicalDevice\">VkPhysicalDevice</a> handle"
         },
@@ -35247,7 +35271,7 @@
     "vkGetPhysicalDeviceSurfaceFormatsKHR": {
       "(VK_KHR_surface)": [
         {
-          "vuid": "VUID-vkGetPhysicalDeviceSurfaceFormatsKHR-surface-02739",
+          "vuid": "VUID-vkGetPhysicalDeviceSurfaceFormatsKHR-surface-06211",
           "text": " <code>surface</code> <strong class=\"purple\">must</strong> be supported by <code>physicalDevice</code>, as reported by <a href=\"#vkGetPhysicalDeviceSurfaceSupportKHR\">vkGetPhysicalDeviceSurfaceSupportKHR</a> or an equivalent platform-specific mechanism"
         },
         {
@@ -35275,7 +35299,7 @@
     "vkGetPhysicalDeviceSurfaceFormats2KHR": {
       "(VK_KHR_surface)+(VK_KHR_get_surface_capabilities2)": [
         {
-          "vuid": "VUID-vkGetPhysicalDeviceSurfaceFormats2KHR-pSurfaceInfo-02740",
+          "vuid": "VUID-vkGetPhysicalDeviceSurfaceFormats2KHR-pSurfaceInfo-06210",
           "text": " <code>pSurfaceInfo-&gt;surface</code> <strong class=\"purple\">must</strong> be supported by <code>physicalDevice</code>, as reported by <a href=\"#vkGetPhysicalDeviceSurfaceSupportKHR\">vkGetPhysicalDeviceSurfaceSupportKHR</a> or an equivalent platform-specific mechanism"
         },
         {
@@ -35311,6 +35335,10 @@
     "vkGetPhysicalDeviceSurfacePresentModesKHR": {
       "(VK_KHR_surface)": [
         {
+          "vuid": "VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-surface-06211",
+          "text": " <code>surface</code> <strong class=\"purple\">must</strong> be supported by <code>physicalDevice</code>, as reported by <a href=\"#vkGetPhysicalDeviceSurfaceSupportKHR\">vkGetPhysicalDeviceSurfaceSupportKHR</a> or an equivalent platform-specific mechanism"
+        },
+        {
           "vuid": "VUID-vkGetPhysicalDeviceSurfacePresentModesKHR-physicalDevice-parameter",
           "text": " <code>physicalDevice</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkPhysicalDevice\">VkPhysicalDevice</a> handle"
         },
@@ -35334,6 +35362,10 @@
     },
     "vkGetPhysicalDeviceSurfacePresentModes2EXT": {
       "(VK_KHR_surface)+(VK_EXT_full_screen_exclusive)": [
+        {
+          "vuid": "VUID-vkGetPhysicalDeviceSurfacePresentModes2EXT-pSurfaceInfo-06210",
+          "text": " <code>pSurfaceInfo-&gt;surface</code> <strong class=\"purple\">must</strong> be supported by <code>physicalDevice</code>, as reported by <a href=\"#vkGetPhysicalDeviceSurfaceSupportKHR\">vkGetPhysicalDeviceSurfaceSupportKHR</a> or an equivalent platform-specific mechanism"
+        },
         {
           "vuid": "VUID-vkGetPhysicalDeviceSurfacePresentModes2EXT-physicalDevice-parameter",
           "text": " <code>physicalDevice</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkPhysicalDevice\">VkPhysicalDevice</a> handle"
@@ -35419,6 +35451,10 @@
     "vkGetDeviceGroupSurfacePresentModesKHR": {
       "(VK_KHR_surface)+(VK_KHR_swapchain)+(VK_VERSION_1_1,VK_KHR_device_group)": [
         {
+          "vuid": "VUID-vkGetDeviceGroupSurfacePresentModesKHR-surface-06212",
+          "text": " <code>surface</code> <strong class=\"purple\">must</strong> be supported by all physical devices associated with <code>device</code>, as reported by <a href=\"#vkGetPhysicalDeviceSurfaceSupportKHR\">vkGetPhysicalDeviceSurfaceSupportKHR</a> or an equivalent platform-specific mechanism"
+        },
+        {
           "vuid": "VUID-vkGetDeviceGroupSurfacePresentModesKHR-device-parameter",
           "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDevice\">VkDevice</a> handle"
         },
@@ -35439,6 +35475,10 @@
     "vkGetDeviceGroupSurfacePresentModes2EXT": {
       "(VK_KHR_surface)+(VK_KHR_swapchain)+(VK_VERSION_1_1,VK_KHR_device_group)+(VK_EXT_full_screen_exclusive)": [
         {
+          "vuid": "VUID-vkGetDeviceGroupSurfacePresentModes2EXT-pSurfaceInfo-06213",
+          "text": " <code>pSurfaceInfo-&gt;surface</code> <strong class=\"purple\">must</strong> be supported by all physical devices associated with <code>device</code>, as reported by <a href=\"#vkGetPhysicalDeviceSurfaceSupportKHR\">vkGetPhysicalDeviceSurfaceSupportKHR</a> or an equivalent platform-specific mechanism"
+        },
+        {
           "vuid": "VUID-vkGetDeviceGroupSurfacePresentModes2EXT-device-parameter",
           "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDevice\">VkDevice</a> handle"
         },
@@ -35454,6 +35494,10 @@
     },
     "vkGetPhysicalDevicePresentRectanglesKHR": {
       "(VK_KHR_surface)+(VK_KHR_swapchain)+(VK_VERSION_1_1,VK_KHR_device_group)": [
+        {
+          "vuid": "VUID-vkGetPhysicalDevicePresentRectanglesKHR-surface-06211",
+          "text": " <code>surface</code> <strong class=\"purple\">must</strong> be supported by <code>physicalDevice</code>, as reported by <a href=\"#vkGetPhysicalDeviceSurfaceSupportKHR\">vkGetPhysicalDeviceSurfaceSupportKHR</a> or an equivalent platform-specific mechanism"
+        },
         {
           "vuid": "VUID-vkGetPhysicalDevicePresentRectanglesKHR-physicalDevice-parameter",
           "text": " <code>physicalDevice</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkPhysicalDevice\">VkPhysicalDevice</a> handle"
@@ -38546,7 +38590,7 @@
         },
         {
           "vuid": "VUID-vkCmdTraceRaysNV-commandBuffer-02701",
-          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set"
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set or inherited (if the <code><a href=\"#VK_NV_inherited_viewport_scissor\">VK_NV_inherited_viewport_scissor</a></code> extension is enabled) for <code>commandBuffer</code>, and done so after any previously bound pipeline with the corresponding state not specified as dynamic"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysNV-None-02859",
@@ -38806,7 +38850,7 @@
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-commandBuffer-02701",
-          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set"
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set or inherited (if the <code><a href=\"#VK_NV_inherited_viewport_scissor\">VK_NV_inherited_viewport_scissor</a></code> extension is enabled) for <code>commandBuffer</code>, and done so after any previously bound pipeline with the corresponding state not specified as dynamic"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-None-02859",
@@ -39178,7 +39222,7 @@
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-commandBuffer-02701",
-          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set"
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command requires any dynamic state, that state <strong class=\"purple\">must</strong> have been set or inherited (if the <code><a href=\"#VK_NV_inherited_viewport_scissor\">VK_NV_inherited_viewport_scissor</a></code> extension is enabled) for <code>commandBuffer</code>, and done so after any previously bound pipeline with the corresponding state not specified as dynamic"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-None-02859",
@@ -43399,6 +43443,10 @@
         {
           "vuid": "VUID-StandaloneSpirv-OpImageQuerySizeLod-04659",
           "text": " <code>OpImageQuerySizeLod</code>, <code>OpImageQueryLod</code>, and <code>OpImageQueryLevels</code> <strong class=\"purple\">must</strong> only consume an &#8220;Image&#8221; operand whose type has its &#8220;Sampled&#8221; operand set to 1"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-OpTypeImage-06214",
+          "text": " An <code>OpTypeImage</code> with a &#8220;Dim&#8221; operand of <code>SubpassData</code> <strong class=\"purple\">must</strong> have an &#8220;Arrayed&#8221; operand of 0 (non-arrayed) and a &#8220;Sampled&#8221; operand of 2 (storage image)"
         },
         {
           "vuid": "VUID-StandaloneSpirv-SubpassData-04660",
