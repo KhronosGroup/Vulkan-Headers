@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.2.186",
-    "comment": "from git branch: github-main commit: 907c556530050b0f4af073753335f23c885c02bf",
-    "date": "2021-07-27 09:51:57Z"
+    "api version": "1.2.187",
+    "comment": "from git branch: github-main commit: cd8da6a515811c4ff9e1f10a6d6ce4ab968333fb",
+    "date": "2021-08-03 11:15:40Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -828,7 +828,7 @@
         },
         {
           "vuid": "VUID-vkGetDeviceQueue-queueIndex-00385",
-          "text": " <code>queueIndex</code> <strong class=\"purple\">must</strong> be less than the number of queues created for the specified queue family index when <code>device</code> was created, via the <code>queueCount</code> member of the <a href=\"#VkDeviceQueueCreateInfo\">VkDeviceQueueCreateInfo</a> structure"
+          "text": " <code>queueIndex</code> <strong class=\"purple\">must</strong> be less than the value of <a href=\"#VkDeviceQueueCreateInfo\">VkDeviceQueueCreateInfo</a>::<code>queueCount</code> for the queue family indicated by <code>queueFamilyIndex</code> when <code>device</code> was created"
         },
         {
           "vuid": "VUID-vkGetDeviceQueue-flags-01841",
@@ -867,8 +867,12 @@
           "text": " <code>queueFamilyIndex</code> <strong class=\"purple\">must</strong> be one of the queue family indices specified when <code>device</code> was created, via the <a href=\"#VkDeviceQueueCreateInfo\">VkDeviceQueueCreateInfo</a> structure"
         },
         {
+          "vuid": "VUID-VkDeviceQueueInfo2-flags-06225",
+          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be equal to <a href=\"#VkDeviceQueueCreateInfo\">VkDeviceQueueCreateInfo</a>::<code>flags</code> for a <a href=\"#VkDeviceQueueCreateInfo\">VkDeviceQueueCreateInfo</a> structure for the queue family indicated by <code>queueFamilyIndex</code> when <code>device</code> was created"
+        },
+        {
           "vuid": "VUID-VkDeviceQueueInfo2-queueIndex-01843",
-          "text": " <code>queueIndex</code> <strong class=\"purple\">must</strong> be less than the number of queues created for the specified queue family index and <a href=\"#VkDeviceQueueCreateFlags\">VkDeviceQueueCreateFlags</a> member <code>flags</code> equal to this <code>flags</code> value when <code>device</code> was created, via the <code>queueCount</code> member of the <a href=\"#VkDeviceQueueCreateInfo\">VkDeviceQueueCreateInfo</a> structure"
+          "text": " <code>queueIndex</code> <strong class=\"purple\">must</strong> be less than <a href=\"#VkDeviceQueueCreateInfo\">VkDeviceQueueCreateInfo</a>::<code>queueCount</code> for the corresponding queue family and flags indicated by <code>queueFamilyIndex</code> and <code>flags</code> when <code>device</code> was created"
         },
         {
           "vuid": "VUID-VkDeviceQueueInfo2-sType-sType",
@@ -3425,7 +3429,7 @@
           "text": " If the <a href=\"#features-tessellationShader\">tessellation shaders</a> feature is not enabled, pname:stageMask <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
         },
         {
-          "vuid": "VUID-vkCmdSetEvent-stageMask-4098",
+          "vuid": "VUID-vkCmdSetEvent-stageMask-04098",
           "text": " Any pipeline stage included in pname:stageMask <strong class=\"purple\">must</strong> be supported by the capabilities of the queue family specified by the <code>queueFamilyIndex</code> member of the <a href=\"#VkCommandPoolCreateInfo\">VkCommandPoolCreateInfo</a> structure that was used to create the <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from, as specified in the <a href=\"#synchronization-pipeline-stages-supported\">table of supported pipeline stages</a>"
         },
         {
@@ -3637,7 +3641,7 @@
           "text": " If the <a href=\"#features-tessellationShader\">tessellation shaders</a> feature is not enabled, pname:stageMask <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
         },
         {
-          "vuid": "VUID-vkCmdResetEvent-stageMask-4098",
+          "vuid": "VUID-vkCmdResetEvent-stageMask-04098",
           "text": " Any pipeline stage included in pname:stageMask <strong class=\"purple\">must</strong> be supported by the capabilities of the queue family specified by the <code>queueFamilyIndex</code> member of the <a href=\"#VkCommandPoolCreateInfo\">VkCommandPoolCreateInfo</a> structure that was used to create the <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from, as specified in the <a href=\"#synchronization-pipeline-stages-supported\">table of supported pipeline stages</a>"
         },
         {
@@ -3821,7 +3825,7 @@
           "text": " If the <a href=\"#features-tessellationShader\">tessellation shaders</a> feature is not enabled, pname:srcStageMask <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
         },
         {
-          "vuid": "VUID-vkCmdWaitEvents-srcStageMask-4098",
+          "vuid": "VUID-vkCmdWaitEvents-srcStageMask-04098",
           "text": " Any pipeline stage included in pname:srcStageMask <strong class=\"purple\">must</strong> be supported by the capabilities of the queue family specified by the <code>queueFamilyIndex</code> member of the <a href=\"#VkCommandPoolCreateInfo\">VkCommandPoolCreateInfo</a> structure that was used to create the <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from, as specified in the <a href=\"#synchronization-pipeline-stages-supported\">table of supported pipeline stages</a>"
         },
         {
@@ -3833,7 +3837,7 @@
           "text": " If the <a href=\"#features-tessellationShader\">tessellation shaders</a> feature is not enabled, pname:dstStageMask <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
         },
         {
-          "vuid": "VUID-vkCmdWaitEvents-dstStageMask-4098",
+          "vuid": "VUID-vkCmdWaitEvents-dstStageMask-04098",
           "text": " Any pipeline stage included in pname:dstStageMask <strong class=\"purple\">must</strong> be supported by the capabilities of the queue family specified by the <code>queueFamilyIndex</code> member of the <a href=\"#VkCommandPoolCreateInfo\">VkCommandPoolCreateInfo</a> structure that was used to create the <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from, as specified in the <a href=\"#synchronization-pipeline-stages-supported\">table of supported pipeline stages</a>"
         },
         {
@@ -4075,7 +4079,7 @@
           "text": " If the <a href=\"#features-tessellationShader\">tessellation shaders</a> feature is not enabled, pname:srcStageMask <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
         },
         {
-          "vuid": "VUID-vkCmdPipelineBarrier-srcStageMask-4098",
+          "vuid": "VUID-vkCmdPipelineBarrier-srcStageMask-04098",
           "text": " Any pipeline stage included in pname:srcStageMask <strong class=\"purple\">must</strong> be supported by the capabilities of the queue family specified by the <code>queueFamilyIndex</code> member of the <a href=\"#VkCommandPoolCreateInfo\">VkCommandPoolCreateInfo</a> structure that was used to create the <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from, as specified in the <a href=\"#synchronization-pipeline-stages-supported\">table of supported pipeline stages</a>"
         },
         {
@@ -4087,7 +4091,7 @@
           "text": " If the <a href=\"#features-tessellationShader\">tessellation shaders</a> feature is not enabled, pname:dstStageMask <strong class=\"purple\">must</strong> not contain <code>VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT</code> or <code>VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</code>"
         },
         {
-          "vuid": "VUID-vkCmdPipelineBarrier-dstStageMask-4098",
+          "vuid": "VUID-vkCmdPipelineBarrier-dstStageMask-04098",
           "text": " Any pipeline stage included in pname:dstStageMask <strong class=\"purple\">must</strong> be supported by the capabilities of the queue family specified by the <code>queueFamilyIndex</code> member of the <a href=\"#VkCommandPoolCreateInfo\">VkCommandPoolCreateInfo</a> structure that was used to create the <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from, as specified in the <a href=\"#synchronization-pipeline-stages-supported\">table of supported pipeline stages</a>"
         },
         {
@@ -7998,11 +8002,11 @@
         },
         {
           "vuid": "VUID-VkRenderPassBeginInfo-renderArea-02848",
-          "text": " <span class=\"eq\"><code>renderArea.offset.x</code> &#43; <code>renderArea.offset.width</code></span> <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#VkFramebufferCreateInfo\">VkFramebufferCreateInfo</a>::<code>width</code> the <code>framebuffer</code> was created with"
+          "text": " <span class=\"eq\"><code>renderArea.offset.x</code> &#43; <code>renderArea.extent.width</code></span> <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#VkFramebufferCreateInfo\">VkFramebufferCreateInfo</a>::<code>width</code> the <code>framebuffer</code> was created with"
         },
         {
           "vuid": "VUID-VkRenderPassBeginInfo-renderArea-02849",
-          "text": " <span class=\"eq\"><code>renderArea.offset.y</code> &#43; <code>renderArea.offset.height</code></span> <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#VkFramebufferCreateInfo\">VkFramebufferCreateInfo</a>::<code>height</code> the <code>framebuffer</code> was created with"
+          "text": " <span class=\"eq\"><code>renderArea.offset.y</code> &#43; <code>renderArea.extent.height</code></span> <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#VkFramebufferCreateInfo\">VkFramebufferCreateInfo</a>::<code>height</code> the <code>framebuffer</code> was created with"
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_device_group)": [
@@ -8016,11 +8020,11 @@
         },
         {
           "vuid": "VUID-VkRenderPassBeginInfo-pNext-02852",
-          "text": " If the <code>pNext</code> chain does not contain <a href=\"#VkDeviceGroupRenderPassBeginInfo\">VkDeviceGroupRenderPassBeginInfo</a> or its <code>deviceRenderAreaCount</code> member is equal to 0, <span class=\"eq\"><code>renderArea.offset.x</code> &#43; <code>renderArea.offset.width</code></span> <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#VkFramebufferCreateInfo\">VkFramebufferCreateInfo</a>::<code>width</code> the <code>framebuffer</code> was created with"
+          "text": " If the <code>pNext</code> chain does not contain <a href=\"#VkDeviceGroupRenderPassBeginInfo\">VkDeviceGroupRenderPassBeginInfo</a> or its <code>deviceRenderAreaCount</code> member is equal to 0, <span class=\"eq\"><code>renderArea.offset.x</code> &#43; <code>renderArea.extent.width</code></span> <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#VkFramebufferCreateInfo\">VkFramebufferCreateInfo</a>::<code>width</code> the <code>framebuffer</code> was created with"
         },
         {
           "vuid": "VUID-VkRenderPassBeginInfo-pNext-02853",
-          "text": " If the <code>pNext</code> chain does not contain <a href=\"#VkDeviceGroupRenderPassBeginInfo\">VkDeviceGroupRenderPassBeginInfo</a> or its <code>deviceRenderAreaCount</code> member is equal to 0, <span class=\"eq\"><code>renderArea.offset.y</code> &#43; <code>renderArea.offset.height</code></span> <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#VkFramebufferCreateInfo\">VkFramebufferCreateInfo</a>::<code>height</code> the <code>framebuffer</code> was created with"
+          "text": " If the <code>pNext</code> chain does not contain <a href=\"#VkDeviceGroupRenderPassBeginInfo\">VkDeviceGroupRenderPassBeginInfo</a> or its <code>deviceRenderAreaCount</code> member is equal to 0, <span class=\"eq\"><code>renderArea.offset.y</code> &#43; <code>renderArea.extent.height</code></span> <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#VkFramebufferCreateInfo\">VkFramebufferCreateInfo</a>::<code>height</code> the <code>framebuffer</code> was created with"
         },
         {
           "vuid": "VUID-VkRenderPassBeginInfo-pNext-02854",
@@ -8032,11 +8036,11 @@
         },
         {
           "vuid": "VUID-VkRenderPassBeginInfo-pNext-02856",
-          "text": " If the <code>pNext</code> chain contains <a href=\"#VkDeviceGroupRenderPassBeginInfo\">VkDeviceGroupRenderPassBeginInfo</a>, <span class=\"eq\"><code>offset.x</code> &#43; <code>offset.width</code></span> of each element of <code>pDeviceRenderAreas</code> <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#VkFramebufferCreateInfo\">VkFramebufferCreateInfo</a>::<code>width</code> the <code>framebuffer</code> was created with"
+          "text": " If the <code>pNext</code> chain contains <a href=\"#VkDeviceGroupRenderPassBeginInfo\">VkDeviceGroupRenderPassBeginInfo</a>, <span class=\"eq\"><code>offset.x</code> &#43; <code>extent.width</code></span> of each element of <code>pDeviceRenderAreas</code> <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#VkFramebufferCreateInfo\">VkFramebufferCreateInfo</a>::<code>width</code> the <code>framebuffer</code> was created with"
         },
         {
           "vuid": "VUID-VkRenderPassBeginInfo-pNext-02857",
-          "text": " If the <code>pNext</code> chain contains <a href=\"#VkDeviceGroupRenderPassBeginInfo\">VkDeviceGroupRenderPassBeginInfo</a>, <span class=\"eq\"><code>offset.y</code> &#43; <code>offset.height</code></span> of each element of <code>pDeviceRenderAreas</code> <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#VkFramebufferCreateInfo\">VkFramebufferCreateInfo</a>::<code>height</code> the <code>framebuffer</code> was created with"
+          "text": " If the <code>pNext</code> chain contains <a href=\"#VkDeviceGroupRenderPassBeginInfo\">VkDeviceGroupRenderPassBeginInfo</a>, <span class=\"eq\"><code>offset.y</code> &#43; <code>extent.height</code></span> of each element of <code>pDeviceRenderAreas</code> <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#VkFramebufferCreateInfo\">VkFramebufferCreateInfo</a>::<code>height</code> the <code>framebuffer</code> was created with"
         }
       ],
       "(VK_VERSION_1_2,VK_KHR_imageless_framebuffer)": [
@@ -10071,7 +10075,7 @@
           "text": " The number of resources in <code>layout</code> accessible to each shader stage that is used by the pipeline <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#VkPhysicalDeviceLimits\">VkPhysicalDeviceLimits</a>::<code>maxPerStageResources</code>"
         },
         {
-          "vuid": "VUID-VkRayTracingPipelineCreateInfoNV-stage-03425",
+          "vuid": "VUID-VkRayTracingPipelineCreateInfoNV-stage-06232",
           "text": " The <code>stage</code> member of at least one element of <code>pStages</code> <strong class=\"purple\">must</strong> be <code>VK_SHADER_STAGE_RAYGEN_BIT_KHR</code>"
         },
         {
@@ -11547,6 +11551,12 @@
         {
           "vuid": "VUID-VkMemoryAllocateInfo-allocationSize-04750",
           "text": " If the parameters define an import operation and the external handle type is <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_ZIRCON_VMO_BIT_FUCHSIA</code>, the value of <code>allocationSize</code> <strong class=\"purple\">must</strong> be greater than <code>0</code> and <strong class=\"purple\">must</strong> be less than or equal to the size of the VMO as determined by <code>zx_vmo_get_size</code>(<code>handle</code>) where <code>handle</code> is the VMO handle to the imported external memory."
+        }
+      ],
+      "(VK_KHR_maintenance3)": [
+        {
+          "vuid": "VUID-VkMemoryAllocateInfo-allocationSize-06231",
+          "text": " <code>allocationSize</code> <strong class=\"purple\">must</strong> be less than <a href=\"#VkPhysicalDeviceMaintenance3Properties\">VkPhysicalDeviceMaintenance3Properties</a>::<code>maxMemoryAllocationSize</code>."
         }
       ],
       "core": [
@@ -22685,7 +22695,7 @@
       ],
       "core": [
         {
-          "vuid": "VUID-vkCmdCopyBufferToImage-pRegions-00172",
+          "vuid": "VUID-vkCmdCopyBufferToImage-pRegions-06217",
           "text": " The image region specified by each element of <code>pRegions</code> <strong class=\"purple\">must</strong> be contained within the specified <code>imageSubresource</code> of <code>dstImage</code>"
         },
         {
@@ -22737,11 +22747,11 @@
           "text": " If the queue family used to create the <a href=\"#VkCommandPool\">VkCommandPool</a> which <code>commandBuffer</code> was allocated from does not support <code>VK_QUEUE_GRAPHICS_BIT</code>, for each element of <code>pRegions</code>, the <code>aspectMask</code> member of <code>imageSubresource</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_ASPECT_DEPTH_BIT</code> or <code>VK_IMAGE_ASPECT_STENCIL_BIT</code>."
         },
         {
-          "vuid": "VUID-vkCmdCopyBufferToImage-imageOffset-00197",
+          "vuid": "VUID-vkCmdCopyBufferToImage-pRegions-06218",
           "text": " For each element of <code>pRegions</code>, <code>imageOffset.x</code> and <span class=\"eq\">(<code>imageExtent.width</code> &#43; <code>imageOffset.x</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the width of the specified <code>imageSubresource</code> of <code>dstImage</code>"
         },
         {
-          "vuid": "VUID-vkCmdCopyBufferToImage-imageOffset-00198",
+          "vuid": "VUID-vkCmdCopyBufferToImage-pRegions-06219",
           "text": " For each element of <code>pRegions</code>, <code>imageOffset.y</code> and <span class=\"eq\">(<code>imageExtent.height</code> &#43; <code>imageOffset.y</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the height of the specified <code>imageSubresource</code> of <code>dstImage</code>"
         },
         {
@@ -22917,7 +22927,7 @@
       ],
       "core": [
         {
-          "vuid": "VUID-vkCmdCopyImageToBuffer-pRegions-00182",
+          "vuid": "VUID-vkCmdCopyImageToBuffer-pRegions-06220",
           "text": " The image region specified by each element of <code>pRegions</code> <strong class=\"purple\">must</strong> be contained within the specified <code>imageSubresource</code> of <code>srcImage</code>"
         },
         {
@@ -22965,11 +22975,11 @@
           "text": " The <code>imageOffset</code> and <code>imageExtent</code> members of each element of <code>pRegions</code> <strong class=\"purple\">must</strong> respect the image transfer granularity requirements of <code>commandBuffer</code>&#8217;s command pool&#8217;s queue family, as described in <a href=\"#VkQueueFamilyProperties\">VkQueueFamilyProperties</a>"
         },
         {
-          "vuid": "VUID-vkCmdCopyImageToBuffer-imageOffset-00197",
+          "vuid": "VUID-vkCmdCopyImageToBuffer-pRegions-06221",
           "text": " For each element of <code>pRegions</code>, <code>imageOffset.x</code> and <span class=\"eq\">(<code>imageExtent.width</code> &#43; <code>imageOffset.x</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the width of the specified <code>imageSubresource</code> of <code>srcImage</code>"
         },
         {
-          "vuid": "VUID-vkCmdCopyImageToBuffer-imageOffset-00198",
+          "vuid": "VUID-vkCmdCopyImageToBuffer-pRegions-06222",
           "text": " For each element of <code>pRegions</code>, <code>imageOffset.y</code> and <span class=\"eq\">(imageExtent.height &#43; <code>imageOffset.y</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the height of the specified <code>imageSubresource</code> of <code>srcImage</code>"
         },
         {
@@ -23259,11 +23269,11 @@
           "text": " If the queue family used to create the <a href=\"#VkCommandPool\">VkCommandPool</a> which <code>commandBuffer</code> was allocated from does not support <code>VK_QUEUE_GRAPHICS_BIT</code>, for each element of <code>pRegions</code>, the <code>aspectMask</code> member of <code>imageSubresource</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_ASPECT_DEPTH_BIT</code> or <code>VK_IMAGE_ASPECT_STENCIL_BIT</code>."
         },
         {
-          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-imageOffset-00197",
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-pRegions-06223",
           "text": " For each element of <code>pRegions</code> not containing <a href=\"#VkCopyCommandTransformInfoQCOM\">VkCopyCommandTransformInfoQCOM</a> in its <code>pNext</code> chain, <code>imageOffset.x</code> and <span class=\"eq\">(<code>imageExtent.width</code> &#43; <code>imageOffset.x</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the width of the specified <code>imageSubresource</code> of <code>dstImage</code>"
         },
         {
-          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-imageOffset-00198",
+          "vuid": "VUID-VkCopyBufferToImageInfo2KHR-pRegions-06224",
           "text": " For each element of <code>pRegions</code> not containing <a href=\"#VkCopyCommandTransformInfoQCOM\">VkCopyCommandTransformInfoQCOM</a> in its <code>pNext</code> chain, <code>imageOffset.y</code> and <span class=\"eq\">(<code>imageExtent.height</code> &#43; <code>imageOffset.y</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the height of the specified <code>imageSubresource</code> of <code>dstImage</code>"
         },
         {
@@ -29325,11 +29335,11 @@
           "text": " If the <a href=\"#features-vertexAttributeInstanceRateDivisor\">vertexAttributeInstanceRateDivisor</a> feature is not enabled, <code>divisor</code> <strong class=\"purple\">must</strong> be <code>1</code>"
         },
         {
-          "vuid": "VUID-VkVertexInputBindingDescription2EXT-divisor-04800",
+          "vuid": "VUID-VkVertexInputBindingDescription2EXT-divisor-06226",
           "text": " <code>divisor</code> <strong class=\"purple\">must</strong> be a value between <code>0</code> and <code>VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT</code>::<code>maxVertexAttribDivisor</code>, inclusive"
         },
         {
-          "vuid": "VUID-VkVertexInputBindingDescription2EXT-divisor-04801",
+          "vuid": "VUID-VkVertexInputBindingDescription2EXT-divisor-06227",
           "text": " If <code>divisor</code> is not <code>1</code> then <code>inputRate</code> <strong class=\"purple\">must</strong> be of type <code>VK_VERTEX_INPUT_RATE_INSTANCE</code>"
         },
         {
@@ -29345,15 +29355,15 @@
     "VkVertexInputAttributeDescription2EXT": {
       "(VK_EXT_vertex_input_dynamic_state)": [
         {
-          "vuid": "VUID-VkVertexInputAttributeDescription2EXT-location-04802",
+          "vuid": "VUID-VkVertexInputAttributeDescription2EXT-location-06228",
           "text": " <code>location</code> <strong class=\"purple\">must</strong> be less than <code>VkPhysicalDeviceLimits</code>::<code>maxVertexInputAttributes</code>"
         },
         {
-          "vuid": "VUID-VkVertexInputAttributeDescription2EXT-binding-04803",
+          "vuid": "VUID-VkVertexInputAttributeDescription2EXT-binding-06229",
           "text": " <code>binding</code> <strong class=\"purple\">must</strong> be less than <code>VkPhysicalDeviceLimits</code>::<code>maxVertexInputBindings</code>"
         },
         {
-          "vuid": "VUID-VkVertexInputAttributeDescription2EXT-offset-04804",
+          "vuid": "VUID-VkVertexInputAttributeDescription2EXT-offset-06230",
           "text": " <code>offset</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceLimits</code>::<code>maxVertexInputAttributeOffset</code>"
         },
         {
@@ -37721,11 +37731,11 @@
           "text": " All acceleration structures in <code>pAccelerationStructures</code> <strong class=\"purple\">must</strong> have been built prior to the execution of this command"
         },
         {
-          "vuid": "VUID-vkCmdWriteAccelerationStructuresPropertiesNV-accelerationStructures-03431",
+          "vuid": "VUID-vkCmdWriteAccelerationStructuresPropertiesNV-pAccelerationStructures-06215",
           "text": " All acceleration structures in <code>pAccelerationStructures</code> <strong class=\"purple\">must</strong> have been built with <code>VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_KHR</code> if <code>queryType</code> is <code>VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_NV</code>"
         },
         {
-          "vuid": "VUID-vkCmdWriteAccelerationStructuresPropertiesNV-queryType-03432",
+          "vuid": "VUID-vkCmdWriteAccelerationStructuresPropertiesNV-queryType-06216",
           "text": " <code>queryType</code> <strong class=\"purple\">must</strong> be <code>VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_NV</code>"
         },
         {
@@ -38634,7 +38644,7 @@
         },
         {
           "vuid": "VUID-vkCmdTraceRaysNV-maxRecursionDepth-03625",
-          "text": " This command <strong class=\"purple\">must</strong> not cause a trace ray instruction to be executed from a shader invocation with a <a href=\"#ray-tracing-recursion-depth\">recursion depth</a> greater than the value of <code>maxRecursionDepth</code> used to create the bound ray tracing pipeline"
+          "text": " This command <strong class=\"purple\">must</strong> not cause a pipeline trace ray instruction to be executed from a shader invocation with a <a href=\"#ray-tracing-recursion-depth\">recursion depth</a> greater than the value of <code>maxRecursionDepth</code> used to create the bound ray tracing pipeline"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysNV-raygenShaderBindingTableBuffer-04042",
@@ -40243,12 +40253,12 @@
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_PROFILE_EXT</code>"
         },
         {
-          "vuid": "VUID-VkVideoDecodeH264ProfileEXT-fieldLayout-parameter",
-          "text": " <code>fieldLayout</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkVideoDecodeH264FieldLayoutFlagBitsEXT\">VkVideoDecodeH264FieldLayoutFlagBitsEXT</a> values"
+          "vuid": "VUID-VkVideoDecodeH264ProfileEXT-pictureLayout-parameter",
+          "text": " <code>pictureLayout</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkVideoDecodeH264PictureLayoutFlagBitsEXT\">VkVideoDecodeH264PictureLayoutFlagBitsEXT</a> values"
         },
         {
-          "vuid": "VUID-VkVideoDecodeH264ProfileEXT-fieldLayout-requiredbitmask",
-          "text": " <code>fieldLayout</code> <strong class=\"purple\">must</strong> not be <code>0</code>"
+          "vuid": "VUID-VkVideoDecodeH264ProfileEXT-pictureLayout-requiredbitmask",
+          "text": " <code>pictureLayout</code> <strong class=\"purple\">must</strong> not be <code>0</code>"
         }
       ]
     },
@@ -40620,7 +40630,7 @@
         },
         {
           "vuid": "VUID-VkVideoEncodeH264CapabilitiesEXT-flags-parameter",
-          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkVideoEncodeH264CapabilitiesFlagBitsEXT\">VkVideoEncodeH264CapabilitiesFlagBitsEXT</a> values"
+          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkVideoEncodeH264CapabilityFlagBitsEXT\">VkVideoEncodeH264CapabilityFlagBitsEXT</a> values"
         },
         {
           "vuid": "VUID-VkVideoEncodeH264CapabilitiesEXT-flags-requiredbitmask",
