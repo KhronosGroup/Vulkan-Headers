@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.2.188",
-    "comment": "from git branch: github-main commit: f1eda2cb1656363ccd67e07f5654a80fc13b47af",
-    "date": "2021-08-10 11:41:18Z"
+    "api version": "1.2.189",
+    "comment": "from git branch: github-main commit: de4eaca2a345ca7ba8077bd53d95571c198ba44e",
+    "date": "2021-08-17 11:57:38Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -11553,12 +11553,6 @@
           "text": " If the parameters define an import operation and the external handle type is <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_ZIRCON_VMO_BIT_FUCHSIA</code>, the value of <code>allocationSize</code> <strong class=\"purple\">must</strong> be greater than <code>0</code> and <strong class=\"purple\">must</strong> be less than or equal to the size of the VMO as determined by <code>zx_vmo_get_size</code>(<code>handle</code>) where <code>handle</code> is the VMO handle to the imported external memory"
         }
       ],
-      "(VK_KHR_maintenance3)": [
-        {
-          "vuid": "VUID-VkMemoryAllocateInfo-allocationSize-06231",
-          "text": " <code>allocationSize</code> <strong class=\"purple\">must</strong> be less than <a href=\"#VkPhysicalDeviceMaintenance3Properties\">VkPhysicalDeviceMaintenance3Properties</a>::<code>maxMemoryAllocationSize</code>"
-        }
-      ],
       "core": [
         {
           "vuid": "VUID-VkMemoryAllocateInfo-sType-sType",
@@ -17443,19 +17437,23 @@
       ]
     },
     "vkUpdateDescriptorSets": {
-      "!(VK_VERSION_1_2,VK_EXT_descriptor_indexing)": [
-        {
-          "vuid": "VUID-vkUpdateDescriptorSets-dstSet-00314",
-          "text": " The <code>dstSet</code> member of each element of <code>pDescriptorWrites</code> or <code>pDescriptorCopies</code> <strong class=\"purple\">must</strong> not be used by any command that was recorded to a command buffer which is in the <a href=\"#commandbuffers-lifecycle\">pending state</a>"
-        }
-      ],
-      "(VK_VERSION_1_2,VK_EXT_descriptor_indexing)": [
-        {
-          "vuid": "VUID-vkUpdateDescriptorSets-None-03047",
-          "text": " Descriptor bindings updated by this command which were created without the <code>VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT</code> or <code>VK_DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT</code> bits set <strong class=\"purple\">must</strong> not be used by any command that was recorded to a command buffer which is in the <a href=\"#commandbuffers-lifecycle\">pending state</a>"
-        }
-      ],
       "core": [
+        {
+          "vuid": "VUID-vkUpdateDescriptorSets-pDescriptorWrites-06236",
+          "text": " For each element <span class=\"eq\">i</span> where <code>pDescriptorWrites</code>[i].<code>descriptorType</code> is <code>VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER</code> or <code>VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER</code>, elements of the <code>pTexelBufferView</code> member of <code>pDescriptorWrites</code>[i] <strong class=\"purple\">must</strong> have been created on <code>device</code>"
+        },
+        {
+          "vuid": "VUID-vkUpdateDescriptorSets-pDescriptorWrites-06237",
+          "text": " For each element <span class=\"eq\">i</span> where <code>pDescriptorWrites</code>[i].<code>descriptorType</code> is <code>VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER</code>, <code>VK_DESCRIPTOR_TYPE_STORAGE_BUFFER</code>, <code>VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC</code>, or <code>VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC</code>, the <code>buffer</code> member of any element of the <code>pBufferInfo</code> member of <code>pDescriptorWrites</code>[i] <strong class=\"purple\">must</strong> have been created on <code>device</code>"
+        },
+        {
+          "vuid": "VUID-vkUpdateDescriptorSets-pDescriptorWrites-06238",
+          "text": " For each element <span class=\"eq\">i</span> where <code>pDescriptorWrites</code>[i].<code>descriptorType</code> is <code>VK_DESCRIPTOR_TYPE_SAMPLER</code> or <code>VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER</code>, and <code>dstSet</code> was not allocated with a layout that included immutable samplers for <code>dstBinding</code> with <code>descriptorType</code>, the <code>sampler</code> member of any element of the <code>pImageInfo</code> member of <code>pDescriptorWrites</code>[i] <strong class=\"purple\">must</strong> have been created on <code>device</code>"
+        },
+        {
+          "vuid": "VUID-vkUpdateDescriptorSets-pDescriptorWrites-06239",
+          "text": " For each element <span class=\"eq\">i</span> where <code>pDescriptorWrites</code>[i].<code>descriptorType</code> is <code>VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE</code>, <code>VK_DESCRIPTOR_TYPE_STORAGE_IMAGE</code>, <code>VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT</code>, or <code>VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER</code> the <code>imageView</code> member of any element of <code>pDescriptorWrites</code>[i] <strong class=\"purple\">must</strong> have been created on <code>device</code>"
+        },
         {
           "vuid": "VUID-vkUpdateDescriptorSets-device-parameter",
           "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDevice\">VkDevice</a> handle"
@@ -17467,6 +17465,30 @@
         {
           "vuid": "VUID-vkUpdateDescriptorSets-pDescriptorCopies-parameter",
           "text": " If <code>descriptorCopyCount</code> is not <code>0</code>, <code>pDescriptorCopies</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>descriptorCopyCount</code> valid <a href=\"#VkCopyDescriptorSet\">VkCopyDescriptorSet</a> structures"
+        }
+      ],
+      "(VK_KHR_acceleration_structure)": [
+        {
+          "vuid": "VUID-vkUpdateDescriptorSets-pDescriptorWrites-06240",
+          "text": " For each element <span class=\"eq\">i</span> where <code>pDescriptorWrites</code>[i].<code>descriptorType</code> is <code>VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR</code>, elements of the <code>pAccelerationStructures</code> member of a <a href=\"#VkWriteDescriptorSetAccelerationStructureKHR\">VkWriteDescriptorSetAccelerationStructureKHR</a> structure in the <code>pNext</code> chain of <code>pDescriptorWrites</code>[i] <strong class=\"purple\">must</strong> have been created on <code>device</code>"
+        }
+      ],
+      "(VK_NV_ray_tracing)": [
+        {
+          "vuid": "VUID-vkUpdateDescriptorSets-pDescriptorWrites-06241",
+          "text": " For each element <span class=\"eq\">i</span> where <code>pDescriptorWrites</code>[i].<code>descriptorType</code> is <code>VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_NV</code>, elements of the <code>pAccelerationStructures</code> member of a <a href=\"#VkWriteDescriptorSetAccelerationStructureNV\">VkWriteDescriptorSetAccelerationStructureNV</a> structure in the <code>pNext</code> chain of <code>pDescriptorWrites</code>[i] <strong class=\"purple\">must</strong> have been created on <code>device</code>"
+        }
+      ],
+      "!(VK_VERSION_1_2,VK_EXT_descriptor_indexing)": [
+        {
+          "vuid": "VUID-vkUpdateDescriptorSets-dstSet-00314",
+          "text": " The <code>dstSet</code> member of each element of <code>pDescriptorWrites</code> or <code>pDescriptorCopies</code> <strong class=\"purple\">must</strong> not be used by any command that was recorded to a command buffer which is in the <a href=\"#commandbuffers-lifecycle\">pending state</a>"
+        }
+      ],
+      "(VK_VERSION_1_2,VK_EXT_descriptor_indexing)": [
+        {
+          "vuid": "VUID-vkUpdateDescriptorSets-None-03047",
+          "text": " Descriptor bindings updated by this command which were created without the <code>VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT</code> or <code>VK_DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT</code> bits set <strong class=\"purple\">must</strong> not be used by any command that was recorded to a command buffer which is in the <a href=\"#commandbuffers-lifecycle\">pending state</a>"
         }
       ]
     },
