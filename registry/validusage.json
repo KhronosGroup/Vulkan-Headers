@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.2.189",
-    "comment": "from git branch: github-main commit: de4eaca2a345ca7ba8077bd53d95571c198ba44e",
-    "date": "2021-08-17 11:57:38Z"
+    "api version": "1.2.190",
+    "comment": "from git branch: github-main commit: e57864f6a51a2d56dc7f012b21957755c59aafa8",
+    "date": "2021-08-29 21:41:03Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -238,7 +238,7 @@
         },
         {
           "vuid": "VUID-VkPhysicalDeviceProperties2-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkPhysicalDeviceAccelerationStructurePropertiesKHR\">VkPhysicalDeviceAccelerationStructurePropertiesKHR</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT\">VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceConservativeRasterizationPropertiesEXT\">VkPhysicalDeviceConservativeRasterizationPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixPropertiesNV\">VkPhysicalDeviceCooperativeMatrixPropertiesNV</a>, <a href=\"#VkPhysicalDeviceCustomBorderColorPropertiesEXT\">VkPhysicalDeviceCustomBorderColorPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDepthStencilResolveProperties\">VkPhysicalDeviceDepthStencilResolveProperties</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingProperties\">VkPhysicalDeviceDescriptorIndexingProperties</a>, <a href=\"#VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV\">VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV</a>, <a href=\"#VkPhysicalDeviceDiscardRectanglePropertiesEXT\">VkPhysicalDeviceDiscardRectanglePropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDriverProperties\">VkPhysicalDeviceDriverProperties</a>, <a href=\"#VkPhysicalDeviceDrmPropertiesEXT\">VkPhysicalDeviceDrmPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceExternalMemoryHostPropertiesEXT\">VkPhysicalDeviceExternalMemoryHostPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceFloatControlsProperties\">VkPhysicalDeviceFloatControlsProperties</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMap2PropertiesEXT\">VkPhysicalDeviceFragmentDensityMap2PropertiesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapPropertiesEXT\">VkPhysicalDeviceFragmentDensityMapPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV\">VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShadingRatePropertiesKHR\">VkPhysicalDeviceFragmentShadingRatePropertiesKHR</a>, <a href=\"#VkPhysicalDeviceIDProperties\">VkPhysicalDeviceIDProperties</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockPropertiesEXT\">VkPhysicalDeviceInlineUniformBlockPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceLineRasterizationPropertiesEXT\">VkPhysicalDeviceLineRasterizationPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceMaintenance3Properties\">VkPhysicalDeviceMaintenance3Properties</a>, <a href=\"#VkPhysicalDeviceMeshShaderPropertiesNV\">VkPhysicalDeviceMeshShaderPropertiesNV</a>, <a href=\"#VkPhysicalDeviceMultiDrawPropertiesEXT\">VkPhysicalDeviceMultiDrawPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX\">VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX</a>, <a href=\"#VkPhysicalDeviceMultiviewProperties\">VkPhysicalDeviceMultiviewProperties</a>, <a href=\"#VkPhysicalDevicePCIBusInfoPropertiesEXT\">VkPhysicalDevicePCIBusInfoPropertiesEXT</a>, <a href=\"#VkPhysicalDevicePerformanceQueryPropertiesKHR\">VkPhysicalDevicePerformanceQueryPropertiesKHR</a>, <a href=\"#VkPhysicalDevicePointClippingProperties\">VkPhysicalDevicePointClippingProperties</a>, <a href=\"#VkPhysicalDevicePortabilitySubsetPropertiesKHR\">VkPhysicalDevicePortabilitySubsetPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryProperties\">VkPhysicalDeviceProtectedMemoryProperties</a>, <a href=\"#VkPhysicalDeviceProvokingVertexPropertiesEXT\">VkPhysicalDeviceProvokingVertexPropertiesEXT</a>, <a href=\"#VkPhysicalDevicePushDescriptorPropertiesKHR\">VkPhysicalDevicePushDescriptorPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceRayTracingPipelinePropertiesKHR\">VkPhysicalDeviceRayTracingPipelinePropertiesKHR</a>, <a href=\"#VkPhysicalDeviceRayTracingPropertiesNV\">VkPhysicalDeviceRayTracingPropertiesNV</a>, <a href=\"#VkPhysicalDeviceRobustness2PropertiesEXT\">VkPhysicalDeviceRobustness2PropertiesEXT</a>, <a href=\"#VkPhysicalDeviceSampleLocationsPropertiesEXT\">VkPhysicalDeviceSampleLocationsPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerFilterMinmaxProperties\">VkPhysicalDeviceSamplerFilterMinmaxProperties</a>, <a href=\"#VkPhysicalDeviceShaderCoreProperties2AMD\">VkPhysicalDeviceShaderCoreProperties2AMD</a>, <a href=\"#VkPhysicalDeviceShaderCorePropertiesAMD\">VkPhysicalDeviceShaderCorePropertiesAMD</a>, <a href=\"#VkPhysicalDeviceShaderSMBuiltinsPropertiesNV\">VkPhysicalDeviceShaderSMBuiltinsPropertiesNV</a>, <a href=\"#VkPhysicalDeviceShadingRateImagePropertiesNV\">VkPhysicalDeviceShadingRateImagePropertiesNV</a>, <a href=\"#VkPhysicalDeviceSubgroupProperties\">VkPhysicalDeviceSubgroupProperties</a>, <a href=\"#VkPhysicalDeviceSubgroupSizeControlPropertiesEXT\">VkPhysicalDeviceSubgroupSizeControlPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceSubpassShadingPropertiesHUAWEI\">VkPhysicalDeviceSubpassShadingPropertiesHUAWEI</a>, <a href=\"#VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT\">VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceTimelineSemaphoreProperties\">VkPhysicalDeviceTimelineSemaphoreProperties</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackPropertiesEXT\">VkPhysicalDeviceTransformFeedbackPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT\">VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceVulkan11Properties\">VkPhysicalDeviceVulkan11Properties</a>, or <a href=\"#VkPhysicalDeviceVulkan12Properties\">VkPhysicalDeviceVulkan12Properties</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkPhysicalDeviceAccelerationStructurePropertiesKHR\">VkPhysicalDeviceAccelerationStructurePropertiesKHR</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT\">VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceConservativeRasterizationPropertiesEXT\">VkPhysicalDeviceConservativeRasterizationPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixPropertiesNV\">VkPhysicalDeviceCooperativeMatrixPropertiesNV</a>, <a href=\"#VkPhysicalDeviceCustomBorderColorPropertiesEXT\">VkPhysicalDeviceCustomBorderColorPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDepthStencilResolveProperties\">VkPhysicalDeviceDepthStencilResolveProperties</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingProperties\">VkPhysicalDeviceDescriptorIndexingProperties</a>, <a href=\"#VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV\">VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV</a>, <a href=\"#VkPhysicalDeviceDiscardRectanglePropertiesEXT\">VkPhysicalDeviceDiscardRectanglePropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDriverProperties\">VkPhysicalDeviceDriverProperties</a>, <a href=\"#VkPhysicalDeviceDrmPropertiesEXT\">VkPhysicalDeviceDrmPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceExternalMemoryHostPropertiesEXT\">VkPhysicalDeviceExternalMemoryHostPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceFloatControlsProperties\">VkPhysicalDeviceFloatControlsProperties</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMap2PropertiesEXT\">VkPhysicalDeviceFragmentDensityMap2PropertiesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapPropertiesEXT\">VkPhysicalDeviceFragmentDensityMapPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV\">VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShadingRatePropertiesKHR\">VkPhysicalDeviceFragmentShadingRatePropertiesKHR</a>, <a href=\"#VkPhysicalDeviceIDProperties\">VkPhysicalDeviceIDProperties</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockPropertiesEXT\">VkPhysicalDeviceInlineUniformBlockPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceLineRasterizationPropertiesEXT\">VkPhysicalDeviceLineRasterizationPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceMaintenance3Properties\">VkPhysicalDeviceMaintenance3Properties</a>, <a href=\"#VkPhysicalDeviceMeshShaderPropertiesNV\">VkPhysicalDeviceMeshShaderPropertiesNV</a>, <a href=\"#VkPhysicalDeviceMultiDrawPropertiesEXT\">VkPhysicalDeviceMultiDrawPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX\">VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX</a>, <a href=\"#VkPhysicalDeviceMultiviewProperties\">VkPhysicalDeviceMultiviewProperties</a>, <a href=\"#VkPhysicalDevicePCIBusInfoPropertiesEXT\">VkPhysicalDevicePCIBusInfoPropertiesEXT</a>, <a href=\"#VkPhysicalDevicePerformanceQueryPropertiesKHR\">VkPhysicalDevicePerformanceQueryPropertiesKHR</a>, <a href=\"#VkPhysicalDevicePointClippingProperties\">VkPhysicalDevicePointClippingProperties</a>, <a href=\"#VkPhysicalDevicePortabilitySubsetPropertiesKHR\">VkPhysicalDevicePortabilitySubsetPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryProperties\">VkPhysicalDeviceProtectedMemoryProperties</a>, <a href=\"#VkPhysicalDeviceProvokingVertexPropertiesEXT\">VkPhysicalDeviceProvokingVertexPropertiesEXT</a>, <a href=\"#VkPhysicalDevicePushDescriptorPropertiesKHR\">VkPhysicalDevicePushDescriptorPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceRayTracingPipelinePropertiesKHR\">VkPhysicalDeviceRayTracingPipelinePropertiesKHR</a>, <a href=\"#VkPhysicalDeviceRayTracingPropertiesNV\">VkPhysicalDeviceRayTracingPropertiesNV</a>, <a href=\"#VkPhysicalDeviceRobustness2PropertiesEXT\">VkPhysicalDeviceRobustness2PropertiesEXT</a>, <a href=\"#VkPhysicalDeviceSampleLocationsPropertiesEXT\">VkPhysicalDeviceSampleLocationsPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerFilterMinmaxProperties\">VkPhysicalDeviceSamplerFilterMinmaxProperties</a>, <a href=\"#VkPhysicalDeviceShaderCoreProperties2AMD\">VkPhysicalDeviceShaderCoreProperties2AMD</a>, <a href=\"#VkPhysicalDeviceShaderCorePropertiesAMD\">VkPhysicalDeviceShaderCorePropertiesAMD</a>, <a href=\"#VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR\">VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceShaderSMBuiltinsPropertiesNV\">VkPhysicalDeviceShaderSMBuiltinsPropertiesNV</a>, <a href=\"#VkPhysicalDeviceShadingRateImagePropertiesNV\">VkPhysicalDeviceShadingRateImagePropertiesNV</a>, <a href=\"#VkPhysicalDeviceSubgroupProperties\">VkPhysicalDeviceSubgroupProperties</a>, <a href=\"#VkPhysicalDeviceSubgroupSizeControlPropertiesEXT\">VkPhysicalDeviceSubgroupSizeControlPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceSubpassShadingPropertiesHUAWEI\">VkPhysicalDeviceSubpassShadingPropertiesHUAWEI</a>, <a href=\"#VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT\">VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceTimelineSemaphoreProperties\">VkPhysicalDeviceTimelineSemaphoreProperties</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackPropertiesEXT\">VkPhysicalDeviceTransformFeedbackPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT\">VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceVulkan11Properties\">VkPhysicalDeviceVulkan11Properties</a>, or <a href=\"#VkPhysicalDeviceVulkan12Properties\">VkPhysicalDeviceVulkan12Properties</a>"
         },
         {
           "vuid": "VUID-VkPhysicalDeviceProperties2-sType-unique",
@@ -291,6 +291,14 @@
         {
           "vuid": "VUID-VkPhysicalDeviceDrmPropertiesEXT-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRM_PROPERTIES_EXT</code>"
+        }
+      ]
+    },
+    "VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR": {
+      "(VK_KHR_shader_integer_dot_product)": [
+        {
+          "vuid": "VUID-VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES_KHR</code>"
         }
       ]
     },
@@ -618,7 +626,7 @@
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceDeviceMemoryReportCreateInfoEXT\">VkDeviceDeviceMemoryReportCreateInfoEXT</a>, <a href=\"#VkDeviceDiagnosticsConfigCreateInfoNV\">VkDeviceDiagnosticsConfigCreateInfoNV</a>, <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceMemoryOverallocationCreateInfoAMD\">VkDeviceMemoryOverallocationCreateInfoAMD</a>, <a href=\"#VkDevicePrivateDataCreateInfoEXT\">VkDevicePrivateDataCreateInfoEXT</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice4444FormatsFeaturesEXT\">VkPhysicalDevice4444FormatsFeaturesEXT</a>, <a href=\"#VkPhysicalDevice8BitStorageFeatures\">VkPhysicalDevice8BitStorageFeatures</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceAccelerationStructureFeaturesKHR\">VkPhysicalDeviceAccelerationStructureFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeatures\">VkPhysicalDeviceBufferDeviceAddressFeatures</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeaturesEXT\">VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCoherentMemoryFeaturesAMD\">VkPhysicalDeviceCoherentMemoryFeaturesAMD</a>, <a href=\"#VkPhysicalDeviceColorWriteEnableFeaturesEXT\">VkPhysicalDeviceColorWriteEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixFeaturesNV\">VkPhysicalDeviceCooperativeMatrixFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCoverageReductionModeFeaturesNV\">VkPhysicalDeviceCoverageReductionModeFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCustomBorderColorFeaturesEXT\">VkPhysicalDeviceCustomBorderColorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV\">VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDepthClipEnableFeaturesEXT\">VkPhysicalDeviceDepthClipEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeatures\">VkPhysicalDeviceDescriptorIndexingFeatures</a>, <a href=\"#VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV\">VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDeviceMemoryReportFeaturesEXT\">VkPhysicalDeviceDeviceMemoryReportFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDiagnosticsConfigFeaturesNV\">VkPhysicalDeviceDiagnosticsConfigFeaturesNV</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceExtendedDynamicState2FeaturesEXT\">VkPhysicalDeviceExtendedDynamicState2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExtendedDynamicStateFeaturesEXT\">VkPhysicalDeviceExtendedDynamicStateFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExternalMemoryRDMAFeaturesNV\">VkPhysicalDeviceExternalMemoryRDMAFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMap2FeaturesEXT\">VkPhysicalDeviceFragmentDensityMap2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapFeaturesEXT\">VkPhysicalDeviceFragmentDensityMapFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT\">VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV\">VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShadingRateFeaturesKHR\">VkPhysicalDeviceFragmentShadingRateFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT\">VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceHostQueryResetFeatures\">VkPhysicalDeviceHostQueryResetFeatures</a>, <a href=\"#VkPhysicalDeviceImageRobustnessFeaturesEXT\">VkPhysicalDeviceImageRobustnessFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceImagelessFramebufferFeatures\">VkPhysicalDeviceImagelessFramebufferFeatures</a>, <a href=\"#VkPhysicalDeviceIndexTypeUint8FeaturesEXT\">VkPhysicalDeviceIndexTypeUint8FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceInheritedViewportScissorFeaturesNV\">VkPhysicalDeviceInheritedViewportScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeaturesEXT\">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceInvocationMaskFeaturesHUAWEI\">VkPhysicalDeviceInvocationMaskFeaturesHUAWEI</a>, <a href=\"#VkPhysicalDeviceLineRasterizationFeaturesEXT\">VkPhysicalDeviceLineRasterizationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMemoryPriorityFeaturesEXT\">VkPhysicalDeviceMemoryPriorityFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiDrawFeaturesEXT\">VkPhysicalDeviceMultiDrawFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE\">VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE</a>, <a href=\"#VkPhysicalDevicePerformanceQueryFeaturesKHR\">VkPhysicalDevicePerformanceQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT\">VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT</a>, <a href=\"#VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR\">VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePresentIdFeaturesKHR\">VkPhysicalDevicePresentIdFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePresentWaitFeaturesKHR\">VkPhysicalDevicePresentWaitFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePrivateDataFeaturesEXT\">VkPhysicalDevicePrivateDataFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceProvokingVertexFeaturesEXT\">VkPhysicalDeviceProvokingVertexFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceRayQueryFeaturesKHR\">VkPhysicalDeviceRayQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceRayTracingMotionBlurFeaturesNV\">VkPhysicalDeviceRayTracingMotionBlurFeaturesNV</a>, <a href=\"#VkPhysicalDeviceRayTracingPipelineFeaturesKHR\">VkPhysicalDeviceRayTracingPipelineFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceRobustness2FeaturesEXT\">VkPhysicalDeviceRobustness2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceScalarBlockLayoutFeatures\">VkPhysicalDeviceScalarBlockLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures\">VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures</a>, <a href=\"#VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT\">VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicFloatFeaturesEXT\">VkPhysicalDeviceShaderAtomicFloatFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64Features\">VkPhysicalDeviceShaderAtomicInt64Features</a>, <a href=\"#VkPhysicalDeviceShaderClockFeaturesKHR\">VkPhysicalDeviceShaderClockFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT\">VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderDrawParametersFeatures\">VkPhysicalDeviceShaderDrawParametersFeatures</a>, <a href=\"#VkPhysicalDeviceShaderFloat16Int8Features\">VkPhysicalDeviceShaderFloat16Int8Features</a>, <a href=\"#VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT\">VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL\">VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL</a>, <a href=\"#VkPhysicalDeviceShaderSMBuiltinsFeaturesNV\">VkPhysicalDeviceShaderSMBuiltinsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures\">VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR\">VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR\">VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSubgroupSizeControlFeaturesEXT\">VkPhysicalDeviceSubgroupSizeControlFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSubpassShadingFeaturesHUAWEI\">VkPhysicalDeviceSubpassShadingFeaturesHUAWEI</a>, <a href=\"#VkPhysicalDeviceSynchronization2FeaturesKHR\">VkPhysicalDeviceSynchronization2FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT\">VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT\">VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTimelineSemaphoreFeatures\">VkPhysicalDeviceTimelineSemaphoreFeatures</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackFeaturesEXT\">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceUniformBufferStandardLayoutFeatures\">VkPhysicalDeviceUniformBufferStandardLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceVariablePointersFeatures\">VkPhysicalDeviceVariablePointersFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT\">VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVulkan11Features\">VkPhysicalDeviceVulkan11Features</a>, <a href=\"#VkPhysicalDeviceVulkan12Features\">VkPhysicalDeviceVulkan12Features</a>, <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeatures\">VkPhysicalDeviceVulkanMemoryModelFeatures</a>, <a href=\"#VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR\">VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT\">VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceYcbcrImageArraysFeaturesEXT\">VkPhysicalDeviceYcbcrImageArraysFeaturesEXT</a>, or <a href=\"#VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR\">VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceDeviceMemoryReportCreateInfoEXT\">VkDeviceDeviceMemoryReportCreateInfoEXT</a>, <a href=\"#VkDeviceDiagnosticsConfigCreateInfoNV\">VkDeviceDiagnosticsConfigCreateInfoNV</a>, <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceMemoryOverallocationCreateInfoAMD\">VkDeviceMemoryOverallocationCreateInfoAMD</a>, <a href=\"#VkDevicePrivateDataCreateInfoEXT\">VkDevicePrivateDataCreateInfoEXT</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice4444FormatsFeaturesEXT\">VkPhysicalDevice4444FormatsFeaturesEXT</a>, <a href=\"#VkPhysicalDevice8BitStorageFeatures\">VkPhysicalDevice8BitStorageFeatures</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceAccelerationStructureFeaturesKHR\">VkPhysicalDeviceAccelerationStructureFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeatures\">VkPhysicalDeviceBufferDeviceAddressFeatures</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeaturesEXT\">VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCoherentMemoryFeaturesAMD\">VkPhysicalDeviceCoherentMemoryFeaturesAMD</a>, <a href=\"#VkPhysicalDeviceColorWriteEnableFeaturesEXT\">VkPhysicalDeviceColorWriteEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixFeaturesNV\">VkPhysicalDeviceCooperativeMatrixFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCoverageReductionModeFeaturesNV\">VkPhysicalDeviceCoverageReductionModeFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCustomBorderColorFeaturesEXT\">VkPhysicalDeviceCustomBorderColorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV\">VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDepthClipEnableFeaturesEXT\">VkPhysicalDeviceDepthClipEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeatures\">VkPhysicalDeviceDescriptorIndexingFeatures</a>, <a href=\"#VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV\">VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDeviceMemoryReportFeaturesEXT\">VkPhysicalDeviceDeviceMemoryReportFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDiagnosticsConfigFeaturesNV\">VkPhysicalDeviceDiagnosticsConfigFeaturesNV</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceExtendedDynamicState2FeaturesEXT\">VkPhysicalDeviceExtendedDynamicState2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExtendedDynamicStateFeaturesEXT\">VkPhysicalDeviceExtendedDynamicStateFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExternalMemoryRDMAFeaturesNV\">VkPhysicalDeviceExternalMemoryRDMAFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMap2FeaturesEXT\">VkPhysicalDeviceFragmentDensityMap2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapFeaturesEXT\">VkPhysicalDeviceFragmentDensityMapFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT\">VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV\">VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShadingRateFeaturesKHR\">VkPhysicalDeviceFragmentShadingRateFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT\">VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceHostQueryResetFeatures\">VkPhysicalDeviceHostQueryResetFeatures</a>, <a href=\"#VkPhysicalDeviceImageRobustnessFeaturesEXT\">VkPhysicalDeviceImageRobustnessFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceImagelessFramebufferFeatures\">VkPhysicalDeviceImagelessFramebufferFeatures</a>, <a href=\"#VkPhysicalDeviceIndexTypeUint8FeaturesEXT\">VkPhysicalDeviceIndexTypeUint8FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceInheritedViewportScissorFeaturesNV\">VkPhysicalDeviceInheritedViewportScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeaturesEXT\">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceInvocationMaskFeaturesHUAWEI\">VkPhysicalDeviceInvocationMaskFeaturesHUAWEI</a>, <a href=\"#VkPhysicalDeviceLineRasterizationFeaturesEXT\">VkPhysicalDeviceLineRasterizationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMemoryPriorityFeaturesEXT\">VkPhysicalDeviceMemoryPriorityFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiDrawFeaturesEXT\">VkPhysicalDeviceMultiDrawFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE\">VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE</a>, <a href=\"#VkPhysicalDevicePerformanceQueryFeaturesKHR\">VkPhysicalDevicePerformanceQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT\">VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT</a>, <a href=\"#VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR\">VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePresentIdFeaturesKHR\">VkPhysicalDevicePresentIdFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePresentWaitFeaturesKHR\">VkPhysicalDevicePresentWaitFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT\">VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT</a>, <a href=\"#VkPhysicalDevicePrivateDataFeaturesEXT\">VkPhysicalDevicePrivateDataFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceProvokingVertexFeaturesEXT\">VkPhysicalDeviceProvokingVertexFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceRayQueryFeaturesKHR\">VkPhysicalDeviceRayQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceRayTracingMotionBlurFeaturesNV\">VkPhysicalDeviceRayTracingMotionBlurFeaturesNV</a>, <a href=\"#VkPhysicalDeviceRayTracingPipelineFeaturesKHR\">VkPhysicalDeviceRayTracingPipelineFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceRobustness2FeaturesEXT\">VkPhysicalDeviceRobustness2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceScalarBlockLayoutFeatures\">VkPhysicalDeviceScalarBlockLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures\">VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures</a>, <a href=\"#VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT\">VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicFloatFeaturesEXT\">VkPhysicalDeviceShaderAtomicFloatFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64Features\">VkPhysicalDeviceShaderAtomicInt64Features</a>, <a href=\"#VkPhysicalDeviceShaderClockFeaturesKHR\">VkPhysicalDeviceShaderClockFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT\">VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderDrawParametersFeatures\">VkPhysicalDeviceShaderDrawParametersFeatures</a>, <a href=\"#VkPhysicalDeviceShaderFloat16Int8Features\">VkPhysicalDeviceShaderFloat16Int8Features</a>, <a href=\"#VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT\">VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR\">VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL\">VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL</a>, <a href=\"#VkPhysicalDeviceShaderSMBuiltinsFeaturesNV\">VkPhysicalDeviceShaderSMBuiltinsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures\">VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR\">VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR\">VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSubgroupSizeControlFeaturesEXT\">VkPhysicalDeviceSubgroupSizeControlFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSubpassShadingFeaturesHUAWEI\">VkPhysicalDeviceSubpassShadingFeaturesHUAWEI</a>, <a href=\"#VkPhysicalDeviceSynchronization2FeaturesKHR\">VkPhysicalDeviceSynchronization2FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT\">VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT\">VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTimelineSemaphoreFeatures\">VkPhysicalDeviceTimelineSemaphoreFeatures</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackFeaturesEXT\">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceUniformBufferStandardLayoutFeatures\">VkPhysicalDeviceUniformBufferStandardLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceVariablePointersFeatures\">VkPhysicalDeviceVariablePointersFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT\">VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVulkan11Features\">VkPhysicalDeviceVulkan11Features</a>, <a href=\"#VkPhysicalDeviceVulkan12Features\">VkPhysicalDeviceVulkan12Features</a>, <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeatures\">VkPhysicalDeviceVulkanMemoryModelFeatures</a>, <a href=\"#VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR\">VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT\">VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceYcbcrImageArraysFeaturesEXT\">VkPhysicalDeviceYcbcrImageArraysFeaturesEXT</a>, or <a href=\"#VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR\">VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR</a>"
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-sType-unique",
@@ -4608,7 +4616,7 @@
       "(VK_KHR_synchronization2)+(VK_KHR_acceleration_structure,VK_NV_ray_tracing)": [
         {
           "vuid": "VUID-VkMemoryBarrier2KHR-srcAccessMask-03927",
-          "text": " If pname:srcAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:srcStageMask <strong class=\"purple\">must</strong> include <code>VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR</code>, <code>VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR</code>, or <code>VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR</code>"
+          "text": " If pname:srcAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:srcStageMask <strong class=\"purple\">must</strong> include <code>VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR</code>, <code>VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR</code>, or one of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages"
         },
         {
           "vuid": "VUID-VkMemoryBarrier2KHR-srcAccessMask-03928",
@@ -4616,11 +4624,51 @@
         },
         {
           "vuid": "VUID-VkMemoryBarrier2KHR-dstAccessMask-03927",
-          "text": " If pname:dstAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:dstStageMask <strong class=\"purple\">must</strong> include <code>VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR</code>, <code>VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR</code>, or <code>VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR</code>"
+          "text": " If pname:dstAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:dstStageMask <strong class=\"purple\">must</strong> include <code>VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR</code>, <code>VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR</code>, or one of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages"
         },
         {
           "vuid": "VUID-VkMemoryBarrier2KHR-dstAccessMask-03928",
           "text": " If pname:dstAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_WRITE_BIT_KHR</code>, pname:dstStageMask <strong class=\"purple\">must</strong> include <code>VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR</code> or <code>VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR</code>"
+        }
+      ],
+      "(VK_KHR_synchronization2)+(VK_KHR_acceleration_structure,VK_NV_ray_tracing)+!(VK_KHR_ray_query)+(VK_KHR_ray_tracing_pipeline,VK_NV_ray_tracing)": [
+        {
+          "vuid": "VUID-VkMemoryBarrier2KHR-srcAccessMask-06254",
+          "text": " If pname:srcAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:srcStageMask <strong class=\"purple\">must</strong> not include any of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages except <code>VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkMemoryBarrier2KHR-dstAccessMask-06254",
+          "text": " If pname:dstAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:dstStageMask <strong class=\"purple\">must</strong> not include any of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages except <code>VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR</code>"
+        }
+      ],
+      "(VK_KHR_synchronization2)+(VK_KHR_acceleration_structure,VK_NV_ray_tracing)+!(VK_KHR_ray_query)+!(VK_KHR_ray_tracing_pipeline,VK_NV_ray_tracing)": [
+        {
+          "vuid": "VUID-VkMemoryBarrier2KHR-srcAccessMask-06255",
+          "text": " If pname:srcAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:srcStageMask <strong class=\"purple\">must</strong> not include any of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages"
+        },
+        {
+          "vuid": "VUID-VkMemoryBarrier2KHR-dstAccessMask-06255",
+          "text": " If pname:dstAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:dstStageMask <strong class=\"purple\">must</strong> not include any of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages"
+        }
+      ],
+      "(VK_KHR_synchronization2)+(VK_KHR_acceleration_structure,VK_NV_ray_tracing)+(VK_KHR_ray_query)+(VK_KHR_ray_tracing_pipeline,VK_NV_ray_tracing)": [
+        {
+          "vuid": "VUID-VkMemoryBarrier2KHR-rayQuery-06256",
+          "text": " If <a href=\"#features-rayQuery\"><code>rayQuery</code></a> is not enabled and pname:srcAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:srcStageMask <strong class=\"purple\">must</strong> not include any of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages except <code>VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkMemoryBarrier2KHR-rayQuery-06256",
+          "text": " If <a href=\"#features-rayQuery\"><code>rayQuery</code></a> is not enabled and pname:dstAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:dstStageMask <strong class=\"purple\">must</strong> not include any of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages except <code>VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR</code>"
+        }
+      ],
+      "(VK_KHR_synchronization2)+(VK_KHR_acceleration_structure,VK_NV_ray_tracing)+(VK_KHR_ray_query)+!(VK_KHR_ray_tracing_pipeline,VK_NV_ray_tracing)": [
+        {
+          "vuid": "VUID-VkMemoryBarrier2KHR-rayQuery-06257",
+          "text": " If <a href=\"#features-rayQuery\"><code>rayQuery</code></a> is not enabled and pname:srcAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:srcStageMask <strong class=\"purple\">must</strong> not include any of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages"
+        },
+        {
+          "vuid": "VUID-VkMemoryBarrier2KHR-rayQuery-06257",
+          "text": " If <a href=\"#features-rayQuery\"><code>rayQuery</code></a> is not enabled and pname:dstAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:dstStageMask <strong class=\"purple\">must</strong> not include any of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages"
         }
       ],
       "(VK_KHR_synchronization2)+(VK_KHR_video_decode_queue)": [
@@ -5056,7 +5104,7 @@
       "(VK_KHR_synchronization2)+(VK_KHR_acceleration_structure,VK_NV_ray_tracing)": [
         {
           "vuid": "VUID-VkBufferMemoryBarrier2KHR-srcAccessMask-03927",
-          "text": " If pname:srcAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:srcStageMask <strong class=\"purple\">must</strong> include <code>VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR</code>, <code>VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR</code>, or <code>VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR</code>"
+          "text": " If pname:srcAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:srcStageMask <strong class=\"purple\">must</strong> include <code>VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR</code>, <code>VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR</code>, or one of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages"
         },
         {
           "vuid": "VUID-VkBufferMemoryBarrier2KHR-srcAccessMask-03928",
@@ -5064,11 +5112,51 @@
         },
         {
           "vuid": "VUID-VkBufferMemoryBarrier2KHR-dstAccessMask-03927",
-          "text": " If pname:dstAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:dstStageMask <strong class=\"purple\">must</strong> include <code>VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR</code>, <code>VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR</code>, or <code>VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR</code>"
+          "text": " If pname:dstAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:dstStageMask <strong class=\"purple\">must</strong> include <code>VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR</code>, <code>VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR</code>, or one of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages"
         },
         {
           "vuid": "VUID-VkBufferMemoryBarrier2KHR-dstAccessMask-03928",
           "text": " If pname:dstAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_WRITE_BIT_KHR</code>, pname:dstStageMask <strong class=\"purple\">must</strong> include <code>VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR</code> or <code>VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR</code>"
+        }
+      ],
+      "(VK_KHR_synchronization2)+(VK_KHR_acceleration_structure,VK_NV_ray_tracing)+!(VK_KHR_ray_query)+(VK_KHR_ray_tracing_pipeline,VK_NV_ray_tracing)": [
+        {
+          "vuid": "VUID-VkBufferMemoryBarrier2KHR-srcAccessMask-06254",
+          "text": " If pname:srcAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:srcStageMask <strong class=\"purple\">must</strong> not include any of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages except <code>VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkBufferMemoryBarrier2KHR-dstAccessMask-06254",
+          "text": " If pname:dstAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:dstStageMask <strong class=\"purple\">must</strong> not include any of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages except <code>VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR</code>"
+        }
+      ],
+      "(VK_KHR_synchronization2)+(VK_KHR_acceleration_structure,VK_NV_ray_tracing)+!(VK_KHR_ray_query)+!(VK_KHR_ray_tracing_pipeline,VK_NV_ray_tracing)": [
+        {
+          "vuid": "VUID-VkBufferMemoryBarrier2KHR-srcAccessMask-06255",
+          "text": " If pname:srcAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:srcStageMask <strong class=\"purple\">must</strong> not include any of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages"
+        },
+        {
+          "vuid": "VUID-VkBufferMemoryBarrier2KHR-dstAccessMask-06255",
+          "text": " If pname:dstAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:dstStageMask <strong class=\"purple\">must</strong> not include any of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages"
+        }
+      ],
+      "(VK_KHR_synchronization2)+(VK_KHR_acceleration_structure,VK_NV_ray_tracing)+(VK_KHR_ray_query)+(VK_KHR_ray_tracing_pipeline,VK_NV_ray_tracing)": [
+        {
+          "vuid": "VUID-VkBufferMemoryBarrier2KHR-rayQuery-06256",
+          "text": " If <a href=\"#features-rayQuery\"><code>rayQuery</code></a> is not enabled and pname:srcAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:srcStageMask <strong class=\"purple\">must</strong> not include any of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages except <code>VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkBufferMemoryBarrier2KHR-rayQuery-06256",
+          "text": " If <a href=\"#features-rayQuery\"><code>rayQuery</code></a> is not enabled and pname:dstAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:dstStageMask <strong class=\"purple\">must</strong> not include any of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages except <code>VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR</code>"
+        }
+      ],
+      "(VK_KHR_synchronization2)+(VK_KHR_acceleration_structure,VK_NV_ray_tracing)+(VK_KHR_ray_query)+!(VK_KHR_ray_tracing_pipeline,VK_NV_ray_tracing)": [
+        {
+          "vuid": "VUID-VkBufferMemoryBarrier2KHR-rayQuery-06257",
+          "text": " If <a href=\"#features-rayQuery\"><code>rayQuery</code></a> is not enabled and pname:srcAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:srcStageMask <strong class=\"purple\">must</strong> not include any of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages"
+        },
+        {
+          "vuid": "VUID-VkBufferMemoryBarrier2KHR-rayQuery-06257",
+          "text": " If <a href=\"#features-rayQuery\"><code>rayQuery</code></a> is not enabled and pname:dstAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:dstStageMask <strong class=\"purple\">must</strong> not include any of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages"
         }
       ],
       "(VK_KHR_synchronization2)+(VK_KHR_video_decode_queue)": [
@@ -5620,7 +5708,7 @@
       "(VK_KHR_synchronization2)+(VK_KHR_acceleration_structure,VK_NV_ray_tracing)": [
         {
           "vuid": "VUID-VkImageMemoryBarrier2KHR-srcAccessMask-03927",
-          "text": " If pname:srcAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:srcStageMask <strong class=\"purple\">must</strong> include <code>VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR</code>, <code>VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR</code>, or <code>VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR</code>"
+          "text": " If pname:srcAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:srcStageMask <strong class=\"purple\">must</strong> include <code>VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR</code>, <code>VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR</code>, or one of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages"
         },
         {
           "vuid": "VUID-VkImageMemoryBarrier2KHR-srcAccessMask-03928",
@@ -5628,11 +5716,51 @@
         },
         {
           "vuid": "VUID-VkImageMemoryBarrier2KHR-dstAccessMask-03927",
-          "text": " If pname:dstAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:dstStageMask <strong class=\"purple\">must</strong> include <code>VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR</code>, <code>VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR</code>, or <code>VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR</code>"
+          "text": " If pname:dstAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:dstStageMask <strong class=\"purple\">must</strong> include <code>VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR</code>, <code>VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR</code>, or one of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages"
         },
         {
           "vuid": "VUID-VkImageMemoryBarrier2KHR-dstAccessMask-03928",
           "text": " If pname:dstAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_WRITE_BIT_KHR</code>, pname:dstStageMask <strong class=\"purple\">must</strong> include <code>VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR</code> or <code>VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR</code>"
+        }
+      ],
+      "(VK_KHR_synchronization2)+(VK_KHR_acceleration_structure,VK_NV_ray_tracing)+!(VK_KHR_ray_query)+(VK_KHR_ray_tracing_pipeline,VK_NV_ray_tracing)": [
+        {
+          "vuid": "VUID-VkImageMemoryBarrier2KHR-srcAccessMask-06254",
+          "text": " If pname:srcAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:srcStageMask <strong class=\"purple\">must</strong> not include any of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages except <code>VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkImageMemoryBarrier2KHR-dstAccessMask-06254",
+          "text": " If pname:dstAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:dstStageMask <strong class=\"purple\">must</strong> not include any of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages except <code>VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR</code>"
+        }
+      ],
+      "(VK_KHR_synchronization2)+(VK_KHR_acceleration_structure,VK_NV_ray_tracing)+!(VK_KHR_ray_query)+!(VK_KHR_ray_tracing_pipeline,VK_NV_ray_tracing)": [
+        {
+          "vuid": "VUID-VkImageMemoryBarrier2KHR-srcAccessMask-06255",
+          "text": " If pname:srcAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:srcStageMask <strong class=\"purple\">must</strong> not include any of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages"
+        },
+        {
+          "vuid": "VUID-VkImageMemoryBarrier2KHR-dstAccessMask-06255",
+          "text": " If pname:dstAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:dstStageMask <strong class=\"purple\">must</strong> not include any of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages"
+        }
+      ],
+      "(VK_KHR_synchronization2)+(VK_KHR_acceleration_structure,VK_NV_ray_tracing)+(VK_KHR_ray_query)+(VK_KHR_ray_tracing_pipeline,VK_NV_ray_tracing)": [
+        {
+          "vuid": "VUID-VkImageMemoryBarrier2KHR-rayQuery-06256",
+          "text": " If <a href=\"#features-rayQuery\"><code>rayQuery</code></a> is not enabled and pname:srcAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:srcStageMask <strong class=\"purple\">must</strong> not include any of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages except <code>VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkImageMemoryBarrier2KHR-rayQuery-06256",
+          "text": " If <a href=\"#features-rayQuery\"><code>rayQuery</code></a> is not enabled and pname:dstAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:dstStageMask <strong class=\"purple\">must</strong> not include any of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages except <code>VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR</code>"
+        }
+      ],
+      "(VK_KHR_synchronization2)+(VK_KHR_acceleration_structure,VK_NV_ray_tracing)+(VK_KHR_ray_query)+!(VK_KHR_ray_tracing_pipeline,VK_NV_ray_tracing)": [
+        {
+          "vuid": "VUID-VkImageMemoryBarrier2KHR-rayQuery-06257",
+          "text": " If <a href=\"#features-rayQuery\"><code>rayQuery</code></a> is not enabled and pname:srcAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:srcStageMask <strong class=\"purple\">must</strong> not include any of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages"
+        },
+        {
+          "vuid": "VUID-VkImageMemoryBarrier2KHR-rayQuery-06257",
+          "text": " If <a href=\"#features-rayQuery\"><code>rayQuery</code></a> is not enabled and pname:dstAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:dstStageMask <strong class=\"purple\">must</strong> not include any of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages"
         }
       ],
       "(VK_KHR_synchronization2)+(VK_KHR_video_decode_queue)": [
@@ -24979,11 +25107,23 @@
       ]
     },
     "VkPipelineInputAssemblyStateCreateInfo": {
-      "core": [
+      "!(VK_EXT_primitive_topology_list_restart)": [
         {
           "vuid": "VUID-VkPipelineInputAssemblyStateCreateInfo-topology-00428",
           "text": " If <code>topology</code> is <code>VK_PRIMITIVE_TOPOLOGY_POINT_LIST</code>, <code>VK_PRIMITIVE_TOPOLOGY_LINE_LIST</code>, <code>VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST</code>, <code>VK_PRIMITIVE_TOPOLOGY_LINE_LIST_WITH_ADJACENCY</code>, <code>VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST_WITH_ADJACENCY</code> or <code>VK_PRIMITIVE_TOPOLOGY_PATCH_LIST</code>, <code>primitiveRestartEnable</code> <strong class=\"purple\">must</strong> be <code>VK_FALSE</code>"
+        }
+      ],
+      "(VK_EXT_primitive_topology_list_restart)": [
+        {
+          "vuid": "VUID-VkPipelineInputAssemblyStateCreateInfo-topology-06252",
+          "text": " If <code>topology</code> is <code>VK_PRIMITIVE_TOPOLOGY_POINT_LIST</code>, <code>VK_PRIMITIVE_TOPOLOGY_LINE_LIST</code>, <code>VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST</code>, <code>VK_PRIMITIVE_TOPOLOGY_LINE_LIST_WITH_ADJACENCY</code> or <code>VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST_WITH_ADJACENCY</code>, the <a href=\"#features-primitiveTopologyListRestart\"><code>primitiveTopologyListRestart</code></a> feature <strong class=\"purple\">must</strong> be enabled"
         },
+        {
+          "vuid": "VUID-VkPipelineInputAssemblyStateCreateInfo-topology-06253",
+          "text": " If <code>topology</code> is <code>VK_PRIMITIVE_TOPOLOGY_PATCH_LIST</code>, the <a href=\"#features-primitiveTopologyPatchListRestart\"><code>primitiveTopologyPatchListRestart</code></a> feature <strong class=\"purple\">must</strong> be enabled"
+        }
+      ],
+      "core": [
         {
           "vuid": "VUID-VkPipelineInputAssemblyStateCreateInfo-topology-00429",
           "text": " If the <a href=\"#features-geometryShader\">geometry shaders</a> feature is not enabled, <code>topology</code> <strong class=\"purple\">must</strong> not be any of <code>VK_PRIMITIVE_TOPOLOGY_LINE_LIST_WITH_ADJACENCY</code>, <code>VK_PRIMITIVE_TOPOLOGY_LINE_STRIP_WITH_ADJACENCY</code>, <code>VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST_WITH_ADJACENCY</code> or <code>VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP_WITH_ADJACENCY</code>"
@@ -41394,6 +41534,14 @@
         }
       ]
     },
+    "VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT": {
+      "(VK_EXT_primitive_topology_list_restart)": [
+        {
+          "vuid": "VUID-VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIMITIVE_TOPOLOGY_LIST_RESTART_FEATURES_EXT</code>"
+        }
+      ]
+    },
     "VkPhysicalDeviceShaderSMBuiltinsFeaturesNV": {
       "(VK_NV_shader_sm_builtins)": [
         {
@@ -41759,6 +41907,14 @@
         {
           "vuid": "VUID-VkPhysicalDevicePresentWaitFeaturesKHR-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_WAIT_FEATURES_KHR</code>"
+        }
+      ]
+    },
+    "VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR": {
+      "(VK_KHR_shader_integer_dot_product)": [
+        {
+          "vuid": "VUID-VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES_KHR</code>"
         }
       ]
     },
@@ -43412,7 +43568,7 @@
         },
         {
           "vuid": "VUID-StandaloneSpirv-None-04642",
-          "text": " <strong>Scope</strong> for <strong>Non Uniform Group Operations</strong> <strong class=\"purple\">must</strong> be limited to <strong>Subgroup</strong>"
+          "text": " <strong>Scope</strong> for <a href=\"#shaders-group-operations\">group operations</a> <strong class=\"purple\">must</strong> be limited to <strong>Subgroup</strong>"
         },
         {
           "vuid": "VUID-StandaloneSpirv-None-04643",

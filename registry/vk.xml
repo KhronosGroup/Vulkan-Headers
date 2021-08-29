@@ -155,7 +155,7 @@ branch of the member gitlab server.
         <type category="define" requires="VK_MAKE_API_VERSION">// Vulkan 1.2 version number
 #define <name>VK_API_VERSION_1_2</name> <type>VK_MAKE_API_VERSION</type>(0, 1, 2, 0)// Patch version should always be set to 0</type>
         <type category="define">// Version of this file
-#define <name>VK_HEADER_VERSION</name> 189</type>
+#define <name>VK_HEADER_VERSION</name> 190</type>
         <type category="define" requires="VK_HEADER_VERSION">// Complete version of this file
 #define <name>VK_HEADER_VERSION_COMPLETE</name> <type>VK_MAKE_API_VERSION</type>(0, 1, 2, VK_HEADER_VERSION)</type>
 
@@ -261,12 +261,11 @@ typedef void <name>CAMetalLayer</name>;
         <type requires="VkPipelineCreateFlagBits"         category="bitmask">typedef <type>VkFlags</type> <name>VkPipelineCreateFlags</name>;</type>
         <type requires="VkColorComponentFlagBits"         category="bitmask">typedef <type>VkFlags</type> <name>VkColorComponentFlags</name>;</type>
         <type requires="VkFenceCreateFlagBits"            category="bitmask">typedef <type>VkFlags</type> <name>VkFenceCreateFlags</name>;</type>
-            <comment>When VkSemaphoreCreateFlagBits is first extended, need to add a requires= attribute for it to VkSemaphoreCreateFlags</comment>
         <type                                             category="bitmask">typedef <type>VkFlags</type> <name>VkSemaphoreCreateFlags</name>;</type>
         <type requires="VkFormatFeatureFlagBits"          category="bitmask">typedef <type>VkFlags</type> <name>VkFormatFeatureFlags</name>;</type>
         <type requires="VkQueryControlFlagBits"           category="bitmask">typedef <type>VkFlags</type> <name>VkQueryControlFlags</name>;</type>
         <type requires="VkQueryResultFlagBits"            category="bitmask">typedef <type>VkFlags</type> <name>VkQueryResultFlags</name>;</type>
-        <type requires="VkShaderModuleCreateFlagBits"     category="bitmask">typedef <type>VkFlags</type> <name>VkShaderModuleCreateFlags</name>;</type>
+        <type                                             category="bitmask">typedef <type>VkFlags</type> <name>VkShaderModuleCreateFlags</name>;</type>
         <type requires="VkEventCreateFlagBits"            category="bitmask">typedef <type>VkFlags</type> <name>VkEventCreateFlags</name>;</type>
         <type requires="VkCommandPoolCreateFlagBits"      category="bitmask">typedef <type>VkFlags</type> <name>VkCommandPoolCreateFlags</name>;</type>
         <type requires="VkCommandPoolResetFlagBits"       category="bitmask">typedef <type>VkFlags</type> <name>VkCommandPoolResetFlags</name>;</type>
@@ -548,7 +547,7 @@ typedef void <name>CAMetalLayer</name>;
         <type name="VkObjectType" category="enum"/>
         <type name="VkEventCreateFlagBits" category="enum"/>
         <type name="VkPipelineLayoutCreateFlagBits" category="enum"/>
-            <comment>When VkSemaphoreCreateFlagBits is first extended, need to add a type enum tag for it here</comment>
+        <type name="VkSemaphoreCreateFlagBits" category="enum"/>
 
         <comment>Extensions</comment>
         <type name="VkIndirectCommandsLayoutUsageFlagBitsNV" category="enum"/>
@@ -2087,7 +2086,7 @@ typedef void <name>CAMetalLayer</name>;
         <type category="struct" name="VkPhysicalDeviceMultiDrawPropertiesEXT" structextends="VkPhysicalDeviceProperties2" returnedonly="true">
             <member values="VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTI_DRAW_PROPERTIES_EXT"><type>VkStructureType</type> <name>sType</name></member>
             <member optional="true"><type>void</type>*    <name>pNext</name></member>
-            <member><type>uint32_t</type>         <name>maxMultiDrawCount</name></member>
+            <member limittype="max"><type>uint32_t</type>         <name>maxMultiDrawCount</name></member>
         </type>
         <type category="struct" name="VkGraphicsShaderGroupCreateInfoNV">
             <member values="VK_STRUCTURE_TYPE_GRAPHICS_SHADER_GROUP_CREATE_INFO_NV"><type>VkStructureType</type> <name>sType</name></member>
@@ -4641,6 +4640,12 @@ typedef void <name>CAMetalLayer</name>;
             <member optional="true"><type>void</type>*    <name>pNext</name></member>
             <member><type>VkImageLayout</type>                  <name>stencilLayout</name></member>
         </type>
+        <type category="struct" name="VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT" structextends="VkPhysicalDeviceFeatures2,VkDeviceCreateInfo">
+            <member values="VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIMITIVE_TOPOLOGY_LIST_RESTART_FEATURES_EXT"><type>VkStructureType</type> <name>sType</name></member>
+            <member optional="true"><type>void</type>*        <name>pNext</name></member>
+            <member><type>VkBool32</type>                     <name>primitiveTopologyListRestart</name></member>
+            <member><type>VkBool32</type>                     <name>primitiveTopologyPatchListRestart</name></member>
+        </type>
         <type category="struct" name="VkAttachmentReferenceStencilLayoutKHR"                   alias="VkAttachmentReferenceStencilLayout"/>
         <type category="struct" name="VkAttachmentDescriptionStencilLayout" structextends="VkAttachmentDescription2">
             <member values="VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_STENCIL_LAYOUT"><type>VkStructureType</type><name>sType</name></member>
@@ -5945,8 +5950,8 @@ typedef void <name>CAMetalLayer</name>;
         <type category="struct" name="VkPhysicalDeviceProvokingVertexPropertiesEXT" returnedonly="true" structextends="VkPhysicalDeviceProperties2">
             <member values="VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROVOKING_VERTEX_PROPERTIES_EXT"><type>VkStructureType</type> <name>sType</name></member>
             <member optional="true"><type>void</type>*                               <name>pNext</name></member>
-            <member><type>VkBool32</type>                            <name>provokingVertexModePerPipeline</name></member>
-            <member><type>VkBool32</type>                            <name>transformFeedbackPreservesTriangleFanProvokingVertex</name></member>
+            <member limittype="bitmask"><type>VkBool32</type>                            <name>provokingVertexModePerPipeline</name></member>
+            <member limittype="bitmask"><type>VkBool32</type>                            <name>transformFeedbackPreservesTriangleFanProvokingVertex</name></member>
         </type>
         <type category="struct" name="VkPipelineRasterizationProvokingVertexStateCreateInfoEXT" structextends="VkPipelineRasterizationStateCreateInfo">
             <member values="VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_PROVOKING_VERTEX_STATE_CREATE_INFO_EXT"><type>VkStructureType</type> <name>sType</name></member>
@@ -5981,15 +5986,54 @@ typedef void <name>CAMetalLayer</name>;
             <member><type>size_t</type>                 <name>extraCount</name></member>
             <member len="extraCount">const <type>void</type>* const *    <name>pExtras</name></member>
         </type>
+        <type category="struct" name="VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR" structextends="VkPhysicalDeviceFeatures2,VkDeviceCreateInfo">
+            <member values="VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES_KHR"><type>VkStructureType</type> <name>sType</name></member>
+            <member optional="true"><type>void</type>*               <name>pNext</name></member>
+            <member><type>VkBool32</type>                            <name>shaderIntegerDotProduct</name></member>
+        </type>
+        <type category="struct" name="VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR" structextends="VkPhysicalDeviceProperties2">
+            <member values="VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES_KHR"><type>VkStructureType</type> <name>sType</name></member>
+            <member optional="true"><type>void</type>*               <name>pNext</name></member>
+            <member limittype="bitmask"><type>VkBool32</type>        <name>integerDotProduct8BitUnsignedAccelerated</name></member>
+            <member limittype="bitmask"><type>VkBool32</type>        <name>integerDotProduct8BitSignedAccelerated</name></member>
+            <member limittype="bitmask"><type>VkBool32</type>        <name>integerDotProduct8BitMixedSignednessAccelerated</name></member>
+            <member limittype="bitmask"><type>VkBool32</type>        <name>integerDotProduct4x8BitPackedUnsignedAccelerated</name></member>
+            <member limittype="bitmask"><type>VkBool32</type>        <name>integerDotProduct4x8BitPackedSignedAccelerated</name></member>
+            <member limittype="bitmask"><type>VkBool32</type>        <name>integerDotProduct4x8BitPackedMixedSignednessAccelerated</name></member>
+            <member limittype="bitmask"><type>VkBool32</type>        <name>integerDotProduct16BitUnsignedAccelerated</name></member>
+            <member limittype="bitmask"><type>VkBool32</type>        <name>integerDotProduct16BitSignedAccelerated</name></member>
+            <member limittype="bitmask"><type>VkBool32</type>        <name>integerDotProduct16BitMixedSignednessAccelerated</name></member>
+            <member limittype="bitmask"><type>VkBool32</type>        <name>integerDotProduct32BitUnsignedAccelerated</name></member>
+            <member limittype="bitmask"><type>VkBool32</type>        <name>integerDotProduct32BitSignedAccelerated</name></member>
+            <member limittype="bitmask"><type>VkBool32</type>        <name>integerDotProduct32BitMixedSignednessAccelerated</name></member>
+            <member limittype="bitmask"><type>VkBool32</type>        <name>integerDotProduct64BitUnsignedAccelerated</name></member>
+            <member limittype="bitmask"><type>VkBool32</type>        <name>integerDotProduct64BitSignedAccelerated</name></member>
+            <member limittype="bitmask"><type>VkBool32</type>        <name>integerDotProduct64BitMixedSignednessAccelerated</name></member>
+            <member limittype="bitmask"><type>VkBool32</type>        <name>integerDotProductAccumulatingSaturating8BitUnsignedAccelerated</name></member>
+            <member limittype="bitmask"><type>VkBool32</type>        <name>integerDotProductAccumulatingSaturating8BitSignedAccelerated</name></member>
+            <member limittype="bitmask"><type>VkBool32</type>        <name>integerDotProductAccumulatingSaturating8BitMixedSignednessAccelerated</name></member>
+            <member limittype="bitmask"><type>VkBool32</type>        <name>integerDotProductAccumulatingSaturating4x8BitPackedUnsignedAccelerated</name></member>
+            <member limittype="bitmask"><type>VkBool32</type>        <name>integerDotProductAccumulatingSaturating4x8BitPackedSignedAccelerated</name></member>
+            <member limittype="bitmask"><type>VkBool32</type>        <name>integerDotProductAccumulatingSaturating4x8BitPackedMixedSignednessAccelerated</name></member>
+            <member limittype="bitmask"><type>VkBool32</type>        <name>integerDotProductAccumulatingSaturating16BitUnsignedAccelerated</name></member>
+            <member limittype="bitmask"><type>VkBool32</type>        <name>integerDotProductAccumulatingSaturating16BitSignedAccelerated</name></member>
+            <member limittype="bitmask"><type>VkBool32</type>        <name>integerDotProductAccumulatingSaturating16BitMixedSignednessAccelerated</name></member>
+            <member limittype="bitmask"><type>VkBool32</type>        <name>integerDotProductAccumulatingSaturating32BitUnsignedAccelerated</name></member>
+            <member limittype="bitmask"><type>VkBool32</type>        <name>integerDotProductAccumulatingSaturating32BitSignedAccelerated</name></member>
+            <member limittype="bitmask"><type>VkBool32</type>        <name>integerDotProductAccumulatingSaturating32BitMixedSignednessAccelerated</name></member>
+            <member limittype="bitmask"><type>VkBool32</type>        <name>integerDotProductAccumulatingSaturating64BitUnsignedAccelerated</name></member>
+            <member limittype="bitmask"><type>VkBool32</type>        <name>integerDotProductAccumulatingSaturating64BitSignedAccelerated</name></member>
+            <member limittype="bitmask"><type>VkBool32</type>        <name>integerDotProductAccumulatingSaturating64BitMixedSignednessAccelerated</name></member>
+        </type>
         <type category="struct" name="VkPhysicalDeviceDrmPropertiesEXT" returnedonly="true" structextends="VkPhysicalDeviceProperties2">
             <member values="VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRM_PROPERTIES_EXT"><type>VkStructureType</type> <name>sType</name></member>
             <member optional="true"><type>void</type>* <name>pNext</name></member>
-            <member><type>VkBool32</type> <name>hasPrimary</name></member>
-            <member><type>VkBool32</type> <name>hasRender</name></member>
-            <member><type>int64_t</type> <name>primaryMajor</name></member>
-            <member><type>int64_t</type> <name>primaryMinor</name></member>
-            <member><type>int64_t</type> <name>renderMajor</name></member>
-            <member><type>int64_t</type> <name>renderMinor</name></member>
+            <member limittype="bitmask"><type>VkBool32</type> <name>hasPrimary</name></member>
+            <member limittype="bitmask"><type>VkBool32</type> <name>hasRender</name></member>
+            <member limittype="noauto"><type>int64_t</type> <name>primaryMajor</name></member>
+            <member limittype="noauto"><type>int64_t</type> <name>primaryMinor</name></member>
+            <member limittype="noauto"><type>int64_t</type> <name>renderMajor</name></member>
+            <member limittype="noauto"><type>int64_t</type> <name>renderMinor</name></member>
         </type>
         <type category="struct" name="VkPhysicalDeviceRayTracingMotionBlurFeaturesNV" structextends="VkPhysicalDeviceFeatures2,VkDeviceCreateInfo">
             <member values="VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_MOTION_BLUR_FEATURES_NV"><type>VkStructureType</type> <name>sType</name></member>
@@ -6192,7 +6236,8 @@ typedef void <name>CAMetalLayer</name>;
     <enums name="VkPipelineCacheHeaderVersion" type="enum">
         <enum value="1"     name="VK_PIPELINE_CACHE_HEADER_VERSION_ONE"/>
     </enums>
-    <enums name="VkPipelineCacheCreateFlagBits" type="bitmask"></enums>
+    <enums name="VkPipelineCacheCreateFlagBits" type="bitmask">
+    </enums>
     <enums name="VkPrimitiveTopology" type="enum">
         <enum value="0"     name="VK_PRIMITIVE_TOPOLOGY_POINT_LIST"/>
         <enum value="1"     name="VK_PRIMITIVE_TOPOLOGY_LINE_LIST"/>
@@ -6651,8 +6696,10 @@ typedef void <name>CAMetalLayer</name>;
         <enum bitpos="1"    name="VK_CULL_MODE_BACK_BIT"/>
         <enum value="0x00000003" name="VK_CULL_MODE_FRONT_AND_BACK"/>
     </enums>
-    <enums name="VkRenderPassCreateFlagBits" type="bitmask"></enums>
-    <enums name="VkDeviceQueueCreateFlagBits" type="bitmask"></enums>
+    <enums name="VkRenderPassCreateFlagBits" type="bitmask">
+    </enums>
+    <enums name="VkDeviceQueueCreateFlagBits" type="bitmask">
+    </enums>
     <enums name="VkMemoryPropertyFlagBits" type="bitmask">
         <enum bitpos="0"    name="VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT"               comment="If otherwise stated, then allocate memory on device"/>
         <enum bitpos="1"    name="VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT"               comment="Memory is mappable by host"/>
@@ -6745,7 +6792,8 @@ typedef void <name>CAMetalLayer</name>;
     <enums name="VkFenceCreateFlagBits" type="bitmask">
         <enum bitpos="0"    name="VK_FENCE_CREATE_SIGNALED_BIT"/>
     </enums>
-        <comment>When VkSemaphoreCreateFlagBits is first extended, need to add a bitmask enums tag for it here</comment>
+    <enums name="VkSemaphoreCreateFlagBits" type="bitmask">
+    </enums>
     <enums name="VkFormatFeatureFlagBits" type="bitmask">
         <enum bitpos="0"    name="VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT"               comment="Format can be used for sampled images (SAMPLED_IMAGE and COMBINED_IMAGE_SAMPLER descriptor types)"/>
         <enum bitpos="1"    name="VK_FORMAT_FEATURE_STORAGE_IMAGE_BIT"               comment="Format can be used for storage images (STORAGE_IMAGE descriptor type)"/>
@@ -10776,7 +10824,7 @@ typedef void <name>CAMetalLayer</name>;
             <type name="VkImageUsageFlagBits"/>
             <type name="VkImageUsageFlags"/>
             <type name="VkInstance"/>
-            <type name="VkInstanceCreateFlags"/>
+            <type name="VkInstanceCreateFlags" comment="Will add VkInstanceCreateFlagBits when bits are defined in the future"/>
             <type name="VkInstanceCreateInfo"/>
             <type name="VkInternalAllocationType"/>
             <type name="VkMemoryHeap"/>
@@ -10812,10 +10860,9 @@ typedef void <name>CAMetalLayer</name>;
         </require>
         <require comment="Device commands">
             <type name="VkDevice"/>
-            <type name="VkDeviceCreateFlags"/>
+            <type name="VkDeviceCreateFlags" comment="Will add VkDeviceCreateFlagBits when bits are defined in the future"/>
             <type name="VkDeviceCreateInfo"/>
-            <type name="VkDeviceQueueCreateFlagBits"/>
-            <type name="VkDeviceQueueCreateFlags"/>
+            <type name="VkDeviceQueueCreateFlags" comment="VkDeviceQueueCreateFlagBits was added later"/>
             <type name="VkDeviceQueueCreateInfo"/>
             <command name="vkCreateDevice"/>
             <command name="vkDestroyDevice"/>
@@ -10893,7 +10940,7 @@ typedef void <name>CAMetalLayer</name>;
         </require>
         <require comment="Queue semaphore commands">
             <type name="VkSemaphore"/>
-            <type name="VkSemaphoreCreateFlags"/>
+            <type name="VkSemaphoreCreateFlags" comment="Will add VkSemaphoreCreateFlagBits when bits are defined in the future"/>
             <type name="VkSemaphoreCreateInfo"/>
             <command name="vkCreateSemaphore"/>
             <command name="vkDestroySemaphore"/>
@@ -10913,7 +10960,7 @@ typedef void <name>CAMetalLayer</name>;
             <type name="VkQueryPipelineStatisticFlagBits"/>
             <type name="VkQueryPipelineStatisticFlags"/>
             <type name="VkQueryPool"/>
-            <type name="VkQueryPoolCreateFlags"/>
+            <type name="VkQueryPoolCreateFlags" comment="Will add VkQueryPoolCreateFlagBits when bits are defined in the future"/>
             <type name="VkQueryPoolCreateInfo"/>
             <type name="VkQueryResultFlagBits"/>
             <type name="VkQueryResultFlags"/>
@@ -10935,7 +10982,7 @@ typedef void <name>CAMetalLayer</name>;
         </require>
         <require comment="Buffer view commands">
             <type name="VkBufferView"/>
-            <type name="VkBufferViewCreateFlags" comment="Will need FlagBits type eventually"/>
+            <type name="VkBufferViewCreateFlags" comment="Will add VkBufferViewFlagBits when bits are defined in the future"/>
             <type name="VkBufferViewCreateInfo"/>
             <command name="vkCreateBufferView"/>
             <command name="vkDestroyBufferView"/>
@@ -10963,7 +11010,6 @@ typedef void <name>CAMetalLayer</name>;
         </require>
         <require comment="Shader commands">
             <type name="VkShaderModule"/>
-            <type name="VkShaderModuleCreateFlagBits"/>
             <type name="VkShaderModuleCreateFlags"/>
             <type name="VkShaderModuleCreateInfo"/>
             <command name="vkCreateShaderModule"/>
@@ -10971,8 +11017,7 @@ typedef void <name>CAMetalLayer</name>;
         </require>
         <require comment="Pipeline Cache commands">
             <type name="VkPipelineCache"/>
-            <type name="VkPipelineCacheCreateFlagBits"/>
-            <type name="VkPipelineCacheCreateFlags"/>
+            <type name="VkPipelineCacheCreateFlags" comment="VkPipelineCacheCreateFlagBits was added later"/>
             <type name="VkPipelineCacheCreateInfo"/>
             <command name="vkCreatePipelineCache"/>
             <command name="vkDestroyPipelineCache"/>
@@ -10994,29 +11039,29 @@ typedef void <name>CAMetalLayer</name>;
             <type name="VkLogicOp"/>
             <type name="VkPipeline"/>
             <type name="VkPipelineColorBlendAttachmentState"/>
-            <type name="VkPipelineColorBlendStateCreateFlags" comment="Will need FlagBits type eventually"/>
+            <type name="VkPipelineColorBlendStateCreateFlags" comment="Will add VkPipeline*StateFlagBits when bits are defined in the future"/>
             <type name="VkPipelineColorBlendStateCreateInfo"/>
             <type name="VkPipelineCreateFlagBits"/>
             <type name="VkPipelineCreateFlags"/>
-            <type name="VkPipelineDepthStencilStateCreateFlags" comment="Will need FlagBits type eventually"/>
+            <type name="VkPipelineDepthStencilStateCreateFlags" comment="Will add VkPipeline*StateFlagBits when bits are defined in the future"/>
             <type name="VkPipelineDepthStencilStateCreateInfo"/>
-            <type name="VkPipelineDynamicStateCreateFlags" comment="Will need FlagBits type eventually"/>
+            <type name="VkPipelineDynamicStateCreateFlags" comment="Will add VkPipeline*StateFlagBits when bits are defined in the future"/>
             <type name="VkPipelineDynamicStateCreateInfo"/>
-            <type name="VkPipelineInputAssemblyStateCreateFlags" comment="Will need FlagBits type eventually"/>
+            <type name="VkPipelineInputAssemblyStateCreateFlags" comment="Will add VkPipeline*StateFlagBits when bits are defined in the future"/>
             <type name="VkPipelineInputAssemblyStateCreateInfo"/>
-            <type name="VkPipelineLayoutCreateFlags" comment="Will need FlagBits type eventually"/>
-            <type name="VkPipelineMultisampleStateCreateFlags" comment="Will need FlagBits type eventually"/>
+            <type name="VkPipelineLayoutCreateFlags" comment="Will add VkPipelineLayoutCreateFlagBits when bits are defined in the future"/>
+            <type name="VkPipelineMultisampleStateCreateFlags" comment="Will add VkPipelineMultisampleStateCreateFlagBits when bits are defined in the future"/>
             <type name="VkPipelineMultisampleStateCreateInfo"/>
-            <type name="VkPipelineRasterizationStateCreateFlags" comment="Will need FlagBits type eventually"/>
+            <type name="VkPipelineRasterizationStateCreateFlags" comment="Will add VkPipelineRasterizationStateCreateFlagBits when bits are defined in the future"/>
             <type name="VkPipelineRasterizationStateCreateInfo"/>
             <type name="VkPipelineShaderStageCreateFlagBits"/>
             <type name="VkPipelineShaderStageCreateFlags"/>
             <type name="VkPipelineShaderStageCreateInfo"/>
-            <type name="VkPipelineTessellationStateCreateFlags" comment="Will need FlagBits type eventually"/>
+            <type name="VkPipelineTessellationStateCreateFlags" comment="Will add VkPipelineTessellationStateCreateFlagBits when bits are defined in the future"/>
             <type name="VkPipelineTessellationStateCreateInfo"/>
-            <type name="VkPipelineVertexInputStateCreateFlags" comment="Will need FlagBits type eventually"/>
+            <type name="VkPipelineVertexInputStateCreateFlags" comment="Will add VkPipelineVertexInputStateCreateFlagBits when bits are defined in the future"/>
             <type name="VkPipelineVertexInputStateCreateInfo"/>
-            <type name="VkPipelineViewportStateCreateFlags" comment="Will need FlagBits type eventually"/>
+            <type name="VkPipelineViewportStateCreateFlags" comment="Will add VkPipelineViewportStateCreateFlagBits when bits are defined in the future"/>
             <type name="VkPipelineViewportStateCreateInfo"/>
             <type name="VkPolygonMode"/>
             <type name="VkPrimitiveTopology"/>
@@ -11369,6 +11414,7 @@ typedef void <name>CAMetalLayer</name>;
             <enum extends="VkStructureType" extnumber="146" offset="3"          name="VK_STRUCTURE_TYPE_DEVICE_QUEUE_INFO_2"/>
             <enum bitpos="4"  extends="VkQueueFlagBits"                         name="VK_QUEUE_PROTECTED_BIT" comment="Queues may support protected operations"/>
             <enum bitpos="0"  extends="VkDeviceQueueCreateFlagBits"             name="VK_DEVICE_QUEUE_CREATE_PROTECTED_BIT" comment="Queue is a protected-capable device queue"/>
+            <type name="VkDeviceQueueCreateFlagBits" comment="This is a temporary workaround for processors not recognizing that VK_DEVICE_QUEUE_CREATE_PROTECTED_BIT above also requires this type"/>
             <enum bitpos="5"  extends="VkMemoryPropertyFlagBits"                name="VK_MEMORY_PROPERTY_PROTECTED_BIT" comment="Memory is protected"/>
             <enum bitpos="3"  extends="VkBufferCreateFlagBits"                  name="VK_BUFFER_CREATE_PROTECTED_BIT" comment="Buffer requires protected memory"/>
             <enum bitpos="11" extends="VkImageCreateFlagBits"                   name="VK_IMAGE_CREATE_PROTECTED_BIT" comment="Image requires protected memory"/>
@@ -15419,10 +15465,14 @@ typedef void <name>CAMetalLayer</name>;
                 <enum value="&quot;VK_KHR_extension_280&quot;"              name="VK_KHR_extension_280"/>
             </require>
         </extension>
-        <extension name="VK_ARM_extension_281" number="281" type="device" author="ARM" contact="Kevin Petit @kevinpetit" supported="disabled">
+        <extension name="VK_KHR_shader_integer_dot_product" number="281" type="device" author="KHR" requires="VK_KHR_get_physical_device_properties2" contact="Kevin Petit @kevinpetit" supported="vulkan">
             <require>
-                <enum value="0"                                             name="VK_ARM_EXTENSION_281_SPEC_VERSION"/>
-                <enum value="&quot;VK_ARM_extension_281&quot;"              name="VK_ARM_extension_281"/>
+                <enum value="1"                                             name="VK_KHR_SHADER_INTEGER_DOT_PRODUCT_SPEC_VERSION"/>
+                <enum value="&quot;VK_KHR_shader_integer_dot_product&quot;" name="VK_KHR_SHADER_INTEGER_DOT_PRODUCT_EXTENSION_NAME"/>
+                <enum offset="0" extends="VkStructureType"                  name="VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES_KHR"/>
+                <enum offset="1" extends="VkStructureType"                  name="VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES_KHR"/>
+                <type name="VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR"/>
+                <type name="VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR"/>
             </require>
         </extension>
         <extension name="VK_EXT_texel_buffer_alignment" number="282" type="device" requires="VK_KHR_get_physical_device_properties2" author="EXT" contact="Jeff Bolz @jeffbolznv" supported="vulkan">
@@ -15626,6 +15676,7 @@ typedef void <name>CAMetalLayer</name>;
                 <enum extends="VkResult"            name="VK_ERROR_PIPELINE_COMPILE_REQUIRED_EXT" alias="VK_PIPELINE_COMPILE_REQUIRED_EXT"/>
                 <enum bitpos="0"  extends="VkPipelineCacheCreateFlagBits"
                     name="VK_PIPELINE_CACHE_CREATE_EXTERNALLY_SYNCHRONIZED_BIT_EXT"/>
+                <type name="VkPipelineCacheCreateFlagBits" comment="This is a temporary workaround for processors not recognizing that VK_PIPELINE_CACHE_CREATE_EXTERNALLY_SYNCHRONIZED_BIT_EXT above also requires this type"/>
             </require>
         </extension>
         <extension name="VK_KHR_extension_299" number="299" author="KHR" contact="Mark Bellamy @mark.bellamy_arm" supported="disabled">
@@ -16207,10 +16258,12 @@ typedef void <name>CAMetalLayer</name>;
                 <enum value="&quot;VK_EXT_vertex_attribute_aliasing&quot;"  name="VK_EXT_VERTEX_ATTRIBUTE_ALIASING_EXTENSION_NAME"/>
             </require>
         </extension>
-        <extension name="VK_EXT_extension_357" number="357" author="EXT" contact="Courtney Goeltzenleuchter @courtney-g" supported="disabled" specialuse="glemulation">
+        <extension name="VK_EXT_primitive_topology_list_restart" number="357" type="device" author="EXT" contact="Shahbaz Youssefi @syoussefi" supported="vulkan" specialuse="glemulation">
             <require>
-                <enum value="0"                                             name="VK_EXT_EXTENSION_357"/>
-                <enum value="&quot;VK_EXT_extension_357&quot;"              name="VK_EXT_EXTENSION_357"/>
+                <enum value="1"                                             name="VK_EXT_PRIMITIVE_TOPOLOGY_LIST_RESTART_SPEC_VERSION"/>
+                <enum value="&quot;VK_EXT_primitive_topology_list_restart&quot;"           name="VK_EXT_PRIMITIVE_TOPOLOGY_LIST_RESTART_EXTENSION_NAME"/>
+                <enum offset="0" extends="VkStructureType"                  name="VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIMITIVE_TOPOLOGY_LIST_RESTART_FEATURES_EXT"/>
+                <type name="VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT"/>
             </require>
         </extension>
         <extension name="VK_KHR_extension_358" number="358" author="KHR" contact="Jeff Bolz @jeffbolznv" supported="disabled">
@@ -16688,6 +16741,13 @@ typedef void <name>CAMetalLayer</name>;
                 <enum value="&quot;VK_EXT_extension_422&quot;"              name="VK_EXT_EXTENSION_422_EXTENSION_NAME"/>
             </require>
         </extension>
+        <extension name="VK_EXT_disable_cube_map_wrap" number="423" author="EXT" contact="Georg Lehmann @DadSchoorse" supported="disabled">
+            <require>
+                <enum value="0"                                             name="VK_EXT_DISABLE_CUBE_MAP_WRAP_SPEC_VERSION"/>
+                <enum value="&quot;VK_EXT_disable_cube_map_wrap&quot;"      name="VK_EXT_DISABLE_CUBE_MAP_WRAP_EXTENSION_NAME"/>
+                <enum bitpos="2"  extends="VkSamplerCreateFlagBits"         name="VK_SAMPLER_CREATE_RESERVED_2_BIT_EXT"/>
+            </require>
+        </extension>
 
     </extensions>
     <spirvextensions comment="SPIR-V Extensions allowed in Vulkan and what is required to use it">
@@ -16869,6 +16929,9 @@ typedef void <name>CAMetalLayer</name>;
         </spirvextension>
         <spirvextension name="SPV_EXT_shader_atomic_float16_add">
             <enable extension="VK_EXT_shader_atomic_float2"/>
+        </spirvextension>
+        <spirvextension name="SPV_KHR_integer_dot_product">
+            <enable extension="VK_KHR_shader_integer_dot_product"/>
         </spirvextension>
     </spirvextensions>
     <spirvcapabilities comment="SPIR-V Capabilities allowed in Vulkan and what is required to use it">
@@ -17288,6 +17351,18 @@ typedef void <name>CAMetalLayer</name>;
         </spirvcapability>
         <spirvcapability name="WorkgroupMemoryExplicitLayout16BitAccessKHR">
             <enable struct="VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR" feature="workgroupMemoryExplicitLayout16BitAccess" requires="VK_KHR_workgroup_memory_explicit_layout"/>
+        </spirvcapability>
+        <spirvcapability name="DotProductInputAllKHR">
+            <enable struct="VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR" feature="shaderIntegerDotProduct" requires="VK_KHR_shader_integer_dot_product"/>
+        </spirvcapability>
+        <spirvcapability name="DotProductInput4x8BitKHR">
+            <enable struct="VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR" feature="shaderIntegerDotProduct" requires="VK_KHR_shader_integer_dot_product"/>
+        </spirvcapability>
+        <spirvcapability name="DotProductInput4x8BitPackedKHR">
+            <enable struct="VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR" feature="shaderIntegerDotProduct" requires="VK_KHR_shader_integer_dot_product"/>
+        </spirvcapability>
+        <spirvcapability name="DotProductKHR">
+            <enable struct="VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR" feature="shaderIntegerDotProduct" requires="VK_KHR_shader_integer_dot_product"/>
         </spirvcapability>
     </spirvcapabilities>
 </registry>
