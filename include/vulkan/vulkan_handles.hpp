@@ -1230,6 +1230,9 @@ namespace VULKAN_HPP_NAMESPACE
   struct MultiDrawInfoEXT;
   struct MultiDrawIndexedInfoEXT;
 
+  //=== VK_EXT_pageable_device_local_memory ===
+  struct PhysicalDevicePageableDeviceLocalMemoryFeaturesEXT;
+
   //===============
   //=== HANDLEs ===
   //===============
@@ -1237,7 +1240,8 @@ namespace VULKAN_HPP_NAMESPACE
   class SurfaceKHR
   {
   public:
-    using CType = VkSurfaceKHR;
+    using CType      = VkSurfaceKHR;
+    using NativeType = VkSurfaceKHR;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::eSurfaceKHR;
@@ -1333,7 +1337,8 @@ namespace VULKAN_HPP_NAMESPACE
   class DebugReportCallbackEXT
   {
   public:
-    using CType = VkDebugReportCallbackEXT;
+    using CType      = VkDebugReportCallbackEXT;
+    using NativeType = VkDebugReportCallbackEXT;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::eDebugReportCallbackEXT;
@@ -1431,7 +1436,8 @@ namespace VULKAN_HPP_NAMESPACE
   class DebugUtilsMessengerEXT
   {
   public:
-    using CType = VkDebugUtilsMessengerEXT;
+    using CType      = VkDebugUtilsMessengerEXT;
+    using NativeType = VkDebugUtilsMessengerEXT;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::eDebugUtilsMessengerEXT;
@@ -1522,7 +1528,8 @@ namespace VULKAN_HPP_NAMESPACE
   class DisplayKHR
   {
   public:
-    using CType = VkDisplayKHR;
+    using CType      = VkDisplayKHR;
+    using NativeType = VkDisplayKHR;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::eDisplayKHR;
@@ -1618,7 +1625,8 @@ namespace VULKAN_HPP_NAMESPACE
   class SwapchainKHR
   {
   public:
-    using CType = VkSwapchainKHR;
+    using CType      = VkSwapchainKHR;
+    using NativeType = VkSwapchainKHR;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::eSwapchainKHR;
@@ -1715,7 +1723,8 @@ namespace VULKAN_HPP_NAMESPACE
   class Semaphore
   {
   public:
-    using CType = VkSemaphore;
+    using CType      = VkSemaphore;
+    using NativeType = VkSemaphore;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::eSemaphore;
@@ -1810,7 +1819,8 @@ namespace VULKAN_HPP_NAMESPACE
   class Fence
   {
   public:
-    using CType = VkFence;
+    using CType      = VkFence;
+    using NativeType = VkFence;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::eFence;
@@ -1903,7 +1913,8 @@ namespace VULKAN_HPP_NAMESPACE
   class PerformanceConfigurationINTEL
   {
   public:
-    using CType = VkPerformanceConfigurationINTEL;
+    using CType      = VkPerformanceConfigurationINTEL;
+    using NativeType = VkPerformanceConfigurationINTEL;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::ePerformanceConfigurationINTEL;
@@ -1996,7 +2007,8 @@ namespace VULKAN_HPP_NAMESPACE
   class QueryPool
   {
   public:
-    using CType = VkQueryPool;
+    using CType      = VkQueryPool;
+    using NativeType = VkQueryPool;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::eQueryPool;
@@ -2091,7 +2103,8 @@ namespace VULKAN_HPP_NAMESPACE
   class Buffer
   {
   public:
-    using CType = VkBuffer;
+    using CType      = VkBuffer;
+    using NativeType = VkBuffer;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::eBuffer;
@@ -2185,7 +2198,8 @@ namespace VULKAN_HPP_NAMESPACE
   class PipelineLayout
   {
   public:
-    using CType = VkPipelineLayout;
+    using CType      = VkPipelineLayout;
+    using NativeType = VkPipelineLayout;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::ePipelineLayout;
@@ -2282,7 +2296,8 @@ namespace VULKAN_HPP_NAMESPACE
   class DescriptorSet
   {
   public:
-    using CType = VkDescriptorSet;
+    using CType      = VkDescriptorSet;
+    using NativeType = VkDescriptorSet;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::eDescriptorSet;
@@ -2379,7 +2394,8 @@ namespace VULKAN_HPP_NAMESPACE
   class ImageView
   {
   public:
-    using CType = VkImageView;
+    using CType      = VkImageView;
+    using NativeType = VkImageView;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::eImageView;
@@ -2474,7 +2490,8 @@ namespace VULKAN_HPP_NAMESPACE
   class Pipeline
   {
   public:
-    using CType = VkPipeline;
+    using CType      = VkPipeline;
+    using NativeType = VkPipeline;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::ePipeline;
@@ -2568,7 +2585,8 @@ namespace VULKAN_HPP_NAMESPACE
   class Image
   {
   public:
-    using CType = VkImage;
+    using CType      = VkImage;
+    using NativeType = VkImage;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::eImage;
@@ -2661,7 +2679,8 @@ namespace VULKAN_HPP_NAMESPACE
   class AccelerationStructureNV
   {
   public:
-    using CType = VkAccelerationStructureNV;
+    using CType      = VkAccelerationStructureNV;
+    using NativeType = VkAccelerationStructureNV;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::eAccelerationStructureNV;
@@ -2759,7 +2778,8 @@ namespace VULKAN_HPP_NAMESPACE
   class DescriptorUpdateTemplate
   {
   public:
-    using CType = VkDescriptorUpdateTemplate;
+    using CType      = VkDescriptorUpdateTemplate;
+    using NativeType = VkDescriptorUpdateTemplate;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::eDescriptorUpdateTemplate;
@@ -2858,7 +2878,8 @@ namespace VULKAN_HPP_NAMESPACE
   class Event
   {
   public:
-    using CType = VkEvent;
+    using CType      = VkEvent;
+    using NativeType = VkEvent;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::eEvent;
@@ -2951,7 +2972,8 @@ namespace VULKAN_HPP_NAMESPACE
   class AccelerationStructureKHR
   {
   public:
-    using CType = VkAccelerationStructureKHR;
+    using CType      = VkAccelerationStructureKHR;
+    using NativeType = VkAccelerationStructureKHR;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::eAccelerationStructureKHR;
@@ -3049,7 +3071,8 @@ namespace VULKAN_HPP_NAMESPACE
   class CommandBuffer
   {
   public:
-    using CType = VkCommandBuffer;
+    using CType      = VkCommandBuffer;
+    using NativeType = VkCommandBuffer;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::eCommandBuffer;
@@ -4752,7 +4775,8 @@ namespace VULKAN_HPP_NAMESPACE
   class DeviceMemory
   {
   public:
-    using CType = VkDeviceMemory;
+    using CType      = VkDeviceMemory;
+    using NativeType = VkDeviceMemory;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::eDeviceMemory;
@@ -4850,7 +4874,8 @@ namespace VULKAN_HPP_NAMESPACE
   class VideoSessionKHR
   {
   public:
-    using CType = VkVideoSessionKHR;
+    using CType      = VkVideoSessionKHR;
+    using NativeType = VkVideoSessionKHR;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::eVideoSessionKHR;
@@ -4941,7 +4966,8 @@ namespace VULKAN_HPP_NAMESPACE
   class DeferredOperationKHR
   {
   public:
-    using CType = VkDeferredOperationKHR;
+    using CType      = VkDeferredOperationKHR;
+    using NativeType = VkDeferredOperationKHR;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::eDeferredOperationKHR;
@@ -5031,7 +5057,8 @@ namespace VULKAN_HPP_NAMESPACE
   class BufferView
   {
   public:
-    using CType = VkBufferView;
+    using CType      = VkBufferView;
+    using NativeType = VkBufferView;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::eBufferView;
@@ -5127,7 +5154,8 @@ namespace VULKAN_HPP_NAMESPACE
   class CommandPool
   {
   public:
-    using CType = VkCommandPool;
+    using CType      = VkCommandPool;
+    using NativeType = VkCommandPool;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::eCommandPool;
@@ -5224,7 +5252,8 @@ namespace VULKAN_HPP_NAMESPACE
   class PipelineCache
   {
   public:
-    using CType = VkPipelineCache;
+    using CType      = VkPipelineCache;
+    using NativeType = VkPipelineCache;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::ePipelineCache;
@@ -5321,7 +5350,8 @@ namespace VULKAN_HPP_NAMESPACE
   class CuFunctionNVX
   {
   public:
-    using CType = VkCuFunctionNVX;
+    using CType      = VkCuFunctionNVX;
+    using NativeType = VkCuFunctionNVX;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::eCuFunctionNVX;
@@ -5418,7 +5448,8 @@ namespace VULKAN_HPP_NAMESPACE
   class CuModuleNVX
   {
   public:
-    using CType = VkCuModuleNVX;
+    using CType      = VkCuModuleNVX;
+    using NativeType = VkCuModuleNVX;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::eCuModuleNVX;
@@ -5515,7 +5546,8 @@ namespace VULKAN_HPP_NAMESPACE
   class DescriptorPool
   {
   public:
-    using CType = VkDescriptorPool;
+    using CType      = VkDescriptorPool;
+    using NativeType = VkDescriptorPool;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::eDescriptorPool;
@@ -5612,7 +5644,8 @@ namespace VULKAN_HPP_NAMESPACE
   class DescriptorSetLayout
   {
   public:
-    using CType = VkDescriptorSetLayout;
+    using CType      = VkDescriptorSetLayout;
+    using NativeType = VkDescriptorSetLayout;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::eDescriptorSetLayout;
@@ -5709,7 +5742,8 @@ namespace VULKAN_HPP_NAMESPACE
   class Framebuffer
   {
   public:
-    using CType = VkFramebuffer;
+    using CType      = VkFramebuffer;
+    using NativeType = VkFramebuffer;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::eFramebuffer;
@@ -5806,7 +5840,8 @@ namespace VULKAN_HPP_NAMESPACE
   class IndirectCommandsLayoutNV
   {
   public:
-    using CType = VkIndirectCommandsLayoutNV;
+    using CType      = VkIndirectCommandsLayoutNV;
+    using NativeType = VkIndirectCommandsLayoutNV;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::eIndirectCommandsLayoutNV;
@@ -5897,7 +5932,8 @@ namespace VULKAN_HPP_NAMESPACE
   class PrivateDataSlotEXT
   {
   public:
-    using CType = VkPrivateDataSlotEXT;
+    using CType      = VkPrivateDataSlotEXT;
+    using NativeType = VkPrivateDataSlotEXT;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::ePrivateDataSlotEXT;
@@ -5987,7 +6023,8 @@ namespace VULKAN_HPP_NAMESPACE
   class RenderPass
   {
   public:
-    using CType = VkRenderPass;
+    using CType      = VkRenderPass;
+    using NativeType = VkRenderPass;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::eRenderPass;
@@ -6083,7 +6120,8 @@ namespace VULKAN_HPP_NAMESPACE
   class Sampler
   {
   public:
-    using CType = VkSampler;
+    using CType      = VkSampler;
+    using NativeType = VkSampler;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::eSampler;
@@ -6177,7 +6215,8 @@ namespace VULKAN_HPP_NAMESPACE
   class SamplerYcbcrConversion
   {
   public:
-    using CType = VkSamplerYcbcrConversion;
+    using CType      = VkSamplerYcbcrConversion;
+    using NativeType = VkSamplerYcbcrConversion;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::eSamplerYcbcrConversion;
@@ -6276,7 +6315,8 @@ namespace VULKAN_HPP_NAMESPACE
   class ShaderModule
   {
   public:
-    using CType = VkShaderModule;
+    using CType      = VkShaderModule;
+    using NativeType = VkShaderModule;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::eShaderModule;
@@ -6373,7 +6413,8 @@ namespace VULKAN_HPP_NAMESPACE
   class ValidationCacheEXT
   {
   public:
-    using CType = VkValidationCacheEXT;
+    using CType      = VkValidationCacheEXT;
+    using NativeType = VkValidationCacheEXT;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::eValidationCacheEXT;
@@ -6471,7 +6512,8 @@ namespace VULKAN_HPP_NAMESPACE
   class VideoSessionParametersKHR
   {
   public:
-    using CType = VkVideoSessionParametersKHR;
+    using CType      = VkVideoSessionParametersKHR;
+    using NativeType = VkVideoSessionParametersKHR;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::eVideoSessionParametersKHR;
@@ -6563,7 +6605,8 @@ namespace VULKAN_HPP_NAMESPACE
   class Queue
   {
   public:
-    using CType = VkQueue;
+    using CType      = VkQueue;
+    using NativeType = VkQueue;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::eQueue;
@@ -7051,7 +7094,8 @@ namespace VULKAN_HPP_NAMESPACE
   class Device
   {
   public:
-    using CType = VkDevice;
+    using CType      = VkDevice;
+    using NativeType = VkDevice;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::eDevice;
@@ -11388,6 +11432,13 @@ namespace VULKAN_HPP_NAMESPACE
                                 Dispatch const & d VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
+    //=== VK_EXT_pageable_device_local_memory ===
+
+    template <typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
+    void setMemoryPriorityEXT( VULKAN_HPP_NAMESPACE::DeviceMemory memory,
+                               float                              priority,
+                               Dispatch const & d VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const VULKAN_HPP_NOEXCEPT;
+
     VULKAN_HPP_TYPESAFE_EXPLICIT operator VkDevice() const VULKAN_HPP_NOEXCEPT
     {
       return m_device;
@@ -11437,7 +11488,8 @@ namespace VULKAN_HPP_NAMESPACE
   class DisplayModeKHR
   {
   public:
-    using CType = VkDisplayModeKHR;
+    using CType      = VkDisplayModeKHR;
+    using NativeType = VkDisplayModeKHR;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::eDisplayModeKHR;
@@ -11544,7 +11596,8 @@ namespace VULKAN_HPP_NAMESPACE
   class PhysicalDevice
   {
   public:
-    using CType = VkPhysicalDevice;
+    using CType      = VkPhysicalDevice;
+    using NativeType = VkPhysicalDevice;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::ePhysicalDevice;
@@ -13064,7 +13117,8 @@ namespace VULKAN_HPP_NAMESPACE
   class Instance
   {
   public:
-    using CType = VkInstance;
+    using CType      = VkInstance;
+    using NativeType = VkInstance;
 
     static VULKAN_HPP_CONST_OR_CONSTEXPR VULKAN_HPP_NAMESPACE::ObjectType objectType =
       VULKAN_HPP_NAMESPACE::ObjectType::eInstance;
