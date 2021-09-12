@@ -2,6 +2,17 @@
 
 Vulkan header files and API registry
 
+## Default branch changed to 'main' 2021-09-12
+
+As discussed in #222, the default branch of this repository is now 'main'. This change should be largely transparent to repository users, since github rewrites many references to the old 'master' branch to 'main'. However, if you have a checked-out local clone, you may wish to take the following steps as recommended by github:
+
+```sh
+git branch -m master main
+git fetch origin
+git branch -u origin/main main
+git remote set-head origin -a
+```
+
 ## Repository Content
 
 The contents of this repository are largely obtained from other repositories
