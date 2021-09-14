@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.2.191",
-    "comment": "from git branch: github-main commit: ef0df9ab7cfd5081018b21174d10bc1d47cb734c",
-    "date": "2021-09-07 06:52:35Z"
+    "api version": "1.2.192",
+    "comment": "from git branch: github-main commit: a09f9efe488cdd97c0362622fc1187f09302689e",
+    "date": "2021-09-14 10:15:00Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -6480,7 +6480,7 @@
       "(VK_VERSION_1_1,VK_KHR_maintenance2)+(VK_EXT_image_drm_format_modifier)": [
         {
           "vuid": "VUID-VkInputAttachmentAspectReference-aspectMask-02250",
-          "text": " <code>aspectMask</code> <strong class=\"purple\">must</strong> not include <code>VK_IMAGE_ASPECT_MEMORY_PLANE_i_BIT_EXT</code> for any index <code>i</code>"
+          "text": " <code>aspectMask</code> <strong class=\"purple\">must</strong> not include <code>VK_IMAGE_ASPECT_MEMORY_PLANE<em>{ibit}</em>BIT_EXT</code> for any index <em>i</em>"
         }
       ]
     },
@@ -7206,7 +7206,7 @@
       "(VK_VERSION_1_2,VK_KHR_create_renderpass2)+(VK_EXT_image_drm_format_modifier)": [
         {
           "vuid": "VUID-VkSubpassDescription2-attachment-04563",
-          "text": " If the <code>attachment</code> member of any element of <code>pInputAttachments</code> is not <code>VK_ATTACHMENT_UNUSED</code>, then the <code>aspectMask</code> member <strong class=\"purple\">must</strong> not include <code>VK_IMAGE_ASPECT_MEMORY_PLANE_i_BIT_EXT</code> for any index <code>i</code>"
+          "text": " If the <code>attachment</code> member of any element of <code>pInputAttachments</code> is not <code>VK_ATTACHMENT_UNUSED</code>, then the <code>aspectMask</code> member <strong class=\"purple\">must</strong> not include <code>VK_IMAGE_ASPECT_MEMORY_PLANE<em>{ibit}</em>BIT_EXT</code> for any index <em>i</em>"
         }
       ]
     },
@@ -9380,7 +9380,7 @@
         },
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-pStages-00740",
-          "text": " If the pipeline is being created with <a href=\"#pipeline-graphics-subsets-pre-rasterization\">pre-rasterization shader state</a> and <a href=\"#pipeline-graphics-subsets-fragment-shader\">fragment shader state</a>, it includes both a fragment shader and a geometry shader, and the fragment shader code reads from an input variable that is decorated with <code>PrimitiveID</code>, then the geometry shader code <strong class=\"purple\">must</strong> write to a matching output variable, decorated with <code>PrimitiveID</code>, in all execution paths"
+          "text": " If the pipeline is being created with <a href=\"#pipeline-graphics-subsets-pre-rasterization\">pre-rasterization shader state</a> and <a href=\"#pipeline-graphics-subsets-fragment-shader\">fragment shader state</a>, it includes both a fragment shader and a geometry shader, and the fragment shader code reads from an input variable that is decorated with <code>PrimitiveId</code>, then the geometry shader code <strong class=\"purple\">must</strong> write to a matching output variable, decorated with <code>PrimitiveId</code>, in all execution paths"
         },
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-pStages-00741",
@@ -9525,6 +9525,10 @@
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-stage-02096",
           "text": " If the pipeline is being created with <a href=\"#pipeline-graphics-subsets-pre-rasterization\">pre-rasterization shader state</a> the <code>stage</code> member of one element of <code>pStages</code> <strong class=\"purple\">must</strong> be either <code>VK_SHADER_STAGE_VERTEX_BIT</code> or <code>VK_SHADER_STAGE_MESH_BIT_NV</code>"
+        },
+        {
+          "vuid": "VUID-VkGraphicsPipelineCreateInfo-PrimitiveId-06264",
+          "text": " If the pipeline is being created with <a href=\"#pipeline-graphics-subsets-pre-rasterization\">pre-rasterization shader state</a>, it includes a mesh shader and the fragment shader code reads from an input variable that is decorated with <code>PrimitiveId</code>, then the mesh shader code <strong class=\"purple\">must</strong> write to a matching output variable, decorated with <code>PrimitiveId</code>, in all execution paths"
         }
       ],
       "!(VK_EXT_extended_dynamic_state)": [
@@ -13540,7 +13544,7 @@
       "(VK_VERSION_1_1,VK_KHR_maintenance2)": [
         {
           "vuid": "VUID-VkImageCreateInfo-flags-01572",
-          "text": " If <code>flags</code> contains <code>VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT</code>, then <code>format</code> <strong class=\"purple\">must</strong> be a <a href=\"#appendix-compressedtex-bc\">block-compressed image format</a>, an <a href=\"#appendix-compressedtex-etc2\">ETC compressed image format</a>, or an <a href=\"#appendix-compressedtex-astc\">ASTC compressed image format</a>"
+          "text": " If <code>flags</code> contains <code>VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT</code>, then <code>format</code> <strong class=\"purple\">must</strong> be a <a href=\"#compressed_image_formats\">compressed image format</a>"
         },
         {
           "vuid": "VUID-VkImageCreateInfo-flags-01573",
@@ -13880,7 +13884,7 @@
         },
         {
           "vuid": "VUID-vkGetImageSubresourceLayout-tiling-02271",
-          "text": " If the <code>tiling</code> of the <code>image</code> is <code>VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT</code>, then the <code>aspectMask</code> member of <code>pSubresource</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_MEMORY_PLANE_i_BIT_EXT</code> and the index <code>i</code> <strong class=\"purple\">must</strong> be less than the <a href=\"#VkDrmFormatModifierPropertiesEXT\">VkDrmFormatModifierPropertiesEXT</a>::<code>drmFormatModifierPlaneCount</code> associated with the image&#8217;s <code>format</code> and <a href=\"#VkImageDrmFormatModifierPropertiesEXT\">VkImageDrmFormatModifierPropertiesEXT</a>::<code>drmFormatModifier</code>"
+          "text": " If the <code>tiling</code> of the <code>image</code> is <code>VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT</code>, then the <code>aspectMask</code> member of <code>pSubresource</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_MEMORY_PLANE<em>{ibit}</em>BIT_EXT</code> and the index <em>i</em> <strong class=\"purple\">must</strong> be less than the <a href=\"#VkDrmFormatModifierPropertiesEXT\">VkDrmFormatModifierPropertiesEXT</a>::<code>drmFormatModifierPlaneCount</code> associated with the image&#8217;s <code>format</code> and <a href=\"#VkImageDrmFormatModifierPropertiesEXT\">VkImageDrmFormatModifierPropertiesEXT</a>::<code>drmFormatModifier</code>"
         }
       ],
       "core": [
@@ -14446,7 +14450,7 @@
       "(VK_EXT_image_drm_format_modifier)": [
         {
           "vuid": "VUID-VkImageSubresourceRange-aspectMask-02278",
-          "text": " <code>aspectMask</code> <strong class=\"purple\">must</strong> not include <code>VK_IMAGE_ASPECT_MEMORY_PLANE_i_BIT_EXT</code> for any index <code>i</code>"
+          "text": " <code>aspectMask</code> <strong class=\"purple\">must</strong> not include <code>VK_IMAGE_ASPECT_MEMORY_PLANE<em>{ibit}</em>BIT_EXT</code> for any index <em>i</em>"
         }
       ]
     },
@@ -19488,7 +19492,7 @@
         },
         {
           "vuid": "VUID-PrimitiveId-Fragment-04333",
-          "text": " If <code>Fragment</code> {ExecutionModel} contains a variable decorated with <code>PrimitiveId</code> either the <code>Geometry</code> or <code>Tessellation</code> capability <strong class=\"purple\">must</strong> also be declared"
+          "text": " If <code>Fragment</code> {ExecutionModel} contains a variable decorated with <code>PrimitiveId</code>, then either the <code>MeshShadingNV</code>, <code>Geometry</code> or <code>Tessellation</code> capability <strong class=\"purple\">must</strong> also be declared"
         },
         {
           "vuid": "VUID-PrimitiveId-PrimitiveId-04334",
@@ -21702,7 +21706,7 @@
       "(VK_EXT_image_drm_format_modifier)": [
         {
           "vuid": "VUID-VkClearAttachment-aspectMask-02246",
-          "text": " <code>aspectMask</code> <strong class=\"purple\">must</strong> not include <code>VK_IMAGE_ASPECT_MEMORY_PLANE_i_BIT_EXT</code> for any index <code>i</code>"
+          "text": " <code>aspectMask</code> <strong class=\"purple\">must</strong> not include <code>VK_IMAGE_ASPECT_MEMORY_PLANE<em>{ibit}</em>BIT_EXT</code> for any index <em>i</em>"
         }
       ]
     },
@@ -22466,7 +22470,7 @@
       "(VK_EXT_image_drm_format_modifier)": [
         {
           "vuid": "VUID-VkImageSubresourceLayers-aspectMask-02247",
-          "text": " <code>aspectMask</code> <strong class=\"purple\">must</strong> not include <code>VK_IMAGE_ASPECT_MEMORY_PLANE_i_BIT_EXT</code> for any index <code>i</code>"
+          "text": " <code>aspectMask</code> <strong class=\"purple\">must</strong> not include <code>VK_IMAGE_ASPECT_MEMORY_PLANE<em>{ibit}</em>BIT_EXT</code> for any index <em>i</em>"
         }
       ]
     },
@@ -43961,6 +43965,520 @@
         {
           "vuid": "VUID-StandaloneSpirv-Base-04781",
           "text": " The <code>Base</code> operand of any <code>OpBitCount</code>, <code>OpBitReverse</code>, <code>OpBitFieldInsert</code>, <code>OpBitFieldSExtract</code>, or <code>OpBitFieldUExtract</code> instruction <strong class=\"purple\">must</strong> be a 32-bit integer scalar or a vector of 32-bit integers"
+        }
+      ]
+    },
+    "RuntimeSpirv": {
+      "(VK_VERSION_1_2,VK_KHR_vulkan_memory_model)": [
+        {
+          "vuid": "VUID-RuntimeSpirv-vulkanMemoryModel-06265",
+          "text": " If <a href=\"#features-vulkanMemoryModel\"><code>vulkanMemoryModel</code></a> is enabled and <a href=\"#features-vulkanMemoryModelDeviceScope\"><code>vulkanMemoryModelDeviceScope</code></a> is not enabled, <strong>Device</strong> memory scope <strong class=\"purple\">must</strong> not be used."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-vulkanMemoryModel-06266",
+          "text": " If <a href=\"#features-vulkanMemoryModel\"><code>vulkanMemoryModel</code></a> is not enabled, <strong>QueueFamily</strong> memory scope <strong class=\"purple\">must</strong> not be used."
+        }
+      ],
+      "(VK_KHR_shader_clock)": [
+        {
+          "vuid": "VUID-RuntimeSpirv-shaderSubgroupClock-06267",
+          "text": " If <a href=\"#features-shaderSubgroupClock\"><code>shaderSubgroupClock</code></a> is not enabled, the <code>Subgroup</code> scope <strong class=\"purple\">must</strong> not be used for <code>OpReadClockKHR</code>."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-shaderDeviceClock-06268",
+          "text": " If <a href=\"#features-shaderDeviceClock\"><code>shaderDeviceClock</code></a> is not enabled, the <code>Device</code> scope <strong class=\"purple\">must</strong> not be used for <code>OpReadClockKHR</code>."
+        }
+      ],
+      "core": [
+        {
+          "vuid": "VUID-RuntimeSpirv-OpTypeImage-06269",
+          "text": " If <a href=\"#features-shaderStorageImageWriteWithoutFormat\">shaderStorageImageWriteWithoutFormat</a> is not enabled, any variable created with a &#8220;Type&#8221; of <code>OpTypeImage</code> that has a &#8220;Sampled&#8221; operand of 2 and an &#8220;Image Format&#8221; operand of <code>Unknown</code> <strong class=\"purple\">must</strong> be decorated with <code>NonWritable</code>."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-OpTypeImage-06270",
+          "text": " If <a href=\"#features-shaderStorageImageReadWithoutFormat\">shaderStorageImageReadWithoutFormat</a> is not enabled, any variable created with a &#8220;Type&#8221; of <code>OpTypeImage</code> that has a &#8220;Sampled&#8221; operand of 2 and an &#8220;Image Format&#8221; operand of <code>Unknown</code> <strong class=\"purple\">must</strong> be decorated with <code>NonReadable</code>."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-BuiltIn-06271",
+          "text": " Any <code>BuiltIn</code> decoration that corresponds only to Vulkan features or extensions that have not been enabled <strong class=\"purple\">must</strong> not be used."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-Location-06272",
+          "text": " The sum of <code>Location</code> and the number of locations the variable it decorates consumes <strong class=\"purple\">must</strong> be less than or equal to the value for the matching {ExecutionModel} defined in <a href=\"#interfaces-iointerfaces-limits\">Shader Input and Output Locations</a>"
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-DescriptorSet-06323",
+          "text": " <code>DescriptorSet</code> and <code>Binding</code> decorations <strong class=\"purple\">must</strong> obey the constraints on storage class, type, and descriptor type described in <a href=\"#interfaces-resources-setandbinding\">DescriptorSet and Binding Assignment</a>"
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-NonWritable-06340",
+          "text": " If <a href=\"#features-fragmentStoresAndAtomics\">fragmentStoresAndAtomics</a> is not enabled, then all storage image, storage texel buffer, and storage buffer variables in the fragment stage <strong class=\"purple\">must</strong> be decorated with the <code>NonWritable</code> decoration."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-NonWritable-06341",
+          "text": " If <a href=\"#features-vertexPipelineStoresAndAtomics\">vertexPipelineStoresAndAtomics</a> is not enabled, then all storage image, storage texel buffer, and storage buffer variables in the vertex, tessellation, and geometry stages <strong class=\"purple\">must</strong> be decorated with the <code>NonWritable</code> decoration."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-None-06342",
+          "text": " If <a href=\"#limits-subgroupQuadOperationsInAllStages\">subgroupQuadOperationsInAllStages</a> is <code>VK_FALSE</code>, then <a href=\"#features-subgroup-quad\">quad subgroup operations</a> <strong class=\"purple\">must</strong> not be used except for in fragment and compute stages."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-None-06343",
+          "text": " <a href=\"#shaders-group-operations\">Group operations</a> with <a href=\"#shaders-scope-subgroup\">subgroup scope</a> <strong class=\"purple\">must</strong> not be used if the shader stage is not in <a href=\"#limits-subgroupSupportedStages\">subgroupSupportedStages</a>."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-Offset-06344",
+          "text": " The first element of the <code>Offset</code> operand of <code>InterpolateAtOffset</code> <strong class=\"purple\">must</strong> be greater than or equal to:"
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-Offset-06345",
+          "text": " The first element of the <code>Offset</code> operand of <code>InterpolateAtOffset</code> <strong class=\"purple\">must</strong> be less than or equal to:"
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-Offset-06346",
+          "text": " The second element of the <code>Offset</code> operand of <code>InterpolateAtOffset</code> <strong class=\"purple\">must</strong> be greater than or equal to:"
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-Offset-06347",
+          "text": " The second element of the <code>Offset</code> operand of <code>InterpolateAtOffset</code> <strong class=\"purple\">must</strong> be less than or equal to:"
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-x-06368",
+          "text": " The <code>x</code> size in <code>LocalSize</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceLimits</code>::<code>maxComputeWorkGroupSize</code>[0]"
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-y-06369",
+          "text": " The <code>y</code> size in <code>LocalSize</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceLimits</code>::<code>maxComputeWorkGroupSize</code>[1]"
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-z-06370",
+          "text": " The <code>z</code> size in <code>LocalSize</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceLimits</code>::<code>maxComputeWorkGroupSize</code>[2]"
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-x-06371",
+          "text": " The product of <code>x</code> size, <code>y</code> size, and <code>z</code> size in <code>LocalSize</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceLimits</code>::<code>maxComputeWorkGroupInvocations</code>"
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-OpImage-06376",
+          "text": " If an <code>OpImage*Gather</code> operation has an image operand of <code>Offset</code>, <code>ConstOffset</code>, or <code>ConstOffsets</code> the offset value <strong class=\"purple\">must</strong> be greater than or equal to <a href=\"#limits-minTexelGatherOffset\">minTexelGatherOffset</a>"
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-OpImage-06377",
+          "text": " If an <code>OpImage*Gather</code> operation has an image operand of <code>Offset</code>, <code>ConstOffset</code>, or <code>ConstOffsets</code> the offset value <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#limits-maxTexelGatherOffset\">maxTexelGatherOffset</a>"
+        }
+      ],
+      "(VK_VERSION_1_2,VK_EXT_descriptor_indexing)": [
+        {
+          "vuid": "VUID-RuntimeSpirv-OpTypeRuntimeArray-06273",
+          "text": " <code>OpTypeRuntimeArray</code> <strong class=\"purple\">must</strong> only be used for an array of variables with storage class <code>Uniform</code>, <code>StorageBuffer</code>, or <code>UniformConstant</code>, or for the outermost dimension of an array of arrays of such variables if the <a href=\"#features-runtimeDescriptorArray\">runtimeDescriptorArray</a> feature is enabled,"
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-NonUniform-06274",
+          "text": " If an instruction loads from or stores to a resource (including atomics and image instructions) and the resource descriptor being accessed is not dynamically uniform, then the operand corresponding to that resource (e.g. the pointer or sampled image operand) <strong class=\"purple\">must</strong> be decorated with <code>NonUniform</code>."
+        }
+      ],
+      "(VK_VERSION_1_2,VK_KHR_shader_subgroup_extended_types)": [
+        {
+          "vuid": "VUID-RuntimeSpirv-None-06275",
+          "text": " <a href=\"#features-subgroup-extended-types\">shaderSubgroupExtendedTypes</a> <strong class=\"purple\">must</strong> be enabled for <a href=\"#shaders-group-operations\">group operations</a> to use 8-bit integer, 16-bit integer, 64-bit integer, 16-bit floating-point, and vectors of these types"
+        }
+      ],
+      "(VK_VERSION_1_2)": [
+        {
+          "vuid": "VUID-RuntimeSpirv-subgroupBroadcastDynamicId-06276",
+          "text": " If <a href=\"#features-subgroupBroadcastDynamicId\"><code>subgroupBroadcastDynamicId</code></a> is <code>VK_TRUE</code>, and the shader module version is 1.5 or higher, the &#8220;Index&#8221; for <code>OpGroupNonUniformQuadBroadcast</code> <strong class=\"purple\">must</strong> be dynamically uniform within the derivative group. Otherwise, &#8220;Index&#8221; <strong class=\"purple\">must</strong> be a constant."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-subgroupBroadcastDynamicId-06277",
+          "text": " If <a href=\"#features-subgroupBroadcastDynamicId\"><code>subgroupBroadcastDynamicId</code></a> is <code>VK_TRUE</code>, and the shader module version is 1.5 or higher, the &#8220;Id&#8221; for <code>OpGroupNonUniformBroadcast</code> <strong class=\"purple\">must</strong> be dynamically uniform within the subgroup. Otherwise, &#8220;Id&#8221; <strong class=\"purple\">must</strong> be a constant."
+        }
+      ],
+      "(VK_KHR_shader_atomic_int64)": [
+        {
+          "vuid": "VUID-RuntimeSpirv-None-06278",
+          "text": " <a href=\"#features-shaderBufferInt64Atomics\">shaderBufferInt64Atomics</a> <strong class=\"purple\">must</strong> be enabled for 64-bit integer atomic operations to be supported on a <em>Pointer</em> with a <strong>Storage Class</strong> of <strong>StorageBuffer</strong> or <strong>Uniform</strong>."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-None-06279",
+          "text": " <a href=\"#features-shaderSharedInt64Atomics\">shaderSharedInt64Atomics</a> <strong class=\"purple\">must</strong> be enabled for 64-bit integer atomic operations to be supported on a <em>Pointer</em> with a <strong>Storage Class</strong> of <strong>Workgroup</strong>."
+        }
+      ],
+      "(VK_EXT_shader_atomic_float)+!(VK_EXT_shader_atomic_float2)": [
+        {
+          "vuid": "VUID-RuntimeSpirv-None-06280",
+          "text": " <a href=\"#features-shaderBufferFloat32Atomics\">shaderBufferFloat32Atomics</a>, or <a href=\"#features-shaderBufferFloat32AtomicAdd\">shaderBufferFloat32AtomicAdd</a>, or <a href=\"#features-shaderBufferFloat64Atomics\">shaderBufferFloat64Atomics</a>, or <a href=\"#features-shaderBufferFloat64AtomicAdd\">shaderBufferFloat64AtomicAdd</a> <strong class=\"purple\">must</strong> be enabled for floating-point atomic operations to be supported on a <em>Pointer</em> with a <strong>Storage Class</strong> of <strong>StorageBuffer</strong>."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-None-06281",
+          "text": " <a href=\"#features-shaderSharedFloat32Atomics\">shaderSharedFloat32Atomics</a>, or <a href=\"#features-shaderSharedFloat32AtomicAdd\">shaderSharedFloat32AtomicAdd</a>, or <a href=\"#features-shaderSharedFloat64Atomics\">shaderSharedFloat64Atomics</a>, or <a href=\"#features-shaderSharedFloat64AtomicAdd\">shaderSharedFloat64AtomicAdd</a> <strong class=\"purple\">must</strong> be enabled for floating-point atomic operations to be supported on a <em>Pointer</em> with a <strong>Storage Class</strong> of <strong>Workgroup</strong>."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-None-06282",
+          "text": " <a href=\"#features-shaderImageFloat32Atomics\">shaderImageFloat32Atomics</a> or <a href=\"#features-shaderImageFloat32AtomicAdd\">shaderImageFloat32AtomicAdd</a> <strong class=\"purple\">must</strong> be enabled for 32-bit floating-point atomic operations to be supported on a <em>Pointer</em> with a <strong>Storage Class</strong> of <strong>Image</strong>."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-None-06283",
+          "text": " <a href=\"#features-sparseImageFloat32Atomics\">sparseImageFloat32Atomics</a> or <a href=\"#features-sparseImageFloat32AtomicAdd\">sparseImageFloat32AtomicAdd</a> <strong class=\"purple\">must</strong> be enabled for 32-bit floating-point atomics to be supported on sparse images."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-None-06335",
+          "text": " <a href=\"#features-shaderBufferFloat32Atomics\">shaderBufferFloat32Atomics</a>, or <a href=\"#features-shaderBufferFloat32AtomicAdd\">shaderBufferFloat32AtomicAdd</a>, or <a href=\"#features-shaderSharedFloat32Atomics\">shaderSharedFloat32Atomics</a>, or <a href=\"#features-shaderSharedFloat32AtomicAdd\">shaderSharedFloat32AtomicAdd</a>, or <a href=\"#features-shaderImageFloat32Atomics\">shaderImageFloat32Atomics</a>, or <a href=\"#features-shaderImageFloat32AtomicAdd\">shaderImageFloat32AtomicAdd</a> <strong class=\"purple\">must</strong> be enabled for 32-bit floating point atomic operations"
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-None-06336",
+          "text": " <a href=\"#features-shaderBufferFloat64Atomics\">shaderBufferFloat64Atomics</a>, or <a href=\"#features-shaderBufferFloat64AtomicAdd\">shaderBufferFloat64AtomicAdd</a>, or <a href=\"#features-shaderSharedFloat64Atomics\">shaderSharedFloat64Atomics</a>, or <a href=\"#features-shaderSharedFloat64AtomicAdd\">shaderSharedFloat64AtomicAdd</a> <strong class=\"purple\">must</strong> be enabled for 64-bit floating point atomic operations"
+        }
+      ],
+      "(VK_EXT_shader_atomic_float2)": [
+        {
+          "vuid": "VUID-RuntimeSpirv-None-06284",
+          "text": " <a href=\"#features-shaderBufferFloat32Atomics\">shaderBufferFloat32Atomics</a>, or <a href=\"#features-shaderBufferFloat32AtomicAdd\">shaderBufferFloat32AtomicAdd</a>, or <a href=\"#features-shaderBufferFloat64Atomics\">shaderBufferFloat64Atomics</a>, or <a href=\"#features-shaderBufferFloat64AtomicAdd\">shaderBufferFloat64AtomicAdd</a>, or <a href=\"#features-shaderBufferFloat16AtomicMinMax\">shaderBufferFloat16Atomics</a>, or <a href=\"#features-shaderBufferFloat16AtomicMinMax\">shaderBufferFloat16AtomicAdd</a>, or <a href=\"#features-shaderBufferFloat16AtomicMinMax\">shaderBufferFloat16AtomicMinMax</a>, or <a href=\"#features-shaderBufferFloat32AtomicMinMax\">shaderBufferFloat32AtomicMinMax</a>, or <a href=\"#features-shaderBufferFloat64AtomicMinMax\">shaderBufferFloat64AtomicMinMax</a> <strong class=\"purple\">must</strong> be enabled for floating-point atomic operations to be supported on a <em>Pointer</em> with a <strong>Storage Class</strong> of <strong>StorageBuffer</strong>."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-None-06285",
+          "text": " <a href=\"#features-shaderSharedFloat32Atomics\">shaderSharedFloat32Atomics</a>, or <a href=\"#features-shaderSharedFloat32AtomicAdd\">shaderSharedFloat32AtomicAdd</a>, or <a href=\"#features-shaderSharedFloat64Atomics\">shaderSharedFloat64Atomics</a>, or <a href=\"#features-shaderSharedFloat64AtomicAdd\">shaderSharedFloat64AtomicAdd</a>, or <a href=\"#features-shaderBufferFloat16AtomicMinMax\">shaderSharedFloat16Atomics</a>, or <a href=\"#features-shaderBufferFloat16AtomicMinMax\">shaderSharedFloat16AtomicAdd</a>, or <a href=\"#features-shaderBufferFloat16AtomicMinMax\">shaderSharedFloat16AtomicMinMax</a>, or <a href=\"#features-shaderSharedFloat32AtomicMinMax\">shaderSharedFloat32AtomicMinMax</a>, or <a href=\"#features-shaderSharedFloat64AtomicMinMax\">shaderSharedFloat64AtomicMinMax</a> <strong class=\"purple\">must</strong> be enabled for floating-point atomic operations to be supported on a <em>Pointer</em> with a <strong>Storage Class</strong> of <strong>Workgroup</strong>."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-None-06286",
+          "text": " <a href=\"#features-shaderImageFloat32Atomics\">shaderImageFloat32Atomics</a>, or <a href=\"#features-shaderImageFloat32AtomicAdd\">shaderImageFloat32AtomicAdd</a>, or <a href=\"#features-shaderImageFloat32AtomicMinMax\">shaderImageFloat32AtomicMinMax</a> <strong class=\"purple\">must</strong> be enabled for 32-bit floating-point atomic operations to be supported on a <em>Pointer</em> with a <strong>Storage Class</strong> of <strong>Image</strong>."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-None-06287",
+          "text": " <a href=\"#features-sparseImageFloat32Atomics\">sparseImageFloat32Atomics</a>, or <a href=\"#features-sparseImageFloat32AtomicAdd\">sparseImageFloat32AtomicAdd</a>, or <a href=\"#features-sparseImageFloat32AtomicMinMax\">sparseImageFloat32AtomicMinMax</a> <strong class=\"purple\">must</strong> be enabled for 32-bit floating-point atomics to be supported on sparse images."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-None-06337",
+          "text": " <a href=\"#features-shaderBufferFloat16Atomics\">shaderBufferFloat16Atomics</a>, or <a href=\"#features-shaderBufferFloat16AtomicAdd\">shaderBufferFloat16AtomicAdd</a>, or <a href=\"#features-shaderBufferFloat16AtomicMinMax\">shaderBufferFloat16AtomicMinMax</a>, or <a href=\"#features-shaderSharedFloat16Atomics\">shaderSharedFloat16Atomics</a>, or <a href=\"#features-shaderSharedFloat16AtomicAdd\">shaderSharedFloat16AtomicAdd</a>, or <a href=\"#features-shaderSharedFloat16AtomicMinMax\">shaderSharedFloat16AtomicMinMax</a> <strong class=\"purple\">must</strong> be enabled for 16-bit floating point atomic operations"
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-None-06338",
+          "text": " <a href=\"#features-shaderBufferFloat32Atomics\">shaderBufferFloat32Atomics</a>, or <a href=\"#features-shaderBufferFloat32AtomicAdd\">shaderBufferFloat32AtomicAdd</a>, or <a href=\"#features-shaderSharedFloat32Atomics\">shaderSharedFloat32Atomics</a>, or <a href=\"#features-shaderSharedFloat32AtomicAdd\">shaderSharedFloat32AtomicAdd</a>, or <a href=\"#features-shaderImageFloat32Atomics\">shaderImageFloat32Atomics</a>, or <a href=\"#features-shaderImageFloat32AtomicAdd\">shaderImageFloat32AtomicAdd</a> or <a href=\"#features-shaderBufferFloat32AtomicMinMax\">shaderBufferFloat32AtomicMinMax</a>, or <a href=\"#features-shaderSharedFloat32AtomicMinMax\">shaderSharedFloat32AtomicMinMax</a>, or <a href=\"#features-shaderImageFloat32AtomicMinMax\">shaderImageFloat32AtomicMinMax</a> <strong class=\"purple\">must</strong> be enabled for 32-bit floating point atomic operations"
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-None-06339",
+          "text": " <a href=\"#features-shaderBufferFloat64Atomics\">shaderBufferFloat64Atomics</a>, or <a href=\"#features-shaderBufferFloat64AtomicAdd\">shaderBufferFloat64AtomicAdd</a>, or <a href=\"#features-shaderSharedFloat64Atomics\">shaderSharedFloat64Atomics</a>, or <a href=\"#features-shaderSharedFloat64AtomicAdd\">shaderSharedFloat64AtomicAdd</a>, or <a href=\"#features-shaderBufferFloat64AtomicMinMax\">shaderBufferFloat64AtomicMinMax</a>, or <a href=\"#features-shaderSharedFloat64AtomicMinMax\">shaderSharedFloat64AtomicMinMax</a>, <strong class=\"purple\">must</strong> be enabled for 64-bit floating point atomic operations"
+        }
+      ],
+      "(VK_EXT_shader_image_atomic_int64)": [
+        {
+          "vuid": "VUID-RuntimeSpirv-None-06288",
+          "text": " <a href=\"#features-shaderImageInt64Atomics\">shaderImageInt64Atomics</a> <strong class=\"purple\">must</strong> be enabled for 64-bit integer atomic operations to be supported on a <em>Pointer</em> with a <strong>Storage Class</strong> of <strong>Image</strong>."
+        }
+      ],
+      "(VK_VERSION_1_2,VK_KHR_shader_float_controls)": [
+        {
+          "vuid": "VUID-RuntimeSpirv-denormBehaviorIndependence-06289",
+          "text": " If <a href=\"#features-denormBehaviorIndependence\"><code>denormBehaviorIndependence</code></a> is <code>VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_32_BIT_ONLY</code>, then the entry point <strong class=\"purple\">must</strong> use the same denormals execution mode for both 16-bit and 64-bit floating-point types."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-denormBehaviorIndependence-06290",
+          "text": " If <a href=\"#features-denormBehaviorIndependence\"><code>denormBehaviorIndependence</code></a> is <code>VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_NONE</code>, then the entry point <strong class=\"purple\">must</strong> use the same denormals execution mode for all floating-point types."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-roundingModeIndependence-06291",
+          "text": " If <a href=\"#features-roundingModeIndependence\"><code>roundingModeIndependence</code></a> is <code>VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_32_BIT_ONLY</code>, then the entry point <strong class=\"purple\">must</strong> use the same rounding execution mode for both 16-bit and 64-bit floating-point types."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-roundingModeIndependence-06292",
+          "text": " If <a href=\"#features-roundingModeIndependence\"><code>roundingModeIndependence</code></a> is <code>VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_NONE</code>, then the entry point <strong class=\"purple\">must</strong> use the same rounding execution mode for all floating-point types."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-shaderSignedZeroInfNanPreserveFloat16-06293",
+          "text": " If <a href=\"#limits-shaderSignedZeroInfNanPreserveFloat16\"><code>shaderSignedZeroInfNanPreserveFloat16</code></a> is <code>VK_FALSE</code>, then <code>SignedZeroInfNanPreserve</code> for 16-bit floating-point type <strong class=\"purple\">must</strong> not be used."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-shaderSignedZeroInfNanPreserveFloat32-06294",
+          "text": " If <a href=\"#limits-shaderSignedZeroInfNanPreserveFloat32\"><code>shaderSignedZeroInfNanPreserveFloat32</code></a> is <code>VK_FALSE</code>, then <code>SignedZeroInfNanPreserve</code> for 32-bit floating-point type <strong class=\"purple\">must</strong> not be used."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-shaderSignedZeroInfNanPreserveFloat64-06295",
+          "text": " If <a href=\"#limits-shaderSignedZeroInfNanPreserveFloat64\"><code>shaderSignedZeroInfNanPreserveFloat64</code></a> is <code>VK_FALSE</code>, then <code>SignedZeroInfNanPreserve</code> for 64-bit floating-point type <strong class=\"purple\">must</strong> not be used."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-shaderDenormPreserveFloat16-06296",
+          "text": " If <a href=\"#limits-shaderDenormPreserveFloat16\"><code>shaderDenormPreserveFloat16</code></a> is <code>VK_FALSE</code>, then <code>DenormPreserve</code> for 16-bit floating-point type <strong class=\"purple\">must</strong> not be used."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-shaderDenormPreserveFloat32-06297",
+          "text": " If <a href=\"#limits-shaderDenormPreserveFloat32\"><code>shaderDenormPreserveFloat32</code></a> is <code>VK_FALSE</code>, then <code>DenormPreserve</code> for 32-bit floating-point type <strong class=\"purple\">must</strong> not be used."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-shaderDenormPreserveFloat64-06298",
+          "text": " If <a href=\"#limits-shaderDenormPreserveFloat64\"><code>shaderDenormPreserveFloat64</code></a> is <code>VK_FALSE</code>, then <code>DenormPreserve</code> for 64-bit floating-point type <strong class=\"purple\">must</strong> not be used."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-shaderDenormFlushToZeroFloat16-06299",
+          "text": " If <a href=\"#limits-shaderDenormFlushToZeroFloat16\"><code>shaderDenormFlushToZeroFloat16</code></a> is <code>VK_FALSE</code>, then <code>DenormFlushToZero</code> for 16-bit floating-point type <strong class=\"purple\">must</strong> not be used."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-shaderDenormFlushToZeroFloat32-06300",
+          "text": " If <a href=\"#limits-shaderDenormFlushToZeroFloat32\"><code>shaderDenormFlushToZeroFloat32</code></a> is <code>VK_FALSE</code>, then <code>DenormFlushToZero</code> for 32-bit floating-point type <strong class=\"purple\">must</strong> not be used."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-shaderDenormFlushToZeroFloat64-06301",
+          "text": " If <a href=\"#limits-shaderDenormFlushToZeroFloat64\"><code>shaderDenormFlushToZeroFloat64</code></a> is <code>VK_FALSE</code>, then <code>DenormFlushToZero</code> for 64-bit floating-point type <strong class=\"purple\">must</strong> not be used."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-shaderRoundingModeRTEFloat16-06302",
+          "text": " If <a href=\"#limits-shaderRoundingModeRTEFloat16\"><code>shaderRoundingModeRTEFloat16</code></a> is <code>VK_FALSE</code>, then <code>RoundingModeRTE</code> for 16-bit floating-point type <strong class=\"purple\">must</strong> not be used."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-shaderRoundingModeRTEFloat32-06303",
+          "text": " If <a href=\"#limits-shaderRoundingModeRTEFloat32\"><code>shaderRoundingModeRTEFloat32</code></a> is <code>VK_FALSE</code>, then <code>RoundingModeRTE</code> for 32-bit floating-point type <strong class=\"purple\">must</strong> not be used."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-shaderRoundingModeRTEFloat64-06304",
+          "text": " If <a href=\"#limits-shaderRoundingModeRTEFloat64\"><code>shaderRoundingModeRTEFloat64</code></a> is <code>VK_FALSE</code>, then <code>RoundingModeRTE</code> for 64-bit floating-point type <strong class=\"purple\">must</strong> not be used."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-shaderRoundingModeRTZFloat16-06305",
+          "text": " If <a href=\"#limits-shaderRoundingModeRTZFloat16\"><code>shaderRoundingModeRTZFloat16</code></a> is <code>VK_FALSE</code>, then <code>RoundingModeRTZ</code> for 16-bit floating-point type <strong class=\"purple\">must</strong> not be used."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-shaderRoundingModeRTZFloat32-06306",
+          "text": " If <a href=\"#limits-shaderRoundingModeRTZFloat32\"><code>shaderRoundingModeRTZFloat32</code></a> is <code>VK_FALSE</code>, then <code>RoundingModeRTZ</code> for 32-bit floating-point type <strong class=\"purple\">must</strong> not be used."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-shaderRoundingModeRTZFloat64-06307",
+          "text": " If <a href=\"#limits-shaderRoundingModeRTZFloat64\"><code>shaderRoundingModeRTZFloat64</code></a> is <code>VK_FALSE</code>, then <code>RoundingModeRTZ</code> for 64-bit floating-point type <strong class=\"purple\">must</strong> not be used."
+        }
+      ],
+      "(VK_EXT_transform_feedback)": [
+        {
+          "vuid": "VUID-RuntimeSpirv-Offset-06308",
+          "text": " The <code>Offset</code> plus size of the type of each variable, in the output interface of the entry point being compiled, decorated with <code>XfbBuffer</code> <strong class=\"purple\">must</strong> not be greater than <code>VkPhysicalDeviceTransformFeedbackPropertiesEXT</code>::<code>maxTransformFeedbackBufferDataSize</code>"
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-XfbBuffer-06309",
+          "text": " For any given <code>XfbBuffer</code> value, define the buffer data size to be smallest number of bytes such that, for all outputs decorated with the same <code>XfbBuffer</code> value, the size of the output interface variable plus the <code>Offset</code> is less than or equal to the buffer data size. For a given <code>Stream</code>, the sum of all the buffer data sizes for all buffers writing to that stream the <strong class=\"purple\">must</strong> not exceed <code>VkPhysicalDeviceTransformFeedbackPropertiesEXT</code>::<code>maxTransformFeedbackStreamDataSize</code>"
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-OpEmitStreamVertex-06310",
+          "text": " The Stream value to <code>OpEmitStreamVertex</code> and <code>OpEndStreamPrimitive</code> <strong class=\"purple\">must</strong> be less than <code>VkPhysicalDeviceTransformFeedbackPropertiesEXT</code>::<code>maxTransformFeedbackStreams</code>"
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-transformFeedbackStreamsLinesTriangles-06311",
+          "text": " If the geometry shader emits to more than one vertex stream and <code>VkPhysicalDeviceTransformFeedbackPropertiesEXT</code>::<code>transformFeedbackStreamsLinesTriangles</code> is <code>VK_FALSE</code>, then execution mode <strong class=\"purple\">must</strong> be <code>OutputPoints</code>"
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-Stream-06312",
+          "text": " The stream number value to <code>Stream</code> <strong class=\"purple\">must</strong> be less than <code>VkPhysicalDeviceTransformFeedbackPropertiesEXT</code>::<code>maxTransformFeedbackStreams</code>"
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-XfbStride-06313",
+          "text": " The XFB Stride value to <code>XfbStride</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceTransformFeedbackPropertiesEXT</code>::<code>maxTransformFeedbackBufferDataStride</code>"
+        }
+      ],
+      "(VK_VERSION_1_2,VK_EXT_buffer_device_address,VK_KHR_buffer_device_address)": [
+        {
+          "vuid": "VUID-RuntimeSpirv-PhysicalStorageBuffer64-06314",
+          "text": " If the <code>PhysicalStorageBuffer64</code> addressing model is enabled any load or store through a physical pointer type <strong class=\"purple\">must</strong> be aligned to a multiple of the size of the largest scalar type in the pointed-to type."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-PhysicalStorageBuffer64-06315",
+          "text": " If the <code>PhysicalStorageBuffer64</code> addressing model is enabled the pointer value of a memory access instruction <strong class=\"purple\">must</strong> be at least as aligned as specified by the <code>Aligned</code> memory access operand."
+        }
+      ],
+      "(VK_NV_cooperative_matrix)": [
+        {
+          "vuid": "VUID-RuntimeSpirv-OpTypeCooperativeMatrixNV-06316",
+          "text": " For <code>OpTypeCooperativeMatrixNV</code>, the component type, scope, number of rows, and number of columns <strong class=\"purple\">must</strong> match one of the matrices in any of the supported <a href=\"#VkCooperativeMatrixPropertiesNV\">VkCooperativeMatrixPropertiesNV</a>."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-OpCooperativeMatrixMulAddNV-06317",
+          "text": " For <code>OpCooperativeMatrixMulAddNV</code>, the type of <code>A</code> <strong class=\"purple\">must</strong> have <a href=\"#VkCooperativeMatrixPropertiesNV\">VkCooperativeMatrixPropertiesNV</a>::<code>MSize</code> rows and <a href=\"#VkCooperativeMatrixPropertiesNV\">VkCooperativeMatrixPropertiesNV</a>::<code>KSize</code> columns and have a component type that matches <a href=\"#VkCooperativeMatrixPropertiesNV\">VkCooperativeMatrixPropertiesNV</a>::<code>AType</code>."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-OpCooperativeMatrixMulAddNV-06318",
+          "text": " For <code>OpCooperativeMatrixMulAddNV</code>, the type of <code>B</code> <strong class=\"purple\">must</strong> have <a href=\"#VkCooperativeMatrixPropertiesNV\">VkCooperativeMatrixPropertiesNV</a>::<code>KSize</code> rows and <a href=\"#VkCooperativeMatrixPropertiesNV\">VkCooperativeMatrixPropertiesNV</a>::<code>NSize</code> columns and have a component type that matches <a href=\"#VkCooperativeMatrixPropertiesNV\">VkCooperativeMatrixPropertiesNV</a>::<code>BType</code>."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-OpCooperativeMatrixMulAddNV-06319",
+          "text": " For <code>OpCooperativeMatrixMulAddNV</code>, the type of <code>C</code> <strong class=\"purple\">must</strong> have <a href=\"#VkCooperativeMatrixPropertiesNV\">VkCooperativeMatrixPropertiesNV</a>::<code>MSize</code> rows and <a href=\"#VkCooperativeMatrixPropertiesNV\">VkCooperativeMatrixPropertiesNV</a>::<code>NSize</code> columns and have a component type that matches <a href=\"#VkCooperativeMatrixPropertiesNV\">VkCooperativeMatrixPropertiesNV</a>::<code>CType</code>."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-OpCooperativeMatrixMulAddNV-06320",
+          "text": " For <code>OpCooperativeMatrixMulAddNV</code>, the type of <code>Result</code> <strong class=\"purple\">must</strong> have <a href=\"#VkCooperativeMatrixPropertiesNV\">VkCooperativeMatrixPropertiesNV</a>::<code>MSize</code> rows and <a href=\"#VkCooperativeMatrixPropertiesNV\">VkCooperativeMatrixPropertiesNV</a>::<code>NSize</code> columns and have a component type that matches <a href=\"#VkCooperativeMatrixPropertiesNV\">VkCooperativeMatrixPropertiesNV</a>::<code>DType</code>."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-OpCooperativeMatrixMulAddNV-06321",
+          "text": " For <code>OpCooperativeMatrixMulAddNV</code>, the type of <code>A</code>, <code>B</code>, <code>C</code>, and <code>Result</code> <strong class=\"purple\">must</strong> all have a scope of <code>scope</code>."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-OpTypeCooperativeMatrixNV-06322",
+          "text": " <code>OpTypeCooperativeMatrixNV</code> and <code>OpCooperativeMatrix*</code> instructions <strong class=\"purple\">must</strong> not be used in shader stages not included in <a href=\"#VkPhysicalDeviceCooperativeMatrixPropertiesNV\">VkPhysicalDeviceCooperativeMatrixPropertiesNV</a>::<code>cooperativeMatrixSupportedStages</code>."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-OpCooperativeMatrixLoadNV-06324",
+          "text": " For <code>OpCooperativeMatrixLoadNV</code> and <code>OpCooperativeMatrixStoreNV</code> instructions, the <code>Pointer</code> and <code>Stride</code> operands <strong class=\"purple\">must</strong> be aligned to at least the lesser of 16 bytes or the natural alignment of a row or column (depending on <code>ColumnMajor</code>) of the matrix (where the natural alignment is the number of columns/rows multiplied by the component size)."
+        }
+      ],
+      "(VK_KHR_portability_subset)": [
+        {
+          "vuid": "VUID-RuntimeSpirv-shaderSampleRateInterpolationFunctions-06325",
+          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">[VK_KHR_portability_subset]</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>shaderSampleRateInterpolationFunctions</code> is <code>VK_FALSE</code>, then <code>GLSL.std.450</code> fragment interpolation functions are not supported by the implementation and <code>OpCapability</code> <strong class=\"purple\">must</strong> not be set to <code>InterpolationFunction</code>."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-tessellationShader-06326",
+          "text": " If <a href=\"#features-tessellationShader\"><code>tessellationShader</code></a> is enabled, and the <code><a href=\"#VK_KHR_portability_subset\">[VK_KHR_portability_subset]</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>tessellationIsolines</code> is <code>VK_FALSE</code>, then <code>OpExecutionMode</code> <strong class=\"purple\">must</strong> not be set to <code>IsoLines</code>."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-tessellationShader-06327",
+          "text": " If <a href=\"#features-tessellationShader\"><code>tessellationShader</code></a> is enabled, and the <code><a href=\"#VK_KHR_portability_subset\">[VK_KHR_portability_subset]</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>tessellationPointMode</code> is <code>VK_FALSE</code>, then <code>OpExecutionMode</code> <strong class=\"purple\">must</strong> not be set to <code>PointMode</code>."
+        }
+      ],
+      "(VK_KHR_8bit_storage)": [
+        {
+          "vuid": "VUID-RuntimeSpirv-storageBuffer8BitAccess-06328",
+          "text": " If <a href=\"#features-storageBuffer8BitAccess\"><code>storageBuffer8BitAccess</code></a> is <code>VK_FALSE</code>, then objects containing an 8-bit integer element <strong class=\"purple\">must</strong> not have storage class of <strong>StorageBuffer</strong>, <strong>ShaderRecordBufferKHR</strong>, or <strong>PhysicalStorageBuffer</strong>."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-uniformAndStorageBuffer8BitAccess-06329",
+          "text": " If <a href=\"#features-uniformAndStorageBuffer8BitAccess\"><code>uniformAndStorageBuffer8BitAccess</code></a> is <code>VK_FALSE</code>, then objects in the <strong>Uniform</strong> storage class with the <strong>Block</strong> decoration <strong class=\"purple\">must</strong> not have an 8-bit integer member."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-storagePushConstant8-06330",
+          "text": " If <a href=\"#features-storagePushConstant8\"><code>storagePushConstant8</code></a> is <code>VK_FALSE</code>, then objects containing an 8-bit integer element <strong class=\"purple\">must</strong> not have storage class of <strong>PushConstant</strong>."
+        }
+      ],
+      "(VK_KHR_16bit_storage)": [
+        {
+          "vuid": "VUID-RuntimeSpirv-storageBuffer16BitAccess-06331",
+          "text": " If <a href=\"#features-storageBuffer16BitAccess\"><code>storageBuffer16BitAccess</code></a> is <code>VK_FALSE</code>, then objects containing 16-bit integer or 16-bit floating-point elements <strong class=\"purple\">must</strong> not have storage class of <strong>StorageBuffer</strong>, <strong>ShaderRecordBufferKHR</strong>, or <strong>PhysicalStorageBuffer</strong>."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-uniformAndStorageBuffer16BitAccess-06332",
+          "text": " If <a href=\"#features-uniformAndStorageBuffer16BitAccess\"><code>uniformAndStorageBuffer16BitAccess</code></a> is <code>VK_FALSE</code>, then objects in the <strong>Uniform</strong> storage class with the <strong>Block</strong> decoration <strong class=\"purple\">must</strong> not have 16-bit integer or 16-bit floating-point members."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-storagePushConstant16-06333",
+          "text": " If <a href=\"#features-storagePushConstant16\"><code>storagePushConstant16</code></a> is <code>VK_FALSE</code>, then objects containing 16-bit integer or 16-bit floating-point elements <strong class=\"purple\">must</strong> not have storage class of <strong>PushConstant</strong>."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-storageInputOutput16-06334",
+          "text": " If <a href=\"#features-storageInputOutput16\"><code>storageInputOutput16</code></a> is <code>VK_FALSE</code>, then objects containing 16-bit integer or 16-bit floating-point elements <strong class=\"purple\">must</strong> not have storage class of <strong>Input</strong> or <strong>Output</strong>."
+        }
+      ],
+      "(VK_KHR_ray_query)": [
+        {
+          "vuid": "VUID-RuntimeSpirv-OpRayQueryInitializeKHR-06348",
+          "text": " For <code>OpRayQueryInitializeKHR</code> instructions, all components of the <code>RayOrigin</code> and <code>RayDirection</code> operands <strong class=\"purple\">must</strong> be finite floating-point values."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-OpRayQueryInitializeKHR-06349",
+          "text": " For <code>OpRayQueryInitializeKHR</code> instructions, the <code>RayTmin</code> and <code>RayTmax</code> operands <strong class=\"purple\">must</strong> be non-negative floating-point values."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-OpRayQueryInitializeKHR-06350",
+          "text": " For <code>OpRayQueryInitializeKHR</code> instructions, the <code>RayTmin</code> operand <strong class=\"purple\">must</strong> be less than or equal to the <code>RayTmax</code> operand."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-OpRayQueryInitializeKHR-06351",
+          "text": " For <code>OpRayQueryInitializeKHR</code> instructions, <code>RayOrigin</code>, <code>RayDirection</code>, <code>RayTmin</code>, and <code>RayTmax</code> operands <strong class=\"purple\">must</strong> not contain NaNs."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-OpRayQueryInitializeKHR-06352",
+          "text": " For <code>OpRayQueryInitializeKHR</code> instructions, <code>Acceleration</code> <code>Structure</code> <strong class=\"purple\">must</strong> be an acceleration structure built as a <a href=\"#acceleration-structure-top-level\">top-level acceleration structure</a>."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-OpRayQueryGenerateIntersectionKHR-06353",
+          "text": " For <code>OpRayQueryGenerateIntersectionKHR</code> instructions, <code>Hit</code> <code>T</code> <strong class=\"purple\">must</strong> satisfy the condition <span class=\"eq\"><code>RayTmin</code> {leq} <code>Hit</code> <code>T</code> {leq} <code>RayTmax</code></span>, where <code>RayTmin</code> is equal to the value returned by <code>OpRayQueryGetRayTMinKHR</code> with the same ray query object, and <code>RayTmax</code> is equal to the value of <code>OpRayQueryGetIntersectionTKHR</code> for the current committed intersection with the same ray query object."
+        }
+      ],
+      "(VK_KHR_ray_query)+(VK_NV_ray_tracing_motion_blur)": [
+        {
+          "vuid": "VUID-RuntimeSpirv-OpRayQueryGenerateIntersectionKHR-06354",
+          "text": " For <code>OpRayQueryGenerateIntersectionKHR</code> instructions, <code>Acceleration</code> <code>Structure</code> <strong class=\"purple\">must</strong> not be built with <code>VK_BUILD_ACCELERATION_STRUCTURE_MOTION_BIT_NV</code> in <code>flags</code>."
+        }
+      ],
+      "(VK_KHR_ray_tracing_pipeline)": [
+        {
+          "vuid": "VUID-RuntimeSpirv-OpTraceRayKHR-06355",
+          "text": " For <code>OpTraceRayKHR</code> instructions, all components of the <code>RayOrigin</code> and <code>RayDirection</code> operands <strong class=\"purple\">must</strong> be finite floating-point values."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-OpTraceRayKHR-06356",
+          "text": " For <code>OpTraceRayKHR</code> instructions, the <code>RayTmin</code> and <code>RayTmax</code> operands <strong class=\"purple\">must</strong> be non-negative floating-point values."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-OpTraceRayKHR-06357",
+          "text": " For <code>OpTraceRayKHR</code> instructions, the <code>RayTmin</code> operand <strong class=\"purple\">must</strong> be less than or equal to the <code>RayTmax</code> operand."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-OpTraceRayKHR-06358",
+          "text": " For <code>OpTraceRayKHR</code> instructions, <code>RayOrigin</code>, <code>RayDirection</code>, <code>RayTmin</code>, and <code>RayTmax</code> operands <strong class=\"purple\">must</strong> not contain NaNs."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-OpTraceRayKHR-06359",
+          "text": " For <code>OpTraceRayKHR</code> instructions, <code>Acceleration</code> <code>Structure</code> <strong class=\"purple\">must</strong> be an acceleration structure built as a <a href=\"#acceleration-structure-top-level\">top-level acceleration structure</a>."
+        }
+      ],
+      "(VK_NV_ray_tracing_motion_blur)": [
+        {
+          "vuid": "VUID-RuntimeSpirv-OpTraceRayKHR-06360",
+          "text": " For <code>OpTraceRayKHR</code> instructions, if <code>Acceleration</code> <code>Structure</code> was built with <code>VK_BUILD_ACCELERATION_STRUCTURE_MOTION_BIT_NV</code> in <code>flags</code>, the pipeline <strong class=\"purple\">must</strong> have been created with <code>VK_PIPELINE_CREATE_RAY_TRACING_ALLOW_MOTION_BIT_NV</code> set"
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-OpTraceRayMotionNV-06361",
+          "text": " For <code>OpTraceRayMotionNV</code> instructions, all components of the <code>RayOrigin</code> and <code>RayDirection</code> operands <strong class=\"purple\">must</strong> be finite floating-point values."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-OpTraceRayMotionNV-06362",
+          "text": " For <code>OpTraceRayMotionNV</code> instructions, the <code>RayTmin</code> and <code>RayTmax</code> operands <strong class=\"purple\">must</strong> be non-negative floating-point values."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-OpTraceRayMotionNV-06363",
+          "text": " For <code>OpTraceRayMotionNV</code> instructions, the <code>RayTmin</code> operand <strong class=\"purple\">must</strong> be less than or equal to the <code>RayTmax</code> operand."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-OpTraceRayMotionNV-06364",
+          "text": " For <code>OpTraceRayMotionNV</code> instructions, <code>RayOrigin</code>, <code>RayDirection</code>, <code>RayTmin</code>, and <code>RayTmax</code> operands <strong class=\"purple\">must</strong> not contain NaNs."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-OpTraceRayMotionNV-06365",
+          "text": " For <code>OpTraceRayMotionNV</code> instructions, <code>Acceleration</code> <code>Structure</code> <strong class=\"purple\">must</strong> be an acceleration structure built as a <a href=\"#acceleration-structure-top-level\">top-level acceleration structure</a> with <code>VK_BUILD_ACCELERATION_STRUCTURE_MOTION_BIT_NV</code> in <code>flags</code>"
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-OpTraceRayMotionNV-06366",
+          "text": " For <code>OpTraceRayMotionNV</code> instructions the <code>time</code> operand <strong class=\"purple\">must</strong> be between 0.0 and 1.0"
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-OpTraceRayMotionNV-06367",
+          "text": " For <code>OpTraceRayMotionNV</code> instructions the pipeline <strong class=\"purple\">must</strong> have been created with <code>VK_PIPELINE_CREATE_RAY_TRACING_ALLOW_MOTION_BIT_NV</code> set"
+        }
+      ],
+      "(VK_KHR_zero_initialize_workgroup_memory)": [
+        {
+          "vuid": "VUID-RuntimeSpirv-shaderZeroInitializeWorkgroupMemory-06372",
+          "text": " If <a href=\"#features-shaderZeroInitializeWorkgroupMemory\"><code>shaderZeroInitializeWorkgroupMemory</code></a> is not enabled, any <code>OpVariable</code> with <strong>Workgroup</strong> as its <strong>Storage Class</strong> <strong class=\"purple\">must</strong> not have an <code>Initializer</code> operand"
+        }
+      ],
+      "!(VK_KHR_zero_initialize_workgroup_memory)": [
+        {
+          "vuid": "VUID-RuntimeSpirv-OpVariable-06373",
+          "text": " Any <code>OpVariable</code> with <strong>Workgroup</strong> as its <strong>Storage Class</strong> <strong class=\"purple\">must</strong> not have an <code>Initializer</code> operand"
+        }
+      ],
+      "(VK_KHR_workgroup_memory_explicit_layout)": [
+        {
+          "vuid": "VUID-RuntimeSpirv-workgroupMemoryExplicitLayout8BitAccess-06374",
+          "text": " If <a href=\"#features-workgroupMemoryExplicitLayout8BitAccess\"><code>workgroupMemoryExplicitLayout8BitAccess</code></a> is <code>VK_FALSE</code>, objects in the <code>Workgroup</code> storage class with the <code>Block</code> decoration <strong class=\"purple\">must</strong> not contain 8-bit integer members."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-workgroupMemoryExplicitLayout16BitAccess-06375",
+          "text": " If <a href=\"#features-workgroupMemoryExplicitLayout16BitAccess\"><code>workgroupMemoryExplicitLayout16BitAccess</code></a> is <code>VK_FALSE</code>, objects in the <code>Workgroup</code> storage class with the <code>Block</code> decoration <strong class=\"purple\">must</strong> not contain 16-bit integer or 16-bit floating-point members."
+        }
+      ],
+      "(VK_QCOM_render_pass_shader_resolve)": [
+        {
+          "vuid": "VUID-RuntimeSpirv-SampleRateShading-06378",
+          "text": " If the subpass description contains <code>VK_SUBPASS_DESCRIPTION_FRAGMENT_REGION_BIT_QCOM</code>, then the SPIR-V fragment shader Capability <code>SampleRateShading</code> <strong class=\"purple\">must</strong> not be enabled."
+        }
+      ],
+      "(VK_KHR_shader_subgroup_uniform_control_flow)": [
+        {
+          "vuid": "VUID-RuntimeSpirv-SubgroupUniformControlFlowKHR-06379",
+          "text": " The execution mode <code>SubgroupUniformControlFlowKHR</code> <strong class=\"purple\">must</strong> not be applied to an entry point unless <a href=\"#features-shaderSubgroupUniformControlFlow\"><code>shaderSubgroupUniformControlFlow</code></a> is enabled and the corresponding shader stage bit is set in subgroup <a href=\"#limits-subgroup-supportedStages\"><code>supportedStages</code></a> and the entry point does not execute any <a href=\"#ray-tracing-repack\"><em>invocation repack instructions</em></a>."
         }
       ]
     }

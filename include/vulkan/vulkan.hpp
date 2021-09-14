@@ -79,6 +79,10 @@
 #  define VULKAN_HPP_ASSERT_ON_RESULT VULKAN_HPP_ASSERT
 #endif
 
+#if !defined( VULKAN_HPP_STATIC_ASSERT )
+#  define VULKAN_HPP_STATIC_ASSERT static_assert
+#endif
+
 #if !defined( VULKAN_HPP_ENABLE_DYNAMIC_LOADER_TOOL )
 #  define VULKAN_HPP_ENABLE_DYNAMIC_LOADER_TOOL 1
 #endif
@@ -115,7 +119,7 @@ extern "C" __declspec( dllimport ) FARPROC __stdcall GetProcAddress( HINSTANCE h
 #  include <span>
 #endif
 
-static_assert( VK_HEADER_VERSION == 191, "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION == 192, "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
@@ -5630,7 +5634,12 @@ namespace VULKAN_HPP_NAMESPACE
       }
   extern VULKAN_HPP_STORAGE_API DispatchLoaderDynamic defaultDispatchLoaderDynamic;
 #  else
-#    define VULKAN_HPP_DEFAULT_DISPATCHER ::VULKAN_HPP_NAMESPACE::DispatchLoaderStatic()
+  static ::VULKAN_HPP_NAMESPACE::DispatchLoaderStatic & getDispatchLoaderStatic()
+  {
+    static ::VULKAN_HPP_NAMESPACE::DispatchLoaderStatic dls;
+    return dls;
+  }
+#    define VULKAN_HPP_DEFAULT_DISPATCHER ::VULKAN_HPP_NAMESPACE::getDispatchLoaderStatic()
 #    define VULKAN_HPP_DEFAULT_DISPATCH_LOADER_DYNAMIC_STORAGE
 #  endif
 #endif
