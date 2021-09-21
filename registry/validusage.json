@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.2.192",
-    "comment": "from git branch: github-main commit: a09f9efe488cdd97c0362622fc1187f09302689e",
-    "date": "2021-09-14 10:15:00Z"
+    "api version": "1.2.193",
+    "comment": "from git branch: github-main commit: 129f6f69dcbc00184d771d2da969b4ed394ac80c",
+    "date": "2021-09-21 07:35:52Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -1324,7 +1324,7 @@
         },
         {
           "vuid": "VUID-vkQueueSubmit2KHR-semaphore-03868",
-          "text": "  The <code>semaphore</code> member of any binary semaphore element of the <code>pSignalSemaphoreInfos</code> member of any element of <code>pSubmits</code> <strong class=\"purple\">must</strong> be unsignaled when the semaphore signal operation it defines is executed on the device"
+          "text": " The <code>semaphore</code> member of any binary semaphore element of the <code>pSignalSemaphoreInfos</code> member of any element of <code>pSubmits</code> <strong class=\"purple\">must</strong> be unsignaled when the semaphore signal operation it defines is executed on the device"
         },
         {
           "vuid": "VUID-vkQueueSubmit2KHR-stageMask-03869",
@@ -4653,21 +4653,21 @@
       ],
       "(VK_KHR_synchronization2)+(VK_KHR_acceleration_structure,VK_NV_ray_tracing)+(VK_KHR_ray_query)+(VK_KHR_ray_tracing_pipeline,VK_NV_ray_tracing)": [
         {
-          "vuid": "VUID-VkMemoryBarrier2KHR-rayQuery-06256",
+          "vuid": "VUID-VkMemoryBarrier2KHR-srcAccessMask-06256",
           "text": " If <a href=\"#features-rayQuery\"><code>rayQuery</code></a> is not enabled and pname:srcAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:srcStageMask <strong class=\"purple\">must</strong> not include any of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages except <code>VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR</code>"
         },
         {
-          "vuid": "VUID-VkMemoryBarrier2KHR-rayQuery-06256",
+          "vuid": "VUID-VkMemoryBarrier2KHR-dstAccessMask-06256",
           "text": " If <a href=\"#features-rayQuery\"><code>rayQuery</code></a> is not enabled and pname:dstAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:dstStageMask <strong class=\"purple\">must</strong> not include any of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages except <code>VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR</code>"
         }
       ],
       "(VK_KHR_synchronization2)+(VK_KHR_acceleration_structure,VK_NV_ray_tracing)+(VK_KHR_ray_query)+!(VK_KHR_ray_tracing_pipeline,VK_NV_ray_tracing)": [
         {
-          "vuid": "VUID-VkMemoryBarrier2KHR-rayQuery-06257",
+          "vuid": "VUID-VkMemoryBarrier2KHR-srcAccessMask-06257",
           "text": " If <a href=\"#features-rayQuery\"><code>rayQuery</code></a> is not enabled and pname:srcAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:srcStageMask <strong class=\"purple\">must</strong> not include any of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages"
         },
         {
-          "vuid": "VUID-VkMemoryBarrier2KHR-rayQuery-06257",
+          "vuid": "VUID-VkMemoryBarrier2KHR-dstAccessMask-06257",
           "text": " If <a href=\"#features-rayQuery\"><code>rayQuery</code></a> is not enabled and pname:dstAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:dstStageMask <strong class=\"purple\">must</strong> not include any of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages"
         }
       ],
@@ -5141,21 +5141,21 @@
       ],
       "(VK_KHR_synchronization2)+(VK_KHR_acceleration_structure,VK_NV_ray_tracing)+(VK_KHR_ray_query)+(VK_KHR_ray_tracing_pipeline,VK_NV_ray_tracing)": [
         {
-          "vuid": "VUID-VkBufferMemoryBarrier2KHR-rayQuery-06256",
+          "vuid": "VUID-VkBufferMemoryBarrier2KHR-srcAccessMask-06256",
           "text": " If <a href=\"#features-rayQuery\"><code>rayQuery</code></a> is not enabled and pname:srcAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:srcStageMask <strong class=\"purple\">must</strong> not include any of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages except <code>VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR</code>"
         },
         {
-          "vuid": "VUID-VkBufferMemoryBarrier2KHR-rayQuery-06256",
+          "vuid": "VUID-VkBufferMemoryBarrier2KHR-dstAccessMask-06256",
           "text": " If <a href=\"#features-rayQuery\"><code>rayQuery</code></a> is not enabled and pname:dstAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:dstStageMask <strong class=\"purple\">must</strong> not include any of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages except <code>VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR</code>"
         }
       ],
       "(VK_KHR_synchronization2)+(VK_KHR_acceleration_structure,VK_NV_ray_tracing)+(VK_KHR_ray_query)+!(VK_KHR_ray_tracing_pipeline,VK_NV_ray_tracing)": [
         {
-          "vuid": "VUID-VkBufferMemoryBarrier2KHR-rayQuery-06257",
+          "vuid": "VUID-VkBufferMemoryBarrier2KHR-srcAccessMask-06257",
           "text": " If <a href=\"#features-rayQuery\"><code>rayQuery</code></a> is not enabled and pname:srcAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:srcStageMask <strong class=\"purple\">must</strong> not include any of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages"
         },
         {
-          "vuid": "VUID-VkBufferMemoryBarrier2KHR-rayQuery-06257",
+          "vuid": "VUID-VkBufferMemoryBarrier2KHR-dstAccessMask-06257",
           "text": " If <a href=\"#features-rayQuery\"><code>rayQuery</code></a> is not enabled and pname:dstAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:dstStageMask <strong class=\"purple\">must</strong> not include any of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages"
         }
       ],
@@ -5745,21 +5745,21 @@
       ],
       "(VK_KHR_synchronization2)+(VK_KHR_acceleration_structure,VK_NV_ray_tracing)+(VK_KHR_ray_query)+(VK_KHR_ray_tracing_pipeline,VK_NV_ray_tracing)": [
         {
-          "vuid": "VUID-VkImageMemoryBarrier2KHR-rayQuery-06256",
+          "vuid": "VUID-VkImageMemoryBarrier2KHR-srcAccessMask-06256",
           "text": " If <a href=\"#features-rayQuery\"><code>rayQuery</code></a> is not enabled and pname:srcAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:srcStageMask <strong class=\"purple\">must</strong> not include any of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages except <code>VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR</code>"
         },
         {
-          "vuid": "VUID-VkImageMemoryBarrier2KHR-rayQuery-06256",
+          "vuid": "VUID-VkImageMemoryBarrier2KHR-dstAccessMask-06256",
           "text": " If <a href=\"#features-rayQuery\"><code>rayQuery</code></a> is not enabled and pname:dstAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:dstStageMask <strong class=\"purple\">must</strong> not include any of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages except <code>VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR</code>"
         }
       ],
       "(VK_KHR_synchronization2)+(VK_KHR_acceleration_structure,VK_NV_ray_tracing)+(VK_KHR_ray_query)+!(VK_KHR_ray_tracing_pipeline,VK_NV_ray_tracing)": [
         {
-          "vuid": "VUID-VkImageMemoryBarrier2KHR-rayQuery-06257",
+          "vuid": "VUID-VkImageMemoryBarrier2KHR-srcAccessMask-06257",
           "text": " If <a href=\"#features-rayQuery\"><code>rayQuery</code></a> is not enabled and pname:srcAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:srcStageMask <strong class=\"purple\">must</strong> not include any of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages"
         },
         {
-          "vuid": "VUID-VkImageMemoryBarrier2KHR-rayQuery-06257",
+          "vuid": "VUID-VkImageMemoryBarrier2KHR-dstAccessMask-06257",
           "text": " If <a href=\"#features-rayQuery\"><code>rayQuery</code></a> is not enabled and pname:dstAccessMask includes <code>VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR</code>, pname:dstStageMask <strong class=\"purple\">must</strong> not include any of the <code>VK_PIPELINE_STAGE_*_SHADER_BIT</code> stages"
         }
       ],
@@ -16458,11 +16458,11 @@
         },
         {
           "vuid": "VUID-VkSamplerYcbcrConversionCreateInfo-xChromaOffset-01651",
-          "text": " If the <a href=\"#potential-format-features\">potential format features</a> of the sampler {YCbCr} conversion do not support <code>VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT</code>, <code>xChromaOffset</code> and <code>yChromaOffset</code> <strong class=\"purple\">must</strong> not be <code>VK_CHROMA_LOCATION_COSITED_EVEN</code> if the corresponding channels are <a href=\"#textures-chroma-reconstruction\">downsampled</a>"
+          "text": " If the <a href=\"#potential-format-features\">potential format features</a> of the sampler {YCbCr} conversion do not support <code>VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT</code>, <code>xChromaOffset</code> and <code>yChromaOffset</code> <strong class=\"purple\">must</strong> not be <code>VK_CHROMA_LOCATION_COSITED_EVEN</code> if the corresponding components are <a href=\"#textures-chroma-reconstruction\">downsampled</a>"
         },
         {
           "vuid": "VUID-VkSamplerYcbcrConversionCreateInfo-xChromaOffset-01652",
-          "text": " If the <a href=\"#potential-format-features\">potential format features</a> of the sampler {YCbCr} conversion do not support <code>VK_FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT</code>, <code>xChromaOffset</code> and <code>yChromaOffset</code> <strong class=\"purple\">must</strong> not be <code>VK_CHROMA_LOCATION_MIDPOINT</code> if the corresponding channels are <a href=\"#textures-chroma-reconstruction\">downsampled</a>"
+          "text": " If the <a href=\"#potential-format-features\">potential format features</a> of the sampler {YCbCr} conversion do not support <code>VK_FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT</code>, <code>xChromaOffset</code> and <code>yChromaOffset</code> <strong class=\"purple\">must</strong> not be <code>VK_CHROMA_LOCATION_MIDPOINT</code> if the corresponding components are <a href=\"#textures-chroma-reconstruction\">downsampled</a>"
         },
         {
           "vuid": "VUID-VkSamplerYcbcrConversionCreateInfo-components-02581",
@@ -16486,11 +16486,11 @@
         },
         {
           "vuid": "VUID-VkSamplerYcbcrConversionCreateInfo-ycbcrModel-01655",
-          "text": " If <code>ycbcrModel</code> is not <code>VK_SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY</code>, then <code>components.r</code>, <code>components.g</code>, and <code>components.b</code> <strong class=\"purple\">must</strong> correspond to channels of the <code>format</code>; that is, <code>components.r</code>, <code>components.g</code>, and <code>components.b</code> <strong class=\"purple\">must</strong> not be <code>VK_COMPONENT_SWIZZLE_ZERO</code> or <code>VK_COMPONENT_SWIZZLE_ONE</code>, and <strong class=\"purple\">must</strong> not correspond to a channel which contains zero or one as a consequence of <a href=\"#textures-conversion-to-rgba\">conversion to RGBA</a>"
+          "text": " If <code>ycbcrModel</code> is not <code>VK_SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY</code>, then <code>components.r</code>, <code>components.g</code>, and <code>components.b</code> <strong class=\"purple\">must</strong> correspond to components of the <code>format</code>; that is, <code>components.r</code>, <code>components.g</code>, and <code>components.b</code> <strong class=\"purple\">must</strong> not be <code>VK_COMPONENT_SWIZZLE_ZERO</code> or <code>VK_COMPONENT_SWIZZLE_ONE</code>, and <strong class=\"purple\">must</strong> not correspond to a component which contains zero or one as a consequence of <a href=\"#textures-conversion-to-rgba\">conversion to RGBA</a>"
         },
         {
           "vuid": "VUID-VkSamplerYcbcrConversionCreateInfo-ycbcrRange-02748",
-          "text": " If <code>ycbcrRange</code> is <code>VK_SAMPLER_YCBCR_RANGE_ITU_NARROW</code> then the R, G and B channels obtained by applying the <code>component</code> swizzle to <code>format</code> <strong class=\"purple\">must</strong> each have a bit-depth greater than or equal to 8"
+          "text": " If <code>ycbcrRange</code> is <code>VK_SAMPLER_YCBCR_RANGE_ITU_NARROW</code> then the R, G and B components obtained by applying the <code>component</code> swizzle to <code>format</code> <strong class=\"purple\">must</strong> each have a bit-depth greater than or equal to 8"
         },
         {
           "vuid": "VUID-VkSamplerYcbcrConversionCreateInfo-forceExplicitReconstruction-01656",
@@ -25140,11 +25140,11 @@
       "(VK_EXT_primitive_topology_list_restart)": [
         {
           "vuid": "VUID-VkPipelineInputAssemblyStateCreateInfo-topology-06252",
-          "text": " If <code>topology</code> is <code>VK_PRIMITIVE_TOPOLOGY_POINT_LIST</code>, <code>VK_PRIMITIVE_TOPOLOGY_LINE_LIST</code>, <code>VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST</code>, <code>VK_PRIMITIVE_TOPOLOGY_LINE_LIST_WITH_ADJACENCY</code> or <code>VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST_WITH_ADJACENCY</code>, the <a href=\"#features-primitiveTopologyListRestart\"><code>primitiveTopologyListRestart</code></a> feature <strong class=\"purple\">must</strong> be enabled"
+          "text": " If <code>topology</code> is <code>VK_PRIMITIVE_TOPOLOGY_POINT_LIST</code>, <code>VK_PRIMITIVE_TOPOLOGY_LINE_LIST</code>, <code>VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST</code>, <code>VK_PRIMITIVE_TOPOLOGY_LINE_LIST_WITH_ADJACENCY</code> or <code>VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST_WITH_ADJACENCY</code>, and <code>primitiveRestartEnable</code> is <code>VK_TRUE</code>, the <a href=\"#features-primitiveTopologyListRestart\"><code>primitiveTopologyListRestart</code></a> feature <strong class=\"purple\">must</strong> be enabled"
         },
         {
           "vuid": "VUID-VkPipelineInputAssemblyStateCreateInfo-topology-06253",
-          "text": " If <code>topology</code> is <code>VK_PRIMITIVE_TOPOLOGY_PATCH_LIST</code>, the <a href=\"#features-primitiveTopologyPatchListRestart\"><code>primitiveTopologyPatchListRestart</code></a> feature <strong class=\"purple\">must</strong> be enabled"
+          "text": " If <code>topology</code> is <code>VK_PRIMITIVE_TOPOLOGY_PATCH_LIST</code>, and <code>primitiveRestartEnable</code> is <code>VK_TRUE</code>, the <a href=\"#features-primitiveTopologyPatchListRestart\"><code>primitiveTopologyPatchListRestart</code></a> feature <strong class=\"purple\">must</strong> be enabled"
         }
       ],
       "core": [
@@ -25448,19 +25448,19 @@
       "(VK_EXT_shader_image_atomic_int64)": [
         {
           "vuid": "VUID-vkCmdDraw-SampledType-04470",
-          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
         },
         {
           "vuid": "VUID-vkCmdDraw-SampledType-04471",
-          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
         },
         {
           "vuid": "VUID-vkCmdDraw-SampledType-04472",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
         },
         {
           "vuid": "VUID-vkCmdDraw-SampledType-04473",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
         },
         {
           "vuid": "VUID-vkCmdDraw-sparseImageInt64Atomics-04474",
@@ -25756,19 +25756,19 @@
       "(VK_EXT_shader_image_atomic_int64)": [
         {
           "vuid": "VUID-vkCmdDrawIndexed-SampledType-04470",
-          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexed-SampledType-04471",
-          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexed-SampledType-04472",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexed-SampledType-04473",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexed-sparseImageInt64Atomics-04474",
@@ -26076,19 +26076,19 @@
       "(VK_EXT_multi_draw)+(VK_EXT_shader_image_atomic_int64)": [
         {
           "vuid": "VUID-vkCmdDrawMultiEXT-SampledType-04470",
-          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
         },
         {
           "vuid": "VUID-vkCmdDrawMultiEXT-SampledType-04471",
-          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
         },
         {
           "vuid": "VUID-vkCmdDrawMultiEXT-SampledType-04472",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
         },
         {
           "vuid": "VUID-vkCmdDrawMultiEXT-SampledType-04473",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
         },
         {
           "vuid": "VUID-vkCmdDrawMultiEXT-sparseImageInt64Atomics-04474",
@@ -26404,19 +26404,19 @@
       "(VK_EXT_multi_draw)+(VK_EXT_shader_image_atomic_int64)": [
         {
           "vuid": "VUID-vkCmdDrawMultiIndexedEXT-SampledType-04470",
-          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
         },
         {
           "vuid": "VUID-vkCmdDrawMultiIndexedEXT-SampledType-04471",
-          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
         },
         {
           "vuid": "VUID-vkCmdDrawMultiIndexedEXT-SampledType-04472",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
         },
         {
           "vuid": "VUID-vkCmdDrawMultiIndexedEXT-SampledType-04473",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
         },
         {
           "vuid": "VUID-vkCmdDrawMultiIndexedEXT-sparseImageInt64Atomics-04474",
@@ -26744,19 +26744,19 @@
       "(VK_EXT_shader_image_atomic_int64)": [
         {
           "vuid": "VUID-vkCmdDrawIndirect-SampledType-04470",
-          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirect-SampledType-04471",
-          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirect-SampledType-04472",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirect-SampledType-04473",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirect-sparseImageInt64Atomics-04474",
@@ -27112,19 +27112,19 @@
       "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_EXT_shader_image_atomic_int64)": [
         {
           "vuid": "VUID-vkCmdDrawIndirectCount-SampledType-04470",
-          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCount-SampledType-04471",
-          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCount-SampledType-04472",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCount-SampledType-04473",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCount-sparseImageInt64Atomics-04474",
@@ -27458,19 +27458,19 @@
       "(VK_EXT_shader_image_atomic_int64)": [
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-SampledType-04470",
-          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-SampledType-04471",
-          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-SampledType-04472",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-SampledType-04473",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-sparseImageInt64Atomics-04474",
@@ -27830,19 +27830,19 @@
       "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_EXT_shader_image_atomic_int64)": [
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount-SampledType-04470",
-          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount-SampledType-04471",
-          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount-SampledType-04472",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount-SampledType-04473",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount-sparseImageInt64Atomics-04474",
@@ -28164,19 +28164,19 @@
       "(VK_EXT_transform_feedback)+(VK_EXT_shader_image_atomic_int64)": [
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-SampledType-04470",
-          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-SampledType-04471",
-          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-SampledType-04472",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-SampledType-04473",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-sparseImageInt64Atomics-04474",
@@ -28536,19 +28536,19 @@
       "(VK_NV_mesh_shader)+(VK_EXT_shader_image_atomic_int64)": [
         {
           "vuid": "VUID-vkCmdDrawMeshTasksNV-SampledType-04470",
-          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksNV-SampledType-04471",
-          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksNV-SampledType-04472",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksNV-SampledType-04473",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksNV-sparseImageInt64Atomics-04474",
@@ -28860,19 +28860,19 @@
       "(VK_NV_mesh_shader)+(VK_EXT_shader_image_atomic_int64)": [
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-SampledType-04470",
-          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-SampledType-04471",
-          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-SampledType-04472",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-SampledType-04473",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-sparseImageInt64Atomics-04474",
@@ -29212,19 +29212,19 @@
       "(VK_NV_mesh_shader)+(VK_EXT_shader_image_atomic_int64)": [
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-SampledType-04470",
-          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-SampledType-04471",
-          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-SampledType-04472",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-SampledType-04473",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-sparseImageInt64Atomics-04474",
@@ -32204,19 +32204,19 @@
       "(VK_EXT_shader_image_atomic_int64)": [
         {
           "vuid": "VUID-vkCmdDispatch-SampledType-04470",
-          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
         },
         {
           "vuid": "VUID-vkCmdDispatch-SampledType-04471",
-          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
         },
         {
           "vuid": "VUID-vkCmdDispatch-SampledType-04472",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
         },
         {
           "vuid": "VUID-vkCmdDispatch-SampledType-04473",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
         },
         {
           "vuid": "VUID-vkCmdDispatch-sparseImageInt64Atomics-04474",
@@ -32376,19 +32376,19 @@
       "(VK_EXT_shader_image_atomic_int64)": [
         {
           "vuid": "VUID-vkCmdDispatchIndirect-SampledType-04470",
-          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
         },
         {
           "vuid": "VUID-vkCmdDispatchIndirect-SampledType-04471",
-          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
         },
         {
           "vuid": "VUID-vkCmdDispatchIndirect-SampledType-04472",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
         },
         {
           "vuid": "VUID-vkCmdDispatchIndirect-SampledType-04473",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
         },
         {
           "vuid": "VUID-vkCmdDispatchIndirect-sparseImageInt64Atomics-04474",
@@ -32576,19 +32576,19 @@
       "(VK_VERSION_1_1,VK_KHR_device_group)+(VK_EXT_shader_image_atomic_int64)": [
         {
           "vuid": "VUID-vkCmdDispatchBase-SampledType-04470",
-          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
         },
         {
           "vuid": "VUID-vkCmdDispatchBase-SampledType-04471",
-          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
         },
         {
           "vuid": "VUID-vkCmdDispatchBase-SampledType-04472",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
         },
         {
           "vuid": "VUID-vkCmdDispatchBase-SampledType-04473",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
         },
         {
           "vuid": "VUID-vkCmdDispatchBase-sparseImageInt64Atomics-04474",
@@ -32724,19 +32724,19 @@
       "(VK_HUAWEI_subpass_shading)+(VK_EXT_shader_image_atomic_int64)": [
         {
           "vuid": "VUID-vkCmdSubpassShadingHUAWEI-SampledType-04470",
-          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
         },
         {
           "vuid": "VUID-vkCmdSubpassShadingHUAWEI-SampledType-04471",
-          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
         },
         {
           "vuid": "VUID-vkCmdSubpassShadingHUAWEI-SampledType-04472",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
         },
         {
           "vuid": "VUID-vkCmdSubpassShadingHUAWEI-SampledType-04473",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
         },
         {
           "vuid": "VUID-vkCmdSubpassShadingHUAWEI-sparseImageInt64Atomics-04474",
@@ -33248,19 +33248,19 @@
       "(VK_NV_device_generated_commands)+(VK_EXT_shader_image_atomic_int64)": [
         {
           "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-SampledType-04470",
-          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
         },
         {
           "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-SampledType-04471",
-          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
         },
         {
           "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-SampledType-04472",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
         },
         {
           "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-SampledType-04473",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
         },
         {
           "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-sparseImageInt64Atomics-04474",
@@ -39004,19 +39004,19 @@
       "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_NV_ray_tracing)+(VK_EXT_shader_image_atomic_int64)": [
         {
           "vuid": "VUID-vkCmdTraceRaysNV-SampledType-04470",
-          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysNV-SampledType-04471",
-          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysNV-SampledType-04472",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysNV-SampledType-04473",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysNV-sparseImageInt64Atomics-04474",
@@ -39300,19 +39300,19 @@
       "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_pipeline)+(VK_EXT_shader_image_atomic_int64)": [
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-SampledType-04470",
-          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-SampledType-04471",
-          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-SampledType-04472",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-SampledType-04473",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-sparseImageInt64Atomics-04474",
@@ -39676,19 +39676,19 @@
       "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_pipeline)+(VK_EXT_shader_image_atomic_int64)": [
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-SampledType-04470",
-          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-SampledType-04471",
-          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+          "text": " If a <a href=\"#VkImageView\">VkImageView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-SampledType-04472",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit channel width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a 64-bit component width is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 64"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-SampledType-04473",
-          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a channel width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
+          "text": " If a <a href=\"#VkBufferView\">VkBufferView</a> with a <a href=\"#VkFormat\">VkFormat</a> that has a component width less than 64-bit is accessed as a result of this command, the <code>SampledType</code> of the <code>OpTypeImage</code> operand of that instruction <strong class=\"purple\">must</strong> have a <code>Width</code> of 32"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-sparseImageInt64Atomics-04474",
