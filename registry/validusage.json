@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.2.193",
-    "comment": "from git branch: github-main commit: 129f6f69dcbc00184d771d2da969b4ed394ac80c",
-    "date": "2021-09-21 07:35:52Z"
+    "api version": "1.2.194",
+    "comment": "from git branch: github-main commit: a0960966d565bdfc6e853a0bc471e58fdbd374ef",
+    "date": "2021-09-28 12:49:58Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -6284,7 +6284,7 @@
         },
         {
           "vuid": "VUID-VkRenderPassCreateInfo-pNext-02515",
-          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkRenderPassMultiviewCreateInfo\">VkRenderPassMultiviewCreateInfo</a> structure, and each element of its <code>pViewMasks</code> member is <code>0</code>, <code>correlatedViewMaskCount</code> <strong class=\"purple\">must</strong> be <code>0</code>"
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkRenderPassMultiviewCreateInfo\">VkRenderPassMultiviewCreateInfo</a> structure, and each element of its <code>pViewMasks</code> member is <code>0</code>, its <code>correlationMaskCount</code> member <strong class=\"purple\">must</strong> be <code>0</code>"
         }
       ]
     },
@@ -11529,6 +11529,36 @@
           "text": " <code>allocationSize</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
         }
       ],
+      "(VK_FUCHSIA_buffer_collection)": [
+        {
+          "vuid": "VUID-VkMemoryAllocateInfo-buffer-06380",
+          "text": " If the parameters define an import operation from an <a href=\"#VkBufferCollectionFUCHSIA\">VkBufferCollectionFUCHSIA</a>, and <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>buffer</code> is present and non-NULL, <a href=\"#VkImportMemoryBufferCollectionFUCHSIA\">VkImportMemoryBufferCollectionFUCHSIA</a>::<code>collection</code> and <a href=\"#VkImportMemoryBufferCollectionFUCHSIA\">VkImportMemoryBufferCollectionFUCHSIA</a>::<code>index</code> must match <a href=\"#VkBufferCollectionBufferCreateInfoFUCHSIA\">VkBufferCollectionBufferCreateInfoFUCHSIA</a>::<code>collection</code> and <a href=\"#VkBufferCollectionBufferCreateInfoFUCHSIA\">VkBufferCollectionBufferCreateInfoFUCHSIA</a>::<code>index</code>, respectively, of the <a href=\"#VkBufferCollectionBufferCreateInfoFUCHSIA\">VkBufferCollectionBufferCreateInfoFUCHSIA</a> structure used to create the <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>buffer</code>"
+        },
+        {
+          "vuid": "VUID-VkMemoryAllocateInfo-image-06381",
+          "text": " If the parameters define an import operation from an <a href=\"#VkBufferCollectionFUCHSIA\">VkBufferCollectionFUCHSIA</a>, and <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>image</code> is present and non-NULL, <a href=\"#VkImportMemoryBufferCollectionFUCHSIA\">VkImportMemoryBufferCollectionFUCHSIA</a>::<code>collection</code> and <a href=\"#VkImportMemoryBufferCollectionFUCHSIA\">VkImportMemoryBufferCollectionFUCHSIA</a>::<code>index</code> must match <a href=\"#VkBufferCollectionImageCreateInfoFUCHSIA\">VkBufferCollectionImageCreateInfoFUCHSIA</a>::<code>collection</code> and <a href=\"#VkBufferCollectionImageCreateInfoFUCHSIA\">VkBufferCollectionImageCreateInfoFUCHSIA</a>::<code>index</code>, respectively, of the <a href=\"#VkBufferCollectionImageCreateInfoFUCHSIA\">VkBufferCollectionImageCreateInfoFUCHSIA</a> structure used to create the <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>image</code>"
+        },
+        {
+          "vuid": "VUID-VkMemoryAllocateInfo-allocationSize-06382",
+          "text": " If the parameters define an import operation from an <a href=\"#VkBufferCollectionFUCHSIA\">VkBufferCollectionFUCHSIA</a>, <code>allocationSize</code> <strong class=\"purple\">must</strong> match <a href=\"#VkMemoryRequirements\">VkMemoryRequirements</a>::<code>size</code> value retrieved by <a href=\"#vkGetImageMemoryRequirements\">vkGetImageMemoryRequirements</a> or <a href=\"#vkGetBufferMemoryRequirements\">vkGetBufferMemoryRequirements</a> for image-based or buffer-based collections respectively"
+        },
+        {
+          "vuid": "VUID-VkMemoryAllocateInfo-pNext-06383",
+          "text": " If the parameters define an import operation from an <a href=\"#VkBufferCollectionFUCHSIA\">VkBufferCollectionFUCHSIA</a>, the <code>pNext</code> chain <strong class=\"purple\">must</strong> include a <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a> structure with either its <code>image</code> or <code>buffer</code> field set to a value other than <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>."
+        },
+        {
+          "vuid": "VUID-VkMemoryAllocateInfo-image-06384",
+          "text": " If the parameters define an import operation from an <a href=\"#VkBufferCollectionFUCHSIA\">VkBufferCollectionFUCHSIA</a> and <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>image</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, the <code>image</code> <strong class=\"purple\">must</strong> be created with a <a href=\"#VkBufferCollectionImageCreateInfoFUCHSIA\">VkBufferCollectionImageCreateInfoFUCHSIA</a> structure chained to its <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>pNext</code> pointer"
+        },
+        {
+          "vuid": "VUID-VkMemoryAllocateInfo-buffer-06385",
+          "text": " If the parameters define an import operation from an <a href=\"#VkBufferCollectionFUCHSIA\">VkBufferCollectionFUCHSIA</a> and <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>::<code>buffer</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, the <code>buffer</code> <strong class=\"purple\">must</strong> be created with a <a href=\"#VkBufferCollectionBufferCreateInfoFUCHSIA\">VkBufferCollectionBufferCreateInfoFUCHSIA</a> structure chained to its <a href=\"#VkBufferCreateInfo\">VkBufferCreateInfo</a>::<code>pNext</code> pointer"
+        },
+        {
+          "vuid": "VUID-VkMemoryAllocateInfo-memoryTypeIndex-06386",
+          "text": " If the parameters define an import operation from an <a href=\"#VkBufferCollectionFUCHSIA\">VkBufferCollectionFUCHSIA</a>, <code>memoryTypeIndex</code> <strong class=\"purple\">must</strong> be from <a href=\"#VkBufferCollectionPropertiesFUCHSIA\">VkBufferCollectionPropertiesFUCHSIA</a> as retrieved by <a href=\"#vkGetBufferCollectionPropertiesFUCHSIA\">vkGetBufferCollectionPropertiesFUCHSIA</a>."
+        }
+      ],
       "(VK_KHR_external_memory)+(VK_KHR_dedicated_allocation,VK_NV_dedicated_allocation)": [
         {
           "vuid": "VUID-VkMemoryAllocateInfo-pNext-00639",
@@ -11692,7 +11722,7 @@
         },
         {
           "vuid": "VUID-VkMemoryAllocateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDedicatedAllocationMemoryAllocateInfoNV\">VkDedicatedAllocationMemoryAllocateInfoNV</a>, <a href=\"#VkExportMemoryAllocateInfo\">VkExportMemoryAllocateInfo</a>, <a href=\"#VkExportMemoryAllocateInfoNV\">VkExportMemoryAllocateInfoNV</a>, <a href=\"#VkExportMemoryWin32HandleInfoKHR\">VkExportMemoryWin32HandleInfoKHR</a>, <a href=\"#VkExportMemoryWin32HandleInfoNV\">VkExportMemoryWin32HandleInfoNV</a>, <a href=\"#VkImportAndroidHardwareBufferInfoANDROID\">VkImportAndroidHardwareBufferInfoANDROID</a>, <a href=\"#VkImportMemoryFdInfoKHR\">VkImportMemoryFdInfoKHR</a>, <a href=\"#VkImportMemoryHostPointerInfoEXT\">VkImportMemoryHostPointerInfoEXT</a>, <a href=\"#VkImportMemoryWin32HandleInfoKHR\">VkImportMemoryWin32HandleInfoKHR</a>, <a href=\"#VkImportMemoryWin32HandleInfoNV\">VkImportMemoryWin32HandleInfoNV</a>, <a href=\"#VkImportMemoryZirconHandleInfoFUCHSIA\">VkImportMemoryZirconHandleInfoFUCHSIA</a>, <a href=\"#VkMemoryAllocateFlagsInfo\">VkMemoryAllocateFlagsInfo</a>, <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>, <a href=\"#VkMemoryOpaqueCaptureAddressAllocateInfo\">VkMemoryOpaqueCaptureAddressAllocateInfo</a>, or <a href=\"#VkMemoryPriorityAllocateInfoEXT\">VkMemoryPriorityAllocateInfoEXT</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDedicatedAllocationMemoryAllocateInfoNV\">VkDedicatedAllocationMemoryAllocateInfoNV</a>, <a href=\"#VkExportMemoryAllocateInfo\">VkExportMemoryAllocateInfo</a>, <a href=\"#VkExportMemoryAllocateInfoNV\">VkExportMemoryAllocateInfoNV</a>, <a href=\"#VkExportMemoryWin32HandleInfoKHR\">VkExportMemoryWin32HandleInfoKHR</a>, <a href=\"#VkExportMemoryWin32HandleInfoNV\">VkExportMemoryWin32HandleInfoNV</a>, <a href=\"#VkImportAndroidHardwareBufferInfoANDROID\">VkImportAndroidHardwareBufferInfoANDROID</a>, <a href=\"#VkImportMemoryBufferCollectionFUCHSIA\">VkImportMemoryBufferCollectionFUCHSIA</a>, <a href=\"#VkImportMemoryFdInfoKHR\">VkImportMemoryFdInfoKHR</a>, <a href=\"#VkImportMemoryHostPointerInfoEXT\">VkImportMemoryHostPointerInfoEXT</a>, <a href=\"#VkImportMemoryWin32HandleInfoKHR\">VkImportMemoryWin32HandleInfoKHR</a>, <a href=\"#VkImportMemoryWin32HandleInfoNV\">VkImportMemoryWin32HandleInfoNV</a>, <a href=\"#VkImportMemoryZirconHandleInfoFUCHSIA\">VkImportMemoryZirconHandleInfoFUCHSIA</a>, <a href=\"#VkMemoryAllocateFlagsInfo\">VkMemoryAllocateFlagsInfo</a>, <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>, <a href=\"#VkMemoryOpaqueCaptureAddressAllocateInfo\">VkMemoryOpaqueCaptureAddressAllocateInfo</a>, or <a href=\"#VkMemoryPriorityAllocateInfoEXT\">VkMemoryPriorityAllocateInfoEXT</a>"
         },
         {
           "vuid": "VUID-VkMemoryAllocateInfo-sType-unique",
@@ -12854,6 +12884,12 @@
           "vuid": "VUID-vkCreateBuffer-pBuffer-parameter",
           "text": " <code>pBuffer</code> <strong class=\"purple\">must</strong> be a valid pointer to a <a href=\"#VkBuffer\">VkBuffer</a> handle"
         }
+      ],
+      "(VK_FUCHSIA_buffer_collection)": [
+        {
+          "vuid": "VUID-vkCreateBuffer-pNext-06387",
+          "text": " If using the <a href=\"#VkBuffer\">VkBuffer</a> for an import operation from a <a href=\"#VkBufferCollectionFUCHSIA\">VkBufferCollectionFUCHSIA</a> where a <a href=\"#VkBufferCollectionBufferCreateInfoFUCHSIA\">VkBufferCollectionBufferCreateInfoFUCHSIA</a> has been chained to <code>pNext</code>, <code>pCreateInfo</code> <strong class=\"purple\">must</strong> match the <a href=\"#VkBufferConstraintsInfoFUCHSIA\">VkBufferConstraintsInfoFUCHSIA</a>::<code>createInfo</code> used when setting the constraints on the buffer collection with <a href=\"#vkSetBufferCollectionBufferConstraintsFUCHSIA\">vkSetBufferCollectionBufferConstraintsFUCHSIA</a>"
+        }
       ]
     },
     "VkBufferCreateInfo": {
@@ -12892,7 +12928,7 @@
         },
         {
           "vuid": "VUID-VkBufferCreateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkBufferDeviceAddressCreateInfoEXT\">VkBufferDeviceAddressCreateInfoEXT</a>, <a href=\"#VkBufferOpaqueCaptureAddressCreateInfo\">VkBufferOpaqueCaptureAddressCreateInfo</a>, <a href=\"#VkDedicatedAllocationBufferCreateInfoNV\">VkDedicatedAllocationBufferCreateInfoNV</a>, <a href=\"#VkExternalMemoryBufferCreateInfo\">VkExternalMemoryBufferCreateInfo</a>, <a href=\"#VkVideoProfileKHR\">VkVideoProfileKHR</a>, or <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkBufferCollectionBufferCreateInfoFUCHSIA\">VkBufferCollectionBufferCreateInfoFUCHSIA</a>, <a href=\"#VkBufferDeviceAddressCreateInfoEXT\">VkBufferDeviceAddressCreateInfoEXT</a>, <a href=\"#VkBufferOpaqueCaptureAddressCreateInfo\">VkBufferOpaqueCaptureAddressCreateInfo</a>, <a href=\"#VkDedicatedAllocationBufferCreateInfoNV\">VkDedicatedAllocationBufferCreateInfoNV</a>, <a href=\"#VkExternalMemoryBufferCreateInfo\">VkExternalMemoryBufferCreateInfo</a>, <a href=\"#VkVideoProfileKHR\">VkVideoProfileKHR</a>, or <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a>"
         },
         {
           "vuid": "VUID-VkBufferCreateInfo-sType-unique",
@@ -13013,6 +13049,22 @@
         {
           "vuid": "VUID-VkBufferDeviceAddressCreateInfoEXT-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_CREATE_INFO_EXT</code>"
+        }
+      ]
+    },
+    "VkBufferCollectionBufferCreateInfoFUCHSIA": {
+      "(VK_FUCHSIA_buffer_collection)": [
+        {
+          "vuid": "VUID-VkBufferCollectionBufferCreateInfoFUCHSIA-index-06388",
+          "text": " <code>index</code> <strong class=\"purple\">must</strong> be less than <a href=\"#VkBufferCollectionPropertiesFUCHSIA\">VkBufferCollectionPropertiesFUCHSIA</a>::<code>bufferCount</code>"
+        },
+        {
+          "vuid": "VUID-VkBufferCollectionBufferCreateInfoFUCHSIA-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_BUFFER_COLLECTION_BUFFER_CREATE_INFO_FUCHSIA</code>"
+        },
+        {
+          "vuid": "VUID-VkBufferCollectionBufferCreateInfoFUCHSIA-collection-parameter",
+          "text": " <code>collection</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkBufferCollectionFUCHSIA\">VkBufferCollectionFUCHSIA</a> handle"
         }
       ]
     },
@@ -13206,6 +13258,12 @@
           "vuid": "VUID-vkCreateImage-pImage-parameter",
           "text": " <code>pImage</code> <strong class=\"purple\">must</strong> be a valid pointer to a <a href=\"#VkImage\">VkImage</a> handle"
         }
+      ],
+      "(VK_FUCHSIA_buffer_collection)": [
+        {
+          "vuid": "VUID-vkCreateImage-pNext-06389",
+          "text": " If a <a href=\"#VkBufferCollectionImageCreateInfoFUCHSIA\">VkBufferCollectionImageCreateInfoFUCHSIA</a> has been chained to <code>pNext</code>, <code>pCreateInfo</code> <strong class=\"purple\">must</strong> match the <a href=\"#sysmem-chosen-create-infos\">Sysmem chosen <code>VkImageCreateInfo</code></a> excepting members <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>extent</code> and <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>usage</code> in the match criteria"
+        }
       ]
     },
     "VkImageCreateInfo": {
@@ -13372,7 +13430,7 @@
         },
         {
           "vuid": "VUID-VkImageCreateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDedicatedAllocationImageCreateInfoNV\">VkDedicatedAllocationImageCreateInfoNV</a>, <a href=\"#VkExternalFormatANDROID\">VkExternalFormatANDROID</a>, <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a>, <a href=\"#VkExternalMemoryImageCreateInfoNV\">VkExternalMemoryImageCreateInfoNV</a>, <a href=\"#VkImageDrmFormatModifierExplicitCreateInfoEXT\">VkImageDrmFormatModifierExplicitCreateInfoEXT</a>, <a href=\"#VkImageDrmFormatModifierListCreateInfoEXT\">VkImageDrmFormatModifierListCreateInfoEXT</a>, <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a>, <a href=\"#VkImageStencilUsageCreateInfo\">VkImageStencilUsageCreateInfo</a>, <a href=\"#VkImageSwapchainCreateInfoKHR\">VkImageSwapchainCreateInfoKHR</a>, <a href=\"#VkVideoProfileKHR\">VkVideoProfileKHR</a>, or <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkBufferCollectionImageCreateInfoFUCHSIA\">VkBufferCollectionImageCreateInfoFUCHSIA</a>, <a href=\"#VkDedicatedAllocationImageCreateInfoNV\">VkDedicatedAllocationImageCreateInfoNV</a>, <a href=\"#VkExternalFormatANDROID\">VkExternalFormatANDROID</a>, <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a>, <a href=\"#VkExternalMemoryImageCreateInfoNV\">VkExternalMemoryImageCreateInfoNV</a>, <a href=\"#VkImageDrmFormatModifierExplicitCreateInfoEXT\">VkImageDrmFormatModifierExplicitCreateInfoEXT</a>, <a href=\"#VkImageDrmFormatModifierListCreateInfoEXT\">VkImageDrmFormatModifierListCreateInfoEXT</a>, <a href=\"#VkImageFormatListCreateInfo\">VkImageFormatListCreateInfo</a>, <a href=\"#VkImageStencilUsageCreateInfo\">VkImageStencilUsageCreateInfo</a>, <a href=\"#VkImageSwapchainCreateInfoKHR\">VkImageSwapchainCreateInfoKHR</a>, <a href=\"#VkVideoProfileKHR\">VkVideoProfileKHR</a>, or <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a>"
         },
         {
           "vuid": "VUID-VkImageCreateInfo-sType-unique",
@@ -13719,6 +13777,28 @@
         {
           "vuid": "VUID-VkImageCreateInfo-usage-04816",
           "text": " If <code>usage</code> includes <code>VK_IMAGE_USAGE_VIDEO_ENCODE_DST_BIT_KHR</code>, <code>VK_IMAGE_USAGE_VIDEO_ENCODE_SRC_BIT_KHR</code>, <code>VK_IMAGE_USAGE_VIDEO_ENCODE_DPB_BIT_KHR</code>, then the <code>pNext</code> chain <strong class=\"purple\">must</strong> include a valid <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a> structure which includes at least one <a href=\"#VkVideoProfileKHR\">VkVideoProfileKHR</a> with a encode codec-operation"
+        }
+      ],
+      "(VK_FUCHSIA_buffer_collection)": [
+        {
+          "vuid": "VUID-VkImageCreateInfo-pNext-06390",
+          "text": " If the <a href=\"#VkImage\">VkImage</a> is to be used to import memory from a <a href=\"#VkBufferCollectionFUCHSIA\">VkBufferCollectionFUCHSIA</a>, a <a href=\"#VkBufferCollectionImageCreateInfoFUCHSIA\">VkBufferCollectionImageCreateInfoFUCHSIA</a> structure <strong class=\"purple\">must</strong> be chained to <code>pNext</code>."
+        }
+      ]
+    },
+    "VkBufferCollectionImageCreateInfoFUCHSIA": {
+      "(VK_FUCHSIA_buffer_collection)": [
+        {
+          "vuid": "VUID-VkBufferCollectionImageCreateInfoFUCHSIA-index-06391",
+          "text": " <code>index</code> <strong class=\"purple\">must</strong> be less than <a href=\"#VkBufferCollectionPropertiesFUCHSIA\">VkBufferCollectionPropertiesFUCHSIA</a>::<code>bufferCount</code>"
+        },
+        {
+          "vuid": "VUID-VkBufferCollectionImageCreateInfoFUCHSIA-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_BUFFER_COLLECTION_IMAGE_CREATE_INFO_FUCHSIA</code>"
+        },
+        {
+          "vuid": "VUID-VkBufferCollectionImageCreateInfoFUCHSIA-collection-parameter",
+          "text": " <code>collection</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkBufferCollectionFUCHSIA\">VkBufferCollectionFUCHSIA</a> handle"
         }
       ]
     },
@@ -15570,6 +15650,12 @@
           "vuid": "VUID-vkBindBufferMemory-bufferDeviceAddress-03339",
           "text": " If the <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeatures\">VkPhysicalDeviceBufferDeviceAddressFeatures</a>::<code>bufferDeviceAddress</code> feature is enabled and <code>buffer</code> was created with the <code>VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT</code> bit set, <code>memory</code> <strong class=\"purple\">must</strong> have been allocated with the <code>VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT</code> bit set"
         }
+      ],
+      "(VK_FUCHSIA_buffer_collection)": [
+        {
+          "vuid": "VUID-vkBindBufferMemory-buffer-06408",
+          "text": " If <code>buffer</code> was created with <a href=\"#VkBufferCollectionBufferCreateInfoFUCHSIA\">VkBufferCollectionBufferCreateInfoFUCHSIA</a> chained to <a href=\"#VkBufferCreateInfo\">VkBufferCreateInfo</a>::<code>pNext</code>, <code>memory</code> <strong class=\"purple\">must</strong> be allocated with a <a href=\"#VkImportMemoryBufferCollectionFUCHSIA\">VkImportMemoryBufferCollectionFUCHSIA</a> chained to <a href=\"#VkMemoryAllocateInfo\">VkMemoryAllocateInfo</a>::<code>pNext</code>"
+        }
       ]
     },
     "vkBindBufferMemory2": {
@@ -15697,6 +15783,12 @@
         {
           "vuid": "VUID-VkBindBufferMemoryInfo-bufferDeviceAddress-03339",
           "text": " If the <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeatures\">VkPhysicalDeviceBufferDeviceAddressFeatures</a>::<code>bufferDeviceAddress</code> feature is enabled and <code>buffer</code> was created with the <code>VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT</code> bit set, <code>memory</code> <strong class=\"purple\">must</strong> have been allocated with the <code>VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT</code> bit set"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_bind_memory2)+(VK_FUCHSIA_buffer_collection)": [
+        {
+          "vuid": "VUID-VkBindBufferMemoryInfo-buffer-06408",
+          "text": " If <code>buffer</code> was created with <a href=\"#VkBufferCollectionBufferCreateInfoFUCHSIA\">VkBufferCollectionBufferCreateInfoFUCHSIA</a> chained to <a href=\"#VkBufferCreateInfo\">VkBufferCreateInfo</a>::<code>pNext</code>, <code>memory</code> <strong class=\"purple\">must</strong> be allocated with a <a href=\"#VkImportMemoryBufferCollectionFUCHSIA\">VkImportMemoryBufferCollectionFUCHSIA</a> chained to <a href=\"#VkMemoryAllocateInfo\">VkMemoryAllocateInfo</a>::<code>pNext</code>"
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_bind_memory2)+(VK_VERSION_1_1,VK_KHR_device_group)": [
@@ -15843,6 +15935,12 @@
         {
           "vuid": "VUID-vkBindImageMemory-image-01608",
           "text": " <code>image</code> <strong class=\"purple\">must</strong> not have been created with the <code>VK_IMAGE_CREATE_DISJOINT_BIT</code> set"
+        }
+      ],
+      "(VK_FUCHSIA_buffer_collection)": [
+        {
+          "vuid": "VUID-vkBindImageMemory-image-06392",
+          "text": " If <code>image</code> was created with <a href=\"#VkBufferCollectionImageCreateInfoFUCHSIA\">VkBufferCollectionImageCreateInfoFUCHSIA</a> chained to <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>pNext</code>, <code>memory</code> <strong class=\"purple\">must</strong> be allocated with a <a href=\"#VkImportMemoryBufferCollectionFUCHSIA\">VkImportMemoryBufferCollectionFUCHSIA</a> chained to <a href=\"#VkMemoryAllocateInfo\">VkMemoryAllocateInfo</a>::<code>pNext</code>"
         }
       ]
     },
@@ -16143,6 +16241,344 @@
         {
           "vuid": "VUID-VkBindImagePlaneMemoryInfo-planeAspect-02284",
           "text": " If the image&#8217;s <code>tiling</code> is <code>VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT</code>, then <code>planeAspect</code> <strong class=\"purple\">must</strong> be a single valid <em>memory plane</em> for the image (that is, <code>aspectMask</code> <strong class=\"purple\">must</strong> specify a plane index that is less than the <a href=\"#VkDrmFormatModifierPropertiesEXT\">VkDrmFormatModifierPropertiesEXT</a>::<code>drmFormatModifierPlaneCount</code> associated with the image&#8217;s <code>format</code> and <a href=\"#VkImageDrmFormatModifierPropertiesEXT\">VkImageDrmFormatModifierPropertiesEXT</a>::<code>drmFormatModifier</code>)"
+        }
+      ]
+    },
+    "vkCreateBufferCollectionFUCHSIA": {
+      "(VK_FUCHSIA_buffer_collection)": [
+        {
+          "vuid": "VUID-vkCreateBufferCollectionFUCHSIA-device-parameter",
+          "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDevice\">VkDevice</a> handle"
+        },
+        {
+          "vuid": "VUID-vkCreateBufferCollectionFUCHSIA-pCreateInfo-parameter",
+          "text": " <code>pCreateInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkBufferCollectionCreateInfoFUCHSIA\">VkBufferCollectionCreateInfoFUCHSIA</a> structure"
+        },
+        {
+          "vuid": "VUID-vkCreateBufferCollectionFUCHSIA-pAllocator-parameter",
+          "text": " If <code>pAllocator</code> is not <code>NULL</code>, <code>pAllocator</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkAllocationCallbacks\">VkAllocationCallbacks</a> structure"
+        },
+        {
+          "vuid": "VUID-vkCreateBufferCollectionFUCHSIA-pCollection-parameter",
+          "text": " <code>pCollection</code> <strong class=\"purple\">must</strong> be a valid pointer to a <a href=\"#VkBufferCollectionFUCHSIA\">VkBufferCollectionFUCHSIA</a> handle"
+        }
+      ]
+    },
+    "VkBufferCollectionCreateInfoFUCHSIA": {
+      "(VK_FUCHSIA_buffer_collection)": [
+        {
+          "vuid": "VUID-VkBufferCollectionCreateInfoFUCHSIA-collectionToken-06393",
+          "text": " <code>collectionToken</code> <strong class=\"purple\">must</strong> be a valid <code>zx_handle_t</code> to a Zircon channel allocated from Sysmem (<code>fuchsia.sysmem.Allocator</code>/AllocateSharedCollection) with <code>ZX_DEFAULT_CHANNEL_RIGHTS</code> rights"
+        },
+        {
+          "vuid": "VUID-VkBufferCollectionCreateInfoFUCHSIA-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_BUFFER_COLLECTION_CREATE_INFO_FUCHSIA</code>"
+        },
+        {
+          "vuid": "VUID-VkBufferCollectionCreateInfoFUCHSIA-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        }
+      ]
+    },
+    "vkSetBufferCollectionImageConstraintsFUCHSIA": {
+      "(VK_FUCHSIA_buffer_collection)": [
+        {
+          "vuid": "VUID-vkSetBufferCollectionImageConstraintsFUCHSIA-collection-06394",
+          "text": " <code>vkSetBufferCollectionImageConstraintsFUCHSIA</code> or <code>vkSetBufferCollectionBufferConstraintsFUCHSIA</code> <strong class=\"purple\">must</strong> not have already been called on <code>collection</code>"
+        },
+        {
+          "vuid": "VUID-vkSetBufferCollectionImageConstraintsFUCHSIA-device-parameter",
+          "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDevice\">VkDevice</a> handle"
+        },
+        {
+          "vuid": "VUID-vkSetBufferCollectionImageConstraintsFUCHSIA-collection-parameter",
+          "text": " <code>collection</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkBufferCollectionFUCHSIA\">VkBufferCollectionFUCHSIA</a> handle"
+        },
+        {
+          "vuid": "VUID-vkSetBufferCollectionImageConstraintsFUCHSIA-pImageConstraintsInfo-parameter",
+          "text": " <code>pImageConstraintsInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkImageConstraintsInfoFUCHSIA\">VkImageConstraintsInfoFUCHSIA</a> structure"
+        },
+        {
+          "vuid": "VUID-vkSetBufferCollectionImageConstraintsFUCHSIA-collection-parent",
+          "text": " <code>collection</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from <code>device</code>"
+        }
+      ]
+    },
+    "VkImageConstraintsInfoFUCHSIA": {
+      "(VK_FUCHSIA_buffer_collection)": [
+        {
+          "vuid": "VUID-VkImageConstraintsInfoFUCHSIA-pFormatConstraints-06395",
+          "text": " All elements of <code>pFormatConstraints</code> <strong class=\"purple\">must</strong> have at least one bit set in its <a href=\"#VkImageFormatConstraintsInfoFUCHSIA\">VkImageFormatConstraintsInfoFUCHSIA</a>::<code>requiredFormatFeatures</code>"
+        },
+        {
+          "vuid": "VUID-VkImageConstraintsInfoFUCHSIA-pFormatConstraints-06396",
+          "text": " If <code>pFormatConstraints</code>::<code>imageCreateInfo</code>::<code>usage</code> contains <code>VK_IMAGE_USAGE_SAMPLED_BIT</code>, then <code>pFormatConstraints</code>::<code>requiredFormatFeatures</code> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT</code>"
+        },
+        {
+          "vuid": "VUID-VkImageConstraintsInfoFUCHSIA-pFormatConstraints-06397",
+          "text": " If <code>pFormatConstraints</code>::<code>imageCreateInfo</code>::<code>usage</code> contains <code>VK_IMAGE_USAGE_STORAGE_BIT</code>, then <code>pFormatConstraints</code>::<code>requiredFormatFeatures</code> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_STORAGE_IMAGE_BIT</code>"
+        },
+        {
+          "vuid": "VUID-VkImageConstraintsInfoFUCHSIA-pFormatConstraints-06398",
+          "text": " If <code>pFormatConstraints</code>::<code>imageCreateInfo</code>::<code>usage</code> contains <code>VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT</code>, then <code>pFormatConstraints</code>::<code>requiredFormatFeatures</code> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT</code>"
+        },
+        {
+          "vuid": "VUID-VkImageConstraintsInfoFUCHSIA-pFormatConstraints-06399",
+          "text": " If <code>pFormatConstraints</code>::<code>imageCreateInfo</code>::<code>usage</code> contains <code>VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</code>, then <code>pFormatConstraints</code>::<code>requiredFormatFeatures</code> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT</code>"
+        },
+        {
+          "vuid": "VUID-VkImageConstraintsInfoFUCHSIA-pFormatConstraints-06400",
+          "text": " If <code>pFormatConstraints</code>::<code>imageCreateInfo</code>::<code>usage</code> contains <code>VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT</code>, then <code>pFormatConstraints</code>::<code>requiredFormatFeatures</code> <strong class=\"purple\">must</strong> contain at least one of <code>VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT</code> or <code>VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT</code>"
+        },
+        {
+          "vuid": "VUID-VkImageConstraintsInfoFUCHSIA-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_IMAGE_CONSTRAINTS_INFO_FUCHSIA</code>"
+        },
+        {
+          "vuid": "VUID-VkImageConstraintsInfoFUCHSIA-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkImageConstraintsInfoFUCHSIA-pFormatConstraints-parameter",
+          "text": " <code>pFormatConstraints</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>formatConstraintsCount</code> valid <a href=\"#VkImageFormatConstraintsInfoFUCHSIA\">VkImageFormatConstraintsInfoFUCHSIA</a> structures"
+        },
+        {
+          "vuid": "VUID-VkImageConstraintsInfoFUCHSIA-bufferCollectionConstraints-parameter",
+          "text": " <code>bufferCollectionConstraints</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkBufferCollectionConstraintsInfoFUCHSIA\">VkBufferCollectionConstraintsInfoFUCHSIA</a> structure"
+        },
+        {
+          "vuid": "VUID-VkImageConstraintsInfoFUCHSIA-flags-parameter",
+          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkImageConstraintsInfoFlagBitsFUCHSIA\">VkImageConstraintsInfoFlagBitsFUCHSIA</a> values"
+        },
+        {
+          "vuid": "VUID-VkImageConstraintsInfoFUCHSIA-formatConstraintsCount-arraylength",
+          "text": " <code>formatConstraintsCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
+        }
+      ],
+      "(VK_FUCHSIA_buffer_collection)+(VK_KHR_fragment_shading_rate)": [
+        {
+          "vuid": "VUID-VkImageConstraintsInfoFUCHSIA-attachmentFragmentShadingRate-06401",
+          "text": " If the <a href=\"#features-attachmentFragmentShadingRate\"><code>attachmentFragmentShadingRate</code> feature</a> is enabled, and <code>pFormatConstraints</code>::<code>imageCreateInfo</code>::<code>usage</code> contains <code>VK_IMAGE_USAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR</code>, then <code>pFormatConstraints</code>::<code>requiredFormatFeatures</code> <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR</code>"
+        }
+      ]
+    },
+    "VkImageFormatConstraintsInfoFUCHSIA": {
+      "(VK_FUCHSIA_buffer_collection)": [
+        {
+          "vuid": "VUID-VkImageFormatConstraintsInfoFUCHSIA-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_IMAGE_FORMAT_CONSTRAINTS_INFO_FUCHSIA</code>"
+        },
+        {
+          "vuid": "VUID-VkImageFormatConstraintsInfoFUCHSIA-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkImageFormatConstraintsInfoFUCHSIA-imageCreateInfo-parameter",
+          "text": " <code>imageCreateInfo</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> structure"
+        },
+        {
+          "vuid": "VUID-VkImageFormatConstraintsInfoFUCHSIA-requiredFormatFeatures-parameter",
+          "text": " <code>requiredFormatFeatures</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkFormatFeatureFlagBits\">VkFormatFeatureFlagBits</a> values"
+        },
+        {
+          "vuid": "VUID-VkImageFormatConstraintsInfoFUCHSIA-requiredFormatFeatures-requiredbitmask",
+          "text": " <code>requiredFormatFeatures</code> <strong class=\"purple\">must</strong> not be <code>0</code>"
+        },
+        {
+          "vuid": "VUID-VkImageFormatConstraintsInfoFUCHSIA-flags-zerobitmask",
+          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be <code>0</code>"
+        },
+        {
+          "vuid": "VUID-VkImageFormatConstraintsInfoFUCHSIA-pColorSpaces-parameter",
+          "text": " <code>pColorSpaces</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkSysmemColorSpaceFUCHSIA\">VkSysmemColorSpaceFUCHSIA</a> structure"
+        }
+      ]
+    },
+    "VkBufferCollectionConstraintsInfoFUCHSIA": {
+      "(VK_FUCHSIA_buffer_collection)": [
+        {
+          "vuid": "VUID-VkBufferCollectionConstraintsInfoFUCHSIA-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_BUFFER_COLLECTION_CONSTRAINTS_INFO_FUCHSIA</code>"
+        },
+        {
+          "vuid": "VUID-VkBufferCollectionConstraintsInfoFUCHSIA-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        }
+      ]
+    },
+    "VkSysmemColorSpaceFUCHSIA": {
+      "(VK_FUCHSIA_buffer_collection)": [
+        {
+          "vuid": "VUID-VkSysmemColorSpaceFUCHSIA-colorSpace-06402",
+          "text": " <code>colorSpace</code> <strong class=\"purple\">must</strong> be a <code>ColorSpaceType</code> as defined in <code>fuchsia.sysmem/image_formats.fidl</code>"
+        },
+        {
+          "vuid": "VUID-VkSysmemColorSpaceFUCHSIA-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_SYSMEM_COLOR_SPACE_FUCHSIA</code>"
+        },
+        {
+          "vuid": "VUID-VkSysmemColorSpaceFUCHSIA-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        }
+      ]
+    },
+    "vkSetBufferCollectionBufferConstraintsFUCHSIA": {
+      "(VK_FUCHSIA_buffer_collection)": [
+        {
+          "vuid": "VUID-vkSetBufferCollectionBufferConstraintsFUCHSIA-collection-06403",
+          "text": " <code>vkSetBufferCollectionImageConstraintsFUCHSIA</code> or <code>vkSetBufferCollectionBufferConstraintsFUCHSIA</code> <strong class=\"purple\">must</strong> not have already been called on <code>collection</code>"
+        },
+        {
+          "vuid": "VUID-vkSetBufferCollectionBufferConstraintsFUCHSIA-device-parameter",
+          "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDevice\">VkDevice</a> handle"
+        },
+        {
+          "vuid": "VUID-vkSetBufferCollectionBufferConstraintsFUCHSIA-collection-parameter",
+          "text": " <code>collection</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkBufferCollectionFUCHSIA\">VkBufferCollectionFUCHSIA</a> handle"
+        },
+        {
+          "vuid": "VUID-vkSetBufferCollectionBufferConstraintsFUCHSIA-pBufferConstraintsInfo-parameter",
+          "text": " <code>pBufferConstraintsInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkBufferConstraintsInfoFUCHSIA\">VkBufferConstraintsInfoFUCHSIA</a> structure"
+        },
+        {
+          "vuid": "VUID-vkSetBufferCollectionBufferConstraintsFUCHSIA-collection-parent",
+          "text": " <code>collection</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from <code>device</code>"
+        }
+      ]
+    },
+    "VkBufferConstraintsInfoFUCHSIA": {
+      "(VK_FUCHSIA_buffer_collection)": [
+        {
+          "vuid": "VUID-VkBufferConstraintsInfoFUCHSIA-requiredFormatFeatures-06404",
+          "text": " The <code>requiredFormatFeatures</code> bitmask of <code>VkFormatFeatureFlagBits</code> <strong class=\"purple\">must</strong> be chosen from among the buffer compatible format features listed in <a href=\"#buffer-compatible-format-features\">buffer compatible format features</a>"
+        },
+        {
+          "vuid": "VUID-VkBufferConstraintsInfoFUCHSIA-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_BUFFER_CONSTRAINTS_INFO_FUCHSIA</code>"
+        },
+        {
+          "vuid": "VUID-VkBufferConstraintsInfoFUCHSIA-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkBufferConstraintsInfoFUCHSIA-createInfo-parameter",
+          "text": " <code>createInfo</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkBufferCreateInfo\">VkBufferCreateInfo</a> structure"
+        },
+        {
+          "vuid": "VUID-VkBufferConstraintsInfoFUCHSIA-requiredFormatFeatures-parameter",
+          "text": " <code>requiredFormatFeatures</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkFormatFeatureFlagBits\">VkFormatFeatureFlagBits</a> values"
+        },
+        {
+          "vuid": "VUID-VkBufferConstraintsInfoFUCHSIA-bufferCollectionConstraints-parameter",
+          "text": " <code>bufferCollectionConstraints</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkBufferCollectionConstraintsInfoFUCHSIA\">VkBufferCollectionConstraintsInfoFUCHSIA</a> structure"
+        }
+      ]
+    },
+    "vkGetBufferCollectionPropertiesFUCHSIA": {
+      "(VK_FUCHSIA_buffer_collection)": [
+        {
+          "vuid": "VUID-vkGetBufferCollectionPropertiesFUCHSIA-None-06405",
+          "text": " Prior to calling <a href=\"#vkGetBufferCollectionPropertiesFUCHSIA\">vkGetBufferCollectionPropertiesFUCHSIA</a>, the constraints on the buffer collection <strong class=\"purple\">must</strong> have been set by either <a href=\"#vkSetBufferCollectionImageConstraintsFUCHSIA\">vkSetBufferCollectionImageConstraintsFUCHSIA</a> or <a href=\"#vkSetBufferCollectionBufferConstraintsFUCHSIA\">vkSetBufferCollectionBufferConstraintsFUCHSIA</a>."
+        },
+        {
+          "vuid": "VUID-vkGetBufferCollectionPropertiesFUCHSIA-device-parameter",
+          "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDevice\">VkDevice</a> handle"
+        },
+        {
+          "vuid": "VUID-vkGetBufferCollectionPropertiesFUCHSIA-collection-parameter",
+          "text": " <code>collection</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkBufferCollectionFUCHSIA\">VkBufferCollectionFUCHSIA</a> handle"
+        },
+        {
+          "vuid": "VUID-vkGetBufferCollectionPropertiesFUCHSIA-pProperties-parameter",
+          "text": " <code>pProperties</code> <strong class=\"purple\">must</strong> be a valid pointer to a <a href=\"#VkBufferCollectionPropertiesFUCHSIA\">VkBufferCollectionPropertiesFUCHSIA</a> structure"
+        },
+        {
+          "vuid": "VUID-vkGetBufferCollectionPropertiesFUCHSIA-collection-parent",
+          "text": " <code>collection</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from <code>device</code>"
+        }
+      ]
+    },
+    "VkBufferCollectionPropertiesFUCHSIA": {
+      "(VK_FUCHSIA_buffer_collection)": [
+        {
+          "vuid": "VUID-VkBufferCollectionPropertiesFUCHSIA-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_BUFFER_COLLECTION_PROPERTIES_FUCHSIA</code>"
+        },
+        {
+          "vuid": "VUID-VkBufferCollectionPropertiesFUCHSIA-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkBufferCollectionPropertiesFUCHSIA-formatFeatures-parameter",
+          "text": " <code>formatFeatures</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkFormatFeatureFlagBits\">VkFormatFeatureFlagBits</a> values"
+        },
+        {
+          "vuid": "VUID-VkBufferCollectionPropertiesFUCHSIA-formatFeatures-requiredbitmask",
+          "text": " <code>formatFeatures</code> <strong class=\"purple\">must</strong> not be <code>0</code>"
+        },
+        {
+          "vuid": "VUID-VkBufferCollectionPropertiesFUCHSIA-sysmemColorSpaceIndex-parameter",
+          "text": " <code>sysmemColorSpaceIndex</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkSysmemColorSpaceFUCHSIA\">VkSysmemColorSpaceFUCHSIA</a> structure"
+        },
+        {
+          "vuid": "VUID-VkBufferCollectionPropertiesFUCHSIA-samplerYcbcrConversionComponents-parameter",
+          "text": " <code>samplerYcbcrConversionComponents</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkComponentMapping\">VkComponentMapping</a> structure"
+        },
+        {
+          "vuid": "VUID-VkBufferCollectionPropertiesFUCHSIA-suggestedYcbcrModel-parameter",
+          "text": " <code>suggestedYcbcrModel</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkSamplerYcbcrModelConversion\">VkSamplerYcbcrModelConversion</a> value"
+        },
+        {
+          "vuid": "VUID-VkBufferCollectionPropertiesFUCHSIA-suggestedYcbcrRange-parameter",
+          "text": " <code>suggestedYcbcrRange</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkSamplerYcbcrRange\">VkSamplerYcbcrRange</a> value"
+        },
+        {
+          "vuid": "VUID-VkBufferCollectionPropertiesFUCHSIA-suggestedXChromaOffset-parameter",
+          "text": " <code>suggestedXChromaOffset</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkChromaLocation\">VkChromaLocation</a> value"
+        },
+        {
+          "vuid": "VUID-VkBufferCollectionPropertiesFUCHSIA-suggestedYChromaOffset-parameter",
+          "text": " <code>suggestedYChromaOffset</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkChromaLocation\">VkChromaLocation</a> value"
+        }
+      ]
+    },
+    "VkImportMemoryBufferCollectionFUCHSIA": {
+      "(VK_FUCHSIA_buffer_collection)": [
+        {
+          "vuid": "VUID-VkImportMemoryBufferCollectionFUCHSIA-index-06406",
+          "text": " <code>index</code> <strong class=\"purple\">must</strong> be less than the value retrieved as <a href=\"#VkBufferCollectionPropertiesFUCHSIA\">VkBufferCollectionPropertiesFUCHSIA</a>:bufferCount"
+        },
+        {
+          "vuid": "VUID-VkImportMemoryBufferCollectionFUCHSIA-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_IMPORT_MEMORY_BUFFER_COLLECTION_FUCHSIA</code>"
+        },
+        {
+          "vuid": "VUID-VkImportMemoryBufferCollectionFUCHSIA-collection-parameter",
+          "text": " <code>collection</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkBufferCollectionFUCHSIA\">VkBufferCollectionFUCHSIA</a> handle"
+        }
+      ]
+    },
+    "vkDestroyBufferCollectionFUCHSIA": {
+      "(VK_FUCHSIA_buffer_collection)": [
+        {
+          "vuid": "VUID-vkDestroyBufferCollectionFUCHSIA-collection-06407",
+          "text": " <a href=\"#VkImage\">VkImage</a> and <a href=\"#VkBuffer\">VkBuffer</a> objects that referenced <code>collection</code> upon creation by inclusion of a <a href=\"#VkBufferCollectionImageCreateInfoFUCHSIA\">VkBufferCollectionImageCreateInfoFUCHSIA</a> or <a href=\"#VkBufferCollectionBufferCreateInfoFUCHSIA\">VkBufferCollectionBufferCreateInfoFUCHSIA</a> chained to their <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> or <a href=\"#VkBufferCreateInfo\">VkBufferCreateInfo</a> structures respectively, <strong class=\"purple\">may</strong> outlive <code>collection</code>."
+        },
+        {
+          "vuid": "VUID-vkDestroyBufferCollectionFUCHSIA-device-parameter",
+          "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDevice\">VkDevice</a> handle"
+        },
+        {
+          "vuid": "VUID-vkDestroyBufferCollectionFUCHSIA-collection-parameter",
+          "text": " <code>collection</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkBufferCollectionFUCHSIA\">VkBufferCollectionFUCHSIA</a> handle"
+        },
+        {
+          "vuid": "VUID-vkDestroyBufferCollectionFUCHSIA-pAllocator-parameter",
+          "text": " If <code>pAllocator</code> is not <code>NULL</code>, <code>pAllocator</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkAllocationCallbacks\">VkAllocationCallbacks</a> structure"
+        },
+        {
+          "vuid": "VUID-vkDestroyBufferCollectionFUCHSIA-collection-parent",
+          "text": " <code>collection</code> <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from <code>device</code>"
         }
       ]
     },
@@ -31174,26 +31610,6 @@
         }
       ]
     },
-    "vkCmdSetDepthBias": {
-      "core": [
-        {
-          "vuid": "VUID-vkCmdSetDepthBias-depthBiasClamp-00790",
-          "text": " If the <a href=\"#features-depthBiasClamp\">depth bias clamping</a> feature is not enabled, <code>depthBiasClamp</code> <strong class=\"purple\">must</strong> be <code>0.0</code>"
-        },
-        {
-          "vuid": "VUID-vkCmdSetDepthBias-commandBuffer-parameter",
-          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCommandBuffer\">VkCommandBuffer</a> handle"
-        },
-        {
-          "vuid": "VUID-vkCmdSetDepthBias-commandBuffer-recording",
-          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be in the <a href=\"#commandbuffers-lifecycle\">recording state</a>"
-        },
-        {
-          "vuid": "VUID-vkCmdSetDepthBias-commandBuffer-cmdpool",
-          "text": " The <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from <strong class=\"purple\">must</strong> support graphics operations"
-        }
-      ]
-    },
     "vkCmdSetDepthBiasEnableEXT": {
       "(VK_EXT_extended_dynamic_state2)": [
         {
@@ -31210,6 +31626,26 @@
         },
         {
           "vuid": "VUID-vkCmdSetDepthBiasEnableEXT-commandBuffer-cmdpool",
+          "text": " The <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from <strong class=\"purple\">must</strong> support graphics operations"
+        }
+      ]
+    },
+    "vkCmdSetDepthBias": {
+      "core": [
+        {
+          "vuid": "VUID-vkCmdSetDepthBias-depthBiasClamp-00790",
+          "text": " If the <a href=\"#features-depthBiasClamp\">depth bias clamping</a> feature is not enabled, <code>depthBiasClamp</code> <strong class=\"purple\">must</strong> be <code>0.0</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdSetDepthBias-commandBuffer-parameter",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCommandBuffer\">VkCommandBuffer</a> handle"
+        },
+        {
+          "vuid": "VUID-vkCmdSetDepthBias-commandBuffer-recording",
+          "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be in the <a href=\"#commandbuffers-lifecycle\">recording state</a>"
+        },
+        {
+          "vuid": "VUID-vkCmdSetDepthBias-commandBuffer-cmdpool",
           "text": " The <code>VkCommandPool</code> that <code>commandBuffer</code> was allocated from <strong class=\"purple\">must</strong> support graphics operations"
         }
       ]
