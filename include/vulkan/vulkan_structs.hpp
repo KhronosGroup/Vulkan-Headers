@@ -188,7 +188,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkAccelerationStructureGeometryTrianglesDataKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eAccelerationStructureGeometryTrianglesDataKHR;
 
@@ -327,7 +327,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkAccelerationStructureGeometryAabbsDataKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eAccelerationStructureGeometryAabbsDataKHR;
 
@@ -416,7 +416,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkAccelerationStructureGeometryInstancesDataKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eAccelerationStructureGeometryInstancesDataKHR;
 
@@ -582,7 +582,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkAccelerationStructureGeometryKHR;
 
-    static const bool                    allowDuplicate              = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eAccelerationStructureGeometryKHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
@@ -730,7 +730,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkAccelerationStructureBuildGeometryInfoKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eAccelerationStructureBuildGeometryInfoKHR;
 
@@ -1051,7 +1051,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkAccelerationStructureBuildSizesInfoKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eAccelerationStructureBuildSizesInfoKHR;
 
@@ -1166,7 +1166,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkAccelerationStructureCreateInfoKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eAccelerationStructureCreateInfoKHR;
 
@@ -1308,8 +1308,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkGeometryTrianglesNV;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eGeometryTrianglesNV;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eGeometryTrianglesNV;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -1487,8 +1487,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkGeometryAABBNV;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eGeometryAabbNV;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eGeometryAabbNV;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR GeometryAABBNV( VULKAN_HPP_NAMESPACE::Buffer     aabbData_ = {},
@@ -1673,8 +1673,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkGeometryNV;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eGeometryNV;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eGeometryNV;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR GeometryNV(
@@ -1776,8 +1776,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkAccelerationStructureInfoNV;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eAccelerationStructureInfoNV;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eAccelerationStructureInfoNV;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -1928,7 +1928,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkAccelerationStructureCreateInfoNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eAccelerationStructureCreateInfoNV;
 
@@ -2029,7 +2029,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkAccelerationStructureDeviceAddressInfoKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eAccelerationStructureDeviceAddressInfoKHR;
 
@@ -2123,7 +2123,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkAccelerationStructureGeometryMotionTrianglesDataNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eAccelerationStructureGeometryMotionTrianglesDataNV;
 
@@ -2534,7 +2534,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkAccelerationStructureMemoryRequirementsInfoNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eAccelerationStructureMemoryRequirementsInfoNV;
 
@@ -2641,7 +2641,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkAccelerationStructureMotionInfoNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eAccelerationStructureMotionInfoNV;
 
@@ -3244,7 +3244,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkAccelerationStructureVersionInfoKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eAccelerationStructureVersionInfoKHR;
 
@@ -3333,8 +3333,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkAcquireNextImageInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eAcquireNextImageInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eAcquireNextImageInfoKHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR AcquireNextImageInfoKHR( VULKAN_HPP_NAMESPACE::SwapchainKHR swapchain_ = {},
@@ -3455,8 +3455,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkAcquireProfilingLockInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eAcquireProfilingLockInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eAcquireProfilingLockInfoKHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR AcquireProfilingLockInfoKHR( VULKAN_HPP_NAMESPACE::AcquireProfilingLockFlagsKHR flags_ = {},
@@ -3761,7 +3761,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkAndroidHardwareBufferFormatPropertiesANDROID;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eAndroidHardwareBufferFormatPropertiesANDROID;
 
@@ -3871,7 +3871,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkAndroidHardwareBufferPropertiesANDROID;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eAndroidHardwareBufferPropertiesANDROID;
 
@@ -3954,7 +3954,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkAndroidHardwareBufferUsageANDROID;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eAndroidHardwareBufferUsageANDROID;
 
@@ -4032,8 +4032,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkAndroidSurfaceCreateInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eAndroidSurfaceCreateInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eAndroidSurfaceCreateInfoKHR;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR AndroidSurfaceCreateInfoKHR( VULKAN_HPP_NAMESPACE::AndroidSurfaceCreateFlagsKHR flags_ = {},
@@ -4129,8 +4129,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkApplicationInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eApplicationInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eApplicationInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR ApplicationInfo( const char * pApplicationName_   = {},
@@ -4395,8 +4395,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkAttachmentDescription2;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eAttachmentDescription2;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eAttachmentDescription2;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR AttachmentDescription2(
@@ -4559,7 +4559,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkAttachmentDescriptionStencilLayout;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eAttachmentDescriptionStencilLayout;
 
@@ -4739,8 +4739,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkAttachmentReference2;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eAttachmentReference2;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eAttachmentReference2;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -4843,7 +4843,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkAttachmentReferenceStencilLayout;
 
-    static const bool                    allowDuplicate              = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eAttachmentReferenceStencilLayout;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
@@ -5080,8 +5080,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkSampleLocationsInfoEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSampleLocationsInfoEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eSampleLocationsInfoEXT;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR SampleLocationsInfoEXT(
@@ -5437,7 +5437,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkBindAccelerationStructureMemoryInfoNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eBindAccelerationStructureMemoryInfoNV;
 
@@ -5593,8 +5593,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkBindBufferMemoryDeviceGroupInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eBindBufferMemoryDeviceGroupInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eBindBufferMemoryDeviceGroupInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR BindBufferMemoryDeviceGroupInfo( uint32_t         deviceIndexCount_ = {},
@@ -5708,8 +5708,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkBindBufferMemoryInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eBindBufferMemoryInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eBindBufferMemoryInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR BindBufferMemoryInfo( VULKAN_HPP_NAMESPACE::Buffer       buffer_     = {},
@@ -5956,8 +5956,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkBindImageMemoryDeviceGroupInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eBindImageMemoryDeviceGroupInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eBindImageMemoryDeviceGroupInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR BindImageMemoryDeviceGroupInfo(
@@ -6110,8 +6110,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkBindImageMemoryInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eBindImageMemoryInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eBindImageMemoryInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR BindImageMemoryInfo( VULKAN_HPP_NAMESPACE::Image        image_      = {},
@@ -6213,8 +6213,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkBindImageMemorySwapchainInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eBindImageMemorySwapchainInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eBindImageMemorySwapchainInfoKHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR BindImageMemorySwapchainInfoKHR( VULKAN_HPP_NAMESPACE::SwapchainKHR swapchain_ = {},
@@ -6310,8 +6310,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkBindImagePlaneMemoryInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eBindImagePlaneMemoryInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eBindImagePlaneMemoryInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -7348,8 +7348,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkBindSparseInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eBindSparseInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eBindSparseInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -7785,8 +7785,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkImageBlit2KHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImageBlit2KHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eImageBlit2KHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR_14
@@ -7902,8 +7902,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkBlitImageInfo2KHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eBlitImageInfo2KHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eBlitImageInfo2KHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR_14 BlitImageInfo2KHR(
@@ -8068,198 +8068,733 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = BlitImageInfo2KHR;
   };
 
-  struct BufferCopy
+#if defined( VK_USE_PLATFORM_FUCHSIA )
+  struct BufferCollectionBufferCreateInfoFUCHSIA
   {
-    using NativeType = VkBufferCopy;
+    using NativeType = VkBufferCollectionBufferCreateInfoFUCHSIA;
 
-#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
-    VULKAN_HPP_CONSTEXPR BufferCopy( VULKAN_HPP_NAMESPACE::DeviceSize srcOffset_ = {},
-                                     VULKAN_HPP_NAMESPACE::DeviceSize dstOffset_ = {},
-                                     VULKAN_HPP_NAMESPACE::DeviceSize size_      = {} ) VULKAN_HPP_NOEXCEPT
-      : srcOffset( srcOffset_ )
-      , dstOffset( dstOffset_ )
-      , size( size_ )
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
+      StructureType::eBufferCollectionBufferCreateInfoFUCHSIA;
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR
+      BufferCollectionBufferCreateInfoFUCHSIA( VULKAN_HPP_NAMESPACE::BufferCollectionFUCHSIA collection_ = {},
+                                               uint32_t index_ = {} ) VULKAN_HPP_NOEXCEPT
+      : collection( collection_ )
+      , index( index_ )
     {}
 
-    VULKAN_HPP_CONSTEXPR BufferCopy( BufferCopy const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+    VULKAN_HPP_CONSTEXPR BufferCollectionBufferCreateInfoFUCHSIA( BufferCollectionBufferCreateInfoFUCHSIA const & rhs )
+      VULKAN_HPP_NOEXCEPT = default;
 
-    BufferCopy( VkBufferCopy const & rhs ) VULKAN_HPP_NOEXCEPT
-      : BufferCopy( *reinterpret_cast<BufferCopy const *>( &rhs ) )
+    BufferCollectionBufferCreateInfoFUCHSIA( VkBufferCollectionBufferCreateInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT
+      : BufferCollectionBufferCreateInfoFUCHSIA(
+          *reinterpret_cast<BufferCollectionBufferCreateInfoFUCHSIA const *>( &rhs ) )
     {}
-#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+#  endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
 
-    BufferCopy & operator=( BufferCopy const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+    BufferCollectionBufferCreateInfoFUCHSIA &
+      operator=( BufferCollectionBufferCreateInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT = default;
 
-    BufferCopy & operator=( VkBufferCopy const & rhs ) VULKAN_HPP_NOEXCEPT
+    BufferCollectionBufferCreateInfoFUCHSIA &
+      operator=( VkBufferCollectionBufferCreateInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT
     {
-      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::BufferCopy const *>( &rhs );
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::BufferCollectionBufferCreateInfoFUCHSIA const *>( &rhs );
       return *this;
     }
 
-#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
-    BufferCopy & setSrcOffset( VULKAN_HPP_NAMESPACE::DeviceSize srcOffset_ ) VULKAN_HPP_NOEXCEPT
-    {
-      srcOffset = srcOffset_;
-      return *this;
-    }
-
-    BufferCopy & setDstOffset( VULKAN_HPP_NAMESPACE::DeviceSize dstOffset_ ) VULKAN_HPP_NOEXCEPT
-    {
-      dstOffset = dstOffset_;
-      return *this;
-    }
-
-    BufferCopy & setSize( VULKAN_HPP_NAMESPACE::DeviceSize size_ ) VULKAN_HPP_NOEXCEPT
-    {
-      size = size_;
-      return *this;
-    }
-#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
-
-    operator VkBufferCopy const &() const VULKAN_HPP_NOEXCEPT
-    {
-      return *reinterpret_cast<const VkBufferCopy *>( this );
-    }
-
-    operator VkBufferCopy &() VULKAN_HPP_NOEXCEPT
-    {
-      return *reinterpret_cast<VkBufferCopy *>( this );
-    }
-
-#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
-    auto operator<=>( BufferCopy const & ) const = default;
-#else
-    bool operator==( BufferCopy const & rhs ) const VULKAN_HPP_NOEXCEPT
-    {
-      return ( srcOffset == rhs.srcOffset ) && ( dstOffset == rhs.dstOffset ) && ( size == rhs.size );
-    }
-
-    bool operator!=( BufferCopy const & rhs ) const VULKAN_HPP_NOEXCEPT
-    {
-      return !operator==( rhs );
-    }
-#endif
-
-  public:
-    VULKAN_HPP_NAMESPACE::DeviceSize srcOffset = {};
-    VULKAN_HPP_NAMESPACE::DeviceSize dstOffset = {};
-    VULKAN_HPP_NAMESPACE::DeviceSize size      = {};
-  };
-  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::BufferCopy ) == sizeof( VkBufferCopy ),
-                            "struct and wrapper have different size!" );
-  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::BufferCopy>::value,
-                            "struct wrapper is not a standard layout!" );
-  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::BufferCopy>::value,
-                            "BufferCopy is not nothrow_move_constructible!" );
-
-  struct BufferCopy2KHR
-  {
-    using NativeType = VkBufferCopy2KHR;
-
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eBufferCopy2KHR;
-
-#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
-    VULKAN_HPP_CONSTEXPR BufferCopy2KHR( VULKAN_HPP_NAMESPACE::DeviceSize srcOffset_ = {},
-                                         VULKAN_HPP_NAMESPACE::DeviceSize dstOffset_ = {},
-                                         VULKAN_HPP_NAMESPACE::DeviceSize size_      = {} ) VULKAN_HPP_NOEXCEPT
-      : srcOffset( srcOffset_ )
-      , dstOffset( dstOffset_ )
-      , size( size_ )
-    {}
-
-    VULKAN_HPP_CONSTEXPR BufferCopy2KHR( BufferCopy2KHR const & rhs ) VULKAN_HPP_NOEXCEPT = default;
-
-    BufferCopy2KHR( VkBufferCopy2KHR const & rhs ) VULKAN_HPP_NOEXCEPT
-      : BufferCopy2KHR( *reinterpret_cast<BufferCopy2KHR const *>( &rhs ) )
-    {}
-#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
-
-    BufferCopy2KHR & operator=( BufferCopy2KHR const & rhs ) VULKAN_HPP_NOEXCEPT = default;
-
-    BufferCopy2KHR & operator=( VkBufferCopy2KHR const & rhs ) VULKAN_HPP_NOEXCEPT
-    {
-      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::BufferCopy2KHR const *>( &rhs );
-      return *this;
-    }
-
-#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
-    BufferCopy2KHR & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+#  if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    BufferCollectionBufferCreateInfoFUCHSIA & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
     {
       pNext = pNext_;
       return *this;
     }
 
-    BufferCopy2KHR & setSrcOffset( VULKAN_HPP_NAMESPACE::DeviceSize srcOffset_ ) VULKAN_HPP_NOEXCEPT
+    BufferCollectionBufferCreateInfoFUCHSIA &
+      setCollection( VULKAN_HPP_NAMESPACE::BufferCollectionFUCHSIA collection_ ) VULKAN_HPP_NOEXCEPT
     {
-      srcOffset = srcOffset_;
+      collection = collection_;
       return *this;
     }
 
-    BufferCopy2KHR & setDstOffset( VULKAN_HPP_NAMESPACE::DeviceSize dstOffset_ ) VULKAN_HPP_NOEXCEPT
+    BufferCollectionBufferCreateInfoFUCHSIA & setIndex( uint32_t index_ ) VULKAN_HPP_NOEXCEPT
     {
-      dstOffset = dstOffset_;
+      index = index_;
       return *this;
     }
+#  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
-    BufferCopy2KHR & setSize( VULKAN_HPP_NAMESPACE::DeviceSize size_ ) VULKAN_HPP_NOEXCEPT
+    operator VkBufferCollectionBufferCreateInfoFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
     {
-      size = size_;
-      return *this;
-    }
-#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
-
-    operator VkBufferCopy2KHR const &() const VULKAN_HPP_NOEXCEPT
-    {
-      return *reinterpret_cast<const VkBufferCopy2KHR *>( this );
+      return *reinterpret_cast<const VkBufferCollectionBufferCreateInfoFUCHSIA *>( this );
     }
 
-    operator VkBufferCopy2KHR &() VULKAN_HPP_NOEXCEPT
+    operator VkBufferCollectionBufferCreateInfoFUCHSIA &() VULKAN_HPP_NOEXCEPT
     {
-      return *reinterpret_cast<VkBufferCopy2KHR *>( this );
+      return *reinterpret_cast<VkBufferCollectionBufferCreateInfoFUCHSIA *>( this );
     }
 
-#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
-    auto operator<=>( BufferCopy2KHR const & ) const = default;
-#else
-    bool operator==( BufferCopy2KHR const & rhs ) const VULKAN_HPP_NOEXCEPT
+#  if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( BufferCollectionBufferCreateInfoFUCHSIA const & ) const = default;
+#  else
+    bool operator==( BufferCollectionBufferCreateInfoFUCHSIA const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
-      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( srcOffset == rhs.srcOffset ) &&
-             ( dstOffset == rhs.dstOffset ) && ( size == rhs.size );
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( collection == rhs.collection ) &&
+             ( index == rhs.index );
     }
 
-    bool operator!=( BufferCopy2KHR const & rhs ) const VULKAN_HPP_NOEXCEPT
+    bool operator!=( BufferCollectionBufferCreateInfoFUCHSIA const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
       return !operator==( rhs );
     }
-#endif
+#  endif
 
   public:
-    VULKAN_HPP_NAMESPACE::StructureType sType     = StructureType::eBufferCopy2KHR;
-    const void *                        pNext     = {};
-    VULKAN_HPP_NAMESPACE::DeviceSize    srcOffset = {};
-    VULKAN_HPP_NAMESPACE::DeviceSize    dstOffset = {};
-    VULKAN_HPP_NAMESPACE::DeviceSize    size      = {};
+    VULKAN_HPP_NAMESPACE::StructureType           sType      = StructureType::eBufferCollectionBufferCreateInfoFUCHSIA;
+    const void *                                  pNext      = {};
+    VULKAN_HPP_NAMESPACE::BufferCollectionFUCHSIA collection = {};
+    uint32_t                                      index      = {};
   };
-  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::BufferCopy2KHR ) == sizeof( VkBufferCopy2KHR ),
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::BufferCollectionBufferCreateInfoFUCHSIA ) ==
+                              sizeof( VkBufferCollectionBufferCreateInfoFUCHSIA ),
                             "struct and wrapper have different size!" );
-  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::BufferCopy2KHR>::value,
-                            "struct wrapper is not a standard layout!" );
-  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::BufferCopy2KHR>::value,
-                            "BufferCopy2KHR is not nothrow_move_constructible!" );
+  VULKAN_HPP_STATIC_ASSERT(
+    std::is_standard_layout<VULKAN_HPP_NAMESPACE::BufferCollectionBufferCreateInfoFUCHSIA>::value,
+    "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT(
+    std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::BufferCollectionBufferCreateInfoFUCHSIA>::value,
+    "BufferCollectionBufferCreateInfoFUCHSIA is not nothrow_move_constructible!" );
 
   template <>
-  struct CppType<StructureType, StructureType::eBufferCopy2KHR>
+  struct CppType<StructureType, StructureType::eBufferCollectionBufferCreateInfoFUCHSIA>
   {
-    using Type = BufferCopy2KHR;
+    using Type = BufferCollectionBufferCreateInfoFUCHSIA;
   };
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
+
+#if defined( VK_USE_PLATFORM_FUCHSIA )
+  struct BufferCollectionConstraintsInfoFUCHSIA
+  {
+    using NativeType = VkBufferCollectionConstraintsInfoFUCHSIA;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
+      StructureType::eBufferCollectionConstraintsInfoFUCHSIA;
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR
+      BufferCollectionConstraintsInfoFUCHSIA( uint32_t minBufferCount_                  = {},
+                                              uint32_t maxBufferCount_                  = {},
+                                              uint32_t minBufferCountForCamping_        = {},
+                                              uint32_t minBufferCountForDedicatedSlack_ = {},
+                                              uint32_t minBufferCountForSharedSlack_    = {} ) VULKAN_HPP_NOEXCEPT
+      : minBufferCount( minBufferCount_ )
+      , maxBufferCount( maxBufferCount_ )
+      , minBufferCountForCamping( minBufferCountForCamping_ )
+      , minBufferCountForDedicatedSlack( minBufferCountForDedicatedSlack_ )
+      , minBufferCountForSharedSlack( minBufferCountForSharedSlack_ )
+    {}
+
+    VULKAN_HPP_CONSTEXPR BufferCollectionConstraintsInfoFUCHSIA( BufferCollectionConstraintsInfoFUCHSIA const & rhs )
+      VULKAN_HPP_NOEXCEPT = default;
+
+    BufferCollectionConstraintsInfoFUCHSIA( VkBufferCollectionConstraintsInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT
+      : BufferCollectionConstraintsInfoFUCHSIA(
+          *reinterpret_cast<BufferCollectionConstraintsInfoFUCHSIA const *>( &rhs ) )
+    {}
+#  endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    BufferCollectionConstraintsInfoFUCHSIA &
+      operator=( BufferCollectionConstraintsInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    BufferCollectionConstraintsInfoFUCHSIA &
+      operator=( VkBufferCollectionConstraintsInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::BufferCollectionConstraintsInfoFUCHSIA const *>( &rhs );
+      return *this;
+    }
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    BufferCollectionConstraintsInfoFUCHSIA & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    BufferCollectionConstraintsInfoFUCHSIA & setMinBufferCount( uint32_t minBufferCount_ ) VULKAN_HPP_NOEXCEPT
+    {
+      minBufferCount = minBufferCount_;
+      return *this;
+    }
+
+    BufferCollectionConstraintsInfoFUCHSIA & setMaxBufferCount( uint32_t maxBufferCount_ ) VULKAN_HPP_NOEXCEPT
+    {
+      maxBufferCount = maxBufferCount_;
+      return *this;
+    }
+
+    BufferCollectionConstraintsInfoFUCHSIA &
+      setMinBufferCountForCamping( uint32_t minBufferCountForCamping_ ) VULKAN_HPP_NOEXCEPT
+    {
+      minBufferCountForCamping = minBufferCountForCamping_;
+      return *this;
+    }
+
+    BufferCollectionConstraintsInfoFUCHSIA &
+      setMinBufferCountForDedicatedSlack( uint32_t minBufferCountForDedicatedSlack_ ) VULKAN_HPP_NOEXCEPT
+    {
+      minBufferCountForDedicatedSlack = minBufferCountForDedicatedSlack_;
+      return *this;
+    }
+
+    BufferCollectionConstraintsInfoFUCHSIA &
+      setMinBufferCountForSharedSlack( uint32_t minBufferCountForSharedSlack_ ) VULKAN_HPP_NOEXCEPT
+    {
+      minBufferCountForSharedSlack = minBufferCountForSharedSlack_;
+      return *this;
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkBufferCollectionConstraintsInfoFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkBufferCollectionConstraintsInfoFUCHSIA *>( this );
+    }
+
+    operator VkBufferCollectionConstraintsInfoFUCHSIA &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkBufferCollectionConstraintsInfoFUCHSIA *>( this );
+    }
+
+#  if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( BufferCollectionConstraintsInfoFUCHSIA const & ) const = default;
+#  else
+    bool operator==( BufferCollectionConstraintsInfoFUCHSIA const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( minBufferCount == rhs.minBufferCount ) &&
+             ( maxBufferCount == rhs.maxBufferCount ) && ( minBufferCountForCamping == rhs.minBufferCountForCamping ) &&
+             ( minBufferCountForDedicatedSlack == rhs.minBufferCountForDedicatedSlack ) &&
+             ( minBufferCountForSharedSlack == rhs.minBufferCountForSharedSlack );
+    }
+
+    bool operator!=( BufferCollectionConstraintsInfoFUCHSIA const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#  endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType          = StructureType::eBufferCollectionConstraintsInfoFUCHSIA;
+    const void *                        pNext          = {};
+    uint32_t                            minBufferCount = {};
+    uint32_t                            maxBufferCount = {};
+    uint32_t                            minBufferCountForCamping        = {};
+    uint32_t                            minBufferCountForDedicatedSlack = {};
+    uint32_t                            minBufferCountForSharedSlack    = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::BufferCollectionConstraintsInfoFUCHSIA ) ==
+                              sizeof( VkBufferCollectionConstraintsInfoFUCHSIA ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT(
+    std::is_standard_layout<VULKAN_HPP_NAMESPACE::BufferCollectionConstraintsInfoFUCHSIA>::value,
+    "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT(
+    std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::BufferCollectionConstraintsInfoFUCHSIA>::value,
+    "BufferCollectionConstraintsInfoFUCHSIA is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::eBufferCollectionConstraintsInfoFUCHSIA>
+  {
+    using Type = BufferCollectionConstraintsInfoFUCHSIA;
+  };
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
+
+#if defined( VK_USE_PLATFORM_FUCHSIA )
+  struct BufferCollectionCreateInfoFUCHSIA
+  {
+    using NativeType = VkBufferCollectionCreateInfoFUCHSIA;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
+      StructureType::eBufferCollectionCreateInfoFUCHSIA;
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR BufferCollectionCreateInfoFUCHSIA( zx_handle_t collectionToken_ = {} ) VULKAN_HPP_NOEXCEPT
+      : collectionToken( collectionToken_ )
+    {}
+
+    VULKAN_HPP_CONSTEXPR
+      BufferCollectionCreateInfoFUCHSIA( BufferCollectionCreateInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    BufferCollectionCreateInfoFUCHSIA( VkBufferCollectionCreateInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT
+      : BufferCollectionCreateInfoFUCHSIA( *reinterpret_cast<BufferCollectionCreateInfoFUCHSIA const *>( &rhs ) )
+    {}
+#  endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    BufferCollectionCreateInfoFUCHSIA &
+      operator=( BufferCollectionCreateInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    BufferCollectionCreateInfoFUCHSIA & operator=( VkBufferCollectionCreateInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::BufferCollectionCreateInfoFUCHSIA const *>( &rhs );
+      return *this;
+    }
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    BufferCollectionCreateInfoFUCHSIA & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    BufferCollectionCreateInfoFUCHSIA & setCollectionToken( zx_handle_t collectionToken_ ) VULKAN_HPP_NOEXCEPT
+    {
+      collectionToken = collectionToken_;
+      return *this;
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkBufferCollectionCreateInfoFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkBufferCollectionCreateInfoFUCHSIA *>( this );
+    }
+
+    operator VkBufferCollectionCreateInfoFUCHSIA &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkBufferCollectionCreateInfoFUCHSIA *>( this );
+    }
+
+#  if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( BufferCollectionCreateInfoFUCHSIA const & ) const = default;
+#  else
+    bool operator==( BufferCollectionCreateInfoFUCHSIA const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
+             ( memcmp( &collectionToken, &rhs.collectionToken, sizeof( zx_handle_t ) ) == 0 );
+    }
+
+    bool operator!=( BufferCollectionCreateInfoFUCHSIA const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#  endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType           = StructureType::eBufferCollectionCreateInfoFUCHSIA;
+    const void *                        pNext           = {};
+    zx_handle_t                         collectionToken = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::BufferCollectionCreateInfoFUCHSIA ) ==
+                              sizeof( VkBufferCollectionCreateInfoFUCHSIA ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::BufferCollectionCreateInfoFUCHSIA>::value,
+                            "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT(
+    std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::BufferCollectionCreateInfoFUCHSIA>::value,
+    "BufferCollectionCreateInfoFUCHSIA is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::eBufferCollectionCreateInfoFUCHSIA>
+  {
+    using Type = BufferCollectionCreateInfoFUCHSIA;
+  };
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
+
+#if defined( VK_USE_PLATFORM_FUCHSIA )
+  struct BufferCollectionImageCreateInfoFUCHSIA
+  {
+    using NativeType = VkBufferCollectionImageCreateInfoFUCHSIA;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
+      StructureType::eBufferCollectionImageCreateInfoFUCHSIA;
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR
+      BufferCollectionImageCreateInfoFUCHSIA( VULKAN_HPP_NAMESPACE::BufferCollectionFUCHSIA collection_ = {},
+                                              uint32_t index_ = {} ) VULKAN_HPP_NOEXCEPT
+      : collection( collection_ )
+      , index( index_ )
+    {}
+
+    VULKAN_HPP_CONSTEXPR BufferCollectionImageCreateInfoFUCHSIA( BufferCollectionImageCreateInfoFUCHSIA const & rhs )
+      VULKAN_HPP_NOEXCEPT = default;
+
+    BufferCollectionImageCreateInfoFUCHSIA( VkBufferCollectionImageCreateInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT
+      : BufferCollectionImageCreateInfoFUCHSIA(
+          *reinterpret_cast<BufferCollectionImageCreateInfoFUCHSIA const *>( &rhs ) )
+    {}
+#  endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    BufferCollectionImageCreateInfoFUCHSIA &
+      operator=( BufferCollectionImageCreateInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    BufferCollectionImageCreateInfoFUCHSIA &
+      operator=( VkBufferCollectionImageCreateInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::BufferCollectionImageCreateInfoFUCHSIA const *>( &rhs );
+      return *this;
+    }
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    BufferCollectionImageCreateInfoFUCHSIA & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    BufferCollectionImageCreateInfoFUCHSIA &
+      setCollection( VULKAN_HPP_NAMESPACE::BufferCollectionFUCHSIA collection_ ) VULKAN_HPP_NOEXCEPT
+    {
+      collection = collection_;
+      return *this;
+    }
+
+    BufferCollectionImageCreateInfoFUCHSIA & setIndex( uint32_t index_ ) VULKAN_HPP_NOEXCEPT
+    {
+      index = index_;
+      return *this;
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkBufferCollectionImageCreateInfoFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkBufferCollectionImageCreateInfoFUCHSIA *>( this );
+    }
+
+    operator VkBufferCollectionImageCreateInfoFUCHSIA &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkBufferCollectionImageCreateInfoFUCHSIA *>( this );
+    }
+
+#  if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( BufferCollectionImageCreateInfoFUCHSIA const & ) const = default;
+#  else
+    bool operator==( BufferCollectionImageCreateInfoFUCHSIA const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( collection == rhs.collection ) &&
+             ( index == rhs.index );
+    }
+
+    bool operator!=( BufferCollectionImageCreateInfoFUCHSIA const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#  endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType           sType      = StructureType::eBufferCollectionImageCreateInfoFUCHSIA;
+    const void *                                  pNext      = {};
+    VULKAN_HPP_NAMESPACE::BufferCollectionFUCHSIA collection = {};
+    uint32_t                                      index      = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::BufferCollectionImageCreateInfoFUCHSIA ) ==
+                              sizeof( VkBufferCollectionImageCreateInfoFUCHSIA ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT(
+    std::is_standard_layout<VULKAN_HPP_NAMESPACE::BufferCollectionImageCreateInfoFUCHSIA>::value,
+    "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT(
+    std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::BufferCollectionImageCreateInfoFUCHSIA>::value,
+    "BufferCollectionImageCreateInfoFUCHSIA is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::eBufferCollectionImageCreateInfoFUCHSIA>
+  {
+    using Type = BufferCollectionImageCreateInfoFUCHSIA;
+  };
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
+
+#if defined( VK_USE_PLATFORM_FUCHSIA )
+  struct SysmemColorSpaceFUCHSIA
+  {
+    using NativeType = VkSysmemColorSpaceFUCHSIA;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eSysmemColorSpaceFUCHSIA;
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR SysmemColorSpaceFUCHSIA( uint32_t colorSpace_ = {} ) VULKAN_HPP_NOEXCEPT
+      : colorSpace( colorSpace_ )
+    {}
+
+    VULKAN_HPP_CONSTEXPR SysmemColorSpaceFUCHSIA( SysmemColorSpaceFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    SysmemColorSpaceFUCHSIA( VkSysmemColorSpaceFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT
+      : SysmemColorSpaceFUCHSIA( *reinterpret_cast<SysmemColorSpaceFUCHSIA const *>( &rhs ) )
+    {}
+#  endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    SysmemColorSpaceFUCHSIA & operator=( SysmemColorSpaceFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    SysmemColorSpaceFUCHSIA & operator=( VkSysmemColorSpaceFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::SysmemColorSpaceFUCHSIA const *>( &rhs );
+      return *this;
+    }
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    SysmemColorSpaceFUCHSIA & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    SysmemColorSpaceFUCHSIA & setColorSpace( uint32_t colorSpace_ ) VULKAN_HPP_NOEXCEPT
+    {
+      colorSpace = colorSpace_;
+      return *this;
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkSysmemColorSpaceFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkSysmemColorSpaceFUCHSIA *>( this );
+    }
+
+    operator VkSysmemColorSpaceFUCHSIA &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkSysmemColorSpaceFUCHSIA *>( this );
+    }
+
+#  if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( SysmemColorSpaceFUCHSIA const & ) const = default;
+#  else
+    bool operator==( SysmemColorSpaceFUCHSIA const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( colorSpace == rhs.colorSpace );
+    }
+
+    bool operator!=( SysmemColorSpaceFUCHSIA const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#  endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType      = StructureType::eSysmemColorSpaceFUCHSIA;
+    const void *                        pNext      = {};
+    uint32_t                            colorSpace = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::SysmemColorSpaceFUCHSIA ) ==
+                              sizeof( VkSysmemColorSpaceFUCHSIA ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::SysmemColorSpaceFUCHSIA>::value,
+                            "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::SysmemColorSpaceFUCHSIA>::value,
+                            "SysmemColorSpaceFUCHSIA is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::eSysmemColorSpaceFUCHSIA>
+  {
+    using Type = SysmemColorSpaceFUCHSIA;
+  };
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
+
+#if defined( VK_USE_PLATFORM_FUCHSIA )
+  struct BufferCollectionPropertiesFUCHSIA
+  {
+    using NativeType = VkBufferCollectionPropertiesFUCHSIA;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
+      StructureType::eBufferCollectionPropertiesFUCHSIA;
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR BufferCollectionPropertiesFUCHSIA(
+      uint32_t                                          memoryTypeBits_                   = {},
+      uint32_t                                          bufferCount_                      = {},
+      uint32_t                                          createInfoIndex_                  = {},
+      uint64_t                                          sysmemPixelFormat_                = {},
+      VULKAN_HPP_NAMESPACE::FormatFeatureFlags          formatFeatures_                   = {},
+      VULKAN_HPP_NAMESPACE::SysmemColorSpaceFUCHSIA     sysmemColorSpaceIndex_            = {},
+      VULKAN_HPP_NAMESPACE::ComponentMapping            samplerYcbcrConversionComponents_ = {},
+      VULKAN_HPP_NAMESPACE::SamplerYcbcrModelConversion suggestedYcbcrModel_ =
+        VULKAN_HPP_NAMESPACE::SamplerYcbcrModelConversion::eRgbIdentity,
+      VULKAN_HPP_NAMESPACE::SamplerYcbcrRange suggestedYcbcrRange_ = VULKAN_HPP_NAMESPACE::SamplerYcbcrRange::eItuFull,
+      VULKAN_HPP_NAMESPACE::ChromaLocation suggestedXChromaOffset_ = VULKAN_HPP_NAMESPACE::ChromaLocation::eCositedEven,
+      VULKAN_HPP_NAMESPACE::ChromaLocation suggestedYChromaOffset_ =
+        VULKAN_HPP_NAMESPACE::ChromaLocation::eCositedEven ) VULKAN_HPP_NOEXCEPT
+      : memoryTypeBits( memoryTypeBits_ )
+      , bufferCount( bufferCount_ )
+      , createInfoIndex( createInfoIndex_ )
+      , sysmemPixelFormat( sysmemPixelFormat_ )
+      , formatFeatures( formatFeatures_ )
+      , sysmemColorSpaceIndex( sysmemColorSpaceIndex_ )
+      , samplerYcbcrConversionComponents( samplerYcbcrConversionComponents_ )
+      , suggestedYcbcrModel( suggestedYcbcrModel_ )
+      , suggestedYcbcrRange( suggestedYcbcrRange_ )
+      , suggestedXChromaOffset( suggestedXChromaOffset_ )
+      , suggestedYChromaOffset( suggestedYChromaOffset_ )
+    {}
+
+    VULKAN_HPP_CONSTEXPR
+      BufferCollectionPropertiesFUCHSIA( BufferCollectionPropertiesFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    BufferCollectionPropertiesFUCHSIA( VkBufferCollectionPropertiesFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT
+      : BufferCollectionPropertiesFUCHSIA( *reinterpret_cast<BufferCollectionPropertiesFUCHSIA const *>( &rhs ) )
+    {}
+#  endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    BufferCollectionPropertiesFUCHSIA &
+      operator=( BufferCollectionPropertiesFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    BufferCollectionPropertiesFUCHSIA & operator=( VkBufferCollectionPropertiesFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::BufferCollectionPropertiesFUCHSIA const *>( &rhs );
+      return *this;
+    }
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    BufferCollectionPropertiesFUCHSIA & setPNext( void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    BufferCollectionPropertiesFUCHSIA & setMemoryTypeBits( uint32_t memoryTypeBits_ ) VULKAN_HPP_NOEXCEPT
+    {
+      memoryTypeBits = memoryTypeBits_;
+      return *this;
+    }
+
+    BufferCollectionPropertiesFUCHSIA & setBufferCount( uint32_t bufferCount_ ) VULKAN_HPP_NOEXCEPT
+    {
+      bufferCount = bufferCount_;
+      return *this;
+    }
+
+    BufferCollectionPropertiesFUCHSIA & setCreateInfoIndex( uint32_t createInfoIndex_ ) VULKAN_HPP_NOEXCEPT
+    {
+      createInfoIndex = createInfoIndex_;
+      return *this;
+    }
+
+    BufferCollectionPropertiesFUCHSIA & setSysmemPixelFormat( uint64_t sysmemPixelFormat_ ) VULKAN_HPP_NOEXCEPT
+    {
+      sysmemPixelFormat = sysmemPixelFormat_;
+      return *this;
+    }
+
+    BufferCollectionPropertiesFUCHSIA &
+      setFormatFeatures( VULKAN_HPP_NAMESPACE::FormatFeatureFlags formatFeatures_ ) VULKAN_HPP_NOEXCEPT
+    {
+      formatFeatures = formatFeatures_;
+      return *this;
+    }
+
+    BufferCollectionPropertiesFUCHSIA & setSysmemColorSpaceIndex(
+      VULKAN_HPP_NAMESPACE::SysmemColorSpaceFUCHSIA const & sysmemColorSpaceIndex_ ) VULKAN_HPP_NOEXCEPT
+    {
+      sysmemColorSpaceIndex = sysmemColorSpaceIndex_;
+      return *this;
+    }
+
+    BufferCollectionPropertiesFUCHSIA & setSamplerYcbcrConversionComponents(
+      VULKAN_HPP_NAMESPACE::ComponentMapping const & samplerYcbcrConversionComponents_ ) VULKAN_HPP_NOEXCEPT
+    {
+      samplerYcbcrConversionComponents = samplerYcbcrConversionComponents_;
+      return *this;
+    }
+
+    BufferCollectionPropertiesFUCHSIA & setSuggestedYcbcrModel(
+      VULKAN_HPP_NAMESPACE::SamplerYcbcrModelConversion suggestedYcbcrModel_ ) VULKAN_HPP_NOEXCEPT
+    {
+      suggestedYcbcrModel = suggestedYcbcrModel_;
+      return *this;
+    }
+
+    BufferCollectionPropertiesFUCHSIA &
+      setSuggestedYcbcrRange( VULKAN_HPP_NAMESPACE::SamplerYcbcrRange suggestedYcbcrRange_ ) VULKAN_HPP_NOEXCEPT
+    {
+      suggestedYcbcrRange = suggestedYcbcrRange_;
+      return *this;
+    }
+
+    BufferCollectionPropertiesFUCHSIA &
+      setSuggestedXChromaOffset( VULKAN_HPP_NAMESPACE::ChromaLocation suggestedXChromaOffset_ ) VULKAN_HPP_NOEXCEPT
+    {
+      suggestedXChromaOffset = suggestedXChromaOffset_;
+      return *this;
+    }
+
+    BufferCollectionPropertiesFUCHSIA &
+      setSuggestedYChromaOffset( VULKAN_HPP_NAMESPACE::ChromaLocation suggestedYChromaOffset_ ) VULKAN_HPP_NOEXCEPT
+    {
+      suggestedYChromaOffset = suggestedYChromaOffset_;
+      return *this;
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkBufferCollectionPropertiesFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkBufferCollectionPropertiesFUCHSIA *>( this );
+    }
+
+    operator VkBufferCollectionPropertiesFUCHSIA &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkBufferCollectionPropertiesFUCHSIA *>( this );
+    }
+
+#  if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( BufferCollectionPropertiesFUCHSIA const & ) const = default;
+#  else
+    bool operator==( BufferCollectionPropertiesFUCHSIA const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( memoryTypeBits == rhs.memoryTypeBits ) &&
+             ( bufferCount == rhs.bufferCount ) && ( createInfoIndex == rhs.createInfoIndex ) &&
+             ( sysmemPixelFormat == rhs.sysmemPixelFormat ) && ( formatFeatures == rhs.formatFeatures ) &&
+             ( sysmemColorSpaceIndex == rhs.sysmemColorSpaceIndex ) &&
+             ( samplerYcbcrConversionComponents == rhs.samplerYcbcrConversionComponents ) &&
+             ( suggestedYcbcrModel == rhs.suggestedYcbcrModel ) && ( suggestedYcbcrRange == rhs.suggestedYcbcrRange ) &&
+             ( suggestedXChromaOffset == rhs.suggestedXChromaOffset ) &&
+             ( suggestedYChromaOffset == rhs.suggestedYChromaOffset );
+    }
+
+    bool operator!=( BufferCollectionPropertiesFUCHSIA const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#  endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType               sType = StructureType::eBufferCollectionPropertiesFUCHSIA;
+    void *                                            pNext = {};
+    uint32_t                                          memoryTypeBits                   = {};
+    uint32_t                                          bufferCount                      = {};
+    uint32_t                                          createInfoIndex                  = {};
+    uint64_t                                          sysmemPixelFormat                = {};
+    VULKAN_HPP_NAMESPACE::FormatFeatureFlags          formatFeatures                   = {};
+    VULKAN_HPP_NAMESPACE::SysmemColorSpaceFUCHSIA     sysmemColorSpaceIndex            = {};
+    VULKAN_HPP_NAMESPACE::ComponentMapping            samplerYcbcrConversionComponents = {};
+    VULKAN_HPP_NAMESPACE::SamplerYcbcrModelConversion suggestedYcbcrModel =
+      VULKAN_HPP_NAMESPACE::SamplerYcbcrModelConversion::eRgbIdentity;
+    VULKAN_HPP_NAMESPACE::SamplerYcbcrRange suggestedYcbcrRange    = VULKAN_HPP_NAMESPACE::SamplerYcbcrRange::eItuFull;
+    VULKAN_HPP_NAMESPACE::ChromaLocation    suggestedXChromaOffset = VULKAN_HPP_NAMESPACE::ChromaLocation::eCositedEven;
+    VULKAN_HPP_NAMESPACE::ChromaLocation    suggestedYChromaOffset = VULKAN_HPP_NAMESPACE::ChromaLocation::eCositedEven;
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::BufferCollectionPropertiesFUCHSIA ) ==
+                              sizeof( VkBufferCollectionPropertiesFUCHSIA ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::BufferCollectionPropertiesFUCHSIA>::value,
+                            "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT(
+    std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::BufferCollectionPropertiesFUCHSIA>::value,
+    "BufferCollectionPropertiesFUCHSIA is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::eBufferCollectionPropertiesFUCHSIA>
+  {
+    using Type = BufferCollectionPropertiesFUCHSIA;
+  };
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
 
   struct BufferCreateInfo
   {
     using NativeType = VkBufferCreateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eBufferCreateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eBufferCreateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -8411,11 +8946,311 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = BufferCreateInfo;
   };
 
+#if defined( VK_USE_PLATFORM_FUCHSIA )
+  struct BufferConstraintsInfoFUCHSIA
+  {
+    using NativeType = VkBufferConstraintsInfoFUCHSIA;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eBufferConstraintsInfoFUCHSIA;
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR BufferConstraintsInfoFUCHSIA(
+      VULKAN_HPP_NAMESPACE::BufferCreateInfo                       createInfo_                  = {},
+      VULKAN_HPP_NAMESPACE::FormatFeatureFlags                     requiredFormatFeatures_      = {},
+      VULKAN_HPP_NAMESPACE::BufferCollectionConstraintsInfoFUCHSIA bufferCollectionConstraints_ = {} )
+      VULKAN_HPP_NOEXCEPT
+      : createInfo( createInfo_ )
+      , requiredFormatFeatures( requiredFormatFeatures_ )
+      , bufferCollectionConstraints( bufferCollectionConstraints_ )
+    {}
+
+    VULKAN_HPP_CONSTEXPR
+      BufferConstraintsInfoFUCHSIA( BufferConstraintsInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    BufferConstraintsInfoFUCHSIA( VkBufferConstraintsInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT
+      : BufferConstraintsInfoFUCHSIA( *reinterpret_cast<BufferConstraintsInfoFUCHSIA const *>( &rhs ) )
+    {}
+#  endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    BufferConstraintsInfoFUCHSIA & operator=( BufferConstraintsInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    BufferConstraintsInfoFUCHSIA & operator=( VkBufferConstraintsInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::BufferConstraintsInfoFUCHSIA const *>( &rhs );
+      return *this;
+    }
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    BufferConstraintsInfoFUCHSIA & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    BufferConstraintsInfoFUCHSIA &
+      setCreateInfo( VULKAN_HPP_NAMESPACE::BufferCreateInfo const & createInfo_ ) VULKAN_HPP_NOEXCEPT
+    {
+      createInfo = createInfo_;
+      return *this;
+    }
+
+    BufferConstraintsInfoFUCHSIA &
+      setRequiredFormatFeatures( VULKAN_HPP_NAMESPACE::FormatFeatureFlags requiredFormatFeatures_ ) VULKAN_HPP_NOEXCEPT
+    {
+      requiredFormatFeatures = requiredFormatFeatures_;
+      return *this;
+    }
+
+    BufferConstraintsInfoFUCHSIA & setBufferCollectionConstraints(
+      VULKAN_HPP_NAMESPACE::BufferCollectionConstraintsInfoFUCHSIA const & bufferCollectionConstraints_ )
+      VULKAN_HPP_NOEXCEPT
+    {
+      bufferCollectionConstraints = bufferCollectionConstraints_;
+      return *this;
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkBufferConstraintsInfoFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkBufferConstraintsInfoFUCHSIA *>( this );
+    }
+
+    operator VkBufferConstraintsInfoFUCHSIA &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkBufferConstraintsInfoFUCHSIA *>( this );
+    }
+
+#  if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( BufferConstraintsInfoFUCHSIA const & ) const = default;
+#  else
+    bool operator==( BufferConstraintsInfoFUCHSIA const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( createInfo == rhs.createInfo ) &&
+             ( requiredFormatFeatures == rhs.requiredFormatFeatures ) &&
+             ( bufferCollectionConstraints == rhs.bufferCollectionConstraints );
+    }
+
+    bool operator!=( BufferConstraintsInfoFUCHSIA const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#  endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType                          sType = StructureType::eBufferConstraintsInfoFUCHSIA;
+    const void *                                                 pNext = {};
+    VULKAN_HPP_NAMESPACE::BufferCreateInfo                       createInfo                  = {};
+    VULKAN_HPP_NAMESPACE::FormatFeatureFlags                     requiredFormatFeatures      = {};
+    VULKAN_HPP_NAMESPACE::BufferCollectionConstraintsInfoFUCHSIA bufferCollectionConstraints = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::BufferConstraintsInfoFUCHSIA ) ==
+                              sizeof( VkBufferConstraintsInfoFUCHSIA ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::BufferConstraintsInfoFUCHSIA>::value,
+                            "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT(
+    std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::BufferConstraintsInfoFUCHSIA>::value,
+    "BufferConstraintsInfoFUCHSIA is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::eBufferConstraintsInfoFUCHSIA>
+  {
+    using Type = BufferConstraintsInfoFUCHSIA;
+  };
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
+
+  struct BufferCopy
+  {
+    using NativeType = VkBufferCopy;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR BufferCopy( VULKAN_HPP_NAMESPACE::DeviceSize srcOffset_ = {},
+                                     VULKAN_HPP_NAMESPACE::DeviceSize dstOffset_ = {},
+                                     VULKAN_HPP_NAMESPACE::DeviceSize size_      = {} ) VULKAN_HPP_NOEXCEPT
+      : srcOffset( srcOffset_ )
+      , dstOffset( dstOffset_ )
+      , size( size_ )
+    {}
+
+    VULKAN_HPP_CONSTEXPR BufferCopy( BufferCopy const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    BufferCopy( VkBufferCopy const & rhs ) VULKAN_HPP_NOEXCEPT
+      : BufferCopy( *reinterpret_cast<BufferCopy const *>( &rhs ) )
+    {}
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    BufferCopy & operator=( BufferCopy const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    BufferCopy & operator=( VkBufferCopy const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::BufferCopy const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    BufferCopy & setSrcOffset( VULKAN_HPP_NAMESPACE::DeviceSize srcOffset_ ) VULKAN_HPP_NOEXCEPT
+    {
+      srcOffset = srcOffset_;
+      return *this;
+    }
+
+    BufferCopy & setDstOffset( VULKAN_HPP_NAMESPACE::DeviceSize dstOffset_ ) VULKAN_HPP_NOEXCEPT
+    {
+      dstOffset = dstOffset_;
+      return *this;
+    }
+
+    BufferCopy & setSize( VULKAN_HPP_NAMESPACE::DeviceSize size_ ) VULKAN_HPP_NOEXCEPT
+    {
+      size = size_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkBufferCopy const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkBufferCopy *>( this );
+    }
+
+    operator VkBufferCopy &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkBufferCopy *>( this );
+    }
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( BufferCopy const & ) const = default;
+#else
+    bool operator==( BufferCopy const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ( srcOffset == rhs.srcOffset ) && ( dstOffset == rhs.dstOffset ) && ( size == rhs.size );
+    }
+
+    bool operator!=( BufferCopy const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::DeviceSize srcOffset = {};
+    VULKAN_HPP_NAMESPACE::DeviceSize dstOffset = {};
+    VULKAN_HPP_NAMESPACE::DeviceSize size      = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::BufferCopy ) == sizeof( VkBufferCopy ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::BufferCopy>::value,
+                            "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::BufferCopy>::value,
+                            "BufferCopy is not nothrow_move_constructible!" );
+
+  struct BufferCopy2KHR
+  {
+    using NativeType = VkBufferCopy2KHR;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eBufferCopy2KHR;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR BufferCopy2KHR( VULKAN_HPP_NAMESPACE::DeviceSize srcOffset_ = {},
+                                         VULKAN_HPP_NAMESPACE::DeviceSize dstOffset_ = {},
+                                         VULKAN_HPP_NAMESPACE::DeviceSize size_      = {} ) VULKAN_HPP_NOEXCEPT
+      : srcOffset( srcOffset_ )
+      , dstOffset( dstOffset_ )
+      , size( size_ )
+    {}
+
+    VULKAN_HPP_CONSTEXPR BufferCopy2KHR( BufferCopy2KHR const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    BufferCopy2KHR( VkBufferCopy2KHR const & rhs ) VULKAN_HPP_NOEXCEPT
+      : BufferCopy2KHR( *reinterpret_cast<BufferCopy2KHR const *>( &rhs ) )
+    {}
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    BufferCopy2KHR & operator=( BufferCopy2KHR const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    BufferCopy2KHR & operator=( VkBufferCopy2KHR const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::BufferCopy2KHR const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    BufferCopy2KHR & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    BufferCopy2KHR & setSrcOffset( VULKAN_HPP_NAMESPACE::DeviceSize srcOffset_ ) VULKAN_HPP_NOEXCEPT
+    {
+      srcOffset = srcOffset_;
+      return *this;
+    }
+
+    BufferCopy2KHR & setDstOffset( VULKAN_HPP_NAMESPACE::DeviceSize dstOffset_ ) VULKAN_HPP_NOEXCEPT
+    {
+      dstOffset = dstOffset_;
+      return *this;
+    }
+
+    BufferCopy2KHR & setSize( VULKAN_HPP_NAMESPACE::DeviceSize size_ ) VULKAN_HPP_NOEXCEPT
+    {
+      size = size_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkBufferCopy2KHR const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkBufferCopy2KHR *>( this );
+    }
+
+    operator VkBufferCopy2KHR &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkBufferCopy2KHR *>( this );
+    }
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( BufferCopy2KHR const & ) const = default;
+#else
+    bool operator==( BufferCopy2KHR const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( srcOffset == rhs.srcOffset ) &&
+             ( dstOffset == rhs.dstOffset ) && ( size == rhs.size );
+    }
+
+    bool operator!=( BufferCopy2KHR const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType sType     = StructureType::eBufferCopy2KHR;
+    const void *                        pNext     = {};
+    VULKAN_HPP_NAMESPACE::DeviceSize    srcOffset = {};
+    VULKAN_HPP_NAMESPACE::DeviceSize    dstOffset = {};
+    VULKAN_HPP_NAMESPACE::DeviceSize    size      = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::BufferCopy2KHR ) == sizeof( VkBufferCopy2KHR ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::BufferCopy2KHR>::value,
+                            "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::BufferCopy2KHR>::value,
+                            "BufferCopy2KHR is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::eBufferCopy2KHR>
+  {
+    using Type = BufferCopy2KHR;
+  };
+
   struct BufferDeviceAddressCreateInfoEXT
   {
     using NativeType = VkBufferDeviceAddressCreateInfoEXT;
 
-    static const bool                    allowDuplicate              = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eBufferDeviceAddressCreateInfoEXT;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
@@ -8504,8 +9339,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkBufferDeviceAddressInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eBufferDeviceAddressInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eBufferDeviceAddressInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR BufferDeviceAddressInfo( VULKAN_HPP_NAMESPACE::Buffer buffer_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -8704,8 +9539,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkBufferImageCopy2KHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eBufferImageCopy2KHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eBufferImageCopy2KHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR BufferImageCopy2KHR( VULKAN_HPP_NAMESPACE::DeviceSize             bufferOffset_      = {},
@@ -8836,8 +9671,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkBufferMemoryBarrier;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eBufferMemoryBarrier;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eBufferMemoryBarrier;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR BufferMemoryBarrier( VULKAN_HPP_NAMESPACE::AccessFlags srcAccessMask_       = {},
@@ -8976,8 +9811,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkBufferMemoryBarrier2KHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eBufferMemoryBarrier2KHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eBufferMemoryBarrier2KHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR BufferMemoryBarrier2KHR( VULKAN_HPP_NAMESPACE::PipelineStageFlags2KHR srcStageMask_  = {},
@@ -9140,8 +9975,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkBufferMemoryRequirementsInfo2;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eBufferMemoryRequirementsInfo2;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eBufferMemoryRequirementsInfo2;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR BufferMemoryRequirementsInfo2( VULKAN_HPP_NAMESPACE::Buffer buffer_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -9228,7 +10063,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkBufferOpaqueCaptureAddressCreateInfo;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eBufferOpaqueCaptureAddressCreateInfo;
 
@@ -9318,8 +10153,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkBufferViewCreateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eBufferViewCreateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eBufferViewCreateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -9439,8 +10274,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkCalibratedTimestampInfoEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eCalibratedTimestampInfoEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eCalibratedTimestampInfoEXT;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -9526,8 +10361,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkCheckpointData2NV;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eCheckpointData2NV;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eCheckpointData2NV;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR CheckpointData2NV( VULKAN_HPP_NAMESPACE::PipelineStageFlags2KHR stage_ = {},
@@ -9599,8 +10434,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkCheckpointDataNV;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eCheckpointDataNV;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eCheckpointDataNV;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR CheckpointDataNV(
@@ -10222,8 +11057,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkCommandBufferAllocateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eCommandBufferAllocateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eCommandBufferAllocateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR CommandBufferAllocateInfo(
@@ -10327,8 +11162,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkCommandBufferInheritanceInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eCommandBufferInheritanceInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eCommandBufferInheritanceInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR CommandBufferInheritanceInfo(
@@ -10465,8 +11300,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkCommandBufferBeginInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eCommandBufferBeginInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eCommandBufferBeginInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR CommandBufferBeginInfo(
@@ -10561,7 +11396,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkCommandBufferInheritanceConditionalRenderingInfoEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eCommandBufferInheritanceConditionalRenderingInfoEXT;
 
@@ -10657,7 +11492,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkCommandBufferInheritanceRenderPassTransformInfoQCOM;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eCommandBufferInheritanceRenderPassTransformInfoQCOM;
 
@@ -10875,7 +11710,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkCommandBufferInheritanceViewportScissorInfoNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eCommandBufferInheritanceViewportScissorInfoNV;
 
@@ -10990,8 +11825,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkCommandBufferSubmitInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eCommandBufferSubmitInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eCommandBufferSubmitInfoKHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR CommandBufferSubmitInfoKHR( VULKAN_HPP_NAMESPACE::CommandBuffer commandBuffer_ = {},
@@ -11086,8 +11921,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkCommandPoolCreateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eCommandPoolCreateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eCommandPoolCreateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR CommandPoolCreateInfo( VULKAN_HPP_NAMESPACE::CommandPoolCreateFlags flags_ = {},
@@ -11392,8 +12227,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineShaderStageCreateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineShaderStageCreateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePipelineShaderStageCreateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR PipelineShaderStageCreateInfo(
@@ -11519,8 +12354,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkComputePipelineCreateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eComputePipelineCreateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eComputePipelineCreateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR ComputePipelineCreateInfo( VULKAN_HPP_NAMESPACE::PipelineCreateFlags           flags_  = {},
@@ -11644,7 +12479,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkConditionalRenderingBeginInfoEXT;
 
-    static const bool                    allowDuplicate              = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eConditionalRenderingBeginInfoEXT;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
@@ -11846,8 +12681,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkCooperativeMatrixPropertiesNV;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eCooperativeMatrixPropertiesNV;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eCooperativeMatrixPropertiesNV;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR CooperativeMatrixPropertiesNV(
@@ -11999,7 +12834,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkCopyAccelerationStructureInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eCopyAccelerationStructureInfoKHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
@@ -12109,7 +12944,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkCopyAccelerationStructureToMemoryInfoKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eCopyAccelerationStructureToMemoryInfoKHR;
 
@@ -12211,8 +13046,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkCopyBufferInfo2KHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eCopyBufferInfo2KHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eCopyBufferInfo2KHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -12346,8 +13181,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkCopyBufferToImageInfo2KHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eCopyBufferToImageInfo2KHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eCopyBufferToImageInfo2KHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR CopyBufferToImageInfo2KHR(
@@ -12497,8 +13332,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkCopyCommandTransformInfoQCOM;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eCopyCommandTransformInfoQCOM;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eCopyCommandTransformInfoQCOM;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -12587,8 +13422,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkCopyDescriptorSet;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eCopyDescriptorSet;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eCopyDescriptorSet;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR CopyDescriptorSet( VULKAN_HPP_NAMESPACE::DescriptorSet srcSet_          = {},
@@ -12727,8 +13562,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkImageCopy2KHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImageCopy2KHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eImageCopy2KHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR ImageCopy2KHR( VULKAN_HPP_NAMESPACE::ImageSubresourceLayers srcSubresource_ = {},
@@ -12850,8 +13685,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkCopyImageInfo2KHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eCopyImageInfo2KHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eCopyImageInfo2KHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR CopyImageInfo2KHR(
@@ -13009,8 +13844,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkCopyImageToBufferInfo2KHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eCopyImageToBufferInfo2KHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eCopyImageToBufferInfo2KHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR CopyImageToBufferInfo2KHR(
@@ -13160,7 +13995,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkCopyMemoryToAccelerationStructureInfoKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eCopyMemoryToAccelerationStructureInfoKHR;
 
@@ -13262,8 +14097,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkCuFunctionCreateInfoNVX;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eCuFunctionCreateInfoNVX;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eCuFunctionCreateInfoNVX;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR CuFunctionCreateInfoNVX( VULKAN_HPP_NAMESPACE::CuModuleNVX module_ = {},
@@ -13355,8 +14190,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkCuLaunchInfoNVX;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eCuLaunchInfoNVX;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eCuLaunchInfoNVX;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR CuLaunchInfoNVX( VULKAN_HPP_NAMESPACE::CuFunctionNVX function_       = {},
@@ -13587,8 +14422,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkCuModuleCreateInfoNVX;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eCuModuleCreateInfoNVX;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eCuModuleCreateInfoNVX;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR CuModuleCreateInfoNVX( size_t dataSize_ = {}, const void * pData_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -13601,7 +14436,14 @@ namespace VULKAN_HPP_NAMESPACE
     CuModuleCreateInfoNVX( VkCuModuleCreateInfoNVX const & rhs ) VULKAN_HPP_NOEXCEPT
       : CuModuleCreateInfoNVX( *reinterpret_cast<CuModuleCreateInfoNVX const *>( &rhs ) )
     {}
-#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+#  if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
+    template <typename T>
+    CuModuleCreateInfoNVX( VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const T> const & data_ )
+      : dataSize( data_.size() * sizeof( T ) ), pData( data_.data() )
+    {}
+#  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+#endif   /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
 
     CuModuleCreateInfoNVX & operator=( CuModuleCreateInfoNVX const & rhs ) VULKAN_HPP_NOEXCEPT = default;
 
@@ -13629,7 +14471,18 @@ namespace VULKAN_HPP_NAMESPACE
       pData = pData_;
       return *this;
     }
-#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+#  if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
+    template <typename T>
+    CuModuleCreateInfoNVX &
+      setData( VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<const T> const & data_ ) VULKAN_HPP_NOEXCEPT
+    {
+      dataSize = data_.size() * sizeof( T );
+      pData    = data_.data();
+      return *this;
+    }
+#  endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+#endif   /*VULKAN_HPP_NO_STRUCT_SETTERS*/
 
     operator VkCuModuleCreateInfoNVX const &() const VULKAN_HPP_NOEXCEPT
     {
@@ -13679,8 +14532,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkD3D12FenceSubmitInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eD3D12FenceSubmitInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eD3D12FenceSubmitInfoKHR;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR D3D12FenceSubmitInfoKHR( uint32_t         waitSemaphoreValuesCount_   = {},
@@ -13826,8 +14679,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDebugMarkerMarkerInfoEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDebugMarkerMarkerInfoEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eDebugMarkerMarkerInfoEXT;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR_14 DebugMarkerMarkerInfoEXT( const char *                 pMarkerName_ = {},
@@ -13921,8 +14774,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDebugMarkerObjectNameInfoEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDebugMarkerObjectNameInfoEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eDebugMarkerObjectNameInfoEXT;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR DebugMarkerObjectNameInfoEXT( VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT objectType_ =
@@ -14029,8 +14882,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDebugMarkerObjectTagInfoEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDebugMarkerObjectTagInfoEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eDebugMarkerObjectTagInfoEXT;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR DebugMarkerObjectTagInfoEXT( VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT objectType_ =
@@ -14181,7 +15034,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDebugReportCallbackCreateInfoEXT;
 
-    static const bool                    allowDuplicate              = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDebugReportCallbackCreateInfoEXT;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
@@ -14287,8 +15140,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDebugUtilsLabelEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDebugUtilsLabelEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eDebugUtilsLabelEXT;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR_14 DebugUtilsLabelEXT( const char *                 pLabelName_ = {},
@@ -14380,8 +15233,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDebugUtilsObjectNameInfoEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDebugUtilsObjectNameInfoEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eDebugUtilsObjectNameInfoEXT;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR DebugUtilsObjectNameInfoEXT(
@@ -14486,7 +15339,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDebugUtilsMessengerCallbackDataEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eDebugUtilsMessengerCallbackDataEXT;
 
@@ -14724,7 +15577,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDebugUtilsMessengerCreateInfoEXT;
 
-    static const bool                    allowDuplicate              = true;
+    static const bool                                  allowDuplicate = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDebugUtilsMessengerCreateInfoEXT;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
@@ -14854,8 +15707,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDebugUtilsObjectTagInfoEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDebugUtilsObjectTagInfoEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eDebugUtilsObjectTagInfoEXT;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR DebugUtilsObjectTagInfoEXT(
@@ -15003,7 +15856,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDedicatedAllocationBufferCreateInfoNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eDedicatedAllocationBufferCreateInfoNV;
 
@@ -15094,7 +15947,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDedicatedAllocationImageCreateInfoNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eDedicatedAllocationImageCreateInfoNV;
 
@@ -15185,7 +16038,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDedicatedAllocationMemoryAllocateInfoNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eDedicatedAllocationMemoryAllocateInfoNV;
 
@@ -15286,8 +16139,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkMemoryBarrier2KHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eMemoryBarrier2KHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eMemoryBarrier2KHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -15505,8 +16358,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkImageMemoryBarrier2KHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImageMemoryBarrier2KHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eImageMemoryBarrier2KHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR ImageMemoryBarrier2KHR(
@@ -15681,8 +16534,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDependencyInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDependencyInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eDependencyInfoKHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR DependencyInfoKHR(
@@ -16124,8 +16977,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDescriptorPoolCreateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDescriptorPoolCreateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eDescriptorPoolCreateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -16261,7 +17114,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDescriptorPoolInlineUniformBlockCreateInfoEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eDescriptorPoolInlineUniformBlockCreateInfoEXT;
 
@@ -16356,8 +17209,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDescriptorSetAllocateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDescriptorSetAllocateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eDescriptorSetAllocateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR DescriptorSetAllocateInfo(
@@ -16619,7 +17472,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDescriptorSetLayoutBindingFlagsCreateInfo;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eDescriptorSetLayoutBindingFlagsCreateInfo;
 
@@ -16743,8 +17596,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDescriptorSetLayoutCreateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDescriptorSetLayoutCreateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eDescriptorSetLayoutCreateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR DescriptorSetLayoutCreateInfo(
@@ -16872,8 +17725,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDescriptorSetLayoutSupport;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDescriptorSetLayoutSupport;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eDescriptorSetLayoutSupport;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR DescriptorSetLayoutSupport( VULKAN_HPP_NAMESPACE::Bool32 supported_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -16944,7 +17797,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDescriptorSetVariableDescriptorCountAllocateInfo;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eDescriptorSetVariableDescriptorCountAllocateInfo;
 
@@ -17068,7 +17921,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDescriptorSetVariableDescriptorCountLayoutSupport;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eDescriptorSetVariableDescriptorCountLayoutSupport;
 
@@ -17270,7 +18123,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDescriptorUpdateTemplateCreateInfo;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eDescriptorUpdateTemplateCreateInfo;
 
@@ -17470,8 +18323,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDeviceQueueCreateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDeviceQueueCreateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eDeviceQueueCreateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR DeviceQueueCreateInfo( VULKAN_HPP_NAMESPACE::DeviceQueueCreateFlags flags_            = {},
@@ -18230,8 +19083,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDeviceCreateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDeviceCreateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eDeviceCreateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR DeviceCreateInfo( VULKAN_HPP_NAMESPACE::DeviceCreateFlags flags_                         = {},
@@ -18434,7 +19287,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDeviceDeviceMemoryReportCreateInfoEXT;
 
-    static const bool                    allowDuplicate = true;
+    static const bool                                  allowDuplicate = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eDeviceDeviceMemoryReportCreateInfoEXT;
 
@@ -18546,7 +19399,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDeviceDiagnosticsConfigCreateInfoNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eDeviceDiagnosticsConfigCreateInfoNV;
 
@@ -18636,8 +19489,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDeviceEventInfoEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDeviceEventInfoEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eDeviceEventInfoEXT;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -18721,8 +19574,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDeviceGroupBindSparseInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDeviceGroupBindSparseInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eDeviceGroupBindSparseInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR DeviceGroupBindSparseInfo( uint32_t resourceDeviceIndex_ = {},
@@ -18817,7 +19670,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDeviceGroupCommandBufferBeginInfo;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eDeviceGroupCommandBufferBeginInfo;
 
@@ -18906,8 +19759,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDeviceGroupDeviceCreateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDeviceGroupDeviceCreateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eDeviceGroupDeviceCreateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR DeviceGroupDeviceCreateInfo(
@@ -19025,7 +19878,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDeviceGroupPresentCapabilitiesKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eDeviceGroupPresentCapabilitiesKHR;
 
@@ -19104,8 +19957,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDeviceGroupPresentInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDeviceGroupPresentInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eDeviceGroupPresentInfoKHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -19232,8 +20085,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDeviceGroupRenderPassBeginInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDeviceGroupRenderPassBeginInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eDeviceGroupRenderPassBeginInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR DeviceGroupRenderPassBeginInfo( uint32_t deviceMask_                                     = {},
@@ -19362,8 +20215,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDeviceGroupSubmitInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDeviceGroupSubmitInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eDeviceGroupSubmitInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -19547,7 +20400,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDeviceGroupSwapchainCreateInfoKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eDeviceGroupSwapchainCreateInfoKHR;
 
@@ -19636,7 +20489,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDeviceMemoryOpaqueCaptureAddressInfo;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eDeviceMemoryOpaqueCaptureAddressInfo;
 
@@ -19727,7 +20580,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDeviceMemoryOverallocationCreateInfoAMD;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eDeviceMemoryOverallocationCreateInfoAMD;
 
@@ -19823,7 +20676,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDeviceMemoryReportCallbackDataEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eDeviceMemoryReportCallbackDataEXT;
 
@@ -19920,8 +20773,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDevicePrivateDataCreateInfoEXT;
 
-    static const bool                    allowDuplicate              = true;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDevicePrivateDataCreateInfoEXT;
+    static const bool                                  allowDuplicate = true;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eDevicePrivateDataCreateInfoEXT;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -20010,7 +20863,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDeviceQueueGlobalPriorityCreateInfoEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eDeviceQueueGlobalPriorityCreateInfoEXT;
 
@@ -20104,8 +20957,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDeviceQueueInfo2;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDeviceQueueInfo2;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eDeviceQueueInfo2;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR DeviceQueueInfo2( VULKAN_HPP_NAMESPACE::DeviceQueueCreateFlags flags_            = {},
@@ -20207,8 +21060,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDirectFBSurfaceCreateInfoEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDirectfbSurfaceCreateInfoEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eDirectfbSurfaceCreateInfoEXT;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR DirectFBSurfaceCreateInfoEXT( VULKAN_HPP_NAMESPACE::DirectFBSurfaceCreateFlagsEXT flags_ = {},
@@ -20398,8 +21251,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDisplayEventInfoEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDisplayEventInfoEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eDisplayEventInfoEXT;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -20560,8 +21413,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDisplayModeCreateInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDisplayModeCreateInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eDisplayModeCreateInfoKHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -20719,8 +21572,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDisplayModeProperties2KHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDisplayModeProperties2KHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eDisplayModeProperties2KHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR DisplayModeProperties2KHR(
@@ -20791,7 +21644,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDisplayNativeHdrSurfaceCapabilitiesAMD;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eDisplayNativeHdrSurfaceCapabilitiesAMD;
 
@@ -20959,8 +21812,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDisplayPlaneCapabilities2KHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDisplayPlaneCapabilities2KHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eDisplayPlaneCapabilities2KHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR DisplayPlaneCapabilities2KHR(
@@ -21032,8 +21885,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDisplayPlaneInfo2KHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDisplayPlaneInfo2KHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eDisplayPlaneInfo2KHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR DisplayPlaneInfo2KHR( VULKAN_HPP_NAMESPACE::DisplayModeKHR mode_ = {},
@@ -21188,8 +22041,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDisplayPlaneProperties2KHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDisplayPlaneProperties2KHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eDisplayPlaneProperties2KHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR DisplayPlaneProperties2KHR(
@@ -21261,8 +22114,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDisplayPowerInfoEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDisplayPowerInfoEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eDisplayPowerInfoEXT;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR DisplayPowerInfoEXT( VULKAN_HPP_NAMESPACE::DisplayPowerStateEXT powerState_ =
@@ -21345,8 +22198,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDisplayPresentInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDisplayPresentInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eDisplayPresentInfoKHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR DisplayPresentInfoKHR( VULKAN_HPP_NAMESPACE::Rect2D srcRect_    = {},
@@ -21527,8 +22380,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDisplayProperties2KHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDisplayProperties2KHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eDisplayProperties2KHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -21597,8 +22450,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDisplaySurfaceCreateInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eDisplaySurfaceCreateInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eDisplaySurfaceCreateInfoKHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -22109,7 +22962,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkDrmFormatModifierPropertiesListEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eDrmFormatModifierPropertiesListEXT;
 
@@ -22199,8 +23052,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkEventCreateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eEventCreateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eEventCreateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR EventCreateInfo( VULKAN_HPP_NAMESPACE::EventCreateFlags flags_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -22282,8 +23135,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkExportFenceCreateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eExportFenceCreateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eExportFenceCreateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -22369,8 +23222,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkExportFenceWin32HandleInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eExportFenceWin32HandleInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eExportFenceWin32HandleInfoKHR;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR ExportFenceWin32HandleInfoKHR( const SECURITY_ATTRIBUTES * pAttributes_ = {},
@@ -22476,8 +23329,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkExportMemoryAllocateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eExportMemoryAllocateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eExportMemoryAllocateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR ExportMemoryAllocateInfo(
@@ -22563,8 +23416,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkExportMemoryAllocateInfoNV;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eExportMemoryAllocateInfoNV;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eExportMemoryAllocateInfoNV;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR ExportMemoryAllocateInfoNV(
@@ -22651,8 +23504,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkExportMemoryWin32HandleInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eExportMemoryWin32HandleInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eExportMemoryWin32HandleInfoKHR;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR ExportMemoryWin32HandleInfoKHR( const SECURITY_ATTRIBUTES * pAttributes_ = {},
@@ -22759,8 +23612,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkExportMemoryWin32HandleInfoNV;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eExportMemoryWin32HandleInfoNV;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eExportMemoryWin32HandleInfoNV;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR ExportMemoryWin32HandleInfoNV( const SECURITY_ATTRIBUTES * pAttributes_ = {},
@@ -22857,8 +23710,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkExportSemaphoreCreateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eExportSemaphoreCreateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eExportSemaphoreCreateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR ExportSemaphoreCreateInfo(
@@ -22946,7 +23799,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkExportSemaphoreWin32HandleInfoKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eExportSemaphoreWin32HandleInfoKHR;
 
@@ -23185,8 +24038,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkExternalBufferProperties;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eExternalBufferProperties;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eExternalBufferProperties;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR ExternalBufferProperties(
@@ -23258,8 +24111,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkExternalFenceProperties;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eExternalFenceProperties;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eExternalFenceProperties;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR ExternalFenceProperties(
@@ -23340,8 +24193,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkExternalFormatANDROID;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eExternalFormatANDROID;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eExternalFormatANDROID;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR ExternalFormatANDROID( uint64_t externalFormat_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -23424,8 +24277,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkExternalImageFormatProperties;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eExternalImageFormatProperties;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eExternalImageFormatProperties;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR ExternalImageFormatProperties(
@@ -23648,8 +24501,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkExternalMemoryBufferCreateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eExternalMemoryBufferCreateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eExternalMemoryBufferCreateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR ExternalMemoryBufferCreateInfo(
@@ -23738,8 +24591,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkExternalMemoryImageCreateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eExternalMemoryImageCreateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eExternalMemoryImageCreateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR ExternalMemoryImageCreateInfo(
@@ -23828,8 +24681,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkExternalMemoryImageCreateInfoNV;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eExternalMemoryImageCreateInfoNV;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eExternalMemoryImageCreateInfoNV;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR ExternalMemoryImageCreateInfoNV(
@@ -23917,8 +24770,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkExternalSemaphoreProperties;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eExternalSemaphoreProperties;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eExternalSemaphoreProperties;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR ExternalSemaphoreProperties(
@@ -24000,8 +24853,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkFenceCreateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eFenceCreateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eFenceCreateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR FenceCreateInfo( VULKAN_HPP_NAMESPACE::FenceCreateFlags flags_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -24083,8 +24936,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkFenceGetFdInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eFenceGetFdInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eFenceGetFdInfoKHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -24181,8 +25034,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkFenceGetWin32HandleInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eFenceGetWin32HandleInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eFenceGetWin32HandleInfoKHR;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR FenceGetWin32HandleInfoKHR(
@@ -24281,7 +25134,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkFilterCubicImageViewImageFormatPropertiesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eFilterCubicImageViewImageFormatPropertiesEXT;
 
@@ -24430,8 +25283,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkFormatProperties2;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eFormatProperties2;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eFormatProperties2;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -24501,7 +25354,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkFragmentShadingRateAttachmentInfoKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eFragmentShadingRateAttachmentInfoKHR;
 
@@ -24604,8 +25457,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkFramebufferAttachmentImageInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eFramebufferAttachmentImageInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eFramebufferAttachmentImageInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -24779,7 +25632,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkFramebufferAttachmentsCreateInfo;
 
-    static const bool                    allowDuplicate              = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eFramebufferAttachmentsCreateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
@@ -24901,8 +25754,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkFramebufferCreateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eFramebufferCreateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eFramebufferCreateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR FramebufferCreateInfo( VULKAN_HPP_NAMESPACE::FramebufferCreateFlags flags_           = {},
@@ -25070,7 +25923,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkFramebufferMixedSamplesCombinationNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eFramebufferMixedSamplesCombinationNV;
 
@@ -25236,8 +26089,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkGeneratedCommandsInfoNV;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eGeneratedCommandsInfoNV;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eGeneratedCommandsInfoNV;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR GeneratedCommandsInfoNV(
@@ -25487,7 +26340,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkGeneratedCommandsMemoryRequirementsInfoNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eGeneratedCommandsMemoryRequirementsInfoNV;
 
@@ -25801,7 +26654,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineVertexInputStateCreateInfo;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePipelineVertexInputStateCreateInfo;
 
@@ -25974,7 +26827,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineInputAssemblyStateCreateInfo;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePipelineInputAssemblyStateCreateInfo;
 
@@ -26086,7 +26939,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineTessellationStateCreateInfo;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePipelineTessellationStateCreateInfo;
 
@@ -26187,8 +27040,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineViewportStateCreateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineViewportStateCreateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePipelineViewportStateCreateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -26351,7 +27204,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineRasterizationStateCreateInfo;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePipelineRasterizationStateCreateInfo;
 
@@ -26545,7 +27398,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineMultisampleStateCreateInfo;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePipelineMultisampleStateCreateInfo;
 
@@ -26822,7 +27675,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineDepthStencilStateCreateInfo;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePipelineDepthStencilStateCreateInfo;
 
@@ -27149,7 +28002,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineColorBlendStateCreateInfo;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePipelineColorBlendStateCreateInfo;
 
@@ -27317,8 +28170,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineDynamicStateCreateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineDynamicStateCreateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePipelineDynamicStateCreateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR PipelineDynamicStateCreateInfo(
@@ -27447,8 +28300,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkGraphicsPipelineCreateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eGraphicsPipelineCreateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eGraphicsPipelineCreateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR_14 GraphicsPipelineCreateInfo(
@@ -27746,8 +28599,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkGraphicsShaderGroupCreateInfoNV;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eGraphicsShaderGroupCreateInfoNV;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eGraphicsShaderGroupCreateInfoNV;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR GraphicsShaderGroupCreateInfoNV(
@@ -27890,7 +28743,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkGraphicsPipelineShaderGroupsCreateInfoNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eGraphicsPipelineShaderGroupsCreateInfoNV;
 
@@ -28121,8 +28974,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkHdrMetadataEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eHdrMetadataEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eHdrMetadataEXT;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR HdrMetadataEXT( VULKAN_HPP_NAMESPACE::XYColorEXT displayPrimaryRed_    = {},
@@ -28274,8 +29127,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkHeadlessSurfaceCreateInfoEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eHeadlessSurfaceCreateInfoEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eHeadlessSurfaceCreateInfoEXT;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR HeadlessSurfaceCreateInfoEXT( VULKAN_HPP_NAMESPACE::HeadlessSurfaceCreateFlagsEXT flags_ = {} )
@@ -28362,8 +29215,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkIOSSurfaceCreateInfoMVK;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eIosSurfaceCreateInfoMVK;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eIosSurfaceCreateInfoMVK;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR IOSSurfaceCreateInfoMVK( VULKAN_HPP_NAMESPACE::IOSSurfaceCreateFlagsMVK flags_ = {},
@@ -28548,116 +29401,12 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::ImageBlit>::value,
                             "ImageBlit is not nothrow_move_constructible!" );
 
-  struct ImageCopy
-  {
-    using NativeType = VkImageCopy;
-
-#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
-    VULKAN_HPP_CONSTEXPR ImageCopy( VULKAN_HPP_NAMESPACE::ImageSubresourceLayers srcSubresource_ = {},
-                                    VULKAN_HPP_NAMESPACE::Offset3D               srcOffset_      = {},
-                                    VULKAN_HPP_NAMESPACE::ImageSubresourceLayers dstSubresource_ = {},
-                                    VULKAN_HPP_NAMESPACE::Offset3D               dstOffset_      = {},
-                                    VULKAN_HPP_NAMESPACE::Extent3D               extent_ = {} ) VULKAN_HPP_NOEXCEPT
-      : srcSubresource( srcSubresource_ )
-      , srcOffset( srcOffset_ )
-      , dstSubresource( dstSubresource_ )
-      , dstOffset( dstOffset_ )
-      , extent( extent_ )
-    {}
-
-    VULKAN_HPP_CONSTEXPR ImageCopy( ImageCopy const & rhs ) VULKAN_HPP_NOEXCEPT = default;
-
-    ImageCopy( VkImageCopy const & rhs ) VULKAN_HPP_NOEXCEPT : ImageCopy( *reinterpret_cast<ImageCopy const *>( &rhs ) )
-    {}
-#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
-
-    ImageCopy & operator=( ImageCopy const & rhs ) VULKAN_HPP_NOEXCEPT = default;
-
-    ImageCopy & operator=( VkImageCopy const & rhs ) VULKAN_HPP_NOEXCEPT
-    {
-      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::ImageCopy const *>( &rhs );
-      return *this;
-    }
-
-#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
-    ImageCopy &
-      setSrcSubresource( VULKAN_HPP_NAMESPACE::ImageSubresourceLayers const & srcSubresource_ ) VULKAN_HPP_NOEXCEPT
-    {
-      srcSubresource = srcSubresource_;
-      return *this;
-    }
-
-    ImageCopy & setSrcOffset( VULKAN_HPP_NAMESPACE::Offset3D const & srcOffset_ ) VULKAN_HPP_NOEXCEPT
-    {
-      srcOffset = srcOffset_;
-      return *this;
-    }
-
-    ImageCopy &
-      setDstSubresource( VULKAN_HPP_NAMESPACE::ImageSubresourceLayers const & dstSubresource_ ) VULKAN_HPP_NOEXCEPT
-    {
-      dstSubresource = dstSubresource_;
-      return *this;
-    }
-
-    ImageCopy & setDstOffset( VULKAN_HPP_NAMESPACE::Offset3D const & dstOffset_ ) VULKAN_HPP_NOEXCEPT
-    {
-      dstOffset = dstOffset_;
-      return *this;
-    }
-
-    ImageCopy & setExtent( VULKAN_HPP_NAMESPACE::Extent3D const & extent_ ) VULKAN_HPP_NOEXCEPT
-    {
-      extent = extent_;
-      return *this;
-    }
-#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
-
-    operator VkImageCopy const &() const VULKAN_HPP_NOEXCEPT
-    {
-      return *reinterpret_cast<const VkImageCopy *>( this );
-    }
-
-    operator VkImageCopy &() VULKAN_HPP_NOEXCEPT
-    {
-      return *reinterpret_cast<VkImageCopy *>( this );
-    }
-
-#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
-    auto operator<=>( ImageCopy const & ) const = default;
-#else
-    bool operator==( ImageCopy const & rhs ) const VULKAN_HPP_NOEXCEPT
-    {
-      return ( srcSubresource == rhs.srcSubresource ) && ( srcOffset == rhs.srcOffset ) &&
-             ( dstSubresource == rhs.dstSubresource ) && ( dstOffset == rhs.dstOffset ) && ( extent == rhs.extent );
-    }
-
-    bool operator!=( ImageCopy const & rhs ) const VULKAN_HPP_NOEXCEPT
-    {
-      return !operator==( rhs );
-    }
-#endif
-
-  public:
-    VULKAN_HPP_NAMESPACE::ImageSubresourceLayers srcSubresource = {};
-    VULKAN_HPP_NAMESPACE::Offset3D               srcOffset      = {};
-    VULKAN_HPP_NAMESPACE::ImageSubresourceLayers dstSubresource = {};
-    VULKAN_HPP_NAMESPACE::Offset3D               dstOffset      = {};
-    VULKAN_HPP_NAMESPACE::Extent3D               extent         = {};
-  };
-  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::ImageCopy ) == sizeof( VkImageCopy ),
-                            "struct and wrapper have different size!" );
-  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::ImageCopy>::value,
-                            "struct wrapper is not a standard layout!" );
-  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::ImageCopy>::value,
-                            "ImageCopy is not nothrow_move_constructible!" );
-
   struct ImageCreateInfo
   {
     using NativeType = VkImageCreateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImageCreateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eImageCreateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR ImageCreateInfo(
@@ -28889,6 +29638,400 @@ namespace VULKAN_HPP_NAMESPACE
     using Type = ImageCreateInfo;
   };
 
+#if defined( VK_USE_PLATFORM_FUCHSIA )
+  struct ImageFormatConstraintsInfoFUCHSIA
+  {
+    using NativeType = VkImageFormatConstraintsInfoFUCHSIA;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
+      StructureType::eImageFormatConstraintsInfoFUCHSIA;
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR ImageFormatConstraintsInfoFUCHSIA(
+      VULKAN_HPP_NAMESPACE::ImageCreateInfo                    imageCreateInfo_        = {},
+      VULKAN_HPP_NAMESPACE::FormatFeatureFlags                 requiredFormatFeatures_ = {},
+      VULKAN_HPP_NAMESPACE::ImageFormatConstraintsFlagsFUCHSIA flags_                  = {},
+      uint64_t                                                 sysmemPixelFormat_      = {},
+      uint32_t                                                 colorSpaceCount_        = {},
+      const VULKAN_HPP_NAMESPACE::SysmemColorSpaceFUCHSIA *    pColorSpaces_           = {} ) VULKAN_HPP_NOEXCEPT
+      : imageCreateInfo( imageCreateInfo_ )
+      , requiredFormatFeatures( requiredFormatFeatures_ )
+      , flags( flags_ )
+      , sysmemPixelFormat( sysmemPixelFormat_ )
+      , colorSpaceCount( colorSpaceCount_ )
+      , pColorSpaces( pColorSpaces_ )
+    {}
+
+    VULKAN_HPP_CONSTEXPR
+      ImageFormatConstraintsInfoFUCHSIA( ImageFormatConstraintsInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ImageFormatConstraintsInfoFUCHSIA( VkImageFormatConstraintsInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT
+      : ImageFormatConstraintsInfoFUCHSIA( *reinterpret_cast<ImageFormatConstraintsInfoFUCHSIA const *>( &rhs ) )
+    {}
+#  endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    ImageFormatConstraintsInfoFUCHSIA &
+      operator=( ImageFormatConstraintsInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ImageFormatConstraintsInfoFUCHSIA & operator=( VkImageFormatConstraintsInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::ImageFormatConstraintsInfoFUCHSIA const *>( &rhs );
+      return *this;
+    }
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    ImageFormatConstraintsInfoFUCHSIA & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    ImageFormatConstraintsInfoFUCHSIA &
+      setImageCreateInfo( VULKAN_HPP_NAMESPACE::ImageCreateInfo const & imageCreateInfo_ ) VULKAN_HPP_NOEXCEPT
+    {
+      imageCreateInfo = imageCreateInfo_;
+      return *this;
+    }
+
+    ImageFormatConstraintsInfoFUCHSIA &
+      setRequiredFormatFeatures( VULKAN_HPP_NAMESPACE::FormatFeatureFlags requiredFormatFeatures_ ) VULKAN_HPP_NOEXCEPT
+    {
+      requiredFormatFeatures = requiredFormatFeatures_;
+      return *this;
+    }
+
+    ImageFormatConstraintsInfoFUCHSIA &
+      setFlags( VULKAN_HPP_NAMESPACE::ImageFormatConstraintsFlagsFUCHSIA flags_ ) VULKAN_HPP_NOEXCEPT
+    {
+      flags = flags_;
+      return *this;
+    }
+
+    ImageFormatConstraintsInfoFUCHSIA & setSysmemPixelFormat( uint64_t sysmemPixelFormat_ ) VULKAN_HPP_NOEXCEPT
+    {
+      sysmemPixelFormat = sysmemPixelFormat_;
+      return *this;
+    }
+
+    ImageFormatConstraintsInfoFUCHSIA & setColorSpaceCount( uint32_t colorSpaceCount_ ) VULKAN_HPP_NOEXCEPT
+    {
+      colorSpaceCount = colorSpaceCount_;
+      return *this;
+    }
+
+    ImageFormatConstraintsInfoFUCHSIA &
+      setPColorSpaces( const VULKAN_HPP_NAMESPACE::SysmemColorSpaceFUCHSIA * pColorSpaces_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pColorSpaces = pColorSpaces_;
+      return *this;
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkImageFormatConstraintsInfoFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkImageFormatConstraintsInfoFUCHSIA *>( this );
+    }
+
+    operator VkImageFormatConstraintsInfoFUCHSIA &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkImageFormatConstraintsInfoFUCHSIA *>( this );
+    }
+
+#  if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( ImageFormatConstraintsInfoFUCHSIA const & ) const = default;
+#  else
+    bool operator==( ImageFormatConstraintsInfoFUCHSIA const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( imageCreateInfo == rhs.imageCreateInfo ) &&
+             ( requiredFormatFeatures == rhs.requiredFormatFeatures ) && ( flags == rhs.flags ) &&
+             ( sysmemPixelFormat == rhs.sysmemPixelFormat ) && ( colorSpaceCount == rhs.colorSpaceCount ) &&
+             ( pColorSpaces == rhs.pColorSpaces );
+    }
+
+    bool operator!=( ImageFormatConstraintsInfoFUCHSIA const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#  endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType                      sType = StructureType::eImageFormatConstraintsInfoFUCHSIA;
+    const void *                                             pNext = {};
+    VULKAN_HPP_NAMESPACE::ImageCreateInfo                    imageCreateInfo        = {};
+    VULKAN_HPP_NAMESPACE::FormatFeatureFlags                 requiredFormatFeatures = {};
+    VULKAN_HPP_NAMESPACE::ImageFormatConstraintsFlagsFUCHSIA flags                  = {};
+    uint64_t                                                 sysmemPixelFormat      = {};
+    uint32_t                                                 colorSpaceCount        = {};
+    const VULKAN_HPP_NAMESPACE::SysmemColorSpaceFUCHSIA *    pColorSpaces           = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::ImageFormatConstraintsInfoFUCHSIA ) ==
+                              sizeof( VkImageFormatConstraintsInfoFUCHSIA ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::ImageFormatConstraintsInfoFUCHSIA>::value,
+                            "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT(
+    std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::ImageFormatConstraintsInfoFUCHSIA>::value,
+    "ImageFormatConstraintsInfoFUCHSIA is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::eImageFormatConstraintsInfoFUCHSIA>
+  {
+    using Type = ImageFormatConstraintsInfoFUCHSIA;
+  };
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
+
+#if defined( VK_USE_PLATFORM_FUCHSIA )
+  struct ImageConstraintsInfoFUCHSIA
+  {
+    using NativeType = VkImageConstraintsInfoFUCHSIA;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eImageConstraintsInfoFUCHSIA;
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR ImageConstraintsInfoFUCHSIA(
+      uint32_t                                                        formatConstraintsCount_      = {},
+      const VULKAN_HPP_NAMESPACE::ImageFormatConstraintsInfoFUCHSIA * pFormatConstraints_          = {},
+      VULKAN_HPP_NAMESPACE::BufferCollectionConstraintsInfoFUCHSIA    bufferCollectionConstraints_ = {},
+      VULKAN_HPP_NAMESPACE::ImageConstraintsInfoFlagsFUCHSIA          flags_ = {} ) VULKAN_HPP_NOEXCEPT
+      : formatConstraintsCount( formatConstraintsCount_ )
+      , pFormatConstraints( pFormatConstraints_ )
+      , bufferCollectionConstraints( bufferCollectionConstraints_ )
+      , flags( flags_ )
+    {}
+
+    VULKAN_HPP_CONSTEXPR
+      ImageConstraintsInfoFUCHSIA( ImageConstraintsInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ImageConstraintsInfoFUCHSIA( VkImageConstraintsInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT
+      : ImageConstraintsInfoFUCHSIA( *reinterpret_cast<ImageConstraintsInfoFUCHSIA const *>( &rhs ) )
+    {}
+
+#    if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
+    ImageConstraintsInfoFUCHSIA(
+      VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<
+        const VULKAN_HPP_NAMESPACE::ImageFormatConstraintsInfoFUCHSIA> const & formatConstraints_,
+      VULKAN_HPP_NAMESPACE::BufferCollectionConstraintsInfoFUCHSIA             bufferCollectionConstraints_ = {},
+      VULKAN_HPP_NAMESPACE::ImageConstraintsInfoFlagsFUCHSIA                   flags_                       = {} )
+      : formatConstraintsCount( static_cast<uint32_t>( formatConstraints_.size() ) )
+      , pFormatConstraints( formatConstraints_.data() )
+      , bufferCollectionConstraints( bufferCollectionConstraints_ )
+      , flags( flags_ )
+    {}
+#    endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+#  endif   /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    ImageConstraintsInfoFUCHSIA & operator=( ImageConstraintsInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ImageConstraintsInfoFUCHSIA & operator=( VkImageConstraintsInfoFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::ImageConstraintsInfoFUCHSIA const *>( &rhs );
+      return *this;
+    }
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    ImageConstraintsInfoFUCHSIA & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    ImageConstraintsInfoFUCHSIA & setFormatConstraintsCount( uint32_t formatConstraintsCount_ ) VULKAN_HPP_NOEXCEPT
+    {
+      formatConstraintsCount = formatConstraintsCount_;
+      return *this;
+    }
+
+    ImageConstraintsInfoFUCHSIA & setPFormatConstraints(
+      const VULKAN_HPP_NAMESPACE::ImageFormatConstraintsInfoFUCHSIA * pFormatConstraints_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pFormatConstraints = pFormatConstraints_;
+      return *this;
+    }
+
+#    if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
+    ImageConstraintsInfoFUCHSIA & setFormatConstraints(
+      VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries<
+        const VULKAN_HPP_NAMESPACE::ImageFormatConstraintsInfoFUCHSIA> const & formatConstraints_ ) VULKAN_HPP_NOEXCEPT
+    {
+      formatConstraintsCount = static_cast<uint32_t>( formatConstraints_.size() );
+      pFormatConstraints     = formatConstraints_.data();
+      return *this;
+    }
+#    endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
+
+    ImageConstraintsInfoFUCHSIA & setBufferCollectionConstraints(
+      VULKAN_HPP_NAMESPACE::BufferCollectionConstraintsInfoFUCHSIA const & bufferCollectionConstraints_ )
+      VULKAN_HPP_NOEXCEPT
+    {
+      bufferCollectionConstraints = bufferCollectionConstraints_;
+      return *this;
+    }
+
+    ImageConstraintsInfoFUCHSIA &
+      setFlags( VULKAN_HPP_NAMESPACE::ImageConstraintsInfoFlagsFUCHSIA flags_ ) VULKAN_HPP_NOEXCEPT
+    {
+      flags = flags_;
+      return *this;
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkImageConstraintsInfoFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkImageConstraintsInfoFUCHSIA *>( this );
+    }
+
+    operator VkImageConstraintsInfoFUCHSIA &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkImageConstraintsInfoFUCHSIA *>( this );
+    }
+
+#  if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( ImageConstraintsInfoFUCHSIA const & ) const = default;
+#  else
+    bool operator==( ImageConstraintsInfoFUCHSIA const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) &&
+             ( formatConstraintsCount == rhs.formatConstraintsCount ) &&
+             ( pFormatConstraints == rhs.pFormatConstraints ) &&
+             ( bufferCollectionConstraints == rhs.bufferCollectionConstraints ) && ( flags == rhs.flags );
+    }
+
+    bool operator!=( ImageConstraintsInfoFUCHSIA const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#  endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType                             sType = StructureType::eImageConstraintsInfoFUCHSIA;
+    const void *                                                    pNext = {};
+    uint32_t                                                        formatConstraintsCount      = {};
+    const VULKAN_HPP_NAMESPACE::ImageFormatConstraintsInfoFUCHSIA * pFormatConstraints          = {};
+    VULKAN_HPP_NAMESPACE::BufferCollectionConstraintsInfoFUCHSIA    bufferCollectionConstraints = {};
+    VULKAN_HPP_NAMESPACE::ImageConstraintsInfoFlagsFUCHSIA          flags                       = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::ImageConstraintsInfoFUCHSIA ) ==
+                              sizeof( VkImageConstraintsInfoFUCHSIA ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::ImageConstraintsInfoFUCHSIA>::value,
+                            "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT(
+    std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::ImageConstraintsInfoFUCHSIA>::value,
+    "ImageConstraintsInfoFUCHSIA is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::eImageConstraintsInfoFUCHSIA>
+  {
+    using Type = ImageConstraintsInfoFUCHSIA;
+  };
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
+
+  struct ImageCopy
+  {
+    using NativeType = VkImageCopy;
+
+#if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR ImageCopy( VULKAN_HPP_NAMESPACE::ImageSubresourceLayers srcSubresource_ = {},
+                                    VULKAN_HPP_NAMESPACE::Offset3D               srcOffset_      = {},
+                                    VULKAN_HPP_NAMESPACE::ImageSubresourceLayers dstSubresource_ = {},
+                                    VULKAN_HPP_NAMESPACE::Offset3D               dstOffset_      = {},
+                                    VULKAN_HPP_NAMESPACE::Extent3D               extent_ = {} ) VULKAN_HPP_NOEXCEPT
+      : srcSubresource( srcSubresource_ )
+      , srcOffset( srcOffset_ )
+      , dstSubresource( dstSubresource_ )
+      , dstOffset( dstOffset_ )
+      , extent( extent_ )
+    {}
+
+    VULKAN_HPP_CONSTEXPR ImageCopy( ImageCopy const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ImageCopy( VkImageCopy const & rhs ) VULKAN_HPP_NOEXCEPT : ImageCopy( *reinterpret_cast<ImageCopy const *>( &rhs ) )
+    {}
+#endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    ImageCopy & operator=( ImageCopy const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ImageCopy & operator=( VkImageCopy const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::ImageCopy const *>( &rhs );
+      return *this;
+    }
+
+#if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    ImageCopy &
+      setSrcSubresource( VULKAN_HPP_NAMESPACE::ImageSubresourceLayers const & srcSubresource_ ) VULKAN_HPP_NOEXCEPT
+    {
+      srcSubresource = srcSubresource_;
+      return *this;
+    }
+
+    ImageCopy & setSrcOffset( VULKAN_HPP_NAMESPACE::Offset3D const & srcOffset_ ) VULKAN_HPP_NOEXCEPT
+    {
+      srcOffset = srcOffset_;
+      return *this;
+    }
+
+    ImageCopy &
+      setDstSubresource( VULKAN_HPP_NAMESPACE::ImageSubresourceLayers const & dstSubresource_ ) VULKAN_HPP_NOEXCEPT
+    {
+      dstSubresource = dstSubresource_;
+      return *this;
+    }
+
+    ImageCopy & setDstOffset( VULKAN_HPP_NAMESPACE::Offset3D const & dstOffset_ ) VULKAN_HPP_NOEXCEPT
+    {
+      dstOffset = dstOffset_;
+      return *this;
+    }
+
+    ImageCopy & setExtent( VULKAN_HPP_NAMESPACE::Extent3D const & extent_ ) VULKAN_HPP_NOEXCEPT
+    {
+      extent = extent_;
+      return *this;
+    }
+#endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkImageCopy const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkImageCopy *>( this );
+    }
+
+    operator VkImageCopy &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkImageCopy *>( this );
+    }
+
+#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( ImageCopy const & ) const = default;
+#else
+    bool operator==( ImageCopy const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ( srcSubresource == rhs.srcSubresource ) && ( srcOffset == rhs.srcOffset ) &&
+             ( dstSubresource == rhs.dstSubresource ) && ( dstOffset == rhs.dstOffset ) && ( extent == rhs.extent );
+    }
+
+    bool operator!=( ImageCopy const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::ImageSubresourceLayers srcSubresource = {};
+    VULKAN_HPP_NAMESPACE::Offset3D               srcOffset      = {};
+    VULKAN_HPP_NAMESPACE::ImageSubresourceLayers dstSubresource = {};
+    VULKAN_HPP_NAMESPACE::Offset3D               dstOffset      = {};
+    VULKAN_HPP_NAMESPACE::Extent3D               extent         = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::ImageCopy ) == sizeof( VkImageCopy ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::ImageCopy>::value,
+                            "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::ImageCopy>::value,
+                            "ImageCopy is not nothrow_move_constructible!" );
+
   struct SubresourceLayout
   {
     using NativeType = VkSubresourceLayout;
@@ -28964,7 +30107,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkImageDrmFormatModifierExplicitCreateInfoEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eImageDrmFormatModifierExplicitCreateInfoEXT;
 
@@ -29102,7 +30245,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkImageDrmFormatModifierListCreateInfoEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eImageDrmFormatModifierListCreateInfoEXT;
 
@@ -29225,7 +30368,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkImageDrmFormatModifierPropertiesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eImageDrmFormatModifierPropertiesEXT;
 
@@ -29300,8 +30443,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkImageFormatListCreateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImageFormatListCreateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eImageFormatListCreateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -29416,8 +30559,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkImageFormatProperties2;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImageFormatProperties2;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eImageFormatProperties2;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR ImageFormatProperties2(
@@ -29488,8 +30631,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkImageMemoryBarrier;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImageMemoryBarrier;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eImageMemoryBarrier;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -29640,8 +30783,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkImageMemoryRequirementsInfo2;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImageMemoryRequirementsInfo2;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eImageMemoryRequirementsInfo2;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR ImageMemoryRequirementsInfo2( VULKAN_HPP_NAMESPACE::Image image_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -29728,7 +30871,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkImagePipeSurfaceCreateInfoFUCHSIA;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eImagepipeSurfaceCreateInfoFUCHSIA;
 
@@ -29829,7 +30972,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkImagePlaneMemoryRequirementsInfo;
 
-    static const bool                    allowDuplicate              = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImagePlaneMemoryRequirementsInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
@@ -30025,8 +31168,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkImageResolve2KHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImageResolve2KHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eImageResolve2KHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR ImageResolve2KHR( VULKAN_HPP_NAMESPACE::ImageSubresourceLayers srcSubresource_ = {},
@@ -30148,7 +31291,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkImageSparseMemoryRequirementsInfo2;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eImageSparseMemoryRequirementsInfo2;
 
@@ -30239,8 +31382,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkImageStencilUsageCreateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImageStencilUsageCreateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eImageStencilUsageCreateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -30328,8 +31471,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkImageSwapchainCreateInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImageSwapchainCreateInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eImageSwapchainCreateInfoKHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -30415,8 +31558,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkImageViewASTCDecodeModeEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImageViewAstcDecodeModeEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eImageViewAstcDecodeModeEXT;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR ImageViewASTCDecodeModeEXT(
@@ -30501,8 +31644,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkImageViewAddressPropertiesNVX;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImageViewAddressPropertiesNVX;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eImageViewAddressPropertiesNVX;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -30579,8 +31722,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkImageViewCreateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImageViewCreateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eImageViewCreateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -30712,8 +31855,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkImageViewHandleInfoNVX;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImageViewHandleInfoNVX;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eImageViewHandleInfoNVX;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR ImageViewHandleInfoNVX(
@@ -30817,8 +31960,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkImageViewUsageCreateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImageViewUsageCreateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eImageViewUsageCreateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -30904,7 +32047,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkImportAndroidHardwareBufferInfoANDROID;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eImportAndroidHardwareBufferInfoANDROID;
 
@@ -30997,8 +32140,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkImportFenceFdInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImportFenceFdInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eImportFenceFdInfoKHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR ImportFenceFdInfoKHR( VULKAN_HPP_NAMESPACE::Fence                           fence_ = {},
@@ -31112,8 +32255,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkImportFenceWin32HandleInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImportFenceWin32HandleInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eImportFenceWin32HandleInfoKHR;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -31237,12 +32380,115 @@ namespace VULKAN_HPP_NAMESPACE
   };
 #endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
+#if defined( VK_USE_PLATFORM_FUCHSIA )
+  struct ImportMemoryBufferCollectionFUCHSIA
+  {
+    using NativeType = VkImportMemoryBufferCollectionFUCHSIA;
+
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
+      StructureType::eImportMemoryBufferCollectionFUCHSIA;
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
+    VULKAN_HPP_CONSTEXPR
+      ImportMemoryBufferCollectionFUCHSIA( VULKAN_HPP_NAMESPACE::BufferCollectionFUCHSIA collection_ = {},
+                                           uint32_t index_ = {} ) VULKAN_HPP_NOEXCEPT
+      : collection( collection_ )
+      , index( index_ )
+    {}
+
+    VULKAN_HPP_CONSTEXPR ImportMemoryBufferCollectionFUCHSIA( ImportMemoryBufferCollectionFUCHSIA const & rhs )
+      VULKAN_HPP_NOEXCEPT = default;
+
+    ImportMemoryBufferCollectionFUCHSIA( VkImportMemoryBufferCollectionFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT
+      : ImportMemoryBufferCollectionFUCHSIA( *reinterpret_cast<ImportMemoryBufferCollectionFUCHSIA const *>( &rhs ) )
+    {}
+#  endif /*VULKAN_HPP_NO_STRUCT_CONSTRUCTORS*/
+
+    ImportMemoryBufferCollectionFUCHSIA &
+      operator=( ImportMemoryBufferCollectionFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT = default;
+
+    ImportMemoryBufferCollectionFUCHSIA &
+      operator=( VkImportMemoryBufferCollectionFUCHSIA const & rhs ) VULKAN_HPP_NOEXCEPT
+    {
+      *this = *reinterpret_cast<VULKAN_HPP_NAMESPACE::ImportMemoryBufferCollectionFUCHSIA const *>( &rhs );
+      return *this;
+    }
+
+#  if !defined( VULKAN_HPP_NO_STRUCT_SETTERS )
+    ImportMemoryBufferCollectionFUCHSIA & setPNext( const void * pNext_ ) VULKAN_HPP_NOEXCEPT
+    {
+      pNext = pNext_;
+      return *this;
+    }
+
+    ImportMemoryBufferCollectionFUCHSIA &
+      setCollection( VULKAN_HPP_NAMESPACE::BufferCollectionFUCHSIA collection_ ) VULKAN_HPP_NOEXCEPT
+    {
+      collection = collection_;
+      return *this;
+    }
+
+    ImportMemoryBufferCollectionFUCHSIA & setIndex( uint32_t index_ ) VULKAN_HPP_NOEXCEPT
+    {
+      index = index_;
+      return *this;
+    }
+#  endif /*VULKAN_HPP_NO_STRUCT_SETTERS*/
+
+    operator VkImportMemoryBufferCollectionFUCHSIA const &() const VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<const VkImportMemoryBufferCollectionFUCHSIA *>( this );
+    }
+
+    operator VkImportMemoryBufferCollectionFUCHSIA &() VULKAN_HPP_NOEXCEPT
+    {
+      return *reinterpret_cast<VkImportMemoryBufferCollectionFUCHSIA *>( this );
+    }
+
+#  if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+    auto operator<=>( ImportMemoryBufferCollectionFUCHSIA const & ) const = default;
+#  else
+    bool operator==( ImportMemoryBufferCollectionFUCHSIA const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ( sType == rhs.sType ) && ( pNext == rhs.pNext ) && ( collection == rhs.collection ) &&
+             ( index == rhs.index );
+    }
+
+    bool operator!=( ImportMemoryBufferCollectionFUCHSIA const & rhs ) const VULKAN_HPP_NOEXCEPT
+    {
+      return !operator==( rhs );
+    }
+#  endif
+
+  public:
+    VULKAN_HPP_NAMESPACE::StructureType           sType      = StructureType::eImportMemoryBufferCollectionFUCHSIA;
+    const void *                                  pNext      = {};
+    VULKAN_HPP_NAMESPACE::BufferCollectionFUCHSIA collection = {};
+    uint32_t                                      index      = {};
+  };
+  VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::ImportMemoryBufferCollectionFUCHSIA ) ==
+                              sizeof( VkImportMemoryBufferCollectionFUCHSIA ),
+                            "struct and wrapper have different size!" );
+  VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::ImportMemoryBufferCollectionFUCHSIA>::value,
+                            "struct wrapper is not a standard layout!" );
+  VULKAN_HPP_STATIC_ASSERT(
+    std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::ImportMemoryBufferCollectionFUCHSIA>::value,
+    "ImportMemoryBufferCollectionFUCHSIA is not nothrow_move_constructible!" );
+
+  template <>
+  struct CppType<StructureType, StructureType::eImportMemoryBufferCollectionFUCHSIA>
+  {
+    using Type = ImportMemoryBufferCollectionFUCHSIA;
+  };
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
+
   struct ImportMemoryFdInfoKHR
   {
     using NativeType = VkImportMemoryFdInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImportMemoryFdInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eImportMemoryFdInfoKHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR ImportMemoryFdInfoKHR( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType_ =
@@ -31336,8 +32582,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkImportMemoryHostPointerInfoEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImportMemoryHostPointerInfoEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eImportMemoryHostPointerInfoEXT;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -31438,8 +32684,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkImportMemoryWin32HandleInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImportMemoryWin32HandleInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eImportMemoryWin32HandleInfoKHR;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -31550,8 +32796,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkImportMemoryWin32HandleInfoNV;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImportMemoryWin32HandleInfoNV;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eImportMemoryWin32HandleInfoNV;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -31651,7 +32897,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkImportMemoryZirconHandleInfoFUCHSIA;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eImportMemoryZirconHandleInfoFUCHSIA;
 
@@ -31755,8 +33001,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkImportSemaphoreFdInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eImportSemaphoreFdInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eImportSemaphoreFdInfoKHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -31872,7 +33118,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkImportSemaphoreWin32HandleInfoKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eImportSemaphoreWin32HandleInfoKHR;
 
@@ -32005,7 +33251,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkImportSemaphoreZirconHandleInfoFUCHSIA;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eImportSemaphoreZirconHandleInfoFUCHSIA;
 
@@ -32132,8 +33378,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkIndirectCommandsLayoutTokenNV;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eIndirectCommandsLayoutTokenNV;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eIndirectCommandsLayoutTokenNV;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -32405,7 +33651,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkIndirectCommandsLayoutCreateInfoNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eIndirectCommandsLayoutCreateInfoNV;
 
@@ -32583,7 +33829,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkInitializePerformanceApiInfoINTEL;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eInitializePerformanceApiInfoINTEL;
 
@@ -32763,8 +34009,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkInstanceCreateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eInstanceCreateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eInstanceCreateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR InstanceCreateInfo( VULKAN_HPP_NAMESPACE::InstanceCreateFlags     flags_                 = {},
@@ -33003,8 +34249,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkMacOSSurfaceCreateInfoMVK;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eMacosSurfaceCreateInfoMVK;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eMacosSurfaceCreateInfoMVK;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR MacOSSurfaceCreateInfoMVK( VULKAN_HPP_NAMESPACE::MacOSSurfaceCreateFlagsMVK flags_ = {},
@@ -33098,8 +34344,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkMappedMemoryRange;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eMappedMemoryRange;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eMappedMemoryRange;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR MappedMemoryRange( VULKAN_HPP_NAMESPACE::DeviceMemory memory_ = {},
@@ -33200,8 +34446,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkMemoryAllocateFlagsInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eMemoryAllocateFlagsInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eMemoryAllocateFlagsInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR MemoryAllocateFlagsInfo( VULKAN_HPP_NAMESPACE::MemoryAllocateFlags flags_ = {},
@@ -33295,8 +34541,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkMemoryAllocateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eMemoryAllocateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eMemoryAllocateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR MemoryAllocateInfo( VULKAN_HPP_NAMESPACE::DeviceSize allocationSize_ = {},
@@ -33388,8 +34634,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkMemoryBarrier;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eMemoryBarrier;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eMemoryBarrier;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR MemoryBarrier( VULKAN_HPP_NAMESPACE::AccessFlags srcAccessMask_ = {},
@@ -33481,8 +34727,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkMemoryDedicatedAllocateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eMemoryDedicatedAllocateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eMemoryDedicatedAllocateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR MemoryDedicatedAllocateInfo( VULKAN_HPP_NAMESPACE::Image  image_  = {},
@@ -33577,8 +34823,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkMemoryDedicatedRequirements;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eMemoryDedicatedRequirements;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eMemoryDedicatedRequirements;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -33656,8 +34902,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkMemoryFdPropertiesKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eMemoryFdPropertiesKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eMemoryFdPropertiesKHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR MemoryFdPropertiesKHR( uint32_t memoryTypeBits_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -33726,7 +34972,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkMemoryGetAndroidHardwareBufferInfoANDROID;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eMemoryGetAndroidHardwareBufferInfoANDROID;
 
@@ -33821,8 +35067,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkMemoryGetFdInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eMemoryGetFdInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eMemoryGetFdInfoKHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -33918,8 +35164,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkMemoryGetRemoteAddressInfoNV;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eMemoryGetRemoteAddressInfoNV;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eMemoryGetRemoteAddressInfoNV;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR MemoryGetRemoteAddressInfoNV(
@@ -34019,8 +35265,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkMemoryGetWin32HandleInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eMemoryGetWin32HandleInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eMemoryGetWin32HandleInfoKHR;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR MemoryGetWin32HandleInfoKHR(
@@ -34121,7 +35367,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkMemoryGetZirconHandleInfoFUCHSIA;
 
-    static const bool                    allowDuplicate              = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eMemoryGetZirconHandleInfoFUCHSIA;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
@@ -34284,8 +35530,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkMemoryHostPointerPropertiesEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eMemoryHostPointerPropertiesEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eMemoryHostPointerPropertiesEXT;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR MemoryHostPointerPropertiesEXT( uint32_t memoryTypeBits_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -34357,7 +35603,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkMemoryOpaqueCaptureAddressAllocateInfo;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eMemoryOpaqueCaptureAddressAllocateInfo;
 
@@ -34451,8 +35697,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkMemoryPriorityAllocateInfoEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eMemoryPriorityAllocateInfoEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eMemoryPriorityAllocateInfoEXT;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR MemoryPriorityAllocateInfoEXT( float priority_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -34602,8 +35848,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkMemoryRequirements2;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eMemoryRequirements2;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eMemoryRequirements2;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -34735,8 +35981,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkMemoryWin32HandlePropertiesKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eMemoryWin32HandlePropertiesKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eMemoryWin32HandlePropertiesKHR;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR MemoryWin32HandlePropertiesKHR( uint32_t memoryTypeBits_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -34810,7 +36056,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkMemoryZirconHandlePropertiesFUCHSIA;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eMemoryZirconHandlePropertiesFUCHSIA;
 
@@ -34887,8 +36133,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkMetalSurfaceCreateInfoEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eMetalSurfaceCreateInfoEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eMetalSurfaceCreateInfoEXT;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR MetalSurfaceCreateInfoEXT( VULKAN_HPP_NAMESPACE::MetalSurfaceCreateFlagsEXT flags_ = {},
@@ -35142,8 +36388,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkMultisamplePropertiesEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eMultisamplePropertiesEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eMultisamplePropertiesEXT;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -35315,7 +36561,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkMutableDescriptorTypeCreateInfoVALVE;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eMutableDescriptorTypeCreateInfoVALVE;
 
@@ -35514,7 +36760,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPerformanceConfigurationAcquireInfoINTEL;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePerformanceConfigurationAcquireInfoINTEL;
 
@@ -35610,7 +36856,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPerformanceCounterDescriptionKHR;
 
-    static const bool                    allowDuplicate              = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePerformanceCounterDescriptionKHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
@@ -35694,8 +36940,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPerformanceCounterKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePerformanceCounterKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePerformanceCounterKHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR_14 PerformanceCounterKHR(
@@ -35863,8 +37109,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPerformanceMarkerInfoINTEL;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePerformanceMarkerInfoINTEL;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePerformanceMarkerInfoINTEL;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR PerformanceMarkerInfoINTEL( uint64_t marker_ = {} ) VULKAN_HPP_NOEXCEPT : marker( marker_ ) {}
@@ -35946,8 +37192,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPerformanceOverrideInfoINTEL;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePerformanceOverrideInfoINTEL;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePerformanceOverrideInfoINTEL;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -36055,8 +37301,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPerformanceQuerySubmitInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePerformanceQuerySubmitInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePerformanceQuerySubmitInfoKHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR PerformanceQuerySubmitInfoKHR( uint32_t counterPassIndex_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -36142,7 +37388,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPerformanceStreamMarkerInfoINTEL;
 
-    static const bool                    allowDuplicate              = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePerformanceStreamMarkerInfoINTEL;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
@@ -36373,7 +37619,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDevice16BitStorageFeatures;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDevice16BitStorageFeatures;
 
@@ -36499,7 +37745,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDevice4444FormatsFeaturesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDevice4444FormatsFeaturesEXT;
 
@@ -36601,7 +37847,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDevice8BitStorageFeatures;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDevice8BitStorageFeatures;
 
@@ -36715,7 +37961,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceASTCDecodeFeaturesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceAstcDecodeFeaturesEXT;
 
@@ -36807,7 +38053,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceAccelerationStructureFeaturesKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceAccelerationStructureFeaturesKHR;
 
@@ -36947,7 +38193,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceAccelerationStructurePropertiesKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceAccelerationStructurePropertiesKHR;
 
@@ -37056,7 +38302,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceBlendOperationAdvancedFeaturesEXT;
 
@@ -37151,7 +38397,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceBlendOperationAdvancedPropertiesEXT;
 
@@ -37252,7 +38498,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceBufferDeviceAddressFeatures;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceBufferDeviceAddressFeatures;
 
@@ -37369,7 +38615,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceBufferDeviceAddressFeaturesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceBufferDeviceAddressFeaturesEXT;
 
@@ -37486,7 +38732,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceCoherentMemoryFeaturesAMD;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceCoherentMemoryFeaturesAMD;
 
@@ -37579,7 +38825,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceColorWriteEnableFeaturesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceColorWriteEnableFeaturesEXT;
 
@@ -37672,7 +38918,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceComputeShaderDerivativesFeaturesNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceComputeShaderDerivativesFeaturesNV;
 
@@ -37778,7 +39024,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceConditionalRenderingFeaturesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceConditionalRenderingFeaturesEXT;
 
@@ -37883,7 +39129,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceConservativeRasterizationPropertiesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceConservativeRasterizationPropertiesEXT;
 
@@ -37996,7 +39242,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceCooperativeMatrixFeaturesNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceCooperativeMatrixFeaturesNV;
 
@@ -38101,7 +39347,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceCooperativeMatrixPropertiesNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceCooperativeMatrixPropertiesNV;
 
@@ -38181,7 +39427,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceCornerSampledImageFeaturesNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceCornerSampledImageFeaturesNV;
 
@@ -38275,7 +39521,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceCoverageReductionModeFeaturesNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceCoverageReductionModeFeaturesNV;
 
@@ -38369,7 +39615,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceCustomBorderColorFeaturesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceCustomBorderColorFeaturesEXT;
 
@@ -38474,7 +39720,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceCustomBorderColorPropertiesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceCustomBorderColorPropertiesEXT;
 
@@ -38554,7 +39800,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV;
 
@@ -38652,7 +39898,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceDepthClipEnableFeaturesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceDepthClipEnableFeaturesEXT;
 
@@ -38746,7 +39992,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceDepthStencilResolveProperties;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceDepthStencilResolveProperties;
 
@@ -38839,7 +40085,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceDescriptorIndexingFeatures;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceDescriptorIndexingFeatures;
 
@@ -39148,7 +40394,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceDescriptorIndexingProperties;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceDescriptorIndexingProperties;
 
@@ -39329,7 +40575,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceDeviceGeneratedCommandsFeaturesNV;
 
@@ -39424,7 +40670,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceDeviceGeneratedCommandsPropertiesNV;
 
@@ -39537,7 +40783,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceDeviceMemoryReportFeaturesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceDeviceMemoryReportFeaturesEXT;
 
@@ -39631,7 +40877,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceDiagnosticsConfigFeaturesNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceDiagnosticsConfigFeaturesNV;
 
@@ -39725,7 +40971,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceDiscardRectanglePropertiesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceDiscardRectanglePropertiesEXT;
 
@@ -39804,8 +41050,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceDriverProperties;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceDriverProperties;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceDriverProperties;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceDriverProperties(
@@ -39890,8 +41136,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceDrmPropertiesEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceDrmPropertiesEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceDrmPropertiesEXT;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR PhysicalDeviceDrmPropertiesEXT( VULKAN_HPP_NAMESPACE::Bool32 hasPrimary_   = {},
@@ -39981,7 +41227,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceExclusiveScissorFeaturesNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceExclusiveScissorFeaturesNV;
 
@@ -40074,7 +41320,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceExtendedDynamicState2FeaturesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceExtendedDynamicState2FeaturesEXT;
 
@@ -40191,7 +41437,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceExtendedDynamicStateFeaturesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceExtendedDynamicStateFeaturesEXT;
 
@@ -40285,7 +41531,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceExternalBufferInfo;
 
-    static const bool                    allowDuplicate              = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceExternalBufferInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
@@ -40396,8 +41642,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceExternalFenceInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceExternalFenceInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceExternalFenceInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR PhysicalDeviceExternalFenceInfo(
@@ -40488,7 +41734,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceExternalImageFormatInfo;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceExternalImageFormatInfo;
 
@@ -40583,7 +41829,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceExternalMemoryHostPropertiesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceExternalMemoryHostPropertiesEXT;
 
@@ -40663,7 +41909,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceExternalMemoryRDMAFeaturesNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceExternalMemoryRdmaFeaturesNV;
 
@@ -40757,7 +42003,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceExternalSemaphoreInfo;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceExternalSemaphoreInfo;
 
@@ -40851,8 +42097,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceFeatures2;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceFeatures2;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceFeatures2;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -40938,7 +42184,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceFloatControlsProperties;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceFloatControlsProperties;
 
@@ -41085,7 +42331,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceFragmentDensityMap2FeaturesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceFragmentDensityMap2FeaturesEXT;
 
@@ -41180,7 +42426,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceFragmentDensityMap2PropertiesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceFragmentDensityMap2PropertiesEXT;
 
@@ -41271,7 +42517,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceFragmentDensityMapFeaturesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceFragmentDensityMapFeaturesEXT;
 
@@ -41387,7 +42633,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceFragmentDensityMapPropertiesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceFragmentDensityMapPropertiesEXT;
 
@@ -41475,7 +42721,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceFragmentShaderBarycentricFeaturesNV;
 
@@ -41571,7 +42817,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceFragmentShaderInterlockFeaturesEXT;
 
@@ -41688,7 +42934,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceFragmentShadingRateEnumsFeaturesNV;
 
@@ -41805,7 +43051,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceFragmentShadingRateEnumsPropertiesNV;
 
@@ -41903,7 +43149,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceFragmentShadingRateFeaturesKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceFragmentShadingRateFeaturesKHR;
 
@@ -42020,7 +43266,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceFragmentShadingRateKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceFragmentShadingRateKHR;
 
@@ -42100,7 +43346,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceFragmentShadingRatePropertiesKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceFragmentShadingRatePropertiesKHR;
 
@@ -42250,7 +43496,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceGlobalPriorityQueryFeaturesEXT;
 
@@ -42344,8 +43590,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceGroupProperties;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceGroupProperties;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceGroupProperties;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceGroupProperties(
@@ -42427,7 +43673,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceHostQueryResetFeatures;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceHostQueryResetFeatures;
 
@@ -42519,8 +43765,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceIDProperties;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceIdProperties;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceIdProperties;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR_14
@@ -42606,7 +43852,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceImageDrmFormatModifierInfoEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceImageDrmFormatModifierInfoEXT;
 
@@ -42754,8 +44000,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceImageFormatInfo2;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceImageFormatInfo2;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceImageFormatInfo2;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR PhysicalDeviceImageFormatInfo2(
@@ -42880,7 +44126,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceImageRobustnessFeaturesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceImageRobustnessFeaturesEXT;
 
@@ -42974,7 +44220,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceImageViewImageFormatInfoEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceImageViewImageFormatInfoEXT;
 
@@ -43069,7 +44315,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceImagelessFramebufferFeatures;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceImagelessFramebufferFeatures;
 
@@ -43164,7 +44410,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceIndexTypeUint8FeaturesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceIndexTypeUint8FeaturesEXT;
 
@@ -43257,7 +44503,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceInheritedViewportScissorFeaturesNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceInheritedViewportScissorFeaturesNV;
 
@@ -43352,7 +44598,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceInlineUniformBlockFeaturesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceInlineUniformBlockFeaturesEXT;
 
@@ -43458,7 +44704,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceInlineUniformBlockPropertiesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceInlineUniformBlockPropertiesEXT;
 
@@ -43557,7 +44803,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceInvocationMaskFeaturesHUAWEI;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceInvocationMaskFeaturesHUAWEI;
 
@@ -44122,7 +45368,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceLineRasterizationFeaturesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceLineRasterizationFeaturesEXT;
 
@@ -44270,7 +45516,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceLineRasterizationPropertiesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceLineRasterizationPropertiesEXT;
 
@@ -44350,7 +45596,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceMaintenance3Properties;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceMaintenance3Properties;
 
@@ -44431,7 +45677,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceMemoryBudgetPropertiesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceMemoryBudgetPropertiesEXT;
 
@@ -44513,7 +45759,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceMemoryPriorityFeaturesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceMemoryPriorityFeaturesEXT;
 
@@ -44679,8 +45925,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceMemoryProperties2;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceMemoryProperties2;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceMemoryProperties2;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceMemoryProperties2(
@@ -44754,7 +46000,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceMeshShaderFeaturesNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceMeshShaderFeaturesNV;
 
@@ -44854,7 +46100,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceMeshShaderPropertiesNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceMeshShaderPropertiesNV;
 
@@ -44979,7 +46225,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceMultiDrawFeaturesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceMultiDrawFeaturesEXT;
 
@@ -45069,7 +46315,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceMultiDrawPropertiesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceMultiDrawPropertiesEXT;
 
@@ -45144,8 +46390,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceMultiviewFeatures;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceMultiviewFeatures;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceMultiviewFeatures;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR PhysicalDeviceMultiviewFeatures(
@@ -45255,7 +46501,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceMultiviewPerViewAttributesPropertiesNVX;
 
@@ -45337,7 +46583,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceMultiviewProperties;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceMultiviewProperties;
 
@@ -45418,7 +46664,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceMutableDescriptorTypeFeaturesVALVE;
 
@@ -45512,7 +46758,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDevicePCIBusInfoPropertiesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDevicePciBusInfoPropertiesEXT;
 
@@ -45598,7 +46844,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDevicePageableDeviceLocalMemoryFeaturesEXT;
 
@@ -45694,7 +46940,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDevicePerformanceQueryFeaturesKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDevicePerformanceQueryFeaturesKHR;
 
@@ -45800,7 +47046,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDevicePerformanceQueryPropertiesKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDevicePerformanceQueryPropertiesKHR;
 
@@ -45880,7 +47126,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDevicePipelineCreationCacheControlFeaturesEXT;
 
@@ -45977,7 +47223,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDevicePipelineExecutablePropertiesFeaturesKHR;
 
@@ -46074,7 +47320,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDevicePointClippingProperties;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDevicePointClippingProperties;
 
@@ -46155,7 +47401,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDevicePortabilitySubsetFeaturesKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDevicePortabilitySubsetFeaturesKHR;
 
@@ -46402,7 +47648,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDevicePortabilitySubsetPropertiesKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDevicePortabilitySubsetPropertiesKHR;
 
@@ -46498,7 +47744,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDevicePresentIdFeaturesKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDevicePresentIdFeaturesKHR;
 
@@ -46588,7 +47834,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDevicePresentWaitFeaturesKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDevicePresentWaitFeaturesKHR;
 
@@ -46679,7 +47925,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDevicePrimitiveTopologyListRestartFeaturesEXT;
 
@@ -46787,7 +48033,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDevicePrivateDataFeaturesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDevicePrivateDataFeaturesEXT;
 
@@ -47045,8 +48291,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceProperties2;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceProperties2;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceProperties2;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR_14
@@ -47118,7 +48364,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceProtectedMemoryFeatures;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceProtectedMemoryFeatures;
 
@@ -47210,7 +48456,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceProtectedMemoryProperties;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceProtectedMemoryProperties;
 
@@ -47288,7 +48534,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceProvokingVertexFeaturesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceProvokingVertexFeaturesEXT;
 
@@ -47393,7 +48639,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceProvokingVertexPropertiesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceProvokingVertexPropertiesEXT;
 
@@ -47478,7 +48724,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDevicePushDescriptorPropertiesKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDevicePushDescriptorPropertiesKHR;
 
@@ -47557,7 +48803,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceRayQueryFeaturesKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceRayQueryFeaturesKHR;
 
@@ -47646,7 +48892,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceRayTracingMotionBlurFeaturesNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceRayTracingMotionBlurFeaturesNV;
 
@@ -47751,7 +48997,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceRayTracingPipelineFeaturesKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceRayTracingPipelineFeaturesKHR;
 
@@ -47891,7 +49137,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceRayTracingPipelinePropertiesKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceRayTracingPipelinePropertiesKHR;
 
@@ -47999,7 +49245,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceRayTracingPropertiesNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceRayTracingPropertiesNV;
 
@@ -48102,7 +49348,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceRepresentativeFragmentTestFeaturesNV;
 
@@ -48198,7 +49444,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceRobustness2FeaturesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceRobustness2FeaturesEXT;
 
@@ -48310,7 +49556,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceRobustness2PropertiesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceRobustness2PropertiesEXT;
 
@@ -48393,7 +49639,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceSampleLocationsPropertiesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceSampleLocationsPropertiesEXT;
 
@@ -48489,7 +49735,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceSamplerFilterMinmaxProperties;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceSamplerFilterMinmaxProperties;
 
@@ -48574,7 +49820,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceSamplerYcbcrConversionFeatures;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceSamplerYcbcrConversionFeatures;
 
@@ -48670,7 +49916,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceScalarBlockLayoutFeatures;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceScalarBlockLayoutFeatures;
 
@@ -48763,7 +50009,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceSeparateDepthStencilLayoutsFeatures;
 
@@ -48860,7 +50106,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceShaderAtomicFloat2FeaturesEXT;
 
@@ -49076,7 +50322,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceShaderAtomicFloatFeaturesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceShaderAtomicFloatFeaturesEXT;
 
@@ -49292,7 +50538,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceShaderAtomicInt64Features;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceShaderAtomicInt64Features;
 
@@ -49398,7 +50644,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceShaderClockFeaturesKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceShaderClockFeaturesKHR;
 
@@ -49500,7 +50746,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceShaderCoreProperties2AMD;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceShaderCoreProperties2AMD;
 
@@ -49582,7 +50828,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceShaderCorePropertiesAMD;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceShaderCorePropertiesAMD;
 
@@ -49706,7 +50952,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT;
 
@@ -49803,7 +51049,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceShaderDrawParametersFeatures;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceShaderDrawParametersFeatures;
 
@@ -49898,7 +51144,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceShaderFloat16Int8Features;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceShaderFloat16Int8Features;
 
@@ -50004,7 +51250,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceShaderImageAtomicInt64FeaturesEXT;
 
@@ -50110,7 +51356,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceShaderImageFootprintFeaturesNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceShaderImageFootprintFeaturesNV;
 
@@ -50203,7 +51449,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceShaderIntegerDotProductFeaturesKHR;
 
@@ -50298,7 +51544,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceShaderIntegerDotProductPropertiesKHR;
 
@@ -50796,7 +52042,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceShaderIntegerFunctions2FeaturesINTEL;
 
@@ -50892,7 +52138,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceShaderSMBuiltinsFeaturesNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceShaderSmBuiltinsFeaturesNV;
 
@@ -50985,7 +52231,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceShaderSMBuiltinsPropertiesNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceShaderSmBuiltinsPropertiesNV;
 
@@ -51068,7 +52314,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceShaderSubgroupExtendedTypesFeatures;
 
@@ -51165,7 +52411,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR;
 
@@ -51264,7 +52510,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceShaderTerminateInvocationFeaturesKHR;
 
@@ -51360,7 +52606,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceShadingRateImageFeaturesNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceShadingRateImageFeaturesNV;
 
@@ -51465,7 +52711,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceShadingRateImagePropertiesNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceShadingRateImagePropertiesNV;
 
@@ -51552,7 +52798,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceSparseImageFormatInfo2;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceSparseImageFormatInfo2;
 
@@ -51681,7 +52927,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceSubgroupProperties;
 
-    static const bool                    allowDuplicate              = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceSubgroupProperties;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
@@ -51766,7 +53012,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceSubgroupSizeControlFeaturesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceSubgroupSizeControlFeaturesEXT;
 
@@ -51871,7 +53117,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceSubgroupSizeControlPropertiesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceSubgroupSizeControlPropertiesEXT;
 
@@ -51962,7 +53208,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceSubpassShadingFeaturesHUAWEI;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceSubpassShadingFeaturesHUAWEI;
 
@@ -52055,7 +53301,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceSubpassShadingPropertiesHUAWEI;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceSubpassShadingPropertiesHUAWEI;
 
@@ -52135,8 +53381,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceSurfaceInfo2KHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceSurfaceInfo2KHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceSurfaceInfo2KHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -52223,7 +53469,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceSynchronization2FeaturesKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceSynchronization2FeaturesKHR;
 
@@ -52316,7 +53562,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceTexelBufferAlignmentFeaturesEXT;
 
@@ -52410,7 +53656,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceTexelBufferAlignmentPropertiesEXT;
 
@@ -52502,7 +53748,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceTextureCompressionAstcHdrFeaturesEXT;
 
@@ -52598,7 +53844,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceTimelineSemaphoreFeatures;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceTimelineSemaphoreFeatures;
 
@@ -52691,7 +53937,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceTimelineSemaphoreProperties;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceTimelineSemaphoreProperties;
 
@@ -52771,8 +54017,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceToolPropertiesEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceToolPropertiesEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceToolPropertiesEXT;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR_14 PhysicalDeviceToolPropertiesEXT(
@@ -52858,7 +54104,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceTransformFeedbackFeaturesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceTransformFeedbackFeaturesEXT;
 
@@ -52963,7 +54209,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceTransformFeedbackPropertiesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceTransformFeedbackPropertiesEXT;
 
@@ -53079,7 +54325,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceUniformBufferStandardLayoutFeatures;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceUniformBufferStandardLayoutFeatures;
 
@@ -53176,7 +54422,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceVariablePointersFeatures;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceVariablePointersFeatures;
 
@@ -53284,7 +54530,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceVertexAttributeDivisorFeaturesEXT;
 
@@ -53390,7 +54636,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceVertexAttributeDivisorPropertiesEXT;
 
@@ -53471,7 +54717,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceVertexInputDynamicStateFeaturesEXT;
 
@@ -53567,8 +54813,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoProfileKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eVideoProfileKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eVideoProfileKHR;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -53688,8 +54934,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoProfilesKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eVideoProfilesKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eVideoProfilesKHR;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -53784,7 +55030,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceVideoFormatInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceVideoFormatInfoKHR;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
@@ -53863,8 +55109,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceVulkan11Features;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceVulkan11Features;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceVulkan11Features;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -54071,7 +55317,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceVulkan11Properties;
 
-    static const bool                    allowDuplicate              = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceVulkan11Properties;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
@@ -54199,8 +55445,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceVulkan12Features;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceVulkan12Features;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePhysicalDeviceVulkan12Features;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR PhysicalDeviceVulkan12Features(
@@ -54793,7 +56039,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceVulkan12Properties;
 
-    static const bool                    allowDuplicate              = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePhysicalDeviceVulkan12Properties;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
@@ -55087,7 +56333,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceVulkanMemoryModelFeatures;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceVulkanMemoryModelFeatures;
 
@@ -55203,7 +56449,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR;
 
@@ -55333,7 +56579,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT;
 
@@ -55427,7 +56673,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceYcbcrImageArraysFeaturesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceYcbcrImageArraysFeaturesEXT;
 
@@ -55520,7 +56766,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR;
 
@@ -55617,8 +56863,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineCacheCreateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineCacheCreateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePipelineCacheCreateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR PipelineCacheCreateInfo( VULKAN_HPP_NAMESPACE::PipelineCacheCreateFlags flags_           = {},
@@ -55852,7 +57098,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineColorBlendAdvancedStateCreateInfoEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePipelineColorBlendAdvancedStateCreateInfoEXT;
 
@@ -55968,8 +57214,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineColorWriteCreateInfoEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineColorWriteCreateInfoEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePipelineColorWriteCreateInfoEXT;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR PipelineColorWriteCreateInfoEXT(
@@ -56086,7 +57332,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineCompilerControlCreateInfoAMD;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePipelineCompilerControlCreateInfoAMD;
 
@@ -56177,7 +57423,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineCoverageModulationStateCreateInfoNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePipelineCoverageModulationStateCreateInfoNV;
 
@@ -56341,7 +57587,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineCoverageReductionStateCreateInfoNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePipelineCoverageReductionStateCreateInfoNV;
 
@@ -56448,7 +57694,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineCoverageToColorStateCreateInfoNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePipelineCoverageToColorStateCreateInfoNV;
 
@@ -56629,7 +57875,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineCreationFeedbackCreateInfoEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePipelineCreationFeedbackCreateInfoEXT;
 
@@ -56766,7 +58012,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineDiscardRectangleStateCreateInfoEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePipelineDiscardRectangleStateCreateInfoEXT;
 
@@ -56917,8 +58163,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineExecutableInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineExecutableInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePipelineExecutableInfoKHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR PipelineExecutableInfoKHR( VULKAN_HPP_NAMESPACE::Pipeline pipeline_ = {},
@@ -57012,7 +58258,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineExecutableInternalRepresentationKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePipelineExecutableInternalRepresentationKHR;
 
@@ -57119,8 +58365,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineExecutablePropertiesKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineExecutablePropertiesKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePipelineExecutablePropertiesKHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR_14
@@ -57278,8 +58524,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineExecutableStatisticKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineExecutableStatisticKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePipelineExecutableStatisticKHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     PipelineExecutableStatisticKHR( std::array<char, VK_MAX_DESCRIPTION_SIZE> const &          name_        = {},
@@ -57348,7 +58594,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineFragmentShadingRateEnumStateCreateInfoNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePipelineFragmentShadingRateEnumStateCreateInfoNV;
 
@@ -57469,7 +58715,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineFragmentShadingRateStateCreateInfoKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePipelineFragmentShadingRateStateCreateInfoKHR;
 
@@ -57576,8 +58822,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePipelineInfoKHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR PipelineInfoKHR( VULKAN_HPP_NAMESPACE::Pipeline pipeline_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -57743,8 +58989,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineLayoutCreateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineLayoutCreateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePipelineLayoutCreateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR PipelineLayoutCreateInfo(
@@ -57906,8 +59152,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineLibraryCreateInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePipelineLibraryCreateInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePipelineLibraryCreateInfoKHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -58022,7 +59268,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineRasterizationConservativeStateCreateInfoEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePipelineRasterizationConservativeStateCreateInfoEXT;
 
@@ -58141,7 +59387,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineRasterizationDepthClipStateCreateInfoEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePipelineRasterizationDepthClipStateCreateInfoEXT;
 
@@ -58246,7 +59492,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineRasterizationLineStateCreateInfoEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePipelineRasterizationLineStateCreateInfoEXT;
 
@@ -58375,7 +59621,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineRasterizationProvokingVertexStateCreateInfoEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePipelineRasterizationProvokingVertexStateCreateInfoEXT;
 
@@ -58473,7 +59719,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineRasterizationStateRasterizationOrderAMD;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePipelineRasterizationStateRasterizationOrderAMD;
 
@@ -58569,7 +59815,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineRasterizationStateStreamCreateInfoEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePipelineRasterizationStateStreamCreateInfoEXT;
 
@@ -58674,7 +59920,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineRepresentativeFragmentTestStateCreateInfoNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePipelineRepresentativeFragmentTestStateCreateInfoNV;
 
@@ -58770,7 +60016,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineSampleLocationsStateCreateInfoEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePipelineSampleLocationsStateCreateInfoEXT;
 
@@ -58876,7 +60122,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePipelineShaderStageRequiredSubgroupSizeCreateInfoEXT;
 
@@ -58956,7 +60202,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineTessellationDomainOriginStateCreateInfo;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePipelineTessellationDomainOriginStateCreateInfo;
 
@@ -59134,7 +60380,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineVertexInputDivisorStateCreateInfoEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePipelineVertexInputDivisorStateCreateInfoEXT;
 
@@ -59263,7 +60509,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineViewportCoarseSampleOrderStateCreateInfoNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePipelineViewportCoarseSampleOrderStateCreateInfoNV;
 
@@ -59404,7 +60650,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineViewportExclusiveScissorStateCreateInfoNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePipelineViewportExclusiveScissorStateCreateInfoNV;
 
@@ -59627,7 +60873,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineViewportShadingRateImageStateCreateInfoNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePipelineViewportShadingRateImageStateCreateInfoNV;
 
@@ -59863,7 +61109,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineViewportSwizzleStateCreateInfoNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePipelineViewportSwizzleStateCreateInfoNV;
 
@@ -60073,7 +61319,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPipelineViewportWScalingStateCreateInfoNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::ePipelineViewportWScalingStateCreateInfoNV;
 
@@ -60211,8 +61457,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPresentFrameTokenGGP;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePresentFrameTokenGGP;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePresentFrameTokenGGP;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR PresentFrameTokenGGP( GgpFrameToken frameToken_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -60296,8 +61542,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPresentIdKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePresentIdKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePresentIdKHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR PresentIdKHR( uint32_t         swapchainCount_ = {},
@@ -60405,8 +61651,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPresentInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePresentInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePresentInfoKHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR PresentInfoKHR( uint32_t                                   waitSemaphoreCount_ = {},
@@ -60799,8 +62045,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPresentRegionsKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePresentRegionsKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePresentRegionsKHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -60986,8 +62232,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPresentTimesInfoGOOGLE;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePresentTimesInfoGOOGLE;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePresentTimesInfoGOOGLE;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -61099,8 +62345,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkPrivateDataSlotCreateInfoEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::ePrivateDataSlotCreateInfoEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::ePrivateDataSlotCreateInfoEXT;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR PrivateDataSlotCreateInfoEXT( VULKAN_HPP_NAMESPACE::PrivateDataSlotCreateFlagsEXT flags_ = {} )
@@ -61186,8 +62432,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkProtectedSubmitInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eProtectedSubmitInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eProtectedSubmitInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR ProtectedSubmitInfo( VULKAN_HPP_NAMESPACE::Bool32 protectedSubmit_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -61269,8 +62515,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkQueryPoolCreateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eQueryPoolCreateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eQueryPoolCreateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR QueryPoolCreateInfo(
@@ -61383,7 +62629,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkQueryPoolPerformanceCreateInfoKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eQueryPoolPerformanceCreateInfoKHR;
 
@@ -61510,7 +62756,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkQueryPoolPerformanceQueryCreateInfoINTEL;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eQueryPoolPerformanceQueryCreateInfoINTEL;
 
@@ -61608,7 +62854,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkQueueFamilyCheckpointProperties2NV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eQueueFamilyCheckpointProperties2NV;
 
@@ -61685,7 +62931,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkQueueFamilyCheckpointPropertiesNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eQueueFamilyCheckpointPropertiesNV;
 
@@ -61761,7 +63007,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkQueueFamilyGlobalPriorityPropertiesEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eQueueFamilyGlobalPriorityPropertiesEXT;
 
@@ -61952,8 +63198,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkQueueFamilyProperties2;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eQueueFamilyProperties2;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eQueueFamilyProperties2;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR QueueFamilyProperties2(
@@ -62024,7 +63270,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkRayTracingShaderGroupCreateInfoKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eRayTracingShaderGroupCreateInfoKHR;
 
@@ -62166,7 +63412,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkRayTracingPipelineInterfaceCreateInfoKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eRayTracingPipelineInterfaceCreateInfoKHR;
 
@@ -62272,8 +63518,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkRayTracingPipelineCreateInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eRayTracingPipelineCreateInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eRayTracingPipelineCreateInfoKHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR RayTracingPipelineCreateInfoKHR(
@@ -62522,7 +63768,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkRayTracingShaderGroupCreateInfoNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eRayTracingShaderGroupCreateInfoNV;
 
@@ -62652,8 +63898,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkRayTracingPipelineCreateInfoNV;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eRayTracingPipelineCreateInfoNV;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eRayTracingPipelineCreateInfoNV;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -62923,8 +64169,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkRenderPassAttachmentBeginInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eRenderPassAttachmentBeginInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eRenderPassAttachmentBeginInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -63041,8 +64287,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkRenderPassBeginInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eRenderPassBeginInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eRenderPassBeginInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR_14
@@ -63550,8 +64796,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkRenderPassCreateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eRenderPassCreateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eRenderPassCreateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -63746,8 +64992,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkSubpassDescription2;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSubpassDescription2;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eSubpassDescription2;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR SubpassDescription2(
@@ -64014,8 +65260,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkSubpassDependency2;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSubpassDependency2;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eSubpassDependency2;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR SubpassDependency2( uint32_t                                 srcSubpass_      = {},
@@ -64166,8 +65412,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkRenderPassCreateInfo2;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eRenderPassCreateInfo2;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eRenderPassCreateInfo2;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR RenderPassCreateInfo2( VULKAN_HPP_NAMESPACE::RenderPassCreateFlags flags_                 = {},
@@ -64395,7 +65641,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkRenderPassFragmentDensityMapCreateInfoEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eRenderPassFragmentDensityMapCreateInfoEXT;
 
@@ -64490,7 +65736,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkRenderPassInputAttachmentAspectCreateInfo;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eRenderPassInputAttachmentAspectCreateInfo;
 
@@ -64616,8 +65862,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkRenderPassMultiviewCreateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eRenderPassMultiviewCreateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eRenderPassMultiviewCreateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR RenderPassMultiviewCreateInfo( uint32_t         subpassCount_         = {},
@@ -64875,7 +66121,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkRenderPassSampleLocationsBeginInfoEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eRenderPassSampleLocationsBeginInfoEXT;
 
@@ -65037,7 +66283,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkRenderPassTransformBeginInfoQCOM;
 
-    static const bool                    allowDuplicate              = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eRenderPassTransformBeginInfoQCOM;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
@@ -65127,8 +66373,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkResolveImageInfo2KHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eResolveImageInfo2KHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eResolveImageInfo2KHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR ResolveImageInfo2KHR(
@@ -65286,8 +66532,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkSamplerCreateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSamplerCreateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eSamplerCreateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR SamplerCreateInfo(
@@ -65513,7 +66759,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkSamplerCustomBorderColorCreateInfoEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eSamplerCustomBorderColorCreateInfoEXT;
 
@@ -65600,8 +66846,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkSamplerReductionModeCreateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSamplerReductionModeCreateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eSamplerReductionModeCreateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR SamplerReductionModeCreateInfo(
@@ -65692,7 +66938,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkSamplerYcbcrConversionCreateInfo;
 
-    static const bool                    allowDuplicate              = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSamplerYcbcrConversionCreateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
@@ -65855,7 +67101,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkSamplerYcbcrConversionImageFormatProperties;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eSamplerYcbcrConversionImageFormatProperties;
 
@@ -65936,8 +67182,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkSamplerYcbcrConversionInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSamplerYcbcrConversionInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eSamplerYcbcrConversionInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -66025,8 +67271,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkScreenSurfaceCreateInfoQNX;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eScreenSurfaceCreateInfoQNX;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eScreenSurfaceCreateInfoQNX;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR ScreenSurfaceCreateInfoQNX( VULKAN_HPP_NAMESPACE::ScreenSurfaceCreateFlagsQNX flags_   = {},
@@ -66131,8 +67377,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkSemaphoreCreateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSemaphoreCreateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eSemaphoreCreateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -66215,8 +67461,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkSemaphoreGetFdInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSemaphoreGetFdInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eSemaphoreGetFdInfoKHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR SemaphoreGetFdInfoKHR( VULKAN_HPP_NAMESPACE::Semaphore semaphore_ = {},
@@ -66313,8 +67559,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkSemaphoreGetWin32HandleInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSemaphoreGetWin32HandleInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eSemaphoreGetWin32HandleInfoKHR;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR SemaphoreGetWin32HandleInfoKHR(
@@ -66416,7 +67662,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkSemaphoreGetZirconHandleInfoFUCHSIA;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eSemaphoreGetZirconHandleInfoFUCHSIA;
 
@@ -66520,8 +67766,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkSemaphoreSignalInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSemaphoreSignalInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eSemaphoreSignalInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR SemaphoreSignalInfo( VULKAN_HPP_NAMESPACE::Semaphore semaphore_ = {},
@@ -66614,8 +67860,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkSemaphoreSubmitInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSemaphoreSubmitInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eSemaphoreSubmitInfoKHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR SemaphoreSubmitInfoKHR( VULKAN_HPP_NAMESPACE::Semaphore              semaphore_ = {},
@@ -66726,8 +67972,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkSemaphoreTypeCreateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSemaphoreTypeCreateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eSemaphoreTypeCreateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR SemaphoreTypeCreateInfo(
@@ -66822,8 +68068,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkSemaphoreWaitInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSemaphoreWaitInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eSemaphoreWaitInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR SemaphoreWaitInfo( VULKAN_HPP_NAMESPACE::SemaphoreWaitFlags flags_          = {},
@@ -67046,8 +68292,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkShaderModuleCreateInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eShaderModuleCreateInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eShaderModuleCreateInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR ShaderModuleCreateInfo( VULKAN_HPP_NAMESPACE::ShaderModuleCreateFlags flags_    = {},
@@ -67166,7 +68412,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkShaderModuleValidationCacheCreateInfoEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eShaderModuleValidationCacheCreateInfoEXT;
 
@@ -67416,7 +68662,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkSharedPresentSurfaceCapabilitiesKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eSharedPresentSurfaceCapabilitiesKHR;
 
@@ -67561,8 +68807,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkSparseImageFormatProperties2;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSparseImageFormatProperties2;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eSparseImageFormatProperties2;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR SparseImageFormatProperties2(
@@ -67712,8 +68958,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkSparseImageMemoryRequirements2;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSparseImageMemoryRequirements2;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eSparseImageMemoryRequirements2;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR SparseImageMemoryRequirements2(
@@ -67788,7 +69034,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkStreamDescriptorSurfaceCreateInfoGGP;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eStreamDescriptorSurfaceCreateInfoGGP;
 
@@ -67981,8 +69227,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkSubmitInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSubmitInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eSubmitInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -68196,8 +69442,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkSubmitInfo2KHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSubmitInfo2KHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eSubmitInfo2KHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR SubmitInfo2KHR(
@@ -68395,8 +69641,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkSubpassBeginInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSubpassBeginInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eSubpassBeginInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR SubpassBeginInfo( VULKAN_HPP_NAMESPACE::SubpassContents contents_ =
@@ -68480,7 +69726,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkSubpassDescriptionDepthStencilResolve;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eSubpassDescriptionDepthStencilResolve;
 
@@ -68595,8 +69841,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkSubpassEndInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSubpassEndInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eSubpassEndInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR SubpassEndInfo() VULKAN_HPP_NOEXCEPT {}
@@ -68670,7 +69916,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkSubpassShadingPipelineCreateInfoHUAWEI;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eSubpassShadingPipelineCreateInfoHUAWEI;
 
@@ -68751,8 +69997,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkSurfaceCapabilities2EXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSurfaceCapabilities2EXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eSurfaceCapabilities2EXT;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR SurfaceCapabilities2EXT(
@@ -68955,8 +70201,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkSurfaceCapabilities2KHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSurfaceCapabilities2KHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eSurfaceCapabilities2KHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR SurfaceCapabilities2KHR(
@@ -69027,7 +70273,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkSurfaceCapabilitiesFullScreenExclusiveEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eSurfaceCapabilitiesFullScreenExclusiveEXT;
 
@@ -69186,8 +70432,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkSurfaceFormat2KHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSurfaceFormat2KHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eSurfaceFormat2KHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -69257,7 +70503,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkSurfaceFullScreenExclusiveInfoEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eSurfaceFullScreenExclusiveInfoEXT;
 
@@ -69351,7 +70597,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkSurfaceFullScreenExclusiveWin32InfoEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eSurfaceFullScreenExclusiveWin32InfoEXT;
 
@@ -69443,8 +70689,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkSurfaceProtectedCapabilitiesKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSurfaceProtectedCapabilitiesKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eSurfaceProtectedCapabilitiesKHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -69532,8 +70778,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkSwapchainCounterCreateInfoEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSwapchainCounterCreateInfoEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eSwapchainCounterCreateInfoEXT;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR SwapchainCounterCreateInfoEXT(
@@ -69621,8 +70867,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkSwapchainCreateInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eSwapchainCreateInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eSwapchainCreateInfoKHR;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR SwapchainCreateInfoKHR(
@@ -69904,7 +71150,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkSwapchainDisplayNativeHdrCreateInfoAMD;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eSwapchainDisplayNativeHdrCreateInfoAMD;
 
@@ -69996,7 +71242,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkTextureLODGatherFormatPropertiesAMD;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eTextureLodGatherFormatPropertiesAMD;
 
@@ -70073,8 +71319,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkTimelineSemaphoreSubmitInfo;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eTimelineSemaphoreSubmitInfo;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eTimelineSemaphoreSubmitInfo;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -70316,8 +71562,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkValidationCacheCreateInfoEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eValidationCacheCreateInfoEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eValidationCacheCreateInfoEXT;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR ValidationCacheCreateInfoEXT( VULKAN_HPP_NAMESPACE::ValidationCacheCreateFlagsEXT flags_ = {},
@@ -70441,8 +71687,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkValidationFeaturesEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eValidationFeaturesEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eValidationFeaturesEXT;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR ValidationFeaturesEXT(
@@ -70595,8 +71841,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkValidationFlagsEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eValidationFlagsEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eValidationFlagsEXT;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR ValidationFlagsEXT(
@@ -70711,7 +71957,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVertexInputAttributeDescription2EXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eVertexInputAttributeDescription2EXT;
 
@@ -70829,7 +72075,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVertexInputBindingDescription2EXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eVertexInputBindingDescription2EXT;
 
@@ -70948,8 +72194,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkViSurfaceCreateInfoNN;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eViSurfaceCreateInfoNN;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eViSurfaceCreateInfoNN;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR ViSurfaceCreateInfoNN( VULKAN_HPP_NAMESPACE::ViSurfaceCreateFlagsNN flags_ = {},
@@ -71042,8 +72288,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoPictureResourceKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eVideoPictureResourceKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eVideoPictureResourceKHR;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -71159,8 +72405,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoReferenceSlotKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eVideoReferenceSlotKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eVideoReferenceSlotKHR;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR VideoReferenceSlotKHR(
@@ -71256,8 +72502,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoBeginCodingInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eVideoBeginCodingInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eVideoBeginCodingInfoKHR;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR VideoBeginCodingInfoKHR(
@@ -71422,8 +72668,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoBindMemoryKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eVideoBindMemoryKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eVideoBindMemoryKHR;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR VideoBindMemoryKHR( uint32_t                           memoryBindIndex_ = {},
@@ -71535,8 +72781,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoCapabilitiesKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eVideoCapabilitiesKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eVideoCapabilitiesKHR;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR VideoCapabilitiesKHR( VULKAN_HPP_NAMESPACE::VideoCapabilityFlagsKHR capabilityFlags_      = {},
@@ -71633,8 +72879,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoCodingControlInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eVideoCodingControlInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eVideoCodingControlInfoKHR;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -71721,8 +72967,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoDecodeH264CapabilitiesEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eVideoDecodeH264CapabilitiesEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eVideoDecodeH264CapabilitiesEXT;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR_14 VideoDecodeH264CapabilitiesEXT(
@@ -71805,8 +73051,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoDecodeH264DpbSlotInfoEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eVideoDecodeH264DpbSlotInfoEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eVideoDecodeH264DpbSlotInfoEXT;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR VideoDecodeH264DpbSlotInfoEXT(
@@ -71896,8 +73142,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoDecodeH264MvcEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eVideoDecodeH264MvcEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eVideoDecodeH264MvcEXT;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR VideoDecodeH264MvcEXT( const StdVideoDecodeH264Mvc * pStdMvc_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -71981,8 +73227,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoDecodeH264PictureInfoEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eVideoDecodeH264PictureInfoEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eVideoDecodeH264PictureInfoEXT;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR VideoDecodeH264PictureInfoEXT( const StdVideoDecodeH264PictureInfo * pStdPictureInfo_ = {},
@@ -72110,8 +73356,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoDecodeH264ProfileEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eVideoDecodeH264ProfileEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eVideoDecodeH264ProfileEXT;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR VideoDecodeH264ProfileEXT(
@@ -72210,7 +73456,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoDecodeH264SessionCreateInfoEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eVideoDecodeH264SessionCreateInfoEXT;
 
@@ -72314,7 +73560,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoDecodeH264SessionParametersAddInfoEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eVideoDecodeH264SessionParametersAddInfoEXT;
 
@@ -72472,7 +73718,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoDecodeH264SessionParametersCreateInfoEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eVideoDecodeH264SessionParametersCreateInfoEXT;
 
@@ -72588,8 +73834,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoDecodeH265CapabilitiesEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eVideoDecodeH265CapabilitiesEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eVideoDecodeH265CapabilitiesEXT;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR_14 VideoDecodeH265CapabilitiesEXT(
@@ -72667,8 +73913,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoDecodeH265DpbSlotInfoEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eVideoDecodeH265DpbSlotInfoEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eVideoDecodeH265DpbSlotInfoEXT;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR VideoDecodeH265DpbSlotInfoEXT(
@@ -72758,8 +74004,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoDecodeH265PictureInfoEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eVideoDecodeH265PictureInfoEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eVideoDecodeH265PictureInfoEXT;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR VideoDecodeH265PictureInfoEXT( StdVideoDecodeH265PictureInfo * pStdPictureInfo_ = {},
@@ -72887,8 +74133,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoDecodeH265ProfileEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eVideoDecodeH265ProfileEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eVideoDecodeH265ProfileEXT;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR VideoDecodeH265ProfileEXT( StdVideoH265ProfileIdc stdProfileIdc_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -72975,7 +74221,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoDecodeH265SessionCreateInfoEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eVideoDecodeH265SessionCreateInfoEXT;
 
@@ -73079,7 +74325,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoDecodeH265SessionParametersAddInfoEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eVideoDecodeH265SessionParametersAddInfoEXT;
 
@@ -73237,7 +74483,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoDecodeH265SessionParametersCreateInfoEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eVideoDecodeH265SessionParametersCreateInfoEXT;
 
@@ -73353,8 +74599,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoDecodeInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eVideoDecodeInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eVideoDecodeInfoKHR;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR VideoDecodeInfoKHR(
@@ -73564,8 +74810,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoEncodeH264CapabilitiesEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eVideoEncodeH264CapabilitiesEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eVideoEncodeH264CapabilitiesEXT;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR_14 VideoEncodeH264CapabilitiesEXT(
@@ -73757,8 +75003,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoEncodeH264DpbSlotInfoEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eVideoEncodeH264DpbSlotInfoEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eVideoEncodeH264DpbSlotInfoEXT;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -73858,7 +75104,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoEncodeH264EmitPictureParametersEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eVideoEncodeH264EmitPictureParametersEXT;
 
@@ -74004,8 +75250,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoEncodeH264NaluSliceEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eVideoEncodeH264NaluSliceEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eVideoEncodeH264NaluSliceEXT;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR VideoEncodeH264NaluSliceEXT(
@@ -74218,8 +75464,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoEncodeH264ProfileEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eVideoEncodeH264ProfileEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eVideoEncodeH264ProfileEXT;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR VideoEncodeH264ProfileEXT( StdVideoH264ProfileIdc stdProfileIdc_ = {} ) VULKAN_HPP_NOEXCEPT
@@ -74306,7 +75552,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoEncodeH264SessionCreateInfoEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eVideoEncodeH264SessionCreateInfoEXT;
 
@@ -74420,7 +75666,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoEncodeH264SessionParametersAddInfoEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eVideoEncodeH264SessionParametersAddInfoEXT;
 
@@ -74578,7 +75824,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoEncodeH264SessionParametersCreateInfoEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eVideoEncodeH264SessionParametersCreateInfoEXT;
 
@@ -74694,8 +75940,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoEncodeH264VclFrameInfoEXT;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eVideoEncodeH264VclFrameInfoEXT;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eVideoEncodeH264VclFrameInfoEXT;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR VideoEncodeH264VclFrameInfoEXT(
@@ -74902,8 +76148,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoEncodeInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eVideoEncodeInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eVideoEncodeInfoKHR;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR VideoEncodeInfoKHR(
@@ -75116,8 +76362,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoEncodeRateControlInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eVideoEncodeRateControlInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eVideoEncodeRateControlInfoKHR;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -75269,8 +76515,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoEndCodingInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eVideoEndCodingInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eVideoEndCodingInfoKHR;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR
@@ -75355,8 +76601,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoFormatPropertiesKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eVideoFormatPropertiesKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eVideoFormatPropertiesKHR;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR VideoFormatPropertiesKHR(
@@ -75428,8 +76674,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoGetMemoryPropertiesKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eVideoGetMemoryPropertiesKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eVideoGetMemoryPropertiesKHR;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR VideoGetMemoryPropertiesKHR(
@@ -75528,8 +76774,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoQueueFamilyProperties2KHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eVideoQueueFamilyProperties2KHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eVideoQueueFamilyProperties2KHR;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR VideoQueueFamilyProperties2KHR(
@@ -75619,8 +76865,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoSessionCreateInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eVideoSessionCreateInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eVideoSessionCreateInfoKHR;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR VideoSessionCreateInfoKHR(
@@ -75780,7 +77026,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoSessionParametersCreateInfoKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eVideoSessionParametersCreateInfoKHR;
 
@@ -75885,7 +77131,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkVideoSessionParametersUpdateInfoKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eVideoSessionParametersUpdateInfoKHR;
 
@@ -75976,8 +77222,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkWaylandSurfaceCreateInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eWaylandSurfaceCreateInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eWaylandSurfaceCreateInfoKHR;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR WaylandSurfaceCreateInfoKHR( VULKAN_HPP_NAMESPACE::WaylandSurfaceCreateFlagsKHR flags_   = {},
@@ -76084,7 +77330,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkWin32KeyedMutexAcquireReleaseInfoKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eWin32KeyedMutexAcquireReleaseInfoKHR;
 
@@ -76341,7 +77587,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkWin32KeyedMutexAcquireReleaseInfoNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eWin32KeyedMutexAcquireReleaseInfoNV;
 
@@ -76601,8 +77847,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkWin32SurfaceCreateInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eWin32SurfaceCreateInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eWin32SurfaceCreateInfoKHR;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR Win32SurfaceCreateInfoKHR( VULKAN_HPP_NAMESPACE::Win32SurfaceCreateFlagsKHR flags_     = {},
@@ -76706,8 +77952,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkWriteDescriptorSet;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eWriteDescriptorSet;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eWriteDescriptorSet;
 
 #if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR WriteDescriptorSet(
@@ -76749,9 +77995,9 @@ namespace VULKAN_HPP_NAMESPACE
       : dstSet( dstSet_ )
       , dstBinding( dstBinding_ )
       , dstArrayElement( dstArrayElement_ )
-      , descriptorCount( static_cast<uint32_t>( !imageInfo_.empty() ? imageInfo_.size()
-                                                                    : !bufferInfo_.empty() ? bufferInfo_.size()
-                                                                                           : texelBufferView_.size() ) )
+      , descriptorCount( static_cast<uint32_t>( !imageInfo_.empty()    ? imageInfo_.size()
+                                                : !bufferInfo_.empty() ? bufferInfo_.size()
+                                                                       : texelBufferView_.size() ) )
       , descriptorType( descriptorType_ )
       , pImageInfo( imageInfo_.data() )
       , pBufferInfo( bufferInfo_.data() )
@@ -76928,7 +78174,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkWriteDescriptorSetAccelerationStructureKHR;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eWriteDescriptorSetAccelerationStructureKHR;
 
@@ -77054,7 +78300,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkWriteDescriptorSetAccelerationStructureNV;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eWriteDescriptorSetAccelerationStructureNV;
 
@@ -77180,7 +78426,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkWriteDescriptorSetInlineUniformBlockEXT;
 
-    static const bool                    allowDuplicate = false;
+    static const bool                                  allowDuplicate = false;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType =
       StructureType::eWriteDescriptorSetInlineUniformBlockEXT;
 
@@ -77299,8 +78545,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkXcbSurfaceCreateInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eXcbSurfaceCreateInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eXcbSurfaceCreateInfoKHR;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR XcbSurfaceCreateInfoKHR( VULKAN_HPP_NAMESPACE::XcbSurfaceCreateFlagsKHR flags_      = {},
@@ -77404,8 +78650,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using NativeType = VkXlibSurfaceCreateInfoKHR;
 
-    static const bool                    allowDuplicate              = false;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType = StructureType::eXlibSurfaceCreateInfoKHR;
+    static const bool                                  allowDuplicate = false;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR StructureType structureType  = StructureType::eXlibSurfaceCreateInfoKHR;
 
 #  if !defined( VULKAN_HPP_NO_STRUCT_CONSTRUCTORS )
     VULKAN_HPP_CONSTEXPR XlibSurfaceCreateInfoKHR( VULKAN_HPP_NAMESPACE::XlibSurfaceCreateFlagsKHR flags_ = {},
