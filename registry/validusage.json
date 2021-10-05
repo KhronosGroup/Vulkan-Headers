@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.2.194",
-    "comment": "from git branch: github-main commit: a0960966d565bdfc6e853a0bc471e58fdbd374ef",
-    "date": "2021-09-28 12:49:58Z"
+    "api version": "1.2.195",
+    "comment": "from git branch: github-main commit: 9dc6dfbb7aea0999f4108ad0faeee099d0adb173",
+    "date": "2021-10-05 10:43:05Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -238,7 +238,7 @@
         },
         {
           "vuid": "VUID-VkPhysicalDeviceProperties2-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkPhysicalDeviceAccelerationStructurePropertiesKHR\">VkPhysicalDeviceAccelerationStructurePropertiesKHR</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT\">VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceConservativeRasterizationPropertiesEXT\">VkPhysicalDeviceConservativeRasterizationPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixPropertiesNV\">VkPhysicalDeviceCooperativeMatrixPropertiesNV</a>, <a href=\"#VkPhysicalDeviceCustomBorderColorPropertiesEXT\">VkPhysicalDeviceCustomBorderColorPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDepthStencilResolveProperties\">VkPhysicalDeviceDepthStencilResolveProperties</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingProperties\">VkPhysicalDeviceDescriptorIndexingProperties</a>, <a href=\"#VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV\">VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV</a>, <a href=\"#VkPhysicalDeviceDiscardRectanglePropertiesEXT\">VkPhysicalDeviceDiscardRectanglePropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDriverProperties\">VkPhysicalDeviceDriverProperties</a>, <a href=\"#VkPhysicalDeviceDrmPropertiesEXT\">VkPhysicalDeviceDrmPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceExternalMemoryHostPropertiesEXT\">VkPhysicalDeviceExternalMemoryHostPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceFloatControlsProperties\">VkPhysicalDeviceFloatControlsProperties</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMap2PropertiesEXT\">VkPhysicalDeviceFragmentDensityMap2PropertiesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapPropertiesEXT\">VkPhysicalDeviceFragmentDensityMapPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV\">VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShadingRatePropertiesKHR\">VkPhysicalDeviceFragmentShadingRatePropertiesKHR</a>, <a href=\"#VkPhysicalDeviceIDProperties\">VkPhysicalDeviceIDProperties</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockPropertiesEXT\">VkPhysicalDeviceInlineUniformBlockPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceLineRasterizationPropertiesEXT\">VkPhysicalDeviceLineRasterizationPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceMaintenance3Properties\">VkPhysicalDeviceMaintenance3Properties</a>, <a href=\"#VkPhysicalDeviceMeshShaderPropertiesNV\">VkPhysicalDeviceMeshShaderPropertiesNV</a>, <a href=\"#VkPhysicalDeviceMultiDrawPropertiesEXT\">VkPhysicalDeviceMultiDrawPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX\">VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX</a>, <a href=\"#VkPhysicalDeviceMultiviewProperties\">VkPhysicalDeviceMultiviewProperties</a>, <a href=\"#VkPhysicalDevicePCIBusInfoPropertiesEXT\">VkPhysicalDevicePCIBusInfoPropertiesEXT</a>, <a href=\"#VkPhysicalDevicePerformanceQueryPropertiesKHR\">VkPhysicalDevicePerformanceQueryPropertiesKHR</a>, <a href=\"#VkPhysicalDevicePointClippingProperties\">VkPhysicalDevicePointClippingProperties</a>, <a href=\"#VkPhysicalDevicePortabilitySubsetPropertiesKHR\">VkPhysicalDevicePortabilitySubsetPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryProperties\">VkPhysicalDeviceProtectedMemoryProperties</a>, <a href=\"#VkPhysicalDeviceProvokingVertexPropertiesEXT\">VkPhysicalDeviceProvokingVertexPropertiesEXT</a>, <a href=\"#VkPhysicalDevicePushDescriptorPropertiesKHR\">VkPhysicalDevicePushDescriptorPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceRayTracingPipelinePropertiesKHR\">VkPhysicalDeviceRayTracingPipelinePropertiesKHR</a>, <a href=\"#VkPhysicalDeviceRayTracingPropertiesNV\">VkPhysicalDeviceRayTracingPropertiesNV</a>, <a href=\"#VkPhysicalDeviceRobustness2PropertiesEXT\">VkPhysicalDeviceRobustness2PropertiesEXT</a>, <a href=\"#VkPhysicalDeviceSampleLocationsPropertiesEXT\">VkPhysicalDeviceSampleLocationsPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerFilterMinmaxProperties\">VkPhysicalDeviceSamplerFilterMinmaxProperties</a>, <a href=\"#VkPhysicalDeviceShaderCoreProperties2AMD\">VkPhysicalDeviceShaderCoreProperties2AMD</a>, <a href=\"#VkPhysicalDeviceShaderCorePropertiesAMD\">VkPhysicalDeviceShaderCorePropertiesAMD</a>, <a href=\"#VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR\">VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceShaderSMBuiltinsPropertiesNV\">VkPhysicalDeviceShaderSMBuiltinsPropertiesNV</a>, <a href=\"#VkPhysicalDeviceShadingRateImagePropertiesNV\">VkPhysicalDeviceShadingRateImagePropertiesNV</a>, <a href=\"#VkPhysicalDeviceSubgroupProperties\">VkPhysicalDeviceSubgroupProperties</a>, <a href=\"#VkPhysicalDeviceSubgroupSizeControlPropertiesEXT\">VkPhysicalDeviceSubgroupSizeControlPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceSubpassShadingPropertiesHUAWEI\">VkPhysicalDeviceSubpassShadingPropertiesHUAWEI</a>, <a href=\"#VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT\">VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceTimelineSemaphoreProperties\">VkPhysicalDeviceTimelineSemaphoreProperties</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackPropertiesEXT\">VkPhysicalDeviceTransformFeedbackPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT\">VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceVulkan11Properties\">VkPhysicalDeviceVulkan11Properties</a>, or <a href=\"#VkPhysicalDeviceVulkan12Properties\">VkPhysicalDeviceVulkan12Properties</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkPhysicalDeviceAccelerationStructurePropertiesKHR\">VkPhysicalDeviceAccelerationStructurePropertiesKHR</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT\">VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceConservativeRasterizationPropertiesEXT\">VkPhysicalDeviceConservativeRasterizationPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixPropertiesNV\">VkPhysicalDeviceCooperativeMatrixPropertiesNV</a>, <a href=\"#VkPhysicalDeviceCustomBorderColorPropertiesEXT\">VkPhysicalDeviceCustomBorderColorPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDepthStencilResolveProperties\">VkPhysicalDeviceDepthStencilResolveProperties</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingProperties\">VkPhysicalDeviceDescriptorIndexingProperties</a>, <a href=\"#VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV\">VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV</a>, <a href=\"#VkPhysicalDeviceDiscardRectanglePropertiesEXT\">VkPhysicalDeviceDiscardRectanglePropertiesEXT</a>, <a href=\"#VkPhysicalDeviceDriverProperties\">VkPhysicalDeviceDriverProperties</a>, <a href=\"#VkPhysicalDeviceDrmPropertiesEXT\">VkPhysicalDeviceDrmPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceExternalMemoryHostPropertiesEXT\">VkPhysicalDeviceExternalMemoryHostPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceFloatControlsProperties\">VkPhysicalDeviceFloatControlsProperties</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMap2PropertiesEXT\">VkPhysicalDeviceFragmentDensityMap2PropertiesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapPropertiesEXT\">VkPhysicalDeviceFragmentDensityMapPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV\">VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShadingRatePropertiesKHR\">VkPhysicalDeviceFragmentShadingRatePropertiesKHR</a>, <a href=\"#VkPhysicalDeviceIDProperties\">VkPhysicalDeviceIDProperties</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockPropertiesEXT\">VkPhysicalDeviceInlineUniformBlockPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceLineRasterizationPropertiesEXT\">VkPhysicalDeviceLineRasterizationPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceMaintenance3Properties\">VkPhysicalDeviceMaintenance3Properties</a>, <a href=\"#VkPhysicalDeviceMaintenance4PropertiesKHR\">VkPhysicalDeviceMaintenance4PropertiesKHR</a>, <a href=\"#VkPhysicalDeviceMeshShaderPropertiesNV\">VkPhysicalDeviceMeshShaderPropertiesNV</a>, <a href=\"#VkPhysicalDeviceMultiDrawPropertiesEXT\">VkPhysicalDeviceMultiDrawPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX\">VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX</a>, <a href=\"#VkPhysicalDeviceMultiviewProperties\">VkPhysicalDeviceMultiviewProperties</a>, <a href=\"#VkPhysicalDevicePCIBusInfoPropertiesEXT\">VkPhysicalDevicePCIBusInfoPropertiesEXT</a>, <a href=\"#VkPhysicalDevicePerformanceQueryPropertiesKHR\">VkPhysicalDevicePerformanceQueryPropertiesKHR</a>, <a href=\"#VkPhysicalDevicePointClippingProperties\">VkPhysicalDevicePointClippingProperties</a>, <a href=\"#VkPhysicalDevicePortabilitySubsetPropertiesKHR\">VkPhysicalDevicePortabilitySubsetPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryProperties\">VkPhysicalDeviceProtectedMemoryProperties</a>, <a href=\"#VkPhysicalDeviceProvokingVertexPropertiesEXT\">VkPhysicalDeviceProvokingVertexPropertiesEXT</a>, <a href=\"#VkPhysicalDevicePushDescriptorPropertiesKHR\">VkPhysicalDevicePushDescriptorPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceRayTracingPipelinePropertiesKHR\">VkPhysicalDeviceRayTracingPipelinePropertiesKHR</a>, <a href=\"#VkPhysicalDeviceRayTracingPropertiesNV\">VkPhysicalDeviceRayTracingPropertiesNV</a>, <a href=\"#VkPhysicalDeviceRobustness2PropertiesEXT\">VkPhysicalDeviceRobustness2PropertiesEXT</a>, <a href=\"#VkPhysicalDeviceSampleLocationsPropertiesEXT\">VkPhysicalDeviceSampleLocationsPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerFilterMinmaxProperties\">VkPhysicalDeviceSamplerFilterMinmaxProperties</a>, <a href=\"#VkPhysicalDeviceShaderCoreProperties2AMD\">VkPhysicalDeviceShaderCoreProperties2AMD</a>, <a href=\"#VkPhysicalDeviceShaderCorePropertiesAMD\">VkPhysicalDeviceShaderCorePropertiesAMD</a>, <a href=\"#VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR\">VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR</a>, <a href=\"#VkPhysicalDeviceShaderSMBuiltinsPropertiesNV\">VkPhysicalDeviceShaderSMBuiltinsPropertiesNV</a>, <a href=\"#VkPhysicalDeviceShadingRateImagePropertiesNV\">VkPhysicalDeviceShadingRateImagePropertiesNV</a>, <a href=\"#VkPhysicalDeviceSubgroupProperties\">VkPhysicalDeviceSubgroupProperties</a>, <a href=\"#VkPhysicalDeviceSubgroupSizeControlPropertiesEXT\">VkPhysicalDeviceSubgroupSizeControlPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceSubpassShadingPropertiesHUAWEI\">VkPhysicalDeviceSubpassShadingPropertiesHUAWEI</a>, <a href=\"#VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT\">VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceTimelineSemaphoreProperties\">VkPhysicalDeviceTimelineSemaphoreProperties</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackPropertiesEXT\">VkPhysicalDeviceTransformFeedbackPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT\">VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT</a>, <a href=\"#VkPhysicalDeviceVulkan11Properties\">VkPhysicalDeviceVulkan11Properties</a>, or <a href=\"#VkPhysicalDeviceVulkan12Properties\">VkPhysicalDeviceVulkan12Properties</a>"
         },
         {
           "vuid": "VUID-VkPhysicalDeviceProperties2-sType-unique",
@@ -566,7 +566,7 @@
       "(VK_KHR_portability_subset)": [
         {
           "vuid": "VUID-VkDeviceCreateInfo-pProperties-04451",
-          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">[VK_KHR_portability_subset]</a></code> extension is included in <code>pProperties</code> of <a href=\"#vkEnumerateDeviceExtensionProperties\">vkEnumerateDeviceExtensionProperties</a>, <code>ppEnabledExtensions</code> <strong class=\"purple\">must</strong> include \"VK_KHR_portability_subset\""
+          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">VK_KHR_portability_subset</a></code> extension is included in <code>pProperties</code> of <a href=\"#vkEnumerateDeviceExtensionProperties\">vkEnumerateDeviceExtensionProperties</a>, <code>ppEnabledExtensions</code> <strong class=\"purple\">must</strong> include \"VK_KHR_portability_subset\""
         }
       ],
       "(VK_KHR_fragment_shading_rate,VK_NV_shading_rate_image)": [
@@ -626,7 +626,7 @@
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceDeviceMemoryReportCreateInfoEXT\">VkDeviceDeviceMemoryReportCreateInfoEXT</a>, <a href=\"#VkDeviceDiagnosticsConfigCreateInfoNV\">VkDeviceDiagnosticsConfigCreateInfoNV</a>, <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceMemoryOverallocationCreateInfoAMD\">VkDeviceMemoryOverallocationCreateInfoAMD</a>, <a href=\"#VkDevicePrivateDataCreateInfoEXT\">VkDevicePrivateDataCreateInfoEXT</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice4444FormatsFeaturesEXT\">VkPhysicalDevice4444FormatsFeaturesEXT</a>, <a href=\"#VkPhysicalDevice8BitStorageFeatures\">VkPhysicalDevice8BitStorageFeatures</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceAccelerationStructureFeaturesKHR\">VkPhysicalDeviceAccelerationStructureFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeatures\">VkPhysicalDeviceBufferDeviceAddressFeatures</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeaturesEXT\">VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCoherentMemoryFeaturesAMD\">VkPhysicalDeviceCoherentMemoryFeaturesAMD</a>, <a href=\"#VkPhysicalDeviceColorWriteEnableFeaturesEXT\">VkPhysicalDeviceColorWriteEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixFeaturesNV\">VkPhysicalDeviceCooperativeMatrixFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCoverageReductionModeFeaturesNV\">VkPhysicalDeviceCoverageReductionModeFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCustomBorderColorFeaturesEXT\">VkPhysicalDeviceCustomBorderColorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV\">VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDepthClipEnableFeaturesEXT\">VkPhysicalDeviceDepthClipEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeatures\">VkPhysicalDeviceDescriptorIndexingFeatures</a>, <a href=\"#VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV\">VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDeviceMemoryReportFeaturesEXT\">VkPhysicalDeviceDeviceMemoryReportFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDiagnosticsConfigFeaturesNV\">VkPhysicalDeviceDiagnosticsConfigFeaturesNV</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceExtendedDynamicState2FeaturesEXT\">VkPhysicalDeviceExtendedDynamicState2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExtendedDynamicStateFeaturesEXT\">VkPhysicalDeviceExtendedDynamicStateFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExternalMemoryRDMAFeaturesNV\">VkPhysicalDeviceExternalMemoryRDMAFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMap2FeaturesEXT\">VkPhysicalDeviceFragmentDensityMap2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapFeaturesEXT\">VkPhysicalDeviceFragmentDensityMapFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT\">VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV\">VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShadingRateFeaturesKHR\">VkPhysicalDeviceFragmentShadingRateFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT\">VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceHostQueryResetFeatures\">VkPhysicalDeviceHostQueryResetFeatures</a>, <a href=\"#VkPhysicalDeviceImageRobustnessFeaturesEXT\">VkPhysicalDeviceImageRobustnessFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceImagelessFramebufferFeatures\">VkPhysicalDeviceImagelessFramebufferFeatures</a>, <a href=\"#VkPhysicalDeviceIndexTypeUint8FeaturesEXT\">VkPhysicalDeviceIndexTypeUint8FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceInheritedViewportScissorFeaturesNV\">VkPhysicalDeviceInheritedViewportScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeaturesEXT\">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceInvocationMaskFeaturesHUAWEI\">VkPhysicalDeviceInvocationMaskFeaturesHUAWEI</a>, <a href=\"#VkPhysicalDeviceLineRasterizationFeaturesEXT\">VkPhysicalDeviceLineRasterizationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMemoryPriorityFeaturesEXT\">VkPhysicalDeviceMemoryPriorityFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiDrawFeaturesEXT\">VkPhysicalDeviceMultiDrawFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE\">VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE</a>, <a href=\"#VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT\">VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT</a>, <a href=\"#VkPhysicalDevicePerformanceQueryFeaturesKHR\">VkPhysicalDevicePerformanceQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT\">VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT</a>, <a href=\"#VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR\">VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePresentIdFeaturesKHR\">VkPhysicalDevicePresentIdFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePresentWaitFeaturesKHR\">VkPhysicalDevicePresentWaitFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT\">VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT</a>, <a href=\"#VkPhysicalDevicePrivateDataFeaturesEXT\">VkPhysicalDevicePrivateDataFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceProvokingVertexFeaturesEXT\">VkPhysicalDeviceProvokingVertexFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceRayQueryFeaturesKHR\">VkPhysicalDeviceRayQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceRayTracingMotionBlurFeaturesNV\">VkPhysicalDeviceRayTracingMotionBlurFeaturesNV</a>, <a href=\"#VkPhysicalDeviceRayTracingPipelineFeaturesKHR\">VkPhysicalDeviceRayTracingPipelineFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceRobustness2FeaturesEXT\">VkPhysicalDeviceRobustness2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceScalarBlockLayoutFeatures\">VkPhysicalDeviceScalarBlockLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures\">VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures</a>, <a href=\"#VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT\">VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicFloatFeaturesEXT\">VkPhysicalDeviceShaderAtomicFloatFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64Features\">VkPhysicalDeviceShaderAtomicInt64Features</a>, <a href=\"#VkPhysicalDeviceShaderClockFeaturesKHR\">VkPhysicalDeviceShaderClockFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT\">VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderDrawParametersFeatures\">VkPhysicalDeviceShaderDrawParametersFeatures</a>, <a href=\"#VkPhysicalDeviceShaderFloat16Int8Features\">VkPhysicalDeviceShaderFloat16Int8Features</a>, <a href=\"#VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT\">VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR\">VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL\">VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL</a>, <a href=\"#VkPhysicalDeviceShaderSMBuiltinsFeaturesNV\">VkPhysicalDeviceShaderSMBuiltinsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures\">VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR\">VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR\">VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSubgroupSizeControlFeaturesEXT\">VkPhysicalDeviceSubgroupSizeControlFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSubpassShadingFeaturesHUAWEI\">VkPhysicalDeviceSubpassShadingFeaturesHUAWEI</a>, <a href=\"#VkPhysicalDeviceSynchronization2FeaturesKHR\">VkPhysicalDeviceSynchronization2FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT\">VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT\">VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTimelineSemaphoreFeatures\">VkPhysicalDeviceTimelineSemaphoreFeatures</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackFeaturesEXT\">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceUniformBufferStandardLayoutFeatures\">VkPhysicalDeviceUniformBufferStandardLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceVariablePointersFeatures\">VkPhysicalDeviceVariablePointersFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT\">VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVulkan11Features\">VkPhysicalDeviceVulkan11Features</a>, <a href=\"#VkPhysicalDeviceVulkan12Features\">VkPhysicalDeviceVulkan12Features</a>, <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeatures\">VkPhysicalDeviceVulkanMemoryModelFeatures</a>, <a href=\"#VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR\">VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT\">VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceYcbcrImageArraysFeaturesEXT\">VkPhysicalDeviceYcbcrImageArraysFeaturesEXT</a>, or <a href=\"#VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR\">VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDeviceDeviceMemoryReportCreateInfoEXT\">VkDeviceDeviceMemoryReportCreateInfoEXT</a>, <a href=\"#VkDeviceDiagnosticsConfigCreateInfoNV\">VkDeviceDiagnosticsConfigCreateInfoNV</a>, <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceMemoryOverallocationCreateInfoAMD\">VkDeviceMemoryOverallocationCreateInfoAMD</a>, <a href=\"#VkDevicePrivateDataCreateInfoEXT\">VkDevicePrivateDataCreateInfoEXT</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice4444FormatsFeaturesEXT\">VkPhysicalDevice4444FormatsFeaturesEXT</a>, <a href=\"#VkPhysicalDevice8BitStorageFeatures\">VkPhysicalDevice8BitStorageFeatures</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceAccelerationStructureFeaturesKHR\">VkPhysicalDeviceAccelerationStructureFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeatures\">VkPhysicalDeviceBufferDeviceAddressFeatures</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeaturesEXT\">VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCoherentMemoryFeaturesAMD\">VkPhysicalDeviceCoherentMemoryFeaturesAMD</a>, <a href=\"#VkPhysicalDeviceColorWriteEnableFeaturesEXT\">VkPhysicalDeviceColorWriteEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceComputeShaderDerivativesFeaturesNV\">VkPhysicalDeviceComputeShaderDerivativesFeaturesNV</a>, <a href=\"#VkPhysicalDeviceConditionalRenderingFeaturesEXT\">VkPhysicalDeviceConditionalRenderingFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCooperativeMatrixFeaturesNV\">VkPhysicalDeviceCooperativeMatrixFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCornerSampledImageFeaturesNV\">VkPhysicalDeviceCornerSampledImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCoverageReductionModeFeaturesNV\">VkPhysicalDeviceCoverageReductionModeFeaturesNV</a>, <a href=\"#VkPhysicalDeviceCustomBorderColorFeaturesEXT\">VkPhysicalDeviceCustomBorderColorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV\">VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDepthClipEnableFeaturesEXT\">VkPhysicalDeviceDepthClipEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeatures\">VkPhysicalDeviceDescriptorIndexingFeatures</a>, <a href=\"#VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV\">VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceDeviceMemoryReportFeaturesEXT\">VkPhysicalDeviceDeviceMemoryReportFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDiagnosticsConfigFeaturesNV\">VkPhysicalDeviceDiagnosticsConfigFeaturesNV</a>, <a href=\"#VkPhysicalDeviceExclusiveScissorFeaturesNV\">VkPhysicalDeviceExclusiveScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceExtendedDynamicState2FeaturesEXT\">VkPhysicalDeviceExtendedDynamicState2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExtendedDynamicStateFeaturesEXT\">VkPhysicalDeviceExtendedDynamicStateFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExternalMemoryRDMAFeaturesNV\">VkPhysicalDeviceExternalMemoryRDMAFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMap2FeaturesEXT\">VkPhysicalDeviceFragmentDensityMap2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentDensityMapFeaturesEXT\">VkPhysicalDeviceFragmentDensityMapFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV\">VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT\">VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV\">VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFragmentShadingRateFeaturesKHR\">VkPhysicalDeviceFragmentShadingRateFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT\">VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceHostQueryResetFeatures\">VkPhysicalDeviceHostQueryResetFeatures</a>, <a href=\"#VkPhysicalDeviceImageRobustnessFeaturesEXT\">VkPhysicalDeviceImageRobustnessFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceImagelessFramebufferFeatures\">VkPhysicalDeviceImagelessFramebufferFeatures</a>, <a href=\"#VkPhysicalDeviceIndexTypeUint8FeaturesEXT\">VkPhysicalDeviceIndexTypeUint8FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceInheritedViewportScissorFeaturesNV\">VkPhysicalDeviceInheritedViewportScissorFeaturesNV</a>, <a href=\"#VkPhysicalDeviceInlineUniformBlockFeaturesEXT\">VkPhysicalDeviceInlineUniformBlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceInvocationMaskFeaturesHUAWEI\">VkPhysicalDeviceInvocationMaskFeaturesHUAWEI</a>, <a href=\"#VkPhysicalDeviceLineRasterizationFeaturesEXT\">VkPhysicalDeviceLineRasterizationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMaintenance4FeaturesKHR\">VkPhysicalDeviceMaintenance4FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceMemoryPriorityFeaturesEXT\">VkPhysicalDeviceMemoryPriorityFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMeshShaderFeaturesNV\">VkPhysicalDeviceMeshShaderFeaturesNV</a>, <a href=\"#VkPhysicalDeviceMultiDrawFeaturesEXT\">VkPhysicalDeviceMultiDrawFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE\">VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE</a>, <a href=\"#VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT\">VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT</a>, <a href=\"#VkPhysicalDevicePerformanceQueryFeaturesKHR\">VkPhysicalDevicePerformanceQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT\">VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT</a>, <a href=\"#VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR\">VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePresentIdFeaturesKHR\">VkPhysicalDevicePresentIdFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePresentWaitFeaturesKHR\">VkPhysicalDevicePresentWaitFeaturesKHR</a>, <a href=\"#VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT\">VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT</a>, <a href=\"#VkPhysicalDevicePrivateDataFeaturesEXT\">VkPhysicalDevicePrivateDataFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceProvokingVertexFeaturesEXT\">VkPhysicalDeviceProvokingVertexFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT\">VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceRayQueryFeaturesKHR\">VkPhysicalDeviceRayQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceRayTracingMotionBlurFeaturesNV\">VkPhysicalDeviceRayTracingMotionBlurFeaturesNV</a>, <a href=\"#VkPhysicalDeviceRayTracingPipelineFeaturesKHR\">VkPhysicalDeviceRayTracingPipelineFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV\">VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV</a>, <a href=\"#VkPhysicalDeviceRobustness2FeaturesEXT\">VkPhysicalDeviceRobustness2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceScalarBlockLayoutFeatures\">VkPhysicalDeviceScalarBlockLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures\">VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures</a>, <a href=\"#VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT\">VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicFloatFeaturesEXT\">VkPhysicalDeviceShaderAtomicFloatFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64Features\">VkPhysicalDeviceShaderAtomicInt64Features</a>, <a href=\"#VkPhysicalDeviceShaderClockFeaturesKHR\">VkPhysicalDeviceShaderClockFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT\">VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderDrawParametersFeatures\">VkPhysicalDeviceShaderDrawParametersFeatures</a>, <a href=\"#VkPhysicalDeviceShaderFloat16Int8Features\">VkPhysicalDeviceShaderFloat16Int8Features</a>, <a href=\"#VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT\">VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderImageFootprintFeaturesNV\">VkPhysicalDeviceShaderImageFootprintFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR\">VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL\">VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL</a>, <a href=\"#VkPhysicalDeviceShaderSMBuiltinsFeaturesNV\">VkPhysicalDeviceShaderSMBuiltinsFeaturesNV</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures\">VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR\">VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR\">VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShadingRateImageFeaturesNV\">VkPhysicalDeviceShadingRateImageFeaturesNV</a>, <a href=\"#VkPhysicalDeviceSubgroupSizeControlFeaturesEXT\">VkPhysicalDeviceSubgroupSizeControlFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSubpassShadingFeaturesHUAWEI\">VkPhysicalDeviceSubpassShadingFeaturesHUAWEI</a>, <a href=\"#VkPhysicalDeviceSynchronization2FeaturesKHR\">VkPhysicalDeviceSynchronization2FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT\">VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT\">VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTimelineSemaphoreFeatures\">VkPhysicalDeviceTimelineSemaphoreFeatures</a>, <a href=\"#VkPhysicalDeviceTransformFeedbackFeaturesEXT\">VkPhysicalDeviceTransformFeedbackFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceUniformBufferStandardLayoutFeatures\">VkPhysicalDeviceUniformBufferStandardLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceVariablePointersFeatures\">VkPhysicalDeviceVariablePointersFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT\">VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVulkan11Features\">VkPhysicalDeviceVulkan11Features</a>, <a href=\"#VkPhysicalDeviceVulkan12Features\">VkPhysicalDeviceVulkan12Features</a>, <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeatures\">VkPhysicalDeviceVulkanMemoryModelFeatures</a>, <a href=\"#VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR\">VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT\">VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceYcbcrImageArraysFeaturesEXT\">VkPhysicalDeviceYcbcrImageArraysFeaturesEXT</a>, or <a href=\"#VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR\">VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR</a>"
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-sType-unique",
@@ -3200,7 +3200,7 @@
       "(VK_KHR_portability_subset)": [
         {
           "vuid": "VUID-vkCreateEvent-events-04468",
-          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">[VK_KHR_portability_subset]</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>events</code> is <code>VK_FALSE</code>, then the implementation does not support <a href=\"#synchronization-events\">events</a>, and <a href=\"#vkCreateEvent\">vkCreateEvent</a> <strong class=\"purple\">must</strong> not be used"
+          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">VK_KHR_portability_subset</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>events</code> is <code>VK_FALSE</code>, then the implementation does not support <a href=\"#synchronization-events\">events</a>, and <a href=\"#vkCreateEvent\">vkCreateEvent</a> <strong class=\"purple\">must</strong> not be used"
         }
       ],
       "core": [
@@ -11562,7 +11562,7 @@
       "(VK_KHR_external_memory)+(VK_KHR_dedicated_allocation,VK_NV_dedicated_allocation)": [
         {
           "vuid": "VUID-VkMemoryAllocateInfo-pNext-00639",
-          "text": " If the <code>pNext</code> chain includes a <code>VkExportMemoryAllocateInfo</code> structure, and any of the handle types specified in <code>VkExportMemoryAllocateInfo</code>::<code>handleTypes</code> require a dedicated allocation, as reported by <a href=\"#vkGetPhysicalDeviceImageFormatProperties2\">vkGetPhysicalDeviceImageFormatProperties2</a> in <code>VkExternalImageFormatProperties</code>::<code>externalMemoryProperties.externalMemoryFeatures</code> or <code>VkExternalBufferProperties</code>::<code>externalMemoryProperties.externalMemoryFeatures</code>, the <code>pNext</code> chain <strong class=\"purple\">must</strong> include a <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a> or <a href=\"#VkDedicatedAllocationMemoryAllocateInfoNV\">VkDedicatedAllocationMemoryAllocateInfoNV</a> structure with either its <code>image</code> or <code>buffer</code> member set to a value other than <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>"
+          "text": " If the <code>pNext</code> chain includes a <code>VkExportMemoryAllocateInfo</code> structure, and any of the handle types specified in <code>VkExportMemoryAllocateInfo</code>::<code>handleTypes</code> require a dedicated allocation, as reported by <a href=\"#vkGetPhysicalDeviceImageFormatProperties2\">vkGetPhysicalDeviceImageFormatProperties2</a> in <code>VkExternalImageFormatProperties</code>::<code>externalMemoryProperties.externalMemoryFeatures</code> or <code>VkExternalBufferProperties</code>::<code>externalMemoryProperties.externalMemoryFeatures</code>, the <code>pNext</code> chain <strong class=\"purple\">must</strong> include a <code>VkMemoryDedicatedAllocateInfo</code> or <code>VkDedicatedAllocationMemoryAllocateInfoNV</code> structure with either its <code>image</code> or <code>buffer</code> member set to a value other than <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>"
         }
       ],
       "(VK_KHR_external_memory)+(VK_NV_external_memory)": [
@@ -12420,7 +12420,7 @@
         },
         {
           "vuid": "VUID-VkAndroidHardwareBufferPropertiesANDROID-pNext-pNext",
-          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkAndroidHardwareBufferFormatPropertiesANDROID\">VkAndroidHardwareBufferFormatPropertiesANDROID</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkAndroidHardwareBufferFormatProperties2ANDROID\">VkAndroidHardwareBufferFormatProperties2ANDROID</a> or <a href=\"#VkAndroidHardwareBufferFormatPropertiesANDROID\">VkAndroidHardwareBufferFormatPropertiesANDROID</a>"
         },
         {
           "vuid": "VUID-VkAndroidHardwareBufferPropertiesANDROID-sType-unique",
@@ -12433,6 +12433,14 @@
         {
           "vuid": "VUID-VkAndroidHardwareBufferFormatPropertiesANDROID-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_FORMAT_PROPERTIES_ANDROID</code>"
+        }
+      ]
+    },
+    "VkAndroidHardwareBufferFormatProperties2ANDROID": {
+      "(VK_ANDROID_external_memory_android_hardware_buffer)+(VK_KHR_format_feature_flags2)": [
+        {
+          "vuid": "VUID-VkAndroidHardwareBufferFormatProperties2ANDROID-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_FORMAT_PROPERTIES_2_ANDROID</code>"
         }
       ]
     },
@@ -13013,6 +13021,12 @@
         {
           "vuid": "VUID-VkBufferCreateInfo-usage-04814",
           "text": " If <code>usage</code> includes <code>VK_BUFFER_USAGE_VIDEO_ENCODE_SRC_BIT_KHR</code>, <code>VK_BUFFER_USAGE_VIDEO_ENCODE_DST_BIT_KHR</code>, then the <code>pNext</code> chain <strong class=\"purple\">must</strong> include a valid <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a> structure which includes at least one <a href=\"#VkVideoProfileKHR\">VkVideoProfileKHR</a> with a encode codec-operation"
+        }
+      ],
+      "(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-VkBufferCreateInfo-size-06409",
+          "text": " <code>size</code> <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#VkPhysicalDeviceMaintenance4PropertiesKHR\">VkPhysicalDeviceMaintenance4PropertiesKHR</a>::<code>maxBufferSize</code>"
         }
       ]
     },
@@ -13612,21 +13626,21 @@
       "(VK_VERSION_1_1,VK_KHR_external_memory,VK_NV_external_memory)": [
         {
           "vuid": "VUID-VkImageCreateInfo-pNext-01443",
-          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a> or <a href=\"#VkExternalMemoryImageCreateInfoNV\">VkExternalMemoryImageCreateInfoNV</a> structure whose <code>handleTypes</code> member is not <code>0</code>, <code>initialLayout</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_LAYOUT_UNDEFINED</code>"
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExternalMemoryImageCreateInfo\">VkExternalMemoryImageCreateInfo</a> or <code>VkExternalMemoryImageCreateInfoNV</code> structure whose <code>handleTypes</code> member is not <code>0</code>, <code>initialLayout</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_LAYOUT_UNDEFINED</code>"
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
         {
-          "vuid": "VUID-VkImageCreateInfo-format-02561",
-          "text": " If the image <code>format</code> is one of those listed in <a href=\"#formats-requiring-sampler-ycbcr-conversion\">Formats requiring sampler Y′C<sub>B</sub>C<sub>R</sub> conversion for <code>VK_IMAGE_ASPECT_COLOR_BIT</code> image views</a>, then <code>mipLevels</code> <strong class=\"purple\">must</strong> be 1"
+          "vuid": "VUID-VkImageCreateInfo-format-06410",
+          "text": " If the image <code>format</code> is one of the <a href=\"#formats-requiring-sampler-ycbcr-conversion\">formats that require a sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion</a>, <code>mipLevels</code> <strong class=\"purple\">must</strong> be 1"
         },
         {
-          "vuid": "VUID-VkImageCreateInfo-format-02562",
-          "text": " If the image <code>format</code> is one of those listed in <a href=\"#formats-requiring-sampler-ycbcr-conversion\">Formats requiring sampler Y′C<sub>B</sub>C<sub>R</sub> conversion for <code>VK_IMAGE_ASPECT_COLOR_BIT</code> image views</a>, <code>samples</code> <strong class=\"purple\">must</strong> be <code>VK_SAMPLE_COUNT_1_BIT</code>"
+          "vuid": "VUID-VkImageCreateInfo-format-06411",
+          "text": " If the image <code>format</code> is one of the <a href=\"#formats-requiring-sampler-ycbcr-conversion\">formats that require a sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion</a>, <code>samples</code> <strong class=\"purple\">must</strong> be <code>VK_SAMPLE_COUNT_1_BIT</code>"
         },
         {
-          "vuid": "VUID-VkImageCreateInfo-format-02563",
-          "text": " If the image <code>format</code> is one of those listed in <a href=\"#formats-requiring-sampler-ycbcr-conversion\">Formats requiring sampler Y′C<sub>B</sub>C<sub>R</sub> conversion for <code>VK_IMAGE_ASPECT_COLOR_BIT</code> image views</a>, <code>imageType</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_TYPE_2D</code>"
+          "vuid": "VUID-VkImageCreateInfo-format-06412",
+          "text": " If the image <code>format</code> is one of the <a href=\"#formats-requiring-sampler-ycbcr-conversion\">formats that require a sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion</a>, <code>imageType</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_TYPE_2D</code>"
         },
         {
           "vuid": "VUID-VkImageCreateInfo-imageCreateFormatFeatures-02260",
@@ -13647,14 +13661,14 @@
       ],
       "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)+(VK_EXT_ycbcr_image_arrays)": [
         {
-          "vuid": "VUID-VkImageCreateInfo-format-02653",
-          "text": " If the image <code>format</code> is one of those listed in <a href=\"#formats-requiring-sampler-ycbcr-conversion\">Formats requiring sampler Y′C<sub>B</sub>C<sub>R</sub> conversion for <code>VK_IMAGE_ASPECT_COLOR_BIT</code> image views</a>, and the <code>ycbcrImageArrays</code> feature is not enabled, <code>arrayLayers</code> <strong class=\"purple\">must</strong> be 1"
+          "vuid": "VUID-VkImageCreateInfo-format-06413",
+          "text": " If the image <code>format</code> is one of the <a href=\"#formats-requiring-sampler-ycbcr-conversion\">formats that require a sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion</a>, and the <code>ycbcrImageArrays</code> feature is not enabled, <code>arrayLayers</code> <strong class=\"purple\">must</strong> be 1"
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)+!(VK_EXT_ycbcr_image_arrays)": [
         {
-          "vuid": "VUID-VkImageCreateInfo-format-02564",
-          "text": " If the image <code>format</code> is one of those listed in <a href=\"#formats-requiring-sampler-ycbcr-conversion\">Formats requiring sampler Y′C<sub>B</sub>C<sub>R</sub> conversion for <code>VK_IMAGE_ASPECT_COLOR_BIT</code> image views</a>, <code>arrayLayers</code> <strong class=\"purple\">must</strong> be 1"
+          "vuid": "VUID-VkImageCreateInfo-format-06414",
+          "text": " If the image <code>format</code> is one of the <a href=\"#formats-requiring-sampler-ycbcr-conversion\">formats that require a sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion</a>, <code>arrayLayers</code> <strong class=\"purple\">must</strong> be 1"
         }
       ],
       "(VK_EXT_image_drm_format_modifier)": [
@@ -13750,11 +13764,11 @@
       "(VK_KHR_portability_subset)": [
         {
           "vuid": "VUID-VkImageCreateInfo-imageView2DOn3DImage-04459",
-          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">[VK_KHR_portability_subset]</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>imageView2DOn3DImage</code> is <code>VK_FALSE</code>, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT</code>"
+          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">VK_KHR_portability_subset</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>imageView2DOn3DImage</code> is <code>VK_FALSE</code>, <code>flags</code> <strong class=\"purple\">must</strong> not contain <code>VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT</code>"
         },
         {
           "vuid": "VUID-VkImageCreateInfo-multisampleArrayImage-04460",
-          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">[VK_KHR_portability_subset]</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>multisampleArrayImage</code> is <code>VK_FALSE</code>, and <code>samples</code> is not <code>VK_SAMPLE_COUNT_1_BIT</code>, then <code>arrayLayers</code> <strong class=\"purple\">must</strong> be <code>1</code>"
+          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">VK_KHR_portability_subset</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>multisampleArrayImage</code> is <code>VK_FALSE</code>, and <code>samples</code> is not <code>VK_SAMPLE_COUNT_1_BIT</code>, then <code>arrayLayers</code> <strong class=\"purple\">must</strong> be <code>1</code>"
         }
       ],
       "(VK_VERSION_1_2,VK_KHR_image_format_list)": [
@@ -14097,10 +14111,6 @@
           "text": " If no <code>VkAllocationCallbacks</code> were provided when <code>image</code> was created, <code>pAllocator</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
         },
         {
-          "vuid": "VUID-vkDestroyImage-image-04882",
-          "text": " <code>image</code> <strong class=\"purple\">must</strong> not have been acquired from <a href=\"#vkGetSwapchainImagesKHR\">vkGetSwapchainImagesKHR</a>"
-        },
-        {
           "vuid": "VUID-vkDestroyImage-device-parameter",
           "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDevice\">VkDevice</a> handle"
         },
@@ -14115,6 +14125,12 @@
         {
           "vuid": "VUID-vkDestroyImage-image-parent",
           "text": " If <code>image</code> is a valid handle, it <strong class=\"purple\">must</strong> have been created, allocated, or retrieved from <code>device</code>"
+        }
+      ],
+      "(VK_KHR_swapchain)": [
+        {
+          "vuid": "VUID-vkDestroyImage-image-04882",
+          "text": " <code>image</code> <strong class=\"purple\">must</strong> not have been acquired from <a href=\"#vkGetSwapchainImagesKHR\">vkGetSwapchainImagesKHR</a>"
         }
       ]
     },
@@ -14365,8 +14381,8 @@
           "text": " If <code>image</code> was not created with the <code>VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT</code> flag, or if the <code>format</code> of the <code>image</code> is a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">multi-planar</a> format and if <code>subresourceRange.aspectMask</code> is <code>VK_IMAGE_ASPECT_COLOR_BIT</code>, <code>format</code> <strong class=\"purple\">must</strong> be identical to the <code>format</code> used to create <code>image</code>"
         },
         {
-          "vuid": "VUID-VkImageViewCreateInfo-format-04724",
-          "text": " If <code>format</code> is one of those listed in <a href=\"#formats-requiring-sampler-ycbcr-conversion\">Formats requiring sampler Y′C<sub>B</sub>C<sub>R</sub> conversion for <code>VK_IMAGE_ASPECT_COLOR_BIT</code> image views</a>, then the <code>pNext</code> chain <strong class=\"purple\">must</strong> include a <a href=\"#VkSamplerYcbcrConversionInfo\">VkSamplerYcbcrConversionInfo</a> structure with a conversion value other than VK_NULL_HANDLE"
+          "vuid": "VUID-VkImageViewCreateInfo-format-06415",
+          "text": " If the image <code>format</code> is one of the <a href=\"#formats-requiring-sampler-ycbcr-conversion\">formats that require a sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion</a>, then the <code>pNext</code> chain <strong class=\"purple\">must</strong> include a <a href=\"#VkSamplerYcbcrConversionInfo\">VkSamplerYcbcrConversionInfo</a> structure with a conversion value other than VK_NULL_HANDLE"
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-format-04714",
@@ -14466,11 +14482,11 @@
       "(VK_KHR_portability_subset)": [
         {
           "vuid": "VUID-VkImageViewCreateInfo-imageViewFormatSwizzle-04465",
-          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">[VK_KHR_portability_subset]</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>imageViewFormatSwizzle</code> is <code>VK_FALSE</code>, all elements of <code>components</code> <strong class=\"purple\">must</strong> have the <a href=\"#resources-image-views-identity-mappings\">identity swizzle</a>"
+          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">VK_KHR_portability_subset</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>imageViewFormatSwizzle</code> is <code>VK_FALSE</code>, all elements of <code>components</code> <strong class=\"purple\">must</strong> have the <a href=\"#resources-image-views-identity-mappings\">identity swizzle</a>"
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-imageViewFormatReinterpretation-04466",
-          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">[VK_KHR_portability_subset]</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>imageViewFormatReinterpretation</code> is <code>VK_FALSE</code>, the <a href=\"#VkFormat\">VkFormat</a> in <code>format</code> <strong class=\"purple\">must</strong> not contain a different number of components, or a different number of bits in each component, than the format of the <code>VkImage</code> in <code>image</code>"
+          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">VK_KHR_portability_subset</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>imageViewFormatReinterpretation</code> is <code>VK_FALSE</code>, the <a href=\"#VkFormat\">VkFormat</a> in <code>format</code> <strong class=\"purple\">must</strong> not contain a different number of components, or a different number of bits in each component, than the format of the <code>VkImage</code> in <code>image</code>"
         }
       ],
       "(VK_KHR_video_decode_queue)": [
@@ -15414,6 +15430,22 @@
         }
       ]
     },
+    "vkGetDeviceBufferMemoryRequirementsKHR": {
+      "(VK_VERSION_1_1,VK_KHR_get_memory_requirements2)+(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkGetDeviceBufferMemoryRequirementsKHR-device-parameter",
+          "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDevice\">VkDevice</a> handle"
+        },
+        {
+          "vuid": "VUID-vkGetDeviceBufferMemoryRequirementsKHR-pInfo-parameter",
+          "text": " <code>pInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkDeviceBufferMemoryRequirementsKHR\">VkDeviceBufferMemoryRequirementsKHR</a> structure"
+        },
+        {
+          "vuid": "VUID-vkGetDeviceBufferMemoryRequirementsKHR-pMemoryRequirements-parameter",
+          "text": " <code>pMemoryRequirements</code> <strong class=\"purple\">must</strong> be a valid pointer to a <a href=\"#VkMemoryRequirements2\">VkMemoryRequirements2</a> structure"
+        }
+      ]
+    },
     "VkBufferMemoryRequirementsInfo2": {
       "(VK_VERSION_1_1,VK_KHR_get_memory_requirements2)": [
         {
@@ -15430,6 +15462,22 @@
         }
       ]
     },
+    "VkDeviceBufferMemoryRequirementsKHR": {
+      "(VK_VERSION_1_1,VK_KHR_get_memory_requirements2)+(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-VkDeviceBufferMemoryRequirementsKHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_DEVICE_BUFFER_MEMORY_REQUIREMENTS_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkDeviceBufferMemoryRequirementsKHR-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkDeviceBufferMemoryRequirementsKHR-pCreateInfo-parameter",
+          "text": " <code>pCreateInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkBufferCreateInfo\">VkBufferCreateInfo</a> structure"
+        }
+      ]
+    },
     "vkGetImageMemoryRequirements2": {
       "(VK_VERSION_1_1,VK_KHR_get_memory_requirements2)": [
         {
@@ -15442,6 +15490,22 @@
         },
         {
           "vuid": "VUID-vkGetImageMemoryRequirements2-pMemoryRequirements-parameter",
+          "text": " <code>pMemoryRequirements</code> <strong class=\"purple\">must</strong> be a valid pointer to a <a href=\"#VkMemoryRequirements2\">VkMemoryRequirements2</a> structure"
+        }
+      ]
+    },
+    "vkGetDeviceImageMemoryRequirementsKHR": {
+      "(VK_VERSION_1_1,VK_KHR_get_memory_requirements2)+(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkGetDeviceImageMemoryRequirementsKHR-device-parameter",
+          "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDevice\">VkDevice</a> handle"
+        },
+        {
+          "vuid": "VUID-vkGetDeviceImageMemoryRequirementsKHR-pInfo-parameter",
+          "text": " <code>pInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkDeviceImageMemoryRequirementsKHR\">VkDeviceImageMemoryRequirementsKHR</a> structure"
+        },
+        {
+          "vuid": "VUID-vkGetDeviceImageMemoryRequirementsKHR-pMemoryRequirements-parameter",
           "text": " <code>pMemoryRequirements</code> <strong class=\"purple\">must</strong> be a valid pointer to a <a href=\"#VkMemoryRequirements2\">VkMemoryRequirements2</a> structure"
         }
       ]
@@ -15495,6 +15559,48 @@
         {
           "vuid": "VUID-VkImageMemoryRequirementsInfo2-image-parameter",
           "text": " <code>image</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImage\">VkImage</a> handle"
+        }
+      ]
+    },
+    "VkDeviceImageMemoryRequirementsKHR": {
+      "(VK_VERSION_1_1,VK_KHR_get_memory_requirements2)+(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-VkDeviceImageMemoryRequirementsKHR-pCreateInfo-06416",
+          "text": " The <code>pCreateInfo</code>::<code>pNext</code> chain <strong class=\"purple\">must</strong> not contain a <a href=\"#VkImageSwapchainCreateInfoKHR\">VkImageSwapchainCreateInfoKHR</a> structure"
+        },
+        {
+          "vuid": "VUID-VkDeviceImageMemoryRequirementsKHR-pCreateInfo-06417",
+          "text": " If <code>pCreateInfo</code>::<code>flags</code> has <code>VK_IMAGE_CREATE_DISJOINT_BIT</code> set then <code>planAspect</code> <strong class=\"purple\">must</strong> not be zero"
+        },
+        {
+          "vuid": "VUID-VkDeviceImageMemoryRequirementsKHR-pCreateInfo-06419",
+          "text": " If <code>pCreateInfo</code>::<code>flags</code> has <code>VK_IMAGE_CREATE_DISJOINT_BIT</code> set and if the <code>pCreateInfo</code>::<code>tiling</code> is <code>VK_IMAGE_TILING_LINEAR</code> or <code>VK_IMAGE_TILING_OPTIMAL</code>, then <code>planeAspect</code> <strong class=\"purple\">must</strong> be a single valid <em>format plane</em> for the image (that is, for a two-plane image <code>planeAspect</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code> or <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code>, and for a three-plane image <code>planeAspect</code> <strong class=\"purple\">must</strong> be <code>VK_IMAGE_ASPECT_PLANE_0_BIT</code>, <code>VK_IMAGE_ASPECT_PLANE_1_BIT</code> or <code>VK_IMAGE_ASPECT_PLANE_2_BIT</code>)"
+        },
+        {
+          "vuid": "VUID-VkDeviceImageMemoryRequirementsKHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_DEVICE_IMAGE_MEMORY_REQUIREMENTS_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkDeviceImageMemoryRequirementsKHR-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkDeviceImageMemoryRequirementsKHR-pCreateInfo-parameter",
+          "text": " <code>pCreateInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> structure"
+        },
+        {
+          "vuid": "VUID-VkDeviceImageMemoryRequirementsKHR-planeAspect-parameter",
+          "text": " <code>planeAspect</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImageAspectFlagBits\">VkImageAspectFlagBits</a> value"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_get_memory_requirements2)+(VK_KHR_maintenance4)+(VK_EXT_image_drm_format_modifier)": [
+        {
+          "vuid": "VUID-VkDeviceImageMemoryRequirementsKHR-pCreateInfo-06418",
+          "text": " If <code>pCreateInfo</code>::<code>flags</code> has <code>VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT</code> set then <code>planAspect</code> <strong class=\"purple\">must</strong> not be zero"
+        },
+        {
+          "vuid": "VUID-VkDeviceImageMemoryRequirementsKHR-pCreateInfo-06420",
+          "text": " If <code>pCreateInfo</code>::<code>flags</code> has <code>VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT</code> set and the <code>pCreateInfo</code>::<code>tiling</code> is <code>VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT</code>, then <code>planeAspect</code> <strong class=\"purple\">must</strong> be a single valid <em>memory plane</em> for the image (that is, <code>aspectMask</code> <strong class=\"purple\">must</strong> specify a plane index that is less than the <a href=\"#VkDrmFormatModifierPropertiesEXT\">VkDrmFormatModifierPropertiesEXT</a>::<code>drmFormatModifierPlaneCount</code> associated with the image&#8217;s <code>format</code> and <a href=\"#VkImageDrmFormatModifierPropertiesEXT\">VkImageDrmFormatModifierPropertiesEXT</a>::<code>drmFormatModifier</code>)"
         }
       ]
     },
@@ -16704,7 +16810,7 @@
       "(VK_KHR_portability_subset)": [
         {
           "vuid": "VUID-VkSamplerCreateInfo-samplerMipLodBias-04467",
-          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">[VK_KHR_portability_subset]</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>samplerMipLodBias</code> is <code>VK_FALSE</code>, <code>mipLodBias</code> <strong class=\"purple\">must</strong> be zero"
+          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">VK_KHR_portability_subset</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>samplerMipLodBias</code> is <code>VK_FALSE</code>, <code>mipLodBias</code> <strong class=\"purple\">must</strong> be zero"
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
@@ -18342,7 +18448,7 @@
       "(VK_KHR_portability_subset)": [
         {
           "vuid": "VUID-VkDescriptorImageInfo-mutableComparisonSamplers-04450",
-          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">[VK_KHR_portability_subset]</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>mutableComparisonSamplers</code> is <code>VK_FALSE</code>, then <code>sampler</code> <strong class=\"purple\">must</strong> have been created with <a href=\"#VkSamplerCreateInfo\">VkSamplerCreateInfo</a>::<code>compareEnable</code> set to <code>VK_FALSE</code>"
+          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">VK_KHR_portability_subset</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>mutableComparisonSamplers</code> is <code>VK_FALSE</code>, then <code>sampler</code> <strong class=\"purple\">must</strong> have been created with <a href=\"#VkSamplerCreateInfo\">VkSamplerCreateInfo</a>::<code>compareEnable</code> set to <code>VK_FALSE</code>"
         }
       ]
     },
@@ -21882,7 +21988,7 @@
       "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
         {
           "vuid": "VUID-vkCmdClearColorImage-image-01545",
-          "text": " <code>image</code> <strong class=\"purple\">must</strong> not use a format listed in <a href=\"#formats-requiring-sampler-ycbcr-conversion\">Formats requiring sampler Y′C<sub>B</sub>C<sub>R</sub> conversion for <code>VK_IMAGE_ASPECT_COLOR_BIT</code> image views</a>"
+          "text": " <code>image</code> <strong class=\"purple\">must</strong> not use any of the <a href=\"#formats-requiring-sampler-ycbcr-conversion\">formats that require a sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion</a>"
         }
       ],
       "!(VK_KHR_shared_presentable_image)": [
@@ -23880,11 +23986,11 @@
         },
         {
           "vuid": "VUID-VkCopyBufferToImageInfo2KHR-pRegions-06223",
-          "text": " For each element of <code>pRegions</code> not containing <a href=\"#VkCopyCommandTransformInfoQCOM\">VkCopyCommandTransformInfoQCOM</a> in its <code>pNext</code> chain, <code>imageOffset.x</code> and <span class=\"eq\">(<code>imageExtent.width</code> &#43; <code>imageOffset.x</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the width of the specified <code>imageSubresource</code> of <code>dstImage</code>"
+          "text": " For each element of <code>pRegions</code> not containing <code>VkCopyCommandTransformInfoQCOM</code> in its <code>pNext</code> chain, <code>imageOffset.x</code> and <span class=\"eq\">(<code>imageExtent.width</code> &#43; <code>imageOffset.x</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the width of the specified <code>imageSubresource</code> of <code>dstImage</code>"
         },
         {
           "vuid": "VUID-VkCopyBufferToImageInfo2KHR-pRegions-06224",
-          "text": " For each element of <code>pRegions</code> not containing <a href=\"#VkCopyCommandTransformInfoQCOM\">VkCopyCommandTransformInfoQCOM</a> in its <code>pNext</code> chain, <code>imageOffset.y</code> and <span class=\"eq\">(<code>imageExtent.height</code> &#43; <code>imageOffset.y</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the height of the specified <code>imageSubresource</code> of <code>dstImage</code>"
+          "text": " For each element of <code>pRegions</code> not containing <code>VkCopyCommandTransformInfoQCOM</code> in its <code>pNext</code> chain, <code>imageOffset.y</code> and <span class=\"eq\">(<code>imageExtent.height</code> &#43; <code>imageOffset.y</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the height of the specified <code>imageSubresource</code> of <code>dstImage</code>"
         },
         {
           "vuid": "VUID-VkCopyBufferToImageInfo2KHR-srcImage-00199",
@@ -24148,11 +24254,11 @@
         },
         {
           "vuid": "VUID-VkCopyImageToBufferInfo2KHR-imageOffset-00197",
-          "text": " For each element of <code>pRegions</code> not containing <a href=\"#VkCopyCommandTransformInfoQCOM\">VkCopyCommandTransformInfoQCOM</a> in its <code>pNext</code> chain, <code>imageOffset.x</code> and <span class=\"eq\">(<code>imageExtent.width</code> &#43; <code>imageOffset.x</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the width of the specified <code>imageSubresource</code> of <code>srcImage</code>"
+          "text": " For each element of <code>pRegions</code> not containing <code>VkCopyCommandTransformInfoQCOM</code> in its <code>pNext</code> chain, <code>imageOffset.x</code> and <span class=\"eq\">(<code>imageExtent.width</code> &#43; <code>imageOffset.x</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the width of the specified <code>imageSubresource</code> of <code>srcImage</code>"
         },
         {
           "vuid": "VUID-VkCopyImageToBufferInfo2KHR-imageOffset-00198",
-          "text": " For each element of <code>pRegions</code> not containing <a href=\"#VkCopyCommandTransformInfoQCOM\">VkCopyCommandTransformInfoQCOM</a> in its <code>pNext</code> chain, <code>imageOffset.y</code> and <span class=\"eq\">(<code>imageExtent.height</code> &#43; <code>imageOffset.y</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the height of the specified <code>imageSubresource</code> of <code>srcImage</code>"
+          "text": " For each element of <code>pRegions</code> not containing <code>VkCopyCommandTransformInfoQCOM</code> in its <code>pNext</code> chain, <code>imageOffset.y</code> and <span class=\"eq\">(<code>imageExtent.height</code> &#43; <code>imageOffset.y</code>)</span> <strong class=\"purple\">must</strong> both be greater than or equal to <code>0</code> and less than or equal to the height of the specified <code>imageSubresource</code> of <code>srcImage</code>"
         },
         {
           "vuid": "VUID-VkCopyImageToBufferInfo2KHR-srcImage-00199",
@@ -24547,12 +24653,12 @@
       ],
       "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
         {
-          "vuid": "VUID-vkCmdBlitImage-srcImage-01561",
-          "text": " <code>srcImage</code> <strong class=\"purple\">must</strong> not use a format listed in <a href=\"#formats-requiring-sampler-ycbcr-conversion\">Formats requiring sampler Y′C<sub>B</sub>C<sub>R</sub> conversion for <code>VK_IMAGE_ASPECT_COLOR_BIT</code> image views</a>"
+          "vuid": "VUID-vkCmdBlitImage-srcImage-06421",
+          "text": " <code>srcImage</code> <strong class=\"purple\">must</strong> not use a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">format that requires a sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion</a>"
         },
         {
-          "vuid": "VUID-vkCmdBlitImage-dstImage-01562",
-          "text": " <code>dstImage</code> <strong class=\"purple\">must</strong> not use a format listed in <a href=\"#formats-requiring-sampler-ycbcr-conversion\">Formats requiring sampler Y′C<sub>B</sub>C<sub>R</sub> conversion for <code>VK_IMAGE_ASPECT_COLOR_BIT</code> image views</a>"
+          "vuid": "VUID-vkCmdBlitImage-dstImage-06422",
+          "text": " <code>dstImage</code> <strong class=\"purple\">must</strong> not use a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">format that requires a sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion</a>"
         }
       ],
       "!(VK_KHR_shared_presentable_image)": [
@@ -24835,12 +24941,12 @@
       ],
       "(VK_KHR_copy_commands2)+(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
         {
-          "vuid": "VUID-VkBlitImageInfo2KHR-srcImage-01561",
-          "text": " <code>srcImage</code> <strong class=\"purple\">must</strong> not use a format listed in <a href=\"#formats-requiring-sampler-ycbcr-conversion\">Formats requiring sampler Y′C<sub>B</sub>C<sub>R</sub> conversion for <code>VK_IMAGE_ASPECT_COLOR_BIT</code> image views</a>"
+          "vuid": "VUID-VkBlitImageInfo2KHR-srcImage-06421",
+          "text": " <code>srcImage</code> <strong class=\"purple\">must</strong> not use a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">format that requires a sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion</a>"
         },
         {
-          "vuid": "VUID-VkBlitImageInfo2KHR-dstImage-01562",
-          "text": " <code>dstImage</code> <strong class=\"purple\">must</strong> not use a format listed in <a href=\"#formats-requiring-sampler-ycbcr-conversion\">Formats requiring sampler Y′C<sub>B</sub>C<sub>R</sub> conversion for <code>VK_IMAGE_ASPECT_COLOR_BIT</code> image views</a>"
+          "vuid": "VUID-VkBlitImageInfo2KHR-dstImage-06422",
+          "text": " <code>dstImage</code> <strong class=\"purple\">must</strong> not use a <a href=\"#formats-requiring-sampler-ycbcr-conversion\">format that requires a sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion</a>"
         }
       ],
       "(VK_KHR_copy_commands2)+!(VK_KHR_shared_presentable_image)": [
@@ -25612,7 +25718,7 @@
       "(VK_KHR_portability_subset)": [
         {
           "vuid": "VUID-VkPipelineInputAssemblyStateCreateInfo-triangleFans-04452",
-          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">[VK_KHR_portability_subset]</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>triangleFans</code> is <code>VK_FALSE</code>, <code>topology</code> <strong class=\"purple\">must</strong> not be <code>VK_PRIMITIVE_TOPOLOGY_TRIANGLE_FAN</code>"
+          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">VK_KHR_portability_subset</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>triangleFans</code> is <code>VK_FALSE</code>, <code>topology</code> <strong class=\"purple\">must</strong> not be <code>VK_PRIMITIVE_TOPOLOGY_TRIANGLE_FAN</code>"
         }
       ]
     },
@@ -25733,10 +25839,6 @@
         {
           "vuid": "VUID-vkCmdDraw-None-02697",
           "text": " For each set <em>n</em> that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a descriptor set <strong class=\"purple\">must</strong> have been bound to <em>n</em> at the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for set <em>n</em>, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
-        },
-        {
-          "vuid": "VUID-vkCmdDraw-None-02698",
-          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
         },
         {
           "vuid": "VUID-vkCmdDraw-None-02699",
@@ -25861,6 +25963,28 @@
         {
           "vuid": "VUID-vkCmdDraw-flags-02696",
           "text": " Any <a href=\"#VkImage\">VkImage</a> created with a <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>flags</code> containing <code>VK_IMAGE_CREATE_CORNER_SAMPLED_BIT_NV</code> sampled as a result of this command <strong class=\"purple\">must</strong> only be sampled using a <a href=\"#VkSamplerAddressMode\">VkSamplerAddressMode</a> of <code>VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE</code>"
+        }
+      ],
+      "(VK_KHR_format_feature_flags2)": [
+        {
+          "vuid": "VUID-vkCmdDraw-OpTypeImage-06423",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT_KHR</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDraw-OpTypeImage-06424",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT_KHR</code>"
+        }
+      ],
+      "!(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdDraw-None-02698",
+          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
+        }
+      ],
+      "(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdDraw-maintenance4-06425",
+          "text": " If the <a href=\"#features-maintenance4\"><code>maintenance4</code></a> feature is not enabled, then for each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
         }
       ],
       "(VK_VERSION_1_1)": [
@@ -26039,10 +26163,6 @@
           "text": " For each set <em>n</em> that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a descriptor set <strong class=\"purple\">must</strong> have been bound to <em>n</em> at the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for set <em>n</em>, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
         },
         {
-          "vuid": "VUID-vkCmdDrawIndexed-None-02698",
-          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
-        },
-        {
           "vuid": "VUID-vkCmdDrawIndexed-None-02699",
           "text": " Descriptors in each bound descriptor set, specified via <code>vkCmdBindDescriptorSets</code>, <strong class=\"purple\">must</strong> be valid if they are statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command"
         },
@@ -26169,6 +26289,28 @@
         {
           "vuid": "VUID-vkCmdDrawIndexed-flags-02696",
           "text": " Any <a href=\"#VkImage\">VkImage</a> created with a <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>flags</code> containing <code>VK_IMAGE_CREATE_CORNER_SAMPLED_BIT_NV</code> sampled as a result of this command <strong class=\"purple\">must</strong> only be sampled using a <a href=\"#VkSamplerAddressMode\">VkSamplerAddressMode</a> of <code>VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE</code>"
+        }
+      ],
+      "(VK_KHR_format_feature_flags2)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexed-OpTypeImage-06423",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT_KHR</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexed-OpTypeImage-06424",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT_KHR</code>"
+        }
+      ],
+      "!(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexed-None-02698",
+          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
+        }
+      ],
+      "(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexed-maintenance4-06425",
+          "text": " If the <a href=\"#features-maintenance4\"><code>maintenance4</code></a> feature is not enabled, then for each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
         }
       ],
       "(VK_VERSION_1_1)": [
@@ -26347,10 +26489,6 @@
           "text": " For each set <em>n</em> that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a descriptor set <strong class=\"purple\">must</strong> have been bound to <em>n</em> at the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for set <em>n</em>, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
         },
         {
-          "vuid": "VUID-vkCmdDrawMultiEXT-None-02698",
-          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
-        },
-        {
           "vuid": "VUID-vkCmdDrawMultiEXT-None-02699",
           "text": " Descriptors in each bound descriptor set, specified via <code>vkCmdBindDescriptorSets</code>, <strong class=\"purple\">must</strong> be valid if they are statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command"
         },
@@ -26489,6 +26627,28 @@
         {
           "vuid": "VUID-vkCmdDrawMultiEXT-flags-02696",
           "text": " Any <a href=\"#VkImage\">VkImage</a> created with a <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>flags</code> containing <code>VK_IMAGE_CREATE_CORNER_SAMPLED_BIT_NV</code> sampled as a result of this command <strong class=\"purple\">must</strong> only be sampled using a <a href=\"#VkSamplerAddressMode\">VkSamplerAddressMode</a> of <code>VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE</code>"
+        }
+      ],
+      "(VK_EXT_multi_draw)+(VK_KHR_format_feature_flags2)": [
+        {
+          "vuid": "VUID-vkCmdDrawMultiEXT-OpTypeImage-06423",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT_KHR</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMultiEXT-OpTypeImage-06424",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT_KHR</code>"
+        }
+      ],
+      "(VK_EXT_multi_draw)+!(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdDrawMultiEXT-None-02698",
+          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
+        }
+      ],
+      "(VK_EXT_multi_draw)+(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdDrawMultiEXT-maintenance4-06425",
+          "text": " If the <a href=\"#features-maintenance4\"><code>maintenance4</code></a> feature is not enabled, then for each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
         }
       ],
       "(VK_EXT_multi_draw)+(VK_VERSION_1_1)": [
@@ -26667,10 +26827,6 @@
           "text": " For each set <em>n</em> that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a descriptor set <strong class=\"purple\">must</strong> have been bound to <em>n</em> at the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for set <em>n</em>, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
         },
         {
-          "vuid": "VUID-vkCmdDrawMultiIndexedEXT-None-02698",
-          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
-        },
-        {
           "vuid": "VUID-vkCmdDrawMultiIndexedEXT-None-02699",
           "text": " Descriptors in each bound descriptor set, specified via <code>vkCmdBindDescriptorSets</code>, <strong class=\"purple\">must</strong> be valid if they are statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command"
         },
@@ -26817,6 +26973,28 @@
         {
           "vuid": "VUID-vkCmdDrawMultiIndexedEXT-flags-02696",
           "text": " Any <a href=\"#VkImage\">VkImage</a> created with a <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>flags</code> containing <code>VK_IMAGE_CREATE_CORNER_SAMPLED_BIT_NV</code> sampled as a result of this command <strong class=\"purple\">must</strong> only be sampled using a <a href=\"#VkSamplerAddressMode\">VkSamplerAddressMode</a> of <code>VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE</code>"
+        }
+      ],
+      "(VK_EXT_multi_draw)+(VK_KHR_format_feature_flags2)": [
+        {
+          "vuid": "VUID-vkCmdDrawMultiIndexedEXT-OpTypeImage-06423",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT_KHR</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMultiIndexedEXT-OpTypeImage-06424",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT_KHR</code>"
+        }
+      ],
+      "(VK_EXT_multi_draw)+!(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdDrawMultiIndexedEXT-None-02698",
+          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
+        }
+      ],
+      "(VK_EXT_multi_draw)+(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdDrawMultiIndexedEXT-maintenance4-06425",
+          "text": " If the <a href=\"#features-maintenance4\"><code>maintenance4</code></a> feature is not enabled, then for each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
         }
       ],
       "(VK_EXT_multi_draw)+(VK_VERSION_1_1)": [
@@ -26995,10 +27173,6 @@
           "text": " For each set <em>n</em> that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a descriptor set <strong class=\"purple\">must</strong> have been bound to <em>n</em> at the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for set <em>n</em>, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
         },
         {
-          "vuid": "VUID-vkCmdDrawIndirect-None-02698",
-          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
-        },
-        {
           "vuid": "VUID-vkCmdDrawIndirect-None-02699",
           "text": " Descriptors in each bound descriptor set, specified via <code>vkCmdBindDescriptorSets</code>, <strong class=\"purple\">must</strong> be valid if they are statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command"
         },
@@ -27165,6 +27339,28 @@
         {
           "vuid": "VUID-vkCmdDrawIndirect-flags-02696",
           "text": " Any <a href=\"#VkImage\">VkImage</a> created with a <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>flags</code> containing <code>VK_IMAGE_CREATE_CORNER_SAMPLED_BIT_NV</code> sampled as a result of this command <strong class=\"purple\">must</strong> only be sampled using a <a href=\"#VkSamplerAddressMode\">VkSamplerAddressMode</a> of <code>VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE</code>"
+        }
+      ],
+      "(VK_KHR_format_feature_flags2)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirect-OpTypeImage-06423",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT_KHR</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirect-OpTypeImage-06424",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT_KHR</code>"
+        }
+      ],
+      "!(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirect-None-02698",
+          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
+        }
+      ],
+      "(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirect-maintenance4-06425",
+          "text": " If the <a href=\"#features-maintenance4\"><code>maintenance4</code></a> feature is not enabled, then for each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
         }
       ],
       "(VK_VERSION_1_1)": [
@@ -27345,10 +27541,6 @@
         {
           "vuid": "VUID-vkCmdDrawIndirectCount-None-02697",
           "text": " For each set <em>n</em> that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a descriptor set <strong class=\"purple\">must</strong> have been bound to <em>n</em> at the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for set <em>n</em>, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
-        },
-        {
-          "vuid": "VUID-vkCmdDrawIndirectCount-None-02698",
-          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCount-None-02699",
@@ -27535,6 +27727,28 @@
           "text": " Any <a href=\"#VkImage\">VkImage</a> created with a <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>flags</code> containing <code>VK_IMAGE_CREATE_CORNER_SAMPLED_BIT_NV</code> sampled as a result of this command <strong class=\"purple\">must</strong> only be sampled using a <a href=\"#VkSamplerAddressMode\">VkSamplerAddressMode</a> of <code>VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE</code>"
         }
       ],
+      "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_KHR_format_feature_flags2)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCount-OpTypeImage-06423",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT_KHR</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCount-OpTypeImage-06424",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT_KHR</code>"
+        }
+      ],
+      "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+!(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCount-None-02698",
+          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
+        }
+      ],
+      "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCount-maintenance4-06425",
+          "text": " If the <a href=\"#features-maintenance4\"><code>maintenance4</code></a> feature is not enabled, then for each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
+        }
+      ],
       "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdDrawIndirectCount-commandBuffer-02707",
@@ -27709,10 +27923,6 @@
           "text": " For each set <em>n</em> that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a descriptor set <strong class=\"purple\">must</strong> have been bound to <em>n</em> at the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for set <em>n</em>, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
         },
         {
-          "vuid": "VUID-vkCmdDrawIndexedIndirect-None-02698",
-          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
-        },
-        {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-None-02699",
           "text": " Descriptors in each bound descriptor set, specified via <code>vkCmdBindDescriptorSets</code>, <strong class=\"purple\">must</strong> be valid if they are statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command"
         },
@@ -27879,6 +28089,28 @@
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-flags-02696",
           "text": " Any <a href=\"#VkImage\">VkImage</a> created with a <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>flags</code> containing <code>VK_IMAGE_CREATE_CORNER_SAMPLED_BIT_NV</code> sampled as a result of this command <strong class=\"purple\">must</strong> only be sampled using a <a href=\"#VkSamplerAddressMode\">VkSamplerAddressMode</a> of <code>VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE</code>"
+        }
+      ],
+      "(VK_KHR_format_feature_flags2)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirect-OpTypeImage-06423",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT_KHR</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirect-OpTypeImage-06424",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT_KHR</code>"
+        }
+      ],
+      "!(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirect-None-02698",
+          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
+        }
+      ],
+      "(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirect-maintenance4-06425",
+          "text": " If the <a href=\"#features-maintenance4\"><code>maintenance4</code></a> feature is not enabled, then for each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
         }
       ],
       "(VK_VERSION_1_1)": [
@@ -28065,10 +28297,6 @@
           "text": " For each set <em>n</em> that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a descriptor set <strong class=\"purple\">must</strong> have been bound to <em>n</em> at the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for set <em>n</em>, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
         },
         {
-          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-None-02698",
-          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
-        },
-        {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount-None-02699",
           "text": " Descriptors in each bound descriptor set, specified via <code>vkCmdBindDescriptorSets</code>, <strong class=\"purple\">must</strong> be valid if they are statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command"
         },
@@ -28253,6 +28481,28 @@
           "text": " Any <a href=\"#VkImage\">VkImage</a> created with a <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>flags</code> containing <code>VK_IMAGE_CREATE_CORNER_SAMPLED_BIT_NV</code> sampled as a result of this command <strong class=\"purple\">must</strong> only be sampled using a <a href=\"#VkSamplerAddressMode\">VkSamplerAddressMode</a> of <code>VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE</code>"
         }
       ],
+      "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_KHR_format_feature_flags2)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-OpTypeImage-06423",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT_KHR</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-OpTypeImage-06424",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT_KHR</code>"
+        }
+      ],
+      "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+!(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-None-02698",
+          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
+        }
+      ],
+      "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-maintenance4-06425",
+          "text": " If the <a href=\"#features-maintenance4\"><code>maintenance4</code></a> feature is not enabled, then for each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
+        }
+      ],
       "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount-commandBuffer-02707",
@@ -28427,10 +28677,6 @@
           "text": " For each set <em>n</em> that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a descriptor set <strong class=\"purple\">must</strong> have been bound to <em>n</em> at the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for set <em>n</em>, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
         },
         {
-          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-None-02698",
-          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
-        },
-        {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-None-02699",
           "text": " Descriptors in each bound descriptor set, specified via <code>vkCmdBindDescriptorSets</code>, <strong class=\"purple\">must</strong> be valid if they are statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command"
         },
@@ -28585,6 +28831,28 @@
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-flags-02696",
           "text": " Any <a href=\"#VkImage\">VkImage</a> created with a <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>flags</code> containing <code>VK_IMAGE_CREATE_CORNER_SAMPLED_BIT_NV</code> sampled as a result of this command <strong class=\"purple\">must</strong> only be sampled using a <a href=\"#VkSamplerAddressMode\">VkSamplerAddressMode</a> of <code>VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE</code>"
+        }
+      ],
+      "(VK_EXT_transform_feedback)+(VK_KHR_format_feature_flags2)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-OpTypeImage-06423",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT_KHR</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-OpTypeImage-06424",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT_KHR</code>"
+        }
+      ],
+      "(VK_EXT_transform_feedback)+!(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-None-02698",
+          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
+        }
+      ],
+      "(VK_EXT_transform_feedback)+(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-maintenance4-06425",
+          "text": " If the <a href=\"#features-maintenance4\"><code>maintenance4</code></a> feature is not enabled, then for each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
         }
       ],
       "(VK_EXT_transform_feedback)+(VK_VERSION_1_1)": [
@@ -28843,10 +29111,6 @@
           "text": " For each set <em>n</em> that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a descriptor set <strong class=\"purple\">must</strong> have been bound to <em>n</em> at the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for set <em>n</em>, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
         },
         {
-          "vuid": "VUID-vkCmdDrawMeshTasksNV-None-02698",
-          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
-        },
-        {
           "vuid": "VUID-vkCmdDrawMeshTasksNV-None-02699",
           "text": " Descriptors in each bound descriptor set, specified via <code>vkCmdBindDescriptorSets</code>, <strong class=\"purple\">must</strong> be valid if they are statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command"
         },
@@ -28961,6 +29225,28 @@
         {
           "vuid": "VUID-vkCmdDrawMeshTasksNV-flags-02696",
           "text": " Any <a href=\"#VkImage\">VkImage</a> created with a <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>flags</code> containing <code>VK_IMAGE_CREATE_CORNER_SAMPLED_BIT_NV</code> sampled as a result of this command <strong class=\"purple\">must</strong> only be sampled using a <a href=\"#VkSamplerAddressMode\">VkSamplerAddressMode</a> of <code>VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE</code>"
+        }
+      ],
+      "(VK_NV_mesh_shader)+(VK_KHR_format_feature_flags2)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksNV-OpTypeImage-06423",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT_KHR</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksNV-OpTypeImage-06424",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT_KHR</code>"
+        }
+      ],
+      "(VK_NV_mesh_shader)+!(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksNV-None-02698",
+          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
+        }
+      ],
+      "(VK_NV_mesh_shader)+(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksNV-maintenance4-06425",
+          "text": " If the <a href=\"#features-maintenance4\"><code>maintenance4</code></a> feature is not enabled, then for each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
         }
       ],
       "(VK_NV_mesh_shader)+(VK_VERSION_1_1)": [
@@ -29127,10 +29413,6 @@
           "text": " For each set <em>n</em> that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a descriptor set <strong class=\"purple\">must</strong> have been bound to <em>n</em> at the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for set <em>n</em>, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
         },
         {
-          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-None-02698",
-          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
-        },
-        {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-None-02699",
           "text": " Descriptors in each bound descriptor set, specified via <code>vkCmdBindDescriptorSets</code>, <strong class=\"purple\">must</strong> be valid if they are statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command"
         },
@@ -29281,6 +29563,28 @@
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-flags-02696",
           "text": " Any <a href=\"#VkImage\">VkImage</a> created with a <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>flags</code> containing <code>VK_IMAGE_CREATE_CORNER_SAMPLED_BIT_NV</code> sampled as a result of this command <strong class=\"purple\">must</strong> only be sampled using a <a href=\"#VkSamplerAddressMode\">VkSamplerAddressMode</a> of <code>VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE</code>"
+        }
+      ],
+      "(VK_NV_mesh_shader)+(VK_KHR_format_feature_flags2)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-OpTypeImage-06423",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT_KHR</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-OpTypeImage-06424",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT_KHR</code>"
+        }
+      ],
+      "(VK_NV_mesh_shader)+!(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-None-02698",
+          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
+        }
+      ],
+      "(VK_NV_mesh_shader)+(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-maintenance4-06425",
+          "text": " If the <a href=\"#features-maintenance4\"><code>maintenance4</code></a> feature is not enabled, then for each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
         }
       ],
       "(VK_NV_mesh_shader)+(VK_VERSION_1_1)": [
@@ -29459,10 +29763,6 @@
           "text": " For each set <em>n</em> that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a descriptor set <strong class=\"purple\">must</strong> have been bound to <em>n</em> at the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for set <em>n</em>, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
         },
         {
-          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-None-02698",
-          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
-        },
-        {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-None-02699",
           "text": " Descriptors in each bound descriptor set, specified via <code>vkCmdBindDescriptorSets</code>, <strong class=\"purple\">must</strong> be valid if they are statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command"
         },
@@ -29633,6 +29933,28 @@
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-flags-02696",
           "text": " Any <a href=\"#VkImage\">VkImage</a> created with a <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>flags</code> containing <code>VK_IMAGE_CREATE_CORNER_SAMPLED_BIT_NV</code> sampled as a result of this command <strong class=\"purple\">must</strong> only be sampled using a <a href=\"#VkSamplerAddressMode\">VkSamplerAddressMode</a> of <code>VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE</code>"
+        }
+      ],
+      "(VK_NV_mesh_shader)+(VK_KHR_format_feature_flags2)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-OpTypeImage-06423",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT_KHR</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-OpTypeImage-06424",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT_KHR</code>"
+        }
+      ],
+      "(VK_NV_mesh_shader)+!(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-None-02698",
+          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
+        }
+      ],
+      "(VK_NV_mesh_shader)+(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-maintenance4-06425",
+          "text": " If the <a href=\"#features-maintenance4\"><code>maintenance4</code></a> feature is not enabled, then for each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
         }
       ],
       "(VK_NV_mesh_shader)+(VK_VERSION_1_1)": [
@@ -29856,7 +30178,7 @@
       "(VK_KHR_portability_subset)": [
         {
           "vuid": "VUID-VkVertexInputBindingDescription-stride-04456",
-          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">[VK_KHR_portability_subset]</a></code> extension is enabled, <code>stride</code> <strong class=\"purple\">must</strong> be a multiple of, and at least as large as, <a href=\"#VkPhysicalDevicePortabilitySubsetPropertiesKHR\">VkPhysicalDevicePortabilitySubsetPropertiesKHR</a>::<code>minVertexInputBindingStrideAlignment</code>"
+          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">VK_KHR_portability_subset</a></code> extension is enabled, <code>stride</code> <strong class=\"purple\">must</strong> be a multiple of, and at least as large as, <a href=\"#VkPhysicalDevicePortabilitySubsetPropertiesKHR\">VkPhysicalDevicePortabilitySubsetPropertiesKHR</a>::<code>minVertexInputBindingStrideAlignment</code>"
         }
       ]
     },
@@ -29886,7 +30208,7 @@
       "(VK_KHR_portability_subset)": [
         {
           "vuid": "VUID-VkVertexInputAttributeDescription-vertexAttributeAccessBeyondStride-04457",
-          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">[VK_KHR_portability_subset]</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>vertexAttributeAccessBeyondStride</code> is <code>VK_FALSE</code>, the sum of <code>offset</code> plus the size of the vertex attribute data described by <code>format</code> <strong class=\"purple\">must</strong> not be greater than <code>stride</code> in the <a href=\"#VkVertexInputBindingDescription\">VkVertexInputBindingDescription</a> referenced in <code>binding</code>"
+          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">VK_KHR_portability_subset</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>vertexAttributeAccessBeyondStride</code> is <code>VK_FALSE</code>, the sum of <code>offset</code> plus the size of the vertex attribute data described by <code>format</code> <strong class=\"purple\">must</strong> not be greater than <code>stride</code> in the <a href=\"#VkVertexInputBindingDescription\">VkVertexInputBindingDescription</a> referenced in <code>binding</code>"
         }
       ]
     },
@@ -30004,7 +30326,7 @@
       "(VK_EXT_vertex_input_dynamic_state)+(VK_KHR_portability_subset)": [
         {
           "vuid": "VUID-VkVertexInputAttributeDescription2EXT-vertexAttributeAccessBeyondStride-04806",
-          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">[VK_KHR_portability_subset]</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>vertexAttributeAccessBeyondStride</code> is <code>VK_FALSE</code>, the sum of <code>offset</code> plus the size of the vertex attribute data described by <code>format</code> <strong class=\"purple\">must</strong> not be greater than <code>stride</code> in the <a href=\"#VkVertexInputBindingDescription2EXT\">VkVertexInputBindingDescription2EXT</a> referenced in <code>binding</code>"
+          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">VK_KHR_portability_subset</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>vertexAttributeAccessBeyondStride</code> is <code>VK_FALSE</code>, the sum of <code>offset</code> plus the size of the vertex attribute data described by <code>format</code> <strong class=\"purple\">must</strong> not be greater than <code>stride</code> in the <a href=\"#VkVertexInputBindingDescription2EXT\">VkVertexInputBindingDescription2EXT</a> referenced in <code>binding</code>"
         }
       ]
     },
@@ -30880,7 +31202,7 @@
       "(VK_KHR_portability_subset)": [
         {
           "vuid": "VUID-VkPipelineRasterizationStateCreateInfo-pointPolygons-04458",
-          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">[VK_KHR_portability_subset]</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>pointPolygons</code> is <code>VK_FALSE</code>, and <code>rasterizerDiscardEnable</code> is <code>VK_FALSE</code>, <code>polygonMode</code> <strong class=\"purple\">must</strong> not be <code>VK_POLYGON_MODE_POINT</code>"
+          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">VK_KHR_portability_subset</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>pointPolygons</code> is <code>VK_FALSE</code>, and <code>rasterizerDiscardEnable</code> is <code>VK_FALSE</code>, <code>polygonMode</code> <strong class=\"purple\">must</strong> not be <code>VK_POLYGON_MODE_POINT</code>"
         }
       ]
     },
@@ -31896,7 +32218,7 @@
       "(VK_KHR_portability_subset)": [
         {
           "vuid": "VUID-VkPipelineDepthStencilStateCreateInfo-separateStencilMaskRef-04453",
-          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">[VK_KHR_portability_subset]</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>separateStencilMaskRef</code> is <code>VK_FALSE</code>, and the value of <a href=\"#VkPipelineDepthStencilStateCreateInfo\">VkPipelineDepthStencilStateCreateInfo</a>::<code>stencilTestEnable</code> is <code>VK_TRUE</code>, and the value of <a href=\"#VkPipelineRasterizationStateCreateInfo\">VkPipelineRasterizationStateCreateInfo</a>::<code>cullMode</code> is <code>VK_CULL_MODE_NONE</code>, the value of <code>reference</code> in each of the <a href=\"#VkStencilOpState\">VkStencilOpState</a> structs in <code>front</code> and <code>back</code> <strong class=\"purple\">must</strong> be the same"
+          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">VK_KHR_portability_subset</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>separateStencilMaskRef</code> is <code>VK_FALSE</code>, and the value of <a href=\"#VkPipelineDepthStencilStateCreateInfo\">VkPipelineDepthStencilStateCreateInfo</a>::<code>stencilTestEnable</code> is <code>VK_TRUE</code>, and the value of <a href=\"#VkPipelineRasterizationStateCreateInfo\">VkPipelineRasterizationStateCreateInfo</a>::<code>cullMode</code> is <code>VK_CULL_MODE_NONE</code>, the value of <code>reference</code> in each of the <a href=\"#VkStencilOpState\">VkStencilOpState</a> structs in <code>front</code> and <code>back</code> <strong class=\"purple\">must</strong> be the same"
         }
       ]
     },
@@ -32372,11 +32694,11 @@
       "(VK_KHR_portability_subset)": [
         {
           "vuid": "VUID-VkPipelineColorBlendAttachmentState-constantAlphaColorBlendFactors-04454",
-          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">[VK_KHR_portability_subset]</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>constantAlphaColorBlendFactors</code> is <code>VK_FALSE</code>, <code>srcColorBlendFactor</code> <strong class=\"purple\">must</strong> not be <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code> or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>"
+          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">VK_KHR_portability_subset</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>constantAlphaColorBlendFactors</code> is <code>VK_FALSE</code>, <code>srcColorBlendFactor</code> <strong class=\"purple\">must</strong> not be <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code> or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>"
         },
         {
           "vuid": "VUID-VkPipelineColorBlendAttachmentState-constantAlphaColorBlendFactors-04455",
-          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">[VK_KHR_portability_subset]</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>constantAlphaColorBlendFactors</code> is <code>VK_FALSE</code>, <code>dstColorBlendFactor</code> <strong class=\"purple\">must</strong> not be <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code> or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>"
+          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">VK_KHR_portability_subset</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>constantAlphaColorBlendFactors</code> is <code>VK_FALSE</code>, <code>dstColorBlendFactor</code> <strong class=\"purple\">must</strong> not be <code>VK_BLEND_FACTOR_CONSTANT_ALPHA</code> or <code>VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA</code>"
         }
       ]
     },
@@ -32515,10 +32837,6 @@
           "text": " For each set <em>n</em> that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a descriptor set <strong class=\"purple\">must</strong> have been bound to <em>n</em> at the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for set <em>n</em>, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
         },
         {
-          "vuid": "VUID-vkCmdDispatch-None-02698",
-          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
-        },
-        {
           "vuid": "VUID-vkCmdDispatch-None-02699",
           "text": " Descriptors in each bound descriptor set, specified via <code>vkCmdBindDescriptorSets</code>, <strong class=\"purple\">must</strong> be valid if they are statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command"
         },
@@ -32619,6 +32937,28 @@
           "text": " Any <a href=\"#VkImage\">VkImage</a> created with a <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>flags</code> containing <code>VK_IMAGE_CREATE_CORNER_SAMPLED_BIT_NV</code> sampled as a result of this command <strong class=\"purple\">must</strong> only be sampled using a <a href=\"#VkSamplerAddressMode\">VkSamplerAddressMode</a> of <code>VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE</code>"
         }
       ],
+      "(VK_KHR_format_feature_flags2)": [
+        {
+          "vuid": "VUID-vkCmdDispatch-OpTypeImage-06423",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT_KHR</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDispatch-OpTypeImage-06424",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT_KHR</code>"
+        }
+      ],
+      "!(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdDispatch-None-02698",
+          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
+        }
+      ],
+      "(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdDispatch-maintenance4-06425",
+          "text": " If the <a href=\"#features-maintenance4\"><code>maintenance4</code></a> feature is not enabled, then for each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
+        }
+      ],
       "(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdDispatch-commandBuffer-02707",
@@ -32681,10 +33021,6 @@
         {
           "vuid": "VUID-vkCmdDispatchIndirect-None-02697",
           "text": " For each set <em>n</em> that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a descriptor set <strong class=\"purple\">must</strong> have been bound to <em>n</em> at the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for set <em>n</em>, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
-        },
-        {
-          "vuid": "VUID-vkCmdDispatchIndirect-None-02698",
-          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
         },
         {
           "vuid": "VUID-vkCmdDispatchIndirect-None-02699",
@@ -32799,6 +33135,28 @@
           "text": " Any <a href=\"#VkImage\">VkImage</a> created with a <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>flags</code> containing <code>VK_IMAGE_CREATE_CORNER_SAMPLED_BIT_NV</code> sampled as a result of this command <strong class=\"purple\">must</strong> only be sampled using a <a href=\"#VkSamplerAddressMode\">VkSamplerAddressMode</a> of <code>VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE</code>"
         }
       ],
+      "(VK_KHR_format_feature_flags2)": [
+        {
+          "vuid": "VUID-vkCmdDispatchIndirect-OpTypeImage-06423",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT_KHR</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDispatchIndirect-OpTypeImage-06424",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT_KHR</code>"
+        }
+      ],
+      "!(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdDispatchIndirect-None-02698",
+          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
+        }
+      ],
+      "(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdDispatchIndirect-maintenance4-06425",
+          "text": " If the <a href=\"#features-maintenance4\"><code>maintenance4</code></a> feature is not enabled, then for each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
+        }
+      ],
       "(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdDispatchIndirect-commandBuffer-02707",
@@ -32869,10 +33227,6 @@
         {
           "vuid": "VUID-vkCmdDispatchBase-None-02697",
           "text": " For each set <em>n</em> that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a descriptor set <strong class=\"purple\">must</strong> have been bound to <em>n</em> at the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for set <em>n</em>, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
-        },
-        {
-          "vuid": "VUID-vkCmdDispatchBase-None-02698",
-          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
         },
         {
           "vuid": "VUID-vkCmdDispatchBase-None-02699",
@@ -32991,6 +33345,28 @@
           "text": " Any <a href=\"#VkImage\">VkImage</a> created with a <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>flags</code> containing <code>VK_IMAGE_CREATE_CORNER_SAMPLED_BIT_NV</code> sampled as a result of this command <strong class=\"purple\">must</strong> only be sampled using a <a href=\"#VkSamplerAddressMode\">VkSamplerAddressMode</a> of <code>VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE</code>"
         }
       ],
+      "(VK_VERSION_1_1,VK_KHR_device_group)+(VK_KHR_format_feature_flags2)": [
+        {
+          "vuid": "VUID-vkCmdDispatchBase-OpTypeImage-06423",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT_KHR</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdDispatchBase-OpTypeImage-06424",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT_KHR</code>"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_device_group)+!(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdDispatchBase-None-02698",
+          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_device_group)+(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdDispatchBase-maintenance4-06425",
+          "text": " If the <a href=\"#features-maintenance4\"><code>maintenance4</code></a> feature is not enabled, then for each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
+        }
+      ],
       "(VK_VERSION_1_1,VK_KHR_device_group)+(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdDispatchBase-commandBuffer-02707",
@@ -33053,10 +33429,6 @@
         {
           "vuid": "VUID-vkCmdSubpassShadingHUAWEI-None-02697",
           "text": " For each set <em>n</em> that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a descriptor set <strong class=\"purple\">must</strong> have been bound to <em>n</em> at the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for set <em>n</em>, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
-        },
-        {
-          "vuid": "VUID-vkCmdSubpassShadingHUAWEI-None-02698",
-          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
         },
         {
           "vuid": "VUID-vkCmdSubpassShadingHUAWEI-None-02699",
@@ -33149,6 +33521,28 @@
         {
           "vuid": "VUID-vkCmdSubpassShadingHUAWEI-flags-02696",
           "text": " Any <a href=\"#VkImage\">VkImage</a> created with a <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>flags</code> containing <code>VK_IMAGE_CREATE_CORNER_SAMPLED_BIT_NV</code> sampled as a result of this command <strong class=\"purple\">must</strong> only be sampled using a <a href=\"#VkSamplerAddressMode\">VkSamplerAddressMode</a> of <code>VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE</code>"
+        }
+      ],
+      "(VK_HUAWEI_subpass_shading)+(VK_KHR_format_feature_flags2)": [
+        {
+          "vuid": "VUID-vkCmdSubpassShadingHUAWEI-OpTypeImage-06423",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT_KHR</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdSubpassShadingHUAWEI-OpTypeImage-06424",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT_KHR</code>"
+        }
+      ],
+      "(VK_HUAWEI_subpass_shading)+!(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdSubpassShadingHUAWEI-None-02698",
+          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
+        }
+      ],
+      "(VK_HUAWEI_subpass_shading)+(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdSubpassShadingHUAWEI-maintenance4-06425",
+          "text": " If the <a href=\"#features-maintenance4\"><code>maintenance4</code></a> feature is not enabled, then for each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
         }
       ],
       "(VK_HUAWEI_subpass_shading)+(VK_VERSION_1_1)": [
@@ -33527,10 +33921,6 @@
           "text": " For each set <em>n</em> that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a descriptor set <strong class=\"purple\">must</strong> have been bound to <em>n</em> at the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for set <em>n</em>, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
         },
         {
-          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-None-02698",
-          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
-        },
-        {
           "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-None-02699",
           "text": " Descriptors in each bound descriptor set, specified via <code>vkCmdBindDescriptorSets</code>, <strong class=\"purple\">must</strong> be valid if they are statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command"
         },
@@ -33669,6 +34059,28 @@
         {
           "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-flags-02696",
           "text": " Any <a href=\"#VkImage\">VkImage</a> created with a <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>flags</code> containing <code>VK_IMAGE_CREATE_CORNER_SAMPLED_BIT_NV</code> sampled as a result of this command <strong class=\"purple\">must</strong> only be sampled using a <a href=\"#VkSamplerAddressMode\">VkSamplerAddressMode</a> of <code>VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE</code>"
+        }
+      ],
+      "(VK_NV_device_generated_commands)+(VK_KHR_format_feature_flags2)": [
+        {
+          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-OpTypeImage-06423",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT_KHR</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-OpTypeImage-06424",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT_KHR</code>"
+        }
+      ],
+      "(VK_NV_device_generated_commands)+!(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-None-02698",
+          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
+        }
+      ],
+      "(VK_NV_device_generated_commands)+(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-maintenance4-06425",
+          "text": " If the <a href=\"#features-maintenance4\"><code>maintenance4</code></a> feature is not enabled, then for each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
         }
       ],
       "(VK_NV_device_generated_commands)+(VK_VERSION_1_1)": [
@@ -34140,6 +34552,26 @@
         },
         {
           "vuid": "VUID-vkGetImageSparseMemoryRequirements2-pSparseMemoryRequirements-parameter",
+          "text": " If the value referenced by <code>pSparseMemoryRequirementCount</code> is not <code>0</code>, and <code>pSparseMemoryRequirements</code> is not <code>NULL</code>, <code>pSparseMemoryRequirements</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>pSparseMemoryRequirementCount</code> <a href=\"#VkSparseImageMemoryRequirements2\">VkSparseImageMemoryRequirements2</a> structures"
+        }
+      ]
+    },
+    "vkGetDeviceImageSparseMemoryRequirementsKHR": {
+      "(VK_VERSION_1_1,VK_KHR_get_memory_requirements2)+(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkGetDeviceImageSparseMemoryRequirementsKHR-device-parameter",
+          "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDevice\">VkDevice</a> handle"
+        },
+        {
+          "vuid": "VUID-vkGetDeviceImageSparseMemoryRequirementsKHR-pInfo-parameter",
+          "text": " <code>pInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkDeviceImageMemoryRequirementsKHR\">VkDeviceImageMemoryRequirementsKHR</a> structure"
+        },
+        {
+          "vuid": "VUID-vkGetDeviceImageSparseMemoryRequirementsKHR-pSparseMemoryRequirementCount-parameter",
+          "text": " <code>pSparseMemoryRequirementCount</code> <strong class=\"purple\">must</strong> be a valid pointer to a <code>uint32_t</code> value"
+        },
+        {
+          "vuid": "VUID-vkGetDeviceImageSparseMemoryRequirementsKHR-pSparseMemoryRequirements-parameter",
           "text": " If the value referenced by <code>pSparseMemoryRequirementCount</code> is not <code>0</code>, and <code>pSparseMemoryRequirements</code> is not <code>NULL</code>, <code>pSparseMemoryRequirements</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>pSparseMemoryRequirementCount</code> <a href=\"#VkSparseImageMemoryRequirements2\">VkSparseImageMemoryRequirements2</a> structures"
         }
       ]
@@ -39223,10 +39655,6 @@
           "text": " For each set <em>n</em> that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a descriptor set <strong class=\"purple\">must</strong> have been bound to <em>n</em> at the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for set <em>n</em>, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
         },
         {
-          "vuid": "VUID-vkCmdTraceRaysNV-None-02698",
-          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
-        },
-        {
           "vuid": "VUID-vkCmdTraceRaysNV-None-02699",
           "text": " Descriptors in each bound descriptor set, specified via <code>vkCmdBindDescriptorSets</code>, <strong class=\"purple\">must</strong> be valid if they are statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command"
         },
@@ -39431,6 +39859,28 @@
           "text": " Any <a href=\"#VkImage\">VkImage</a> created with a <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>flags</code> containing <code>VK_IMAGE_CREATE_CORNER_SAMPLED_BIT_NV</code> sampled as a result of this command <strong class=\"purple\">must</strong> only be sampled using a <a href=\"#VkSamplerAddressMode\">VkSamplerAddressMode</a> of <code>VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE</code>"
         }
       ],
+      "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_NV_ray_tracing)+(VK_KHR_format_feature_flags2)": [
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-OpTypeImage-06423",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT_KHR</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-OpTypeImage-06424",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT_KHR</code>"
+        }
+      ],
+      "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_NV_ray_tracing)+!(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-None-02698",
+          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
+        }
+      ],
+      "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_NV_ray_tracing)+(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-maintenance4-06425",
+          "text": " If the <a href=\"#features-maintenance4\"><code>maintenance4</code></a> feature is not enabled, then for each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
+        }
+      ],
       "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_NV_ray_tracing)+(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdTraceRaysNV-commandBuffer-02707",
@@ -39481,10 +39931,6 @@
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-None-02697",
           "text": " For each set <em>n</em> that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a descriptor set <strong class=\"purple\">must</strong> have been bound to <em>n</em> at the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for set <em>n</em>, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
-        },
-        {
-          "vuid": "VUID-vkCmdTraceRaysKHR-None-02698",
-          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-None-02699",
@@ -39727,6 +40173,28 @@
           "text": " Any <a href=\"#VkImage\">VkImage</a> created with a <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>flags</code> containing <code>VK_IMAGE_CREATE_CORNER_SAMPLED_BIT_NV</code> sampled as a result of this command <strong class=\"purple\">must</strong> only be sampled using a <a href=\"#VkSamplerAddressMode\">VkSamplerAddressMode</a> of <code>VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE</code>"
         }
       ],
+      "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_pipeline)+(VK_KHR_format_feature_flags2)": [
+        {
+          "vuid": "VUID-vkCmdTraceRaysKHR-OpTypeImage-06423",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT_KHR</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysKHR-OpTypeImage-06424",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT_KHR</code>"
+        }
+      ],
+      "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_pipeline)+!(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdTraceRaysKHR-None-02698",
+          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
+        }
+      ],
+      "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_pipeline)+(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdTraceRaysKHR-maintenance4-06425",
+          "text": " If the <a href=\"#features-maintenance4\"><code>maintenance4</code></a> feature is not enabled, then for each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
+        }
+      ],
       "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_pipeline)+(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-commandBuffer-02707",
@@ -39853,10 +40321,6 @@
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-None-02697",
           "text": " For each set <em>n</em> that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a descriptor set <strong class=\"purple\">must</strong> have been bound to <em>n</em> at the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for set <em>n</em>, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
-        },
-        {
-          "vuid": "VUID-vkCmdTraceRaysIndirectKHR-None-02698",
-          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-None-02699",
@@ -40101,6 +40565,28 @@
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-flags-02696",
           "text": " Any <a href=\"#VkImage\">VkImage</a> created with a <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>flags</code> containing <code>VK_IMAGE_CREATE_CORNER_SAMPLED_BIT_NV</code> sampled as a result of this command <strong class=\"purple\">must</strong> only be sampled using a <a href=\"#VkSamplerAddressMode\">VkSamplerAddressMode</a> of <code>VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE</code>"
+        }
+      ],
+      "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_pipeline)+(VK_KHR_format_feature_flags2)": [
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirectKHR-OpTypeImage-06423",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT_KHR</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirectKHR-OpTypeImage-06424",
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT_KHR</code>"
+        }
+      ],
+      "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_pipeline)+!(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirectKHR-None-02698",
+          "text": " For each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
+        }
+      ],
+      "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_pipeline)+(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirectKHR-maintenance4-06425",
+          "text": " If the <a href=\"#features-maintenance4\"><code>maintenance4</code></a> feature is not enabled, then for each push constant that is statically used by the <code>VkPipeline</code> bound to the pipeline bind point used by this command, a push constant value <strong class=\"purple\">must</strong> have been set for the same pipeline bind point, with a <code>VkPipelineLayout</code> that is compatible for push constants, with the <code>VkPipelineLayout</code> used to create the current <code>VkPipeline</code>, as described in <a href=\"#descriptorsets-compatibility\">Pipeline Layout Compatibility</a>"
         }
       ],
       "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_pipeline)+(VK_VERSION_1_1)": [
@@ -42394,6 +42880,22 @@
         }
       ]
     },
+    "VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT": {
+      "(VK_EXT_rgba10x6_formats)": [
+        {
+          "vuid": "VUID-VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RGBA10X6_FORMATS_FEATURES_EXT</code>"
+        }
+      ]
+    },
+    "VkPhysicalDeviceMaintenance4FeaturesKHR": {
+      "(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-VkPhysicalDeviceMaintenance4FeaturesKHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_FEATURES_KHR</code>"
+        }
+      ]
+    },
     "VkPhysicalDevicePushDescriptorPropertiesKHR": {
       "(VK_KHR_push_descriptor)": [
         {
@@ -42511,6 +43013,14 @@
         {
           "vuid": "VUID-VkPhysicalDeviceMaintenance3Properties-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES</code>"
+        }
+      ]
+    },
+    "VkPhysicalDeviceMaintenance4PropertiesKHR": {
+      "(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-VkPhysicalDeviceMaintenance4PropertiesKHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_PROPERTIES_KHR</code>"
         }
       ]
     },
@@ -42818,7 +43328,7 @@
         },
         {
           "vuid": "VUID-VkFormatProperties2-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDrmFormatModifierPropertiesListEXT\">VkDrmFormatModifierPropertiesListEXT</a>, <a href=\"#VkVideoProfileKHR\">VkVideoProfileKHR</a>, or <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDrmFormatModifierPropertiesList2EXT\">VkDrmFormatModifierPropertiesList2EXT</a>, <a href=\"#VkDrmFormatModifierPropertiesListEXT\">VkDrmFormatModifierPropertiesListEXT</a>, <a href=\"#VkFormatProperties3KHR\">VkFormatProperties3KHR</a>, <a href=\"#VkVideoProfileKHR\">VkVideoProfileKHR</a>, or <a href=\"#VkVideoProfilesKHR\">VkVideoProfilesKHR</a>"
         },
         {
           "vuid": "VUID-VkFormatProperties2-sType-unique",
@@ -42831,6 +43341,22 @@
         {
           "vuid": "VUID-VkDrmFormatModifierPropertiesListEXT-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT</code>"
+        }
+      ]
+    },
+    "VkDrmFormatModifierPropertiesList2EXT": {
+      "(VK_VERSION_1_1,VK_KHR_get_physical_device_properties2)+(VK_EXT_image_drm_format_modifier)+(VK_KHR_format_feature_flags2)": [
+        {
+          "vuid": "VUID-VkDrmFormatModifierPropertiesList2EXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_2_EXT</code>"
+        }
+      ]
+    },
+    "VkFormatProperties3KHR": {
+      "(VK_VERSION_1_1,VK_KHR_get_physical_device_properties2)+(VK_KHR_format_feature_flags2)": [
+        {
+          "vuid": "VUID-VkFormatProperties3KHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_3_KHR</code>"
         }
       ]
     },
@@ -44275,8 +44801,8 @@
           "text": " If <code>OpControlBarrier</code> is used in ray generation, intersection, any-hit, closest hit, miss, fragment, vertex, tessellation evaluation, or geometry shaders, the execution Scope <strong class=\"purple\">must</strong> be <code>Subgroup</code>"
         },
         {
-          "vuid": "VUID-StandaloneSpirv-LocalSize-04683",
-          "text": " For each compute shader entry point, either a <code>LocalSize</code> execution mode or an object decorated with the <code>WorkgroupSize</code> decoration <strong class=\"purple\">must</strong> be specified"
+          "vuid": "VUID-StandaloneSpirv-LocalSize-06426",
+          "text": " For each compute shader entry point, either a <code>LocalSize</code> or <code>LocalSizeId</code> execution mode, or an object decorated with the <code>WorkgroupSize</code> decoration <strong class=\"purple\">must</strong> be specified"
         },
         {
           "vuid": "VUID-StandaloneSpirv-DerivativeGroupQuadsNV-04684",
@@ -44425,7 +44951,7 @@
           "text": " If <a href=\"#features-shaderDeviceClock\"><code>shaderDeviceClock</code></a> is not enabled, the <code>Device</code> scope <strong class=\"purple\">must</strong> not be used for <code>OpReadClockKHR</code>."
         }
       ],
-      "core": [
+      "!(VK_KHR_format_feature_flags2)": [
         {
           "vuid": "VUID-RuntimeSpirv-OpTypeImage-06269",
           "text": " If <a href=\"#features-shaderStorageImageWriteWithoutFormat\">shaderStorageImageWriteWithoutFormat</a> is not enabled, any variable created with a &#8220;Type&#8221; of <code>OpTypeImage</code> that has a &#8220;Sampled&#8221; operand of 2 and an &#8220;Image Format&#8221; operand of <code>Unknown</code> <strong class=\"purple\">must</strong> be decorated with <code>NonWritable</code>."
@@ -44436,11 +44962,21 @@
         },
         {
           "vuid": "VUID-RuntimeSpirv-BuiltIn-06271",
-          "text": " Any <code>BuiltIn</code> decoration that corresponds only to Vulkan features or extensions that have not been enabled <strong class=\"purple\">must</strong> not be used."
-        },
+          "text": " Any <code>BuiltIn</code> decoration that corresponds only to Vulkan features or"
+        }
+      ],
+      "core": [
         {
           "vuid": "VUID-RuntimeSpirv-Location-06272",
           "text": " The sum of <code>Location</code> and the number of locations the variable it decorates consumes <strong class=\"purple\">must</strong> be less than or equal to the value for the matching {ExecutionModel} defined in <a href=\"#interfaces-iointerfaces-limits\">Shader Input and Output Locations</a>"
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-Fragment-06427",
+          "text": " When blending is enabled and one of the dual source blend modes is in use, the maximum number of output attachments written to in the <code>Fragment</code> {ExecutionModel} <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#limits-maxFragmentDualSrcAttachments\"><code>maxFragmentDualSrcAttachments</code></a>"
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-Location-06428",
+          "text": " The maximum number of storage buffers, storage images, and output <code>Location</code> decorated color attachments written to in the <code>Fragment</code> {ExecutionModel} <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#limits-maxFragmentCombinedOutputResources\"><code>maxFragmentCombinedOutputResources</code></a>"
         },
         {
           "vuid": "VUID-RuntimeSpirv-DescriptorSet-06323",
@@ -44479,20 +45015,20 @@
           "text": " The second element of the <code>Offset</code> operand of <code>InterpolateAtOffset</code> <strong class=\"purple\">must</strong> be less than or equal to:"
         },
         {
-          "vuid": "VUID-RuntimeSpirv-x-06368",
-          "text": " The <code>x</code> size in <code>LocalSize</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceLimits</code>::<code>maxComputeWorkGroupSize</code>[0]"
+          "vuid": "VUID-RuntimeSpirv-x-06429",
+          "text": " The <code>x</code> size in <code>LocalSize</code> or <code>LocalSizeId</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceLimits</code>::<code>maxComputeWorkGroupSize</code>[0]"
         },
         {
-          "vuid": "VUID-RuntimeSpirv-y-06369",
-          "text": " The <code>y</code> size in <code>LocalSize</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceLimits</code>::<code>maxComputeWorkGroupSize</code>[1]"
+          "vuid": "VUID-RuntimeSpirv-y-06430",
+          "text": " The <code>y</code> size in <code>LocalSize</code> or <code>LocalSizeId</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceLimits</code>::<code>maxComputeWorkGroupSize</code>[1]"
         },
         {
-          "vuid": "VUID-RuntimeSpirv-z-06370",
-          "text": " The <code>z</code> size in <code>LocalSize</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceLimits</code>::<code>maxComputeWorkGroupSize</code>[2]"
+          "vuid": "VUID-RuntimeSpirv-z-06431",
+          "text": " The <code>z</code> size in <code>LocalSize</code> or <code>LocalSizeId</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceLimits</code>::<code>maxComputeWorkGroupSize</code>[2]"
         },
         {
-          "vuid": "VUID-RuntimeSpirv-x-06371",
-          "text": " The product of <code>x</code> size, <code>y</code> size, and <code>z</code> size in <code>LocalSize</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceLimits</code>::<code>maxComputeWorkGroupInvocations</code>"
+          "vuid": "VUID-RuntimeSpirv-x-06432",
+          "text": " The product of <code>x</code> size, <code>y</code> size, and <code>z</code> size in <code>LocalSize</code> or <code>LocalSizeId</code> <strong class=\"purple\">must</strong> be less than or equal to <code>VkPhysicalDeviceLimits</code>::<code>maxComputeWorkGroupInvocations</code>"
         },
         {
           "vuid": "VUID-RuntimeSpirv-OpImage-06376",
@@ -44501,6 +45037,14 @@
         {
           "vuid": "VUID-RuntimeSpirv-OpImage-06377",
           "text": " If an <code>OpImage*Gather</code> operation has an image operand of <code>Offset</code>, <code>ConstOffset</code>, or <code>ConstOffsets</code> the offset value <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#limits-maxTexelGatherOffset\">maxTexelGatherOffset</a>"
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-OpImageSample-06435",
+          "text": " If an <code>OpImageSample*</code> or <code>OpImageFetch*</code> operation has an image operand of <code>ConstOffset</code> then the offset value <strong class=\"purple\">must</strong> be greater than or equal to <a href=\"#limits-minTexelOffset\">minTexelOffset</a>"
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-OpImageSample-06436",
+          "text": " If an <code>OpImageSample*</code> or <code>OpImageFetch*</code> operation has an image operand of <code>ConstOffset</code> then the offset value <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#limits-maxTexelOffset\">maxTexelOffset</a>"
         }
       ],
       "(VK_VERSION_1_2,VK_EXT_descriptor_indexing)": [
@@ -44752,15 +45296,15 @@
       "(VK_KHR_portability_subset)": [
         {
           "vuid": "VUID-RuntimeSpirv-shaderSampleRateInterpolationFunctions-06325",
-          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">[VK_KHR_portability_subset]</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>shaderSampleRateInterpolationFunctions</code> is <code>VK_FALSE</code>, then <code>GLSL.std.450</code> fragment interpolation functions are not supported by the implementation and <code>OpCapability</code> <strong class=\"purple\">must</strong> not be set to <code>InterpolationFunction</code>."
+          "text": " If the <code><a href=\"#VK_KHR_portability_subset\">VK_KHR_portability_subset</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>shaderSampleRateInterpolationFunctions</code> is <code>VK_FALSE</code>, then <code>GLSL.std.450</code> fragment interpolation functions are not supported by the implementation and <code>OpCapability</code> <strong class=\"purple\">must</strong> not be set to <code>InterpolationFunction</code>."
         },
         {
           "vuid": "VUID-RuntimeSpirv-tessellationShader-06326",
-          "text": " If <a href=\"#features-tessellationShader\"><code>tessellationShader</code></a> is enabled, and the <code><a href=\"#VK_KHR_portability_subset\">[VK_KHR_portability_subset]</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>tessellationIsolines</code> is <code>VK_FALSE</code>, then <code>OpExecutionMode</code> <strong class=\"purple\">must</strong> not be set to <code>IsoLines</code>."
+          "text": " If <a href=\"#features-tessellationShader\"><code>tessellationShader</code></a> is enabled, and the <code><a href=\"#VK_KHR_portability_subset\">VK_KHR_portability_subset</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>tessellationIsolines</code> is <code>VK_FALSE</code>, then <code>OpExecutionMode</code> <strong class=\"purple\">must</strong> not be set to <code>IsoLines</code>."
         },
         {
           "vuid": "VUID-RuntimeSpirv-tessellationShader-06327",
-          "text": " If <a href=\"#features-tessellationShader\"><code>tessellationShader</code></a> is enabled, and the <code><a href=\"#VK_KHR_portability_subset\">[VK_KHR_portability_subset]</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>tessellationPointMode</code> is <code>VK_FALSE</code>, then <code>OpExecutionMode</code> <strong class=\"purple\">must</strong> not be set to <code>PointMode</code>."
+          "text": " If <a href=\"#features-tessellationShader\"><code>tessellationShader</code></a> is enabled, and the <code><a href=\"#VK_KHR_portability_subset\">VK_KHR_portability_subset</a></code> extension is enabled, and <a href=\"#VkPhysicalDevicePortabilitySubsetFeaturesKHR\">VkPhysicalDevicePortabilitySubsetFeaturesKHR</a>::<code>tessellationPointMode</code> is <code>VK_FALSE</code>, then <code>OpExecutionMode</code> <strong class=\"purple\">must</strong> not be set to <code>PointMode</code>."
         }
       ],
       "(VK_KHR_8bit_storage)": [
@@ -44881,6 +45425,18 @@
         {
           "vuid": "VUID-RuntimeSpirv-OpTraceRayMotionNV-06367",
           "text": " For <code>OpTraceRayMotionNV</code> instructions the pipeline <strong class=\"purple\">must</strong> have been created with <code>VK_PIPELINE_CREATE_RAY_TRACING_ALLOW_MOTION_BIT_NV</code> set"
+        }
+      ],
+      "!(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-RuntimeSpirv-LocalSizeId-06433",
+          "text": " The execution mode <code>LocalSizeId</code> <strong class=\"purple\">must</strong> not be used"
+        }
+      ],
+      "(VK_KHR_maintenance4)": [
+        {
+          "vuid": "VUID-RuntimeSpirv-LocalSizeId-06434",
+          "text": " if execution mode <code>LocalSizeId</code> is used, <a href=\"#features-maintenance4\"><code>maintenance4</code></a> <strong class=\"purple\">must</strong> be enabled"
         }
       ],
       "(VK_KHR_zero_initialize_workgroup_memory)": [
