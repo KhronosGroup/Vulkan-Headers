@@ -119,7 +119,7 @@ extern "C" __declspec( dllimport ) FARPROC __stdcall GetProcAddress( HINSTANCE h
 #  include <span>
 #endif
 
-static_assert( VK_HEADER_VERSION == 195, "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION == 196, "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
@@ -1385,15 +1385,24 @@ namespace VULKAN_HPP_NAMESPACE
 
   class DispatchLoaderBase
   {
-#if !defined( NDEBUG )
   public:
+    DispatchLoaderBase() = default;
+    DispatchLoaderBase( std::nullptr_t )
+#if !defined( NDEBUG )
+      : m_valid( false )
+#endif
+    {}
+
+#if !defined( NDEBUG )
     size_t getVkHeaderVersion() const
     {
+      VULKAN_HPP_ASSERT( m_valid );
       return vkHeaderVersion;
     }
 
   private:
     size_t vkHeaderVersion = VK_HEADER_VERSION;
+    bool   m_valid         = true;
 #endif
   };
 
@@ -5704,7 +5713,7 @@ namespace VULKAN_HPP_NAMESPACE
       }
   extern VULKAN_HPP_STORAGE_API DispatchLoaderDynamic defaultDispatchLoaderDynamic;
 #  else
-  static ::VULKAN_HPP_NAMESPACE::DispatchLoaderStatic & getDispatchLoaderStatic()
+  static inline ::VULKAN_HPP_NAMESPACE::DispatchLoaderStatic & getDispatchLoaderStatic()
   {
     static ::VULKAN_HPP_NAMESPACE::DispatchLoaderStatic dls;
     return dls;
@@ -7727,6 +7736,66 @@ namespace VULKAN_HPP_NAMESPACE
   };
   template <>
   struct StructExtends<VideoEncodeH264ProfileEXT, VideoProfileKHR>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
+
+#if defined( VK_ENABLE_BETA_EXTENSIONS )
+  //=== VK_EXT_video_encode_h265 ===
+  template <>
+  struct StructExtends<VideoEncodeH265CapabilitiesEXT, VideoCapabilitiesKHR>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<VideoEncodeH265SessionCreateInfoEXT, VideoSessionCreateInfoKHR>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<VideoEncodeH265SessionParametersCreateInfoEXT, VideoSessionParametersCreateInfoKHR>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<VideoEncodeH265SessionParametersAddInfoEXT, VideoSessionParametersUpdateInfoKHR>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<VideoEncodeH265VclFrameInfoEXT, VideoEncodeInfoKHR>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<VideoEncodeH265EmitPictureParametersEXT, VideoEncodeInfoKHR>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<VideoEncodeH265ProfileEXT, VideoProfileKHR>
   {
     enum
     {
@@ -10621,6 +10690,32 @@ namespace VULKAN_HPP_NAMESPACE
   };
   template <>
   struct StructExtends<PhysicalDeviceMultiDrawPropertiesEXT, PhysicalDeviceProperties2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  //=== VK_EXT_border_color_swizzle ===
+  template <>
+  struct StructExtends<PhysicalDeviceBorderColorSwizzleFeaturesEXT, PhysicalDeviceFeatures2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<PhysicalDeviceBorderColorSwizzleFeaturesEXT, DeviceCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<SamplerBorderColorComponentMappingCreateInfoEXT, SamplerCreateInfo>
   {
     enum
     {
