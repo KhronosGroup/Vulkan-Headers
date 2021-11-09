@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.2.197",
-    "comment": "from git branch: github-main commit: 2a43f68f2841054d7f2fb6a44c637c533a549dbb",
-    "date": "2021-11-02 08:48:49Z"
+    "api version": "1.2.198",
+    "comment": "from git branch: github-main commit: 3a4dc41cc86b4215e9995f20f2be744a106887d5",
+    "date": "2021-11-09 07:58:02Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -62,13 +62,13 @@
       "(VK_EXT_debug_report,VK_EXT_debug_utils)+(VK_EXT_debug_report)": [
         {
           "vuid": "VUID-VkInstanceCreateInfo-pNext-04925",
-          "text": " If the <code>pNext</code> chain of <code>VkInstanceCreateInfo</code> includes a <code>VkDebugReportCallbackCreateInfoEXT</code> structure, the list of enabled extensions in <code>ppEnabledExtensionNames</code> <strong class=\"purple\">must</strong> contain VK_EXT_debug_report"
+          "text": " If the <code>pNext</code> chain of <code>VkInstanceCreateInfo</code> includes a <code>VkDebugReportCallbackCreateInfoEXT</code> structure, the list of enabled extensions in <code>ppEnabledExtensionNames</code> <strong class=\"purple\">must</strong> contain <a href=\"#VK_EXT_debug_report\">VK_EXT_debug_report</a>"
         }
       ],
       "(VK_EXT_debug_report,VK_EXT_debug_utils)+(VK_EXT_debug_utils)": [
         {
           "vuid": "VUID-VkInstanceCreateInfo-pNext-04926",
-          "text": " If the <code>pNext</code> chain of <code>VkInstanceCreateInfo</code> includes a <code>VkDebugUtilsMessengerCreateInfoEXT</code> structure, the list of enabled extensions in <code>ppEnabledExtensionNames</code> <strong class=\"purple\">must</strong> contain VK_EXT_debug_utils"
+          "text": " If the <code>pNext</code> chain of <code>VkInstanceCreateInfo</code> includes a <code>VkDebugUtilsMessengerCreateInfoEXT</code> structure, the list of enabled extensions in <code>ppEnabledExtensionNames</code> <strong class=\"purple\">must</strong> contain <a href=\"#VK_EXT_debug_utils\">VK_EXT_debug_utils</a>"
         }
       ],
       "core": [
@@ -514,7 +514,7 @@
       "(VK_VERSION_1_2)+(VK_EXT_buffer_device_address)": [
         {
           "vuid": "VUID-VkDeviceCreateInfo-pNext-04748",
-          "text": " if the <code>pNext</code> chain includes a <a href=\"#VkPhysicalDeviceVulkan12Features\">VkPhysicalDeviceVulkan12Features</a> structure and <a href=\"#VkPhysicalDeviceVulkan12Features\">VkPhysicalDeviceVulkan12Features</a>::<code>bufferDeviceAddress</code> is VK_TRUE, <code>ppEnabledExtensionNames</code> <strong class=\"purple\">must</strong> not contain <code><a href=\"#VK_EXT_buffer_device_address\">VK_EXT_buffer_device_address</a></code>"
+          "text": " if the <code>pNext</code> chain includes a <a href=\"#VkPhysicalDeviceVulkan12Features\">VkPhysicalDeviceVulkan12Features</a> structure and <a href=\"#VkPhysicalDeviceVulkan12Features\">VkPhysicalDeviceVulkan12Features</a>::<code>bufferDeviceAddress</code> is <code>VK_TRUE</code>, <code>ppEnabledExtensionNames</code> <strong class=\"purple\">must</strong> not contain <code><a href=\"#VK_EXT_buffer_device_address\">VK_EXT_buffer_device_address</a></code>"
         }
       ],
       "(VK_VERSION_1_2)": [
@@ -813,6 +813,10 @@
         {
           "vuid": "VUID-VkDeviceQueueCreateInfo-flags-02861",
           "text": " If the <a href=\"#features-protectedMemory\">protected memory</a> feature is not enabled, the <code>VK_DEVICE_QUEUE_CREATE_PROTECTED_BIT</code> bit of <code>flags</code> <strong class=\"purple\">must</strong> not be set"
+        },
+        {
+          "vuid": "VUID-VkDeviceQueueCreateInfo-flags-06449",
+          "text": " If <code>flags</code> includes <code>VK_DEVICE_QUEUE_CREATE_PROTECTED_BIT</code>, <code>queueFamilyIndex</code> <strong class=\"purple\">must</strong> be the index of a queue family that includes the <code>VK_QUEUE_PROTECTED_BIT</code> capability"
         }
       ]
     },
@@ -1502,6 +1506,12 @@
           "vuid": "VUID-vkQueueSubmit2KHR-commandBuffer-03880",
           "text": " If a command recorded into the <code>commandBuffer</code> member of any element of the <code>pCommandBufferInfos</code> member of any element of <code>pSubmits</code> was a <a href=\"#vkCmdBeginQuery\">vkCmdBeginQuery</a> whose <code>queryPool</code> was created with a <code>queryType</code> of <code>VK_QUERY_TYPE_PERFORMANCE_QUERY_KHR</code>, the <a href=\"#profiling-lock\">profiling lock</a> <strong class=\"purple\">must</strong> have been held continuously on the <code>VkDevice</code> that <code>queue</code> was retrieved from, throughout recording of those command buffers"
         }
+      ],
+      "(VK_KHR_synchronization2)+(VK_VERSION_1_1)": [
+        {
+          "vuid": "VUID-vkQueueSubmit2KHR-queue-06447",
+          "text": " If <code>queue</code> was not created with <code>VK_DEVICE_QUEUE_CREATE_PROTECTED_BIT</code>, the <code>flags</code> member of any element of <code>pSubmits</code> <strong class=\"purple\">must</strong> not include <code>VK_SUBMIT_PROTECTED_BIT_KHR</code>"
+        }
       ]
     },
     "VkSubmitInfo2KHR": {
@@ -1524,10 +1534,6 @@
         }
       ],
       "(VK_KHR_synchronization2)+(VK_VERSION_1_1)": [
-        {
-          "vuid": "VUID-VkSubmitInfo2KHR-flags-03885",
-          "text": " If the protected memory feature is not enabled, <code>flags</code> <strong class=\"purple\">must</strong> not include <code>VK_SUBMIT_PROTECTED_BIT_KHR</code>"
-        },
         {
           "vuid": "VUID-VkSubmitInfo2KHR-flags-03886",
           "text": " If <code>flags</code> includes <code>VK_SUBMIT_PROTECTED_BIT_KHR</code>, all elements of <code>pCommandBuffers</code> <strong class=\"purple\">must</strong> be protected command buffers"
@@ -1794,6 +1800,12 @@
           "vuid": "VUID-vkQueueSubmit-pCommandBuffers-03220",
           "text": " If a command recorded into any element of <code>pCommandBuffers</code> was a <a href=\"#vkCmdBeginQuery\">vkCmdBeginQuery</a> whose <code>queryPool</code> was created with a <code>queryType</code> of <code>VK_QUERY_TYPE_PERFORMANCE_QUERY_KHR</code>, the <a href=\"#profiling-lock\">profiling lock</a> <strong class=\"purple\">must</strong> have been held continuously on the <code>VkDevice</code> that <code>queue</code> was retrieved from, throughout recording of those command buffers"
         }
+      ],
+      "(VK_VERSION_1_1)": [
+        {
+          "vuid": "VUID-vkQueueSubmit-queue-06448",
+          "text": " If <code>queue</code> was not created with <code>VK_DEVICE_QUEUE_CREATE_PROTECTED_BIT</code>, there <strong class=\"purple\">must</strong> be no element of <code>pSubmits</code> that includes an <a href=\"#VkProtectedSubmitInfo\">VkProtectedSubmitInfo</a> structure in its <code>pNext</code> chain with <code>protectedSubmit</code> equal to <code>VK_TRUE</code>"
+        }
       ]
     },
     "VkSubmitInfo": {
@@ -2033,10 +2045,6 @@
     "VkProtectedSubmitInfo": {
       "(VK_VERSION_1_1)": [
         {
-          "vuid": "VUID-VkProtectedSubmitInfo-protectedSubmit-01816",
-          "text": " If the protected memory feature is not enabled, <code>protectedSubmit</code> <strong class=\"purple\">must</strong> not be <code>VK_TRUE</code>"
-        },
-        {
           "vuid": "VUID-VkProtectedSubmitInfo-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PROTECTED_SUBMIT_INFO</code>"
         }
@@ -2224,11 +2232,11 @@
       "(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdExecuteCommands-commandBuffer-01820",
-          "text": " If <code>commandBuffer</code> is a protected command buffer, then each element of <code>pCommandBuffers</code> <strong class=\"purple\">must</strong> be a protected command buffer"
+          "text": " If <code>commandBuffer</code> is a protected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, each element of <code>pCommandBuffers</code> <strong class=\"purple\">must</strong> be a protected command buffer"
         },
         {
           "vuid": "VUID-vkCmdExecuteCommands-commandBuffer-01821",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then each element of <code>pCommandBuffers</code> <strong class=\"purple\">must</strong> be an unprotected command buffer"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, each element of <code>pCommandBuffers</code> <strong class=\"purple\">must</strong> be an unprotected command buffer"
         }
       ],
       "(VK_EXT_transform_feedback)": [
@@ -6450,7 +6458,7 @@
         },
         {
           "vuid": "VUID-VkRenderingInfoKHR-imageView-06070",
-          "text": " If neither the <code><a href=\"#VK_AMD_mixed_attachment_samples\">VK_AMD_mixed_attachment_samples</a></code> nor the <code><a href=\"#VK_NV_framebuffer_mixed_samples\">VK_NV_framebuffer_mixed_samples</a></code> extensions are enabled, <code>imageView</code> members of <code>pDepthAttachment</code>, <code>pStencilAttachment</code>, and elements of <code>pColorAttachments</code> that are not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a> <strong class=\"purple\">must</strong> have been created with the same <code>sampleCount</code>"
+          "text": " If neither the <a href=\"#VK_AMD_mixed_attachment_samples\">VK_AMD_mixed_attachment_samples</a> nor the <a href=\"#VK_NV_framebuffer_mixed_samples\">VK_NV_framebuffer_mixed_samples</a> extensions are enabled, <code>imageView</code> members of <code>pDepthAttachment</code>, <code>pStencilAttachment</code>, and elements of <code>pColorAttachments</code> that are not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a> <strong class=\"purple\">must</strong> have been created with the same <code>sampleCount</code>"
         },
         {
           "vuid": "VUID-VkRenderingInfoKHR-colorAttachmentCount-06087",
@@ -7748,11 +7756,11 @@
       "(VK_VERSION_1_2,VK_KHR_create_renderpass2)+(VK_QCOM_render_pass_shader_resolve)": [
         {
           "vuid": "VUID-VkRenderPassCreateInfo2-rasterizationSamples-04905",
-          "text": " If the pipeline is being created with fragment shader state, and the VK_QCOM_render_pass_shader_resolve extension is enabled, and if subpass has any input attachments, and if the subpass description contains <code>VK_SUBPASS_DESCRIPTION_FRAGMENT_REGION_BIT_QCOM</code>, then the sample count of the input attachments <strong class=\"purple\">must</strong> equal <code>rasterizationSamples</code>"
+          "text": " If the pipeline is being created with fragment shader state, and the <a href=\"#VK_QCOM_render_pass_shader_resolve\">VK_QCOM_render_pass_shader_resolve</a> extension is enabled, and if subpass has any input attachments, and if the subpass description contains <code>VK_SUBPASS_DESCRIPTION_FRAGMENT_REGION_BIT_QCOM</code>, then the sample count of the input attachments <strong class=\"purple\">must</strong> equal <code>rasterizationSamples</code>"
         },
         {
           "vuid": "VUID-VkRenderPassCreateInfo2-sampleShadingEnable-04906",
-          "text": " If the pipeline is being created with fragment shader state, and the VK_QCOM_render_pass_shader_resolve extension is enabled, and if the subpass description contains <code>VK_SUBPASS_DESCRIPTION_FRAGMENT_REGION_BIT_QCOM</code>, then <code>sampleShadingEnable</code> <strong class=\"purple\">must</strong> be false"
+          "text": " If the pipeline is being created with fragment shader state, and the <a href=\"#VK_QCOM_render_pass_shader_resolve\">VK_QCOM_render_pass_shader_resolve</a> extension is enabled, and if the subpass description contains <code>VK_SUBPASS_DESCRIPTION_FRAGMENT_REGION_BIT_QCOM</code>, then <code>sampleShadingEnable</code> <strong class=\"purple\">must</strong> be false"
         },
         {
           "vuid": "VUID-VkRenderPassCreateInfo2-flags-04907",
@@ -10116,7 +10124,7 @@
       "(VK_HUAWEI_subpass_shading)": [
         {
           "vuid": "VUID-VkSubpassShadingPipelineCreateInfoHUAWEI-subpass-04946",
-          "text": " <code>subpass</code> <strong class=\"purple\">must</strong> be created with VK_PIPELINE_BIND_POINT_SUBPASS_SHADING_HUAWEI bind point"
+          "text": " <code>subpass</code> <strong class=\"purple\">must</strong> be created with <code>VK_PIPELINE_BIND_POINT_SUBPASS_SHADING_HUAWEI</code> bind point"
         },
         {
           "vuid": "VUID-VkSubpassShadingPipelineCreateInfoHUAWEI-sType-sType",
@@ -10792,11 +10800,11 @@
       "(VK_QCOM_render_pass_shader_resolve)": [
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-rasterizationSamples-04899",
-          "text": " If the pipeline is being created with fragment shader state, and the VK_QCOM_render_pass_shader_resolve extension is enabled, and if subpass has any input attachments, and if the subpass description contains <code>VK_SUBPASS_DESCRIPTION_FRAGMENT_REGION_BIT_QCOM</code>, then the sample count of the input attachments <strong class=\"purple\">must</strong> equal <code>rasterizationSamples</code>"
+          "text": " If the pipeline is being created with fragment shader state, and the <a href=\"#VK_QCOM_render_pass_shader_resolve\">VK_QCOM_render_pass_shader_resolve</a> extension is enabled, and if subpass has any input attachments, and if the subpass description contains <code>VK_SUBPASS_DESCRIPTION_FRAGMENT_REGION_BIT_QCOM</code>, then the sample count of the input attachments <strong class=\"purple\">must</strong> equal <code>rasterizationSamples</code>"
         },
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-sampleShadingEnable-04900",
-          "text": " If the pipeline is being created with fragment shader state, and the VK_QCOM_render_pass_shader_resolve extension is enabled, and if the subpass description contains <code>VK_SUBPASS_DESCRIPTION_FRAGMENT_REGION_BIT_QCOM</code>, then <code>sampleShadingEnable</code> <strong class=\"purple\">must</strong> be false"
+          "text": " If the pipeline is being created with fragment shader state, and the <a href=\"#VK_QCOM_render_pass_shader_resolve\">VK_QCOM_render_pass_shader_resolve</a> extension is enabled, and if the subpass description contains <code>VK_SUBPASS_DESCRIPTION_FRAGMENT_REGION_BIT_QCOM</code>, then <code>sampleShadingEnable</code> <strong class=\"purple\">must</strong> be false"
         },
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-flags-04901",
@@ -12586,7 +12594,7 @@
       "(VK_KHR_external_memory_fd)": [
         {
           "vuid": "VUID-VkMemoryAllocateInfo-allocationSize-01742",
-          "text": " If the parameters define an import operation, the external handle specified was created by the Vulkan API, and the external handle type is <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT_KHR</code>, then the values of <code>allocationSize</code> and <code>memoryTypeIndex</code> <strong class=\"purple\">must</strong> match those specified when the payload being imported was created"
+          "text": " If the parameters define an import operation, the external handle specified was created by the Vulkan API, and the external handle type is <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT</code>, then the values of <code>allocationSize</code> and <code>memoryTypeIndex</code> <strong class=\"purple\">must</strong> match those specified when the payload being imported was created"
         },
         {
           "vuid": "VUID-VkMemoryAllocateInfo-memoryTypeIndex-00648",
@@ -12610,7 +12618,7 @@
         },
         {
           "vuid": "VUID-VkMemoryAllocateInfo-allocationSize-01743",
-          "text": " If the parameters define an import operation, the external handle was created by the Vulkan API, and the external handle type is <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR</code> or <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHR</code>, then the values of <code>allocationSize</code> and <code>memoryTypeIndex</code> <strong class=\"purple\">must</strong> match those specified when the payload being imported was created"
+          "text": " If the parameters define an import operation, the external handle was created by the Vulkan API, and the external handle type is <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT</code> or <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT</code>, then the values of <code>allocationSize</code> and <code>memoryTypeIndex</code> <strong class=\"purple\">must</strong> match those specified when the payload being imported was created"
         },
         {
           "vuid": "VUID-VkMemoryAllocateInfo-allocationSize-00647",
@@ -13234,7 +13242,7 @@
         },
         {
           "vuid": "VUID-vkGetMemoryFdPropertiesKHR-handleType-00674",
-          "text": " <code>handleType</code> <strong class=\"purple\">must</strong> not be <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT_KHR</code>"
+          "text": " <code>handleType</code> <strong class=\"purple\">must</strong> not be <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT</code>"
         },
         {
           "vuid": "VUID-vkGetMemoryFdPropertiesKHR-device-parameter",
@@ -15388,7 +15396,7 @@
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-format-06415",
-          "text": " If the image <code>format</code> is one of the <a href=\"#formats-requiring-sampler-ycbcr-conversion\">formats that require a sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion</a>, then the <code>pNext</code> chain <strong class=\"purple\">must</strong> include a <a href=\"#VkSamplerYcbcrConversionInfo\">VkSamplerYcbcrConversionInfo</a> structure with a conversion value other than VK_NULL_HANDLE"
+          "text": " If the image <code>format</code> is one of the <a href=\"#formats-requiring-sampler-ycbcr-conversion\">formats that require a sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion</a>, then the <code>pNext</code> chain <strong class=\"purple\">must</strong> include a <a href=\"#VkSamplerYcbcrConversionInfo\">VkSamplerYcbcrConversionInfo</a> structure with a conversion value other than <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>"
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-format-04714",
@@ -23028,11 +23036,11 @@
       "(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdClearColorImage-commandBuffer-01805",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then <code>image</code> <strong class=\"purple\">must</strong> not be a protected image"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>image</code> <strong class=\"purple\">must</strong> not be a protected image"
         },
         {
           "vuid": "VUID-vkCmdClearColorImage-commandBuffer-01806",
-          "text": " If <code>commandBuffer</code> is a protected command buffer, then <code>image</code> <strong class=\"purple\">must</strong> not be an unprotected image"
+          "text": " If <code>commandBuffer</code> is a protected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <strong class=\"purple\">must</strong> not be an unprotected image"
         }
       ]
     },
@@ -23152,11 +23160,11 @@
       "(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdClearDepthStencilImage-commandBuffer-01807",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then <code>image</code> <strong class=\"purple\">must</strong> not be a protected image"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>image</code> <strong class=\"purple\">must</strong> not be a protected image"
         },
         {
           "vuid": "VUID-vkCmdClearDepthStencilImage-commandBuffer-01808",
-          "text": " If <code>commandBuffer</code> is a protected command buffer, then <code>image</code> <strong class=\"purple\">must</strong> not be an unprotected image"
+          "text": " If <code>commandBuffer</code> is a protected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>image</code> <strong class=\"purple\">must</strong> not be an unprotected image"
         }
       ]
     },
@@ -23230,11 +23238,11 @@
       "(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdClearAttachments-commandBuffer-02504",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then each attachment to be cleared <strong class=\"purple\">must</strong> not be a protected image"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, each attachment to be cleared <strong class=\"purple\">must</strong> not be a protected image"
         },
         {
           "vuid": "VUID-vkCmdClearAttachments-commandBuffer-02505",
-          "text": " If <code>commandBuffer</code> is a protected command buffer, then each attachment to be cleared <strong class=\"purple\">must</strong> not be an unprotected image"
+          "text": " If <code>commandBuffer</code> is a protected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, each attachment to be cleared <strong class=\"purple\">must</strong> not be an unprotected image"
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_multiview)": [
@@ -23352,11 +23360,11 @@
       "(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdFillBuffer-commandBuffer-01811",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then <code>dstBuffer</code> <strong class=\"purple\">must</strong> not be a protected buffer"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>dstBuffer</code> <strong class=\"purple\">must</strong> not be a protected buffer"
         },
         {
           "vuid": "VUID-vkCmdFillBuffer-commandBuffer-01812",
-          "text": " If <code>commandBuffer</code> is a protected command buffer, then <code>dstBuffer</code> <strong class=\"purple\">must</strong> not be an unprotected buffer"
+          "text": " If <code>commandBuffer</code> is a protected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>dstBuffer</code> <strong class=\"purple\">must</strong> not be an unprotected buffer"
         }
       ]
     },
@@ -23426,11 +23434,11 @@
       "(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdUpdateBuffer-commandBuffer-01813",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then <code>dstBuffer</code> <strong class=\"purple\">must</strong> not be a protected buffer"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>dstBuffer</code> <strong class=\"purple\">must</strong> not be a protected buffer"
         },
         {
           "vuid": "VUID-vkCmdUpdateBuffer-commandBuffer-01814",
-          "text": " If <code>commandBuffer</code> is a protected command buffer, then <code>dstBuffer</code> <strong class=\"purple\">must</strong> not be an unprotected buffer"
+          "text": " If <code>commandBuffer</code> is a protected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>dstBuffer</code> <strong class=\"purple\">must</strong> not be an unprotected buffer"
         }
       ]
     },
@@ -23438,15 +23446,15 @@
       "(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdCopyBuffer-commandBuffer-01822",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then <code>srcBuffer</code> <strong class=\"purple\">must</strong> not be a protected buffer"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>srcBuffer</code> <strong class=\"purple\">must</strong> not be a protected buffer"
         },
         {
           "vuid": "VUID-vkCmdCopyBuffer-commandBuffer-01823",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then <code>dstBuffer</code> <strong class=\"purple\">must</strong> not be a protected buffer"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>dstBuffer</code> <strong class=\"purple\">must</strong> not be a protected buffer"
         },
         {
           "vuid": "VUID-vkCmdCopyBuffer-commandBuffer-01824",
-          "text": " If <code>commandBuffer</code> is a protected command buffer, then <code>dstBuffer</code> <strong class=\"purple\">must</strong> not be an unprotected buffer"
+          "text": " If <code>commandBuffer</code> is a protected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>dstBuffer</code> <strong class=\"purple\">must</strong> not be an unprotected buffer"
         }
       ],
       "core": [
@@ -23536,15 +23544,15 @@
       "(VK_KHR_copy_commands2)+(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdCopyBuffer2KHR-commandBuffer-01822",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then <code>srcBuffer</code> <strong class=\"purple\">must</strong> not be a protected buffer"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>srcBuffer</code> <strong class=\"purple\">must</strong> not be a protected buffer"
         },
         {
           "vuid": "VUID-vkCmdCopyBuffer2KHR-commandBuffer-01823",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then <code>dstBuffer</code> <strong class=\"purple\">must</strong> not be a protected buffer"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>dstBuffer</code> <strong class=\"purple\">must</strong> not be a protected buffer"
         },
         {
           "vuid": "VUID-vkCmdCopyBuffer2KHR-commandBuffer-01824",
-          "text": " If <code>commandBuffer</code> is a protected command buffer, then <code>dstBuffer</code> <strong class=\"purple\">must</strong> not be an unprotected buffer"
+          "text": " If <code>commandBuffer</code> is a protected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>dstBuffer</code> <strong class=\"purple\">must</strong> not be an unprotected buffer"
         }
       ],
       "(VK_KHR_copy_commands2)": [
@@ -23658,15 +23666,15 @@
       "(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdCopyImage-commandBuffer-01825",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then <code>srcImage</code> <strong class=\"purple\">must</strong> not be a protected image"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>srcImage</code> <strong class=\"purple\">must</strong> not be a protected image"
         },
         {
           "vuid": "VUID-vkCmdCopyImage-commandBuffer-01826",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then <code>dstImage</code> <strong class=\"purple\">must</strong> not be a protected image"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>dstImage</code> <strong class=\"purple\">must</strong> not be a protected image"
         },
         {
           "vuid": "VUID-vkCmdCopyImage-commandBuffer-01827",
-          "text": " If <code>commandBuffer</code> is a protected command buffer, then <code>dstImage</code> <strong class=\"purple\">must</strong> not be an unprotected image"
+          "text": " If <code>commandBuffer</code> is a protected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>dstImage</code> <strong class=\"purple\">must</strong> not be an unprotected image"
         }
       ],
       "core": [
@@ -24042,15 +24050,15 @@
       "(VK_KHR_copy_commands2)+(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdCopyImage2KHR-commandBuffer-01825",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then <code>srcImage</code> <strong class=\"purple\">must</strong> not be a protected image"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>srcImage</code> <strong class=\"purple\">must</strong> not be a protected image"
         },
         {
           "vuid": "VUID-vkCmdCopyImage2KHR-commandBuffer-01826",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then <code>dstImage</code> <strong class=\"purple\">must</strong> not be a protected image"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>dstImage</code> <strong class=\"purple\">must</strong> not be a protected image"
         },
         {
           "vuid": "VUID-vkCmdCopyImage2KHR-commandBuffer-01827",
-          "text": " If <code>commandBuffer</code> is a protected command buffer, then <code>dstImage</code> <strong class=\"purple\">must</strong> not be an unprotected image"
+          "text": " If <code>commandBuffer</code> is a protected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>dstImage</code> <strong class=\"purple\">must</strong> not be an unprotected image"
         }
       ],
       "(VK_KHR_copy_commands2)": [
@@ -24420,15 +24428,15 @@
       "(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdCopyBufferToImage-commandBuffer-01828",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then <code>srcBuffer</code> <strong class=\"purple\">must</strong> not be a protected buffer"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>srcBuffer</code> <strong class=\"purple\">must</strong> not be a protected buffer"
         },
         {
           "vuid": "VUID-vkCmdCopyBufferToImage-commandBuffer-01829",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then <code>dstImage</code> <strong class=\"purple\">must</strong> not be a protected image"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>dstImage</code> <strong class=\"purple\">must</strong> not be a protected image"
         },
         {
           "vuid": "VUID-vkCmdCopyBufferToImage-commandBuffer-01830",
-          "text": " If <code>commandBuffer</code> is a protected command buffer, then <code>dstImage</code> <strong class=\"purple\">must</strong> not be an unprotected image"
+          "text": " If <code>commandBuffer</code> is a protected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>dstImage</code> <strong class=\"purple\">must</strong> not be an unprotected image"
         }
       ],
       "core": [
@@ -24652,15 +24660,15 @@
       "(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdCopyImageToBuffer-commandBuffer-01831",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then <code>srcImage</code> <strong class=\"purple\">must</strong> not be a protected image"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>srcImage</code> <strong class=\"purple\">must</strong> not be a protected image"
         },
         {
           "vuid": "VUID-vkCmdCopyImageToBuffer-commandBuffer-01832",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then <code>dstBuffer</code> <strong class=\"purple\">must</strong> not be a protected buffer"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>dstBuffer</code> <strong class=\"purple\">must</strong> not be a protected buffer"
         },
         {
           "vuid": "VUID-vkCmdCopyImageToBuffer-commandBuffer-01833",
-          "text": " If <code>commandBuffer</code> is a protected command buffer, then <code>dstBuffer</code> <strong class=\"purple\">must</strong> not be an unprotected buffer"
+          "text": " If <code>commandBuffer</code> is a protected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>dstBuffer</code> <strong class=\"purple\">must</strong> not be an unprotected buffer"
         }
       ],
       "core": [
@@ -24894,15 +24902,15 @@
       "(VK_KHR_copy_commands2)+(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdCopyBufferToImage2KHR-commandBuffer-01828",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then <code>srcBuffer</code> <strong class=\"purple\">must</strong> not be a protected buffer"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>srcBuffer</code> <strong class=\"purple\">must</strong> not be a protected buffer"
         },
         {
           "vuid": "VUID-vkCmdCopyBufferToImage2KHR-commandBuffer-01829",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then <code>dstImage</code> <strong class=\"purple\">must</strong> not be a protected image"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>dstImage</code> <strong class=\"purple\">must</strong> not be a protected image"
         },
         {
           "vuid": "VUID-vkCmdCopyBufferToImage2KHR-commandBuffer-01830",
-          "text": " If <code>commandBuffer</code> is a protected command buffer, then <code>dstImage</code> <strong class=\"purple\">must</strong> not be an unprotected image"
+          "text": " If <code>commandBuffer</code> is a protected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>dstImage</code> <strong class=\"purple\">must</strong> not be an unprotected image"
         }
       ],
       "(VK_KHR_copy_commands2)": [
@@ -25166,15 +25174,15 @@
       "(VK_KHR_copy_commands2)+(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdCopyImageToBuffer2KHR-commandBuffer-01831",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then <code>srcImage</code> <strong class=\"purple\">must</strong> not be a protected image"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>srcImage</code> <strong class=\"purple\">must</strong> not be a protected image"
         },
         {
           "vuid": "VUID-vkCmdCopyImageToBuffer2KHR-commandBuffer-01832",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then <code>dstBuffer</code> <strong class=\"purple\">must</strong> not be a protected buffer"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>dstBuffer</code> <strong class=\"purple\">must</strong> not be a protected buffer"
         },
         {
           "vuid": "VUID-vkCmdCopyImageToBuffer2KHR-commandBuffer-01833",
-          "text": " If <code>commandBuffer</code> is a protected command buffer, then <code>dstBuffer</code> <strong class=\"purple\">must</strong> not be an unprotected buffer"
+          "text": " If <code>commandBuffer</code> is a protected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>dstBuffer</code> <strong class=\"purple\">must</strong> not be an unprotected buffer"
         }
       ],
       "(VK_KHR_copy_commands2)": [
@@ -25472,15 +25480,15 @@
       "(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdBlitImage-commandBuffer-01834",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then <code>srcImage</code> <strong class=\"purple\">must</strong> not be a protected image"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>srcImage</code> <strong class=\"purple\">must</strong> not be a protected image"
         },
         {
           "vuid": "VUID-vkCmdBlitImage-commandBuffer-01835",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then <code>dstImage</code> <strong class=\"purple\">must</strong> not be a protected image"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>dstImage</code> <strong class=\"purple\">must</strong> not be a protected image"
         },
         {
           "vuid": "VUID-vkCmdBlitImage-commandBuffer-01836",
-          "text": " If <code>commandBuffer</code> is a protected command buffer, then <code>dstImage</code> <strong class=\"purple\">must</strong> not be an unprotected image"
+          "text": " If <code>commandBuffer</code> is a protected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>dstImage</code> <strong class=\"purple\">must</strong> not be an unprotected image"
         }
       ],
       "core": [
@@ -25744,15 +25752,15 @@
       "(VK_KHR_copy_commands2)+(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdBlitImage2KHR-commandBuffer-01834",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then <code>srcImage</code> <strong class=\"purple\">must</strong> not be a protected image"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>srcImage</code> <strong class=\"purple\">must</strong> not be a protected image"
         },
         {
           "vuid": "VUID-vkCmdBlitImage2KHR-commandBuffer-01835",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then <code>dstImage</code> <strong class=\"purple\">must</strong> not be a protected image"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>dstImage</code> <strong class=\"purple\">must</strong> not be a protected image"
         },
         {
           "vuid": "VUID-vkCmdBlitImage2KHR-commandBuffer-01836",
-          "text": " If <code>commandBuffer</code> is a protected command buffer, then <code>dstImage</code> <strong class=\"purple\">must</strong> not be an unprotected image"
+          "text": " If <code>commandBuffer</code> is a protected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>dstImage</code> <strong class=\"purple\">must</strong> not be an unprotected image"
         }
       ],
       "(VK_KHR_copy_commands2)": [
@@ -26058,15 +26066,15 @@
       "(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdResolveImage-commandBuffer-01837",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then <code>srcImage</code> <strong class=\"purple\">must</strong> not be a protected image"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>srcImage</code> <strong class=\"purple\">must</strong> not be a protected image"
         },
         {
           "vuid": "VUID-vkCmdResolveImage-commandBuffer-01838",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then <code>dstImage</code> <strong class=\"purple\">must</strong> not be a protected image"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>dstImage</code> <strong class=\"purple\">must</strong> not be a protected image"
         },
         {
           "vuid": "VUID-vkCmdResolveImage-commandBuffer-01839",
-          "text": " If <code>commandBuffer</code> is a protected command buffer, then <code>dstImage</code> <strong class=\"purple\">must</strong> not be an unprotected image"
+          "text": " If <code>commandBuffer</code> is a protected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>dstImage</code> <strong class=\"purple\">must</strong> not be an unprotected image"
         }
       ],
       "core": [
@@ -26466,15 +26474,15 @@
       "(VK_KHR_copy_commands2)+(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdResolveImage2KHR-commandBuffer-01837",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then <code>srcImage</code> <strong class=\"purple\">must</strong> not be a protected image"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>srcImage</code> <strong class=\"purple\">must</strong> not be a protected image"
         },
         {
           "vuid": "VUID-vkCmdResolveImage2KHR-commandBuffer-01838",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, then <code>dstImage</code> <strong class=\"purple\">must</strong> not be a protected image"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>dstImage</code> <strong class=\"purple\">must</strong> not be a protected image"
         },
         {
           "vuid": "VUID-vkCmdResolveImage2KHR-commandBuffer-01839",
-          "text": " If <code>commandBuffer</code> is a protected command buffer, then <code>dstImage</code> <strong class=\"purple\">must</strong> not be an unprotected image"
+          "text": " If <code>commandBuffer</code> is a protected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, <code>dstImage</code> <strong class=\"purple\">must</strong> not be an unprotected image"
         }
       ],
       "(VK_KHR_copy_commands2)": [
@@ -27012,15 +27020,15 @@
       "(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdDraw-commandBuffer-02707",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, any resource accessed by the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, any resource accessed by the <a href=\"#VkPipeline\">VkPipeline</a> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
         },
         {
           "vuid": "VUID-vkCmdDraw-commandBuffer-02712",
-          "text": " If <code>commandBuffer</code> is a protected command buffer, any resource written to by the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be an unprotected resource"
+          "text": " If <code>commandBuffer</code> is a protected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, any resource written to by the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be an unprotected resource"
         },
         {
           "vuid": "VUID-vkCmdDraw-commandBuffer-02713",
-          "text": " If <code>commandBuffer</code> is a protected command buffer, pipeline stages other than the framebuffer-space and compute stages in the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not write to any resource"
+          "text": " If <code>commandBuffer</code> is a protected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, pipeline stages other than the framebuffer-space and compute stages in the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not write to any resource"
         },
         {
           "vuid": "VUID-vkCmdDraw-commandBuffer-04617",
@@ -27430,15 +27438,15 @@
       "(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdDrawIndexed-commandBuffer-02707",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, any resource accessed by the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, any resource accessed by the <a href=\"#VkPipeline\">VkPipeline</a> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexed-commandBuffer-02712",
-          "text": " If <code>commandBuffer</code> is a protected command buffer, any resource written to by the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be an unprotected resource"
+          "text": " If <code>commandBuffer</code> is a protected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, any resource written to by the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be an unprotected resource"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexed-commandBuffer-02713",
-          "text": " If <code>commandBuffer</code> is a protected command buffer, pipeline stages other than the framebuffer-space and compute stages in the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not write to any resource"
+          "text": " If <code>commandBuffer</code> is a protected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, pipeline stages other than the framebuffer-space and compute stages in the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not write to any resource"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexed-commandBuffer-04617",
@@ -27860,15 +27868,15 @@
       "(VK_EXT_multi_draw)+(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdDrawMultiEXT-commandBuffer-02707",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, any resource accessed by the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, any resource accessed by the <a href=\"#VkPipeline\">VkPipeline</a> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
         },
         {
           "vuid": "VUID-vkCmdDrawMultiEXT-commandBuffer-02712",
-          "text": " If <code>commandBuffer</code> is a protected command buffer, any resource written to by the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be an unprotected resource"
+          "text": " If <code>commandBuffer</code> is a protected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, any resource written to by the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be an unprotected resource"
         },
         {
           "vuid": "VUID-vkCmdDrawMultiEXT-commandBuffer-02713",
-          "text": " If <code>commandBuffer</code> is a protected command buffer, pipeline stages other than the framebuffer-space and compute stages in the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not write to any resource"
+          "text": " If <code>commandBuffer</code> is a protected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, pipeline stages other than the framebuffer-space and compute stages in the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not write to any resource"
         },
         {
           "vuid": "VUID-vkCmdDrawMultiEXT-commandBuffer-04617",
@@ -28298,15 +28306,15 @@
       "(VK_EXT_multi_draw)+(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdDrawMultiIndexedEXT-commandBuffer-02707",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, any resource accessed by the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, any resource accessed by the <a href=\"#VkPipeline\">VkPipeline</a> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
         },
         {
           "vuid": "VUID-vkCmdDrawMultiIndexedEXT-commandBuffer-02712",
-          "text": " If <code>commandBuffer</code> is a protected command buffer, any resource written to by the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be an unprotected resource"
+          "text": " If <code>commandBuffer</code> is a protected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, any resource written to by the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be an unprotected resource"
         },
         {
           "vuid": "VUID-vkCmdDrawMultiIndexedEXT-commandBuffer-02713",
-          "text": " If <code>commandBuffer</code> is a protected command buffer, pipeline stages other than the framebuffer-space and compute stages in the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not write to any resource"
+          "text": " If <code>commandBuffer</code> is a protected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, pipeline stages other than the framebuffer-space and compute stages in the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not write to any resource"
         },
         {
           "vuid": "VUID-vkCmdDrawMultiIndexedEXT-commandBuffer-04617",
@@ -28756,7 +28764,7 @@
       "(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdDrawIndirect-commandBuffer-02707",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, any resource accessed by the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, any resource accessed by the <a href=\"#VkPipeline\">VkPipeline</a> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirect-commandBuffer-02711",
@@ -29234,7 +29242,7 @@
       "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdDrawIndirectCount-commandBuffer-02707",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, any resource accessed by the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, any resource accessed by the <a href=\"#VkPipeline\">VkPipeline</a> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCount-commandBuffer-02711",
@@ -29690,7 +29698,7 @@
       "(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-commandBuffer-02707",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, any resource accessed by the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, any resource accessed by the <a href=\"#VkPipeline\">VkPipeline</a> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-commandBuffer-02711",
@@ -30172,7 +30180,7 @@
       "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount-commandBuffer-02707",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, any resource accessed by the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, any resource accessed by the <a href=\"#VkPipeline\">VkPipeline</a> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount-commandBuffer-02711",
@@ -30616,7 +30624,7 @@
       "(VK_EXT_transform_feedback)+(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-commandBuffer-02707",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, any resource accessed by the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, any resource accessed by the <a href=\"#VkPipeline\">VkPipeline</a> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-commandBuffer-02646",
@@ -31102,7 +31110,7 @@
       "(VK_NV_mesh_shader)+(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdDrawMeshTasksNV-commandBuffer-02707",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, any resource accessed by the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, any resource accessed by the <a href=\"#VkPipeline\">VkPipeline</a> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
         }
       ],
       "(VK_NV_mesh_shader)+(VK_EXT_shader_image_atomic_int64)": [
@@ -31532,7 +31540,7 @@
       "(VK_NV_mesh_shader)+(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-commandBuffer-02707",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, any resource accessed by the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, any resource accessed by the <a href=\"#VkPipeline\">VkPipeline</a> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-commandBuffer-02711",
@@ -31994,7 +32002,7 @@
       "(VK_NV_mesh_shader)+(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-commandBuffer-02707",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, any resource accessed by the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, any resource accessed by the <a href=\"#VkPipeline\">VkPipeline</a> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-commandBuffer-02711",
@@ -35088,15 +35096,15 @@
       "(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdDispatch-commandBuffer-02707",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, any resource accessed by the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, any resource accessed by the <a href=\"#VkPipeline\">VkPipeline</a> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
         },
         {
           "vuid": "VUID-vkCmdDispatch-commandBuffer-02712",
-          "text": " If <code>commandBuffer</code> is a protected command buffer, any resource written to by the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be an unprotected resource"
+          "text": " If <code>commandBuffer</code> is a protected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, any resource written to by the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be an unprotected resource"
         },
         {
           "vuid": "VUID-vkCmdDispatch-commandBuffer-02713",
-          "text": " If <code>commandBuffer</code> is a protected command buffer, pipeline stages other than the framebuffer-space and compute stages in the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not write to any resource"
+          "text": " If <code>commandBuffer</code> is a protected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, pipeline stages other than the framebuffer-space and compute stages in the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not write to any resource"
         },
         {
           "vuid": "VUID-vkCmdDispatch-commandBuffer-04617",
@@ -35286,7 +35294,7 @@
       "(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdDispatchIndirect-commandBuffer-02707",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, any resource accessed by the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, any resource accessed by the <a href=\"#VkPipeline\">VkPipeline</a> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
         },
         {
           "vuid": "VUID-vkCmdDispatchIndirect-commandBuffer-02711",
@@ -35496,15 +35504,15 @@
       "(VK_VERSION_1_1,VK_KHR_device_group)+(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdDispatchBase-commandBuffer-02707",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, any resource accessed by the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, any resource accessed by the <a href=\"#VkPipeline\">VkPipeline</a> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
         },
         {
           "vuid": "VUID-vkCmdDispatchBase-commandBuffer-02712",
-          "text": " If <code>commandBuffer</code> is a protected command buffer, any resource written to by the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be an unprotected resource"
+          "text": " If <code>commandBuffer</code> is a protected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, any resource written to by the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be an unprotected resource"
         },
         {
           "vuid": "VUID-vkCmdDispatchBase-commandBuffer-02713",
-          "text": " If <code>commandBuffer</code> is a protected command buffer, pipeline stages other than the framebuffer-space and compute stages in the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not write to any resource"
+          "text": " If <code>commandBuffer</code> is a protected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, pipeline stages other than the framebuffer-space and compute stages in the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not write to any resource"
         },
         {
           "vuid": "VUID-vkCmdDispatchBase-commandBuffer-04617",
@@ -35602,7 +35610,7 @@
         },
         {
           "vuid": "VUID-vkCmdSubpassShadingHUAWEI-None-04931",
-          "text": " This command must be called in a subpass with bind point VK_PIPELINE_BIND_POINT_SUBPASS_SHADING_HUAWEI. No draw commands can be called in the same subpass. Only one vkCmdSubpassShadingHUAWEI command can be called in a subpass"
+          "text": " This command must be called in a subpass with bind point <code>VK_PIPELINE_BIND_POINT_SUBPASS_SHADING_HUAWEI</code>. No draw commands can be called in the same subpass. Only one <a href=\"#vkCmdSubpassShadingHUAWEI\">vkCmdSubpassShadingHUAWEI</a> command can be called in a subpass"
         },
         {
           "vuid": "VUID-vkCmdSubpassShadingHUAWEI-commandBuffer-parameter",
@@ -35674,7 +35682,7 @@
       "(VK_HUAWEI_subpass_shading)+(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdSubpassShadingHUAWEI-commandBuffer-02707",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, any resource accessed by the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, any resource accessed by the <a href=\"#VkPipeline\">VkPipeline</a> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
         }
       ],
       "(VK_HUAWEI_subpass_shading)+(VK_EXT_shader_image_atomic_int64)": [
@@ -36212,7 +36220,7 @@
       "(VK_NV_device_generated_commands)+(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-commandBuffer-02707",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, any resource accessed by the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, any resource accessed by the <a href=\"#VkPipeline\">VkPipeline</a> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
         },
         {
           "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-commandBuffer-02970",
@@ -42102,7 +42110,7 @@
       "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_NV_ray_tracing)+(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdTraceRaysNV-commandBuffer-02707",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, any resource accessed by the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, any resource accessed by the <a href=\"#VkPipeline\">VkPipeline</a> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
         }
       ],
       "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_NV_ray_tracing)+(VK_EXT_shader_image_atomic_int64)": [
@@ -42416,7 +42424,7 @@
       "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_pipeline)+(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-commandBuffer-02707",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, any resource accessed by the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, any resource accessed by the <a href=\"#VkPipeline\">VkPipeline</a> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
         }
       ],
       "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_pipeline)+(VK_EXT_shader_image_atomic_int64)": [
@@ -42810,7 +42818,7 @@
       "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_pipeline)+(VK_VERSION_1_1)": [
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-commandBuffer-02707",
-          "text": " If <code>commandBuffer</code> is an unprotected command buffer, any resource accessed by the <code>VkPipeline</code> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
+          "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, any resource accessed by the <a href=\"#VkPipeline\">VkPipeline</a> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
         }
       ],
       "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_pipeline)+(VK_EXT_shader_image_atomic_int64)": [
@@ -47164,7 +47172,7 @@
         },
         {
           "vuid": "VUID-StandaloneSpirv-Location-04918",
-          "text": " The <code>Location</code> decorations <strong class=\"purple\">must</strong> not be used on the members of <code>OpVariable</code> with a structure type that is a block decorated with <code>Location</code>"
+          "text": " The <code>Location</code> decorations <strong class=\"purple\">must</strong> not be used on the members of <code>OpVariable</code> with a structure type that is decorated with <code>Location</code>"
         },
         {
           "vuid": "VUID-StandaloneSpirv-Location-04919",
