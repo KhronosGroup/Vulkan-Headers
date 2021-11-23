@@ -119,7 +119,7 @@ extern "C" __declspec( dllimport ) FARPROC __stdcall GetProcAddress( HINSTANCE h
 #  include <span>
 #endif
 
-static_assert( VK_HEADER_VERSION == 199, "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION == 200, "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
@@ -308,87 +308,25 @@ namespace VULKAN_HPP_NAMESPACE
 #    pragma GCC diagnostic pop
 #  endif
 
-    template <size_t N>
-    ArrayProxy( std::array<T, N> const & data ) VULKAN_HPP_NOEXCEPT
-      : m_count( N )
-      , m_ptr( data.data() )
+    // Any type with a .data() return type implicitly convertible to T*, and a .size() return type implicitly
+    // convertible to size_t. The const version can capture temporaries, with lifetime ending at end of statement.
+    template <typename V,
+              typename std::enable_if<
+                std::is_convertible<decltype( std::declval<V>().data() ), T *>::value &&
+                std::is_convertible<decltype( std::declval<V>().size() ), std::size_t>::value>::type * = nullptr>
+    ArrayProxy( V const & v ) VULKAN_HPP_NOEXCEPT
+      : m_count( static_cast<uint32_t>( v.size() ) )
+      , m_ptr( v.data() )
     {}
 
-    template <size_t N, typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
-    ArrayProxy( std::array<typename std::remove_const<T>::type, N> const & data ) VULKAN_HPP_NOEXCEPT
-      : m_count( N )
-      , m_ptr( data.data() )
+    template <typename V,
+              typename std::enable_if<
+                std::is_convertible<decltype( std::declval<V>().data() ), T *>::value &&
+                std::is_convertible<decltype( std::declval<V>().size() ), std::size_t>::value>::type * = nullptr>
+    ArrayProxy( V & v ) VULKAN_HPP_NOEXCEPT
+      : m_count( static_cast<uint32_t>( v.size() ) )
+      , m_ptr( v.data() )
     {}
-
-    template <size_t N>
-    ArrayProxy( std::array<T, N> & data ) VULKAN_HPP_NOEXCEPT
-      : m_count( N )
-      , m_ptr( data.data() )
-    {}
-
-    template <size_t N, typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
-    ArrayProxy( std::array<typename std::remove_const<T>::type, N> & data ) VULKAN_HPP_NOEXCEPT
-      : m_count( N )
-      , m_ptr( data.data() )
-    {}
-
-    template <class Allocator = std::allocator<typename std::remove_const<T>::type>>
-    ArrayProxy( std::vector<T, Allocator> const & data ) VULKAN_HPP_NOEXCEPT
-      : m_count( static_cast<uint32_t>( data.size() ) )
-      , m_ptr( data.data() )
-    {}
-
-    template <class Allocator = std::allocator<typename std::remove_const<T>::type>,
-              typename B      = T,
-              typename std::enable_if<std::is_const<B>::value, int>::type = 0>
-    ArrayProxy( std::vector<typename std::remove_const<T>::type, Allocator> const & data ) VULKAN_HPP_NOEXCEPT
-      : m_count( static_cast<uint32_t>( data.size() ) )
-      , m_ptr( data.data() )
-    {}
-
-    template <class Allocator = std::allocator<typename std::remove_const<T>::type>>
-    ArrayProxy( std::vector<T, Allocator> & data ) VULKAN_HPP_NOEXCEPT
-      : m_count( static_cast<uint32_t>( data.size() ) )
-      , m_ptr( data.data() )
-    {}
-
-    template <class Allocator = std::allocator<typename std::remove_const<T>::type>,
-              typename B      = T,
-              typename std::enable_if<std::is_const<B>::value, int>::type = 0>
-    ArrayProxy( std::vector<typename std::remove_const<T>::type, Allocator> & data ) VULKAN_HPP_NOEXCEPT
-      : m_count( static_cast<uint32_t>( data.size() ) )
-      , m_ptr( data.data() )
-    {}
-
-#  if defined( VULKAN_HPP_SUPPORT_SPAN )
-    template <size_t N = std::dynamic_extent>
-    ArrayProxy( std::span<T, N> const & data ) VULKAN_HPP_NOEXCEPT
-      : m_count( static_cast<uint32_t>( data.size() ) )
-      , m_ptr( data.data() )
-    {}
-
-    template <size_t N                                                    = std::dynamic_extent,
-              typename B                                                  = T,
-              typename std::enable_if<std::is_const<B>::value, int>::type = 0>
-    ArrayProxy( std::span<typename std::remove_const<T>::type, N> const & data ) VULKAN_HPP_NOEXCEPT
-      : m_count( static_cast<uint32_t>( data.size() ) )
-      , m_ptr( data.data() )
-    {}
-
-    template <size_t N = std::dynamic_extent>
-    ArrayProxy( std::span<T, N> & data ) VULKAN_HPP_NOEXCEPT
-      : m_count( static_cast<uint32_t>( data.size() ) )
-      , m_ptr( data.data() )
-    {}
-
-    template <size_t N                                                    = std::dynamic_extent,
-              typename B                                                  = T,
-              typename std::enable_if<std::is_const<B>::value, int>::type = 0>
-    ArrayProxy( std::span<typename std::remove_const<T>::type, N> & data ) VULKAN_HPP_NOEXCEPT
-      : m_count( static_cast<uint32_t>( data.size() ) )
-      , m_ptr( data.data() )
-    {}
-#  endif
 
     const T * begin() const VULKAN_HPP_NOEXCEPT
     {
@@ -451,7 +389,8 @@ namespace VULKAN_HPP_NAMESPACE
       , m_ptr( &value )
     {}
 
-    ArrayProxyNoTemporaries( T && value ) = delete;
+    template <typename V>
+    ArrayProxyNoTemporaries( V && value ) = delete;
 
     template <typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
     ArrayProxyNoTemporaries( typename std::remove_const<T>::type & value ) VULKAN_HPP_NOEXCEPT
@@ -506,116 +445,16 @@ namespace VULKAN_HPP_NAMESPACE
     template <typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
     ArrayProxyNoTemporaries( std::initializer_list<typename std::remove_const<T>::type> && list ) = delete;
 
-    template <size_t N>
-    ArrayProxyNoTemporaries( std::array<T, N> const & data ) VULKAN_HPP_NOEXCEPT
-      : m_count( N )
-      , m_ptr( data.data() )
+    // Any type with a .data() return type implicitly convertible to T*, and a // .size() return type implicitly
+    // convertible to size_t.
+    template <typename V,
+              typename std::enable_if<
+                std::is_convertible<decltype( std::declval<V>().data() ), T *>::value &&
+                std::is_convertible<decltype( std::declval<V>().size() ), std::size_t>::value>::type * = nullptr>
+    ArrayProxyNoTemporaries( V & v ) VULKAN_HPP_NOEXCEPT
+      : m_count( static_cast<uint32_t>( v.size() ) )
+      , m_ptr( v.data() )
     {}
-
-    template <size_t N>
-    ArrayProxyNoTemporaries( std::array<T, N> const && data ) = delete;
-
-    template <size_t N, typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
-    ArrayProxyNoTemporaries( std::array<typename std::remove_const<T>::type, N> const & data ) VULKAN_HPP_NOEXCEPT
-      : m_count( N )
-      , m_ptr( data.data() )
-    {}
-
-    template <size_t N, typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
-    ArrayProxyNoTemporaries( std::array<typename std::remove_const<T>::type, N> const && data ) = delete;
-
-    template <size_t N>
-    ArrayProxyNoTemporaries( std::array<T, N> & data ) VULKAN_HPP_NOEXCEPT
-      : m_count( N )
-      , m_ptr( data.data() )
-    {}
-
-    template <size_t N>
-    ArrayProxyNoTemporaries( std::array<T, N> && data ) = delete;
-
-    template <size_t N, typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
-    ArrayProxyNoTemporaries( std::array<typename std::remove_const<T>::type, N> & data ) VULKAN_HPP_NOEXCEPT
-      : m_count( N )
-      , m_ptr( data.data() )
-    {}
-
-    template <size_t N, typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
-    ArrayProxyNoTemporaries( std::array<typename std::remove_const<T>::type, N> && data ) = delete;
-
-    template <class Allocator = std::allocator<typename std::remove_const<T>::type>>
-    ArrayProxyNoTemporaries( std::vector<T, Allocator> const & data ) VULKAN_HPP_NOEXCEPT
-      : m_count( static_cast<uint32_t>( data.size() ) )
-      , m_ptr( data.data() )
-    {}
-
-    template <class Allocator = std::allocator<typename std::remove_const<T>::type>>
-    ArrayProxyNoTemporaries( std::vector<T, Allocator> const && data ) = delete;
-
-    template <class Allocator = std::allocator<typename std::remove_const<T>::type>,
-              typename B      = T,
-              typename std::enable_if<std::is_const<B>::value, int>::type = 0>
-    ArrayProxyNoTemporaries( std::vector<typename std::remove_const<T>::type, Allocator> const & data )
-      VULKAN_HPP_NOEXCEPT
-      : m_count( static_cast<uint32_t>( data.size() ) )
-      , m_ptr( data.data() )
-    {}
-
-    template <class Allocator = std::allocator<typename std::remove_const<T>::type>,
-              typename B      = T,
-              typename std::enable_if<std::is_const<B>::value, int>::type = 0>
-    ArrayProxyNoTemporaries( std::vector<typename std::remove_const<T>::type, Allocator> const && data ) = delete;
-
-    template <class Allocator = std::allocator<typename std::remove_const<T>::type>>
-    ArrayProxyNoTemporaries( std::vector<T, Allocator> & data ) VULKAN_HPP_NOEXCEPT
-      : m_count( static_cast<uint32_t>( data.size() ) )
-      , m_ptr( data.data() )
-    {}
-
-    template <class Allocator = std::allocator<typename std::remove_const<T>::type>>
-    ArrayProxyNoTemporaries( std::vector<T, Allocator> && data ) = delete;
-
-    template <class Allocator = std::allocator<typename std::remove_const<T>::type>,
-              typename B      = T,
-              typename std::enable_if<std::is_const<B>::value, int>::type = 0>
-    ArrayProxyNoTemporaries( std::vector<typename std::remove_const<T>::type, Allocator> & data ) VULKAN_HPP_NOEXCEPT
-      : m_count( static_cast<uint32_t>( data.size() ) )
-      , m_ptr( data.data() )
-    {}
-
-    template <class Allocator = std::allocator<typename std::remove_const<T>::type>,
-              typename B      = T,
-              typename std::enable_if<std::is_const<B>::value, int>::type = 0>
-    ArrayProxyNoTemporaries( std::vector<typename std::remove_const<T>::type, Allocator> && data ) = delete;
-
-#  if defined( VULKAN_HPP_SUPPORT_SPAN )
-    template <size_t N = std::dynamic_extent>
-    ArrayProxyNoTemporaries( std::span<T, N> const & data ) VULKAN_HPP_NOEXCEPT
-      : m_count( static_cast<uint32_t>( data.size() ) )
-      , m_ptr( data.data() )
-    {}
-
-    template <size_t N                                                    = std::dynamic_extent,
-              typename B                                                  = T,
-              typename std::enable_if<std::is_const<B>::value, int>::type = 0>
-    ArrayProxyNoTemporaries( std::span<typename std::remove_const<T>::type, N> const & data ) VULKAN_HPP_NOEXCEPT
-      : m_count( static_cast<uint32_t>( data.size() ) )
-      , m_ptr( data.data() )
-    {}
-
-    template <size_t N = std::dynamic_extent>
-    ArrayProxyNoTemporaries( std::span<T, N> & data ) VULKAN_HPP_NOEXCEPT
-      : m_count( static_cast<uint32_t>( data.size() ) )
-      , m_ptr( data.data() )
-    {}
-
-    template <size_t N                                                    = std::dynamic_extent,
-              typename B                                                  = T,
-              typename std::enable_if<std::is_const<B>::value, int>::type = 0>
-    ArrayProxyNoTemporaries( std::span<typename std::remove_const<T>::type, N> & data ) VULKAN_HPP_NOEXCEPT
-      : m_count( static_cast<uint32_t>( data.size() ) )
-      , m_ptr( data.data() )
-    {}
-#  endif
 
     const T * begin() const VULKAN_HPP_NOEXCEPT
     {
@@ -10752,6 +10591,32 @@ namespace VULKAN_HPP_NAMESPACE
   //=== VK_EXT_physical_device_drm ===
   template <>
   struct StructExtends<PhysicalDeviceDrmPropertiesEXT, PhysicalDeviceProperties2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  //=== VK_EXT_depth_clip_control ===
+  template <>
+  struct StructExtends<PhysicalDeviceDepthClipControlFeaturesEXT, PhysicalDeviceFeatures2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<PhysicalDeviceDepthClipControlFeaturesEXT, DeviceCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<PipelineViewportDepthClipControlCreateInfoEXT, PipelineViewportStateCreateInfo>
   {
     enum
     {
