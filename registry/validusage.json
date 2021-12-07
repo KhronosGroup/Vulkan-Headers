@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.2.201",
-    "comment": "from git branch: github-main commit: d70e01c0be7b8a7d20b186b30b29a75b18bba75d",
-    "date": "2021-12-01 02:18:40Z"
+    "api version": "1.2.202",
+    "comment": "from git branch: github-main commit: 48b76697118c275337e49836259f0571b3410d84",
+    "date": "2021-12-07 08:44:26Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -3851,10 +3851,6 @@
           "text": " <code>stageMask</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkPipelineStageFlagBits2KHR\">VkPipelineStageFlagBits2KHR</a> values"
         },
         {
-          "vuid": "VUID-vkCmdResetEvent2KHR-stageMask-requiredbitmask",
-          "text": " <code>stageMask</code> <strong class=\"purple\">must</strong> not be <code>0</code>"
-        },
-        {
           "vuid": "VUID-vkCmdResetEvent2KHR-commandBuffer-recording",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be in the <a href=\"#commandbuffers-lifecycle\">recording state</a>"
         },
@@ -7240,7 +7236,7 @@
         },
         {
           "vuid": "VUID-VkAttachmentDescription-format-03280",
-          "text": " If <code>format</code> is a color format, <code>initialLayout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL</code>, <code>VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL</code>, <code>VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL</code>, or <code>VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL</code>"
+          "text": " If <code>format</code> is a color format, <code>initialLayout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL</code> or <code>VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL</code>"
         },
         {
           "vuid": "VUID-VkAttachmentDescription-format-03281",
@@ -7248,7 +7244,7 @@
         },
         {
           "vuid": "VUID-VkAttachmentDescription-format-03282",
-          "text": " If <code>format</code> is a color format, <code>finalLayout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL</code>, <code>VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL</code>, <code>VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL</code>, or <code>VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL</code>"
+          "text": " If <code>format</code> is a color format, <code>finalLayout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL</code> or <code>VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL</code>"
         },
         {
           "vuid": "VUID-VkAttachmentDescription-format-03283",
@@ -7289,6 +7285,16 @@
         {
           "vuid": "VUID-VkAttachmentDescription-finalLayout-parameter",
           "text": " <code>finalLayout</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImageLayout\">VkImageLayout</a> value"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_maintenance2)": [
+        {
+          "vuid": "VUID-VkAttachmentDescription-format-06487",
+          "text": " If <code>format</code> is a color format, <code>initialLayout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL</code> or <code>VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL</code>"
+        },
+        {
+          "vuid": "VUID-VkAttachmentDescription-format-06488",
+          "text": " If <code>format</code> is a color format, <code>finalLayout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL</code> or <code>VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL</code>"
         }
       ],
       "(VK_VERSION_1_2,VK_KHR_separate_depth_stencil_layouts)": [
@@ -10186,11 +10192,11 @@
         },
         {
           "vuid": "VUID-VkPipelineShaderStageCreateInfo-pNext-02755",
-          "text": " If a <a href=\"#VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT\">VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT</a> structure is included in the <code>pNext</code> chain, the <a href=\"#features-subgroupSizeControl\"><code>subgroupSizeControl</code></a> feature <strong class=\"purple\">must</strong> be enabled, and <code>stage</code> <strong class=\"purple\">must</strong> be a valid bit specified in <a href=\"#limits-required-subgroup-size-stages\"><code>requiredSubgroupSizeStages</code></a>"
+          "text": " If a <a href=\"#VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT\">VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT</a> structure is included in the <code>pNext</code> chain, the <a href=\"#features-subgroupSizeControl\"><code>subgroupSizeControl</code></a> feature <strong class=\"purple\">must</strong> be enabled, and <code>stage</code> <strong class=\"purple\">must</strong> be a valid bit specified in <a href=\"#limits-requiredSubgroupSizeStages\"><code>requiredSubgroupSizeStages</code></a>"
         },
         {
           "vuid": "VUID-VkPipelineShaderStageCreateInfo-pNext-02756",
-          "text": " If a <a href=\"#VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT\">VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT</a> structure is included in the <code>pNext</code> chain and <code>stage</code> is <code>VK_SHADER_STAGE_COMPUTE_BIT</code>, the local workgroup size of the shader <strong class=\"purple\">must</strong> be less than or equal to the product of <a href=\"#VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT\">VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT</a>::<code>requiredSubgroupSize</code> and <a href=\"#limits-max-subgroups-per-workgroup\"><code>maxComputeWorkgroupSubgroups</code></a>"
+          "text": " If a <a href=\"#VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT\">VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT</a> structure is included in the <code>pNext</code> chain and <code>stage</code> is <code>VK_SHADER_STAGE_COMPUTE_BIT</code>, the local workgroup size of the shader <strong class=\"purple\">must</strong> be less than or equal to the product of <a href=\"#VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT\">VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT</a>::<code>requiredSubgroupSize</code> and <a href=\"#limits-maxComputeWorkgroupSubgroups\"><code>maxComputeWorkgroupSubgroups</code></a>"
         },
         {
           "vuid": "VUID-VkPipelineShaderStageCreateInfo-pNext-02757",
@@ -10198,7 +10204,7 @@
         },
         {
           "vuid": "VUID-VkPipelineShaderStageCreateInfo-flags-02758",
-          "text": " If <code>flags</code> has both the <code>VK_PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT</code> and <code>VK_PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT</code> flags set, the local workgroup size in the X dimension of the pipeline <strong class=\"purple\">must</strong> be a multiple of <a href=\"#limits-max-subgroup-size\"><code>maxSubgroupSize</code></a>"
+          "text": " If <code>flags</code> has both the <code>VK_PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT</code> and <code>VK_PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT</code> flags set, the local workgroup size in the X dimension of the pipeline <strong class=\"purple\">must</strong> be a multiple of <a href=\"#limits-maxSubgroupSize\"><code>maxSubgroupSize</code></a>"
         },
         {
           "vuid": "VUID-VkPipelineShaderStageCreateInfo-flags-02759",
@@ -10214,11 +10220,11 @@
         },
         {
           "vuid": "VUID-VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT-requiredSubgroupSize-02761",
-          "text": " <code>requiredSubgroupSize</code> <strong class=\"purple\">must</strong> be greater or equal to <a href=\"#limits-min-subgroup-size\">minSubgroupSize</a>"
+          "text": " <code>requiredSubgroupSize</code> <strong class=\"purple\">must</strong> be greater or equal to <a href=\"#limits-minSubgroupSize\">minSubgroupSize</a>"
         },
         {
           "vuid": "VUID-VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT-requiredSubgroupSize-02762",
-          "text": " <code>requiredSubgroupSize</code> <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#limits-max-subgroup-size\">maxSubgroupSize</a>"
+          "text": " <code>requiredSubgroupSize</code> <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#limits-maxSubgroupSize\">maxSubgroupSize</a>"
         },
         {
           "vuid": "VUID-VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT-sType-sType",
@@ -10987,16 +10993,26 @@
           "text": " If <code>pStages</code> includes a fragment shader stage, and the fragment shader code enables <a href=\"#shaders-fragment-earlytest\">early fragment tests</a>, the <code>flags</code> member of <a href=\"#VkPipelineDepthStencilStateCreateInfo\">VkPipelineDepthStencilStateCreateInfo</a> <strong class=\"purple\">must</strong> not include <code>VK_PIPELINE_DEPTH_STENCIL_STATE_CREATE_RASTERIZATION_ORDER_ATTACHMENT_DEPTH_ACCESS_BIT_ARM</code> or <code>VK_PIPELINE_DEPTH_STENCIL_STATE_CREATE_RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_BIT_ARM</code>"
         },
         {
-          "vuid": "VUID-VkGraphicsPipelineCreateInfo-flags-06467",
-          "text": " If the <code>flags</code> member of <a href=\"#VkPipelineColorBlendStateCreateInfo\">VkPipelineColorBlendStateCreateInfo</a> includes <code>VK_PIPELINE_COLOR_BLEND_STATE_CREATE_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_BIT_ARM</code> <code>subpass</code> <strong class=\"purple\">must</strong> have been created with <code>VK_SUBPASS_DESCRIPTION_RASTERIZATION_ORDER_ATTACHMENT_COLOR_ACCESS_BIT_ARM</code>"
+          "vuid": "VUID-VkGraphicsPipelineCreateInfo-flags-06484",
+          "text": " If the pipeline is being created with <a href=\"#pipeline-graphics-subsets-fragment-output\">fragment output interface state</a> and the <code>flags</code> member of <a href=\"#VkPipelineColorBlendStateCreateInfo\">VkPipelineColorBlendStateCreateInfo</a> includes <code>VK_PIPELINE_COLOR_BLEND_STATE_CREATE_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_BIT_ARM</code> <code>subpass</code> <strong class=\"purple\">must</strong> have been created with <code>VK_SUBPASS_DESCRIPTION_RASTERIZATION_ORDER_ATTACHMENT_COLOR_ACCESS_BIT_ARM</code>"
         },
         {
-          "vuid": "VUID-VkGraphicsPipelineCreateInfo-flags-06468",
-          "text": " If the <code>flags</code> member of <a href=\"#VkPipelineDepthStencilStateCreateInfo\">VkPipelineDepthStencilStateCreateInfo</a> includes <code>VK_PIPELINE_DEPTH_STENCIL_STATE_CREATE_RASTERIZATION_ORDER_ATTACHMENT_DEPTH_ACCESS_BIT_ARM</code>, <code>subpass</code> <strong class=\"purple\">must</strong> have been created with <code>VK_SUBPASS_DESCRIPTION_RASTERIZATION_ORDER_ATTACHMENT_DEPTH_ACCESS_BIT_ARM</code>"
+          "vuid": "VUID-VkGraphicsPipelineCreateInfo-flags-06485",
+          "text": " If the pipeline is being created with <a href=\"#pipeline-graphics-subsets-fragment-output\">fragment output interface state</a> and the <code>flags</code> member of <a href=\"#VkPipelineDepthStencilStateCreateInfo\">VkPipelineDepthStencilStateCreateInfo</a> includes <code>VK_PIPELINE_DEPTH_STENCIL_STATE_CREATE_RASTERIZATION_ORDER_ATTACHMENT_DEPTH_ACCESS_BIT_ARM</code>, <code>subpass</code> <strong class=\"purple\">must</strong> have been created with <code>VK_SUBPASS_DESCRIPTION_RASTERIZATION_ORDER_ATTACHMENT_DEPTH_ACCESS_BIT_ARM</code>"
         },
         {
-          "vuid": "VUID-VkGraphicsPipelineCreateInfo-flags-06469",
-          "text": " If the <code>flags</code> member of <a href=\"#VkPipelineDepthStencilStateCreateInfo\">VkPipelineDepthStencilStateCreateInfo</a> includes <code>VK_PIPELINE_DEPTH_STENCIL_STATE_CREATE_RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_BIT_ARM</code>, <code>subpass</code> <strong class=\"purple\">must</strong> have been created with <code>VK_SUBPASS_DESCRIPTION_RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_BIT_ARM</code>"
+          "vuid": "VUID-VkGraphicsPipelineCreateInfo-flags-06486",
+          "text": " If the pipeline is being created with <a href=\"#pipeline-graphics-subsets-fragment-output\">fragment output interface state</a> and the <code>flags</code> member of <a href=\"#VkPipelineDepthStencilStateCreateInfo\">VkPipelineDepthStencilStateCreateInfo</a> includes <code>VK_PIPELINE_DEPTH_STENCIL_STATE_CREATE_RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_BIT_ARM</code>, <code>subpass</code> <strong class=\"purple\">must</strong> have been created with <code>VK_SUBPASS_DESCRIPTION_RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_BIT_ARM</code>"
+        }
+      ],
+      "(VK_ARM_rasterization_order_attachment_access)+(VK_KHR_dynamic_rendering)": [
+        {
+          "vuid": "VUID-VkGraphicsPipelineCreateInfo-flags-06482",
+          "text": " If the pipeline is being created with <a href=\"#pipeline-graphics-subsets-fragment-output\">fragment output interface state</a> and the <code>flags</code> member of <a href=\"#VkPipelineColorBlendStateCreateInfo\">VkPipelineColorBlendStateCreateInfo</a> includes <code>VK_PIPELINE_COLOR_BLEND_STATE_CREATE_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_BIT_ARM</code>, <code>renderpass</code> <strong class=\"purple\">must</strong> not be <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>"
+        },
+        {
+          "vuid": "VUID-VkGraphicsPipelineCreateInfo-flags-06483",
+          "text": " If the pipeline is being created with <a href=\"#pipeline-graphics-subsets-fragment-output\">fragment output interface state</a> and the <code>flags</code> member of <a href=\"#VkPipelineDepthStencilStateCreateInfo\">VkPipelineDepthStencilStateCreateInfo</a> includes <code>VK_PIPELINE_DEPTH_STENCIL_STATE_CREATE_RASTERIZATION_ORDER_ATTACHMENT_DEPTH_ACCESS_BIT_ARM</code> or <code>VK_PIPELINE_DEPTH_STENCIL_STATE_CREATE_RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_BIT_ARM</code>, <code>renderpass</code> <strong class=\"purple\">must</strong> not be <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>"
         }
       ]
     },
@@ -16724,7 +16740,7 @@
         },
         {
           "vuid": "VUID-VkDeviceImageMemoryRequirementsKHR-pCreateInfo-06417",
-          "text": " If <code>pCreateInfo</code>::<code>flags</code> has <code>VK_IMAGE_CREATE_DISJOINT_BIT</code> set then <code>planAspect</code> <strong class=\"purple\">must</strong> not be zero"
+          "text": " If <code>pCreateInfo</code>::<code>flags</code> has <code>VK_IMAGE_CREATE_DISJOINT_BIT</code> set then <code>planeAspect</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_ASPECT_NONE_KHR</code>"
         },
         {
           "vuid": "VUID-VkDeviceImageMemoryRequirementsKHR-pCreateInfo-06419",
@@ -16750,7 +16766,7 @@
       "(VK_VERSION_1_1,VK_KHR_get_memory_requirements2)+(VK_KHR_maintenance4)+(VK_EXT_image_drm_format_modifier)": [
         {
           "vuid": "VUID-VkDeviceImageMemoryRequirementsKHR-pCreateInfo-06418",
-          "text": " If <code>pCreateInfo</code>::<code>flags</code> has <code>VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT</code> set then <code>planAspect</code> <strong class=\"purple\">must</strong> not be zero"
+          "text": " If <code>pCreateInfo</code>::<code>flags</code> has <code>VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT</code> set then <code>planeAspect</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_ASPECT_NONE_KHR</code>"
         },
         {
           "vuid": "VUID-VkDeviceImageMemoryRequirementsKHR-pCreateInfo-06420",
@@ -22615,10 +22631,6 @@
           "text": " <code>stage</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkPipelineStageFlagBits2KHR\">VkPipelineStageFlagBits2KHR</a> values"
         },
         {
-          "vuid": "VUID-vkCmdWriteTimestamp2KHR-stage-requiredbitmask",
-          "text": " <code>stage</code> <strong class=\"purple\">must</strong> not be <code>0</code>"
-        },
-        {
           "vuid": "VUID-vkCmdWriteTimestamp2KHR-queryPool-parameter",
           "text": " <code>queryPool</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkQueryPool\">VkQueryPool</a> handle"
         },
@@ -22775,6 +22787,18 @@
         {
           "vuid": "VUID-vkCmdWriteTimestamp-pipelineStage-04081",
           "text": " If the <a href=\"#features-shadingRateImage\">shading rate image</a> feature is not enabled, <code>pipelineStage</code> <strong class=\"purple\">must</strong> not be <code>VK_PIPELINE_STAGE_SHADING_RATE_IMAGE_BIT_NV</code>"
+        }
+      ],
+      "(VK_KHR_synchronization2)": [
+        {
+          "vuid": "VUID-vkCmdWriteTimestamp-synchronization2-06489",
+          "text": " If the <a href=\"#features-synchronization2\"><code>synchronization2</code></a> feature is not enabled, <code>pipelineStage</code> <strong class=\"purple\">must</strong> not be <code>VK_PIPELINE_STAGE_NONE_KHR</code>"
+        }
+      ],
+      "!(VK_KHR_synchronization2)": [
+        {
+          "vuid": "VUID-vkCmdWriteTimestamp-pipelineStage-06490",
+          "text": " <code>pipelineStage</code> <strong class=\"purple\">must</strong> not be <code>VK_PIPELINE_STAGE_NONE_KHR</code>"
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_multiview)": [
@@ -26463,10 +26487,6 @@
           "text": " <code>stage</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkPipelineStageFlagBits2KHR\">VkPipelineStageFlagBits2KHR</a> values"
         },
         {
-          "vuid": "VUID-vkCmdWriteBufferMarker2AMD-stage-requiredbitmask",
-          "text": " <code>stage</code> <strong class=\"purple\">must</strong> not be <code>0</code>"
-        },
-        {
           "vuid": "VUID-vkCmdWriteBufferMarker2AMD-dstBuffer-parameter",
           "text": " <code>dstBuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkBuffer\">VkBuffer</a> handle"
         },
@@ -26566,7 +26586,7 @@
         },
         {
           "vuid": "VUID-vkCmdWriteBufferMarkerAMD-pipelineStage-parameter",
-          "text": " <code>pipelineStage</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkPipelineStageFlagBits\">VkPipelineStageFlagBits</a> value"
+          "text": " If <code>pipelineStage</code> is not <code>0</code>, <code>pipelineStage</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkPipelineStageFlagBits\">VkPipelineStageFlagBits</a> value"
         },
         {
           "vuid": "VUID-vkCmdWriteBufferMarkerAMD-dstBuffer-parameter",
@@ -26613,6 +26633,18 @@
         {
           "vuid": "VUID-vkCmdWriteBufferMarkerAMD-pipelineStage-04081",
           "text": " If the <a href=\"#features-shadingRateImage\">shading rate image</a> feature is not enabled, <code>pipelineStage</code> <strong class=\"purple\">must</strong> not be <code>VK_PIPELINE_STAGE_SHADING_RATE_IMAGE_BIT_NV</code>"
+        }
+      ],
+      "(VK_AMD_buffer_marker)+(VK_KHR_synchronization2)": [
+        {
+          "vuid": "VUID-vkCmdWriteBufferMarkerAMD-synchronization2-06489",
+          "text": " If the <a href=\"#features-synchronization2\"><code>synchronization2</code></a> feature is not enabled, <code>pipelineStage</code> <strong class=\"purple\">must</strong> not be <code>VK_PIPELINE_STAGE_NONE_KHR</code>"
+        }
+      ],
+      "(VK_AMD_buffer_marker)+!(VK_KHR_synchronization2)": [
+        {
+          "vuid": "VUID-vkCmdWriteBufferMarkerAMD-pipelineStage-06490",
+          "text": " <code>pipelineStage</code> <strong class=\"purple\">must</strong> not be <code>VK_PIPELINE_STAGE_NONE_KHR</code>"
         }
       ]
     },
@@ -47859,6 +47891,10 @@
         {
           "vuid": "VUID-StandaloneSpirv-Base-04781",
           "text": " The <code>Base</code> operand of any <code>OpBitCount</code>, <code>OpBitReverse</code>, <code>OpBitFieldInsert</code>, <code>OpBitFieldSExtract</code>, or <code>OpBitFieldUExtract</code> instruction <strong class=\"purple\">must</strong> be a 32-bit integer scalar or a vector of 32-bit integers"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-DescriptorSet-06491",
+          "text": " If a variable is decorated by <code>DescriptorSet</code> or <code>Binding</code>, the storage class <strong class=\"purple\">must</strong> correspond to an entry in <a href=\"#interfaces-resources-storage-class-correspondence\">Shader Resource and Storage Class Correspondence</a>"
         }
       ],
       "(VK_VERSION_1_1)": [
