@@ -99,6 +99,12 @@ typedef enum VkVideoCodingQualityPresetFlagBitsKHR {
     VK_VIDEO_CODING_QUALITY_PRESET_FLAG_BITS_MAX_ENUM_KHR = 0x7FFFFFFF
 } VkVideoCodingQualityPresetFlagBitsKHR;
 typedef VkFlags VkVideoCodingQualityPresetFlagsKHR;
+typedef struct VkQueueFamilyQueryResultStatusProperties2KHR {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           supported;
+} VkQueueFamilyQueryResultStatusProperties2KHR;
+
 typedef struct VkVideoQueueFamilyProperties2KHR {
     VkStructureType                  sType;
     void*                            pNext;
@@ -444,7 +450,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdEncodeVideoKHR(
 #define VK_EXT_video_encode_h264 1
 #include "vk_video/vulkan_video_codec_h264std.h"
 #include "vk_video/vulkan_video_codec_h264std_encode.h"
-#define VK_EXT_VIDEO_ENCODE_H264_SPEC_VERSION 2
+#define VK_EXT_VIDEO_ENCODE_H264_SPEC_VERSION 3
 #define VK_EXT_VIDEO_ENCODE_H264_EXTENSION_NAME "VK_EXT_video_encode_h264"
 
 typedef enum VkVideoEncodeH264CapabilityFlagBitsEXT {
@@ -459,7 +465,6 @@ typedef enum VkVideoEncodeH264CapabilityFlagBitsEXT {
     VK_VIDEO_ENCODE_H264_CAPABILITY_DEBLOCKING_FILTER_PARTIAL_BIT_EXT = 0x00000100,
     VK_VIDEO_ENCODE_H264_CAPABILITY_MULTIPLE_SLICE_PER_FRAME_BIT_EXT = 0x00000200,
     VK_VIDEO_ENCODE_H264_CAPABILITY_EVENLY_DISTRIBUTED_SLICE_SIZE_BIT_EXT = 0x00000400,
-    VK_VIDEO_ENCODE_H264_CAPABILITY_OPTIONAL_RC_EXTENSION_STRUCT_BIT_EXT = 0x00000800,
     VK_VIDEO_ENCODE_H264_CAPABILITY_FLAG_BITS_MAX_ENUM_EXT = 0x7FFFFFFF
 } VkVideoEncodeH264CapabilityFlagBitsEXT;
 typedef VkFlags VkVideoEncodeH264CapabilityFlagsEXT;
@@ -587,6 +592,7 @@ typedef struct VkVideoEncodeH264RateControlInfoEXT {
     uint32_t                                            idrPeriod;
     uint32_t                                            consecutiveBFrameCount;
     VkVideoEncodeH264RateControlStructureFlagBitsEXT    rateControlStructure;
+    uint8_t                                             temporalLayerCount;
 } VkVideoEncodeH264RateControlInfoEXT;
 
 typedef struct VkVideoEncodeH264QpEXT {
@@ -620,7 +626,7 @@ typedef struct VkVideoEncodeH264RateControlLayerInfoEXT {
 #define VK_EXT_video_encode_h265 1
 #include "vk_video/vulkan_video_codec_h265std.h"
 #include "vk_video/vulkan_video_codec_h265std_encode.h"
-#define VK_EXT_VIDEO_ENCODE_H265_SPEC_VERSION 2
+#define VK_EXT_VIDEO_ENCODE_H265_SPEC_VERSION 3
 #define VK_EXT_VIDEO_ENCODE_H265_EXTENSION_NAME "VK_EXT_video_encode_h265"
 typedef VkFlags VkVideoEncodeH265CapabilityFlagsEXT;
 
@@ -758,6 +764,7 @@ typedef struct VkVideoEncodeH265RateControlInfoEXT {
     uint32_t                                            idrPeriod;
     uint32_t                                            consecutiveBFrameCount;
     VkVideoEncodeH265RateControlStructureFlagBitsEXT    rateControlStructure;
+    uint8_t                                             subLayerCount;
 } VkVideoEncodeH265RateControlInfoEXT;
 
 typedef struct VkVideoEncodeH265QpEXT {

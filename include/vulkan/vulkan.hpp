@@ -119,7 +119,7 @@ extern "C" __declspec( dllimport ) FARPROC __stdcall GetProcAddress( HINSTANCE h
 #  include <span>
 #endif
 
-static_assert( VK_HEADER_VERSION == 202, "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION == 203, "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
@@ -232,11 +232,6 @@ static_assert( VK_HEADER_VERSION == 202, "Wrong VK_HEADER_VERSION!" );
 
 #if !defined( VULKAN_HPP_NAMESPACE )
 #  define VULKAN_HPP_NAMESPACE vk
-#endif
-
-#if !defined( VULKAN_HPP_HASH_COMBINE )
-#  define VULKAN_HPP_HASH_COMBINE( valueType, seed, value ) \
-    seed ^= std::hash<std::remove_const<valueType>::type>{}( value ) + 0x9e3779b9 + ( seed << 6 ) + ( seed >> 2 )
 #endif
 
 #define VULKAN_HPP_STRINGIFY2( text ) #text
@@ -818,20 +813,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     return flags.operator^( bit );
   }
-}  // namespace VULKAN_HPP_NAMESPACE
 
-template <typename BitType>
-struct std::hash<VULKAN_HPP_NAMESPACE::Flags<BitType>>
-{
-  std::size_t operator()( VULKAN_HPP_NAMESPACE::Flags<BitType> const & flags ) const VULKAN_HPP_NOEXCEPT
-  {
-    return std::hash<typename std::underlying_type<BitType>::type>{}(
-      static_cast<typename std::underlying_type<BitType>::type>( flags ) );
-  }
-};
-
-namespace VULKAN_HPP_NAMESPACE
-{
   template <typename RefType>
   class Optional
   {
@@ -7446,6 +7428,14 @@ namespace VULKAN_HPP_NAMESPACE
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
   //=== VK_KHR_video_queue ===
   template <>
+  struct StructExtends<QueueFamilyQueryResultStatusProperties2KHR, QueueFamilyProperties2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
   struct StructExtends<VideoQueueFamilyProperties2KHR, QueueFamilyProperties2>
   {
     enum
@@ -11023,6 +11013,58 @@ namespace VULKAN_HPP_NAMESPACE
   };
   template <>
   struct StructExtends<PhysicalDeviceMaintenance4PropertiesKHR, PhysicalDeviceProperties2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  //=== VK_QCOM_fragment_density_map_offset ===
+  template <>
+  struct StructExtends<PhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM, PhysicalDeviceFeatures2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<PhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM, DeviceCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<PhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM, PhysicalDeviceProperties2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<SubpassFragmentDensityMapOffsetEndInfoQCOM, SubpassEndInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  //=== VK_NV_linear_color_attachment ===
+  template <>
+  struct StructExtends<PhysicalDeviceLinearColorAttachmentFeaturesNV, PhysicalDeviceFeatures2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<PhysicalDeviceLinearColorAttachmentFeaturesNV, DeviceCreateInfo>
   {
     enum
     {
