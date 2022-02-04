@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.3.204",
-    "comment": "from git branch: github-main commit: 15d807ce4839d8feb523ca5c133a42a2aa448ade",
-    "date": "2022-01-22 07:55:58Z"
+    "api version": "1.3.205",
+    "comment": "from git branch: github-main commit: 9e4c847a9e93cccd5f46e173c3ccf752b89c35df",
+    "date": "2022-02-04 11:34:23Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -1382,15 +1382,11 @@
         },
         {
           "vuid": "VUID-VkAttachmentSampleCountInfoAMD-pColorAttachmentSamples-parameter",
-          "text": " <code>pColorAttachmentSamples</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>colorAttachmentCount</code> valid or <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a> <a href=\"#VkSampleCountFlagBits\">VkSampleCountFlagBits</a> values"
+          "text": " If <code>colorAttachmentCount</code> is not <code>0</code>, <code>pColorAttachmentSamples</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>colorAttachmentCount</code> valid <a href=\"#VkSampleCountFlagBits\">VkSampleCountFlagBits</a> values"
         },
         {
           "vuid": "VUID-VkAttachmentSampleCountInfoAMD-depthStencilAttachmentSamples-parameter",
           "text": " If <code>depthStencilAttachmentSamples</code> is not <code>0</code>, <code>depthStencilAttachmentSamples</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkSampleCountFlagBits\">VkSampleCountFlagBits</a> value"
-        },
-        {
-          "vuid": "VUID-VkAttachmentSampleCountInfoAMD-colorAttachmentCount-arraylength",
-          "text": " <code>colorAttachmentCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
         }
       ]
     },
@@ -2223,6 +2219,22 @@
         {
           "vuid": "VUID-vkCmdExecuteCommands-pCommandBuffers-00105",
           "text": " Each element of <code>pCommandBuffers</code> <strong class=\"purple\">must</strong> not begin any query types that are <a href=\"#queries-operation-active\">active</a> in <code>commandBuffer</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdExecuteCommands-commandBuffer-06533",
+          "text": " If <code>vkCmdExecuteCommands</code> is being called within a render pass instance and any recorded command in <code>commandBuffer</code> in the current subpass will write to an image subresource as an attachment, commands recorded in elements of <code>pCommandBuffers</code> <strong class=\"purple\">must</strong> not read from the memory backing that image subresource in any other way"
+        },
+        {
+          "vuid": "VUID-vkCmdExecuteCommands-commandBuffer-06534",
+          "text": " If <code>vkCmdExecuteCommands</code> is being called within a render pass instance and any recorded command in <code>commandBuffer</code> in the current subpass will read from an image subresource used as an attachment in any way other than as an attachment, commands recorded in elements of <code>pCommandBuffers</code> <strong class=\"purple\">must</strong> not write to that image subresource as an attachment"
+        },
+        {
+          "vuid": "VUID-vkCmdExecuteCommands-pCommandBuffers-06535",
+          "text": " If <code>vkCmdExecuteCommands</code> is being called within a render pass instance and any recorded command in a given element of <code>pCommandBuffers</code> will write to an image subresource as an attachment, commands recorded in elements of <code>pCommandBuffers</code> at a higher index <strong class=\"purple\">must</strong> not read from the memory backing that image subresource in any other way"
+        },
+        {
+          "vuid": "VUID-vkCmdExecuteCommands-pCommandBuffers-06536",
+          "text": " If <code>vkCmdExecuteCommands</code> is being called within a render pass instance and any recorded command in a given element of <code>pCommandBuffers</code> will read from an image subresource used as an attachment in any way other than as an attachment, commands recorded in elements of <code>pCommandBuffers</code> at a higher index <strong class=\"purple\">must</strong> not write to that image subresource as an attachment"
         },
         {
           "vuid": "VUID-vkCmdExecuteCommands-commandBuffer-parameter",
@@ -5818,7 +5830,11 @@
         },
         {
           "vuid": "VUID-VkImageMemoryBarrier2-pNext-pNext",
-          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkSampleLocationsInfoEXT\">VkSampleLocationsInfoEXT</a>"
+        },
+        {
+          "vuid": "VUID-VkImageMemoryBarrier2-sType-unique",
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
           "vuid": "VUID-VkImageMemoryBarrier2-srcStageMask-parameter",
@@ -6893,7 +6909,7 @@
           "text": " If <code>imageView</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a> and <code>resolveMode</code> is not <code>VK_RESOLVE_MODE_NONE</code>, <code>resolveImageLayout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_FRAGMENT_DENSITY_MAP_OPTIMAL_EXT</code>"
         }
       ],
-      "(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_KHR_synchronization2)": [
+      "(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_VERSION_1_3,VK_KHR_synchronization2)": [
         {
           "vuid": "VUID-VkRenderingAttachmentInfo-imageView-06142",
           "text": " If <code>imageView</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a> and <code>resolveMode</code> is not <code>VK_RESOLVE_MODE_NONE</code>, <code>resolveImageLayout</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_LAYOUT_READ_ONLY_OPTIMAL_KHR</code>"
@@ -11111,7 +11127,7 @@
           "text": " If the pipeline is being created with <a href=\"#pipeline-graphics-subsets-fragment-output\">fragment output interface state</a> and the <code>flags</code> member of <a href=\"#VkPipelineDepthStencilStateCreateInfo\">VkPipelineDepthStencilStateCreateInfo</a> includes <code>VK_PIPELINE_DEPTH_STENCIL_STATE_CREATE_RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_BIT_ARM</code>, <code>subpass</code> <strong class=\"purple\">must</strong> have been created with <code>VK_SUBPASS_DESCRIPTION_RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_BIT_ARM</code>"
         }
       ],
-      "(VK_ARM_rasterization_order_attachment_access)+(VK_KHR_dynamic_rendering)": [
+      "(VK_ARM_rasterization_order_attachment_access)+(VK_VERSION_1_3,VK_KHR_dynamic_rendering)": [
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-flags-06482",
           "text": " If the pipeline is being created with <a href=\"#pipeline-graphics-subsets-fragment-output\">fragment output interface state</a> and the <code>flags</code> member of <a href=\"#VkPipelineColorBlendStateCreateInfo\">VkPipelineColorBlendStateCreateInfo</a> includes <code>VK_PIPELINE_COLOR_BLEND_STATE_CREATE_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_BIT_ARM</code>, <code>renderpass</code> <strong class=\"purple\">must</strong> not be <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>"
@@ -15560,7 +15576,7 @@
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-image-04971",
-          "text": " If <code>image</code> was created with <code>VK_IMAGE_TYPE_3D</code> and <code>viewType</code> is <code>VK_IMAGE_VIEW_TYPE_2D</code> or <code>VK_IMAGE_VIEW_TYPE_2D_ARRAY</code> then <code>flags</code> <strong class=\"purple\">must</strong> not contain any of <code>VK_IMAGE_CREATE_SPARSE_BINDING_BIT</code>, <code>VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</code>, and <code>VK_IMAGE_CREATE_SPARSE_ALIASED_BIT</code>"
+          "text": " If <code>image</code> was created with <code>VK_IMAGE_TYPE_3D</code> and <code>viewType</code> is <code>VK_IMAGE_VIEW_TYPE_2D</code> or <code>VK_IMAGE_VIEW_TYPE_2D_ARRAY</code> then <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>flags</code> <strong class=\"purple\">must</strong> not contain any of <code>VK_IMAGE_CREATE_SPARSE_BINDING_BIT</code>, <code>VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT</code>, and <code>VK_IMAGE_CREATE_SPARSE_ALIASED_BIT</code>"
         },
         {
           "vuid": "VUID-VkImageViewCreateInfo-image-04972",
@@ -16876,7 +16892,7 @@
         },
         {
           "vuid": "VUID-VkDeviceImageMemoryRequirementsKHR-pCreateInfo-06417",
-          "text": " If <code>pCreateInfo</code>::<code>flags</code> has <code>VK_IMAGE_CREATE_DISJOINT_BIT</code> set then <code>planeAspect</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_ASPECT_NONE_KHR</code>"
+          "text": " If <code>pCreateInfo</code>::<code>format</code> specifies a <em>multi-planar</em> format and <code>pCreateInfo</code>::<code>flags</code> has <code>VK_IMAGE_CREATE_DISJOINT_BIT</code> set then <code>planeAspect</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_ASPECT_NONE_KHR</code>"
         },
         {
           "vuid": "VUID-VkDeviceImageMemoryRequirementsKHR-pCreateInfo-06419",
@@ -16901,12 +16917,8 @@
       ],
       "(VK_VERSION_1_1,VK_KHR_get_memory_requirements2)+(VK_VERSION_1_3,VK_KHR_maintenance4)+(VK_EXT_image_drm_format_modifier)": [
         {
-          "vuid": "VUID-VkDeviceImageMemoryRequirementsKHR-pCreateInfo-06418",
-          "text": " If <code>pCreateInfo</code>::<code>flags</code> has <code>VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT</code> set then <code>planeAspect</code> <strong class=\"purple\">must</strong> not be <code>VK_IMAGE_ASPECT_NONE_KHR</code>"
-        },
-        {
           "vuid": "VUID-VkDeviceImageMemoryRequirementsKHR-pCreateInfo-06420",
-          "text": " If <code>pCreateInfo</code>::<code>flags</code> has <code>VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT</code> set and the <code>pCreateInfo</code>::<code>tiling</code> is <code>VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT</code>, then <code>planeAspect</code> <strong class=\"purple\">must</strong> be a single valid <em>memory plane</em> for the image (that is, <code>aspectMask</code> <strong class=\"purple\">must</strong> specify a plane index that is less than the <a href=\"#VkDrmFormatModifierPropertiesEXT\">VkDrmFormatModifierPropertiesEXT</a>::<code>drmFormatModifierPlaneCount</code> associated with the image&#8217;s <code>format</code> and <a href=\"#VkImageDrmFormatModifierPropertiesEXT\">VkImageDrmFormatModifierPropertiesEXT</a>::<code>drmFormatModifier</code>)"
+          "text": " If <code>pCreateInfo</code>::<code>tiling</code> is <code>VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT</code>, then <code>planeAspect</code> <strong class=\"purple\">must</strong> be a single valid <em>memory plane</em> for the image (that is, <code>aspectMask</code> <strong class=\"purple\">must</strong> specify a plane index that is less than the <a href=\"#VkDrmFormatModifierPropertiesEXT\">VkDrmFormatModifierPropertiesEXT</a>::<code>drmFormatModifierPlaneCount</code> associated with the image&#8217;s <code>format</code> and <a href=\"#VkImageDrmFormatModifierPropertiesEXT\">VkImageDrmFormatModifierPropertiesEXT</a>::<code>drmFormatModifier</code>)"
         }
       ]
     },
@@ -17802,7 +17814,11 @@
         },
         {
           "vuid": "VUID-VkImageFormatConstraintsInfoFUCHSIA-pColorSpaces-parameter",
-          "text": " <code>pColorSpaces</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkSysmemColorSpaceFUCHSIA\">VkSysmemColorSpaceFUCHSIA</a> structure"
+          "text": " <code>pColorSpaces</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>colorSpaceCount</code> valid <a href=\"#VkSysmemColorSpaceFUCHSIA\">VkSysmemColorSpaceFUCHSIA</a> structures"
+        },
+        {
+          "vuid": "VUID-VkImageFormatConstraintsInfoFUCHSIA-colorSpaceCount-arraylength",
+          "text": " <code>colorSpaceCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
         }
       ]
     },
@@ -22929,16 +22945,16 @@
           "text": " If the <a href=\"#features-shadingRateImage\">shading rate image</a> feature is not enabled, <code>pipelineStage</code> <strong class=\"purple\">must</strong> not be <code>VK_PIPELINE_STAGE_SHADING_RATE_IMAGE_BIT_NV</code>"
         }
       ],
-      "(VK_KHR_synchronization2)": [
+      "(VK_VERSION_1_3,VK_KHR_synchronization2)": [
         {
           "vuid": "VUID-vkCmdWriteTimestamp-synchronization2-06489",
-          "text": " If the <a href=\"#features-synchronization2\"><code>synchronization2</code></a> feature is not enabled, <code>pipelineStage</code> <strong class=\"purple\">must</strong> not be <code>VK_PIPELINE_STAGE_NONE_KHR</code>"
+          "text": " If the <a href=\"#features-synchronization2\"><code>synchronization2</code></a> feature is not enabled, <code>pipelineStage</code> <strong class=\"purple\">must</strong> not be <code>VK_PIPELINE_STAGE_NONE</code>"
         }
       ],
-      "!(VK_KHR_synchronization2)": [
+      "!(VK_VERSION_1_3,VK_KHR_synchronization2)": [
         {
           "vuid": "VUID-vkCmdWriteTimestamp-pipelineStage-06490",
-          "text": " <code>pipelineStage</code> <strong class=\"purple\">must</strong> not be <code>VK_PIPELINE_STAGE_NONE_KHR</code>"
+          "text": " <code>pipelineStage</code> <strong class=\"purple\">must</strong> not be <code>VK_PIPELINE_STAGE_NONE</code>"
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_multiview)": [
@@ -25770,7 +25786,11 @@
         },
         {
           "vuid": "VUID-VkBufferImageCopy2-pNext-pNext",
-          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkCopyCommandTransformInfoQCOM\">VkCopyCommandTransformInfoQCOM</a>"
+        },
+        {
+          "vuid": "VUID-VkBufferImageCopy2-sType-unique",
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
           "vuid": "VUID-VkBufferImageCopy2-imageSubresource-parameter",
@@ -26360,7 +26380,11 @@
         },
         {
           "vuid": "VUID-VkImageBlit2-pNext-pNext",
-          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkCopyCommandTransformInfoQCOM\">VkCopyCommandTransformInfoQCOM</a>"
+        },
+        {
+          "vuid": "VUID-VkImageBlit2-sType-unique",
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         },
         {
           "vuid": "VUID-VkImageBlit2-srcSubresource-parameter",
@@ -26781,16 +26805,16 @@
           "text": " If the <a href=\"#features-shadingRateImage\">shading rate image</a> feature is not enabled, <code>pipelineStage</code> <strong class=\"purple\">must</strong> not be <code>VK_PIPELINE_STAGE_SHADING_RATE_IMAGE_BIT_NV</code>"
         }
       ],
-      "(VK_AMD_buffer_marker)+(VK_KHR_synchronization2)": [
+      "(VK_AMD_buffer_marker)+(VK_VERSION_1_3,VK_KHR_synchronization2)": [
         {
           "vuid": "VUID-vkCmdWriteBufferMarkerAMD-synchronization2-06489",
-          "text": " If the <a href=\"#features-synchronization2\"><code>synchronization2</code></a> feature is not enabled, <code>pipelineStage</code> <strong class=\"purple\">must</strong> not be <code>VK_PIPELINE_STAGE_NONE_KHR</code>"
+          "text": " If the <a href=\"#features-synchronization2\"><code>synchronization2</code></a> feature is not enabled, <code>pipelineStage</code> <strong class=\"purple\">must</strong> not be <code>VK_PIPELINE_STAGE_NONE</code>"
         }
       ],
-      "(VK_AMD_buffer_marker)+!(VK_KHR_synchronization2)": [
+      "(VK_AMD_buffer_marker)+!(VK_VERSION_1_3,VK_KHR_synchronization2)": [
         {
           "vuid": "VUID-vkCmdWriteBufferMarkerAMD-pipelineStage-06490",
-          "text": " <code>pipelineStage</code> <strong class=\"purple\">must</strong> not be <code>VK_PIPELINE_STAGE_NONE_KHR</code>"
+          "text": " <code>pipelineStage</code> <strong class=\"purple\">must</strong> not be <code>VK_PIPELINE_STAGE_NONE</code>"
         }
       ]
     },
@@ -27257,8 +27281,16 @@
           "text": " Every input attachment used by the current subpass <strong class=\"purple\">must</strong> be bound to the pipeline via a descriptor set"
         },
         {
-          "vuid": "VUID-vkCmdDraw-None-04584",
-          "text": " Image subresources used as attachments in the current render pass <strong class=\"purple\">must</strong> not be accessed in any way other than as an attachment by this command, except for cases involving read-only access to depth/stencil attachments as described in the <a href=\"#renderpass-attachment-nonattachment\">Render Pass</a> chapter"
+          "vuid": "VUID-vkCmdDraw-None-06537",
+          "text": " Memory backing image subresources used as attachments in the current render pass <strong class=\"purple\">must</strong> not be written in any way other than as an attachment by this command"
+        },
+        {
+          "vuid": "VUID-vkCmdDraw-None-06538",
+          "text": " If any recorded command in the current subpass will write to an image subresource as an attachment, this command <strong class=\"purple\">must</strong> not read from the memory backing that image subresource in any other way than as an attachment"
+        },
+        {
+          "vuid": "VUID-vkCmdDraw-None-06539",
+          "text": " If any recorded command in the current subpass will read from an image subresource used as an attachment in any way other than as an attachment, this command <strong class=\"purple\">must</strong> not write to that image subresource as an attachment"
         },
         {
           "vuid": "VUID-vkCmdDraw-blendEnable-04727",
@@ -27687,8 +27719,16 @@
           "text": " Every input attachment used by the current subpass <strong class=\"purple\">must</strong> be bound to the pipeline via a descriptor set"
         },
         {
-          "vuid": "VUID-vkCmdDrawIndexed-None-04584",
-          "text": " Image subresources used as attachments in the current render pass <strong class=\"purple\">must</strong> not be accessed in any way other than as an attachment by this command, except for cases involving read-only access to depth/stencil attachments as described in the <a href=\"#renderpass-attachment-nonattachment\">Render Pass</a> chapter"
+          "vuid": "VUID-vkCmdDrawIndexed-None-06537",
+          "text": " Memory backing image subresources used as attachments in the current render pass <strong class=\"purple\">must</strong> not be written in any way other than as an attachment by this command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexed-None-06538",
+          "text": " If any recorded command in the current subpass will write to an image subresource as an attachment, this command <strong class=\"purple\">must</strong> not read from the memory backing that image subresource in any other way than as an attachment"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexed-None-06539",
+          "text": " If any recorded command in the current subpass will read from an image subresource used as an attachment in any way other than as an attachment, this command <strong class=\"purple\">must</strong> not write to that image subresource as an attachment"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexed-blendEnable-04727",
@@ -28121,8 +28161,16 @@
           "text": " Every input attachment used by the current subpass <strong class=\"purple\">must</strong> be bound to the pipeline via a descriptor set"
         },
         {
-          "vuid": "VUID-vkCmdDrawMultiEXT-None-04584",
-          "text": " Image subresources used as attachments in the current render pass <strong class=\"purple\">must</strong> not be accessed in any way other than as an attachment by this command, except for cases involving read-only access to depth/stencil attachments as described in the <a href=\"#renderpass-attachment-nonattachment\">Render Pass</a> chapter"
+          "vuid": "VUID-vkCmdDrawMultiEXT-None-06537",
+          "text": " Memory backing image subresources used as attachments in the current render pass <strong class=\"purple\">must</strong> not be written in any way other than as an attachment by this command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMultiEXT-None-06538",
+          "text": " If any recorded command in the current subpass will write to an image subresource as an attachment, this command <strong class=\"purple\">must</strong> not read from the memory backing that image subresource in any other way than as an attachment"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMultiEXT-None-06539",
+          "text": " If any recorded command in the current subpass will read from an image subresource used as an attachment in any way other than as an attachment, this command <strong class=\"purple\">must</strong> not write to that image subresource as an attachment"
         },
         {
           "vuid": "VUID-vkCmdDrawMultiEXT-blendEnable-04727",
@@ -28567,8 +28615,16 @@
           "text": " Every input attachment used by the current subpass <strong class=\"purple\">must</strong> be bound to the pipeline via a descriptor set"
         },
         {
-          "vuid": "VUID-vkCmdDrawMultiIndexedEXT-None-04584",
-          "text": " Image subresources used as attachments in the current render pass <strong class=\"purple\">must</strong> not be accessed in any way other than as an attachment by this command, except for cases involving read-only access to depth/stencil attachments as described in the <a href=\"#renderpass-attachment-nonattachment\">Render Pass</a> chapter"
+          "vuid": "VUID-vkCmdDrawMultiIndexedEXT-None-06537",
+          "text": " Memory backing image subresources used as attachments in the current render pass <strong class=\"purple\">must</strong> not be written in any way other than as an attachment by this command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMultiIndexedEXT-None-06538",
+          "text": " If any recorded command in the current subpass will write to an image subresource as an attachment, this command <strong class=\"purple\">must</strong> not read from the memory backing that image subresource in any other way than as an attachment"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMultiIndexedEXT-None-06539",
+          "text": " If any recorded command in the current subpass will read from an image subresource used as an attachment in any way other than as an attachment, this command <strong class=\"purple\">must</strong> not write to that image subresource as an attachment"
         },
         {
           "vuid": "VUID-vkCmdDrawMultiIndexedEXT-blendEnable-04727",
@@ -29021,8 +29077,16 @@
           "text": " Every input attachment used by the current subpass <strong class=\"purple\">must</strong> be bound to the pipeline via a descriptor set"
         },
         {
-          "vuid": "VUID-vkCmdDrawIndirect-None-04584",
-          "text": " Image subresources used as attachments in the current render pass <strong class=\"purple\">must</strong> not be accessed in any way other than as an attachment by this command, except for cases involving read-only access to depth/stencil attachments as described in the <a href=\"#renderpass-attachment-nonattachment\">Render Pass</a> chapter"
+          "vuid": "VUID-vkCmdDrawIndirect-None-06537",
+          "text": " Memory backing image subresources used as attachments in the current render pass <strong class=\"purple\">must</strong> not be written in any way other than as an attachment by this command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirect-None-06538",
+          "text": " If any recorded command in the current subpass will write to an image subresource as an attachment, this command <strong class=\"purple\">must</strong> not read from the memory backing that image subresource in any other way than as an attachment"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirect-None-06539",
+          "text": " If any recorded command in the current subpass will read from an image subresource used as an attachment in any way other than as an attachment, this command <strong class=\"purple\">must</strong> not write to that image subresource as an attachment"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirect-blendEnable-04727",
@@ -29499,8 +29563,16 @@
           "text": " Every input attachment used by the current subpass <strong class=\"purple\">must</strong> be bound to the pipeline via a descriptor set"
         },
         {
-          "vuid": "VUID-vkCmdDrawIndirectCount-None-04584",
-          "text": " Image subresources used as attachments in the current render pass <strong class=\"purple\">must</strong> not be accessed in any way other than as an attachment by this command, except for cases involving read-only access to depth/stencil attachments as described in the <a href=\"#renderpass-attachment-nonattachment\">Render Pass</a> chapter"
+          "vuid": "VUID-vkCmdDrawIndirectCount-None-06537",
+          "text": " Memory backing image subresources used as attachments in the current render pass <strong class=\"purple\">must</strong> not be written in any way other than as an attachment by this command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCount-None-06538",
+          "text": " If any recorded command in the current subpass will write to an image subresource as an attachment, this command <strong class=\"purple\">must</strong> not read from the memory backing that image subresource in any other way than as an attachment"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCount-None-06539",
+          "text": " If any recorded command in the current subpass will read from an image subresource used as an attachment in any way other than as an attachment, this command <strong class=\"purple\">must</strong> not write to that image subresource as an attachment"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCount-blendEnable-04727",
@@ -29987,8 +30059,16 @@
           "text": " Every input attachment used by the current subpass <strong class=\"purple\">must</strong> be bound to the pipeline via a descriptor set"
         },
         {
-          "vuid": "VUID-vkCmdDrawIndexedIndirect-None-04584",
-          "text": " Image subresources used as attachments in the current render pass <strong class=\"purple\">must</strong> not be accessed in any way other than as an attachment by this command, except for cases involving read-only access to depth/stencil attachments as described in the <a href=\"#renderpass-attachment-nonattachment\">Render Pass</a> chapter"
+          "vuid": "VUID-vkCmdDrawIndexedIndirect-None-06537",
+          "text": " Memory backing image subresources used as attachments in the current render pass <strong class=\"purple\">must</strong> not be written in any way other than as an attachment by this command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirect-None-06538",
+          "text": " If any recorded command in the current subpass will write to an image subresource as an attachment, this command <strong class=\"purple\">must</strong> not read from the memory backing that image subresource in any other way than as an attachment"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirect-None-06539",
+          "text": " If any recorded command in the current subpass will read from an image subresource used as an attachment in any way other than as an attachment, this command <strong class=\"purple\">must</strong> not write to that image subresource as an attachment"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-blendEnable-04727",
@@ -30469,8 +30549,16 @@
           "text": " Every input attachment used by the current subpass <strong class=\"purple\">must</strong> be bound to the pipeline via a descriptor set"
         },
         {
-          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-None-04584",
-          "text": " Image subresources used as attachments in the current render pass <strong class=\"purple\">must</strong> not be accessed in any way other than as an attachment by this command, except for cases involving read-only access to depth/stencil attachments as described in the <a href=\"#renderpass-attachment-nonattachment\">Render Pass</a> chapter"
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-None-06537",
+          "text": " Memory backing image subresources used as attachments in the current render pass <strong class=\"purple\">must</strong> not be written in any way other than as an attachment by this command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-None-06538",
+          "text": " If any recorded command in the current subpass will write to an image subresource as an attachment, this command <strong class=\"purple\">must</strong> not read from the memory backing that image subresource in any other way than as an attachment"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-None-06539",
+          "text": " If any recorded command in the current subpass will read from an image subresource used as an attachment in any way other than as an attachment, this command <strong class=\"purple\">must</strong> not write to that image subresource as an attachment"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount-blendEnable-04727",
@@ -30957,8 +31045,16 @@
           "text": " Every input attachment used by the current subpass <strong class=\"purple\">must</strong> be bound to the pipeline via a descriptor set"
         },
         {
-          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-None-04584",
-          "text": " Image subresources used as attachments in the current render pass <strong class=\"purple\">must</strong> not be accessed in any way other than as an attachment by this command, except for cases involving read-only access to depth/stencil attachments as described in the <a href=\"#renderpass-attachment-nonattachment\">Render Pass</a> chapter"
+          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-None-06537",
+          "text": " Memory backing image subresources used as attachments in the current render pass <strong class=\"purple\">must</strong> not be written in any way other than as an attachment by this command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-None-06538",
+          "text": " If any recorded command in the current subpass will write to an image subresource as an attachment, this command <strong class=\"purple\">must</strong> not read from the memory backing that image subresource in any other way than as an attachment"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-None-06539",
+          "text": " If any recorded command in the current subpass will read from an image subresource used as an attachment in any way other than as an attachment, this command <strong class=\"purple\">must</strong> not write to that image subresource as an attachment"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-blendEnable-04727",
@@ -31499,8 +31595,16 @@
           "text": " Every input attachment used by the current subpass <strong class=\"purple\">must</strong> be bound to the pipeline via a descriptor set"
         },
         {
-          "vuid": "VUID-vkCmdDrawMeshTasksNV-None-04584",
-          "text": " Image subresources used as attachments in the current render pass <strong class=\"purple\">must</strong> not be accessed in any way other than as an attachment by this command, except for cases involving read-only access to depth/stencil attachments as described in the <a href=\"#renderpass-attachment-nonattachment\">Render Pass</a> chapter"
+          "vuid": "VUID-vkCmdDrawMeshTasksNV-None-06537",
+          "text": " Memory backing image subresources used as attachments in the current render pass <strong class=\"purple\">must</strong> not be written in any way other than as an attachment by this command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksNV-None-06538",
+          "text": " If any recorded command in the current subpass will write to an image subresource as an attachment, this command <strong class=\"purple\">must</strong> not read from the memory backing that image subresource in any other way than as an attachment"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksNV-None-06539",
+          "text": " If any recorded command in the current subpass will read from an image subresource used as an attachment in any way other than as an attachment, this command <strong class=\"purple\">must</strong> not write to that image subresource as an attachment"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksNV-blendEnable-04727",
@@ -31875,8 +31979,16 @@
           "text": " Every input attachment used by the current subpass <strong class=\"purple\">must</strong> be bound to the pipeline via a descriptor set"
         },
         {
-          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-None-04584",
-          "text": " Image subresources used as attachments in the current render pass <strong class=\"purple\">must</strong> not be accessed in any way other than as an attachment by this command, except for cases involving read-only access to depth/stencil attachments as described in the <a href=\"#renderpass-attachment-nonattachment\">Render Pass</a> chapter"
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-None-06537",
+          "text": " Memory backing image subresources used as attachments in the current render pass <strong class=\"purple\">must</strong> not be written in any way other than as an attachment by this command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-None-06538",
+          "text": " If any recorded command in the current subpass will write to an image subresource as an attachment, this command <strong class=\"purple\">must</strong> not read from the memory backing that image subresource in any other way than as an attachment"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-None-06539",
+          "text": " If any recorded command in the current subpass will read from an image subresource used as an attachment in any way other than as an attachment, this command <strong class=\"purple\">must</strong> not write to that image subresource as an attachment"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-blendEnable-04727",
@@ -32299,8 +32411,16 @@
           "text": " Every input attachment used by the current subpass <strong class=\"purple\">must</strong> be bound to the pipeline via a descriptor set"
         },
         {
-          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-None-04584",
-          "text": " Image subresources used as attachments in the current render pass <strong class=\"purple\">must</strong> not be accessed in any way other than as an attachment by this command, except for cases involving read-only access to depth/stencil attachments as described in the <a href=\"#renderpass-attachment-nonattachment\">Render Pass</a> chapter"
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-None-06537",
+          "text": " Memory backing image subresources used as attachments in the current render pass <strong class=\"purple\">must</strong> not be written in any way other than as an attachment by this command"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-None-06538",
+          "text": " If any recorded command in the current subpass will write to an image subresource as an attachment, this command <strong class=\"purple\">must</strong> not read from the memory backing that image subresource in any other way than as an attachment"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-None-06539",
+          "text": " If any recorded command in the current subpass will read from an image subresource used as an attachment in any way other than as an attachment, this command <strong class=\"purple\">must</strong> not write to that image subresource as an attachment"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-blendEnable-04727",
@@ -36599,8 +36719,16 @@
           "text": " Every input attachment used by the current subpass <strong class=\"purple\">must</strong> be bound to the pipeline via a descriptor set"
         },
         {
-          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-None-04584",
-          "text": " Image subresources used as attachments in the current render pass <strong class=\"purple\">must</strong> not be accessed in any way other than as an attachment by this command, except for cases involving read-only access to depth/stencil attachments as described in the <a href=\"#renderpass-attachment-nonattachment\">Render Pass</a> chapter"
+          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-None-06537",
+          "text": " Memory backing image subresources used as attachments in the current render pass <strong class=\"purple\">must</strong> not be written in any way other than as an attachment by this command"
+        },
+        {
+          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-None-06538",
+          "text": " If any recorded command in the current subpass will write to an image subresource as an attachment, this command <strong class=\"purple\">must</strong> not read from the memory backing that image subresource in any other way than as an attachment"
+        },
+        {
+          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-None-06539",
+          "text": " If any recorded command in the current subpass will read from an image subresource used as an attachment in any way other than as an attachment, this command <strong class=\"purple\">must</strong> not write to that image subresource as an attachment"
         },
         {
           "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-blendEnable-04727",
@@ -44237,14 +44365,6 @@
         {
           "vuid": "VUID-VkVideoDecodeH264ProfileEXT-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_PROFILE_EXT</code>"
-        },
-        {
-          "vuid": "VUID-VkVideoDecodeH264ProfileEXT-pictureLayout-parameter",
-          "text": " <code>pictureLayout</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkVideoDecodeH264PictureLayoutFlagBitsEXT\">VkVideoDecodeH264PictureLayoutFlagBitsEXT</a> values"
-        },
-        {
-          "vuid": "VUID-VkVideoDecodeH264ProfileEXT-pictureLayout-requiredbitmask",
-          "text": " <code>pictureLayout</code> <strong class=\"purple\">must</strong> not be <code>0</code>"
         }
       ]
     },
@@ -45047,36 +45167,36 @@
           "text": " If <code>pReferenceFinalLists</code> is not <code>NULL</code>, <code>pReferenceFinalLists</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkVideoEncodeH265ReferenceListsEXT\">VkVideoEncodeH265ReferenceListsEXT</a> structure"
         },
         {
-          "vuid": "VUID-VkVideoEncodeH265VclFrameInfoEXT-pNaluSliceEntries-parameter",
-          "text": " <code>pNaluSliceEntries</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>naluSliceEntryCount</code> valid <a href=\"#VkVideoEncodeH265NaluSliceEXT\">VkVideoEncodeH265NaluSliceEXT</a> structures"
+          "vuid": "VUID-VkVideoEncodeH265VclFrameInfoEXT-pNaluSliceSegmentEntries-parameter",
+          "text": " <code>pNaluSliceSegmentEntries</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>naluSliceSegmentEntryCount</code> valid <a href=\"#VkVideoEncodeH265NaluSliceSegmentEXT\">VkVideoEncodeH265NaluSliceSegmentEXT</a> structures"
         },
         {
           "vuid": "VUID-VkVideoEncodeH265VclFrameInfoEXT-pCurrentPictureInfo-parameter",
           "text": " <code>pCurrentPictureInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <code>StdVideoEncodeH265PictureInfo</code> value"
         },
         {
-          "vuid": "VUID-VkVideoEncodeH265VclFrameInfoEXT-naluSliceEntryCount-arraylength",
-          "text": " <code>naluSliceEntryCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
+          "vuid": "VUID-VkVideoEncodeH265VclFrameInfoEXT-naluSliceSegmentEntryCount-arraylength",
+          "text": " <code>naluSliceSegmentEntryCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
         }
       ]
     },
-    "VkVideoEncodeH265NaluSliceEXT": {
+    "VkVideoEncodeH265NaluSliceSegmentEXT": {
       "(VK_EXT_video_encode_h265)": [
         {
-          "vuid": "VUID-VkVideoEncodeH265NaluSliceEXT-sType-sType",
-          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_NALU_SLICE_EXT</code>"
+          "vuid": "VUID-VkVideoEncodeH265NaluSliceSegmentEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_NALU_SLICE_SEGMENT_EXT</code>"
         },
         {
-          "vuid": "VUID-VkVideoEncodeH265NaluSliceEXT-pNext-pNext",
+          "vuid": "VUID-VkVideoEncodeH265NaluSliceSegmentEXT-pNext-pNext",
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
         },
         {
-          "vuid": "VUID-VkVideoEncodeH265NaluSliceEXT-pReferenceFinalLists-parameter",
+          "vuid": "VUID-VkVideoEncodeH265NaluSliceSegmentEXT-pReferenceFinalLists-parameter",
           "text": " If <code>pReferenceFinalLists</code> is not <code>NULL</code>, <code>pReferenceFinalLists</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkVideoEncodeH265ReferenceListsEXT\">VkVideoEncodeH265ReferenceListsEXT</a> structure"
         },
         {
-          "vuid": "VUID-VkVideoEncodeH265NaluSliceEXT-pSliceHeaderStd-parameter",
-          "text": " <code>pSliceHeaderStd</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <code>StdVideoEncodeH265SliceHeader</code> value"
+          "vuid": "VUID-VkVideoEncodeH265NaluSliceSegmentEXT-pSliceSegmentHeaderStd-parameter",
+          "text": " <code>pSliceSegmentHeaderStd</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <code>StdVideoEncodeH265SliceSegmentHeader</code> value"
         }
       ]
     },

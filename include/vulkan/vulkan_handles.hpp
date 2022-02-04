@@ -602,7 +602,7 @@ namespace VULKAN_HPP_NAMESPACE
   struct VideoEncodeH265VclFrameInfoEXT;
   struct VideoEncodeH265EmitPictureParametersEXT;
   struct VideoEncodeH265DpbSlotInfoEXT;
-  struct VideoEncodeH265NaluSliceEXT;
+  struct VideoEncodeH265NaluSliceSegmentEXT;
   struct VideoEncodeH265ProfileEXT;
   struct VideoEncodeH265ReferenceListsEXT;
   struct VideoEncodeH265RateControlInfoEXT;
@@ -10905,11 +10905,11 @@ namespace VULKAN_HPP_NAMESPACE
       Dispatch const & d VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    Result buildAccelerationStructuresKHR(
+    VULKAN_HPP_NODISCARD Result buildAccelerationStructuresKHR(
       VULKAN_HPP_NAMESPACE::DeferredOperationKHR                                                     deferredOperation,
       ArrayProxy<const VULKAN_HPP_NAMESPACE::AccelerationStructureBuildGeometryInfoKHR> const &      infos,
       ArrayProxy<const VULKAN_HPP_NAMESPACE::AccelerationStructureBuildRangeInfoKHR * const> const & pBuildRangeInfos,
-      Dispatch const & d VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const VULKAN_HPP_NOEXCEPT_WHEN_NO_EXCEPTIONS;
+      Dispatch const & d VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template <typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
