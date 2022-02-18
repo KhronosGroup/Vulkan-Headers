@@ -964,9 +964,9 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
   template <typename Dispatch>
-  VULKAN_HPP_INLINE void Device::free( VULKAN_HPP_NAMESPACE::DeviceMemory                memory,
-                                       const VULKAN_HPP_NAMESPACE::AllocationCallbacks * pAllocator,
-                                       Dispatch const &                                  d ) const VULKAN_HPP_NOEXCEPT
+  VULKAN_HPP_INLINE void( Device::free )( VULKAN_HPP_NAMESPACE::DeviceMemory                memory,
+                                          const VULKAN_HPP_NAMESPACE::AllocationCallbacks * pAllocator,
+                                          Dispatch const & d ) const VULKAN_HPP_NOEXCEPT
   {
     VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
     d.vkFreeMemory(
@@ -975,9 +975,9 @@ namespace VULKAN_HPP_NAMESPACE
 
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template <typename Dispatch>
-  VULKAN_HPP_INLINE void Device::free( VULKAN_HPP_NAMESPACE::DeviceMemory                        memory,
-                                       Optional<const VULKAN_HPP_NAMESPACE::AllocationCallbacks> allocator,
-                                       Dispatch const & d ) const VULKAN_HPP_NOEXCEPT
+  VULKAN_HPP_INLINE void( Device::free )( VULKAN_HPP_NAMESPACE::DeviceMemory                        memory,
+                                          Optional<const VULKAN_HPP_NAMESPACE::AllocationCallbacks> allocator,
+                                          Dispatch const & d ) const VULKAN_HPP_NOEXCEPT
   {
     VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
     d.vkFreeMemory( m_device,
@@ -1981,31 +1981,6 @@ namespace VULKAN_HPP_NAMESPACE
   }
 
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
-  template <typename T, typename Dispatch>
-  VULKAN_HPP_DEPRECATED( "This function is deprecated. Use one of the other flavours of it." )
-  VULKAN_HPP_NODISCARD
-    VULKAN_HPP_INLINE Result Device::getQueryPoolResults( VULKAN_HPP_NAMESPACE::QueryPool        queryPool,
-                                                          uint32_t                               firstQuery,
-                                                          uint32_t                               queryCount,
-                                                          ArrayProxy<T> const &                  data,
-                                                          VULKAN_HPP_NAMESPACE::DeviceSize       stride,
-                                                          VULKAN_HPP_NAMESPACE::QueryResultFlags flags,
-                                                          Dispatch const &                       d ) const
-  {
-    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
-    Result result = static_cast<Result>( d.vkGetQueryPoolResults( m_device,
-                                                                  static_cast<VkQueryPool>( queryPool ),
-                                                                  firstQuery,
-                                                                  queryCount,
-                                                                  data.size() * sizeof( T ),
-                                                                  reinterpret_cast<void *>( data.data() ),
-                                                                  static_cast<VkDeviceSize>( stride ),
-                                                                  static_cast<VkQueryResultFlags>( flags ) ) );
-    return createResultValue( result,
-                              VULKAN_HPP_NAMESPACE_STRING "::Device::getQueryPoolResults",
-                              { VULKAN_HPP_NAMESPACE::Result::eSuccess, VULKAN_HPP_NAMESPACE::Result::eNotReady } );
-  }
-
   template <typename DataType, typename Allocator, typename Dispatch>
   VULKAN_HPP_NODISCARD VULKAN_HPP_INLINE ResultValue<std::vector<DataType, Allocator>>
                                          Device::getQueryPoolResults( VULKAN_HPP_NAMESPACE::QueryPool        queryPool,
@@ -3887,10 +3862,10 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
   template <typename Dispatch>
-  VULKAN_HPP_INLINE Result Device::free( VULKAN_HPP_NAMESPACE::DescriptorPool        descriptorPool,
-                                         uint32_t                                    descriptorSetCount,
-                                         const VULKAN_HPP_NAMESPACE::DescriptorSet * pDescriptorSets,
-                                         Dispatch const &                            d ) const VULKAN_HPP_NOEXCEPT
+  VULKAN_HPP_INLINE Result( Device::free )( VULKAN_HPP_NAMESPACE::DescriptorPool        descriptorPool,
+                                            uint32_t                                    descriptorSetCount,
+                                            const VULKAN_HPP_NAMESPACE::DescriptorSet * pDescriptorSets,
+                                            Dispatch const &                            d ) const VULKAN_HPP_NOEXCEPT
   {
     VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
     return static_cast<Result>(
@@ -3902,10 +3877,10 @@ namespace VULKAN_HPP_NAMESPACE
 
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template <typename Dispatch>
-  VULKAN_HPP_INLINE typename ResultValueType<void>::type
-    Device::free( VULKAN_HPP_NAMESPACE::DescriptorPool                          descriptorPool,
-                  ArrayProxy<const VULKAN_HPP_NAMESPACE::DescriptorSet> const & descriptorSets,
-                  Dispatch const &                                              d ) const
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type( Device::free )(
+    VULKAN_HPP_NAMESPACE::DescriptorPool                          descriptorPool,
+    ArrayProxy<const VULKAN_HPP_NAMESPACE::DescriptorSet> const & descriptorSets,
+    Dispatch const &                                              d ) const
   {
     VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
     Result result = static_cast<Result>(
@@ -3913,7 +3888,7 @@ namespace VULKAN_HPP_NAMESPACE
                               static_cast<VkDescriptorPool>( descriptorPool ),
                               descriptorSets.size(),
                               reinterpret_cast<const VkDescriptorSet *>( descriptorSets.data() ) ) );
-    return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING "::Device::free" );
+    return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING "::( Device::free )" );
   }
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
@@ -4458,10 +4433,10 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
   template <typename Dispatch>
-  VULKAN_HPP_INLINE void Device::free( VULKAN_HPP_NAMESPACE::CommandPool           commandPool,
-                                       uint32_t                                    commandBufferCount,
-                                       const VULKAN_HPP_NAMESPACE::CommandBuffer * pCommandBuffers,
-                                       Dispatch const &                            d ) const VULKAN_HPP_NOEXCEPT
+  VULKAN_HPP_INLINE void( Device::free )( VULKAN_HPP_NAMESPACE::CommandPool           commandPool,
+                                          uint32_t                                    commandBufferCount,
+                                          const VULKAN_HPP_NAMESPACE::CommandBuffer * pCommandBuffers,
+                                          Dispatch const &                            d ) const VULKAN_HPP_NOEXCEPT
   {
     VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
     d.vkFreeCommandBuffers( m_device,
@@ -4472,9 +4447,9 @@ namespace VULKAN_HPP_NAMESPACE
 
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
   template <typename Dispatch>
-  VULKAN_HPP_INLINE void Device::free( VULKAN_HPP_NAMESPACE::CommandPool                             commandPool,
-                                       ArrayProxy<const VULKAN_HPP_NAMESPACE::CommandBuffer> const & commandBuffers,
-                                       Dispatch const & d ) const VULKAN_HPP_NOEXCEPT
+  VULKAN_HPP_INLINE void( Device::free )( VULKAN_HPP_NAMESPACE::CommandPool                             commandPool,
+                                          ArrayProxy<const VULKAN_HPP_NAMESPACE::CommandBuffer> const & commandBuffers,
+                                          Dispatch const & d ) const VULKAN_HPP_NOEXCEPT
   {
     VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
     d.vkFreeCommandBuffers( m_device,
@@ -14916,29 +14891,6 @@ namespace VULKAN_HPP_NAMESPACE
   }
 
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
-  template <typename T, typename Dispatch>
-  VULKAN_HPP_DEPRECATED( "This function is deprecated. Use one of the other flavours of it." )
-  VULKAN_HPP_NODISCARD_WHEN_NO_EXCEPTIONS VULKAN_HPP_INLINE
-    typename ResultValueType<void>::type Device::writeAccelerationStructuresPropertiesKHR(
-      ArrayProxy<const VULKAN_HPP_NAMESPACE::AccelerationStructureKHR> const & accelerationStructures,
-      VULKAN_HPP_NAMESPACE::QueryType                                          queryType,
-      ArrayProxy<T> const &                                                    data,
-      size_t                                                                   stride,
-      Dispatch const &                                                         d ) const
-  {
-    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
-    Result result = static_cast<Result>( d.vkWriteAccelerationStructuresPropertiesKHR(
-      m_device,
-      accelerationStructures.size(),
-      reinterpret_cast<const VkAccelerationStructureKHR *>( accelerationStructures.data() ),
-      static_cast<VkQueryType>( queryType ),
-      data.size() * sizeof( T ),
-      reinterpret_cast<void *>( data.data() ),
-      stride ) );
-    return createResultValue( result,
-                              VULKAN_HPP_NAMESPACE_STRING "::Device::writeAccelerationStructuresPropertiesKHR" );
-  }
-
   template <typename DataType, typename Allocator, typename Dispatch>
   VULKAN_HPP_NODISCARD_WHEN_NO_EXCEPTIONS VULKAN_HPP_INLINE
     typename ResultValueType<std::vector<DataType, Allocator>>::type
@@ -16170,27 +16122,6 @@ namespace VULKAN_HPP_NAMESPACE
   }
 
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
-  template <typename T, typename Dispatch>
-  VULKAN_HPP_DEPRECATED( "This function is deprecated. Use one of the other flavours of it." )
-  VULKAN_HPP_NODISCARD_WHEN_NO_EXCEPTIONS VULKAN_HPP_INLINE
-    typename ResultValueType<void>::type Device::getRayTracingShaderGroupHandlesNV(
-      VULKAN_HPP_NAMESPACE::Pipeline pipeline,
-      uint32_t                       firstGroup,
-      uint32_t                       groupCount,
-      ArrayProxy<T> const &          data,
-      Dispatch const &               d ) const
-  {
-    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
-    Result result =
-      static_cast<Result>( d.vkGetRayTracingShaderGroupHandlesNV( m_device,
-                                                                  static_cast<VkPipeline>( pipeline ),
-                                                                  firstGroup,
-                                                                  groupCount,
-                                                                  data.size() * sizeof( T ),
-                                                                  reinterpret_cast<void *>( data.data() ) ) );
-    return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING "::Device::getRayTracingShaderGroupHandlesNV" );
-  }
-
   template <typename DataType, typename Allocator, typename Dispatch>
   VULKAN_HPP_NODISCARD_WHEN_NO_EXCEPTIONS VULKAN_HPP_INLINE
     typename ResultValueType<std::vector<DataType, Allocator>>::type
@@ -16245,23 +16176,6 @@ namespace VULKAN_HPP_NAMESPACE
   }
 
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
-  template <typename T, typename Dispatch>
-  VULKAN_HPP_DEPRECATED( "This function is deprecated. Use one of the other flavours of it." )
-  VULKAN_HPP_NODISCARD_WHEN_NO_EXCEPTIONS VULKAN_HPP_INLINE
-    typename ResultValueType<void>::type Device::getAccelerationStructureHandleNV(
-      VULKAN_HPP_NAMESPACE::AccelerationStructureNV accelerationStructure,
-      ArrayProxy<T> const &                         data,
-      Dispatch const &                              d ) const
-  {
-    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
-    Result result = static_cast<Result>(
-      d.vkGetAccelerationStructureHandleNV( m_device,
-                                            static_cast<VkAccelerationStructureNV>( accelerationStructure ),
-                                            data.size() * sizeof( T ),
-                                            reinterpret_cast<void *>( data.data() ) ) );
-    return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING "::Device::getAccelerationStructureHandleNV" );
-  }
-
   template <typename DataType, typename Allocator, typename Dispatch>
   VULKAN_HPP_NODISCARD_WHEN_NO_EXCEPTIONS VULKAN_HPP_INLINE
     typename ResultValueType<std::vector<DataType, Allocator>>::type
@@ -19903,27 +19817,6 @@ namespace VULKAN_HPP_NAMESPACE
   }
 
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
-  template <typename T, typename Dispatch>
-  VULKAN_HPP_DEPRECATED( "This function is deprecated. Use one of the other flavours of it." )
-  VULKAN_HPP_NODISCARD_WHEN_NO_EXCEPTIONS VULKAN_HPP_INLINE
-    typename ResultValueType<void>::type Device::getRayTracingShaderGroupHandlesKHR(
-      VULKAN_HPP_NAMESPACE::Pipeline pipeline,
-      uint32_t                       firstGroup,
-      uint32_t                       groupCount,
-      ArrayProxy<T> const &          data,
-      Dispatch const &               d ) const
-  {
-    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
-    Result result =
-      static_cast<Result>( d.vkGetRayTracingShaderGroupHandlesKHR( m_device,
-                                                                   static_cast<VkPipeline>( pipeline ),
-                                                                   firstGroup,
-                                                                   groupCount,
-                                                                   data.size() * sizeof( T ),
-                                                                   reinterpret_cast<void *>( data.data() ) ) );
-    return createResultValue( result, VULKAN_HPP_NAMESPACE_STRING "::Device::getRayTracingShaderGroupHandlesKHR" );
-  }
-
   template <typename DataType, typename Allocator, typename Dispatch>
   VULKAN_HPP_NODISCARD_WHEN_NO_EXCEPTIONS VULKAN_HPP_INLINE
     typename ResultValueType<std::vector<DataType, Allocator>>::type
@@ -19981,28 +19874,6 @@ namespace VULKAN_HPP_NAMESPACE
   }
 
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
-  template <typename T, typename Dispatch>
-  VULKAN_HPP_DEPRECATED( "This function is deprecated. Use one of the other flavours of it." )
-  VULKAN_HPP_NODISCARD_WHEN_NO_EXCEPTIONS VULKAN_HPP_INLINE
-    typename ResultValueType<void>::type Device::getRayTracingCaptureReplayShaderGroupHandlesKHR(
-      VULKAN_HPP_NAMESPACE::Pipeline pipeline,
-      uint32_t                       firstGroup,
-      uint32_t                       groupCount,
-      ArrayProxy<T> const &          data,
-      Dispatch const &               d ) const
-  {
-    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
-    Result result = static_cast<Result>(
-      d.vkGetRayTracingCaptureReplayShaderGroupHandlesKHR( m_device,
-                                                           static_cast<VkPipeline>( pipeline ),
-                                                           firstGroup,
-                                                           groupCount,
-                                                           data.size() * sizeof( T ),
-                                                           reinterpret_cast<void *>( data.data() ) ) );
-    return createResultValue( result,
-                              VULKAN_HPP_NAMESPACE_STRING "::Device::getRayTracingCaptureReplayShaderGroupHandlesKHR" );
-  }
-
   template <typename DataType, typename Allocator, typename Dispatch>
   VULKAN_HPP_NODISCARD_WHEN_NO_EXCEPTIONS VULKAN_HPP_INLINE
     typename ResultValueType<std::vector<DataType, Allocator>>::type

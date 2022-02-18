@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.3.205",
-    "comment": "from git branch: github-main commit: 9e4c847a9e93cccd5f46e173c3ccf752b89c35df",
-    "date": "2022-02-04 11:34:23Z"
+    "api version": "1.3.206",
+    "comment": "from git branch: github-main commit: d80b6159f6d69398dbeae52aa1080e47ae96fe47",
+    "date": "2022-02-17 16:04:58Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -1321,8 +1321,16 @@
           "text": " If any element of <code>pColorAttachmentFormats</code> is not <code>VK_FORMAT_UNDEFINED</code>, it <strong class=\"purple\">must</strong> be a format with <a href=\"#potential-format-features\">potential format features</a> that include <code>VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT</code>"
         },
         {
+          "vuid": "VUID-VkCommandBufferInheritanceRenderingInfo-depthAttachmentFormat-06540",
+          "text": " If <code>depthAttachmentFormat</code> is not <code>VK_FORMAT_UNDEFINED</code>, it <strong class=\"purple\">must</strong> be a format that includes a depth aspect"
+        },
+        {
           "vuid": "VUID-VkCommandBufferInheritanceRenderingInfo-depthAttachmentFormat-06007",
           "text": " If <code>depthAttachmentFormat</code> is not <code>VK_FORMAT_UNDEFINED</code>, it <strong class=\"purple\">must</strong> be a format with <a href=\"#potential-format-features\">potential format features</a> that include <code>VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT</code>"
+        },
+        {
+          "vuid": "VUID-VkCommandBufferInheritanceRenderingInfo-stencilAttachmentFormat-06541",
+          "text": " If <code>stencilAttachmentFormat</code> is not <code>VK_FORMAT_UNDEFINED</code>, it <strong class=\"purple\">must</strong> be a format that includes a stencil aspect"
         },
         {
           "vuid": "VUID-VkCommandBufferInheritanceRenderingInfo-stencilAttachmentFormat-06199",
@@ -6525,8 +6533,16 @@
           "text": " If <code>colorAttachmentCount</code> is not <code>0</code> and the <code>imageView</code> member of an element of <code>pColorAttachments</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, that <code>imageView</code> <strong class=\"purple\">must</strong> have been created with <code>VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT</code>"
         },
         {
+          "vuid": "VUID-VkRenderingInfo-pDepthAttachment-06547",
+          "text": " If <code>pDepthAttachment</code> is not <code>NULL</code> and <code>pDepthAttachment-&gt;imageView</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>pDepthAttachment-&gt;imageView</code> <strong class=\"purple\">must</strong> have been created with a format that includes a depth aspect"
+        },
+        {
           "vuid": "VUID-VkRenderingInfo-pDepthAttachment-06088",
           "text": " If <code>pDepthAttachment</code> is not <code>NULL</code> and <code>pDepthAttachment-&gt;imageView</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>pDepthAttachment-&gt;imageView</code> <strong class=\"purple\">must</strong> have been created with <code>VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</code>"
+        },
+        {
+          "vuid": "VUID-VkRenderingInfo-pStencilAttachment-06548",
+          "text": " If <code>pStencilAttachment</code> is not <code>NULL</code> and <code>pStencilAttachment-&gt;imageView</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>pStencilAttachment-&gt;imageView</code> <strong class=\"purple\">must</strong> have been created with a format that includes a stencil aspect"
         },
         {
           "vuid": "VUID-VkRenderingInfo-pStencilAttachment-06089",
@@ -10675,10 +10691,6 @@
           "text": " If the pipeline is being created with <a href=\"#pipeline-graphics-subsets-pre-rasterization\">pre-rasterization shader state</a>, and no element of the <code>pDynamicStates</code> member of <code>pDynamicState</code> is <code>VK_DYNAMIC_STATE_SCISSOR</code> or <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT</code>, the <code>pScissors</code> member of <code>pViewportState</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>pViewportState-&gt;scissorCount</code> <code>VkRect2D</code> structures"
         },
         {
-          "vuid": "VUID-VkGraphicsPipelineCreateInfo-pDynamicStates-03378",
-          "text": " If the <a href=\"#features-extendedDynamicState\">extendedDynamicState</a> feature is not enabled, there <strong class=\"purple\">must</strong> be no element of the <code>pDynamicStates</code> member of <code>pDynamicState</code> set to <code>VK_DYNAMIC_STATE_CULL_MODE</code>, <code>VK_DYNAMIC_STATE_FRONT_FACE</code>, <code>VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY</code>, <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</code>, <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT</code>, <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE</code>, <code>VK_DYNAMIC_STATE_DEPTH_TEST_ENABLE</code>, <code>VK_DYNAMIC_STATE_DEPTH_WRITE_ENABLE</code>, <code>VK_DYNAMIC_STATE_DEPTH_COMPARE_OP</code>, <code>VK_DYNAMIC_STATE_DEPTH_BOUNDS_TEST_ENABLE</code>, <code>VK_DYNAMIC_STATE_STENCIL_TEST_ENABLE</code>, or <code>VK_DYNAMIC_STATE_STENCIL_OP</code>"
-        },
-        {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-pDynamicStates-03379",
           "text": " If the pipeline is being created with <a href=\"#pipeline-graphics-subsets-pre-rasterization\">pre-rasterization shader state</a>, and <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</code> is included in the <code>pDynamicStates</code> array then <code>viewportCount</code> <strong class=\"purple\">must</strong> be zero"
         },
@@ -10699,10 +10711,6 @@
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-pViewportState-04892",
           "text": " If the pipeline is being created with <a href=\"#pipeline-graphics-subsets-pre-rasterization\">pre-rasterization shader state</a>, and the graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE</code> dynamic state enabled, <code>pViewportState</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a> structure"
-        },
-        {
-          "vuid": "VUID-VkGraphicsPipelineCreateInfo-pDynamicStates-04868",
-          "text": " If the <a href=\"#features-extendedDynamicState2\">extendedDynamicState2</a> feature is not enabled, there <strong class=\"purple\">must</strong> be no element of the <code>pDynamicStates</code> member of <code>pDynamicState</code> set to <code>VK_DYNAMIC_STATE_DEPTH_BIAS_ENABLE</code>, <code>VK_DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE</code>, or <code>VK_DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE</code>"
         },
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-pDynamicStates-04869",
@@ -10911,6 +10919,18 @@
         {
           "vuid": "VUID-VkGraphicsPipelineCreateInfo-flags-04947",
           "text": " <code>flags</code> <strong class=\"purple\">must</strong> not include <code>VK_PIPELINE_CREATE_RAY_TRACING_ALLOW_MOTION_BIT_NV</code>"
+        }
+      ],
+      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)+!(VK_VERSION_1_3)": [
+        {
+          "vuid": "VUID-VkGraphicsPipelineCreateInfo-pDynamicStates-03378",
+          "text": " If the <a href=\"#features-extendedDynamicState\">extendedDynamicState</a> feature is not enabled, there <strong class=\"purple\">must</strong> be no element of the <code>pDynamicStates</code> member of <code>pDynamicState</code> set to <code>VK_DYNAMIC_STATE_CULL_MODE</code>, <code>VK_DYNAMIC_STATE_FRONT_FACE</code>, <code>VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY</code>, <code>VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</code>, <code>VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT</code>, <code>VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE</code>, <code>VK_DYNAMIC_STATE_DEPTH_TEST_ENABLE</code>, <code>VK_DYNAMIC_STATE_DEPTH_WRITE_ENABLE</code>, <code>VK_DYNAMIC_STATE_DEPTH_COMPARE_OP</code>, <code>VK_DYNAMIC_STATE_DEPTH_BOUNDS_TEST_ENABLE</code>, <code>VK_DYNAMIC_STATE_STENCIL_TEST_ENABLE</code>, or <code>VK_DYNAMIC_STATE_STENCIL_OP</code>"
+        }
+      ],
+      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state2)+!(VK_VERSION_1_3)": [
+        {
+          "vuid": "VUID-VkGraphicsPipelineCreateInfo-pDynamicStates-04868",
+          "text": " If the <a href=\"#features-extendedDynamicState2\">extendedDynamicState2</a> feature is not enabled, there <strong class=\"purple\">must</strong> be no element of the <code>pDynamicStates</code> member of <code>pDynamicState</code> set to <code>VK_DYNAMIC_STATE_DEPTH_BIAS_ENABLE</code>, <code>VK_DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE</code>, or <code>VK_DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE</code>"
         }
       ],
       "(VK_NV_device_generated_commands)": [
@@ -11152,6 +11172,14 @@
         }
       ],
       "(VK_VERSION_1_3,VK_KHR_dynamic_rendering)": [
+        {
+          "vuid": "VUID-VkPipelineRenderingCreateInfo-depthAttachmentFormat-06544",
+          "text": " If <code>depthAttachmentFormat</code> is not <code>VK_FORMAT_UNDEFINED</code>, it <strong class=\"purple\">must</strong> be a format that includes a depth aspect"
+        },
+        {
+          "vuid": "VUID-VkPipelineRenderingCreateInfo-stencilAttachmentFormat-06545",
+          "text": " If <code>stencilAttachmentFormat</code> is not <code>VK_FORMAT_UNDEFINED</code>, it <strong class=\"purple\">must</strong> be a format that includes a stencil aspect"
+        },
         {
           "vuid": "VUID-VkPipelineRenderingCreateInfo-depthAttachmentFormat-06065",
           "text": " If <code>depthAttachmentFormat</code> is not <code>VK_FORMAT_UNDEFINED</code>, it <strong class=\"purple\">must</strong> be a format with <a href=\"#potential-format-features\">potential format features</a> that include <code>VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT</code>"
@@ -11637,6 +11665,10 @@
         {
           "vuid": "VUID-VkRayTracingPipelineCreateInfoKHR-rayTraversalPrimitiveCulling-03597",
           "text": " If the <a href=\"#features-rayTraversalPrimitiveCulling\"><code>rayTraversalPrimitiveCulling</code></a> feature is not enabled, <code>flags</code> <strong class=\"purple\">must</strong> not include <code>VK_PIPELINE_CREATE_RAY_TRACING_SKIP_TRIANGLES_BIT_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkRayTracingPipelineCreateInfoKHR-flags-06546",
+          "text": " <code>flags</code> <strong class=\"purple\">must</strong> not include both <code>VK_PIPELINE_CREATE_RAY_TRACING_SKIP_TRIANGLES_BIT_KHR</code> and <code>VK_PIPELINE_CREATE_RAY_TRACING_SKIP_AABBS_BIT_KHR</code>"
         },
         {
           "vuid": "VUID-VkRayTracingPipelineCreateInfoKHR-flags-03598",
@@ -14281,6 +14313,10 @@
         {
           "vuid": "VUID-VkBufferCreateInfo-deviceAddress-02604",
           "text": " If <a href=\"#VkBufferDeviceAddressCreateInfoEXT\">VkBufferDeviceAddressCreateInfoEXT</a>::<code>deviceAddress</code> is not zero, <code>flags</code> <strong class=\"purple\">must</strong> include <code>VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT</code>"
+        },
+        {
+          "vuid": "VUID-VkBufferCreateInfo-flags-03338",
+          "text": " If <code>flags</code> includes <code>VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT</code>, the <a href=\"#features-bufferDeviceAddressCaptureReplay\">bufferDeviceAddressCaptureReplay</a> or <a href=\"#features-bufferDeviceAddressCaptureReplayEXT\"><code>VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</code>::<code>bufferDeviceAddressCaptureReplay</code></a> feature <strong class=\"purple\">must</strong> be enabled"
         }
       ],
       "(VK_VERSION_1_2,VK_EXT_buffer_device_address,VK_KHR_buffer_device_address)+(VK_VERSION_1_2,VK_KHR_buffer_device_address)": [
@@ -14289,10 +14325,10 @@
           "text": " If <a href=\"#VkBufferOpaqueCaptureAddressCreateInfo\">VkBufferOpaqueCaptureAddressCreateInfo</a>::<code>opaqueCaptureAddress</code> is not zero, <code>flags</code> <strong class=\"purple\">must</strong> include <code>VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT</code>"
         }
       ],
-      "(VK_VERSION_1_2,VK_EXT_buffer_device_address,VK_KHR_buffer_device_address)": [
+      "(VK_VERSION_1_2,VK_EXT_buffer_device_address,VK_KHR_buffer_device_address)+!(VK_EXT_buffer_device_address)": [
         {
-          "vuid": "VUID-VkBufferCreateInfo-flags-03338",
-          "text": " If <code>flags</code> includes <code>VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT</code>, the <a href=\"#features-bufferDeviceAddressCaptureReplay\">bufferDeviceAddressCaptureReplay</a> or <a href=\"#features-bufferDeviceAddressCaptureReplayEXT\"><code>VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</code>::<code>bufferDeviceAddressCaptureReplay</code></a> feature <strong class=\"purple\">must</strong> be enabled"
+          "vuid": "VUID-VkBufferCreateInfo-flags-06549",
+          "text": " If <code>flags</code> includes <code>VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT</code>, the <a href=\"#features-bufferDeviceAddressCaptureReplay\">bufferDeviceAddressCaptureReplay</a> feature <strong class=\"purple\">must</strong> be enabled"
         }
       ],
       "(VK_KHR_video_decode_queue)": [
@@ -20369,7 +20405,7 @@
       ]
     },
     "vkGetBufferDeviceAddress": {
-      "(VK_VERSION_1_2,VK_EXT_buffer_device_address,VK_KHR_buffer_device_address)": [
+      "(VK_VERSION_1_2,VK_EXT_buffer_device_address,VK_KHR_buffer_device_address)+(VK_EXT_buffer_device_address)": [
         {
           "vuid": "VUID-vkGetBufferDeviceAddress-bufferDeviceAddress-03324",
           "text": " The <a href=\"#features-bufferDeviceAddress\">bufferDeviceAddress</a> or <a href=\"#features-bufferDeviceAddressEXT\"><code>VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</code>::<code>bufferDeviceAddress</code></a> feature <strong class=\"purple\">must</strong> be enabled"
@@ -20377,7 +20413,19 @@
         {
           "vuid": "VUID-vkGetBufferDeviceAddress-device-03325",
           "text": " If <code>device</code> was created with multiple physical devices, then the <a href=\"#features-bufferDeviceAddressMultiDevice\">bufferDeviceAddressMultiDevice</a> or <a href=\"#features-bufferDeviceAddressMultiDeviceEXT\"><code>VkPhysicalDeviceBufferDeviceAddressFeaturesEXT</code>::<code>bufferDeviceAddressMultiDevice</code></a> feature <strong class=\"purple\">must</strong> be enabled"
+        }
+      ],
+      "(VK_VERSION_1_2,VK_EXT_buffer_device_address,VK_KHR_buffer_device_address)+!(VK_EXT_buffer_device_address)": [
+        {
+          "vuid": "VUID-vkGetBufferDeviceAddress-None-06542",
+          "text": " The <a href=\"#features-bufferDeviceAddress\">bufferDeviceAddress</a> feature <strong class=\"purple\">must</strong> be enabled"
         },
+        {
+          "vuid": "VUID-vkGetBufferDeviceAddress-device-06543",
+          "text": " If <code>device</code> was created with multiple physical devices, then the <a href=\"#features-bufferDeviceAddressMultiDevice\">bufferDeviceAddressMultiDevice</a> feature <strong class=\"purple\">must</strong> be enabled"
+        }
+      ],
+      "(VK_VERSION_1_2,VK_EXT_buffer_device_address,VK_KHR_buffer_device_address)": [
         {
           "vuid": "VUID-vkGetBufferDeviceAddress-device-parameter",
           "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDevice\">VkDevice</a> handle"
@@ -27107,11 +27155,13 @@
       ]
     },
     "vkCmdSetPrimitiveRestartEnable": {
-      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state2)": [
+      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state2)+!(VK_VERSION_1_3)": [
         {
           "vuid": "VUID-vkCmdSetPrimitiveRestartEnable-None-04866",
           "text": " The <a href=\"#features-extendedDynamicState2\">extendedDynamicState2</a> feature <strong class=\"purple\">must</strong> be enabled"
-        },
+        }
+      ],
+      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state2)": [
         {
           "vuid": "VUID-vkCmdSetPrimitiveRestartEnable-commandBuffer-parameter",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCommandBuffer\">VkCommandBuffer</a> handle"
@@ -27127,11 +27177,13 @@
       ]
     },
     "vkCmdSetPrimitiveTopology": {
-      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)": [
+      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)+!(VK_VERSION_1_3)": [
         {
           "vuid": "VUID-vkCmdSetPrimitiveTopology-None-03347",
           "text": " The <a href=\"#features-extendedDynamicState\">extendedDynamicState</a> feature <strong class=\"purple\">must</strong> be enabled"
-        },
+        }
+      ],
+      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)": [
         {
           "vuid": "VUID-vkCmdSetPrimitiveTopology-commandBuffer-parameter",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCommandBuffer\">VkCommandBuffer</a> handle"
@@ -27342,11 +27394,11 @@
         },
         {
           "vuid": "VUID-vkCmdDraw-OpTypeImage-06423",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
         },
         {
           "vuid": "VUID-vkCmdDraw-OpTypeImage-06424",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
         }
       ],
       "(VK_IMG_filter_cubic,VK_EXT_filter_cubic)": [
@@ -27405,6 +27457,16 @@
         {
           "vuid": "VUID-vkCmdDraw-commandBuffer-04617",
           "text": " If any of the shader stages of the <code>VkPipeline</code> bound to the pipeline bind point used by this command uses the <a href=\"#spirvenv-capabilities-table-RayQueryKHR\">RayQueryKHR</a> capability, then <code>commandBuffer</code> <strong class=\"purple\">must</strong> not be a protected command buffer"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
+        {
+          "vuid": "VUID-vkCmdDraw-None-06550",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> only be used with <code>OpImageSample*</code> or <code>OpImageSparseSample*</code> instructions"
+        },
+        {
+          "vuid": "VUID-vkCmdDraw-ConstOffset-06551",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> not use the <code>ConstOffset</code> and <code>Offset</code> operands"
         }
       ],
       "(VK_EXT_shader_image_atomic_int64)": [
@@ -27784,11 +27846,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexed-OpTypeImage-06423",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexed-OpTypeImage-06424",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
         }
       ],
       "(VK_IMG_filter_cubic,VK_EXT_filter_cubic)": [
@@ -27847,6 +27909,16 @@
         {
           "vuid": "VUID-vkCmdDrawIndexed-commandBuffer-04617",
           "text": " If any of the shader stages of the <code>VkPipeline</code> bound to the pipeline bind point used by this command uses the <a href=\"#spirvenv-capabilities-table-RayQueryKHR\">RayQueryKHR</a> capability, then <code>commandBuffer</code> <strong class=\"purple\">must</strong> not be a protected command buffer"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexed-None-06550",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> only be used with <code>OpImageSample*</code> or <code>OpImageSparseSample*</code> instructions"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexed-ConstOffset-06551",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> not use the <code>ConstOffset</code> and <code>Offset</code> operands"
         }
       ],
       "(VK_EXT_shader_image_atomic_int64)": [
@@ -28238,11 +28310,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMultiEXT-OpTypeImage-06423",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
         },
         {
           "vuid": "VUID-vkCmdDrawMultiEXT-OpTypeImage-06424",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
         }
       ],
       "(VK_EXT_multi_draw)+(VK_IMG_filter_cubic,VK_EXT_filter_cubic)": [
@@ -28301,6 +28373,16 @@
         {
           "vuid": "VUID-vkCmdDrawMultiEXT-commandBuffer-04617",
           "text": " If any of the shader stages of the <code>VkPipeline</code> bound to the pipeline bind point used by this command uses the <a href=\"#spirvenv-capabilities-table-RayQueryKHR\">RayQueryKHR</a> capability, then <code>commandBuffer</code> <strong class=\"purple\">must</strong> not be a protected command buffer"
+        }
+      ],
+      "(VK_EXT_multi_draw)+(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
+        {
+          "vuid": "VUID-vkCmdDrawMultiEXT-None-06550",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> only be used with <code>OpImageSample*</code> or <code>OpImageSparseSample*</code> instructions"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMultiEXT-ConstOffset-06551",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> not use the <code>ConstOffset</code> and <code>Offset</code> operands"
         }
       ],
       "(VK_EXT_multi_draw)+(VK_EXT_shader_image_atomic_int64)": [
@@ -28700,11 +28782,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMultiIndexedEXT-OpTypeImage-06423",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
         },
         {
           "vuid": "VUID-vkCmdDrawMultiIndexedEXT-OpTypeImage-06424",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
         }
       ],
       "(VK_EXT_multi_draw)+(VK_IMG_filter_cubic,VK_EXT_filter_cubic)": [
@@ -28763,6 +28845,16 @@
         {
           "vuid": "VUID-vkCmdDrawMultiIndexedEXT-commandBuffer-04617",
           "text": " If any of the shader stages of the <code>VkPipeline</code> bound to the pipeline bind point used by this command uses the <a href=\"#spirvenv-capabilities-table-RayQueryKHR\">RayQueryKHR</a> capability, then <code>commandBuffer</code> <strong class=\"purple\">must</strong> not be a protected command buffer"
+        }
+      ],
+      "(VK_EXT_multi_draw)+(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
+        {
+          "vuid": "VUID-vkCmdDrawMultiIndexedEXT-None-06550",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> only be used with <code>OpImageSample*</code> or <code>OpImageSparseSample*</code> instructions"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMultiIndexedEXT-ConstOffset-06551",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> not use the <code>ConstOffset</code> and <code>Offset</code> operands"
         }
       ],
       "(VK_EXT_multi_draw)+(VK_EXT_shader_image_atomic_int64)": [
@@ -29182,11 +29274,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirect-OpTypeImage-06423",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirect-OpTypeImage-06424",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
         }
       ],
       "(VK_IMG_filter_cubic,VK_EXT_filter_cubic)": [
@@ -29237,6 +29329,16 @@
         {
           "vuid": "VUID-vkCmdDrawIndirect-commandBuffer-02711",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> not be a protected command buffer"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirect-None-06550",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> only be used with <code>OpImageSample*</code> or <code>OpImageSparseSample*</code> instructions"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirect-ConstOffset-06551",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> not use the <code>ConstOffset</code> and <code>Offset</code> operands"
         }
       ],
       "(VK_EXT_shader_image_atomic_int64)": [
@@ -29684,11 +29786,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCount-OpTypeImage-06423",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCount-OpTypeImage-06424",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
         }
       ],
       "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_IMG_filter_cubic,VK_EXT_filter_cubic)": [
@@ -29739,6 +29841,16 @@
         {
           "vuid": "VUID-vkCmdDrawIndirectCount-commandBuffer-02711",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> not be a protected command buffer"
+        }
+      ],
+      "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCount-None-06550",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> only be used with <code>OpImageSample*</code> or <code>OpImageSparseSample*</code> instructions"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCount-ConstOffset-06551",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> not use the <code>ConstOffset</code> and <code>Offset</code> operands"
         }
       ],
       "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_EXT_shader_image_atomic_int64)": [
@@ -30164,11 +30276,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-OpTypeImage-06423",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-OpTypeImage-06424",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
         }
       ],
       "(VK_IMG_filter_cubic,VK_EXT_filter_cubic)": [
@@ -30219,6 +30331,16 @@
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-commandBuffer-02711",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> not be a protected command buffer"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirect-None-06550",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> only be used with <code>OpImageSample*</code> or <code>OpImageSparseSample*</code> instructions"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirect-ConstOffset-06551",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> not use the <code>ConstOffset</code> and <code>Offset</code> operands"
         }
       ],
       "(VK_EXT_shader_image_atomic_int64)": [
@@ -30670,11 +30792,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount-OpTypeImage-06423",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount-OpTypeImage-06424",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
         }
       ],
       "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_IMG_filter_cubic,VK_EXT_filter_cubic)": [
@@ -30725,6 +30847,16 @@
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount-commandBuffer-02711",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> not be a protected command buffer"
+        }
+      ],
+      "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-None-06550",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> only be used with <code>OpImageSample*</code> or <code>OpImageSparseSample*</code> instructions"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-ConstOffset-06551",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> not use the <code>ConstOffset</code> and <code>Offset</code> operands"
         }
       ],
       "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_EXT_shader_image_atomic_int64)": [
@@ -31138,11 +31270,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-OpTypeImage-06423",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-OpTypeImage-06424",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
         }
       ],
       "(VK_EXT_transform_feedback)+(VK_IMG_filter_cubic,VK_EXT_filter_cubic)": [
@@ -31193,6 +31325,16 @@
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-commandBuffer-02646",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> not be a protected command buffer"
+        }
+      ],
+      "(VK_EXT_transform_feedback)+(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-None-06550",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> only be used with <code>OpImageSample*</code> or <code>OpImageSparseSample*</code> instructions"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-ConstOffset-06551",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> not use the <code>ConstOffset</code> and <code>Offset</code> operands"
         }
       ],
       "(VK_EXT_transform_feedback)+(VK_EXT_shader_image_atomic_int64)": [
@@ -31648,11 +31790,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksNV-OpTypeImage-06423",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksNV-OpTypeImage-06424",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
         }
       ],
       "(VK_NV_mesh_shader)+(VK_IMG_filter_cubic,VK_EXT_filter_cubic)": [
@@ -31699,6 +31841,16 @@
         {
           "vuid": "VUID-vkCmdDrawMeshTasksNV-commandBuffer-02707",
           "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, any resource accessed by the <a href=\"#VkPipeline\">VkPipeline</a> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
+        }
+      ],
+      "(VK_NV_mesh_shader)+(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksNV-None-06550",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> only be used with <code>OpImageSample*</code> or <code>OpImageSparseSample*</code> instructions"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksNV-ConstOffset-06551",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> not use the <code>ConstOffset</code> and <code>Offset</code> operands"
         }
       ],
       "(VK_NV_mesh_shader)+(VK_EXT_shader_image_atomic_int64)": [
@@ -32068,11 +32220,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-OpTypeImage-06423",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-OpTypeImage-06424",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
         }
       ],
       "(VK_NV_mesh_shader)+(VK_IMG_filter_cubic,VK_EXT_filter_cubic)": [
@@ -32123,6 +32275,16 @@
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-commandBuffer-02711",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> not be a protected command buffer"
+        }
+      ],
+      "(VK_NV_mesh_shader)+(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-None-06550",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> only be used with <code>OpImageSample*</code> or <code>OpImageSparseSample*</code> instructions"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-ConstOffset-06551",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> not use the <code>ConstOffset</code> and <code>Offset</code> operands"
         }
       ],
       "(VK_NV_mesh_shader)+(VK_EXT_shader_image_atomic_int64)": [
@@ -32520,11 +32682,11 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-OpTypeImage-06423",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-OpTypeImage-06424",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
         }
       ],
       "(VK_NV_mesh_shader)+(VK_IMG_filter_cubic,VK_EXT_filter_cubic)": [
@@ -32575,6 +32737,16 @@
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-commandBuffer-02711",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> not be a protected command buffer"
+        }
+      ],
+      "(VK_NV_mesh_shader)+(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-None-06550",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> only be used with <code>OpImageSample*</code> or <code>OpImageSparseSample*</code> instructions"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-ConstOffset-06551",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> not use the <code>ConstOffset</code> and <code>Offset</code> operands"
         }
       ],
       "(VK_NV_mesh_shader)+(VK_EXT_shader_image_atomic_int64)": [
@@ -33629,11 +33801,13 @@
       ]
     },
     "vkCmdSetViewportWithCount": {
-      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)": [
+      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)+!(VK_VERSION_1_3)": [
         {
           "vuid": "VUID-vkCmdSetViewportWithCount-None-03393",
           "text": " The <a href=\"#features-extendedDynamicState\">extendedDynamicState</a> feature <strong class=\"purple\">must</strong> be enabled"
-        },
+        }
+      ],
+      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)": [
         {
           "vuid": "VUID-vkCmdSetViewportWithCount-viewportCount-03394",
           "text": " <code>viewportCount</code> <strong class=\"purple\">must</strong> be between <code>1</code> and <code>VkPhysicalDeviceLimits</code>::<code>maxViewports</code>, inclusive"
@@ -33671,11 +33845,13 @@
       ]
     },
     "vkCmdSetScissorWithCount": {
-      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)": [
+      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)+!(VK_VERSION_1_3)": [
         {
           "vuid": "VUID-vkCmdSetScissorWithCount-None-03396",
           "text": " The <a href=\"#features-extendedDynamicState\">extendedDynamicState</a> feature <strong class=\"purple\">must</strong> be enabled"
-        },
+        }
+      ],
+      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)": [
         {
           "vuid": "VUID-vkCmdSetScissorWithCount-scissorCount-03397",
           "text": " <code>scissorCount</code> <strong class=\"purple\">must</strong> be between <code>1</code> and <code>VkPhysicalDeviceLimits</code>::<code>maxViewports</code>, inclusive"
@@ -33951,11 +34127,13 @@
       ]
     },
     "vkCmdSetRasterizerDiscardEnable": {
-      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state2)": [
+      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state2)+!(VK_VERSION_1_3)": [
         {
           "vuid": "VUID-vkCmdSetRasterizerDiscardEnable-None-04871",
           "text": " The <a href=\"#features-extendedDynamicState2\">extendedDynamicState2</a> feature <strong class=\"purple\">must</strong> be enabled"
-        },
+        }
+      ],
+      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state2)": [
         {
           "vuid": "VUID-vkCmdSetRasterizerDiscardEnable-commandBuffer-parameter",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCommandBuffer\">VkCommandBuffer</a> handle"
@@ -34571,11 +34749,13 @@
       ]
     },
     "vkCmdSetFrontFace": {
-      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)": [
+      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)+!(VK_VERSION_1_3)": [
         {
           "vuid": "VUID-vkCmdSetFrontFace-None-03383",
           "text": " The <a href=\"#features-extendedDynamicState\">extendedDynamicState</a> feature <strong class=\"purple\">must</strong> be enabled"
-        },
+        }
+      ],
+      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)": [
         {
           "vuid": "VUID-vkCmdSetFrontFace-commandBuffer-parameter",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCommandBuffer\">VkCommandBuffer</a> handle"
@@ -34595,11 +34775,13 @@
       ]
     },
     "vkCmdSetCullMode": {
-      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)": [
+      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)+!(VK_VERSION_1_3)": [
         {
           "vuid": "VUID-vkCmdSetCullMode-None-03384",
           "text": " The <a href=\"#features-extendedDynamicState\">extendedDynamicState</a> feature <strong class=\"purple\">must</strong> be enabled"
-        },
+        }
+      ],
+      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)": [
         {
           "vuid": "VUID-vkCmdSetCullMode-commandBuffer-parameter",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCommandBuffer\">VkCommandBuffer</a> handle"
@@ -34619,11 +34801,13 @@
       ]
     },
     "vkCmdSetDepthBiasEnable": {
-      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state2)": [
+      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state2)+!(VK_VERSION_1_3)": [
         {
           "vuid": "VUID-vkCmdSetDepthBiasEnable-None-04872",
           "text": " The <a href=\"#features-extendedDynamicState2\">extendedDynamicState2</a> feature <strong class=\"purple\">must</strong> be enabled"
-        },
+        }
+      ],
+      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state2)": [
         {
           "vuid": "VUID-vkCmdSetDepthBiasEnable-commandBuffer-parameter",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCommandBuffer\">VkCommandBuffer</a> handle"
@@ -34919,11 +35103,13 @@
       ]
     },
     "vkCmdSetDepthBoundsTestEnable": {
-      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)": [
+      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)+!(VK_VERSION_1_3)": [
         {
           "vuid": "VUID-vkCmdSetDepthBoundsTestEnable-None-03349",
           "text": " The <a href=\"#features-extendedDynamicState\">extendedDynamicState</a> feature <strong class=\"purple\">must</strong> be enabled"
-        },
+        }
+      ],
+      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)": [
         {
           "vuid": "VUID-vkCmdSetDepthBoundsTestEnable-commandBuffer-parameter",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCommandBuffer\">VkCommandBuffer</a> handle"
@@ -34975,11 +35161,13 @@
       ]
     },
     "vkCmdSetStencilTestEnable": {
-      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)": [
+      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)+!(VK_VERSION_1_3)": [
         {
           "vuid": "VUID-vkCmdSetStencilTestEnable-None-03350",
           "text": " The <a href=\"#features-extendedDynamicState\">extendedDynamicState</a> feature <strong class=\"purple\">must</strong> be enabled"
-        },
+        }
+      ],
+      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)": [
         {
           "vuid": "VUID-vkCmdSetStencilTestEnable-commandBuffer-parameter",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCommandBuffer\">VkCommandBuffer</a> handle"
@@ -34995,11 +35183,13 @@
       ]
     },
     "vkCmdSetStencilOp": {
-      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)": [
+      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)+!(VK_VERSION_1_3)": [
         {
           "vuid": "VUID-vkCmdSetStencilOp-None-03351",
           "text": " The <a href=\"#features-extendedDynamicState\">extendedDynamicState</a> feature <strong class=\"purple\">must</strong> be enabled"
-        },
+        }
+      ],
+      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)": [
         {
           "vuid": "VUID-vkCmdSetStencilOp-commandBuffer-parameter",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCommandBuffer\">VkCommandBuffer</a> handle"
@@ -35131,11 +35321,13 @@
       ]
     },
     "vkCmdSetDepthTestEnable": {
-      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)": [
+      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)+!(VK_VERSION_1_3)": [
         {
           "vuid": "VUID-vkCmdSetDepthTestEnable-None-03352",
           "text": " The <a href=\"#features-extendedDynamicState\">extendedDynamicState</a> feature <strong class=\"purple\">must</strong> be enabled"
-        },
+        }
+      ],
+      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)": [
         {
           "vuid": "VUID-vkCmdSetDepthTestEnable-commandBuffer-parameter",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCommandBuffer\">VkCommandBuffer</a> handle"
@@ -35151,11 +35343,13 @@
       ]
     },
     "vkCmdSetDepthCompareOp": {
-      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)": [
+      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)+!(VK_VERSION_1_3)": [
         {
           "vuid": "VUID-vkCmdSetDepthCompareOp-None-03353",
           "text": " The <a href=\"#features-extendedDynamicState\">extendedDynamicState</a> feature <strong class=\"purple\">must</strong> be enabled"
-        },
+        }
+      ],
+      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)": [
         {
           "vuid": "VUID-vkCmdSetDepthCompareOp-commandBuffer-parameter",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCommandBuffer\">VkCommandBuffer</a> handle"
@@ -35175,11 +35369,13 @@
       ]
     },
     "vkCmdSetDepthWriteEnable": {
-      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)": [
+      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)+!(VK_VERSION_1_3)": [
         {
           "vuid": "VUID-vkCmdSetDepthWriteEnable-None-03354",
           "text": " The <a href=\"#features-extendedDynamicState\">extendedDynamicState</a> feature <strong class=\"purple\">must</strong> be enabled"
-        },
+        }
+      ],
+      "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)": [
         {
           "vuid": "VUID-vkCmdSetDepthWriteEnable-commandBuffer-parameter",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkCommandBuffer\">VkCommandBuffer</a> handle"
@@ -35624,11 +35820,11 @@
         },
         {
           "vuid": "VUID-vkCmdDispatch-OpTypeImage-06423",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
         },
         {
           "vuid": "VUID-vkCmdDispatch-OpTypeImage-06424",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
         }
       ],
       "(VK_IMG_filter_cubic,VK_EXT_filter_cubic)": [
@@ -35687,6 +35883,16 @@
         {
           "vuid": "VUID-vkCmdDispatch-commandBuffer-04617",
           "text": " If any of the shader stages of the <code>VkPipeline</code> bound to the pipeline bind point used by this command uses the <a href=\"#spirvenv-capabilities-table-RayQueryKHR\">RayQueryKHR</a> capability, then <code>commandBuffer</code> <strong class=\"purple\">must</strong> not be a protected command buffer"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
+        {
+          "vuid": "VUID-vkCmdDispatch-None-06550",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> only be used with <code>OpImageSample*</code> or <code>OpImageSparseSample*</code> instructions"
+        },
+        {
+          "vuid": "VUID-vkCmdDispatch-ConstOffset-06551",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> not use the <code>ConstOffset</code> and <code>Offset</code> operands"
         }
       ],
       "(VK_EXT_shader_image_atomic_int64)": [
@@ -35832,11 +36038,11 @@
         },
         {
           "vuid": "VUID-vkCmdDispatchIndirect-OpTypeImage-06423",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
         },
         {
           "vuid": "VUID-vkCmdDispatchIndirect-OpTypeImage-06424",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
         }
       ],
       "(VK_IMG_filter_cubic,VK_EXT_filter_cubic)": [
@@ -35887,6 +36093,16 @@
         {
           "vuid": "VUID-vkCmdDispatchIndirect-commandBuffer-02711",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> not be a protected command buffer"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
+        {
+          "vuid": "VUID-vkCmdDispatchIndirect-None-06550",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> only be used with <code>OpImageSample*</code> or <code>OpImageSparseSample*</code> instructions"
+        },
+        {
+          "vuid": "VUID-vkCmdDispatchIndirect-ConstOffset-06551",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> not use the <code>ConstOffset</code> and <code>Offset</code> operands"
         }
       ],
       "(VK_EXT_shader_image_atomic_int64)": [
@@ -36052,11 +36268,11 @@
         },
         {
           "vuid": "VUID-vkCmdDispatchBase-OpTypeImage-06423",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
         },
         {
           "vuid": "VUID-vkCmdDispatchBase-OpTypeImage-06424",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_device_group)+(VK_IMG_filter_cubic,VK_EXT_filter_cubic)": [
@@ -36115,6 +36331,16 @@
         {
           "vuid": "VUID-vkCmdDispatchBase-commandBuffer-04617",
           "text": " If any of the shader stages of the <code>VkPipeline</code> bound to the pipeline bind point used by this command uses the <a href=\"#spirvenv-capabilities-table-RayQueryKHR\">RayQueryKHR</a> capability, then <code>commandBuffer</code> <strong class=\"purple\">must</strong> not be a protected command buffer"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_device_group)+(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
+        {
+          "vuid": "VUID-vkCmdDispatchBase-None-06550",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> only be used with <code>OpImageSample*</code> or <code>OpImageSparseSample*</code> instructions"
+        },
+        {
+          "vuid": "VUID-vkCmdDispatchBase-ConstOffset-06551",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> not use the <code>ConstOffset</code> and <code>Offset</code> operands"
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_device_group)+(VK_EXT_shader_image_atomic_int64)": [
@@ -36240,11 +36466,11 @@
         },
         {
           "vuid": "VUID-vkCmdSubpassShadingHUAWEI-OpTypeImage-06423",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
         },
         {
           "vuid": "VUID-vkCmdSubpassShadingHUAWEI-OpTypeImage-06424",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
         }
       ],
       "(VK_HUAWEI_subpass_shading)+(VK_IMG_filter_cubic,VK_EXT_filter_cubic)": [
@@ -36291,6 +36517,16 @@
         {
           "vuid": "VUID-vkCmdSubpassShadingHUAWEI-commandBuffer-02707",
           "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, any resource accessed by the <a href=\"#VkPipeline\">VkPipeline</a> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
+        }
+      ],
+      "(VK_HUAWEI_subpass_shading)+(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
+        {
+          "vuid": "VUID-vkCmdSubpassShadingHUAWEI-None-06550",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> only be used with <code>OpImageSample*</code> or <code>OpImageSparseSample*</code> instructions"
+        },
+        {
+          "vuid": "VUID-vkCmdSubpassShadingHUAWEI-ConstOffset-06551",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> not use the <code>ConstOffset</code> and <code>Offset</code> operands"
         }
       ],
       "(VK_HUAWEI_subpass_shading)+(VK_EXT_shader_image_atomic_int64)": [
@@ -36796,11 +37032,11 @@
         },
         {
           "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-OpTypeImage-06423",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
         },
         {
           "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-OpTypeImage-06424",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
         }
       ],
       "(VK_NV_device_generated_commands)+(VK_IMG_filter_cubic,VK_EXT_filter_cubic)": [
@@ -36851,6 +37087,16 @@
         {
           "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-commandBuffer-02970",
           "text": " <code>commandBuffer</code> <strong class=\"purple\">must</strong> not be a protected command buffer"
+        }
+      ],
+      "(VK_NV_device_generated_commands)+(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
+        {
+          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-None-06550",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> only be used with <code>OpImageSample*</code> or <code>OpImageSparseSample*</code> instructions"
+        },
+        {
+          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-ConstOffset-06551",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> not use the <code>ConstOffset</code> and <code>Offset</code> operands"
         }
       ],
       "(VK_NV_device_generated_commands)+(VK_EXT_shader_image_atomic_int64)": [
@@ -42802,11 +43048,11 @@
         },
         {
           "vuid": "VUID-vkCmdTraceRaysNV-OpTypeImage-06423",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysNV-OpTypeImage-06424",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
         }
       ],
       "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_NV_ray_tracing)+(VK_IMG_filter_cubic,VK_EXT_filter_cubic)": [
@@ -42853,6 +43099,16 @@
         {
           "vuid": "VUID-vkCmdTraceRaysNV-commandBuffer-02707",
           "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, any resource accessed by the <a href=\"#VkPipeline\">VkPipeline</a> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
+        }
+      ],
+      "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_NV_ray_tracing)+(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-None-06550",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> only be used with <code>OpImageSample*</code> or <code>OpImageSparseSample*</code> instructions"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysNV-ConstOffset-06551",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> not use the <code>ConstOffset</code> and <code>Offset</code> operands"
         }
       ],
       "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_NV_ray_tracing)+(VK_EXT_shader_image_atomic_int64)": [
@@ -43126,11 +43382,11 @@
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-OpTypeImage-06423",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-OpTypeImage-06424",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
         }
       ],
       "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_pipeline)+(VK_IMG_filter_cubic,VK_EXT_filter_cubic)": [
@@ -43177,6 +43433,16 @@
         {
           "vuid": "VUID-vkCmdTraceRaysKHR-commandBuffer-02707",
           "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, any resource accessed by the <a href=\"#VkPipeline\">VkPipeline</a> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
+        }
+      ],
+      "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_pipeline)+(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
+        {
+          "vuid": "VUID-vkCmdTraceRaysKHR-None-06550",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> only be used with <code>OpImageSample*</code> or <code>OpImageSparseSample*</code> instructions"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysKHR-ConstOffset-06551",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> not use the <code>ConstOffset</code> and <code>Offset</code> operands"
         }
       ],
       "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_pipeline)+(VK_EXT_shader_image_atomic_int64)": [
@@ -43530,11 +43796,11 @@
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-OpTypeImage-06423",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being written as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT</code>"
         },
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-OpTypeImage-06424",
-          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> <strong class=\"purple\">must</strong> have image format features that support <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
+          "text": " Any <a href=\"#VkImageView\">VkImageView</a> or <a href=\"#VkBufferView\">VkBufferView</a> being read as a storage image or storage texel buffer where the image format field of the <code>OpTypeImage</code> is <code>Unknown</code> then the view&#8217;s format feature <strong class=\"purple\">must</strong> contain <code>VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT</code>"
         }
       ],
       "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_pipeline)+(VK_IMG_filter_cubic,VK_EXT_filter_cubic)": [
@@ -43581,6 +43847,16 @@
         {
           "vuid": "VUID-vkCmdTraceRaysIndirectKHR-commandBuffer-02707",
           "text": " If <code>commandBuffer</code> is an unprotected command buffer and <a href=\"#limits-protectedNoFault\"><code>protectedNoFault</code></a> is not supported, any resource accessed by the <a href=\"#VkPipeline\">VkPipeline</a> object bound to the pipeline bind point used by this command <strong class=\"purple\">must</strong> not be a protected resource"
+        }
+      ],
+      "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_pipeline)+(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirectKHR-None-06550",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> only be used with <code>OpImageSample*</code> or <code>OpImageSparseSample*</code> instructions"
+        },
+        {
+          "vuid": "VUID-vkCmdTraceRaysIndirectKHR-ConstOffset-06551",
+          "text": " If the <code>VkPipeline</code> object bound to the pipeline bind point used by this command accesses a <code>VkSampler</code> or <code>VkImageView</code> object that enables <a href=\"#samplers-YCbCr-conversion\">sampler {YCbCr} conversion</a>, that object <strong class=\"purple\">must</strong> not use the <code>ConstOffset</code> and <code>Offset</code> operands"
         }
       ],
       "(VK_NV_ray_tracing,VK_KHR_ray_tracing_pipeline)+(VK_KHR_ray_tracing_pipeline)+(VK_EXT_shader_image_atomic_int64)": [
@@ -43712,7 +43988,7 @@
         },
         {
           "vuid": "VUID-VkVideoCapabilitiesKHR-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkVideoDecodeH264CapabilitiesEXT\">VkVideoDecodeH264CapabilitiesEXT</a>, <a href=\"#VkVideoDecodeH265CapabilitiesEXT\">VkVideoDecodeH265CapabilitiesEXT</a>, <a href=\"#VkVideoEncodeH264CapabilitiesEXT\">VkVideoEncodeH264CapabilitiesEXT</a>, or <a href=\"#VkVideoEncodeH265CapabilitiesEXT\">VkVideoEncodeH265CapabilitiesEXT</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkVideoDecodeH264CapabilitiesEXT\">VkVideoDecodeH264CapabilitiesEXT</a>, <a href=\"#VkVideoDecodeH265CapabilitiesEXT\">VkVideoDecodeH265CapabilitiesEXT</a>, or <a href=\"#VkVideoEncodeCapabilitiesKHR\">VkVideoEncodeCapabilitiesKHR</a>"
         },
         {
           "vuid": "VUID-VkVideoCapabilitiesKHR-sType-unique",
@@ -44632,6 +44908,22 @@
         }
       ]
     },
+    "VkVideoEncodeCapabilitiesKHR": {
+      "(VK_KHR_video_encode_queue)": [
+        {
+          "vuid": "VUID-VkVideoEncodeCapabilitiesKHR-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_VIDEO_ENCODE_CAPABILITIES_KHR</code>"
+        },
+        {
+          "vuid": "VUID-VkVideoEncodeCapabilitiesKHR-rateControlModes-parameter",
+          "text": " <code>rateControlModes</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkVideoEncodeRateControlModeFlagBitsKHR\">VkVideoEncodeRateControlModeFlagBitsKHR</a> values"
+        },
+        {
+          "vuid": "VUID-VkVideoEncodeCapabilitiesKHR-rateControlModes-requiredbitmask",
+          "text": " <code>rateControlModes</code> <strong class=\"purple\">must</strong> not be <code>0</code>"
+        }
+      ]
+    },
     "vkCmdEncodeVideoKHR": {
       "(VK_KHR_video_encode_queue)": [
         {
@@ -44759,14 +45051,6 @@
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_EXT</code>"
         },
         {
-          "vuid": "VUID-VkVideoEncodeH264CapabilitiesEXT-flags-parameter",
-          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkVideoEncodeH264CapabilityFlagBitsEXT\">VkVideoEncodeH264CapabilityFlagBitsEXT</a> values"
-        },
-        {
-          "vuid": "VUID-VkVideoEncodeH264CapabilitiesEXT-flags-requiredbitmask",
-          "text": " <code>flags</code> <strong class=\"purple\">must</strong> not be <code>0</code>"
-        },
-        {
           "vuid": "VUID-VkVideoEncodeH264CapabilitiesEXT-inputModeFlags-parameter",
           "text": " <code>inputModeFlags</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkVideoEncodeH264InputModeFlagBitsEXT\">VkVideoEncodeH264InputModeFlagBitsEXT</a> values"
         },
@@ -44879,12 +45163,8 @@
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_VCL_FRAME_INFO_EXT</code>"
         },
         {
-          "vuid": "VUID-VkVideoEncodeH264VclFrameInfoEXT-pRefDefaultFinalList0Entries-parameter",
-          "text": " <code>pRefDefaultFinalList0Entries</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>refDefaultFinalList0EntryCount</code> valid <a href=\"#VkVideoEncodeH264DpbSlotInfoEXT\">VkVideoEncodeH264DpbSlotInfoEXT</a> structures"
-        },
-        {
-          "vuid": "VUID-VkVideoEncodeH264VclFrameInfoEXT-pRefDefaultFinalList1Entries-parameter",
-          "text": " <code>pRefDefaultFinalList1Entries</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>refDefaultFinalList1EntryCount</code> valid <a href=\"#VkVideoEncodeH264DpbSlotInfoEXT\">VkVideoEncodeH264DpbSlotInfoEXT</a> structures"
+          "vuid": "VUID-VkVideoEncodeH264VclFrameInfoEXT-pReferenceFinalLists-parameter",
+          "text": " If <code>pReferenceFinalLists</code> is not <code>NULL</code>, <code>pReferenceFinalLists</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkVideoEncodeH264ReferenceListsEXT\">VkVideoEncodeH264ReferenceListsEXT</a> structure"
         },
         {
           "vuid": "VUID-VkVideoEncodeH264VclFrameInfoEXT-pNaluSliceEntries-parameter",
@@ -44892,35 +45172,11 @@
         },
         {
           "vuid": "VUID-VkVideoEncodeH264VclFrameInfoEXT-pCurrentPictureInfo-parameter",
-          "text": " <code>pCurrentPictureInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkVideoEncodeH264DpbSlotInfoEXT\">VkVideoEncodeH264DpbSlotInfoEXT</a> structure"
-        },
-        {
-          "vuid": "VUID-VkVideoEncodeH264VclFrameInfoEXT-refDefaultFinalList0EntryCount-arraylength",
-          "text": " <code>refDefaultFinalList0EntryCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
-        },
-        {
-          "vuid": "VUID-VkVideoEncodeH264VclFrameInfoEXT-refDefaultFinalList1EntryCount-arraylength",
-          "text": " <code>refDefaultFinalList1EntryCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
+          "text": " <code>pCurrentPictureInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <code>StdVideoEncodeH264PictureInfo</code> value"
         },
         {
           "vuid": "VUID-VkVideoEncodeH264VclFrameInfoEXT-naluSliceEntryCount-arraylength",
           "text": " <code>naluSliceEntryCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
-        }
-      ]
-    },
-    "VkVideoEncodeH264DpbSlotInfoEXT": {
-      "(VK_EXT_video_encode_h264)": [
-        {
-          "vuid": "VUID-VkVideoEncodeH264DpbSlotInfoEXT-sType-sType",
-          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_DPB_SLOT_INFO_EXT</code>"
-        },
-        {
-          "vuid": "VUID-VkVideoEncodeH264DpbSlotInfoEXT-pNext-pNext",
-          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
-        },
-        {
-          "vuid": "VUID-VkVideoEncodeH264DpbSlotInfoEXT-pStdPictureInfo-parameter",
-          "text": " <code>pStdPictureInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <code>StdVideoEncodeH264PictureInfo</code> value"
         }
       ]
     },
@@ -44935,24 +45191,52 @@
           "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
         },
         {
+          "vuid": "VUID-VkVideoEncodeH264NaluSliceEXT-pReferenceFinalLists-parameter",
+          "text": " If <code>pReferenceFinalLists</code> is not <code>NULL</code>, <code>pReferenceFinalLists</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkVideoEncodeH264ReferenceListsEXT\">VkVideoEncodeH264ReferenceListsEXT</a> structure"
+        },
+        {
           "vuid": "VUID-VkVideoEncodeH264NaluSliceEXT-pSliceHeaderStd-parameter",
           "text": " <code>pSliceHeaderStd</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <code>StdVideoEncodeH264SliceHeader</code> value"
+        }
+      ]
+    },
+    "VkVideoEncodeH264DpbSlotInfoEXT": {
+      "(VK_EXT_video_encode_h264)": [
+        {
+          "vuid": "VUID-VkVideoEncodeH264DpbSlotInfoEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_DPB_SLOT_INFO_EXT</code>"
         },
         {
-          "vuid": "VUID-VkVideoEncodeH264NaluSliceEXT-pRefFinalList0Entries-parameter",
-          "text": " <code>pRefFinalList0Entries</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>refFinalList0EntryCount</code> valid <a href=\"#VkVideoEncodeH264DpbSlotInfoEXT\">VkVideoEncodeH264DpbSlotInfoEXT</a> structures"
+          "vuid": "VUID-VkVideoEncodeH264DpbSlotInfoEXT-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
         },
         {
-          "vuid": "VUID-VkVideoEncodeH264NaluSliceEXT-pRefFinalList1Entries-parameter",
-          "text": " <code>pRefFinalList1Entries</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>refFinalList1EntryCount</code> valid <a href=\"#VkVideoEncodeH264DpbSlotInfoEXT\">VkVideoEncodeH264DpbSlotInfoEXT</a> structures"
+          "vuid": "VUID-VkVideoEncodeH264DpbSlotInfoEXT-pStdReferenceInfo-parameter",
+          "text": " <code>pStdReferenceInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <code>StdVideoEncodeH264ReferenceInfo</code> value"
+        }
+      ]
+    },
+    "VkVideoEncodeH264ReferenceListsEXT": {
+      "(VK_EXT_video_encode_h264)": [
+        {
+          "vuid": "VUID-VkVideoEncodeH264ReferenceListsEXT-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_REFERENCE_LISTS_EXT</code>"
         },
         {
-          "vuid": "VUID-VkVideoEncodeH264NaluSliceEXT-refFinalList0EntryCount-arraylength",
-          "text": " <code>refFinalList0EntryCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
+          "vuid": "VUID-VkVideoEncodeH264ReferenceListsEXT-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
         },
         {
-          "vuid": "VUID-VkVideoEncodeH264NaluSliceEXT-refFinalList1EntryCount-arraylength",
-          "text": " <code>refFinalList1EntryCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
+          "vuid": "VUID-VkVideoEncodeH264ReferenceListsEXT-pReferenceList0Entries-parameter",
+          "text": " If <code>referenceList0EntryCount</code> is not <code>0</code>, <code>pReferenceList0Entries</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>referenceList0EntryCount</code> valid <a href=\"#VkVideoEncodeH264DpbSlotInfoEXT\">VkVideoEncodeH264DpbSlotInfoEXT</a> structures"
+        },
+        {
+          "vuid": "VUID-VkVideoEncodeH264ReferenceListsEXT-pReferenceList1Entries-parameter",
+          "text": " If <code>referenceList1EntryCount</code> is not <code>0</code>, <code>pReferenceList1Entries</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>referenceList1EntryCount</code> valid <a href=\"#VkVideoEncodeH264DpbSlotInfoEXT\">VkVideoEncodeH264DpbSlotInfoEXT</a> structures"
+        },
+        {
+          "vuid": "VUID-VkVideoEncodeH264ReferenceListsEXT-pMemMgmtCtrlOperations-parameter",
+          "text": " <code>pMemMgmtCtrlOperations</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <code>StdVideoEncodeH264RefMemMgmtCtrlOperations</code> value"
         }
       ]
     },
@@ -45031,10 +45315,6 @@
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_CAPABILITIES_EXT</code>"
         },
         {
-          "vuid": "VUID-VkVideoEncodeH265CapabilitiesEXT-flags-zerobitmask",
-          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be <code>0</code>"
-        },
-        {
           "vuid": "VUID-VkVideoEncodeH265CapabilitiesEXT-inputModeFlags-parameter",
           "text": " <code>inputModeFlags</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkVideoEncodeH265InputModeFlagBitsEXT\">VkVideoEncodeH265InputModeFlagBitsEXT</a> values"
         },
@@ -45057,6 +45337,14 @@
         {
           "vuid": "VUID-VkVideoEncodeH265CapabilitiesEXT-ctbSizes-requiredbitmask",
           "text": " <code>ctbSizes</code> <strong class=\"purple\">must</strong> not be <code>0</code>"
+        },
+        {
+          "vuid": "VUID-VkVideoEncodeH265CapabilitiesEXT-transformBlockSizes-parameter",
+          "text": " <code>transformBlockSizes</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkVideoEncodeH265TransformBlockSizeFlagBitsEXT\">VkVideoEncodeH265TransformBlockSizeFlagBitsEXT</a> values"
+        },
+        {
+          "vuid": "VUID-VkVideoEncodeH265CapabilitiesEXT-transformBlockSizes-requiredbitmask",
+          "text": " <code>transformBlockSizes</code> <strong class=\"purple\">must</strong> not be <code>0</code>"
         },
         {
           "vuid": "VUID-VkVideoEncodeH265CapabilitiesEXT-stdExtensionVersion-parameter",
@@ -48783,6 +49071,18 @@
         {
           "vuid": "VUID-RuntimeSpirv-OpTraceRayKHR-06356",
           "text": " For <code>OpTraceRayKHR</code> instructions, the <code>RayTmin</code> and <code>RayTmax</code> operands <strong class=\"purple\">must</strong> be non-negative floating-point values."
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-OpTraceRayKHR-06552",
+          "text": " For <code>OpTraceRayKHR</code> instructions, the <code>Rayflags</code> operand <strong class=\"purple\">must</strong> not contain both <code>SkipTrianglesKHR</code> and <code>SkipAABBsKHR</code>"
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-OpTraceRayKHR-06553",
+          "text": " For <code>OpTraceRayKHR</code> instructions, if the <code>Rayflags</code> operand contains <code>SkipTrianglesKHR</code>, the pipeline <strong class=\"purple\">must</strong> not have been created with <code>VK_PIPELINE_CREATE_RAY_TRACING_SKIP_AABBS_BIT_KHR</code> set"
+        },
+        {
+          "vuid": "VUID-RuntimeSpirv-OpTraceRayKHR-06554",
+          "text": " For <code>OpTraceRayKHR</code> instructions, if the <code>Rayflags</code> operand contains <code>SkipAABBsKHR</code>, the pipeline <strong class=\"purple\">must</strong> not have been created with <code>VK_PIPELINE_CREATE_RAY_TRACING_SKIP_TRIANGLES_BIT_KHR</code> set"
         },
         {
           "vuid": "VUID-RuntimeSpirv-OpTraceRayKHR-06357",
