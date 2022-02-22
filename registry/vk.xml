@@ -6750,6 +6750,23 @@ typedef void <name>CAMetalLayer</name>;
             <member optional="true" noautovalidity="true"><type>void</type>*     <name>pNext</name></member>
             <member><type>VkBool32</type>                                        <name>linearColorAttachment</name></member>
         </type>
+		<type category="struct" name="VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE" structextends="VkPhysicalDeviceFeatures2,VkDeviceCreateInfo">
+			<member values="VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_SET_HOST_MAPPING_FEATURES_VALVE"><type>VkStructureType</type> <name>sType</name></member>
+			<member optional="true" noautovalidity="true"><type>void</type>*     <name>pNext</name></member>
+			<member><type>VkBool32</type>                                        <name>descriptorSetHostMapping</name></member>
+		</type>
+		<type category="struct" name="VkDescriptorSetBindingReferenceVALVE">
+			<member values="VK_STRUCTURE_TYPE_DESCRIPTOR_SET_BINDING_REFERENCE_VALVE"><type>VkStructureType</type> <name>sType</name></member>
+			<member optional="true">const <type>void</type>*                                                       <name>pNext</name></member>
+			<member><type>VkDescriptorSetLayout</type>                                                             <name>descriptorSetLayout</name></member>
+			<member><type>uint32_t</type>                                                                          <name>binding</name></member>
+		</type>
+		<type category="struct" name="VkDescriptorSetLayoutHostMappingInfoVALVE">
+			<member values="VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_HOST_MAPPING_INFO_VALVE"><type>VkStructureType</type> <name>sType</name></member>
+			<member optional="true"><type>void</type>*                                                                    <name>pNext</name></member>
+			<member><type>size_t</type>                                                                                   <name>descriptorOffset</name></member>
+			<member><type>uint32_t</type>                                                                                 <name>descriptorSize</name></member>
+		</type>
     </types>
     <comment>Vulkan enumerant (token) definitions</comment>
 
@@ -11699,6 +11716,18 @@ typedef void <name>CAMetalLayer</name>;
             <param externsync="true"><type>VkCommandBuffer</type>                   <name>commandBuffer</name></param>
         </command>
         <command name="vkCmdEndRenderingKHR" alias="vkCmdEndRendering"/>
+		<command>
+			<proto><type>void</type> <name>vkGetDescriptorSetLayoutHostMappingInfoVALVE</name></proto>
+            <param><type>VkDevice</type> <name>device</name></param>
+			<param>const <type>VkDescriptorSetBindingReferenceVALVE</type>* <name>pBindingReference</name></param>
+			<param><type>VkDescriptorSetLayoutHostMappingInfoVALVE</type>* <name>pHostMapping</name></param>
+		</command>
+		<command>
+			<proto><type>void</type> <name>vkGetDescriptorSetHostMappingVALVE</name></proto>
+            <param><type>VkDevice</type> <name>device</name></param>
+            <param><type>VkDescriptorSet</type> <name>descriptorSet</name></param>
+			<param><type>void</type>** <name>ppData</name></param>
+		</command>
     </commands>
 
     <feature api="vulkan" name="VK_VERSION_1_0" number="1.0" comment="Vulkan core API interface definitions">
@@ -18188,10 +18217,18 @@ typedef void <name>CAMetalLayer</name>;
                 <enum value="&quot;VK_EXT_extension_420&quot;"              name="VK_EXT_EXTENSION_420_EXTENSION_NAME"/>
             </require>
         </extension>
-        <extension name="VK_KHR_extension_421" number="421" author="KHR" contact="Hans-Kristian Arntzen @HansKristian-Work" supported="disabled">
+        <extension name="VK_VALVE_descriptor_set_host_mapping" number="421" type="device" author="VALVE" contact="Hans-Kristian Arntzen @HansKristian-Work" specialuse="d3demulation" supported="vulkan">
             <require>
-                <enum value="0"                                             name="VK_KHR_EXTENSION_421_SPEC_VERSION"/>
-                <enum value="&quot;VK_KHR_extension_421&quot;"              name="VK_KHR_EXTENSION_421_EXTENSION_NAME"/>
+                <enum value="1"                                                 name="VK_VALVE_DESCRIPTOR_SET_HOST_MAPPING_SPEC_VERSION"/>
+                <enum value="&quot;VK_VALVE_descriptor_set_host_mapping&quot;"  name="VK_VALVE_DESCRIPTOR_SET_HOST_MAPPING_EXTENSION_NAME"/>
+                <enum offset="0"  extends="VkStructureType"                     name="VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_SET_HOST_MAPPING_FEATURES_VALVE"/>
+                <enum offset="1"  extends="VkStructureType"                     name="VK_STRUCTURE_TYPE_DESCRIPTOR_SET_BINDING_REFERENCE_VALVE"/>
+                <enum offset="2"  extends="VkStructureType"                     name="VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_HOST_MAPPING_INFO_VALVE"/>
+                <type name="VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE"/>
+                <type name="VkDescriptorSetBindingReferenceVALVE"/>
+                <type name="VkDescriptorSetLayoutHostMappingInfoVALVE"/>
+                <command name="vkGetDescriptorSetLayoutHostMappingInfoVALVE"/>
+                <command name="vkGetDescriptorSetHostMappingVALVE"/>
             </require>
         </extension>
         <extension name="VK_EXT_extension_422" number="422" author="EXT" contact="Graeme Leese @gnl21" supported="disabled">

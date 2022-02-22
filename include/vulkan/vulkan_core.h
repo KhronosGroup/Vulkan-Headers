@@ -939,6 +939,9 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BORDER_COLOR_SWIZZLE_FEATURES_EXT = 1000411000,
     VK_STRUCTURE_TYPE_SAMPLER_BORDER_COLOR_COMPONENT_MAPPING_CREATE_INFO_EXT = 1000411001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PAGEABLE_DEVICE_LOCAL_MEMORY_FEATURES_EXT = 1000412000,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_SET_HOST_MAPPING_FEATURES_VALVE = 1000420000,
+    VK_STRUCTURE_TYPE_DESCRIPTOR_SET_BINDING_REFERENCE_VALVE = 1000420001,
+    VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_HOST_MAPPING_INFO_VALVE = 1000420002,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_FEATURES_QCOM = 1000425000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_PROPERTIES_QCOM = 1000425001,
     VK_STRUCTURE_TYPE_SUBPASS_FRAGMENT_DENSITY_MAP_OFFSET_END_INFO_QCOM = 1000425002,
@@ -13827,6 +13830,45 @@ VKAPI_ATTR void VKAPI_CALL vkSetDeviceMemoryPriorityEXT(
     VkDevice                                    device,
     VkDeviceMemory                              memory,
     float                                       priority);
+#endif
+
+
+#define VK_VALVE_descriptor_set_host_mapping 1
+#define VK_VALVE_DESCRIPTOR_SET_HOST_MAPPING_SPEC_VERSION 1
+#define VK_VALVE_DESCRIPTOR_SET_HOST_MAPPING_EXTENSION_NAME "VK_VALVE_descriptor_set_host_mapping"
+typedef struct VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           descriptorSetHostMapping;
+} VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE;
+
+typedef struct VkDescriptorSetBindingReferenceVALVE {
+    VkStructureType          sType;
+    const void*              pNext;
+    VkDescriptorSetLayout    descriptorSetLayout;
+    uint32_t                 binding;
+} VkDescriptorSetBindingReferenceVALVE;
+
+typedef struct VkDescriptorSetLayoutHostMappingInfoVALVE {
+    VkStructureType    sType;
+    void*              pNext;
+    size_t             descriptorOffset;
+    uint32_t           descriptorSize;
+} VkDescriptorSetLayoutHostMappingInfoVALVE;
+
+typedef void (VKAPI_PTR *PFN_vkGetDescriptorSetLayoutHostMappingInfoVALVE)(VkDevice device, const VkDescriptorSetBindingReferenceVALVE* pBindingReference, VkDescriptorSetLayoutHostMappingInfoVALVE* pHostMapping);
+typedef void (VKAPI_PTR *PFN_vkGetDescriptorSetHostMappingVALVE)(VkDevice device, VkDescriptorSet descriptorSet, void** ppData);
+
+#ifndef VK_NO_PROTOTYPES
+VKAPI_ATTR void VKAPI_CALL vkGetDescriptorSetLayoutHostMappingInfoVALVE(
+    VkDevice                                    device,
+    const VkDescriptorSetBindingReferenceVALVE* pBindingReference,
+    VkDescriptorSetLayoutHostMappingInfoVALVE*  pHostMapping);
+
+VKAPI_ATTR void VKAPI_CALL vkGetDescriptorSetHostMappingVALVE(
+    VkDevice                                    device,
+    VkDescriptorSet                             descriptorSet,
+    void**                                      ppData);
 #endif
 
 
