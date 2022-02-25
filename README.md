@@ -4,7 +4,11 @@ Vulkan header files and API registry
 
 ## Default branch changed to 'main' 2021-09-12
 
-As discussed in #222, the default branch of this repository is now 'main'. This change should be largely transparent to repository users, since github rewrites many references to the old 'master' branch to 'main'. However, if you have a checked-out local clone, you may wish to take the following steps as recommended by github:
+As discussed in #222, the default branch of this repository is now 'main'.
+This change should be largely transparent to repository users, since github
+rewrites many references to the old 'master' branch to 'main'. However, if
+you have a checked-out local clone, you may wish to take the following steps
+as recommended by github:
 
 ```sh
 git branch -m master main
@@ -13,12 +17,19 @@ git branch -u origin/main main
 git remote set-head origin -a
 ```
 
+## Vulkan SC Headers and JSON Files
+
+The `sc_main` branch of this repository contains generated headers and JSON
+files for the Vulkan SC specification.
+The API XML and some of the scripts in this branch differ slightly from the
+equivalent files in the `main` branch for Vulkan.
+
 ## Repository Content
 
 The contents of this repository are largely obtained from other repositories
 and are collected, coordinated, and curated here.
 
-If proposing changes to any file originating from a different repository,
+If proposking changes to any file originating from a different repository,
 please propose such changes in that repository, rather than Vulkan-Headers.
 Files in this repository originate from:
 
@@ -57,6 +68,9 @@ As of the Vulkan-Docs 1.2.182 spec update, the Vulkan-Hpp headers have been
 split into multiple files. All of those files are now included in this
 repository.
 
+*NOTE*: the `sc_main_ branch does not currently contain C++ headers, which
+are not currently generated for Vulkan SC.
+
 * include/vulkan/vulkan.hpp
 * include/vulkan/vulkan_enums.hpp
 * include/vulkan/vulkan_funcs.hpp
@@ -68,7 +82,10 @@ repository.
 
 Updates to the `Vulkan-Headers` repository which correspond to a new Vulkan
 specification release are tagged using the following format:
-`v<`_`version`_`>` (e.g., `v1.1.96`).
+`v<`_`version`_`>` (e.g., `v1.3.202`).
+
+Updates which correspond to a new Vulkan SC specification release are tagged
+using the following format: `vksc<`_`version`_`>` (e.g., `vksc1.0.9`).
 
 **Note**: Marked version releases have undergone thorough testing but do not
 imply the same quality level as SDK tags. SDK tags follow the
