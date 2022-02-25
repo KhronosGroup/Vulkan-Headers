@@ -2,27 +2,13 @@
 
 Vulkan header files and API registry
 
-## Default branch changed to 'main' 2021-09-12
+The default branch of this repository is `main`, containing files for the Vulkan API.
 
-As discussed in #222, the default branch of this repository is now 'main'.
-This change should be largely transparent to repository users, since github
-rewrites many references to the old 'master' branch to 'main'. However, if
-you have a checked-out local clone, you may wish to take the following steps
-as recommended by github:
-
-```sh
-git branch -m master main
-git fetch origin
-git branch -u origin/main main
-git remote set-head origin -a
-```
-
-## Vulkan SC Headers and JSON Files
-
-The `sc_main` branch of this repository contains generated headers and JSON
-files for the Vulkan SC specification.
+The `sc_main` branch contains files for the Vulkan SC API.
 The API XML and some of the scripts in this branch differ slightly from the
-equivalent files in the `main` branch for Vulkan.
+equivalent files in the `main` branch for Vulkan, and there are additional
+generated `.json` files in the `json/` directory.
+
 
 ## Repository Content
 
@@ -33,7 +19,12 @@ If proposking changes to any file originating from a different repository,
 please propose such changes in that repository, rather than Vulkan-Headers.
 Files in this repository originate from:
 
-### Specification repository (https://github.com/KhronosGroup/Vulkan-Docs)
+
+### Specification repository
+
+For the `main` branch, these files are derived from https://github.com/KhronosGroup/Vulkan-Docs
+
+For the `sc_main` branch, these files are derived from https://github.com/KhronosGroup/VulkanSC-Docs
 
 * registry/cgenerator.py
 * registry/conventions.py
@@ -45,6 +36,8 @@ Files in this repository originate from:
 * registry/vk.xml
 * registry/vkconventions.py
 * All files under include/vulkan/ which are *not* listed explicitly as originating from another repository.
+* For the `sc_main` branch, all `.json` files under `json/`
+
 
 ### This repository (https://github.com/KhronosGroup/Vulkan-Headers)
 
@@ -62,13 +55,14 @@ Files in this repository originate from:
   * include/vulkan/vk_layer.h
   * include/vulkan/vk_sdk_platform.h
 
+
 ### Vulkan C++ Binding Repository (https://github.com/KhronosGroup/Vulkan-Hpp)
 
 As of the Vulkan-Docs 1.2.182 spec update, the Vulkan-Hpp headers have been
 split into multiple files. All of those files are now included in this
 repository.
 
-*NOTE*: the `sc_main_ branch does not currently contain C++ headers, which
+**Note**: the `sc_main_ branch does not currently contain C++ headers, which
 are not currently generated for Vulkan SC.
 
 * include/vulkan/vulkan.hpp
@@ -78,14 +72,14 @@ are not currently generated for Vulkan SC.
 * include/vulkan/vulkan_raii.hpp
 * include/vulkan/vulkan_structs.hpp
 
+
 ## Version Tagging Scheme
 
-Updates to the `Vulkan-Headers` repository which correspond to a new Vulkan
-specification release are tagged using the following format:
-`v<`_`version`_`>` (e.g., `v1.3.202`).
+Updates to `main` branch corresponding to a new Vulkan specification release
+are tagged with the format: `v<`_`version`_`>` (e.g., `v1.3.202`).
 
-Updates which correspond to a new Vulkan SC specification release are tagged
-using the following format: `vksc<`_`version`_`>` (e.g., `vksc1.0.9`).
+Updates to `sc_main` branch corresponding to a new Vulkan SC specification
+release are tagged with the format: `vksc<`_`version`_`>` (e.g., `vksc1.0.9`).
 
 **Note**: Marked version releases have undergone thorough testing but do not
 imply the same quality level as SDK tags. SDK tags follow the
