@@ -27,6 +27,9 @@ config("vulkan_headers_config") {
   }
   if (defined(vulkan_use_wayland) && vulkan_use_wayland) {
     defines += [ "VK_USE_PLATFORM_WAYLAND_KHR" ]
+    if (defined(vulkan_wayland_include_dir)) {
+      include_dirs += [ "$vulkan_wayland_include_dir" ]
+    }
   }
   if (is_android) {
     defines += [ "VK_USE_PLATFORM_ANDROID_KHR" ]
