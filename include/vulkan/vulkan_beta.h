@@ -313,8 +313,16 @@ VKAPI_ATTR void VKAPI_CALL vkCmdControlVideoCodingKHR(
 
 
 #define VK_KHR_video_decode_queue 1
-#define VK_KHR_VIDEO_DECODE_QUEUE_SPEC_VERSION 2
+#define VK_KHR_VIDEO_DECODE_QUEUE_SPEC_VERSION 3
 #define VK_KHR_VIDEO_DECODE_QUEUE_EXTENSION_NAME "VK_KHR_video_decode_queue"
+
+typedef enum VkVideoDecodeCapabilityFlagBitsKHR {
+    VK_VIDEO_DECODE_CAPABILITY_DEFAULT_KHR = 0,
+    VK_VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_COINCIDE_BIT_KHR = 0x00000001,
+    VK_VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_DISTINCT_BIT_KHR = 0x00000002,
+    VK_VIDEO_DECODE_CAPABILITY_FLAG_BITS_MAX_ENUM_KHR = 0x7FFFFFFF
+} VkVideoDecodeCapabilityFlagBitsKHR;
+typedef VkFlags VkVideoDecodeCapabilityFlagsKHR;
 
 typedef enum VkVideoDecodeFlagBitsKHR {
     VK_VIDEO_DECODE_DEFAULT_KHR = 0,
@@ -322,6 +330,12 @@ typedef enum VkVideoDecodeFlagBitsKHR {
     VK_VIDEO_DECODE_FLAG_BITS_MAX_ENUM_KHR = 0x7FFFFFFF
 } VkVideoDecodeFlagBitsKHR;
 typedef VkFlags VkVideoDecodeFlagsKHR;
+typedef struct VkVideoDecodeCapabilitiesKHR {
+    VkStructureType                    sType;
+    void*                              pNext;
+    VkVideoDecodeCapabilityFlagsKHR    flags;
+} VkVideoDecodeCapabilitiesKHR;
+
 typedef struct VkVideoDecodeInfoKHR {
     VkStructureType                   sType;
     const void*                       pNext;
