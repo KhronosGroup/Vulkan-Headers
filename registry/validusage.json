@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.3.207",
-    "comment": "from git branch: github-main commit: 75c276d6fa83a3f1cbf8b3da50b9278c479be021",
-    "date": "2022-03-08 12:53:34Z"
+    "api version": "1.3.208",
+    "comment": "from git branch: github-main commit: e88e27f2cda370444f87fc724412a384cb958824",
+    "date": "2022-03-15 10:28:57Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -59,16 +59,22 @@
       ]
     },
     "VkInstanceCreateInfo": {
-      "(VK_EXT_debug_report,VK_EXT_debug_utils)+(VK_EXT_debug_report)": [
+      "(VK_EXT_debug_report,VK_EXT_debug_utils,VK_KHR_portability_enumeration)+(VK_EXT_debug_report)": [
         {
           "vuid": "VUID-VkInstanceCreateInfo-pNext-04925",
           "text": " If the <code>pNext</code> chain of <code>VkInstanceCreateInfo</code> includes a <code>VkDebugReportCallbackCreateInfoEXT</code> structure, the list of enabled extensions in <code>ppEnabledExtensionNames</code> <strong class=\"purple\">must</strong> contain <a href=\"#VK_EXT_debug_report\">VK_EXT_debug_report</a>"
         }
       ],
-      "(VK_EXT_debug_report,VK_EXT_debug_utils)+(VK_EXT_debug_utils)": [
+      "(VK_EXT_debug_report,VK_EXT_debug_utils,VK_KHR_portability_enumeration)+(VK_EXT_debug_utils)": [
         {
           "vuid": "VUID-VkInstanceCreateInfo-pNext-04926",
           "text": " If the <code>pNext</code> chain of <code>VkInstanceCreateInfo</code> includes a <code>VkDebugUtilsMessengerCreateInfoEXT</code> structure, the list of enabled extensions in <code>ppEnabledExtensionNames</code> <strong class=\"purple\">must</strong> contain <a href=\"#VK_EXT_debug_utils\">VK_EXT_debug_utils</a>"
+        }
+      ],
+      "(VK_EXT_debug_report,VK_EXT_debug_utils,VK_KHR_portability_enumeration)+(VK_KHR_portability_enumeration)": [
+        {
+          "vuid": "VUID-VkInstanceCreateInfo-flags-06559",
+          "text": " If <code>flags</code> has the <code>VK_INSTANCE_CREATE_ENUMERATE_PORTABILITY_BIT_KHR</code> bit set, the list of enabled extensions in <code>ppEnabledExtensionNames</code> <strong class=\"purple\">must</strong> contain <code><a href=\"#VK_KHR_portability_enumeration\">VK_KHR_portability_enumeration</a></code>"
         }
       ],
       "core": [
@@ -85,8 +91,8 @@
           "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique, with the exception of structures of type <a href=\"#VkDebugUtilsMessengerCreateInfoEXT\">VkDebugUtilsMessengerCreateInfoEXT</a>"
         },
         {
-          "vuid": "VUID-VkInstanceCreateInfo-flags-zerobitmask",
-          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be <code>0</code>"
+          "vuid": "VUID-VkInstanceCreateInfo-flags-parameter",
+          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkInstanceCreateFlagBits\">VkInstanceCreateFlagBits</a> values"
         },
         {
           "vuid": "VUID-VkInstanceCreateInfo-pApplicationInfo-parameter",
@@ -12992,7 +12998,7 @@
         },
         {
           "vuid": "VUID-VkMemoryAllocateInfo-pNext-02386",
-          "text": " If the parameters define an import operation, the external handle is an Android hardware buffer, and the <code>pNext</code> chain includes a <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a> with <code>image</code> that is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, the Android hardware buffer&#8217;s <code>AHardwareBuffer</code>::<code>usage</code> <strong class=\"purple\">must</strong> include at least one of <code>AHARDWAREBUFFER_USAGE_GPU_FRAMEBUFFER</code> or <code>AHARDWAREBUFFER_USAGE_GPU_SAMPLED_IMAGE</code>"
+          "text": " If the parameters define an import operation, the external handle is an Android hardware buffer, and the <code>pNext</code> chain includes a <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a> with <code>image</code> that is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, the Android hardware buffer&#8217;s <code>AHardwareBuffer</code>::<code>usage</code> <strong class=\"purple\">must</strong> include at least one of <code>AHARDWAREBUFFER_USAGE_GPU_FRAMEBUFFER</code>, <code>AHARDWAREBUFFER_USAGE_GPU_SAMPLED_IMAGE</code> or <code>AHARDWAREBUFFER_USAGE_GPU_DATA_BUFFER</code>"
         },
         {
           "vuid": "VUID-VkMemoryAllocateInfo-pNext-02387",
