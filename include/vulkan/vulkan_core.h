@@ -72,7 +72,7 @@ extern "C" {
 #define VK_API_VERSION_1_0 VK_MAKE_API_VERSION(0, 1, 0, 0)// Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 207
+#define VK_HEADER_VERSION 208
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 3, VK_HEADER_VERSION)
@@ -2137,6 +2137,11 @@ typedef enum VkImageUsageFlagBits {
     VK_IMAGE_USAGE_FLAG_BITS_MAX_ENUM = 0x7FFFFFFF
 } VkImageUsageFlagBits;
 typedef VkFlags VkImageUsageFlags;
+
+typedef enum VkInstanceCreateFlagBits {
+    VK_INSTANCE_CREATE_ENUMERATE_PORTABILITY_BIT_KHR = 0x00000001,
+    VK_INSTANCE_CREATE_FLAG_BITS_MAX_ENUM = 0x7FFFFFFF
+} VkInstanceCreateFlagBits;
 typedef VkFlags VkInstanceCreateFlags;
 
 typedef enum VkMemoryHeapFlagBits {
@@ -9475,6 +9480,11 @@ typedef VkFormatFeatureFlagBits2 VkFormatFeatureFlagBits2KHR;
 
 typedef VkFormatProperties3 VkFormatProperties3KHR;
 
+
+
+#define VK_KHR_portability_enumeration 1
+#define VK_KHR_PORTABILITY_ENUMERATION_SPEC_VERSION 1
+#define VK_KHR_PORTABILITY_ENUMERATION_EXTENSION_NAME "VK_KHR_portability_enumeration"
 
 
 #define VK_KHR_maintenance4 1
