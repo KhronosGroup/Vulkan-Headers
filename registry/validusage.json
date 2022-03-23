@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.3.208",
-    "comment": "from git branch: github-main commit: e88e27f2cda370444f87fc724412a384cb958824",
-    "date": "2022-03-15 10:28:57Z"
+    "api version": "1.3.209",
+    "comment": "from git branch: github-main commit: fff65570f345288361958ff530e284de27b1a657",
+    "date": "2022-03-23 04:49:16Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -499,6 +499,12 @@
         {
           "vuid": "VUID-VkDeviceCreateInfo-queueFamilyIndex-02802",
           "text": " The <code>queueFamilyIndex</code> member of each element of <code>pQueueCreateInfos</code> <strong class=\"purple\">must</strong> be unique within <code>pQueueCreateInfos</code>, except that two members can share the same <code>queueFamilyIndex</code> if one is a protected-capable queue and one is not a protected-capable queue"
+        }
+      ],
+      "(VK_VERSION_1_1)+(VK_KHR_global_priority,VK_EXT_global_priority)": [
+        {
+          "vuid": "VUID-VkDeviceCreateInfo-pQueueCreateInfos-06654",
+          "text": " If multiple elements of <code>pQueueCreateInfos</code> share the same <code>queueFamilyIndex</code>, then all of such elements <strong class=\"purple\">must</strong> have the same global priority level, which <strong class=\"purple\">can</strong> be specified explicitly by the including a <a href=\"#VkDeviceQueueGlobalPriorityCreateInfoKHR\">VkDeviceQueueGlobalPriorityCreateInfoKHR</a> structure in the <code>pNext</code> chain, or by the implicit default value"
         }
       ],
       "(VK_VERSION_1_1,VK_KHR_get_physical_device_properties2)": [
@@ -8909,7 +8915,7 @@
           "text": " If <code>renderpass</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, multiview is not enabled for <code>renderPass</code>, and <code>flags</code> includes <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT</code>, the <code>layerCount</code> member of any element of the <code>pAttachmentImageInfos</code> member of a <a href=\"#VkFramebufferAttachmentsCreateInfo\">VkFramebufferAttachmentsCreateInfo</a> structure included in the <code>pNext</code> chain used as an input, color, resolve, or depth/stencil attachment in <code>renderPass</code> <strong class=\"purple\">must</strong> be greater than or equal to <code>layers</code>"
         }
       ],
-      "(VK_VERSION_1_2,VK_KHR_imageless_framebuffer)+!(VK_VERSION_1_1+VK_KHR_multiview)": [
+      "(VK_VERSION_1_2,VK_KHR_imageless_framebuffer)+!(VK_VERSION_1_1,VK_KHR_multiview)": [
         {
           "vuid": "VUID-VkFramebufferCreateInfo-flags-04547",
           "text": " If <code>renderpass</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a> and <code>flags</code> includes <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT</code>, the <code>layerCount</code> member of any element of the <code>pAttachmentImageInfos</code> member of a <a href=\"#VkFramebufferAttachmentsCreateInfo\">VkFramebufferAttachmentsCreateInfo</a> structure included in the <code>pNext</code> chain used as an input, color, resolve, or depth/stencil attachment in <code>pRenderPass</code> <strong class=\"purple\">must</strong> be greater than or equal to <code>layers</code>"
@@ -12863,6 +12869,24 @@
       ]
     },
     "VkMemoryAllocateInfo": {
+      "core": [
+        {
+          "vuid": "VUID-VkMemoryAllocateInfo-None-06657",
+          "text": " The parameters <strong class=\"purple\">must</strong> not define more than one <a href=\"#memory-import-operation\">import operation</a>"
+        },
+        {
+          "vuid": "VUID-VkMemoryAllocateInfo-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO</code>"
+        },
+        {
+          "vuid": "VUID-VkMemoryAllocateInfo-pNext-pNext",
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDedicatedAllocationMemoryAllocateInfoNV\">VkDedicatedAllocationMemoryAllocateInfoNV</a>, <a href=\"#VkExportMemoryAllocateInfo\">VkExportMemoryAllocateInfo</a>, <a href=\"#VkExportMemoryAllocateInfoNV\">VkExportMemoryAllocateInfoNV</a>, <a href=\"#VkExportMemoryWin32HandleInfoKHR\">VkExportMemoryWin32HandleInfoKHR</a>, <a href=\"#VkExportMemoryWin32HandleInfoNV\">VkExportMemoryWin32HandleInfoNV</a>, <a href=\"#VkImportAndroidHardwareBufferInfoANDROID\">VkImportAndroidHardwareBufferInfoANDROID</a>, <a href=\"#VkImportMemoryBufferCollectionFUCHSIA\">VkImportMemoryBufferCollectionFUCHSIA</a>, <a href=\"#VkImportMemoryFdInfoKHR\">VkImportMemoryFdInfoKHR</a>, <a href=\"#VkImportMemoryHostPointerInfoEXT\">VkImportMemoryHostPointerInfoEXT</a>, <a href=\"#VkImportMemoryWin32HandleInfoKHR\">VkImportMemoryWin32HandleInfoKHR</a>, <a href=\"#VkImportMemoryWin32HandleInfoNV\">VkImportMemoryWin32HandleInfoNV</a>, <a href=\"#VkImportMemoryZirconHandleInfoFUCHSIA\">VkImportMemoryZirconHandleInfoFUCHSIA</a>, <a href=\"#VkMemoryAllocateFlagsInfo\">VkMemoryAllocateFlagsInfo</a>, <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>, <a href=\"#VkMemoryOpaqueCaptureAddressAllocateInfo\">VkMemoryOpaqueCaptureAddressAllocateInfo</a>, or <a href=\"#VkMemoryPriorityAllocateInfoEXT\">VkMemoryPriorityAllocateInfoEXT</a>"
+        },
+        {
+          "vuid": "VUID-VkMemoryAllocateInfo-sType-unique",
+          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+        }
+      ],
       "!(VK_ANDROID_external_memory_android_hardware_buffer)": [
         {
           "vuid": "VUID-VkMemoryAllocateInfo-allocationSize-00638",
@@ -13053,20 +13077,6 @@
         {
           "vuid": "VUID-VkMemoryAllocateInfo-allocationSize-04750",
           "text": " If the parameters define an import operation and the external handle type is <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_ZIRCON_VMO_BIT_FUCHSIA</code>, the value of <code>allocationSize</code> <strong class=\"purple\">must</strong> be greater than <code>0</code> and <strong class=\"purple\">must</strong> be less than or equal to the size of the VMO as determined by <code>zx_vmo_get_size</code>(<code>handle</code>) where <code>handle</code> is the VMO handle to the imported external memory"
-        }
-      ],
-      "core": [
-        {
-          "vuid": "VUID-VkMemoryAllocateInfo-sType-sType",
-          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO</code>"
-        },
-        {
-          "vuid": "VUID-VkMemoryAllocateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkDedicatedAllocationMemoryAllocateInfoNV\">VkDedicatedAllocationMemoryAllocateInfoNV</a>, <a href=\"#VkExportMemoryAllocateInfo\">VkExportMemoryAllocateInfo</a>, <a href=\"#VkExportMemoryAllocateInfoNV\">VkExportMemoryAllocateInfoNV</a>, <a href=\"#VkExportMemoryWin32HandleInfoKHR\">VkExportMemoryWin32HandleInfoKHR</a>, <a href=\"#VkExportMemoryWin32HandleInfoNV\">VkExportMemoryWin32HandleInfoNV</a>, <a href=\"#VkImportAndroidHardwareBufferInfoANDROID\">VkImportAndroidHardwareBufferInfoANDROID</a>, <a href=\"#VkImportMemoryBufferCollectionFUCHSIA\">VkImportMemoryBufferCollectionFUCHSIA</a>, <a href=\"#VkImportMemoryFdInfoKHR\">VkImportMemoryFdInfoKHR</a>, <a href=\"#VkImportMemoryHostPointerInfoEXT\">VkImportMemoryHostPointerInfoEXT</a>, <a href=\"#VkImportMemoryWin32HandleInfoKHR\">VkImportMemoryWin32HandleInfoKHR</a>, <a href=\"#VkImportMemoryWin32HandleInfoNV\">VkImportMemoryWin32HandleInfoNV</a>, <a href=\"#VkImportMemoryZirconHandleInfoFUCHSIA\">VkImportMemoryZirconHandleInfoFUCHSIA</a>, <a href=\"#VkMemoryAllocateFlagsInfo\">VkMemoryAllocateFlagsInfo</a>, <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>, <a href=\"#VkMemoryOpaqueCaptureAddressAllocateInfo\">VkMemoryOpaqueCaptureAddressAllocateInfo</a>, or <a href=\"#VkMemoryPriorityAllocateInfoEXT\">VkMemoryPriorityAllocateInfoEXT</a>"
-        },
-        {
-          "vuid": "VUID-VkMemoryAllocateInfo-sType-unique",
-          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         }
       ]
     },
@@ -15761,6 +15771,10 @@
         {
           "vuid": "VUID-VkImageViewCreateInfo-pNext-01970",
           "text": " If the <code>pNext</code> chain includes a <a href=\"#VkSamplerYcbcrConversionInfo\">VkSamplerYcbcrConversionInfo</a> structure with a <code>conversion</code> value other than <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, all members of <code>components</code> <strong class=\"purple\">must</strong> have the <a href=\"#resources-image-views-identity-mappings\">identity swizzle</a>"
+        },
+        {
+          "vuid": "VUID-VkImageViewCreateInfo-pNext-06658",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkSamplerYcbcrConversionInfo\">VkSamplerYcbcrConversionInfo</a> structure with a <code>conversion</code> value other than <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, <code>format</code> <strong class=\"purple\">must</strong> be the same used in <a href=\"#VkSamplerYcbcrConversionCreateInfo\">VkSamplerYcbcrConversionCreateInfo</a>::<code>format</code>"
         }
       ],
       "!(VK_VERSION_1_1,VK_KHR_sampler_ycbcr_conversion)": [
@@ -15825,7 +15839,7 @@
           "text": " If the <a href=\"#features-invocationMask\"><code>invocationMask</code> feature</a> is enabled, and if <code>image</code> was created with <code>usage</code> containing <code>VK_IMAGE_USAGE_INVOCATION_MASK_BIT_HUAWEI</code>, <code>format</code> <strong class=\"purple\">must</strong> be <code>VK_FORMAT_R8_UINT</code>"
         }
       ],
-      "(VK_VERSION_1_1,VK_KHR_maintenance2)+!(VK_VERSION_1_2+VK_EXT_separate_stencil_usage)": [
+      "(VK_VERSION_1_1,VK_KHR_maintenance2)+!(VK_VERSION_1_2,VK_EXT_separate_stencil_usage)": [
         {
           "vuid": "VUID-VkImageViewCreateInfo-pNext-02661",
           "text": " If the <code>pNext</code> chain includes a <a href=\"#VkImageViewUsageCreateInfo\">VkImageViewUsageCreateInfo</a> structure, its <code>usage</code> member <strong class=\"purple\">must</strong> not include any bits that were not set in the <code>usage</code> member of the <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> structure used to create <code>image</code>"
@@ -24089,16 +24103,8 @@
           "text": " The union of all source regions, and the union of all destination regions, specified by the elements of <code>pRegions</code>, <strong class=\"purple\">must</strong> not overlap in memory"
         },
         {
-          "vuid": "VUID-vkCmdCopyImage-srcImage-00126",
-          "text": " <code>srcImage</code> <strong class=\"purple\">must</strong> have been created with <code>VK_IMAGE_USAGE_TRANSFER_SRC_BIT</code> usage flag"
-        },
-        {
           "vuid": "VUID-vkCmdCopyImage-srcImageLayout-00128",
           "text": " <code>srcImageLayout</code> <strong class=\"purple\">must</strong> specify the layout of the image subresources of <code>srcImage</code> specified in <code>pRegions</code> at the time this command is executed on a <code>VkDevice</code>"
-        },
-        {
-          "vuid": "VUID-vkCmdCopyImage-dstImage-00131",
-          "text": " <code>dstImage</code> <strong class=\"purple\">must</strong> have been created with <code>VK_IMAGE_USAGE_TRANSFER_DST_BIT</code> usage flag"
         },
         {
           "vuid": "VUID-vkCmdCopyImage-dstImageLayout-00133",
@@ -24390,6 +24396,34 @@
           "vuid": "VUID-vkCmdCopyImage-srcImage-01789",
           "text": " If <code>srcImage</code> or <code>dstImage</code> is of type <code>VK_IMAGE_TYPE_2D</code>, then for each element of <code>pRegions</code>, <code>extent.depth</code> <strong class=\"purple\">must</strong> be <code>1</code>"
         }
+      ],
+      "!(VK_VERSION_1_2,VK_EXT_separate_stencil_usage)": [
+        {
+          "vuid": "VUID-vkCmdCopyImage-srcImage-00126",
+          "text": " <code>srcImage</code> <strong class=\"purple\">must</strong> have been created with <code>VK_IMAGE_USAGE_TRANSFER_SRC_BIT</code> usage flag"
+        },
+        {
+          "vuid": "VUID-vkCmdCopyImage-dstImage-00131",
+          "text": " <code>dstImage</code> <strong class=\"purple\">must</strong> have been created with <code>VK_IMAGE_USAGE_TRANSFER_DST_BIT</code> usage flag"
+        }
+      ],
+      "(VK_VERSION_1_2,VK_EXT_separate_stencil_usage)": [
+        {
+          "vuid": "VUID-vkCmdCopyImage-aspect-06662",
+          "text": " If the <code>aspect</code> member of any element of <code>pRanges</code> includes any flag other than <code>VK_IMAGE_ASPECT_STENCIL_BIT</code> or <code>srcImage</code> was not created with <a href=\"#VkImageStencilUsageCreateInfo\">separate stencil usage</a>, <code>VK_IMAGE_USAGE_TRANSFER_SRC_BIT</code> <strong class=\"purple\">must</strong> have been included in the <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>usage</code> used to create <code>srcImage</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdCopyImage-aspect-06663",
+          "text": " If the <code>aspect</code> member of any element of <code>pRanges</code> includes any flag other than <code>VK_IMAGE_ASPECT_STENCIL_BIT</code> or <code>dstImage</code> was not created with <a href=\"#VkImageStencilUsageCreateInfo\">separate stencil usage</a>, <code>VK_IMAGE_USAGE_TRANSFER_DST_BIT</code> <strong class=\"purple\">must</strong> have been included in the <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>usage</code> used to create <code>dstImage</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdCopyImage-aspect-06664",
+          "text": " If the <code>aspect</code> member of any element of <code>pRanges</code> includes <code>VK_IMAGE_ASPECT_STENCIL_BIT</code>, and <code>srcImage</code> was created with <a href=\"#VkImageStencilUsageCreateInfo\">separate stencil usage</a>, <code>VK_IMAGE_USAGE_TRANSFER_SRC_BIT</code> <strong class=\"purple\">must</strong> have been included in the <a href=\"#VkImageStencilUsageCreateInfo\">VkImageStencilUsageCreateInfo</a>::<code>stencilUsage</code> used to create <code>srcImage</code>"
+        },
+        {
+          "vuid": "VUID-vkCmdCopyImage-aspect-06665",
+          "text": " If the <code>aspect</code> member of any element of <code>pRanges</code> includes <code>VK_IMAGE_ASPECT_STENCIL_BIT</code>, and <code>dstImage</code> was created with <a href=\"#VkImageStencilUsageCreateInfo\">separate stencil usage</a>, <code>VK_IMAGE_USAGE_TRANSFER_DST_BIT</code> <strong class=\"purple\">must</strong> have been included in the <a href=\"#VkImageStencilUsageCreateInfo\">VkImageStencilUsageCreateInfo</a>::<code>stencilUsage</code> used to create <code>dstImage</code>"
+        }
       ]
     },
     "VkImageCopy": {
@@ -24412,6 +24446,18 @@
         }
       ],
       "core": [
+        {
+          "vuid": "VUID-VkImageCopy-extent-06668",
+          "text": " <code>extent.width</code> <strong class=\"purple\">must</strong> not be 0"
+        },
+        {
+          "vuid": "VUID-VkImageCopy-extent-06669",
+          "text": " <code>extent.height</code> <strong class=\"purple\">must</strong> not be 0"
+        },
+        {
+          "vuid": "VUID-VkImageCopy-extent-06670",
+          "text": " <code>extent.depth</code> <strong class=\"purple\">must</strong> not be 0"
+        },
         {
           "vuid": "VUID-VkImageCopy-srcSubresource-parameter",
           "text": " <code>srcSubresource</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkImageSubresourceLayers\">VkImageSubresourceLayers</a> structure"
@@ -24497,16 +24543,8 @@
           "text": " The union of all source regions, and the union of all destination regions, specified by the elements of <code>pRegions</code>, <strong class=\"purple\">must</strong> not overlap in memory"
         },
         {
-          "vuid": "VUID-VkCopyImageInfo2-srcImage-00126",
-          "text": " <code>srcImage</code> <strong class=\"purple\">must</strong> have been created with <code>VK_IMAGE_USAGE_TRANSFER_SRC_BIT</code> usage flag"
-        },
-        {
           "vuid": "VUID-VkCopyImageInfo2-srcImageLayout-00128",
           "text": " <code>srcImageLayout</code> <strong class=\"purple\">must</strong> specify the layout of the image subresources of <code>srcImage</code> specified in <code>pRegions</code> at the time this command is executed on a <code>VkDevice</code>"
-        },
-        {
-          "vuid": "VUID-VkCopyImageInfo2-dstImage-00131",
-          "text": " <code>dstImage</code> <strong class=\"purple\">must</strong> have been created with <code>VK_IMAGE_USAGE_TRANSFER_DST_BIT</code> usage flag"
         },
         {
           "vuid": "VUID-VkCopyImageInfo2-dstImageLayout-00133",
@@ -24790,6 +24828,34 @@
           "vuid": "VUID-VkCopyImageInfo2-srcImage-01789",
           "text": " If <code>srcImage</code> or <code>dstImage</code> is of type <code>VK_IMAGE_TYPE_2D</code>, then for each element of <code>pRegions</code>, <code>extent.depth</code> <strong class=\"purple\">must</strong> be <code>1</code>"
         }
+      ],
+      "(VK_VERSION_1_3,VK_KHR_copy_commands2)+!(VK_VERSION_1_2,VK_EXT_separate_stencil_usage)": [
+        {
+          "vuid": "VUID-VkCopyImageInfo2-srcImage-00126",
+          "text": " <code>srcImage</code> <strong class=\"purple\">must</strong> have been created with <code>VK_IMAGE_USAGE_TRANSFER_SRC_BIT</code> usage flag"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2-dstImage-00131",
+          "text": " <code>dstImage</code> <strong class=\"purple\">must</strong> have been created with <code>VK_IMAGE_USAGE_TRANSFER_DST_BIT</code> usage flag"
+        }
+      ],
+      "(VK_VERSION_1_3,VK_KHR_copy_commands2)+(VK_VERSION_1_2,VK_EXT_separate_stencil_usage)": [
+        {
+          "vuid": "VUID-VkCopyImageInfo2-aspect-06662",
+          "text": " If the <code>aspect</code> member of any element of <code>pRanges</code> includes any flag other than <code>VK_IMAGE_ASPECT_STENCIL_BIT</code> or <code>srcImage</code> was not created with <a href=\"#VkImageStencilUsageCreateInfo\">separate stencil usage</a>, <code>VK_IMAGE_USAGE_TRANSFER_SRC_BIT</code> <strong class=\"purple\">must</strong> have been included in the <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>usage</code> used to create <code>srcImage</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2-aspect-06663",
+          "text": " If the <code>aspect</code> member of any element of <code>pRanges</code> includes any flag other than <code>VK_IMAGE_ASPECT_STENCIL_BIT</code> or <code>dstImage</code> was not created with <a href=\"#VkImageStencilUsageCreateInfo\">separate stencil usage</a>, <code>VK_IMAGE_USAGE_TRANSFER_DST_BIT</code> <strong class=\"purple\">must</strong> have been included in the <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a>::<code>usage</code> used to create <code>dstImage</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2-aspect-06664",
+          "text": " If the <code>aspect</code> member of any element of <code>pRanges</code> includes <code>VK_IMAGE_ASPECT_STENCIL_BIT</code>, and <code>srcImage</code> was created with <a href=\"#VkImageStencilUsageCreateInfo\">separate stencil usage</a>, <code>VK_IMAGE_USAGE_TRANSFER_SRC_BIT</code> <strong class=\"purple\">must</strong> have been included in the <a href=\"#VkImageStencilUsageCreateInfo\">VkImageStencilUsageCreateInfo</a>::<code>stencilUsage</code> used to create <code>srcImage</code>"
+        },
+        {
+          "vuid": "VUID-VkCopyImageInfo2-aspect-06665",
+          "text": " If the <code>aspect</code> member of any element of <code>pRanges</code> includes <code>VK_IMAGE_ASPECT_STENCIL_BIT</code>, and <code>dstImage</code> was created with <a href=\"#VkImageStencilUsageCreateInfo\">separate stencil usage</a>, <code>VK_IMAGE_USAGE_TRANSFER_DST_BIT</code> <strong class=\"purple\">must</strong> have been included in the <a href=\"#VkImageStencilUsageCreateInfo\">VkImageStencilUsageCreateInfo</a>::<code>stencilUsage</code> used to create <code>dstImage</code>"
+        }
       ]
     },
     "VkImageCopy2": {
@@ -24812,6 +24878,18 @@
         }
       ],
       "(VK_VERSION_1_3,VK_KHR_copy_commands2)": [
+        {
+          "vuid": "VUID-VkImageCopy2-extent-06668",
+          "text": " <code>extent.width</code> <strong class=\"purple\">must</strong> not be 0"
+        },
+        {
+          "vuid": "VUID-VkImageCopy2-extent-06669",
+          "text": " <code>extent.height</code> <strong class=\"purple\">must</strong> not be 0"
+        },
+        {
+          "vuid": "VUID-VkImageCopy2-extent-06670",
+          "text": " <code>extent.depth</code> <strong class=\"purple\">must</strong> not be 0"
+        },
         {
           "vuid": "VUID-VkImageCopy2-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_IMAGE_COPY_2</code>"
@@ -25297,6 +25375,18 @@
         {
           "vuid": "VUID-VkBufferImageCopy-aspectMask-00212",
           "text": " The <code>aspectMask</code> member of <code>imageSubresource</code> <strong class=\"purple\">must</strong> only have a single bit set"
+        },
+        {
+          "vuid": "VUID-VkBufferImageCopy-imageExtent-06659",
+          "text": " <code>imageExtent.width</code> <strong class=\"purple\">must</strong> not be 0"
+        },
+        {
+          "vuid": "VUID-VkBufferImageCopy-imageExtent-06660",
+          "text": " <code>imageExtent.height</code> <strong class=\"purple\">must</strong> not be 0"
+        },
+        {
+          "vuid": "VUID-VkBufferImageCopy-imageExtent-06661",
+          "text": " <code>imageExtent.depth</code> <strong class=\"purple\">must</strong> not be 0"
         },
         {
           "vuid": "VUID-VkBufferImageCopy-imageSubresource-parameter",
@@ -25851,6 +25941,18 @@
         {
           "vuid": "VUID-VkBufferImageCopy2-aspectMask-00212",
           "text": " The <code>aspectMask</code> member of <code>imageSubresource</code> <strong class=\"purple\">must</strong> only have a single bit set"
+        },
+        {
+          "vuid": "VUID-VkBufferImageCopy2-imageExtent-06659",
+          "text": " <code>imageExtent.width</code> <strong class=\"purple\">must</strong> not be 0"
+        },
+        {
+          "vuid": "VUID-VkBufferImageCopy2-imageExtent-06660",
+          "text": " <code>imageExtent.height</code> <strong class=\"purple\">must</strong> not be 0"
+        },
+        {
+          "vuid": "VUID-VkBufferImageCopy2-imageExtent-06661",
+          "text": " <code>imageExtent.depth</code> <strong class=\"purple\">must</strong> not be 0"
         },
         {
           "vuid": "VUID-VkBufferImageCopy2-sType-sType",
@@ -27529,6 +27631,10 @@
         {
           "vuid": "VUID-vkCmdDraw-sampleLocationsEnable-02689",
           "text": " If the bound graphics pipeline was created with <a href=\"#VkPipelineSampleLocationsStateCreateInfoEXT\">VkPipelineSampleLocationsStateCreateInfoEXT</a>::<code>sampleLocationsEnable</code> set to <code>VK_TRUE</code> and the current subpass has a depth/stencil attachment, then that attachment <strong class=\"purple\">must</strong> have been created with the <code>VK_IMAGE_CREATE_SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_BIT_EXT</code> bit set"
+        },
+        {
+          "vuid": "VUID-vkCmdDraw-None-06666",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetSampleLocationsEXT\">vkCmdSetSampleLocationsEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
         }
       ],
       "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)": [
@@ -27657,6 +27763,12 @@
         {
           "vuid": "VUID-vkCmdDraw-imageView-06177",
           "text": " If the current render pass instance was begun with <a href=\"#vkCmdBeginRendering\">vkCmdBeginRendering</a>, the <code>imageView</code> member of <code>pStencilAttachment</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, and the <code>layout</code> member of <code>pStencilAttachment</code> is <code>VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL</code>, this command <strong class=\"purple\">must</strong> not write any values to the stencil attachment"
+        }
+      ],
+      "(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_EXT_color_write_enable)": [
+        {
+          "vuid": "VUID-vkCmdDraw-attachmentCount-06667",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be equal to the <code>VkPipelineColorBlendStateCreateInfo</code>::<code>attachmentCount</code> of the currently bound graphics pipeline"
         }
       ],
       "(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_KHR_fragment_shading_rate)": [
@@ -27981,6 +28093,10 @@
         {
           "vuid": "VUID-vkCmdDrawIndexed-sampleLocationsEnable-02689",
           "text": " If the bound graphics pipeline was created with <a href=\"#VkPipelineSampleLocationsStateCreateInfoEXT\">VkPipelineSampleLocationsStateCreateInfoEXT</a>::<code>sampleLocationsEnable</code> set to <code>VK_TRUE</code> and the current subpass has a depth/stencil attachment, then that attachment <strong class=\"purple\">must</strong> have been created with the <code>VK_IMAGE_CREATE_SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_BIT_EXT</code> bit set"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexed-None-06666",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetSampleLocationsEXT\">vkCmdSetSampleLocationsEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
         }
       ],
       "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)": [
@@ -28109,6 +28225,12 @@
         {
           "vuid": "VUID-vkCmdDrawIndexed-imageView-06177",
           "text": " If the current render pass instance was begun with <a href=\"#vkCmdBeginRendering\">vkCmdBeginRendering</a>, the <code>imageView</code> member of <code>pStencilAttachment</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, and the <code>layout</code> member of <code>pStencilAttachment</code> is <code>VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL</code>, this command <strong class=\"purple\">must</strong> not write any values to the stencil attachment"
+        }
+      ],
+      "(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_EXT_color_write_enable)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexed-attachmentCount-06667",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be equal to the <code>VkPipelineColorBlendStateCreateInfo</code>::<code>attachmentCount</code> of the currently bound graphics pipeline"
         }
       ],
       "(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_KHR_fragment_shading_rate)": [
@@ -28445,6 +28567,10 @@
         {
           "vuid": "VUID-vkCmdDrawMultiEXT-sampleLocationsEnable-02689",
           "text": " If the bound graphics pipeline was created with <a href=\"#VkPipelineSampleLocationsStateCreateInfoEXT\">VkPipelineSampleLocationsStateCreateInfoEXT</a>::<code>sampleLocationsEnable</code> set to <code>VK_TRUE</code> and the current subpass has a depth/stencil attachment, then that attachment <strong class=\"purple\">must</strong> have been created with the <code>VK_IMAGE_CREATE_SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_BIT_EXT</code> bit set"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMultiEXT-None-06666",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetSampleLocationsEXT\">vkCmdSetSampleLocationsEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
         }
       ],
       "(VK_EXT_multi_draw)+(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)": [
@@ -28573,6 +28699,12 @@
         {
           "vuid": "VUID-vkCmdDrawMultiEXT-imageView-06177",
           "text": " If the current render pass instance was begun with <a href=\"#vkCmdBeginRendering\">vkCmdBeginRendering</a>, the <code>imageView</code> member of <code>pStencilAttachment</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, and the <code>layout</code> member of <code>pStencilAttachment</code> is <code>VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL</code>, this command <strong class=\"purple\">must</strong> not write any values to the stencil attachment"
+        }
+      ],
+      "(VK_EXT_multi_draw)+(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_EXT_color_write_enable)": [
+        {
+          "vuid": "VUID-vkCmdDrawMultiEXT-attachmentCount-06667",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be equal to the <code>VkPipelineColorBlendStateCreateInfo</code>::<code>attachmentCount</code> of the currently bound graphics pipeline"
         }
       ],
       "(VK_EXT_multi_draw)+(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_KHR_fragment_shading_rate)": [
@@ -28917,6 +29049,10 @@
         {
           "vuid": "VUID-vkCmdDrawMultiIndexedEXT-sampleLocationsEnable-02689",
           "text": " If the bound graphics pipeline was created with <a href=\"#VkPipelineSampleLocationsStateCreateInfoEXT\">VkPipelineSampleLocationsStateCreateInfoEXT</a>::<code>sampleLocationsEnable</code> set to <code>VK_TRUE</code> and the current subpass has a depth/stencil attachment, then that attachment <strong class=\"purple\">must</strong> have been created with the <code>VK_IMAGE_CREATE_SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_BIT_EXT</code> bit set"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMultiIndexedEXT-None-06666",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetSampleLocationsEXT\">vkCmdSetSampleLocationsEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
         }
       ],
       "(VK_EXT_multi_draw)+(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)": [
@@ -29045,6 +29181,12 @@
         {
           "vuid": "VUID-vkCmdDrawMultiIndexedEXT-imageView-06177",
           "text": " If the current render pass instance was begun with <a href=\"#vkCmdBeginRendering\">vkCmdBeginRendering</a>, the <code>imageView</code> member of <code>pStencilAttachment</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, and the <code>layout</code> member of <code>pStencilAttachment</code> is <code>VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL</code>, this command <strong class=\"purple\">must</strong> not write any values to the stencil attachment"
+        }
+      ],
+      "(VK_EXT_multi_draw)+(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_EXT_color_write_enable)": [
+        {
+          "vuid": "VUID-vkCmdDrawMultiIndexedEXT-attachmentCount-06667",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be equal to the <code>VkPipelineColorBlendStateCreateInfo</code>::<code>attachmentCount</code> of the currently bound graphics pipeline"
         }
       ],
       "(VK_EXT_multi_draw)+(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_KHR_fragment_shading_rate)": [
@@ -29401,6 +29543,10 @@
         {
           "vuid": "VUID-vkCmdDrawIndirect-sampleLocationsEnable-02689",
           "text": " If the bound graphics pipeline was created with <a href=\"#VkPipelineSampleLocationsStateCreateInfoEXT\">VkPipelineSampleLocationsStateCreateInfoEXT</a>::<code>sampleLocationsEnable</code> set to <code>VK_TRUE</code> and the current subpass has a depth/stencil attachment, then that attachment <strong class=\"purple\">must</strong> have been created with the <code>VK_IMAGE_CREATE_SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_BIT_EXT</code> bit set"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirect-None-06666",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetSampleLocationsEXT\">vkCmdSetSampleLocationsEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
         }
       ],
       "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)": [
@@ -29529,6 +29675,12 @@
         {
           "vuid": "VUID-vkCmdDrawIndirect-imageView-06177",
           "text": " If the current render pass instance was begun with <a href=\"#vkCmdBeginRendering\">vkCmdBeginRendering</a>, the <code>imageView</code> member of <code>pStencilAttachment</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, and the <code>layout</code> member of <code>pStencilAttachment</code> is <code>VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL</code>, this command <strong class=\"purple\">must</strong> not write any values to the stencil attachment"
+        }
+      ],
+      "(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_EXT_color_write_enable)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirect-attachmentCount-06667",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be equal to the <code>VkPipelineColorBlendStateCreateInfo</code>::<code>attachmentCount</code> of the currently bound graphics pipeline"
         }
       ],
       "(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_KHR_fragment_shading_rate)": [
@@ -29913,6 +30065,10 @@
         {
           "vuid": "VUID-vkCmdDrawIndirectCount-sampleLocationsEnable-02689",
           "text": " If the bound graphics pipeline was created with <a href=\"#VkPipelineSampleLocationsStateCreateInfoEXT\">VkPipelineSampleLocationsStateCreateInfoEXT</a>::<code>sampleLocationsEnable</code> set to <code>VK_TRUE</code> and the current subpass has a depth/stencil attachment, then that attachment <strong class=\"purple\">must</strong> have been created with the <code>VK_IMAGE_CREATE_SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_BIT_EXT</code> bit set"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCount-None-06666",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetSampleLocationsEXT\">vkCmdSetSampleLocationsEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
         }
       ],
       "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)": [
@@ -30041,6 +30197,12 @@
         {
           "vuid": "VUID-vkCmdDrawIndirectCount-imageView-06177",
           "text": " If the current render pass instance was begun with <a href=\"#vkCmdBeginRendering\">vkCmdBeginRendering</a>, the <code>imageView</code> member of <code>pStencilAttachment</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, and the <code>layout</code> member of <code>pStencilAttachment</code> is <code>VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL</code>, this command <strong class=\"purple\">must</strong> not write any values to the stencil attachment"
+        }
+      ],
+      "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_EXT_color_write_enable)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCount-attachmentCount-06667",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be equal to the <code>VkPipelineColorBlendStateCreateInfo</code>::<code>attachmentCount</code> of the currently bound graphics pipeline"
         }
       ],
       "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_KHR_fragment_shading_rate)": [
@@ -30403,6 +30565,10 @@
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-sampleLocationsEnable-02689",
           "text": " If the bound graphics pipeline was created with <a href=\"#VkPipelineSampleLocationsStateCreateInfoEXT\">VkPipelineSampleLocationsStateCreateInfoEXT</a>::<code>sampleLocationsEnable</code> set to <code>VK_TRUE</code> and the current subpass has a depth/stencil attachment, then that attachment <strong class=\"purple\">must</strong> have been created with the <code>VK_IMAGE_CREATE_SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_BIT_EXT</code> bit set"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirect-None-06666",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetSampleLocationsEXT\">vkCmdSetSampleLocationsEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
         }
       ],
       "(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)": [
@@ -30531,6 +30697,12 @@
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-imageView-06177",
           "text": " If the current render pass instance was begun with <a href=\"#vkCmdBeginRendering\">vkCmdBeginRendering</a>, the <code>imageView</code> member of <code>pStencilAttachment</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, and the <code>layout</code> member of <code>pStencilAttachment</code> is <code>VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL</code>, this command <strong class=\"purple\">must</strong> not write any values to the stencil attachment"
+        }
+      ],
+      "(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_EXT_color_write_enable)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirect-attachmentCount-06667",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be equal to the <code>VkPipelineColorBlendStateCreateInfo</code>::<code>attachmentCount</code> of the currently bound graphics pipeline"
         }
       ],
       "(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_KHR_fragment_shading_rate)": [
@@ -30919,6 +31091,10 @@
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount-sampleLocationsEnable-02689",
           "text": " If the bound graphics pipeline was created with <a href=\"#VkPipelineSampleLocationsStateCreateInfoEXT\">VkPipelineSampleLocationsStateCreateInfoEXT</a>::<code>sampleLocationsEnable</code> set to <code>VK_TRUE</code> and the current subpass has a depth/stencil attachment, then that attachment <strong class=\"purple\">must</strong> have been created with the <code>VK_IMAGE_CREATE_SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_BIT_EXT</code> bit set"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-None-06666",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetSampleLocationsEXT\">vkCmdSetSampleLocationsEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
         }
       ],
       "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)": [
@@ -31047,6 +31223,12 @@
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount-imageView-06177",
           "text": " If the current render pass instance was begun with <a href=\"#vkCmdBeginRendering\">vkCmdBeginRendering</a>, the <code>imageView</code> member of <code>pStencilAttachment</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, and the <code>layout</code> member of <code>pStencilAttachment</code> is <code>VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL</code>, this command <strong class=\"purple\">must</strong> not write any values to the stencil attachment"
+        }
+      ],
+      "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_EXT_color_write_enable)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-attachmentCount-06667",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be equal to the <code>VkPipelineColorBlendStateCreateInfo</code>::<code>attachmentCount</code> of the currently bound graphics pipeline"
         }
       ],
       "(VK_VERSION_1_2,VK_KHR_draw_indirect_count)+(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_KHR_fragment_shading_rate)": [
@@ -31397,6 +31579,10 @@
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-sampleLocationsEnable-02689",
           "text": " If the bound graphics pipeline was created with <a href=\"#VkPipelineSampleLocationsStateCreateInfoEXT\">VkPipelineSampleLocationsStateCreateInfoEXT</a>::<code>sampleLocationsEnable</code> set to <code>VK_TRUE</code> and the current subpass has a depth/stencil attachment, then that attachment <strong class=\"purple\">must</strong> have been created with the <code>VK_IMAGE_CREATE_SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_BIT_EXT</code> bit set"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-None-06666",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetSampleLocationsEXT\">vkCmdSetSampleLocationsEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
         }
       ],
       "(VK_EXT_transform_feedback)+(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)": [
@@ -31525,6 +31711,12 @@
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-imageView-06177",
           "text": " If the current render pass instance was begun with <a href=\"#vkCmdBeginRendering\">vkCmdBeginRendering</a>, the <code>imageView</code> member of <code>pStencilAttachment</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, and the <code>layout</code> member of <code>pStencilAttachment</code> is <code>VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL</code>, this command <strong class=\"purple\">must</strong> not write any values to the stencil attachment"
+        }
+      ],
+      "(VK_EXT_transform_feedback)+(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_EXT_color_write_enable)": [
+        {
+          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-attachmentCount-06667",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be equal to the <code>VkPipelineColorBlendStateCreateInfo</code>::<code>attachmentCount</code> of the currently bound graphics pipeline"
         }
       ],
       "(VK_EXT_transform_feedback)+(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_KHR_fragment_shading_rate)": [
@@ -31913,6 +32105,10 @@
         {
           "vuid": "VUID-vkCmdDrawMeshTasksNV-sampleLocationsEnable-02689",
           "text": " If the bound graphics pipeline was created with <a href=\"#VkPipelineSampleLocationsStateCreateInfoEXT\">VkPipelineSampleLocationsStateCreateInfoEXT</a>::<code>sampleLocationsEnable</code> set to <code>VK_TRUE</code> and the current subpass has a depth/stencil attachment, then that attachment <strong class=\"purple\">must</strong> have been created with the <code>VK_IMAGE_CREATE_SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_BIT_EXT</code> bit set"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksNV-None-06666",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetSampleLocationsEXT\">vkCmdSetSampleLocationsEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
         }
       ],
       "(VK_NV_mesh_shader)+(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)": [
@@ -32029,6 +32225,12 @@
         {
           "vuid": "VUID-vkCmdDrawMeshTasksNV-imageView-06177",
           "text": " If the current render pass instance was begun with <a href=\"#vkCmdBeginRendering\">vkCmdBeginRendering</a>, the <code>imageView</code> member of <code>pStencilAttachment</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, and the <code>layout</code> member of <code>pStencilAttachment</code> is <code>VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL</code>, this command <strong class=\"purple\">must</strong> not write any values to the stencil attachment"
+        }
+      ],
+      "(VK_NV_mesh_shader)+(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_EXT_color_write_enable)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksNV-attachmentCount-06667",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be equal to the <code>VkPipelineColorBlendStateCreateInfo</code>::<code>attachmentCount</code> of the currently bound graphics pipeline"
         }
       ],
       "(VK_NV_mesh_shader)+(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_KHR_fragment_shading_rate)": [
@@ -32347,6 +32549,10 @@
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-sampleLocationsEnable-02689",
           "text": " If the bound graphics pipeline was created with <a href=\"#VkPipelineSampleLocationsStateCreateInfoEXT\">VkPipelineSampleLocationsStateCreateInfoEXT</a>::<code>sampleLocationsEnable</code> set to <code>VK_TRUE</code> and the current subpass has a depth/stencil attachment, then that attachment <strong class=\"purple\">must</strong> have been created with the <code>VK_IMAGE_CREATE_SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_BIT_EXT</code> bit set"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-None-06666",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetSampleLocationsEXT\">vkCmdSetSampleLocationsEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
         }
       ],
       "(VK_NV_mesh_shader)+(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)": [
@@ -32463,6 +32669,12 @@
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-imageView-06177",
           "text": " If the current render pass instance was begun with <a href=\"#vkCmdBeginRendering\">vkCmdBeginRendering</a>, the <code>imageView</code> member of <code>pStencilAttachment</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, and the <code>layout</code> member of <code>pStencilAttachment</code> is <code>VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL</code>, this command <strong class=\"purple\">must</strong> not write any values to the stencil attachment"
+        }
+      ],
+      "(VK_NV_mesh_shader)+(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_EXT_color_write_enable)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-attachmentCount-06667",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be equal to the <code>VkPipelineColorBlendStateCreateInfo</code>::<code>attachmentCount</code> of the currently bound graphics pipeline"
         }
       ],
       "(VK_NV_mesh_shader)+(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_KHR_fragment_shading_rate)": [
@@ -32809,6 +33021,10 @@
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-sampleLocationsEnable-02689",
           "text": " If the bound graphics pipeline was created with <a href=\"#VkPipelineSampleLocationsStateCreateInfoEXT\">VkPipelineSampleLocationsStateCreateInfoEXT</a>::<code>sampleLocationsEnable</code> set to <code>VK_TRUE</code> and the current subpass has a depth/stencil attachment, then that attachment <strong class=\"purple\">must</strong> have been created with the <code>VK_IMAGE_CREATE_SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_BIT_EXT</code> bit set"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-None-06666",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetSampleLocationsEXT\">vkCmdSetSampleLocationsEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
         }
       ],
       "(VK_NV_mesh_shader)+(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)": [
@@ -32925,6 +33141,12 @@
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-imageView-06177",
           "text": " If the current render pass instance was begun with <a href=\"#vkCmdBeginRendering\">vkCmdBeginRendering</a>, the <code>imageView</code> member of <code>pStencilAttachment</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, and the <code>layout</code> member of <code>pStencilAttachment</code> is <code>VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL</code>, this command <strong class=\"purple\">must</strong> not write any values to the stencil attachment"
+        }
+      ],
+      "(VK_NV_mesh_shader)+(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_EXT_color_write_enable)": [
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-attachmentCount-06667",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be equal to the <code>VkPipelineColorBlendStateCreateInfo</code>::<code>attachmentCount</code> of the currently bound graphics pipeline"
         }
       ],
       "(VK_NV_mesh_shader)+(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_KHR_fragment_shading_rate)": [
@@ -35699,6 +35921,10 @@
           "text": " <code>attachmentCount</code> <strong class=\"purple\">must</strong> be equal to the <code>attachmentCount</code> member of the <code>VkPipelineColorBlendStateCreateInfo</code> structure specified during pipeline creation"
         },
         {
+          "vuid": "VUID-VkPipelineColorWriteCreateInfoEXT-attachmentCount-06655",
+          "text": " <code>attachmentCount</code> <strong class=\"purple\">must</strong> be less than or equal to the <code>maxColorAttachments</code> member of <code>VkPhysicalDeviceLimits</code>"
+        },
+        {
           "vuid": "VUID-VkPipelineColorWriteCreateInfoEXT-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PIPELINE_COLOR_WRITE_CREATE_INFO_EXT</code>"
         },
@@ -35715,8 +35941,8 @@
           "text": " The <a href=\"#features-colorWriteEnable\">colorWriteEnable</a> feature <strong class=\"purple\">must</strong> be enabled"
         },
         {
-          "vuid": "VUID-vkCmdSetColorWriteEnableEXT-attachmentCount-04804",
-          "text": " <code>attachmentCount</code> <strong class=\"purple\">must</strong> be equal to the <code>attachmentCount</code> member of the <code>VkPipelineColorBlendStateCreateInfo</code> structure specified during pipeline creation"
+          "vuid": "VUID-vkCmdSetColorWriteEnableEXT-attachmentCount-06656",
+          "text": " <code>attachmentCount</code> <strong class=\"purple\">must</strong> be less than or equal to the <code>maxColorAttachments</code> member of <code>VkPhysicalDeviceLimits</code>"
         },
         {
           "vuid": "VUID-vkCmdSetColorWriteEnableEXT-commandBuffer-parameter",
@@ -37159,6 +37385,10 @@
         {
           "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-sampleLocationsEnable-02689",
           "text": " If the bound graphics pipeline was created with <a href=\"#VkPipelineSampleLocationsStateCreateInfoEXT\">VkPipelineSampleLocationsStateCreateInfoEXT</a>::<code>sampleLocationsEnable</code> set to <code>VK_TRUE</code> and the current subpass has a depth/stencil attachment, then that attachment <strong class=\"purple\">must</strong> have been created with the <code>VK_IMAGE_CREATE_SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_BIT_EXT</code> bit set"
+        },
+        {
+          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-None-06666",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetSampleLocationsEXT\">vkCmdSetSampleLocationsEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command"
         }
       ],
       "(VK_NV_device_generated_commands)+(VK_VERSION_1_3,VK_EXT_extended_dynamic_state)": [
@@ -37287,6 +37517,12 @@
         {
           "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-imageView-06177",
           "text": " If the current render pass instance was begun with <a href=\"#vkCmdBeginRendering\">vkCmdBeginRendering</a>, the <code>imageView</code> member of <code>pStencilAttachment</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, and the <code>layout</code> member of <code>pStencilAttachment</code> is <code>VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL</code>, this command <strong class=\"purple\">must</strong> not write any values to the stencil attachment"
+        }
+      ],
+      "(VK_NV_device_generated_commands)+(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_EXT_color_write_enable)": [
+        {
+          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-attachmentCount-06667",
+          "text": " If the bound graphics pipeline state was created with the <code>VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT</code> dynamic state enabled then <a href=\"#vkCmdSetColorWriteEnableEXT\">vkCmdSetColorWriteEnableEXT</a> <strong class=\"purple\">must</strong> have been called in the current command buffer prior to this drawing command, and the <code>attachmentCount</code> parameter of <code>vkCmdSetColorWriteEnableEXT</code> <strong class=\"purple\">must</strong> be equal to the <code>VkPipelineColorBlendStateCreateInfo</code>::<code>attachmentCount</code> of the currently bound graphics pipeline"
         }
       ],
       "(VK_NV_device_generated_commands)+(VK_VERSION_1_3,VK_KHR_dynamic_rendering)+(VK_KHR_fragment_shading_rate)": [
@@ -44152,11 +44388,7 @@
         },
         {
           "vuid": "VUID-VkVideoSessionCreateInfoKHR-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkVideoDecodeH264SessionCreateInfoEXT\">VkVideoDecodeH264SessionCreateInfoEXT</a>, <a href=\"#VkVideoDecodeH265SessionCreateInfoEXT\">VkVideoDecodeH265SessionCreateInfoEXT</a>, <a href=\"#VkVideoEncodeH264SessionCreateInfoEXT\">VkVideoEncodeH264SessionCreateInfoEXT</a>, or <a href=\"#VkVideoEncodeH265SessionCreateInfoEXT\">VkVideoEncodeH265SessionCreateInfoEXT</a>"
-        },
-        {
-          "vuid": "VUID-VkVideoSessionCreateInfoKHR-sType-unique",
-          "text": " The <code>sType</code> value of each struct in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
         },
         {
           "vuid": "VUID-VkVideoSessionCreateInfoKHR-flags-parameter",
@@ -44173,6 +44405,10 @@
         {
           "vuid": "VUID-VkVideoSessionCreateInfoKHR-referencePicturesFormat-parameter",
           "text": " <code>referencePicturesFormat</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkFormat\">VkFormat</a> value"
+        },
+        {
+          "vuid": "VUID-VkVideoSessionCreateInfoKHR-pStdHeaderVersion-parameter",
+          "text": " <code>pStdHeaderVersion</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkExtensionProperties\">VkExtensionProperties</a> structure"
         }
       ]
     },
@@ -44688,22 +44924,6 @@
         }
       ]
     },
-    "VkVideoDecodeH264SessionCreateInfoEXT": {
-      "(VK_EXT_video_decode_h264)": [
-        {
-          "vuid": "VUID-VkVideoDecodeH264SessionCreateInfoEXT-sType-sType",
-          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_SESSION_CREATE_INFO_EXT</code>"
-        },
-        {
-          "vuid": "VUID-VkVideoDecodeH264SessionCreateInfoEXT-flags-zerobitmask",
-          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be <code>0</code>"
-        },
-        {
-          "vuid": "VUID-VkVideoDecodeH264SessionCreateInfoEXT-pStdExtensionVersion-parameter",
-          "text": " <code>pStdExtensionVersion</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkExtensionProperties\">VkExtensionProperties</a> structure"
-        }
-      ]
-    },
     "VkVideoDecodeH264SessionParametersCreateInfoEXT": {
       "(VK_EXT_video_decode_h264)": [
         {
@@ -44828,22 +45048,6 @@
         }
       ]
     },
-    "VkVideoDecodeH265SessionCreateInfoEXT": {
-      "(VK_EXT_video_decode_h265)": [
-        {
-          "vuid": "VUID-VkVideoDecodeH265SessionCreateInfoEXT-sType-sType",
-          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_CREATE_INFO_EXT</code>"
-        },
-        {
-          "vuid": "VUID-VkVideoDecodeH265SessionCreateInfoEXT-flags-zerobitmask",
-          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be <code>0</code>"
-        },
-        {
-          "vuid": "VUID-VkVideoDecodeH265SessionCreateInfoEXT-pStdExtensionVersion-parameter",
-          "text": " <code>pStdExtensionVersion</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkExtensionProperties\">VkExtensionProperties</a> structure"
-        }
-      ]
-    },
     "VkVideoDecodeH265SessionParametersCreateInfoEXT": {
       "(VK_EXT_video_decode_h265)": [
         {
@@ -44895,12 +45099,20 @@
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_PARAMETERS_ADD_INFO_EXT</code>"
         },
         {
+          "vuid": "VUID-VkVideoDecodeH265SessionParametersAddInfoEXT-pVpsStd-parameter",
+          "text": " If <code>pVpsStd</code> is not <code>NULL</code>, <code>pVpsStd</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>vpsStdCount</code> <code>StdVideoH265VideoParameterSet</code> values"
+        },
+        {
           "vuid": "VUID-VkVideoDecodeH265SessionParametersAddInfoEXT-pSpsStd-parameter",
           "text": " If <code>pSpsStd</code> is not <code>NULL</code>, <code>pSpsStd</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>spsStdCount</code> <code>StdVideoH265SequenceParameterSet</code> values"
         },
         {
           "vuid": "VUID-VkVideoDecodeH265SessionParametersAddInfoEXT-pPpsStd-parameter",
           "text": " If <code>pPpsStd</code> is not <code>NULL</code>, <code>pPpsStd</code> <strong class=\"purple\">must</strong> be a valid pointer to an array of <code>ppsStdCount</code> <code>StdVideoH265PictureParameterSet</code> values"
+        },
+        {
+          "vuid": "VUID-VkVideoDecodeH265SessionParametersAddInfoEXT-vpsStdCount-arraylength",
+          "text": " <code>vpsStdCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
         },
         {
           "vuid": "VUID-VkVideoDecodeH265SessionParametersAddInfoEXT-spsStdCount-arraylength",
@@ -45101,30 +45313,6 @@
         {
           "vuid": "VUID-VkVideoEncodeH264CapabilitiesEXT-outputModeFlags-requiredbitmask",
           "text": " <code>outputModeFlags</code> <strong class=\"purple\">must</strong> not be <code>0</code>"
-        },
-        {
-          "vuid": "VUID-VkVideoEncodeH264CapabilitiesEXT-stdExtensionVersion-parameter",
-          "text": " <code>stdExtensionVersion</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkExtensionProperties\">VkExtensionProperties</a> structure"
-        }
-      ]
-    },
-    "VkVideoEncodeH264SessionCreateInfoEXT": {
-      "(VK_EXT_video_encode_h264)": [
-        {
-          "vuid": "VUID-VkVideoEncodeH264SessionCreateInfoEXT-sType-sType",
-          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_CREATE_INFO_EXT</code>"
-        },
-        {
-          "vuid": "VUID-VkVideoEncodeH264SessionCreateInfoEXT-flags-parameter",
-          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkVideoEncodeH264CreateFlagBitsEXT\">VkVideoEncodeH264CreateFlagBitsEXT</a> values"
-        },
-        {
-          "vuid": "VUID-VkVideoEncodeH264SessionCreateInfoEXT-flags-requiredbitmask",
-          "text": " <code>flags</code> <strong class=\"purple\">must</strong> not be <code>0</code>"
-        },
-        {
-          "vuid": "VUID-VkVideoEncodeH264SessionCreateInfoEXT-pStdExtensionVersion-parameter",
-          "text": " <code>pStdExtensionVersion</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkExtensionProperties\">VkExtensionProperties</a> structure"
         }
       ]
     },
@@ -45381,26 +45569,6 @@
         {
           "vuid": "VUID-VkVideoEncodeH265CapabilitiesEXT-transformBlockSizes-requiredbitmask",
           "text": " <code>transformBlockSizes</code> <strong class=\"purple\">must</strong> not be <code>0</code>"
-        },
-        {
-          "vuid": "VUID-VkVideoEncodeH265CapabilitiesEXT-stdExtensionVersion-parameter",
-          "text": " <code>stdExtensionVersion</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkExtensionProperties\">VkExtensionProperties</a> structure"
-        }
-      ]
-    },
-    "VkVideoEncodeH265SessionCreateInfoEXT": {
-      "(VK_EXT_video_encode_h265)": [
-        {
-          "vuid": "VUID-VkVideoEncodeH265SessionCreateInfoEXT-sType-sType",
-          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_CREATE_INFO_EXT</code>"
-        },
-        {
-          "vuid": "VUID-VkVideoEncodeH265SessionCreateInfoEXT-flags-zerobitmask",
-          "text": " <code>flags</code> <strong class=\"purple\">must</strong> be <code>0</code>"
-        },
-        {
-          "vuid": "VUID-VkVideoEncodeH265SessionCreateInfoEXT-pStdExtensionVersion-parameter",
-          "text": " <code>pStdExtensionVersion</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkExtensionProperties\">VkExtensionProperties</a> structure"
         }
       ]
     },
@@ -48353,6 +48521,10 @@
           "text": " <code>OpTypeImage</code> <strong class=\"purple\">must</strong> have a &#8220;Sampled&#8221; operand of 1 (sampled image) or 2 (storage image)"
         },
         {
+          "vuid": "VUID-StandaloneSpirv-OpTypeSampledImage-06671",
+          "text": " <code>OpTypeSampledImage</code> <strong class=\"purple\">must</strong> have a <code>OpTypeImage</code> with a &#8220;Sampled&#8221; operand of 1 (sampled image)"
+        },
+        {
           "vuid": "VUID-StandaloneSpirv-Image-04965",
           "text": " The converted bit width, signedness, and numeric type of the <code>Image</code> <code>Format</code> operand of an <code>OpTypeImage</code> <strong class=\"purple\">must</strong> match the <code>Sampled</code> <code>Type</code>, as defined in <a href=\"#spirvenv-format-type-matching\">Image Format and Type Matching</a>"
         },
@@ -48394,7 +48566,7 @@
         },
         {
           "vuid": "VUID-StandaloneSpirv-OpImage-04777",
-          "text": " <code>OpImage*Dref</code> <strong class=\"purple\">must</strong> not consume an image whose <code>Dim</code> is 3D"
+          "text": " <code>OpImage*Dref*</code> instructions <strong class=\"purple\">must</strong> not consume an image whose <code>Dim</code> is 3D"
         },
         {
           "vuid": "VUID-StandaloneSpirv-OpTypeAccelerationStructureKHR-04665",
@@ -48411,6 +48583,10 @@
         {
           "vuid": "VUID-StandaloneSpirv-BuiltIn-04668",
           "text": " Any <code>BuiltIn</code> decoration not listed in <a href=\"#interfaces-builtin-variables\">Built-In Variables</a> <strong class=\"purple\">must</strong> not be used"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-Location-06672",
+          "text": " The <code>Location</code> or <code>Component</code> decorations <strong class=\"purple\">must</strong> only be used with the <code>Input</code>, <code>Output</code>, <code>RayPayloadKHR</code>, <code>IncomingRayPayloadKHR</code>, <code>HitAttributeKHR</code>, <code>CallableDataKHR</code>, <code>IncomingCallableDataKHR</code>, or <code>ShaderRecordBufferKHR</code> storage classes"
         },
         {
           "vuid": "VUID-StandaloneSpirv-Location-04915",
@@ -48487,10 +48663,6 @@
         {
           "vuid": "VUID-StandaloneSpirv-FPRoundingMode-04675",
           "text": " Rounding modes other than round-to-nearest-even and round-towards-zero <strong class=\"purple\">must</strong> not be used for the <code>FPRoundingMode</code> decoration"
-        },
-        {
-          "vuid": "VUID-StandaloneSpirv-FPRoundingMode-04676",
-          "text": " The <code>FPRoundingMode</code> decoration <strong class=\"purple\">must</strong> only be used for a width-only conversion instruction whose only uses are <code>Object</code> operands of <code>OpStore</code> instructions storing through a pointer to a 16-bit floating-point object in the <code>StorageBuffer</code>, <code>PhysicalStorageBuffer</code>, <code>Uniform</code>, or <code>Output</code> storage class"
         },
         {
           "vuid": "VUID-StandaloneSpirv-Invariant-04677",
@@ -48637,12 +48809,36 @@
           "text": " All variables with a storage class of <strong>PushConstant</strong> declared as an array <strong class=\"purple\">must</strong> only be accessed by dynamically uniform indices"
         },
         {
+          "vuid": "VUID-StandaloneSpirv-OpVariable-06673",
+          "text": " There <strong class=\"purple\">must</strong> not be more than one <code>OpVariable</code> in the <code>PushConstant</code> storage class listed in the <code>Interface</code> for each <code>OpEntryPoint</code>"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-OpEntryPoint-06674",
+          "text": " Each <code>OpEntryPoint</code> <strong class=\"purple\">must</strong> not statically use more than one <code>OpVariable</code> in the <code>PushConstant</code> storage class"
+        },
+        {
           "vuid": "VUID-StandaloneSpirv-Result-04780",
           "text": " The <code>Result</code> <code>Type</code> operand of any <code>OpImageRead</code> or <code>OpImageSparseRead</code> instruction <strong class=\"purple\">must</strong> be a vector of four components"
         },
         {
           "vuid": "VUID-StandaloneSpirv-Base-04781",
           "text": " The <code>Base</code> operand of any <code>OpBitCount</code>, <code>OpBitReverse</code>, <code>OpBitFieldInsert</code>, <code>OpBitFieldSExtract</code>, or <code>OpBitFieldUExtract</code> instruction <strong class=\"purple\">must</strong> be a 32-bit integer scalar or a vector of 32-bit integers"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-PushConstant-06675",
+          "text": " Any variable in the <code>PushConstant</code> or <code>StorageBuffer</code> storage class <strong class=\"purple\">must</strong> be decorated as <code>Block</code>"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-Uniform-06676",
+          "text": " Any variable in the <code>Uniform</code> storage class <strong class=\"purple\">must</strong> be decorated as <code>Block</code> or <code>BufferBlock</code>"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-UniformConstant-06677",
+          "text": " Any variable in the <code>UniformConstant</code>, <code>StorageBuffer</code>, or <code>Uniform</code> storage class <strong class=\"purple\">must</strong> be decorated with <code>DescriptorSet</code> and <code>Binding</code>"
+        },
+        {
+          "vuid": "VUID-StandaloneSpirv-InputAttachmentIndex-06678",
+          "text": " Variables decorated with <code>InputAttachmentIndex</code> <strong class=\"purple\">must</strong> be in the <code>UniformConstant</code> storage class"
         },
         {
           "vuid": "VUID-StandaloneSpirv-DescriptorSet-06491",
