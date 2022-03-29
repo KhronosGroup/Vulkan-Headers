@@ -119,7 +119,7 @@ extern "C" __declspec( dllimport ) FARPROC __stdcall GetProcAddress( HINSTANCE h
 #  include <span>
 #endif
 
-static_assert( VK_HEADER_VERSION == 209, "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION == 210, "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
@@ -5967,20 +5967,6 @@ namespace VULKAN_HPP_NAMESPACE
 #endif
   };
 
-  VULKAN_HPP_INLINE ResultValueType<void>::type createResultValue( Result result, char const * message )
-  {
-#ifdef VULKAN_HPP_NO_EXCEPTIONS
-    ignore( message );
-    VULKAN_HPP_ASSERT_ON_RESULT( result == Result::eSuccess );
-    return result;
-#else
-    if ( result != Result::eSuccess )
-    {
-      throwResultException( result, message );
-    }
-#endif
-  }
-
   template <typename T>
   VULKAN_HPP_INLINE typename ResultValueType<T>::type createResultValue( Result result, T & data, char const * message )
   {
@@ -5995,21 +5981,6 @@ namespace VULKAN_HPP_NAMESPACE
     }
     return std::move( data );
 #endif
-  }
-
-  VULKAN_HPP_INLINE Result createResultValue( Result result, char const * message, std::initializer_list<Result> successCodes )
-  {
-#ifdef VULKAN_HPP_NO_EXCEPTIONS
-    ignore( message );
-    ignore( successCodes );  // just in case VULKAN_HPP_ASSERT_ON_RESULT is empty
-    VULKAN_HPP_ASSERT_ON_RESULT( std::find( successCodes.begin(), successCodes.end(), result ) != successCodes.end() );
-#else
-    if ( std::find( successCodes.begin(), successCodes.end(), result ) == successCodes.end() )
-    {
-      throwResultException( result, message );
-    }
-#endif
-    return result;
   }
 
   template <typename T>
@@ -6047,23 +6018,6 @@ namespace VULKAN_HPP_NAMESPACE
   }
 
   template <typename T, typename D>
-  VULKAN_HPP_INLINE ResultValue<UniqueHandle<T, D>> createResultValue(
-    Result result, T & data, char const * message, std::initializer_list<Result> successCodes, typename UniqueHandleTraits<T, D>::deleter const & deleter )
-  {
-#  ifdef VULKAN_HPP_NO_EXCEPTIONS
-    ignore( message );
-    ignore( successCodes );  // just in case VULKAN_HPP_ASSERT_ON_RESULT is empty
-    VULKAN_HPP_ASSERT_ON_RESULT( std::find( successCodes.begin(), successCodes.end(), result ) != successCodes.end() );
-#  else
-    if ( std::find( successCodes.begin(), successCodes.end(), result ) == successCodes.end() )
-    {
-      throwResultException( result, message );
-    }
-#  endif
-    return ResultValue<UniqueHandle<T, D>>( result, UniqueHandle<T, D>( data, deleter ) );
-  }
-
-  template <typename T, typename D>
   VULKAN_HPP_INLINE typename ResultValueType<std::vector<UniqueHandle<T, D>>>::type
     createResultValue( Result result, std::vector<UniqueHandle<T, D>> && data, char const * message )
   {
@@ -6097,6 +6051,55 @@ namespace VULKAN_HPP_NAMESPACE
     return ResultValue<std::vector<UniqueHandle<T, D>>>( result, std::move( data ) );
   }
 #endif
+
+  template <typename T>
+  VULKAN_HPP_INLINE typename ResultValueType<T>::type createResultValueType( Result result, T & data )
+  {
+#ifdef VULKAN_HPP_NO_EXCEPTIONS
+    return ResultValue<T>( result, std::move( data ) );
+#else
+    ignore( result );
+    return std::move( data );
+#endif
+  }
+
+  VULKAN_HPP_INLINE typename ResultValueType<void>::type createResultValueType( Result result )
+  {
+#ifdef VULKAN_HPP_NO_EXCEPTIONS
+    return result;
+#else
+    ignore( result );
+#endif
+  }
+
+  VULKAN_HPP_INLINE void resultCheck( Result result, char const * message )
+  {
+#ifdef VULKAN_HPP_NO_EXCEPTIONS
+    ignore( result );  // just in case VULKAN_HPP_ASSERT_ON_RESULT is empty
+    ignore( message );
+    VULKAN_HPP_ASSERT_ON_RESULT( result == Result::eSuccess );
+#else
+    if ( result != Result::eSuccess )
+    {
+      throwResultException( result, message );
+    }
+#endif
+  }
+
+  VULKAN_HPP_INLINE void resultCheck( Result result, char const * message, std::initializer_list<Result> successCodes )
+  {
+#ifdef VULKAN_HPP_NO_EXCEPTIONS
+    ignore( result );  // just in case VULKAN_HPP_ASSERT_ON_RESULT is empty
+    ignore( message );
+    ignore( successCodes );  // just in case VULKAN_HPP_ASSERT_ON_RESULT is empty
+    VULKAN_HPP_ASSERT_ON_RESULT( std::find( successCodes.begin(), successCodes.end(), result ) != successCodes.end() );
+#else
+    if ( std::find( successCodes.begin(), successCodes.end(), result ) == successCodes.end() )
+    {
+      throwResultException( result, message );
+    }
+#endif
+  }
 }  // namespace VULKAN_HPP_NAMESPACE
 
 // clang-format off
@@ -6110,6 +6113,16 @@ namespace VULKAN_HPP_NAMESPACE
   //=======================
   //=== STRUCTS EXTENDS ===
   //=======================
+
+  //=== VK_VERSION_1_0 ===
+  template <>
+  struct StructExtends<ShaderModuleCreateInfo, PipelineShaderStageCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
 
   //=== VK_VERSION_1_1 ===
   template <>
@@ -8358,6 +8371,14 @@ namespace VULKAN_HPP_NAMESPACE
       value = true
     };
   };
+  template <>
+  struct StructExtends<DebugUtilsObjectNameInfoEXT, PipelineShaderStageCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
 
 #if defined( VK_USE_PLATFORM_ANDROID_KHR )
   //=== VK_ANDROID_external_memory_android_hardware_buffer ===
@@ -9889,6 +9910,16 @@ namespace VULKAN_HPP_NAMESPACE
     };
   };
 
+  //=== VK_KHR_pipeline_library ===
+  template <>
+  struct StructExtends<PipelineLibraryCreateInfoKHR, GraphicsPipelineCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
   //=== VK_KHR_present_id ===
   template <>
   struct StructExtends<PresentIdKHR, PresentInfoKHR>
@@ -9972,6 +10003,40 @@ namespace VULKAN_HPP_NAMESPACE
   //=== VK_KHR_synchronization2 ===
   template <>
   struct StructExtends<QueueFamilyCheckpointProperties2NV, QueueFamilyProperties2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  //=== VK_EXT_graphics_pipeline_library ===
+  template <>
+  struct StructExtends<PhysicalDeviceGraphicsPipelineLibraryFeaturesEXT, PhysicalDeviceFeatures2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<PhysicalDeviceGraphicsPipelineLibraryFeaturesEXT, DeviceCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<PhysicalDeviceGraphicsPipelineLibraryPropertiesEXT, PhysicalDeviceProperties2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<GraphicsPipelineLibraryCreateInfoEXT, GraphicsPipelineCreateInfo>
   {
     enum
     {
@@ -10496,6 +10561,24 @@ namespace VULKAN_HPP_NAMESPACE
   };
   template <>
   struct StructExtends<PipelineColorWriteCreateInfoEXT, PipelineColorBlendStateCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  //=== VK_EXT_primitives_generated_query ===
+  template <>
+  struct StructExtends<PhysicalDevicePrimitivesGeneratedQueryFeaturesEXT, PhysicalDeviceFeatures2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<PhysicalDevicePrimitivesGeneratedQueryFeaturesEXT, DeviceCreateInfo>
   {
     enum
     {
