@@ -119,9 +119,9 @@ extern "C" __declspec( dllimport ) FARPROC __stdcall GetProcAddress( HINSTANCE h
 #  include <span>
 #endif
 
-static_assert( VK_HEADER_VERSION == 211, "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION == 212, "Wrong VK_HEADER_VERSION!" );
 
-// 32-bit vulkan is not typesafe for handles, so don't allow copy constructors on this platform by default.
+// 32-bit vulkan is not typesafe for non-dispatchable handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
 #if ( VK_USE_64_BIT_PTR_DEFINES == 1 )
 #  if !defined( VULKAN_HPP_TYPESAFE_CONVERSION )
@@ -283,6 +283,20 @@ namespace VULKAN_HPP_NAMESPACE
     {
     }
 
+    template <std::size_t C>
+    ArrayProxy( T ( &ptr )[C] ) VULKAN_HPP_NOEXCEPT
+      : m_count( C )
+      , m_ptr( ptr )
+    {
+    }
+
+    template <std::size_t C, typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
+    ArrayProxy( typename std::remove_const<T>::type ( &ptr )[C] ) VULKAN_HPP_NOEXCEPT
+      : m_count( C )
+      , m_ptr( ptr )
+    {
+    }
+
 #  if __GNUC__ >= 9
 #    pragma GCC diagnostic push
 #    pragma GCC diagnostic ignored "-Winit-list-lifetime"
@@ -427,6 +441,26 @@ namespace VULKAN_HPP_NAMESPACE
       , m_ptr( ptr )
     {
     }
+
+    template <std::size_t C>
+    ArrayProxyNoTemporaries( T ( &ptr )[C] ) VULKAN_HPP_NOEXCEPT
+      : m_count( C )
+      , m_ptr( ptr )
+    {
+    }
+
+    template <std::size_t C>
+    ArrayProxyNoTemporaries( T( &&ptr )[C] ) = delete;
+
+    template <std::size_t C, typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
+    ArrayProxyNoTemporaries( typename std::remove_const<T>::type ( &ptr )[C] ) VULKAN_HPP_NOEXCEPT
+      : m_count( C )
+      , m_ptr( ptr )
+    {
+    }
+
+    template <std::size_t C, typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
+    ArrayProxyNoTemporaries( typename std::remove_const<T>::type( &&ptr )[C] ) = delete;
 
     ArrayProxyNoTemporaries( std::initializer_list<T> const & list ) VULKAN_HPP_NOEXCEPT
       : m_count( static_cast<uint32_t>( list.size() ) )
@@ -5983,57 +6017,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif
   }
 
-  template <typename T>
-  VULKAN_HPP_INLINE ResultValue<T> createResultValue( Result result, T & data, char const * message, std::initializer_list<Result> successCodes )
-  {
-#ifdef VULKAN_HPP_NO_EXCEPTIONS
-    ignore( message );
-    ignore( successCodes );  // just in case VULKAN_HPP_ASSERT_ON_RESULT is empty
-    VULKAN_HPP_ASSERT_ON_RESULT( std::find( successCodes.begin(), successCodes.end(), result ) != successCodes.end() );
-#else
-    if ( std::find( successCodes.begin(), successCodes.end(), result ) == successCodes.end() )
-    {
-      throwResultException( result, message );
-    }
-#endif
-    return ResultValue<T>( result, std::move( data ) );
-  }
-
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
-  template <typename T, typename D>
-  VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<T, D>>::type
-    createResultValue( Result result, T & data, char const * message, typename UniqueHandleTraits<T, D>::deleter const & deleter )
-  {
-#  ifdef VULKAN_HPP_NO_EXCEPTIONS
-    ignore( message );
-    VULKAN_HPP_ASSERT_ON_RESULT( result == Result::eSuccess );
-    return ResultValue<UniqueHandle<T, D>>( result, UniqueHandle<T, D>( data, deleter ) );
-#  else
-    if ( result != Result::eSuccess )
-    {
-      throwResultException( result, message );
-    }
-    return UniqueHandle<T, D>( data, deleter );
-#  endif
-  }
-
-  template <typename T, typename D>
-  VULKAN_HPP_INLINE ResultValue<UniqueHandle<T, D>> createResultValue(
-    Result result, T & data, char const * message, std::initializer_list<Result> successCodes, typename UniqueHandleTraits<T, D>::deleter const & deleter )
-  {
-#  ifdef VULKAN_HPP_NO_EXCEPTIONS
-    ignore( message );
-    ignore( successCodes );  // just in case VULKAN_HPP_ASSERT_ON_RESULT is empty
-    VULKAN_HPP_ASSERT_ON_RESULT( std::find( successCodes.begin(), successCodes.end(), result ) != successCodes.end() );
-#  else
-    if ( std::find( successCodes.begin(), successCodes.end(), result ) == successCodes.end() )
-    {
-      throwResultException( result, message );
-    }
-#  endif
-    return ResultValue<UniqueHandle<T, D>>( result, UniqueHandle<T, D>( data, deleter ) );
-  }
-
   template <typename T, typename D, typename Allocator = std::allocator<UniqueHandle<T, D>>>
   VULKAN_HPP_INLINE typename ResultValueType<std::vector<UniqueHandle<T, D>, Allocator>>::type
     createResultValue( Result result, std::vector<UniqueHandle<T, D>, Allocator> && data, char const * message )
@@ -6069,23 +6053,34 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif
 
-  template <typename T>
-  VULKAN_HPP_INLINE typename ResultValueType<T>::type createResultValueType( Result result, T & data )
-  {
-#ifdef VULKAN_HPP_NO_EXCEPTIONS
-    return ResultValue<T>( result, std::move( data ) );
-#else
-    ignore( result );
-    return std::move( data );
-#endif
-  }
-
   VULKAN_HPP_INLINE typename ResultValueType<void>::type createResultValueType( Result result )
   {
 #ifdef VULKAN_HPP_NO_EXCEPTIONS
     return result;
 #else
     ignore( result );
+#endif
+  }
+
+  template <typename T>
+  VULKAN_HPP_INLINE typename ResultValueType<T>::type createResultValueType( Result result, T & data )
+  {
+#ifdef VULKAN_HPP_NO_EXCEPTIONS
+    return ResultValue<T>( result, data );
+#else
+    ignore( result );
+    return data;
+#endif
+  }
+
+  template <typename T>
+  VULKAN_HPP_INLINE typename ResultValueType<T>::type createResultValueType( Result result, T && data )
+  {
+#ifdef VULKAN_HPP_NO_EXCEPTIONS
+    return ResultValue<T>( result, std::move( data ) );
+#else
+    ignore( result );
+    return std::move( data );
 #endif
   }
 
