@@ -10,6 +10,7 @@ Instructions for building this repository on Windows, Linux, and MacOS.
 1. [Windows Build](#building-on-windows)
 1. [Linux Build](#building-on-linux)
 1. [MacOS Build](#building-on-macos)
+1. [Vulkan SC Build](#building-vulkan-sc)
 
 ## Contributing to the Repository
 
@@ -271,4 +272,17 @@ or
 
 The instructions for building this repository on MacOS are similar to those for Linux.
 
-[CMake 3.10.2](https://cmake.org/files/v3.10/cmake-3.10.2-Darwin-x86_64.tar.gz) is recommended.
+[CMake 3.10.2](https://cmake.org/files/v3.10/cmake-3.10.2-darwin-x86_64.tar.gz) is recommended.
+
+## Building Vulkan SC
+
+To build Vulkan SC instead of Vulkan (required for `sc_main` and derived branches)
+set the `VulkanSC` CMake variable to `TRUE`.
+
+For example:
+
+    cd Vulkan-Headers
+    mkdir build
+    cd build
+    cmake -DCMAKE_INSTALL_PREFIX=install -DVulkanSC=TRUE ..
+    make install

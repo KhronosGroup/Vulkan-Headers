@@ -23,6 +23,16 @@ cmake_minimum_required(VERSION 3.10.2)
 # NONE = this project has no language toolchain requirement.
 project(Vulkan-Headers NONE)
 
+
+# Add support for VulkanSC mode from the command line
+set(VulkanSC FALSE CACHE BOOL "User defined variable for VulkanSC mode to be passed in through cmake command line e.g. -DVulkanSC=TRUE")
+# Add preprocessor definition for VulkanSC.
+# This "VulkanSC" definition can be used to deactivate code that is not required for the VulkanSC builds.
+if(VulkanSC)
+add_definitions(-DVULKANSC)
+endif()
+
+
 # User-interface declarations ----------------------------------------------------------------------------------------------------
 # This section contains variables that affect development GUIs (e.g. CMake GUI and IDEs), such as option(), folders, and variables
 # with the CACHE property.
@@ -46,7 +56,9 @@ target_include_directories(Vulkan-Registry INTERFACE "${CMAKE_CURRENT_SOURCE_DIR
 add_library(Vulkan::Registry ALIAS Vulkan-Registry)
 
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/vulkan" DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+if(NOT VulkanSC)
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/vk_video" DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+endif()
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/registry" DESTINATION ${CMAKE_INSTALL_DATADIR}/vulkan)
 
 # uninstall target

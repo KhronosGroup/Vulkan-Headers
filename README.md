@@ -15,7 +15,7 @@ generated `.json` files in the `json/` directory.
 The contents of this repository are largely obtained from other repositories
 and are collected, coordinated, and curated here.
 
-If proposking changes to any file originating from a different repository,
+If proposing changes to any file originating from a different repository,
 please propose such changes in that repository, rather than Vulkan-Headers.
 Files in this repository originate from:
 

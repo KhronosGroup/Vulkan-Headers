@@ -23,7 +23,12 @@
 #ifndef VKICD_H
 #define VKICD_H
 
+#if defined(VULKANSC)
+#include "vulkan_sc.h"
+#else
 #include "vulkan.h"
+#endif
+
 #include <stdbool.h>
 
 // Loader-ICD version negotiation API.  Versions add the following features:
