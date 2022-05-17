@@ -72,7 +72,7 @@ extern "C" {
 #define VK_API_VERSION_1_0 VK_MAKE_API_VERSION(0, 1, 0, 0)// Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 213
+#define VK_HEADER_VERSION 214
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 3, VK_HEADER_VERSION)
@@ -120,7 +120,6 @@ VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkDescriptorSet)
 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkDescriptorPool)
 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkFramebuffer)
 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkCommandPool)
-#define VK_UUID_SIZE                      16U
 #define VK_ATTACHMENT_UNUSED              (~0U)
 #define VK_FALSE                          0U
 #define VK_LOD_CLAMP_NONE                 1000.0F
@@ -131,10 +130,11 @@ VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkCommandPool)
 #define VK_TRUE                           1U
 #define VK_WHOLE_SIZE                     (~0ULL)
 #define VK_MAX_MEMORY_TYPES               32U
-#define VK_MAX_MEMORY_HEAPS               16U
 #define VK_MAX_PHYSICAL_DEVICE_NAME_SIZE  256U
+#define VK_UUID_SIZE                      16U
 #define VK_MAX_EXTENSION_NAME_SIZE        256U
 #define VK_MAX_DESCRIPTION_SIZE           256U
+#define VK_MAX_MEMORY_HEAPS               16U
 
 typedef enum VkResult {
     VK_SUCCESS = 0,
@@ -877,6 +877,7 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GRAPHICS_PIPELINE_LIBRARY_FEATURES_EXT = 1000320000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GRAPHICS_PIPELINE_LIBRARY_PROPERTIES_EXT = 1000320001,
     VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_LIBRARY_CREATE_INFO_EXT = 1000320002,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_EARLY_AND_LATE_FRAGMENT_TESTS_FEATURES_EXT = 1000321000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_FEATURES_KHR = 1000323000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_PROPERTIES_NV = 1000326000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_FEATURES_NV = 1000326001,
@@ -1128,6 +1129,11 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_MAX_ENUM = 0x7FFFFFFF
 } VkStructureType;
 
+typedef enum VkPipelineCacheHeaderVersion {
+    VK_PIPELINE_CACHE_HEADER_VERSION_ONE = 1,
+    VK_PIPELINE_CACHE_HEADER_VERSION_MAX_ENUM = 0x7FFFFFFF
+} VkPipelineCacheHeaderVersion;
+
 typedef enum VkImageLayout {
     VK_IMAGE_LAYOUT_UNDEFINED = 0,
     VK_IMAGE_LAYOUT_GENERAL = 1,
@@ -1236,11 +1242,6 @@ typedef enum VkObjectType {
     VK_OBJECT_TYPE_PRIVATE_DATA_SLOT_EXT = VK_OBJECT_TYPE_PRIVATE_DATA_SLOT,
     VK_OBJECT_TYPE_MAX_ENUM = 0x7FFFFFFF
 } VkObjectType;
-
-typedef enum VkPipelineCacheHeaderVersion {
-    VK_PIPELINE_CACHE_HEADER_VERSION_ONE = 1,
-    VK_PIPELINE_CACHE_HEADER_VERSION_MAX_ENUM = 0x7FFFFFFF
-} VkPipelineCacheHeaderVersion;
 
 typedef enum VkVendorId {
     VK_VENDOR_ID_VIV = 0x10001,
@@ -13250,13 +13251,14 @@ typedef VkPhysicalDevicePipelineCreationCacheControlFeatures VkPhysicalDevicePip
 
 
 #define VK_NV_device_diagnostics_config 1
-#define VK_NV_DEVICE_DIAGNOSTICS_CONFIG_SPEC_VERSION 1
+#define VK_NV_DEVICE_DIAGNOSTICS_CONFIG_SPEC_VERSION 2
 #define VK_NV_DEVICE_DIAGNOSTICS_CONFIG_EXTENSION_NAME "VK_NV_device_diagnostics_config"
 
 typedef enum VkDeviceDiagnosticsConfigFlagBitsNV {
     VK_DEVICE_DIAGNOSTICS_CONFIG_ENABLE_SHADER_DEBUG_INFO_BIT_NV = 0x00000001,
     VK_DEVICE_DIAGNOSTICS_CONFIG_ENABLE_RESOURCE_TRACKING_BIT_NV = 0x00000002,
     VK_DEVICE_DIAGNOSTICS_CONFIG_ENABLE_AUTOMATIC_CHECKPOINTS_BIT_NV = 0x00000004,
+    VK_DEVICE_DIAGNOSTICS_CONFIG_ENABLE_SHADER_ERROR_REPORTING_BIT_NV = 0x00000008,
     VK_DEVICE_DIAGNOSTICS_CONFIG_FLAG_BITS_MAX_ENUM_NV = 0x7FFFFFFF
 } VkDeviceDiagnosticsConfigFlagBitsNV;
 typedef VkFlags VkDeviceDiagnosticsConfigFlagsNV;
@@ -13309,6 +13311,17 @@ typedef struct VkGraphicsPipelineLibraryCreateInfoEXT {
     void*                                pNext;
     VkGraphicsPipelineLibraryFlagsEXT    flags;
 } VkGraphicsPipelineLibraryCreateInfoEXT;
+
+
+
+#define VK_AMD_shader_early_and_late_fragment_tests 1
+#define VK_AMD_SHADER_EARLY_AND_LATE_FRAGMENT_TESTS_SPEC_VERSION 1
+#define VK_AMD_SHADER_EARLY_AND_LATE_FRAGMENT_TESTS_EXTENSION_NAME "VK_AMD_shader_early_and_late_fragment_tests"
+typedef struct VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           shaderEarlyAndLateFragmentTests;
+} VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT;
 
 
 

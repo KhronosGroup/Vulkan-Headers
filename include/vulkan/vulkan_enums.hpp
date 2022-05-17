@@ -753,6 +753,7 @@ namespace VULKAN_HPP_NAMESPACE
     ePhysicalDeviceGraphicsPipelineLibraryFeaturesEXT            = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GRAPHICS_PIPELINE_LIBRARY_FEATURES_EXT,
     ePhysicalDeviceGraphicsPipelineLibraryPropertiesEXT          = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GRAPHICS_PIPELINE_LIBRARY_PROPERTIES_EXT,
     eGraphicsPipelineLibraryCreateInfoEXT                        = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_LIBRARY_CREATE_INFO_EXT,
+    ePhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT    = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_EARLY_AND_LATE_FRAGMENT_TESTS_FEATURES_EXT,
     ePhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR   = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_FEATURES_KHR,
     ePhysicalDeviceFragmentShadingRateEnumsPropertiesNV          = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_PROPERTIES_NV,
     ePhysicalDeviceFragmentShadingRateEnumsFeaturesNV            = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_FEATURES_NV,
@@ -1627,6 +1628,7 @@ namespace VULKAN_HPP_NAMESPACE
       case StructureType::ePhysicalDeviceGraphicsPipelineLibraryFeaturesEXT: return "PhysicalDeviceGraphicsPipelineLibraryFeaturesEXT";
       case StructureType::ePhysicalDeviceGraphicsPipelineLibraryPropertiesEXT: return "PhysicalDeviceGraphicsPipelineLibraryPropertiesEXT";
       case StructureType::eGraphicsPipelineLibraryCreateInfoEXT: return "GraphicsPipelineLibraryCreateInfoEXT";
+      case StructureType::ePhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT: return "PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT";
       case StructureType::ePhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR: return "PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR";
       case StructureType::ePhysicalDeviceFragmentShadingRateEnumsPropertiesNV: return "PhysicalDeviceFragmentShadingRateEnumsPropertiesNV";
       case StructureType::ePhysicalDeviceFragmentShadingRateEnumsFeaturesNV: return "PhysicalDeviceFragmentShadingRateEnumsFeaturesNV";
@@ -1712,6 +1714,20 @@ namespace VULKAN_HPP_NAMESPACE
       case StructureType::eRenderPassCreationControlEXT: return "RenderPassCreationControlEXT";
       case StructureType::eRenderPassCreationFeedbackInfoEXT: return "RenderPassCreationFeedbackInfoEXT";
       case StructureType::eRenderPassSubpassFeedbackInfoEXT: return "RenderPassSubpassFeedbackInfoEXT";
+      default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
+    }
+  }
+
+  enum class PipelineCacheHeaderVersion
+  {
+    eOne = VK_PIPELINE_CACHE_HEADER_VERSION_ONE
+  };
+
+  VULKAN_HPP_INLINE std::string to_string( PipelineCacheHeaderVersion value )
+  {
+    switch ( value )
+    {
+      case PipelineCacheHeaderVersion::eOne: return "One";
       default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
     }
   }
@@ -1851,20 +1867,6 @@ namespace VULKAN_HPP_NAMESPACE
       case VendorId::eCodeplay: return "Codeplay";
       case VendorId::eMESA: return "MESA";
       case VendorId::ePocl: return "Pocl";
-      default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
-    }
-  }
-
-  enum class PipelineCacheHeaderVersion
-  {
-    eOne = VK_PIPELINE_CACHE_HEADER_VERSION_ONE
-  };
-
-  VULKAN_HPP_INLINE std::string to_string( PipelineCacheHeaderVersion value )
-  {
-    switch ( value )
-    {
-      case PipelineCacheHeaderVersion::eOne: return "One";
       default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
     }
   }
@@ -8045,7 +8047,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     eEnableShaderDebugInfo      = VK_DEVICE_DIAGNOSTICS_CONFIG_ENABLE_SHADER_DEBUG_INFO_BIT_NV,
     eEnableResourceTracking     = VK_DEVICE_DIAGNOSTICS_CONFIG_ENABLE_RESOURCE_TRACKING_BIT_NV,
-    eEnableAutomaticCheckpoints = VK_DEVICE_DIAGNOSTICS_CONFIG_ENABLE_AUTOMATIC_CHECKPOINTS_BIT_NV
+    eEnableAutomaticCheckpoints = VK_DEVICE_DIAGNOSTICS_CONFIG_ENABLE_AUTOMATIC_CHECKPOINTS_BIT_NV,
+    eEnableShaderErrorReporting = VK_DEVICE_DIAGNOSTICS_CONFIG_ENABLE_SHADER_ERROR_REPORTING_BIT_NV
   };
 
   VULKAN_HPP_INLINE std::string to_string( DeviceDiagnosticsConfigFlagBitsNV value )
@@ -8055,6 +8058,7 @@ namespace VULKAN_HPP_NAMESPACE
       case DeviceDiagnosticsConfigFlagBitsNV::eEnableShaderDebugInfo: return "EnableShaderDebugInfo";
       case DeviceDiagnosticsConfigFlagBitsNV::eEnableResourceTracking: return "EnableResourceTracking";
       case DeviceDiagnosticsConfigFlagBitsNV::eEnableAutomaticCheckpoints: return "EnableAutomaticCheckpoints";
+      case DeviceDiagnosticsConfigFlagBitsNV::eEnableShaderErrorReporting: return "EnableShaderErrorReporting";
       default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
     }
   }
@@ -15204,7 +15208,8 @@ namespace VULKAN_HPP_NAMESPACE
     enum : VkFlags
     {
       allFlags = VkFlags( DeviceDiagnosticsConfigFlagBitsNV::eEnableShaderDebugInfo ) | VkFlags( DeviceDiagnosticsConfigFlagBitsNV::eEnableResourceTracking ) |
-                 VkFlags( DeviceDiagnosticsConfigFlagBitsNV::eEnableAutomaticCheckpoints )
+                 VkFlags( DeviceDiagnosticsConfigFlagBitsNV::eEnableAutomaticCheckpoints ) |
+                 VkFlags( DeviceDiagnosticsConfigFlagBitsNV::eEnableShaderErrorReporting )
     };
   };
 
@@ -15243,6 +15248,8 @@ namespace VULKAN_HPP_NAMESPACE
       result += "EnableResourceTracking | ";
     if ( value & DeviceDiagnosticsConfigFlagBitsNV::eEnableAutomaticCheckpoints )
       result += "EnableAutomaticCheckpoints | ";
+    if ( value & DeviceDiagnosticsConfigFlagBitsNV::eEnableShaderErrorReporting )
+      result += "EnableShaderErrorReporting | ";
 
     return "{ " + result.substr( 0, result.size() - 3 ) + " }";
   }
