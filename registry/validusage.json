@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.0.9",
-    "comment": "from git branch: github-sc_main commit: 0fd144fc0aca908f42b8dee88080ba70d030a631",
-    "date": "2022-02-25 11:47:15Z"
+    "api version": "1.0.10",
+    "comment": "from git branch: github-sc_main commit: f300e4d9e81b12998c872e3e31c7a28b8b48036e",
+    "date": "2022-05-26 09:59:01Z"
   },
   "validation": {
     "vkGetInstanceProcAddr": {
@@ -462,6 +462,16 @@
           "vuid": "VUID-vkCreateDevice-key-05092",
           "text": " The <code>key</code> value of each <a href=\"#VkApplicationParametersEXT\">VkApplicationParametersEXT</a> structure in the <a href=\"#VkDeviceCreateInfo\">VkDeviceCreateInfo</a>::<code>pNext</code> chain <strong class=\"purple\">must</strong> be unique"
         }
+      ],
+      "(VKSC_VERSION_1_0)": [
+        {
+          "vuid": "VUID-vkCreateDevice-deviceMemoryRequestCount-05095",
+          "text": " The sum of <code>deviceMemoryRequestCount</code> over all <code>VkDeviceObjectReservationCreateInfo</code> structures <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#VkPhysicalDeviceLimits\">VkPhysicalDeviceLimits</a>::<code>maxMemoryAllocationCount</code>"
+        },
+        {
+          "vuid": "VUID-vkCreateDevice-samplerRequestCount-05096",
+          "text": " The sum of <code>samplerRequestCount</code> over all <code>VkDeviceObjectReservationCreateInfo</code> structures <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#VkPhysicalDeviceLimits\">VkPhysicalDeviceLimits</a>::<code>maxSamplerAllocationCount</code>"
+        }
       ]
     },
     "VkDeviceCreateInfo": {
@@ -616,7 +626,7 @@
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkApplicationParametersEXT\">VkApplicationParametersEXT</a>, <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceObjectReservationCreateInfo\">VkDeviceObjectReservationCreateInfo</a>, <a href=\"#VkFaultCallbackInfo\">VkFaultCallbackInfo</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice4444FormatsFeaturesEXT\">VkPhysicalDevice4444FormatsFeaturesEXT</a>, <a href=\"#VkPhysicalDevice8BitStorageFeatures\">VkPhysicalDevice8BitStorageFeatures</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeatures\">VkPhysicalDeviceBufferDeviceAddressFeatures</a>, <a href=\"#VkPhysicalDeviceColorWriteEnableFeaturesEXT\">VkPhysicalDeviceColorWriteEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCustomBorderColorFeaturesEXT\">VkPhysicalDeviceCustomBorderColorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDepthClipEnableFeaturesEXT\">VkPhysicalDeviceDepthClipEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeatures\">VkPhysicalDeviceDescriptorIndexingFeatures</a>, <a href=\"#VkPhysicalDeviceExtendedDynamicState2FeaturesEXT\">VkPhysicalDeviceExtendedDynamicState2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExtendedDynamicStateFeaturesEXT\">VkPhysicalDeviceExtendedDynamicStateFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT\">VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShadingRateFeaturesKHR\">VkPhysicalDeviceFragmentShadingRateFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceHostQueryResetFeatures\">VkPhysicalDeviceHostQueryResetFeatures</a>, <a href=\"#VkPhysicalDeviceImageRobustnessFeaturesEXT\">VkPhysicalDeviceImageRobustnessFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceImagelessFramebufferFeatures\">VkPhysicalDeviceImagelessFramebufferFeatures</a>, <a href=\"#VkPhysicalDeviceIndexTypeUint8FeaturesEXT\">VkPhysicalDeviceIndexTypeUint8FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceLineRasterizationFeaturesEXT\">VkPhysicalDeviceLineRasterizationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDevicePerformanceQueryFeaturesKHR\">VkPhysicalDevicePerformanceQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceRobustness2FeaturesEXT\">VkPhysicalDeviceRobustness2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceScalarBlockLayoutFeatures\">VkPhysicalDeviceScalarBlockLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures\">VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures</a>, <a href=\"#VkPhysicalDeviceShaderAtomicFloatFeaturesEXT\">VkPhysicalDeviceShaderAtomicFloatFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64Features\">VkPhysicalDeviceShaderAtomicInt64Features</a>, <a href=\"#VkPhysicalDeviceShaderClockFeaturesKHR\">VkPhysicalDeviceShaderClockFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT\">VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderDrawParametersFeatures\">VkPhysicalDeviceShaderDrawParametersFeatures</a>, <a href=\"#VkPhysicalDeviceShaderFloat16Int8Features\">VkPhysicalDeviceShaderFloat16Int8Features</a>, <a href=\"#VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT\">VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures\">VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures</a>, <a href=\"#VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR\">VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceSubgroupSizeControlFeaturesEXT\">VkPhysicalDeviceSubgroupSizeControlFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSynchronization2FeaturesKHR\">VkPhysicalDeviceSynchronization2FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT\">VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT\">VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTimelineSemaphoreFeatures\">VkPhysicalDeviceTimelineSemaphoreFeatures</a>, <a href=\"#VkPhysicalDeviceUniformBufferStandardLayoutFeatures\">VkPhysicalDeviceUniformBufferStandardLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceVariablePointersFeatures\">VkPhysicalDeviceVariablePointersFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT\">VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVulkan11Features\">VkPhysicalDeviceVulkan11Features</a>, <a href=\"#VkPhysicalDeviceVulkan12Features\">VkPhysicalDeviceVulkan12Features</a>, <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeatures\">VkPhysicalDeviceVulkanMemoryModelFeatures</a>, <a href=\"#VkPhysicalDeviceVulkanSC10Features\">VkPhysicalDeviceVulkanSC10Features</a>, <a href=\"#VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT\">VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT</a>, or <a href=\"#VkPhysicalDeviceYcbcrImageArraysFeaturesEXT\">VkPhysicalDeviceYcbcrImageArraysFeaturesEXT</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkApplicationParametersEXT\">VkApplicationParametersEXT</a>, <a href=\"#VkDeviceGroupDeviceCreateInfo\">VkDeviceGroupDeviceCreateInfo</a>, <a href=\"#VkDeviceObjectReservationCreateInfo\">VkDeviceObjectReservationCreateInfo</a>, <a href=\"#VkFaultCallbackInfo\">VkFaultCallbackInfo</a>, <a href=\"#VkPhysicalDevice16BitStorageFeatures\">VkPhysicalDevice16BitStorageFeatures</a>, <a href=\"#VkPhysicalDevice4444FormatsFeaturesEXT\">VkPhysicalDevice4444FormatsFeaturesEXT</a>, <a href=\"#VkPhysicalDevice8BitStorageFeatures\">VkPhysicalDevice8BitStorageFeatures</a>, <a href=\"#VkPhysicalDeviceASTCDecodeFeaturesEXT\">VkPhysicalDeviceASTCDecodeFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT\">VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceBufferDeviceAddressFeatures\">VkPhysicalDeviceBufferDeviceAddressFeatures</a>, <a href=\"#VkPhysicalDeviceColorWriteEnableFeaturesEXT\">VkPhysicalDeviceColorWriteEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceCustomBorderColorFeaturesEXT\">VkPhysicalDeviceCustomBorderColorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDepthClipEnableFeaturesEXT\">VkPhysicalDeviceDepthClipEnableFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceDescriptorIndexingFeatures\">VkPhysicalDeviceDescriptorIndexingFeatures</a>, <a href=\"#VkPhysicalDeviceExtendedDynamicState2FeaturesEXT\">VkPhysicalDeviceExtendedDynamicState2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExtendedDynamicStateFeaturesEXT\">VkPhysicalDeviceExtendedDynamicStateFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceExternalSciBufFeaturesNV\">VkPhysicalDeviceExternalSciBufFeaturesNV</a>, <a href=\"#VkPhysicalDeviceExternalSciSyncFeaturesNV\">VkPhysicalDeviceExternalSciSyncFeaturesNV</a>, <a href=\"#VkPhysicalDeviceFeatures2\">VkPhysicalDeviceFeatures2</a>, <a href=\"#VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT\">VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceFragmentShadingRateFeaturesKHR\">VkPhysicalDeviceFragmentShadingRateFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceHostQueryResetFeatures\">VkPhysicalDeviceHostQueryResetFeatures</a>, <a href=\"#VkPhysicalDeviceImageRobustnessFeaturesEXT\">VkPhysicalDeviceImageRobustnessFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceImagelessFramebufferFeatures\">VkPhysicalDeviceImagelessFramebufferFeatures</a>, <a href=\"#VkPhysicalDeviceIndexTypeUint8FeaturesEXT\">VkPhysicalDeviceIndexTypeUint8FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceLineRasterizationFeaturesEXT\">VkPhysicalDeviceLineRasterizationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceMultiviewFeatures\">VkPhysicalDeviceMultiviewFeatures</a>, <a href=\"#VkPhysicalDevicePerformanceQueryFeaturesKHR\">VkPhysicalDevicePerformanceQueryFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceProtectedMemoryFeatures\">VkPhysicalDeviceProtectedMemoryFeatures</a>, <a href=\"#VkPhysicalDeviceRobustness2FeaturesEXT\">VkPhysicalDeviceRobustness2FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSamplerYcbcrConversionFeatures\">VkPhysicalDeviceSamplerYcbcrConversionFeatures</a>, <a href=\"#VkPhysicalDeviceScalarBlockLayoutFeatures\">VkPhysicalDeviceScalarBlockLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures\">VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures</a>, <a href=\"#VkPhysicalDeviceShaderAtomicFloatFeaturesEXT\">VkPhysicalDeviceShaderAtomicFloatFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderAtomicInt64Features\">VkPhysicalDeviceShaderAtomicInt64Features</a>, <a href=\"#VkPhysicalDeviceShaderClockFeaturesKHR\">VkPhysicalDeviceShaderClockFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT\">VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderDrawParametersFeatures\">VkPhysicalDeviceShaderDrawParametersFeatures</a>, <a href=\"#VkPhysicalDeviceShaderFloat16Int8Features\">VkPhysicalDeviceShaderFloat16Int8Features</a>, <a href=\"#VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT\">VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT</a>, <a href=\"#VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures\">VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures</a>, <a href=\"#VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR\">VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR</a>, <a href=\"#VkPhysicalDeviceSubgroupSizeControlFeaturesEXT\">VkPhysicalDeviceSubgroupSizeControlFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceSynchronization2FeaturesKHR\">VkPhysicalDeviceSynchronization2FeaturesKHR</a>, <a href=\"#VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT\">VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT\">VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceTimelineSemaphoreFeatures\">VkPhysicalDeviceTimelineSemaphoreFeatures</a>, <a href=\"#VkPhysicalDeviceUniformBufferStandardLayoutFeatures\">VkPhysicalDeviceUniformBufferStandardLayoutFeatures</a>, <a href=\"#VkPhysicalDeviceVariablePointersFeatures\">VkPhysicalDeviceVariablePointersFeatures</a>, <a href=\"#VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT\">VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT\">VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT</a>, <a href=\"#VkPhysicalDeviceVulkan11Features\">VkPhysicalDeviceVulkan11Features</a>, <a href=\"#VkPhysicalDeviceVulkan12Features\">VkPhysicalDeviceVulkan12Features</a>, <a href=\"#VkPhysicalDeviceVulkanMemoryModelFeatures\">VkPhysicalDeviceVulkanMemoryModelFeatures</a>, <a href=\"#VkPhysicalDeviceVulkanSC10Features\">VkPhysicalDeviceVulkanSC10Features</a>, <a href=\"#VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT\">VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT</a>, or <a href=\"#VkPhysicalDeviceYcbcrImageArraysFeaturesEXT\">VkPhysicalDeviceYcbcrImageArraysFeaturesEXT</a>"
         },
         {
           "vuid": "VUID-VkDeviceCreateInfo-sType-unique",
@@ -1682,6 +1692,12 @@
           "vuid": "VUID-VkSemaphoreSubmitInfoKHR-device-03889",
           "text": " If the <code>device</code> that <code>semaphore</code> was created on is a device group, <code>deviceIndex</code> <strong class=\"purple\">must</strong> be a valid device index"
         }
+      ],
+      "(VK_KHR_synchronization2)+(VK_NV_external_sci_sync)": [
+        {
+          "vuid": "VUID-VkSemaphoreSubmitInfoKHR-semaphore-05094",
+          "text": " If <code>semaphore</code> has a payload of <code>NvSciSyncObj</code>, <code>value</code> <strong class=\"purple\">must</strong> be calculated by application via <a href=\"#NvSciSync-extension-page\">NvSciSync APIs</a>."
+        }
       ]
     },
     "VkCommandBufferSubmitInfoKHR": {
@@ -2343,6 +2359,12 @@
           "text": " The number of {objectnameplural} currently allocated from <code>device</code> plus {objectcount} <strong class=\"purple\">must</strong> be less than or equal to the total number of {objectnameplural} requested via <a href=\"#VkDeviceObjectReservationCreateInfo\">VkDeviceObjectReservationCreateInfo</a>::pname:{objectnamecamelcase}RequestCount specified when <code>device</code> was created"
         }
       ],
+      "(VK_NV_external_sci_sync)": [
+        {
+          "vuid": "VUID-vkCreateFence-pNext-05106",
+          "text": " If the <code>pNext</code> chain of <a href=\"#VkFenceCreateInfo\">VkFenceCreateInfo</a> includes <a href=\"#VkExportFenceSciSyncInfoNV\">VkExportFenceSciSyncInfoNV</a>, then <a href=\"#VkFenceCreateInfo\">VkFenceCreateInfo</a>::<code>flags</code> <strong class=\"purple\">must</strong> not include <code>VK_FENCE_CREATE_SIGNALED_BIT</code>"
+        }
+      ],
       "core": [
         {
           "vuid": "VUID-vkCreateFence-device-parameter",
@@ -2370,7 +2392,7 @@
         },
         {
           "vuid": "VUID-VkFenceCreateInfo-pNext-pNext",
-          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkExportFenceCreateInfo\">VkExportFenceCreateInfo</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkExportFenceCreateInfo\">VkExportFenceCreateInfo</a> or <a href=\"#VkExportFenceSciSyncInfoNV\">VkExportFenceSciSyncInfoNV</a>"
         },
         {
           "vuid": "VUID-VkFenceCreateInfo-sType-unique",
@@ -2395,6 +2417,12 @@
         {
           "vuid": "VUID-VkExportFenceCreateInfo-handleTypes-parameter",
           "text": " <code>handleTypes</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkExternalFenceHandleTypeFlagBits\">VkExternalFenceHandleTypeFlagBits</a> values"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_external_fence)+(VK_NV_external_sci_sync)": [
+        {
+          "vuid": "VUID-VkExportFenceCreateInfo-pNext-05107",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExportFenceSciSyncInfoNV\">VkExportFenceSciSyncInfoNV</a> structure, <a href=\"#VkPhysicalDeviceExternalSciSyncFeaturesNV\">VkPhysicalDeviceExternalSciSyncFeaturesNV</a>::<code>sciSyncFence</code> and <a href=\"#VkPhysicalDeviceExternalSciSyncFeaturesNV\">VkPhysicalDeviceExternalSciSyncFeaturesNV</a>::<code>sciSyncExport</code> <strong class=\"purple\">must</strong> be enabled"
         }
       ]
     },
@@ -2478,6 +2506,134 @@
         },
         {
           "vuid": "VUID-VkFenceGetFdInfoKHR-handleType-parameter",
+          "text": " <code>handleType</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkExternalFenceHandleTypeFlagBits\">VkExternalFenceHandleTypeFlagBits</a> value"
+        }
+      ]
+    },
+    "VkExportFenceSciSyncInfoNV": {
+      "(VK_NV_external_sci_sync)": [
+        {
+          "vuid": "VUID-VkExportFenceSciSyncInfoNV-pAttributes-05108",
+          "text": " <code>pAttributes</code> <strong class=\"purple\">must</strong> be a reconciled <code>NvSciSyncAttrList</code>"
+        },
+        {
+          "vuid": "VUID-VkExportFenceSciSyncInfoNV-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_EXPORT_FENCE_SCI_SYNC_INFO_NV</code>"
+        }
+      ]
+    },
+    "vkGetPhysicalDeviceSciSyncAttributesNV": {
+      "(VK_NV_external_sci_sync)": [
+        {
+          "vuid": "VUID-vkGetPhysicalDeviceSciSyncAttributesNV-pSciSyncAttributesInfo-05109",
+          "text": " If <code>pSciSyncAttributesInfo-&gt;primitiveType</code> is <code>VK_SCI_SYNC_PRIMITIVE_TYPE_FENCE_NV</code> then <a href=\"#VkPhysicalDeviceExternalSciSyncFeaturesNV\">VkPhysicalDeviceExternalSciSyncFeaturesNV</a>::<code>sciSyncFence</code> <strong class=\"purple\">must</strong> be enabled"
+        },
+        {
+          "vuid": "VUID-vkGetPhysicalDeviceSciSyncAttributesNV-pSciSyncAttributesInfo-05110",
+          "text": " If <code>pSciSyncAttributesInfo-&gt;primitiveType</code> is <code>VK_SCI_SYNC_PRIMITIVE_TYPE_SEMAPHORE_NV</code> then <a href=\"#VkPhysicalDeviceExternalSciSyncFeaturesNV\">VkPhysicalDeviceExternalSciSyncFeaturesNV</a>::<code>sciSyncSemaphore</code> <strong class=\"purple\">must</strong> be enabled"
+        },
+        {
+          "vuid": "VUID-vkGetPhysicalDeviceSciSyncAttributesNV-pAttributes-05111",
+          "text": " <code>pAttributes</code> <strong class=\"purple\">must</strong> be a valid <code>NvSciSyncAttrList</code> and <strong class=\"purple\">must</strong> not be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-vkGetPhysicalDeviceSciSyncAttributesNV-physicalDevice-parameter",
+          "text": " <code>physicalDevice</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkPhysicalDevice\">VkPhysicalDevice</a> handle"
+        },
+        {
+          "vuid": "VUID-vkGetPhysicalDeviceSciSyncAttributesNV-pSciSyncAttributesInfo-parameter",
+          "text": " <code>pSciSyncAttributesInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkSciSyncAttributesInfoNV\">VkSciSyncAttributesInfoNV</a> structure"
+        }
+      ]
+    },
+    "VkSciSyncAttributesInfoNV": {
+      "(VK_NV_external_sci_sync)": [
+        {
+          "vuid": "VUID-VkSciSyncAttributesInfoNV-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_SCI_SYNC_ATTRIBUTES_INFO_NV</code>"
+        },
+        {
+          "vuid": "VUID-VkSciSyncAttributesInfoNV-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkSciSyncAttributesInfoNV-clientType-parameter",
+          "text": " <code>clientType</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkSciSyncClientTypeNV\">VkSciSyncClientTypeNV</a> value"
+        },
+        {
+          "vuid": "VUID-VkSciSyncAttributesInfoNV-primitiveType-parameter",
+          "text": " <code>primitiveType</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkSciSyncPrimitiveTypeNV\">VkSciSyncPrimitiveTypeNV</a> value"
+        }
+      ]
+    },
+    "vkGetFenceSciSyncFenceNV": {
+      "(VK_NV_external_sci_sync)": [
+        {
+          "vuid": "VUID-vkGetFenceSciSyncFenceNV-pGetSciSyncHandleInfo-05112",
+          "text": " <code>pGetSciSyncHandleInfo-&gt;handleType</code> <strong class=\"purple\">must</strong> be <code>VK_EXTERNAL_FENCE_HANDLE_TYPE_SCI_SYNC_FENCE_BIT_NV</code>"
+        },
+        {
+          "vuid": "VUID-vkGetFenceSciSyncFenceNV-sciSyncFence-05113",
+          "text": " <a href=\"#VkPhysicalDeviceExternalSciSyncFeaturesNV\">VkPhysicalDeviceExternalSciSyncFeaturesNV</a>::<code>sciSyncFence</code> <strong class=\"purple\">must</strong> be enabled"
+        },
+        {
+          "vuid": "VUID-vkGetFenceSciSyncFenceNV-device-parameter",
+          "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDevice\">VkDevice</a> handle"
+        },
+        {
+          "vuid": "VUID-vkGetFenceSciSyncFenceNV-pGetSciSyncHandleInfo-parameter",
+          "text": " <code>pGetSciSyncHandleInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkFenceGetSciSyncInfoNV\">VkFenceGetSciSyncInfoNV</a> structure"
+        },
+        {
+          "vuid": "VUID-vkGetFenceSciSyncFenceNV-pHandle-parameter",
+          "text": " <code>pHandle</code> <strong class=\"purple\">must</strong> be a pointer value"
+        }
+      ]
+    },
+    "vkGetFenceSciSyncObjNV": {
+      "(VK_NV_external_sci_sync)": [
+        {
+          "vuid": "VUID-vkGetFenceSciSyncObjNV-pGetSciSyncHandleInfo-05114",
+          "text": " <code>pGetSciSyncHandleInfo-&gt;handleType</code> <strong class=\"purple\">must</strong> be <code>VK_EXTERNAL_FENCE_HANDLE_TYPE_SCI_SYNC_OBJ_BIT_NV</code>"
+        },
+        {
+          "vuid": "VUID-vkGetFenceSciSyncObjNV-sciSyncFence-05115",
+          "text": " <a href=\"#VkPhysicalDeviceExternalSciSyncFeaturesNV\">VkPhysicalDeviceExternalSciSyncFeaturesNV</a>::<code>sciSyncFence</code> <strong class=\"purple\">must</strong> be enabled"
+        },
+        {
+          "vuid": "VUID-vkGetFenceSciSyncObjNV-device-parameter",
+          "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDevice\">VkDevice</a> handle"
+        },
+        {
+          "vuid": "VUID-vkGetFenceSciSyncObjNV-pGetSciSyncHandleInfo-parameter",
+          "text": " <code>pGetSciSyncHandleInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkFenceGetSciSyncInfoNV\">VkFenceGetSciSyncInfoNV</a> structure"
+        },
+        {
+          "vuid": "VUID-vkGetFenceSciSyncObjNV-pHandle-parameter",
+          "text": " <code>pHandle</code> <strong class=\"purple\">must</strong> be a pointer value"
+        }
+      ]
+    },
+    "VkFenceGetSciSyncInfoNV": {
+      "(VK_NV_external_sci_sync)": [
+        {
+          "vuid": "VUID-VkFenceGetSciSyncInfoNV-handleType-05116",
+          "text": " <code>handleType</code> <strong class=\"purple\">must</strong> be <code>VK_EXTERNAL_FENCE_HANDLE_TYPE_SCI_SYNC_OBJ_BIT_NV</code> or <code>VK_EXTERNAL_FENCE_HANDLE_TYPE_SCI_SYNC_FENCE_BIT_NV</code>"
+        },
+        {
+          "vuid": "VUID-VkFenceGetSciSyncInfoNV-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_FENCE_GET_SCI_SYNC_INFO_NV</code>"
+        },
+        {
+          "vuid": "VUID-VkFenceGetSciSyncInfoNV-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkFenceGetSciSyncInfoNV-fence-parameter",
+          "text": " <code>fence</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkFence\">VkFence</a> handle"
+        },
+        {
+          "vuid": "VUID-VkFenceGetSciSyncInfoNV-handleType-parameter",
           "text": " <code>handleType</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkExternalFenceHandleTypeFlagBits\">VkExternalFenceHandleTypeFlagBits</a> value"
         }
       ]
@@ -2744,6 +2900,58 @@
         }
       ]
     },
+    "vkImportFenceSciSyncFenceNV": {
+      "(VK_NV_external_sci_sync)": [
+        {
+          "vuid": "VUID-vkImportFenceSciSyncFenceNV-device-parameter",
+          "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDevice\">VkDevice</a> handle"
+        },
+        {
+          "vuid": "VUID-vkImportFenceSciSyncFenceNV-pImportFenceSciSyncInfo-parameter",
+          "text": " <code>pImportFenceSciSyncInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkImportFenceSciSyncInfoNV\">VkImportFenceSciSyncInfoNV</a> structure"
+        }
+      ]
+    },
+    "vkImportFenceSciSyncObjNV": {
+      "(VK_NV_external_sci_sync)": [
+        {
+          "vuid": "VUID-vkImportFenceSciSyncObjNV-device-parameter",
+          "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDevice\">VkDevice</a> handle"
+        },
+        {
+          "vuid": "VUID-vkImportFenceSciSyncObjNV-pImportFenceSciSyncInfo-parameter",
+          "text": " <code>pImportFenceSciSyncInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkImportFenceSciSyncInfoNV\">VkImportFenceSciSyncInfoNV</a> structure"
+        }
+      ]
+    },
+    "VkImportFenceSciSyncInfoNV": {
+      "(VK_NV_external_sci_sync)": [
+        {
+          "vuid": "VUID-VkImportFenceSciSyncInfoNV-handleType-05117",
+          "text": " <code>handleType</code> <strong class=\"purple\">must</strong> be a value included in the <a href=\"#synchronization-fence-handletypes-sci-sync\">Handle Types Supported by <code>VkImportFenceSciSyncInfoNV</code></a> table"
+        },
+        {
+          "vuid": "VUID-VkImportFenceSciSyncInfoNV-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_IMPORT_FENCE_SCI_SYNC_INFO_NV</code>"
+        },
+        {
+          "vuid": "VUID-VkImportFenceSciSyncInfoNV-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkImportFenceSciSyncInfoNV-fence-parameter",
+          "text": " <code>fence</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkFence\">VkFence</a> handle"
+        },
+        {
+          "vuid": "VUID-VkImportFenceSciSyncInfoNV-handleType-parameter",
+          "text": " <code>handleType</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkExternalFenceHandleTypeFlagBits\">VkExternalFenceHandleTypeFlagBits</a> value"
+        },
+        {
+          "vuid": "VUID-VkImportFenceSciSyncInfoNV-handle-parameter",
+          "text": " <code>handle</code> <strong class=\"purple\">must</strong> be a pointer value"
+        }
+      ]
+    },
     "vkCreateSemaphore": {
       "(VKSC_VERSION_1_0)": [
         {
@@ -2771,6 +2979,12 @@
       ]
     },
     "VkSemaphoreCreateInfo": {
+      "(VK_NV_external_sci_sync)": [
+        {
+          "vuid": "VUID-VkSemaphoreCreateInfo-pNext-05118",
+          "text": " If the <code>pNext</code> chain includes <a href=\"#VkExportSemaphoreSciSyncInfoNV\">VkExportSemaphoreSciSyncInfoNV</a>, it <strong class=\"purple\">must</strong> also include <a href=\"#VkSemaphoreTypeCreateInfo\">VkSemaphoreTypeCreateInfo</a> with a <a href=\"#VkSemaphoreTypeCreateInfo\">VkSemaphoreTypeCreateInfo</a>&#8594;<code>semaphoreType</code> of <code>VK_SEMAPHORE_TYPE_TIMELINE</code>"
+        }
+      ],
       "core": [
         {
           "vuid": "VUID-VkSemaphoreCreateInfo-sType-sType",
@@ -2778,7 +2992,7 @@
         },
         {
           "vuid": "VUID-VkSemaphoreCreateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkExportSemaphoreCreateInfo\">VkExportSemaphoreCreateInfo</a> or <a href=\"#VkSemaphoreTypeCreateInfo\">VkSemaphoreTypeCreateInfo</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkExportSemaphoreCreateInfo\">VkExportSemaphoreCreateInfo</a>, <a href=\"#VkExportSemaphoreSciSyncInfoNV\">VkExportSemaphoreSciSyncInfoNV</a>, or <a href=\"#VkSemaphoreTypeCreateInfo\">VkSemaphoreTypeCreateInfo</a>"
         },
         {
           "vuid": "VUID-VkSemaphoreCreateInfo-sType-unique",
@@ -2808,6 +3022,12 @@
           "vuid": "VUID-VkSemaphoreTypeCreateInfo-semaphoreType-parameter",
           "text": " <code>semaphoreType</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkSemaphoreType\">VkSemaphoreType</a> value"
         }
+      ],
+      "(VK_VERSION_1_2,VK_KHR_timeline_semaphore)+(VK_NV_external_sci_sync)": [
+        {
+          "vuid": "VUID-VkSemaphoreTypeCreateInfo-pNext-05119",
+          "text": " If the <code>pNext</code> chain includes <a href=\"#VkExportSemaphoreSciSyncInfoNV\">VkExportSemaphoreSciSyncInfoNV</a>, <code>initialValue</code> <strong class=\"purple\">must</strong> be zero."
+        }
       ]
     },
     "VkExportSemaphoreCreateInfo": {
@@ -2823,6 +3043,12 @@
         {
           "vuid": "VUID-VkExportSemaphoreCreateInfo-handleTypes-parameter",
           "text": " <code>handleTypes</code> <strong class=\"purple\">must</strong> be a valid combination of <a href=\"#VkExternalSemaphoreHandleTypeFlagBits\">VkExternalSemaphoreHandleTypeFlagBits</a> values"
+        }
+      ],
+      "(VK_VERSION_1_1,VK_KHR_external_semaphore)+(VK_NV_external_sci_sync)": [
+        {
+          "vuid": "VUID-VkExportSemaphoreCreateInfo-pNext-05120",
+          "text": " If the <code>pNext</code> chain includes a <code>VkExportSemaphoreSciSyncInfoNV</code> structure, <a href=\"#VkPhysicalDeviceExternalSciSyncFeaturesNV\">VkPhysicalDeviceExternalSciSyncFeaturesNV</a>::<code>sciSyncSemapore</code> and <a href=\"#VkPhysicalDeviceExternalSciSyncFeaturesNV\">VkPhysicalDeviceExternalSciSyncFeaturesNV</a>::<code>sciSyncExport</code> <strong class=\"purple\">must</strong> be enabled"
         }
       ]
     },
@@ -2956,6 +3182,66 @@
         }
       ]
     },
+    "VkExportSemaphoreSciSyncInfoNV": {
+      "(VK_NV_external_sci_sync)": [
+        {
+          "vuid": "VUID-VkExportSemaphoreSciSyncInfoNV-pAttributes-05121",
+          "text": " <code>pAttributes</code> <strong class=\"purple\">must</strong> be a reconciled <code>NvSciSyncAttrList</code>"
+        },
+        {
+          "vuid": "VUID-VkExportSemaphoreSciSyncInfoNV-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_SCI_SYNC_INFO_NV</code>"
+        }
+      ]
+    },
+    "vkGetSemaphoreSciSyncObjNV": {
+      "(VK_NV_external_sci_sync)": [
+        {
+          "vuid": "VUID-vkGetSemaphoreSciSyncObjNV-device-parameter",
+          "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDevice\">VkDevice</a> handle"
+        },
+        {
+          "vuid": "VUID-vkGetSemaphoreSciSyncObjNV-pGetSciSyncInfo-parameter",
+          "text": " <code>pGetSciSyncInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkSemaphoreGetSciSyncInfoNV\">VkSemaphoreGetSciSyncInfoNV</a> structure"
+        },
+        {
+          "vuid": "VUID-vkGetSemaphoreSciSyncObjNV-pHandle-parameter",
+          "text": " <code>pHandle</code> <strong class=\"purple\">must</strong> be a pointer value"
+        }
+      ]
+    },
+    "VkSemaphoreGetSciSyncInfoNV": {
+      "(VK_NV_external_sci_sync)": [
+        {
+          "vuid": "VUID-VkSemaphoreGetSciSyncInfoNV-handleType-05122",
+          "text": " <code>handleType</code> <strong class=\"purple\">must</strong> be <code>VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SCI_SYNC_OBJ_BIT_NV</code>"
+        },
+        {
+          "vuid": "VUID-VkSemaphoreGetSciSyncInfoNV-semaphore-05123",
+          "text": " <code>semaphore</code> <strong class=\"purple\">must</strong> have been created with a <a href=\"#VkSemaphoreType\">VkSemaphoreType</a> of <code>VK_SEMAPHORE_TYPE_TIMELINE</code>"
+        },
+        {
+          "vuid": "VUID-VkSemaphoreGetSciSyncInfoNV-semaphore-05129",
+          "text": " <code>semaphore</code> <strong class=\"purple\">must</strong> have been created with <a href=\"#VkExportSemaphoreSciSyncInfoNV\">VkExportSemaphoreSciSyncInfoNV</a> included <code>pNext</code> chain of <a href=\"#VkSemaphoreCreateInfo\">VkSemaphoreCreateInfo</a>, or previously imported by <a href=\"#vkImportSemaphoreSciSyncObjNV\">vkImportSemaphoreSciSyncObjNV</a>"
+        },
+        {
+          "vuid": "VUID-VkSemaphoreGetSciSyncInfoNV-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_SEMAPHORE_GET_SCI_SYNC_INFO_NV</code>"
+        },
+        {
+          "vuid": "VUID-VkSemaphoreGetSciSyncInfoNV-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkSemaphoreGetSciSyncInfoNV-semaphore-parameter",
+          "text": " <code>semaphore</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkSemaphore\">VkSemaphore</a> handle"
+        },
+        {
+          "vuid": "VUID-VkSemaphoreGetSciSyncInfoNV-handleType-parameter",
+          "text": " <code>handleType</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkExternalSemaphoreHandleTypeFlagBits\">VkExternalSemaphoreHandleTypeFlagBits</a> value"
+        }
+      ]
+    },
     "vkDestroySemaphore": {
       "core": [
         {
@@ -3056,6 +3342,12 @@
           "vuid": "VUID-VkSemaphoreWaitInfo-semaphoreCount-arraylength",
           "text": " <code>semaphoreCount</code> <strong class=\"purple\">must</strong> be greater than <code>0</code>"
         }
+      ],
+      "(VK_VERSION_1_2,VK_KHR_timeline_semaphore)+(VK_NV_external_sci_sync)": [
+        {
+          "vuid": "VUID-VkSemaphoreWaitInfo-pSemaphores-05124",
+          "text": " If any of the semaphores in <code>pSemaphores</code> have <code>NvSciSyncObj</code> as payload, application <strong class=\"purple\">must</strong> calculate the corresponding timeline semaphore values in <code>pValues</code> by calling <a href=\"#NvSciSync-extension-page\">NvSciSync APIs</a>."
+        }
       ]
     },
     "vkSignalSemaphore": {
@@ -3099,6 +3391,12 @@
         {
           "vuid": "VUID-VkSemaphoreSignalInfo-semaphore-parameter",
           "text": " <code>semaphore</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkSemaphore\">VkSemaphore</a> handle"
+        }
+      ],
+      "(VK_VERSION_1_2,VK_KHR_timeline_semaphore)+(VK_NV_external_sci_sync)": [
+        {
+          "vuid": "VUID-VkSemaphoreSignalInfo-semaphores-05125",
+          "text": " If <code>semaphores</code> has <code>NvSciSyncObj</code> as payload, application <strong class=\"purple\">must</strong> calculate the corresponding timeline semaphore value in <code>value</code> by calling <a href=\"#NvSciSync-extension-page\">NvSciSync APIs</a>."
         }
       ]
     },
@@ -3237,6 +3535,54 @@
         {
           "vuid": "VUID-VkImportSemaphoreZirconHandleInfoFUCHSIA-semaphoreType-04768",
           "text": " The <a href=\"#VkSemaphoreTypeCreateInfo\">VkSemaphoreTypeCreateInfo</a>::<code>semaphoreType</code> field <strong class=\"purple\">must</strong> not be <code>VK_SEMAPHORE_TYPE_TIMELINE</code>"
+        }
+      ]
+    },
+    "vkImportSemaphoreSciSyncObjNV": {
+      "(VK_NV_external_sci_sync)": [
+        {
+          "vuid": "VUID-vkImportSemaphoreSciSyncObjNV-device-parameter",
+          "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDevice\">VkDevice</a> handle"
+        },
+        {
+          "vuid": "VUID-vkImportSemaphoreSciSyncObjNV-pImportSemaphoreSciSyncInfo-parameter",
+          "text": " <code>pImportSemaphoreSciSyncInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkImportSemaphoreSciSyncInfoNV\">VkImportSemaphoreSciSyncInfoNV</a> structure"
+        }
+      ]
+    },
+    "VkImportSemaphoreSciSyncInfoNV": {
+      "(VK_NV_external_sci_sync)": [
+        {
+          "vuid": "VUID-VkImportSemaphoreSciSyncInfoNV-handleType-05126",
+          "text": " <code>handleType</code> <strong class=\"purple\">must</strong> be a value included in the <a href=\"#synchronization-semaphore-handletypes-sci-sync\">Handle Types Supported by <code>VkImportSemaphoreSciSyncInfoNV</code></a> table"
+        },
+        {
+          "vuid": "VUID-VkImportSemaphoreSciSyncInfoNV-semaphore-05127",
+          "text": " <code>semaphore</code> <strong class=\"purple\">must</strong> have been created with a <a href=\"#VkSemaphoreType\">VkSemaphoreType</a> of <code>VK_SEMAPHORE_TYPE_TIMELINE</code>"
+        },
+        {
+          "vuid": "VUID-VkImportSemaphoreSciSyncInfoNV-semaphore-05128",
+          "text": " <code>semaphore</code> <strong class=\"purple\">must</strong> not be associated with any queue command that has not yet completed execution on that queue"
+        },
+        {
+          "vuid": "VUID-VkImportSemaphoreSciSyncInfoNV-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_SCI_SYNC_INFO_NV</code>"
+        },
+        {
+          "vuid": "VUID-VkImportSemaphoreSciSyncInfoNV-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkImportSemaphoreSciSyncInfoNV-semaphore-parameter",
+          "text": " <code>semaphore</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkSemaphore\">VkSemaphore</a> handle"
+        },
+        {
+          "vuid": "VUID-VkImportSemaphoreSciSyncInfoNV-handleType-parameter",
+          "text": " <code>handleType</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkExternalSemaphoreHandleTypeFlagBits\">VkExternalSemaphoreHandleTypeFlagBits</a> value"
+        },
+        {
+          "vuid": "VUID-VkImportSemaphoreSciSyncInfoNV-handle-parameter",
+          "text": " <code>handle</code> <strong class=\"purple\">must</strong> be a pointer value"
         }
       ]
     },
@@ -8505,7 +8851,7 @@
           "text": " If <code>renderpass</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a>, multiview is not enabled for <code>renderPass</code>, and <code>flags</code> includes <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT</code>, the <code>layerCount</code> member of any element of the <code>pAttachmentImageInfos</code> member of a <a href=\"#VkFramebufferAttachmentsCreateInfo\">VkFramebufferAttachmentsCreateInfo</a> structure included in the <code>pNext</code> chain used as an input, color, resolve, or depth/stencil attachment in <code>renderPass</code> <strong class=\"purple\">must</strong> be greater than or equal to <code>layers</code>"
         }
       ],
-      "(VK_VERSION_1_2,VK_KHR_imageless_framebuffer)+!(VK_VERSION_1_1+VK_KHR_multiview)": [
+      "(VK_VERSION_1_2,VK_KHR_imageless_framebuffer)+!(VK_VERSION_1_1,VK_KHR_multiview)": [
         {
           "vuid": "VUID-VkFramebufferCreateInfo-flags-04547",
           "text": " If <code>renderpass</code> is not <a href=\"#VK_NULL_HANDLE\">VK_NULL_HANDLE</a> and <code>flags</code> includes <code>VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT</code>, the <code>layerCount</code> member of any element of the <code>pAttachmentImageInfos</code> member of a <a href=\"#VkFramebufferAttachmentsCreateInfo\">VkFramebufferAttachmentsCreateInfo</a> structure included in the <code>pNext</code> chain used as an input, color, resolve, or depth/stencil attachment in <code>pRenderPass</code> <strong class=\"purple\">must</strong> be greater than or equal to <code>layers</code>"
@@ -11997,6 +12343,20 @@
           "text": " If the parameters define an import operation and the external handle type is <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_ZIRCON_VMO_BIT_FUCHSIA</code>, the value of <code>allocationSize</code> <strong class=\"purple\">must</strong> be greater than <code>0</code> and <strong class=\"purple\">must</strong> be less than or equal to the size of the VMO as determined by <code>zx_vmo_get_size</code>(<code>handle</code>) where <code>handle</code> is the VMO handle to the imported external memory"
         }
       ],
+      "(VK_NV_external_memory_sci_buf)": [
+        {
+          "vuid": "VUID-VkMemoryAllocateInfo-pNext-05097",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkExportMemorySciBufInfoNV\">VkExportMemorySciBufInfoNV</a> structure, <a href=\"#VkPhysicalDeviceExternalSciBufFeaturesNV\">VkPhysicalDeviceExternalSciBufFeaturesNV</a>::<code>sciBufExport</code> <strong class=\"purple\">must</strong> be enabled"
+        },
+        {
+          "vuid": "VUID-VkMemoryAllocateInfo-pNext-05098",
+          "text": " If the <code>pNext</code> chain includes a <a href=\"#VkImportMemorySciBufInfoNV\">VkImportMemorySciBufInfoNV</a> structure, <a href=\"#VkPhysicalDeviceExternalSciBufFeaturesNV\">VkPhysicalDeviceExternalSciBufFeaturesNV</a>::<code>sciBufImport</code> <strong class=\"purple\">must</strong> be enabled"
+        },
+        {
+          "vuid": "VUID-VkMemoryAllocateInfo-memoryTypeIndex-05099",
+          "text": " If the parameters define an import operation and the external handle is a <code>NvSciBufObj</code>, the value of <code>memoryTypeIndex</code> <strong class=\"purple\">must</strong> be one of those returned by <a href=\"#vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV\">vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV</a>"
+        }
+      ],
       "core": [
         {
           "vuid": "VUID-VkMemoryAllocateInfo-sType-sType",
@@ -12004,7 +12364,7 @@
         },
         {
           "vuid": "VUID-VkMemoryAllocateInfo-pNext-pNext",
-          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkExportMemoryAllocateInfo\">VkExportMemoryAllocateInfo</a>, <a href=\"#VkImportMemoryFdInfoKHR\">VkImportMemoryFdInfoKHR</a>, <a href=\"#VkImportMemoryHostPointerInfoEXT\">VkImportMemoryHostPointerInfoEXT</a>, <a href=\"#VkMemoryAllocateFlagsInfo\">VkMemoryAllocateFlagsInfo</a>, <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>, or <a href=\"#VkMemoryOpaqueCaptureAddressAllocateInfo\">VkMemoryOpaqueCaptureAddressAllocateInfo</a>"
+          "text": " Each <code>pNext</code> member of any structure (including this one) in the <code>pNext</code> chain <strong class=\"purple\">must</strong> be either <code>NULL</code> or a pointer to a valid instance of <a href=\"#VkExportMemoryAllocateInfo\">VkExportMemoryAllocateInfo</a>, <a href=\"#VkExportMemorySciBufInfoNV\">VkExportMemorySciBufInfoNV</a>, <a href=\"#VkImportMemoryFdInfoKHR\">VkImportMemoryFdInfoKHR</a>, <a href=\"#VkImportMemoryHostPointerInfoEXT\">VkImportMemoryHostPointerInfoEXT</a>, <a href=\"#VkImportMemorySciBufInfoNV\">VkImportMemorySciBufInfoNV</a>, <a href=\"#VkMemoryAllocateFlagsInfo\">VkMemoryAllocateFlagsInfo</a>, <a href=\"#VkMemoryDedicatedAllocateInfo\">VkMemoryDedicatedAllocateInfo</a>, or <a href=\"#VkMemoryOpaqueCaptureAddressAllocateInfo\">VkMemoryOpaqueCaptureAddressAllocateInfo</a>"
         },
         {
           "vuid": "VUID-VkMemoryAllocateInfo-sType-unique",
@@ -12527,6 +12887,122 @@
         {
           "vuid": "VUID-VkMemoryGetZirconHandleInfoFUCHSIA-handleType-04776",
           "text": " <code>handleType</code> <strong class=\"purple\">must</strong> have been included in the <code>handleTypes</code> field of the <code>VkExportMemoryAllocateInfo</code> structure when the external memory was allocated"
+        }
+      ]
+    },
+    "VkExportMemorySciBufInfoNV": {
+      "(VK_NV_external_memory_sci_buf)": [
+        {
+          "vuid": "VUID-VkExportMemorySciBufInfoNV-pAttributes-05100",
+          "text": " <code>pAttributes</code> <strong class=\"purple\">must</strong> be a reconciled <code>NvSciBufAttrList</code>"
+        },
+        {
+          "vuid": "VUID-VkExportMemorySciBufInfoNV-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_EXPORT_MEMORY_SCI_BUF_INFO_NV</code>"
+        }
+      ]
+    },
+    "vkGetPhysicalDeviceSciBufAttributesNV": {
+      "(VK_NV_external_memory_sci_buf)": [
+        {
+          "vuid": "VUID-vkGetPhysicalDeviceSciBufAttributesNV-pAttributes-05101",
+          "text": " <code>pAttributes</code> <strong class=\"purple\">must</strong> be a valid <code>NvSciBufAttrList</code> and <strong class=\"purple\">must</strong> not be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-vkGetPhysicalDeviceSciBufAttributesNV-physicalDevice-parameter",
+          "text": " <code>physicalDevice</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkPhysicalDevice\">VkPhysicalDevice</a> handle"
+        }
+      ]
+    },
+    "VkImportMemorySciBufInfoNV": {
+      "(VK_NV_external_memory_sci_buf)": [
+        {
+          "vuid": "VUID-VkImportMemorySciBufInfoNV-handleType-05102",
+          "text": " <code>handleType</code> <strong class=\"purple\">must</strong> be <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_SCI_BUF_BIT_NV</code>"
+        },
+        {
+          "vuid": "VUID-VkImportMemorySciBufInfoNV-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_IMPORT_MEMORY_SCI_BUF_INFO_NV</code>"
+        },
+        {
+          "vuid": "VUID-VkImportMemorySciBufInfoNV-handleType-parameter",
+          "text": " <code>handleType</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkExternalMemoryHandleTypeFlagBits\">VkExternalMemoryHandleTypeFlagBits</a> value"
+        }
+      ]
+    },
+    "vkGetMemorySciBufNV": {
+      "(VK_NV_external_memory_sci_buf)": [
+        {
+          "vuid": "VUID-vkGetMemorySciBufNV-device-parameter",
+          "text": " <code>device</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDevice\">VkDevice</a> handle"
+        },
+        {
+          "vuid": "VUID-vkGetMemorySciBufNV-pGetSciBufInfo-parameter",
+          "text": " <code>pGetSciBufInfo</code> <strong class=\"purple\">must</strong> be a valid pointer to a valid <a href=\"#VkMemoryGetSciBufInfoNV\">VkMemoryGetSciBufInfoNV</a> structure"
+        },
+        {
+          "vuid": "VUID-vkGetMemorySciBufNV-pHandle-parameter",
+          "text": " <code>pHandle</code> <strong class=\"purple\">must</strong> be a valid pointer to a <code>NvSciBufObj</code> value"
+        }
+      ]
+    },
+    "VkMemoryGetSciBufInfoNV": {
+      "(VK_NV_external_memory_sci_buf)": [
+        {
+          "vuid": "VUID-VkMemoryGetSciBufInfoNV-handleType-05103",
+          "text": " <code>handleType</code> <strong class=\"purple\">must</strong> be <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_SCI_BUF_BIT_NV</code>"
+        },
+        {
+          "vuid": "VUID-VkMemoryGetSciBufInfoNV-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_MEMORY_GET_SCI_BUF_INFO_NV</code>"
+        },
+        {
+          "vuid": "VUID-VkMemoryGetSciBufInfoNV-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
+        },
+        {
+          "vuid": "VUID-VkMemoryGetSciBufInfoNV-memory-parameter",
+          "text": " <code>memory</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkDeviceMemory\">VkDeviceMemory</a> handle"
+        },
+        {
+          "vuid": "VUID-VkMemoryGetSciBufInfoNV-handleType-parameter",
+          "text": " <code>handleType</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkExternalMemoryHandleTypeFlagBits\">VkExternalMemoryHandleTypeFlagBits</a> value"
+        }
+      ]
+    },
+    "vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV": {
+      "(VK_NV_external_memory_sci_buf)": [
+        {
+          "vuid": "VUID-vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV-handleType-05104",
+          "text": " <code>handleType</code> <strong class=\"purple\">must</strong> be <code>VK_EXTERNAL_MEMORY_HANDLE_TYPE_SCI_BUF_BIT_NV</code>"
+        },
+        {
+          "vuid": "VUID-vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV-sciBufImport-05105",
+          "text": " <a href=\"#VkPhysicalDeviceExternalSciBufFeaturesNV\">VkPhysicalDeviceExternalSciBufFeaturesNV</a>::<code>sciBufImport</code> <strong class=\"purple\">must</strong> be enabled"
+        },
+        {
+          "vuid": "VUID-vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV-physicalDevice-parameter",
+          "text": " <code>physicalDevice</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkPhysicalDevice\">VkPhysicalDevice</a> handle"
+        },
+        {
+          "vuid": "VUID-vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV-handleType-parameter",
+          "text": " <code>handleType</code> <strong class=\"purple\">must</strong> be a valid <a href=\"#VkExternalMemoryHandleTypeFlagBits\">VkExternalMemoryHandleTypeFlagBits</a> value"
+        },
+        {
+          "vuid": "VUID-vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV-pMemorySciBufProperties-parameter",
+          "text": " <code>pMemorySciBufProperties</code> <strong class=\"purple\">must</strong> be a valid pointer to a <a href=\"#VkMemorySciBufPropertiesNV\">VkMemorySciBufPropertiesNV</a> structure"
+        }
+      ]
+    },
+    "VkMemorySciBufPropertiesNV": {
+      "(VK_NV_external_memory_sci_buf)": [
+        {
+          "vuid": "VUID-VkMemorySciBufPropertiesNV-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_MEMORY_SCI_BUF_PROPERTIES_NV</code>"
+        },
+        {
+          "vuid": "VUID-VkMemorySciBufPropertiesNV-pNext-pNext",
+          "text": " <code>pNext</code> <strong class=\"purple\">must</strong> be <code>NULL</code>"
         }
       ]
     },
@@ -14401,7 +14877,7 @@
           "text": " If the <a href=\"#features-invocationMask\"><code>invocationMask</code> feature</a> is enabled, and if <code>image</code> was created with <code>usage</code> containing <code>VK_IMAGE_USAGE_INVOCATION_MASK_BIT_HUAWEI</code>, <code>format</code> <strong class=\"purple\">must</strong> be <code>VK_FORMAT_R8_UINT</code>"
         }
       ],
-      "(VK_VERSION_1_1,VK_KHR_maintenance2)+!(VK_VERSION_1_2+VK_EXT_separate_stencil_usage)": [
+      "(VK_VERSION_1_1,VK_KHR_maintenance2)+!(VK_VERSION_1_2,VK_EXT_separate_stencil_usage)": [
         {
           "vuid": "VUID-VkImageViewCreateInfo-pNext-02661",
           "text": " If the <code>pNext</code> chain includes a <a href=\"#VkImageViewUsageCreateInfo\">VkImageViewUsageCreateInfo</a> structure, its <code>usage</code> member <strong class=\"purple\">must</strong> not include any bits that were not set in the <code>usage</code> member of the <a href=\"#VkImageCreateInfo\">VkImageCreateInfo</a> structure used to create <code>image</code>"
@@ -34036,27 +34512,11 @@
         }
       ]
     },
-    "vkCreateAndroidSurfaceKHR": {
-      "(VK_KHR_surface)+(VK_KHR_android_surface)+(VKSC_VERSION_1_0)": [
-        {
-          "vuid": "VUID-vkCreateAndroidSurfaceKHR-device-05068",
-          "text": " The number of {objectnameplural} currently allocated from <code>device</code> plus {objectcount} <strong class=\"purple\">must</strong> be less than or equal to the total number of {objectnameplural} requested via <a href=\"#VkDeviceObjectReservationCreateInfo\">VkDeviceObjectReservationCreateInfo</a>::pname:{objectnamecamelcase}RequestCount specified when <code>device</code> was created"
-        }
-      ]
-    },
     "VkAndroidSurfaceCreateInfoKHR": {
       "(VK_KHR_surface)+(VK_KHR_android_surface)": [
         {
           "vuid": "VUID-VkAndroidSurfaceCreateInfoKHR-window-01248",
           "text": " <code>window</code> <strong class=\"purple\">must</strong> point to a valid Android <code>ANativeWindow</code>"
-        }
-      ]
-    },
-    "vkCreateWaylandSurfaceKHR": {
-      "(VK_KHR_surface)+(VK_KHR_wayland_surface)+(VKSC_VERSION_1_0)": [
-        {
-          "vuid": "VUID-vkCreateWaylandSurfaceKHR-device-05068",
-          "text": " The number of {objectnameplural} currently allocated from <code>device</code> plus {objectcount} <strong class=\"purple\">must</strong> be less than or equal to the total number of {objectnameplural} requested via <a href=\"#VkDeviceObjectReservationCreateInfo\">VkDeviceObjectReservationCreateInfo</a>::pname:{objectnamecamelcase}RequestCount specified when <code>device</code> was created"
         }
       ]
     },
@@ -34072,14 +34532,6 @@
         }
       ]
     },
-    "vkCreateWin32SurfaceKHR": {
-      "(VK_KHR_surface)+(VK_KHR_win32_surface)+(VKSC_VERSION_1_0)": [
-        {
-          "vuid": "VUID-vkCreateWin32SurfaceKHR-device-05068",
-          "text": " The number of {objectnameplural} currently allocated from <code>device</code> plus {objectcount} <strong class=\"purple\">must</strong> be less than or equal to the total number of {objectnameplural} requested via <a href=\"#VkDeviceObjectReservationCreateInfo\">VkDeviceObjectReservationCreateInfo</a>::pname:{objectnamecamelcase}RequestCount specified when <code>device</code> was created"
-        }
-      ]
-    },
     "VkWin32SurfaceCreateInfoKHR": {
       "(VK_KHR_surface)+(VK_KHR_win32_surface)": [
         {
@@ -34089,14 +34541,6 @@
         {
           "vuid": "VUID-VkWin32SurfaceCreateInfoKHR-hwnd-01308",
           "text": " <code>hwnd</code> <strong class=\"purple\">must</strong> be a valid Win32 <code>HWND</code>"
-        }
-      ]
-    },
-    "vkCreateXcbSurfaceKHR": {
-      "(VK_KHR_surface)+(VK_KHR_xcb_surface)+(VKSC_VERSION_1_0)": [
-        {
-          "vuid": "VUID-vkCreateXcbSurfaceKHR-device-05068",
-          "text": " The number of {objectnameplural} currently allocated from <code>device</code> plus {objectcount} <strong class=\"purple\">must</strong> be less than or equal to the total number of {objectnameplural} requested via <a href=\"#VkDeviceObjectReservationCreateInfo\">VkDeviceObjectReservationCreateInfo</a>::pname:{objectnamecamelcase}RequestCount specified when <code>device</code> was created"
         }
       ]
     },
@@ -34112,14 +34556,6 @@
         }
       ]
     },
-    "vkCreateXlibSurfaceKHR": {
-      "(VK_KHR_surface)+(VK_KHR_xlib_surface)+(VKSC_VERSION_1_0)": [
-        {
-          "vuid": "VUID-vkCreateXlibSurfaceKHR-device-05068",
-          "text": " The number of {objectnameplural} currently allocated from <code>device</code> plus {objectcount} <strong class=\"purple\">must</strong> be less than or equal to the total number of {objectnameplural} requested via <a href=\"#VkDeviceObjectReservationCreateInfo\">VkDeviceObjectReservationCreateInfo</a>::pname:{objectnamecamelcase}RequestCount specified when <code>device</code> was created"
-        }
-      ]
-    },
     "VkXlibSurfaceCreateInfoKHR": {
       "(VK_KHR_surface)+(VK_KHR_xlib_surface)": [
         {
@@ -34129,14 +34565,6 @@
         {
           "vuid": "VUID-VkXlibSurfaceCreateInfoKHR-window-01314",
           "text": " <code>window</code> <strong class=\"purple\">must</strong> be a valid Xlib <code>Window</code>"
-        }
-      ]
-    },
-    "vkCreateDirectFBSurfaceEXT": {
-      "(VK_KHR_surface)+(VK_EXT_directfb_surface)+(VKSC_VERSION_1_0)": [
-        {
-          "vuid": "VUID-vkCreateDirectFBSurfaceEXT-device-05068",
-          "text": " The number of {objectnameplural} currently allocated from <code>device</code> plus {objectcount} <strong class=\"purple\">must</strong> be less than or equal to the total number of {objectnameplural} requested via <a href=\"#VkDeviceObjectReservationCreateInfo\">VkDeviceObjectReservationCreateInfo</a>::pname:{objectnamecamelcase}RequestCount specified when <code>device</code> was created"
         }
       ]
     },
@@ -34152,14 +34580,6 @@
         }
       ]
     },
-    "vkCreateImagePipeSurfaceFUCHSIA": {
-      "(VK_KHR_surface)+(VK_FUCHSIA_imagepipe_surface)+(VKSC_VERSION_1_0)": [
-        {
-          "vuid": "VUID-vkCreateImagePipeSurfaceFUCHSIA-device-05068",
-          "text": " The number of {objectnameplural} currently allocated from <code>device</code> plus {objectcount} <strong class=\"purple\">must</strong> be less than or equal to the total number of {objectnameplural} requested via <a href=\"#VkDeviceObjectReservationCreateInfo\">VkDeviceObjectReservationCreateInfo</a>::pname:{objectnamecamelcase}RequestCount specified when <code>device</code> was created"
-        }
-      ]
-    },
     "VkImagePipeSurfaceCreateInfoFUCHSIA": {
       "(VK_KHR_surface)+(VK_FUCHSIA_imagepipe_surface)": [
         {
@@ -34168,27 +34588,11 @@
         }
       ]
     },
-    "vkCreateStreamDescriptorSurfaceGGP": {
-      "(VK_KHR_surface)+(VK_GGP_stream_descriptor_surface)+(VKSC_VERSION_1_0)": [
-        {
-          "vuid": "VUID-vkCreateStreamDescriptorSurfaceGGP-device-05068",
-          "text": " The number of {objectnameplural} currently allocated from <code>device</code> plus {objectcount} <strong class=\"purple\">must</strong> be less than or equal to the total number of {objectnameplural} requested via <a href=\"#VkDeviceObjectReservationCreateInfo\">VkDeviceObjectReservationCreateInfo</a>::pname:{objectnamecamelcase}RequestCount specified when <code>device</code> was created"
-        }
-      ]
-    },
     "VkStreamDescriptorSurfaceCreateInfoGGP": {
       "(VK_KHR_surface)+(VK_GGP_stream_descriptor_surface)": [
         {
           "vuid": "VUID-VkStreamDescriptorSurfaceCreateInfoGGP-streamDescriptor-02681",
           "text": " <code>streamDescriptor</code> <strong class=\"purple\">must</strong> be a valid <code>GgpStreamDescriptor</code>"
-        }
-      ]
-    },
-    "vkCreateIOSSurfaceMVK": {
-      "(VK_KHR_surface)+(VK_MVK_ios_surface)+(VKSC_VERSION_1_0)": [
-        {
-          "vuid": "VUID-vkCreateIOSSurfaceMVK-device-05068",
-          "text": " The number of {objectnameplural} currently allocated from <code>device</code> plus {objectcount} <strong class=\"purple\">must</strong> be less than or equal to the total number of {objectnameplural} requested via <a href=\"#VkDeviceObjectReservationCreateInfo\">VkDeviceObjectReservationCreateInfo</a>::pname:{objectnamecamelcase}RequestCount specified when <code>device</code> was created"
         }
       ]
     },
@@ -34204,14 +34608,6 @@
         }
       ]
     },
-    "vkCreateMacOSSurfaceMVK": {
-      "(VK_KHR_surface)+(VK_MVK_macos_surface)+(VKSC_VERSION_1_0)": [
-        {
-          "vuid": "VUID-vkCreateMacOSSurfaceMVK-device-05068",
-          "text": " The number of {objectnameplural} currently allocated from <code>device</code> plus {objectcount} <strong class=\"purple\">must</strong> be less than or equal to the total number of {objectnameplural} requested via <a href=\"#VkDeviceObjectReservationCreateInfo\">VkDeviceObjectReservationCreateInfo</a>::pname:{objectnamecamelcase}RequestCount specified when <code>device</code> was created"
-        }
-      ]
-    },
     "VkMacOSSurfaceCreateInfoMVK": {
       "(VK_KHR_surface)+(VK_MVK_macos_surface)": [
         {
@@ -34224,27 +34620,11 @@
         }
       ]
     },
-    "vkCreateViSurfaceNN": {
-      "(VK_KHR_surface)+(VK_NN_vi_surface)+(VKSC_VERSION_1_0)": [
-        {
-          "vuid": "VUID-vkCreateViSurfaceNN-device-05068",
-          "text": " The number of {objectnameplural} currently allocated from <code>device</code> plus {objectcount} <strong class=\"purple\">must</strong> be less than or equal to the total number of {objectnameplural} requested via <a href=\"#VkDeviceObjectReservationCreateInfo\">VkDeviceObjectReservationCreateInfo</a>::pname:{objectnamecamelcase}RequestCount specified when <code>device</code> was created"
-        }
-      ]
-    },
     "VkViSurfaceCreateInfoNN": {
       "(VK_KHR_surface)+(VK_NN_vi_surface)": [
         {
           "vuid": "VUID-VkViSurfaceCreateInfoNN-window-01318",
           "text": " <code>window</code> <strong class=\"purple\">must</strong> be a valid <code>nn</code>::<code>vi</code>::<code>NativeWindowHandle</code>"
-        }
-      ]
-    },
-    "vkCreateMetalSurfaceEXT": {
-      "(VK_KHR_surface)+(VK_EXT_metal_surface)+(VKSC_VERSION_1_0)": [
-        {
-          "vuid": "VUID-vkCreateMetalSurfaceEXT-device-05068",
-          "text": " The number of {objectnameplural} currently allocated from <code>device</code> plus {objectcount} <strong class=\"purple\">must</strong> be less than or equal to the total number of {objectnameplural} requested via <a href=\"#VkDeviceObjectReservationCreateInfo\">VkDeviceObjectReservationCreateInfo</a>::pname:{objectnamecamelcase}RequestCount specified when <code>device</code> was created"
         }
       ]
     },
@@ -34495,12 +34875,6 @@
       ]
     },
     "vkCreateDisplayModeKHR": {
-      "(VK_KHR_surface)+(VK_KHR_display)+(VKSC_VERSION_1_0)": [
-        {
-          "vuid": "VUID-vkCreateDisplayModeKHR-device-05068",
-          "text": " The number of {objectnameplural} currently allocated from <code>device</code> plus {objectcount} <strong class=\"purple\">must</strong> be less than or equal to the total number of {objectnameplural} requested via <a href=\"#VkDeviceObjectReservationCreateInfo\">VkDeviceObjectReservationCreateInfo</a>::pname:{objectnamecamelcase}RequestCount specified when <code>device</code> was created"
-        }
-      ],
       "(VK_KHR_surface)+(VK_KHR_display)": [
         {
           "vuid": "VUID-vkCreateDisplayModeKHR-physicalDevice-parameter",
@@ -34645,12 +35019,6 @@
       ]
     },
     "vkCreateDisplayPlaneSurfaceKHR": {
-      "(VK_KHR_surface)+(VK_KHR_display)+(VKSC_VERSION_1_0)": [
-        {
-          "vuid": "VUID-vkCreateDisplayPlaneSurfaceKHR-device-05068",
-          "text": " The number of {objectnameplural} currently allocated from <code>device</code> plus {objectcount} <strong class=\"purple\">must</strong> be less than or equal to the total number of {objectnameplural} requested via <a href=\"#VkDeviceObjectReservationCreateInfo\">VkDeviceObjectReservationCreateInfo</a>::pname:{objectnamecamelcase}RequestCount specified when <code>device</code> was created"
-        }
-      ],
       "(VK_KHR_surface)+(VK_KHR_display)": [
         {
           "vuid": "VUID-vkCreateDisplayPlaneSurfaceKHR-instance-parameter",
@@ -34689,6 +35057,10 @@
           "text": " <code>alphaMode</code> <strong class=\"purple\">must</strong> be one of the bits present in the <code>supportedAlpha</code> member of <code>VkDisplayPlaneCapabilitiesKHR</code> for the display plane corresponding to <code>displayMode</code>"
         },
         {
+          "vuid": "VUID-VkDisplaySurfaceCreateInfoKHR-transform-06740",
+          "text": " <code>transform</code> <strong class=\"purple\">must</strong> be one of the bits present in the <code>supportedTransforms</code> member of <code>VkDisplayPropertiesKHR</code> for the display corresponding to <code>displayMode</code>"
+        },
+        {
           "vuid": "VUID-VkDisplaySurfaceCreateInfoKHR-width-01256",
           "text": " The <code>width</code> and <code>height</code> members of <code>imageExtent</code> <strong class=\"purple\">must</strong> be less than or equal to <a href=\"#VkPhysicalDeviceLimits\">VkPhysicalDeviceLimits</a>::<code>maxImageDimension2D</code>"
         },
@@ -34719,12 +35091,6 @@
       ]
     },
     "vkCreateHeadlessSurfaceEXT": {
-      "(VK_KHR_surface)+(VK_EXT_headless_surface)+(VKSC_VERSION_1_0)": [
-        {
-          "vuid": "VUID-vkCreateHeadlessSurfaceEXT-device-05068",
-          "text": " The number of {objectnameplural} currently allocated from <code>device</code> plus {objectcount} <strong class=\"purple\">must</strong> be less than or equal to the total number of {objectnameplural} requested via <a href=\"#VkDeviceObjectReservationCreateInfo\">VkDeviceObjectReservationCreateInfo</a>::pname:{objectnamecamelcase}RequestCount specified when <code>device</code> was created"
-        }
-      ],
       "(VK_KHR_surface)+(VK_EXT_headless_surface)": [
         {
           "vuid": "VUID-vkCreateHeadlessSurfaceEXT-instance-parameter",
@@ -38875,6 +39241,22 @@
         {
           "vuid": "VUID-VkPhysicalDeviceTimelineSemaphoreFeatures-sType-sType",
           "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_FEATURES</code>"
+        }
+      ]
+    },
+    "VkPhysicalDeviceExternalSciSyncFeaturesNV": {
+      "(VK_NV_external_sci_sync)": [
+        {
+          "vuid": "VUID-VkPhysicalDeviceExternalSciSyncFeaturesNV-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SCI_SYNC_FEATURES_NV</code>"
+        }
+      ]
+    },
+    "VkPhysicalDeviceExternalSciBufFeaturesNV": {
+      "(VK_NV_external_memory_sci_buf)": [
+        {
+          "vuid": "VUID-VkPhysicalDeviceExternalSciBufFeaturesNV-sType-sType",
+          "text": " <code>sType</code> <strong class=\"purple\">must</strong> be <code>VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SCI_BUF_FEATURES_NV</code>"
         }
       ]
     },
