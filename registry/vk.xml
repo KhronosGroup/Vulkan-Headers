@@ -32,6 +32,7 @@ branch of the member gitlab server.
         <platform name="metal" protect="VK_USE_PLATFORM_METAL_EXT" comment="Metal on CoreAnimation on Apple platforms"/>
         <platform name="fuchsia" protect="VK_USE_PLATFORM_FUCHSIA" comment="Fuchsia"/>
         <platform name="ggp" protect="VK_USE_PLATFORM_GGP" comment="Google Games Platform"/>
+        <platform name="sci" protect="VK_USE_PLATFORM_SCI" comment="NVIDIA SCI"/>
         <platform name="provisional" protect="VK_ENABLE_BETA_EXTENSIONS" comment="Enable declarations for beta/provisional extensions"/>
         <platform name="screen" protect="VK_USE_PLATFORM_SCREEN_QNX" comment="QNX Screen Graphics Subsystem"/>
     </platforms>
@@ -88,6 +89,8 @@ branch of the member gitlab server.
         <type category="include" name="zircon/types.h"/>
         <type category="include" name="ggp_c/vulkan_types.h"/>
         <type category="include" name="screen/screen.h"/>
+        <type category="include" name="nvscisync.h"/>
+        <type category="include" name="nvscibuf.h"/>
             <comment>
                 In the current header structure, each platform's interfaces
                 are confined to a platform-specific header (vulkan_xlib.h,
@@ -128,6 +131,9 @@ branch of the member gitlab server.
         <type requires="ggp_c/vulkan_types.h" name="GgpFrameToken"/>
         <type requires="screen/screen.h" name="_screen_context"/>
         <type requires="screen/screen.h" name="_screen_window"/>
+        <type requires="nvscisync.h" name="NvSciSyncAttrList"/>
+        <type requires="nvscibuf.h" name="NvSciBufAttrList"/>
+        <type requires="nvscibuf.h" name="NvSciBufObj"/>
 
         <type category="define">// DEPRECATED: This define is deprecated. VK_MAKE_API_VERSION should be used instead.
 #define <name>VK_MAKE_VERSION</name>(major, minor, patch) \
@@ -166,7 +172,7 @@ branch of the member gitlab server.
 #define <name>VK_HEADER_VERSION_COMPLETE</name> <type>VK_MAKE_API_VERSION</type>(0, 1, 2, VK_HEADER_VERSION)</type>
 
         <type api="vulkansc" category="define">// Version of this file
-#define <name>VK_HEADER_VERSION</name> 9</type>
+#define <name>VK_HEADER_VERSION</name> 10</type>
         <type api="vulkansc" category="define" requires="VKSC_API_VARIANT">// Complete version of this file
 #define <name>VK_HEADER_VERSION_COMPLETE</name> <type>VK_MAKE_API_VERSION</type>(VKSC_API_VARIANT, 1, 0, VK_HEADER_VERSION)</type>
 
@@ -654,6 +660,8 @@ typedef void <name>CAMetalLayer</name>;
         <type name="VkFragmentShadingRateTypeNV" category="enum"/>
         <type name="VkAccessFlagBits2KHR" category="enum"/>
         <type name="VkPipelineStageFlagBits2KHR" category="enum"/>
+        <type name="VkSciSyncClientTypeNV" category="enum"/>
+        <type name="VkSciSyncPrimitiveTypeNV" category="enum"/>
         <type name="VkProvokingVertexModeEXT" category="enum"/>
         <type name="VkPipelineCacheValidationVersion" category="enum"/>
         <type name="VkImageFormatConstraintsFlagBitsFUCHSIA" category="enum"/>
@@ -2129,6 +2137,34 @@ typedef void <name>CAMetalLayer</name>;
             <member optional="true">const <type>SECURITY_ATTRIBUTES</type>*       <name>pAttributes</name></member>
             <member optional="true"><type>DWORD</type>                            <name>dwAccess</name></member>
         </type>
+        <type category="struct" name="VkExportMemorySciBufInfoNV" structextends="VkMemoryAllocateInfo">
+            <member values="VK_STRUCTURE_TYPE_EXPORT_MEMORY_SCI_BUF_INFO_NV"><type>VkStructureType</type> <name>sType</name></member>
+            <member optional="true">const <type>void</type>*                 <name>pNext</name></member>
+            <member><type>NvSciBufAttrList</type>                            <name>pAttributes</name></member>
+        </type>
+        <type category="struct" name="VkImportMemorySciBufInfoNV" structextends="VkMemoryAllocateInfo">
+            <member values="VK_STRUCTURE_TYPE_IMPORT_MEMORY_SCI_BUF_INFO_NV"><type>VkStructureType</type> <name>sType</name></member>
+            <member optional="true">const <type>void</type>*            <name>pNext</name></member>
+            <member><type>VkExternalMemoryHandleTypeFlagBits</type>     <name>handleType</name></member>
+            <member><type>NvSciBufObj</type>                            <name>handle</name></member>
+        </type>
+        <type category="struct" name="VkMemoryGetSciBufInfoNV">
+            <member values="VK_STRUCTURE_TYPE_MEMORY_GET_SCI_BUF_INFO_NV"><type>VkStructureType</type> <name>sType</name></member>
+            <member optional="true">const <type>void</type>*            <name>pNext</name></member>
+            <member><type>VkDeviceMemory</type>                         <name>memory</name></member>
+            <member><type>VkExternalMemoryHandleTypeFlagBits</type>     <name>handleType</name></member>
+        </type>
+        <type category="struct" name="VkMemorySciBufPropertiesNV">
+            <member values="VK_STRUCTURE_TYPE_MEMORY_SCI_BUF_PROPERTIES_NV"><type>VkStructureType</type> <name>sType</name></member>
+            <member optional="true">const <type>void</type>*            <name>pNext</name></member>
+            <member><type>uint32_t</type>                               <name>memoryTypeBits</name></member>
+        </type>
+        <type category="struct" name="VkPhysicalDeviceExternalSciBufFeaturesNV" structextends="VkPhysicalDeviceFeatures2,VkDeviceCreateInfo">
+            <member values="VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SCI_BUF_FEATURES_NV"><type>VkStructureType</type> <name>sType</name></member>
+            <member optional="true">const <type>void</type>*                 <name>pNext</name></member>
+            <member><type>VkBool32</type>                                    <name>sciBufImport</name></member>
+            <member><type>VkBool32</type>                                    <name>sciBufExport</name></member>
+        </type>
         <type category="struct" name="VkWin32KeyedMutexAcquireReleaseInfoNV" structextends="VkSubmitInfo,VkSubmitInfo2KHR">
             <member values="VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_NV"><type>VkStructureType</type> <name>sType</name></member>
             <member optional="true">const <type>void</type>*                      <name>pNext</name></member>
@@ -2636,6 +2672,56 @@ typedef void <name>CAMetalLayer</name>;
             <member optional="true">const <type>void</type>*                            <name>pNext</name></member>
             <member><type>VkFence</type>                                <name>fence</name></member>
             <member><type>VkExternalFenceHandleTypeFlagBits</type>   <name>handleType</name></member>
+        </type>
+        <type category="struct" name="VkExportFenceSciSyncInfoNV" structextends="VkFenceCreateInfo">
+            <member values="VK_STRUCTURE_TYPE_EXPORT_FENCE_SCI_SYNC_INFO_NV"><type>VkStructureType</type> <name>sType</name></member>
+            <member optional="true">const <type>void</type>*            <name>pNext</name></member>
+            <member><type>NvSciSyncAttrList</type>                      <name>pAttributes</name></member>
+        </type>
+        <type category="struct" name="VkImportFenceSciSyncInfoNV">
+            <member values="VK_STRUCTURE_TYPE_IMPORT_FENCE_SCI_SYNC_INFO_NV"><type>VkStructureType</type> <name>sType</name></member>
+            <member optional="true">const <type>void</type>*            <name>pNext</name></member>
+            <member externsync="true"><type>VkFence</type>              <name>fence</name></member>
+            <member><type>VkExternalFenceHandleTypeFlagBits</type>      <name>handleType</name></member>
+            <member>const <type>void</type>*                            <name>handle</name></member>
+        </type>
+        <type category="struct" name="VkFenceGetSciSyncInfoNV">
+            <member values="VK_STRUCTURE_TYPE_FENCE_GET_SCI_SYNC_INFO_NV"><type>VkStructureType</type> <name>sType</name></member>
+            <member optional="true">const <type>void</type>*            <name>pNext</name></member>
+            <member><type>VkFence</type>                                <name>fence</name></member>
+            <member><type>VkExternalFenceHandleTypeFlagBits</type>      <name>handleType</name></member>
+        </type>
+        <type category="struct" name="VkExportSemaphoreSciSyncInfoNV" structextends="VkSemaphoreCreateInfo">
+            <member values="VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_SCI_SYNC_INFO_NV"><type>VkStructureType</type> <name>sType</name></member>
+            <member optional="true">const <type>void</type>*            <name>pNext</name></member>
+            <member><type>NvSciSyncAttrList</type>                      <name>pAttributes</name></member>
+        </type>
+        <type category="struct" name="VkImportSemaphoreSciSyncInfoNV">
+            <member values="VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_SCI_SYNC_INFO_NV"><type>VkStructureType</type> <name>sType</name></member>
+            <member optional="true">const <type>void</type>*            <name>pNext</name></member>
+            <member externsync="true"><type>VkSemaphore</type>          <name>semaphore</name></member>
+            <member><type>VkExternalSemaphoreHandleTypeFlagBits</type>  <name>handleType</name></member>
+            <member>const <type>void</type>*                            <name>handle</name></member>
+        </type>
+        <type category="struct" name="VkSemaphoreGetSciSyncInfoNV">
+            <member values="VK_STRUCTURE_TYPE_SEMAPHORE_GET_SCI_SYNC_INFO_NV"><type>VkStructureType</type> <name>sType</name></member>
+            <member optional="true">const <type>void</type>*            <name>pNext</name></member>
+            <member><type>VkSemaphore</type>                            <name>semaphore</name></member>
+            <member><type>VkExternalSemaphoreHandleTypeFlagBits</type>  <name>handleType</name></member>
+        </type>
+        <type category="struct" name="VkSciSyncAttributesInfoNV">
+            <member values="VK_STRUCTURE_TYPE_SCI_SYNC_ATTRIBUTES_INFO_NV"><type>VkStructureType</type> <name>sType</name></member>
+            <member optional="true">const <type>void</type>*            <name>pNext</name></member>
+            <member><type>VkSciSyncClientTypeNV</type>                  <name>clientType</name></member>
+            <member><type>VkSciSyncPrimitiveTypeNV</type>               <name>primitiveType</name></member>
+        </type>
+        <type category="struct" name="VkPhysicalDeviceExternalSciSyncFeaturesNV" structextends="VkPhysicalDeviceFeatures2,VkDeviceCreateInfo">
+            <member values="VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SCI_SYNC_FEATURES_NV"><type>VkStructureType</type> <name>sType</name></member>
+            <member optional="true"><type>void</type>*                  <name>pNext</name></member>
+            <member><type>VkBool32</type>                               <name>sciSyncFence</name></member>
+            <member><type>VkBool32</type>                               <name>sciSyncSemaphore</name></member>
+            <member><type>VkBool32</type>                               <name>sciSyncImport</name></member>
+            <member><type>VkBool32</type>                               <name>sciSyncExport</name></member>
         </type>
         <type category="struct" name="VkPhysicalDeviceMultiviewFeatures" structextends="VkPhysicalDeviceFeatures2,VkDeviceCreateInfo">
             <member values="VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES"><type>VkStructureType</type> <name>sType</name></member>
@@ -8248,6 +8334,15 @@ typedef void <name>CAMetalLayer</name>;
     </enums>
     <enums name="VkPipelineLayoutCreateFlagBits" type="bitmask">
     </enums>
+    <enums name="VkSciSyncClientTypeNV" type="enum">
+        <enum value="0"    name="VK_SCI_SYNC_CLIENT_TYPE_SIGNALER_NV"/>
+        <enum value="1"    name="VK_SCI_SYNC_CLIENT_TYPE_WAITER_NV"/>
+        <enum value="2"    name="VK_SCI_SYNC_CLIENT_TYPE_SIGNALER_WAITER_NV"/>
+    </enums>
+    <enums name="VkSciSyncPrimitiveTypeNV" type="enum">
+        <enum value="0"   name="VK_SCI_SYNC_PRIMITIVE_TYPE_FENCE_NV"/>
+        <enum value="1"   name="VK_SCI_SYNC_PRIMITIVE_TYPE_SEMAPHORE_NV"/>
+    </enums>
     <enums name="VkProvokingVertexModeEXT" type="enum">
         <enum value="0"     name="VK_PROVOKING_VERTEX_MODE_FIRST_VERTEX_EXT"/>
         <enum value="1"     name="VK_PROVOKING_VERTEX_MODE_LAST_VERTEX_EXT"/>
@@ -9879,6 +9974,24 @@ typedef void <name>CAMetalLayer</name>;
             <param>const <type>VkMemoryGetRemoteAddressInfoNV</type>* <name>pMemoryGetRemoteAddressInfo</name></param>
             <param><type>VkRemoteAddressNV</type>* <name>pAddress</name></param>
         </command>
+        <command successcodes="VK_SUCCESS" errorcodes="VK_ERROR_INITIALIZATION_FAILED">
+            <proto><type>VkResult</type> <name>vkGetMemorySciBufNV</name></proto>
+            <param><type>VkDevice</type> <name>device</name></param>
+            <param>const <type>VkMemoryGetSciBufInfoNV</type>* <name>pGetSciBufInfo</name></param>
+            <param><type>NvSciBufObj</type>* <name>pHandle</name></param>
+        </command>
+        <command successcodes="VK_SUCCESS" errorcodes="VK_ERROR_INITIALIZATION_FAILED,VK_ERROR_INVALID_EXTERNAL_HANDLE">
+            <proto><type>VkResult</type> <name>vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV</name></proto>
+            <param><type>VkPhysicalDevice</type> <name>physicalDevice</name></param>
+            <param><type>VkExternalMemoryHandleTypeFlagBits</type> <name>handleType</name></param>
+            <param><type>NvSciBufObj</type> <name>handle</name></param>
+            <param><type>VkMemorySciBufPropertiesNV</type>* <name>pMemorySciBufProperties</name></param>
+        </command>
+        <command successcodes="VK_SUCCESS" errorcodes="VK_ERROR_OUT_OF_HOST_MEMORY,VK_ERROR_INITIALIZATION_FAILED">
+            <proto><type>VkResult</type> <name>vkGetPhysicalDeviceSciBufAttributesNV</name></proto>
+            <param><type>VkPhysicalDevice</type> <name>physicalDevice</name></param>
+            <param><type>NvSciBufAttrList</type> <name>pAttributes</name></param>
+        </command>
         <command>
             <proto><type>void</type> <name>vkGetPhysicalDeviceExternalSemaphoreProperties</name></proto>
             <param><type>VkPhysicalDevice</type> <name>physicalDevice</name></param>
@@ -9947,6 +10060,45 @@ typedef void <name>CAMetalLayer</name>;
             <proto><type>VkResult</type> <name>vkImportFenceFdKHR</name></proto>
             <param><type>VkDevice</type> <name>device</name></param>
             <param>const <type>VkImportFenceFdInfoKHR</type>* <name>pImportFenceFdInfo</name></param>
+        </command>
+        <command successcodes="VK_SUCCESS" errorcodes="VK_ERROR_INVALID_EXTERNAL_HANDLE,VK_ERROR_NOT_PERMITTED_EXT">
+            <proto><type>VkResult</type> <name>vkGetFenceSciSyncFenceNV</name></proto>
+            <param><type>VkDevice</type> <name>device</name></param>
+            <param>const <type>VkFenceGetSciSyncInfoNV</type>* <name>pGetSciSyncHandleInfo</name></param>
+            <param><type>void</type>* <name>pHandle</name></param>
+        </command>
+        <command successcodes="VK_SUCCESS" errorcodes="VK_ERROR_INVALID_EXTERNAL_HANDLE,VK_ERROR_NOT_PERMITTED_EXT">
+            <proto><type>VkResult</type> <name>vkGetFenceSciSyncObjNV</name></proto>
+            <param><type>VkDevice</type> <name>device</name></param>
+            <param>const <type>VkFenceGetSciSyncInfoNV</type>* <name>pGetSciSyncHandleInfo</name></param>
+            <param><type>void</type>* <name>pHandle</name></param>
+        </command>
+        <command successcodes="VK_SUCCESS" errorcodes="VK_ERROR_INVALID_EXTERNAL_HANDLE,VK_ERROR_NOT_PERMITTED_EXT">
+            <proto><type>VkResult</type> <name>vkImportFenceSciSyncFenceNV</name></proto>
+            <param><type>VkDevice</type> <name>device</name></param>
+            <param>const <type>VkImportFenceSciSyncInfoNV</type>* <name>pImportFenceSciSyncInfo</name></param>
+        </command>
+        <command successcodes="VK_SUCCESS" errorcodes="VK_ERROR_INVALID_EXTERNAL_HANDLE,VK_ERROR_NOT_PERMITTED_EXT">
+            <proto><type>VkResult</type> <name>vkImportFenceSciSyncObjNV</name></proto>
+            <param><type>VkDevice</type> <name>device</name></param>
+            <param>const <type>VkImportFenceSciSyncInfoNV</type>* <name>pImportFenceSciSyncInfo</name></param>
+        </command>
+        <command successcodes="VK_SUCCESS" errorcodes="VK_ERROR_INVALID_EXTERNAL_HANDLE,VK_ERROR_NOT_PERMITTED_EXT">
+            <proto><type>VkResult</type> <name>vkGetSemaphoreSciSyncObjNV</name></proto>
+            <param><type>VkDevice</type> <name>device</name></param>
+            <param>const <type>VkSemaphoreGetSciSyncInfoNV</type>* <name>pGetSciSyncInfo</name></param>
+            <param><type>void</type>* <name>pHandle</name></param>
+        </command>
+        <command successcodes="VK_SUCCESS" errorcodes="VK_ERROR_INVALID_EXTERNAL_HANDLE,VK_ERROR_NOT_PERMITTED_EXT,VK_ERROR_OUT_OF_HOST_MEMORY">
+            <proto><type>VkResult</type> <name>vkImportSemaphoreSciSyncObjNV</name></proto>
+            <param><type>VkDevice</type> <name>device</name></param>
+            <param>const <type>VkImportSemaphoreSciSyncInfoNV</type>* <name>pImportSemaphoreSciSyncInfo</name></param>
+        </command>
+        <command successcodes="VK_SUCCESS" errorcodes="VK_ERROR_INITIALIZATION_FAILED">
+            <proto><type>VkResult</type> <name>vkGetPhysicalDeviceSciSyncAttributesNV</name></proto>
+            <param><type>VkPhysicalDevice</type> <name>physicalDevice</name></param>
+            <param>const <type>VkSciSyncAttributesInfoNV</type>* <name>pSciSyncAttributesInfo</name></param>
+            <param><type>NvSciSyncAttrList</type> <name>pAttributes</name></param>
         </command>
         <command successcodes="VK_SUCCESS">
             <proto><type>VkResult</type> <name>vkReleaseDisplayEXT</name></proto>
@@ -17562,21 +17714,58 @@ typedef void <name>CAMetalLayer</name>;
                 <enum value="&quot;VK_NV_extension_373&quot;"           name="VK_NV_EXTENSION_373_EXTENSION_NAME"/>
             </require>
         </extension>
-        <extension name="VK_NV_extension_374" number="374" author="NV" contact="Daniel Koch @dgkoch" supported="disabled">
+        <extension name="VK_NV_external_sci_sync" number="374" requiresCore="1.1" platform="sci" type="device" author="NV" contact="Kai Zhang @kazhang" supported="vulkansc">
             <require>
-                <enum value="0"                                         name="VK_NV_EXTENSION_374_SPEC_VERSION"/>
-                <enum value="&quot;VK_NV_extension_374&quot;"           name="VK_NV_EXTENSION_374_EXTENSION_NAME"/>
-                <enum bitpos="4" extends="VkExternalFenceHandleTypeFlagBits" name="VK_EXTERNAL_FENCE_HANDLE_TYPE_RESERVED_4_BIT_NV"/>
-                <enum bitpos="5" extends="VkExternalFenceHandleTypeFlagBits" name="VK_EXTERNAL_FENCE_HANDLE_TYPE_RESERVED_5_BIT_NV"/>
-                <enum bitpos="5" extends="VkExternalSemaphoreHandleTypeFlagBits" name="VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_RESERVED_5_BIT_NV"/>
-                <enum bitpos="6" extends="VkExternalSemaphoreHandleTypeFlagBits" name="VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_RESERVED_6_BIT_NV"/>
+                <enum value="2"                                         name="VK_NV_EXTERNAL_SCI_SYNC_SPEC_VERSION"/>
+                <enum value="&quot;VK_NV_external_sci_sync&quot;"       name="VK_NV_EXTERNAL_SCI_SYNC_EXTENSION_NAME"/>
+                <enum offset="0" extends="VkStructureType"              name="VK_STRUCTURE_TYPE_IMPORT_FENCE_SCI_SYNC_INFO_NV"/>
+                <enum offset="1" extends="VkStructureType"              name="VK_STRUCTURE_TYPE_EXPORT_FENCE_SCI_SYNC_INFO_NV"/>
+                <enum offset="2" extends="VkStructureType"              name="VK_STRUCTURE_TYPE_FENCE_GET_SCI_SYNC_INFO_NV"/>
+                <enum offset="3" extends="VkStructureType"              name="VK_STRUCTURE_TYPE_SCI_SYNC_ATTRIBUTES_INFO_NV"/>
+                <enum offset="4" extends="VkStructureType"              name="VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_SCI_SYNC_INFO_NV"/>
+                <enum offset="5" extends="VkStructureType"              name="VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_SCI_SYNC_INFO_NV"/>
+                <enum offset="6" extends="VkStructureType"              name="VK_STRUCTURE_TYPE_SEMAPHORE_GET_SCI_SYNC_INFO_NV"/>
+                <enum offset="7" extends="VkStructureType"              name="VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SCI_SYNC_FEATURES_NV"/>
+                <enum bitpos="4" extends="VkExternalFenceHandleTypeFlagBits" name="VK_EXTERNAL_FENCE_HANDLE_TYPE_SCI_SYNC_OBJ_BIT_NV"/>
+                <enum bitpos="5" extends="VkExternalFenceHandleTypeFlagBits" name="VK_EXTERNAL_FENCE_HANDLE_TYPE_SCI_SYNC_FENCE_BIT_NV"/>
+                <enum bitpos="5" extends="VkExternalSemaphoreHandleTypeFlagBits" name="VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SCI_SYNC_OBJ_BIT_NV"/>
+                <type name="VkSciSyncClientTypeNV"/>
+                <type name="VkSciSyncPrimitiveTypeNV"/>
+                <type name="VkExportFenceSciSyncInfoNV"/>
+                <type name="VkImportFenceSciSyncInfoNV"/>
+                <type name="VkFenceGetSciSyncInfoNV"/>
+                <type name="VkSciSyncAttributesInfoNV"/>
+                <type name="VkExportSemaphoreSciSyncInfoNV"/>
+                <type name="VkImportSemaphoreSciSyncInfoNV"/>
+                <type name="VkSemaphoreGetSciSyncInfoNV"/>
+                <type name="VkPhysicalDeviceExternalSciSyncFeaturesNV"/>
+                <command name="vkGetFenceSciSyncFenceNV"/>
+                <command name="vkGetFenceSciSyncObjNV"/>
+                <command name="vkImportFenceSciSyncFenceNV"/>
+                <command name="vkImportFenceSciSyncObjNV"/>
+                <command name="vkGetPhysicalDeviceSciSyncAttributesNV"/>
+                <command name="vkGetSemaphoreSciSyncObjNV"/>
+                <command name="vkImportSemaphoreSciSyncObjNV"/>
             </require>
         </extension>
-        <extension name="VK_NV_extension_375" number="375" author="NV" contact="Daniel Koch @dgkoch" supported="disabled">
+        <extension name="VK_NV_external_memory_sci_buf" number="375" requiresCore="1.1" platform="sci" type="device" author="NV" contact="Kai Zhang @kazhang" supported="vulkansc">
             <require>
-                <enum value="0"                                         name="VK_NV_EXTENSION_375_SPEC_VERSION"/>
-                <enum value="&quot;VK_NV_extension_375&quot;"           name="VK_NV_EXTENSION_375_EXTENSION_NAME"/>
-                <enum bitpos="13" extends="VkExternalMemoryHandleTypeFlagBits"  name="VK_EXTERNAL_MEMORY_HANDLE_TYPE_RESERVED_13_BIT_NV"/>
+                <enum value="1"                                         name="VK_NV_EXTERNAL_MEMORY_SCI_BUF_SPEC_VERSION"/>
+                <enum value="&quot;VK_NV_external_memory_sci_buf&quot;" name="VK_NV_EXTERNAL_MEMORY_SCI_BUF_EXTENSION_NAME"/>
+                <enum offset="0" extends="VkStructureType"              name="VK_STRUCTURE_TYPE_IMPORT_MEMORY_SCI_BUF_INFO_NV"/>
+                <enum offset="1" extends="VkStructureType"              name="VK_STRUCTURE_TYPE_EXPORT_MEMORY_SCI_BUF_INFO_NV"/>
+                <enum offset="2" extends="VkStructureType"              name="VK_STRUCTURE_TYPE_MEMORY_GET_SCI_BUF_INFO_NV"/>
+                <enum offset="3" extends="VkStructureType"              name="VK_STRUCTURE_TYPE_MEMORY_SCI_BUF_PROPERTIES_NV"/>
+                <enum offset="4" extends="VkStructureType"              name="VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SCI_BUF_FEATURES_NV"/>
+                <enum bitpos="13" extends="VkExternalMemoryHandleTypeFlagBits"  name="VK_EXTERNAL_MEMORY_HANDLE_TYPE_SCI_BUF_BIT_NV"/>
+                <type name="VkExportMemorySciBufInfoNV"/>
+                <type name="VkImportMemorySciBufInfoNV"/>
+                <type name="VkMemoryGetSciBufInfoNV"/>
+                <type name="VkMemorySciBufPropertiesNV"/>
+                <type name="VkPhysicalDeviceExternalSciBufFeaturesNV"/>
+                <command name="vkGetMemorySciBufNV"/>
+                <command name="vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV"/>
+                <command name="vkGetPhysicalDeviceSciBufAttributesNV"/>
             </require>
         </extension>
         <extension name="VK_EXT_extension_376" number="376" author="EXT" contact="Melih Yasin Yalcin @yalcinmelihyasin" supported="disabled">

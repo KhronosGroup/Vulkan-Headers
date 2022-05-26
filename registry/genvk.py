@@ -407,6 +407,8 @@ def makeGenOpts(args):
         [ 'vulkan_xlib_xrandr.h', [ 'VK_EXT_acquire_xlib_display' ], commonSuppressExtensions ],
         [ 'vulkan_metal.h',       [ 'VK_EXT_metal_surface'        ], commonSuppressExtensions ],
         [ 'vulkan_screen.h',      [ 'VK_QNX_screen_surface'       ], commonSuppressExtensions ],
+        [ 'vulkan_sci.h',         [ 'VK_NV_external_sci_sync',
+                                    'VK_NV_external_memory_sci_buf'], commonSuppressExtensions ],
         [ 'vulkan_beta.h',        betaRequireExtensions,             betaSuppressExtensions ],
     ]
 
