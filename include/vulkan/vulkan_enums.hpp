@@ -838,8 +838,8 @@ namespace VULKAN_HPP_NAMESPACE
     ePhysicalDeviceImageCompressionControlSwapchainFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_FEATURES_EXT,
     ePhysicalDeviceSubpassMergeFeedbackFeaturesEXT             = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_MERGE_FEEDBACK_FEATURES_EXT,
     eRenderPassCreationControlEXT                              = VK_STRUCTURE_TYPE_RENDER_PASS_CREATION_CONTROL_EXT,
-    eRenderPassCreationFeedbackInfoEXT                         = VK_STRUCTURE_TYPE_RENDER_PASS_CREATION_FEEDBACK_INFO_EXT,
-    eRenderPassSubpassFeedbackInfoEXT                          = VK_STRUCTURE_TYPE_RENDER_PASS_SUBPASS_FEEDBACK_INFO_EXT,
+    eRenderPassCreationFeedbackCreateInfoEXT                   = VK_STRUCTURE_TYPE_RENDER_PASS_CREATION_FEEDBACK_CREATE_INFO_EXT,
+    eRenderPassSubpassFeedbackCreateInfoEXT                    = VK_STRUCTURE_TYPE_RENDER_PASS_SUBPASS_FEEDBACK_CREATE_INFO_EXT,
     eAttachmentDescription2KHR                                 = VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_2_KHR,
     eAttachmentDescriptionStencilLayoutKHR                     = VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_STENCIL_LAYOUT_KHR,
     eAttachmentReference2KHR                                   = VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_2_KHR,
@@ -1715,8 +1715,8 @@ namespace VULKAN_HPP_NAMESPACE
       case StructureType::ePhysicalDeviceImageCompressionControlSwapchainFeaturesEXT: return "PhysicalDeviceImageCompressionControlSwapchainFeaturesEXT";
       case StructureType::ePhysicalDeviceSubpassMergeFeedbackFeaturesEXT: return "PhysicalDeviceSubpassMergeFeedbackFeaturesEXT";
       case StructureType::eRenderPassCreationControlEXT: return "RenderPassCreationControlEXT";
-      case StructureType::eRenderPassCreationFeedbackInfoEXT: return "RenderPassCreationFeedbackInfoEXT";
-      case StructureType::eRenderPassSubpassFeedbackInfoEXT: return "RenderPassSubpassFeedbackInfoEXT";
+      case StructureType::eRenderPassCreationFeedbackCreateInfoEXT: return "RenderPassCreationFeedbackCreateInfoEXT";
+      case StructureType::eRenderPassSubpassFeedbackCreateInfoEXT: return "RenderPassSubpassFeedbackCreateInfoEXT";
       default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
     }
   }
