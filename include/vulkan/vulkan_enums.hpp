@@ -36,37 +36,45 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class Result
   {
-    eSuccess                                     = VK_SUCCESS,
-    eNotReady                                    = VK_NOT_READY,
-    eTimeout                                     = VK_TIMEOUT,
-    eEventSet                                    = VK_EVENT_SET,
-    eEventReset                                  = VK_EVENT_RESET,
-    eIncomplete                                  = VK_INCOMPLETE,
-    eErrorOutOfHostMemory                        = VK_ERROR_OUT_OF_HOST_MEMORY,
-    eErrorOutOfDeviceMemory                      = VK_ERROR_OUT_OF_DEVICE_MEMORY,
-    eErrorInitializationFailed                   = VK_ERROR_INITIALIZATION_FAILED,
-    eErrorDeviceLost                             = VK_ERROR_DEVICE_LOST,
-    eErrorMemoryMapFailed                        = VK_ERROR_MEMORY_MAP_FAILED,
-    eErrorLayerNotPresent                        = VK_ERROR_LAYER_NOT_PRESENT,
-    eErrorExtensionNotPresent                    = VK_ERROR_EXTENSION_NOT_PRESENT,
-    eErrorFeatureNotPresent                      = VK_ERROR_FEATURE_NOT_PRESENT,
-    eErrorIncompatibleDriver                     = VK_ERROR_INCOMPATIBLE_DRIVER,
-    eErrorTooManyObjects                         = VK_ERROR_TOO_MANY_OBJECTS,
-    eErrorFormatNotSupported                     = VK_ERROR_FORMAT_NOT_SUPPORTED,
-    eErrorFragmentedPool                         = VK_ERROR_FRAGMENTED_POOL,
-    eErrorUnknown                                = VK_ERROR_UNKNOWN,
-    eErrorOutOfPoolMemory                        = VK_ERROR_OUT_OF_POOL_MEMORY,
-    eErrorInvalidExternalHandle                  = VK_ERROR_INVALID_EXTERNAL_HANDLE,
-    eErrorFragmentation                          = VK_ERROR_FRAGMENTATION,
-    eErrorInvalidOpaqueCaptureAddress            = VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS,
-    ePipelineCompileRequired                     = VK_PIPELINE_COMPILE_REQUIRED,
-    eErrorSurfaceLostKHR                         = VK_ERROR_SURFACE_LOST_KHR,
-    eErrorNativeWindowInUseKHR                   = VK_ERROR_NATIVE_WINDOW_IN_USE_KHR,
-    eSuboptimalKHR                               = VK_SUBOPTIMAL_KHR,
-    eErrorOutOfDateKHR                           = VK_ERROR_OUT_OF_DATE_KHR,
-    eErrorIncompatibleDisplayKHR                 = VK_ERROR_INCOMPATIBLE_DISPLAY_KHR,
-    eErrorValidationFailedEXT                    = VK_ERROR_VALIDATION_FAILED_EXT,
-    eErrorInvalidShaderNV                        = VK_ERROR_INVALID_SHADER_NV,
+    eSuccess                          = VK_SUCCESS,
+    eNotReady                         = VK_NOT_READY,
+    eTimeout                          = VK_TIMEOUT,
+    eEventSet                         = VK_EVENT_SET,
+    eEventReset                       = VK_EVENT_RESET,
+    eIncomplete                       = VK_INCOMPLETE,
+    eErrorOutOfHostMemory             = VK_ERROR_OUT_OF_HOST_MEMORY,
+    eErrorOutOfDeviceMemory           = VK_ERROR_OUT_OF_DEVICE_MEMORY,
+    eErrorInitializationFailed        = VK_ERROR_INITIALIZATION_FAILED,
+    eErrorDeviceLost                  = VK_ERROR_DEVICE_LOST,
+    eErrorMemoryMapFailed             = VK_ERROR_MEMORY_MAP_FAILED,
+    eErrorLayerNotPresent             = VK_ERROR_LAYER_NOT_PRESENT,
+    eErrorExtensionNotPresent         = VK_ERROR_EXTENSION_NOT_PRESENT,
+    eErrorFeatureNotPresent           = VK_ERROR_FEATURE_NOT_PRESENT,
+    eErrorIncompatibleDriver          = VK_ERROR_INCOMPATIBLE_DRIVER,
+    eErrorTooManyObjects              = VK_ERROR_TOO_MANY_OBJECTS,
+    eErrorFormatNotSupported          = VK_ERROR_FORMAT_NOT_SUPPORTED,
+    eErrorFragmentedPool              = VK_ERROR_FRAGMENTED_POOL,
+    eErrorUnknown                     = VK_ERROR_UNKNOWN,
+    eErrorOutOfPoolMemory             = VK_ERROR_OUT_OF_POOL_MEMORY,
+    eErrorInvalidExternalHandle       = VK_ERROR_INVALID_EXTERNAL_HANDLE,
+    eErrorFragmentation               = VK_ERROR_FRAGMENTATION,
+    eErrorInvalidOpaqueCaptureAddress = VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS,
+    ePipelineCompileRequired          = VK_PIPELINE_COMPILE_REQUIRED,
+    eErrorSurfaceLostKHR              = VK_ERROR_SURFACE_LOST_KHR,
+    eErrorNativeWindowInUseKHR        = VK_ERROR_NATIVE_WINDOW_IN_USE_KHR,
+    eSuboptimalKHR                    = VK_SUBOPTIMAL_KHR,
+    eErrorOutOfDateKHR                = VK_ERROR_OUT_OF_DATE_KHR,
+    eErrorIncompatibleDisplayKHR      = VK_ERROR_INCOMPATIBLE_DISPLAY_KHR,
+    eErrorValidationFailedEXT         = VK_ERROR_VALIDATION_FAILED_EXT,
+    eErrorInvalidShaderNV             = VK_ERROR_INVALID_SHADER_NV,
+#if defined( VK_ENABLE_BETA_EXTENSIONS )
+    eErrorImageUsageNotSupportedKHR            = VK_ERROR_IMAGE_USAGE_NOT_SUPPORTED_KHR,
+    eErrorVideoPictureLayoutNotSupportedKHR    = VK_ERROR_VIDEO_PICTURE_LAYOUT_NOT_SUPPORTED_KHR,
+    eErrorVideoProfileOperationNotSupportedKHR = VK_ERROR_VIDEO_PROFILE_OPERATION_NOT_SUPPORTED_KHR,
+    eErrorVideoProfileFormatNotSupportedKHR    = VK_ERROR_VIDEO_PROFILE_FORMAT_NOT_SUPPORTED_KHR,
+    eErrorVideoProfileCodecNotSupportedKHR     = VK_ERROR_VIDEO_PROFILE_CODEC_NOT_SUPPORTED_KHR,
+    eErrorVideoStdVersionNotSupportedKHR       = VK_ERROR_VIDEO_STD_VERSION_NOT_SUPPORTED_KHR,
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
     eErrorInvalidDrmFormatModifierPlaneLayoutEXT = VK_ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT,
     eErrorNotPermittedKHR                        = VK_ERROR_NOT_PERMITTED_KHR,
 #if defined( VK_USE_PLATFORM_WIN32_KHR )
@@ -122,6 +130,14 @@ namespace VULKAN_HPP_NAMESPACE
       case Result::eErrorIncompatibleDisplayKHR: return "ErrorIncompatibleDisplayKHR";
       case Result::eErrorValidationFailedEXT: return "ErrorValidationFailedEXT";
       case Result::eErrorInvalidShaderNV: return "ErrorInvalidShaderNV";
+#if defined( VK_ENABLE_BETA_EXTENSIONS )
+      case Result::eErrorImageUsageNotSupportedKHR: return "ErrorImageUsageNotSupportedKHR";
+      case Result::eErrorVideoPictureLayoutNotSupportedKHR: return "ErrorVideoPictureLayoutNotSupportedKHR";
+      case Result::eErrorVideoProfileOperationNotSupportedKHR: return "ErrorVideoProfileOperationNotSupportedKHR";
+      case Result::eErrorVideoProfileFormatNotSupportedKHR: return "ErrorVideoProfileFormatNotSupportedKHR";
+      case Result::eErrorVideoProfileCodecNotSupportedKHR: return "ErrorVideoProfileCodecNotSupportedKHR";
+      case Result::eErrorVideoStdVersionNotSupportedKHR: return "ErrorVideoStdVersionNotSupportedKHR";
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
       case Result::eErrorInvalidDrmFormatModifierPlaneLayoutEXT: return "ErrorInvalidDrmFormatModifierPlaneLayoutEXT";
       case Result::eErrorNotPermittedKHR: return "ErrorNotPermittedKHR";
 #if defined( VK_USE_PLATFORM_WIN32_KHR )
