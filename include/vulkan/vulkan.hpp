@@ -117,7 +117,7 @@ extern "C" __declspec( dllimport ) FARPROC __stdcall GetProcAddress( HINSTANCE h
 #  include <span>
 #endif
 
-static_assert( VK_HEADER_VERSION == 223, "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION == 224, "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for non-dispatchable handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
@@ -556,8 +556,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     return flags.operator^( bit );
   }
-#if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
 
+#if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
   template <typename T>
   class ArrayProxy
   {
@@ -5406,8 +5406,8 @@ namespace VULKAN_HPP_NAMESPACE
 #  define VULKAN_HPP_DEFAULT_ARGUMENT_NULLPTR_ASSIGNMENT = nullptr
 #  define VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT       = VULKAN_HPP_DEFAULT_DISPATCHER
 #endif
-#if !defined( VULKAN_HPP_NO_SMART_HANDLE )
 
+#if !defined( VULKAN_HPP_NO_SMART_HANDLE )
   struct AllocationCallbacks;
 
   template <typename OwnerType, typename Dispatch>
@@ -5617,7 +5617,6 @@ namespace std
 namespace VULKAN_HPP_NAMESPACE
 {
 #ifndef VULKAN_HPP_NO_EXCEPTIONS
-
   class ErrorCategoryImpl : public std::error_category
   {
   public:
@@ -7625,7 +7624,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  if defined( VK_ENABLE_BETA_EXTENSIONS )
   //=== VK_EXT_video_encode_h264 ===
   template <>
-  struct StructExtends<VideoEncodeH264CapabilitiesEXT, VideoEncodeCapabilitiesKHR>
+  struct StructExtends<VideoEncodeH264CapabilitiesEXT, VideoCapabilitiesKHR>
   {
     enum
     {
@@ -7701,7 +7700,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  if defined( VK_ENABLE_BETA_EXTENSIONS )
   //=== VK_EXT_video_encode_h265 ===
   template <>
-  struct StructExtends<VideoEncodeH265CapabilitiesEXT, VideoEncodeCapabilitiesKHR>
+  struct StructExtends<VideoEncodeH265CapabilitiesEXT, VideoCapabilitiesKHR>
   {
     enum
     {
@@ -7793,7 +7792,7 @@ namespace VULKAN_HPP_NAMESPACE
     };
   };
   template <>
-  struct StructExtends<VideoDecodeH264CapabilitiesEXT, VideoDecodeCapabilitiesKHR>
+  struct StructExtends<VideoDecodeH264CapabilitiesEXT, VideoCapabilitiesKHR>
   {
     enum
     {
@@ -8881,7 +8880,7 @@ namespace VULKAN_HPP_NAMESPACE
     };
   };
   template <>
-  struct StructExtends<VideoDecodeH265CapabilitiesEXT, VideoDecodeCapabilitiesKHR>
+  struct StructExtends<VideoDecodeH265CapabilitiesEXT, VideoCapabilitiesKHR>
   {
     enum
     {
@@ -10444,6 +10443,24 @@ namespace VULKAN_HPP_NAMESPACE
     };
   };
 
+  //=== VK_EXT_attachment_feedback_loop_layout ===
+  template <>
+  struct StructExtends<PhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT, PhysicalDeviceFeatures2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<PhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT, DeviceCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
   //=== VK_EXT_4444_formats ===
   template <>
   struct StructExtends<PhysicalDevice4444FormatsFeaturesEXT, PhysicalDeviceFeatures2>
@@ -11247,6 +11264,32 @@ namespace VULKAN_HPP_NAMESPACE
   };
   template <>
   struct StructExtends<PhysicalDeviceTilePropertiesFeaturesQCOM, DeviceCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  //=== VK_SEC_amigo_profiling ===
+  template <>
+  struct StructExtends<PhysicalDeviceAmigoProfilingFeaturesSEC, PhysicalDeviceFeatures2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<PhysicalDeviceAmigoProfilingFeaturesSEC, DeviceCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<AmigoProfilingSubmitInfoSEC, SubmitInfo>
   {
     enum
     {

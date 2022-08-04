@@ -10678,25 +10678,23 @@ namespace VULKAN_HPP_NAMESPACE
     }
 
     template <typename DataType>
-    VULKAN_HPP_NODISCARD std::pair<VULKAN_HPP_NAMESPACE::Result, DataType> QueryPool::getResult( uint32_t                               firstQuery,
-                                                                                                 uint32_t                               queryCount,
-                                                                                                 VULKAN_HPP_NAMESPACE::DeviceSize       stride,
-                                                                                                 VULKAN_HPP_NAMESPACE::QueryResultFlags flags ) const
+    VULKAN_HPP_NODISCARD VULKAN_HPP_INLINE std::pair<VULKAN_HPP_NAMESPACE::Result, DataType> QueryPool::getResult(
+      uint32_t firstQuery, uint32_t queryCount, VULKAN_HPP_NAMESPACE::DeviceSize stride, VULKAN_HPP_NAMESPACE::QueryResultFlags flags ) const
     {
       DataType data;
-      Result   result = static_cast<Result>( getDispatcher()->vkGetQueryPoolResults( static_cast<VkDevice>( m_device ),
-                                                                                   static_cast<VkQueryPool>( m_queryPool ),
-                                                                                   firstQuery,
-                                                                                   queryCount,
-                                                                                   sizeof( DataType ),
-                                                                                   reinterpret_cast<void *>( &data ),
-                                                                                   static_cast<VkDeviceSize>( stride ),
-                                                                                   static_cast<VkQueryResultFlags>( flags ) ) );
-      if ( ( result != VULKAN_HPP_NAMESPACE::Result::eSuccess ) && ( result != VULKAN_HPP_NAMESPACE::Result::eNotReady ) )
-      {
-        throwResultException( result, VULKAN_HPP_NAMESPACE_STRING "::QueryPool::getResult" );
-      }
-      return std::make_pair( result, data );
+      VkResult result = getDispatcher()->vkGetQueryPoolResults( static_cast<VkDevice>( m_device ),
+                                                                static_cast<VkQueryPool>( m_queryPool ),
+                                                                firstQuery,
+                                                                queryCount,
+                                                                sizeof( DataType ),
+                                                                reinterpret_cast<void *>( &data ),
+                                                                static_cast<VkDeviceSize>( stride ),
+                                                                static_cast<VkQueryResultFlags>( flags ) );
+      resultCheck( static_cast<VULKAN_HPP_NAMESPACE::Result>( result ),
+                   VULKAN_HPP_NAMESPACE_STRING "::QueryPool::getResult",
+                   { VULKAN_HPP_NAMESPACE::Result::eSuccess, VULKAN_HPP_NAMESPACE::Result::eNotReady } );
+
+      return std::make_pair( static_cast<VULKAN_HPP_NAMESPACE::Result>( result ), data );
     }
 
     VULKAN_HPP_NODISCARD VULKAN_HPP_INLINE VULKAN_HPP_RAII_NAMESPACE::Buffer
@@ -14829,24 +14827,25 @@ namespace VULKAN_HPP_NAMESPACE
     }
 
     template <typename DataType>
-    VULKAN_HPP_NODISCARD DataType
+    VULKAN_HPP_NODISCARD VULKAN_HPP_INLINE DataType
       Device::writeAccelerationStructuresPropertyKHR( ArrayProxy<const VULKAN_HPP_NAMESPACE::AccelerationStructureKHR> const & accelerationStructures,
                                                       VULKAN_HPP_NAMESPACE::QueryType                                          queryType,
                                                       size_t                                                                   stride ) const
     {
+      VULKAN_HPP_ASSERT( getDispatcher()->vkWriteAccelerationStructuresPropertiesKHR &&
+                         "Function <vkWriteAccelerationStructuresPropertiesKHR> needs extension <VK_KHR_acceleration_structure> enabled!" );
+
       DataType data;
-      Result   result = static_cast<Result>(
+      VkResult result =
         getDispatcher()->vkWriteAccelerationStructuresPropertiesKHR( static_cast<VkDevice>( m_device ),
                                                                      accelerationStructures.size(),
                                                                      reinterpret_cast<const VkAccelerationStructureKHR *>( accelerationStructures.data() ),
                                                                      static_cast<VkQueryType>( queryType ),
                                                                      sizeof( DataType ),
                                                                      reinterpret_cast<void *>( &data ),
-                                                                     stride ) );
-      if ( result != VULKAN_HPP_NAMESPACE::Result::eSuccess )
-      {
-        throwResultException( result, VULKAN_HPP_NAMESPACE_STRING "::Device::writeAccelerationStructuresPropertyKHR" );
-      }
+                                                                     stride );
+      resultCheck( static_cast<VULKAN_HPP_NAMESPACE::Result>( result ), VULKAN_HPP_NAMESPACE_STRING "::Device::writeAccelerationStructuresPropertyKHR" );
+
       return data;
     }
 
@@ -15245,19 +15244,20 @@ namespace VULKAN_HPP_NAMESPACE
     }
 
     template <typename DataType>
-    VULKAN_HPP_NODISCARD DataType Pipeline::getRayTracingShaderGroupHandleNV( uint32_t firstGroup, uint32_t groupCount ) const
+    VULKAN_HPP_NODISCARD VULKAN_HPP_INLINE DataType Pipeline::getRayTracingShaderGroupHandleNV( uint32_t firstGroup, uint32_t groupCount ) const
     {
+      VULKAN_HPP_ASSERT( getDispatcher()->vkGetRayTracingShaderGroupHandlesNV &&
+                         "Function <vkGetRayTracingShaderGroupHandlesNV> needs extension <VK_NV_ray_tracing> enabled!" );
+
       DataType data;
-      Result   result = static_cast<Result>( getDispatcher()->vkGetRayTracingShaderGroupHandlesNV( static_cast<VkDevice>( m_device ),
-                                                                                                 static_cast<VkPipeline>( m_pipeline ),
-                                                                                                 firstGroup,
-                                                                                                 groupCount,
-                                                                                                 sizeof( DataType ),
-                                                                                                 reinterpret_cast<void *>( &data ) ) );
-      if ( result != VULKAN_HPP_NAMESPACE::Result::eSuccess )
-      {
-        throwResultException( result, VULKAN_HPP_NAMESPACE_STRING "::Pipeline::getRayTracingShaderGroupHandleNV" );
-      }
+      VkResult result = getDispatcher()->vkGetRayTracingShaderGroupHandlesNV( static_cast<VkDevice>( m_device ),
+                                                                              static_cast<VkPipeline>( m_pipeline ),
+                                                                              firstGroup,
+                                                                              groupCount,
+                                                                              sizeof( DataType ),
+                                                                              reinterpret_cast<void *>( &data ) );
+      resultCheck( static_cast<VULKAN_HPP_NAMESPACE::Result>( result ), VULKAN_HPP_NAMESPACE_STRING "::Pipeline::getRayTracingShaderGroupHandleNV" );
+
       return data;
     }
 
@@ -15279,18 +15279,18 @@ namespace VULKAN_HPP_NAMESPACE
     }
 
     template <typename DataType>
-    VULKAN_HPP_NODISCARD DataType AccelerationStructureNV::getHandle() const
+    VULKAN_HPP_NODISCARD VULKAN_HPP_INLINE DataType AccelerationStructureNV::getHandle() const
     {
+      VULKAN_HPP_ASSERT( getDispatcher()->vkGetAccelerationStructureHandleNV &&
+                         "Function <vkGetAccelerationStructureHandleNV> needs extension <VK_NV_ray_tracing> enabled!" );
+
       DataType data;
-      Result   result =
-        static_cast<Result>( getDispatcher()->vkGetAccelerationStructureHandleNV( static_cast<VkDevice>( m_device ),
-                                                                                  static_cast<VkAccelerationStructureNV>( m_accelerationStructure ),
-                                                                                  sizeof( DataType ),
-                                                                                  reinterpret_cast<void *>( &data ) ) );
-      if ( result != VULKAN_HPP_NAMESPACE::Result::eSuccess )
-      {
-        throwResultException( result, VULKAN_HPP_NAMESPACE_STRING "::AccelerationStructureNV::getHandle" );
-      }
+      VkResult result = getDispatcher()->vkGetAccelerationStructureHandleNV( static_cast<VkDevice>( m_device ),
+                                                                             static_cast<VkAccelerationStructureNV>( m_accelerationStructure ),
+                                                                             sizeof( DataType ),
+                                                                             reinterpret_cast<void *>( &data ) );
+      resultCheck( static_cast<VULKAN_HPP_NAMESPACE::Result>( result ), VULKAN_HPP_NAMESPACE_STRING "::AccelerationStructureNV::getHandle" );
+
       return data;
     }
 
@@ -16771,19 +16771,20 @@ namespace VULKAN_HPP_NAMESPACE
     }
 
     template <typename DataType>
-    VULKAN_HPP_NODISCARD DataType Pipeline::getRayTracingShaderGroupHandleKHR( uint32_t firstGroup, uint32_t groupCount ) const
+    VULKAN_HPP_NODISCARD VULKAN_HPP_INLINE DataType Pipeline::getRayTracingShaderGroupHandleKHR( uint32_t firstGroup, uint32_t groupCount ) const
     {
+      VULKAN_HPP_ASSERT( getDispatcher()->vkGetRayTracingShaderGroupHandlesKHR &&
+                         "Function <vkGetRayTracingShaderGroupHandlesKHR> needs extension <VK_KHR_ray_tracing_pipeline> enabled!" );
+
       DataType data;
-      Result   result = static_cast<Result>( getDispatcher()->vkGetRayTracingShaderGroupHandlesKHR( static_cast<VkDevice>( m_device ),
-                                                                                                  static_cast<VkPipeline>( m_pipeline ),
-                                                                                                  firstGroup,
-                                                                                                  groupCount,
-                                                                                                  sizeof( DataType ),
-                                                                                                  reinterpret_cast<void *>( &data ) ) );
-      if ( result != VULKAN_HPP_NAMESPACE::Result::eSuccess )
-      {
-        throwResultException( result, VULKAN_HPP_NAMESPACE_STRING "::Pipeline::getRayTracingShaderGroupHandleKHR" );
-      }
+      VkResult result = getDispatcher()->vkGetRayTracingShaderGroupHandlesKHR( static_cast<VkDevice>( m_device ),
+                                                                               static_cast<VkPipeline>( m_pipeline ),
+                                                                               firstGroup,
+                                                                               groupCount,
+                                                                               sizeof( DataType ),
+                                                                               reinterpret_cast<void *>( &data ) );
+      resultCheck( static_cast<VULKAN_HPP_NAMESPACE::Result>( result ), VULKAN_HPP_NAMESPACE_STRING "::Pipeline::getRayTracingShaderGroupHandleKHR" );
+
       return data;
     }
 
@@ -16809,19 +16810,21 @@ namespace VULKAN_HPP_NAMESPACE
     }
 
     template <typename DataType>
-    VULKAN_HPP_NODISCARD DataType Pipeline::getRayTracingCaptureReplayShaderGroupHandleKHR( uint32_t firstGroup, uint32_t groupCount ) const
+    VULKAN_HPP_NODISCARD VULKAN_HPP_INLINE DataType Pipeline::getRayTracingCaptureReplayShaderGroupHandleKHR( uint32_t firstGroup, uint32_t groupCount ) const
     {
+      VULKAN_HPP_ASSERT( getDispatcher()->vkGetRayTracingCaptureReplayShaderGroupHandlesKHR &&
+                         "Function <vkGetRayTracingCaptureReplayShaderGroupHandlesKHR> needs extension <VK_KHR_ray_tracing_pipeline> enabled!" );
+
       DataType data;
-      Result   result = static_cast<Result>( getDispatcher()->vkGetRayTracingCaptureReplayShaderGroupHandlesKHR( static_cast<VkDevice>( m_device ),
-                                                                                                               static_cast<VkPipeline>( m_pipeline ),
-                                                                                                               firstGroup,
-                                                                                                               groupCount,
-                                                                                                               sizeof( DataType ),
-                                                                                                               reinterpret_cast<void *>( &data ) ) );
-      if ( result != VULKAN_HPP_NAMESPACE::Result::eSuccess )
-      {
-        throwResultException( result, VULKAN_HPP_NAMESPACE_STRING "::Pipeline::getRayTracingCaptureReplayShaderGroupHandleKHR" );
-      }
+      VkResult result = getDispatcher()->vkGetRayTracingCaptureReplayShaderGroupHandlesKHR( static_cast<VkDevice>( m_device ),
+                                                                                            static_cast<VkPipeline>( m_pipeline ),
+                                                                                            firstGroup,
+                                                                                            groupCount,
+                                                                                            sizeof( DataType ),
+                                                                                            reinterpret_cast<void *>( &data ) );
+      resultCheck( static_cast<VULKAN_HPP_NAMESPACE::Result>( result ),
+                   VULKAN_HPP_NAMESPACE_STRING "::Pipeline::getRayTracingCaptureReplayShaderGroupHandleKHR" );
+
       return data;
     }
 
