@@ -25,7 +25,7 @@ Files in this repository originate from:
 ### Specification repository (https://github.com/KhronosGroup/Vulkan-Docs)
 
 * registry/cgenerator.py
-* registry/conventions.py
+* registry/spec_tools/conventions.py
 * registry/generator.py
 * registry/genvk.py
 * registry/reg.py
