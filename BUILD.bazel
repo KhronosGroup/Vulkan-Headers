@@ -1,0 +1,11 @@
+cc_library(
+    name = "vulkan",
+    hdrs = glob(["include/vulkan/*"]),
+    visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "vk_video",
+    hdrs = glob(["include/vk_video/*"]),
+    visibility = ["//visibility:public"],
+)

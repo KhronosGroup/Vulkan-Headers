@@ -41,6 +41,8 @@ Files in this repository originate from:
 * .cmake-format.py
 * BUILD.gn
 * BUILD.md
+* BUILD.bazel
+* WORKSPACE.bazel
 * CMakeLists.txt
 * CODE_OF_CONDUCT.md
 * LICENSE.txt
