@@ -316,7 +316,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdControlVideoCodingKHR(
 
 
 #define VK_KHR_video_decode_queue 1
-#define VK_KHR_VIDEO_DECODE_QUEUE_SPEC_VERSION 5
+#define VK_KHR_VIDEO_DECODE_QUEUE_SPEC_VERSION 6
 #define VK_KHR_VIDEO_DECODE_QUEUE_EXTENSION_NAME "VK_KHR_video_decode_queue"
 
 typedef enum VkVideoDecodeCapabilityFlagBitsKHR {
@@ -325,12 +325,27 @@ typedef enum VkVideoDecodeCapabilityFlagBitsKHR {
     VK_VIDEO_DECODE_CAPABILITY_FLAG_BITS_MAX_ENUM_KHR = 0x7FFFFFFF
 } VkVideoDecodeCapabilityFlagBitsKHR;
 typedef VkFlags VkVideoDecodeCapabilityFlagsKHR;
+
+typedef enum VkVideoDecodeUsageFlagBitsKHR {
+    VK_VIDEO_DECODE_USAGE_DEFAULT_KHR = 0,
+    VK_VIDEO_DECODE_USAGE_TRANSCODING_BIT_KHR = 0x00000001,
+    VK_VIDEO_DECODE_USAGE_OFFLINE_BIT_KHR = 0x00000002,
+    VK_VIDEO_DECODE_USAGE_STREAMING_BIT_KHR = 0x00000004,
+    VK_VIDEO_DECODE_USAGE_FLAG_BITS_MAX_ENUM_KHR = 0x7FFFFFFF
+} VkVideoDecodeUsageFlagBitsKHR;
+typedef VkFlags VkVideoDecodeUsageFlagsKHR;
 typedef VkFlags VkVideoDecodeFlagsKHR;
 typedef struct VkVideoDecodeCapabilitiesKHR {
     VkStructureType                    sType;
     void*                              pNext;
     VkVideoDecodeCapabilityFlagsKHR    flags;
 } VkVideoDecodeCapabilitiesKHR;
+
+typedef struct VkVideoDecodeUsageInfoKHR {
+    VkStructureType               sType;
+    const void*                   pNext;
+    VkVideoDecodeUsageFlagsKHR    videoUsageHints;
+} VkVideoDecodeUsageInfoKHR;
 
 typedef struct VkVideoDecodeInfoKHR {
     VkStructureType                       sType;
@@ -386,8 +401,17 @@ typedef struct VkPhysicalDevicePortabilitySubsetPropertiesKHR {
 
 
 #define VK_KHR_video_encode_queue 1
-#define VK_KHR_VIDEO_ENCODE_QUEUE_SPEC_VERSION 6
+#define VK_KHR_VIDEO_ENCODE_QUEUE_SPEC_VERSION 7
 #define VK_KHR_VIDEO_ENCODE_QUEUE_EXTENSION_NAME "VK_KHR_video_encode_queue"
+
+typedef enum VkVideoEncodeTuningModeKHR {
+    VK_VIDEO_ENCODE_TUNING_MODE_DEFAULT_KHR = 0,
+    VK_VIDEO_ENCODE_TUNING_MODE_HIGH_QUALITY_KHR = 1,
+    VK_VIDEO_ENCODE_TUNING_MODE_LOW_LATENCY_KHR = 2,
+    VK_VIDEO_ENCODE_TUNING_MODE_ULTRA_LOW_LATENCY_KHR = 3,
+    VK_VIDEO_ENCODE_TUNING_MODE_LOSSLESS_KHR = 4,
+    VK_VIDEO_ENCODE_TUNING_MODE_MAX_ENUM_KHR = 0x7FFFFFFF
+} VkVideoEncodeTuningModeKHR;
 typedef VkFlags VkVideoEncodeFlagsKHR;
 
 typedef enum VkVideoEncodeCapabilityFlagBitsKHR {
@@ -403,6 +427,25 @@ typedef enum VkVideoEncodeRateControlModeFlagBitsKHR {
     VK_VIDEO_ENCODE_RATE_CONTROL_MODE_FLAG_BITS_MAX_ENUM_KHR = 0x7FFFFFFF
 } VkVideoEncodeRateControlModeFlagBitsKHR;
 typedef VkFlags VkVideoEncodeRateControlModeFlagsKHR;
+
+typedef enum VkVideoEncodeUsageFlagBitsKHR {
+    VK_VIDEO_ENCODE_USAGE_DEFAULT_KHR = 0,
+    VK_VIDEO_ENCODE_USAGE_TRANSCODING_BIT_KHR = 0x00000001,
+    VK_VIDEO_ENCODE_USAGE_STREAMING_BIT_KHR = 0x00000002,
+    VK_VIDEO_ENCODE_USAGE_RECORDING_BIT_KHR = 0x00000004,
+    VK_VIDEO_ENCODE_USAGE_CONFERENCING_BIT_KHR = 0x00000008,
+    VK_VIDEO_ENCODE_USAGE_FLAG_BITS_MAX_ENUM_KHR = 0x7FFFFFFF
+} VkVideoEncodeUsageFlagBitsKHR;
+typedef VkFlags VkVideoEncodeUsageFlagsKHR;
+
+typedef enum VkVideoEncodeContentFlagBitsKHR {
+    VK_VIDEO_ENCODE_CONTENT_DEFAULT_KHR = 0,
+    VK_VIDEO_ENCODE_CONTENT_CAMERA_BIT_KHR = 0x00000001,
+    VK_VIDEO_ENCODE_CONTENT_DESKTOP_BIT_KHR = 0x00000002,
+    VK_VIDEO_ENCODE_CONTENT_RENDERED_BIT_KHR = 0x00000004,
+    VK_VIDEO_ENCODE_CONTENT_FLAG_BITS_MAX_ENUM_KHR = 0x7FFFFFFF
+} VkVideoEncodeContentFlagBitsKHR;
+typedef VkFlags VkVideoEncodeContentFlagsKHR;
 typedef VkFlags VkVideoEncodeRateControlFlagsKHR;
 typedef struct VkVideoEncodeInfoKHR {
     VkStructureType                       sType;
@@ -428,6 +471,14 @@ typedef struct VkVideoEncodeCapabilitiesKHR {
     uint8_t                                 qualityLevelCount;
     VkExtent2D                              inputImageDataFillAlignment;
 } VkVideoEncodeCapabilitiesKHR;
+
+typedef struct VkVideoEncodeUsageInfoKHR {
+    VkStructureType                 sType;
+    const void*                     pNext;
+    VkVideoEncodeUsageFlagsKHR      videoUsageHints;
+    VkVideoEncodeContentFlagsKHR    videoContentHints;
+    VkVideoEncodeTuningModeKHR      tuningMode;
+} VkVideoEncodeUsageInfoKHR;
 
 typedef struct VkVideoEncodeRateControlLayerInfoKHR {
     VkStructureType    sType;
