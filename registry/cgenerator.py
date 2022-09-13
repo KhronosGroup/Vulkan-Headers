@@ -274,6 +274,8 @@ class COutputGenerator(OutputGenerator):
                         body += self.genOpts.apientry + noneStr(elem.tail)
                     else:
                         body += noneStr(elem.text) + noneStr(elem.tail)
+                if category == 'define' and self.misracppstyle():
+                    body = body.replace("(uint32_t)", "static_cast<uint32_t>")
             if body:
                 # Add extra newline after multi-line entries.
                 if '\n' in body[0:-1]:

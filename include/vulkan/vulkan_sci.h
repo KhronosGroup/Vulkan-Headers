@@ -46,7 +46,7 @@ typedef struct VkImportFenceSciSyncInfoNV {
     const void*                          pNext;
     VkFence                              fence;
     VkExternalFenceHandleTypeFlagBits    handleType;
-    const void*                          handle;
+    void*                                handle;
 } VkImportFenceSciSyncInfoNV;
 
 typedef struct VkFenceGetSciSyncInfoNV {
@@ -74,7 +74,7 @@ typedef struct VkImportSemaphoreSciSyncInfoNV {
     const void*                              pNext;
     VkSemaphore                              semaphore;
     VkExternalSemaphoreHandleTypeFlagBits    handleType;
-    const void*                              handle;
+    void*                                    handle;
 } VkImportSemaphoreSciSyncInfoNV;
 
 typedef struct VkSemaphoreGetSciSyncInfoNV {
@@ -191,6 +191,55 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetPhysicalDeviceExternalMemorySciBufProperties
 VKAPI_ATTR VkResult VKAPI_CALL vkGetPhysicalDeviceSciBufAttributesNV(
     VkPhysicalDevice                            physicalDevice,
     NvSciBufAttrList                            pAttributes);
+#endif
+
+
+#define VK_NV_external_sci_sync2 1
+VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkSemaphoreSciSyncPoolNV)
+#define VK_NV_EXTERNAL_SCI_SYNC_2_SPEC_VERSION 1
+#define VK_NV_EXTERNAL_SCI_SYNC_2_EXTENSION_NAME "VK_NV_external_sci_sync2"
+typedef struct VkPhysicalDeviceExternalSciSync2FeaturesNV {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           sciSyncFence;
+    VkBool32           sciSyncSemaphore2;
+    VkBool32           sciSyncImport;
+    VkBool32           sciSyncExport;
+} VkPhysicalDeviceExternalSciSync2FeaturesNV;
+
+typedef struct VkSemaphoreSciSyncPoolCreateInfoNV {
+    VkStructureType    sType;
+    const void*        pNext;
+    NvSciSyncObj       handle;
+} VkSemaphoreSciSyncPoolCreateInfoNV;
+
+typedef struct VkSemaphoreSciSyncCreateInfoNV {
+    VkStructureType             sType;
+    const void*                 pNext;
+    VkSemaphoreSciSyncPoolNV    semaphorePool;
+    const NvSciSyncFence*       pFence;
+} VkSemaphoreSciSyncCreateInfoNV;
+
+typedef struct VkDeviceSemaphoreSciSyncPoolReservationCreateInfoNV {
+    VkStructureType    sType;
+    const void*        pNext;
+    uint32_t           semaphoreSciSyncPoolRequestCount;
+} VkDeviceSemaphoreSciSyncPoolReservationCreateInfoNV;
+
+typedef VkResult (VKAPI_PTR *PFN_vkCreateSemaphoreSciSyncPoolNV)(VkDevice device, const VkSemaphoreSciSyncPoolCreateInfoNV* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkSemaphoreSciSyncPoolNV* pSemaphorePool);
+typedef void (VKAPI_PTR *PFN_vkDestroySemaphoreSciSyncPoolNV)(VkDevice device, VkSemaphoreSciSyncPoolNV semaphorePool, const VkAllocationCallbacks* pAllocator);
+
+#ifndef VK_NO_PROTOTYPES
+VKAPI_ATTR VkResult VKAPI_CALL vkCreateSemaphoreSciSyncPoolNV(
+    VkDevice                                    device,
+    const VkSemaphoreSciSyncPoolCreateInfoNV*   pCreateInfo,
+    const VkAllocationCallbacks*                pAllocator,
+    VkSemaphoreSciSyncPoolNV*                   pSemaphorePool);
+
+VKAPI_ATTR void VKAPI_CALL vkDestroySemaphoreSciSyncPoolNV(
+    VkDevice                                    device,
+    VkSemaphoreSciSyncPoolNV                    semaphorePool,
+    const VkAllocationCallbacks*                pAllocator);
 #endif
 
 #ifdef __cplusplus

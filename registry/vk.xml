@@ -132,6 +132,8 @@ branch of the member gitlab server.
         <type requires="screen/screen.h" name="_screen_context"/>
         <type requires="screen/screen.h" name="_screen_window"/>
         <type requires="nvscisync.h" name="NvSciSyncAttrList"/>
+        <type requires="nvscisync.h" name="NvSciSyncObj"/>
+        <type requires="nvscisync.h" name="NvSciSyncFence"/>
         <type requires="nvscibuf.h" name="NvSciBufAttrList"/>
         <type requires="nvscibuf.h" name="NvSciBufObj"/>
 
@@ -172,7 +174,7 @@ branch of the member gitlab server.
 #define <name>VK_HEADER_VERSION_COMPLETE</name> <type>VK_MAKE_API_VERSION</type>(0, 1, 2, VK_HEADER_VERSION)</type>
 
         <type api="vulkansc" category="define">// Version of this file
-#define <name>VK_HEADER_VERSION</name> 10</type>
+#define <name>VK_HEADER_VERSION</name> 11</type>
         <type api="vulkansc" category="define" requires="VKSC_API_VARIANT">// Complete version of this file
 #define <name>VK_HEADER_VERSION_COMPLETE</name> <type>VK_MAKE_API_VERSION</type>(VKSC_API_VARIANT, 1, 0, VK_HEADER_VERSION)</type>
 
@@ -500,6 +502,9 @@ typedef void <name>CAMetalLayer</name>;
             <comment>Video extensions</comment>
         <type category="handle" parent="VkDevice"          objtypeenum="VK_OBJECT_TYPE_VIDEO_SESSION_KHR"><type>VK_DEFINE_NON_DISPATCHABLE_HANDLE</type>(<name>VkVideoSessionKHR</name>)</type>
         <type category="handle" parent="VkVideoSessionKHR" objtypeenum="VK_OBJECT_TYPE_VIDEO_SESSION_PARAMETERS_KHR"><type>VK_DEFINE_NON_DISPATCHABLE_HANDLE</type>(<name>VkVideoSessionParametersKHR</name>)</type>
+
+            <comment>VK_NV_external_sci_sync2</comment>
+        <type category="handle" parent="VkDevice"          objtypeenum="VK_OBJECT_TYPE_SEMAPHORE_SCI_SYNC_POOL_NV"><type>VK_DEFINE_NON_DISPATCHABLE_HANDLE</type>(<name>VkSemaphoreSciSyncPoolNV</name>)</type>
 
             <comment>Types generated from corresponding enums tags below</comment>
         <type name="VkAttachmentLoadOp" category="enum"/>
@@ -1255,7 +1260,7 @@ typedef void <name>CAMetalLayer</name>;
             <member optional="true">const <type>void</type>*            <name>pNext</name></member>
             <member optional="true"><type>VkDescriptorPoolCreateFlags</type>  <name>flags</name></member>
             <member><type>uint32_t</type>               <name>maxSets</name></member>
-            <member><type>uint32_t</type>               <name>poolSizeCount</name></member>
+            <member optional="true"><type>uint32_t</type>               <name>poolSizeCount</name></member>
             <member len="poolSizeCount">const <type>VkDescriptorPoolSize</type>* <name>pPoolSizes</name></member>
         </type>
         <type category="struct" name="VkDescriptorSetAllocateInfo">
@@ -2683,7 +2688,7 @@ typedef void <name>CAMetalLayer</name>;
             <member optional="true">const <type>void</type>*            <name>pNext</name></member>
             <member externsync="true"><type>VkFence</type>              <name>fence</name></member>
             <member><type>VkExternalFenceHandleTypeFlagBits</type>      <name>handleType</name></member>
-            <member>const <type>void</type>*                            <name>handle</name></member>
+            <member><type>void</type>*                                  <name>handle</name></member>
         </type>
         <type category="struct" name="VkFenceGetSciSyncInfoNV">
             <member values="VK_STRUCTURE_TYPE_FENCE_GET_SCI_SYNC_INFO_NV"><type>VkStructureType</type> <name>sType</name></member>
@@ -2701,7 +2706,7 @@ typedef void <name>CAMetalLayer</name>;
             <member optional="true">const <type>void</type>*            <name>pNext</name></member>
             <member externsync="true"><type>VkSemaphore</type>          <name>semaphore</name></member>
             <member><type>VkExternalSemaphoreHandleTypeFlagBits</type>  <name>handleType</name></member>
-            <member>const <type>void</type>*                            <name>handle</name></member>
+            <member><type>void</type>*                                  <name>handle</name></member>
         </type>
         <type category="struct" name="VkSemaphoreGetSciSyncInfoNV">
             <member values="VK_STRUCTURE_TYPE_SEMAPHORE_GET_SCI_SYNC_INFO_NV"><type>VkStructureType</type> <name>sType</name></member>
@@ -2722,6 +2727,30 @@ typedef void <name>CAMetalLayer</name>;
             <member><type>VkBool32</type>                               <name>sciSyncSemaphore</name></member>
             <member><type>VkBool32</type>                               <name>sciSyncImport</name></member>
             <member><type>VkBool32</type>                               <name>sciSyncExport</name></member>
+        </type>
+        <type category="struct" name="VkPhysicalDeviceExternalSciSync2FeaturesNV" structextends="VkPhysicalDeviceFeatures2,VkDeviceCreateInfo">
+            <member values="VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SCI_SYNC_2_FEATURES_NV"><type>VkStructureType</type> <name>sType</name></member>
+            <member optional="true"><type>void</type>*                  <name>pNext</name></member>
+            <member><type>VkBool32</type>                               <name>sciSyncFence</name></member>
+            <member><type>VkBool32</type>                               <name>sciSyncSemaphore2</name></member>
+            <member><type>VkBool32</type>                               <name>sciSyncImport</name></member>
+            <member><type>VkBool32</type>                               <name>sciSyncExport</name></member>
+        </type>
+        <type category="struct" name="VkSemaphoreSciSyncPoolCreateInfoNV">
+            <member values="VK_STRUCTURE_TYPE_SEMAPHORE_SCI_SYNC_POOL_CREATE_INFO_NV"><type>VkStructureType</type> <name>sType</name></member>
+            <member optional="true">const <type>void</type>*            <name>pNext</name></member>
+            <member><type>NvSciSyncObj</type>                           <name>handle</name></member>
+        </type>
+        <type category="struct" name="VkSemaphoreSciSyncCreateInfoNV" structextends="VkSemaphoreCreateInfo">
+            <member values="VK_STRUCTURE_TYPE_SEMAPHORE_SCI_SYNC_CREATE_INFO_NV"><type>VkStructureType</type> <name>sType</name></member>
+            <member optional="true">const <type>void</type>*            <name>pNext</name></member>
+            <member><type>VkSemaphoreSciSyncPoolNV</type>               <name>semaphorePool</name></member>
+            <member>const <type>NvSciSyncFence</type>*                  <name>pFence</name></member>
+        </type>
+        <type category="struct" name="VkDeviceSemaphoreSciSyncPoolReservationCreateInfoNV" allowduplicate="true" structextends="VkDeviceObjectReservationCreateInfo">
+            <member values="VK_STRUCTURE_TYPE_DEVICE_SEMAPHORE_SCI_SYNC_POOL_RESERVATION_CREATE_INFO_NV"><type>VkStructureType</type> <name>sType</name></member>
+            <member optional="true">const <type>void</type>*            <name>pNext</name></member>
+            <member><type>uint32_t</type>                               <name>semaphoreSciSyncPoolRequestCount</name></member>
         </type>
         <type category="struct" name="VkPhysicalDeviceMultiviewFeatures" structextends="VkPhysicalDeviceFeatures2,VkDeviceCreateInfo">
             <member values="VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES"><type>VkStructureType</type> <name>sType</name></member>
@@ -5157,8 +5186,8 @@ typedef void <name>CAMetalLayer</name>;
         <type category="struct" name="VkFaultCallbackInfo" structextends="VkDeviceCreateInfo">
             <member values="VK_STRUCTURE_TYPE_FAULT_CALLBACK_INFO"><type>VkStructureType</type> <name>sType</name></member>
             <member optional="true"><type>void</type>*              <name>pNext</name></member>
-            <member><type>uint32_t</type>                           <name>faultCount</name></member>
-            <member len="faultCount"><type>VkFaultData</type>*<name>pFaults</name></member>
+            <member optional="true"><type>uint32_t</type>           <name>faultCount</name></member>
+            <member optional="true" len="faultCount"><type>VkFaultData</type>*<name>pFaults</name></member>
             <member><type>PFN_vkFaultCallbackFunction</type>        <name>pfnFaultCallback</name></member>
         </type>
         <type category="struct" name="VkPhysicalDeviceToolPropertiesEXT" returnedonly="true">
@@ -10100,6 +10129,19 @@ typedef void <name>CAMetalLayer</name>;
             <param>const <type>VkSciSyncAttributesInfoNV</type>* <name>pSciSyncAttributesInfo</name></param>
             <param><type>NvSciSyncAttrList</type> <name>pAttributes</name></param>
         </command>
+        <command successcodes="VK_SUCCESS" errorcodes="VK_ERROR_INITIALIZATION_FAILED,VK_ERROR_OUT_OF_HOST_MEMORY">
+            <proto><type>VkResult</type> <name>vkCreateSemaphoreSciSyncPoolNV</name></proto>
+            <param><type>VkDevice</type> <name>device</name></param>
+            <param>const <type>VkSemaphoreSciSyncPoolCreateInfoNV</type>* <name>pCreateInfo</name></param>
+            <param optional="true">const <type>VkAllocationCallbacks</type>* <name>pAllocator</name></param>
+            <param><type>VkSemaphoreSciSyncPoolNV</type>* <name>pSemaphorePool</name></param>
+        </command>
+        <command>
+            <proto><type>void</type> <name>vkDestroySemaphoreSciSyncPoolNV</name></proto>
+            <param><type>VkDevice</type> <name>device</name></param>
+            <param optional="true" externsync="true"><type>VkSemaphoreSciSyncPoolNV</type> <name>semaphorePool</name></param>
+            <param optional="true">const <type>VkAllocationCallbacks</type>* <name>pAllocator</name></param>
+        </command>
         <command successcodes="VK_SUCCESS">
             <proto><type>VkResult</type> <name>vkReleaseDisplayEXT</name></proto>
             <param><type>VkPhysicalDevice</type> <name>physicalDevice</name></param>
@@ -12815,7 +12857,7 @@ typedef void <name>CAMetalLayer</name>;
 
         <remove comment="SC 1.0 removes some features from Vulkan 1.0/1.1/1.2">
             <enum name="VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO"/>
-            <enum name="VK_OBJECT_TYPE_SHADER_MODULE"/>
+            <!--enum name="VK_OBJECT_TYPE_SHADER_MODULE" comment="leave this present for compatibility"/-->
             <enum name="VK_PIPELINE_CREATE_ALLOW_DERIVATIVES_BIT"/>
             <enum name="VK_PIPELINE_CREATE_DERIVATIVE_BIT"/>
             <enum name="VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT"/>
@@ -13668,12 +13710,11 @@ typedef void <name>CAMetalLayer</name>;
                 <type name="VkPhysicalDeviceCornerSampledImageFeaturesNV"/>
             </require>
         </extension>
-        <extension name="VK_NV_extension_52" number="52" author="NV" contact="Daniel Koch @dgkoch" supported="disabled">
+        <extension name="VK_NV_private_vendor_info" number="52" type="device" author="NV" contact="Daniel Koch @dgkoch" supported="vulkansc">
             <require>
-                <enum value="0"                                                 name="VK_NV_EXTENSION_52_SPEC_VERSION"/>
-                <enum value="&quot;VK_NV_extension_52&quot;"                    name="VK_NV_EXTENSION_52_EXTENSION_NAME"/>
-                <enum bitpos="0" extends="VkShaderModuleCreateFlagBits"         name="VK_SHADER_MODULE_CREATE_RESERVED_0_BIT_NV"/>
-                <enum bitpos="2" extends="VkPipelineShaderStageCreateFlagBits"  name="VK_PIPELINE_SHADER_STAGE_CREATE_RESERVED_2_BIT_NV"/>
+                <enum value="2"                                         name="VK_NV_PRIVATE_VENDOR_INFO_SPEC_VERSION"/>
+                <enum value="&quot;VK_NV_private_vendor_info&quot;"     name="VK_NV_PRIVATE_VENDOR_INFO_EXTENSION_NAME"/>
+                <enum offset="0" extends="VkStructureType"              name="VK_STRUCTURE_TYPE_PRIVATE_VENDOR_INFO_RESERVED_OFFSET_0_NV"/>
             </require>
         </extension>
         <extension name="VK_NV_extension_53" number="53" author="NV" contact="Jeff Bolz @jeffbolznv" supported="disabled">
@@ -17714,7 +17755,7 @@ typedef void <name>CAMetalLayer</name>;
                 <enum value="&quot;VK_NV_extension_373&quot;"           name="VK_NV_EXTENSION_373_EXTENSION_NAME"/>
             </require>
         </extension>
-        <extension name="VK_NV_external_sci_sync" number="374" requiresCore="1.1" platform="sci" type="device" author="NV" contact="Kai Zhang @kazhang" supported="vulkansc">
+        <extension name="VK_NV_external_sci_sync" number="374" requiresCore="1.1" platform="sci" type="device" author="NV" contact="Kai Zhang @kazhang" supported="vulkansc" deprecatedby="VK_NV_external_sci_sync2">
             <require>
                 <enum value="2"                                         name="VK_NV_EXTERNAL_SCI_SYNC_SPEC_VERSION"/>
                 <enum value="&quot;VK_NV_external_sci_sync&quot;"       name="VK_NV_EXTERNAL_SCI_SYNC_EXTENSION_NAME"/>
@@ -18255,6 +18296,45 @@ typedef void <name>CAMetalLayer</name>;
             <require>
                 <enum value="0"                                             name="VK_COREAVI_EXTENSION_447_SPEC_VERSION"/>
                 <enum value="&quot;VK_COREAVI_extension_447&quot;"          name="VK_COREAVI_EXTENSION_447_EXTENSION_NAME"/>
+            </require>
+        </extension>
+        <extension name="VK_NV_external_sci_sync2" number="490" author="NV" requiresCore="1.1" platform="sci" type="device" contact="Kai Zhang @kazhang" supported="vulkansc">
+            <require>
+                <enum value="1"                                         name="VK_NV_EXTERNAL_SCI_SYNC_2_SPEC_VERSION"/>
+                <enum value="&quot;VK_NV_external_sci_sync2&quot;"      name="VK_NV_EXTERNAL_SCI_SYNC_2_EXTENSION_NAME"/>
+                <enum offset="0"  extends="VkObjectType"                name="VK_OBJECT_TYPE_SEMAPHORE_SCI_SYNC_POOL_NV"   comment="VkSemaphoreSciSyncPoolNV" protect="VK_USE_PLATFORM_SCI"/>
+                <enum offset="0"  extends="VkStructureType"             name="VK_STRUCTURE_TYPE_SEMAPHORE_SCI_SYNC_POOL_CREATE_INFO_NV"/>
+                <enum offset="1"  extends="VkStructureType"             name="VK_STRUCTURE_TYPE_SEMAPHORE_SCI_SYNC_CREATE_INFO_NV"/>
+                <enum offset="2"  extends="VkStructureType"             name="VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SCI_SYNC_2_FEATURES_NV"/>
+                <type name="VkSemaphoreSciSyncPoolNV"/>
+                <type name="VkPhysicalDeviceExternalSciSync2FeaturesNV"/>
+                <type name="VkSemaphoreSciSyncPoolCreateInfoNV"/>
+                <type name="VkSemaphoreSciSyncCreateInfoNV"/>
+                <command name="vkCreateSemaphoreSciSyncPoolNV"/>
+                <command name="vkDestroySemaphoreSciSyncPoolNV"/>
+            </require>
+            <require comment="functionality re-used unmodified from VK_NV_external_sci_sync">
+                <enum extnumber="374" offset="0" extends="VkStructureType"   name="VK_STRUCTURE_TYPE_IMPORT_FENCE_SCI_SYNC_INFO_NV"/>
+                <enum extnumber="374" offset="1" extends="VkStructureType"   name="VK_STRUCTURE_TYPE_EXPORT_FENCE_SCI_SYNC_INFO_NV"/>
+                <enum extnumber="374" offset="2" extends="VkStructureType"   name="VK_STRUCTURE_TYPE_FENCE_GET_SCI_SYNC_INFO_NV"/>
+                <enum extnumber="374" offset="3" extends="VkStructureType"   name="VK_STRUCTURE_TYPE_SCI_SYNC_ATTRIBUTES_INFO_NV"/>
+                <enum bitpos="4" extends="VkExternalFenceHandleTypeFlagBits" name="VK_EXTERNAL_FENCE_HANDLE_TYPE_SCI_SYNC_OBJ_BIT_NV"/>
+                <enum bitpos="5" extends="VkExternalFenceHandleTypeFlagBits" name="VK_EXTERNAL_FENCE_HANDLE_TYPE_SCI_SYNC_FENCE_BIT_NV"/>
+                <type name="VkSciSyncClientTypeNV"/>
+                <type name="VkSciSyncPrimitiveTypeNV"/>
+                <type name="VkExportFenceSciSyncInfoNV"/>
+                <type name="VkImportFenceSciSyncInfoNV"/>
+                <type name="VkFenceGetSciSyncInfoNV"/>
+                <type name="VkSciSyncAttributesInfoNV"/>
+                <command name="vkGetFenceSciSyncFenceNV"/>
+                <command name="vkGetFenceSciSyncObjNV"/>
+                <command name="vkImportFenceSciSyncFenceNV"/>
+                <command name="vkImportFenceSciSyncObjNV"/>
+                <command name="vkGetPhysicalDeviceSciSyncAttributesNV"/>
+            </require>
+            <require feature="VKSC_VERSION_1_0">
+                <enum offset="3" extends="VkStructureType"         name="VK_STRUCTURE_TYPE_DEVICE_SEMAPHORE_SCI_SYNC_POOL_RESERVATION_CREATE_INFO_NV"/>
+                <type name="VkDeviceSemaphoreSciSyncPoolReservationCreateInfoNV"/>
             </require>
         </extension>
     </extensions>

@@ -59,13 +59,13 @@ extern "C" {
 #endif
 
 #define VK_MAKE_API_VERSION(variant, major, minor, patch) \
-    ((((uint32_t)(variant)) << 29) | (((uint32_t)(major)) << 22) | (((uint32_t)(minor)) << 12) | ((uint32_t)(patch)))
+    (((static_cast<uint32_t>(variant)) << 29) | ((static_cast<uint32_t>(major)) << 22) | ((static_cast<uint32_t>(minor)) << 12) | (static_cast<uint32_t>(patch)))
 
 // Vulkan 1.0 version number
 #define VK_API_VERSION_1_0 VK_MAKE_API_VERSION(0, 1, 0, 0)// Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 10
+#define VK_HEADER_VERSION 11
 
 // Vulkan SC variant number
 #define VKSC_API_VARIANT 1
@@ -73,10 +73,10 @@ extern "C" {
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(VKSC_API_VARIANT, 1, 0, VK_HEADER_VERSION)
 
-#define VK_API_VERSION_VARIANT(version) ((uint32_t)(version) >> 29)
-#define VK_API_VERSION_MAJOR(version) (((uint32_t)(version) >> 22) & 0x7FU)
-#define VK_API_VERSION_MINOR(version) (((uint32_t)(version) >> 12) & 0x3FFU)
-#define VK_API_VERSION_PATCH(version) ((uint32_t)(version) & 0xFFFU)
+#define VK_API_VERSION_VARIANT(version) (static_cast<uint32_t>(version) >> 29)
+#define VK_API_VERSION_MAJOR(version) ((static_cast<uint32_t>(version) >> 22) & 0x7FU)
+#define VK_API_VERSION_MINOR(version) ((static_cast<uint32_t>(version) >> 12) & 0x3FFU)
+#define VK_API_VERSION_PATCH(version) (static_cast<uint32_t>(version) & 0xFFFU)
 typedef uint32_t VkBool32;
 typedef uint64_t VkDeviceAddress;
 typedef uint64_t VkDeviceSize;
@@ -337,6 +337,7 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_DISPLAY_MODE_CREATE_INFO_KHR = 1000002000,
     VK_STRUCTURE_TYPE_DISPLAY_SURFACE_CREATE_INFO_KHR = 1000002001,
     VK_STRUCTURE_TYPE_DISPLAY_PRESENT_INFO_KHR = 1000003000,
+    VK_STRUCTURE_TYPE_PRIVATE_VENDOR_INFO_RESERVED_OFFSET_0_NV = 1000051000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES_EXT = 1000066000,
     VK_STRUCTURE_TYPE_IMAGE_VIEW_ASTC_DECODE_MODE_EXT = 1000067000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT = 1000067001,
@@ -482,6 +483,10 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COLOR_WRITE_ENABLE_FEATURES_EXT = 1000381000,
     VK_STRUCTURE_TYPE_PIPELINE_COLOR_WRITE_CREATE_INFO_EXT = 1000381001,
     VK_STRUCTURE_TYPE_APPLICATION_PARAMETERS_EXT = 1000435000,
+    VK_STRUCTURE_TYPE_SEMAPHORE_SCI_SYNC_POOL_CREATE_INFO_NV = 1000489000,
+    VK_STRUCTURE_TYPE_SEMAPHORE_SCI_SYNC_CREATE_INFO_NV = 1000489001,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SCI_SYNC_2_FEATURES_NV = 1000489002,
+    VK_STRUCTURE_TYPE_DEVICE_SEMAPHORE_SCI_SYNC_POOL_RESERVATION_CREATE_INFO_NV = 1000489003,
     VK_STRUCTURE_TYPE_MAX_ENUM = 0x7FFFFFFF
 } VkStructureType;
 
@@ -525,6 +530,7 @@ typedef enum VkObjectType {
     VK_OBJECT_TYPE_QUERY_POOL = 12,
     VK_OBJECT_TYPE_BUFFER_VIEW = 13,
     VK_OBJECT_TYPE_IMAGE_VIEW = 14,
+    VK_OBJECT_TYPE_SHADER_MODULE = 15,
     VK_OBJECT_TYPE_PIPELINE_CACHE = 16,
     VK_OBJECT_TYPE_PIPELINE_LAYOUT = 17,
     VK_OBJECT_TYPE_RENDER_PASS = 18,
@@ -541,6 +547,9 @@ typedef enum VkObjectType {
     VK_OBJECT_TYPE_DISPLAY_KHR = 1000002000,
     VK_OBJECT_TYPE_DISPLAY_MODE_KHR = 1000002001,
     VK_OBJECT_TYPE_DEBUG_UTILS_MESSENGER_EXT = 1000128000,
+#ifdef VK_USE_PLATFORM_SCI
+    VK_OBJECT_TYPE_SEMAPHORE_SCI_SYNC_POOL_NV = 1000489000,
+#endif
     VK_OBJECT_TYPE_MAX_ENUM = 0x7FFFFFFF
 } VkObjectType;
 
@@ -6456,6 +6465,11 @@ VKAPI_ATTR void VKAPI_CALL vkCmdResolveImage2KHR(
 #define VK_EXT_depth_range_unrestricted 1
 #define VK_EXT_DEPTH_RANGE_UNRESTRICTED_SPEC_VERSION 1
 #define VK_EXT_DEPTH_RANGE_UNRESTRICTED_EXTENSION_NAME "VK_EXT_depth_range_unrestricted"
+
+
+#define VK_NV_private_vendor_info 1
+#define VK_NV_PRIVATE_VENDOR_INFO_SPEC_VERSION 2
+#define VK_NV_PRIVATE_VENDOR_INFO_EXTENSION_NAME "VK_NV_private_vendor_info"
 
 
 #define VK_EXT_texture_compression_astc_hdr 1
