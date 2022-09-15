@@ -26,6 +26,7 @@
 #  error "vulkan.hpp needs at least c++ standard version 11"
 #endif
 
+#include <algorithm>
 #include <array>   // ArrayWrapperND
 #include <string>  // std::string
 #include <vulkan/vulkan.h>
@@ -44,10 +45,6 @@
 
 #if !defined( VULKAN_HPP_NO_EXCEPTIONS )
 #  include <system_error>  // std::is_error_code_enum
-#endif
-
-#if !defined( VULKAN_HPP_NO_SMART_HANDLE )
-#  include <algorithm>  // std::transform
 #endif
 
 #if defined( VULKAN_HPP_NO_CONSTRUCTORS )
@@ -117,7 +114,7 @@ extern "C" __declspec( dllimport ) FARPROC __stdcall GetProcAddress( HINSTANCE h
 #  include <span>
 #endif
 
-static_assert( VK_HEADER_VERSION == 227, "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION == 228, "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for non-dispatchable handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
@@ -574,41 +571,20 @@ namespace VULKAN_HPP_NAMESPACE
     {
     }
 
-    ArrayProxy( T & value ) VULKAN_HPP_NOEXCEPT
+    ArrayProxy( T const & value ) VULKAN_HPP_NOEXCEPT
       : m_count( 1 )
       , m_ptr( &value )
     {
     }
 
-    template <typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
-    ArrayProxy( typename std::remove_const<T>::type & value ) VULKAN_HPP_NOEXCEPT
-      : m_count( 1 )
-      , m_ptr( &value )
-    {
-    }
-
-    ArrayProxy( uint32_t count, T * ptr ) VULKAN_HPP_NOEXCEPT
-      : m_count( count )
-      , m_ptr( ptr )
-    {
-    }
-
-    template <typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
-    ArrayProxy( uint32_t count, typename std::remove_const<T>::type * ptr ) VULKAN_HPP_NOEXCEPT
+    ArrayProxy( uint32_t count, T const * ptr ) VULKAN_HPP_NOEXCEPT
       : m_count( count )
       , m_ptr( ptr )
     {
     }
 
     template <std::size_t C>
-    ArrayProxy( T ( &ptr )[C] ) VULKAN_HPP_NOEXCEPT
-      : m_count( C )
-      , m_ptr( ptr )
-    {
-    }
-
-    template <std::size_t C, typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
-    ArrayProxy( typename std::remove_const<T>::type ( &ptr )[C] ) VULKAN_HPP_NOEXCEPT
+    ArrayProxy( T const ( &ptr )[C] ) VULKAN_HPP_NOEXCEPT
       : m_count( C )
       , m_ptr( ptr )
     {
@@ -632,19 +608,6 @@ namespace VULKAN_HPP_NAMESPACE
     {
     }
 
-    ArrayProxy( std::initializer_list<T> & list ) VULKAN_HPP_NOEXCEPT
-      : m_count( static_cast<uint32_t>( list.size() ) )
-      , m_ptr( list.begin() )
-    {
-    }
-
-    template <typename B = T, typename std::enable_if<std::is_const<B>::value, int>::type = 0>
-    ArrayProxy( std::initializer_list<typename std::remove_const<T>::type> & list ) VULKAN_HPP_NOEXCEPT
-      : m_count( static_cast<uint32_t>( list.size() ) )
-      , m_ptr( list.begin() )
-    {
-    }
-
 #  if __GNUC__ >= 9
 #    pragma GCC diagnostic pop
 #  endif
@@ -655,15 +618,6 @@ namespace VULKAN_HPP_NAMESPACE
               typename std::enable_if<std::is_convertible<decltype( std::declval<V>().data() ), T *>::value &&
                                       std::is_convertible<decltype( std::declval<V>().size() ), std::size_t>::value>::type * = nullptr>
     ArrayProxy( V const & v ) VULKAN_HPP_NOEXCEPT
-      : m_count( static_cast<uint32_t>( v.size() ) )
-      , m_ptr( v.data() )
-    {
-    }
-
-    template <typename V,
-              typename std::enable_if<std::is_convertible<decltype( std::declval<V>().data() ), T *>::value &&
-                                      std::is_convertible<decltype( std::declval<V>().size() ), std::size_t>::value>::type * = nullptr>
-    ArrayProxy( V & v ) VULKAN_HPP_NOEXCEPT
       : m_count( static_cast<uint32_t>( v.size() ) )
       , m_ptr( v.data() )
     {
@@ -701,14 +655,14 @@ namespace VULKAN_HPP_NAMESPACE
       return m_count;
     }
 
-    T * data() const VULKAN_HPP_NOEXCEPT
+    T const * data() const VULKAN_HPP_NOEXCEPT
     {
       return m_ptr;
     }
 
   private:
-    uint32_t m_count;
-    T *      m_ptr;
+    uint32_t  m_count;
+    T const * m_ptr;
   };
 
   template <typename T>
@@ -866,6 +820,47 @@ namespace VULKAN_HPP_NAMESPACE
   private:
     uint32_t m_count;
     T *      m_ptr;
+  };
+
+  template <typename T>
+  class StridedArrayProxy : protected ArrayProxy<T>
+  {
+  public:
+    using ArrayProxy<T>::ArrayProxy;
+
+    StridedArrayProxy( uint32_t count, T const * ptr, uint32_t stride ) VULKAN_HPP_NOEXCEPT
+      : ArrayProxy<T>( count, ptr )
+      , m_stride( stride )
+    {
+      VULKAN_HPP_ASSERT( sizeof( T ) <= stride );
+    }
+
+    using ArrayProxy<T>::begin;
+
+    const T * end() const VULKAN_HPP_NOEXCEPT
+    {
+      return reinterpret_cast<T const *>( static_cast<uint8_t const *>( begin() ) + size() * m_stride );
+    }
+
+    using ArrayProxy<T>::front;
+
+    const T & back() const VULKAN_HPP_NOEXCEPT
+    {
+      VULKAN_HPP_ASSERT( begin() && size() );
+      return *reinterpret_cast<T const *>( static_cast<uint8_t const *>( begin() ) + ( size() - 1 ) * m_stride );
+    }
+
+    using ArrayProxy<T>::empty;
+    using ArrayProxy<T>::size;
+    using ArrayProxy<T>::data;
+
+    uint32_t stride() const
+    {
+      return m_stride;
+    }
+
+  private:
+    uint32_t m_stride = sizeof( T );
   };
 
   template <typename RefType>
@@ -10623,40 +10618,6 @@ namespace VULKAN_HPP_NAMESPACE
     };
   };
 
-  //=== VK_VALVE_mutable_descriptor_type ===
-  template <>
-  struct StructExtends<PhysicalDeviceMutableDescriptorTypeFeaturesVALVE, PhysicalDeviceFeatures2>
-  {
-    enum
-    {
-      value = true
-    };
-  };
-  template <>
-  struct StructExtends<PhysicalDeviceMutableDescriptorTypeFeaturesVALVE, DeviceCreateInfo>
-  {
-    enum
-    {
-      value = true
-    };
-  };
-  template <>
-  struct StructExtends<MutableDescriptorTypeCreateInfoVALVE, DescriptorSetLayoutCreateInfo>
-  {
-    enum
-    {
-      value = true
-    };
-  };
-  template <>
-  struct StructExtends<MutableDescriptorTypeCreateInfoVALVE, DescriptorPoolCreateInfo>
-  {
-    enum
-    {
-      value = true
-    };
-  };
-
   //=== VK_EXT_vertex_input_dynamic_state ===
   template <>
   struct StructExtends<PhysicalDeviceVertexInputDynamicStateFeaturesEXT, PhysicalDeviceFeatures2>
@@ -11408,6 +11369,40 @@ namespace VULKAN_HPP_NAMESPACE
   };
   template <>
   struct StructExtends<AmigoProfilingSubmitInfoSEC, SubmitInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  //=== VK_EXT_mutable_descriptor_type ===
+  template <>
+  struct StructExtends<PhysicalDeviceMutableDescriptorTypeFeaturesEXT, PhysicalDeviceFeatures2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<PhysicalDeviceMutableDescriptorTypeFeaturesEXT, DeviceCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<MutableDescriptorTypeCreateInfoEXT, DescriptorSetLayoutCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<MutableDescriptorTypeCreateInfoEXT, DescriptorPoolCreateInfo>
   {
     enum
     {
