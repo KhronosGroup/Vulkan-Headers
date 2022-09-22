@@ -4945,7 +4945,7 @@ namespace VULKAN_HPP_NAMESPACE
 #  if defined( VK_ENABLE_BETA_EXTENSIONS )
       //=== VK_KHR_video_decode_queue ===
 
-      void decodeVideoKHR( const VULKAN_HPP_NAMESPACE::VideoDecodeInfoKHR & frameInfo ) const VULKAN_HPP_NOEXCEPT;
+      void decodeVideoKHR( const VULKAN_HPP_NAMESPACE::VideoDecodeInfoKHR & decodeInfo ) const VULKAN_HPP_NOEXCEPT;
 #  endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
       //=== VK_EXT_transform_feedback ===
@@ -9794,7 +9794,7 @@ namespace VULKAN_HPP_NAMESPACE
 
       //=== VK_KHR_swapchain ===
 
-      VULKAN_HPP_NODISCARD std::vector<VkImage> getImages() const;
+      VULKAN_HPP_NODISCARD std::vector<VULKAN_HPP_NAMESPACE::Image> getImages() const;
 
       VULKAN_HPP_NODISCARD std::pair<VULKAN_HPP_NAMESPACE::Result, uint32_t>
                            acquireNextImage( uint64_t                                  timeout,
@@ -12390,13 +12390,13 @@ namespace VULKAN_HPP_NAMESPACE
       return VULKAN_HPP_RAII_NAMESPACE::SwapchainKHR( *this, createInfo, allocator );
     }
 
-    VULKAN_HPP_NODISCARD VULKAN_HPP_INLINE std::vector<VkImage> SwapchainKHR::getImages() const
+    VULKAN_HPP_NODISCARD VULKAN_HPP_INLINE std::vector<VULKAN_HPP_NAMESPACE::Image> SwapchainKHR::getImages() const
     {
       VULKAN_HPP_ASSERT( getDispatcher()->vkGetSwapchainImagesKHR && "Function <vkGetSwapchainImagesKHR> needs extension <VK_KHR_swapchain> enabled!" );
 
-      std::vector<VkImage> swapchainImages;
-      uint32_t             swapchainImageCount;
-      VkResult             result;
+      std::vector<VULKAN_HPP_NAMESPACE::Image> swapchainImages;
+      uint32_t                                 swapchainImageCount;
+      VkResult                                 result;
       do
       {
         result = getDispatcher()->vkGetSwapchainImagesKHR(
@@ -12404,8 +12404,10 @@ namespace VULKAN_HPP_NAMESPACE
         if ( ( result == VK_SUCCESS ) && swapchainImageCount )
         {
           swapchainImages.resize( swapchainImageCount );
-          result = getDispatcher()->vkGetSwapchainImagesKHR(
-            static_cast<VkDevice>( m_device ), static_cast<VkSwapchainKHR>( m_swapchain ), &swapchainImageCount, swapchainImages.data() );
+          result = getDispatcher()->vkGetSwapchainImagesKHR( static_cast<VkDevice>( m_device ),
+                                                             static_cast<VkSwapchainKHR>( m_swapchain ),
+                                                             &swapchainImageCount,
+                                                             reinterpret_cast<VkImage *>( swapchainImages.data() ) );
         }
       } while ( result == VK_INCOMPLETE );
       resultCheck( static_cast<VULKAN_HPP_NAMESPACE::Result>( result ), VULKAN_HPP_NAMESPACE_STRING "::SwapchainKHR::getImages" );
@@ -13007,11 +13009,11 @@ namespace VULKAN_HPP_NAMESPACE
 #  if defined( VK_ENABLE_BETA_EXTENSIONS )
     //=== VK_KHR_video_decode_queue ===
 
-    VULKAN_HPP_INLINE void CommandBuffer::decodeVideoKHR( const VULKAN_HPP_NAMESPACE::VideoDecodeInfoKHR & frameInfo ) const VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_INLINE void CommandBuffer::decodeVideoKHR( const VULKAN_HPP_NAMESPACE::VideoDecodeInfoKHR & decodeInfo ) const VULKAN_HPP_NOEXCEPT
     {
       VULKAN_HPP_ASSERT( getDispatcher()->vkCmdDecodeVideoKHR && "Function <vkCmdDecodeVideoKHR> needs extension <VK_KHR_video_decode_queue> enabled!" );
 
-      getDispatcher()->vkCmdDecodeVideoKHR( static_cast<VkCommandBuffer>( m_commandBuffer ), reinterpret_cast<const VkVideoDecodeInfoKHR *>( &frameInfo ) );
+      getDispatcher()->vkCmdDecodeVideoKHR( static_cast<VkCommandBuffer>( m_commandBuffer ), reinterpret_cast<const VkVideoDecodeInfoKHR *>( &decodeInfo ) );
     }
 #  endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
