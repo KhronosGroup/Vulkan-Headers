@@ -58,5 +58,10 @@ source_set("vulkan_headers") {
     "include/vulkan/vulkan_screen.h",
   ]
   public_configs = [ ":vulkan_headers_config" ]
-}
 
+  deps = []
+  if (defined(vulkan_use_wayland) && vulkan_use_wayland &&
+      defined(vulkan_wayland_deps)) {
+    deps += vulkan_wayland_deps
+  }
+}
