@@ -22,7 +22,7 @@ extern "C" {
 #define VK_KHR_video_queue 1
 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkVideoSessionKHR)
 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkVideoSessionParametersKHR)
-#define VK_KHR_VIDEO_QUEUE_SPEC_VERSION   6
+#define VK_KHR_VIDEO_QUEUE_SPEC_VERSION   7
 #define VK_KHR_VIDEO_QUEUE_EXTENSION_NAME "VK_KHR_video_queue"
 
 typedef enum VkQueryResultStatusKHR {
@@ -167,7 +167,7 @@ typedef struct VkVideoPictureResourceInfoKHR {
 typedef struct VkVideoReferenceSlotInfoKHR {
     VkStructureType                         sType;
     const void*                             pNext;
-    int8_t                                  slotIndex;
+    int32_t                                 slotIndex;
     const VkVideoPictureResourceInfoKHR*    pPictureResource;
 } VkVideoReferenceSlotInfoKHR;
 

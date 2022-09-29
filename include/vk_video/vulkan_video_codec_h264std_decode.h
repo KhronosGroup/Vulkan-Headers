@@ -21,10 +21,10 @@ extern "C" {
 
 #define vulkan_video_codec_h264std_decode 1
 // Vulkan 0.9 provisional Vulkan video H.264 decode std specification version number
-#define VK_STD_VULKAN_VIDEO_CODEC_H264_DECODE_API_VERSION_0_9_7 VK_MAKE_VIDEO_STD_VERSION(0, 9, 7) // Patch version should always be set to 0
+#define VK_STD_VULKAN_VIDEO_CODEC_H264_DECODE_API_VERSION_0_9_8 VK_MAKE_VIDEO_STD_VERSION(0, 9, 8) // Patch version should always be set to 0
 
 #define STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_LIST_SIZE 2
-#define VK_STD_VULKAN_VIDEO_CODEC_H264_DECODE_SPEC_VERSION VK_STD_VULKAN_VIDEO_CODEC_H264_DECODE_API_VERSION_0_9_7
+#define VK_STD_VULKAN_VIDEO_CODEC_H264_DECODE_SPEC_VERSION VK_STD_VULKAN_VIDEO_CODEC_H264_DECODE_API_VERSION_0_9_8
 #define VK_STD_VULKAN_VIDEO_CODEC_H264_DECODE_EXTENSION_NAME "VK_STD_vulkan_video_codec_h264_decode"
 
 typedef enum StdVideoDecodeH264FieldOrderCount {
@@ -46,7 +46,8 @@ typedef struct StdVideoDecodeH264PictureInfo {
     StdVideoDecodeH264PictureInfoFlags    flags;
     uint8_t                               seq_parameter_set_id;
     uint8_t                               pic_parameter_set_id;
-    uint16_t                              reserved;
+    uint8_t                               reserved1;
+    uint8_t                               reserved2;
     uint16_t                              frame_num;
     uint16_t                              idr_pic_id;
     int32_t                               PicOrderCnt[STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_LIST_SIZE];
