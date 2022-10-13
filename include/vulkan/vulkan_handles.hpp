@@ -1510,9 +1510,19 @@ namespace VULKAN_HPP_NAMESPACE
   struct MutableDescriptorTypeCreateInfoEXT;
   using MutableDescriptorTypeCreateInfoVALVE = MutableDescriptorTypeCreateInfoEXT;
 
+  //=== VK_ARM_shader_core_builtins ===
+  struct PhysicalDeviceShaderCoreBuiltinsFeaturesARM;
+  struct PhysicalDeviceShaderCoreBuiltinsPropertiesARM;
+
   //===============
   //=== HANDLEs ===
   //===============
+
+  template <typename Type>
+  struct isVulkanHandleType
+  {
+    static VULKAN_HPP_CONST_OR_CONSTEXPR bool value = false;
+  };
 
   class SurfaceKHR
   {

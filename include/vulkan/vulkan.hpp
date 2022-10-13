@@ -114,7 +114,7 @@ extern "C" __declspec( dllimport ) FARPROC __stdcall GetProcAddress( HINSTANCE h
 #  include <span>
 #endif
 
-static_assert( VK_HEADER_VERSION == 230, "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION == 231, "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for non-dispatchable handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
@@ -377,6 +377,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <typename FlagBitsType>
   struct FlagTraits
   {
+    static VULKAN_HPP_CONST_OR_CONSTEXPR bool isBitmask = false;
   };
 
   template <typename BitType>
@@ -552,6 +553,31 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_CONSTEXPR Flags<BitType> operator^( BitType bit, Flags<BitType> const & flags ) VULKAN_HPP_NOEXCEPT
   {
     return flags.operator^( bit );
+  }
+
+  // bitwise operators on BitType
+  template <typename BitType, typename std::enable_if<FlagTraits<BitType>::isBitmask, bool>::type = true>
+  VULKAN_HPP_INLINE VULKAN_HPP_CONSTEXPR Flags<BitType> operator&( BitType lhs, BitType rhs ) VULKAN_HPP_NOEXCEPT
+  {
+    return Flags<BitType>( lhs ) & rhs;
+  }
+
+  template <typename BitType, typename std::enable_if<FlagTraits<BitType>::isBitmask, bool>::type = true>
+  VULKAN_HPP_INLINE VULKAN_HPP_CONSTEXPR Flags<BitType> operator|( BitType lhs, BitType rhs ) VULKAN_HPP_NOEXCEPT
+  {
+    return Flags<BitType>( lhs ) | rhs;
+  }
+
+  template <typename BitType, typename std::enable_if<FlagTraits<BitType>::isBitmask, bool>::type = true>
+  VULKAN_HPP_INLINE VULKAN_HPP_CONSTEXPR Flags<BitType> operator^( BitType lhs, BitType rhs ) VULKAN_HPP_NOEXCEPT
+  {
+    return Flags<BitType>( lhs ) ^ rhs;
+  }
+
+  template <typename BitType, typename std::enable_if<FlagTraits<BitType>::isBitmask, bool>::type = true>
+  VULKAN_HPP_INLINE VULKAN_HPP_CONSTEXPR Flags<BitType> operator~( BitType bit ) VULKAN_HPP_NOEXCEPT
+  {
+    return ~( Flags<BitType>( bit ) );
   }
 
 #if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
@@ -11936,6 +11962,32 @@ namespace VULKAN_HPP_NAMESPACE
   };
   template <>
   struct StructExtends<MutableDescriptorTypeCreateInfoEXT, DescriptorPoolCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  //=== VK_ARM_shader_core_builtins ===
+  template <>
+  struct StructExtends<PhysicalDeviceShaderCoreBuiltinsFeaturesARM, PhysicalDeviceFeatures2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<PhysicalDeviceShaderCoreBuiltinsFeaturesARM, DeviceCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<PhysicalDeviceShaderCoreBuiltinsPropertiesARM, PhysicalDeviceProperties2>
   {
     enum
     {
