@@ -72,7 +72,7 @@ extern "C" {
 #define VK_API_VERSION_1_0 VK_MAKE_API_VERSION(0, 1, 0, 0)// Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 231
+#define VK_HEADER_VERSION 232
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 3, VK_HEADER_VERSION)
@@ -15501,7 +15501,7 @@ typedef struct VkAmigoProfilingSubmitInfoSEC {
 
 
 #define VK_ARM_shader_core_builtins 1
-#define VK_ARM_SHADER_CORE_BUILTINS_SPEC_VERSION 1
+#define VK_ARM_SHADER_CORE_BUILTINS_SPEC_VERSION 2
 #define VK_ARM_SHADER_CORE_BUILTINS_EXTENSION_NAME "VK_ARM_shader_core_builtins"
 typedef struct VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM {
     VkStructureType    sType;
@@ -15512,6 +15512,7 @@ typedef struct VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM {
 typedef struct VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM {
     VkStructureType    sType;
     void*              pNext;
+    uint64_t           shaderCoreMask;
     uint32_t           shaderCoreCount;
     uint32_t           shaderWarpsPerCore;
 } VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM;
