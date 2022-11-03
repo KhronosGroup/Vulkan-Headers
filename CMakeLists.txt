@@ -20,8 +20,7 @@
 
 cmake_minimum_required(VERSION 3.10.2)
 
-# NONE = this project has no language toolchain requirement.
-project(Vulkan-Headers NONE)
+project(Vulkan-Headers LANGUAGES C)
 
 # User-interface declarations ----------------------------------------------------------------------------------------------------
 # This section contains variables that affect development GUIs (e.g. CMake GUI and IDEs), such as option(), folders, and variables
