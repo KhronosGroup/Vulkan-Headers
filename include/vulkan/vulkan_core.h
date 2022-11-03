@@ -72,7 +72,7 @@ extern "C" {
 #define VK_API_VERSION_1_0 VK_MAKE_API_VERSION(0, 1, 0, 0)// Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 232
+#define VK_HEADER_VERSION 233
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 3, VK_HEADER_VERSION)
@@ -1011,6 +1011,10 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_FEATURES_QCOM = 1000425000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_PROPERTIES_QCOM = 1000425001,
     VK_STRUCTURE_TYPE_SUBPASS_FRAGMENT_DENSITY_MAP_OFFSET_END_INFO_QCOM = 1000425002,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COPY_MEMORY_INDIRECT_FEATURES_NV = 1000426000,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COPY_MEMORY_INDIRECT_PROPERTIES_NV = 1000426001,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_FEATURES_NV = 1000427000,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_PROPERTIES_NV = 1000427001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV = 1000430000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_FEATURES_EXT = 1000437000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_PROCESSING_FEATURES_QCOM = 1000440000,
@@ -1040,6 +1044,8 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_TILE_PROPERTIES_QCOM = 1000484001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_AMIGO_PROFILING_FEATURES_SEC = 1000485000,
     VK_STRUCTURE_TYPE_AMIGO_PROFILING_SUBMIT_INFO_SEC = 1000485001,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_INVOCATION_REORDER_FEATURES_NV = 1000490000,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_INVOCATION_REORDER_PROPERTIES_NV = 1000490001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_EXT = 1000351000,
     VK_STRUCTURE_TYPE_MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_EXT = 1000351002,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_BUILTINS_FEATURES_ARM = 1000497000,
@@ -14859,6 +14865,104 @@ typedef struct VkSubpassFragmentDensityMapOffsetEndInfoQCOM {
 
 
 
+#define VK_NV_copy_memory_indirect 1
+#define VK_NV_COPY_MEMORY_INDIRECT_SPEC_VERSION 1
+#define VK_NV_COPY_MEMORY_INDIRECT_EXTENSION_NAME "VK_NV_copy_memory_indirect"
+typedef struct VkCopyMemoryIndirectCommandNV {
+    VkDeviceAddress    srcAddress;
+    VkDeviceAddress    dstAddress;
+    VkDeviceSize       size;
+} VkCopyMemoryIndirectCommandNV;
+
+typedef struct VkCopyMemoryToImageIndirectCommandNV {
+    VkDeviceAddress             srcAddress;
+    uint32_t                    bufferRowLength;
+    uint32_t                    bufferImageHeight;
+    VkImageSubresourceLayers    imageSubresource;
+    VkOffset3D                  imageOffset;
+    VkExtent3D                  imageExtent;
+} VkCopyMemoryToImageIndirectCommandNV;
+
+typedef struct VkPhysicalDeviceCopyMemoryIndirectFeaturesNV {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           indirectCopy;
+} VkPhysicalDeviceCopyMemoryIndirectFeaturesNV;
+
+typedef struct VkPhysicalDeviceCopyMemoryIndirectPropertiesNV {
+    VkStructureType    sType;
+    void*              pNext;
+    VkQueueFlags       supportedQueues;
+} VkPhysicalDeviceCopyMemoryIndirectPropertiesNV;
+
+typedef void (VKAPI_PTR *PFN_vkCmdCopyMemoryIndirectNV)(VkCommandBuffer commandBuffer, VkDeviceAddress copyBufferAddress, uint32_t copyCount, uint32_t stride);
+typedef void (VKAPI_PTR *PFN_vkCmdCopyMemoryToImageIndirectNV)(VkCommandBuffer commandBuffer, VkDeviceAddress copyBufferAddress, uint32_t copyCount, uint32_t stride, VkImage dstImage, VkImageLayout dstImageLayout, const VkImageSubresourceLayers* pImageSubresources);
+
+#ifndef VK_NO_PROTOTYPES
+VKAPI_ATTR void VKAPI_CALL vkCmdCopyMemoryIndirectNV(
+    VkCommandBuffer                             commandBuffer,
+    VkDeviceAddress                             copyBufferAddress,
+    uint32_t                                    copyCount,
+    uint32_t                                    stride);
+
+VKAPI_ATTR void VKAPI_CALL vkCmdCopyMemoryToImageIndirectNV(
+    VkCommandBuffer                             commandBuffer,
+    VkDeviceAddress                             copyBufferAddress,
+    uint32_t                                    copyCount,
+    uint32_t                                    stride,
+    VkImage                                     dstImage,
+    VkImageLayout                               dstImageLayout,
+    const VkImageSubresourceLayers*             pImageSubresources);
+#endif
+
+
+#define VK_NV_memory_decompression 1
+#define VK_NV_MEMORY_DECOMPRESSION_SPEC_VERSION 1
+#define VK_NV_MEMORY_DECOMPRESSION_EXTENSION_NAME "VK_NV_memory_decompression"
+
+// Flag bits for VkMemoryDecompressionMethodFlagBitsNV
+typedef VkFlags64 VkMemoryDecompressionMethodFlagBitsNV;
+static const VkMemoryDecompressionMethodFlagBitsNV VK_MEMORY_DECOMPRESSION_METHOD_GDEFLATE_1_0_BIT_NV = 0x00000001ULL;
+
+typedef VkFlags64 VkMemoryDecompressionMethodFlagsNV;
+typedef struct VkDecompressMemoryRegionNV {
+    VkDeviceAddress                       srcAddress;
+    VkDeviceAddress                       dstAddress;
+    VkDeviceSize                          compressedSize;
+    VkDeviceSize                          decompressedSize;
+    VkMemoryDecompressionMethodFlagsNV    decompressionMethod;
+} VkDecompressMemoryRegionNV;
+
+typedef struct VkPhysicalDeviceMemoryDecompressionFeaturesNV {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           memoryDecompression;
+} VkPhysicalDeviceMemoryDecompressionFeaturesNV;
+
+typedef struct VkPhysicalDeviceMemoryDecompressionPropertiesNV {
+    VkStructureType                       sType;
+    void*                                 pNext;
+    VkMemoryDecompressionMethodFlagsNV    decompressionMethods;
+    uint64_t                              maxDecompressionIndirectCount;
+} VkPhysicalDeviceMemoryDecompressionPropertiesNV;
+
+typedef void (VKAPI_PTR *PFN_vkCmdDecompressMemoryNV)(VkCommandBuffer commandBuffer, uint32_t decompressRegionCount, const VkDecompressMemoryRegionNV* pDecompressMemoryRegions);
+typedef void (VKAPI_PTR *PFN_vkCmdDecompressMemoryIndirectCountNV)(VkCommandBuffer commandBuffer, VkDeviceAddress indirectCommandsAddress, VkDeviceAddress indirectCommandsCountAddress, uint32_t stride);
+
+#ifndef VK_NO_PROTOTYPES
+VKAPI_ATTR void VKAPI_CALL vkCmdDecompressMemoryNV(
+    VkCommandBuffer                             commandBuffer,
+    uint32_t                                    decompressRegionCount,
+    const VkDecompressMemoryRegionNV*           pDecompressMemoryRegions);
+
+VKAPI_ATTR void VKAPI_CALL vkCmdDecompressMemoryIndirectCountNV(
+    VkCommandBuffer                             commandBuffer,
+    VkDeviceAddress                             indirectCommandsAddress,
+    VkDeviceAddress                             indirectCommandsCountAddress,
+    uint32_t                                    stride);
+#endif
+
+
 #define VK_NV_linear_color_attachment 1
 #define VK_NV_LINEAR_COLOR_ATTACHMENT_SPEC_VERSION 1
 #define VK_NV_LINEAR_COLOR_ATTACHMENT_EXTENSION_NAME "VK_NV_linear_color_attachment"
@@ -15492,6 +15596,29 @@ typedef struct VkAmigoProfilingSubmitInfoSEC {
     uint64_t           firstDrawTimestamp;
     uint64_t           swapBufferTimestamp;
 } VkAmigoProfilingSubmitInfoSEC;
+
+
+
+#define VK_NV_ray_tracing_invocation_reorder 1
+#define VK_NV_RAY_TRACING_INVOCATION_REORDER_SPEC_VERSION 1
+#define VK_NV_RAY_TRACING_INVOCATION_REORDER_EXTENSION_NAME "VK_NV_ray_tracing_invocation_reorder"
+
+typedef enum VkRayTracingInvocationReorderModeNV {
+    VK_RAY_TRACING_INVOCATION_REORDER_MODE_NONE_NV = 0,
+    VK_RAY_TRACING_INVOCATION_REORDER_MODE_REORDER_NV = 1,
+    VK_RAY_TRACING_INVOCATION_REORDER_MODE_MAX_ENUM_NV = 0x7FFFFFFF
+} VkRayTracingInvocationReorderModeNV;
+typedef struct VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV {
+    VkStructureType                        sType;
+    void*                                  pNext;
+    VkRayTracingInvocationReorderModeNV    rayTracingInvocationReorderReorderingHint;
+} VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV;
+
+typedef struct VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           rayTracingInvocationReorder;
+} VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV;
 
 
 
