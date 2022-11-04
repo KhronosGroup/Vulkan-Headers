@@ -1,6 +1,6 @@
 # ~~~
-# Copyright (c) 2018 Valve Corporation
-# Copyright (c) 2018 LunarG, Inc.
+# Copyright (c) 2018-2022 Valve Corporation
+# Copyright (c) 2018-2022 LunarG, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,8 +19,10 @@
 # This section contains pre-project() initialization, and ends with the project() command.
 
 cmake_minimum_required(VERSION 3.10.2)
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/version.cmake)
 
-project(Vulkan-Headers LANGUAGES C)
+project(Vulkan-Headers LANGUAGES C VERSION ${VK_VERSION_STRING})
+message(STATUS "${PROJECT_NAME} = ${PROJECT_VERSION}")
 
 # User-interface declarations ----------------------------------------------------------------------------------------------------
 # This section contains variables that affect development GUIs (e.g. CMake GUI and IDEs), such as option(), folders, and variables
