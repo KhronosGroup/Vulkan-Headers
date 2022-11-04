@@ -27,7 +27,7 @@ Files in this repository originate from:
 * README.md
 * cmake/Copyright_cmake.txt
 * cmake/cmake_uninstall.cmake.in
-* Non-API headers (report issues to the [Vulkan-Loader/issues](https://github.com/KhronosGroup/Vulkan-Loader/issues) tracker)
+* Non-API headers
   * include/vulkan/vk_icd.h
   * include/vulkan/vk_layer.h
   * include/vulkan/vk_sdk_platform.h
