@@ -28,4 +28,11 @@ add_library(Vulkan-Registry INTERFACE)
 target_include_directories(Vulkan-Registry INTERFACE $<BUILD_INTERFACE:"${CMAKE_CURRENT_SOURCE_DIR}/registry">)
 add_library(Vulkan::Registry ALIAS Vulkan-Registry)
 
-include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/install.cmake)
+# https://cmake.org/cmake/help/latest/variable/PROJECT_IS_TOP_LEVEL.html
+string(COMPARE EQUAL ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_SOURCE_DIR} PROJECT_IS_TOP_LEVEL)
+
+option(VULKAN_HEADERS_INSTALL "Install Vulkan Headers" ${PROJECT_IS_TOP_LEVEL})
+
+if (VULKAN_HEADERS_INSTALL)
+    include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/install.cmake)
+endif()
