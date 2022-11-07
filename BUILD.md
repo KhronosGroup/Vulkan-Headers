@@ -39,11 +39,25 @@ indicated by *install_dir*:
 
 - *install_dir*`/include/vulkan` : The header files found in the
  `include/vulkan` directory of this repository
+- *install_dir*`/share/cmake/VulkanHeaders`: The CMake config files needed
+  for find_package support
 - *install_dir*`/share/vulkan/registry` : The registry files found in the
   `registry` directory of this repository
 
 The `uninstall` target can be used to remove the above files from the install
 directory.
+
+### Usage in CMake
+
+The library provides a Config file for CMake, once installed it can be found via `find_package`.
+
+Which, when successful, will add library target called `Vulkan::Headers` which you can use via the usual `target_link_libraries` mechanism.
+
+```cmake
+find_package(VulkanHeaders REQUIRED CONFIG)
+
+target_link_libraries(foobar PRIVATE Vulkan::Headers)
+```
 
 ## Repository Set-Up
 
