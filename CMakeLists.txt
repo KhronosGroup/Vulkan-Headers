@@ -21,11 +21,11 @@ project(Vulkan-Headers LANGUAGES C VERSION ${VK_VERSION_STRING})
 message(STATUS "${PROJECT_NAME} = ${PROJECT_VERSION}")
 
 add_library(Vulkan-Headers INTERFACE)
-target_include_directories(Vulkan-Headers INTERFACE $<BUILD_INTERFACE:"${CMAKE_CURRENT_SOURCE_DIR}/include">)
+target_include_directories(Vulkan-Headers INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
 add_library(Vulkan::Headers ALIAS Vulkan-Headers)
 
 add_library(Vulkan-Registry INTERFACE)
-target_include_directories(Vulkan-Registry INTERFACE $<BUILD_INTERFACE:"${CMAKE_CURRENT_SOURCE_DIR}/registry">)
+target_include_directories(Vulkan-Registry INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/registry>)
 add_library(Vulkan::Registry ALIAS Vulkan-Registry)
 
 # https://cmake.org/cmake/help/latest/variable/PROJECT_IS_TOP_LEVEL.html
