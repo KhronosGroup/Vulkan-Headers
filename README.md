@@ -18,15 +18,13 @@ Files in this repository originate from:
 
 ### This repository (https://github.com/KhronosGroup/Vulkan-Headers)
 
-* .cmake-format.py
 * BUILD.gn
 * BUILD.md
 * CMakeLists.txt
+* cmake/*
 * CODE_OF_CONDUCT.md
 * LICENSE.txt
 * README.md
-* cmake/Copyright_cmake.txt
-* cmake/cmake_uninstall.cmake.in
 * Non-API headers
   * include/vulkan/vk_icd.h
   * include/vulkan/vk_layer.h
@@ -51,4 +49,3 @@ imply the same quality level as SDK tags. SDK tags follow the
 `sdk-<`_`version`_`>.<`_`patch`_`>` format (e.g., `sdk-1.1.92.0`).
 
 This scheme was adopted following the 1.1.96 Vulkan specification release.
-
