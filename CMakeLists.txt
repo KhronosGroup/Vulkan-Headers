@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ~~~
-cmake_minimum_required(VERSION 3.10.2)
+cmake_minimum_required(VERSION 3.14)
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/version.cmake)
 
 project(Vulkan-Headers LANGUAGES C VERSION ${VK_VERSION_STRING})

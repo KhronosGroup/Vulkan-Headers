@@ -92,7 +92,7 @@ directories and place them in any location.
     - [2019](https://www.visualstudio.com/vs/downloads/)
   - The Community Edition of each of the above versions is sufficient, as
     well as any more capable edition.
-- [CMake 3.10.2](https://cmake.org/files/v3.10/cmake-3.10.2-win64-x64.zip) is recommended.
+- [CMake 3.14.0](https://cmake.org/files/v3.14/cmake-3.14.0-win64-x64.zip) is recommended.
   - Use the installer option to add CMake to the system PATH
 - Git Client Support
   - [Git for Windows](http://git-scm.com/download/win) is a popular solution
@@ -206,7 +206,7 @@ Build the `uninstall` target to remove the files from the install directory.
 There are no specific Linux distribution or compiler version requirements for
 building this repository. The required tools are
 
-- [CMake 3.10.2](https://cmake.org/files/v3.10/cmake-3.10.2-Linux-x86_64.tar.gz) is recommended.
+- [CMake 3.14.0](https://cmake.org/files/v3.14/cmake-3.14.0-Linux-x86_64.tar.gz) is recommended.
 - git
 
 ### Linux Build
@@ -285,4 +285,4 @@ or
 
 The instructions for building this repository on MacOS are similar to those for Linux.
 
-[CMake 3.10.2](https://cmake.org/files/v3.10/cmake-3.10.2-Darwin-x86_64.tar.gz) is recommended.
+- [CMake 3.14.0](https://cmake.org/files/v3.14/cmake-3.14.0-Darwin-x86_64.tar.gz) is recommended.

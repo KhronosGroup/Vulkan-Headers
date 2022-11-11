@@ -45,10 +45,6 @@ export(TARGETS Vulkan-Headers NAMESPACE ${namespace} FILE ${export_name}.cmake)
 set(config_version "${CMAKE_CURRENT_BINARY_DIR}/${export_name}Version.cmake")
 
 # Add find_package() versioning support
-if(${CMAKE_VERSION} VERSION_LESS "3.14.0")
-    write_basic_package_version_file(${config_version} COMPATIBILITY SameMajorVersion)
-else()
-    write_basic_package_version_file(${config_version} COMPATIBILITY SameMajorVersion ARCH_INDEPENDENT)
-endif()
+write_basic_package_version_file(${config_version} COMPATIBILITY SameMajorVersion ARCH_INDEPENDENT)
 
 install(FILES ${config_version} DESTINATION ${cmake_files_install_dir})
