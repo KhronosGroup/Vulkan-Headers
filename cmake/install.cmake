@@ -26,7 +26,7 @@ install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/registry" DESTINATION ${VLK_REGIS
 
 set(export_name "VulkanHeadersConfig")
 set(namespace "Vulkan::")
-set(cmake_files_install_dir ${CMAKE_INSTALL_LIBDIR}/cmake/VulkanHeaders/)
+set(cmake_files_install_dir ${CMAKE_INSTALL_DATADIR}/cmake/VulkanHeaders/)
 
 # Set EXPORT_NAME for consistency with established names. The CMake generated ones won't work.
 set_target_properties(Vulkan-Headers PROPERTIES EXPORT_NAME "Headers")
