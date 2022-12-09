@@ -59,9 +59,7 @@ add_library(Vulkan::Registry ALIAS Vulkan-Registry)
 # https://cmake.org/cmake/help/latest/variable/PROJECT_IS_TOP_LEVEL.html
 string(COMPARE EQUAL ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_SOURCE_DIR} PROJECT_IS_TOP_LEVEL)
 
-option(VULKAN_HEADERS_INSTALL "Install Vulkan Headers" ${PROJECT_IS_TOP_LEVEL})
-
-if (VULKAN_HEADERS_INSTALL)
+if (PROJECT_IS_TOP_LEVEL)
     include(GNUInstallDirs)
     include(CMakePackageConfigHelpers)
 
