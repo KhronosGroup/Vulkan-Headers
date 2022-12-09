@@ -44,9 +44,6 @@ indicated by *install_dir*:
 - *install_dir*`/share/vulkan/registry` : The registry files found in the
   `registry` directory of this repository
 
-The `uninstall` target can be used to remove the above files from the install
-directory.
-
 ### Usage in CMake
 
 The library provides a Config file for CMake, once installed it can be found via `find_package`.
@@ -183,21 +180,11 @@ While still in the build directory:
 
 to build the install target.
 
-Build the `uninstall` target to remove the files from the install directory.
-
-    cmake --build . --target uninstall
-
 #### Build the Solution With Visual Studio
 
 Launch Visual Studio and open the "Vulkan-Headers.sln" solution file in the
 build directory. Build the `INSTALL` target from the Visual Studio solution
 explorer.
-
-Build the `uninstall` target to remove the files from the install directory.
-
-> Note: Since there are only the `INSTALL` and `uninstall` projects in the
-> solution, building the solution from the command line may be more efficient
-> than starting Visual Studio for these simple operations.
 
 ## Building On Linux
 
@@ -272,14 +259,6 @@ To install the header files:
 or
 
     cmake --build . --target install
-
-To uninstall the files from the install directories, you can execute:
-
-    make uninstall
-
-or
-
-    cmake --build . --target uninstall
 
 ## Building on MacOS
 
