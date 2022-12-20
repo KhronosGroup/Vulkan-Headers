@@ -60,6 +60,11 @@ add_library(Vulkan::Registry ALIAS Vulkan-Registry)
 string(COMPARE EQUAL ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_SOURCE_DIR} PROJECT_IS_TOP_LEVEL)
 
 if (PROJECT_IS_TOP_LEVEL)
+    option(BUILD_TESTS "Build the tests" OFF)
+    if (BUILD_TESTS)
+        add_subdirectory(tests)
+    endif()
+
     include(GNUInstallDirs)
     include(CMakePackageConfigHelpers)
 

@@ -23,7 +23,7 @@ on:
 jobs:
   # Configure/Install the headers.
   # No need to build since it's a header only library.
-  ubuntu-latest:
+  ubuntu-cmake-install:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -35,3 +35,17 @@ jobs:
         run: cmake -S . -B build
       - name: Install Vulkan-Headers
         run: cmake --install build --prefix build/install
+
+  # Enable testing
+  ubuntu-cmake-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install build dependencies
+        run: |
+          sudo apt-get -qq update
+          sudo apt-get install -y cmake
+      - name: Configure Vulkan-Headers
+        run: cmake -S . -B build -D BUILD_TESTS=ON
+      - name: Build Vulkan-Headers Tests
+        run: cmake --build build
