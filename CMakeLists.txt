@@ -45,6 +45,8 @@ function(vlk_get_header_version)
 endfunction()
 vlk_get_header_version()
 
+message(FATAL_ERROR "Failure!!")
+
 project(Vulkan-Headers LANGUAGES C VERSION ${VK_VERSION_STRING})
 message(STATUS "${PROJECT_NAME} = ${PROJECT_VERSION}")
 
