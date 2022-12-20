@@ -23,6 +23,7 @@ Files in this repository originate from:
 * CMakeLists.txt
 * cmake/*
 * CODE_OF_CONDUCT.md
+* INTEGRATION.md
 * LICENSE.txt
 * README.md
 * Non-API headers
