@@ -21,7 +21,7 @@ Files in this repository originate from:
 * BUILD.gn
 * BUILD.md
 * CMakeLists.txt
-* cmake/*
+* tests/*
 * CODE_OF_CONDUCT.md
 * INTEGRATION.md
 * LICENSE.txt
