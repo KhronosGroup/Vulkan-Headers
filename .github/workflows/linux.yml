@@ -18,7 +18,7 @@ on:
     push:
     pull_request:
         branches:
-            - master
+            - main
 
 jobs:
   # Configure/Install the headers.
