@@ -19,9 +19,7 @@
  * limitations under the License.
  *
  */
-
-#ifndef VKICD_H
-#define VKICD_H
+#pragma once
 
 #include "vulkan.h"
 #include <stdbool.h>
@@ -258,5 +256,3 @@ typedef struct {
   VkIcdSurfaceBase base;
 } VkIcdSurfaceImagePipe;
 #endif // VK_USE_PLATFORM_FUCHSIA
-
-#endif  // VKICD_H

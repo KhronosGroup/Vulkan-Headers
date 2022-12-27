@@ -18,9 +18,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-#ifndef VK_SDK_PLATFORM_H
-#define VK_SDK_PLATFORM_H
+#pragma once
 
 #if defined(_WIN32)
 #ifndef NOMINMAX
@@ -67,5 +65,3 @@
 #define NOEXCEPT
 #endif
 #endif
-
-#endif  // VK_SDK_PLATFORM_H
