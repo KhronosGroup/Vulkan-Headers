@@ -19,12 +19,12 @@
  * limitations under the License.
  *
  */
+#pragma once
 
 /* Need to define dispatch table
  * Core struct can then have ptr to dispatch table at the top
  * Along with object ptrs for current and next OBJ
  */
-#pragma once
 
 #include "vulkan_core.h"
 
