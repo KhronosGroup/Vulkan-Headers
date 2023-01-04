@@ -42,3 +42,4 @@ target_link_libraries(vk_layer PRIVATE Vulkan::Headers)
 # vk_sdk_platform.h
 add_executable(vk_sdk_platform vk_sdk_platform.c)
 target_link_libraries(vk_sdk_platform PRIVATE Vulkan::Headers)
+target_compile_definitions(vk_sdk_platform PRIVATE VK_SDK_PLATFORM_SUPRRESS_DEPRECATION_WARNING)
