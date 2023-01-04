@@ -2,9 +2,9 @@
 // File: vk_icd.h
 //
 /*
- * Copyright (c) 2015-2016, 2022 The Khronos Group Inc.
- * Copyright (c) 2015-2016, 2022 Valve Corporation
- * Copyright (c) 2015-2016, 2022 LunarG, Inc.
+ * Copyright (c) 2015-2023 LunarG, Inc.
+ * Copyright (c) 2015-2023 The Khronos Group Inc.
+ * Copyright (c) 2015-2023 Valve Corporation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
