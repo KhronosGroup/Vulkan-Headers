@@ -52,10 +52,6 @@ add_library(Vulkan-Headers INTERFACE)
 target_include_directories(Vulkan-Headers INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
 add_library(Vulkan::Headers ALIAS Vulkan-Headers)
 
-add_library(Vulkan-Registry INTERFACE)
-target_include_directories(Vulkan-Registry INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/registry>)
-add_library(Vulkan::Registry ALIAS Vulkan-Registry)
-
 # https://cmake.org/cmake/help/latest/variable/PROJECT_IS_TOP_LEVEL.html
 string(COMPARE EQUAL ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_SOURCE_DIR} PROJECT_IS_TOP_LEVEL)
 
@@ -76,26 +72,26 @@ if (PROJECT_IS_TOP_LEVEL)
     install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/vulkan" DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
     # Install registry files
     install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/registry" DESTINATION ${VLK_REGISTRY_DIR} USE_SOURCE_PERMISSIONS)
-
-    set(export_name "VulkanHeadersConfig")
-    set(namespace "Vulkan::")
+    # Where *.cmake files will be installed
     set(cmake_files_install_dir ${CMAKE_INSTALL_DATADIR}/cmake/VulkanHeaders/)
 
     # Set EXPORT_NAME for consistency with established names. The CMake generated ones won't work.
     set_target_properties(Vulkan-Headers PROPERTIES EXPORT_NAME "Headers")
-    set_target_properties(Vulkan-Registry PROPERTIES EXPORT_NAME "Registry")
 
     # Add find_package() support
-    target_include_directories(Vulkan-Headers INTERFACE $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
-    install(TARGETS Vulkan-Headers EXPORT ${export_name})
+    install(TARGETS Vulkan-Headers EXPORT VulkanHeadersTargets INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
-    target_include_directories(Vulkan-Registry INTERFACE $<INSTALL_INTERFACE:${VLK_REGISTRY_DIR}/registry>)
-    install(TARGETS Vulkan-Registry EXPORT ${export_name})
+    install(EXPORT VulkanHeadersTargets FILE VulkanHeadersTargets.cmake NAMESPACE "Vulkan::" DESTINATION ${cmake_files_install_dir})
 
-    install(EXPORT ${export_name} NAMESPACE ${namespace} DESTINATION ${cmake_files_install_dir})
-    export(TARGETS Vulkan-Headers NAMESPACE ${namespace} FILE ${export_name}.cmake)
+    set(vulkan_headers_config "${CMAKE_CURRENT_BINARY_DIR}/VulkanHeadersConfig.cmake")
+    set(VULKAN_HEADERS_REGISTRY_DIRECTORY "${VLK_REGISTRY_DIR}/registry")
 
-    set(config_version "${CMAKE_CURRENT_BINARY_DIR}/${export_name}Version.cmake")
+    configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/VulkanHeadersConfig.cmake.in ${vulkan_headers_config}
+        INSTALL_DESTINATION ${cmake_files_install_dir}
+        PATH_VARS VULKAN_HEADERS_REGISTRY_DIRECTORY
+    )
+
+    set(config_version "${CMAKE_CURRENT_BINARY_DIR}/VulkanHeadersConfigVersion.cmake")
 
     # Add find_package() versioning support
     if(${CMAKE_VERSION} VERSION_LESS "3.14.0")
@@ -104,5 +100,5 @@ if (PROJECT_IS_TOP_LEVEL)
         write_basic_package_version_file(${config_version} COMPATIBILITY SameMajorVersion ARCH_INDEPENDENT)
     endif()
 
-    install(FILES ${config_version} DESTINATION ${cmake_files_install_dir})
+    install(FILES ${config_version} ${vulkan_headers_config} DESTINATION ${cmake_files_install_dir})
 endif()
