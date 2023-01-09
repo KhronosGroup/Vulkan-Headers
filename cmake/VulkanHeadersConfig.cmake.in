@@ -1,0 +1,7 @@
+@PACKAGE_INIT@
+
+include("${CMAKE_CURRENT_LIST_DIR}/VulkanHeadersTargets.cmake")
+
+check_required_components(VulkanHeaders)
+
+set(VULKAN_HEADERS_REGISTRY_DIRECTORY "@PACKAGE_VULKAN_HEADERS_REGISTRY_DIRECTORY@")

@@ -54,6 +54,8 @@ Which, when successful, will add library target called `Vulkan::Headers` which y
 find_package(VulkanHeaders REQUIRED CONFIG)
 
 target_link_libraries(foobar PRIVATE Vulkan::Headers)
+
+message(STATUS "Vulkan Headers Registry: ${VULKAN_HEADERS_REGISTRY_DIRECTORY}")
 ```
 
 ## Repository Set-Up

@@ -20,6 +20,7 @@ Files in this repository originate from:
 
 * BUILD.gn
 * BUILD.md
+* cmake/
 * CMakeLists.txt
 * tests/*
 * CODE_OF_CONDUCT.md
