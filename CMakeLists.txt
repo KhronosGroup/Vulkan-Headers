@@ -25,19 +25,19 @@ function(vlk_get_header_version)
     file(READ ${vulkan_core_header_file} ver)
 
     if (ver MATCHES "#define[ ]+VK_HEADER_VERSION_COMPLETE[ ]+VK_MAKE_API_VERSION\\([ ]*[0-9]+,[ ]*([0-9]+),[ ]*([0-9]+),[ ]*VK_HEADER_VERSION[ ]*\\)")
-        set(VK_VERSION_MAJOR "${CMAKE_MATCH_1}")
-        set(VK_VERSION_MINOR "${CMAKE_MATCH_2}")
+        set(MAJOR_VERSION "${CMAKE_MATCH_1}")
+        set(MINOR_VERSION "${CMAKE_MATCH_2}")
     else()
         message(FATAL_ERROR "Couldn't get major/minor version")
     endif()
 
     if (ver MATCHES "#define[ ]+VK_HEADER_VERSION[ ]+([0-9]+)")
-        set(VK_PATCH_VERSION "${CMAKE_MATCH_1}")
+        set(PATCH_VERSION "${CMAKE_MATCH_1}")
     else()
         message(FATAL_ERROR "Couldn't get the patch version")
     endif()
 
-    set(VK_VERSION_STRING "${VK_VERSION_MAJOR}.${VK_VERSION_MINOR}.${VK_PATCH_VERSION}" PARENT_SCOPE)
+    set(VK_VERSION_STRING "${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}" PARENT_SCOPE)
 endfunction()
 vlk_get_header_version()
 
