@@ -35,12 +35,12 @@ The library provides a Config file for CMake, once installed it can be found via
 
 Which, when successful, will create the header only library `Vulkan::Headers` which you can use via the usual `target_link_libraries` mechanism.
 
-`VULKAN_HEADERS_REGISTRY_DIRECTORY` is also provided to users who need it.
-
 ```cmake
 find_package(VulkanHeaders REQUIRED CONFIG)
 
 target_link_libraries(foobar PRIVATE Vulkan::Headers)
 
 message(STATUS "Vulkan Headers Registry: ${VULKAN_HEADERS_REGISTRY_DIRECTORY}")
+
+message(STATUS "Vulkan Headers Version: ${VulkanHeaders_VERSION}")
 ```
