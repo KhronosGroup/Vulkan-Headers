@@ -85,6 +85,8 @@ if (PROJECT_IS_TOP_LEVEL)
     configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/VulkanHeadersConfig.cmake.in ${vulkan_headers_config}
         INSTALL_DESTINATION ${cmake_files_install_dir}
         PATH_VARS VULKAN_HEADERS_REGISTRY_DIRECTORY
+        NO_SET_AND_CHECK_MACRO
+        NO_CHECK_REQUIRED_COMPONENTS_MACRO
     )
 
     set(config_version "${CMAKE_CURRENT_BINARY_DIR}/VulkanHeadersConfigVersion.cmake")
