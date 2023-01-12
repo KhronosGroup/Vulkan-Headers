@@ -13,6 +13,18 @@ Files in this repository originate from:
 
 See the [CONTRIBUTING.md](CONTRIBUTING.md)
 
+## Building
+
+See [BUILD.md](BUILD.md)
+
+## SDK Support
+
+Vulkan-Headers are shipped as part of the official [Vulkan-SDK](https://www.lunarg.com/vulkan-sdk/)
+
+## C/C++ Package Manager Support
+
+`Vulkan-Headers` are also supported by both conan & vcpkg.
+
 ## Version Tagging Scheme
 
 Updates to the `Vulkan-Headers` repository which correspond to a new Vulkan
