@@ -51,3 +51,15 @@ jobs:
         run: cmake -S . -B build -D BUILD_TESTS=ON
       - name: Build Vulkan-Headers Tests
         run: cmake --build build
+
+  test-cmake-minimum:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: lukka/get-cmake@latest
+        with:
+          cmakeVersion: 3.10.2
+      - name: CMake Version
+        run: cmake --version
+      - name: Configure Vulkan-Headers
+        run: mkdir build/ && cd build/ && cmake ${GITHUB_WORKSPACE}
