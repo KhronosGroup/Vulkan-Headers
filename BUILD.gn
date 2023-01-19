@@ -51,7 +51,6 @@ source_set("vulkan_headers") {
     "include/vulkan/vk_icd.h",
     "include/vulkan/vk_layer.h",
     "include/vulkan/vk_platform.h",
-    "include/vulkan/vk_sdk_platform.h",
     "include/vulkan/vulkan.h",
     "include/vulkan/vulkan.hpp",
     "include/vulkan/vulkan_core.h",
@@ -66,4 +65,3 @@ source_set("vulkan_headers") {
   ]
   public_configs = [ ":vulkan_headers_config" ]
 }
-
