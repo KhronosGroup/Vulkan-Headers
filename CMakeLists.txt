@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ~~~
-cmake_minimum_required(VERSION 3.10.2)
+cmake_minimum_required(VERSION 3.14...3.25)
 
 function(vlk_get_header_version)
     set(vulkan_core_header_file "${CMAKE_CURRENT_SOURCE_DIR}/include/vulkan/vulkan_core.h")
@@ -42,17 +42,22 @@ endfunction()
 vlk_get_header_version()
 
 project(Vulkan-Headers LANGUAGES C VERSION ${VK_VERSION_STRING})
-message(STATUS "${PROJECT_NAME} = ${PROJECT_VERSION}")
+
+if (CMAKE_VERSION VERSION_GREATER_EQUAL "3.15")
+    message(DEBUG "${PROJECT_NAME} = ${PROJECT_VERSION}")
+endif()
 
 add_library(Vulkan-Headers INTERFACE)
 target_include_directories(Vulkan-Headers INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
 add_library(Vulkan::Headers ALIAS Vulkan-Headers)
 
-# https://cmake.org/cmake/help/latest/variable/PROJECT_IS_TOP_LEVEL.html
-string(COMPARE EQUAL ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_SOURCE_DIR} PROJECT_IS_TOP_LEVEL)
+if (CMAKE_VERSION VERSION_LESS "3.21")
+    # https://cmake.org/cmake/help/latest/variable/PROJECT_IS_TOP_LEVEL.html
+    string(COMPARE EQUAL ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_SOURCE_DIR} PROJECT_IS_TOP_LEVEL)
+endif()
 
 if (PROJECT_IS_TOP_LEVEL)
-    option(BUILD_TESTS "Build the tests" OFF)
+    option(BUILD_TESTS "Build the tests")
     if (BUILD_TESTS)
         add_subdirectory(tests)
     endif()
@@ -91,12 +96,7 @@ if (PROJECT_IS_TOP_LEVEL)
 
     set(config_version "${CMAKE_CURRENT_BINARY_DIR}/VulkanHeadersConfigVersion.cmake")
 
-    # Add find_package() versioning support
-    if(${CMAKE_VERSION} VERSION_LESS "3.14.0")
-        write_basic_package_version_file(${config_version} COMPATIBILITY SameMajorVersion)
-    else()
-        write_basic_package_version_file(${config_version} COMPATIBILITY SameMajorVersion ARCH_INDEPENDENT)
-    endif()
+    write_basic_package_version_file(${config_version} COMPATIBILITY SameMajorVersion ARCH_INDEPENDENT)
 
     install(FILES ${config_version} ${vulkan_headers_config} DESTINATION ${cmake_files_install_dir})
 endif()
