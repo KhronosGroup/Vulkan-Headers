@@ -2,8 +2,6 @@
 
 Please note when contributing what files this repository actually is responsible for.
 
-The majority for the Vulkan headers come from [Vulkan-Docs](https://github.com/KhronosGroup/Vulkan-Docs)
-
 ### This repository (https://github.com/KhronosGroup/Vulkan-Headers)
 
 * BUILD.gn
@@ -27,9 +25,5 @@ The majority for the Vulkan headers come from [Vulkan-Docs](https://github.com/K
 * All files under include/vulkan/ which are *not* listed explicitly as originating from another repository.
 
 ### Vulkan C++ Binding Repository (https://github.com/KhronosGroup/Vulkan-Hpp)
-
-As of the Vulkan-Docs 1.2.182 spec update, the Vulkan-Hpp headers have been
-split into multiple files. All of those files are now included in this
-repository.
 
 * include/vulkan/*.hpp
