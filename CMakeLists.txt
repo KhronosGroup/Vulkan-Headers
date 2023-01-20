@@ -41,6 +41,7 @@ function(vlk_get_header_version)
 endfunction()
 vlk_get_header_version()
 
+# JUST A TEST
 project(Vulkan-Headers LANGUAGES C VERSION ${VK_VERSION_STRING})
 
 if (CMAKE_VERSION VERSION_GREATER_EQUAL "3.15")
