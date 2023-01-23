@@ -24,11 +24,12 @@ cmake_minimum_required(VERSION 3.10.2)
 project(Vulkan-Headers NONE)
 
 
-# Add support for VulkanSC mode from the command line
-set(VulkanSC FALSE CACHE BOOL "User defined variable for VulkanSC mode to be passed in through cmake command line e.g. -DVulkanSC=TRUE")
-# Add preprocessor definition for VulkanSC.
-# This "VulkanSC" definition can be used to deactivate code that is not required for the VulkanSC builds.
-if(VulkanSC)
+# Add support for VULKANSC mode from the command line
+set(VULKANSC OFF CACHE BOOL "User defined variable for VULKANSC mode to be passed in through cmake command line e.g. -DVULKANSC=ON")
+
+# Add preprocessor definition for Vulkan SC.
+# This "VULKANSC" definition can be used to deactivate the loader code that is not required for the VULKANSC builds.
+if(VULKANSC)
 add_definitions(-DVULKANSC)
 endif()
 
@@ -56,7 +57,7 @@ target_include_directories(Vulkan-Registry INTERFACE "${CMAKE_CURRENT_SOURCE_DIR
 add_library(Vulkan::Registry ALIAS Vulkan-Registry)
 
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/vulkan" DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-if(NOT VulkanSC)
+if(NOT VULKANSC)
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/vk_video" DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 endif()
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/registry" DESTINATION ${CMAKE_INSTALL_DATADIR}/vulkan)

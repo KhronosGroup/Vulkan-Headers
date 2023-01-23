@@ -277,12 +277,12 @@ The instructions for building this repository on MacOS are similar to those for 
 ## Building Vulkan SC
 
 To build Vulkan SC instead of Vulkan (required for `sc_main` and derived branches)
-set the `VulkanSC` CMake variable to `TRUE`.
+set the `VULKANSC` CMake variable to `ON`.
 
 For example:
 
     cd Vulkan-Headers
     mkdir build
     cd build
-    cmake -DCMAKE_INSTALL_PREFIX=install -DVulkanSC=TRUE ..
+    cmake -DCMAKE_INSTALL_PREFIX=install -DVULKANSC=ON ..
     make install
