@@ -595,10 +595,10 @@ def makeGenOpts(args):
                 profile           = None,
                 versions          = featuresPat,
                 emitversions      = featuresPat,
-                defaultExtensions = defaultExtensions,
+                defaultExtensions = None,
                 addExtensions     = addExtensionsPat,
-                removeExtensions  = removeExtensionsPat,
-                emitExtensions    = emitExtensionsPat,
+                removeExtensions  = None,
+                emitExtensions    = None,
                 vulkanLayer       = vulkanLayer,
                 prefixText        = prefixStrings + vkPrefixStrings,
                 genFuncPointers   = True,
@@ -640,6 +640,11 @@ def makeGenOpts(args):
             alignFuncParam    = 48)
         ]
 
+    # keep any relevant platform extensions for the following generators
+    # (needed for e.g. the vulkan_sci extensions)
+    explicitRemoveExtensionsPat = makeREstring(
+        removeExtensions, None, strings_are_regex=True)
+
     # Raw C header file generator.
     genOpts['vulkan_json_gen.h'] = [
           JSONHeaderOutputGenerator,
@@ -653,7 +658,7 @@ def makeGenOpts(args):
             emitversions      = scVersions,
             defaultExtensions = 'vulkansc',
             addExtensions     = addExtensionsPat,
-            removeExtensions  = removeExtensionsPat,
+            removeExtensions  = explicitRemoveExtensionsPat,
             emitExtensions    = emitExtensionsPat,
             prefixText        = prefixStrings + vkPrefixStrings,
             genFuncPointers   = True,
@@ -680,7 +685,7 @@ def makeGenOpts(args):
             emitversions      = scVersions,
             defaultExtensions = 'vulkansc',
             addExtensions     = addExtensionsPat,
-            removeExtensions  = removeExtensionsPat,
+            removeExtensions  = explicitRemoveExtensionsPat,
             emitExtensions    = emitExtensionsPat,
             prefixText        = prefixStrings + vkPrefixStrings,
             genFuncPointers   = True,
@@ -706,7 +711,7 @@ def makeGenOpts(args):
             emitversions      = scVersions,
             defaultExtensions = 'vulkansc',
             addExtensions     = addExtensionsPat,
-            removeExtensions  = removeExtensionsPat,
+            removeExtensions  = explicitRemoveExtensionsPat,
             emitExtensions    = emitExtensionsPat,
             prefixText        = prefixStrings + vkPrefixStrings,
             genFuncPointers   = True,

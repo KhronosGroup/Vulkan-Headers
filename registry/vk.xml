@@ -139,19 +139,19 @@ branch of the member gitlab server.
 
         <type category="define">// DEPRECATED: This define is deprecated. VK_MAKE_API_VERSION should be used instead.
 #define <name>VK_MAKE_VERSION</name>(major, minor, patch) \
-    ((((uint32_t)(major)) &lt;&lt; 22) | (((uint32_t)(minor)) &lt;&lt; 12) | ((uint32_t)(patch)))</type>
+    ((((uint32_t)(major)) &lt;&lt; 22U) | (((uint32_t)(minor)) &lt;&lt; 12U) | ((uint32_t)(patch)))</type>
         <type category="define">// DEPRECATED: This define is deprecated. VK_API_VERSION_MAJOR should be used instead.
-#define <name>VK_VERSION_MAJOR</name>(version) ((uint32_t)(version) &gt;&gt; 22)</type>
+#define <name>VK_VERSION_MAJOR</name>(version) ((uint32_t)(version) &gt;&gt; 22U)</type>
         <type category="define">// DEPRECATED: This define is deprecated. VK_API_VERSION_MINOR should be used instead.
-#define <name>VK_VERSION_MINOR</name>(version) (((uint32_t)(version) &gt;&gt; 12) &amp; 0x3FFU)</type>
+#define <name>VK_VERSION_MINOR</name>(version) (((uint32_t)(version) &gt;&gt; 12U) &amp; 0x3FFU)</type>
         <type category="define">// DEPRECATED: This define is deprecated. VK_API_VERSION_PATCH should be used instead.
 #define <name>VK_VERSION_PATCH</name>(version) ((uint32_t)(version) &amp; 0xFFFU)</type>
 
         <type category="define">#define <name>VK_MAKE_API_VERSION</name>(variant, major, minor, patch) \
-    ((((uint32_t)(variant)) &lt;&lt; 29) | (((uint32_t)(major)) &lt;&lt; 22) | (((uint32_t)(minor)) &lt;&lt; 12) | ((uint32_t)(patch)))</type>
-        <type category="define">#define <name>VK_API_VERSION_VARIANT</name>(version) ((uint32_t)(version) &gt;&gt; 29)</type>
-        <type category="define">#define <name>VK_API_VERSION_MAJOR</name>(version) (((uint32_t)(version) &gt;&gt; 22) &amp; 0x7FU)</type>
-        <type category="define">#define <name>VK_API_VERSION_MINOR</name>(version) (((uint32_t)(version) &gt;&gt; 12) &amp; 0x3FFU)</type>
+    ((((uint32_t)(variant)) &lt;&lt; 29U) | (((uint32_t)(major)) &lt;&lt; 22U) | (((uint32_t)(minor)) &lt;&lt; 12U) | ((uint32_t)(patch)))</type>
+        <type category="define">#define <name>VK_API_VERSION_VARIANT</name>(version) ((uint32_t)(version) &gt;&gt; 29U)</type>
+        <type category="define">#define <name>VK_API_VERSION_MAJOR</name>(version) (((uint32_t)(version) &gt;&gt; 22U) &amp; 0x7FU)</type>
+        <type category="define">#define <name>VK_API_VERSION_MINOR</name>(version) (((uint32_t)(version) &gt;&gt; 12U) &amp; 0x3FFU)</type>
         <type category="define">#define <name>VK_API_VERSION_PATCH</name>(version) ((uint32_t)(version) &amp; 0xFFFU)</type>
 
         <type category="define" requires="VK_HEADER_VERSION">// Vulkan SC variant number
@@ -174,7 +174,7 @@ branch of the member gitlab server.
 #define <name>VK_HEADER_VERSION_COMPLETE</name> <type>VK_MAKE_API_VERSION</type>(0, 1, 2, VK_HEADER_VERSION)</type>
 
         <type api="vulkansc" category="define">// Version of this file
-#define <name>VK_HEADER_VERSION</name> 11</type>
+#define <name>VK_HEADER_VERSION</name> 12</type>
         <type api="vulkansc" category="define" requires="VKSC_API_VARIANT">// Complete version of this file
 #define <name>VK_HEADER_VERSION_COMPLETE</name> <type>VK_MAKE_API_VERSION</type>(VKSC_API_VARIANT, 1, 0, VK_HEADER_VERSION)</type>
 
@@ -1865,7 +1865,7 @@ typedef void <name>CAMetalLayer</name>;
             <member optional="true">const <type>void</type>* <name>pNext</name></member>
             <member optional="true"><type>uint32_t</type>       <name>waitSemaphoreCount</name></member>
             <member len="waitSemaphoreCount">const <type>VkSemaphore</type>*     <name>pWaitSemaphores</name></member>
-            <member len="waitSemaphoreCount">const <type>VkPipelineStageFlags</type>*           <name>pWaitDstStageMask</name></member>
+            <member optional="false,true" len="waitSemaphoreCount">const <type>VkPipelineStageFlags</type>*           <name>pWaitDstStageMask</name></member>
             <member optional="true"><type>uint32_t</type>       <name>commandBufferCount</name></member>
             <member len="commandBufferCount">const <type>VkCommandBuffer</type>*     <name>pCommandBuffers</name></member>
             <member optional="true"><type>uint32_t</type>       <name>signalSemaphoreCount</name></member>
@@ -2164,12 +2164,13 @@ typedef void <name>CAMetalLayer</name>;
             <member optional="true">const <type>void</type>*            <name>pNext</name></member>
             <member><type>uint32_t</type>                               <name>memoryTypeBits</name></member>
         </type>
-        <type category="struct" name="VkPhysicalDeviceExternalSciBufFeaturesNV" structextends="VkPhysicalDeviceFeatures2,VkDeviceCreateInfo">
-            <member values="VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SCI_BUF_FEATURES_NV"><type>VkStructureType</type> <name>sType</name></member>
-            <member optional="true">const <type>void</type>*                 <name>pNext</name></member>
+        <type category="struct" name="VkPhysicalDeviceExternalMemorySciBufFeaturesNV" structextends="VkPhysicalDeviceFeatures2,VkDeviceCreateInfo">
+            <member values="VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_SCI_BUF_FEATURES_NV"><type>VkStructureType</type> <name>sType</name></member>
+            <member optional="true"><type>void</type>*                       <name>pNext</name></member>
             <member><type>VkBool32</type>                                    <name>sciBufImport</name></member>
             <member><type>VkBool32</type>                                    <name>sciBufExport</name></member>
         </type>
+        <type category="struct" name="VkPhysicalDeviceExternalSciBufFeaturesNV"  alias="VkPhysicalDeviceExternalMemorySciBufFeaturesNV"/>
         <type category="struct" name="VkWin32KeyedMutexAcquireReleaseInfoNV" structextends="VkSubmitInfo,VkSubmitInfo2KHR">
             <member values="VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_NV"><type>VkStructureType</type> <name>sType</name></member>
             <member optional="true">const <type>void</type>*                      <name>pNext</name></member>
@@ -5177,7 +5178,7 @@ typedef void <name>CAMetalLayer</name>;
             <member optional="true"><type>void</type>*        <name>pNext</name></member>
             <member><type>VkBool32</type>                           <name>deviceCoherentMemory</name></member>
         </type>
-        <type category="struct" name="VkFaultData">
+        <type category="struct" name="VkFaultData" returnedonly="true">
             <member values="VK_STRUCTURE_TYPE_FAULT_DATA"><type>VkStructureType</type> <name>sType</name></member>
             <member noautovalidity="true" optional="true"><type>void</type>* <name>pNext</name></member>
             <member><type>VkFaultLevel</type>                    <name>faultLevel</name></member>
@@ -8645,12 +8646,19 @@ typedef void <name>CAMetalLayer</name>;
             <param optional="false,true"><type>uint32_t</type>* <name>pPropertyCount</name></param>
             <param optional="true" len="pPropertyCount"><type>VkExtensionProperties</type>* <name>pProperties</name></param>
         </command>
-        <command successcodes="VK_SUCCESS,VK_INCOMPLETE" errorcodes="VK_ERROR_OUT_OF_HOST_MEMORY,VK_ERROR_OUT_OF_DEVICE_MEMORY">
+        <command api="vulkan" successcodes="VK_SUCCESS,VK_INCOMPLETE" errorcodes="VK_ERROR_OUT_OF_HOST_MEMORY,VK_ERROR_OUT_OF_DEVICE_MEMORY">
             <proto><type>VkResult</type> <name>vkEnumerateDeviceLayerProperties</name></proto>
             <param><type>VkPhysicalDevice</type> <name>physicalDevice</name></param>
             <param optional="false,true"><type>uint32_t</type>* <name>pPropertyCount</name></param>
             <param optional="true" len="pPropertyCount"><type>VkLayerProperties</type>* <name>pProperties</name></param>
         </command>
+        <command api="vulkansc" successcodes="VK_SUCCESS">
+            <proto><type>VkResult</type> <name>vkEnumerateDeviceLayerProperties</name></proto>
+            <param><type>VkPhysicalDevice</type> <name>physicalDevice</name></param>
+            <param optional="false,true"><type>uint32_t</type>* <name>pPropertyCount</name></param>
+            <param optional="true" len="pPropertyCount"><type>VkLayerProperties</type>* <name>pProperties</name></param>
+        </command>
+
         <command successcodes="VK_SUCCESS,VK_INCOMPLETE" errorcodes="VK_ERROR_OUT_OF_HOST_MEMORY,VK_ERROR_OUT_OF_DEVICE_MEMORY,VK_ERROR_LAYER_NOT_PRESENT">
             <proto><type>VkResult</type> <name>vkEnumerateDeviceExtensionProperties</name></proto>
             <param><type>VkPhysicalDevice</type> <name>physicalDevice</name></param>
@@ -12931,6 +12939,8 @@ typedef void <name>CAMetalLayer</name>;
             <enum name="VK_STRUCTURE_TYPE_BIND_SPARSE_INFO"/>
             <type name="VkDeviceGroupBindSparseInfo"/>
             <enum name="VK_STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO"/>
+
+            <command name="vkDestroySemaphoreSciSyncPoolNV"/>
         </remove>
     </feature>
 
@@ -17791,18 +17801,20 @@ typedef void <name>CAMetalLayer</name>;
         </extension>
         <extension name="VK_NV_external_memory_sci_buf" number="375" requiresCore="1.1" platform="sci" type="device" author="NV" contact="Kai Zhang @kazhang" supported="vulkansc">
             <require>
-                <enum value="1"                                         name="VK_NV_EXTERNAL_MEMORY_SCI_BUF_SPEC_VERSION"/>
+                <enum value="2"                                         name="VK_NV_EXTERNAL_MEMORY_SCI_BUF_SPEC_VERSION"/>
                 <enum value="&quot;VK_NV_external_memory_sci_buf&quot;" name="VK_NV_EXTERNAL_MEMORY_SCI_BUF_EXTENSION_NAME"/>
                 <enum offset="0" extends="VkStructureType"              name="VK_STRUCTURE_TYPE_IMPORT_MEMORY_SCI_BUF_INFO_NV"/>
                 <enum offset="1" extends="VkStructureType"              name="VK_STRUCTURE_TYPE_EXPORT_MEMORY_SCI_BUF_INFO_NV"/>
                 <enum offset="2" extends="VkStructureType"              name="VK_STRUCTURE_TYPE_MEMORY_GET_SCI_BUF_INFO_NV"/>
                 <enum offset="3" extends="VkStructureType"              name="VK_STRUCTURE_TYPE_MEMORY_SCI_BUF_PROPERTIES_NV"/>
-                <enum offset="4" extends="VkStructureType"              name="VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SCI_BUF_FEATURES_NV"/>
+                <enum offset="4" extends="VkStructureType"              name="VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_SCI_BUF_FEATURES_NV"/>
+                <enum extends="VkStructureType"                         name="VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SCI_BUF_FEATURES_NV" alias="VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_SCI_BUF_FEATURES_NV"/>
                 <enum bitpos="13" extends="VkExternalMemoryHandleTypeFlagBits"  name="VK_EXTERNAL_MEMORY_HANDLE_TYPE_SCI_BUF_BIT_NV"/>
                 <type name="VkExportMemorySciBufInfoNV"/>
                 <type name="VkImportMemorySciBufInfoNV"/>
                 <type name="VkMemoryGetSciBufInfoNV"/>
                 <type name="VkMemorySciBufPropertiesNV"/>
+                <type name="VkPhysicalDeviceExternalMemorySciBufFeaturesNV"/>
                 <type name="VkPhysicalDeviceExternalSciBufFeaturesNV"/>
                 <command name="vkGetMemorySciBufNV"/>
                 <command name="vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV"/>
@@ -18302,7 +18314,7 @@ typedef void <name>CAMetalLayer</name>;
             <require>
                 <enum value="1"                                         name="VK_NV_EXTERNAL_SCI_SYNC_2_SPEC_VERSION"/>
                 <enum value="&quot;VK_NV_external_sci_sync2&quot;"      name="VK_NV_EXTERNAL_SCI_SYNC_2_EXTENSION_NAME"/>
-                <enum offset="0"  extends="VkObjectType"                name="VK_OBJECT_TYPE_SEMAPHORE_SCI_SYNC_POOL_NV"   comment="VkSemaphoreSciSyncPoolNV" protect="VK_USE_PLATFORM_SCI"/>
+                <enum offset="0"  extends="VkObjectType"                name="VK_OBJECT_TYPE_SEMAPHORE_SCI_SYNC_POOL_NV"   comment="VkSemaphoreSciSyncPoolNV"/>
                 <enum offset="0"  extends="VkStructureType"             name="VK_STRUCTURE_TYPE_SEMAPHORE_SCI_SYNC_POOL_CREATE_INFO_NV"/>
                 <enum offset="1"  extends="VkStructureType"             name="VK_STRUCTURE_TYPE_SEMAPHORE_SCI_SYNC_CREATE_INFO_NV"/>
                 <enum offset="2"  extends="VkStructureType"             name="VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SCI_SYNC_2_FEATURES_NV"/>
