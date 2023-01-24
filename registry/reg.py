@@ -1,6 +1,6 @@
 #!/usr/bin/python3 -i
 #
-# Copyright 2013-2021 The Khronos Group Inc.
+# Copyright 2013-2022 The Khronos Group Inc.
 #
 # SPDX-License-Identifier: Apache-2.0
 
@@ -11,7 +11,8 @@ import re
 import sys
 import xml.etree.ElementTree as etree
 from collections import defaultdict, deque, namedtuple
-from generator import OutputGenerator, GeneratorOptions, write
+
+from generator import GeneratorOptions, OutputGenerator, noneStr, write
 from apiconventions import APIConventions
 
 def apiNameMatch(str, supported):
@@ -268,22 +269,21 @@ class FeatureInfo(BaseInfo):
                attribute of <feature>. Extensions do not have API version
                numbers and are assigned number 0."""
 
-            self.number = "0"
+            self.number = 0
             self.supported = None
         else:
             # Extract vendor portion of <APIprefix>_<vendor>_<name>
             self.category = self.name.split('_', 2)[1]
             self.version = "0"
             self.versionNumber = "0"
-            self.number = elem.get('number')
+
+            self.number = int(elem.get('number','0'))
             """extension number, used for ordering and for assigning
             enumerant offsets. <feature> features do not have extension
-            numbers and are assigned number 0."""
+            numbers and are assigned number 0, as are extensions without
+            numbers, so sorting works."""
 
-            # If there is no 'number' attribute, use 0, so sorting works
-            if self.number is None:
-                self.number = 0
-            self.supported = elem.get('supported')
+            self.supported = elem.get('supported', 'disabled')
 
 class SpirvInfo(BaseInfo):
     """Registry information about an API <spirvextensions>
@@ -295,8 +295,10 @@ class SpirvInfo(BaseInfo):
 class FormatInfo(BaseInfo):
     """Registry information about an API <format>."""
 
-    def __init__(self, elem):
+    def __init__(self, elem, condition):
         BaseInfo.__init__(self, elem)
+        # Need to save the condition here when it is known
+        self.condition = condition
 
 class Registry:
     """Object representing an API registry, loaded from an XML file."""
@@ -400,7 +402,7 @@ class Registry:
         Intended for internal use only.
 
         - elem - `<type>`/`<enums>`/`<enum>`/`<command>`/`<feature>`/`<extension>`/`<spirvextension>`/`<spirvcapability>`/`<format>` Element
-        - info - corresponding {Type|Group|Enum|Cmd|Feature|Spirv}Info object
+        - info - corresponding {Type|Group|Enum|Cmd|Feature|Spirv|Format}Info object
         - infoName - 'type' / 'group' / 'enum' / 'command' / 'feature' / 'extension' / 'spirvextension' / 'spirvcapability' / 'format'
         - dictionary - self.{type|group|enum|cmd|api|ext|format|spirvext|spirvcap}dict
 
@@ -442,6 +444,8 @@ class Registry:
     def parseTree(self):
         """Parse the registry Element, once created"""
         # This must be the Element for the root <registry>
+        if self.tree is None:
+            raise RuntimeError("Tree not initialized!")
         self.reg = self.tree.getroot()
 
         # Preprocess the tree by removing all elements with non-matching
@@ -466,7 +470,10 @@ class Registry:
             # If the <type> does not already have a 'name' attribute, set
             # it from contents of its <name> tag.
             if type_elem.get('name') is None:
-                type_elem.set('name', type_elem.find('name').text)
+                name_elem = type_elem.find('name')
+                if name_elem is None or not name_elem.text:
+                    raise RuntimeError("Type without a name!")
+                type_elem.set('name', name_elem.text)
             self.addElementInfo(type_elem, TypeInfo(type_elem), 'type', self.typedict)
 
         # Create dictionary of registry enum groups from <enums> tags.
@@ -511,7 +518,10 @@ class Registry:
             # it from contents of its <proto><name> tag.
             name = cmd.get('name')
             if name is None:
-                name = cmd.set('name', cmd.find('proto/name').text)
+                name_elem = cmd.find('proto/name')
+                if name_elem is None or not name_elem.text:
+                    raise RuntimeError("Command without a name!")
+                name = cmd.set('name', name_elem.text)
             ci = CmdInfo(cmd)
             self.addElementInfo(cmd, ci, 'command', self.cmddict)
             alias = cmd.get('alias')
@@ -541,6 +551,7 @@ class Registry:
         # Create dictionaries of API and extension interfaces
         #   from toplevel <api> and <extension> tags.
         self.apidict = {}
+        format_condition = dict()
         for feature in self.reg.findall('feature'):
             featureInfo = FeatureInfo(feature)
             self.addElementInfo(feature, featureInfo, 'feature', self.apidict)
@@ -577,6 +588,11 @@ class Registry:
                         else:
                             self.gen.logMsg('warn', 'NO matching group',
                                             groupName, 'for enum', enum.get('name'), 'found.')
+                        if groupName == "VkFormat":
+                            format_name = enum.get('name')
+                            if enum.get('alias'):
+                                format_name = enum.get('alias')
+                            format_condition[format_name] = featureInfo.name
                         addEnumInfo = True
                     elif enum.get('value') or enum.get('bitpos') or enum.get('alias'):
                         # self.gen.logMsg('diag', 'Adding extension constant "enum"',
@@ -611,10 +627,10 @@ class Registry:
                         # as when redefining an enum in another extension.
                         extnumber = enum.get('extnumber')
                         if not extnumber:
-                            enum.set('extnumber', featureInfo.number)
+                            enum.set('extnumber', str(featureInfo.number))
 
                         enum.set('extname', featureInfo.name)
-                        enum.set('supported', featureInfo.supported)
+                        enum.set('supported', noneStr(featureInfo.supported))
                         # Look up the GroupInfo with matching groupName
                         if groupName in self.groupdict:
                             # self.gen.logMsg('diag', 'Matching group',
@@ -624,6 +640,15 @@ class Registry:
                         else:
                             self.gen.logMsg('warn', 'NO matching group',
                                             groupName, 'for enum', enum.get('name'), 'found.')
+                        # This is Vulkan-specific
+                        if groupName == "VkFormat":
+                            format_name = enum.get('name')
+                            if enum.get('alias'):
+                                format_name = enum.get('alias')
+                            if format_name in format_condition:
+                                format_condition[format_name] += "," + featureInfo.name
+                            else:
+                                format_condition[format_name] = featureInfo.name
                         addEnumInfo = True
                     elif enum.get('value') or enum.get('bitpos') or enum.get('alias'):
                         # self.gen.logMsg('diag', 'Adding extension constant "enum"',
@@ -641,9 +666,10 @@ class Registry:
                 disabled_types.append(type_elem.get('name'))
         for type_elem in self.reg.findall('types/type'):
             if type_elem.get('name') not in disabled_types:
-                parentStructs = type_elem.get('structextends')
-                if parentStructs is not None:
-                    for parent in parentStructs.split(','):
+                # The structure type this may be chained to.
+                struct_extends = type_elem.get('structextends')
+                if struct_extends is not None:
+                    for parent in struct_extends.split(','):
                         # self.gen.logMsg('diag', type.get('name'), 'extends', parent)
                         self.validextensionstructs[parent].append(type_elem.get('name'))
         # Sort the lists so they do not depend on the XML order
@@ -660,7 +686,11 @@ class Registry:
             self.addElementInfo(spirv, spirvInfo, 'spirvcapability', self.spirvcapdict)
 
         for format in self.reg.findall('formats/format'):
-            formatInfo = FormatInfo(format)
+            condition = None
+            format_name = format.get('name')
+            if format_name in format_condition:
+                condition = format_condition[format_name]
+            formatInfo = FormatInfo(format, condition)
             self.addElementInfo(format, formatInfo, 'format', self.formatsdict)
 
     def dumpReg(self, maxlen=120, filehandle=sys.stdout):
@@ -853,7 +883,7 @@ class Registry:
                     self.markCmdRequired(depname, required)
 
             # Tag all parameter types of this command as required.
-            # This DOES NOT remove types of commands in a <remove>
+            # This does not remove types of commands in a <remove>
             # tag, because many other commands may use the same type.
             # We could be more clever and reference count types,
             # instead of using a boolean.
@@ -967,6 +997,11 @@ class Registry:
 
                 # Determine the required extension or version needed for a require block
                 # Assumes that only one of these is specified
+                # 'extension', and therefore 'required_key', may be a boolean
+                # expression of extension names.
+                # 'required_key' is used only as a dictionary key at
+                # present, and passed through to the script generators, so
+                # they must be prepared to parse that expression.
                 required_key = require.get('feature')
                 if required_key is None:
                     required_key = require.get('extension')
@@ -1211,6 +1246,8 @@ class Registry:
                         if name in enumAliases:
                             elem.set('required', 'true')
                             self.gen.logMsg('diag', '* also need to require alias', name)
+            if f is None:
+                raise RuntimeError("Should not get here")
             if f.elem.get('category') == 'bitmask':
                 followupFeature = f.elem.get('bitvalues')
         elif ftype == 'command':
@@ -1233,6 +1270,8 @@ class Registry:
         # Actually generate the type only if emitting declarations
         if self.emitFeatures:
             self.gen.logMsg('diag', 'Emitting', ftype, 'decl for', fname)
+            if genProc is None:
+                raise RuntimeError("genProc is None when we should be emitting")
             genProc(f, fname, alias)
         else:
             self.gen.logMsg('diag', 'Skipping', ftype, fname,
@@ -1421,7 +1460,7 @@ class Registry:
             # the regexp specified in the generator options. This allows
             # forcing extensions into an interface even if they are not
             # tagged appropriately in the registry.
-            # However we still respect the 'supported' attribute.
+            # However, we still respect the 'supported' attribute.
             if regAddExtensions.match(extName) is not None:
                 if not apiNameMatch(self.genOpts.apiname, ei.elem.get('supported')):
                     self.gen.logMsg('diag', 'NOT including extension',
@@ -1481,7 +1520,6 @@ class Registry:
         # Sort the features list, if a sort procedure is defined
         if self.genOpts.sortProcedure:
             self.genOpts.sortProcedure(features)
-            # print('sortProcedure ->', [f.name for f in features])
 
         # Passes 1+2: loop over requested API versions and extensions tagging
         #   types/commands/features as required (in an <require> block) or no
@@ -1556,45 +1594,3 @@ class Registry:
             self.cmddict[cmd].resetState()
         for cmd in self.apidict:
             self.apidict[cmd].resetState()
-
-    def __validateStructLimittypes(self, struct):
-        """Validate 'limittype' attributes for a single struct."""
-        limittypeDiags = namedtuple('limittypeDiags', ['missing', 'invalid'])
-        badFields = defaultdict(lambda : limittypeDiags(missing=[], invalid=[]))
-        validLimittypes = { 'min', 'max', 'bitmask', 'range', 'struct', 'noauto' }
-        for member in struct.getMembers():
-            memberName = member.findtext('name')
-            if memberName in ['sType', 'pNext']:
-                continue
-            limittype = member.get('limittype')
-            if not limittype:
-                badFields[struct.elem.get('name')].missing.append(memberName)
-            elif limittype == 'struct':
-                typeName = member.findtext('type')
-                memberType = self.typedict[typeName]
-                badFields.update(self.__validateStructLimittypes(memberType))
-            elif limittype not in validLimittypes:
-                badFields[struct.elem.get('name')].invalid.append(memberName)
-        return badFields
-
-    def __validateLimittype(self):
-        """Validate 'limittype' attributes."""
-        badFields = self.__validateStructLimittypes(self.typedict['VkPhysicalDeviceProperties2'])
-        for featStructName in self.validextensionstructs['VkPhysicalDeviceProperties2']:
-            featStruct = self.typedict[featStructName]
-            badFields.update(self.__validateStructLimittypes(featStruct))
-
-        if badFields:
-            self.gen.logMsg('diag', 'SUMMARY OF FIELDS WITH INCORRECT LIMITTYPES')
-            for key in sorted(badFields.keys()):
-                diags = badFields[key]
-                if diags.missing:
-                    self.gen.logMsg('diag', '    ', key, 'missing limittype:', ', '.join(badFields[key].missing))
-                if diags.invalid:
-                    self.gen.logMsg('diag', '    ', key, 'invalid limittype:', ', '.join(badFields[key].invalid))
-            return False
-        return True
-
-    def validateRegistry(self):
-        """Validate properties of the registry."""
-        return self.__validateLimittype()

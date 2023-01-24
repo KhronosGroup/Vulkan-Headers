@@ -2,7 +2,7 @@
 #define VULKAN_SCI_H_ 1
 
 /*
-** Copyright 2015-2021 The Khronos Group Inc.
+** Copyright 2015-2022 The Khronos Group Inc.
 **
 ** SPDX-License-Identifier: Apache-2.0
 */
@@ -137,7 +137,7 @@ VKAPI_ATTR VkResult VKAPI_CALL vkImportSemaphoreSciSyncObjNV(
 
 
 #define VK_NV_external_memory_sci_buf 1
-#define VK_NV_EXTERNAL_MEMORY_SCI_BUF_SPEC_VERSION 1
+#define VK_NV_EXTERNAL_MEMORY_SCI_BUF_SPEC_VERSION 2
 #define VK_NV_EXTERNAL_MEMORY_SCI_BUF_EXTENSION_NAME "VK_NV_external_memory_sci_buf"
 typedef struct VkExportMemorySciBufInfoNV {
     VkStructureType     sType;
@@ -165,12 +165,14 @@ typedef struct VkMemorySciBufPropertiesNV {
     uint32_t           memoryTypeBits;
 } VkMemorySciBufPropertiesNV;
 
-typedef struct VkPhysicalDeviceExternalSciBufFeaturesNV {
+typedef struct VkPhysicalDeviceExternalMemorySciBufFeaturesNV {
     VkStructureType    sType;
-    const void*        pNext;
+    void*              pNext;
     VkBool32           sciBufImport;
     VkBool32           sciBufExport;
-} VkPhysicalDeviceExternalSciBufFeaturesNV;
+} VkPhysicalDeviceExternalMemorySciBufFeaturesNV;
+
+typedef VkPhysicalDeviceExternalMemorySciBufFeaturesNV VkPhysicalDeviceExternalSciBufFeaturesNV;
 
 typedef VkResult (VKAPI_PTR *PFN_vkGetMemorySciBufNV)(VkDevice device, const VkMemoryGetSciBufInfoNV* pGetSciBufInfo, NvSciBufObj* pHandle);
 typedef VkResult (VKAPI_PTR *PFN_vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV)(VkPhysicalDevice physicalDevice, VkExternalMemoryHandleTypeFlagBits handleType, NvSciBufObj handle, VkMemorySciBufPropertiesNV* pMemorySciBufProperties);
@@ -227,7 +229,6 @@ typedef struct VkDeviceSemaphoreSciSyncPoolReservationCreateInfoNV {
 } VkDeviceSemaphoreSciSyncPoolReservationCreateInfoNV;
 
 typedef VkResult (VKAPI_PTR *PFN_vkCreateSemaphoreSciSyncPoolNV)(VkDevice device, const VkSemaphoreSciSyncPoolCreateInfoNV* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkSemaphoreSciSyncPoolNV* pSemaphorePool);
-typedef void (VKAPI_PTR *PFN_vkDestroySemaphoreSciSyncPoolNV)(VkDevice device, VkSemaphoreSciSyncPoolNV semaphorePool, const VkAllocationCallbacks* pAllocator);
 
 #ifndef VK_NO_PROTOTYPES
 VKAPI_ATTR VkResult VKAPI_CALL vkCreateSemaphoreSciSyncPoolNV(
@@ -235,11 +236,6 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateSemaphoreSciSyncPoolNV(
     const VkSemaphoreSciSyncPoolCreateInfoNV*   pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkSemaphoreSciSyncPoolNV*                   pSemaphorePool);
-
-VKAPI_ATTR void VKAPI_CALL vkDestroySemaphoreSciSyncPoolNV(
-    VkDevice                                    device,
-    VkSemaphoreSciSyncPoolNV                    semaphorePool,
-    const VkAllocationCallbacks*                pAllocator);
 #endif
 
 #ifdef __cplusplus

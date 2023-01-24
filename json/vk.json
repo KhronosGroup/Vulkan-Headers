@@ -43,11 +43,11 @@
     "VkCommandPool": {"$ref": "#/definitions/uint64_t"},
     "VkResult": {"$ref": "#/definitions/enum"},
     "VkStructureType": {"$ref": "#/definitions/enum"},
+    "VkPipelineCacheHeaderVersion": {"$ref": "#/definitions/enum"},
     "VkAccessFlagBits": {"$ref": "#/definitions/enum"},
     "VkImageLayout": {"$ref": "#/definitions/enum"},
     "VkImageAspectFlagBits": {"$ref": "#/definitions/enum"},
     "VkObjectType": {"$ref": "#/definitions/enum"},
-    "VkPipelineCacheHeaderVersion": {"$ref": "#/definitions/enum"},
     "VkVendorId": {"$ref": "#/definitions/enum"},
     "VkSystemAllocationScope": {"$ref": "#/definitions/enum"},
     "VkInternalAllocationType": {"$ref": "#/definitions/enum"},
@@ -58,6 +58,7 @@
     "VkImageTiling": {"$ref": "#/definitions/enum"},
     "VkImageType": {"$ref": "#/definitions/enum"},
     "VkImageUsageFlagBits": {"$ref": "#/definitions/enum"},
+    "VkInstanceCreateFlagBits": {"$ref": "#/definitions/enum"},
     "VkMemoryHeapFlagBits": {"$ref": "#/definitions/enum"},
     "VkMemoryPropertyFlagBits": {"$ref": "#/definitions/enum"},
     "VkPhysicalDeviceType": {"$ref": "#/definitions/enum"},
@@ -91,6 +92,7 @@
     "VkPolygonMode": {"$ref": "#/definitions/enum"},
     "VkStencilOp": {"$ref": "#/definitions/enum"},
     "VkLogicOp": {"$ref": "#/definitions/enum"},
+    "VkPipelineLayoutCreateFlagBits": {"$ref": "#/definitions/enum"},
     "VkBorderColor": {"$ref": "#/definitions/enum"},
     "VkFilter": {"$ref": "#/definitions/enum"},
     "VkSamplerAddressMode": {"$ref": "#/definitions/enum"},
@@ -3839,7 +3841,7 @@
         }
     },
 
-    "VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR": {
+    "VkPhysicalDeviceShaderTerminateInvocationFeatures": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -3944,36 +3946,39 @@
         }
     },
 
+    "VkPipelineStageFlagBits2": {"$ref": "#/definitions/enum"},
     "VkPipelineStageFlagBits2KHR": {"$ref": "#/definitions/enum"},
+    "VkAccessFlagBits2": {"$ref": "#/definitions/enum"},
     "VkAccessFlagBits2KHR": {"$ref": "#/definitions/enum"},
+    "VkSubmitFlagBits": {"$ref": "#/definitions/enum"},
     "VkSubmitFlagBitsKHR": {"$ref": "#/definitions/enum"},
     "VkFlags64": {"$ref": "#/definitions/uint64_t"},
-    "VkPipelineStageFlags2KHR": {"$ref": "#/definitions/VkFlags64"},
-    "VkAccessFlags2KHR": {"$ref": "#/definitions/VkFlags64"},
-    "VkSubmitFlagsKHR": {"$ref": "#/definitions/VkFlags"},
-    "VkMemoryBarrier2KHR": {
+    "VkPipelineStageFlags2": {"$ref": "#/definitions/VkFlags64"},
+    "VkAccessFlags2": {"$ref": "#/definitions/VkFlags64"},
+    "VkSubmitFlags": {"$ref": "#/definitions/VkFlags"},
+    "VkMemoryBarrier2": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
             "sType": {"$ref": "#/definitions/VkStructureType"},
             "pNext": {"$ref": "#/definitions/void"},
-            "srcStageMask": {"$ref": "#/definitions/VkPipelineStageFlags2KHR"},
-            "srcAccessMask": {"$ref": "#/definitions/VkAccessFlags2KHR"},
-            "dstStageMask": {"$ref": "#/definitions/VkPipelineStageFlags2KHR"},
-            "dstAccessMask": {"$ref": "#/definitions/VkAccessFlags2KHR"}
+            "srcStageMask": {"$ref": "#/definitions/VkPipelineStageFlags2"},
+            "srcAccessMask": {"$ref": "#/definitions/VkAccessFlags2"},
+            "dstStageMask": {"$ref": "#/definitions/VkPipelineStageFlags2"},
+            "dstAccessMask": {"$ref": "#/definitions/VkAccessFlags2"}
         }
     },
 
-    "VkBufferMemoryBarrier2KHR": {
+    "VkBufferMemoryBarrier2": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
             "sType": {"$ref": "#/definitions/VkStructureType"},
             "pNext": {"$ref": "#/definitions/void"},
-            "srcStageMask": {"$ref": "#/definitions/VkPipelineStageFlags2KHR"},
-            "srcAccessMask": {"$ref": "#/definitions/VkAccessFlags2KHR"},
-            "dstStageMask": {"$ref": "#/definitions/VkPipelineStageFlags2KHR"},
-            "dstAccessMask": {"$ref": "#/definitions/VkAccessFlags2KHR"},
+            "srcStageMask": {"$ref": "#/definitions/VkPipelineStageFlags2"},
+            "srcAccessMask": {"$ref": "#/definitions/VkAccessFlags2"},
+            "dstStageMask": {"$ref": "#/definitions/VkPipelineStageFlags2"},
+            "dstAccessMask": {"$ref": "#/definitions/VkAccessFlags2"},
             "srcQueueFamilyIndex": {"$ref": "#/definitions/uint32_t"},
             "dstQueueFamilyIndex": {"$ref": "#/definitions/uint32_t"},
             "buffer": {"$ref": "#/definitions/VkBuffer"},
@@ -3982,16 +3987,16 @@
         }
     },
 
-    "VkImageMemoryBarrier2KHR": {
+    "VkImageMemoryBarrier2": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
             "sType": {"$ref": "#/definitions/VkStructureType"},
             "pNext": {"$ref": "#/definitions/void"},
-            "srcStageMask": {"$ref": "#/definitions/VkPipelineStageFlags2KHR"},
-            "srcAccessMask": {"$ref": "#/definitions/VkAccessFlags2KHR"},
-            "dstStageMask": {"$ref": "#/definitions/VkPipelineStageFlags2KHR"},
-            "dstAccessMask": {"$ref": "#/definitions/VkAccessFlags2KHR"},
+            "srcStageMask": {"$ref": "#/definitions/VkPipelineStageFlags2"},
+            "srcAccessMask": {"$ref": "#/definitions/VkAccessFlags2"},
+            "dstStageMask": {"$ref": "#/definitions/VkPipelineStageFlags2"},
+            "dstAccessMask": {"$ref": "#/definitions/VkAccessFlags2"},
             "oldLayout": {"$ref": "#/definitions/VkImageLayout"},
             "newLayout": {"$ref": "#/definitions/VkImageLayout"},
             "srcQueueFamilyIndex": {"$ref": "#/definitions/uint32_t"},
@@ -4001,7 +4006,7 @@
         }
     },
 
-    "VkDependencyInfoKHR": {
+    "VkDependencyInfo": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -4009,15 +4014,15 @@
             "pNext": {"$ref": "#/definitions/void"},
             "dependencyFlags": {"$ref": "#/definitions/VkDependencyFlags"},
             "memoryBarrierCount": {"$ref": "#/definitions/uint32_t"},
-            "pMemoryBarriers": {"oneOf": [{"$ref": "#/definitions/void"}, {"type": "array", "minItems": 0, "maxItems": 255, "items": {"$ref": "#/definitions/VkMemoryBarrier2KHR"}}]},
+            "pMemoryBarriers": {"oneOf": [{"$ref": "#/definitions/void"}, {"type": "array", "minItems": 0, "maxItems": 255, "items": {"$ref": "#/definitions/VkMemoryBarrier2"}}]},
             "bufferMemoryBarrierCount": {"$ref": "#/definitions/uint32_t"},
-            "pBufferMemoryBarriers": {"oneOf": [{"$ref": "#/definitions/void"}, {"type": "array", "minItems": 0, "maxItems": 255, "items": {"$ref": "#/definitions/VkBufferMemoryBarrier2KHR"}}]},
+            "pBufferMemoryBarriers": {"oneOf": [{"$ref": "#/definitions/void"}, {"type": "array", "minItems": 0, "maxItems": 255, "items": {"$ref": "#/definitions/VkBufferMemoryBarrier2"}}]},
             "imageMemoryBarrierCount": {"$ref": "#/definitions/uint32_t"},
-            "pImageMemoryBarriers": {"oneOf": [{"$ref": "#/definitions/void"}, {"type": "array", "minItems": 0, "maxItems": 255, "items": {"$ref": "#/definitions/VkImageMemoryBarrier2KHR"}}]}
+            "pImageMemoryBarriers": {"oneOf": [{"$ref": "#/definitions/void"}, {"type": "array", "minItems": 0, "maxItems": 255, "items": {"$ref": "#/definitions/VkImageMemoryBarrier2"}}]}
         }
     },
 
-    "VkSemaphoreSubmitInfoKHR": {
+    "VkSemaphoreSubmitInfo": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -4025,12 +4030,12 @@
             "pNext": {"$ref": "#/definitions/void"},
             "semaphore": {"$ref": "#/definitions/VkSemaphore"},
             "value": {"$ref": "#/definitions/uint64_t"},
-            "stageMask": {"$ref": "#/definitions/VkPipelineStageFlags2KHR"},
+            "stageMask": {"$ref": "#/definitions/VkPipelineStageFlags2"},
             "deviceIndex": {"$ref": "#/definitions/uint32_t"}
         }
     },
 
-    "VkCommandBufferSubmitInfoKHR": {
+    "VkCommandBufferSubmitInfo": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -4041,23 +4046,23 @@
         }
     },
 
-    "VkSubmitInfo2KHR": {
+    "VkSubmitInfo2": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
             "sType": {"$ref": "#/definitions/VkStructureType"},
             "pNext": {"$ref": "#/definitions/void"},
-            "flags": {"$ref": "#/definitions/VkSubmitFlagsKHR"},
+            "flags": {"$ref": "#/definitions/VkSubmitFlags"},
             "waitSemaphoreInfoCount": {"$ref": "#/definitions/uint32_t"},
-            "pWaitSemaphoreInfos": {"oneOf": [{"$ref": "#/definitions/void"}, {"type": "array", "minItems": 0, "maxItems": 255, "items": {"$ref": "#/definitions/VkSemaphoreSubmitInfoKHR"}}]},
+            "pWaitSemaphoreInfos": {"oneOf": [{"$ref": "#/definitions/void"}, {"type": "array", "minItems": 0, "maxItems": 255, "items": {"$ref": "#/definitions/VkSemaphoreSubmitInfo"}}]},
             "commandBufferInfoCount": {"$ref": "#/definitions/uint32_t"},
-            "pCommandBufferInfos": {"oneOf": [{"$ref": "#/definitions/void"}, {"type": "array", "minItems": 0, "maxItems": 255, "items": {"$ref": "#/definitions/VkCommandBufferSubmitInfoKHR"}}]},
+            "pCommandBufferInfos": {"oneOf": [{"$ref": "#/definitions/void"}, {"type": "array", "minItems": 0, "maxItems": 255, "items": {"$ref": "#/definitions/VkCommandBufferSubmitInfo"}}]},
             "signalSemaphoreInfoCount": {"$ref": "#/definitions/uint32_t"},
-            "pSignalSemaphoreInfos": {"oneOf": [{"$ref": "#/definitions/void"}, {"type": "array", "minItems": 0, "maxItems": 255, "items": {"$ref": "#/definitions/VkSemaphoreSubmitInfoKHR"}}]}
+            "pSignalSemaphoreInfos": {"oneOf": [{"$ref": "#/definitions/void"}, {"type": "array", "minItems": 0, "maxItems": 255, "items": {"$ref": "#/definitions/VkSemaphoreSubmitInfo"}}]}
         }
     },
 
-    "VkPhysicalDeviceSynchronization2FeaturesKHR": {
+    "VkPhysicalDeviceSynchronization2Features": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -4073,7 +4078,7 @@
         "properties": {
             "sType": {"$ref": "#/definitions/VkStructureType"},
             "pNext": {"$ref": "#/definitions/void"},
-            "checkpointExecutionStageMask": {"$ref": "#/definitions/VkPipelineStageFlags2KHR"}
+            "checkpointExecutionStageMask": {"$ref": "#/definitions/VkPipelineStageFlags2"}
         }
     },
 
@@ -4083,12 +4088,12 @@
         "properties": {
             "sType": {"$ref": "#/definitions/VkStructureType"},
             "pNext": {"$ref": "#/definitions/void"},
-            "stage": {"$ref": "#/definitions/VkPipelineStageFlags2KHR"},
+            "stage": {"$ref": "#/definitions/VkPipelineStageFlags2"},
             "pCheckpointMarker": {"oneOf": [{"$ref": "#/definitions/void"},{"$ref": "#/definitions/void"}]}
         }
     },
 
-    "VkBufferCopy2KHR": {
+    "VkBufferCopy2": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -4100,7 +4105,7 @@
         }
     },
 
-    "VkCopyBufferInfo2KHR": {
+    "VkCopyBufferInfo2": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -4109,11 +4114,11 @@
             "srcBuffer": {"$ref": "#/definitions/VkBuffer"},
             "dstBuffer": {"$ref": "#/definitions/VkBuffer"},
             "regionCount": {"$ref": "#/definitions/uint32_t"},
-            "pRegions": {"oneOf": [{"$ref": "#/definitions/void"}, {"type": "array", "minItems": 0, "maxItems": 255, "items": {"$ref": "#/definitions/VkBufferCopy2KHR"}}]}
+            "pRegions": {"oneOf": [{"$ref": "#/definitions/void"}, {"type": "array", "minItems": 0, "maxItems": 255, "items": {"$ref": "#/definitions/VkBufferCopy2"}}]}
         }
     },
 
-    "VkImageCopy2KHR": {
+    "VkImageCopy2": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -4127,7 +4132,7 @@
         }
     },
 
-    "VkCopyImageInfo2KHR": {
+    "VkCopyImageInfo2": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -4138,11 +4143,11 @@
             "dstImage": {"$ref": "#/definitions/VkImage"},
             "dstImageLayout": {"$ref": "#/definitions/VkImageLayout"},
             "regionCount": {"$ref": "#/definitions/uint32_t"},
-            "pRegions": {"oneOf": [{"$ref": "#/definitions/void"}, {"type": "array", "minItems": 0, "maxItems": 255, "items": {"$ref": "#/definitions/VkImageCopy2KHR"}}]}
+            "pRegions": {"oneOf": [{"$ref": "#/definitions/void"}, {"type": "array", "minItems": 0, "maxItems": 255, "items": {"$ref": "#/definitions/VkImageCopy2"}}]}
         }
     },
 
-    "VkBufferImageCopy2KHR": {
+    "VkBufferImageCopy2": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -4157,7 +4162,7 @@
         }
     },
 
-    "VkCopyBufferToImageInfo2KHR": {
+    "VkCopyBufferToImageInfo2": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -4167,11 +4172,11 @@
             "dstImage": {"$ref": "#/definitions/VkImage"},
             "dstImageLayout": {"$ref": "#/definitions/VkImageLayout"},
             "regionCount": {"$ref": "#/definitions/uint32_t"},
-            "pRegions": {"oneOf": [{"$ref": "#/definitions/void"}, {"type": "array", "minItems": 0, "maxItems": 255, "items": {"$ref": "#/definitions/VkBufferImageCopy2KHR"}}]}
+            "pRegions": {"oneOf": [{"$ref": "#/definitions/void"}, {"type": "array", "minItems": 0, "maxItems": 255, "items": {"$ref": "#/definitions/VkBufferImageCopy2"}}]}
         }
     },
 
-    "VkCopyImageToBufferInfo2KHR": {
+    "VkCopyImageToBufferInfo2": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -4181,11 +4186,11 @@
             "srcImageLayout": {"$ref": "#/definitions/VkImageLayout"},
             "dstBuffer": {"$ref": "#/definitions/VkBuffer"},
             "regionCount": {"$ref": "#/definitions/uint32_t"},
-            "pRegions": {"oneOf": [{"$ref": "#/definitions/void"}, {"type": "array", "minItems": 0, "maxItems": 255, "items": {"$ref": "#/definitions/VkBufferImageCopy2KHR"}}]}
+            "pRegions": {"oneOf": [{"$ref": "#/definitions/void"}, {"type": "array", "minItems": 0, "maxItems": 255, "items": {"$ref": "#/definitions/VkBufferImageCopy2"}}]}
         }
     },
 
-    "VkImageBlit2KHR": {
+    "VkImageBlit2": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -4198,7 +4203,7 @@
         }
     },
 
-    "VkBlitImageInfo2KHR": {
+    "VkBlitImageInfo2": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -4209,12 +4214,12 @@
             "dstImage": {"$ref": "#/definitions/VkImage"},
             "dstImageLayout": {"$ref": "#/definitions/VkImageLayout"},
             "regionCount": {"$ref": "#/definitions/uint32_t"},
-            "pRegions": {"oneOf": [{"$ref": "#/definitions/void"}, {"type": "array", "minItems": 0, "maxItems": 255, "items": {"$ref": "#/definitions/VkImageBlit2KHR"}}]},
+            "pRegions": {"oneOf": [{"$ref": "#/definitions/void"}, {"type": "array", "minItems": 0, "maxItems": 255, "items": {"$ref": "#/definitions/VkImageBlit2"}}]},
             "filter": {"$ref": "#/definitions/VkFilter"}
         }
     },
 
-    "VkImageResolve2KHR": {
+    "VkImageResolve2": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -4228,7 +4233,7 @@
         }
     },
 
-    "VkResolveImageInfo2KHR": {
+    "VkResolveImageInfo2": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -4239,11 +4244,11 @@
             "dstImage": {"$ref": "#/definitions/VkImage"},
             "dstImageLayout": {"$ref": "#/definitions/VkImageLayout"},
             "regionCount": {"$ref": "#/definitions/uint32_t"},
-            "pRegions": {"oneOf": [{"$ref": "#/definitions/void"}, {"type": "array", "minItems": 0, "maxItems": 255, "items": {"$ref": "#/definitions/VkImageResolve2KHR"}}]}
+            "pRegions": {"oneOf": [{"$ref": "#/definitions/void"}, {"type": "array", "minItems": 0, "maxItems": 255, "items": {"$ref": "#/definitions/VkImageResolve2"}}]}
         }
     },
 
-    "VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT": {
+    "VkPhysicalDeviceTextureCompressionASTCHDRFeatures": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -4646,8 +4651,8 @@
         }
     },
 
-    "VkFormatFeatureFlagBits2KHR": {"$ref": "#/definitions/enum"},
-    "VkFormatFeatureFlags2KHR": {"$ref": "#/definitions/VkFlags64"},
+    "VkFormatFeatureFlagBits2": {"$ref": "#/definitions/enum"},
+    "VkFormatFeatureFlags2": {"$ref": "#/definitions/VkFlags64"},
     "VkDrmFormatModifierPropertiesEXT": {
         "type": "object",
         "additionalProperties": false,
@@ -4721,7 +4726,7 @@
         "properties": {
             "drmFormatModifier": {"$ref": "#/definitions/uint64_t"},
             "drmFormatModifierPlaneCount": {"$ref": "#/definitions/uint32_t"},
-            "drmFormatModifierTilingFeatures": {"$ref": "#/definitions/VkFormatFeatureFlags2KHR"}
+            "drmFormatModifierTilingFeatures": {"$ref": "#/definitions/VkFormatFeatureFlags2"}
         }
     },
 
@@ -4757,14 +4762,15 @@
         }
     },
 
+    "VkQueueGlobalPriorityKHR": {"$ref": "#/definitions/enum"},
     "VkQueueGlobalPriorityEXT": {"$ref": "#/definitions/enum"},
-    "VkDeviceQueueGlobalPriorityCreateInfoEXT": {
+    "VkDeviceQueueGlobalPriorityCreateInfoKHR": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
             "sType": {"$ref": "#/definitions/VkStructureType"},
             "pNext": {"$ref": "#/definitions/void"},
-            "globalPriority": {"$ref": "#/definitions/VkQueueGlobalPriorityEXT"}
+            "globalPriority": {"$ref": "#/definitions/VkQueueGlobalPriorityKHR"}
         }
     },
 
@@ -4864,7 +4870,7 @@
         }
     },
 
-    "VkPhysicalDeviceSubgroupSizeControlFeaturesEXT": {
+    "VkPhysicalDeviceSubgroupSizeControlFeatures": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -4875,7 +4881,7 @@
         }
     },
 
-    "VkPhysicalDeviceSubgroupSizeControlPropertiesEXT": {
+    "VkPhysicalDeviceSubgroupSizeControlProperties": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -4888,7 +4894,7 @@
         }
     },
 
-    "VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT": {
+    "VkPipelineShaderStageRequiredSubgroupSizeCreateInfo": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -5048,7 +5054,7 @@
         }
     },
 
-    "VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT": {
+    "VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -5068,7 +5074,7 @@
         }
     },
 
-    "VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT": {
+    "VkPhysicalDeviceTexelBufferAlignmentProperties": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -5146,7 +5152,7 @@
         }
     },
 
-    "VkPhysicalDeviceImageRobustnessFeaturesEXT": {
+    "VkPhysicalDeviceImageRobustnessFeatures": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
