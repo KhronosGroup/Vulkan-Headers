@@ -1561,6 +1561,9 @@ namespace VULKAN_HPP_NAMESPACE
   struct PhysicalDeviceShaderCoreBuiltinsFeaturesARM;
   struct PhysicalDeviceShaderCoreBuiltinsPropertiesARM;
 
+  //=== VK_EXT_pipeline_library_group_handles ===
+  struct PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT;
+
   //===============
   //=== HANDLEs ===
   //===============
