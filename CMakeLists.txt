@@ -65,21 +65,17 @@ if (PROJECT_IS_TOP_LEVEL)
     include(GNUInstallDirs)
     include(CMakePackageConfigHelpers)
 
-    # Location registry files will be installed to
     set(VLK_REGISTRY_DIR "${CMAKE_INSTALL_DATADIR}/vulkan")
 
-    # Install header files
     install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/vk_video" DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
     install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/vulkan" DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-    # Install registry files
+    # Preserve source permissions https://github.com/KhronosGroup/Vulkan-Headers/issues/336
     install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/registry" DESTINATION ${VLK_REGISTRY_DIR} USE_SOURCE_PERMISSIONS)
-    # Where *.cmake files will be installed
+
     set(cmake_files_install_dir ${CMAKE_INSTALL_DATADIR}/cmake/VulkanHeaders/)
 
-    # Set EXPORT_NAME for consistency with established names. The CMake generated ones won't work.
     set_target_properties(Vulkan-Headers PROPERTIES EXPORT_NAME "Headers")
 
-    # Add find_package() support
     install(TARGETS Vulkan-Headers EXPORT VulkanHeadersTargets INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
     install(EXPORT VulkanHeadersTargets FILE VulkanHeadersTargets.cmake NAMESPACE "Vulkan::" DESTINATION ${cmake_files_install_dir})
