@@ -1,4 +1,4 @@
-// Copyright 2015-2022 The Khronos Group Inc.
+// Copyright 2015-2023 The Khronos Group Inc.
 //
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 //
@@ -114,7 +114,7 @@ extern "C" __declspec( dllimport ) FARPROC __stdcall GetProcAddress( HINSTANCE h
 #  include <span>
 #endif
 
-static_assert( VK_HEADER_VERSION == 240, "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION == 241, "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for non-dispatchable handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
@@ -3658,6 +3658,16 @@ namespace VULKAN_HPP_NAMESPACE
       return ::vkCmdSetDiscardRectangleEXT( commandBuffer, firstDiscardRectangle, discardRectangleCount, pDiscardRectangles );
     }
 
+    void vkCmdSetDiscardRectangleEnableEXT( VkCommandBuffer commandBuffer, VkBool32 discardRectangleEnable ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkCmdSetDiscardRectangleEnableEXT( commandBuffer, discardRectangleEnable );
+    }
+
+    void vkCmdSetDiscardRectangleModeEXT( VkCommandBuffer commandBuffer, VkDiscardRectangleModeEXT discardRectangleMode ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkCmdSetDiscardRectangleModeEXT( commandBuffer, discardRectangleMode );
+    }
+
     //=== VK_EXT_hdr_metadata ===
 
     void vkSetHdrMetadataEXT( VkDevice                 device,
@@ -4400,6 +4410,14 @@ namespace VULKAN_HPP_NAMESPACE
     }
 
     //=== VK_NV_scissor_exclusive ===
+
+    void vkCmdSetExclusiveScissorEnableNV( VkCommandBuffer  commandBuffer,
+                                           uint32_t         firstExclusiveScissor,
+                                           uint32_t         exclusiveScissorCount,
+                                           const VkBool32 * pExclusiveScissorEnables ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkCmdSetExclusiveScissorEnableNV( commandBuffer, firstExclusiveScissor, exclusiveScissorCount, pExclusiveScissorEnables );
+    }
 
     void vkCmdSetExclusiveScissorNV( VkCommandBuffer  commandBuffer,
                                      uint32_t         firstExclusiveScissor,
@@ -11809,6 +11827,42 @@ namespace VULKAN_HPP_NAMESPACE
     };
   };
 
+  //=== VK_ARM_shader_core_properties ===
+  template <>
+  struct StructExtends<PhysicalDeviceShaderCorePropertiesARM, PhysicalDeviceProperties2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  //=== VK_EXT_image_sliced_view_of_3d ===
+  template <>
+  struct StructExtends<PhysicalDeviceImageSlicedViewOf3DFeaturesEXT, PhysicalDeviceFeatures2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<PhysicalDeviceImageSlicedViewOf3DFeaturesEXT, DeviceCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<ImageViewSlicedCreateInfoEXT, ImageViewCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
   //=== VK_VALVE_descriptor_set_host_mapping ===
   template <>
   struct StructExtends<PhysicalDeviceDescriptorSetHostMappingFeaturesVALVE, PhysicalDeviceFeatures2>
@@ -12409,6 +12463,40 @@ namespace VULKAN_HPP_NAMESPACE
     };
   };
 
+  //=== VK_QCOM_multiview_per_view_render_areas ===
+  template <>
+  struct StructExtends<PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM, PhysicalDeviceFeatures2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM, DeviceCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM, RenderPassBeginInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM, RenderingInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
 #endif  // VULKAN_HPP_DISABLE_ENHANCED_MODE
 
 #if VULKAN_HPP_ENABLE_DYNAMIC_LOADER_TOOL
@@ -12992,7 +13080,9 @@ namespace VULKAN_HPP_NAMESPACE
     PFN_vkGetPastPresentationTimingGOOGLE vkGetPastPresentationTimingGOOGLE = 0;
 
     //=== VK_EXT_discard_rectangles ===
-    PFN_vkCmdSetDiscardRectangleEXT vkCmdSetDiscardRectangleEXT = 0;
+    PFN_vkCmdSetDiscardRectangleEXT       vkCmdSetDiscardRectangleEXT       = 0;
+    PFN_vkCmdSetDiscardRectangleEnableEXT vkCmdSetDiscardRectangleEnableEXT = 0;
+    PFN_vkCmdSetDiscardRectangleModeEXT   vkCmdSetDiscardRectangleModeEXT   = 0;
 
     //=== VK_EXT_hdr_metadata ===
     PFN_vkSetHdrMetadataEXT vkSetHdrMetadataEXT = 0;
@@ -13160,7 +13250,8 @@ namespace VULKAN_HPP_NAMESPACE
     PFN_vkCmdDrawMeshTasksIndirectCountNV vkCmdDrawMeshTasksIndirectCountNV = 0;
 
     //=== VK_NV_scissor_exclusive ===
-    PFN_vkCmdSetExclusiveScissorNV vkCmdSetExclusiveScissorNV = 0;
+    PFN_vkCmdSetExclusiveScissorEnableNV vkCmdSetExclusiveScissorEnableNV = 0;
+    PFN_vkCmdSetExclusiveScissorNV       vkCmdSetExclusiveScissorNV       = 0;
 
     //=== VK_NV_device_diagnostic_checkpoints ===
     PFN_vkCmdSetCheckpointNV       vkCmdSetCheckpointNV       = 0;
@@ -14120,7 +14211,9 @@ namespace VULKAN_HPP_NAMESPACE
       vkGetPastPresentationTimingGOOGLE = PFN_vkGetPastPresentationTimingGOOGLE( vkGetInstanceProcAddr( instance, "vkGetPastPresentationTimingGOOGLE" ) );
 
       //=== VK_EXT_discard_rectangles ===
-      vkCmdSetDiscardRectangleEXT = PFN_vkCmdSetDiscardRectangleEXT( vkGetInstanceProcAddr( instance, "vkCmdSetDiscardRectangleEXT" ) );
+      vkCmdSetDiscardRectangleEXT       = PFN_vkCmdSetDiscardRectangleEXT( vkGetInstanceProcAddr( instance, "vkCmdSetDiscardRectangleEXT" ) );
+      vkCmdSetDiscardRectangleEnableEXT = PFN_vkCmdSetDiscardRectangleEnableEXT( vkGetInstanceProcAddr( instance, "vkCmdSetDiscardRectangleEnableEXT" ) );
+      vkCmdSetDiscardRectangleModeEXT   = PFN_vkCmdSetDiscardRectangleModeEXT( vkGetInstanceProcAddr( instance, "vkCmdSetDiscardRectangleModeEXT" ) );
 
       //=== VK_EXT_hdr_metadata ===
       vkSetHdrMetadataEXT = PFN_vkSetHdrMetadataEXT( vkGetInstanceProcAddr( instance, "vkSetHdrMetadataEXT" ) );
@@ -14336,7 +14429,8 @@ namespace VULKAN_HPP_NAMESPACE
       vkCmdDrawMeshTasksIndirectCountNV = PFN_vkCmdDrawMeshTasksIndirectCountNV( vkGetInstanceProcAddr( instance, "vkCmdDrawMeshTasksIndirectCountNV" ) );
 
       //=== VK_NV_scissor_exclusive ===
-      vkCmdSetExclusiveScissorNV = PFN_vkCmdSetExclusiveScissorNV( vkGetInstanceProcAddr( instance, "vkCmdSetExclusiveScissorNV" ) );
+      vkCmdSetExclusiveScissorEnableNV = PFN_vkCmdSetExclusiveScissorEnableNV( vkGetInstanceProcAddr( instance, "vkCmdSetExclusiveScissorEnableNV" ) );
+      vkCmdSetExclusiveScissorNV       = PFN_vkCmdSetExclusiveScissorNV( vkGetInstanceProcAddr( instance, "vkCmdSetExclusiveScissorNV" ) );
 
       //=== VK_NV_device_diagnostic_checkpoints ===
       vkCmdSetCheckpointNV       = PFN_vkCmdSetCheckpointNV( vkGetInstanceProcAddr( instance, "vkCmdSetCheckpointNV" ) );
@@ -15170,7 +15264,9 @@ namespace VULKAN_HPP_NAMESPACE
       vkGetPastPresentationTimingGOOGLE = PFN_vkGetPastPresentationTimingGOOGLE( vkGetDeviceProcAddr( device, "vkGetPastPresentationTimingGOOGLE" ) );
 
       //=== VK_EXT_discard_rectangles ===
-      vkCmdSetDiscardRectangleEXT = PFN_vkCmdSetDiscardRectangleEXT( vkGetDeviceProcAddr( device, "vkCmdSetDiscardRectangleEXT" ) );
+      vkCmdSetDiscardRectangleEXT       = PFN_vkCmdSetDiscardRectangleEXT( vkGetDeviceProcAddr( device, "vkCmdSetDiscardRectangleEXT" ) );
+      vkCmdSetDiscardRectangleEnableEXT = PFN_vkCmdSetDiscardRectangleEnableEXT( vkGetDeviceProcAddr( device, "vkCmdSetDiscardRectangleEnableEXT" ) );
+      vkCmdSetDiscardRectangleModeEXT   = PFN_vkCmdSetDiscardRectangleModeEXT( vkGetDeviceProcAddr( device, "vkCmdSetDiscardRectangleModeEXT" ) );
 
       //=== VK_EXT_hdr_metadata ===
       vkSetHdrMetadataEXT = PFN_vkSetHdrMetadataEXT( vkGetDeviceProcAddr( device, "vkSetHdrMetadataEXT" ) );
@@ -15344,7 +15440,8 @@ namespace VULKAN_HPP_NAMESPACE
       vkCmdDrawMeshTasksIndirectCountNV = PFN_vkCmdDrawMeshTasksIndirectCountNV( vkGetDeviceProcAddr( device, "vkCmdDrawMeshTasksIndirectCountNV" ) );
 
       //=== VK_NV_scissor_exclusive ===
-      vkCmdSetExclusiveScissorNV = PFN_vkCmdSetExclusiveScissorNV( vkGetDeviceProcAddr( device, "vkCmdSetExclusiveScissorNV" ) );
+      vkCmdSetExclusiveScissorEnableNV = PFN_vkCmdSetExclusiveScissorEnableNV( vkGetDeviceProcAddr( device, "vkCmdSetExclusiveScissorEnableNV" ) );
+      vkCmdSetExclusiveScissorNV       = PFN_vkCmdSetExclusiveScissorNV( vkGetDeviceProcAddr( device, "vkCmdSetExclusiveScissorNV" ) );
 
       //=== VK_NV_device_diagnostic_checkpoints ===
       vkCmdSetCheckpointNV       = PFN_vkCmdSetCheckpointNV( vkGetDeviceProcAddr( device, "vkCmdSetCheckpointNV" ) );
