@@ -114,7 +114,7 @@ extern "C" __declspec( dllimport ) FARPROC __stdcall GetProcAddress( HINSTANCE h
 #  include <span>
 #endif
 
-static_assert( VK_HEADER_VERSION == 242, "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION == 243, "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for non-dispatchable handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
@@ -4099,6 +4099,68 @@ namespace VULKAN_HPP_NAMESPACE
       return ::vkGetAccelerationStructureBuildSizesKHR( device, buildType, pBuildInfo, pMaxPrimitiveCounts, pSizeInfo );
     }
 
+    //=== VK_KHR_ray_tracing_pipeline ===
+
+    void vkCmdTraceRaysKHR( VkCommandBuffer                         commandBuffer,
+                            const VkStridedDeviceAddressRegionKHR * pRaygenShaderBindingTable,
+                            const VkStridedDeviceAddressRegionKHR * pMissShaderBindingTable,
+                            const VkStridedDeviceAddressRegionKHR * pHitShaderBindingTable,
+                            const VkStridedDeviceAddressRegionKHR * pCallableShaderBindingTable,
+                            uint32_t                                width,
+                            uint32_t                                height,
+                            uint32_t                                depth ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkCmdTraceRaysKHR(
+        commandBuffer, pRaygenShaderBindingTable, pMissShaderBindingTable, pHitShaderBindingTable, pCallableShaderBindingTable, width, height, depth );
+    }
+
+    VkResult vkCreateRayTracingPipelinesKHR( VkDevice                                  device,
+                                             VkDeferredOperationKHR                    deferredOperation,
+                                             VkPipelineCache                           pipelineCache,
+                                             uint32_t                                  createInfoCount,
+                                             const VkRayTracingPipelineCreateInfoKHR * pCreateInfos,
+                                             const VkAllocationCallbacks *             pAllocator,
+                                             VkPipeline *                              pPipelines ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkCreateRayTracingPipelinesKHR( device, deferredOperation, pipelineCache, createInfoCount, pCreateInfos, pAllocator, pPipelines );
+    }
+
+    VkResult vkGetRayTracingShaderGroupHandlesKHR(
+      VkDevice device, VkPipeline pipeline, uint32_t firstGroup, uint32_t groupCount, size_t dataSize, void * pData ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkGetRayTracingShaderGroupHandlesKHR( device, pipeline, firstGroup, groupCount, dataSize, pData );
+    }
+
+    VkResult vkGetRayTracingCaptureReplayShaderGroupHandlesKHR(
+      VkDevice device, VkPipeline pipeline, uint32_t firstGroup, uint32_t groupCount, size_t dataSize, void * pData ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkGetRayTracingCaptureReplayShaderGroupHandlesKHR( device, pipeline, firstGroup, groupCount, dataSize, pData );
+    }
+
+    void vkCmdTraceRaysIndirectKHR( VkCommandBuffer                         commandBuffer,
+                                    const VkStridedDeviceAddressRegionKHR * pRaygenShaderBindingTable,
+                                    const VkStridedDeviceAddressRegionKHR * pMissShaderBindingTable,
+                                    const VkStridedDeviceAddressRegionKHR * pHitShaderBindingTable,
+                                    const VkStridedDeviceAddressRegionKHR * pCallableShaderBindingTable,
+                                    VkDeviceAddress                         indirectDeviceAddress ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkCmdTraceRaysIndirectKHR(
+        commandBuffer, pRaygenShaderBindingTable, pMissShaderBindingTable, pHitShaderBindingTable, pCallableShaderBindingTable, indirectDeviceAddress );
+    }
+
+    VkDeviceSize vkGetRayTracingShaderGroupStackSizeKHR( VkDevice               device,
+                                                         VkPipeline             pipeline,
+                                                         uint32_t               group,
+                                                         VkShaderGroupShaderKHR groupShader ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkGetRayTracingShaderGroupStackSizeKHR( device, pipeline, group, groupShader );
+    }
+
+    void vkCmdSetRayTracingPipelineStackSizeKHR( VkCommandBuffer commandBuffer, uint32_t pipelineStackSize ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkCmdSetRayTracingPipelineStackSizeKHR( commandBuffer, pipelineStackSize );
+    }
+
     //=== VK_KHR_sampler_ycbcr_conversion ===
 
     VkResult vkCreateSamplerYcbcrConversionKHR( VkDevice                                   device,
@@ -5138,68 +5200,6 @@ namespace VULKAN_HPP_NAMESPACE
       return ::vkGetPhysicalDeviceDirectFBPresentationSupportEXT( physicalDevice, queueFamilyIndex, dfb );
     }
 #  endif /*VK_USE_PLATFORM_DIRECTFB_EXT*/
-
-    //=== VK_KHR_ray_tracing_pipeline ===
-
-    void vkCmdTraceRaysKHR( VkCommandBuffer                         commandBuffer,
-                            const VkStridedDeviceAddressRegionKHR * pRaygenShaderBindingTable,
-                            const VkStridedDeviceAddressRegionKHR * pMissShaderBindingTable,
-                            const VkStridedDeviceAddressRegionKHR * pHitShaderBindingTable,
-                            const VkStridedDeviceAddressRegionKHR * pCallableShaderBindingTable,
-                            uint32_t                                width,
-                            uint32_t                                height,
-                            uint32_t                                depth ) const VULKAN_HPP_NOEXCEPT
-    {
-      return ::vkCmdTraceRaysKHR(
-        commandBuffer, pRaygenShaderBindingTable, pMissShaderBindingTable, pHitShaderBindingTable, pCallableShaderBindingTable, width, height, depth );
-    }
-
-    VkResult vkCreateRayTracingPipelinesKHR( VkDevice                                  device,
-                                             VkDeferredOperationKHR                    deferredOperation,
-                                             VkPipelineCache                           pipelineCache,
-                                             uint32_t                                  createInfoCount,
-                                             const VkRayTracingPipelineCreateInfoKHR * pCreateInfos,
-                                             const VkAllocationCallbacks *             pAllocator,
-                                             VkPipeline *                              pPipelines ) const VULKAN_HPP_NOEXCEPT
-    {
-      return ::vkCreateRayTracingPipelinesKHR( device, deferredOperation, pipelineCache, createInfoCount, pCreateInfos, pAllocator, pPipelines );
-    }
-
-    VkResult vkGetRayTracingShaderGroupHandlesKHR(
-      VkDevice device, VkPipeline pipeline, uint32_t firstGroup, uint32_t groupCount, size_t dataSize, void * pData ) const VULKAN_HPP_NOEXCEPT
-    {
-      return ::vkGetRayTracingShaderGroupHandlesKHR( device, pipeline, firstGroup, groupCount, dataSize, pData );
-    }
-
-    VkResult vkGetRayTracingCaptureReplayShaderGroupHandlesKHR(
-      VkDevice device, VkPipeline pipeline, uint32_t firstGroup, uint32_t groupCount, size_t dataSize, void * pData ) const VULKAN_HPP_NOEXCEPT
-    {
-      return ::vkGetRayTracingCaptureReplayShaderGroupHandlesKHR( device, pipeline, firstGroup, groupCount, dataSize, pData );
-    }
-
-    void vkCmdTraceRaysIndirectKHR( VkCommandBuffer                         commandBuffer,
-                                    const VkStridedDeviceAddressRegionKHR * pRaygenShaderBindingTable,
-                                    const VkStridedDeviceAddressRegionKHR * pMissShaderBindingTable,
-                                    const VkStridedDeviceAddressRegionKHR * pHitShaderBindingTable,
-                                    const VkStridedDeviceAddressRegionKHR * pCallableShaderBindingTable,
-                                    VkDeviceAddress                         indirectDeviceAddress ) const VULKAN_HPP_NOEXCEPT
-    {
-      return ::vkCmdTraceRaysIndirectKHR(
-        commandBuffer, pRaygenShaderBindingTable, pMissShaderBindingTable, pHitShaderBindingTable, pCallableShaderBindingTable, indirectDeviceAddress );
-    }
-
-    VkDeviceSize vkGetRayTracingShaderGroupStackSizeKHR( VkDevice               device,
-                                                         VkPipeline             pipeline,
-                                                         uint32_t               group,
-                                                         VkShaderGroupShaderKHR groupShader ) const VULKAN_HPP_NOEXCEPT
-    {
-      return ::vkGetRayTracingShaderGroupStackSizeKHR( device, pipeline, group, groupShader );
-    }
-
-    void vkCmdSetRayTracingPipelineStackSizeKHR( VkCommandBuffer commandBuffer, uint32_t pipelineStackSize ) const VULKAN_HPP_NOEXCEPT
-    {
-      return ::vkCmdSetRayTracingPipelineStackSizeKHR( commandBuffer, pipelineStackSize );
-    }
 
     //=== VK_EXT_vertex_input_dynamic_state ===
 
@@ -6459,6 +6459,15 @@ namespace VULKAN_HPP_NAMESPACE
   };
 #  endif /*VK_USE_PLATFORM_WIN32_KHR*/
 
+#  if defined( VK_ENABLE_BETA_EXTENSIONS )
+  class InvalidVideoStdParametersKHRError : public SystemError
+  {
+  public:
+    InvalidVideoStdParametersKHRError( std::string const & message ) : SystemError( make_error_code( Result::eErrorInvalidVideoStdParametersKHR ), message ) {}
+    InvalidVideoStdParametersKHRError( char const * message ) : SystemError( make_error_code( Result::eErrorInvalidVideoStdParametersKHR ), message ) {}
+  };
+#  endif /*VK_ENABLE_BETA_EXTENSIONS*/
+
   class CompressionExhaustedEXTError : public SystemError
   {
   public:
@@ -6506,6 +6515,9 @@ namespace VULKAN_HPP_NAMESPACE
 #  if defined( VK_USE_PLATFORM_WIN32_KHR )
         case Result::eErrorFullScreenExclusiveModeLostEXT: throw FullScreenExclusiveModeLostEXTError( message );
 #  endif /*VK_USE_PLATFORM_WIN32_KHR*/
+#  if defined( VK_ENABLE_BETA_EXTENSIONS )
+        case Result::eErrorInvalidVideoStdParametersKHR: throw InvalidVideoStdParametersKHRError( message );
+#  endif /*VK_ENABLE_BETA_EXTENSIONS*/
         case Result::eErrorCompressionExhaustedEXT: throw CompressionExhaustedEXTError( message );
         default: throw SystemError( make_error_code( result ) );
       }
@@ -8156,7 +8168,7 @@ namespace VULKAN_HPP_NAMESPACE
     };
   };
   template <>
-  struct StructExtends<VideoEncodeH264EmitPictureParametersInfoEXT, VideoEncodeInfoKHR>
+  struct StructExtends<VideoEncodeH264DpbSlotInfoEXT, VideoReferenceSlotInfoKHR>
   {
     enum
     {
@@ -8240,7 +8252,7 @@ namespace VULKAN_HPP_NAMESPACE
     };
   };
   template <>
-  struct StructExtends<VideoEncodeH265EmitPictureParametersInfoEXT, VideoEncodeInfoKHR>
+  struct StructExtends<VideoEncodeH265DpbSlotInfoEXT, VideoReferenceSlotInfoKHR>
   {
     enum
     {
@@ -9068,6 +9080,50 @@ namespace VULKAN_HPP_NAMESPACE
   };
   template <>
   struct StructExtends<PhysicalDeviceAccelerationStructurePropertiesKHR, PhysicalDeviceProperties2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  //=== VK_KHR_ray_tracing_pipeline ===
+  template <>
+  struct StructExtends<PhysicalDeviceRayTracingPipelineFeaturesKHR, PhysicalDeviceFeatures2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<PhysicalDeviceRayTracingPipelineFeaturesKHR, DeviceCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<PhysicalDeviceRayTracingPipelinePropertiesKHR, PhysicalDeviceProperties2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  //=== VK_KHR_ray_query ===
+  template <>
+  struct StructExtends<PhysicalDeviceRayQueryFeaturesKHR, PhysicalDeviceFeatures2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<PhysicalDeviceRayQueryFeaturesKHR, DeviceCreateInfo>
   {
     enum
     {
@@ -10546,6 +10602,14 @@ namespace VULKAN_HPP_NAMESPACE
     };
   };
   template <>
+  struct StructExtends<QueryPoolVideoEncodeFeedbackCreateInfoKHR, QueryPoolCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
   struct StructExtends<VideoEncodeUsageInfoKHR, VideoProfileInfoKHR>
   {
     enum
@@ -11264,50 +11328,6 @@ namespace VULKAN_HPP_NAMESPACE
   };
   template <>
   struct StructExtends<PhysicalDeviceRGBA10X6FormatsFeaturesEXT, DeviceCreateInfo>
-  {
-    enum
-    {
-      value = true
-    };
-  };
-
-  //=== VK_KHR_ray_tracing_pipeline ===
-  template <>
-  struct StructExtends<PhysicalDeviceRayTracingPipelineFeaturesKHR, PhysicalDeviceFeatures2>
-  {
-    enum
-    {
-      value = true
-    };
-  };
-  template <>
-  struct StructExtends<PhysicalDeviceRayTracingPipelineFeaturesKHR, DeviceCreateInfo>
-  {
-    enum
-    {
-      value = true
-    };
-  };
-  template <>
-  struct StructExtends<PhysicalDeviceRayTracingPipelinePropertiesKHR, PhysicalDeviceProperties2>
-  {
-    enum
-    {
-      value = true
-    };
-  };
-
-  //=== VK_KHR_ray_query ===
-  template <>
-  struct StructExtends<PhysicalDeviceRayQueryFeaturesKHR, PhysicalDeviceFeatures2>
-  {
-    enum
-    {
-      value = true
-    };
-  };
-  template <>
-  struct StructExtends<PhysicalDeviceRayQueryFeaturesKHR, DeviceCreateInfo>
   {
     enum
     {
@@ -13201,6 +13221,15 @@ namespace VULKAN_HPP_NAMESPACE
     PFN_vkGetDeviceAccelerationStructureCompatibilityKHR vkGetDeviceAccelerationStructureCompatibilityKHR = 0;
     PFN_vkGetAccelerationStructureBuildSizesKHR          vkGetAccelerationStructureBuildSizesKHR          = 0;
 
+    //=== VK_KHR_ray_tracing_pipeline ===
+    PFN_vkCmdTraceRaysKHR                                 vkCmdTraceRaysKHR                                 = 0;
+    PFN_vkCreateRayTracingPipelinesKHR                    vkCreateRayTracingPipelinesKHR                    = 0;
+    PFN_vkGetRayTracingShaderGroupHandlesKHR              vkGetRayTracingShaderGroupHandlesKHR              = 0;
+    PFN_vkGetRayTracingCaptureReplayShaderGroupHandlesKHR vkGetRayTracingCaptureReplayShaderGroupHandlesKHR = 0;
+    PFN_vkCmdTraceRaysIndirectKHR                         vkCmdTraceRaysIndirectKHR                         = 0;
+    PFN_vkGetRayTracingShaderGroupStackSizeKHR            vkGetRayTracingShaderGroupStackSizeKHR            = 0;
+    PFN_vkCmdSetRayTracingPipelineStackSizeKHR            vkCmdSetRayTracingPipelineStackSizeKHR            = 0;
+
     //=== VK_KHR_sampler_ycbcr_conversion ===
     PFN_vkCreateSamplerYcbcrConversionKHR  vkCreateSamplerYcbcrConversionKHR  = 0;
     PFN_vkDestroySamplerYcbcrConversionKHR vkDestroySamplerYcbcrConversionKHR = 0;
@@ -13469,15 +13498,6 @@ namespace VULKAN_HPP_NAMESPACE
     PFN_dummy vkCreateDirectFBSurfaceEXT_placeholder                        = 0;
     PFN_dummy vkGetPhysicalDeviceDirectFBPresentationSupportEXT_placeholder = 0;
 #endif /*VK_USE_PLATFORM_DIRECTFB_EXT*/
-
-    //=== VK_KHR_ray_tracing_pipeline ===
-    PFN_vkCmdTraceRaysKHR                                 vkCmdTraceRaysKHR                                 = 0;
-    PFN_vkCreateRayTracingPipelinesKHR                    vkCreateRayTracingPipelinesKHR                    = 0;
-    PFN_vkGetRayTracingShaderGroupHandlesKHR              vkGetRayTracingShaderGroupHandlesKHR              = 0;
-    PFN_vkGetRayTracingCaptureReplayShaderGroupHandlesKHR vkGetRayTracingCaptureReplayShaderGroupHandlesKHR = 0;
-    PFN_vkCmdTraceRaysIndirectKHR                         vkCmdTraceRaysIndirectKHR                         = 0;
-    PFN_vkGetRayTracingShaderGroupStackSizeKHR            vkGetRayTracingShaderGroupStackSizeKHR            = 0;
-    PFN_vkCmdSetRayTracingPipelineStackSizeKHR            vkCmdSetRayTracingPipelineStackSizeKHR            = 0;
 
     //=== VK_EXT_vertex_input_dynamic_state ===
     PFN_vkCmdSetVertexInputEXT vkCmdSetVertexInputEXT = 0;
@@ -14359,6 +14379,19 @@ namespace VULKAN_HPP_NAMESPACE
       vkGetAccelerationStructureBuildSizesKHR =
         PFN_vkGetAccelerationStructureBuildSizesKHR( vkGetInstanceProcAddr( instance, "vkGetAccelerationStructureBuildSizesKHR" ) );
 
+      //=== VK_KHR_ray_tracing_pipeline ===
+      vkCmdTraceRaysKHR              = PFN_vkCmdTraceRaysKHR( vkGetInstanceProcAddr( instance, "vkCmdTraceRaysKHR" ) );
+      vkCreateRayTracingPipelinesKHR = PFN_vkCreateRayTracingPipelinesKHR( vkGetInstanceProcAddr( instance, "vkCreateRayTracingPipelinesKHR" ) );
+      vkGetRayTracingShaderGroupHandlesKHR =
+        PFN_vkGetRayTracingShaderGroupHandlesKHR( vkGetInstanceProcAddr( instance, "vkGetRayTracingShaderGroupHandlesKHR" ) );
+      vkGetRayTracingCaptureReplayShaderGroupHandlesKHR =
+        PFN_vkGetRayTracingCaptureReplayShaderGroupHandlesKHR( vkGetInstanceProcAddr( instance, "vkGetRayTracingCaptureReplayShaderGroupHandlesKHR" ) );
+      vkCmdTraceRaysIndirectKHR = PFN_vkCmdTraceRaysIndirectKHR( vkGetInstanceProcAddr( instance, "vkCmdTraceRaysIndirectKHR" ) );
+      vkGetRayTracingShaderGroupStackSizeKHR =
+        PFN_vkGetRayTracingShaderGroupStackSizeKHR( vkGetInstanceProcAddr( instance, "vkGetRayTracingShaderGroupStackSizeKHR" ) );
+      vkCmdSetRayTracingPipelineStackSizeKHR =
+        PFN_vkCmdSetRayTracingPipelineStackSizeKHR( vkGetInstanceProcAddr( instance, "vkCmdSetRayTracingPipelineStackSizeKHR" ) );
+
       //=== VK_KHR_sampler_ycbcr_conversion ===
       vkCreateSamplerYcbcrConversionKHR = PFN_vkCreateSamplerYcbcrConversionKHR( vkGetInstanceProcAddr( instance, "vkCreateSamplerYcbcrConversionKHR" ) );
       if ( !vkCreateSamplerYcbcrConversion )
@@ -14727,19 +14760,6 @@ namespace VULKAN_HPP_NAMESPACE
       vkGetPhysicalDeviceDirectFBPresentationSupportEXT =
         PFN_vkGetPhysicalDeviceDirectFBPresentationSupportEXT( vkGetInstanceProcAddr( instance, "vkGetPhysicalDeviceDirectFBPresentationSupportEXT" ) );
 #endif /*VK_USE_PLATFORM_DIRECTFB_EXT*/
-
-      //=== VK_KHR_ray_tracing_pipeline ===
-      vkCmdTraceRaysKHR              = PFN_vkCmdTraceRaysKHR( vkGetInstanceProcAddr( instance, "vkCmdTraceRaysKHR" ) );
-      vkCreateRayTracingPipelinesKHR = PFN_vkCreateRayTracingPipelinesKHR( vkGetInstanceProcAddr( instance, "vkCreateRayTracingPipelinesKHR" ) );
-      vkGetRayTracingShaderGroupHandlesKHR =
-        PFN_vkGetRayTracingShaderGroupHandlesKHR( vkGetInstanceProcAddr( instance, "vkGetRayTracingShaderGroupHandlesKHR" ) );
-      vkGetRayTracingCaptureReplayShaderGroupHandlesKHR =
-        PFN_vkGetRayTracingCaptureReplayShaderGroupHandlesKHR( vkGetInstanceProcAddr( instance, "vkGetRayTracingCaptureReplayShaderGroupHandlesKHR" ) );
-      vkCmdTraceRaysIndirectKHR = PFN_vkCmdTraceRaysIndirectKHR( vkGetInstanceProcAddr( instance, "vkCmdTraceRaysIndirectKHR" ) );
-      vkGetRayTracingShaderGroupStackSizeKHR =
-        PFN_vkGetRayTracingShaderGroupStackSizeKHR( vkGetInstanceProcAddr( instance, "vkGetRayTracingShaderGroupStackSizeKHR" ) );
-      vkCmdSetRayTracingPipelineStackSizeKHR =
-        PFN_vkCmdSetRayTracingPipelineStackSizeKHR( vkGetInstanceProcAddr( instance, "vkCmdSetRayTracingPipelineStackSizeKHR" ) );
 
       //=== VK_EXT_vertex_input_dynamic_state ===
       vkCmdSetVertexInputEXT = PFN_vkCmdSetVertexInputEXT( vkGetInstanceProcAddr( instance, "vkCmdSetVertexInputEXT" ) );
@@ -15373,6 +15393,18 @@ namespace VULKAN_HPP_NAMESPACE
       vkGetAccelerationStructureBuildSizesKHR =
         PFN_vkGetAccelerationStructureBuildSizesKHR( vkGetDeviceProcAddr( device, "vkGetAccelerationStructureBuildSizesKHR" ) );
 
+      //=== VK_KHR_ray_tracing_pipeline ===
+      vkCmdTraceRaysKHR                    = PFN_vkCmdTraceRaysKHR( vkGetDeviceProcAddr( device, "vkCmdTraceRaysKHR" ) );
+      vkCreateRayTracingPipelinesKHR       = PFN_vkCreateRayTracingPipelinesKHR( vkGetDeviceProcAddr( device, "vkCreateRayTracingPipelinesKHR" ) );
+      vkGetRayTracingShaderGroupHandlesKHR = PFN_vkGetRayTracingShaderGroupHandlesKHR( vkGetDeviceProcAddr( device, "vkGetRayTracingShaderGroupHandlesKHR" ) );
+      vkGetRayTracingCaptureReplayShaderGroupHandlesKHR =
+        PFN_vkGetRayTracingCaptureReplayShaderGroupHandlesKHR( vkGetDeviceProcAddr( device, "vkGetRayTracingCaptureReplayShaderGroupHandlesKHR" ) );
+      vkCmdTraceRaysIndirectKHR = PFN_vkCmdTraceRaysIndirectKHR( vkGetDeviceProcAddr( device, "vkCmdTraceRaysIndirectKHR" ) );
+      vkGetRayTracingShaderGroupStackSizeKHR =
+        PFN_vkGetRayTracingShaderGroupStackSizeKHR( vkGetDeviceProcAddr( device, "vkGetRayTracingShaderGroupStackSizeKHR" ) );
+      vkCmdSetRayTracingPipelineStackSizeKHR =
+        PFN_vkCmdSetRayTracingPipelineStackSizeKHR( vkGetDeviceProcAddr( device, "vkCmdSetRayTracingPipelineStackSizeKHR" ) );
+
       //=== VK_KHR_sampler_ycbcr_conversion ===
       vkCreateSamplerYcbcrConversionKHR = PFN_vkCreateSamplerYcbcrConversionKHR( vkGetDeviceProcAddr( device, "vkCreateSamplerYcbcrConversionKHR" ) );
       if ( !vkCreateSamplerYcbcrConversion )
@@ -15687,18 +15719,6 @@ namespace VULKAN_HPP_NAMESPACE
 
       //=== VK_EXT_device_fault ===
       vkGetDeviceFaultInfoEXT = PFN_vkGetDeviceFaultInfoEXT( vkGetDeviceProcAddr( device, "vkGetDeviceFaultInfoEXT" ) );
-
-      //=== VK_KHR_ray_tracing_pipeline ===
-      vkCmdTraceRaysKHR                    = PFN_vkCmdTraceRaysKHR( vkGetDeviceProcAddr( device, "vkCmdTraceRaysKHR" ) );
-      vkCreateRayTracingPipelinesKHR       = PFN_vkCreateRayTracingPipelinesKHR( vkGetDeviceProcAddr( device, "vkCreateRayTracingPipelinesKHR" ) );
-      vkGetRayTracingShaderGroupHandlesKHR = PFN_vkGetRayTracingShaderGroupHandlesKHR( vkGetDeviceProcAddr( device, "vkGetRayTracingShaderGroupHandlesKHR" ) );
-      vkGetRayTracingCaptureReplayShaderGroupHandlesKHR =
-        PFN_vkGetRayTracingCaptureReplayShaderGroupHandlesKHR( vkGetDeviceProcAddr( device, "vkGetRayTracingCaptureReplayShaderGroupHandlesKHR" ) );
-      vkCmdTraceRaysIndirectKHR = PFN_vkCmdTraceRaysIndirectKHR( vkGetDeviceProcAddr( device, "vkCmdTraceRaysIndirectKHR" ) );
-      vkGetRayTracingShaderGroupStackSizeKHR =
-        PFN_vkGetRayTracingShaderGroupStackSizeKHR( vkGetDeviceProcAddr( device, "vkGetRayTracingShaderGroupStackSizeKHR" ) );
-      vkCmdSetRayTracingPipelineStackSizeKHR =
-        PFN_vkCmdSetRayTracingPipelineStackSizeKHR( vkGetDeviceProcAddr( device, "vkCmdSetRayTracingPipelineStackSizeKHR" ) );
 
       //=== VK_EXT_vertex_input_dynamic_state ===
       vkCmdSetVertexInputEXT = PFN_vkCmdSetVertexInputEXT( vkGetDeviceProcAddr( device, "vkCmdSetVertexInputEXT" ) );
