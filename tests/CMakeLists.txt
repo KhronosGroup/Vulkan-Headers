@@ -18,6 +18,8 @@
 # NOTE: For us testing just means that these header files compile
 # with reasonable warnings.
 
+message(STATUS "${PROJECT_NAME} = ${PROJECT_VERSION}")
+
 set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS OFF)
@@ -38,3 +40,7 @@ target_link_libraries(vk_icd PRIVATE Vulkan::Headers)
 # vk_layer.h
 add_library(vk_layer MODULE vk_layer.c)
 target_link_libraries(vk_layer PRIVATE Vulkan::Headers)
+
+if (NOT TARGET Vulkan-Headers)
+    message(FATAL_ERROR "Backcompat for Vulkan-Headers target broken!")
+endif()
