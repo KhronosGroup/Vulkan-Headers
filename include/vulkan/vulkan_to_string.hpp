@@ -2691,6 +2691,13 @@ namespace VULKAN_HPP_NAMESPACE
     return "{}";
   }
 
+  //=== VK_KHR_map_memory2 ===
+
+  VULKAN_HPP_INLINE std::string to_string( MemoryUnmapFlagsKHR )
+  {
+    return "{}";
+  }
+
   //=== VK_EXT_surface_maintenance1 ===
 
   VULKAN_HPP_INLINE std::string to_string( PresentScalingFlagsEXT value )
@@ -3840,6 +3847,8 @@ namespace VULKAN_HPP_NAMESPACE
       case StructureType::ePipelineExecutableInfoKHR: return "PipelineExecutableInfoKHR";
       case StructureType::ePipelineExecutableStatisticKHR: return "PipelineExecutableStatisticKHR";
       case StructureType::ePipelineExecutableInternalRepresentationKHR: return "PipelineExecutableInternalRepresentationKHR";
+      case StructureType::eMemoryMapInfoKHR: return "MemoryMapInfoKHR";
+      case StructureType::eMemoryUnmapInfoKHR: return "MemoryUnmapInfoKHR";
       case StructureType::ePhysicalDeviceShaderAtomicFloat2FeaturesEXT: return "PhysicalDeviceShaderAtomicFloat2FeaturesEXT";
       case StructureType::eSurfacePresentModeEXT: return "SurfacePresentModeEXT";
       case StructureType::eSurfacePresentScalingCapabilitiesEXT: return "SurfacePresentScalingCapabilitiesEXT";
@@ -7609,6 +7618,13 @@ namespace VULKAN_HPP_NAMESPACE
       case PipelineExecutableStatisticFormatKHR::eFloat64: return "Float64";
       default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
     }
+  }
+
+  //=== VK_KHR_map_memory2 ===
+
+  VULKAN_HPP_INLINE std::string to_string( MemoryUnmapFlagBitsKHR )
+  {
+    return "(void)";
   }
 
   //=== VK_EXT_surface_maintenance1 ===
