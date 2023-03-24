@@ -68,7 +68,7 @@ extern "C" {
 #define VK_API_VERSION_1_0 VK_MAKE_API_VERSION(0, 1, 0, 0)// Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 244
+#define VK_HEADER_VERSION 245
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 3, VK_HEADER_VERSION)
@@ -943,6 +943,15 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_MICROMAP_CREATE_INFO_EXT = 1000396007,
     VK_STRUCTURE_TYPE_MICROMAP_BUILD_SIZES_INFO_EXT = 1000396008,
     VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_TRIANGLES_OPACITY_MICROMAP_EXT = 1000396009,
+#ifdef VK_ENABLE_BETA_EXTENSIONS
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISPLACEMENT_MICROMAP_FEATURES_NV = 1000397000,
+#endif
+#ifdef VK_ENABLE_BETA_EXTENSIONS
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISPLACEMENT_MICROMAP_PROPERTIES_NV = 1000397001,
+#endif
+#ifdef VK_ENABLE_BETA_EXTENSIONS
+    VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_TRIANGLES_DISPLACEMENT_MICROMAP_NV = 1000397002,
+#endif
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CLUSTER_CULLING_SHADER_FEATURES_HUAWEI = 1000404000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CLUSTER_CULLING_SHADER_PROPERTIES_HUAWEI = 1000404001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BORDER_COLOR_SWIZZLE_FEATURES_EXT = 1000411000,
@@ -2482,6 +2491,9 @@ typedef enum VkPipelineCreateFlagBits {
     VK_PIPELINE_CREATE_COLOR_ATTACHMENT_FEEDBACK_LOOP_BIT_EXT = 0x02000000,
     VK_PIPELINE_CREATE_DEPTH_STENCIL_ATTACHMENT_FEEDBACK_LOOP_BIT_EXT = 0x04000000,
     VK_PIPELINE_CREATE_RAY_TRACING_OPACITY_MICROMAP_BIT_EXT = 0x01000000,
+#ifdef VK_ENABLE_BETA_EXTENSIONS
+    VK_PIPELINE_CREATE_RAY_TRACING_DISPLACEMENT_MICROMAP_BIT_NV = 0x10000000,
+#endif
     VK_PIPELINE_CREATE_NO_PROTECTED_ACCESS_BIT_EXT = 0x08000000,
     VK_PIPELINE_CREATE_PROTECTED_ACCESS_ONLY_BIT_EXT = 0x40000000,
     VK_PIPELINE_CREATE_DISPATCH_BASE = VK_PIPELINE_CREATE_DISPATCH_BASE_BIT,
@@ -12067,6 +12079,9 @@ typedef enum VkBuildAccelerationStructureFlagBitsKHR {
     VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_OPACITY_MICROMAP_UPDATE_EXT = 0x00000040,
     VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_DISABLE_OPACITY_MICROMAPS_EXT = 0x00000080,
     VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_OPACITY_MICROMAP_DATA_UPDATE_EXT = 0x00000100,
+#ifdef VK_ENABLE_BETA_EXTENSIONS
+    VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_DISPLACEMENT_MICROMAP_UPDATE_NV = 0x00000200,
+#endif
     VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_NV = VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_KHR,
     VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_NV = VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_KHR,
     VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_NV = VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_KHR,
@@ -15226,6 +15241,9 @@ VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkMicromapEXT)
 
 typedef enum VkMicromapTypeEXT {
     VK_MICROMAP_TYPE_OPACITY_MICROMAP_EXT = 0,
+#ifdef VK_ENABLE_BETA_EXTENSIONS
+    VK_MICROMAP_TYPE_DISPLACEMENT_MICROMAP_NV = 1000397000,
+#endif
     VK_MICROMAP_TYPE_MAX_ENUM_EXT = 0x7FFFFFFF
 } VkMicromapTypeEXT;
 
@@ -15485,6 +15503,51 @@ VKAPI_ATTR void VKAPI_CALL vkGetMicromapBuildSizesEXT(
     const VkMicromapBuildInfoEXT*               pBuildInfo,
     VkMicromapBuildSizesInfoEXT*                pSizeInfo);
 #endif
+
+
+#define VK_NV_displacement_micromap 1
+#define VK_NV_DISPLACEMENT_MICROMAP_SPEC_VERSION 1
+#define VK_NV_DISPLACEMENT_MICROMAP_EXTENSION_NAME "VK_NV_displacement_micromap"
+
+typedef enum VkDisplacementMicromapFormatNV {
+    VK_DISPLACEMENT_MICROMAP_FORMAT_64_TRIANGLES_64_BYTES_NV = 1,
+    VK_DISPLACEMENT_MICROMAP_FORMAT_256_TRIANGLES_128_BYTES_NV = 2,
+    VK_DISPLACEMENT_MICROMAP_FORMAT_1024_TRIANGLES_128_BYTES_NV = 3,
+    VK_DISPLACEMENT_MICROMAP_FORMAT_MAX_ENUM_NV = 0x7FFFFFFF
+} VkDisplacementMicromapFormatNV;
+typedef struct VkPhysicalDeviceDisplacementMicromapFeaturesNV {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           displacementMicromap;
+} VkPhysicalDeviceDisplacementMicromapFeaturesNV;
+
+typedef struct VkPhysicalDeviceDisplacementMicromapPropertiesNV {
+    VkStructureType    sType;
+    void*              pNext;
+    uint32_t           maxDisplacementMicromapSubdivisionLevel;
+} VkPhysicalDeviceDisplacementMicromapPropertiesNV;
+
+typedef struct VkAccelerationStructureTrianglesDisplacementMicromapNV {
+    VkStructureType                     sType;
+    void*                               pNext;
+    VkFormat                            displacementBiasAndScaleFormat;
+    VkFormat                            displacementVectorFormat;
+    VkDeviceOrHostAddressConstKHR       displacementBiasAndScaleBuffer;
+    VkDeviceSize                        displacementBiasAndScaleStride;
+    VkDeviceOrHostAddressConstKHR       displacementVectorBuffer;
+    VkDeviceSize                        displacementVectorStride;
+    VkDeviceOrHostAddressConstKHR       displacedMicromapPrimitiveFlags;
+    VkDeviceSize                        displacedMicromapPrimitiveFlagsStride;
+    VkIndexType                         indexType;
+    VkDeviceOrHostAddressConstKHR       indexBuffer;
+    VkDeviceSize                        indexStride;
+    uint32_t                            baseTriangle;
+    uint32_t                            usageCountsCount;
+    const VkMicromapUsageEXT*           pUsageCounts;
+    const VkMicromapUsageEXT* const*    ppUsageCounts;
+    VkMicromapEXT                       micromap;
+} VkAccelerationStructureTrianglesDisplacementMicromapNV;
+
 
 
 #define VK_EXT_load_store_op_none 1
