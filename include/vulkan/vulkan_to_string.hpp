@@ -768,6 +768,10 @@ namespace VULKAN_HPP_NAMESPACE
       result += "DepthStencilAttachmentFeedbackLoopEXT | ";
     if ( value & PipelineCreateFlagBits::eRayTracingOpacityMicromapEXT )
       result += "RayTracingOpacityMicromapEXT | ";
+#if defined( VK_ENABLE_BETA_EXTENSIONS )
+    if ( value & PipelineCreateFlagBits::eRayTracingDisplacementMicromapNV )
+      result += "RayTracingDisplacementMicromapNV | ";
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
     if ( value & PipelineCreateFlagBits::eNoProtectedAccessEXT )
       result += "NoProtectedAccessEXT | ";
     if ( value & PipelineCreateFlagBits::eProtectedAccessOnlyEXT )
@@ -2611,6 +2615,10 @@ namespace VULKAN_HPP_NAMESPACE
       result += "AllowDisableOpacityMicromapsEXT | ";
     if ( value & BuildAccelerationStructureFlagBitsKHR::eAllowOpacityMicromapDataUpdateEXT )
       result += "AllowOpacityMicromapDataUpdateEXT | ";
+#if defined( VK_ENABLE_BETA_EXTENSIONS )
+    if ( value & BuildAccelerationStructureFlagBitsKHR::eAllowDisplacementMicromapUpdateNV )
+      result += "AllowDisplacementMicromapUpdateNV | ";
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
     return "{ " + result.substr( 0, result.size() - 3 ) + " }";
   }
@@ -4020,6 +4028,11 @@ namespace VULKAN_HPP_NAMESPACE
       case StructureType::eMicromapCreateInfoEXT: return "MicromapCreateInfoEXT";
       case StructureType::eMicromapBuildSizesInfoEXT: return "MicromapBuildSizesInfoEXT";
       case StructureType::eAccelerationStructureTrianglesOpacityMicromapEXT: return "AccelerationStructureTrianglesOpacityMicromapEXT";
+#if defined( VK_ENABLE_BETA_EXTENSIONS )
+      case StructureType::ePhysicalDeviceDisplacementMicromapFeaturesNV: return "PhysicalDeviceDisplacementMicromapFeaturesNV";
+      case StructureType::ePhysicalDeviceDisplacementMicromapPropertiesNV: return "PhysicalDeviceDisplacementMicromapPropertiesNV";
+      case StructureType::eAccelerationStructureTrianglesDisplacementMicromapNV: return "AccelerationStructureTrianglesDisplacementMicromapNV";
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
       case StructureType::ePhysicalDeviceClusterCullingShaderFeaturesHUAWEI: return "PhysicalDeviceClusterCullingShaderFeaturesHUAWEI";
       case StructureType::ePhysicalDeviceClusterCullingShaderPropertiesHUAWEI: return "PhysicalDeviceClusterCullingShaderPropertiesHUAWEI";
       case StructureType::ePhysicalDeviceBorderColorSwizzleFeaturesEXT: return "PhysicalDeviceBorderColorSwizzleFeaturesEXT";
@@ -5242,6 +5255,9 @@ namespace VULKAN_HPP_NAMESPACE
       case PipelineCreateFlagBits::eColorAttachmentFeedbackLoopEXT: return "ColorAttachmentFeedbackLoopEXT";
       case PipelineCreateFlagBits::eDepthStencilAttachmentFeedbackLoopEXT: return "DepthStencilAttachmentFeedbackLoopEXT";
       case PipelineCreateFlagBits::eRayTracingOpacityMicromapEXT: return "RayTracingOpacityMicromapEXT";
+#if defined( VK_ENABLE_BETA_EXTENSIONS )
+      case PipelineCreateFlagBits::eRayTracingDisplacementMicromapNV: return "RayTracingDisplacementMicromapNV";
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
       case PipelineCreateFlagBits::eNoProtectedAccessEXT: return "NoProtectedAccessEXT";
       case PipelineCreateFlagBits::eProtectedAccessOnlyEXT: return "ProtectedAccessOnlyEXT";
       default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
@@ -7170,6 +7186,9 @@ namespace VULKAN_HPP_NAMESPACE
       case BuildAccelerationStructureFlagBitsKHR::eAllowOpacityMicromapUpdateEXT: return "AllowOpacityMicromapUpdateEXT";
       case BuildAccelerationStructureFlagBitsKHR::eAllowDisableOpacityMicromapsEXT: return "AllowDisableOpacityMicromapsEXT";
       case BuildAccelerationStructureFlagBitsKHR::eAllowOpacityMicromapDataUpdateEXT: return "AllowOpacityMicromapDataUpdateEXT";
+#if defined( VK_ENABLE_BETA_EXTENSIONS )
+      case BuildAccelerationStructureFlagBitsKHR::eAllowDisplacementMicromapUpdateNV: return "AllowDisplacementMicromapUpdateNV";
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
       default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
     }
   }
@@ -8055,6 +8074,9 @@ namespace VULKAN_HPP_NAMESPACE
     switch ( value )
     {
       case MicromapTypeEXT::eOpacityMicromap: return "OpacityMicromap";
+#if defined( VK_ENABLE_BETA_EXTENSIONS )
+      case MicromapTypeEXT::eDisplacementMicromapNV: return "DisplacementMicromapNV";
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
       default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
     }
   }
@@ -8121,6 +8143,21 @@ namespace VULKAN_HPP_NAMESPACE
       default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
     }
   }
+
+#if defined( VK_ENABLE_BETA_EXTENSIONS )
+  //=== VK_NV_displacement_micromap ===
+
+  VULKAN_HPP_INLINE std::string to_string( DisplacementMicromapFormatNV value )
+  {
+    switch ( value )
+    {
+      case DisplacementMicromapFormatNV::e64Triangles64Bytes: return "64Triangles64Bytes";
+      case DisplacementMicromapFormatNV::e256Triangles128Bytes: return "256Triangles128Bytes";
+      case DisplacementMicromapFormatNV::e1024Triangles128Bytes: return "1024Triangles128Bytes";
+      default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
+    }
+  }
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
   //=== VK_NV_memory_decompression ===
 
