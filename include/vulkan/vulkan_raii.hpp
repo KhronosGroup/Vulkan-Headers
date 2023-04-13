@@ -10189,15 +10189,15 @@ namespace VULKAN_HPP_NAMESPACE
         , m_allocator( static_cast<const VULKAN_HPP_NAMESPACE::AllocationCallbacks *>( allocator ) )
         , m_dispatcher( device.getDispatcher() )
       {
-        m_constructorSuccessCode =
+        VULKAN_HPP_NAMESPACE::Result result =
           static_cast<VULKAN_HPP_NAMESPACE::Result>( getDispatcher()->vkCreateShadersEXT( static_cast<VkDevice>( *device ),
                                                                                           1,
                                                                                           reinterpret_cast<const VkShaderCreateInfoEXT *>( &createInfo ),
                                                                                           reinterpret_cast<const VkAllocationCallbacks *>( m_allocator ),
                                                                                           reinterpret_cast<VkShaderEXT *>( &m_shader ) ) );
-        if ( m_constructorSuccessCode != VULKAN_HPP_NAMESPACE::Result::eSuccess )
+        if ( result != VULKAN_HPP_NAMESPACE::Result::eSuccess )
         {
-          throwResultException( m_constructorSuccessCode, "vkCreateShadersEXT" );
+          throwResultException( result, "vkCreateShadersEXT" );
         }
       }
 

@@ -68,7 +68,7 @@ extern "C" {
 #define VK_API_VERSION_1_0 VK_MAKE_API_VERSION(0, 1, 0, 0)// Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 246
+#define VK_HEADER_VERSION 247
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 3, VK_HEADER_VERSION)
@@ -14695,7 +14695,7 @@ typedef struct VkPhysicalDevice4444FormatsFeaturesEXT {
 
 
 #define VK_EXT_device_fault 1
-#define VK_EXT_DEVICE_FAULT_SPEC_VERSION  1
+#define VK_EXT_DEVICE_FAULT_SPEC_VERSION  2
 #define VK_EXT_DEVICE_FAULT_EXTENSION_NAME "VK_EXT_device_fault"
 
 typedef enum VkDeviceFaultAddressTypeEXT {
@@ -14759,6 +14759,8 @@ typedef struct VkDeviceFaultVendorBinaryHeaderVersionOneEXT {
     uint32_t                                     applicationNameOffset;
     uint32_t                                     applicationVersion;
     uint32_t                                     engineNameOffset;
+    uint32_t                                     engineVersion;
+    uint32_t                                     apiVersion;
 } VkDeviceFaultVendorBinaryHeaderVersionOneEXT;
 
 typedef VkResult (VKAPI_PTR *PFN_vkGetDeviceFaultInfoEXT)(VkDevice device, VkDeviceFaultCountsEXT* pFaultCounts, VkDeviceFaultInfoEXT* pFaultInfo);
@@ -15540,7 +15542,7 @@ VKAPI_ATTR void VKAPI_CALL vkGetMicromapBuildSizesEXT(
 
 
 #define VK_HUAWEI_cluster_culling_shader 1
-#define VK_HUAWEI_CLUSTER_CULLING_SHADER_SPEC_VERSION 1
+#define VK_HUAWEI_CLUSTER_CULLING_SHADER_SPEC_VERSION 2
 #define VK_HUAWEI_CLUSTER_CULLING_SHADER_EXTENSION_NAME "VK_HUAWEI_cluster_culling_shader"
 typedef struct VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI {
     VkStructureType    sType;
