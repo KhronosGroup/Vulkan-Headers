@@ -43,52 +43,56 @@ vlk_get_header_version()
 
 project(VULKAN_HEADERS LANGUAGES C VERSION ${VK_VERSION_STRING})
 
-add_library(Vulkan-Headers INTERFACE)
-add_library(Vulkan::Headers ALIAS Vulkan-Headers)
-target_include_directories(Vulkan-Headers INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
-
 if (CMAKE_VERSION VERSION_LESS "3.21")
     # https://cmake.org/cmake/help/latest/variable/PROJECT_IS_TOP_LEVEL.html
     string(COMPARE EQUAL ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_SOURCE_DIR} PROJECT_IS_TOP_LEVEL)
 endif()
+
+if (NOT PROJECT_IS_TOP_LEVEL)
+    set_directory_properties(PROPERTIES EXCLUDE_FROM_ALL ON)
+endif()
+
+add_library(Vulkan-Headers INTERFACE)
+add_library(Vulkan::Headers ALIAS Vulkan-Headers)
+target_include_directories(Vulkan-Headers INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
 
 if (PROJECT_IS_TOP_LEVEL)
     option(BUILD_TESTS "Build the tests")
     if (BUILD_TESTS)
         add_subdirectory(tests)
     endif()
-
-    include(GNUInstallDirs)
-    include(CMakePackageConfigHelpers)
-
-    set(VLK_REGISTRY_DIR "${CMAKE_INSTALL_DATADIR}/vulkan")
-
-    install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/vk_video" DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-    install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/vulkan" DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-    # Preserve source permissions https://github.com/KhronosGroup/Vulkan-Headers/issues/336
-    install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/registry" DESTINATION ${VLK_REGISTRY_DIR} USE_SOURCE_PERMISSIONS)
-
-    set(cmake_files_install_dir ${CMAKE_INSTALL_DATADIR}/cmake/VulkanHeaders/)
-
-    set_target_properties(Vulkan-Headers PROPERTIES EXPORT_NAME "Headers")
-
-    install(TARGETS Vulkan-Headers EXPORT VulkanHeadersTargets INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-
-    install(EXPORT VulkanHeadersTargets FILE VulkanHeadersTargets.cmake NAMESPACE "Vulkan::" DESTINATION ${cmake_files_install_dir})
-
-    set(vulkan_headers_config "${CMAKE_CURRENT_BINARY_DIR}/VulkanHeadersConfig.cmake")
-    set(VULKAN_HEADERS_REGISTRY_DIRECTORY "${VLK_REGISTRY_DIR}/registry")
-
-    configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/VulkanHeadersConfig.cmake.in ${vulkan_headers_config}
-        INSTALL_DESTINATION ${cmake_files_install_dir}
-        PATH_VARS VULKAN_HEADERS_REGISTRY_DIRECTORY
-        NO_SET_AND_CHECK_MACRO
-        NO_CHECK_REQUIRED_COMPONENTS_MACRO
-    )
-
-    set(config_version "${CMAKE_CURRENT_BINARY_DIR}/VulkanHeadersConfigVersion.cmake")
-
-    write_basic_package_version_file(${config_version} COMPATIBILITY SameMajorVersion ARCH_INDEPENDENT)
-
-    install(FILES ${config_version} ${vulkan_headers_config} DESTINATION ${cmake_files_install_dir})
 endif()
+
+include(GNUInstallDirs)
+include(CMakePackageConfigHelpers)
+
+set(VLK_REGISTRY_DIR "${CMAKE_INSTALL_DATADIR}/vulkan")
+
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/vk_video" DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/vulkan" DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+# Preserve source permissions https://github.com/KhronosGroup/Vulkan-Headers/issues/336
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/registry" DESTINATION ${VLK_REGISTRY_DIR} USE_SOURCE_PERMISSIONS)
+
+set(cmake_files_install_dir ${CMAKE_INSTALL_DATADIR}/cmake/VulkanHeaders/)
+
+set_target_properties(Vulkan-Headers PROPERTIES EXPORT_NAME "Headers")
+
+install(TARGETS Vulkan-Headers EXPORT VulkanHeadersTargets INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+
+install(EXPORT VulkanHeadersTargets FILE VulkanHeadersTargets.cmake NAMESPACE "Vulkan::" DESTINATION ${cmake_files_install_dir})
+
+set(vulkan_headers_config "${CMAKE_CURRENT_BINARY_DIR}/VulkanHeadersConfig.cmake")
+set(VULKAN_HEADERS_REGISTRY_DIRECTORY "${VLK_REGISTRY_DIR}/registry")
+
+configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/VulkanHeadersConfig.cmake.in ${vulkan_headers_config}
+    INSTALL_DESTINATION ${cmake_files_install_dir}
+    PATH_VARS VULKAN_HEADERS_REGISTRY_DIRECTORY
+    NO_SET_AND_CHECK_MACRO
+    NO_CHECK_REQUIRED_COMPONENTS_MACRO
+)
+
+set(config_version "${CMAKE_CURRENT_BINARY_DIR}/VulkanHeadersConfigVersion.cmake")
+
+write_basic_package_version_file(${config_version} COMPATIBILITY SameMajorVersion ARCH_INDEPENDENT)
+
+install(FILES ${config_version} ${vulkan_headers_config} DESTINATION ${cmake_files_install_dir})
