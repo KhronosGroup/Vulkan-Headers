@@ -19,6 +19,9 @@ on:
     pull_request:
         branches:
             - main
+
+env:
+  CMAKE_GENERATOR: Ninja
             
 permissions:
     contents: read
@@ -32,7 +35,7 @@ jobs:
         with:
           cmakeVersion: 3.17.0
       - name: Configure Vulkan-Headers
-        run: cmake -S . -B build -G "Ninja"
+        run: cmake -S . -B build
       - name: Install Vulkan-Headers
         run: cmake --install build --prefix ${{ github.workspace }}/build/install
       - name: Test Vulkan-Headers find_package support
@@ -46,7 +49,7 @@ jobs:
         with:
           cmakeVersion: 3.25.0
       - name: Configure Vulkan-Headers
-        run: cmake -S . -B build -D BUILD_TESTS=ON --log-level=DEBUG -G "Ninja"
+        run: cmake -S . -B build -D BUILD_TESTS=ON --log-level=DEBUG
       - name: Build Vulkan-Headers Tests
         run: cmake --build build
 
@@ -58,6 +61,16 @@ jobs:
         with:
           cmakeVersion: 3.15.0
       - name: Configure Vulkan-Headers
-        run: cmake -S . -B build/ -G "Ninja" --loglevel=DEBUG
+        run: cmake -S . -B build/ --loglevel=DEBUG
       - name: Install Vulkan-Headers
         run: cmake --install build/ --prefix build/install
+
+  ubuntu-cmake-add_subdirectory:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: lukka/get-cmake@latest
+      - name: Test add_subdirectory support
+        run: cmake -S tests/add_subdirectory -B tests/add_subdirectory/build
+      - name: Build
+        run: cmake --build tests/add_subdirectory/build

@@ -57,7 +57,10 @@ if (PROJECT_IS_TOP_LEVEL)
     if (BUILD_TESTS)
         add_subdirectory(tests)
     endif()
+endif()
 
+option(VULKAN_HEADERS_INSTALL "Install Vulkan Headers" ${PROJECT_IS_TOP_LEVEL})
+if (VULKAN_HEADERS_INSTALL)
     include(GNUInstallDirs)
     include(CMakePackageConfigHelpers)
 
