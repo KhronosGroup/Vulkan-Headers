@@ -33,3 +33,4 @@ split into multiple files. All of those files are now included in this
 repository.
 
 * include/vulkan/*.hpp
+* include/vulkan/*.cppm
