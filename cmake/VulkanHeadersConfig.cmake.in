@@ -1,5 +1,7 @@
 @PACKAGE_INIT@
 
-include("${CMAKE_CURRENT_LIST_DIR}/VulkanHeadersTargets.cmake")
+if (NOT TARGET Vulkan::Headers)
+    include("${CMAKE_CURRENT_LIST_DIR}/VulkanHeadersTargets.cmake")
+endif()
 
 set(VULKAN_HEADERS_REGISTRY_DIRECTORY "@PACKAGE_VULKAN_HEADERS_REGISTRY_DIRECTORY@")
