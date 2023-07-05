@@ -57,19 +57,14 @@ if (PROJECT_IS_TOP_LEVEL)
     if (BUILD_TESTS)
         add_subdirectory(tests)
     endif()
-endif()
 
-option(VULKAN_HEADERS_INSTALL "Install Vulkan Headers" ${PROJECT_IS_TOP_LEVEL})
-if (VULKAN_HEADERS_INSTALL)
     include(GNUInstallDirs)
     include(CMakePackageConfigHelpers)
-
-    set(VLK_REGISTRY_DIR "${CMAKE_INSTALL_DATADIR}/vulkan")
 
     install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/vk_video" DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
     install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/vulkan" DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
     # Preserve source permissions https://github.com/KhronosGroup/Vulkan-Headers/issues/336
-    install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/registry" DESTINATION ${VLK_REGISTRY_DIR} USE_SOURCE_PERMISSIONS)
+    install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/registry" DESTINATION "${CMAKE_INSTALL_DATADIR}/vulkan" USE_SOURCE_PERMISSIONS)
 
     set_target_properties(Vulkan-Headers PROPERTIES EXPORT_NAME "Headers")
 

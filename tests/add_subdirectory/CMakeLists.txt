@@ -8,12 +8,9 @@ if (NOT TARGET Vulkan::Headers)
     message(FATAL_ERROR "Vulkan::Headers target not defined")
 endif()
 
-# By default installation for a subproject should be disabled.
-# This makes it easier to consume for most projects.
-# Consuming the vulkan-headers via add_subdirectory and installing
-# them is the more niche use case.
-if (VULKAN_HEADERS_INSTALL)
-    message(FATAL_ERROR "VULKAN_HEADERS_INSTALL should be OFF!")
+# Consuming vulkan-headers via add_subdirectory should NOT add installation code to the parent CMake project.
+if (DEFINED CMAKE_INSTALL_INCLUDEDIR)
+    message(FATAL_ERROR "CMAKE_INSTALL_INCLUDEDIR was defined!")
 endif()
 
 add_library(foobar STATIC)
