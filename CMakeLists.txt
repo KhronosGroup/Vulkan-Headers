@@ -71,27 +71,14 @@ if (VULKAN_HEADERS_INSTALL)
     # Preserve source permissions https://github.com/KhronosGroup/Vulkan-Headers/issues/336
     install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/registry" DESTINATION ${VLK_REGISTRY_DIR} USE_SOURCE_PERMISSIONS)
 
-    set(cmake_files_install_dir ${CMAKE_INSTALL_DATADIR}/cmake/VulkanHeaders/)
-
     set_target_properties(Vulkan-Headers PROPERTIES EXPORT_NAME "Headers")
 
-    install(TARGETS Vulkan-Headers EXPORT VulkanHeadersTargets INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+    set(cmake_install_dir "${CMAKE_INSTALL_DATADIR}/cmake/VulkanHeaders")
 
-    install(EXPORT VulkanHeadersTargets FILE VulkanHeadersTargets.cmake NAMESPACE "Vulkan::" DESTINATION ${cmake_files_install_dir})
+    install(TARGETS Vulkan-Headers EXPORT VulkanHeadersConfig INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+    install(EXPORT VulkanHeadersConfig NAMESPACE "Vulkan::" DESTINATION "${cmake_install_dir}")
 
-    set(vulkan_headers_config "${CMAKE_CURRENT_BINARY_DIR}/VulkanHeadersConfig.cmake")
-    set(VULKAN_HEADERS_REGISTRY_DIRECTORY "${VLK_REGISTRY_DIR}/registry")
-
-    configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/VulkanHeadersConfig.cmake.in ${vulkan_headers_config}
-        INSTALL_DESTINATION ${cmake_files_install_dir}
-        PATH_VARS VULKAN_HEADERS_REGISTRY_DIRECTORY
-        NO_SET_AND_CHECK_MACRO
-        NO_CHECK_REQUIRED_COMPONENTS_MACRO
-    )
-
-    set(config_version "${CMAKE_CURRENT_BINARY_DIR}/VulkanHeadersConfigVersion.cmake")
-
-    write_basic_package_version_file(${config_version} COMPATIBILITY SameMajorVersion ARCH_INDEPENDENT)
-
-    install(FILES ${config_version} ${vulkan_headers_config} DESTINATION ${cmake_files_install_dir})
+    set(version_config "${CMAKE_CURRENT_BINARY_DIR}/generated/VulkanHeadersConfigVersion.cmake")
+    write_basic_package_version_file("${version_config}" COMPATIBILITY SameMajorVersion ARCH_INDEPENDENT)
+    install(FILES "${version_config}" DESTINATION "${cmake_install_dir}")
 endif()
