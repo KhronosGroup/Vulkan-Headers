@@ -19,6 +19,7 @@ extern "C" {
 
 
 
+// vulkan_video_codec_h265std_decode is a preprocessor guard. Do not pass it to API calls.
 #define vulkan_video_codec_h265std_decode 1
 
 #define VK_STD_VULKAN_VIDEO_CODEC_H265_DECODE_API_VERSION_1_0_0 VK_MAKE_VIDEO_STD_VERSION(1, 0, 0)

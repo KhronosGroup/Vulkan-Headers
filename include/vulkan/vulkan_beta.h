@@ -19,6 +19,7 @@ extern "C" {
 
 
 
+// VK_KHR_portability_subset is a preprocessor guard. Do not pass it to API calls.
 #define VK_KHR_portability_subset 1
 #define VK_KHR_PORTABILITY_SUBSET_SPEC_VERSION 1
 #define VK_KHR_PORTABILITY_SUBSET_EXTENSION_NAME "VK_KHR_portability_subset"
@@ -50,6 +51,7 @@ typedef struct VkPhysicalDevicePortabilitySubsetPropertiesKHR {
 
 
 
+// VK_KHR_video_encode_queue is a preprocessor guard. Do not pass it to API calls.
 #define VK_KHR_video_encode_queue 1
 #define VK_KHR_VIDEO_ENCODE_QUEUE_SPEC_VERSION 9
 #define VK_KHR_VIDEO_ENCODE_QUEUE_EXTENSION_NAME "VK_KHR_video_encode_queue"
@@ -221,6 +223,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdEncodeVideoKHR(
 #endif
 
 
+// VK_EXT_video_encode_h264 is a preprocessor guard. Do not pass it to API calls.
 #define VK_EXT_video_encode_h264 1
 #include "vk_video/vulkan_video_codec_h264std.h"
 #include "vk_video/vulkan_video_codec_h264std_encode.h"
@@ -417,6 +420,7 @@ typedef struct VkVideoEncodeH264GopRemainingFrameInfoEXT {
 
 
 
+// VK_EXT_video_encode_h265 is a preprocessor guard. Do not pass it to API calls.
 #define VK_EXT_video_encode_h265 1
 #include "vk_video/vulkan_video_codec_h265std.h"
 #include "vk_video/vulkan_video_codec_h265std_encode.h"
@@ -639,6 +643,7 @@ typedef struct VkVideoEncodeH265GopRemainingFrameInfoEXT {
 
 
 
+// VK_NV_displacement_micromap is a preprocessor guard. Do not pass it to API calls.
 #define VK_NV_displacement_micromap 1
 #define VK_NV_DISPLACEMENT_MICROMAP_SPEC_VERSION 1
 #define VK_NV_DISPLACEMENT_MICROMAP_EXTENSION_NAME "VK_NV_displacement_micromap"
