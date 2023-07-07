@@ -8,7 +8,6 @@ The majority for the Vulkan headers come from [Vulkan-Docs](https://github.com/K
 
 * BUILD.gn
 * BUILD.md
-* cmake/
 * CMakeLists.txt
 * tests/*
 * CODE_OF_CONDUCT.md

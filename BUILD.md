@@ -36,7 +36,5 @@ find_package(VulkanHeaders REQUIRED CONFIG)
 
 target_link_libraries(foobar PRIVATE Vulkan::Headers)
 
-message(STATUS "Vulkan Headers Registry: ${VULKAN_HEADERS_REGISTRY_DIRECTORY}")
-
 message(STATUS "Vulkan Headers Version: ${VulkanHeaders_VERSION}")
 ```
