@@ -68,12 +68,10 @@ if (PROJECT_IS_TOP_LEVEL)
 
     set_target_properties(Vulkan-Headers PROPERTIES EXPORT_NAME "Headers")
 
-    set(cmake_install_dir "${CMAKE_INSTALL_DATADIR}/cmake/VulkanHeaders")
-
     install(TARGETS Vulkan-Headers EXPORT VulkanHeadersConfig INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-    install(EXPORT VulkanHeadersConfig NAMESPACE "Vulkan::" DESTINATION "${cmake_install_dir}")
+    install(EXPORT VulkanHeadersConfig NAMESPACE "Vulkan::" DESTINATION "share/cmake/VulkanHeaders")
 
     set(version_config "${CMAKE_CURRENT_BINARY_DIR}/generated/VulkanHeadersConfigVersion.cmake")
     write_basic_package_version_file("${version_config}" COMPATIBILITY SameMajorVersion ARCH_INDEPENDENT)
-    install(FILES "${version_config}" DESTINATION "${cmake_install_dir}")
+    install(FILES "${version_config}" DESTINATION "share/cmake/VulkanHeaders")
 endif()
