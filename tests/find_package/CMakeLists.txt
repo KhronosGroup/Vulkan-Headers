@@ -1,3 +1,10 @@
+# ~~~
+# Copyright 2022-2023 The Khronos Group Inc.
+# Copyright 2022-2023 Valve Corporation
+# Copyright 2022-2023 LunarG, Inc.
+#
+# SPDX-License-Identifier: Apache-2.0
+# ~~~
 cmake_minimum_required(VERSION 3.14.2)
 
 project(TEST_VULKAN_HEADERS_FIND_PACKAGE_SUPPORT LANGUAGES C)
