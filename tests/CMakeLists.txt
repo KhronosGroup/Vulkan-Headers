@@ -25,6 +25,14 @@ if(${CMAKE_C_COMPILER_ID} MATCHES "(GNU|Clang)")
     )
 endif()
 
+if (MSVC)
+    add_compile_options(
+        /W4
+        /permissive-
+        /WX
+    )
+endif()
+
 # vk_icd.h
 add_executable(vk_icd vk_icd.c)
 target_link_libraries(vk_icd PRIVATE Vulkan::Headers)
