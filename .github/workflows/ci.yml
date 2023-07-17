@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-name: Linux
+name: ci
 
 on:
     push:
@@ -38,6 +38,22 @@ jobs:
       - uses: lukka/get-cmake@latest
         with:
           cmakeVersion: 3.25.0
+      - name: Configure Vulkan-Headers
+        run: cmake -S . -B build -D BUILD_TESTS=ON --log-level=DEBUG
+      - name: Build Vulkan-Headers Tests
+        run: cmake --build build
+
+  windows-cmake-tests:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        arch: [ amd64, amd64_x86 ]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: lukka/get-cmake@latest
+      - uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: ${{ matrix.arch }}
       - name: Configure Vulkan-Headers
         run: cmake -S . -B build -D BUILD_TESTS=ON --log-level=DEBUG
       - name: Build Vulkan-Headers Tests
