@@ -69,7 +69,7 @@ extern "C" {
 #define VK_API_VERSION_1_0 VK_MAKE_API_VERSION(0, 1, 0, 0)// Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 257
+#define VK_HEADER_VERSION 258
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 3, VK_HEADER_VERSION)
@@ -800,6 +800,16 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_INFO_KHR = 1000269003,
     VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_STATISTIC_KHR = 1000269004,
     VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_INTERNAL_REPRESENTATION_KHR = 1000269005,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_IMAGE_COPY_FEATURES_EXT = 1000270000,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_IMAGE_COPY_PROPERTIES_EXT = 1000270001,
+    VK_STRUCTURE_TYPE_MEMORY_TO_IMAGE_COPY_EXT = 1000270002,
+    VK_STRUCTURE_TYPE_IMAGE_TO_MEMORY_COPY_EXT = 1000270003,
+    VK_STRUCTURE_TYPE_COPY_IMAGE_TO_MEMORY_INFO_EXT = 1000270004,
+    VK_STRUCTURE_TYPE_COPY_MEMORY_TO_IMAGE_INFO_EXT = 1000270005,
+    VK_STRUCTURE_TYPE_HOST_IMAGE_LAYOUT_TRANSITION_INFO_EXT = 1000270006,
+    VK_STRUCTURE_TYPE_COPY_IMAGE_TO_IMAGE_INFO_EXT = 1000270007,
+    VK_STRUCTURE_TYPE_SUBRESOURCE_HOST_MEMCPY_SIZE_EXT = 1000270008,
+    VK_STRUCTURE_TYPE_HOST_IMAGE_COPY_DEVICE_PERFORMANCE_QUERY_EXT = 1000270009,
     VK_STRUCTURE_TYPE_MEMORY_MAP_INFO_KHR = 1000271000,
     VK_STRUCTURE_TYPE_MEMORY_UNMAP_INFO_KHR = 1000271001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_2_FEATURES_EXT = 1000273000,
@@ -1024,6 +1034,9 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COPY_MEMORY_INDIRECT_PROPERTIES_NV = 1000426001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_FEATURES_NV = 1000427000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_PROPERTIES_NV = 1000427001,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_COMPUTE_FEATURES_NV = 1000428000,
+    VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_INDIRECT_BUFFER_INFO_NV = 1000428001,
+    VK_STRUCTURE_TYPE_PIPELINE_INDIRECT_DEVICE_ADDRESS_INFO_NV = 1000428002,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV = 1000430000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_FEATURES_EXT = 1000437000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_PROCESSING_FEATURES_QCOM = 1000440000,
@@ -2291,6 +2304,7 @@ typedef enum VkImageUsageFlagBits {
     VK_IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR = 0x00001000,
     VK_IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT = 0x00000200,
     VK_IMAGE_USAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR = 0x00000100,
+    VK_IMAGE_USAGE_HOST_TRANSFER_BIT_EXT = 0x00400000,
 #ifdef VK_ENABLE_BETA_EXTENSIONS
     VK_IMAGE_USAGE_VIDEO_ENCODE_DST_BIT_KHR = 0x00002000,
 #endif
@@ -2681,6 +2695,7 @@ typedef enum VkDescriptorSetLayoutCreateFlagBits {
     VK_DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR = 0x00000001,
     VK_DESCRIPTOR_SET_LAYOUT_CREATE_DESCRIPTOR_BUFFER_BIT_EXT = 0x00000010,
     VK_DESCRIPTOR_SET_LAYOUT_CREATE_EMBEDDED_IMMUTABLE_SAMPLERS_BIT_EXT = 0x00000020,
+    VK_DESCRIPTOR_SET_LAYOUT_CREATE_INDIRECT_BINDABLE_BIT_NV = 0x00000080,
     VK_DESCRIPTOR_SET_LAYOUT_CREATE_HOST_ONLY_POOL_BIT_EXT = 0x00000004,
     VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT_EXT = VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT,
     VK_DESCRIPTOR_SET_LAYOUT_CREATE_HOST_ONLY_POOL_BIT_VALVE = VK_DESCRIPTOR_SET_LAYOUT_CREATE_HOST_ONLY_POOL_BIT_EXT,
@@ -6735,6 +6750,7 @@ static const VkFormatFeatureFlagBits2 VK_FORMAT_FEATURE_2_VIDEO_DECODE_DPB_BIT_K
 static const VkFormatFeatureFlagBits2 VK_FORMAT_FEATURE_2_ACCELERATION_STRUCTURE_VERTEX_BUFFER_BIT_KHR = 0x20000000ULL;
 static const VkFormatFeatureFlagBits2 VK_FORMAT_FEATURE_2_FRAGMENT_DENSITY_MAP_BIT_EXT = 0x01000000ULL;
 static const VkFormatFeatureFlagBits2 VK_FORMAT_FEATURE_2_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR = 0x40000000ULL;
+static const VkFormatFeatureFlagBits2 VK_FORMAT_FEATURE_2_HOST_IMAGE_TRANSFER_BIT_EXT = 0x400000000000ULL;
 #ifdef VK_ENABLE_BETA_EXTENSIONS
 static const VkFormatFeatureFlagBits2 VK_FORMAT_FEATURE_2_VIDEO_ENCODE_INPUT_BIT_KHR = 0x08000000ULL;
 #endif
@@ -13874,6 +13890,153 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetStencilOpEXT(
 #endif
 
 
+// VK_EXT_host_image_copy is a preprocessor guard. Do not pass it to API calls.
+#define VK_EXT_host_image_copy 1
+#define VK_EXT_HOST_IMAGE_COPY_SPEC_VERSION 1
+#define VK_EXT_HOST_IMAGE_COPY_EXTENSION_NAME "VK_EXT_host_image_copy"
+
+typedef enum VkHostImageCopyFlagBitsEXT {
+    VK_HOST_IMAGE_COPY_MEMCPY_EXT = 0x00000001,
+    VK_HOST_IMAGE_COPY_FLAG_BITS_MAX_ENUM_EXT = 0x7FFFFFFF
+} VkHostImageCopyFlagBitsEXT;
+typedef VkFlags VkHostImageCopyFlagsEXT;
+typedef struct VkPhysicalDeviceHostImageCopyFeaturesEXT {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           hostImageCopy;
+} VkPhysicalDeviceHostImageCopyFeaturesEXT;
+
+typedef struct VkPhysicalDeviceHostImageCopyPropertiesEXT {
+    VkStructureType    sType;
+    void*              pNext;
+    uint32_t           copySrcLayoutCount;
+    VkImageLayout*     pCopySrcLayouts;
+    uint32_t           copyDstLayoutCount;
+    VkImageLayout*     pCopyDstLayouts;
+    uint8_t            optimalTilingLayoutUUID[VK_UUID_SIZE];
+    VkBool32           identicalMemoryTypeRequirements;
+} VkPhysicalDeviceHostImageCopyPropertiesEXT;
+
+typedef struct VkMemoryToImageCopyEXT {
+    VkStructureType             sType;
+    const void*                 pNext;
+    const void*                 pHostPointer;
+    uint32_t                    memoryRowLength;
+    uint32_t                    memoryImageHeight;
+    VkImageSubresourceLayers    imageSubresource;
+    VkOffset3D                  imageOffset;
+    VkExtent3D                  imageExtent;
+} VkMemoryToImageCopyEXT;
+
+typedef struct VkImageToMemoryCopyEXT {
+    VkStructureType             sType;
+    const void*                 pNext;
+    void*                       pHostPointer;
+    uint32_t                    memoryRowLength;
+    uint32_t                    memoryImageHeight;
+    VkImageSubresourceLayers    imageSubresource;
+    VkOffset3D                  imageOffset;
+    VkExtent3D                  imageExtent;
+} VkImageToMemoryCopyEXT;
+
+typedef struct VkCopyMemoryToImageInfoEXT {
+    VkStructureType                  sType;
+    const void*                      pNext;
+    VkHostImageCopyFlagsEXT          flags;
+    VkImage                          dstImage;
+    VkImageLayout                    dstImageLayout;
+    uint32_t                         regionCount;
+    const VkMemoryToImageCopyEXT*    pRegions;
+} VkCopyMemoryToImageInfoEXT;
+
+typedef struct VkCopyImageToMemoryInfoEXT {
+    VkStructureType                  sType;
+    const void*                      pNext;
+    VkHostImageCopyFlagsEXT          flags;
+    VkImage                          srcImage;
+    VkImageLayout                    srcImageLayout;
+    uint32_t                         regionCount;
+    const VkImageToMemoryCopyEXT*    pRegions;
+} VkCopyImageToMemoryInfoEXT;
+
+typedef struct VkCopyImageToImageInfoEXT {
+    VkStructureType            sType;
+    const void*                pNext;
+    VkHostImageCopyFlagsEXT    flags;
+    VkImage                    srcImage;
+    VkImageLayout              srcImageLayout;
+    VkImage                    dstImage;
+    VkImageLayout              dstImageLayout;
+    uint32_t                   regionCount;
+    const VkImageCopy2*        pRegions;
+} VkCopyImageToImageInfoEXT;
+
+typedef struct VkHostImageLayoutTransitionInfoEXT {
+    VkStructureType            sType;
+    const void*                pNext;
+    VkImage                    image;
+    VkImageLayout              oldLayout;
+    VkImageLayout              newLayout;
+    VkImageSubresourceRange    subresourceRange;
+} VkHostImageLayoutTransitionInfoEXT;
+
+typedef struct VkSubresourceHostMemcpySizeEXT {
+    VkStructureType    sType;
+    void*              pNext;
+    VkDeviceSize       size;
+} VkSubresourceHostMemcpySizeEXT;
+
+typedef struct VkHostImageCopyDevicePerformanceQueryEXT {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           optimalDeviceAccess;
+    VkBool32           identicalMemoryLayout;
+} VkHostImageCopyDevicePerformanceQueryEXT;
+
+typedef struct VkSubresourceLayout2EXT {
+    VkStructureType        sType;
+    void*                  pNext;
+    VkSubresourceLayout    subresourceLayout;
+} VkSubresourceLayout2EXT;
+
+typedef struct VkImageSubresource2EXT {
+    VkStructureType       sType;
+    void*                 pNext;
+    VkImageSubresource    imageSubresource;
+} VkImageSubresource2EXT;
+
+typedef VkResult (VKAPI_PTR *PFN_vkCopyMemoryToImageEXT)(VkDevice device, const VkCopyMemoryToImageInfoEXT* pCopyMemoryToImageInfo);
+typedef VkResult (VKAPI_PTR *PFN_vkCopyImageToMemoryEXT)(VkDevice device, const VkCopyImageToMemoryInfoEXT* pCopyImageToMemoryInfo);
+typedef VkResult (VKAPI_PTR *PFN_vkCopyImageToImageEXT)(VkDevice device, const VkCopyImageToImageInfoEXT* pCopyImageToImageInfo);
+typedef VkResult (VKAPI_PTR *PFN_vkTransitionImageLayoutEXT)(VkDevice device, uint32_t transitionCount, const VkHostImageLayoutTransitionInfoEXT* pTransitions);
+typedef void (VKAPI_PTR *PFN_vkGetImageSubresourceLayout2EXT)(VkDevice device, VkImage image, const VkImageSubresource2EXT* pSubresource, VkSubresourceLayout2EXT* pLayout);
+
+#ifndef VK_NO_PROTOTYPES
+VKAPI_ATTR VkResult VKAPI_CALL vkCopyMemoryToImageEXT(
+    VkDevice                                    device,
+    const VkCopyMemoryToImageInfoEXT*           pCopyMemoryToImageInfo);
+
+VKAPI_ATTR VkResult VKAPI_CALL vkCopyImageToMemoryEXT(
+    VkDevice                                    device,
+    const VkCopyImageToMemoryInfoEXT*           pCopyImageToMemoryInfo);
+
+VKAPI_ATTR VkResult VKAPI_CALL vkCopyImageToImageEXT(
+    VkDevice                                    device,
+    const VkCopyImageToImageInfoEXT*            pCopyImageToImageInfo);
+
+VKAPI_ATTR VkResult VKAPI_CALL vkTransitionImageLayoutEXT(
+    VkDevice                                    device,
+    uint32_t                                    transitionCount,
+    const VkHostImageLayoutTransitionInfoEXT*   pTransitions);
+
+VKAPI_ATTR void VKAPI_CALL vkGetImageSubresourceLayout2EXT(
+    VkDevice                                    device,
+    VkImage                                     image,
+    const VkImageSubresource2EXT*               pSubresource,
+    VkSubresourceLayout2EXT*                    pLayout);
+#endif
+
+
 // VK_EXT_shader_atomic_float2 is a preprocessor guard. Do not pass it to API calls.
 #define VK_EXT_shader_atomic_float2 1
 #define VK_EXT_SHADER_ATOMIC_FLOAT_2_SPEC_VERSION 1
@@ -14022,6 +14185,8 @@ typedef enum VkIndirectCommandsTokenTypeNV {
     VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_NV = 6,
     VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_TASKS_NV = 7,
     VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_NV = 1000328000,
+    VK_INDIRECT_COMMANDS_TOKEN_TYPE_PIPELINE_NV = 1000428003,
+    VK_INDIRECT_COMMANDS_TOKEN_TYPE_DISPATCH_NV = 1000428004,
     VK_INDIRECT_COMMANDS_TOKEN_TYPE_MAX_ENUM_NV = 0x7FFFFFFF
 } VkIndirectCommandsTokenTypeNV;
 
@@ -15057,18 +15222,6 @@ typedef struct VkImageCompressionControlEXT {
     VkImageCompressionFixedRateFlagsEXT*    pFixedRateFlags;
 } VkImageCompressionControlEXT;
 
-typedef struct VkSubresourceLayout2EXT {
-    VkStructureType        sType;
-    void*                  pNext;
-    VkSubresourceLayout    subresourceLayout;
-} VkSubresourceLayout2EXT;
-
-typedef struct VkImageSubresource2EXT {
-    VkStructureType       sType;
-    void*                 pNext;
-    VkImageSubresource    imageSubresource;
-} VkImageSubresource2EXT;
-
 typedef struct VkImageCompressionPropertiesEXT {
     VkStructureType                        sType;
     void*                                  pNext;
@@ -15076,15 +15229,6 @@ typedef struct VkImageCompressionPropertiesEXT {
     VkImageCompressionFixedRateFlagsEXT    imageCompressionFixedRateFlags;
 } VkImageCompressionPropertiesEXT;
 
-typedef void (VKAPI_PTR *PFN_vkGetImageSubresourceLayout2EXT)(VkDevice device, VkImage image, const VkImageSubresource2EXT* pSubresource, VkSubresourceLayout2EXT* pLayout);
-
-#ifndef VK_NO_PROTOTYPES
-VKAPI_ATTR void VKAPI_CALL vkGetImageSubresourceLayout2EXT(
-    VkDevice                                    device,
-    VkImage                                     image,
-    const VkImageSubresource2EXT*               pSubresource,
-    VkSubresourceLayout2EXT*                    pLayout);
-#endif
 
 
 // VK_EXT_attachment_feedback_loop_layout is a preprocessor guard. Do not pass it to API calls.
@@ -16280,6 +16424,58 @@ VKAPI_ATTR void VKAPI_CALL vkCmdDecompressMemoryIndirectCountNV(
     VkDeviceAddress                             indirectCommandsAddress,
     VkDeviceAddress                             indirectCommandsCountAddress,
     uint32_t                                    stride);
+#endif
+
+
+// VK_NV_device_generated_commands_compute is a preprocessor guard. Do not pass it to API calls.
+#define VK_NV_device_generated_commands_compute 1
+#define VK_NV_DEVICE_GENERATED_COMMANDS_COMPUTE_SPEC_VERSION 1
+#define VK_NV_DEVICE_GENERATED_COMMANDS_COMPUTE_EXTENSION_NAME "VK_NV_device_generated_commands_compute"
+typedef struct VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           deviceGeneratedCompute;
+    VkBool32           deviceGeneratedComputePipelines;
+    VkBool32           deviceGeneratedComputeCaptureReplay;
+} VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV;
+
+typedef struct VkComputePipelineIndirectBufferInfoNV {
+    VkStructureType    sType;
+    const void*        pNext;
+    VkDeviceAddress    deviceAddress;
+    VkDeviceSize       size;
+    VkDeviceAddress    pipelineDeviceAddressCaptureReplay;
+} VkComputePipelineIndirectBufferInfoNV;
+
+typedef struct VkPipelineIndirectDeviceAddressInfoNV {
+    VkStructureType        sType;
+    const void*            pNext;
+    VkPipelineBindPoint    pipelineBindPoint;
+    VkPipeline             pipeline;
+} VkPipelineIndirectDeviceAddressInfoNV;
+
+typedef struct VkBindPipelineIndirectCommandNV {
+    VkDeviceAddress    pipelineAddress;
+} VkBindPipelineIndirectCommandNV;
+
+typedef void (VKAPI_PTR *PFN_vkGetPipelineIndirectMemoryRequirementsNV)(VkDevice device, const VkComputePipelineCreateInfo* pCreateInfo, VkMemoryRequirements2* pMemoryRequirements);
+typedef void (VKAPI_PTR *PFN_vkCmdUpdatePipelineIndirectBuffer)(VkCommandBuffer commandBuffer, VkPipelineBindPoint           pipelineBindPoint, VkPipeline                    pipeline);
+typedef VkDeviceAddress (VKAPI_PTR *PFN_vkGetPipelineIndirectDeviceAddressNV)(VkDevice device, const VkPipelineIndirectDeviceAddressInfoNV* pInfo);
+
+#ifndef VK_NO_PROTOTYPES
+VKAPI_ATTR void VKAPI_CALL vkGetPipelineIndirectMemoryRequirementsNV(
+    VkDevice                                    device,
+    const VkComputePipelineCreateInfo*          pCreateInfo,
+    VkMemoryRequirements2*                      pMemoryRequirements);
+
+VKAPI_ATTR void VKAPI_CALL vkCmdUpdatePipelineIndirectBuffer(
+    VkCommandBuffer                             commandBuffer,
+    VkPipelineBindPoint                         pipelineBindPoint,
+    VkPipeline                                  pipeline);
+
+VKAPI_ATTR VkDeviceAddress VKAPI_CALL vkGetPipelineIndirectDeviceAddressNV(
+    VkDevice                                    device,
+    const VkPipelineIndirectDeviceAddressInfoNV* pInfo);
 #endif
 
 

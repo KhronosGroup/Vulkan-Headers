@@ -645,7 +645,7 @@ typedef struct VkVideoEncodeH265GopRemainingFrameInfoEXT {
 
 // VK_NV_displacement_micromap is a preprocessor guard. Do not pass it to API calls.
 #define VK_NV_displacement_micromap 1
-#define VK_NV_DISPLACEMENT_MICROMAP_SPEC_VERSION 1
+#define VK_NV_DISPLACEMENT_MICROMAP_SPEC_VERSION 2
 #define VK_NV_DISPLACEMENT_MICROMAP_EXTENSION_NAME "VK_NV_displacement_micromap"
 
 typedef enum VkDisplacementMicromapFormatNV {
