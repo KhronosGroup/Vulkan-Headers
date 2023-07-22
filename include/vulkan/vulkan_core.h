@@ -69,7 +69,7 @@ extern "C" {
 #define VK_API_VERSION_1_0 VK_MAKE_API_VERSION(0, 1, 0, 0)// Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 258
+#define VK_HEADER_VERSION 259
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 3, VK_HEADER_VERSION)
@@ -16429,7 +16429,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdDecompressMemoryIndirectCountNV(
 
 // VK_NV_device_generated_commands_compute is a preprocessor guard. Do not pass it to API calls.
 #define VK_NV_device_generated_commands_compute 1
-#define VK_NV_DEVICE_GENERATED_COMMANDS_COMPUTE_SPEC_VERSION 1
+#define VK_NV_DEVICE_GENERATED_COMMANDS_COMPUTE_SPEC_VERSION 2
 #define VK_NV_DEVICE_GENERATED_COMMANDS_COMPUTE_EXTENSION_NAME "VK_NV_device_generated_commands_compute"
 typedef struct VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV {
     VkStructureType    sType;
@@ -16459,7 +16459,7 @@ typedef struct VkBindPipelineIndirectCommandNV {
 } VkBindPipelineIndirectCommandNV;
 
 typedef void (VKAPI_PTR *PFN_vkGetPipelineIndirectMemoryRequirementsNV)(VkDevice device, const VkComputePipelineCreateInfo* pCreateInfo, VkMemoryRequirements2* pMemoryRequirements);
-typedef void (VKAPI_PTR *PFN_vkCmdUpdatePipelineIndirectBuffer)(VkCommandBuffer commandBuffer, VkPipelineBindPoint           pipelineBindPoint, VkPipeline                    pipeline);
+typedef void (VKAPI_PTR *PFN_vkCmdUpdatePipelineIndirectBufferNV)(VkCommandBuffer commandBuffer, VkPipelineBindPoint           pipelineBindPoint, VkPipeline                    pipeline);
 typedef VkDeviceAddress (VKAPI_PTR *PFN_vkGetPipelineIndirectDeviceAddressNV)(VkDevice device, const VkPipelineIndirectDeviceAddressInfoNV* pInfo);
 
 #ifndef VK_NO_PROTOTYPES
@@ -16468,7 +16468,7 @@ VKAPI_ATTR void VKAPI_CALL vkGetPipelineIndirectMemoryRequirementsNV(
     const VkComputePipelineCreateInfo*          pCreateInfo,
     VkMemoryRequirements2*                      pMemoryRequirements);
 
-VKAPI_ATTR void VKAPI_CALL vkCmdUpdatePipelineIndirectBuffer(
+VKAPI_ATTR void VKAPI_CALL vkCmdUpdatePipelineIndirectBufferNV(
     VkCommandBuffer                             commandBuffer,
     VkPipelineBindPoint                         pipelineBindPoint,
     VkPipeline                                  pipeline);

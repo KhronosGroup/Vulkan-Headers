@@ -114,7 +114,7 @@ extern "C" __declspec( dllimport ) FARPROC __stdcall GetProcAddress( HINSTANCE h
 #  include <span>
 #endif
 
-static_assert( VK_HEADER_VERSION == 258, "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION == 259, "Wrong VK_HEADER_VERSION!" );
 
 // 32-bit vulkan is not typesafe for non-dispatchable handles, so don't allow copy constructors on this platform by default.
 // To enable this feature on 32-bit platforms please define VULKAN_HPP_TYPESAFE_CONVERSION
@@ -5726,9 +5726,9 @@ namespace VULKAN_HPP_NAMESPACE
     }
 
     void
-      vkCmdUpdatePipelineIndirectBuffer( VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipeline pipeline ) const VULKAN_HPP_NOEXCEPT
+      vkCmdUpdatePipelineIndirectBufferNV( VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipeline pipeline ) const VULKAN_HPP_NOEXCEPT
     {
-      return ::vkCmdUpdatePipelineIndirectBuffer( commandBuffer, pipelineBindPoint, pipeline );
+      return ::vkCmdUpdatePipelineIndirectBufferNV( commandBuffer, pipelineBindPoint, pipeline );
     }
 
     VkDeviceAddress vkGetPipelineIndirectDeviceAddressNV( VkDevice device, const VkPipelineIndirectDeviceAddressInfoNV * pInfo ) const VULKAN_HPP_NOEXCEPT
@@ -14403,7 +14403,7 @@ namespace VULKAN_HPP_NAMESPACE
 
     //=== VK_NV_device_generated_commands_compute ===
     PFN_vkGetPipelineIndirectMemoryRequirementsNV vkGetPipelineIndirectMemoryRequirementsNV = 0;
-    PFN_vkCmdUpdatePipelineIndirectBuffer         vkCmdUpdatePipelineIndirectBuffer         = 0;
+    PFN_vkCmdUpdatePipelineIndirectBufferNV       vkCmdUpdatePipelineIndirectBufferNV       = 0;
     PFN_vkGetPipelineIndirectDeviceAddressNV      vkGetPipelineIndirectDeviceAddressNV      = 0;
 
     //=== VK_EXT_extended_dynamic_state3 ===
@@ -15714,7 +15714,7 @@ namespace VULKAN_HPP_NAMESPACE
       //=== VK_NV_device_generated_commands_compute ===
       vkGetPipelineIndirectMemoryRequirementsNV =
         PFN_vkGetPipelineIndirectMemoryRequirementsNV( vkGetInstanceProcAddr( instance, "vkGetPipelineIndirectMemoryRequirementsNV" ) );
-      vkCmdUpdatePipelineIndirectBuffer = PFN_vkCmdUpdatePipelineIndirectBuffer( vkGetInstanceProcAddr( instance, "vkCmdUpdatePipelineIndirectBuffer" ) );
+      vkCmdUpdatePipelineIndirectBufferNV = PFN_vkCmdUpdatePipelineIndirectBufferNV( vkGetInstanceProcAddr( instance, "vkCmdUpdatePipelineIndirectBufferNV" ) );
       vkGetPipelineIndirectDeviceAddressNV =
         PFN_vkGetPipelineIndirectDeviceAddressNV( vkGetInstanceProcAddr( instance, "vkGetPipelineIndirectDeviceAddressNV" ) );
 
@@ -16703,7 +16703,7 @@ namespace VULKAN_HPP_NAMESPACE
       //=== VK_NV_device_generated_commands_compute ===
       vkGetPipelineIndirectMemoryRequirementsNV =
         PFN_vkGetPipelineIndirectMemoryRequirementsNV( vkGetDeviceProcAddr( device, "vkGetPipelineIndirectMemoryRequirementsNV" ) );
-      vkCmdUpdatePipelineIndirectBuffer    = PFN_vkCmdUpdatePipelineIndirectBuffer( vkGetDeviceProcAddr( device, "vkCmdUpdatePipelineIndirectBuffer" ) );
+      vkCmdUpdatePipelineIndirectBufferNV  = PFN_vkCmdUpdatePipelineIndirectBufferNV( vkGetDeviceProcAddr( device, "vkCmdUpdatePipelineIndirectBufferNV" ) );
       vkGetPipelineIndirectDeviceAddressNV = PFN_vkGetPipelineIndirectDeviceAddressNV( vkGetDeviceProcAddr( device, "vkGetPipelineIndirectDeviceAddressNV" ) );
 
       //=== VK_EXT_extended_dynamic_state3 ===
