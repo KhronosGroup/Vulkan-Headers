@@ -1576,7 +1576,7 @@ namespace VULKAN_HPP_NAMESPACE
         //=== VK_NV_device_generated_commands_compute ===
         vkGetPipelineIndirectMemoryRequirementsNV =
           PFN_vkGetPipelineIndirectMemoryRequirementsNV( vkGetDeviceProcAddr( device, "vkGetPipelineIndirectMemoryRequirementsNV" ) );
-        vkCmdUpdatePipelineIndirectBuffer = PFN_vkCmdUpdatePipelineIndirectBuffer( vkGetDeviceProcAddr( device, "vkCmdUpdatePipelineIndirectBuffer" ) );
+        vkCmdUpdatePipelineIndirectBufferNV = PFN_vkCmdUpdatePipelineIndirectBufferNV( vkGetDeviceProcAddr( device, "vkCmdUpdatePipelineIndirectBufferNV" ) );
         vkGetPipelineIndirectDeviceAddressNV =
           PFN_vkGetPipelineIndirectDeviceAddressNV( vkGetDeviceProcAddr( device, "vkGetPipelineIndirectDeviceAddressNV" ) );
 
@@ -2403,7 +2403,7 @@ namespace VULKAN_HPP_NAMESPACE
 
       //=== VK_NV_device_generated_commands_compute ===
       PFN_vkGetPipelineIndirectMemoryRequirementsNV vkGetPipelineIndirectMemoryRequirementsNV = 0;
-      PFN_vkCmdUpdatePipelineIndirectBuffer         vkCmdUpdatePipelineIndirectBuffer         = 0;
+      PFN_vkCmdUpdatePipelineIndirectBufferNV       vkCmdUpdatePipelineIndirectBufferNV       = 0;
       PFN_vkGetPipelineIndirectDeviceAddressNV      vkGetPipelineIndirectDeviceAddressNV      = 0;
 
       //=== VK_EXT_extended_dynamic_state3 ===
@@ -5927,8 +5927,8 @@ namespace VULKAN_HPP_NAMESPACE
 
       //=== VK_NV_device_generated_commands_compute ===
 
-      void updatePipelineIndirectBuffer( VULKAN_HPP_NAMESPACE::PipelineBindPoint pipelineBindPoint,
-                                         VULKAN_HPP_NAMESPACE::Pipeline          pipeline ) const VULKAN_HPP_NOEXCEPT;
+      void updatePipelineIndirectBufferNV( VULKAN_HPP_NAMESPACE::PipelineBindPoint pipelineBindPoint,
+                                           VULKAN_HPP_NAMESPACE::Pipeline          pipeline ) const VULKAN_HPP_NOEXCEPT;
 
       //=== VK_EXT_extended_dynamic_state3 ===
 
@@ -19766,13 +19766,13 @@ namespace VULKAN_HPP_NAMESPACE
       return structureChain;
     }
 
-    VULKAN_HPP_INLINE void CommandBuffer::updatePipelineIndirectBuffer( VULKAN_HPP_NAMESPACE::PipelineBindPoint pipelineBindPoint,
-                                                                        VULKAN_HPP_NAMESPACE::Pipeline          pipeline ) const VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_INLINE void CommandBuffer::updatePipelineIndirectBufferNV( VULKAN_HPP_NAMESPACE::PipelineBindPoint pipelineBindPoint,
+                                                                          VULKAN_HPP_NAMESPACE::Pipeline          pipeline ) const VULKAN_HPP_NOEXCEPT
     {
-      VULKAN_HPP_ASSERT( getDispatcher()->vkCmdUpdatePipelineIndirectBuffer &&
-                         "Function <vkCmdUpdatePipelineIndirectBuffer> requires <VK_NV_device_generated_commands_compute>" );
+      VULKAN_HPP_ASSERT( getDispatcher()->vkCmdUpdatePipelineIndirectBufferNV &&
+                         "Function <vkCmdUpdatePipelineIndirectBufferNV> requires <VK_NV_device_generated_commands_compute>" );
 
-      getDispatcher()->vkCmdUpdatePipelineIndirectBuffer(
+      getDispatcher()->vkCmdUpdatePipelineIndirectBufferNV(
         static_cast<VkCommandBuffer>( m_commandBuffer ), static_cast<VkPipelineBindPoint>( pipelineBindPoint ), static_cast<VkPipeline>( pipeline ) );
     }
 

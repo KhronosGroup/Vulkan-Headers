@@ -5966,9 +5966,9 @@ namespace VULKAN_HPP_NAMESPACE
     //=== VK_NV_device_generated_commands_compute ===
 
     template <typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    void updatePipelineIndirectBuffer( VULKAN_HPP_NAMESPACE::PipelineBindPoint pipelineBindPoint,
-                                       VULKAN_HPP_NAMESPACE::Pipeline          pipeline,
-                                       Dispatch const & d                      VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const VULKAN_HPP_NOEXCEPT;
+    void updatePipelineIndirectBufferNV( VULKAN_HPP_NAMESPACE::PipelineBindPoint pipelineBindPoint,
+                                         VULKAN_HPP_NAMESPACE::Pipeline          pipeline,
+                                         Dispatch const & d                      VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const VULKAN_HPP_NOEXCEPT;
 
     //=== VK_EXT_extended_dynamic_state3 ===
 
