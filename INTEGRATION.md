@@ -1,3 +1,9 @@
+<!--
+Copyright 2018-2023 The Khronos Group Inc.
+
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # Integrating Updated Vulkan Headers into Vulkan Repositories
 
 - This guide assumes the [Vulkan-Headers](https://github.com/KhronosGroup/Vulkan-Headers), [Vulkan-Loader](https://github.com/KhronosGroup/Vulkan-Loader), [Vulkan-Tools](https://github.com/KhronosGroup/Vulkan-Tools), [Vulkan-ValidationLayers](https://github.com/KhronosGroup/Vulkan-ValidationLayers), [LunarG/VulkanSamples](https://github.com/LunarG/VulkanSamples), and [LunarG/VulkanTools](https://github.com/LunarG/VulkanTools) repositories have been cloned to a known directory on the system. If necessary, see the `BUILD.md` file in each repository for information on how to clone and build the projects.

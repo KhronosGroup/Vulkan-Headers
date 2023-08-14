@@ -1,3 +1,9 @@
+<!--
+Copyright 2018-2023 The Khronos Group Inc.
+
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # Build Instructions
 
 Instructions for building this repository.
