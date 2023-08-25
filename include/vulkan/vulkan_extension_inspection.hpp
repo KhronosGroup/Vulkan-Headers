@@ -395,6 +395,10 @@ namespace VULKAN_HPP_NAMESPACE
 "VK_EXT_dynamic_rendering_unused_attachments", 
 "VK_KHR_cooperative_matrix", 
 "VK_QCOM_multiview_per_view_render_areas", 
+"VK_QCOM_image_processing2", 
+"VK_QCOM_filter_cubic_weights", 
+"VK_QCOM_ycbcr_degamma", 
+"VK_QCOM_filter_cubic_clamp", 
 "VK_EXT_attachment_feedback_loop_dynamic_state",
 #if defined( VK_USE_PLATFORM_SCREEN_QNX )
 "VK_QNX_external_memory_screen_buffer"
@@ -793,6 +797,9 @@ namespace VULKAN_HPP_NAMESPACE
 { "VK_EXT_pipeline_library_group_handles", { { "VK_VERSION_1_0", {  { "VK_KHR_ray_tracing_pipeline", "VK_KHR_pipeline_library",  } } } } }, 
 { "VK_EXT_dynamic_rendering_unused_attachments", { { "VK_VERSION_1_0", {  { "VK_KHR_get_physical_device_properties2", "VK_KHR_dynamic_rendering",  } } }, { "VK_VERSION_1_1", {  { "VK_KHR_dynamic_rendering",  } } }, { "VK_VERSION_1_3", {  {  } } } } }, 
 { "VK_KHR_cooperative_matrix", { { "VK_VERSION_1_0", {  { "VK_KHR_get_physical_device_properties2",  } } } } }, 
+{ "VK_QCOM_image_processing2", { { "VK_VERSION_1_0", {  { "VK_QCOM_image_processing",  } } } } }, 
+{ "VK_QCOM_filter_cubic_weights", { { "VK_VERSION_1_0", {  { "VK_EXT_filter_cubic",  } } } } }, 
+{ "VK_QCOM_filter_cubic_clamp", { { "VK_VERSION_1_0", {  { "VK_EXT_filter_cubic", "VK_EXT_sampler_filter_minmax",  } } }, { "VK_VERSION_1_2", {  { "VK_EXT_filter_cubic",  } } } } }, 
 { "VK_EXT_attachment_feedback_loop_dynamic_state", { { "VK_VERSION_1_0", {  { "VK_KHR_get_physical_device_properties2", "VK_EXT_attachment_feedback_loop_layout",  } } } } },
 #if defined( VK_USE_PLATFORM_SCREEN_QNX )
 { "VK_QNX_external_memory_screen_buffer", { { "VK_VERSION_1_0", {  { "VK_KHR_sampler_ycbcr_conversion", "VK_KHR_external_memory", "VK_KHR_dedicated_allocation",  } } }, { "VK_VERSION_1_1", {  { "VK_EXT_queue_family_foreign",  } } } } }
@@ -1511,7 +1518,9 @@ namespace VULKAN_HPP_NAMESPACE
            ( extension == "VK_NV_ray_tracing_invocation_reorder" ) || ( extension == "VK_EXT_mutable_descriptor_type" ) ||
            ( extension == "VK_ARM_shader_core_builtins" ) || ( extension == "VK_EXT_pipeline_library_group_handles" ) ||
            ( extension == "VK_EXT_dynamic_rendering_unused_attachments" ) || ( extension == "VK_KHR_cooperative_matrix" ) ||
-           ( extension == "VK_QCOM_multiview_per_view_render_areas" ) || ( extension == "VK_EXT_attachment_feedback_loop_dynamic_state" )
+           ( extension == "VK_QCOM_multiview_per_view_render_areas" ) || ( extension == "VK_QCOM_image_processing2" ) ||
+           ( extension == "VK_QCOM_filter_cubic_weights" ) || ( extension == "VK_QCOM_ycbcr_degamma" ) || ( extension == "VK_QCOM_filter_cubic_clamp" ) ||
+           ( extension == "VK_EXT_attachment_feedback_loop_dynamic_state" )
 #if defined( VK_USE_PLATFORM_SCREEN_QNX )
            || ( extension == "VK_QNX_external_memory_screen_buffer" )
 #endif /*VK_USE_PLATFORM_SCREEN_QNX*/

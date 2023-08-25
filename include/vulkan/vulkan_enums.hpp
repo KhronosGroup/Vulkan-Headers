@@ -1128,6 +1128,15 @@ namespace VULKAN_HPP_NAMESPACE
     ePhysicalDeviceCooperativeMatrixPropertiesKHR                = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_PROPERTIES_KHR,
     ePhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM       = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_RENDER_AREAS_FEATURES_QCOM,
     eMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM          = VK_STRUCTURE_TYPE_MULTIVIEW_PER_VIEW_RENDER_AREAS_RENDER_PASS_BEGIN_INFO_QCOM,
+    ePhysicalDeviceImageProcessing2FeaturesQCOM                  = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_PROCESSING_2_FEATURES_QCOM,
+    ePhysicalDeviceImageProcessing2PropertiesQCOM                = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_PROCESSING_2_PROPERTIES_QCOM,
+    eSamplerBlockMatchWindowCreateInfoQCOM                       = VK_STRUCTURE_TYPE_SAMPLER_BLOCK_MATCH_WINDOW_CREATE_INFO_QCOM,
+    eSamplerCubicWeightsCreateInfoQCOM                           = VK_STRUCTURE_TYPE_SAMPLER_CUBIC_WEIGHTS_CREATE_INFO_QCOM,
+    ePhysicalDeviceCubicWeightsFeaturesQCOM                      = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUBIC_WEIGHTS_FEATURES_QCOM,
+    eBlitImageCubicWeightsInfoQCOM                               = VK_STRUCTURE_TYPE_BLIT_IMAGE_CUBIC_WEIGHTS_INFO_QCOM,
+    ePhysicalDeviceYcbcrDegammaFeaturesQCOM                      = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_DEGAMMA_FEATURES_QCOM,
+    eSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM            = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_YCBCR_DEGAMMA_CREATE_INFO_QCOM,
+    ePhysicalDeviceCubicClampFeaturesQCOM                        = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUBIC_CLAMP_FEATURES_QCOM,
     ePhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ATTACHMENT_FEEDBACK_LOOP_DYNAMIC_STATE_FEATURES_EXT,
 #if defined( VK_USE_PLATFORM_SCREEN_QNX )
     eScreenBufferPropertiesQNX                           = VK_STRUCTURE_TYPE_SCREEN_BUFFER_PROPERTIES_QNX,
@@ -3661,9 +3670,10 @@ namespace VULKAN_HPP_NAMESPACE
 
   enum class SamplerReductionMode
   {
-    eWeightedAverage = VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE,
-    eMin             = VK_SAMPLER_REDUCTION_MODE_MIN,
-    eMax             = VK_SAMPLER_REDUCTION_MODE_MAX
+    eWeightedAverage               = VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE,
+    eMin                           = VK_SAMPLER_REDUCTION_MODE_MIN,
+    eMax                           = VK_SAMPLER_REDUCTION_MODE_MAX,
+    eWeightedAverageRangeclampQCOM = VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE_RANGECLAMP_QCOM
   };
   using SamplerReductionModeEXT = SamplerReductionMode;
 
@@ -6820,6 +6830,24 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using ComponentTypeNV = ComponentTypeKHR;
 
+  //=== VK_QCOM_image_processing2 ===
+
+  enum class BlockMatchWindowCompareModeQCOM
+  {
+    eMin = VK_BLOCK_MATCH_WINDOW_COMPARE_MODE_MIN_QCOM,
+    eMax = VK_BLOCK_MATCH_WINDOW_COMPARE_MODE_MAX_QCOM
+  };
+
+  //=== VK_QCOM_filter_cubic_weights ===
+
+  enum class CubicFilterWeightsQCOM
+  {
+    eCatmullRom          = VK_CUBIC_FILTER_WEIGHTS_CATMULL_ROM_QCOM,
+    eZeroTangentCardinal = VK_CUBIC_FILTER_WEIGHTS_ZERO_TANGENT_CARDINAL_QCOM,
+    eBSpline             = VK_CUBIC_FILTER_WEIGHTS_B_SPLINE_QCOM,
+    eMitchellNetravali   = VK_CUBIC_FILTER_WEIGHTS_MITCHELL_NETRAVALI_QCOM
+  };
+
   //=========================
   //=== Index Type Traits ===
   //=========================
@@ -6864,6 +6892,125 @@ namespace VULKAN_HPP_NAMESPACE
   {
     using Type = uint8_t;
   };
+
+  //===========================================================
+  //=== Mapping from ObjectType to DebugReportObjectTypeEXT ===
+  //===========================================================
+
+  VULKAN_HPP_INLINE VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT debugReportObjectType( VULKAN_HPP_NAMESPACE::ObjectType objectType )
+  {
+    switch ( objectType )
+    {
+        //=== VK_VERSION_1_0 ===
+      case VULKAN_HPP_NAMESPACE::ObjectType::eInstance: return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eInstance;
+      case VULKAN_HPP_NAMESPACE::ObjectType::ePhysicalDevice: return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::ePhysicalDevice;
+      case VULKAN_HPP_NAMESPACE::ObjectType::eDevice: return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eDevice;
+      case VULKAN_HPP_NAMESPACE::ObjectType::eQueue: return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eQueue;
+      case VULKAN_HPP_NAMESPACE::ObjectType::eDeviceMemory: return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eDeviceMemory;
+      case VULKAN_HPP_NAMESPACE::ObjectType::eFence: return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eFence;
+      case VULKAN_HPP_NAMESPACE::ObjectType::eSemaphore: return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eSemaphore;
+      case VULKAN_HPP_NAMESPACE::ObjectType::eEvent: return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eEvent;
+      case VULKAN_HPP_NAMESPACE::ObjectType::eQueryPool: return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eQueryPool;
+      case VULKAN_HPP_NAMESPACE::ObjectType::eBuffer: return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eBuffer;
+      case VULKAN_HPP_NAMESPACE::ObjectType::eBufferView: return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eBufferView;
+      case VULKAN_HPP_NAMESPACE::ObjectType::eImage: return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eImage;
+      case VULKAN_HPP_NAMESPACE::ObjectType::eImageView: return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eImageView;
+      case VULKAN_HPP_NAMESPACE::ObjectType::eShaderModule: return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eShaderModule;
+      case VULKAN_HPP_NAMESPACE::ObjectType::ePipelineCache: return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::ePipelineCache;
+      case VULKAN_HPP_NAMESPACE::ObjectType::ePipeline: return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::ePipeline;
+      case VULKAN_HPP_NAMESPACE::ObjectType::ePipelineLayout: return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::ePipelineLayout;
+      case VULKAN_HPP_NAMESPACE::ObjectType::eSampler: return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eSampler;
+      case VULKAN_HPP_NAMESPACE::ObjectType::eDescriptorPool: return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eDescriptorPool;
+      case VULKAN_HPP_NAMESPACE::ObjectType::eDescriptorSet: return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eDescriptorSet;
+      case VULKAN_HPP_NAMESPACE::ObjectType::eDescriptorSetLayout: return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eDescriptorSetLayout;
+      case VULKAN_HPP_NAMESPACE::ObjectType::eFramebuffer: return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eFramebuffer;
+      case VULKAN_HPP_NAMESPACE::ObjectType::eRenderPass: return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eRenderPass;
+      case VULKAN_HPP_NAMESPACE::ObjectType::eCommandPool: return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eCommandPool;
+      case VULKAN_HPP_NAMESPACE::ObjectType::eCommandBuffer:
+        return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eCommandBuffer;
+
+        //=== VK_VERSION_1_1 ===
+      case VULKAN_HPP_NAMESPACE::ObjectType::eSamplerYcbcrConversion: return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eSamplerYcbcrConversion;
+      case VULKAN_HPP_NAMESPACE::ObjectType::eDescriptorUpdateTemplate:
+        return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eDescriptorUpdateTemplate;
+
+        //=== VK_VERSION_1_3 ===
+      case VULKAN_HPP_NAMESPACE::ObjectType::ePrivateDataSlot:
+        return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eUnknown;
+
+        //=== VK_KHR_surface ===
+      case VULKAN_HPP_NAMESPACE::ObjectType::eSurfaceKHR:
+        return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eSurfaceKHR;
+
+        //=== VK_KHR_swapchain ===
+      case VULKAN_HPP_NAMESPACE::ObjectType::eSwapchainKHR:
+        return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eSwapchainKHR;
+
+        //=== VK_KHR_display ===
+      case VULKAN_HPP_NAMESPACE::ObjectType::eDisplayKHR: return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eDisplayKHR;
+      case VULKAN_HPP_NAMESPACE::ObjectType::eDisplayModeKHR:
+        return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eDisplayModeKHR;
+
+        //=== VK_EXT_debug_report ===
+      case VULKAN_HPP_NAMESPACE::ObjectType::eDebugReportCallbackEXT:
+        return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eDebugReportCallbackEXT;
+
+        //=== VK_KHR_video_queue ===
+      case VULKAN_HPP_NAMESPACE::ObjectType::eVideoSessionKHR: return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eUnknown;
+      case VULKAN_HPP_NAMESPACE::ObjectType::eVideoSessionParametersKHR:
+        return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eUnknown;
+
+        //=== VK_NVX_binary_import ===
+      case VULKAN_HPP_NAMESPACE::ObjectType::eCuModuleNVX: return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eCuModuleNVX;
+      case VULKAN_HPP_NAMESPACE::ObjectType::eCuFunctionNVX:
+        return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eCuFunctionNVX;
+
+        //=== VK_EXT_debug_utils ===
+      case VULKAN_HPP_NAMESPACE::ObjectType::eDebugUtilsMessengerEXT:
+        return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eUnknown;
+
+        //=== VK_KHR_acceleration_structure ===
+      case VULKAN_HPP_NAMESPACE::ObjectType::eAccelerationStructureKHR:
+        return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eAccelerationStructureKHR;
+
+        //=== VK_EXT_validation_cache ===
+      case VULKAN_HPP_NAMESPACE::ObjectType::eValidationCacheEXT:
+        return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eValidationCacheEXT;
+
+        //=== VK_NV_ray_tracing ===
+      case VULKAN_HPP_NAMESPACE::ObjectType::eAccelerationStructureNV:
+        return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eAccelerationStructureNV;
+
+        //=== VK_INTEL_performance_query ===
+      case VULKAN_HPP_NAMESPACE::ObjectType::ePerformanceConfigurationINTEL:
+        return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eUnknown;
+
+        //=== VK_KHR_deferred_host_operations ===
+      case VULKAN_HPP_NAMESPACE::ObjectType::eDeferredOperationKHR:
+        return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eUnknown;
+
+        //=== VK_NV_device_generated_commands ===
+      case VULKAN_HPP_NAMESPACE::ObjectType::eIndirectCommandsLayoutNV: return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eUnknown;
+
+#if defined( VK_USE_PLATFORM_FUCHSIA )
+        //=== VK_FUCHSIA_buffer_collection ===
+      case VULKAN_HPP_NAMESPACE::ObjectType::eBufferCollectionFUCHSIA: return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eBufferCollectionFUCHSIA;
+#endif /*VK_USE_PLATFORM_FUCHSIA*/
+
+        //=== VK_EXT_opacity_micromap ===
+      case VULKAN_HPP_NAMESPACE::ObjectType::eMicromapEXT:
+        return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eUnknown;
+
+        //=== VK_NV_optical_flow ===
+      case VULKAN_HPP_NAMESPACE::ObjectType::eOpticalFlowSessionNV:
+        return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eUnknown;
+
+        //=== VK_EXT_shader_object ===
+      case VULKAN_HPP_NAMESPACE::ObjectType::eShaderEXT: return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eUnknown;
+
+      default: VULKAN_HPP_ASSERT( false && "unknown ObjectType" ); return VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT::eUnknown;
+    }
+  }
 
 }  // namespace VULKAN_HPP_NAMESPACE
 #endif
