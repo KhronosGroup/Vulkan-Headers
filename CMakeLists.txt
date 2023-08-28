@@ -7,6 +7,10 @@
 # ~~~
 cmake_minimum_required(VERSION 3.15...3.25)
 
+# NOTE: Parsing the version like this is suboptimal but neccessary due to our release process:
+# https://github.com/KhronosGroup/Vulkan-Headers/pull/346
+#
+# As shown a more robust approach would be just to add basic test code to check the project version.
 function(vlk_get_header_version)
     set(vulkan_core_header_file "${CMAKE_CURRENT_SOURCE_DIR}/include/vulkan/vulkan_core.h")
     if (NOT EXISTS ${vulkan_core_header_file})
