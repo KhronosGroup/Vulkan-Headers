@@ -1699,6 +1699,9 @@ namespace VULKAN_HPP_NAMESPACE
   struct PhysicalDeviceExternalMemoryScreenBufferFeaturesQNX;
 #endif /*VK_USE_PLATFORM_SCREEN_QNX*/
 
+  //=== VK_NV_descriptor_pool_overallocation ===
+  struct PhysicalDeviceDescriptorPoolOverallocationFeaturesNV;
+
   //===================================
   //=== HANDLE forward declarations ===
   //===================================
