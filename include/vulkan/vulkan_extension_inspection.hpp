@@ -401,9 +401,9 @@ namespace VULKAN_HPP_NAMESPACE
 "VK_QCOM_filter_cubic_clamp", 
 "VK_EXT_attachment_feedback_loop_dynamic_state",
 #if defined( VK_USE_PLATFORM_SCREEN_QNX )
-"VK_QNX_external_memory_screen_buffer"
+"VK_QNX_external_memory_screen_buffer",
 #endif /*VK_USE_PLATFORM_SCREEN_QNX*/
- };
+"VK_NV_descriptor_pool_overallocation" };
     return deviceExtensions;
   }
 
@@ -802,9 +802,9 @@ namespace VULKAN_HPP_NAMESPACE
 { "VK_QCOM_filter_cubic_clamp", { { "VK_VERSION_1_0", {  { "VK_EXT_filter_cubic", "VK_EXT_sampler_filter_minmax",  } } }, { "VK_VERSION_1_2", {  { "VK_EXT_filter_cubic",  } } } } }, 
 { "VK_EXT_attachment_feedback_loop_dynamic_state", { { "VK_VERSION_1_0", {  { "VK_KHR_get_physical_device_properties2", "VK_EXT_attachment_feedback_loop_layout",  } } } } },
 #if defined( VK_USE_PLATFORM_SCREEN_QNX )
-{ "VK_QNX_external_memory_screen_buffer", { { "VK_VERSION_1_0", {  { "VK_KHR_sampler_ycbcr_conversion", "VK_KHR_external_memory", "VK_KHR_dedicated_allocation",  } } }, { "VK_VERSION_1_1", {  { "VK_EXT_queue_family_foreign",  } } } } }
+{ "VK_QNX_external_memory_screen_buffer", { { "VK_VERSION_1_0", {  { "VK_KHR_sampler_ycbcr_conversion", "VK_KHR_external_memory", "VK_KHR_dedicated_allocation",  } } }, { "VK_VERSION_1_1", {  { "VK_EXT_queue_family_foreign",  } } } } },
 #endif /*VK_USE_PLATFORM_SCREEN_QNX*/
- };
+{ "VK_NV_descriptor_pool_overallocation", { { "VK_VERSION_1_1", {  {  } } } } } };
     auto depIt = dependencies.find( extension );
     return ( depIt != dependencies.end() ) ? depIt->second : noDependencies;
   }
@@ -1524,7 +1524,7 @@ namespace VULKAN_HPP_NAMESPACE
 #if defined( VK_USE_PLATFORM_SCREEN_QNX )
            || ( extension == "VK_QNX_external_memory_screen_buffer" )
 #endif /*VK_USE_PLATFORM_SCREEN_QNX*/
-      ;
+           || ( extension == "VK_NV_descriptor_pool_overallocation" );
   }
 
   VULKAN_HPP_INLINE VULKAN_HPP_CONSTEXPR_20 bool isInstanceExtension( std::string const & extension )
