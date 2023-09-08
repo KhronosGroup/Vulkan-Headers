@@ -3189,6 +3189,20 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VK_USE_PLATFORM_FUCHSIA*/
 
+  //=== VK_EXT_frame_boundary ===
+
+  VULKAN_HPP_INLINE std::string to_string( FrameBoundaryFlagsEXT value )
+  {
+    if ( !value )
+      return "{}";
+
+    std::string result;
+    if ( value & FrameBoundaryFlagBitsEXT::eFrameEnd )
+      result += "FrameEnd | ";
+
+    return "{ " + result.substr( 0, result.size() - 3 ) + " }";
+  }
+
 #if defined( VK_USE_PLATFORM_SCREEN_QNX )
   //=== VK_QNX_screen_surface ===
 
@@ -4318,6 +4332,8 @@ namespace VULKAN_HPP_NAMESPACE
       case StructureType::ePhysicalDeviceExternalMemoryRdmaFeaturesNV: return "PhysicalDeviceExternalMemoryRdmaFeaturesNV";
       case StructureType::ePipelinePropertiesIdentifierEXT: return "PipelinePropertiesIdentifierEXT";
       case StructureType::ePhysicalDevicePipelinePropertiesFeaturesEXT: return "PhysicalDevicePipelinePropertiesFeaturesEXT";
+      case StructureType::ePhysicalDeviceFrameBoundaryFeaturesEXT: return "PhysicalDeviceFrameBoundaryFeaturesEXT";
+      case StructureType::eFrameBoundaryEXT: return "FrameBoundaryEXT";
       case StructureType::ePhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT: return "PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT";
       case StructureType::eSubpassResolvePerformanceQueryEXT: return "SubpassResolvePerformanceQueryEXT";
       case StructureType::eMultisampledRenderToSingleSampledInfoEXT: return "MultisampledRenderToSingleSampledInfoEXT";
@@ -4449,6 +4465,7 @@ namespace VULKAN_HPP_NAMESPACE
       case StructureType::eExternalFormatQNX: return "ExternalFormatQNX";
       case StructureType::ePhysicalDeviceExternalMemoryScreenBufferFeaturesQNX: return "PhysicalDeviceExternalMemoryScreenBufferFeaturesQNX";
 #endif /*VK_USE_PLATFORM_SCREEN_QNX*/
+      case StructureType::ePhysicalDeviceLayeredDriverPropertiesMSFT: return "PhysicalDeviceLayeredDriverPropertiesMSFT";
       case StructureType::ePhysicalDeviceDescriptorPoolOverallocationFeaturesNV: return "PhysicalDeviceDescriptorPoolOverallocationFeaturesNV";
       default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
     }
@@ -8462,6 +8479,17 @@ namespace VULKAN_HPP_NAMESPACE
   }
 #endif /*VK_USE_PLATFORM_FUCHSIA*/
 
+  //=== VK_EXT_frame_boundary ===
+
+  VULKAN_HPP_INLINE std::string to_string( FrameBoundaryFlagBitsEXT value )
+  {
+    switch ( value )
+    {
+      case FrameBoundaryFlagBitsEXT::eFrameEnd: return "FrameEnd";
+      default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
+    }
+  }
+
 #if defined( VK_USE_PLATFORM_SCREEN_QNX )
   //=== VK_QNX_screen_surface ===
 
@@ -8889,6 +8917,18 @@ namespace VULKAN_HPP_NAMESPACE
       case CubicFilterWeightsQCOM::eZeroTangentCardinal: return "ZeroTangentCardinal";
       case CubicFilterWeightsQCOM::eBSpline: return "BSpline";
       case CubicFilterWeightsQCOM::eMitchellNetravali: return "MitchellNetravali";
+      default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
+    }
+  }
+
+  //=== VK_MSFT_layered_driver ===
+
+  VULKAN_HPP_INLINE std::string to_string( LayeredDriverUnderlyingApiMSFT value )
+  {
+    switch ( value )
+    {
+      case LayeredDriverUnderlyingApiMSFT::eNone: return "None";
+      case LayeredDriverUnderlyingApiMSFT::eD3D12: return "D3D12";
       default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
     }
   }
