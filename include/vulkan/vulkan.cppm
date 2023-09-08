@@ -5,6 +5,9 @@
 
 // This header is generated from the Khronos Vulkan XML API Registry.
 
+// Note: This module is still in an experimental state.
+// Any feedback is welcome on https://github.com/KhronosGroup/Vulkan-Hpp/issues.
+
 module;
 
 #include <vulkan/vulkan.hpp>
@@ -13,9 +16,7 @@ module;
 #include <vulkan/vulkan_hash.hpp>
 #include <vulkan/vulkan_raii.hpp>
 
-export module vulkan;
-
-VULKAN_HPP_DEFAULT_DISPATCH_LOADER_DYNAMIC_STORAGE
+export module vulkan_hpp;
 
 export namespace VULKAN_HPP_NAMESPACE
 {
@@ -25,6 +26,7 @@ export namespace VULKAN_HPP_NAMESPACE
   using VULKAN_HPP_NAMESPACE::ArrayWrapper1D;
   using VULKAN_HPP_NAMESPACE::ArrayWrapper2D;
   using VULKAN_HPP_NAMESPACE::DispatchLoaderBase;
+  using VULKAN_HPP_NAMESPACE::DispatchLoaderDynamic;
   using VULKAN_HPP_NAMESPACE::Flags;
   using VULKAN_HPP_NAMESPACE::FlagTraits;
 
@@ -748,6 +750,10 @@ export namespace VULKAN_HPP_NAMESPACE
   using VULKAN_HPP_NAMESPACE::ImageFormatConstraintsFlagsFUCHSIA;
 #endif /*VK_USE_PLATFORM_FUCHSIA*/
 
+  //=== VK_EXT_frame_boundary ===
+  using VULKAN_HPP_NAMESPACE::FrameBoundaryFlagBitsEXT;
+  using VULKAN_HPP_NAMESPACE::FrameBoundaryFlagsEXT;
+
 #if defined( VK_USE_PLATFORM_SCREEN_QNX )
   //=== VK_QNX_screen_surface ===
   using VULKAN_HPP_NAMESPACE::ScreenSurfaceCreateFlagBitsQNX;
@@ -825,6 +831,9 @@ export namespace VULKAN_HPP_NAMESPACE
 
   //=== VK_QCOM_filter_cubic_weights ===
   using VULKAN_HPP_NAMESPACE::CubicFilterWeightsQCOM;
+
+  //=== VK_MSFT_layered_driver ===
+  using VULKAN_HPP_NAMESPACE::LayeredDriverUnderlyingApiMSFT;
 
   //=========================
   //=== Index Type Traits ===
@@ -2422,6 +2431,10 @@ export namespace VULKAN_HPP_NAMESPACE
   using VULKAN_HPP_NAMESPACE::PhysicalDevicePipelinePropertiesFeaturesEXT;
   using VULKAN_HPP_NAMESPACE::PipelinePropertiesIdentifierEXT;
 
+  //=== VK_EXT_frame_boundary ===
+  using VULKAN_HPP_NAMESPACE::FrameBoundaryEXT;
+  using VULKAN_HPP_NAMESPACE::PhysicalDeviceFrameBoundaryFeaturesEXT;
+
   //=== VK_EXT_multisampled_render_to_single_sampled ===
   using VULKAN_HPP_NAMESPACE::MultisampledRenderToSingleSampledInfoEXT;
   using VULKAN_HPP_NAMESPACE::PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT;
@@ -2683,6 +2696,9 @@ export namespace VULKAN_HPP_NAMESPACE
   using VULKAN_HPP_NAMESPACE::ScreenBufferPropertiesQNX;
 #endif /*VK_USE_PLATFORM_SCREEN_QNX*/
 
+  //=== VK_MSFT_layered_driver ===
+  using VULKAN_HPP_NAMESPACE::PhysicalDeviceLayeredDriverPropertiesMSFT;
+
   //=== VK_NV_descriptor_pool_overallocation ===
   using VULKAN_HPP_NAMESPACE::PhysicalDeviceDescriptorPoolOverallocationFeaturesNV;
 
@@ -2890,8 +2906,6 @@ export namespace VULKAN_HPP_NAMESPACE
 #if defined( VULKAN_HPP_ENABLE_DYNAMIC_LOADER_TOOL )
   using VULKAN_HPP_NAMESPACE::DynamicLoader;
 #endif /*VULKAN_HPP_ENABLE_DYNAMIC_LOADER_TOOL*/
-
-  using VULKAN_HPP_NAMESPACE::DispatchLoaderDynamic;
 
   //=====================
   //=== Format Traits ===

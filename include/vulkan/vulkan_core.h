@@ -69,7 +69,7 @@ extern "C" {
 #define VK_API_VERSION_1_0 VK_MAKE_API_VERSION(0, 1, 0, 0)// Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 263
+#define VK_HEADER_VERSION 264
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 3, VK_HEADER_VERSION)
@@ -992,6 +992,8 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_RDMA_FEATURES_NV = 1000371001,
     VK_STRUCTURE_TYPE_PIPELINE_PROPERTIES_IDENTIFIER_EXT = 1000372000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_PROPERTIES_FEATURES_EXT = 1000372001,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAME_BOUNDARY_FEATURES_EXT = 1000375000,
+    VK_STRUCTURE_TYPE_FRAME_BOUNDARY_EXT = 1000375001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_FEATURES_EXT = 1000376000,
     VK_STRUCTURE_TYPE_SUBPASS_RESOLVE_PERFORMANCE_QUERY_EXT = 1000376001,
     VK_STRUCTURE_TYPE_MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_INFO_EXT = 1000376002,
@@ -1123,6 +1125,7 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_IMPORT_SCREEN_BUFFER_INFO_QNX = 1000529002,
     VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_QNX = 1000529003,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_SCREEN_BUFFER_FEATURES_QNX = 1000529004,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_DRIVER_PROPERTIES_MSFT = 1000530000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_POOL_OVERALLOCATION_FEATURES_NV = 1000546000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETER_FEATURES = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES,
@@ -15830,6 +15833,38 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetPipelinePropertiesEXT(
 #endif
 
 
+// VK_EXT_frame_boundary is a preprocessor guard. Do not pass it to API calls.
+#define VK_EXT_frame_boundary 1
+#define VK_EXT_FRAME_BOUNDARY_SPEC_VERSION 1
+#define VK_EXT_FRAME_BOUNDARY_EXTENSION_NAME "VK_EXT_frame_boundary"
+
+typedef enum VkFrameBoundaryFlagBitsEXT {
+    VK_FRAME_BOUNDARY_FRAME_END_BIT_EXT = 0x00000001,
+    VK_FRAME_BOUNDARY_FLAG_BITS_MAX_ENUM_EXT = 0x7FFFFFFF
+} VkFrameBoundaryFlagBitsEXT;
+typedef VkFlags VkFrameBoundaryFlagsEXT;
+typedef struct VkPhysicalDeviceFrameBoundaryFeaturesEXT {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           frameBoundary;
+} VkPhysicalDeviceFrameBoundaryFeaturesEXT;
+
+typedef struct VkFrameBoundaryEXT {
+    VkStructureType            sType;
+    const void*                pNext;
+    VkFrameBoundaryFlagsEXT    flags;
+    uint64_t                   frameID;
+    uint32_t                   imageCount;
+    const VkImage*             pImages;
+    uint32_t                   bufferCount;
+    const VkBuffer*            pBuffers;
+    uint64_t                   tagName;
+    size_t                     tagSize;
+    const void*                pTag;
+} VkFrameBoundaryEXT;
+
+
+
 // VK_EXT_multisampled_render_to_single_sampled is a preprocessor guard. Do not pass it to API calls.
 #define VK_EXT_multisampled_render_to_single_sampled 1
 #define VK_EXT_MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_SPEC_VERSION 1
@@ -17676,6 +17711,24 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetAttachmentFeedbackLoopEnableEXT(
     VkCommandBuffer                             commandBuffer,
     VkImageAspectFlags                          aspectMask);
 #endif
+
+
+// VK_MSFT_layered_driver is a preprocessor guard. Do not pass it to API calls.
+#define VK_MSFT_layered_driver 1
+#define VK_MSFT_LAYERED_DRIVER_SPEC_VERSION 1
+#define VK_MSFT_LAYERED_DRIVER_EXTENSION_NAME "VK_MSFT_layered_driver"
+
+typedef enum VkLayeredDriverUnderlyingApiMSFT {
+    VK_LAYERED_DRIVER_UNDERLYING_API_NONE_MSFT = 0,
+    VK_LAYERED_DRIVER_UNDERLYING_API_D3D12_MSFT = 1,
+    VK_LAYERED_DRIVER_UNDERLYING_API_MAX_ENUM_MSFT = 0x7FFFFFFF
+} VkLayeredDriverUnderlyingApiMSFT;
+typedef struct VkPhysicalDeviceLayeredDriverPropertiesMSFT {
+    VkStructureType                     sType;
+    void*                               pNext;
+    VkLayeredDriverUnderlyingApiMSFT    underlyingAPI;
+} VkPhysicalDeviceLayeredDriverPropertiesMSFT;
+
 
 
 // VK_NV_descriptor_pool_overallocation is a preprocessor guard. Do not pass it to API calls.
