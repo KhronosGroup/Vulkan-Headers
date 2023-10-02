@@ -47,10 +47,8 @@ Vulkan-Headers are shipped as part of the official [Vulkan-SDK](https://www.luna
 
 ## Version Tagging Scheme
 
-Updates to the `Vulkan-Headers` repository which correspond to a new Vulkan
-specification release are tagged using the following format:
-`v<`_`version`_`>` (e.g., `v1.3.255`).
+Updates to this repository which correspond to a new Vulkan specification release are tagged using the following format: `v<`_`version`_`>` (e.g., `v1.3.266`).
 
-**Note**: Marked version releases have undergone thorough testing but do not
-imply the same quality level as SDK tags. SDK tags follow the
-`sdk-<`_`version`_`>.<`_`patch`_`>` format (e.g., `sdk-1.3.250.0`).
+**Note**: Marked version releases have undergone thorough testing but do not imply the same quality level as SDK tags. SDK tags follow the `vulkan-sdk-<`_`version`_`>.<`_`patch`_`>` format (e.g., `vulkan-sdk-1.3.266.0`).
+
+This scheme was adopted following the `1.3.266` Vulkan specification release.
