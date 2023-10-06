@@ -69,7 +69,7 @@ extern "C" {
 #define VK_API_VERSION_1_0 VK_MAKE_API_VERSION(0, 1, 0, 0)// Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 266
+#define VK_HEADER_VERSION 267
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 3, VK_HEADER_VERSION)
@@ -1057,6 +1057,8 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_PROCESSING_FEATURES_QCOM = 1000440000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_PROCESSING_PROPERTIES_QCOM = 1000440001,
     VK_STRUCTURE_TYPE_IMAGE_VIEW_SAMPLE_WEIGHT_CREATE_INFO_QCOM = 1000440002,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_NESTED_COMMAND_BUFFER_FEATURES_EXT = 1000451000,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_NESTED_COMMAND_BUFFER_PROPERTIES_EXT = 1000451001,
     VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_ACQUIRE_UNMODIFIED_EXT = 1000453000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_3_FEATURES_EXT = 1000455000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_3_PROPERTIES_EXT = 1000455001,
@@ -1102,6 +1104,8 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_VIEWPORTS_FEATURES_QCOM = 1000488000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_INVOCATION_REORDER_FEATURES_NV = 1000490000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_INVOCATION_REORDER_PROPERTIES_NV = 1000490001,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_SPARSE_ADDRESS_SPACE_FEATURES_NV = 1000492000,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_SPARSE_ADDRESS_SPACE_PROPERTIES_NV = 1000492001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_EXT = 1000351000,
     VK_STRUCTURE_TYPE_MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_EXT = 1000351002,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_BUILTINS_FEATURES_ARM = 1000497000,
@@ -2188,6 +2192,7 @@ typedef enum VkIndexType {
 typedef enum VkSubpassContents {
     VK_SUBPASS_CONTENTS_INLINE = 0,
     VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS = 1,
+    VK_SUBPASS_CONTENTS_INLINE_AND_SECONDARY_COMMAND_BUFFERS_EXT = 1000451000,
     VK_SUBPASS_CONTENTS_MAX_ENUM = 0x7FFFFFFF
 } VkSubpassContents;
 
@@ -6741,6 +6746,7 @@ typedef enum VkRenderingFlagBits {
     VK_RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT = 0x00000001,
     VK_RENDERING_SUSPENDING_BIT = 0x00000002,
     VK_RENDERING_RESUMING_BIT = 0x00000004,
+    VK_RENDERING_CONTENTS_INLINE_BIT_EXT = 0x00000010,
     VK_RENDERING_ENABLE_LEGACY_DITHERING_BIT_EXT = 0x00000008,
     VK_RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT_KHR = VK_RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT,
     VK_RENDERING_SUSPENDING_BIT_KHR = VK_RENDERING_SUSPENDING_BIT,
@@ -16791,6 +16797,26 @@ typedef struct VkPhysicalDeviceImageProcessingPropertiesQCOM {
 
 
 
+// VK_EXT_nested_command_buffer is a preprocessor guard. Do not pass it to API calls.
+#define VK_EXT_nested_command_buffer 1
+#define VK_EXT_NESTED_COMMAND_BUFFER_SPEC_VERSION 1
+#define VK_EXT_NESTED_COMMAND_BUFFER_EXTENSION_NAME "VK_EXT_nested_command_buffer"
+typedef struct VkPhysicalDeviceNestedCommandBufferFeaturesEXT {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           nestedCommandBuffer;
+    VkBool32           nestedCommandBufferRendering;
+    VkBool32           nestedCommandBufferSimultaneousUse;
+} VkPhysicalDeviceNestedCommandBufferFeaturesEXT;
+
+typedef struct VkPhysicalDeviceNestedCommandBufferPropertiesEXT {
+    VkStructureType    sType;
+    void*              pNext;
+    uint32_t           maxCommandBufferNestingLevel;
+} VkPhysicalDeviceNestedCommandBufferPropertiesEXT;
+
+
+
 // VK_EXT_external_memory_acquire_unmodified is a preprocessor guard. Do not pass it to API calls.
 #define VK_EXT_external_memory_acquire_unmodified 1
 #define VK_EXT_EXTERNAL_MEMORY_ACQUIRE_UNMODIFIED_SPEC_VERSION 1
@@ -17545,6 +17571,26 @@ typedef struct VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV {
 
 
 
+// VK_NV_extended_sparse_address_space is a preprocessor guard. Do not pass it to API calls.
+#define VK_NV_extended_sparse_address_space 1
+#define VK_NV_EXTENDED_SPARSE_ADDRESS_SPACE_SPEC_VERSION 1
+#define VK_NV_EXTENDED_SPARSE_ADDRESS_SPACE_EXTENSION_NAME "VK_NV_extended_sparse_address_space"
+typedef struct VkPhysicalDeviceExtendedSparseAddressSpaceFeaturesNV {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           extendedSparseAddressSpace;
+} VkPhysicalDeviceExtendedSparseAddressSpaceFeaturesNV;
+
+typedef struct VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV {
+    VkStructureType       sType;
+    void*                 pNext;
+    VkDeviceSize          extendedSparseAddressSpaceSize;
+    VkImageUsageFlags     extendedSparseImageUsageFlags;
+    VkBufferUsageFlags    extendedSparseBufferUsageFlags;
+} VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV;
+
+
+
 // VK_EXT_mutable_descriptor_type is a preprocessor guard. Do not pass it to API calls.
 #define VK_EXT_mutable_descriptor_type 1
 #define VK_EXT_MUTABLE_DESCRIPTOR_TYPE_SPEC_VERSION 1
@@ -17693,27 +17739,27 @@ typedef struct VkLatencySurfaceCapabilitiesNV {
     VkPresentModeKHR*    pPresentModes;
 } VkLatencySurfaceCapabilitiesNV;
 
-typedef VkResult (VKAPI_PTR *PFN_vkSetLatencySleepModeNV)(VkDevice device, VkSwapchainKHR swapchain, VkLatencySleepModeInfoNV* pSleepModeInfo);
-typedef VkResult (VKAPI_PTR *PFN_vkLatencySleepNV)(VkDevice device, VkSwapchainKHR swapchain, VkLatencySleepInfoNV* pSleepInfo);
-typedef void (VKAPI_PTR *PFN_vkSetLatencyMarkerNV)(VkDevice device, VkSwapchainKHR swapchain, VkSetLatencyMarkerInfoNV* pLatencyMarkerInfo);
+typedef VkResult (VKAPI_PTR *PFN_vkSetLatencySleepModeNV)(VkDevice device, VkSwapchainKHR swapchain, const VkLatencySleepModeInfoNV* pSleepModeInfo);
+typedef VkResult (VKAPI_PTR *PFN_vkLatencySleepNV)(VkDevice device, VkSwapchainKHR swapchain, const VkLatencySleepInfoNV* pSleepInfo);
+typedef void (VKAPI_PTR *PFN_vkSetLatencyMarkerNV)(VkDevice device, VkSwapchainKHR swapchain, const VkSetLatencyMarkerInfoNV* pLatencyMarkerInfo);
 typedef void (VKAPI_PTR *PFN_vkGetLatencyTimingsNV)(VkDevice device, VkSwapchainKHR swapchain, uint32_t* pTimingCount, VkGetLatencyMarkerInfoNV* pLatencyMarkerInfo);
-typedef void (VKAPI_PTR *PFN_vkQueueNotifyOutOfBandNV)(VkQueue queue, VkOutOfBandQueueTypeInfoNV pQueueTypeInfo);
+typedef void (VKAPI_PTR *PFN_vkQueueNotifyOutOfBandNV)(VkQueue queue, const VkOutOfBandQueueTypeInfoNV* pQueueTypeInfo);
 
 #ifndef VK_NO_PROTOTYPES
 VKAPI_ATTR VkResult VKAPI_CALL vkSetLatencySleepModeNV(
     VkDevice                                    device,
     VkSwapchainKHR                              swapchain,
-    VkLatencySleepModeInfoNV*                   pSleepModeInfo);
+    const VkLatencySleepModeInfoNV*             pSleepModeInfo);
 
 VKAPI_ATTR VkResult VKAPI_CALL vkLatencySleepNV(
     VkDevice                                    device,
     VkSwapchainKHR                              swapchain,
-    VkLatencySleepInfoNV*                       pSleepInfo);
+    const VkLatencySleepInfoNV*                 pSleepInfo);
 
 VKAPI_ATTR void VKAPI_CALL vkSetLatencyMarkerNV(
     VkDevice                                    device,
     VkSwapchainKHR                              swapchain,
-    VkSetLatencyMarkerInfoNV*                   pLatencyMarkerInfo);
+    const VkSetLatencyMarkerInfoNV*             pLatencyMarkerInfo);
 
 VKAPI_ATTR void VKAPI_CALL vkGetLatencyTimingsNV(
     VkDevice                                    device,
@@ -17723,7 +17769,7 @@ VKAPI_ATTR void VKAPI_CALL vkGetLatencyTimingsNV(
 
 VKAPI_ATTR void VKAPI_CALL vkQueueNotifyOutOfBandNV(
     VkQueue                                     queue,
-    VkOutOfBandQueueTypeInfoNV                  pQueueTypeInfo);
+    const VkOutOfBandQueueTypeInfoNV*           pQueueTypeInfo);
 #endif
 
 
