@@ -34,7 +34,7 @@ if (MSVC)
 endif()
 
 # vk_icd.h
-add_executable(vk_icd vk_icd.c)
+add_library(vk_icd MODULE vk_icd.c)
 target_link_libraries(vk_icd PRIVATE Vulkan::Headers)
 
 # vk_layer.h

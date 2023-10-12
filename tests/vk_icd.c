@@ -8,7 +8,7 @@
 
 #include "vulkan/vk_icd.h"
 
-int main()
+int square(int i)
 {
-    return 0;
+    return i * i;
 }

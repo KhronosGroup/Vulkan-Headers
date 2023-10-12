@@ -8,7 +8,7 @@
 
 #include "vulkan/vk_layer.h"
 
-int foobar()
+int square(int i)
 {
-    return 0;
+    return i * i;
 }
