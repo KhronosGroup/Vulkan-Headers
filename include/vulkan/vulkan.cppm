@@ -45,10 +45,8 @@ export namespace VULKAN_HPP_NAMESPACE
   using VULKAN_HPP_NAMESPACE::ArrayProxy;
   using VULKAN_HPP_NAMESPACE::ArrayProxyNoTemporaries;
   using VULKAN_HPP_NAMESPACE::Optional;
-  using VULKAN_HPP_NAMESPACE::SharedHandle;
   using VULKAN_HPP_NAMESPACE::StridedArrayProxy;
   using VULKAN_HPP_NAMESPACE::StructureChain;
-  using VULKAN_HPP_NAMESPACE::UniqueHandle;
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
 #if !defined( VULKAN_HPP_NO_SMART_HANDLE )
@@ -60,6 +58,8 @@ export namespace VULKAN_HPP_NAMESPACE
   using VULKAN_HPP_NAMESPACE::ObjectReleaseShared;
   using VULKAN_HPP_NAMESPACE::PoolFree;
   using VULKAN_HPP_NAMESPACE::PoolFreeShared;
+  using VULKAN_HPP_NAMESPACE::SharedHandle;
+  using VULKAN_HPP_NAMESPACE::UniqueHandle;
 #endif /*VULKAN_HPP_NO_SMART_HANDLE*/
 
   //==================
@@ -118,6 +118,8 @@ export namespace VULKAN_HPP_NAMESPACE
   using VULKAN_HPP_NAMESPACE::DescriptorType;
   using VULKAN_HPP_NAMESPACE::DeviceCreateFlagBits;
   using VULKAN_HPP_NAMESPACE::DeviceCreateFlags;
+  using VULKAN_HPP_NAMESPACE::DeviceQueueCreateFlagBits;
+  using VULKAN_HPP_NAMESPACE::DeviceQueueCreateFlags;
   using VULKAN_HPP_NAMESPACE::DynamicState;
   using VULKAN_HPP_NAMESPACE::EventCreateFlagBits;
   using VULKAN_HPP_NAMESPACE::EventCreateFlags;
@@ -156,13 +158,21 @@ export namespace VULKAN_HPP_NAMESPACE
   using VULKAN_HPP_NAMESPACE::ObjectType;
   using VULKAN_HPP_NAMESPACE::PhysicalDeviceType;
   using VULKAN_HPP_NAMESPACE::PipelineBindPoint;
+  using VULKAN_HPP_NAMESPACE::PipelineCacheCreateFlagBits;
+  using VULKAN_HPP_NAMESPACE::PipelineCacheCreateFlags;
   using VULKAN_HPP_NAMESPACE::PipelineCacheHeaderVersion;
+  using VULKAN_HPP_NAMESPACE::PipelineColorBlendStateCreateFlagBits;
+  using VULKAN_HPP_NAMESPACE::PipelineColorBlendStateCreateFlags;
   using VULKAN_HPP_NAMESPACE::PipelineCreateFlagBits;
   using VULKAN_HPP_NAMESPACE::PipelineCreateFlags;
+  using VULKAN_HPP_NAMESPACE::PipelineDepthStencilStateCreateFlagBits;
+  using VULKAN_HPP_NAMESPACE::PipelineDepthStencilStateCreateFlags;
   using VULKAN_HPP_NAMESPACE::PipelineDynamicStateCreateFlagBits;
   using VULKAN_HPP_NAMESPACE::PipelineDynamicStateCreateFlags;
   using VULKAN_HPP_NAMESPACE::PipelineInputAssemblyStateCreateFlagBits;
   using VULKAN_HPP_NAMESPACE::PipelineInputAssemblyStateCreateFlags;
+  using VULKAN_HPP_NAMESPACE::PipelineLayoutCreateFlagBits;
+  using VULKAN_HPP_NAMESPACE::PipelineLayoutCreateFlags;
   using VULKAN_HPP_NAMESPACE::PipelineMultisampleStateCreateFlagBits;
   using VULKAN_HPP_NAMESPACE::PipelineMultisampleStateCreateFlags;
   using VULKAN_HPP_NAMESPACE::PipelineRasterizationStateCreateFlagBits;
@@ -230,8 +240,6 @@ export namespace VULKAN_HPP_NAMESPACE
   using VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplateCreateFlags;
   using VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplateType;
   using VULKAN_HPP_NAMESPACE::DescriptorUpdateTemplateTypeKHR;
-  using VULKAN_HPP_NAMESPACE::DeviceQueueCreateFlagBits;
-  using VULKAN_HPP_NAMESPACE::DeviceQueueCreateFlags;
   using VULKAN_HPP_NAMESPACE::ExternalFenceFeatureFlagBits;
   using VULKAN_HPP_NAMESPACE::ExternalFenceFeatureFlagBitsKHR;
   using VULKAN_HPP_NAMESPACE::ExternalFenceFeatureFlags;
@@ -677,10 +685,6 @@ export namespace VULKAN_HPP_NAMESPACE
   using VULKAN_HPP_NAMESPACE::DeviceMemoryReportFlagBitsEXT;
   using VULKAN_HPP_NAMESPACE::DeviceMemoryReportFlagsEXT;
 
-  //=== VK_EXT_pipeline_creation_cache_control ===
-  using VULKAN_HPP_NAMESPACE::PipelineCacheCreateFlagBits;
-  using VULKAN_HPP_NAMESPACE::PipelineCacheCreateFlags;
-
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
   //=== VK_KHR_video_encode_queue ===
   using VULKAN_HPP_NAMESPACE::VideoEncodeCapabilityFlagBitsKHR;
@@ -713,8 +717,6 @@ export namespace VULKAN_HPP_NAMESPACE
   //=== VK_EXT_graphics_pipeline_library ===
   using VULKAN_HPP_NAMESPACE::GraphicsPipelineLibraryFlagBitsEXT;
   using VULKAN_HPP_NAMESPACE::GraphicsPipelineLibraryFlagsEXT;
-  using VULKAN_HPP_NAMESPACE::PipelineLayoutCreateFlagBits;
-  using VULKAN_HPP_NAMESPACE::PipelineLayoutCreateFlags;
 
   //=== VK_NV_fragment_shading_rate_enums ===
   using VULKAN_HPP_NAMESPACE::FragmentShadingRateNV;
@@ -793,12 +795,6 @@ export namespace VULKAN_HPP_NAMESPACE
   using VULKAN_HPP_NAMESPACE::DirectDriverLoadingFlagBitsLUNARG;
   using VULKAN_HPP_NAMESPACE::DirectDriverLoadingFlagsLUNARG;
   using VULKAN_HPP_NAMESPACE::DirectDriverLoadingModeLUNARG;
-
-  //=== VK_EXT_rasterization_order_attachment_access ===
-  using VULKAN_HPP_NAMESPACE::PipelineColorBlendStateCreateFlagBits;
-  using VULKAN_HPP_NAMESPACE::PipelineColorBlendStateCreateFlags;
-  using VULKAN_HPP_NAMESPACE::PipelineDepthStencilStateCreateFlagBits;
-  using VULKAN_HPP_NAMESPACE::PipelineDepthStencilStateCreateFlags;
 
   //=== VK_NV_optical_flow ===
   using VULKAN_HPP_NAMESPACE::OpticalFlowExecuteFlagBitsNV;
