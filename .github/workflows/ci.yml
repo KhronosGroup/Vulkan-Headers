@@ -20,7 +20,7 @@ jobs:
   ubuntu-cmake-install:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: lukka/get-cmake@latest
         with:
           cmakeVersion: 3.17.0
@@ -34,7 +34,7 @@ jobs:
   ubuntu-cmake-tests:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: lukka/get-cmake@latest
         with:
           cmakeVersion: 3.25.0
@@ -49,7 +49,7 @@ jobs:
       matrix:
         arch: [ amd64, amd64_x86 ]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: lukka/get-cmake@latest
       - uses: ilammy/msvc-dev-cmd@v1
         with:
@@ -62,7 +62,7 @@ jobs:
   test-cmake-minimum:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: lukka/get-cmake@latest
         with:
           cmakeVersion: 3.15.0
@@ -74,7 +74,7 @@ jobs:
   ubuntu-cmake-add_subdirectory:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: lukka/get-cmake@latest
       - name: Test add_subdirectory support
         run: cmake -S tests/add_subdirectory -B tests/add_subdirectory/build
@@ -84,6 +84,6 @@ jobs:
   reuse:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: REUSE Compliance Check
       uses: fsfe/reuse-action@v1
