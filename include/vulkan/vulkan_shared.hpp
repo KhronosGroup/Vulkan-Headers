@@ -654,6 +654,16 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using SharedSwapchainKHR = SharedHandle<SwapchainKHR>;
 
+  //=== VK_KHR_display ===
+  template <>
+  class SharedHandleTraits<DisplayKHR>
+  {
+  public:
+    using DestructorType = PhysicalDevice;
+    using deleter        = ObjectDestroyShared<DisplayKHR>;
+  };
+  using SharedDisplayKHR = SharedHandle<DisplayKHR>;
+
   //=== VK_EXT_debug_report ===
   template <>
   class SharedHandleTraits<DebugReportCallbackEXT>
@@ -740,6 +750,16 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using SharedAccelerationStructureNV = SharedHandle<AccelerationStructureNV>;
 
+  //=== VK_INTEL_performance_query ===
+  template <>
+  class SharedHandleTraits<PerformanceConfigurationINTEL>
+  {
+  public:
+    using DestructorType = Device;
+    using deleter        = ObjectDestroyShared<PerformanceConfigurationINTEL>;
+  };
+  using SharedPerformanceConfigurationINTEL = SharedHandle<PerformanceConfigurationINTEL>;
+
   //=== VK_KHR_deferred_host_operations ===
   template <>
   class SharedHandleTraits<DeferredOperationKHR>
@@ -759,6 +779,26 @@ namespace VULKAN_HPP_NAMESPACE
     using deleter        = ObjectDestroyShared<IndirectCommandsLayoutNV>;
   };
   using SharedIndirectCommandsLayoutNV = SharedHandle<IndirectCommandsLayoutNV>;
+
+#  if defined( VK_ENABLE_BETA_EXTENSIONS )
+  //=== VK_NV_cuda_kernel_launch ===
+  template <>
+  class SharedHandleTraits<CudaModuleNV>
+  {
+  public:
+    using DestructorType = Device;
+    using deleter        = ObjectDestroyShared<CudaModuleNV>;
+  };
+  using SharedCudaModuleNV = SharedHandle<CudaModuleNV>;
+  template <>
+  class SharedHandleTraits<CudaFunctionNV>
+  {
+  public:
+    using DestructorType = Device;
+    using deleter        = ObjectDestroyShared<CudaFunctionNV>;
+  };
+  using SharedCudaFunctionNV = SharedHandle<CudaFunctionNV>;
+#  endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #  if defined( VK_USE_PLATFORM_FUCHSIA )
   //=== VK_FUCHSIA_buffer_collection ===
@@ -941,20 +981,6 @@ namespace VULKAN_HPP_NAMESPACE
   //=== VK_KHR_display ===
 
   template <>
-  class SharedHandle<DisplayKHR> : public SharedHandleBaseNoDestroy<DisplayKHR, SharedPhysicalDevice>
-  {
-    friend SharedHandleBase<DisplayKHR, SharedPhysicalDevice>;
-
-  public:
-    SharedHandle() = default;
-    explicit SharedHandle( DisplayKHR handle, SharedPhysicalDevice parent ) noexcept
-      : SharedHandleBaseNoDestroy<DisplayKHR, SharedPhysicalDevice>( handle, std::move( parent ) )
-    {
-    }
-  };
-  using SharedDisplayKHR = SharedHandle<DisplayKHR>;
-
-  template <>
   class SharedHandle<DisplayModeKHR> : public SharedHandleBaseNoDestroy<DisplayModeKHR, SharedDisplayKHR>
   {
     friend SharedHandleBase<DisplayModeKHR, SharedDisplayKHR>;
@@ -967,22 +993,6 @@ namespace VULKAN_HPP_NAMESPACE
     }
   };
   using SharedDisplayModeKHR = SharedHandle<DisplayModeKHR>;
-
-  //=== VK_INTEL_performance_query ===
-
-  template <>
-  class SharedHandle<PerformanceConfigurationINTEL> : public SharedHandleBaseNoDestroy<PerformanceConfigurationINTEL, SharedDevice>
-  {
-    friend SharedHandleBase<PerformanceConfigurationINTEL, SharedDevice>;
-
-  public:
-    SharedHandle() = default;
-    explicit SharedHandle( PerformanceConfigurationINTEL handle, SharedDevice parent ) noexcept
-      : SharedHandleBaseNoDestroy<PerformanceConfigurationINTEL, SharedDevice>( handle, std::move( parent ) )
-    {
-    }
-  };
-  using SharedPerformanceConfigurationINTEL = SharedHandle<PerformanceConfigurationINTEL>;
 #endif  // !VULKAN_HPP_NO_SMART_HANDLE
 }  // namespace VULKAN_HPP_NAMESPACE
 #endif  // VULKAN_SHARED_HPP

@@ -23,10 +23,8 @@ They can also use headers from, or packaged from, this repository.
 
 In most cases, developers should only need the headers, not the scripts and
 other material in this repository.
-In particular if you are packaging the headers for inclusion in Linux
-distributions or similar uses, we advise that you do not include the
-scripts, and direct potential users of the scripts to their canonical
-sources in the [Vulkan Specification
+If you need to run the scripts, please use them from their canonical source
+in the [Vulkan Specification
 repository](https://github.com/KhronosGroup/Vulkan-Docs).
 
 ## Contributing

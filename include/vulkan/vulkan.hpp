@@ -55,7 +55,7 @@ extern "C" __declspec( dllimport ) FARPROC __stdcall GetProcAddress( HINSTANCE h
 #  include <span>
 #endif
 
-static_assert( VK_HEADER_VERSION == 268, "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION == 269, "Wrong VK_HEADER_VERSION!" );
 
 // <tuple> includes <sys/sysmacros.h> through some other header
 // this results in major(x) being resolved to gnu_dev_major(x)
@@ -94,6 +94,20 @@ namespace VULKAN_HPP_NAMESPACE
 
     VULKAN_HPP_CONSTEXPR ArrayWrapper1D( std::array<T, N> const & data ) VULKAN_HPP_NOEXCEPT : std::array<T, N>( data ) {}
 
+    template <typename B = T, typename std::enable_if<std::is_same<B, char>::value, int>::type = 0>
+    VULKAN_HPP_CONSTEXPR_14 ArrayWrapper1D( std::string const & data ) VULKAN_HPP_NOEXCEPT
+    {
+      copy( data.data(), data.length() );
+    }
+
+#if 17 <= VULKAN_HPP_CPP_VERSION
+    template <typename B = T, typename std::enable_if<std::is_same<B, char>::value, int>::type = 0>
+    VULKAN_HPP_CONSTEXPR_14 ArrayWrapper1D( std::string_view data ) VULKAN_HPP_NOEXCEPT
+    {
+      copy( data.data(), data.length() );
+    }
+#endif
+
 #if ( VK_USE_64_BIT_PTR_DEFINES == 0 )
     // on 32 bit compiles, needs overloads on index type int to resolve ambiguities
     VULKAN_HPP_CONSTEXPR T const & operator[]( int index ) const VULKAN_HPP_NOEXCEPT
@@ -120,14 +134,14 @@ namespace VULKAN_HPP_NAMESPACE
     template <typename B = T, typename std::enable_if<std::is_same<B, char>::value, int>::type = 0>
     operator std::string() const
     {
-      return std::string( this->data() );
+      return std::string( this->data(), N );
     }
 
 #if 17 <= VULKAN_HPP_CPP_VERSION
     template <typename B = T, typename std::enable_if<std::is_same<B, char>::value, int>::type = 0>
     operator std::string_view() const
     {
-      return std::string_view( this->data() );
+      return std::string_view( this->data(), N );
     }
 #endif
 
@@ -173,6 +187,20 @@ namespace VULKAN_HPP_NAMESPACE
     bool operator!=( ArrayWrapper1D<char, N> const & rhs ) const VULKAN_HPP_NOEXCEPT
     {
       return *static_cast<std::array<char, N> const *>( this ) != *static_cast<std::array<char, N> const *>( &rhs );
+    }
+
+  private:
+    VULKAN_HPP_CONSTEXPR_14 void copy( char const * data, size_t len ) VULKAN_HPP_NOEXCEPT
+    {
+      size_t n = std::min( N, len );
+      for ( size_t i = 0; i < n; ++i )
+      {
+        ( *this )[i] = data[i];
+      }
+      for ( size_t i = n; i < N; ++i )
+      {
+        ( *this )[i] = 0;
+      }
     }
   };
 
@@ -4746,6 +4774,46 @@ namespace VULKAN_HPP_NAMESPACE
     void vkCmdEncodeVideoKHR( VkCommandBuffer commandBuffer, const VkVideoEncodeInfoKHR * pEncodeInfo ) const VULKAN_HPP_NOEXCEPT
     {
       return ::vkCmdEncodeVideoKHR( commandBuffer, pEncodeInfo );
+    }
+#  endif /*VK_ENABLE_BETA_EXTENSIONS*/
+
+#  if defined( VK_ENABLE_BETA_EXTENSIONS )
+    //=== VK_NV_cuda_kernel_launch ===
+
+    VkResult vkCreateCudaModuleNV( VkDevice                         device,
+                                   const VkCudaModuleCreateInfoNV * pCreateInfo,
+                                   const VkAllocationCallbacks *    pAllocator,
+                                   VkCudaModuleNV *                 pModule ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkCreateCudaModuleNV( device, pCreateInfo, pAllocator, pModule );
+    }
+
+    VkResult vkGetCudaModuleCacheNV( VkDevice device, VkCudaModuleNV module, size_t * pCacheSize, void * pCacheData ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkGetCudaModuleCacheNV( device, module, pCacheSize, pCacheData );
+    }
+
+    VkResult vkCreateCudaFunctionNV( VkDevice                           device,
+                                     const VkCudaFunctionCreateInfoNV * pCreateInfo,
+                                     const VkAllocationCallbacks *      pAllocator,
+                                     VkCudaFunctionNV *                 pFunction ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkCreateCudaFunctionNV( device, pCreateInfo, pAllocator, pFunction );
+    }
+
+    void vkDestroyCudaModuleNV( VkDevice device, VkCudaModuleNV module, const VkAllocationCallbacks * pAllocator ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkDestroyCudaModuleNV( device, module, pAllocator );
+    }
+
+    void vkDestroyCudaFunctionNV( VkDevice device, VkCudaFunctionNV function, const VkAllocationCallbacks * pAllocator ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkDestroyCudaFunctionNV( device, function, pAllocator );
+    }
+
+    void vkCmdCudaLaunchKernelNV( VkCommandBuffer commandBuffer, const VkCudaLaunchInfoNV * pLaunchInfo ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkCmdCudaLaunchKernelNV( commandBuffer, pLaunchInfo );
     }
 #  endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
@@ -10965,6 +11033,34 @@ namespace VULKAN_HPP_NAMESPACE
     };
   };
 
+#  if defined( VK_ENABLE_BETA_EXTENSIONS )
+  //=== VK_NV_cuda_kernel_launch ===
+  template <>
+  struct StructExtends<PhysicalDeviceCudaKernelLaunchFeaturesNV, PhysicalDeviceFeatures2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<PhysicalDeviceCudaKernelLaunchFeaturesNV, DeviceCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<PhysicalDeviceCudaKernelLaunchPropertiesNV, PhysicalDeviceProperties2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+#  endif /*VK_ENABLE_BETA_EXTENSIONS*/
+
   //=== VK_NV_low_latency ===
   template <>
   struct StructExtends<QueryLowLatencySupportNV, SemaphoreCreateInfo>
@@ -12268,6 +12364,48 @@ namespace VULKAN_HPP_NAMESPACE
   //=== VK_ARM_shader_core_properties ===
   template <>
   struct StructExtends<PhysicalDeviceShaderCorePropertiesARM, PhysicalDeviceProperties2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  //=== VK_ARM_scheduling_controls ===
+  template <>
+  struct StructExtends<DeviceQueueShaderCoreControlCreateInfoARM, DeviceQueueCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<DeviceQueueShaderCoreControlCreateInfoARM, DeviceCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<PhysicalDeviceSchedulingControlsFeaturesARM, PhysicalDeviceFeatures2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<PhysicalDeviceSchedulingControlsFeaturesARM, DeviceCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+  template <>
+  struct StructExtends<PhysicalDeviceSchedulingControlsPropertiesARM, PhysicalDeviceProperties2>
   {
     enum
     {
@@ -14436,6 +14574,23 @@ namespace VULKAN_HPP_NAMESPACE
     PFN_dummy vkCmdEncodeVideoKHR_placeholder                                     = 0;
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
+#if defined( VK_ENABLE_BETA_EXTENSIONS )
+    //=== VK_NV_cuda_kernel_launch ===
+    PFN_vkCreateCudaModuleNV    vkCreateCudaModuleNV    = 0;
+    PFN_vkGetCudaModuleCacheNV  vkGetCudaModuleCacheNV  = 0;
+    PFN_vkCreateCudaFunctionNV  vkCreateCudaFunctionNV  = 0;
+    PFN_vkDestroyCudaModuleNV   vkDestroyCudaModuleNV   = 0;
+    PFN_vkDestroyCudaFunctionNV vkDestroyCudaFunctionNV = 0;
+    PFN_vkCmdCudaLaunchKernelNV vkCmdCudaLaunchKernelNV = 0;
+#else
+    PFN_dummy vkCreateCudaModuleNV_placeholder                                    = 0;
+    PFN_dummy vkGetCudaModuleCacheNV_placeholder                                  = 0;
+    PFN_dummy vkCreateCudaFunctionNV_placeholder                                  = 0;
+    PFN_dummy vkDestroyCudaModuleNV_placeholder                                   = 0;
+    PFN_dummy vkDestroyCudaFunctionNV_placeholder                                 = 0;
+    PFN_dummy vkCmdCudaLaunchKernelNV_placeholder                                 = 0;
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
+
 #if defined( VK_USE_PLATFORM_METAL_EXT )
     //=== VK_EXT_metal_objects ===
     PFN_vkExportMetalObjectsEXT vkExportMetalObjectsEXT = 0;
@@ -15760,6 +15915,16 @@ namespace VULKAN_HPP_NAMESPACE
       vkCmdEncodeVideoKHR = PFN_vkCmdEncodeVideoKHR( vkGetInstanceProcAddr( instance, "vkCmdEncodeVideoKHR" ) );
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
+#if defined( VK_ENABLE_BETA_EXTENSIONS )
+      //=== VK_NV_cuda_kernel_launch ===
+      vkCreateCudaModuleNV    = PFN_vkCreateCudaModuleNV( vkGetInstanceProcAddr( instance, "vkCreateCudaModuleNV" ) );
+      vkGetCudaModuleCacheNV  = PFN_vkGetCudaModuleCacheNV( vkGetInstanceProcAddr( instance, "vkGetCudaModuleCacheNV" ) );
+      vkCreateCudaFunctionNV  = PFN_vkCreateCudaFunctionNV( vkGetInstanceProcAddr( instance, "vkCreateCudaFunctionNV" ) );
+      vkDestroyCudaModuleNV   = PFN_vkDestroyCudaModuleNV( vkGetInstanceProcAddr( instance, "vkDestroyCudaModuleNV" ) );
+      vkDestroyCudaFunctionNV = PFN_vkDestroyCudaFunctionNV( vkGetInstanceProcAddr( instance, "vkDestroyCudaFunctionNV" ) );
+      vkCmdCudaLaunchKernelNV = PFN_vkCmdCudaLaunchKernelNV( vkGetInstanceProcAddr( instance, "vkCmdCudaLaunchKernelNV" ) );
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
+
 #if defined( VK_USE_PLATFORM_METAL_EXT )
       //=== VK_EXT_metal_objects ===
       vkExportMetalObjectsEXT = PFN_vkExportMetalObjectsEXT( vkGetInstanceProcAddr( instance, "vkExportMetalObjectsEXT" ) );
@@ -16799,6 +16964,16 @@ namespace VULKAN_HPP_NAMESPACE
       vkGetEncodedVideoSessionParametersKHR =
         PFN_vkGetEncodedVideoSessionParametersKHR( vkGetDeviceProcAddr( device, "vkGetEncodedVideoSessionParametersKHR" ) );
       vkCmdEncodeVideoKHR = PFN_vkCmdEncodeVideoKHR( vkGetDeviceProcAddr( device, "vkCmdEncodeVideoKHR" ) );
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
+
+#if defined( VK_ENABLE_BETA_EXTENSIONS )
+      //=== VK_NV_cuda_kernel_launch ===
+      vkCreateCudaModuleNV    = PFN_vkCreateCudaModuleNV( vkGetDeviceProcAddr( device, "vkCreateCudaModuleNV" ) );
+      vkGetCudaModuleCacheNV  = PFN_vkGetCudaModuleCacheNV( vkGetDeviceProcAddr( device, "vkGetCudaModuleCacheNV" ) );
+      vkCreateCudaFunctionNV  = PFN_vkCreateCudaFunctionNV( vkGetDeviceProcAddr( device, "vkCreateCudaFunctionNV" ) );
+      vkDestroyCudaModuleNV   = PFN_vkDestroyCudaModuleNV( vkGetDeviceProcAddr( device, "vkDestroyCudaModuleNV" ) );
+      vkDestroyCudaFunctionNV = PFN_vkDestroyCudaFunctionNV( vkGetDeviceProcAddr( device, "vkDestroyCudaFunctionNV" ) );
+      vkCmdCudaLaunchKernelNV = PFN_vkCmdCudaLaunchKernelNV( vkGetDeviceProcAddr( device, "vkCmdCudaLaunchKernelNV" ) );
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #if defined( VK_USE_PLATFORM_METAL_EXT )
