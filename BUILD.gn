@@ -27,8 +27,14 @@ config("vulkan_headers_config") {
   if (is_fuchsia) {
     defines += [ "VK_USE_PLATFORM_FUCHSIA" ]
   }
-  if (is_mac) {
+  if (is_apple) {
     defines += [ "VK_USE_PLATFORM_METAL_EXT" ]
+  }
+  if (is_mac) {
+    defines += [ "VK_USE_PLATFORM_MACOS_MVK" ]
+  }
+  if (is_ios) {
+    defines += [ "VK_USE_PLATFORM_IOS_MVK" ]
   }
   if (defined(is_ggp) && is_ggp) {
     defines += [ "VK_USE_PLATFORM_GGP" ]
