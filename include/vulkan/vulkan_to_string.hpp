@@ -3979,6 +3979,7 @@ namespace VULKAN_HPP_NAMESPACE
       case StructureType::ePhysicalDeviceDepthClipEnableFeaturesEXT: return "PhysicalDeviceDepthClipEnableFeaturesEXT";
       case StructureType::ePipelineRasterizationDepthClipStateCreateInfoEXT: return "PipelineRasterizationDepthClipStateCreateInfoEXT";
       case StructureType::eHdrMetadataEXT: return "HdrMetadataEXT";
+      case StructureType::ePhysicalDeviceRelaxedLineRasterizationFeaturesIMG: return "PhysicalDeviceRelaxedLineRasterizationFeaturesIMG";
       case StructureType::eSharedPresentSurfaceCapabilitiesKHR: return "SharedPresentSurfaceCapabilitiesKHR";
 #if defined( VK_USE_PLATFORM_WIN32_KHR )
       case StructureType::eImportFenceWin32HandleInfoKHR: return "ImportFenceWin32HandleInfoKHR";
