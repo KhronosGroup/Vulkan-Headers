@@ -17,50 +17,18 @@ permissions:
     contents: read
 
 jobs:
-  build-tests:
-    name: BUILD_TESTS=ON ${{ matrix.os }}
+  cmake:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ ubuntu-latest, windows-latest, macos-latest ]
+        cmake-version: [ '3.15', 'latest']
     steps:
       - uses: actions/checkout@v4
       - uses: lukka/get-cmake@latest
       - uses: ilammy/msvc-dev-cmd@v1
-      - run: cmake -S . -B build -D BUILD_TESTS=ON --log-level=DEBUG
-      - run: cmake --build build
-
-  test-cmake-minimum:
-    name: Test CMake minimum
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: lukka/get-cmake@latest
-        with:
-          cmakeVersion: 3.15.0
-      - run: cmake -S . -B build/ --loglevel=DEBUG
-      - run: cmake --install build/ --prefix build/install
-
-  find_package:
-    name: Test find_package
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: lukka/get-cmake@latest
-        with:
-          cmakeVersion: 3.17.0
-      - run: cmake -S . -B build
-      - run: cmake --install build --prefix ${{ github.workspace }}/build/install
-      - run: cmake -S tests/find_package -B build/tests/find_package -D CMAKE_PREFIX_PATH=${{ github.workspace }}/build/install
-
-  add_subdirectory:
-    name: Test add_subdirectory
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: lukka/get-cmake@latest
-      - run: cmake -S tests/add_subdirectory -B tests/add_subdirectory/build
-      - run: cmake --build tests/add_subdirectory/build
+      - run: cmake -S . -B build -D BUILD_TESTS=ON --log-level=DEBUG -G Ninja
+      - run: ctest --test-dir build --output-on-failure
 
   reuse:
     runs-on: ubuntu-latest

@@ -50,6 +50,7 @@ endif()
 if (PROJECT_IS_TOP_LEVEL)
     option(BUILD_TESTS "Build the tests")
     if (BUILD_TESTS)
+        enable_testing()
         add_subdirectory(tests)
     endif()
 

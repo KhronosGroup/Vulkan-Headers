@@ -6,41 +6,32 @@
 # SPDX-License-Identifier: Apache-2.0
 # ~~~
 
-# Test the non-API headers provided by this repo
-# NOTE: For us testing just means that these header files compile
-# with reasonable warnings.
-
-message(STATUS "${PROJECT_NAME} = ${PROJECT_VERSION}")
-
-set(CMAKE_C_STANDARD 99)
-set(CMAKE_C_STANDARD_REQUIRED ON)
-set(CMAKE_C_EXTENSIONS OFF)
-
-if(${CMAKE_C_COMPILER_ID} MATCHES "(GNU|Clang)")
-    add_compile_options(
-        -Wpedantic
-        -Wall
-        -Wextra
-        -Werror
-    )
+if (CMAKE_VERSION VERSION_GREATER_EQUAL "3.24")
+    set(fresh "--fresh")
 endif()
 
-if (MSVC)
-    add_compile_options(
-        /W4
-        /permissive-
-        /WX
-    )
-endif()
+# Test add_subdirectory suppport
+add_test(NAME integration.add_subdirectory
+    COMMAND ${CMAKE_CTEST_COMMAND}
+        --build-and-test ${CMAKE_CURRENT_LIST_DIR}/integration
+                         ${CMAKE_CURRENT_BINARY_DIR}/add_subdirectory
+        --build-generator ${CMAKE_GENERATOR}
+        --build-options -DFIND_PACKAGE_TESTING=OFF "${fresh}"
+)
 
-# vk_icd.h
-add_library(vk_icd MODULE vk_icd.c)
-target_link_libraries(vk_icd PRIVATE Vulkan::Headers)
+set(test_install_dir "${CMAKE_CURRENT_BINARY_DIR}/install")
+add_test(NAME integration.install
+    COMMAND ${CMAKE_COMMAND} --install ${VULKAN_HEADERS_BINARY_DIR} --prefix ${test_install_dir}
+)
 
-# vk_layer.h
-add_library(vk_layer MODULE vk_layer.c)
-target_link_libraries(vk_layer PRIVATE Vulkan::Headers)
+# Test find_package suppport
+add_test(NAME integration.find_package
+    COMMAND ${CMAKE_CTEST_COMMAND}
+        --build-and-test ${CMAKE_CURRENT_LIST_DIR}/integration
+                         ${CMAKE_CURRENT_BINARY_DIR}/find_package
+        --build-generator ${CMAKE_GENERATOR}
+        --build-options -DFIND_PACKAGE_TESTING=ON -DCMAKE_PREFIX_PATH=${test_install_dir} "${fresh}"
+)
 
-if (NOT TARGET Vulkan-Headers)
-    message(FATAL_ERROR "Backcompat for Vulkan-Headers target broken!")
-endif()
+# Installing comes before testing
+set_tests_properties(integration.find_package PROPERTIES DEPENDS integration.install)
