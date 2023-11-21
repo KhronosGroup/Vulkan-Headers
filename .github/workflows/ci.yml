@@ -30,7 +30,8 @@ jobs:
           cmakeVersion: ${{ matrix.cmake-version }} 
       - uses: ilammy/msvc-dev-cmd@v1
       - run: cmake -S . -B build -D BUILD_TESTS=ON -G Ninja
-      - run: ctest --test-dir build --output-on-failure
+      - run: ctest --output-on-failure
+        working-directory: build
 
   reuse:
     runs-on: ubuntu-latest

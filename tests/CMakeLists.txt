@@ -6,17 +6,13 @@
 # SPDX-License-Identifier: Apache-2.0
 # ~~~
 
-if (CMAKE_VERSION VERSION_GREATER_EQUAL "3.24")
-    set(fresh "--fresh")
-endif()
-
 # Test add_subdirectory suppport
 add_test(NAME integration.add_subdirectory
     COMMAND ${CMAKE_CTEST_COMMAND}
         --build-and-test ${CMAKE_CURRENT_LIST_DIR}/integration
                          ${CMAKE_CURRENT_BINARY_DIR}/add_subdirectory
         --build-generator ${CMAKE_GENERATOR}
-        --build-options -DFIND_PACKAGE_TESTING=OFF "${fresh}"
+        --build-options -DFIND_PACKAGE_TESTING=OFF
 )
 
 set(test_install_dir "${CMAKE_CURRENT_BINARY_DIR}/install")
@@ -30,7 +26,7 @@ add_test(NAME integration.find_package
         --build-and-test ${CMAKE_CURRENT_LIST_DIR}/integration
                          ${CMAKE_CURRENT_BINARY_DIR}/find_package
         --build-generator ${CMAKE_GENERATOR}
-        --build-options -DFIND_PACKAGE_TESTING=ON -DCMAKE_PREFIX_PATH=${test_install_dir} "${fresh}"
+        --build-options -DFIND_PACKAGE_TESTING=ON -DCMAKE_PREFIX_PATH=${test_install_dir}
 )
 
 # Installing comes before testing
