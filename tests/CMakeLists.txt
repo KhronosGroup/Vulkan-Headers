@@ -17,7 +17,7 @@ add_test(NAME integration.add_subdirectory
 
 set(test_install_dir "${CMAKE_CURRENT_BINARY_DIR}/install")
 add_test(NAME integration.install
-    COMMAND ${CMAKE_COMMAND} --install ${VULKAN_HEADERS_BINARY_DIR} --prefix ${test_install_dir}
+    COMMAND ${CMAKE_COMMAND} --install ${VULKAN_HEADERS_BINARY_DIR} --prefix ${test_install_dir} --config $<CONFIG>
 )
 
 # Test find_package suppport
