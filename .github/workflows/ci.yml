@@ -26,8 +26,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: lukka/get-cmake@latest
+        with:
+          cmakeVersion: ${{ matrix.cmake-version }} 
       - uses: ilammy/msvc-dev-cmd@v1
-      - run: cmake -S . -B build -D BUILD_TESTS=ON --log-level=DEBUG -G Ninja
+      - run: cmake -S . -B build -D BUILD_TESTS=ON -G Ninja
       - run: ctest --test-dir build --output-on-failure
 
   reuse:
