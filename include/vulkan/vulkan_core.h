@@ -69,7 +69,7 @@ extern "C" {
 #define VK_API_VERSION_1_0 VK_MAKE_API_VERSION(0, 1, 0, 0)// Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 270
+#define VK_HEADER_VERSION 271
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 3, VK_HEADER_VERSION)
@@ -10779,8 +10779,8 @@ typedef enum VkDebugReportObjectTypeEXT {
     VK_DEBUG_REPORT_OBJECT_TYPE_CU_FUNCTION_NVX_EXT = 1000029001,
     VK_DEBUG_REPORT_OBJECT_TYPE_ACCELERATION_STRUCTURE_KHR_EXT = 1000150000,
     VK_DEBUG_REPORT_OBJECT_TYPE_ACCELERATION_STRUCTURE_NV_EXT = 1000165000,
-    VK_DEBUG_REPORT_OBJECT_TYPE_CUDA_MODULE_NV = 1000307000,
-    VK_DEBUG_REPORT_OBJECT_TYPE_CUDA_FUNCTION_NV = 1000307001,
+    VK_DEBUG_REPORT_OBJECT_TYPE_CUDA_MODULE_NV_EXT = 1000307000,
+    VK_DEBUG_REPORT_OBJECT_TYPE_CUDA_FUNCTION_NV_EXT = 1000307001,
     VK_DEBUG_REPORT_OBJECT_TYPE_BUFFER_COLLECTION_FUCHSIA_EXT = 1000366000,
     VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_EXT = VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT_EXT,
     VK_DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT = VK_DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT_EXT,
@@ -17790,7 +17790,7 @@ typedef struct VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT {
 
 // VK_NV_low_latency2 is a preprocessor guard. Do not pass it to API calls.
 #define VK_NV_low_latency2 1
-#define VK_NV_LOW_LATENCY_2_SPEC_VERSION  1
+#define VK_NV_LOW_LATENCY_2_SPEC_VERSION  2
 #define VK_NV_LOW_LATENCY_2_EXTENSION_NAME "VK_NV_low_latency2"
 
 typedef enum VkLatencyMarkerNV {
@@ -17858,6 +17858,7 @@ typedef struct VkLatencyTimingsFrameReportNV {
 typedef struct VkGetLatencyMarkerInfoNV {
     VkStructureType                   sType;
     const void*                       pNext;
+    uint32_t                          timingCount;
     VkLatencyTimingsFrameReportNV*    pTimings;
 } VkGetLatencyMarkerInfoNV;
 
@@ -17889,7 +17890,7 @@ typedef struct VkLatencySurfaceCapabilitiesNV {
 typedef VkResult (VKAPI_PTR *PFN_vkSetLatencySleepModeNV)(VkDevice device, VkSwapchainKHR swapchain, const VkLatencySleepModeInfoNV* pSleepModeInfo);
 typedef VkResult (VKAPI_PTR *PFN_vkLatencySleepNV)(VkDevice device, VkSwapchainKHR swapchain, const VkLatencySleepInfoNV* pSleepInfo);
 typedef void (VKAPI_PTR *PFN_vkSetLatencyMarkerNV)(VkDevice device, VkSwapchainKHR swapchain, const VkSetLatencyMarkerInfoNV* pLatencyMarkerInfo);
-typedef void (VKAPI_PTR *PFN_vkGetLatencyTimingsNV)(VkDevice device, VkSwapchainKHR swapchain, uint32_t* pTimingCount, VkGetLatencyMarkerInfoNV* pLatencyMarkerInfo);
+typedef void (VKAPI_PTR *PFN_vkGetLatencyTimingsNV)(VkDevice device, VkSwapchainKHR swapchain, VkGetLatencyMarkerInfoNV* pLatencyMarkerInfo);
 typedef void (VKAPI_PTR *PFN_vkQueueNotifyOutOfBandNV)(VkQueue queue, const VkOutOfBandQueueTypeInfoNV* pQueueTypeInfo);
 
 #ifndef VK_NO_PROTOTYPES
@@ -17911,7 +17912,6 @@ VKAPI_ATTR void VKAPI_CALL vkSetLatencyMarkerNV(
 VKAPI_ATTR void VKAPI_CALL vkGetLatencyTimingsNV(
     VkDevice                                    device,
     VkSwapchainKHR                              swapchain,
-    uint32_t*                                   pTimingCount,
     VkGetLatencyMarkerInfoNV*                   pLatencyMarkerInfo);
 
 VKAPI_ATTR void VKAPI_CALL vkQueueNotifyOutOfBandNV(

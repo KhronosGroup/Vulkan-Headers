@@ -9,8 +9,9 @@
 #define VULKAN_HPP
 
 #include <algorithm>
-#include <array>   // ArrayWrapperND
-#include <string>  // std::string
+#include <array>     // ArrayWrapperND
+#include <string.h>  // strnlen
+#include <string>    // std::string
 #include <vulkan/vulkan.h>
 #include <vulkan/vulkan_hpp_macros.hpp>
 
@@ -55,7 +56,7 @@ extern "C" __declspec( dllimport ) FARPROC __stdcall GetProcAddress( HINSTANCE h
 #  include <span>
 #endif
 
-static_assert( VK_HEADER_VERSION == 270, "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION == 271, "Wrong VK_HEADER_VERSION!" );
 
 // <tuple> includes <sys/sysmacros.h> through some other header
 // this results in major(x) being resolved to gnu_dev_major(x)
@@ -134,14 +135,14 @@ namespace VULKAN_HPP_NAMESPACE
     template <typename B = T, typename std::enable_if<std::is_same<B, char>::value, int>::type = 0>
     operator std::string() const
     {
-      return std::string( this->data(), N );
+      return std::string( this->data(), strnlen( this->data(), N ) );
     }
 
 #if 17 <= VULKAN_HPP_CPP_VERSION
     template <typename B = T, typename std::enable_if<std::is_same<B, char>::value, int>::type = 0>
     operator std::string_view() const
     {
-      return std::string_view( this->data(), N );
+      return std::string_view( this->data(), strnlen( this->data(), N ) );
     }
 #endif
 
@@ -5796,12 +5797,9 @@ namespace VULKAN_HPP_NAMESPACE
       return ::vkSetLatencyMarkerNV( device, swapchain, pLatencyMarkerInfo );
     }
 
-    void vkGetLatencyTimingsNV( VkDevice                   device,
-                                VkSwapchainKHR             swapchain,
-                                uint32_t *                 pTimingCount,
-                                VkGetLatencyMarkerInfoNV * pLatencyMarkerInfo ) const VULKAN_HPP_NOEXCEPT
+    void vkGetLatencyTimingsNV( VkDevice device, VkSwapchainKHR swapchain, VkGetLatencyMarkerInfoNV * pLatencyMarkerInfo ) const VULKAN_HPP_NOEXCEPT
     {
-      return ::vkGetLatencyTimingsNV( device, swapchain, pTimingCount, pLatencyMarkerInfo );
+      return ::vkGetLatencyTimingsNV( device, swapchain, pLatencyMarkerInfo );
     }
 
     void vkQueueNotifyOutOfBandNV( VkQueue queue, const VkOutOfBandQueueTypeInfoNV * pQueueTypeInfo ) const VULKAN_HPP_NOEXCEPT
