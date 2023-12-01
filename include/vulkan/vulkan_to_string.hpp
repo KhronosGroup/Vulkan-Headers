@@ -4397,6 +4397,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
       case StructureType::ePhysicalDeviceClusterCullingShaderFeaturesHUAWEI: return "PhysicalDeviceClusterCullingShaderFeaturesHUAWEI";
       case StructureType::ePhysicalDeviceClusterCullingShaderPropertiesHUAWEI: return "PhysicalDeviceClusterCullingShaderPropertiesHUAWEI";
+      case StructureType::ePhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI: return "PhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI";
       case StructureType::ePhysicalDeviceBorderColorSwizzleFeaturesEXT: return "PhysicalDeviceBorderColorSwizzleFeaturesEXT";
       case StructureType::eSamplerBorderColorComponentMappingCreateInfoEXT: return "SamplerBorderColorComponentMappingCreateInfoEXT";
       case StructureType::ePhysicalDevicePageableDeviceLocalMemoryFeaturesEXT: return "PhysicalDevicePageableDeviceLocalMemoryFeaturesEXT";
@@ -4411,6 +4412,11 @@ namespace VULKAN_HPP_NAMESPACE
       case StructureType::eDescriptorSetLayoutHostMappingInfoVALVE: return "DescriptorSetLayoutHostMappingInfoVALVE";
       case StructureType::ePhysicalDeviceDepthClampZeroOneFeaturesEXT: return "PhysicalDeviceDepthClampZeroOneFeaturesEXT";
       case StructureType::ePhysicalDeviceNonSeamlessCubeMapFeaturesEXT: return "PhysicalDeviceNonSeamlessCubeMapFeaturesEXT";
+      case StructureType::ePhysicalDeviceRenderPassStripedFeaturesARM: return "PhysicalDeviceRenderPassStripedFeaturesARM";
+      case StructureType::ePhysicalDeviceRenderPassStripedPropertiesARM: return "PhysicalDeviceRenderPassStripedPropertiesARM";
+      case StructureType::eRenderPassStripeBeginInfoARM: return "RenderPassStripeBeginInfoARM";
+      case StructureType::eRenderPassStripeInfoARM: return "RenderPassStripeInfoARM";
+      case StructureType::eRenderPassStripeSubmitInfoARM: return "RenderPassStripeSubmitInfoARM";
       case StructureType::ePhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM: return "PhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM";
       case StructureType::ePhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM: return "PhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM";
       case StructureType::eSubpassFragmentDensityMapOffsetEndInfoQCOM: return "SubpassFragmentDensityMapOffsetEndInfoQCOM";
@@ -4479,6 +4485,7 @@ namespace VULKAN_HPP_NAMESPACE
       case StructureType::ePhysicalDeviceExtendedSparseAddressSpacePropertiesNV: return "PhysicalDeviceExtendedSparseAddressSpacePropertiesNV";
       case StructureType::ePhysicalDeviceMutableDescriptorTypeFeaturesEXT: return "PhysicalDeviceMutableDescriptorTypeFeaturesEXT";
       case StructureType::eMutableDescriptorTypeCreateInfoEXT: return "MutableDescriptorTypeCreateInfoEXT";
+      case StructureType::eLayerSettingsCreateInfoEXT: return "LayerSettingsCreateInfoEXT";
       case StructureType::ePhysicalDeviceShaderCoreBuiltinsFeaturesARM: return "PhysicalDeviceShaderCoreBuiltinsFeaturesARM";
       case StructureType::ePhysicalDeviceShaderCoreBuiltinsPropertiesARM: return "PhysicalDeviceShaderCoreBuiltinsPropertiesARM";
       case StructureType::ePhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT: return "PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT";
@@ -8928,6 +8935,24 @@ namespace VULKAN_HPP_NAMESPACE
     {
       case RayTracingInvocationReorderModeNV::eNone: return "None";
       case RayTracingInvocationReorderModeNV::eReorder: return "Reorder";
+      default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
+    }
+  }
+
+  //=== VK_EXT_layer_settings ===
+
+  VULKAN_HPP_INLINE std::string to_string( LayerSettingTypeEXT value )
+  {
+    switch ( value )
+    {
+      case LayerSettingTypeEXT::eBool32: return "Bool32";
+      case LayerSettingTypeEXT::eInt32: return "Int32";
+      case LayerSettingTypeEXT::eInt64: return "Int64";
+      case LayerSettingTypeEXT::eUint32: return "Uint32";
+      case LayerSettingTypeEXT::eUint64: return "Uint64";
+      case LayerSettingTypeEXT::eFloat32: return "Float32";
+      case LayerSettingTypeEXT::eFloat64: return "Float64";
+      case LayerSettingTypeEXT::eString: return "String";
       default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
     }
   }

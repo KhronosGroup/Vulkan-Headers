@@ -69,7 +69,7 @@ extern "C" {
 #define VK_API_VERSION_1_0 VK_MAKE_API_VERSION(0, 1, 0, 0)// Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 271
+#define VK_HEADER_VERSION 272
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 3, VK_HEADER_VERSION)
@@ -1037,6 +1037,7 @@ typedef enum VkStructureType {
 #endif
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CLUSTER_CULLING_SHADER_FEATURES_HUAWEI = 1000404000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CLUSTER_CULLING_SHADER_PROPERTIES_HUAWEI = 1000404001,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CLUSTER_CULLING_SHADER_VRS_FEATURES_HUAWEI = 1000404002,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BORDER_COLOR_SWIZZLE_FEATURES_EXT = 1000411000,
     VK_STRUCTURE_TYPE_SAMPLER_BORDER_COLOR_COMPONENT_MAPPING_CREATE_INFO_EXT = 1000411001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PAGEABLE_DEVICE_LOCAL_MEMORY_FEATURES_EXT = 1000412000,
@@ -1051,6 +1052,11 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_HOST_MAPPING_INFO_VALVE = 1000420002,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_EXT = 1000421000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_NON_SEAMLESS_CUBE_MAP_FEATURES_EXT = 1000422000,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RENDER_PASS_STRIPED_FEATURES_ARM = 1000424000,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RENDER_PASS_STRIPED_PROPERTIES_ARM = 1000424001,
+    VK_STRUCTURE_TYPE_RENDER_PASS_STRIPE_BEGIN_INFO_ARM = 1000424002,
+    VK_STRUCTURE_TYPE_RENDER_PASS_STRIPE_INFO_ARM = 1000424003,
+    VK_STRUCTURE_TYPE_RENDER_PASS_STRIPE_SUBMIT_INFO_ARM = 1000424004,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_FEATURES_QCOM = 1000425000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_PROPERTIES_QCOM = 1000425001,
     VK_STRUCTURE_TYPE_SUBPASS_FRAGMENT_DENSITY_MAP_OFFSET_END_INFO_QCOM = 1000425002,
@@ -1117,6 +1123,7 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_SPARSE_ADDRESS_SPACE_PROPERTIES_NV = 1000492001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_EXT = 1000351000,
     VK_STRUCTURE_TYPE_MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_EXT = 1000351002,
+    VK_STRUCTURE_TYPE_LAYER_SETTINGS_CREATE_INFO_EXT = 1000496000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_BUILTINS_FEATURES_ARM = 1000497000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_BUILTINS_PROPERTIES_ARM = 1000497001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_LIBRARY_GROUP_HANDLES_FEATURES_EXT = 1000498000,
@@ -11361,7 +11368,7 @@ typedef struct VkExportMemoryAllocateInfoNV {
 
 // VK_EXT_validation_flags is a preprocessor guard. Do not pass it to API calls.
 #define VK_EXT_validation_flags 1
-#define VK_EXT_VALIDATION_FLAGS_SPEC_VERSION 2
+#define VK_EXT_VALIDATION_FLAGS_SPEC_VERSION 3
 #define VK_EXT_VALIDATION_FLAGS_EXTENSION_NAME "VK_EXT_validation_flags"
 
 typedef enum VkValidationCheckEXT {
@@ -13762,7 +13769,7 @@ typedef VkImageStencilUsageCreateInfo VkImageStencilUsageCreateInfoEXT;
 
 // VK_EXT_validation_features is a preprocessor guard. Do not pass it to API calls.
 #define VK_EXT_validation_features 1
-#define VK_EXT_VALIDATION_FEATURES_SPEC_VERSION 5
+#define VK_EXT_VALIDATION_FEATURES_SPEC_VERSION 6
 #define VK_EXT_VALIDATION_FEATURES_EXTENSION_NAME "VK_EXT_validation_features"
 
 typedef enum VkValidationFeatureEnableEXT {
@@ -16503,7 +16510,7 @@ VKAPI_ATTR void VKAPI_CALL vkGetMicromapBuildSizesEXT(
 
 // VK_HUAWEI_cluster_culling_shader is a preprocessor guard. Do not pass it to API calls.
 #define VK_HUAWEI_cluster_culling_shader 1
-#define VK_HUAWEI_CLUSTER_CULLING_SHADER_SPEC_VERSION 2
+#define VK_HUAWEI_CLUSTER_CULLING_SHADER_SPEC_VERSION 3
 #define VK_HUAWEI_CLUSTER_CULLING_SHADER_EXTENSION_NAME "VK_HUAWEI_cluster_culling_shader"
 typedef struct VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI {
     VkStructureType    sType;
@@ -16520,6 +16527,12 @@ typedef struct VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI {
     uint32_t           maxOutputClusterCount;
     VkDeviceSize       indirectBufferOffsetAlignment;
 } VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI;
+
+typedef struct VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           clusterShadingRate;
+} VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI;
 
 typedef void (VKAPI_PTR *PFN_vkCmdDrawClusterHUAWEI)(VkCommandBuffer commandBuffer, uint32_t groupCountX, uint32_t groupCountY, uint32_t groupCountZ);
 typedef void (VKAPI_PTR *PFN_vkCmdDrawClusterIndirectHUAWEI)(VkCommandBuffer commandBuffer, VkBuffer buffer, VkDeviceSize offset);
@@ -16703,6 +16716,45 @@ typedef struct VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT {
     void*              pNext;
     VkBool32           nonSeamlessCubeMap;
 } VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT;
+
+
+
+// VK_ARM_render_pass_striped is a preprocessor guard. Do not pass it to API calls.
+#define VK_ARM_render_pass_striped 1
+#define VK_ARM_RENDER_PASS_STRIPED_SPEC_VERSION 1
+#define VK_ARM_RENDER_PASS_STRIPED_EXTENSION_NAME "VK_ARM_render_pass_striped"
+typedef struct VkPhysicalDeviceRenderPassStripedFeaturesARM {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           renderPassStriped;
+} VkPhysicalDeviceRenderPassStripedFeaturesARM;
+
+typedef struct VkPhysicalDeviceRenderPassStripedPropertiesARM {
+    VkStructureType    sType;
+    void*              pNext;
+    VkExtent2D         renderPassStripeGranularity;
+    uint32_t           maxRenderPassStripes;
+} VkPhysicalDeviceRenderPassStripedPropertiesARM;
+
+typedef struct VkRenderPassStripeInfoARM {
+    VkStructureType    sType;
+    const void*        pNext;
+    VkRect2D           stripeArea;
+} VkRenderPassStripeInfoARM;
+
+typedef struct VkRenderPassStripeBeginInfoARM {
+    VkStructureType               sType;
+    const void*                   pNext;
+    uint32_t                      stripeInfoCount;
+    VkRenderPassStripeInfoARM*    pStripeInfos;
+} VkRenderPassStripeBeginInfoARM;
+
+typedef struct VkRenderPassStripeSubmitInfoARM {
+    VkStructureType                 sType;
+    const void*                     pNext;
+    uint32_t                        stripeSemaphoreInfoCount;
+    const VkSemaphoreSubmitInfo*    pStripeSemaphoreInfos;
+} VkRenderPassStripeSubmitInfoARM;
 
 
 
@@ -17742,6 +17794,39 @@ typedef struct VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV {
 #define VK_EXT_mutable_descriptor_type 1
 #define VK_EXT_MUTABLE_DESCRIPTOR_TYPE_SPEC_VERSION 1
 #define VK_EXT_MUTABLE_DESCRIPTOR_TYPE_EXTENSION_NAME "VK_EXT_mutable_descriptor_type"
+
+
+// VK_EXT_layer_settings is a preprocessor guard. Do not pass it to API calls.
+#define VK_EXT_layer_settings 1
+#define VK_EXT_LAYER_SETTINGS_SPEC_VERSION 2
+#define VK_EXT_LAYER_SETTINGS_EXTENSION_NAME "VK_EXT_layer_settings"
+
+typedef enum VkLayerSettingTypeEXT {
+    VK_LAYER_SETTING_TYPE_BOOL32_EXT = 0,
+    VK_LAYER_SETTING_TYPE_INT32_EXT = 1,
+    VK_LAYER_SETTING_TYPE_INT64_EXT = 2,
+    VK_LAYER_SETTING_TYPE_UINT32_EXT = 3,
+    VK_LAYER_SETTING_TYPE_UINT64_EXT = 4,
+    VK_LAYER_SETTING_TYPE_FLOAT32_EXT = 5,
+    VK_LAYER_SETTING_TYPE_FLOAT64_EXT = 6,
+    VK_LAYER_SETTING_TYPE_STRING_EXT = 7,
+    VK_LAYER_SETTING_TYPE_MAX_ENUM_EXT = 0x7FFFFFFF
+} VkLayerSettingTypeEXT;
+typedef struct VkLayerSettingEXT {
+    const char*              pLayerName;
+    const char*              pSettingName;
+    VkLayerSettingTypeEXT    type;
+    uint32_t                 valueCount;
+    const void*              pValues;
+} VkLayerSettingEXT;
+
+typedef struct VkLayerSettingsCreateInfoEXT {
+    VkStructureType             sType;
+    const void*                 pNext;
+    uint32_t                    settingCount;
+    const VkLayerSettingEXT*    pSettings;
+} VkLayerSettingsCreateInfoEXT;
+
 
 
 // VK_ARM_shader_core_builtins is a preprocessor guard. Do not pass it to API calls.
