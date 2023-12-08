@@ -248,6 +248,7 @@ namespace VULKAN_HPP_NAMESPACE
       {                                                                                                    \
         VULKAN_HPP_STORAGE_API ::VULKAN_HPP_NAMESPACE::DispatchLoaderDynamic defaultDispatchLoaderDynamic; \
       }
+
 namespace VULKAN_HPP_NAMESPACE
 {
   extern VULKAN_HPP_STORAGE_API VULKAN_HPP_NAMESPACE::DispatchLoaderDynamic defaultDispatchLoaderDynamic;
