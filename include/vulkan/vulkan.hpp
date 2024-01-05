@@ -1,4 +1,4 @@
-// Copyright 2015-2023 The Khronos Group Inc.
+// Copyright 2015-2024 The Khronos Group Inc.
 //
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 //
@@ -16,7 +16,7 @@
 #include <vulkan/vulkan_hpp_macros.hpp>
 
 #if 17 <= VULKAN_HPP_CPP_VERSION
-#  include <string_view>  // std::string_view
+#  include <string_view>
 #endif
 
 #if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
@@ -56,7 +56,7 @@ extern "C" __declspec( dllimport ) FARPROC __stdcall GetProcAddress( HINSTANCE h
 #  include <span>
 #endif
 
-static_assert( VK_HEADER_VERSION == 274, "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION == 275, "Wrong VK_HEADER_VERSION!" );
 
 // <tuple> includes <sys/sysmacros.h> through some other header
 // this results in major(x) being resolved to gnu_dev_major(x)
@@ -16302,6 +16302,10 @@ namespace VULKAN_HPP_NAMESPACE
         }
 #  elif defined( __APPLE__ )
         m_library = dlopen( "libvulkan.dylib", RTLD_NOW | RTLD_LOCAL );
+        if ( m_library == nullptr )
+        {
+          m_library = dlopen( "libvulkan.1.dylib", RTLD_NOW | RTLD_LOCAL );
+        }
 #  elif defined( _WIN32 )
         m_library = ::LoadLibraryA( "vulkan-1.dll" );
 #  else
