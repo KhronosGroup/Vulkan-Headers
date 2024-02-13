@@ -47,13 +47,15 @@ if (CMAKE_VERSION VERSION_LESS "3.21")
     string(COMPARE EQUAL ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_SOURCE_DIR} PROJECT_IS_TOP_LEVEL)
 endif()
 
-if (PROJECT_IS_TOP_LEVEL)
-    option(BUILD_TESTS "Build the tests")
-    if (BUILD_TESTS)
-        enable_testing()
-        add_subdirectory(tests)
-    endif()
+option(VULKAN_HEADERS_ENABLE_TESTS "Test Vulkan-Headers" ${PROJECT_IS_TOP_LEVEL})
+option(VULKAN_HEADERS_ENABLE_INSTALL "Install Vulkan-Headers" ${PROJECT_IS_TOP_LEVEL})
 
+if (VULKAN_HEADERS_ENABLE_TESTS)
+    enable_testing() # This is only effective in the top level CMakeLists.txt file.
+    add_subdirectory(tests)
+endif()
+
+if (VULKAN_HEADERS_ENABLE_INSTALL)
     include(GNUInstallDirs)
     include(CMakePackageConfigHelpers)
 
