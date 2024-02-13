@@ -12,7 +12,7 @@ on:
 
 env:
   CMAKE_GENERATOR: Ninja
-            
+
 permissions:
     contents: read
 
@@ -27,9 +27,9 @@ jobs:
       - uses: actions/checkout@v4
       - uses: lukka/get-cmake@latest
         with:
-          cmakeVersion: ${{ matrix.cmake-version }} 
+          cmakeVersion: ${{ matrix.cmake-version }}
       - uses: ilammy/msvc-dev-cmd@v1
-      - run: cmake -S . -B build -D BUILD_TESTS=ON -G Ninja
+      - run: cmake -S . -B build -D VULKAN_HEADERS_ENABLE_TESTS=ON -D VULKAN_HEADERS_ENABLE_INSTALL=ON -G Ninja
       - run: ctest --output-on-failure
         working-directory: build
 
