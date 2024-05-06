@@ -69,7 +69,7 @@ extern "C" {
 #define VK_API_VERSION_1_0 VK_MAKE_API_VERSION(0, 1, 0, 0)// Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 283
+#define VK_HEADER_VERSION 284
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 3, VK_HEADER_VERSION)
@@ -1046,6 +1046,8 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_SPARSE_ADDRESS_SPACE_PROPERTIES_NV = 1000492001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_EXT = 1000351000,
     VK_STRUCTURE_TYPE_MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_EXT = 1000351002,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LEGACY_VERTEX_ATTRIBUTES_FEATURES_EXT = 1000495000,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LEGACY_VERTEX_ATTRIBUTES_PROPERTIES_EXT = 1000495001,
     VK_STRUCTURE_TYPE_LAYER_SETTINGS_CREATE_INFO_EXT = 1000496000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_BUILTINS_FEATURES_ARM = 1000497000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_BUILTINS_PROPERTIES_ARM = 1000497001,
@@ -18727,6 +18729,24 @@ typedef struct VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV {
 #define VK_EXT_mutable_descriptor_type 1
 #define VK_EXT_MUTABLE_DESCRIPTOR_TYPE_SPEC_VERSION 1
 #define VK_EXT_MUTABLE_DESCRIPTOR_TYPE_EXTENSION_NAME "VK_EXT_mutable_descriptor_type"
+
+
+// VK_EXT_legacy_vertex_attributes is a preprocessor guard. Do not pass it to API calls.
+#define VK_EXT_legacy_vertex_attributes 1
+#define VK_EXT_LEGACY_VERTEX_ATTRIBUTES_SPEC_VERSION 1
+#define VK_EXT_LEGACY_VERTEX_ATTRIBUTES_EXTENSION_NAME "VK_EXT_legacy_vertex_attributes"
+typedef struct VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           legacyVertexAttributes;
+} VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT;
+
+typedef struct VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           nativeUnalignedPerformance;
+} VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT;
+
 
 
 // VK_EXT_layer_settings is a preprocessor guard. Do not pass it to API calls.
