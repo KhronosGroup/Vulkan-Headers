@@ -69,7 +69,7 @@ extern "C" {
 #define VK_API_VERSION_1_0 VK_MAKE_API_VERSION(0, 1, 0, 0)// Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 287
+#define VK_HEADER_VERSION 288
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 3, VK_HEADER_VERSION)
@@ -1112,6 +1112,7 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_BIND_DESCRIPTOR_BUFFER_EMBEDDED_SAMPLERS_INFO_EXT = 1000545008,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_POOL_OVERALLOCATION_FEATURES_NV = 1000546000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAW_ACCESS_CHAINS_FEATURES_NV = 1000555000,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_RELAXED_EXTENDED_INSTRUCTION_FEATURES_KHR = 1000558000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT16_VECTOR_FEATURES_NV = 1000563000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_REPLICATED_COMPOSITES_FEATURES_EXT = 1000564000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_VALIDATION_FEATURES_NV = 1000568000,
@@ -11707,6 +11708,18 @@ VKAPI_ATTR void VKAPI_CALL vkCmdBindDescriptorBufferEmbeddedSamplers2EXT(
     VkCommandBuffer                             commandBuffer,
     const VkBindDescriptorBufferEmbeddedSamplersInfoEXT* pBindDescriptorBufferEmbeddedSamplersInfo);
 #endif
+
+
+// VK_KHR_shader_relaxed_extended_instruction is a preprocessor guard. Do not pass it to API calls.
+#define VK_KHR_shader_relaxed_extended_instruction 1
+#define VK_KHR_SHADER_RELAXED_EXTENDED_INSTRUCTION_SPEC_VERSION 1
+#define VK_KHR_SHADER_RELAXED_EXTENDED_INSTRUCTION_EXTENSION_NAME "VK_KHR_shader_relaxed_extended_instruction"
+typedef struct VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           shaderRelaxedExtendedInstruction;
+} VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR;
+
 
 
 // VK_EXT_debug_report is a preprocessor guard. Do not pass it to API calls.
