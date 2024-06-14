@@ -5,7 +5,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ~~~
-cmake_minimum_required(VERSION 3.15...3.25)
+cmake_minimum_required(VERSION 3.15)
 
 # NOTE: Parsing the version like this is suboptimal but neccessary due to our release process:
 # https://github.com/KhronosGroup/Vulkan-Headers/pull/346
@@ -36,11 +36,32 @@ function(vlk_get_header_version)
 endfunction()
 vlk_get_header_version()
 
-project(VULKAN_HEADERS LANGUAGES C VERSION ${VK_VERSION_STRING})
+project(VULKAN_HEADERS LANGUAGES C CXX VERSION ${VK_VERSION_STRING})
 
 add_library(Vulkan-Headers INTERFACE)
 add_library(Vulkan::Headers ALIAS Vulkan-Headers)
 target_include_directories(Vulkan-Headers INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
+
+if (MSVC AND (MSVC_VERSION GREATER_EQUAL "1934") OR
+    CMAKE_CXX_COMPILER_ID STREQUAL "Clang" AND CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL "16.0" OR
+    CMAKE_CXX_COMPILER_ID STREQUAL "GNU" AND CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL "14.0")
+    set(COMPILER_SUPPORTS_CXX_MODULES TRUE)
+endif()
+
+
+if (CMAKE_VERSION VERSION_GREATER_EQUAL "3.28" AND COMPILER_SUPPORTS_CXX_MODULES)
+    add_library(Vulkan-Module)
+    add_library(Vulkan::VulkanHppModule ALIAS Vulkan-Module)
+    target_sources(Vulkan-Module
+        PUBLIC
+            FILE_SET module
+                TYPE CXX_MODULES
+                BASE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/include"
+                FILES "${CMAKE_CURRENT_SOURCE_DIR}/include/vulkan/vulkan.cppm"
+    )
+    target_compile_features(Vulkan-Module PUBLIC cxx_std_20)
+    target_link_libraries(Vulkan-Module PUBLIC Vulkan-Headers)
+endif ()
 
 if (CMAKE_VERSION VERSION_LESS "3.21")
     # https://cmake.org/cmake/help/latest/variable/PROJECT_IS_TOP_LEVEL.html
@@ -65,8 +86,16 @@ if (VULKAN_HEADERS_ENABLE_INSTALL)
     install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/registry" DESTINATION "${CMAKE_INSTALL_DATADIR}/vulkan" USE_SOURCE_PERMISSIONS)
 
     set_target_properties(Vulkan-Headers PROPERTIES EXPORT_NAME "Headers")
-
     install(TARGETS Vulkan-Headers EXPORT VulkanHeadersConfig INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+
+    if (CMAKE_VERSION VERSION_GREATER_EQUAL "3.28" AND COMPILER_SUPPORTS_CXX_MODULES)
+        install(TARGETS Vulkan-Module
+            EXPORT VulkanHeadersConfig
+            FILE_SET module
+            DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/include/vulkan"
+        )
+    endif()
+
     install(EXPORT VulkanHeadersConfig NAMESPACE "Vulkan::" DESTINATION "share/cmake/VulkanHeaders")
 
     set(version_config "${CMAKE_CURRENT_BINARY_DIR}/generated/VulkanHeadersConfigVersion.cmake")
