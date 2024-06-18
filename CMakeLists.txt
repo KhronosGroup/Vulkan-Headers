@@ -88,14 +88,6 @@ if (VULKAN_HEADERS_ENABLE_INSTALL)
     set_target_properties(Vulkan-Headers PROPERTIES EXPORT_NAME "Headers")
     install(TARGETS Vulkan-Headers EXPORT VulkanHeadersConfig INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
-    if (CMAKE_VERSION VERSION_GREATER_EQUAL "3.28" AND COMPILER_SUPPORTS_CXX_MODULES)
-        install(TARGETS Vulkan-Module
-            EXPORT VulkanHeadersConfig
-            FILE_SET module
-            DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/include/vulkan"
-        )
-    endif()
-
     install(EXPORT VulkanHeadersConfig NAMESPACE "Vulkan::" DESTINATION "share/cmake/VulkanHeaders")
 
     set(version_config "${CMAKE_CURRENT_BINARY_DIR}/generated/VulkanHeadersConfigVersion.cmake")
