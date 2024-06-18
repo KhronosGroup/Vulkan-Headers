@@ -48,8 +48,9 @@ if (MSVC AND (MSVC_VERSION GREATER_EQUAL "1934") OR
     set(COMPILER_SUPPORTS_CXX_MODULES TRUE)
 endif()
 
+option(VULKAN_HEADERS_ENABLE_MODULE "Enables building of the Vulkan C++ module. Default is true if supported by the CMake version and compilers" ${COMPILER_SUPPORTS_CXX_MODULES})
 
-if (CMAKE_VERSION VERSION_GREATER_EQUAL "3.28" AND COMPILER_SUPPORTS_CXX_MODULES)
+if (CMAKE_VERSION VERSION_GREATER_EQUAL "3.28" AND VULKAN_HEADERS_ENABLE_MODULE)
     add_library(Vulkan-Module)
     add_library(Vulkan::VulkanHppModule ALIAS Vulkan-Module)
     target_sources(Vulkan-Module
