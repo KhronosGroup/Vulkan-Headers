@@ -30,8 +30,9 @@ jobs:
           cmakeVersion: ${{ matrix.cmake-version }}
       - uses: ilammy/msvc-dev-cmd@v1
       - run: cmake -S . -B build -D VULKAN_HEADERS_ENABLE_TESTS=ON -D VULKAN_HEADERS_ENABLE_INSTALL=ON -G Ninja
-      - run: cmake --install build/ --prefix build/install
-      - run: ctest --output-on-failure
+      - run: cmake --build ./build --verbose
+      - run: cmake --install build/ --prefix build/install --verbose
+      - run: ctest --output-on-failure --verbose
         working-directory: build
 
   reuse:
