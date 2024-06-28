@@ -1419,6 +1419,11 @@ namespace VULKAN_HPP_NAMESPACE
     ePhysicalDeviceDescriptorPoolOverallocationFeaturesNV      = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_POOL_OVERALLOCATION_FEATURES_NV,
     ePhysicalDeviceRawAccessChainsFeaturesNV                   = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAW_ACCESS_CHAINS_FEATURES_NV,
     ePhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_RELAXED_EXTENDED_INSTRUCTION_FEATURES_KHR,
+    ePhysicalDeviceMaintenance7FeaturesKHR                     = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_7_FEATURES_KHR,
+    ePhysicalDeviceMaintenance7PropertiesKHR                   = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_7_PROPERTIES_KHR,
+    ePhysicalDeviceLayeredApiPropertiesListKHR                 = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_PROPERTIES_LIST_KHR,
+    ePhysicalDeviceLayeredApiPropertiesKHR                     = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_PROPERTIES_KHR,
+    ePhysicalDeviceLayeredApiVulkanPropertiesKHR               = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_VULKAN_PROPERTIES_KHR,
     ePhysicalDeviceShaderAtomicFloat16VectorFeaturesNV         = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT16_VECTOR_FEATURES_NV,
     ePhysicalDeviceShaderReplicatedCompositesFeaturesEXT       = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_REPLICATED_COMPOSITES_FEATURES_EXT,
     ePhysicalDeviceRayTracingValidationFeaturesNV              = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_VALIDATION_FEATURES_NV,
@@ -3573,6 +3578,51 @@ namespace VULKAN_HPP_NAMESPACE
     eUint8EXT = VK_INDEX_TYPE_UINT8_EXT
   };
 
+  //=========================
+  //=== Index Type Traits ===
+  //=========================
+
+  template <typename T>
+  struct IndexTypeValue
+  {
+  };
+
+  template <>
+  struct IndexTypeValue<uint16_t>
+  {
+    static VULKAN_HPP_CONST_OR_CONSTEXPR IndexType value = IndexType::eUint16;
+  };
+
+  template <>
+  struct CppType<IndexType, IndexType::eUint16>
+  {
+    using Type = uint16_t;
+  };
+
+  template <>
+  struct IndexTypeValue<uint32_t>
+  {
+    static VULKAN_HPP_CONST_OR_CONSTEXPR IndexType value = IndexType::eUint32;
+  };
+
+  template <>
+  struct CppType<IndexType, IndexType::eUint32>
+  {
+    using Type = uint32_t;
+  };
+
+  template <>
+  struct IndexTypeValue<uint8_t>
+  {
+    static VULKAN_HPP_CONST_OR_CONSTEXPR IndexType value = IndexType::eUint8KHR;
+  };
+
+  template <>
+  struct CppType<IndexType, IndexType::eUint8KHR>
+  {
+    using Type = uint8_t;
+  };
+
   enum class StencilFaceFlagBits : VkStencilFaceFlags
   {
     eFront                 = VK_STENCIL_FACE_FRONT_BIT,
@@ -3595,6 +3645,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     eInline                              = VK_SUBPASS_CONTENTS_INLINE,
     eSecondaryCommandBuffers             = VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS,
+    eInlineAndSecondaryCommandBuffersKHR = VK_SUBPASS_CONTENTS_INLINE_AND_SECONDARY_COMMAND_BUFFERS_KHR,
     eInlineAndSecondaryCommandBuffersEXT = VK_SUBPASS_CONTENTS_INLINE_AND_SECONDARY_COMMAND_BUFFERS_EXT
   };
 
@@ -4284,8 +4335,9 @@ namespace VULKAN_HPP_NAMESPACE
     eContentsSecondaryCommandBuffers = VK_RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT,
     eSuspending                      = VK_RENDERING_SUSPENDING_BIT,
     eResuming                        = VK_RENDERING_RESUMING_BIT,
-    eContentsInlineEXT               = VK_RENDERING_CONTENTS_INLINE_BIT_EXT,
-    eEnableLegacyDitheringEXT        = VK_RENDERING_ENABLE_LEGACY_DITHERING_BIT_EXT
+    eEnableLegacyDitheringEXT        = VK_RENDERING_ENABLE_LEGACY_DITHERING_BIT_EXT,
+    eContentsInlineKHR               = VK_RENDERING_CONTENTS_INLINE_BIT_KHR,
+    eContentsInlineEXT               = VK_RENDERING_CONTENTS_INLINE_BIT_EXT
   };
   using RenderingFlagBitsKHR = RenderingFlagBits;
 
@@ -4297,8 +4349,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool           isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR RenderingFlags allFlags  = RenderingFlagBits::eContentsSecondaryCommandBuffers | RenderingFlagBits::eSuspending |
-                                                                   RenderingFlagBits::eResuming | RenderingFlagBits::eContentsInlineEXT |
-                                                                   RenderingFlagBits::eEnableLegacyDitheringEXT;
+                                                                   RenderingFlagBits::eResuming | RenderingFlagBits::eEnableLegacyDitheringEXT |
+                                                                   RenderingFlagBits::eContentsInlineKHR;
   };
 
   enum class FormatFeatureFlagBits2 : VkFormatFeatureFlags2
@@ -7091,6 +7143,75 @@ namespace VULKAN_HPP_NAMESPACE
     eString  = VK_LAYER_SETTING_TYPE_STRING_EXT
   };
 
+  //=================================
+  //=== Layer Setting Type Traits ===
+  //=================================
+
+  template <>
+  struct CppType<LayerSettingTypeEXT, LayerSettingTypeEXT::eBool32>
+  {
+    using Type = vk::Bool32;
+  };
+
+  template <>
+  struct CppType<LayerSettingTypeEXT, LayerSettingTypeEXT::eInt32>
+  {
+    using Type = int32_t;
+  };
+
+  template <>
+  struct CppType<LayerSettingTypeEXT, LayerSettingTypeEXT::eInt64>
+  {
+    using Type = int64_t;
+  };
+
+  template <>
+  struct CppType<LayerSettingTypeEXT, LayerSettingTypeEXT::eUint32>
+  {
+    using Type = uint32_t;
+  };
+
+  template <>
+  struct CppType<LayerSettingTypeEXT, LayerSettingTypeEXT::eUint64>
+  {
+    using Type = uint64_t;
+  };
+
+  template <>
+  struct CppType<LayerSettingTypeEXT, LayerSettingTypeEXT::eFloat32>
+  {
+    using Type = float;
+  };
+
+  template <>
+  struct CppType<LayerSettingTypeEXT, LayerSettingTypeEXT::eFloat64>
+  {
+    using Type = double;
+  };
+
+  template <>
+  struct CppType<LayerSettingTypeEXT, LayerSettingTypeEXT::eString>
+  {
+    using Type = char *;
+  };
+
+  template <typename T>
+  bool isSameType( LayerSettingTypeEXT layerSettingType )
+  {
+    switch ( layerSettingType )
+    {
+      case LayerSettingTypeEXT::eBool32: return std::is_same<T, VULKAN_HPP_NAMESPACE::Bool32>::value;
+      case LayerSettingTypeEXT::eInt32: return std::is_same<T, int32_t>::value;
+      case LayerSettingTypeEXT::eInt64: return std::is_same<T, int64_t>::value;
+      case LayerSettingTypeEXT::eUint32: return std::is_same<T, uint32_t>::value;
+      case LayerSettingTypeEXT::eUint64: return std::is_same<T, uint64_t>::value;
+      case LayerSettingTypeEXT::eFloat32: return std::is_same<T, float>::value;
+      case LayerSettingTypeEXT::eFloat64: return std::is_same<T, double>::value;
+      case LayerSettingTypeEXT::eString: return std::is_same<T, char *>::value;
+      default: return false;
+    }
+  }
+
   //=== VK_NV_low_latency2 ===
 
   enum class LatencyMarkerNV
@@ -7190,49 +7311,15 @@ namespace VULKAN_HPP_NAMESPACE
   };
   using TimeDomainEXT = TimeDomainKHR;
 
-  //=========================
-  //=== Index Type Traits ===
-  //=========================
+  //=== VK_KHR_maintenance7 ===
 
-  template <typename T>
-  struct IndexTypeValue
+  enum class PhysicalDeviceLayeredApiKHR
   {
-  };
-
-  template <>
-  struct IndexTypeValue<uint16_t>
-  {
-    static VULKAN_HPP_CONST_OR_CONSTEXPR IndexType value = IndexType::eUint16;
-  };
-
-  template <>
-  struct CppType<IndexType, IndexType::eUint16>
-  {
-    using Type = uint16_t;
-  };
-
-  template <>
-  struct IndexTypeValue<uint32_t>
-  {
-    static VULKAN_HPP_CONST_OR_CONSTEXPR IndexType value = IndexType::eUint32;
-  };
-
-  template <>
-  struct CppType<IndexType, IndexType::eUint32>
-  {
-    using Type = uint32_t;
-  };
-
-  template <>
-  struct IndexTypeValue<uint8_t>
-  {
-    static VULKAN_HPP_CONST_OR_CONSTEXPR IndexType value = IndexType::eUint8KHR;
-  };
-
-  template <>
-  struct CppType<IndexType, IndexType::eUint8KHR>
-  {
-    using Type = uint8_t;
+    eVulkan   = VK_PHYSICAL_DEVICE_LAYERED_API_VULKAN_KHR,
+    eD3D12    = VK_PHYSICAL_DEVICE_LAYERED_API_D3D12_KHR,
+    eMetal    = VK_PHYSICAL_DEVICE_LAYERED_API_METAL_KHR,
+    eOpengl   = VK_PHYSICAL_DEVICE_LAYERED_API_OPENGL_KHR,
+    eOpengles = VK_PHYSICAL_DEVICE_LAYERED_API_OPENGLES_KHR
   };
 
   //===========================================================
