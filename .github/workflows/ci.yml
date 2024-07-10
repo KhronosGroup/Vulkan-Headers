@@ -46,7 +46,7 @@ jobs:
         with:
           cmakeVersion: ${{ matrix.cmake-version }}
       - uses: ilammy/msvc-dev-cmd@v1
-      - run: cmake -S . -B build -D VULKAN_HEADERS_ENABLE_TESTS=ON -D VULKAN_HEADERS_ENABLE_INSTALL=ON -G Ninja -DVULKAN_HEADERS_ENABLE_MODULE=OFF # workaround for compiler bug in 17.10 and before
+      - run: cmake -S . -B build -D VULKAN_HEADERS_ENABLE_TESTS=ON -D VULKAN_HEADERS_ENABLE_INSTALL=ON -G Ninja
       - run: cmake --build ./build
       - run: cmake --install build/ --prefix build/install
       - run: ctest --output-on-failure
