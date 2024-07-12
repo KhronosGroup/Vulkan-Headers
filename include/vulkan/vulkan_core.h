@@ -69,7 +69,7 @@ extern "C" {
 #define VK_API_VERSION_1_0 VK_MAKE_API_VERSION(0, 1, 0, 0)// Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 289
+#define VK_HEADER_VERSION 290
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 3, VK_HEADER_VERSION)
@@ -12928,13 +12928,13 @@ typedef struct VkPipelineRasterizationDepthClipStateCreateInfoEXT {
 
 // VK_EXT_swapchain_colorspace is a preprocessor guard. Do not pass it to API calls.
 #define VK_EXT_swapchain_colorspace 1
-#define VK_EXT_SWAPCHAIN_COLOR_SPACE_SPEC_VERSION 4
+#define VK_EXT_SWAPCHAIN_COLOR_SPACE_SPEC_VERSION 5
 #define VK_EXT_SWAPCHAIN_COLOR_SPACE_EXTENSION_NAME "VK_EXT_swapchain_colorspace"
 
 
 // VK_EXT_hdr_metadata is a preprocessor guard. Do not pass it to API calls.
 #define VK_EXT_hdr_metadata 1
-#define VK_EXT_HDR_METADATA_SPEC_VERSION  2
+#define VK_EXT_HDR_METADATA_SPEC_VERSION  3
 #define VK_EXT_HDR_METADATA_EXTENSION_NAME "VK_EXT_hdr_metadata"
 typedef struct VkXYColorEXT {
     float    x;
