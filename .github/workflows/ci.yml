@@ -52,6 +52,27 @@ jobs:
       - run: ctest --output-on-failure
         working-directory: build
 
+  windows_clang:
+    runs-on: windows-2022
+    strategy:
+      matrix:
+          compiler: [ clang, clang-cl ]
+    steps:
+        - uses: actions/checkout@v4
+        - uses: ilammy/msvc-dev-cmd@v1
+        - run: |
+            cmake -S . -B build `
+            -D CMAKE_C_COMPILER=${{matrix.compiler}} `
+            -D CMAKE_CXX_COMPILER=${{matrix.compiler}} `
+            -D CMAKE_BUILD_TYPE=Release `
+            -D VULKAN_HEADERS_ENABLE_TESTS=ON `
+            -D VULKAN_HEADERS_ENABLE_INSTALL=ON `
+            -G Ninja
+        - run: cmake --build ./build
+        - run: cmake --install build/ --prefix build/install
+        - run: ctest --output-on-failure
+          working-directory: build
+
   reuse:
     runs-on: ubuntu-latest
     steps:
