@@ -12,6 +12,7 @@
 #include <array>     // ArrayWrapperND
 #include <string.h>  // strnlen
 #include <string>    // std::string
+#include <utility>   // std::exchange
 #include <vulkan/vulkan.h>
 #include <vulkan/vulkan_hpp_macros.hpp>
 
@@ -56,7 +57,7 @@ extern "C" __declspec( dllimport ) FARPROC __stdcall GetProcAddress( HINSTANCE h
 #  include <span>
 #endif
 
-static_assert( VK_HEADER_VERSION == 291, "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION == 292, "Wrong VK_HEADER_VERSION!" );
 
 // <tuple> includes <sys/sysmacros.h> through some other header
 // this results in major(x) being resolved to gnu_dev_major(x)
@@ -5886,6 +5887,18 @@ namespace VULKAN_HPP_NAMESPACE
   {
     static ::VULKAN_HPP_NAMESPACE::DispatchLoaderStatic dls;
     return dls;
+  }
+#endif
+
+#if ( 14 <= VULKAN_HPP_CPP_VERSION )
+  using std::exchange;
+#else
+  template <class T, class U = T>
+  VULKAN_HPP_CONSTEXPR_14 VULKAN_HPP_INLINE T exchange( T & obj, U && newValue )
+  {
+    T oldValue = std::move( obj );
+    obj        = std::forward<U>( newValue );
+    return oldValue;
   }
 #endif
 
