@@ -69,7 +69,7 @@ extern "C" {
 #define VK_API_VERSION_1_0 VK_MAKE_API_VERSION(0, 1, 0, 0)// Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 291
+#define VK_HEADER_VERSION 292
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 3, VK_HEADER_VERSION)
@@ -10654,10 +10654,6 @@ typedef enum VkVideoEncodeTuningModeKHR {
     VK_VIDEO_ENCODE_TUNING_MODE_LOSSLESS_KHR = 4,
     VK_VIDEO_ENCODE_TUNING_MODE_MAX_ENUM_KHR = 0x7FFFFFFF
 } VkVideoEncodeTuningModeKHR;
-
-typedef enum VkVideoEncodeFlagBitsKHR {
-    VK_VIDEO_ENCODE_FLAG_BITS_MAX_ENUM_KHR = 0x7FFFFFFF
-} VkVideoEncodeFlagBitsKHR;
 typedef VkFlags VkVideoEncodeFlagsKHR;
 
 typedef enum VkVideoEncodeCapabilityFlagBitsKHR {
@@ -16177,14 +16173,14 @@ typedef struct VkDescriptorAddressInfoEXT {
 
 typedef struct VkDescriptorBufferBindingInfoEXT {
     VkStructureType       sType;
-    void*                 pNext;
+    const void*           pNext;
     VkDeviceAddress       address;
     VkBufferUsageFlags    usage;
 } VkDescriptorBufferBindingInfoEXT;
 
 typedef struct VkDescriptorBufferBindingPushDescriptorBufferHandleEXT {
     VkStructureType    sType;
-    void*              pNext;
+    const void*        pNext;
     VkBuffer           buffer;
 } VkDescriptorBufferBindingPushDescriptorBufferHandleEXT;
 
