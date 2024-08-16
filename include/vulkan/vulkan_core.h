@@ -69,7 +69,7 @@ extern "C" {
 #define VK_API_VERSION_1_0 VK_MAKE_API_VERSION(0, 1, 0, 0)// Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 292
+#define VK_HEADER_VERSION 293
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 3, VK_HEADER_VERSION)
@@ -1121,6 +1121,7 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_POOL_OVERALLOCATION_FEATURES_NV = 1000546000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAW_ACCESS_CHAINS_FEATURES_NV = 1000555000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_RELAXED_EXTENDED_INSTRUCTION_FEATURES_KHR = 1000558000,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMMAND_BUFFER_INHERITANCE_FEATURES_NV = 1000559000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_7_FEATURES_KHR = 1000562000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_7_PROPERTIES_KHR = 1000562001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_PROPERTIES_LIST_KHR = 1000562002,
@@ -19306,6 +19307,18 @@ typedef struct VkPhysicalDeviceRawAccessChainsFeaturesNV {
     void*              pNext;
     VkBool32           shaderRawAccessChains;
 } VkPhysicalDeviceRawAccessChainsFeaturesNV;
+
+
+
+// VK_NV_command_buffer_inheritance is a preprocessor guard. Do not pass it to API calls.
+#define VK_NV_command_buffer_inheritance 1
+#define VK_NV_COMMAND_BUFFER_INHERITANCE_SPEC_VERSION 1
+#define VK_NV_COMMAND_BUFFER_INHERITANCE_EXTENSION_NAME "VK_NV_command_buffer_inheritance"
+typedef struct VkPhysicalDeviceCommandBufferInheritanceFeaturesNV {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           commandBufferInheritance;
+} VkPhysicalDeviceCommandBufferInheritanceFeaturesNV;
 
 
 
