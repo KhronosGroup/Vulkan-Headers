@@ -8,6 +8,9 @@
 #ifndef VULKAN_HANDLES_HPP
 #define VULKAN_HANDLES_HPP
 
+// include-what-you-use: make sure, vulkan.hpp is used by code-completers
+// IWYU pragma: private; include "vulkan.hpp"
+
 namespace VULKAN_HPP_NAMESPACE
 {
 
@@ -1834,6 +1837,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   //=== VK_KHR_shader_relaxed_extended_instruction ===
   struct PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR;
+
+  //=== VK_NV_command_buffer_inheritance ===
+  struct PhysicalDeviceCommandBufferInheritanceFeaturesNV;
 
   //=== VK_KHR_maintenance7 ===
   struct PhysicalDeviceMaintenance7FeaturesKHR;
