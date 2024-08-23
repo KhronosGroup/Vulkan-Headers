@@ -69,7 +69,7 @@ extern "C" {
 #define VK_API_VERSION_1_0 VK_MAKE_API_VERSION(0, 1, 0, 0)// Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 293
+#define VK_HEADER_VERSION 294
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 3, VK_HEADER_VERSION)
@@ -189,6 +189,8 @@ typedef enum VkResult {
     VK_ERROR_INVALID_VIDEO_STD_PARAMETERS_KHR = -1000299000,
     VK_ERROR_COMPRESSION_EXHAUSTED_EXT = -1000338000,
     VK_INCOMPATIBLE_SHADER_BINARY_EXT = 1000482000,
+    VK_PIPELINE_BINARY_MISSING_KHR = 1000483000,
+    VK_ERROR_NOT_ENOUGH_SPACE_KHR = -1000483000,
     VK_ERROR_OUT_OF_POOL_MEMORY_KHR = VK_ERROR_OUT_OF_POOL_MEMORY,
     VK_ERROR_INVALID_EXTERNAL_HANDLE_KHR = VK_ERROR_INVALID_EXTERNAL_HANDLE,
     VK_ERROR_FRAGMENTATION_EXT = VK_ERROR_FRAGMENTATION,
@@ -1043,6 +1045,16 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_OBJECT_FEATURES_EXT = 1000482000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_OBJECT_PROPERTIES_EXT = 1000482001,
     VK_STRUCTURE_TYPE_SHADER_CREATE_INFO_EXT = 1000482002,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_BINARY_FEATURES_KHR = 1000483000,
+    VK_STRUCTURE_TYPE_PIPELINE_BINARY_CREATE_INFO_KHR = 1000483001,
+    VK_STRUCTURE_TYPE_PIPELINE_BINARY_INFO_KHR = 1000483002,
+    VK_STRUCTURE_TYPE_PIPELINE_BINARY_KEY_KHR = 1000483003,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_BINARY_PROPERTIES_KHR = 1000483004,
+    VK_STRUCTURE_TYPE_RELEASE_CAPTURED_PIPELINE_DATA_INFO_KHR = 1000483005,
+    VK_STRUCTURE_TYPE_PIPELINE_BINARY_DATA_INFO_KHR = 1000483006,
+    VK_STRUCTURE_TYPE_PIPELINE_CREATE_INFO_KHR = 1000483007,
+    VK_STRUCTURE_TYPE_DEVICE_PIPELINE_BINARY_INTERNAL_CACHE_CONTROL_KHR = 1000483008,
+    VK_STRUCTURE_TYPE_PIPELINE_BINARY_HANDLES_INFO_KHR = 1000483009,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TILE_PROPERTIES_FEATURES_QCOM = 1000484000,
     VK_STRUCTURE_TYPE_TILE_PROPERTIES_QCOM = 1000484001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_AMIGO_PROFILING_FEATURES_SEC = 1000485000,
@@ -1421,6 +1433,7 @@ typedef enum VkObjectType {
     VK_OBJECT_TYPE_MICROMAP_EXT = 1000396000,
     VK_OBJECT_TYPE_OPTICAL_FLOW_SESSION_NV = 1000464000,
     VK_OBJECT_TYPE_SHADER_EXT = 1000482000,
+    VK_OBJECT_TYPE_PIPELINE_BINARY_KHR = 1000483000,
     VK_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_KHR = VK_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE,
     VK_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_KHR = VK_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION,
     VK_OBJECT_TYPE_PRIVATE_DATA_SLOT_EXT = VK_OBJECT_TYPE_PRIVATE_DATA_SLOT,
@@ -11184,6 +11197,7 @@ static const VkPipelineCreateFlagBits2KHR VK_PIPELINE_CREATE_2_NO_PROTECTED_ACCE
 static const VkPipelineCreateFlagBits2KHR VK_PIPELINE_CREATE_2_PROTECTED_ACCESS_ONLY_BIT_EXT = 0x40000000ULL;
 static const VkPipelineCreateFlagBits2KHR VK_PIPELINE_CREATE_2_RAY_TRACING_DISPLACEMENT_MICROMAP_BIT_NV = 0x10000000ULL;
 static const VkPipelineCreateFlagBits2KHR VK_PIPELINE_CREATE_2_DESCRIPTOR_BUFFER_BIT_EXT = 0x20000000ULL;
+static const VkPipelineCreateFlagBits2KHR VK_PIPELINE_CREATE_2_CAPTURE_DATA_BIT_KHR = 0x80000000ULL;
 
 typedef VkFlags64 VkBufferUsageFlags2KHR;
 
@@ -11316,6 +11330,128 @@ typedef struct VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR {
     VkBool32           rayTracingPositionFetch;
 } VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR;
 
+
+
+// VK_KHR_pipeline_binary is a preprocessor guard. Do not pass it to API calls.
+#define VK_KHR_pipeline_binary 1
+VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkPipelineBinaryKHR)
+#define VK_MAX_PIPELINE_BINARY_KEY_SIZE_KHR 32U
+#define VK_KHR_PIPELINE_BINARY_SPEC_VERSION 1
+#define VK_KHR_PIPELINE_BINARY_EXTENSION_NAME "VK_KHR_pipeline_binary"
+typedef struct VkPhysicalDevicePipelineBinaryFeaturesKHR {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           pipelineBinaries;
+} VkPhysicalDevicePipelineBinaryFeaturesKHR;
+
+typedef struct VkPhysicalDevicePipelineBinaryPropertiesKHR {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           pipelineBinaryInternalCache;
+    VkBool32           pipelineBinaryInternalCacheControl;
+    VkBool32           pipelineBinaryPrefersInternalCache;
+    VkBool32           pipelineBinaryPrecompiledInternalCache;
+    VkBool32           pipelineBinaryCompressedData;
+} VkPhysicalDevicePipelineBinaryPropertiesKHR;
+
+typedef struct VkDevicePipelineBinaryInternalCacheControlKHR {
+    VkStructureType    sType;
+    const void*        pNext;
+    VkBool32           disableInternalCache;
+} VkDevicePipelineBinaryInternalCacheControlKHR;
+
+typedef struct VkPipelineBinaryKeyKHR {
+    VkStructureType    sType;
+    void*              pNext;
+    uint32_t           keySize;
+    uint8_t            key[VK_MAX_PIPELINE_BINARY_KEY_SIZE_KHR];
+} VkPipelineBinaryKeyKHR;
+
+typedef struct VkPipelineBinaryDataKHR {
+    size_t    dataSize;
+    void*     pData;
+} VkPipelineBinaryDataKHR;
+
+typedef struct VkPipelineBinaryKeysAndDataKHR {
+    uint32_t                          binaryCount;
+    const VkPipelineBinaryKeyKHR*     pPipelineBinaryKeys;
+    const VkPipelineBinaryDataKHR*    pPipelineBinaryData;
+} VkPipelineBinaryKeysAndDataKHR;
+
+typedef struct VkPipelineCreateInfoKHR {
+    VkStructureType    sType;
+    void*              pNext;
+} VkPipelineCreateInfoKHR;
+
+typedef struct VkPipelineBinaryCreateInfoKHR {
+    VkStructureType                          sType;
+    const void*                              pNext;
+    const VkPipelineBinaryKeysAndDataKHR*    pKeysAndDataInfo;
+    VkPipeline                               pipeline;
+    const VkPipelineCreateInfoKHR*           pPipelineCreateInfo;
+} VkPipelineBinaryCreateInfoKHR;
+
+typedef struct VkPipelineBinaryInfoKHR {
+    VkStructureType               sType;
+    const void*                   pNext;
+    uint32_t                      binaryCount;
+    const VkPipelineBinaryKHR*    pPipelineBinaries;
+} VkPipelineBinaryInfoKHR;
+
+typedef struct VkReleaseCapturedPipelineDataInfoKHR {
+    VkStructureType    sType;
+    void*              pNext;
+    VkPipeline         pipeline;
+} VkReleaseCapturedPipelineDataInfoKHR;
+
+typedef struct VkPipelineBinaryDataInfoKHR {
+    VkStructureType        sType;
+    void*                  pNext;
+    VkPipelineBinaryKHR    pipelineBinary;
+} VkPipelineBinaryDataInfoKHR;
+
+typedef struct VkPipelineBinaryHandlesInfoKHR {
+    VkStructureType         sType;
+    const void*             pNext;
+    uint32_t                pipelineBinaryCount;
+    VkPipelineBinaryKHR*    pPipelineBinaries;
+} VkPipelineBinaryHandlesInfoKHR;
+
+typedef VkResult (VKAPI_PTR *PFN_vkCreatePipelineBinariesKHR)(VkDevice device, const VkPipelineBinaryCreateInfoKHR* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkPipelineBinaryHandlesInfoKHR* pBinaries);
+typedef void (VKAPI_PTR *PFN_vkDestroyPipelineBinaryKHR)(VkDevice device, VkPipelineBinaryKHR pipelineBinary, const VkAllocationCallbacks* pAllocator);
+typedef VkResult (VKAPI_PTR *PFN_vkGetPipelineKeyKHR)(VkDevice device, const VkPipelineCreateInfoKHR* pPipelineCreateInfo, VkPipelineBinaryKeyKHR* pPipelineKey);
+typedef VkResult (VKAPI_PTR *PFN_vkGetPipelineBinaryDataKHR)(VkDevice device, const VkPipelineBinaryDataInfoKHR* pInfo, VkPipelineBinaryKeyKHR* pPipelineBinaryKey, size_t* pPipelineBinaryDataSize, void* pPipelineBinaryData);
+typedef VkResult (VKAPI_PTR *PFN_vkReleaseCapturedPipelineDataKHR)(VkDevice device, const VkReleaseCapturedPipelineDataInfoKHR* pInfo, const VkAllocationCallbacks* pAllocator);
+
+#ifndef VK_NO_PROTOTYPES
+VKAPI_ATTR VkResult VKAPI_CALL vkCreatePipelineBinariesKHR(
+    VkDevice                                    device,
+    const VkPipelineBinaryCreateInfoKHR*        pCreateInfo,
+    const VkAllocationCallbacks*                pAllocator,
+    VkPipelineBinaryHandlesInfoKHR*             pBinaries);
+
+VKAPI_ATTR void VKAPI_CALL vkDestroyPipelineBinaryKHR(
+    VkDevice                                    device,
+    VkPipelineBinaryKHR                         pipelineBinary,
+    const VkAllocationCallbacks*                pAllocator);
+
+VKAPI_ATTR VkResult VKAPI_CALL vkGetPipelineKeyKHR(
+    VkDevice                                    device,
+    const VkPipelineCreateInfoKHR*              pPipelineCreateInfo,
+    VkPipelineBinaryKeyKHR*                     pPipelineKey);
+
+VKAPI_ATTR VkResult VKAPI_CALL vkGetPipelineBinaryDataKHR(
+    VkDevice                                    device,
+    const VkPipelineBinaryDataInfoKHR*          pInfo,
+    VkPipelineBinaryKeyKHR*                     pPipelineBinaryKey,
+    size_t*                                     pPipelineBinaryDataSize,
+    void*                                       pPipelineBinaryData);
+
+VKAPI_ATTR VkResult VKAPI_CALL vkReleaseCapturedPipelineDataKHR(
+    VkDevice                                    device,
+    const VkReleaseCapturedPipelineDataInfoKHR* pInfo,
+    const VkAllocationCallbacks*                pAllocator);
+#endif
 
 
 // VK_KHR_cooperative_matrix is a preprocessor guard. Do not pass it to API calls.
