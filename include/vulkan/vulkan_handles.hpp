@@ -1000,9 +1000,6 @@ namespace VULKAN_HPP_NAMESPACE
   struct PresentFrameTokenGGP;
 #endif /*VK_USE_PLATFORM_GGP*/
 
-  //=== VK_NV_compute_shader_derivatives ===
-  struct PhysicalDeviceComputeShaderDerivativesFeaturesNV;
-
   //=== VK_NV_mesh_shader ===
   struct PhysicalDeviceMeshShaderFeaturesNV;
   struct PhysicalDeviceMeshShaderPropertiesNV;
@@ -1754,6 +1751,11 @@ namespace VULKAN_HPP_NAMESPACE
   //=== VK_QCOM_multiview_per_view_render_areas ===
   struct PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM;
   struct MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM;
+
+  //=== VK_KHR_compute_shader_derivatives ===
+  struct PhysicalDeviceComputeShaderDerivativesFeaturesKHR;
+  using PhysicalDeviceComputeShaderDerivativesFeaturesNV = PhysicalDeviceComputeShaderDerivativesFeaturesKHR;
+  struct PhysicalDeviceComputeShaderDerivativesPropertiesKHR;
 
   //=== VK_KHR_video_decode_av1 ===
   struct VideoDecodeAV1ProfileInfoKHR;
@@ -14457,12 +14459,6 @@ namespace VULKAN_HPP_NAMESPACE
     VULKAN_HPP_NODISCARD Result getFaultInfoEXT( VULKAN_HPP_NAMESPACE::DeviceFaultCountsEXT * pFaultCounts,
                                                  VULKAN_HPP_NAMESPACE::DeviceFaultInfoEXT *   pFaultInfo,
                                                  Dispatch const & d VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const VULKAN_HPP_NOEXCEPT;
-#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
-    template <typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    VULKAN_HPP_NODISCARD typename ResultValueType<std::pair<VULKAN_HPP_NAMESPACE::DeviceFaultCountsEXT, VULKAN_HPP_NAMESPACE::DeviceFaultInfoEXT>>::type
-      getFaultInfoEXT( Dispatch const & d VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const;
-#endif /* VULKAN_HPP_DISABLE_ENHANCED_MODE */
-
 #if defined( VK_USE_PLATFORM_FUCHSIA )
     //=== VK_FUCHSIA_external_memory ===
 
