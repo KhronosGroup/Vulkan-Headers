@@ -42,7 +42,7 @@ add_library(Vulkan-Headers INTERFACE)
 add_library(Vulkan::Headers ALIAS Vulkan-Headers)
 target_include_directories(Vulkan-Headers INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
 
-if (MSVC AND (MSVC_VERSION GREATER_EQUAL "1941") OR
+if ((CMAKE_CXX_COMPILER_ID STREQUAL "MSVC" AND (MSVC_VERSION GREATER_EQUAL "1941")) OR
     # clang-cl doesn't currently support modules
     (CMAKE_CXX_COMPILER_ID STREQUAL "Clang"
         AND CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL "16.0"
