@@ -69,7 +69,7 @@ extern "C" {
 #define VK_API_VERSION_1_0 VK_MAKE_API_VERSION(0, 1, 0, 0)// Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 296
+#define VK_HEADER_VERSION 297
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 3, VK_HEADER_VERSION)
@@ -902,6 +902,7 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_CONTROL_FEATURES_EXT = 1000355000,
     VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_DEPTH_CLIP_CONTROL_CREATE_INFO_EXT = 1000355001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIMITIVE_TOPOLOGY_LIST_RESTART_FEATURES_EXT = 1000356000,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_MODE_FIFO_LATEST_READY_FEATURES_EXT = 1000361000,
     VK_STRUCTURE_TYPE_IMPORT_MEMORY_ZIRCON_HANDLE_INFO_FUCHSIA = 1000364000,
     VK_STRUCTURE_TYPE_MEMORY_ZIRCON_HANDLE_PROPERTIES_FUCHSIA = 1000364001,
     VK_STRUCTURE_TYPE_MEMORY_GET_ZIRCON_HANDLE_INFO_FUCHSIA = 1000364002,
@@ -7633,6 +7634,7 @@ typedef enum VkPresentModeKHR {
     VK_PRESENT_MODE_FIFO_RELAXED_KHR = 3,
     VK_PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR = 1000111000,
     VK_PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR = 1000111001,
+    VK_PRESENT_MODE_FIFO_LATEST_READY_EXT = 1000361000,
     VK_PRESENT_MODE_MAX_ENUM_KHR = 0x7FFFFFFF
 } VkPresentModeKHR;
 
@@ -17094,6 +17096,18 @@ typedef struct VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT {
     VkBool32           primitiveTopologyListRestart;
     VkBool32           primitiveTopologyPatchListRestart;
 } VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT;
+
+
+
+// VK_EXT_present_mode_fifo_latest_ready is a preprocessor guard. Do not pass it to API calls.
+#define VK_EXT_present_mode_fifo_latest_ready 1
+#define VK_EXT_PRESENT_MODE_FIFO_LATEST_READY_SPEC_VERSION 1
+#define VK_EXT_PRESENT_MODE_FIFO_LATEST_READY_EXTENSION_NAME "VK_EXT_present_mode_fifo_latest_ready"
+typedef struct VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           presentModeFifoLatestReady;
+} VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT;
 
 
 

@@ -2166,6 +2166,10 @@ export namespace VULKAN_HPP_NAMESPACE
   using VULKAN_HPP_NAMESPACE::KHRFormatFeatureFlags2ExtensionName;
   using VULKAN_HPP_NAMESPACE::KHRFormatFeatureFlags2SpecVersion;
 
+  //=== VK_EXT_present_mode_fifo_latest_ready ===
+  using VULKAN_HPP_NAMESPACE::EXTPresentModeFifoLatestReadyExtensionName;
+  using VULKAN_HPP_NAMESPACE::EXTPresentModeFifoLatestReadySpecVersion;
+
 #if defined( VK_USE_PLATFORM_FUCHSIA )
   //=== VK_FUCHSIA_external_memory ===
   using VULKAN_HPP_NAMESPACE::FUCHSIAExternalMemoryExtensionName;
@@ -4016,6 +4020,9 @@ export namespace VULKAN_HPP_NAMESPACE
 
   //=== VK_EXT_primitive_topology_list_restart ===
   using VULKAN_HPP_NAMESPACE::PhysicalDevicePrimitiveTopologyListRestartFeaturesEXT;
+
+  //=== VK_EXT_present_mode_fifo_latest_ready ===
+  using VULKAN_HPP_NAMESPACE::PhysicalDevicePresentModeFifoLatestReadyFeaturesEXT;
 
 #if defined( VK_USE_PLATFORM_FUCHSIA )
   //=== VK_FUCHSIA_external_memory ===

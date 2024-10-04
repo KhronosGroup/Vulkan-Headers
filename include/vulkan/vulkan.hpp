@@ -63,7 +63,7 @@ extern "C" __declspec( dllimport ) FARPROC __stdcall GetProcAddress( HINSTANCE h
 #  include <span>
 #endif
 
-static_assert( VK_HEADER_VERSION == 296, "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION == 297, "Wrong VK_HEADER_VERSION!" );
 
 // <tuple> includes <sys/sysmacros.h> through some other header
 // this results in major(x) being resolved to gnu_dev_major(x)
@@ -8233,6 +8233,10 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_CONSTEXPR_INLINE auto KHRFormatFeatureFlags2ExtensionName = VK_KHR_FORMAT_FEATURE_FLAGS_2_EXTENSION_NAME;
   VULKAN_HPP_CONSTEXPR_INLINE auto KHRFormatFeatureFlags2SpecVersion   = VK_KHR_FORMAT_FEATURE_FLAGS_2_SPEC_VERSION;
 
+  //=== VK_EXT_present_mode_fifo_latest_ready ===
+  VULKAN_HPP_CONSTEXPR_INLINE auto EXTPresentModeFifoLatestReadyExtensionName = VK_EXT_PRESENT_MODE_FIFO_LATEST_READY_EXTENSION_NAME;
+  VULKAN_HPP_CONSTEXPR_INLINE auto EXTPresentModeFifoLatestReadySpecVersion   = VK_EXT_PRESENT_MODE_FIFO_LATEST_READY_SPEC_VERSION;
+
 #if defined( VK_USE_PLATFORM_FUCHSIA )
   //=== VK_FUCHSIA_external_memory ===
   VULKAN_HPP_CONSTEXPR_INLINE auto FUCHSIAExternalMemoryExtensionName = VK_FUCHSIA_EXTERNAL_MEMORY_EXTENSION_NAME;
@@ -14236,6 +14240,25 @@ namespace VULKAN_HPP_NAMESPACE
 
   template <>
   struct StructExtends<PhysicalDevicePrimitiveTopologyListRestartFeaturesEXT, DeviceCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  //=== VK_EXT_present_mode_fifo_latest_ready ===
+  template <>
+  struct StructExtends<PhysicalDevicePresentModeFifoLatestReadyFeaturesEXT, PhysicalDeviceFeatures2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<PhysicalDevicePresentModeFifoLatestReadyFeaturesEXT, DeviceCreateInfo>
   {
     enum
     {

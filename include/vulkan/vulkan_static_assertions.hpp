@@ -5784,6 +5784,16 @@ VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::Physical
 VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::PhysicalDevicePrimitiveTopologyListRestartFeaturesEXT>::value,
                           "PhysicalDevicePrimitiveTopologyListRestartFeaturesEXT is not nothrow_move_constructible!" );
 
+//=== VK_EXT_present_mode_fifo_latest_ready ===
+
+VULKAN_HPP_STATIC_ASSERT( sizeof( VULKAN_HPP_NAMESPACE::PhysicalDevicePresentModeFifoLatestReadyFeaturesEXT ) ==
+                            sizeof( VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT ),
+                          "struct and wrapper have different size!" );
+VULKAN_HPP_STATIC_ASSERT( std::is_standard_layout<VULKAN_HPP_NAMESPACE::PhysicalDevicePresentModeFifoLatestReadyFeaturesEXT>::value,
+                          "struct wrapper is not a standard layout!" );
+VULKAN_HPP_STATIC_ASSERT( std::is_nothrow_move_constructible<VULKAN_HPP_NAMESPACE::PhysicalDevicePresentModeFifoLatestReadyFeaturesEXT>::value,
+                          "PhysicalDevicePresentModeFifoLatestReadyFeaturesEXT is not nothrow_move_constructible!" );
+
 #if defined( VK_USE_PLATFORM_FUCHSIA )
 //=== VK_FUCHSIA_external_memory ===
 
