@@ -346,6 +346,7 @@ namespace VULKAN_HPP_NAMESPACE
       "VK_EXT_depth_clip_control",
       "VK_EXT_primitive_topology_list_restart",
       "VK_KHR_format_feature_flags2",
+      "VK_EXT_present_mode_fifo_latest_ready",
 #if defined( VK_USE_PLATFORM_FUCHSIA )
       "VK_FUCHSIA_external_memory",
       "VK_FUCHSIA_external_semaphore",
@@ -1827,6 +1828,11 @@ namespace VULKAN_HPP_NAMESPACE
               "VK_KHR_get_physical_device_properties2",
             } } },
           { "VK_VERSION_1_1", { {} } } } },
+      { "VK_EXT_present_mode_fifo_latest_ready",
+        { { "VK_VERSION_1_0",
+            { {
+              "VK_KHR_swapchain",
+            } } } } },
 #if defined( VK_USE_PLATFORM_FUCHSIA )
       { "VK_FUCHSIA_external_memory",
         { { "VK_VERSION_1_0",
@@ -3081,7 +3087,7 @@ namespace VULKAN_HPP_NAMESPACE
         || ( extension == "VK_VALVE_mutable_descriptor_type" ) || ( extension == "VK_EXT_vertex_input_dynamic_state" ) ||
            ( extension == "VK_EXT_physical_device_drm" ) || ( extension == "VK_EXT_device_address_binding_report" ) ||
            ( extension == "VK_EXT_depth_clip_control" ) || ( extension == "VK_EXT_primitive_topology_list_restart" ) ||
-           ( extension == "VK_KHR_format_feature_flags2" )
+           ( extension == "VK_KHR_format_feature_flags2" ) || ( extension == "VK_EXT_present_mode_fifo_latest_ready" )
 #if defined( VK_USE_PLATFORM_FUCHSIA )
         || ( extension == "VK_FUCHSIA_external_memory" ) || ( extension == "VK_FUCHSIA_external_semaphore" ) || ( extension == "VK_FUCHSIA_buffer_collection" )
 #endif /*VK_USE_PLATFORM_FUCHSIA*/

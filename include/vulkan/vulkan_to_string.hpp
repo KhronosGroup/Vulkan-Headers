@@ -4384,6 +4384,7 @@ namespace VULKAN_HPP_NAMESPACE
       case StructureType::ePhysicalDeviceDepthClipControlFeaturesEXT: return "PhysicalDeviceDepthClipControlFeaturesEXT";
       case StructureType::ePipelineViewportDepthClipControlCreateInfoEXT: return "PipelineViewportDepthClipControlCreateInfoEXT";
       case StructureType::ePhysicalDevicePrimitiveTopologyListRestartFeaturesEXT: return "PhysicalDevicePrimitiveTopologyListRestartFeaturesEXT";
+      case StructureType::ePhysicalDevicePresentModeFifoLatestReadyFeaturesEXT: return "PhysicalDevicePresentModeFifoLatestReadyFeaturesEXT";
 #if defined( VK_USE_PLATFORM_FUCHSIA )
       case StructureType::eImportMemoryZirconHandleInfoFUCHSIA: return "ImportMemoryZirconHandleInfoFUCHSIA";
       case StructureType::eMemoryZirconHandlePropertiesFUCHSIA: return "MemoryZirconHandlePropertiesFUCHSIA";
@@ -6914,6 +6915,7 @@ namespace VULKAN_HPP_NAMESPACE
       case PresentModeKHR::eFifoRelaxed: return "FifoRelaxed";
       case PresentModeKHR::eSharedDemandRefresh: return "SharedDemandRefresh";
       case PresentModeKHR::eSharedContinuousRefresh: return "SharedContinuousRefresh";
+      case PresentModeKHR::eFifoLatestReadyEXT: return "FifoLatestReadyEXT";
       default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
     }
   }

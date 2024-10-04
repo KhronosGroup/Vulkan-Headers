@@ -1401,6 +1401,9 @@ namespace VULKAN_HPP_NAMESPACE
   //=== VK_EXT_primitive_topology_list_restart ===
   struct PhysicalDevicePrimitiveTopologyListRestartFeaturesEXT;
 
+  //=== VK_EXT_present_mode_fifo_latest_ready ===
+  struct PhysicalDevicePresentModeFifoLatestReadyFeaturesEXT;
+
 #if defined( VK_USE_PLATFORM_FUCHSIA )
   //=== VK_FUCHSIA_external_memory ===
   struct ImportMemoryZirconHandleInfoFUCHSIA;
