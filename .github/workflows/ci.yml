@@ -7,8 +7,6 @@ name: ci
 on:
   push:
   pull_request:
-    branches:
-    - main
 
 env:
   CMAKE_GENERATOR: Ninja
@@ -19,6 +17,7 @@ permissions:
 jobs:
   cmake-unix:
     runs-on: ${{ matrix.os }}
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name
     strategy:
       matrix:
         os: [ ubuntu-latest, macos-latest ]
@@ -37,6 +36,7 @@ jobs:
 
   cmake-windows:
     runs-on: windows-latest
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name
     strategy:
       matrix:
         cmake-version: [ '3.15', 'latest']
@@ -54,6 +54,7 @@ jobs:
 
   windows_clang:
     runs-on: windows-2022
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name
     strategy:
       matrix:
           compiler: [ clang, clang-cl ]
@@ -75,6 +76,7 @@ jobs:
 
   reuse:
     runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name
     steps:
     - uses: actions/checkout@v4
     - name: REUSE Compliance Check
