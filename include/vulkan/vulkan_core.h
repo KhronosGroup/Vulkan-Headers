@@ -69,7 +69,7 @@ extern "C" {
 #define VK_API_VERSION_1_0 VK_MAKE_API_VERSION(0, 1, 0, 0)// Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 299
+#define VK_HEADER_VERSION 300
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 3, VK_HEADER_VERSION)
@@ -1163,6 +1163,9 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_IMAGE_ALIGNMENT_CONTROL_CREATE_INFO_MESA = 1000575002,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_CONTROL_FEATURES_EXT = 1000582000,
     VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_DEPTH_CLAMP_CONTROL_CREATE_INFO_EXT = 1000582001,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_FEATURES_NV = 1000593000,
+    VK_STRUCTURE_TYPE_COOPERATIVE_MATRIX_FLEXIBLE_DIMENSIONS_PROPERTIES_NV = 1000593001,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_PROPERTIES_NV = 1000593002,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETER_FEATURES = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES,
   // VK_STRUCTURE_TYPE_DEBUG_REPORT_CREATE_INFO_EXT is a deprecated alias
@@ -19896,6 +19899,55 @@ typedef struct VkPipelineViewportDepthClampControlCreateInfoEXT {
     const VkDepthClampRangeEXT*    pDepthClampRange;
 } VkPipelineViewportDepthClampControlCreateInfoEXT;
 
+
+
+// VK_NV_cooperative_matrix2 is a preprocessor guard. Do not pass it to API calls.
+#define VK_NV_cooperative_matrix2 1
+#define VK_NV_COOPERATIVE_MATRIX_2_SPEC_VERSION 1
+#define VK_NV_COOPERATIVE_MATRIX_2_EXTENSION_NAME "VK_NV_cooperative_matrix2"
+typedef struct VkCooperativeMatrixFlexibleDimensionsPropertiesNV {
+    VkStructureType       sType;
+    void*                 pNext;
+    uint32_t              MGranularity;
+    uint32_t              NGranularity;
+    uint32_t              KGranularity;
+    VkComponentTypeKHR    AType;
+    VkComponentTypeKHR    BType;
+    VkComponentTypeKHR    CType;
+    VkComponentTypeKHR    ResultType;
+    VkBool32              saturatingAccumulation;
+    VkScopeKHR            scope;
+    uint32_t              workgroupInvocations;
+} VkCooperativeMatrixFlexibleDimensionsPropertiesNV;
+
+typedef struct VkPhysicalDeviceCooperativeMatrix2FeaturesNV {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           cooperativeMatrixWorkgroupScope;
+    VkBool32           cooperativeMatrixFlexibleDimensions;
+    VkBool32           cooperativeMatrixReductions;
+    VkBool32           cooperativeMatrixConversions;
+    VkBool32           cooperativeMatrixPerElementOperations;
+    VkBool32           cooperativeMatrixTensorAddressing;
+    VkBool32           cooperativeMatrixBlockLoads;
+} VkPhysicalDeviceCooperativeMatrix2FeaturesNV;
+
+typedef struct VkPhysicalDeviceCooperativeMatrix2PropertiesNV {
+    VkStructureType    sType;
+    void*              pNext;
+    uint32_t           cooperativeMatrixWorkgroupScopeMaxWorkgroupSize;
+    uint32_t           cooperativeMatrixFlexibleDimensionsMaxDimension;
+    uint32_t           cooperativeMatrixWorkgroupScopeReservedSharedMemory;
+} VkPhysicalDeviceCooperativeMatrix2PropertiesNV;
+
+typedef VkResult (VKAPI_PTR *PFN_vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV)(VkPhysicalDevice physicalDevice, uint32_t* pPropertyCount, VkCooperativeMatrixFlexibleDimensionsPropertiesNV* pProperties);
+
+#ifndef VK_NO_PROTOTYPES
+VKAPI_ATTR VkResult VKAPI_CALL vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV(
+    VkPhysicalDevice                            physicalDevice,
+    uint32_t*                                   pPropertyCount,
+    VkCooperativeMatrixFlexibleDimensionsPropertiesNV* pProperties);
+#endif
 
 
 // VK_KHR_acceleration_structure is a preprocessor guard. Do not pass it to API calls.
