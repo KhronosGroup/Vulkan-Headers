@@ -69,7 +69,7 @@ extern "C" {
 #define VK_API_VERSION_1_0 VK_MAKE_API_VERSION(0, 1, 0, 0)// Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 300
+#define VK_HEADER_VERSION 301
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 3, VK_HEADER_VERSION)
@@ -1163,6 +1163,8 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_IMAGE_ALIGNMENT_CONTROL_CREATE_INFO_MESA = 1000575002,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_CONTROL_FEATURES_EXT = 1000582000,
     VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_DEPTH_CLAMP_CONTROL_CREATE_INFO_EXT = 1000582001,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HDR_VIVID_FEATURES_HUAWEI = 1000590000,
+    VK_STRUCTURE_TYPE_HDR_VIVID_DYNAMIC_METADATA_HUAWEI = 1000590001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_FEATURES_NV = 1000593000,
     VK_STRUCTURE_TYPE_COOPERATIVE_MATRIX_FLEXIBLE_DIMENSIONS_PROPERTIES_NV = 1000593001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_PROPERTIES_NV = 1000593002,
@@ -19898,6 +19900,25 @@ typedef struct VkPipelineViewportDepthClampControlCreateInfoEXT {
     VkDepthClampModeEXT            depthClampMode;
     const VkDepthClampRangeEXT*    pDepthClampRange;
 } VkPipelineViewportDepthClampControlCreateInfoEXT;
+
+
+
+// VK_HUAWEI_hdr_vivid is a preprocessor guard. Do not pass it to API calls.
+#define VK_HUAWEI_hdr_vivid 1
+#define VK_HUAWEI_HDR_VIVID_SPEC_VERSION  1
+#define VK_HUAWEI_HDR_VIVID_EXTENSION_NAME "VK_HUAWEI_hdr_vivid"
+typedef struct VkPhysicalDeviceHdrVividFeaturesHUAWEI {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           hdrVivid;
+} VkPhysicalDeviceHdrVividFeaturesHUAWEI;
+
+typedef struct VkHdrVividDynamicMetadataHUAWEI {
+    VkStructureType    sType;
+    const void*        pNext;
+    size_t             dynamicMetadataSize;
+    const void*        pDynamicMetadata;
+} VkHdrVividDynamicMetadataHUAWEI;
 
 
 
