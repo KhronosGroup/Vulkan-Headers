@@ -872,6 +872,18 @@ export namespace VULKAN_HPP_NAMESPACE
   using VULKAN_HPP_NAMESPACE::ScopeKHR;
   using VULKAN_HPP_NAMESPACE::ScopeNV;
 
+  //=== VK_KHR_video_encode_av1 ===
+  using VULKAN_HPP_NAMESPACE::VideoEncodeAV1CapabilityFlagBitsKHR;
+  using VULKAN_HPP_NAMESPACE::VideoEncodeAV1CapabilityFlagsKHR;
+  using VULKAN_HPP_NAMESPACE::VideoEncodeAV1PredictionModeKHR;
+  using VULKAN_HPP_NAMESPACE::VideoEncodeAV1RateControlFlagBitsKHR;
+  using VULKAN_HPP_NAMESPACE::VideoEncodeAV1RateControlFlagsKHR;
+  using VULKAN_HPP_NAMESPACE::VideoEncodeAV1RateControlGroupKHR;
+  using VULKAN_HPP_NAMESPACE::VideoEncodeAV1StdFlagBitsKHR;
+  using VULKAN_HPP_NAMESPACE::VideoEncodeAV1StdFlagsKHR;
+  using VULKAN_HPP_NAMESPACE::VideoEncodeAV1SuperblockSizeFlagBitsKHR;
+  using VULKAN_HPP_NAMESPACE::VideoEncodeAV1SuperblockSizeFlagsKHR;
+
   //=== VK_QCOM_image_processing2 ===
   using VULKAN_HPP_NAMESPACE::BlockMatchWindowCompareModeQCOM;
 
@@ -888,6 +900,9 @@ export namespace VULKAN_HPP_NAMESPACE
   //=== VK_KHR_calibrated_timestamps ===
   using VULKAN_HPP_NAMESPACE::TimeDomainEXT;
   using VULKAN_HPP_NAMESPACE::TimeDomainKHR;
+
+  //=== VK_NV_display_stereo ===
+  using VULKAN_HPP_NAMESPACE::DisplaySurfaceStereoTypeNV;
 
   //=== VK_KHR_maintenance7 ===
   using VULKAN_HPP_NAMESPACE::PhysicalDeviceLayeredApiKHR;
@@ -2498,6 +2513,10 @@ export namespace VULKAN_HPP_NAMESPACE
   using VULKAN_HPP_NAMESPACE::KHRVideoDecodeAv1SpecVersion;
   using VULKAN_HPP_NAMESPACE::MaxVideoAv1ReferencesPerFrameKHR;
 
+  //=== VK_KHR_video_encode_av1 ===
+  using VULKAN_HPP_NAMESPACE::KHRVideoEncodeAv1ExtensionName;
+  using VULKAN_HPP_NAMESPACE::KHRVideoEncodeAv1SpecVersion;
+
   //=== VK_KHR_video_maintenance1 ===
   using VULKAN_HPP_NAMESPACE::KHRVideoMaintenance1ExtensionName;
   using VULKAN_HPP_NAMESPACE::KHRVideoMaintenance1SpecVersion;
@@ -2572,6 +2591,14 @@ export namespace VULKAN_HPP_NAMESPACE
   using VULKAN_HPP_NAMESPACE::NVDescriptorPoolOverallocationExtensionName;
   using VULKAN_HPP_NAMESPACE::NVDescriptorPoolOverallocationSpecVersion;
 
+  //=== VK_NV_display_stereo ===
+  using VULKAN_HPP_NAMESPACE::NVDisplayStereoExtensionName;
+  using VULKAN_HPP_NAMESPACE::NVDisplayStereoSpecVersion;
+
+  //=== VK_KHR_video_encode_quantization_map ===
+  using VULKAN_HPP_NAMESPACE::KHRVideoEncodeQuantizationMapExtensionName;
+  using VULKAN_HPP_NAMESPACE::KHRVideoEncodeQuantizationMapSpecVersion;
+
   //=== VK_NV_raw_access_chains ===
   using VULKAN_HPP_NAMESPACE::NVRawAccessChainsExtensionName;
   using VULKAN_HPP_NAMESPACE::NVRawAccessChainsSpecVersion;
@@ -2619,6 +2646,10 @@ export namespace VULKAN_HPP_NAMESPACE
   //=== VK_NV_cooperative_matrix2 ===
   using VULKAN_HPP_NAMESPACE::NVCooperativeMatrix2ExtensionName;
   using VULKAN_HPP_NAMESPACE::NVCooperativeMatrix2SpecVersion;
+
+  //=== VK_EXT_vertex_attribute_robustness ===
+  using VULKAN_HPP_NAMESPACE::EXTVertexAttributeRobustnessExtensionName;
+  using VULKAN_HPP_NAMESPACE::EXTVertexAttributeRobustnessSpecVersion;
 
   //========================
   //=== CONSTEXPR VALUEs ===
@@ -3209,6 +3240,7 @@ export namespace VULKAN_HPP_NAMESPACE
   using VULKAN_HPP_NAMESPACE::CuFunctionCreateInfoNVX;
   using VULKAN_HPP_NAMESPACE::CuLaunchInfoNVX;
   using VULKAN_HPP_NAMESPACE::CuModuleCreateInfoNVX;
+  using VULKAN_HPP_NAMESPACE::CuModuleTexturingModeCreateInfoNVX;
 
   //=== VK_NVX_image_view_handle ===
   using VULKAN_HPP_NAMESPACE::ImageViewAddressPropertiesNVX;
@@ -4400,6 +4432,21 @@ export namespace VULKAN_HPP_NAMESPACE
   using VULKAN_HPP_NAMESPACE::VideoDecodeAV1ProfileInfoKHR;
   using VULKAN_HPP_NAMESPACE::VideoDecodeAV1SessionParametersCreateInfoKHR;
 
+  //=== VK_KHR_video_encode_av1 ===
+  using VULKAN_HPP_NAMESPACE::PhysicalDeviceVideoEncodeAV1FeaturesKHR;
+  using VULKAN_HPP_NAMESPACE::VideoEncodeAV1CapabilitiesKHR;
+  using VULKAN_HPP_NAMESPACE::VideoEncodeAV1DpbSlotInfoKHR;
+  using VULKAN_HPP_NAMESPACE::VideoEncodeAV1FrameSizeKHR;
+  using VULKAN_HPP_NAMESPACE::VideoEncodeAV1GopRemainingFrameInfoKHR;
+  using VULKAN_HPP_NAMESPACE::VideoEncodeAV1PictureInfoKHR;
+  using VULKAN_HPP_NAMESPACE::VideoEncodeAV1ProfileInfoKHR;
+  using VULKAN_HPP_NAMESPACE::VideoEncodeAV1QIndexKHR;
+  using VULKAN_HPP_NAMESPACE::VideoEncodeAV1QualityLevelPropertiesKHR;
+  using VULKAN_HPP_NAMESPACE::VideoEncodeAV1RateControlInfoKHR;
+  using VULKAN_HPP_NAMESPACE::VideoEncodeAV1RateControlLayerInfoKHR;
+  using VULKAN_HPP_NAMESPACE::VideoEncodeAV1SessionCreateInfoKHR;
+  using VULKAN_HPP_NAMESPACE::VideoEncodeAV1SessionParametersCreateInfoKHR;
+
   //=== VK_KHR_video_maintenance1 ===
   using VULKAN_HPP_NAMESPACE::PhysicalDeviceVideoMaintenance1FeaturesKHR;
   using VULKAN_HPP_NAMESPACE::VideoInlineQueryInfoKHR;
@@ -4484,6 +4531,22 @@ export namespace VULKAN_HPP_NAMESPACE
   //=== VK_NV_descriptor_pool_overallocation ===
   using VULKAN_HPP_NAMESPACE::PhysicalDeviceDescriptorPoolOverallocationFeaturesNV;
 
+  //=== VK_NV_display_stereo ===
+  using VULKAN_HPP_NAMESPACE::DisplayModeStereoPropertiesNV;
+  using VULKAN_HPP_NAMESPACE::DisplaySurfaceStereoCreateInfoNV;
+
+  //=== VK_KHR_video_encode_quantization_map ===
+  using VULKAN_HPP_NAMESPACE::PhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR;
+  using VULKAN_HPP_NAMESPACE::VideoEncodeAV1QuantizationMapCapabilitiesKHR;
+  using VULKAN_HPP_NAMESPACE::VideoEncodeH264QuantizationMapCapabilitiesKHR;
+  using VULKAN_HPP_NAMESPACE::VideoEncodeH265QuantizationMapCapabilitiesKHR;
+  using VULKAN_HPP_NAMESPACE::VideoEncodeQuantizationMapCapabilitiesKHR;
+  using VULKAN_HPP_NAMESPACE::VideoEncodeQuantizationMapInfoKHR;
+  using VULKAN_HPP_NAMESPACE::VideoEncodeQuantizationMapSessionParametersCreateInfoKHR;
+  using VULKAN_HPP_NAMESPACE::VideoFormatAV1QuantizationMapPropertiesKHR;
+  using VULKAN_HPP_NAMESPACE::VideoFormatH265QuantizationMapPropertiesKHR;
+  using VULKAN_HPP_NAMESPACE::VideoFormatQuantizationMapPropertiesKHR;
+
   //=== VK_NV_raw_access_chains ===
   using VULKAN_HPP_NAMESPACE::PhysicalDeviceRawAccessChainsFeaturesNV;
 
@@ -4552,6 +4615,9 @@ export namespace VULKAN_HPP_NAMESPACE
   using VULKAN_HPP_NAMESPACE::CooperativeMatrixFlexibleDimensionsPropertiesNV;
   using VULKAN_HPP_NAMESPACE::PhysicalDeviceCooperativeMatrix2FeaturesNV;
   using VULKAN_HPP_NAMESPACE::PhysicalDeviceCooperativeMatrix2PropertiesNV;
+
+  //=== VK_EXT_vertex_attribute_robustness ===
+  using VULKAN_HPP_NAMESPACE::PhysicalDeviceVertexAttributeRobustnessFeaturesEXT;
 
   //===============
   //=== HANDLEs ===

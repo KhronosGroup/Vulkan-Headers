@@ -572,6 +572,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   //=== VK_NVX_binary_import ===
   struct CuModuleCreateInfoNVX;
+  struct CuModuleTexturingModeCreateInfoNVX;
   struct CuFunctionCreateInfoNVX;
   struct CuLaunchInfoNVX;
 
@@ -1765,6 +1766,21 @@ namespace VULKAN_HPP_NAMESPACE
   struct VideoDecodeAV1PictureInfoKHR;
   struct VideoDecodeAV1DpbSlotInfoKHR;
 
+  //=== VK_KHR_video_encode_av1 ===
+  struct PhysicalDeviceVideoEncodeAV1FeaturesKHR;
+  struct VideoEncodeAV1CapabilitiesKHR;
+  struct VideoEncodeAV1QualityLevelPropertiesKHR;
+  struct VideoEncodeAV1SessionCreateInfoKHR;
+  struct VideoEncodeAV1SessionParametersCreateInfoKHR;
+  struct VideoEncodeAV1PictureInfoKHR;
+  struct VideoEncodeAV1DpbSlotInfoKHR;
+  struct VideoEncodeAV1ProfileInfoKHR;
+  struct VideoEncodeAV1QIndexKHR;
+  struct VideoEncodeAV1FrameSizeKHR;
+  struct VideoEncodeAV1GopRemainingFrameInfoKHR;
+  struct VideoEncodeAV1RateControlInfoKHR;
+  struct VideoEncodeAV1RateControlLayerInfoKHR;
+
   //=== VK_KHR_video_maintenance1 ===
   struct PhysicalDeviceVideoMaintenance1FeaturesKHR;
   struct VideoInlineQueryInfoKHR;
@@ -1849,6 +1865,22 @@ namespace VULKAN_HPP_NAMESPACE
   //=== VK_NV_descriptor_pool_overallocation ===
   struct PhysicalDeviceDescriptorPoolOverallocationFeaturesNV;
 
+  //=== VK_NV_display_stereo ===
+  struct DisplaySurfaceStereoCreateInfoNV;
+  struct DisplayModeStereoPropertiesNV;
+
+  //=== VK_KHR_video_encode_quantization_map ===
+  struct VideoEncodeQuantizationMapCapabilitiesKHR;
+  struct VideoFormatQuantizationMapPropertiesKHR;
+  struct VideoEncodeQuantizationMapInfoKHR;
+  struct VideoEncodeQuantizationMapSessionParametersCreateInfoKHR;
+  struct PhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR;
+  struct VideoEncodeH264QuantizationMapCapabilitiesKHR;
+  struct VideoEncodeH265QuantizationMapCapabilitiesKHR;
+  struct VideoFormatH265QuantizationMapPropertiesKHR;
+  struct VideoEncodeAV1QuantizationMapCapabilitiesKHR;
+  struct VideoFormatAV1QuantizationMapPropertiesKHR;
+
   //=== VK_NV_raw_access_chains ===
   struct PhysicalDeviceRawAccessChainsFeaturesNV;
 
@@ -1917,6 +1949,9 @@ namespace VULKAN_HPP_NAMESPACE
   struct CooperativeMatrixFlexibleDimensionsPropertiesNV;
   struct PhysicalDeviceCooperativeMatrix2FeaturesNV;
   struct PhysicalDeviceCooperativeMatrix2PropertiesNV;
+
+  //=== VK_EXT_vertex_attribute_robustness ===
+  struct PhysicalDeviceVertexAttributeRobustnessFeaturesEXT;
 
   //===================================
   //=== HANDLE forward declarations ===
@@ -12738,6 +12773,15 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /* VULKAN_HPP_DISABLE_ENHANCED_MODE */
 
     template <typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
+    uint64_t getImageViewHandle64NVX( const VULKAN_HPP_NAMESPACE::ImageViewHandleInfoNVX * pInfo,
+                                      Dispatch const & d                                   VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const VULKAN_HPP_NOEXCEPT;
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+    template <typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
+    uint64_t getImageViewHandle64NVX( const VULKAN_HPP_NAMESPACE::ImageViewHandleInfoNVX & info,
+                                      Dispatch const & d                                   VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const VULKAN_HPP_NOEXCEPT;
+#endif /* VULKAN_HPP_DISABLE_ENHANCED_MODE */
+
+    template <typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     VULKAN_HPP_NODISCARD Result getImageViewAddressNVX( VULKAN_HPP_NAMESPACE::ImageView                       imageView,
                                                         VULKAN_HPP_NAMESPACE::ImageViewAddressPropertiesNVX * pProperties,
                                                         Dispatch const & d VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const VULKAN_HPP_NOEXCEPT;
@@ -16805,6 +16849,21 @@ namespace VULKAN_HPP_NAMESPACE
       getVideoFormatPropertiesKHR( const VULKAN_HPP_NAMESPACE::PhysicalDeviceVideoFormatInfoKHR & videoFormatInfo,
                                    VideoFormatPropertiesKHRAllocator &                            videoFormatPropertiesKHRAllocator,
                                    Dispatch const & d                                             VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const;
+    template <typename StructureChain,
+              typename StructureChainAllocator = std::allocator<StructureChain>,
+              typename Dispatch                = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE,
+              typename std::enable_if<std::is_same<typename StructureChainAllocator::value_type, StructureChain>::value, int>::type = 0>
+    VULKAN_HPP_NODISCARD typename ResultValueType<std::vector<StructureChain, StructureChainAllocator>>::type
+      getVideoFormatPropertiesKHR( const VULKAN_HPP_NAMESPACE::PhysicalDeviceVideoFormatInfoKHR & videoFormatInfo,
+                                   Dispatch const & d                                             VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const;
+    template <typename StructureChain,
+              typename StructureChainAllocator = std::allocator<StructureChain>,
+              typename Dispatch                = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE,
+              typename std::enable_if<std::is_same<typename StructureChainAllocator::value_type, StructureChain>::value, int>::type = 0>
+    VULKAN_HPP_NODISCARD typename ResultValueType<std::vector<StructureChain, StructureChainAllocator>>::type
+      getVideoFormatPropertiesKHR( const VULKAN_HPP_NAMESPACE::PhysicalDeviceVideoFormatInfoKHR & videoFormatInfo,
+                                   StructureChainAllocator &                                      structureChainAllocator,
+                                   Dispatch const & d                                             VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const;
 #endif /* VULKAN_HPP_DISABLE_ENHANCED_MODE */
 
     //=== VK_NV_external_memory_capabilities ===
@@ -17213,6 +17272,20 @@ namespace VULKAN_HPP_NAMESPACE
       getDisplayModeProperties2KHR( VULKAN_HPP_NAMESPACE::DisplayKHR     display,
                                     DisplayModeProperties2KHRAllocator & displayModeProperties2KHRAllocator,
                                     Dispatch const & d                   VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const;
+    template <typename StructureChain,
+              typename StructureChainAllocator = std::allocator<StructureChain>,
+              typename Dispatch                = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE,
+              typename std::enable_if<std::is_same<typename StructureChainAllocator::value_type, StructureChain>::value, int>::type = 0>
+    VULKAN_HPP_NODISCARD typename ResultValueType<std::vector<StructureChain, StructureChainAllocator>>::type
+      getDisplayModeProperties2KHR( VULKAN_HPP_NAMESPACE::DisplayKHR display, Dispatch const & d VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const;
+    template <typename StructureChain,
+              typename StructureChainAllocator = std::allocator<StructureChain>,
+              typename Dispatch                = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE,
+              typename std::enable_if<std::is_same<typename StructureChainAllocator::value_type, StructureChain>::value, int>::type = 0>
+    VULKAN_HPP_NODISCARD typename ResultValueType<std::vector<StructureChain, StructureChainAllocator>>::type
+      getDisplayModeProperties2KHR( VULKAN_HPP_NAMESPACE::DisplayKHR display,
+                                    StructureChainAllocator &        structureChainAllocator,
+                                    Dispatch const & d               VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const;
 #endif /* VULKAN_HPP_DISABLE_ENHANCED_MODE */
 
     template <typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
