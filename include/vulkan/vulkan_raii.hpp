@@ -926,8 +926,9 @@ namespace VULKAN_HPP_NAMESPACE
           vkCmdCuLaunchKernelNVX = PFN_vkCmdCuLaunchKernelNVX( vkGetDeviceProcAddr( device, "vkCmdCuLaunchKernelNVX" ) );
 
           //=== VK_NVX_image_view_handle ===
-          vkGetImageViewHandleNVX  = PFN_vkGetImageViewHandleNVX( vkGetDeviceProcAddr( device, "vkGetImageViewHandleNVX" ) );
-          vkGetImageViewAddressNVX = PFN_vkGetImageViewAddressNVX( vkGetDeviceProcAddr( device, "vkGetImageViewAddressNVX" ) );
+          vkGetImageViewHandleNVX   = PFN_vkGetImageViewHandleNVX( vkGetDeviceProcAddr( device, "vkGetImageViewHandleNVX" ) );
+          vkGetImageViewHandle64NVX = PFN_vkGetImageViewHandle64NVX( vkGetDeviceProcAddr( device, "vkGetImageViewHandle64NVX" ) );
+          vkGetImageViewAddressNVX  = PFN_vkGetImageViewAddressNVX( vkGetDeviceProcAddr( device, "vkGetImageViewAddressNVX" ) );
 
           //=== VK_AMD_draw_indirect_count ===
           vkCmdDrawIndirectCountAMD = PFN_vkCmdDrawIndirectCountAMD( vkGetDeviceProcAddr( device, "vkCmdDrawIndirectCountAMD" ) );
@@ -1999,8 +2000,9 @@ namespace VULKAN_HPP_NAMESPACE
         PFN_vkCmdCuLaunchKernelNVX vkCmdCuLaunchKernelNVX = 0;
 
         //=== VK_NVX_image_view_handle ===
-        PFN_vkGetImageViewHandleNVX  vkGetImageViewHandleNVX  = 0;
-        PFN_vkGetImageViewAddressNVX vkGetImageViewAddressNVX = 0;
+        PFN_vkGetImageViewHandleNVX   vkGetImageViewHandleNVX   = 0;
+        PFN_vkGetImageViewHandle64NVX vkGetImageViewHandle64NVX = 0;
+        PFN_vkGetImageViewAddressNVX  vkGetImageViewAddressNVX  = 0;
 
         //=== VK_AMD_draw_indirect_count ===
         PFN_vkCmdDrawIndirectCountAMD        vkCmdDrawIndirectCountAMD        = 0;
@@ -3381,6 +3383,10 @@ namespace VULKAN_HPP_NAMESPACE
       VULKAN_HPP_NODISCARD std::vector<VULKAN_HPP_NAMESPACE::VideoFormatPropertiesKHR>
                            getVideoFormatPropertiesKHR( const VULKAN_HPP_NAMESPACE::PhysicalDeviceVideoFormatInfoKHR & videoFormatInfo ) const;
 
+      template <typename StructureChain>
+      VULKAN_HPP_NODISCARD std::vector<StructureChain>
+                           getVideoFormatPropertiesKHR( const VULKAN_HPP_NAMESPACE::PhysicalDeviceVideoFormatInfoKHR & videoFormatInfo ) const;
+
       //=== VK_NV_external_memory_capabilities ===
 
       VULKAN_HPP_NODISCARD VULKAN_HPP_NAMESPACE::ExternalImageFormatPropertiesNV getExternalImageFormatPropertiesNV(
@@ -4045,6 +4051,8 @@ namespace VULKAN_HPP_NAMESPACE
       //=== VK_NVX_image_view_handle ===
 
       VULKAN_HPP_NODISCARD uint32_t getImageViewHandleNVX( const VULKAN_HPP_NAMESPACE::ImageViewHandleInfoNVX & info ) const VULKAN_HPP_NOEXCEPT;
+
+      VULKAN_HPP_NODISCARD uint64_t getImageViewHandle64NVX( const VULKAN_HPP_NAMESPACE::ImageViewHandleInfoNVX & info ) const VULKAN_HPP_NOEXCEPT;
 
       //=== VK_KHR_device_group ===
 
@@ -8223,6 +8231,9 @@ namespace VULKAN_HPP_NAMESPACE
       //=== VK_KHR_get_display_properties2 ===
 
       VULKAN_HPP_NODISCARD std::vector<VULKAN_HPP_NAMESPACE::DisplayModeProperties2KHR> getModeProperties2() const;
+
+      template <typename StructureChain>
+      VULKAN_HPP_NODISCARD std::vector<StructureChain> getModeProperties2() const;
 
 #  if defined( VK_USE_PLATFORM_WIN32_KHR )
       //=== VK_NV_acquire_winrt_display ===
@@ -16397,6 +16408,52 @@ namespace VULKAN_HPP_NAMESPACE
       return videoFormatProperties;
     }
 
+    template <typename StructureChain>
+    VULKAN_HPP_NODISCARD VULKAN_HPP_INLINE std::vector<StructureChain>
+      PhysicalDevice::getVideoFormatPropertiesKHR( const VULKAN_HPP_NAMESPACE::PhysicalDeviceVideoFormatInfoKHR & videoFormatInfo ) const
+    {
+      VULKAN_HPP_ASSERT( getDispatcher()->vkGetPhysicalDeviceVideoFormatPropertiesKHR &&
+                         "Function <vkGetPhysicalDeviceVideoFormatPropertiesKHR> requires <VK_KHR_video_queue>" );
+
+      std::vector<StructureChain>                                 structureChains;
+      std::vector<VULKAN_HPP_NAMESPACE::VideoFormatPropertiesKHR> videoFormatProperties;
+      uint32_t                                                    videoFormatPropertyCount;
+      VULKAN_HPP_NAMESPACE::Result                                result;
+      do
+      {
+        result = static_cast<VULKAN_HPP_NAMESPACE::Result>(
+          getDispatcher()->vkGetPhysicalDeviceVideoFormatPropertiesKHR( static_cast<VkPhysicalDevice>( m_physicalDevice ),
+                                                                        reinterpret_cast<const VkPhysicalDeviceVideoFormatInfoKHR *>( &videoFormatInfo ),
+                                                                        &videoFormatPropertyCount,
+                                                                        nullptr ) );
+        if ( ( result == VULKAN_HPP_NAMESPACE::Result::eSuccess ) && videoFormatPropertyCount )
+        {
+          structureChains.resize( videoFormatPropertyCount );
+          videoFormatProperties.resize( videoFormatPropertyCount );
+          for ( uint32_t i = 0; i < videoFormatPropertyCount; i++ )
+          {
+            videoFormatProperties[i].pNext = structureChains[i].template get<VULKAN_HPP_NAMESPACE::VideoFormatPropertiesKHR>().pNext;
+          }
+          result = static_cast<VULKAN_HPP_NAMESPACE::Result>(
+            getDispatcher()->vkGetPhysicalDeviceVideoFormatPropertiesKHR( static_cast<VkPhysicalDevice>( m_physicalDevice ),
+                                                                          reinterpret_cast<const VkPhysicalDeviceVideoFormatInfoKHR *>( &videoFormatInfo ),
+                                                                          &videoFormatPropertyCount,
+                                                                          reinterpret_cast<VkVideoFormatPropertiesKHR *>( videoFormatProperties.data() ) ) );
+        }
+      } while ( result == VULKAN_HPP_NAMESPACE::Result::eIncomplete );
+      VULKAN_HPP_NAMESPACE::detail::resultCheck( result, VULKAN_HPP_NAMESPACE_STRING "::PhysicalDevice::getVideoFormatPropertiesKHR" );
+      VULKAN_HPP_ASSERT( videoFormatPropertyCount <= videoFormatProperties.size() );
+      if ( videoFormatPropertyCount < videoFormatProperties.size() )
+      {
+        structureChains.resize( videoFormatPropertyCount );
+      }
+      for ( uint32_t i = 0; i < videoFormatPropertyCount; i++ )
+      {
+        structureChains[i].template get<VULKAN_HPP_NAMESPACE::VideoFormatPropertiesKHR>() = videoFormatProperties[i];
+      }
+      return structureChains;
+    }
+
     VULKAN_HPP_NODISCARD VULKAN_HPP_INLINE
       VULKAN_HPP_NAMESPACE::VULKAN_HPP_RAII_NAMESPACE::detail::CreateReturnType<VULKAN_HPP_NAMESPACE::VULKAN_HPP_RAII_NAMESPACE::VideoSessionKHR>::Type
       Device::createVideoSessionKHR( VULKAN_HPP_NAMESPACE::VideoSessionCreateInfoKHR const &                         createInfo,
@@ -16714,6 +16771,17 @@ namespace VULKAN_HPP_NAMESPACE
 
       uint32_t result =
         getDispatcher()->vkGetImageViewHandleNVX( static_cast<VkDevice>( m_device ), reinterpret_cast<const VkImageViewHandleInfoNVX *>( &info ) );
+
+      return result;
+    }
+
+    VULKAN_HPP_NODISCARD VULKAN_HPP_INLINE uint64_t
+      Device::getImageViewHandle64NVX( const VULKAN_HPP_NAMESPACE::ImageViewHandleInfoNVX & info ) const VULKAN_HPP_NOEXCEPT
+    {
+      VULKAN_HPP_ASSERT( getDispatcher()->vkGetImageViewHandle64NVX && "Function <vkGetImageViewHandle64NVX> requires <VK_NVX_image_view_handle>" );
+
+      uint64_t result =
+        getDispatcher()->vkGetImageViewHandle64NVX( static_cast<VkDevice>( m_device ), reinterpret_cast<const VkImageViewHandleInfoNVX *>( &info ) );
 
       return result;
     }
@@ -18133,6 +18201,48 @@ namespace VULKAN_HPP_NAMESPACE
         properties.resize( propertyCount );
       }
       return properties;
+    }
+
+    template <typename StructureChain>
+    VULKAN_HPP_NODISCARD VULKAN_HPP_INLINE std::vector<StructureChain> DisplayKHR::getModeProperties2() const
+    {
+      VULKAN_HPP_ASSERT( getDispatcher()->vkGetDisplayModeProperties2KHR &&
+                         "Function <vkGetDisplayModeProperties2KHR> requires <VK_KHR_get_display_properties2>" );
+
+      std::vector<StructureChain>                                  structureChains;
+      std::vector<VULKAN_HPP_NAMESPACE::DisplayModeProperties2KHR> properties;
+      uint32_t                                                     propertyCount;
+      VULKAN_HPP_NAMESPACE::Result                                 result;
+      do
+      {
+        result = static_cast<VULKAN_HPP_NAMESPACE::Result>( getDispatcher()->vkGetDisplayModeProperties2KHR(
+          static_cast<VkPhysicalDevice>( m_physicalDevice ), static_cast<VkDisplayKHR>( m_display ), &propertyCount, nullptr ) );
+        if ( ( result == VULKAN_HPP_NAMESPACE::Result::eSuccess ) && propertyCount )
+        {
+          structureChains.resize( propertyCount );
+          properties.resize( propertyCount );
+          for ( uint32_t i = 0; i < propertyCount; i++ )
+          {
+            properties[i].pNext = structureChains[i].template get<VULKAN_HPP_NAMESPACE::DisplayModeProperties2KHR>().pNext;
+          }
+          result = static_cast<VULKAN_HPP_NAMESPACE::Result>(
+            getDispatcher()->vkGetDisplayModeProperties2KHR( static_cast<VkPhysicalDevice>( m_physicalDevice ),
+                                                             static_cast<VkDisplayKHR>( m_display ),
+                                                             &propertyCount,
+                                                             reinterpret_cast<VkDisplayModeProperties2KHR *>( properties.data() ) ) );
+        }
+      } while ( result == VULKAN_HPP_NAMESPACE::Result::eIncomplete );
+      VULKAN_HPP_NAMESPACE::detail::resultCheck( result, VULKAN_HPP_NAMESPACE_STRING "::DisplayKHR::getModeProperties2" );
+      VULKAN_HPP_ASSERT( propertyCount <= properties.size() );
+      if ( propertyCount < properties.size() )
+      {
+        structureChains.resize( propertyCount );
+      }
+      for ( uint32_t i = 0; i < propertyCount; i++ )
+      {
+        structureChains[i].template get<VULKAN_HPP_NAMESPACE::DisplayModeProperties2KHR>() = properties[i];
+      }
+      return structureChains;
     }
 
     VULKAN_HPP_NODISCARD VULKAN_HPP_INLINE VULKAN_HPP_NAMESPACE::DisplayPlaneCapabilities2KHR

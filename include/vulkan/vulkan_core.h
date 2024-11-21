@@ -69,7 +69,7 @@ extern "C" {
 #define VK_API_VERSION_1_0 VK_MAKE_API_VERSION(0, 1, 0, 0)// Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 301
+#define VK_HEADER_VERSION 302
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 3, VK_HEADER_VERSION)
@@ -471,6 +471,7 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_CU_MODULE_CREATE_INFO_NVX = 1000029000,
     VK_STRUCTURE_TYPE_CU_FUNCTION_CREATE_INFO_NVX = 1000029001,
     VK_STRUCTURE_TYPE_CU_LAUNCH_INFO_NVX = 1000029002,
+    VK_STRUCTURE_TYPE_CU_MODULE_TEXTURING_MODE_CREATE_INFO_NVX = 1000029004,
     VK_STRUCTURE_TYPE_IMAGE_VIEW_HANDLE_INFO_NVX = 1000030000,
     VK_STRUCTURE_TYPE_IMAGE_VIEW_ADDRESS_PROPERTIES_NVX = 1000030001,
     VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_KHR = 1000038000,
@@ -1094,6 +1095,17 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_VIDEO_DECODE_AV1_PROFILE_INFO_KHR = 1000512003,
     VK_STRUCTURE_TYPE_VIDEO_DECODE_AV1_SESSION_PARAMETERS_CREATE_INFO_KHR = 1000512004,
     VK_STRUCTURE_TYPE_VIDEO_DECODE_AV1_DPB_SLOT_INFO_KHR = 1000512005,
+    VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_CAPABILITIES_KHR = 1000513000,
+    VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_SESSION_PARAMETERS_CREATE_INFO_KHR = 1000513001,
+    VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_PICTURE_INFO_KHR = 1000513002,
+    VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_DPB_SLOT_INFO_KHR = 1000513003,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_ENCODE_AV1_FEATURES_KHR = 1000513004,
+    VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_PROFILE_INFO_KHR = 1000513005,
+    VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_RATE_CONTROL_INFO_KHR = 1000513006,
+    VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_RATE_CONTROL_LAYER_INFO_KHR = 1000513007,
+    VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_QUALITY_LEVEL_PROPERTIES_KHR = 1000513008,
+    VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_SESSION_CREATE_INFO_KHR = 1000513009,
+    VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_GOP_REMAINING_FRAME_INFO_KHR = 1000513010,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_MAINTENANCE_1_FEATURES_KHR = 1000515000,
     VK_STRUCTURE_TYPE_VIDEO_INLINE_QUERY_INFO_KHR = 1000515001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PER_STAGE_DESCRIPTOR_SET_FEATURES_NV = 1000516000,
@@ -1133,6 +1145,18 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_SET_DESCRIPTOR_BUFFER_OFFSETS_INFO_EXT = 1000545007,
     VK_STRUCTURE_TYPE_BIND_DESCRIPTOR_BUFFER_EMBEDDED_SAMPLERS_INFO_EXT = 1000545008,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_POOL_OVERALLOCATION_FEATURES_NV = 1000546000,
+    VK_STRUCTURE_TYPE_DISPLAY_SURFACE_STEREO_CREATE_INFO_NV = 1000551000,
+    VK_STRUCTURE_TYPE_DISPLAY_MODE_STEREO_PROPERTIES_NV = 1000551001,
+    VK_STRUCTURE_TYPE_VIDEO_ENCODE_QUANTIZATION_MAP_CAPABILITIES_KHR = 1000553000,
+    VK_STRUCTURE_TYPE_VIDEO_FORMAT_QUANTIZATION_MAP_PROPERTIES_KHR = 1000553001,
+    VK_STRUCTURE_TYPE_VIDEO_ENCODE_QUANTIZATION_MAP_INFO_KHR = 1000553002,
+    VK_STRUCTURE_TYPE_VIDEO_ENCODE_QUANTIZATION_MAP_SESSION_PARAMETERS_CREATE_INFO_KHR = 1000553005,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_ENCODE_QUANTIZATION_MAP_FEATURES_KHR = 1000553009,
+    VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_QUANTIZATION_MAP_CAPABILITIES_KHR = 1000553003,
+    VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_QUANTIZATION_MAP_CAPABILITIES_KHR = 1000553004,
+    VK_STRUCTURE_TYPE_VIDEO_FORMAT_H265_QUANTIZATION_MAP_PROPERTIES_KHR = 1000553006,
+    VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_QUANTIZATION_MAP_CAPABILITIES_KHR = 1000553007,
+    VK_STRUCTURE_TYPE_VIDEO_FORMAT_AV1_QUANTIZATION_MAP_PROPERTIES_KHR = 1000553008,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAW_ACCESS_CHAINS_FEATURES_NV = 1000555000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_RELAXED_EXTENDED_INSTRUCTION_FEATURES_KHR = 1000558000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMMAND_BUFFER_INHERITANCE_FEATURES_NV = 1000559000,
@@ -1168,6 +1192,7 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_FEATURES_NV = 1000593000,
     VK_STRUCTURE_TYPE_COOPERATIVE_MATRIX_FLEXIBLE_DIMENSIONS_PROPERTIES_NV = 1000593001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_PROPERTIES_NV = 1000593002,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_ROBUSTNESS_FEATURES_EXT = 1000608000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETER_FEATURES = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES,
   // VK_STRUCTURE_TYPE_DEBUG_REPORT_CREATE_INFO_EXT is a deprecated alias
@@ -1393,6 +1418,7 @@ typedef enum VkImageLayout {
     VK_IMAGE_LAYOUT_VIDEO_ENCODE_SRC_KHR = 1000299001,
     VK_IMAGE_LAYOUT_VIDEO_ENCODE_DPB_KHR = 1000299002,
     VK_IMAGE_LAYOUT_ATTACHMENT_FEEDBACK_LOOP_OPTIMAL_EXT = 1000339000,
+    VK_IMAGE_LAYOUT_VIDEO_ENCODE_QUANTIZATION_MAP_KHR = 1000553000,
     VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL_KHR = VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL,
     VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL_KHR = VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL,
     VK_IMAGE_LAYOUT_SHADING_RATE_OPTIMAL_NV = VK_IMAGE_LAYOUT_FRAGMENT_SHADING_RATE_ATTACHMENT_OPTIMAL_KHR,
@@ -2412,6 +2438,8 @@ typedef enum VkImageUsageFlagBits {
     VK_IMAGE_USAGE_INVOCATION_MASK_BIT_HUAWEI = 0x00040000,
     VK_IMAGE_USAGE_SAMPLE_WEIGHT_BIT_QCOM = 0x00100000,
     VK_IMAGE_USAGE_SAMPLE_BLOCK_MATCH_BIT_QCOM = 0x00200000,
+    VK_IMAGE_USAGE_VIDEO_ENCODE_QUANTIZATION_DELTA_MAP_BIT_KHR = 0x02000000,
+    VK_IMAGE_USAGE_VIDEO_ENCODE_EMPHASIS_MAP_BIT_KHR = 0x04000000,
     VK_IMAGE_USAGE_SHADING_RATE_IMAGE_BIT_NV = VK_IMAGE_USAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR,
     VK_IMAGE_USAGE_FLAG_BITS_MAX_ENUM = 0x7FFFFFFF
 } VkImageUsageFlagBits;
@@ -6873,6 +6901,8 @@ static const VkFormatFeatureFlagBits2 VK_FORMAT_FEATURE_2_BOX_FILTER_SAMPLED_BIT
 static const VkFormatFeatureFlagBits2 VK_FORMAT_FEATURE_2_OPTICAL_FLOW_IMAGE_BIT_NV = 0x10000000000ULL;
 static const VkFormatFeatureFlagBits2 VK_FORMAT_FEATURE_2_OPTICAL_FLOW_VECTOR_BIT_NV = 0x20000000000ULL;
 static const VkFormatFeatureFlagBits2 VK_FORMAT_FEATURE_2_OPTICAL_FLOW_COST_BIT_NV = 0x40000000000ULL;
+static const VkFormatFeatureFlagBits2 VK_FORMAT_FEATURE_2_VIDEO_ENCODE_QUANTIZATION_DELTA_MAP_BIT_KHR = 0x2000000000000ULL;
+static const VkFormatFeatureFlagBits2 VK_FORMAT_FEATURE_2_VIDEO_ENCODE_EMPHASIS_MAP_BIT_KHR = 0x4000000000000ULL;
 
 typedef struct VkPhysicalDeviceVulkan13Features {
     VkStructureType    sType;
@@ -8084,6 +8114,7 @@ typedef enum VkVideoCodecOperationFlagBitsKHR {
     VK_VIDEO_CODEC_OPERATION_DECODE_H264_BIT_KHR = 0x00000001,
     VK_VIDEO_CODEC_OPERATION_DECODE_H265_BIT_KHR = 0x00000002,
     VK_VIDEO_CODEC_OPERATION_DECODE_AV1_BIT_KHR = 0x00000004,
+    VK_VIDEO_CODEC_OPERATION_ENCODE_AV1_BIT_KHR = 0x00040000,
     VK_VIDEO_CODEC_OPERATION_FLAG_BITS_MAX_ENUM_KHR = 0x7FFFFFFF
 } VkVideoCodecOperationFlagBitsKHR;
 typedef VkFlags VkVideoCodecOperationFlagsKHR;
@@ -8118,9 +8149,16 @@ typedef enum VkVideoSessionCreateFlagBitsKHR {
     VK_VIDEO_SESSION_CREATE_PROTECTED_CONTENT_BIT_KHR = 0x00000001,
     VK_VIDEO_SESSION_CREATE_ALLOW_ENCODE_PARAMETER_OPTIMIZATIONS_BIT_KHR = 0x00000002,
     VK_VIDEO_SESSION_CREATE_INLINE_QUERIES_BIT_KHR = 0x00000004,
+    VK_VIDEO_SESSION_CREATE_ALLOW_ENCODE_QUANTIZATION_DELTA_MAP_BIT_KHR = 0x00000008,
+    VK_VIDEO_SESSION_CREATE_ALLOW_ENCODE_EMPHASIS_MAP_BIT_KHR = 0x00000010,
     VK_VIDEO_SESSION_CREATE_FLAG_BITS_MAX_ENUM_KHR = 0x7FFFFFFF
 } VkVideoSessionCreateFlagBitsKHR;
 typedef VkFlags VkVideoSessionCreateFlagsKHR;
+
+typedef enum VkVideoSessionParametersCreateFlagBitsKHR {
+    VK_VIDEO_SESSION_PARAMETERS_CREATE_QUANTIZATION_MAP_COMPATIBLE_BIT_KHR = 0x00000001,
+    VK_VIDEO_SESSION_PARAMETERS_CREATE_FLAG_BITS_MAX_ENUM_KHR = 0x7FFFFFFF
+} VkVideoSessionParametersCreateFlagBitsKHR;
 typedef VkFlags VkVideoSessionParametersCreateFlagsKHR;
 typedef VkFlags VkVideoBeginCodingFlagsKHR;
 typedef VkFlags VkVideoEndCodingFlagsKHR;
@@ -8423,6 +8461,7 @@ typedef enum VkVideoEncodeH264CapabilityFlagBitsKHR {
     VK_VIDEO_ENCODE_H264_CAPABILITY_PER_PICTURE_TYPE_MIN_MAX_QP_BIT_KHR = 0x00000040,
     VK_VIDEO_ENCODE_H264_CAPABILITY_PER_SLICE_CONSTANT_QP_BIT_KHR = 0x00000080,
     VK_VIDEO_ENCODE_H264_CAPABILITY_GENERATE_PREFIX_NALU_BIT_KHR = 0x00000100,
+    VK_VIDEO_ENCODE_H264_CAPABILITY_MB_QP_DIFF_WRAPAROUND_BIT_KHR = 0x00000200,
     VK_VIDEO_ENCODE_H264_CAPABILITY_FLAG_BITS_MAX_ENUM_KHR = 0x7FFFFFFF
 } VkVideoEncodeH264CapabilityFlagBitsKHR;
 typedef VkFlags VkVideoEncodeH264CapabilityFlagsKHR;
@@ -8623,6 +8662,7 @@ typedef enum VkVideoEncodeH265CapabilityFlagBitsKHR {
     VK_VIDEO_ENCODE_H265_CAPABILITY_PER_SLICE_SEGMENT_CONSTANT_QP_BIT_KHR = 0x00000080,
     VK_VIDEO_ENCODE_H265_CAPABILITY_MULTIPLE_TILES_PER_SLICE_SEGMENT_BIT_KHR = 0x00000100,
     VK_VIDEO_ENCODE_H265_CAPABILITY_MULTIPLE_SLICE_SEGMENTS_PER_TILE_BIT_KHR = 0x00000200,
+    VK_VIDEO_ENCODE_H265_CAPABILITY_CU_QP_DIFF_WRAPAROUND_BIT_KHR = 0x00000400,
     VK_VIDEO_ENCODE_H265_CAPABILITY_FLAG_BITS_MAX_ENUM_KHR = 0x7FFFFFFF
 } VkVideoEncodeH265CapabilityFlagBitsKHR;
 typedef VkFlags VkVideoEncodeH265CapabilityFlagsKHR;
@@ -10679,11 +10719,19 @@ typedef enum VkVideoEncodeTuningModeKHR {
     VK_VIDEO_ENCODE_TUNING_MODE_LOSSLESS_KHR = 4,
     VK_VIDEO_ENCODE_TUNING_MODE_MAX_ENUM_KHR = 0x7FFFFFFF
 } VkVideoEncodeTuningModeKHR;
+
+typedef enum VkVideoEncodeFlagBitsKHR {
+    VK_VIDEO_ENCODE_WITH_QUANTIZATION_DELTA_MAP_BIT_KHR = 0x00000001,
+    VK_VIDEO_ENCODE_WITH_EMPHASIS_MAP_BIT_KHR = 0x00000002,
+    VK_VIDEO_ENCODE_FLAG_BITS_MAX_ENUM_KHR = 0x7FFFFFFF
+} VkVideoEncodeFlagBitsKHR;
 typedef VkFlags VkVideoEncodeFlagsKHR;
 
 typedef enum VkVideoEncodeCapabilityFlagBitsKHR {
     VK_VIDEO_ENCODE_CAPABILITY_PRECEDING_EXTERNALLY_ENCODED_BYTES_BIT_KHR = 0x00000001,
     VK_VIDEO_ENCODE_CAPABILITY_INSUFFICIENT_BITSTREAM_BUFFER_RANGE_DETECTION_BIT_KHR = 0x00000002,
+    VK_VIDEO_ENCODE_CAPABILITY_QUANTIZATION_DELTA_MAP_BIT_KHR = 0x00000004,
+    VK_VIDEO_ENCODE_CAPABILITY_EMPHASIS_MAP_BIT_KHR = 0x00000008,
     VK_VIDEO_ENCODE_CAPABILITY_FLAG_BITS_MAX_ENUM_KHR = 0x7FFFFFFF
 } VkVideoEncodeCapabilityFlagBitsKHR;
 typedef VkFlags VkVideoEncodeCapabilityFlagsKHR;
@@ -11588,6 +11636,200 @@ typedef struct VkVideoDecodeAV1DpbSlotInfoKHR {
 
 
 
+// VK_KHR_video_encode_av1 is a preprocessor guard. Do not pass it to API calls.
+#define VK_KHR_video_encode_av1 1
+#include "vk_video/vulkan_video_codec_av1std_encode.h"
+#define VK_KHR_VIDEO_ENCODE_AV1_SPEC_VERSION 1
+#define VK_KHR_VIDEO_ENCODE_AV1_EXTENSION_NAME "VK_KHR_video_encode_av1"
+
+typedef enum VkVideoEncodeAV1PredictionModeKHR {
+    VK_VIDEO_ENCODE_AV1_PREDICTION_MODE_INTRA_ONLY_KHR = 0,
+    VK_VIDEO_ENCODE_AV1_PREDICTION_MODE_SINGLE_REFERENCE_KHR = 1,
+    VK_VIDEO_ENCODE_AV1_PREDICTION_MODE_UNIDIRECTIONAL_COMPOUND_KHR = 2,
+    VK_VIDEO_ENCODE_AV1_PREDICTION_MODE_BIDIRECTIONAL_COMPOUND_KHR = 3,
+    VK_VIDEO_ENCODE_AV1_PREDICTION_MODE_MAX_ENUM_KHR = 0x7FFFFFFF
+} VkVideoEncodeAV1PredictionModeKHR;
+
+typedef enum VkVideoEncodeAV1RateControlGroupKHR {
+    VK_VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_INTRA_KHR = 0,
+    VK_VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_PREDICTIVE_KHR = 1,
+    VK_VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_BIPREDICTIVE_KHR = 2,
+    VK_VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_MAX_ENUM_KHR = 0x7FFFFFFF
+} VkVideoEncodeAV1RateControlGroupKHR;
+
+typedef enum VkVideoEncodeAV1CapabilityFlagBitsKHR {
+    VK_VIDEO_ENCODE_AV1_CAPABILITY_PER_RATE_CONTROL_GROUP_MIN_MAX_Q_INDEX_BIT_KHR = 0x00000001,
+    VK_VIDEO_ENCODE_AV1_CAPABILITY_GENERATE_OBU_EXTENSION_HEADER_BIT_KHR = 0x00000002,
+    VK_VIDEO_ENCODE_AV1_CAPABILITY_PRIMARY_REFERENCE_CDF_ONLY_BIT_KHR = 0x00000004,
+    VK_VIDEO_ENCODE_AV1_CAPABILITY_FRAME_SIZE_OVERRIDE_BIT_KHR = 0x00000008,
+    VK_VIDEO_ENCODE_AV1_CAPABILITY_MOTION_VECTOR_SCALING_BIT_KHR = 0x00000010,
+    VK_VIDEO_ENCODE_AV1_CAPABILITY_FLAG_BITS_MAX_ENUM_KHR = 0x7FFFFFFF
+} VkVideoEncodeAV1CapabilityFlagBitsKHR;
+typedef VkFlags VkVideoEncodeAV1CapabilityFlagsKHR;
+
+typedef enum VkVideoEncodeAV1StdFlagBitsKHR {
+    VK_VIDEO_ENCODE_AV1_STD_UNIFORM_TILE_SPACING_FLAG_SET_BIT_KHR = 0x00000001,
+    VK_VIDEO_ENCODE_AV1_STD_SKIP_MODE_PRESENT_UNSET_BIT_KHR = 0x00000002,
+    VK_VIDEO_ENCODE_AV1_STD_PRIMARY_REF_FRAME_BIT_KHR = 0x00000004,
+    VK_VIDEO_ENCODE_AV1_STD_DELTA_Q_BIT_KHR = 0x00000008,
+    VK_VIDEO_ENCODE_AV1_STD_FLAG_BITS_MAX_ENUM_KHR = 0x7FFFFFFF
+} VkVideoEncodeAV1StdFlagBitsKHR;
+typedef VkFlags VkVideoEncodeAV1StdFlagsKHR;
+
+typedef enum VkVideoEncodeAV1SuperblockSizeFlagBitsKHR {
+    VK_VIDEO_ENCODE_AV1_SUPERBLOCK_SIZE_64_BIT_KHR = 0x00000001,
+    VK_VIDEO_ENCODE_AV1_SUPERBLOCK_SIZE_128_BIT_KHR = 0x00000002,
+    VK_VIDEO_ENCODE_AV1_SUPERBLOCK_SIZE_FLAG_BITS_MAX_ENUM_KHR = 0x7FFFFFFF
+} VkVideoEncodeAV1SuperblockSizeFlagBitsKHR;
+typedef VkFlags VkVideoEncodeAV1SuperblockSizeFlagsKHR;
+
+typedef enum VkVideoEncodeAV1RateControlFlagBitsKHR {
+    VK_VIDEO_ENCODE_AV1_RATE_CONTROL_REGULAR_GOP_BIT_KHR = 0x00000001,
+    VK_VIDEO_ENCODE_AV1_RATE_CONTROL_TEMPORAL_LAYER_PATTERN_DYADIC_BIT_KHR = 0x00000002,
+    VK_VIDEO_ENCODE_AV1_RATE_CONTROL_REFERENCE_PATTERN_FLAT_BIT_KHR = 0x00000004,
+    VK_VIDEO_ENCODE_AV1_RATE_CONTROL_REFERENCE_PATTERN_DYADIC_BIT_KHR = 0x00000008,
+    VK_VIDEO_ENCODE_AV1_RATE_CONTROL_FLAG_BITS_MAX_ENUM_KHR = 0x7FFFFFFF
+} VkVideoEncodeAV1RateControlFlagBitsKHR;
+typedef VkFlags VkVideoEncodeAV1RateControlFlagsKHR;
+typedef struct VkPhysicalDeviceVideoEncodeAV1FeaturesKHR {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           videoEncodeAV1;
+} VkPhysicalDeviceVideoEncodeAV1FeaturesKHR;
+
+typedef struct VkVideoEncodeAV1CapabilitiesKHR {
+    VkStructureType                           sType;
+    void*                                     pNext;
+    VkVideoEncodeAV1CapabilityFlagsKHR        flags;
+    StdVideoAV1Level                          maxLevel;
+    VkExtent2D                                codedPictureAlignment;
+    VkExtent2D                                maxTiles;
+    VkExtent2D                                minTileSize;
+    VkExtent2D                                maxTileSize;
+    VkVideoEncodeAV1SuperblockSizeFlagsKHR    superblockSizes;
+    uint32_t                                  maxSingleReferenceCount;
+    uint32_t                                  singleReferenceNameMask;
+    uint32_t                                  maxUnidirectionalCompoundReferenceCount;
+    uint32_t                                  maxUnidirectionalCompoundGroup1ReferenceCount;
+    uint32_t                                  unidirectionalCompoundReferenceNameMask;
+    uint32_t                                  maxBidirectionalCompoundReferenceCount;
+    uint32_t                                  maxBidirectionalCompoundGroup1ReferenceCount;
+    uint32_t                                  maxBidirectionalCompoundGroup2ReferenceCount;
+    uint32_t                                  bidirectionalCompoundReferenceNameMask;
+    uint32_t                                  maxTemporalLayerCount;
+    uint32_t                                  maxSpatialLayerCount;
+    uint32_t                                  maxOperatingPoints;
+    uint32_t                                  minQIndex;
+    uint32_t                                  maxQIndex;
+    VkBool32                                  prefersGopRemainingFrames;
+    VkBool32                                  requiresGopRemainingFrames;
+    VkVideoEncodeAV1StdFlagsKHR               stdSyntaxFlags;
+} VkVideoEncodeAV1CapabilitiesKHR;
+
+typedef struct VkVideoEncodeAV1QIndexKHR {
+    uint32_t    intraQIndex;
+    uint32_t    predictiveQIndex;
+    uint32_t    bipredictiveQIndex;
+} VkVideoEncodeAV1QIndexKHR;
+
+typedef struct VkVideoEncodeAV1QualityLevelPropertiesKHR {
+    VkStructureType                        sType;
+    void*                                  pNext;
+    VkVideoEncodeAV1RateControlFlagsKHR    preferredRateControlFlags;
+    uint32_t                               preferredGopFrameCount;
+    uint32_t                               preferredKeyFramePeriod;
+    uint32_t                               preferredConsecutiveBipredictiveFrameCount;
+    uint32_t                               preferredTemporalLayerCount;
+    VkVideoEncodeAV1QIndexKHR              preferredConstantQIndex;
+    uint32_t                               preferredMaxSingleReferenceCount;
+    uint32_t                               preferredSingleReferenceNameMask;
+    uint32_t                               preferredMaxUnidirectionalCompoundReferenceCount;
+    uint32_t                               preferredMaxUnidirectionalCompoundGroup1ReferenceCount;
+    uint32_t                               preferredUnidirectionalCompoundReferenceNameMask;
+    uint32_t                               preferredMaxBidirectionalCompoundReferenceCount;
+    uint32_t                               preferredMaxBidirectionalCompoundGroup1ReferenceCount;
+    uint32_t                               preferredMaxBidirectionalCompoundGroup2ReferenceCount;
+    uint32_t                               preferredBidirectionalCompoundReferenceNameMask;
+} VkVideoEncodeAV1QualityLevelPropertiesKHR;
+
+typedef struct VkVideoEncodeAV1SessionCreateInfoKHR {
+    VkStructureType     sType;
+    const void*         pNext;
+    VkBool32            useMaxLevel;
+    StdVideoAV1Level    maxLevel;
+} VkVideoEncodeAV1SessionCreateInfoKHR;
+
+typedef struct VkVideoEncodeAV1SessionParametersCreateInfoKHR {
+    VkStructureType                               sType;
+    const void*                                   pNext;
+    const StdVideoAV1SequenceHeader*              pStdSequenceHeader;
+    const StdVideoEncodeAV1DecoderModelInfo*      pStdDecoderModelInfo;
+    uint32_t                                      stdOperatingPointCount;
+    const StdVideoEncodeAV1OperatingPointInfo*    pStdOperatingPoints;
+} VkVideoEncodeAV1SessionParametersCreateInfoKHR;
+
+typedef struct VkVideoEncodeAV1PictureInfoKHR {
+    VkStructureType                        sType;
+    const void*                            pNext;
+    VkVideoEncodeAV1PredictionModeKHR      predictionMode;
+    VkVideoEncodeAV1RateControlGroupKHR    rateControlGroup;
+    uint32_t                               constantQIndex;
+    const StdVideoEncodeAV1PictureInfo*    pStdPictureInfo;
+    int32_t                                referenceNameSlotIndices[VK_MAX_VIDEO_AV1_REFERENCES_PER_FRAME_KHR];
+    VkBool32                               primaryReferenceCdfOnly;
+    VkBool32                               generateObuExtensionHeader;
+} VkVideoEncodeAV1PictureInfoKHR;
+
+typedef struct VkVideoEncodeAV1DpbSlotInfoKHR {
+    VkStructureType                          sType;
+    const void*                              pNext;
+    const StdVideoEncodeAV1ReferenceInfo*    pStdReferenceInfo;
+} VkVideoEncodeAV1DpbSlotInfoKHR;
+
+typedef struct VkVideoEncodeAV1ProfileInfoKHR {
+    VkStructureType       sType;
+    const void*           pNext;
+    StdVideoAV1Profile    stdProfile;
+} VkVideoEncodeAV1ProfileInfoKHR;
+
+typedef struct VkVideoEncodeAV1FrameSizeKHR {
+    uint32_t    intraFrameSize;
+    uint32_t    predictiveFrameSize;
+    uint32_t    bipredictiveFrameSize;
+} VkVideoEncodeAV1FrameSizeKHR;
+
+typedef struct VkVideoEncodeAV1GopRemainingFrameInfoKHR {
+    VkStructureType    sType;
+    const void*        pNext;
+    VkBool32           useGopRemainingFrames;
+    uint32_t           gopRemainingIntra;
+    uint32_t           gopRemainingPredictive;
+    uint32_t           gopRemainingBipredictive;
+} VkVideoEncodeAV1GopRemainingFrameInfoKHR;
+
+typedef struct VkVideoEncodeAV1RateControlInfoKHR {
+    VkStructureType                        sType;
+    const void*                            pNext;
+    VkVideoEncodeAV1RateControlFlagsKHR    flags;
+    uint32_t                               gopFrameCount;
+    uint32_t                               keyFramePeriod;
+    uint32_t                               consecutiveBipredictiveFrameCount;
+    uint32_t                               temporalLayerCount;
+} VkVideoEncodeAV1RateControlInfoKHR;
+
+typedef struct VkVideoEncodeAV1RateControlLayerInfoKHR {
+    VkStructureType                 sType;
+    const void*                     pNext;
+    VkBool32                        useMinQIndex;
+    VkVideoEncodeAV1QIndexKHR       minQIndex;
+    VkBool32                        useMaxQIndex;
+    VkVideoEncodeAV1QIndexKHR       maxQIndex;
+    VkBool32                        useMaxFrameSize;
+    VkVideoEncodeAV1FrameSizeKHR    maxFrameSize;
+} VkVideoEncodeAV1RateControlLayerInfoKHR;
+
+
+
 // VK_KHR_video_maintenance1 is a preprocessor guard. Do not pass it to API calls.
 #define VK_KHR_video_maintenance1 1
 #define VK_KHR_VIDEO_MAINTENANCE_1_SPEC_VERSION 1
@@ -11890,6 +12132,76 @@ VKAPI_ATTR void VKAPI_CALL vkCmdBindDescriptorBufferEmbeddedSamplers2EXT(
     VkCommandBuffer                             commandBuffer,
     const VkBindDescriptorBufferEmbeddedSamplersInfoEXT* pBindDescriptorBufferEmbeddedSamplersInfo);
 #endif
+
+
+// VK_KHR_video_encode_quantization_map is a preprocessor guard. Do not pass it to API calls.
+#define VK_KHR_video_encode_quantization_map 1
+#define VK_KHR_VIDEO_ENCODE_QUANTIZATION_MAP_SPEC_VERSION 2
+#define VK_KHR_VIDEO_ENCODE_QUANTIZATION_MAP_EXTENSION_NAME "VK_KHR_video_encode_quantization_map"
+typedef struct VkVideoEncodeQuantizationMapCapabilitiesKHR {
+    VkStructureType    sType;
+    void*              pNext;
+    VkExtent2D         maxQuantizationMapExtent;
+} VkVideoEncodeQuantizationMapCapabilitiesKHR;
+
+typedef struct VkVideoFormatQuantizationMapPropertiesKHR {
+    VkStructureType    sType;
+    void*              pNext;
+    VkExtent2D         quantizationMapTexelSize;
+} VkVideoFormatQuantizationMapPropertiesKHR;
+
+typedef struct VkVideoEncodeQuantizationMapInfoKHR {
+    VkStructureType    sType;
+    const void*        pNext;
+    VkImageView        quantizationMap;
+    VkExtent2D         quantizationMapExtent;
+} VkVideoEncodeQuantizationMapInfoKHR;
+
+typedef struct VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR {
+    VkStructureType    sType;
+    const void*        pNext;
+    VkExtent2D         quantizationMapTexelSize;
+} VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR;
+
+typedef struct VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           videoEncodeQuantizationMap;
+} VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR;
+
+typedef struct VkVideoEncodeH264QuantizationMapCapabilitiesKHR {
+    VkStructureType    sType;
+    void*              pNext;
+    int32_t            minQpDelta;
+    int32_t            maxQpDelta;
+} VkVideoEncodeH264QuantizationMapCapabilitiesKHR;
+
+typedef struct VkVideoEncodeH265QuantizationMapCapabilitiesKHR {
+    VkStructureType    sType;
+    void*              pNext;
+    int32_t            minQpDelta;
+    int32_t            maxQpDelta;
+} VkVideoEncodeH265QuantizationMapCapabilitiesKHR;
+
+typedef struct VkVideoFormatH265QuantizationMapPropertiesKHR {
+    VkStructureType                     sType;
+    void*                               pNext;
+    VkVideoEncodeH265CtbSizeFlagsKHR    compatibleCtbSizes;
+} VkVideoFormatH265QuantizationMapPropertiesKHR;
+
+typedef struct VkVideoEncodeAV1QuantizationMapCapabilitiesKHR {
+    VkStructureType    sType;
+    void*              pNext;
+    int32_t            minQIndexDelta;
+    int32_t            maxQIndexDelta;
+} VkVideoEncodeAV1QuantizationMapCapabilitiesKHR;
+
+typedef struct VkVideoFormatAV1QuantizationMapPropertiesKHR {
+    VkStructureType                           sType;
+    void*                                     pNext;
+    VkVideoEncodeAV1SuperblockSizeFlagsKHR    compatibleSuperblockSizes;
+} VkVideoFormatAV1QuantizationMapPropertiesKHR;
+
 
 
 // VK_KHR_shader_relaxed_extended_instruction is a preprocessor guard. Do not pass it to API calls.
@@ -12300,7 +12612,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdDrawIndirectByteCountEXT(
 #define VK_NVX_binary_import 1
 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkCuModuleNVX)
 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkCuFunctionNVX)
-#define VK_NVX_BINARY_IMPORT_SPEC_VERSION 1
+#define VK_NVX_BINARY_IMPORT_SPEC_VERSION 2
 #define VK_NVX_BINARY_IMPORT_EXTENSION_NAME "VK_NVX_binary_import"
 typedef struct VkCuModuleCreateInfoNVX {
     VkStructureType    sType;
@@ -12308,6 +12620,12 @@ typedef struct VkCuModuleCreateInfoNVX {
     size_t             dataSize;
     const void*        pData;
 } VkCuModuleCreateInfoNVX;
+
+typedef struct VkCuModuleTexturingModeCreateInfoNVX {
+    VkStructureType    sType;
+    const void*        pNext;
+    VkBool32           use64bitTexturing;
+} VkCuModuleTexturingModeCreateInfoNVX;
 
 typedef struct VkCuFunctionCreateInfoNVX {
     VkStructureType    sType;
@@ -12370,7 +12688,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdCuLaunchKernelNVX(
 
 // VK_NVX_image_view_handle is a preprocessor guard. Do not pass it to API calls.
 #define VK_NVX_image_view_handle 1
-#define VK_NVX_IMAGE_VIEW_HANDLE_SPEC_VERSION 2
+#define VK_NVX_IMAGE_VIEW_HANDLE_SPEC_VERSION 3
 #define VK_NVX_IMAGE_VIEW_HANDLE_EXTENSION_NAME "VK_NVX_image_view_handle"
 typedef struct VkImageViewHandleInfoNVX {
     VkStructureType     sType;
@@ -12388,10 +12706,15 @@ typedef struct VkImageViewAddressPropertiesNVX {
 } VkImageViewAddressPropertiesNVX;
 
 typedef uint32_t (VKAPI_PTR *PFN_vkGetImageViewHandleNVX)(VkDevice device, const VkImageViewHandleInfoNVX* pInfo);
+typedef uint64_t (VKAPI_PTR *PFN_vkGetImageViewHandle64NVX)(VkDevice device, const VkImageViewHandleInfoNVX* pInfo);
 typedef VkResult (VKAPI_PTR *PFN_vkGetImageViewAddressNVX)(VkDevice device, VkImageView imageView, VkImageViewAddressPropertiesNVX* pProperties);
 
 #ifndef VK_NO_PROTOTYPES
 VKAPI_ATTR uint32_t VKAPI_CALL vkGetImageViewHandleNVX(
+    VkDevice                                    device,
+    const VkImageViewHandleInfoNVX*             pInfo);
+
+VKAPI_ATTR uint64_t VKAPI_CALL vkGetImageViewHandle64NVX(
     VkDevice                                    device,
     const VkImageViewHandleInfoNVX*             pInfo);
 
@@ -19520,6 +19843,32 @@ typedef struct VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV {
 
 
 
+// VK_NV_display_stereo is a preprocessor guard. Do not pass it to API calls.
+#define VK_NV_display_stereo 1
+#define VK_NV_DISPLAY_STEREO_SPEC_VERSION 1
+#define VK_NV_DISPLAY_STEREO_EXTENSION_NAME "VK_NV_display_stereo"
+
+typedef enum VkDisplaySurfaceStereoTypeNV {
+    VK_DISPLAY_SURFACE_STEREO_TYPE_NONE_NV = 0,
+    VK_DISPLAY_SURFACE_STEREO_TYPE_ONBOARD_DIN_NV = 1,
+    VK_DISPLAY_SURFACE_STEREO_TYPE_HDMI_3D_NV = 2,
+    VK_DISPLAY_SURFACE_STEREO_TYPE_INBAND_DISPLAYPORT_NV = 3,
+    VK_DISPLAY_SURFACE_STEREO_TYPE_MAX_ENUM_NV = 0x7FFFFFFF
+} VkDisplaySurfaceStereoTypeNV;
+typedef struct VkDisplaySurfaceStereoCreateInfoNV {
+    VkStructureType                 sType;
+    const void*                     pNext;
+    VkDisplaySurfaceStereoTypeNV    stereoType;
+} VkDisplaySurfaceStereoCreateInfoNV;
+
+typedef struct VkDisplayModeStereoPropertiesNV {
+    VkStructureType    sType;
+    const void*        pNext;
+    VkBool32           hdmi3DSupported;
+} VkDisplayModeStereoPropertiesNV;
+
+
+
 // VK_NV_raw_access_chains is a preprocessor guard. Do not pass it to API calls.
 #define VK_NV_raw_access_chains 1
 #define VK_NV_RAW_ACCESS_CHAINS_SPEC_VERSION 1
@@ -19969,6 +20318,18 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetPhysicalDeviceCooperativeMatrixFlexibleDimen
     uint32_t*                                   pPropertyCount,
     VkCooperativeMatrixFlexibleDimensionsPropertiesNV* pProperties);
 #endif
+
+
+// VK_EXT_vertex_attribute_robustness is a preprocessor guard. Do not pass it to API calls.
+#define VK_EXT_vertex_attribute_robustness 1
+#define VK_EXT_VERTEX_ATTRIBUTE_ROBUSTNESS_SPEC_VERSION 1
+#define VK_EXT_VERTEX_ATTRIBUTE_ROBUSTNESS_EXTENSION_NAME "VK_EXT_vertex_attribute_robustness"
+typedef struct VkPhysicalDeviceVertexAttributeRobustnessFeaturesEXT {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           vertexAttributeRobustness;
+} VkPhysicalDeviceVertexAttributeRobustnessFeaturesEXT;
+
 
 
 // VK_KHR_acceleration_structure is a preprocessor guard. Do not pass it to API calls.

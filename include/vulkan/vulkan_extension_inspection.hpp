@@ -46,7 +46,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   VULKAN_HPP_INLINE std::map<std::string, std::string> const & getDeprecatedExtensions()
   {
-    static std::map<std::string, std::string> deprecatedExtensions = {
+    static const std::map<std::string, std::string> deprecatedExtensions = {
       { "VK_EXT_debug_report", "VK_EXT_debug_utils" },
       { "VK_NV_glsl_shader", "" },
       { "VK_NV_dedicated_allocation", "VK_KHR_dedicated_allocation" },
@@ -76,7 +76,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   VULKAN_HPP_INLINE std::set<std::string> const & getDeviceExtensions()
   {
-    static std::set<std::string> deviceExtensions = {
+    static const std::set<std::string> deviceExtensions = {
       "VK_KHR_swapchain",
       "VK_KHR_display_swapchain",
       "VK_NV_glsl_shader",
@@ -424,6 +424,7 @@ namespace VULKAN_HPP_NAMESPACE
       "VK_QCOM_multiview_per_view_render_areas",
       "VK_KHR_compute_shader_derivatives",
       "VK_KHR_video_decode_av1",
+      "VK_KHR_video_encode_av1",
       "VK_KHR_video_maintenance1",
       "VK_NV_per_stage_descriptor_set",
       "VK_QCOM_image_processing2",
@@ -444,6 +445,7 @@ namespace VULKAN_HPP_NAMESPACE
       "VK_KHR_shader_expect_assume",
       "VK_KHR_maintenance6",
       "VK_NV_descriptor_pool_overallocation",
+      "VK_KHR_video_encode_quantization_map",
       "VK_NV_raw_access_chains",
       "VK_KHR_shader_relaxed_extended_instruction",
       "VK_NV_command_buffer_inheritance",
@@ -455,14 +457,15 @@ namespace VULKAN_HPP_NAMESPACE
       "VK_MESA_image_alignment_control",
       "VK_EXT_depth_clamp_control",
       "VK_HUAWEI_hdr_vivid",
-      "VK_NV_cooperative_matrix2"
+      "VK_NV_cooperative_matrix2",
+      "VK_EXT_vertex_attribute_robustness"
     };
     return deviceExtensions;
   }
 
   VULKAN_HPP_INLINE std::set<std::string> const & getInstanceExtensions()
   {
-    static std::set<std::string> instanceExtensions = {
+    static const std::set<std::string> instanceExtensions = {
       "VK_KHR_surface",
       "VK_KHR_display",
 #if defined( VK_USE_PLATFORM_XLIB_KHR )
@@ -529,15 +532,16 @@ namespace VULKAN_HPP_NAMESPACE
       "VK_KHR_portability_enumeration",
       "VK_GOOGLE_surfaceless_query",
       "VK_LUNARG_direct_driver_loading",
-      "VK_EXT_layer_settings"
+      "VK_EXT_layer_settings",
+      "VK_NV_display_stereo"
     };
     return instanceExtensions;
   }
 
   VULKAN_HPP_INLINE std::map<std::string, std::vector<std::vector<std::string>>> const & getExtensionDepends( std::string const & extension )
   {
-    static std::map<std::string, std::vector<std::vector<std::string>>>                        noDependencies;
-    static std::map<std::string, std::map<std::string, std::vector<std::vector<std::string>>>> dependencies = {
+    static const std::map<std::string, std::vector<std::vector<std::string>>>                        noDependencies;
+    static const std::map<std::string, std::map<std::string, std::vector<std::vector<std::string>>>> dependencies = {
       { "VK_KHR_swapchain",
         { { "VK_VERSION_1_0",
             { {
@@ -2249,6 +2253,11 @@ namespace VULKAN_HPP_NAMESPACE
             { {
               "VK_KHR_video_decode_queue",
             } } } } },
+      { "VK_KHR_video_encode_av1",
+        { { "VK_VERSION_1_0",
+            { {
+              "VK_KHR_video_encode_queue",
+            } } } } },
       { "VK_KHR_video_maintenance1",
         { { "VK_VERSION_1_0",
             { {
@@ -2344,6 +2353,18 @@ namespace VULKAN_HPP_NAMESPACE
           { "VK_VERSION_1_1", { {} } } } },
       { "VK_KHR_maintenance6", { { "VK_VERSION_1_1", { {} } } } },
       { "VK_NV_descriptor_pool_overallocation", { { "VK_VERSION_1_1", { {} } } } },
+      { "VK_NV_display_stereo",
+        { { "VK_VERSION_1_0",
+            { {
+              "VK_KHR_display",
+              "VK_KHR_get_display_properties2",
+            } } } } },
+      { "VK_KHR_video_encode_quantization_map",
+        { { "VK_VERSION_1_0",
+            { {
+              "VK_KHR_video_encode_queue",
+              "VK_KHR_format_feature_flags2",
+            } } } } },
       { "VK_KHR_maintenance7", { { "VK_VERSION_1_1", { {} } } } },
       { "VK_EXT_device_generated_commands",
         { { "VK_VERSION_1_0",
@@ -2414,13 +2435,13 @@ namespace VULKAN_HPP_NAMESPACE
 
   VULKAN_HPP_INLINE std::map<std::string, std::string> const & getObsoletedExtensions()
   {
-    static std::map<std::string, std::string> obsoletedExtensions = { { "VK_AMD_negative_viewport_height", "VK_KHR_maintenance1" } };
+    static const std::map<std::string, std::string> obsoletedExtensions = { { "VK_AMD_negative_viewport_height", "VK_KHR_maintenance1" } };
     return obsoletedExtensions;
   }
 
   VULKAN_HPP_INLINE std::map<std::string, std::string> const & getPromotedExtensions()
   {
-    static std::map<std::string, std::string> promotedExtensions = {
+    static const std::map<std::string, std::string> promotedExtensions = {
       { "VK_KHR_sampler_mirror_clamp_to_edge", "VK_VERSION_1_2" },
       { "VK_EXT_debug_marker", "VK_EXT_debug_utils" },
       { "VK_AMD_draw_indirect_count", "VK_KHR_draw_indirect_count" },
@@ -3141,8 +3162,8 @@ namespace VULKAN_HPP_NAMESPACE
            ( extension == "VK_ARM_shader_core_builtins" ) || ( extension == "VK_EXT_pipeline_library_group_handles" ) ||
            ( extension == "VK_EXT_dynamic_rendering_unused_attachments" ) || ( extension == "VK_NV_low_latency2" ) ||
            ( extension == "VK_KHR_cooperative_matrix" ) || ( extension == "VK_QCOM_multiview_per_view_render_areas" ) ||
-           ( extension == "VK_KHR_compute_shader_derivatives" ) || ( extension == "VK_KHR_video_decode_av1" ) || ( extension == "VK_KHR_video_maintenance1" ) ||
-           ( extension == "VK_NV_per_stage_descriptor_set" ) || ( extension == "VK_QCOM_image_processing2" ) ||
+           ( extension == "VK_KHR_compute_shader_derivatives" ) || ( extension == "VK_KHR_video_decode_av1" ) || ( extension == "VK_KHR_video_encode_av1" ) ||
+           ( extension == "VK_KHR_video_maintenance1" ) || ( extension == "VK_NV_per_stage_descriptor_set" ) || ( extension == "VK_QCOM_image_processing2" ) ||
            ( extension == "VK_QCOM_filter_cubic_weights" ) || ( extension == "VK_QCOM_ycbcr_degamma" ) || ( extension == "VK_QCOM_filter_cubic_clamp" ) ||
            ( extension == "VK_EXT_attachment_feedback_loop_dynamic_state" ) || ( extension == "VK_KHR_vertex_attribute_divisor" ) ||
            ( extension == "VK_KHR_load_store_op_none" ) || ( extension == "VK_KHR_shader_float_controls2" )
@@ -3151,12 +3172,13 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VK_USE_PLATFORM_SCREEN_QNX*/
         || ( extension == "VK_MSFT_layered_driver" ) || ( extension == "VK_KHR_index_type_uint8" ) || ( extension == "VK_KHR_line_rasterization" ) ||
            ( extension == "VK_KHR_calibrated_timestamps" ) || ( extension == "VK_KHR_shader_expect_assume" ) || ( extension == "VK_KHR_maintenance6" ) ||
-           ( extension == "VK_NV_descriptor_pool_overallocation" ) || ( extension == "VK_NV_raw_access_chains" ) ||
-           ( extension == "VK_KHR_shader_relaxed_extended_instruction" ) || ( extension == "VK_NV_command_buffer_inheritance" ) ||
-           ( extension == "VK_KHR_maintenance7" ) || ( extension == "VK_NV_shader_atomic_float16_vector" ) ||
-           ( extension == "VK_EXT_shader_replicated_composites" ) || ( extension == "VK_NV_ray_tracing_validation" ) ||
-           ( extension == "VK_EXT_device_generated_commands" ) || ( extension == "VK_MESA_image_alignment_control" ) ||
-           ( extension == "VK_EXT_depth_clamp_control" ) || ( extension == "VK_HUAWEI_hdr_vivid" ) || ( extension == "VK_NV_cooperative_matrix2" );
+           ( extension == "VK_NV_descriptor_pool_overallocation" ) || ( extension == "VK_KHR_video_encode_quantization_map" ) ||
+           ( extension == "VK_NV_raw_access_chains" ) || ( extension == "VK_KHR_shader_relaxed_extended_instruction" ) ||
+           ( extension == "VK_NV_command_buffer_inheritance" ) || ( extension == "VK_KHR_maintenance7" ) ||
+           ( extension == "VK_NV_shader_atomic_float16_vector" ) || ( extension == "VK_EXT_shader_replicated_composites" ) ||
+           ( extension == "VK_NV_ray_tracing_validation" ) || ( extension == "VK_EXT_device_generated_commands" ) ||
+           ( extension == "VK_MESA_image_alignment_control" ) || ( extension == "VK_EXT_depth_clamp_control" ) || ( extension == "VK_HUAWEI_hdr_vivid" ) ||
+           ( extension == "VK_NV_cooperative_matrix2" ) || ( extension == "VK_EXT_vertex_attribute_robustness" );
   }
 
   VULKAN_HPP_INLINE VULKAN_HPP_CONSTEXPR_20 bool isInstanceExtension( std::string const & extension )
@@ -3216,7 +3238,7 @@ namespace VULKAN_HPP_NAMESPACE
         || ( extension == "VK_QNX_screen_surface" )
 #endif /*VK_USE_PLATFORM_SCREEN_QNX*/
         || ( extension == "VK_KHR_portability_enumeration" ) || ( extension == "VK_GOOGLE_surfaceless_query" ) ||
-           ( extension == "VK_LUNARG_direct_driver_loading" ) || ( extension == "VK_EXT_layer_settings" );
+           ( extension == "VK_LUNARG_direct_driver_loading" ) || ( extension == "VK_EXT_layer_settings" ) || ( extension == "VK_NV_display_stereo" );
   }
 
   VULKAN_HPP_INLINE VULKAN_HPP_CONSTEXPR_20 bool isObsoletedExtension( std::string const & extension )
