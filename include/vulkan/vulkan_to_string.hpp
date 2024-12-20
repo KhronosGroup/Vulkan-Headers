@@ -8,7 +8,7 @@
 #ifndef VULKAN_TO_STRING_HPP
 #define VULKAN_TO_STRING_HPP
 
-#include <vulkan/vulkan_enums.hpp>
+#include <vulkan/vulkan.hpp>
 
 // ignore warnings on using deprecated enum values in this header
 #if defined( __clang__ ) || defined( __GNUC__ )
@@ -6748,7 +6748,7 @@ namespace VULKAN_HPP_NAMESPACE
       case DriverId::eMesaNvk: return "MesaNvk";
       case DriverId::eImaginationOpenSourceMESA: return "ImaginationOpenSourceMESA";
       case DriverId::eMesaHoneykrisp: return "MesaHoneykrisp";
-      case DriverId::eReserved27: return "Reserved27";
+      case DriverId::eVulkanScEmulationOnVulkan: return "VulkanScEmulationOnVulkan";
       default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
     }
   }

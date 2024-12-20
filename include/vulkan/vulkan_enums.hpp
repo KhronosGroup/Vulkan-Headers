@@ -256,8 +256,8 @@ namespace VULKAN_HPP_NAMESPACE
     eErrorInvalidDeviceAddressEXT                = VK_ERROR_INVALID_DEVICE_ADDRESS_EXT,
     eErrorInvalidOpaqueCaptureAddressKHR         = VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS_KHR,
     ePipelineCompileRequired                     = VK_PIPELINE_COMPILE_REQUIRED,
-    eErrorPipelineCompileRequiredEXT             = VK_ERROR_PIPELINE_COMPILE_REQUIRED_EXT,
     ePipelineCompileRequiredEXT                  = VK_PIPELINE_COMPILE_REQUIRED_EXT,
+    eErrorPipelineCompileRequiredEXT             = VK_ERROR_PIPELINE_COMPILE_REQUIRED_EXT,
     eErrorNotPermitted                           = VK_ERROR_NOT_PERMITTED,
     eErrorNotPermittedEXT                        = VK_ERROR_NOT_PERMITTED_EXT,
     eErrorNotPermittedKHR                        = VK_ERROR_NOT_PERMITTED_KHR,
@@ -413,8 +413,8 @@ namespace VULKAN_HPP_NAMESPACE
     ePhysicalDeviceMultiviewProperties                       = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES,
     ePhysicalDeviceMultiviewPropertiesKHR                    = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES_KHR,
     ePhysicalDeviceVariablePointersFeatures                  = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES,
-    ePhysicalDeviceVariablePointersFeaturesKHR               = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES_KHR,
     ePhysicalDeviceVariablePointerFeatures                   = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES,
+    ePhysicalDeviceVariablePointersFeaturesKHR               = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES_KHR,
     ePhysicalDeviceVariablePointerFeaturesKHR                = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES_KHR,
     eProtectedSubmitInfo                                     = VK_STRUCTURE_TYPE_PROTECTED_SUBMIT_INFO,
     ePhysicalDeviceProtectedMemoryFeatures                   = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES,
@@ -495,8 +495,8 @@ namespace VULKAN_HPP_NAMESPACE
     ePhysicalDeviceShaderAtomicInt64Features                 = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES,
     ePhysicalDeviceShaderAtomicInt64FeaturesKHR              = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES_KHR,
     ePhysicalDeviceShaderFloat16Int8Features                 = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES,
-    ePhysicalDeviceFloat16Int8FeaturesKHR                    = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT16_INT8_FEATURES_KHR,
     ePhysicalDeviceShaderFloat16Int8FeaturesKHR              = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES_KHR,
+    ePhysicalDeviceFloat16Int8FeaturesKHR                    = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT16_INT8_FEATURES_KHR,
     ePhysicalDeviceFloatControlsProperties                   = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES,
     ePhysicalDeviceFloatControlsPropertiesKHR                = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES_KHR,
     eDescriptorSetLayoutBindingFlagsCreateInfo               = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO,
@@ -675,11 +675,11 @@ namespace VULKAN_HPP_NAMESPACE
     eDeviceQueueGlobalPriorityCreateInfoEXT                  = VK_STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_EXT,
     eDeviceQueueGlobalPriorityCreateInfoKHR                  = VK_STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_KHR,
     ePhysicalDeviceGlobalPriorityQueryFeatures               = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES,
-    ePhysicalDeviceGlobalPriorityQueryFeaturesEXT            = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_EXT,
     ePhysicalDeviceGlobalPriorityQueryFeaturesKHR            = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_KHR,
+    ePhysicalDeviceGlobalPriorityQueryFeaturesEXT            = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_EXT,
     eQueueFamilyGlobalPriorityProperties                     = VK_STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES,
-    eQueueFamilyGlobalPriorityPropertiesEXT                  = VK_STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_EXT,
     eQueueFamilyGlobalPriorityPropertiesKHR                  = VK_STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_KHR,
+    eQueueFamilyGlobalPriorityPropertiesEXT                  = VK_STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_EXT,
     ePhysicalDeviceShaderSubgroupRotateFeatures              = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_ROTATE_FEATURES,
     ePhysicalDeviceShaderSubgroupRotateFeaturesKHR           = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_ROTATE_FEATURES_KHR,
     ePhysicalDeviceShaderFloatControls2Features              = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT_CONTROLS_2_FEATURES,
@@ -3532,9 +3532,9 @@ namespace VULKAN_HPP_NAMESPACE
     eStore    = VK_ATTACHMENT_STORE_OP_STORE,
     eDontCare = VK_ATTACHMENT_STORE_OP_DONT_CARE,
     eNone     = VK_ATTACHMENT_STORE_OP_NONE,
-    eNoneEXT  = VK_ATTACHMENT_STORE_OP_NONE_EXT,
     eNoneKHR  = VK_ATTACHMENT_STORE_OP_NONE_KHR,
-    eNoneQCOM = VK_ATTACHMENT_STORE_OP_NONE_QCOM
+    eNoneQCOM = VK_ATTACHMENT_STORE_OP_NONE_QCOM,
+    eNoneEXT  = VK_ATTACHMENT_STORE_OP_NONE_EXT
   };
 
   enum class DependencyFlagBits : VkDependencyFlags
@@ -4151,7 +4151,7 @@ namespace VULKAN_HPP_NAMESPACE
     eMesaNvk                   = VK_DRIVER_ID_MESA_NVK,
     eImaginationOpenSourceMESA = VK_DRIVER_ID_IMAGINATION_OPEN_SOURCE_MESA,
     eMesaHoneykrisp            = VK_DRIVER_ID_MESA_HONEYKRISP,
-    eReserved27                = VK_DRIVER_ID_RESERVED_27
+    eVulkanScEmulationOnVulkan = VK_DRIVER_ID_VULKAN_SC_EMULATION_ON_VULKAN
   };
   using DriverIdKHR = DriverId;
 
