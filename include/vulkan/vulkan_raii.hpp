@@ -1,4 +1,4 @@
-// Copyright 2015-2024 The Khronos Group Inc.
+// Copyright 2015-2025 The Khronos Group Inc.
 //
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 //
@@ -3044,7 +3044,7 @@ namespace VULKAN_HPP_NAMESPACE
         std::vector<VULKAN_HPP_NAMESPACE::VULKAN_HPP_RAII_NAMESPACE::PhysicalDevice>>::Type
         enumeratePhysicalDevices() const;
 
-      VULKAN_HPP_NODISCARD PFN_vkVoidFunction getProcAddr( const std::string & name ) const VULKAN_HPP_NOEXCEPT;
+      VULKAN_HPP_NODISCARD VULKAN_HPP_NAMESPACE::PFN_VoidFunction getProcAddr( const std::string & name ) const VULKAN_HPP_NOEXCEPT;
 
       //=== VK_VERSION_1_1 ===
 
@@ -3117,7 +3117,7 @@ namespace VULKAN_HPP_NAMESPACE
         VULKAN_HPP_RAII_CREATE_NOEXCEPT;
 
       void debugReportMessageEXT( VULKAN_HPP_NAMESPACE::DebugReportFlagsEXT      flags,
-                                  VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT objectType_,
+                                  VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT objectType,
                                   uint64_t                                       object,
                                   size_t                                         location,
                                   int32_t                                        messageCode,
@@ -3818,7 +3818,7 @@ namespace VULKAN_HPP_NAMESPACE
 
       //=== VK_VERSION_1_0 ===
 
-      VULKAN_HPP_NODISCARD PFN_vkVoidFunction getProcAddr( const std::string & name ) const VULKAN_HPP_NOEXCEPT;
+      VULKAN_HPP_NODISCARD VULKAN_HPP_NAMESPACE::PFN_VoidFunction getProcAddr( const std::string & name ) const VULKAN_HPP_NOEXCEPT;
 
       VULKAN_HPP_NODISCARD
         VULKAN_HPP_NAMESPACE::VULKAN_HPP_RAII_NAMESPACE::detail::CreateReturnType<VULKAN_HPP_NAMESPACE::VULKAN_HPP_RAII_NAMESPACE::Queue>::Type
@@ -4059,12 +4059,12 @@ namespace VULKAN_HPP_NAMESPACE
                                VULKAN_HPP_NAMESPACE::Optional<const VULKAN_HPP_NAMESPACE::AllocationCallbacks> allocator = nullptr ) const
         VULKAN_HPP_RAII_CREATE_NOEXCEPT;
 
-      void setPrivateData( VULKAN_HPP_NAMESPACE::ObjectType      objectType_,
+      void setPrivateData( VULKAN_HPP_NAMESPACE::ObjectType      objectType,
                            uint64_t                              objectHandle,
                            VULKAN_HPP_NAMESPACE::PrivateDataSlot privateDataSlot,
                            uint64_t                              data ) const;
 
-      VULKAN_HPP_NODISCARD uint64_t getPrivateData( VULKAN_HPP_NAMESPACE::ObjectType      objectType_,
+      VULKAN_HPP_NODISCARD uint64_t getPrivateData( VULKAN_HPP_NAMESPACE::ObjectType      objectType,
                                                     uint64_t                              objectHandle,
                                                     VULKAN_HPP_NAMESPACE::PrivateDataSlot privateDataSlot ) const VULKAN_HPP_NOEXCEPT;
 
@@ -4585,12 +4585,12 @@ namespace VULKAN_HPP_NAMESPACE
                                       Optional<const VULKAN_HPP_NAMESPACE::AllocationCallbacks> allocator
                                         VULKAN_HPP_DEFAULT_ARGUMENT_NULLPTR_ASSIGNMENT ) const VULKAN_HPP_NOEXCEPT;
 
-      void setPrivateDataEXT( VULKAN_HPP_NAMESPACE::ObjectType      objectType_,
+      void setPrivateDataEXT( VULKAN_HPP_NAMESPACE::ObjectType      objectType,
                               uint64_t                              objectHandle,
                               VULKAN_HPP_NAMESPACE::PrivateDataSlot privateDataSlot,
                               uint64_t                              data ) const;
 
-      VULKAN_HPP_NODISCARD uint64_t getPrivateDataEXT( VULKAN_HPP_NAMESPACE::ObjectType      objectType_,
+      VULKAN_HPP_NODISCARD uint64_t getPrivateDataEXT( VULKAN_HPP_NAMESPACE::ObjectType      objectType,
                                                        uint64_t                              objectHandle,
                                                        VULKAN_HPP_NAMESPACE::PrivateDataSlot privateDataSlot ) const VULKAN_HPP_NOEXCEPT;
 
@@ -13176,7 +13176,7 @@ namespace VULKAN_HPP_NAMESPACE
       return memoryProperties;
     }
 
-    VULKAN_HPP_NODISCARD VULKAN_HPP_INLINE PFN_vkVoidFunction Instance::getProcAddr( const std::string & name ) const VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_NODISCARD VULKAN_HPP_INLINE VULKAN_HPP_NAMESPACE::PFN_VoidFunction Instance::getProcAddr( const std::string & name ) const VULKAN_HPP_NOEXCEPT
     {
       VULKAN_HPP_ASSERT( getDispatcher()->vkGetInstanceProcAddr && "Function <vkGetInstanceProcAddr> requires <VK_VERSION_1_0>" );
 
@@ -13185,7 +13185,7 @@ namespace VULKAN_HPP_NAMESPACE
       return result;
     }
 
-    VULKAN_HPP_NODISCARD VULKAN_HPP_INLINE PFN_vkVoidFunction Device::getProcAddr( const std::string & name ) const VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_NODISCARD VULKAN_HPP_INLINE VULKAN_HPP_NAMESPACE::PFN_VoidFunction Device::getProcAddr( const std::string & name ) const VULKAN_HPP_NOEXCEPT
     {
       VULKAN_HPP_ASSERT( getDispatcher()->vkGetDeviceProcAddr && "Function <vkGetDeviceProcAddr> requires <VK_VERSION_1_0>" );
 
@@ -14154,9 +14154,6 @@ namespace VULKAN_HPP_NAMESPACE
                                     VULKAN_HPP_NAMESPACE::Optional<const VULKAN_HPP_NAMESPACE::AllocationCallbacks> allocator ) const
       VULKAN_HPP_RAII_CREATE_NOEXCEPT
     {
-      VULKAN_HPP_ASSERT(
-        createInfo.flags & vk::DescriptorPoolCreateFlagBits::eFreeDescriptorSet &&
-        "createInfo.flags need to have vk::DescriptorPoolCreateFlagBits::eFreeDesriptors set in order to allow destruction of VULKAN_HPP_NAMESPACE::VULKAN_HPP_RAII_NAMESPACE::DescriptorSet which requires to return individual allocations to the pool" );
       VULKAN_HPP_NAMESPACE::DescriptorPool descriptorPool;
       VULKAN_HPP_NAMESPACE::Result         result = static_cast<VULKAN_HPP_NAMESPACE::Result>( getDispatcher()->vkCreateDescriptorPool(
         static_cast<VkDevice>( m_device ),
