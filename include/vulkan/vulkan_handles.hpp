@@ -1,4 +1,4 @@
-// Copyright 2015-2024 The Khronos Group Inc.
+// Copyright 2015-2025 The Khronos Group Inc.
 //
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 //
@@ -1618,9 +1618,6 @@ namespace VULKAN_HPP_NAMESPACE
   struct DescriptorSetBindingReferenceVALVE;
   struct DescriptorSetLayoutHostMappingInfoVALVE;
 
-  //=== VK_EXT_depth_clamp_zero_one ===
-  struct PhysicalDeviceDepthClampZeroOneFeaturesEXT;
-
   //=== VK_EXT_non_seamless_cube_map ===
   struct PhysicalDeviceNonSeamlessCubeMapFeaturesEXT;
 
@@ -1956,6 +1953,10 @@ namespace VULKAN_HPP_NAMESPACE
   struct GeneratedCommandsShaderInfoEXT;
   struct WriteIndirectExecutionSetShaderEXT;
 
+  //=== VK_KHR_maintenance8 ===
+  struct PhysicalDeviceMaintenance8FeaturesKHR;
+  struct MemoryBarrierAccessFlags3KHR;
+
   //=== VK_MESA_image_alignment_control ===
   struct PhysicalDeviceImageAlignmentControlFeaturesMESA;
   struct PhysicalDeviceImageAlignmentControlPropertiesMESA;
@@ -1974,6 +1975,13 @@ namespace VULKAN_HPP_NAMESPACE
   struct CooperativeMatrixFlexibleDimensionsPropertiesNV;
   struct PhysicalDeviceCooperativeMatrix2FeaturesNV;
   struct PhysicalDeviceCooperativeMatrix2PropertiesNV;
+
+  //=== VK_ARM_pipeline_opacity_micromap ===
+  struct PhysicalDevicePipelineOpacityMicromapFeaturesARM;
+
+  //=== VK_KHR_depth_clamp_zero_one ===
+  struct PhysicalDeviceDepthClampZeroOneFeaturesKHR;
+  using PhysicalDeviceDepthClampZeroOneFeaturesEXT = PhysicalDeviceDepthClampZeroOneFeaturesKHR;
 
   //=== VK_EXT_vertex_attribute_robustness ===
   struct PhysicalDeviceVertexAttributeRobustnessFeaturesEXT;
@@ -2084,6 +2092,8 @@ namespace VULKAN_HPP_NAMESPACE
   //=== VK_EXT_device_generated_commands ===
   class IndirectCommandsLayoutEXT;
   class IndirectExecutionSetEXT;
+
+  typedef void( VKAPI_PTR * PFN_VoidFunction )();
 
 #ifndef VULKAN_HPP_NO_SMART_HANDLE
   //======================
@@ -9722,7 +9732,8 @@ namespace VULKAN_HPP_NAMESPACE
     PFN_vkVoidFunction getProcAddr( const char * pName, Dispatch const & d VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    PFN_vkVoidFunction getProcAddr( const std::string & name, Dispatch const & d VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const VULKAN_HPP_NOEXCEPT;
+    VULKAN_HPP_NAMESPACE::PFN_VoidFunction getProcAddr( const std::string & name,
+                                                        Dispatch const & d  VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const VULKAN_HPP_NOEXCEPT;
 #endif /* VULKAN_HPP_DISABLE_ENHANCED_MODE */
 
     template <typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
@@ -11442,14 +11453,14 @@ namespace VULKAN_HPP_NAMESPACE
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    VULKAN_HPP_NODISCARD Result setPrivateData( VULKAN_HPP_NAMESPACE::ObjectType      objectType_,
+    VULKAN_HPP_NODISCARD Result setPrivateData( VULKAN_HPP_NAMESPACE::ObjectType      objectType,
                                                 uint64_t                              objectHandle,
                                                 VULKAN_HPP_NAMESPACE::PrivateDataSlot privateDataSlot,
                                                 uint64_t                              data,
                                                 Dispatch const & d                    VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const VULKAN_HPP_NOEXCEPT;
 #else
     template <typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    typename ResultValueType<void>::type setPrivateData( VULKAN_HPP_NAMESPACE::ObjectType      objectType_,
+    typename ResultValueType<void>::type setPrivateData( VULKAN_HPP_NAMESPACE::ObjectType      objectType,
                                                          uint64_t                              objectHandle,
                                                          VULKAN_HPP_NAMESPACE::PrivateDataSlot privateDataSlot,
                                                          uint64_t                              data,
@@ -11457,14 +11468,14 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template <typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    void getPrivateData( VULKAN_HPP_NAMESPACE::ObjectType      objectType_,
+    void getPrivateData( VULKAN_HPP_NAMESPACE::ObjectType      objectType,
                          uint64_t                              objectHandle,
                          VULKAN_HPP_NAMESPACE::PrivateDataSlot privateDataSlot,
                          uint64_t *                            pData,
                          Dispatch const & d                    VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    VULKAN_HPP_NODISCARD uint64_t getPrivateData( VULKAN_HPP_NAMESPACE::ObjectType      objectType_,
+    VULKAN_HPP_NODISCARD uint64_t getPrivateData( VULKAN_HPP_NAMESPACE::ObjectType      objectType,
                                                   uint64_t                              objectHandle,
                                                   VULKAN_HPP_NAMESPACE::PrivateDataSlot privateDataSlot,
                                                   Dispatch const & d                    VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const VULKAN_HPP_NOEXCEPT;
@@ -13904,14 +13915,14 @@ namespace VULKAN_HPP_NAMESPACE
 
 #ifdef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    VULKAN_HPP_NODISCARD Result setPrivateDataEXT( VULKAN_HPP_NAMESPACE::ObjectType      objectType_,
+    VULKAN_HPP_NODISCARD Result setPrivateDataEXT( VULKAN_HPP_NAMESPACE::ObjectType      objectType,
                                                    uint64_t                              objectHandle,
                                                    VULKAN_HPP_NAMESPACE::PrivateDataSlot privateDataSlot,
                                                    uint64_t                              data,
                                                    Dispatch const & d                    VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const VULKAN_HPP_NOEXCEPT;
 #else
     template <typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    typename ResultValueType<void>::type setPrivateDataEXT( VULKAN_HPP_NAMESPACE::ObjectType      objectType_,
+    typename ResultValueType<void>::type setPrivateDataEXT( VULKAN_HPP_NAMESPACE::ObjectType      objectType,
                                                             uint64_t                              objectHandle,
                                                             VULKAN_HPP_NAMESPACE::PrivateDataSlot privateDataSlot,
                                                             uint64_t                              data,
@@ -13919,14 +13930,14 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VULKAN_HPP_DISABLE_ENHANCED_MODE*/
 
     template <typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    void getPrivateDataEXT( VULKAN_HPP_NAMESPACE::ObjectType      objectType_,
+    void getPrivateDataEXT( VULKAN_HPP_NAMESPACE::ObjectType      objectType,
                             uint64_t                              objectHandle,
                             VULKAN_HPP_NAMESPACE::PrivateDataSlot privateDataSlot,
                             uint64_t *                            pData,
                             Dispatch const & d                    VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    VULKAN_HPP_NODISCARD uint64_t getPrivateDataEXT( VULKAN_HPP_NAMESPACE::ObjectType      objectType_,
+    VULKAN_HPP_NODISCARD uint64_t getPrivateDataEXT( VULKAN_HPP_NAMESPACE::ObjectType      objectType,
                                                      uint64_t                              objectHandle,
                                                      VULKAN_HPP_NAMESPACE::PrivateDataSlot privateDataSlot,
                                                      Dispatch const & d                    VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const VULKAN_HPP_NOEXCEPT;
@@ -17032,7 +17043,8 @@ namespace VULKAN_HPP_NAMESPACE
     PFN_vkVoidFunction getProcAddr( const char * pName, Dispatch const & d VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const VULKAN_HPP_NOEXCEPT;
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    PFN_vkVoidFunction getProcAddr( const std::string & name, Dispatch const & d VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const VULKAN_HPP_NOEXCEPT;
+    VULKAN_HPP_NAMESPACE::PFN_VoidFunction getProcAddr( const std::string & name,
+                                                        Dispatch const & d  VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const VULKAN_HPP_NOEXCEPT;
 #endif /* VULKAN_HPP_DISABLE_ENHANCED_MODE */
 
     //=== VK_VERSION_1_1 ===
@@ -17273,7 +17285,7 @@ namespace VULKAN_HPP_NAMESPACE
 
     template <typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     void debugReportMessageEXT( VULKAN_HPP_NAMESPACE::DebugReportFlagsEXT      flags,
-                                VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT objectType_,
+                                VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT objectType,
                                 uint64_t                                       object,
                                 size_t                                         location,
                                 int32_t                                        messageCode,
@@ -17283,7 +17295,7 @@ namespace VULKAN_HPP_NAMESPACE
 #ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     template <typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
     void debugReportMessageEXT( VULKAN_HPP_NAMESPACE::DebugReportFlagsEXT      flags,
-                                VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT objectType_,
+                                VULKAN_HPP_NAMESPACE::DebugReportObjectTypeEXT objectType,
                                 uint64_t                                       object,
                                 size_t                                         location,
                                 int32_t                                        messageCode,
