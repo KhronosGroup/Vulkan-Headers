@@ -63,7 +63,7 @@ extern "C" __declspec( dllimport ) FARPROC __stdcall GetProcAddress( HINSTANCE h
 #  include <span>
 #endif
 
-static_assert( VK_HEADER_VERSION == 305, "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION == 306, "Wrong VK_HEADER_VERSION!" );
 
 // <tuple> includes <sys/sysmacros.h> through some other header
 // this results in major(x) being resolved to gnu_dev_major(x)
@@ -6150,6 +6150,24 @@ namespace VULKAN_HPP_NAMESPACE
       {
         return ::vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV( physicalDevice, pPropertyCount, pProperties );
       }
+
+#  if defined( VK_USE_PLATFORM_METAL_EXT )
+      //=== VK_EXT_external_memory_metal ===
+
+      VkResult
+        vkGetMemoryMetalHandleEXT( VkDevice device, const VkMemoryGetMetalHandleInfoEXT * pGetMetalHandleInfo, void ** pHandle ) const VULKAN_HPP_NOEXCEPT
+      {
+        return ::vkGetMemoryMetalHandleEXT( device, pGetMetalHandleInfo, pHandle );
+      }
+
+      VkResult vkGetMemoryMetalHandlePropertiesEXT( VkDevice                           device,
+                                                    VkExternalMemoryHandleTypeFlagBits handleType,
+                                                    const void *                       pHandle,
+                                                    VkMemoryMetalHandlePropertiesEXT * pMemoryMetalHandleProperties ) const VULKAN_HPP_NOEXCEPT
+      {
+        return ::vkGetMemoryMetalHandlePropertiesEXT( device, handleType, pHandle, pMemoryMetalHandleProperties );
+      }
+#  endif /*VK_USE_PLATFORM_METAL_EXT*/
     };
 
     inline DispatchLoaderStatic & getDispatchLoaderStatic()
@@ -8849,6 +8867,10 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_CONSTEXPR_INLINE auto EXTDepthClampControlExtensionName = VK_EXT_DEPTH_CLAMP_CONTROL_EXTENSION_NAME;
   VULKAN_HPP_CONSTEXPR_INLINE auto EXTDepthClampControlSpecVersion   = VK_EXT_DEPTH_CLAMP_CONTROL_SPEC_VERSION;
 
+  //=== VK_KHR_video_maintenance2 ===
+  VULKAN_HPP_CONSTEXPR_INLINE auto KHRVideoMaintenance2ExtensionName = VK_KHR_VIDEO_MAINTENANCE_2_EXTENSION_NAME;
+  VULKAN_HPP_CONSTEXPR_INLINE auto KHRVideoMaintenance2SpecVersion   = VK_KHR_VIDEO_MAINTENANCE_2_SPEC_VERSION;
+
   //=== VK_HUAWEI_hdr_vivid ===
   VULKAN_HPP_CONSTEXPR_INLINE auto HUAWEIHdrVividExtensionName = VK_HUAWEI_HDR_VIVID_EXTENSION_NAME;
   VULKAN_HPP_CONSTEXPR_INLINE auto HUAWEIHdrVividSpecVersion   = VK_HUAWEI_HDR_VIVID_SPEC_VERSION;
@@ -8860,6 +8882,12 @@ namespace VULKAN_HPP_NAMESPACE
   //=== VK_ARM_pipeline_opacity_micromap ===
   VULKAN_HPP_CONSTEXPR_INLINE auto ARMPipelineOpacityMicromapExtensionName = VK_ARM_PIPELINE_OPACITY_MICROMAP_EXTENSION_NAME;
   VULKAN_HPP_CONSTEXPR_INLINE auto ARMPipelineOpacityMicromapSpecVersion   = VK_ARM_PIPELINE_OPACITY_MICROMAP_SPEC_VERSION;
+
+#if defined( VK_USE_PLATFORM_METAL_EXT )
+  //=== VK_EXT_external_memory_metal ===
+  VULKAN_HPP_CONSTEXPR_INLINE auto EXTExternalMemoryMetalExtensionName = VK_EXT_EXTERNAL_MEMORY_METAL_EXTENSION_NAME;
+  VULKAN_HPP_CONSTEXPR_INLINE auto EXTExternalMemoryMetalSpecVersion   = VK_EXT_EXTERNAL_MEMORY_METAL_SPEC_VERSION;
+#endif /*VK_USE_PLATFORM_METAL_EXT*/
 
   //=== VK_KHR_depth_clamp_zero_one ===
   VULKAN_HPP_CONSTEXPR_INLINE auto KHRDepthClampZeroOneExtensionName = VK_KHR_DEPTH_CLAMP_ZERO_ONE_EXTENSION_NAME;
@@ -17551,6 +17579,52 @@ namespace VULKAN_HPP_NAMESPACE
     };
   };
 
+  //=== VK_KHR_video_maintenance2 ===
+  template <>
+  struct StructExtends<PhysicalDeviceVideoMaintenance2FeaturesKHR, PhysicalDeviceFeatures2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<PhysicalDeviceVideoMaintenance2FeaturesKHR, DeviceCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<VideoDecodeH264InlineSessionParametersInfoKHR, VideoDecodeInfoKHR>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<VideoDecodeH265InlineSessionParametersInfoKHR, VideoDecodeInfoKHR>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<VideoDecodeAV1InlineSessionParametersInfoKHR, VideoDecodeInfoKHR>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
   //=== VK_HUAWEI_hdr_vivid ===
   template <>
   struct StructExtends<PhysicalDeviceHdrVividFeaturesHUAWEI, PhysicalDeviceFeatures2>
@@ -17625,6 +17699,18 @@ namespace VULKAN_HPP_NAMESPACE
       value = true
     };
   };
+
+#  if defined( VK_USE_PLATFORM_METAL_EXT )
+  //=== VK_EXT_external_memory_metal ===
+  template <>
+  struct StructExtends<ImportMemoryMetalHandleInfoEXT, MemoryAllocateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+#  endif /*VK_USE_PLATFORM_METAL_EXT*/
 
   //=== VK_KHR_depth_clamp_zero_one ===
   template <>
@@ -18972,6 +19058,15 @@ namespace VULKAN_HPP_NAMESPACE
 
       //=== VK_NV_cooperative_matrix2 ===
       PFN_vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV = 0;
+
+#if defined( VK_USE_PLATFORM_METAL_EXT )
+      //=== VK_EXT_external_memory_metal ===
+      PFN_vkGetMemoryMetalHandleEXT           vkGetMemoryMetalHandleEXT           = 0;
+      PFN_vkGetMemoryMetalHandlePropertiesEXT vkGetMemoryMetalHandlePropertiesEXT = 0;
+#else
+      PFN_dummy vkGetMemoryMetalHandleEXT_placeholder                         = 0;
+      PFN_dummy vkGetMemoryMetalHandlePropertiesEXT_placeholder               = 0;
+#endif /*VK_USE_PLATFORM_METAL_EXT*/
 
     public:
       DispatchLoaderDynamic() VULKAN_HPP_NOEXCEPT                                    = default;
@@ -20489,6 +20584,13 @@ namespace VULKAN_HPP_NAMESPACE
         //=== VK_NV_cooperative_matrix2 ===
         vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV = PFN_vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV(
           vkGetInstanceProcAddr( instance, "vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV" ) );
+
+#if defined( VK_USE_PLATFORM_METAL_EXT )
+        //=== VK_EXT_external_memory_metal ===
+        vkGetMemoryMetalHandleEXT = PFN_vkGetMemoryMetalHandleEXT( vkGetInstanceProcAddr( instance, "vkGetMemoryMetalHandleEXT" ) );
+        vkGetMemoryMetalHandlePropertiesEXT =
+          PFN_vkGetMemoryMetalHandlePropertiesEXT( vkGetInstanceProcAddr( instance, "vkGetMemoryMetalHandlePropertiesEXT" ) );
+#endif /*VK_USE_PLATFORM_METAL_EXT*/
       }
 
       void init( VULKAN_HPP_NAMESPACE::Device deviceCpp ) VULKAN_HPP_NOEXCEPT
@@ -21633,6 +21735,12 @@ namespace VULKAN_HPP_NAMESPACE
           PFN_vkUpdateIndirectExecutionSetPipelineEXT( vkGetDeviceProcAddr( device, "vkUpdateIndirectExecutionSetPipelineEXT" ) );
         vkUpdateIndirectExecutionSetShaderEXT =
           PFN_vkUpdateIndirectExecutionSetShaderEXT( vkGetDeviceProcAddr( device, "vkUpdateIndirectExecutionSetShaderEXT" ) );
+
+#if defined( VK_USE_PLATFORM_METAL_EXT )
+        //=== VK_EXT_external_memory_metal ===
+        vkGetMemoryMetalHandleEXT           = PFN_vkGetMemoryMetalHandleEXT( vkGetDeviceProcAddr( device, "vkGetMemoryMetalHandleEXT" ) );
+        vkGetMemoryMetalHandlePropertiesEXT = PFN_vkGetMemoryMetalHandlePropertiesEXT( vkGetDeviceProcAddr( device, "vkGetMemoryMetalHandlePropertiesEXT" ) );
+#endif /*VK_USE_PLATFORM_METAL_EXT*/
       }
 
       template <typename DynamicLoader>
