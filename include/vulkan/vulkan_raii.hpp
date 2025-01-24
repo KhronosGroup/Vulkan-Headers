@@ -1813,6 +1813,12 @@ namespace VULKAN_HPP_NAMESPACE
             PFN_vkUpdateIndirectExecutionSetPipelineEXT( vkGetDeviceProcAddr( device, "vkUpdateIndirectExecutionSetPipelineEXT" ) );
           vkUpdateIndirectExecutionSetShaderEXT =
             PFN_vkUpdateIndirectExecutionSetShaderEXT( vkGetDeviceProcAddr( device, "vkUpdateIndirectExecutionSetShaderEXT" ) );
+
+#  if defined( VK_USE_PLATFORM_METAL_EXT )
+          //=== VK_EXT_external_memory_metal ===
+          vkGetMemoryMetalHandleEXT           = PFN_vkGetMemoryMetalHandleEXT( vkGetDeviceProcAddr( device, "vkGetMemoryMetalHandleEXT" ) );
+          vkGetMemoryMetalHandlePropertiesEXT = PFN_vkGetMemoryMetalHandlePropertiesEXT( vkGetDeviceProcAddr( device, "vkGetMemoryMetalHandlePropertiesEXT" ) );
+#  endif /*VK_USE_PLATFORM_METAL_EXT*/
         }
 
       public:
@@ -2739,6 +2745,15 @@ namespace VULKAN_HPP_NAMESPACE
         PFN_vkDestroyIndirectExecutionSetEXT            vkDestroyIndirectExecutionSetEXT            = 0;
         PFN_vkUpdateIndirectExecutionSetPipelineEXT     vkUpdateIndirectExecutionSetPipelineEXT     = 0;
         PFN_vkUpdateIndirectExecutionSetShaderEXT       vkUpdateIndirectExecutionSetShaderEXT       = 0;
+
+#  if defined( VK_USE_PLATFORM_METAL_EXT )
+        //=== VK_EXT_external_memory_metal ===
+        PFN_vkGetMemoryMetalHandleEXT           vkGetMemoryMetalHandleEXT           = 0;
+        PFN_vkGetMemoryMetalHandlePropertiesEXT vkGetMemoryMetalHandlePropertiesEXT = 0;
+#  else
+        PFN_dummy vkGetMemoryMetalHandleEXT_placeholder                         = 0;
+        PFN_dummy vkGetMemoryMetalHandlePropertiesEXT_placeholder               = 0;
+#  endif /*VK_USE_PLATFORM_METAL_EXT*/
       };
 
     }  // namespace detail
@@ -4871,6 +4886,16 @@ namespace VULKAN_HPP_NAMESPACE
         createIndirectExecutionSetEXT( VULKAN_HPP_NAMESPACE::IndirectExecutionSetCreateInfoEXT const &                 createInfo,
                                        VULKAN_HPP_NAMESPACE::Optional<const VULKAN_HPP_NAMESPACE::AllocationCallbacks> allocator = nullptr ) const
         VULKAN_HPP_RAII_CREATE_NOEXCEPT;
+
+#  if defined( VK_USE_PLATFORM_METAL_EXT )
+      //=== VK_EXT_external_memory_metal ===
+
+      VULKAN_HPP_NODISCARD void * getMemoryMetalHandleEXT( const VULKAN_HPP_NAMESPACE::MemoryGetMetalHandleInfoEXT & getMetalHandleInfo ) const;
+
+      template <typename HandleType>
+      VULKAN_HPP_NODISCARD VULKAN_HPP_NAMESPACE::MemoryMetalHandlePropertiesEXT
+        getMemoryMetalHandlePropertiesEXT( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType, HandleType const & handle ) const;
+#  endif /*VK_USE_PLATFORM_METAL_EXT*/
 
     private:
       VULKAN_HPP_NAMESPACE::Device                                                               m_device    = {};
@@ -24681,6 +24706,41 @@ namespace VULKAN_HPP_NAMESPACE
       }
       return properties;
     }
+
+#  if defined( VK_USE_PLATFORM_METAL_EXT )
+    //=== VK_EXT_external_memory_metal ===
+
+    VULKAN_HPP_NODISCARD VULKAN_HPP_INLINE void *
+      Device::getMemoryMetalHandleEXT( const VULKAN_HPP_NAMESPACE::MemoryGetMetalHandleInfoEXT & getMetalHandleInfo ) const
+    {
+      VULKAN_HPP_ASSERT( getDispatcher()->vkGetMemoryMetalHandleEXT && "Function <vkGetMemoryMetalHandleEXT> requires <VK_EXT_external_memory_metal>" );
+
+      void *                       handle;
+      VULKAN_HPP_NAMESPACE::Result result = static_cast<VULKAN_HPP_NAMESPACE::Result>( getDispatcher()->vkGetMemoryMetalHandleEXT(
+        static_cast<VkDevice>( m_device ), reinterpret_cast<const VkMemoryGetMetalHandleInfoEXT *>( &getMetalHandleInfo ), &handle ) );
+      VULKAN_HPP_NAMESPACE::detail::resultCheck( result, VULKAN_HPP_NAMESPACE_STRING "::Device::getMemoryMetalHandleEXT" );
+
+      return handle;
+    }
+
+    template <typename HandleType>
+    VULKAN_HPP_NODISCARD VULKAN_HPP_INLINE VULKAN_HPP_NAMESPACE::MemoryMetalHandlePropertiesEXT
+      Device::getMemoryMetalHandlePropertiesEXT( VULKAN_HPP_NAMESPACE::ExternalMemoryHandleTypeFlagBits handleType, HandleType const & handle ) const
+    {
+      VULKAN_HPP_ASSERT( getDispatcher()->vkGetMemoryMetalHandlePropertiesEXT &&
+                         "Function <vkGetMemoryMetalHandlePropertiesEXT> requires <VK_EXT_external_memory_metal>" );
+
+      VULKAN_HPP_NAMESPACE::MemoryMetalHandlePropertiesEXT memoryMetalHandleProperties;
+      VULKAN_HPP_NAMESPACE::Result                         result = static_cast<VULKAN_HPP_NAMESPACE::Result>(
+        getDispatcher()->vkGetMemoryMetalHandlePropertiesEXT( static_cast<VkDevice>( m_device ),
+                                                              static_cast<VkExternalMemoryHandleTypeFlagBits>( handleType ),
+                                                              reinterpret_cast<const void *>( &handle ),
+                                                              reinterpret_cast<VkMemoryMetalHandlePropertiesEXT *>( &memoryMetalHandleProperties ) ) );
+      VULKAN_HPP_NAMESPACE::detail::resultCheck( result, VULKAN_HPP_NAMESPACE_STRING "::Device::getMemoryMetalHandlePropertiesEXT" );
+
+      return memoryMetalHandleProperties;
+    }
+#  endif /*VK_USE_PLATFORM_METAL_EXT*/
 
     //====================
     //=== RAII Helpers ===

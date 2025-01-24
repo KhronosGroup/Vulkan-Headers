@@ -457,9 +457,13 @@ namespace VULKAN_HPP_NAMESPACE
       "VK_KHR_maintenance8",
       "VK_MESA_image_alignment_control",
       "VK_EXT_depth_clamp_control",
+      "VK_KHR_video_maintenance2",
       "VK_HUAWEI_hdr_vivid",
       "VK_NV_cooperative_matrix2",
       "VK_ARM_pipeline_opacity_micromap",
+#if defined( VK_USE_PLATFORM_METAL_EXT )
+      "VK_EXT_external_memory_metal",
+#endif /*VK_USE_PLATFORM_METAL_EXT*/
       "VK_KHR_depth_clamp_zero_one",
       "VK_EXT_vertex_attribute_robustness"
     };
@@ -2390,6 +2394,12 @@ namespace VULKAN_HPP_NAMESPACE
               "VK_KHR_get_physical_device_properties2",
             } } },
           { "VK_VERSION_1_1", { {} } } } },
+      { "VK_KHR_video_maintenance2",
+        { { "VK_VERSION_1_0",
+            { {
+              "VK_KHR_video_decode_queue",
+              "VK_KHR_video_encode_queue",
+            } } } } },
       { "VK_HUAWEI_hdr_vivid",
         { { "VK_VERSION_1_0",
             { {
@@ -2410,6 +2420,14 @@ namespace VULKAN_HPP_NAMESPACE
             { {
               "VK_EXT_opacity_micromap",
             } } } } },
+#if defined( VK_USE_PLATFORM_METAL_EXT )
+      { "VK_EXT_external_memory_metal",
+        { { "VK_VERSION_1_0",
+            { {
+              "VK_KHR_external_memory",
+            } } },
+          { "VK_VERSION_1_1", { {} } } } },
+#endif /*VK_USE_PLATFORM_METAL_EXT*/
       { "VK_KHR_depth_clamp_zero_one",
         { { "VK_VERSION_1_0",
             { {
@@ -3285,9 +3303,13 @@ namespace VULKAN_HPP_NAMESPACE
            ( extension == "VK_NV_command_buffer_inheritance" ) || ( extension == "VK_KHR_maintenance7" ) ||
            ( extension == "VK_NV_shader_atomic_float16_vector" ) || ( extension == "VK_EXT_shader_replicated_composites" ) ||
            ( extension == "VK_NV_ray_tracing_validation" ) || ( extension == "VK_EXT_device_generated_commands" ) || ( extension == "VK_KHR_maintenance8" ) ||
-           ( extension == "VK_MESA_image_alignment_control" ) || ( extension == "VK_EXT_depth_clamp_control" ) || ( extension == "VK_HUAWEI_hdr_vivid" ) ||
-           ( extension == "VK_NV_cooperative_matrix2" ) || ( extension == "VK_ARM_pipeline_opacity_micromap" ) ||
-           ( extension == "VK_KHR_depth_clamp_zero_one" ) || ( extension == "VK_EXT_vertex_attribute_robustness" );
+           ( extension == "VK_MESA_image_alignment_control" ) || ( extension == "VK_EXT_depth_clamp_control" ) ||
+           ( extension == "VK_KHR_video_maintenance2" ) || ( extension == "VK_HUAWEI_hdr_vivid" ) || ( extension == "VK_NV_cooperative_matrix2" ) ||
+           ( extension == "VK_ARM_pipeline_opacity_micromap" )
+#if defined( VK_USE_PLATFORM_METAL_EXT )
+        || ( extension == "VK_EXT_external_memory_metal" )
+#endif /*VK_USE_PLATFORM_METAL_EXT*/
+        || ( extension == "VK_KHR_depth_clamp_zero_one" ) || ( extension == "VK_EXT_vertex_attribute_robustness" );
   }
 
   VULKAN_HPP_INLINE VULKAN_HPP_CONSTEXPR_20 bool isInstanceExtension( std::string const & extension )
