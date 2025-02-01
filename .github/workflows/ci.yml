@@ -21,7 +21,7 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-latest, macos-latest ]
-        cmake-version: [ '3.15', 'latest']
+        cmake-version: [ '3.22.1', 'latest']
     steps:
       - uses: actions/checkout@v4
       - uses: lukka/get-cmake@latest
@@ -39,7 +39,7 @@ jobs:
     if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name
     strategy:
       matrix:
-        cmake-version: [ '3.15', 'latest']
+        cmake-version: [ '3.22.1', 'latest']
     steps:
       - uses: actions/checkout@v4
       - uses: lukka/get-cmake@latest
