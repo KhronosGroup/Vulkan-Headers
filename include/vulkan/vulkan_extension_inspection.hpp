@@ -469,7 +469,10 @@ namespace VULKAN_HPP_NAMESPACE
       "VK_EXT_external_memory_metal",
 #endif /*VK_USE_PLATFORM_METAL_EXT*/
       "VK_KHR_depth_clamp_zero_one",
-      "VK_EXT_vertex_attribute_robustness"
+      "VK_EXT_vertex_attribute_robustness",
+#if defined( VK_ENABLE_BETA_EXTENSIONS )
+      "VK_NV_present_metering"
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
     };
     return deviceExtensions;
   }
@@ -1054,12 +1057,18 @@ namespace VULKAN_HPP_NAMESPACE
         { { "VK_VERSION_1_0",
             { {
               "VK_KHR_spirv_1_4",
+            } } },
+          { "VK_VERSION_1_2",
+            { {
               "VK_KHR_acceleration_structure",
             } } } } },
       { "VK_KHR_ray_query",
         { { "VK_VERSION_1_0",
             { {
               "VK_KHR_spirv_1_4",
+            } } },
+          { "VK_VERSION_1_2",
+            { {
               "VK_KHR_acceleration_structure",
             } } } } },
       { "VK_NV_shader_sm_builtins", { { "VK_VERSION_1_1", { {} } } } },
@@ -1362,6 +1371,9 @@ namespace VULKAN_HPP_NAMESPACE
         { { "VK_VERSION_1_1",
             { {
               "VK_KHR_vulkan_memory_model",
+            } } },
+          { "VK_VERSION_1_2",
+            { {
               "VK_KHR_shader_maximal_reconvergence",
             } } } } },
       { "VK_KHR_spirv_1_4",
@@ -1714,7 +1726,8 @@ namespace VULKAN_HPP_NAMESPACE
         { { "VK_VERSION_1_0",
             { {
               "VK_KHR_spirv_1_4",
-            } } } } },
+            } } },
+          { "VK_VERSION_1_2", { {} } } } },
       { "VK_EXT_ycbcr_2plane_444_formats",
         { { "VK_VERSION_1_0",
             { {
@@ -2192,7 +2205,8 @@ namespace VULKAN_HPP_NAMESPACE
         { { "VK_VERSION_1_0",
             { {
               "VK_KHR_maintenance5",
-            } } } } },
+            } } },
+          { "VK_VERSION_1_4", { {} } } } },
       { "VK_QCOM_tile_properties",
         { { "VK_VERSION_1_0",
             { {
@@ -2220,7 +2234,8 @@ namespace VULKAN_HPP_NAMESPACE
         { { "VK_VERSION_1_0",
             { {
               "VK_KHR_maintenance3",
-            } } } } },
+            } } },
+          { "VK_VERSION_1_1", { {} } } } },
       { "VK_EXT_legacy_vertex_attributes",
         { { "VK_VERSION_1_0",
             { {
@@ -2264,7 +2279,8 @@ namespace VULKAN_HPP_NAMESPACE
         { { "VK_VERSION_1_0",
             { {
               "VK_KHR_get_physical_device_properties2",
-            } } } } },
+            } } },
+          { "VK_VERSION_1_1", { {} } } } },
       { "VK_KHR_video_decode_av1",
         { { "VK_VERSION_1_0",
             { {
@@ -2382,7 +2398,8 @@ namespace VULKAN_HPP_NAMESPACE
             { {
               "VK_KHR_video_encode_queue",
               "VK_KHR_format_feature_flags2",
-            } } } } },
+            } } },
+          { "VK_VERSION_1_3", { {} } } } },
       { "VK_KHR_maintenance7", { { "VK_VERSION_1_1", { {} } } } },
       { "VK_NV_cluster_acceleration_structure",
         { { "VK_VERSION_1_0",
@@ -2398,8 +2415,12 @@ namespace VULKAN_HPP_NAMESPACE
         { { "VK_VERSION_1_0",
             { {
               "VK_KHR_buffer_device_address",
+            } } },
+          { "VK_VERSION_1_2",
+            { {
               "VK_KHR_maintenance5",
-            } } } } },
+            } } },
+          { "VK_VERSION_1_3", { {} } } } },
       { "VK_KHR_maintenance8", { { "VK_VERSION_1_1", { {} } } } },
       { "VK_MESA_image_alignment_control",
         { { "VK_VERSION_1_0",
@@ -2416,8 +2437,7 @@ namespace VULKAN_HPP_NAMESPACE
       { "VK_KHR_video_maintenance2",
         { { "VK_VERSION_1_0",
             { {
-              "VK_KHR_video_decode_queue",
-              "VK_KHR_video_encode_queue",
+              "VK_KHR_video_queue",
             } } } } },
       { "VK_HUAWEI_hdr_vivid",
         { { "VK_VERSION_1_0",
@@ -3331,7 +3351,11 @@ namespace VULKAN_HPP_NAMESPACE
 #if defined( VK_USE_PLATFORM_METAL_EXT )
         || ( extension == "VK_EXT_external_memory_metal" )
 #endif /*VK_USE_PLATFORM_METAL_EXT*/
-        || ( extension == "VK_KHR_depth_clamp_zero_one" ) || ( extension == "VK_EXT_vertex_attribute_robustness" );
+        || ( extension == "VK_KHR_depth_clamp_zero_one" ) || ( extension == "VK_EXT_vertex_attribute_robustness" )
+#if defined( VK_ENABLE_BETA_EXTENSIONS )
+        || ( extension == "VK_NV_present_metering" )
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
+      ;
   }
 
   VULKAN_HPP_INLINE VULKAN_HPP_CONSTEXPR_20 bool isInstanceExtension( std::string const & extension )
