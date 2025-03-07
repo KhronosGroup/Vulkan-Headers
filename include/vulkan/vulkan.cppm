@@ -8505,9 +8505,9 @@ export namespace std
   struct hash<VULKAN_HPP_NAMESPACE::PhysicalDevicePresentMeteringFeaturesNV>;
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
-  //===============================================
-  //=== Required exports for vk::StructureChain ===
-  //===============================================
+  //=================================================================
+  //=== Required exports for VULKAN_HPP_NAMESPACE::StructureChain ===
+  //=================================================================
 
 #if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
   using std::tuple_element;
@@ -8516,5 +8516,5 @@ export namespace std
 }  // namespace std
 
 // This VkFlags type is used as part of a bitfield in some structure.
-// As it that can't be mimiced by vk-data types, we need to export just that!!
-export VkGeometryInstanceFlagsKHR;
+// As it can't be mimicked by vk-data types, we need to export just that!!
+export using ::VkGeometryInstanceFlagsKHR;
