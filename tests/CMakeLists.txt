@@ -6,13 +6,22 @@
 # SPDX-License-Identifier: Apache-2.0
 # ~~~
 
-# Test add_subdirectory suppport
-add_test(NAME integration.add_subdirectory
+# Test add_subdirectory suppport for headers
+add_test(NAME integration.add_subdirectory_headers
     COMMAND ${CMAKE_CTEST_COMMAND}
         --build-and-test ${CMAKE_CURRENT_LIST_DIR}/integration
-                         ${CMAKE_CURRENT_BINARY_DIR}/add_subdirectory
+                         ${CMAKE_CURRENT_BINARY_DIR}/add_subdirectory_headers
         --build-generator ${CMAKE_GENERATOR}
         --build-options -DFIND_PACKAGE_TESTING=OFF -DVULKAN_HEADERS_ENABLE_MODULE=OFF
+)
+
+# Test add_subdirectory suppport for C++20 modules
+add_test(NAME integration.add_subdirectory_modules
+    COMMAND ${CMAKE_CTEST_COMMAND}
+        --build-and-test ${CMAKE_CURRENT_LIST_DIR}/integration
+                         ${CMAKE_CURRENT_BINARY_DIR}/add_subdirectory_modules
+        --build-generator ${CMAKE_GENERATOR}
+        --build-options -DFIND_PACKAGE_TESTING=OFF -DVULKAN_HEADERS_ENABLE_MODULE=ON
 )
 
 set(test_install_dir "${CMAKE_CURRENT_BINARY_DIR}/install")
