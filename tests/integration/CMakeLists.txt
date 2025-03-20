@@ -7,7 +7,7 @@
 # ~~~
 cmake_minimum_required(VERSION 3.22.1)
 
-project(API LANGUAGES C)
+project(API LANGUAGES C CXX)
 
 if (FIND_PACKAGE_TESTING)
     find_package(VulkanHeaders REQUIRED CONFIG)
@@ -77,3 +77,16 @@ target_link_libraries(vk_icd PRIVATE Vulkan::Headers)
 # vk_layer.h
 add_library(vk_layer MODULE ../vk_layer.c)
 target_link_libraries(vk_layer PRIVATE Vulkan::Headers)
+
+# vulkan.hpp
+add_library(vk_hpp MODULE ../vk_hpp.cpp)
+target_compile_features(vk_hpp PUBLIC cxx_std_11)
+target_link_libraries(vk_hpp PRIVATE Vulkan::Headers)
+
+# vulkan.cppm
+if (VULKAN_HEADERS_ENABLE_MODULE)
+    add_library(vk_hpp_module MODULE ../vk_hpp_module.cpp)
+    target_compile_features(vk_hpp_module PUBLIC cxx_std_20)
+    set_target_properties(vk_hpp_module PROPERTIES CXX_SCAN_FOR_MODULES ON)
+    target_link_libraries(vk_hpp_module PRIVATE Vulkan::HppModule)
+endif()
