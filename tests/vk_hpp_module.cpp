@@ -6,8 +6,12 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 import vulkan_hpp;
+#include <string>
 
-int header_version()
+int test_instance()
 {
-    return VK_HEADER_VERSION;
+    vk::InstanceCreateInfo instanceCreateInfo({}, nullptr);
+    vk::Instance instance = vk::createInstance(instanceCreateInfo);
+    instance.destroy();
+    return 0;
 }
