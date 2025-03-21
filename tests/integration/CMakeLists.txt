@@ -86,7 +86,6 @@ target_link_libraries(vk_hpp PRIVATE Vulkan::Headers)
 # vulkan.cppm
 if (VULKAN_HEADERS_ENABLE_MODULE)
     add_library(vk_hpp_module MODULE ../vk_hpp_module.cpp)
-    target_compile_features(vk_hpp_module PUBLIC cxx_std_20)
     set_target_properties(vk_hpp_module PROPERTIES CXX_SCAN_FOR_MODULES ON)
     target_link_libraries(vk_hpp_module PRIVATE Vulkan::HppModule)
 endif()
