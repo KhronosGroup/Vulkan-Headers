@@ -98,7 +98,7 @@ jobs:
           -G Ninja
       - run: cmake --build ./build
       - run: cmake --install build/ --prefix build/install
-      - run: ctest --output-on-failure
+      - run: ctest --output-on-failure -D CMAKE_CXX_COMPILER=${{ matrix.compiler }}
         working-directory: build
 
   cmake-windows-modules:
@@ -115,11 +115,11 @@ jobs:
           cmakeVersion: ${{ matrix.cmake-version }}
       - uses: ilammy/msvc-dev-cmd@v1
       - run: |
-          cmake -S . -B build \
-          -D VULKAN_HEADERS_ENABLE_TESTS=ON \
-          -D VULKAN_HEADERS_ENABLE_INSTALL=ON \
-          -D VULKAN_HEADERS_ENABLE_MODULE=ON \
-          -D VULKAN_HEADERS_ENABLE_MODULE_STD=OFF \
+          cmake -S . -B build `
+          -D VULKAN_HEADERS_ENABLE_TESTS=ON `
+          -D VULKAN_HEADERS_ENABLE_INSTALL=ON `
+          -D VULKAN_HEADERS_ENABLE_MODULE=ON `
+          -D VULKAN_HEADERS_ENABLE_MODULE_STD=OFF `
           -G Ninja
       - run: cmake --build ./build
       - run: cmake --install build/ --prefix build/install
