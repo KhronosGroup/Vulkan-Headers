@@ -98,7 +98,7 @@ jobs:
           -G Ninja
       - run: cmake --build ./build
       - run: cmake --install build/ --prefix build/install
-      - run: ctest --output-on-failure -D CMAKE_CXX_COMPILER=${{ matrix.compiler }}
+      - run: CXX=${{ matrix.compiler }} ctest --output-on-failure
         working-directory: build
 
   cmake-windows-modules:
