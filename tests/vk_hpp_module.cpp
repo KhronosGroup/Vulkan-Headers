@@ -7,7 +7,7 @@
  */
 import vulkan_hpp;
 
-int test_instance()
+int test_version()
 {
     return static_cast<int>(vk::makeApiVersion(1, 0, 0, 0));
 }
