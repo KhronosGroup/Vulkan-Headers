@@ -115,13 +115,12 @@ if (VULKAN_HEADERS_ENABLE_INSTALL)
     install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/registry" DESTINATION "${CMAKE_INSTALL_DATADIR}/vulkan" USE_SOURCE_PERMISSIONS)
 
     set_target_properties(Vulkan-Headers PROPERTIES EXPORT_NAME "Headers")
-    list(APPEND INSTALL_TARGETS Vulkan-Headers)
     if (VULKAN_HEADERS_ENABLE_MODULE)
         set_target_properties(Vulkan-HppModule PROPERTIES EXPORT_NAME "HppModule")
-        list(APPEND INSTALL_TARGETS Vulkan-HppModule)
+        install(TARGETS Vulkan-Headers Vulkan-HppModule EXPORT VulkanHeadersConfig FILE_SET module INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+    else()
+        install(TARGETS Vulkan-Headers EXPORT VulkanHeadersConfig INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
     endif()
-    install(TARGETS ${INSTALL_TARGETS} EXPORT VulkanHeadersConfig FILE_SET module INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-
     install(EXPORT VulkanHeadersConfig NAMESPACE "Vulkan::" DESTINATION "share/cmake/VulkanHeaders")
 
     set(version_config "${CMAKE_CURRENT_BINARY_DIR}/generated/VulkanHeadersConfigVersion.cmake")
