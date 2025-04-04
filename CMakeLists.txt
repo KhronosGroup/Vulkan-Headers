@@ -115,9 +115,26 @@ if (VULKAN_HEADERS_ENABLE_INSTALL)
     install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/registry" DESTINATION "${CMAKE_INSTALL_DATADIR}/vulkan" USE_SOURCE_PERMISSIONS)
 
     set_target_properties(Vulkan-Headers PROPERTIES EXPORT_NAME "Headers")
-    install(TARGETS Vulkan-Headers EXPORT VulkanHeadersConfig INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-
-    install(EXPORT VulkanHeadersConfig NAMESPACE "Vulkan::" DESTINATION "share/cmake/VulkanHeaders")
+    if (VULKAN_HEADERS_ENABLE_MODULE)
+        # install Vulkan-Hpp module alongside headers
+        set_target_properties(Vulkan-HppModule PROPERTIES EXPORT_NAME "HppModule")
+        install(TARGETS Vulkan-Headers Vulkan-HppModule
+            EXPORT VulkanHeadersConfig
+            FILE_SET module DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+            INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+        install(EXPORT VulkanHeadersConfig
+            NAMESPACE "Vulkan::" 
+            DESTINATION "share/cmake/VulkanHeaders"
+            CXX_MODULES_DIRECTORY .)
+    else()
+        # only install vulkan headers
+        install(TARGETS Vulkan-Headers
+            EXPORT VulkanHeadersConfig
+            INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+        install(EXPORT VulkanHeadersConfig
+            NAMESPACE "Vulkan::" 
+            DESTINATION "share/cmake/VulkanHeaders")
+    endif()
 
     set(version_config "${CMAKE_CURRENT_BINARY_DIR}/generated/VulkanHeadersConfigVersion.cmake")
     write_basic_package_version_file("${version_config}" COMPATIBILITY SameMajorVersion ARCH_INDEPENDENT)
