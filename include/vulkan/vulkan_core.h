@@ -69,7 +69,7 @@ extern "C" {
 #define VK_API_VERSION_1_0 VK_MAKE_API_VERSION(0, 1, 0, 0)// Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 311
+#define VK_HEADER_VERSION 312
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 4, VK_HEADER_VERSION)
@@ -878,6 +878,12 @@ typedef enum VkStructureType {
 #ifdef VK_ENABLE_BETA_EXTENSIONS
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUDA_KERNEL_LAUNCH_PROPERTIES_NV = 1000307004,
 #endif
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TILE_SHADING_FEATURES_QCOM = 1000309000,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TILE_SHADING_PROPERTIES_QCOM = 1000309001,
+    VK_STRUCTURE_TYPE_RENDER_PASS_TILE_SHADING_CREATE_INFO_QCOM = 1000309002,
+    VK_STRUCTURE_TYPE_PER_TILE_BEGIN_INFO_QCOM = 1000309003,
+    VK_STRUCTURE_TYPE_PER_TILE_END_INFO_QCOM = 1000309004,
+    VK_STRUCTURE_TYPE_DISPATCH_TILE_INFO_QCOM = 1000309005,
     VK_STRUCTURE_TYPE_QUERY_LOW_LATENCY_SUPPORT_NV = 1000310000,
     VK_STRUCTURE_TYPE_EXPORT_METAL_OBJECT_CREATE_INFO_EXT = 1000311000,
     VK_STRUCTURE_TYPE_EXPORT_METAL_OBJECTS_INFO_EXT = 1000311001,
@@ -1175,6 +1181,10 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_QUANTIZATION_MAP_CAPABILITIES_KHR = 1000553007,
     VK_STRUCTURE_TYPE_VIDEO_FORMAT_AV1_QUANTIZATION_MAP_PROPERTIES_KHR = 1000553008,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAW_ACCESS_CHAINS_FEATURES_NV = 1000555000,
+    VK_STRUCTURE_TYPE_EXTERNAL_COMPUTE_QUEUE_DEVICE_CREATE_INFO_NV = 1000556000,
+    VK_STRUCTURE_TYPE_EXTERNAL_COMPUTE_QUEUE_CREATE_INFO_NV = 1000556001,
+    VK_STRUCTURE_TYPE_EXTERNAL_COMPUTE_QUEUE_DATA_PARAMS_NV = 1000556002,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_COMPUTE_QUEUE_PROPERTIES_NV = 1000556003,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_RELAXED_EXTENDED_INSTRUCTION_FEATURES_KHR = 1000558000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMMAND_BUFFER_INHERITANCE_FEATURES_NV = 1000559000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_7_FEATURES_KHR = 1000562000,
@@ -1593,6 +1603,7 @@ typedef enum VkObjectType {
     VK_OBJECT_TYPE_OPTICAL_FLOW_SESSION_NV = 1000464000,
     VK_OBJECT_TYPE_SHADER_EXT = 1000482000,
     VK_OBJECT_TYPE_PIPELINE_BINARY_KHR = 1000483000,
+    VK_OBJECT_TYPE_EXTERNAL_COMPUTE_QUEUE_NV = 1000556000,
     VK_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_EXT = 1000572000,
     VK_OBJECT_TYPE_INDIRECT_EXECUTION_SET_EXT = 1000572001,
     VK_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_KHR = VK_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE,
@@ -2991,6 +3002,7 @@ typedef enum VkSubpassDescriptionFlagBits {
     VK_SUBPASS_DESCRIPTION_PER_VIEW_POSITION_X_ONLY_BIT_NVX = 0x00000002,
     VK_SUBPASS_DESCRIPTION_FRAGMENT_REGION_BIT_QCOM = 0x00000004,
     VK_SUBPASS_DESCRIPTION_SHADER_RESOLVE_BIT_QCOM = 0x00000008,
+    VK_SUBPASS_DESCRIPTION_TILE_SHADING_APRON_BIT_QCOM = 0x00000100,
     VK_SUBPASS_DESCRIPTION_RASTERIZATION_ORDER_ATTACHMENT_COLOR_ACCESS_BIT_EXT = 0x00000010,
     VK_SUBPASS_DESCRIPTION_RASTERIZATION_ORDER_ATTACHMENT_DEPTH_ACCESS_BIT_EXT = 0x00000020,
     VK_SUBPASS_DESCRIPTION_RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_BIT_EXT = 0x00000040,
@@ -6890,6 +6902,8 @@ static const VkAccessFlagBits2 VK_ACCESS_2_VIDEO_DECODE_READ_BIT_KHR = 0x8000000
 static const VkAccessFlagBits2 VK_ACCESS_2_VIDEO_DECODE_WRITE_BIT_KHR = 0x1000000000ULL;
 static const VkAccessFlagBits2 VK_ACCESS_2_VIDEO_ENCODE_READ_BIT_KHR = 0x2000000000ULL;
 static const VkAccessFlagBits2 VK_ACCESS_2_VIDEO_ENCODE_WRITE_BIT_KHR = 0x4000000000ULL;
+static const VkAccessFlagBits2 VK_ACCESS_2_SHADER_TILE_ATTACHMENT_READ_BIT_QCOM = 0x8000000000000ULL;
+static const VkAccessFlagBits2 VK_ACCESS_2_SHADER_TILE_ATTACHMENT_WRITE_BIT_QCOM = 0x10000000000000ULL;
 static const VkAccessFlagBits2 VK_ACCESS_2_NONE_KHR = 0ULL;
 static const VkAccessFlagBits2 VK_ACCESS_2_INDIRECT_COMMAND_READ_BIT_KHR = 0x00000001ULL;
 static const VkAccessFlagBits2 VK_ACCESS_2_INDEX_READ_BIT_KHR = 0x00000002ULL;
@@ -17175,6 +17189,85 @@ VKAPI_ATTR void VKAPI_CALL vkCmdCudaLaunchKernelNV(
 #endif
 
 
+// VK_QCOM_tile_shading is a preprocessor guard. Do not pass it to API calls.
+#define VK_QCOM_tile_shading 1
+#define VK_QCOM_TILE_SHADING_SPEC_VERSION 1
+#define VK_QCOM_TILE_SHADING_EXTENSION_NAME "VK_QCOM_tile_shading"
+
+typedef enum VkTileShadingRenderPassFlagBitsQCOM {
+    VK_TILE_SHADING_RENDER_PASS_ENABLE_BIT_QCOM = 0x00000001,
+    VK_TILE_SHADING_RENDER_PASS_PER_TILE_EXECUTION_BIT_QCOM = 0x00000002,
+    VK_TILE_SHADING_RENDER_PASS_FLAG_BITS_MAX_ENUM_QCOM = 0x7FFFFFFF
+} VkTileShadingRenderPassFlagBitsQCOM;
+typedef VkFlags VkTileShadingRenderPassFlagsQCOM;
+typedef struct VkPhysicalDeviceTileShadingFeaturesQCOM {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           tileShading;
+    VkBool32           tileShadingFragmentStage;
+    VkBool32           tileShadingColorAttachments;
+    VkBool32           tileShadingDepthAttachments;
+    VkBool32           tileShadingStencilAttachments;
+    VkBool32           tileShadingInputAttachments;
+    VkBool32           tileShadingSampledAttachments;
+    VkBool32           tileShadingPerTileDraw;
+    VkBool32           tileShadingPerTileDispatch;
+    VkBool32           tileShadingDispatchTile;
+    VkBool32           tileShadingApron;
+    VkBool32           tileShadingAnisotropicApron;
+    VkBool32           tileShadingAtomicOps;
+    VkBool32           tileShadingImageProcessing;
+} VkPhysicalDeviceTileShadingFeaturesQCOM;
+
+typedef struct VkPhysicalDeviceTileShadingPropertiesQCOM {
+    VkStructureType    sType;
+    void*              pNext;
+    uint32_t           maxApronSize;
+    VkBool32           preferNonCoherent;
+    VkExtent2D         tileGranularity;
+    VkExtent2D         maxTileShadingRate;
+} VkPhysicalDeviceTileShadingPropertiesQCOM;
+
+typedef struct VkRenderPassTileShadingCreateInfoQCOM {
+    VkStructureType                     sType;
+    const void*                         pNext;
+    VkTileShadingRenderPassFlagsQCOM    flags;
+    VkExtent2D                          tileApronSize;
+} VkRenderPassTileShadingCreateInfoQCOM;
+
+typedef struct VkPerTileBeginInfoQCOM {
+    VkStructureType    sType;
+    const void*        pNext;
+} VkPerTileBeginInfoQCOM;
+
+typedef struct VkPerTileEndInfoQCOM {
+    VkStructureType    sType;
+    const void*        pNext;
+} VkPerTileEndInfoQCOM;
+
+typedef struct VkDispatchTileInfoQCOM {
+    VkStructureType    sType;
+    const void*        pNext;
+} VkDispatchTileInfoQCOM;
+
+typedef void (VKAPI_PTR *PFN_vkCmdDispatchTileQCOM)(VkCommandBuffer commandBuffer);
+typedef void (VKAPI_PTR *PFN_vkCmdBeginPerTileExecutionQCOM)(VkCommandBuffer commandBuffer, const VkPerTileBeginInfoQCOM* pPerTileBeginInfo);
+typedef void (VKAPI_PTR *PFN_vkCmdEndPerTileExecutionQCOM)(VkCommandBuffer commandBuffer, const VkPerTileEndInfoQCOM* pPerTileEndInfo);
+
+#ifndef VK_NO_PROTOTYPES
+VKAPI_ATTR void VKAPI_CALL vkCmdDispatchTileQCOM(
+    VkCommandBuffer                             commandBuffer);
+
+VKAPI_ATTR void VKAPI_CALL vkCmdBeginPerTileExecutionQCOM(
+    VkCommandBuffer                             commandBuffer,
+    const VkPerTileBeginInfoQCOM*               pPerTileBeginInfo);
+
+VKAPI_ATTR void VKAPI_CALL vkCmdEndPerTileExecutionQCOM(
+    VkCommandBuffer                             commandBuffer,
+    const VkPerTileEndInfoQCOM*                 pPerTileEndInfo);
+#endif
+
+
 // VK_NV_low_latency is a preprocessor guard. Do not pass it to API calls.
 #define VK_NV_low_latency 1
 #define VK_NV_LOW_LATENCY_SPEC_VERSION    1
@@ -20576,6 +20669,59 @@ typedef struct VkPhysicalDeviceRawAccessChainsFeaturesNV {
     VkBool32           shaderRawAccessChains;
 } VkPhysicalDeviceRawAccessChainsFeaturesNV;
 
+
+
+// VK_NV_external_compute_queue is a preprocessor guard. Do not pass it to API calls.
+#define VK_NV_external_compute_queue 1
+VK_DEFINE_HANDLE(VkExternalComputeQueueNV)
+#define VK_NV_EXTERNAL_COMPUTE_QUEUE_SPEC_VERSION 1
+#define VK_NV_EXTERNAL_COMPUTE_QUEUE_EXTENSION_NAME "VK_NV_external_compute_queue"
+typedef struct VkExternalComputeQueueDeviceCreateInfoNV {
+    VkStructureType    sType;
+    const void*        pNext;
+    uint32_t           reservedExternalQueues;
+} VkExternalComputeQueueDeviceCreateInfoNV;
+
+typedef struct VkExternalComputeQueueCreateInfoNV {
+    VkStructureType    sType;
+    const void*        pNext;
+    VkQueue            preferredQueue;
+} VkExternalComputeQueueCreateInfoNV;
+
+typedef struct VkExternalComputeQueueDataParamsNV {
+    VkStructureType    sType;
+    const void*        pNext;
+    uint32_t           deviceIndex;
+} VkExternalComputeQueueDataParamsNV;
+
+typedef struct VkPhysicalDeviceExternalComputeQueuePropertiesNV {
+    VkStructureType    sType;
+    void*              pNext;
+    uint32_t           externalDataSize;
+    uint32_t           maxExternalQueues;
+} VkPhysicalDeviceExternalComputeQueuePropertiesNV;
+
+typedef VkResult (VKAPI_PTR *PFN_vkCreateExternalComputeQueueNV)(VkDevice device, const VkExternalComputeQueueCreateInfoNV* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkExternalComputeQueueNV* pExternalQueue);
+typedef void (VKAPI_PTR *PFN_vkDestroyExternalComputeQueueNV)(VkDevice device, VkExternalComputeQueueNV externalQueue, const VkAllocationCallbacks* pAllocator);
+typedef void (VKAPI_PTR *PFN_vkGetExternalComputeQueueDataNV)(VkExternalComputeQueueNV externalQueue, VkExternalComputeQueueDataParamsNV* params, void* pData);
+
+#ifndef VK_NO_PROTOTYPES
+VKAPI_ATTR VkResult VKAPI_CALL vkCreateExternalComputeQueueNV(
+    VkDevice                                    device,
+    const VkExternalComputeQueueCreateInfoNV*   pCreateInfo,
+    const VkAllocationCallbacks*                pAllocator,
+    VkExternalComputeQueueNV*                   pExternalQueue);
+
+VKAPI_ATTR void VKAPI_CALL vkDestroyExternalComputeQueueNV(
+    VkDevice                                    device,
+    VkExternalComputeQueueNV                    externalQueue,
+    const VkAllocationCallbacks*                pAllocator);
+
+VKAPI_ATTR void VKAPI_CALL vkGetExternalComputeQueueDataNV(
+    VkExternalComputeQueueNV                    externalQueue,
+    VkExternalComputeQueueDataParamsNV*         params,
+    void*                                       pData);
+#endif
 
 
 // VK_NV_command_buffer_inheritance is a preprocessor guard. Do not pass it to API calls.
