@@ -23,6 +23,7 @@ namespace VULKAN_HPP_NAMESPACE
   class Flags
   {
   public:
+    using BitsType = BitType;
     using MaskType = typename std::underlying_type<BitType>::type;
 
     // constructors
@@ -1513,6 +1514,11 @@ namespace VULKAN_HPP_NAMESPACE
     eSetDescriptorBufferOffsetsInfoEXT                          = VK_STRUCTURE_TYPE_SET_DESCRIPTOR_BUFFER_OFFSETS_INFO_EXT,
     eBindDescriptorBufferEmbeddedSamplersInfoEXT                = VK_STRUCTURE_TYPE_BIND_DESCRIPTOR_BUFFER_EMBEDDED_SAMPLERS_INFO_EXT,
     ePhysicalDeviceDescriptorPoolOverallocationFeaturesNV       = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_POOL_OVERALLOCATION_FEATURES_NV,
+    ePhysicalDeviceTileMemoryHeapFeaturesQCOM                   = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TILE_MEMORY_HEAP_FEATURES_QCOM,
+    ePhysicalDeviceTileMemoryHeapPropertiesQCOM                 = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TILE_MEMORY_HEAP_PROPERTIES_QCOM,
+    eTileMemoryRequirementsQCOM                                 = VK_STRUCTURE_TYPE_TILE_MEMORY_REQUIREMENTS_QCOM,
+    eTileMemoryBindInfoQCOM                                     = VK_STRUCTURE_TYPE_TILE_MEMORY_BIND_INFO_QCOM,
+    eTileMemorySizeInfoQCOM                                     = VK_STRUCTURE_TYPE_TILE_MEMORY_SIZE_INFO_QCOM,
     eDisplaySurfaceStereoCreateInfoNV                           = VK_STRUCTURE_TYPE_DISPLAY_SURFACE_STEREO_CREATE_INFO_NV,
     eDisplayModeStereoPropertiesNV                              = VK_STRUCTURE_TYPE_DISPLAY_MODE_STEREO_PROPERTIES_NV,
     eVideoEncodeQuantizationMapCapabilitiesKHR                  = VK_STRUCTURE_TYPE_VIDEO_ENCODE_QUANTIZATION_MAP_CAPABILITIES_KHR,
@@ -2059,6 +2065,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<FormatFeatureFlagBits>
   {
+    using WrappedType                                                 = VkFormatFeatureFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool               isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR FormatFeatureFlags allFlags =
       FormatFeatureFlagBits::eSampledImage | FormatFeatureFlagBits::eStorageImage | FormatFeatureFlagBits::eStorageImageAtomic |
@@ -2114,6 +2121,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<ImageCreateFlagBits>
   {
+    using WrappedType                                               = VkImageCreateFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool             isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR ImageCreateFlags allFlags =
       ImageCreateFlagBits::eSparseBinding | ImageCreateFlagBits::eSparseResidency | ImageCreateFlagBits::eSparseAliased | ImageCreateFlagBits::eMutableFormat |
@@ -2167,6 +2175,7 @@ namespace VULKAN_HPP_NAMESPACE
     eInvocationMaskHUAWEI               = VK_IMAGE_USAGE_INVOCATION_MASK_BIT_HUAWEI,
     eSampleWeightQCOM                   = VK_IMAGE_USAGE_SAMPLE_WEIGHT_BIT_QCOM,
     eSampleBlockMatchQCOM               = VK_IMAGE_USAGE_SAMPLE_BLOCK_MATCH_BIT_QCOM,
+    eTileMemoryQCOM                     = VK_IMAGE_USAGE_TILE_MEMORY_QCOM,
     eVideoEncodeQuantizationDeltaMapKHR = VK_IMAGE_USAGE_VIDEO_ENCODE_QUANTIZATION_DELTA_MAP_BIT_KHR,
     eVideoEncodeEmphasisMapKHR          = VK_IMAGE_USAGE_VIDEO_ENCODE_EMPHASIS_MAP_BIT_KHR
   };
@@ -2177,6 +2186,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<ImageUsageFlagBits>
   {
+    using WrappedType                                              = VkImageUsageFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool            isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR ImageUsageFlags allFlags =
       ImageUsageFlagBits::eTransferSrc | ImageUsageFlagBits::eTransferDst | ImageUsageFlagBits::eSampled | ImageUsageFlagBits::eStorage |
@@ -2185,8 +2195,8 @@ namespace VULKAN_HPP_NAMESPACE
       ImageUsageFlagBits::eVideoDecodeSrcKHR | ImageUsageFlagBits::eVideoDecodeDpbKHR | ImageUsageFlagBits::eFragmentDensityMapEXT |
       ImageUsageFlagBits::eFragmentShadingRateAttachmentKHR | ImageUsageFlagBits::eVideoEncodeDstKHR | ImageUsageFlagBits::eVideoEncodeSrcKHR |
       ImageUsageFlagBits::eVideoEncodeDpbKHR | ImageUsageFlagBits::eAttachmentFeedbackLoopEXT | ImageUsageFlagBits::eInvocationMaskHUAWEI |
-      ImageUsageFlagBits::eSampleWeightQCOM | ImageUsageFlagBits::eSampleBlockMatchQCOM | ImageUsageFlagBits::eVideoEncodeQuantizationDeltaMapKHR |
-      ImageUsageFlagBits::eVideoEncodeEmphasisMapKHR;
+      ImageUsageFlagBits::eSampleWeightQCOM | ImageUsageFlagBits::eSampleBlockMatchQCOM | ImageUsageFlagBits::eTileMemoryQCOM |
+      ImageUsageFlagBits::eVideoEncodeQuantizationDeltaMapKHR | ImageUsageFlagBits::eVideoEncodeEmphasisMapKHR;
   };
 
   // wrapper class for enum VkInstanceCreateFlagBits, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkInstanceCreateFlagBits.html
@@ -2201,6 +2211,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<InstanceCreateFlagBits>
   {
+    using WrappedType                                                  = VkInstanceCreateFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR InstanceCreateFlags allFlags  = InstanceCreateFlagBits::eEnumeratePortabilityKHR;
   };
@@ -2216,7 +2227,8 @@ namespace VULKAN_HPP_NAMESPACE
   {
     eDeviceLocal      = VK_MEMORY_HEAP_DEVICE_LOCAL_BIT,
     eMultiInstance    = VK_MEMORY_HEAP_MULTI_INSTANCE_BIT,
-    eMultiInstanceKHR = VK_MEMORY_HEAP_MULTI_INSTANCE_BIT_KHR
+    eMultiInstanceKHR = VK_MEMORY_HEAP_MULTI_INSTANCE_BIT_KHR,
+    eTileMemoryQCOM   = VK_MEMORY_HEAP_TILE_MEMORY_BIT_QCOM
   };
 
   // wrapper using for bitmask VkMemoryHeapFlags, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkMemoryHeapFlags.html
@@ -2225,8 +2237,10 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<MemoryHeapFlagBits>
   {
+    using WrappedType                                              = VkMemoryHeapFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool            isBitmask = true;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR MemoryHeapFlags allFlags  = MemoryHeapFlagBits::eDeviceLocal | MemoryHeapFlagBits::eMultiInstance;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR MemoryHeapFlags allFlags =
+      MemoryHeapFlagBits::eDeviceLocal | MemoryHeapFlagBits::eMultiInstance | MemoryHeapFlagBits::eTileMemoryQCOM;
   };
 
   // wrapper class for enum VkMemoryPropertyFlagBits, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkMemoryPropertyFlagBits.html
@@ -2249,6 +2263,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<MemoryPropertyFlagBits>
   {
+    using WrappedType                                                  = VkMemoryPropertyFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR MemoryPropertyFlags allFlags =
       MemoryPropertyFlagBits::eDeviceLocal | MemoryPropertyFlagBits::eHostVisible | MemoryPropertyFlagBits::eHostCoherent |
@@ -2285,6 +2300,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<QueueFlagBits>
   {
+    using WrappedType                                         = VkQueueFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool       isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR QueueFlags allFlags  = QueueFlagBits::eGraphics | QueueFlagBits::eCompute | QueueFlagBits::eTransfer |
                                                                QueueFlagBits::eSparseBinding | QueueFlagBits::eProtected | QueueFlagBits::eVideoDecodeKHR |
@@ -2309,6 +2325,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<SampleCountFlagBits>
   {
+    using WrappedType                                               = VkSampleCountFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool             isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR SampleCountFlags allFlags  = SampleCountFlagBits::e1 | SampleCountFlagBits::e2 | SampleCountFlagBits::e4 |
                                                                      SampleCountFlagBits::e8 | SampleCountFlagBits::e16 | SampleCountFlagBits::e32 |
@@ -2325,7 +2342,6 @@ namespace VULKAN_HPP_NAMESPACE
     eInstance = VK_SYSTEM_ALLOCATION_SCOPE_INSTANCE
   };
 
-  // wrapper class for enum VkDeviceCreateFlagBits, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkDeviceCreateFlagBits.html
   enum class DeviceCreateFlagBits : VkDeviceCreateFlags
   {
   };
@@ -2352,6 +2368,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<DeviceQueueCreateFlagBits>
   {
+    using WrappedType                                                     = VkDeviceQueueCreateFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                   isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR DeviceQueueCreateFlags allFlags  = DeviceQueueCreateFlagBits::eProtected;
   };
@@ -2401,6 +2418,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<PipelineStageFlagBits>
   {
+    using WrappedType                                                 = VkPipelineStageFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool               isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR PipelineStageFlags allFlags =
       PipelineStageFlagBits::eTopOfPipe | PipelineStageFlagBits::eDrawIndirect | PipelineStageFlagBits::eVertexInput | PipelineStageFlagBits::eVertexShader |
@@ -2426,6 +2444,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<MemoryMapFlagBits>
   {
+    using WrappedType                                             = VkMemoryMapFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool           isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR MemoryMapFlags allFlags  = MemoryMapFlagBits::ePlacedEXT;
   };
@@ -2457,6 +2476,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<ImageAspectFlagBits>
   {
+    using WrappedType                                               = VkImageAspectFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool             isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR ImageAspectFlags allFlags = ImageAspectFlagBits::eColor | ImageAspectFlagBits::eDepth | ImageAspectFlagBits::eStencil |
                                                                      ImageAspectFlagBits::eMetadata | ImageAspectFlagBits::ePlane0 |
@@ -2479,6 +2499,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<SparseImageFormatFlagBits>
   {
+    using WrappedType                                                     = VkSparseImageFormatFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                   isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR SparseImageFormatFlags allFlags =
       SparseImageFormatFlagBits::eSingleMiptail | SparseImageFormatFlagBits::eAlignedMipSize | SparseImageFormatFlagBits::eNonstandardBlockSize;
@@ -2496,6 +2517,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<SparseMemoryBindFlagBits>
   {
+    using WrappedType                                                    = VkSparseMemoryBindFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                  isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR SparseMemoryBindFlags allFlags  = SparseMemoryBindFlagBits::eMetadata;
   };
@@ -2512,11 +2534,11 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<FenceCreateFlagBits>
   {
+    using WrappedType                                               = VkFenceCreateFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool             isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR FenceCreateFlags allFlags  = FenceCreateFlagBits::eSignaled;
   };
 
-  // wrapper class for enum VkSemaphoreCreateFlagBits, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkSemaphoreCreateFlagBits.html
   enum class SemaphoreCreateFlagBits : VkSemaphoreCreateFlags
   {
   };
@@ -2544,6 +2566,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<EventCreateFlagBits>
   {
+    using WrappedType                                               = VkEventCreateFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool             isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR EventCreateFlags allFlags  = EventCreateFlagBits::eDeviceOnly;
   };
@@ -2574,6 +2597,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<QueryPipelineStatisticFlagBits>
   {
+    using WrappedType                                                          = VkQueryPipelineStatisticFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                        isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR QueryPipelineStatisticFlags allFlags =
       QueryPipelineStatisticFlagBits::eInputAssemblyVertices | QueryPipelineStatisticFlagBits::eInputAssemblyPrimitives |
@@ -2601,6 +2625,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<QueryResultFlagBits>
   {
+    using WrappedType                                               = VkQueryResultFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool             isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR QueryResultFlags allFlags  = QueryResultFlagBits::e64 | QueryResultFlagBits::eWait |
                                                                      QueryResultFlagBits::eWithAvailability | QueryResultFlagBits::ePartial |
@@ -2629,7 +2654,6 @@ namespace VULKAN_HPP_NAMESPACE
     eMicromapCompactedSizeEXT                                 = VK_QUERY_TYPE_MICROMAP_COMPACTED_SIZE_EXT
   };
 
-  // wrapper class for enum VkQueryPoolCreateFlagBits, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkQueryPoolCreateFlagBits.html
   enum class QueryPoolCreateFlagBits : VkQueryPoolCreateFlags
   {
   };
@@ -2664,6 +2688,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<BufferCreateFlagBits>
   {
+    using WrappedType                                                = VkBufferCreateFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool              isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR BufferCreateFlags allFlags =
       BufferCreateFlagBits::eSparseBinding | BufferCreateFlagBits::eSparseResidency | BufferCreateFlagBits::eSparseAliased | BufferCreateFlagBits::eProtected |
@@ -2704,7 +2729,8 @@ namespace VULKAN_HPP_NAMESPACE
     eResourceDescriptorBufferEXT                = VK_BUFFER_USAGE_RESOURCE_DESCRIPTOR_BUFFER_BIT_EXT,
     ePushDescriptorsDescriptorBufferEXT         = VK_BUFFER_USAGE_PUSH_DESCRIPTORS_DESCRIPTOR_BUFFER_BIT_EXT,
     eMicromapBuildInputReadOnlyEXT              = VK_BUFFER_USAGE_MICROMAP_BUILD_INPUT_READ_ONLY_BIT_EXT,
-    eMicromapStorageEXT                         = VK_BUFFER_USAGE_MICROMAP_STORAGE_BIT_EXT
+    eMicromapStorageEXT                         = VK_BUFFER_USAGE_MICROMAP_STORAGE_BIT_EXT,
+    eTileMemoryQCOM                             = VK_BUFFER_USAGE_TILE_MEMORY_QCOM
   };
 
   // wrapper using for bitmask VkBufferUsageFlags, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkBufferUsageFlags.html
@@ -2713,6 +2739,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<BufferUsageFlagBits>
   {
+    using WrappedType                                               = VkBufferUsageFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool             isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR BufferUsageFlags allFlags =
       BufferUsageFlagBits::eTransferSrc | BufferUsageFlagBits::eTransferDst | BufferUsageFlagBits::eUniformTexelBuffer |
@@ -2726,7 +2753,8 @@ namespace VULKAN_HPP_NAMESPACE
       | BufferUsageFlagBits::eAccelerationStructureBuildInputReadOnlyKHR | BufferUsageFlagBits::eAccelerationStructureStorageKHR |
       BufferUsageFlagBits::eShaderBindingTableKHR | BufferUsageFlagBits::eVideoEncodeDstKHR | BufferUsageFlagBits::eVideoEncodeSrcKHR |
       BufferUsageFlagBits::eSamplerDescriptorBufferEXT | BufferUsageFlagBits::eResourceDescriptorBufferEXT |
-      BufferUsageFlagBits::ePushDescriptorsDescriptorBufferEXT | BufferUsageFlagBits::eMicromapBuildInputReadOnlyEXT | BufferUsageFlagBits::eMicromapStorageEXT;
+      BufferUsageFlagBits::ePushDescriptorsDescriptorBufferEXT | BufferUsageFlagBits::eMicromapBuildInputReadOnlyEXT |
+      BufferUsageFlagBits::eMicromapStorageEXT | BufferUsageFlagBits::eTileMemoryQCOM;
   };
 
   // wrapper class for enum VkSharingMode, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkSharingMode.html
@@ -2736,7 +2764,6 @@ namespace VULKAN_HPP_NAMESPACE
     eConcurrent = VK_SHARING_MODE_CONCURRENT
   };
 
-  // wrapper class for enum VkBufferViewCreateFlagBits, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkBufferViewCreateFlagBits.html
   enum class BufferViewCreateFlagBits : VkBufferViewCreateFlags
   {
   };
@@ -2822,6 +2849,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<ImageViewCreateFlagBits>
   {
+    using WrappedType                                                   = VkImageViewCreateFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                 isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR ImageViewCreateFlags allFlags  = ImageViewCreateFlagBits::eFragmentDensityMapDynamicEXT |
                                                                          ImageViewCreateFlagBits::eDescriptorBufferCaptureReplayEXT |
@@ -2840,7 +2868,6 @@ namespace VULKAN_HPP_NAMESPACE
     eCubeArray = VK_IMAGE_VIEW_TYPE_CUBE_ARRAY
   };
 
-  // wrapper class for enum VkShaderModuleCreateFlagBits, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkShaderModuleCreateFlagBits.html
   enum class ShaderModuleCreateFlagBits : VkShaderModuleCreateFlags
   {
   };
@@ -2869,6 +2896,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<PipelineCacheCreateFlagBits>
   {
+    using WrappedType                                                       = VkPipelineCacheCreateFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                     isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR PipelineCacheCreateFlags allFlags =
       PipelineCacheCreateFlagBits::eExternallySynchronized | PipelineCacheCreateFlagBits::eInternallySynchronizedMergeKHR;
@@ -2969,6 +2997,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<ColorComponentFlagBits>
   {
+    using WrappedType                                                  = VkColorComponentFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR ColorComponentFlags allFlags =
       ColorComponentFlagBits::eR | ColorComponentFlagBits::eG | ColorComponentFlagBits::eB | ColorComponentFlagBits::eA;
@@ -3002,6 +3031,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<CullModeFlagBits>
   {
+    using WrappedType                                            = VkCullModeFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool          isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR CullModeFlags allFlags =
       CullModeFlagBits::eNone | CullModeFlagBits::eFront | CullModeFlagBits::eBack | CullModeFlagBits::eFrontAndBack;
@@ -3182,6 +3212,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<PipelineCreateFlagBits>
   {
+    using WrappedType                                                  = VkPipelineCreateFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR PipelineCreateFlags allFlags =
       PipelineCreateFlagBits::eDisableOptimization | PipelineCreateFlagBits::eAllowDerivatives | PipelineCreateFlagBits::eDerivative |
@@ -3220,6 +3251,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<PipelineShaderStageCreateFlagBits>
   {
+    using WrappedType                                                             = VkPipelineShaderStageCreateFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                           isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR PipelineShaderStageCreateFlags allFlags =
       PipelineShaderStageCreateFlagBits::eAllowVaryingSubgroupSize | PipelineShaderStageCreateFlagBits::eRequireFullSubgroups;
@@ -3287,6 +3319,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<ShaderStageFlagBits>
   {
+    using WrappedType                                               = VkShaderStageFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool             isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR ShaderStageFlags allFlags =
       ShaderStageFlagBits::eVertex | ShaderStageFlagBits::eTessellationControl | ShaderStageFlagBits::eTessellationEvaluation | ShaderStageFlagBits::eGeometry |
@@ -3331,6 +3364,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<PipelineColorBlendStateCreateFlagBits>
   {
+    using WrappedType                                                                 = VkPipelineColorBlendStateCreateFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                               isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR PipelineColorBlendStateCreateFlags allFlags =
       PipelineColorBlendStateCreateFlagBits::eRasterizationOrderAttachmentAccessEXT;
@@ -3353,14 +3387,13 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<PipelineDepthStencilStateCreateFlagBits>
   {
+    using WrappedType                                                                   = VkPipelineDepthStencilStateCreateFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                                 isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR PipelineDepthStencilStateCreateFlags allFlags =
       PipelineDepthStencilStateCreateFlagBits::eRasterizationOrderAttachmentDepthAccessEXT |
       PipelineDepthStencilStateCreateFlagBits::eRasterizationOrderAttachmentStencilAccessEXT;
   };
 
-  // wrapper class for enum VkPipelineDynamicStateCreateFlagBits, see
-  // https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineDynamicStateCreateFlagBits.html
   enum class PipelineDynamicStateCreateFlagBits : VkPipelineDynamicStateCreateFlags
   {
   };
@@ -3376,8 +3409,6 @@ namespace VULKAN_HPP_NAMESPACE
     static VULKAN_HPP_CONST_OR_CONSTEXPR PipelineDynamicStateCreateFlags allFlags  = {};
   };
 
-  // wrapper class for enum VkPipelineInputAssemblyStateCreateFlagBits, see
-  // https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineInputAssemblyStateCreateFlagBits.html
   enum class PipelineInputAssemblyStateCreateFlagBits : VkPipelineInputAssemblyStateCreateFlags
   {
   };
@@ -3405,12 +3436,11 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<PipelineLayoutCreateFlagBits>
   {
+    using WrappedType                                                        = VkPipelineLayoutCreateFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                      isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR PipelineLayoutCreateFlags allFlags  = PipelineLayoutCreateFlagBits::eIndependentSetsEXT;
   };
 
-  // wrapper class for enum VkPipelineMultisampleStateCreateFlagBits, see
-  // https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineMultisampleStateCreateFlagBits.html
   enum class PipelineMultisampleStateCreateFlagBits : VkPipelineMultisampleStateCreateFlags
   {
   };
@@ -3426,8 +3456,6 @@ namespace VULKAN_HPP_NAMESPACE
     static VULKAN_HPP_CONST_OR_CONSTEXPR PipelineMultisampleStateCreateFlags allFlags  = {};
   };
 
-  // wrapper class for enum VkPipelineRasterizationStateCreateFlagBits, see
-  // https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineRasterizationStateCreateFlagBits.html
   enum class PipelineRasterizationStateCreateFlagBits : VkPipelineRasterizationStateCreateFlags
   {
   };
@@ -3443,8 +3471,6 @@ namespace VULKAN_HPP_NAMESPACE
     static VULKAN_HPP_CONST_OR_CONSTEXPR PipelineRasterizationStateCreateFlags allFlags  = {};
   };
 
-  // wrapper class for enum VkPipelineTessellationStateCreateFlagBits, see
-  // https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineTessellationStateCreateFlagBits.html
   enum class PipelineTessellationStateCreateFlagBits : VkPipelineTessellationStateCreateFlags
   {
   };
@@ -3460,8 +3486,6 @@ namespace VULKAN_HPP_NAMESPACE
     static VULKAN_HPP_CONST_OR_CONSTEXPR PipelineTessellationStateCreateFlags allFlags  = {};
   };
 
-  // wrapper class for enum VkPipelineVertexInputStateCreateFlagBits, see
-  // https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineVertexInputStateCreateFlagBits.html
   enum class PipelineVertexInputStateCreateFlagBits : VkPipelineVertexInputStateCreateFlags
   {
   };
@@ -3477,8 +3501,6 @@ namespace VULKAN_HPP_NAMESPACE
     static VULKAN_HPP_CONST_OR_CONSTEXPR PipelineVertexInputStateCreateFlags allFlags  = {};
   };
 
-  // wrapper class for enum VkPipelineViewportStateCreateFlagBits, see
-  // https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineViewportStateCreateFlagBits.html
   enum class PipelineViewportStateCreateFlagBits : VkPipelineViewportStateCreateFlags
   {
   };
@@ -3543,6 +3565,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<SamplerCreateFlagBits>
   {
+    using WrappedType                                                 = VkSamplerCreateFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool               isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR SamplerCreateFlags allFlags =
       SamplerCreateFlagBits::eSubsampledEXT | SamplerCreateFlagBits::eSubsampledCoarseReconstructionEXT |
@@ -3574,6 +3597,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<DescriptorPoolCreateFlagBits>
   {
+    using WrappedType                                                        = VkDescriptorPoolCreateFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                      isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR DescriptorPoolCreateFlags allFlags =
       DescriptorPoolCreateFlagBits::eFreeDescriptorSet | DescriptorPoolCreateFlagBits::eUpdateAfterBind | DescriptorPoolCreateFlagBits::eHostOnlyEXT |
@@ -3603,6 +3627,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<DescriptorSetLayoutCreateFlagBits>
   {
+    using WrappedType                                                             = VkDescriptorSetLayoutCreateFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                           isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR DescriptorSetLayoutCreateFlags allFlags =
       DescriptorSetLayoutCreateFlagBits::eUpdateAfterBindPool | DescriptorSetLayoutCreateFlagBits::ePushDescriptor |
@@ -3636,7 +3661,6 @@ namespace VULKAN_HPP_NAMESPACE
     ePartitionedAccelerationStructureNV = VK_DESCRIPTOR_TYPE_PARTITIONED_ACCELERATION_STRUCTURE_NV
   };
 
-  // wrapper class for enum VkDescriptorPoolResetFlagBits, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkDescriptorPoolResetFlagBits.html
   enum class DescriptorPoolResetFlagBits : VkDescriptorPoolResetFlags
   {
   };
@@ -3697,6 +3721,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<AccessFlagBits>
   {
+    using WrappedType                                          = VkAccessFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool        isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR AccessFlags allFlags =
       AccessFlagBits::eIndirectCommandRead | AccessFlagBits::eIndexRead | AccessFlagBits::eVertexAttributeRead | AccessFlagBits::eUniformRead |
@@ -3721,6 +3746,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<AttachmentDescriptionFlagBits>
   {
+    using WrappedType                                                         = VkAttachmentDescriptionFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                       isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR AttachmentDescriptionFlags allFlags  = AttachmentDescriptionFlagBits::eMayAlias;
   };
@@ -3765,6 +3791,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<DependencyFlagBits>
   {
+    using WrappedType                                              = VkDependencyFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool            isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR DependencyFlags allFlags  = DependencyFlagBits::eByRegion | DependencyFlagBits::eDeviceGroup |
                                                                     DependencyFlagBits::eViewLocal | DependencyFlagBits::eFeedbackLoopEXT |
@@ -3784,6 +3811,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<FramebufferCreateFlagBits>
   {
+    using WrappedType                                                     = VkFramebufferCreateFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                   isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR FramebufferCreateFlags allFlags  = FramebufferCreateFlagBits::eImageless;
   };
@@ -3813,6 +3841,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<RenderPassCreateFlagBits>
   {
+    using WrappedType                                                    = VkRenderPassCreateFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                  isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR RenderPassCreateFlags allFlags  = RenderPassCreateFlagBits::eTransformQCOM;
   };
@@ -3840,6 +3869,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<SubpassDescriptionFlagBits>
   {
+    using WrappedType                                                      = VkSubpassDescriptionFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                    isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR SubpassDescriptionFlags allFlags =
       SubpassDescriptionFlagBits::ePerViewAttributesNVX | SubpassDescriptionFlagBits::ePerViewPositionXOnlyNVX |
@@ -3862,6 +3892,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<CommandPoolCreateFlagBits>
   {
+    using WrappedType                                                     = VkCommandPoolCreateFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                   isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR CommandPoolCreateFlags allFlags =
       CommandPoolCreateFlagBits::eTransient | CommandPoolCreateFlagBits::eResetCommandBuffer | CommandPoolCreateFlagBits::eProtected;
@@ -3879,6 +3910,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<CommandPoolResetFlagBits>
   {
+    using WrappedType                                                    = VkCommandPoolResetFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                  isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR CommandPoolResetFlags allFlags  = CommandPoolResetFlagBits::eReleaseResources;
   };
@@ -3902,6 +3934,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<CommandBufferResetFlagBits>
   {
+    using WrappedType                                                      = VkCommandBufferResetFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                    isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR CommandBufferResetFlags allFlags  = CommandBufferResetFlagBits::eReleaseResources;
   };
@@ -3920,6 +3953,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<CommandBufferUsageFlagBits>
   {
+    using WrappedType                                                      = VkCommandBufferUsageFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                    isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR CommandBufferUsageFlags allFlags =
       CommandBufferUsageFlagBits::eOneTimeSubmit | CommandBufferUsageFlagBits::eRenderPassContinue | CommandBufferUsageFlagBits::eSimultaneousUse;
@@ -3937,6 +3971,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<QueryControlFlagBits>
   {
+    using WrappedType                                                = VkQueryControlFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool              isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR QueryControlFlags allFlags  = QueryControlFlagBits::ePrecise;
   };
@@ -4013,6 +4048,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<StencilFaceFlagBits>
   {
+    using WrappedType                                               = VkStencilFaceFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool             isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR StencilFaceFlags allFlags =
       StencilFaceFlagBits::eFront | StencilFaceFlagBits::eBack | StencilFaceFlagBits::eFrontAndBack;
@@ -4053,6 +4089,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<SubgroupFeatureFlagBits>
   {
+    using WrappedType                                                   = VkSubgroupFeatureFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                 isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR SubgroupFeatureFlags allFlags =
       SubgroupFeatureFlagBits::eBasic | SubgroupFeatureFlagBits::eVote | SubgroupFeatureFlagBits::eArithmetic | SubgroupFeatureFlagBits::eBallot |
@@ -4078,6 +4115,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<PeerMemoryFeatureFlagBits>
   {
+    using WrappedType                                                     = VkPeerMemoryFeatureFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                   isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR PeerMemoryFeatureFlags allFlags  = PeerMemoryFeatureFlagBits::eCopySrc | PeerMemoryFeatureFlagBits::eCopyDst |
                                                                            PeerMemoryFeatureFlagBits::eGenericSrc | PeerMemoryFeatureFlagBits::eGenericDst;
@@ -4100,12 +4138,12 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<MemoryAllocateFlagBits>
   {
+    using WrappedType                                                  = VkMemoryAllocateFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR MemoryAllocateFlags allFlags =
       MemoryAllocateFlagBits::eDeviceMask | MemoryAllocateFlagBits::eDeviceAddress | MemoryAllocateFlagBits::eDeviceAddressCaptureReplay;
   };
 
-  // wrapper class for enum VkCommandPoolTrimFlagBits, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkCommandPoolTrimFlagBits.html
   enum class CommandPoolTrimFlagBits : VkCommandPoolTrimFlags
   {
   };
@@ -4178,8 +4216,6 @@ namespace VULKAN_HPP_NAMESPACE
 
   using DescriptorUpdateTemplateTypeKHR = DescriptorUpdateTemplateType;
 
-  // wrapper class for enum VkDescriptorUpdateTemplateCreateFlagBits, see
-  // https://registry.khronos.org/vulkan/specs/latest/man/html/VkDescriptorUpdateTemplateCreateFlagBits.html
   enum class DescriptorUpdateTemplateCreateFlagBits : VkDescriptorUpdateTemplateCreateFlags
   {
   };
@@ -4237,6 +4273,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<ExternalMemoryHandleTypeFlagBits>
   {
+    using WrappedType                                                            = VkExternalMemoryHandleTypeFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                          isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR ExternalMemoryHandleTypeFlags allFlags =
       ExternalMemoryHandleTypeFlagBits::eOpaqueFd | ExternalMemoryHandleTypeFlagBits::eOpaqueWin32 | ExternalMemoryHandleTypeFlagBits::eOpaqueWin32Kmt |
@@ -4276,6 +4313,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<ExternalMemoryFeatureFlagBits>
   {
+    using WrappedType                                                         = VkExternalMemoryFeatureFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                       isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR ExternalMemoryFeatureFlags allFlags =
       ExternalMemoryFeatureFlagBits::eDedicatedOnly | ExternalMemoryFeatureFlagBits::eExportable | ExternalMemoryFeatureFlagBits::eImportable;
@@ -4300,6 +4338,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<ExternalFenceHandleTypeFlagBits>
   {
+    using WrappedType                                                           = VkExternalFenceHandleTypeFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                         isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR ExternalFenceHandleTypeFlags allFlags =
       ExternalFenceHandleTypeFlagBits::eOpaqueFd | ExternalFenceHandleTypeFlagBits::eOpaqueWin32 | ExternalFenceHandleTypeFlagBits::eOpaqueWin32Kmt |
@@ -4322,6 +4361,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<ExternalFenceFeatureFlagBits>
   {
+    using WrappedType                                                        = VkExternalFenceFeatureFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                      isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR ExternalFenceFeatureFlags allFlags =
       ExternalFenceFeatureFlagBits::eExportable | ExternalFenceFeatureFlagBits::eImportable;
@@ -4342,6 +4382,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<FenceImportFlagBits>
   {
+    using WrappedType                                               = VkFenceImportFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool             isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR FenceImportFlags allFlags  = FenceImportFlagBits::eTemporary;
   };
@@ -4361,6 +4402,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<SemaphoreImportFlagBits>
   {
+    using WrappedType                                                   = VkSemaphoreImportFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                 isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR SemaphoreImportFlags allFlags  = SemaphoreImportFlagBits::eTemporary;
   };
@@ -4390,6 +4432,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<ExternalSemaphoreHandleTypeFlagBits>
   {
+    using WrappedType                                                               = VkExternalSemaphoreHandleTypeFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                             isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR ExternalSemaphoreHandleTypeFlags allFlags =
       ExternalSemaphoreHandleTypeFlagBits::eOpaqueFd | ExternalSemaphoreHandleTypeFlagBits::eOpaqueWin32 |
@@ -4418,6 +4461,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<ExternalSemaphoreFeatureFlagBits>
   {
+    using WrappedType                                                            = VkExternalSemaphoreFeatureFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                          isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR ExternalSemaphoreFeatureFlags allFlags =
       ExternalSemaphoreFeatureFlagBits::eExportable | ExternalSemaphoreFeatureFlagBits::eImportable;
@@ -4488,6 +4532,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<DescriptorBindingFlagBits>
   {
+    using WrappedType                                                     = VkDescriptorBindingFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                   isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR DescriptorBindingFlags allFlags =
       DescriptorBindingFlagBits::eUpdateAfterBind | DescriptorBindingFlagBits::eUpdateUnusedWhilePending | DescriptorBindingFlagBits::ePartiallyBound |
@@ -4516,6 +4561,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<ResolveModeFlagBits>
   {
+    using WrappedType                                               = VkResolveModeFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool             isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR ResolveModeFlags allFlags  = ResolveModeFlagBits::eNone | ResolveModeFlagBits::eSampleZero |
                                                                      ResolveModeFlagBits::eAverage | ResolveModeFlagBits::eMin | ResolveModeFlagBits::eMax
@@ -4560,6 +4606,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<SemaphoreWaitFlagBits>
   {
+    using WrappedType                                                 = VkSemaphoreWaitFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool               isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR SemaphoreWaitFlags allFlags  = SemaphoreWaitFlagBits::eAny;
   };
@@ -4585,6 +4632,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<PipelineCreationFeedbackFlagBits>
   {
+    using WrappedType                                                            = VkPipelineCreationFeedbackFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                          isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR PipelineCreationFeedbackFlags allFlags  = PipelineCreationFeedbackFlagBits::eValid |
                                                                                   PipelineCreationFeedbackFlagBits::eApplicationPipelineCacheHit |
@@ -4612,13 +4660,13 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<ToolPurposeFlagBits>
   {
+    using WrappedType                                               = VkToolPurposeFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool             isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR ToolPurposeFlags allFlags =
       ToolPurposeFlagBits::eValidation | ToolPurposeFlagBits::eProfiling | ToolPurposeFlagBits::eTracing | ToolPurposeFlagBits::eAdditionalFeatures |
       ToolPurposeFlagBits::eModifyingFeatures | ToolPurposeFlagBits::eDebugReportingEXT | ToolPurposeFlagBits::eDebugMarkersEXT;
   };
 
-  // wrapper class for enum VkPrivateDataSlotCreateFlagBits, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkPrivateDataSlotCreateFlagBits.html
   enum class PrivateDataSlotCreateFlagBits : VkPrivateDataSlotCreateFlags
   {
   };
@@ -4701,6 +4749,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<PipelineStageFlagBits2>
   {
+    using WrappedType                                                  = VkPipelineStageFlagBits2;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR PipelineStageFlags2 allFlags =
       PipelineStageFlagBits2::eNone | PipelineStageFlagBits2::eTopOfPipe | PipelineStageFlagBits2::eDrawIndirect | PipelineStageFlagBits2::eVertexInput |
@@ -4783,6 +4832,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<AccessFlagBits2>
   {
+    using WrappedType                                           = VkAccessFlagBits2;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool         isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR AccessFlags2 allFlags =
       AccessFlagBits2::eNone | AccessFlagBits2::eIndirectCommandRead | AccessFlagBits2::eIndexRead | AccessFlagBits2::eVertexAttributeRead |
@@ -4816,6 +4866,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<SubmitFlagBits>
   {
+    using WrappedType                                          = VkSubmitFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool        isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR SubmitFlags allFlags  = SubmitFlagBits::eProtected;
   };
@@ -4840,6 +4891,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<RenderingFlagBits>
   {
+    using WrappedType                                             = VkRenderingFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool           isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR RenderingFlags allFlags  = RenderingFlagBits::eContentsSecondaryCommandBuffers | RenderingFlagBits::eSuspending |
                                                                    RenderingFlagBits::eResuming | RenderingFlagBits::eEnableLegacyDitheringEXT |
@@ -4909,6 +4961,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<FormatFeatureFlagBits2>
   {
+    using WrappedType                                                  = VkFormatFeatureFlagBits2;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR FormatFeatureFlags2 allFlags =
       FormatFeatureFlagBits2::eSampledImage | FormatFeatureFlagBits2::eStorageImage | FormatFeatureFlagBits2::eStorageImageAtomic |
@@ -4981,6 +5034,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<MemoryUnmapFlagBits>
   {
+    using WrappedType                                               = VkMemoryUnmapFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool             isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR MemoryUnmapFlags allFlags  = MemoryUnmapFlagBits::eReserveEXT;
   };
@@ -5041,6 +5095,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<PipelineCreateFlagBits2>
   {
+    using WrappedType                                                   = VkPipelineCreateFlagBits2;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                 isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR PipelineCreateFlags2 allFlags =
       PipelineCreateFlagBits2::eDisableOptimization | PipelineCreateFlagBits2::eAllowDerivatives | PipelineCreateFlagBits2::eDerivative |
@@ -5095,6 +5150,7 @@ namespace VULKAN_HPP_NAMESPACE
     ePushDescriptorsDescriptorBufferEXT         = VK_BUFFER_USAGE_2_PUSH_DESCRIPTORS_DESCRIPTOR_BUFFER_BIT_EXT,
     eMicromapBuildInputReadOnlyEXT              = VK_BUFFER_USAGE_2_MICROMAP_BUILD_INPUT_READ_ONLY_BIT_EXT,
     eMicromapStorageEXT                         = VK_BUFFER_USAGE_2_MICROMAP_STORAGE_BIT_EXT,
+    eTileMemoryQCOM                             = VK_BUFFER_USAGE_2_TILE_MEMORY_QCOM,
     ePreprocessBufferEXT                        = VK_BUFFER_USAGE_2_PREPROCESS_BUFFER_BIT_EXT
   };
 
@@ -5107,6 +5163,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<BufferUsageFlagBits2>
   {
+    using WrappedType                                                = VkBufferUsageFlagBits2;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool              isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR BufferUsageFlags2 allFlags =
       BufferUsageFlagBits2::eTransferSrc | BufferUsageFlagBits2::eTransferDst | BufferUsageFlagBits2::eUniformTexelBuffer |
@@ -5121,7 +5178,8 @@ namespace VULKAN_HPP_NAMESPACE
       BufferUsageFlagBits2::eVideoEncodeDstKHR | BufferUsageFlagBits2::eVideoEncodeSrcKHR | BufferUsageFlagBits2::eAccelerationStructureBuildInputReadOnlyKHR |
       BufferUsageFlagBits2::eAccelerationStructureStorageKHR | BufferUsageFlagBits2::eSamplerDescriptorBufferEXT |
       BufferUsageFlagBits2::eResourceDescriptorBufferEXT | BufferUsageFlagBits2::ePushDescriptorsDescriptorBufferEXT |
-      BufferUsageFlagBits2::eMicromapBuildInputReadOnlyEXT | BufferUsageFlagBits2::eMicromapStorageEXT | BufferUsageFlagBits2::ePreprocessBufferEXT;
+      BufferUsageFlagBits2::eMicromapBuildInputReadOnlyEXT | BufferUsageFlagBits2::eMicromapStorageEXT | BufferUsageFlagBits2::eTileMemoryQCOM |
+      BufferUsageFlagBits2::ePreprocessBufferEXT;
   };
 
   // wrapper class for enum VkPipelineRobustnessBufferBehavior, see
@@ -5163,6 +5221,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<HostImageCopyFlagBits>
   {
+    using WrappedType                                                 = VkHostImageCopyFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool               isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR HostImageCopyFlags allFlags  = HostImageCopyFlagBits::eMemcpy;
   };
@@ -5189,6 +5248,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<SurfaceTransformFlagBitsKHR>
   {
+    using WrappedType                                                       = VkSurfaceTransformFlagBitsKHR;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                     isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR SurfaceTransformFlagsKHR allFlags =
       SurfaceTransformFlagBitsKHR::eIdentity | SurfaceTransformFlagBitsKHR::eRotate90 | SurfaceTransformFlagBitsKHR::eRotate180 |
@@ -5246,6 +5306,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<CompositeAlphaFlagBitsKHR>
   {
+    using WrappedType                                                     = VkCompositeAlphaFlagBitsKHR;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                   isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR CompositeAlphaFlagsKHR allFlags  = CompositeAlphaFlagBitsKHR::eOpaque | CompositeAlphaFlagBitsKHR::ePreMultiplied |
                                                                            CompositeAlphaFlagBitsKHR::ePostMultiplied | CompositeAlphaFlagBitsKHR::eInherit;
@@ -5268,6 +5329,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<SwapchainCreateFlagBitsKHR>
   {
+    using WrappedType                                                      = VkSwapchainCreateFlagBitsKHR;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                    isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR SwapchainCreateFlagsKHR allFlags =
       SwapchainCreateFlagBitsKHR::eSplitInstanceBindRegions | SwapchainCreateFlagBitsKHR::eProtected | SwapchainCreateFlagBitsKHR::eMutableFormat |
@@ -5291,6 +5353,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<DeviceGroupPresentModeFlagBitsKHR>
   {
+    using WrappedType                                                             = VkDeviceGroupPresentModeFlagBitsKHR;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                           isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR DeviceGroupPresentModeFlagsKHR allFlags =
       DeviceGroupPresentModeFlagBitsKHR::eLocal | DeviceGroupPresentModeFlagBitsKHR::eRemote | DeviceGroupPresentModeFlagBitsKHR::eSum |
@@ -5314,13 +5377,13 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<DisplayPlaneAlphaFlagBitsKHR>
   {
+    using WrappedType                                                        = VkDisplayPlaneAlphaFlagBitsKHR;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                      isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR DisplayPlaneAlphaFlagsKHR allFlags  = DisplayPlaneAlphaFlagBitsKHR::eOpaque | DisplayPlaneAlphaFlagBitsKHR::eGlobal |
                                                                               DisplayPlaneAlphaFlagBitsKHR::ePerPixel |
                                                                               DisplayPlaneAlphaFlagBitsKHR::ePerPixelPremultiplied;
   };
 
-  // wrapper class for enum VkDisplayModeCreateFlagBitsKHR, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkDisplayModeCreateFlagBitsKHR.html
   enum class DisplayModeCreateFlagBitsKHR : VkDisplayModeCreateFlagsKHR
   {
   };
@@ -5335,8 +5398,6 @@ namespace VULKAN_HPP_NAMESPACE
     static VULKAN_HPP_CONST_OR_CONSTEXPR DisplayModeCreateFlagsKHR allFlags  = {};
   };
 
-  // wrapper class for enum VkDisplaySurfaceCreateFlagBitsKHR, see
-  // https://registry.khronos.org/vulkan/specs/latest/man/html/VkDisplaySurfaceCreateFlagBitsKHR.html
   enum class DisplaySurfaceCreateFlagBitsKHR : VkDisplaySurfaceCreateFlagsKHR
   {
   };
@@ -5354,7 +5415,6 @@ namespace VULKAN_HPP_NAMESPACE
 #if defined( VK_USE_PLATFORM_XLIB_KHR )
   //=== VK_KHR_xlib_surface ===
 
-  // wrapper class for enum VkXlibSurfaceCreateFlagBitsKHR, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkXlibSurfaceCreateFlagBitsKHR.html
   enum class XlibSurfaceCreateFlagBitsKHR : VkXlibSurfaceCreateFlagsKHR
   {
   };
@@ -5373,7 +5433,6 @@ namespace VULKAN_HPP_NAMESPACE
 #if defined( VK_USE_PLATFORM_XCB_KHR )
   //=== VK_KHR_xcb_surface ===
 
-  // wrapper class for enum VkXcbSurfaceCreateFlagBitsKHR, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkXcbSurfaceCreateFlagBitsKHR.html
   enum class XcbSurfaceCreateFlagBitsKHR : VkXcbSurfaceCreateFlagsKHR
   {
   };
@@ -5392,8 +5451,6 @@ namespace VULKAN_HPP_NAMESPACE
 #if defined( VK_USE_PLATFORM_WAYLAND_KHR )
   //=== VK_KHR_wayland_surface ===
 
-  // wrapper class for enum VkWaylandSurfaceCreateFlagBitsKHR, see
-  // https://registry.khronos.org/vulkan/specs/latest/man/html/VkWaylandSurfaceCreateFlagBitsKHR.html
   enum class WaylandSurfaceCreateFlagBitsKHR : VkWaylandSurfaceCreateFlagsKHR
   {
   };
@@ -5412,8 +5469,6 @@ namespace VULKAN_HPP_NAMESPACE
 #if defined( VK_USE_PLATFORM_ANDROID_KHR )
   //=== VK_KHR_android_surface ===
 
-  // wrapper class for enum VkAndroidSurfaceCreateFlagBitsKHR, see
-  // https://registry.khronos.org/vulkan/specs/latest/man/html/VkAndroidSurfaceCreateFlagBitsKHR.html
   enum class AndroidSurfaceCreateFlagBitsKHR : VkAndroidSurfaceCreateFlagsKHR
   {
   };
@@ -5432,7 +5487,6 @@ namespace VULKAN_HPP_NAMESPACE
 #if defined( VK_USE_PLATFORM_WIN32_KHR )
   //=== VK_KHR_win32_surface ===
 
-  // wrapper class for enum VkWin32SurfaceCreateFlagBitsKHR, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkWin32SurfaceCreateFlagBitsKHR.html
   enum class Win32SurfaceCreateFlagBitsKHR : VkWin32SurfaceCreateFlagsKHR
   {
   };
@@ -5466,6 +5520,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<DebugReportFlagBitsEXT>
   {
+    using WrappedType                                                  = VkDebugReportFlagBitsEXT;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR DebugReportFlagsEXT allFlags  = DebugReportFlagBitsEXT::eInformation | DebugReportFlagBitsEXT::eWarning |
                                                                         DebugReportFlagBitsEXT::ePerformanceWarning | DebugReportFlagBitsEXT::eError |
@@ -5556,6 +5611,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<VideoCodecOperationFlagBitsKHR>
   {
+    using WrappedType                                                          = VkVideoCodecOperationFlagBitsKHR;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                        isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR VideoCodecOperationFlagsKHR allFlags =
       VideoCodecOperationFlagBitsKHR::eNone | VideoCodecOperationFlagBitsKHR::eEncodeH264 | VideoCodecOperationFlagBitsKHR::eEncodeH265 |
@@ -5581,6 +5637,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<VideoChromaSubsamplingFlagBitsKHR>
   {
+    using WrappedType                                                             = VkVideoChromaSubsamplingFlagBitsKHR;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                           isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR VideoChromaSubsamplingFlagsKHR allFlags =
       VideoChromaSubsamplingFlagBitsKHR::eInvalid | VideoChromaSubsamplingFlagBitsKHR::eMonochrome | VideoChromaSubsamplingFlagBitsKHR::e420 |
@@ -5604,6 +5661,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<VideoComponentBitDepthFlagBitsKHR>
   {
+    using WrappedType                                                             = VkVideoComponentBitDepthFlagBitsKHR;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                           isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR VideoComponentBitDepthFlagsKHR allFlags =
       VideoComponentBitDepthFlagBitsKHR::eInvalid | VideoComponentBitDepthFlagBitsKHR::e8 | VideoComponentBitDepthFlagBitsKHR::e10 |
@@ -5623,6 +5681,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<VideoCapabilityFlagBitsKHR>
   {
+    using WrappedType                                                      = VkVideoCapabilityFlagBitsKHR;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                    isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR VideoCapabilityFlagsKHR allFlags =
       VideoCapabilityFlagBitsKHR::eProtectedContent | VideoCapabilityFlagBitsKHR::eSeparateReferenceImages;
@@ -5645,6 +5704,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<VideoSessionCreateFlagBitsKHR>
   {
+    using WrappedType                                                         = VkVideoSessionCreateFlagBitsKHR;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                       isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR VideoSessionCreateFlagsKHR allFlags =
       VideoSessionCreateFlagBitsKHR::eProtectedContent | VideoSessionCreateFlagBitsKHR::eAllowEncodeParameterOptimizations |
@@ -5666,6 +5726,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<VideoCodingControlFlagBitsKHR>
   {
+    using WrappedType                                                         = VkVideoCodingControlFlagBitsKHR;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                       isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR VideoCodingControlFlagsKHR allFlags =
       VideoCodingControlFlagBitsKHR::eReset | VideoCodingControlFlagBitsKHR::eEncodeRateControl | VideoCodingControlFlagBitsKHR::eEncodeQualityLevel;
@@ -5694,11 +5755,11 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<VideoSessionParametersCreateFlagBitsKHR>
   {
+    using WrappedType                                                                   = VkVideoSessionParametersCreateFlagBitsKHR;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                                 isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR VideoSessionParametersCreateFlagsKHR allFlags  = VideoSessionParametersCreateFlagBitsKHR::eQuantizationMapCompatible;
   };
 
-  // wrapper class for enum VkVideoBeginCodingFlagBitsKHR, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoBeginCodingFlagBitsKHR.html
   enum class VideoBeginCodingFlagBitsKHR : VkVideoBeginCodingFlagsKHR
   {
   };
@@ -5713,7 +5774,6 @@ namespace VULKAN_HPP_NAMESPACE
     static VULKAN_HPP_CONST_OR_CONSTEXPR VideoBeginCodingFlagsKHR allFlags  = {};
   };
 
-  // wrapper class for enum VkVideoEndCodingFlagBitsKHR, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEndCodingFlagBitsKHR.html
   enum class VideoEndCodingFlagBitsKHR : VkVideoEndCodingFlagsKHR
   {
   };
@@ -5745,6 +5805,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<VideoDecodeCapabilityFlagBitsKHR>
   {
+    using WrappedType                                                            = VkVideoDecodeCapabilityFlagBitsKHR;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                          isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR VideoDecodeCapabilityFlagsKHR allFlags =
       VideoDecodeCapabilityFlagBitsKHR::eDpbAndOutputCoincide | VideoDecodeCapabilityFlagBitsKHR::eDpbAndOutputDistinct;
@@ -5765,12 +5826,12 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<VideoDecodeUsageFlagBitsKHR>
   {
+    using WrappedType                                                       = VkVideoDecodeUsageFlagBitsKHR;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                     isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR VideoDecodeUsageFlagsKHR allFlags = VideoDecodeUsageFlagBitsKHR::eDefault | VideoDecodeUsageFlagBitsKHR::eTranscoding |
                                                                              VideoDecodeUsageFlagBitsKHR::eOffline | VideoDecodeUsageFlagBitsKHR::eStreaming;
   };
 
-  // wrapper class for enum VkVideoDecodeFlagBitsKHR, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoDecodeFlagBitsKHR.html
   enum class VideoDecodeFlagBitsKHR : VkVideoDecodeFlagsKHR
   {
   };
@@ -5787,8 +5848,6 @@ namespace VULKAN_HPP_NAMESPACE
 
   //=== VK_EXT_transform_feedback ===
 
-  // wrapper class for enum VkPipelineRasterizationStateStreamCreateFlagBitsEXT, see
-  // https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineRasterizationStateStreamCreateFlagBitsEXT.html
   enum class PipelineRasterizationStateStreamCreateFlagBitsEXT : VkPipelineRasterizationStateStreamCreateFlagsEXT
   {
   };
@@ -5829,6 +5888,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<VideoEncodeH264CapabilityFlagBitsKHR>
   {
+    using WrappedType                                                                = VkVideoEncodeH264CapabilityFlagBitsKHR;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                              isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR VideoEncodeH264CapabilityFlagsKHR allFlags =
       VideoEncodeH264CapabilityFlagBitsKHR::eHrdCompliance | VideoEncodeH264CapabilityFlagBitsKHR::ePredictionWeightTableGenerated |
@@ -5869,6 +5929,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<VideoEncodeH264StdFlagBitsKHR>
   {
+    using WrappedType                                                         = VkVideoEncodeH264StdFlagBitsKHR;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                       isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR VideoEncodeH264StdFlagsKHR allFlags =
       VideoEncodeH264StdFlagBitsKHR::eSeparateColorPlaneFlagSet | VideoEncodeH264StdFlagBitsKHR::eQpprimeYZeroTransformBypassFlagSet |
@@ -5901,6 +5962,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<VideoEncodeH264RateControlFlagBitsKHR>
   {
+    using WrappedType                                                                 = VkVideoEncodeH264RateControlFlagBitsKHR;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                               isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR VideoEncodeH264RateControlFlagsKHR allFlags =
       VideoEncodeH264RateControlFlagBitsKHR::eAttemptHrdCompliance | VideoEncodeH264RateControlFlagBitsKHR::eRegularGop |
@@ -5934,6 +5996,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<VideoEncodeH265CapabilityFlagBitsKHR>
   {
+    using WrappedType                                                                = VkVideoEncodeH265CapabilityFlagBitsKHR;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                              isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR VideoEncodeH265CapabilityFlagsKHR allFlags =
       VideoEncodeH265CapabilityFlagBitsKHR::eHrdCompliance | VideoEncodeH265CapabilityFlagBitsKHR::ePredictionWeightTableGenerated |
@@ -5976,6 +6039,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<VideoEncodeH265StdFlagBitsKHR>
   {
+    using WrappedType                                                         = VkVideoEncodeH265StdFlagBitsKHR;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                       isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR VideoEncodeH265StdFlagsKHR allFlags =
       VideoEncodeH265StdFlagBitsKHR::eSeparateColorPlaneFlagSet | VideoEncodeH265StdFlagBitsKHR::eSampleAdaptiveOffsetEnabledFlagSet |
@@ -6007,6 +6071,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<VideoEncodeH265CtbSizeFlagBitsKHR>
   {
+    using WrappedType                                                             = VkVideoEncodeH265CtbSizeFlagBitsKHR;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                           isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR VideoEncodeH265CtbSizeFlagsKHR allFlags =
       VideoEncodeH265CtbSizeFlagBitsKHR::e16 | VideoEncodeH265CtbSizeFlagBitsKHR::e32 | VideoEncodeH265CtbSizeFlagBitsKHR::e64;
@@ -6029,6 +6094,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<VideoEncodeH265TransformBlockSizeFlagBitsKHR>
   {
+    using WrappedType                                                                        = VkVideoEncodeH265TransformBlockSizeFlagBitsKHR;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                                      isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR VideoEncodeH265TransformBlockSizeFlagsKHR allFlags =
       VideoEncodeH265TransformBlockSizeFlagBitsKHR::e4 | VideoEncodeH265TransformBlockSizeFlagBitsKHR::e8 | VideoEncodeH265TransformBlockSizeFlagBitsKHR::e16 |
@@ -6053,6 +6119,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<VideoEncodeH265RateControlFlagBitsKHR>
   {
+    using WrappedType                                                                 = VkVideoEncodeH265RateControlFlagBitsKHR;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                               isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR VideoEncodeH265RateControlFlagsKHR allFlags =
       VideoEncodeH265RateControlFlagBitsKHR::eAttemptHrdCompliance | VideoEncodeH265RateControlFlagBitsKHR::eRegularGop |
@@ -6078,6 +6145,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<VideoDecodeH264PictureLayoutFlagBitsKHR>
   {
+    using WrappedType                                                                   = VkVideoDecodeH264PictureLayoutFlagBitsKHR;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                                 isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR VideoDecodeH264PictureLayoutFlagsKHR allFlags  = VideoDecodeH264PictureLayoutFlagBitsKHR::eProgressive |
                                                                                          VideoDecodeH264PictureLayoutFlagBitsKHR::eInterlacedInterleavedLines |
@@ -6097,8 +6165,6 @@ namespace VULKAN_HPP_NAMESPACE
 #if defined( VK_USE_PLATFORM_GGP )
   //=== VK_GGP_stream_descriptor_surface ===
 
-  // wrapper class for enum VkStreamDescriptorSurfaceCreateFlagBitsGGP, see
-  // https://registry.khronos.org/vulkan/specs/latest/man/html/VkStreamDescriptorSurfaceCreateFlagBitsGGP.html
   enum class StreamDescriptorSurfaceCreateFlagBitsGGP : VkStreamDescriptorSurfaceCreateFlagsGGP
   {
   };
@@ -6134,6 +6200,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<ExternalMemoryHandleTypeFlagBitsNV>
   {
+    using WrappedType                                                              = VkExternalMemoryHandleTypeFlagBitsNV;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                            isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR ExternalMemoryHandleTypeFlagsNV allFlags =
       ExternalMemoryHandleTypeFlagBitsNV::eOpaqueWin32 | ExternalMemoryHandleTypeFlagBitsNV::eOpaqueWin32Kmt | ExternalMemoryHandleTypeFlagBitsNV::eD3D11Image |
@@ -6155,6 +6222,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<ExternalMemoryFeatureFlagBitsNV>
   {
+    using WrappedType                                                           = VkExternalMemoryFeatureFlagBitsNV;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                         isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR ExternalMemoryFeatureFlagsNV allFlags =
       ExternalMemoryFeatureFlagBitsNV::eDedicatedOnly | ExternalMemoryFeatureFlagBitsNV::eExportable | ExternalMemoryFeatureFlagBitsNV::eImportable;
@@ -6172,7 +6240,6 @@ namespace VULKAN_HPP_NAMESPACE
 #if defined( VK_USE_PLATFORM_VI_NN )
   //=== VK_NN_vi_surface ===
 
-  // wrapper class for enum VkViSurfaceCreateFlagBitsNN, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkViSurfaceCreateFlagBitsNN.html
   enum class ViSurfaceCreateFlagBitsNN : VkViSurfaceCreateFlagsNN
   {
   };
@@ -6203,6 +6270,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<ConditionalRenderingFlagBitsEXT>
   {
+    using WrappedType                                                           = VkConditionalRenderingFlagBitsEXT;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                         isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR ConditionalRenderingFlagsEXT allFlags  = ConditionalRenderingFlagBitsEXT::eInverted;
   };
@@ -6221,6 +6289,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<SurfaceCounterFlagBitsEXT>
   {
+    using WrappedType                                                     = VkSurfaceCounterFlagBitsEXT;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                   isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR SurfaceCounterFlagsEXT allFlags  = SurfaceCounterFlagBitsEXT::eVblank;
   };
@@ -6262,8 +6331,6 @@ namespace VULKAN_HPP_NAMESPACE
     eNegativeW = VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_W_NV
   };
 
-  // wrapper class for enum VkPipelineViewportSwizzleStateCreateFlagBitsNV, see
-  // https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineViewportSwizzleStateCreateFlagBitsNV.html
   enum class PipelineViewportSwizzleStateCreateFlagBitsNV : VkPipelineViewportSwizzleStateCreateFlagsNV
   {
   };
@@ -6288,8 +6355,6 @@ namespace VULKAN_HPP_NAMESPACE
     eExclusive = VK_DISCARD_RECTANGLE_MODE_EXCLUSIVE_EXT
   };
 
-  // wrapper class for enum VkPipelineDiscardRectangleStateCreateFlagBitsEXT, see
-  // https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineDiscardRectangleStateCreateFlagBitsEXT.html
   enum class PipelineDiscardRectangleStateCreateFlagBitsEXT : VkPipelineDiscardRectangleStateCreateFlagsEXT
   {
   };
@@ -6316,8 +6381,6 @@ namespace VULKAN_HPP_NAMESPACE
     eUnderestimate = VK_CONSERVATIVE_RASTERIZATION_MODE_UNDERESTIMATE_EXT
   };
 
-  // wrapper class for enum VkPipelineRasterizationConservativeStateCreateFlagBitsEXT, see
-  // https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineRasterizationConservativeStateCreateFlagBitsEXT.html
   enum class PipelineRasterizationConservativeStateCreateFlagBitsEXT : VkPipelineRasterizationConservativeStateCreateFlagsEXT
   {
   };
@@ -6335,8 +6398,6 @@ namespace VULKAN_HPP_NAMESPACE
 
   //=== VK_EXT_depth_clip_enable ===
 
-  // wrapper class for enum VkPipelineRasterizationDepthClipStateCreateFlagBitsEXT, see
-  // https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineRasterizationDepthClipStateCreateFlagBitsEXT.html
   enum class PipelineRasterizationDepthClipStateCreateFlagBitsEXT : VkPipelineRasterizationDepthClipStateCreateFlagsEXT
   {
   };
@@ -6369,6 +6430,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<PerformanceCounterDescriptionFlagBitsKHR>
   {
+    using WrappedType                                                                    = VkPerformanceCounterDescriptionFlagBitsKHR;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                                  isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR PerformanceCounterDescriptionFlagsKHR allFlags =
       PerformanceCounterDescriptionFlagBitsKHR::ePerformanceImpacting | PerformanceCounterDescriptionFlagBitsKHR::eConcurrentlyImpacted;
@@ -6412,8 +6474,6 @@ namespace VULKAN_HPP_NAMESPACE
     eCycles         = VK_PERFORMANCE_COUNTER_UNIT_CYCLES_KHR
   };
 
-  // wrapper class for enum VkAcquireProfilingLockFlagBitsKHR, see
-  // https://registry.khronos.org/vulkan/specs/latest/man/html/VkAcquireProfilingLockFlagBitsKHR.html
   enum class AcquireProfilingLockFlagBitsKHR : VkAcquireProfilingLockFlagsKHR
   {
   };
@@ -6431,7 +6491,6 @@ namespace VULKAN_HPP_NAMESPACE
 #if defined( VK_USE_PLATFORM_IOS_MVK )
   //=== VK_MVK_ios_surface ===
 
-  // wrapper class for enum VkIOSSurfaceCreateFlagBitsMVK, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkIOSSurfaceCreateFlagBitsMVK.html
   enum class IOSSurfaceCreateFlagBitsMVK : VkIOSSurfaceCreateFlagsMVK
   {
   };
@@ -6450,7 +6509,6 @@ namespace VULKAN_HPP_NAMESPACE
 #if defined( VK_USE_PLATFORM_MACOS_MVK )
   //=== VK_MVK_macos_surface ===
 
-  // wrapper class for enum VkMacOSSurfaceCreateFlagBitsMVK, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkMacOSSurfaceCreateFlagBitsMVK.html
   enum class MacOSSurfaceCreateFlagBitsMVK : VkMacOSSurfaceCreateFlagsMVK
   {
   };
@@ -6485,6 +6543,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<DebugUtilsMessageSeverityFlagBitsEXT>
   {
+    using WrappedType                                                                = VkDebugUtilsMessageSeverityFlagBitsEXT;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                              isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR DebugUtilsMessageSeverityFlagsEXT allFlags =
       DebugUtilsMessageSeverityFlagBitsEXT::eVerbose | DebugUtilsMessageSeverityFlagBitsEXT::eInfo | DebugUtilsMessageSeverityFlagBitsEXT::eWarning |
@@ -6508,14 +6567,13 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<DebugUtilsMessageTypeFlagBitsEXT>
   {
+    using WrappedType                                                            = VkDebugUtilsMessageTypeFlagBitsEXT;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                          isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR DebugUtilsMessageTypeFlagsEXT allFlags =
       DebugUtilsMessageTypeFlagBitsEXT::eGeneral | DebugUtilsMessageTypeFlagBitsEXT::eValidation | DebugUtilsMessageTypeFlagBitsEXT::ePerformance |
       DebugUtilsMessageTypeFlagBitsEXT::eDeviceAddressBinding;
   };
 
-  // wrapper class for enum VkDebugUtilsMessengerCallbackDataFlagBitsEXT, see
-  // https://registry.khronos.org/vulkan/specs/latest/man/html/VkDebugUtilsMessengerCallbackDataFlagBitsEXT.html
   enum class DebugUtilsMessengerCallbackDataFlagBitsEXT : VkDebugUtilsMessengerCallbackDataFlagsEXT
   {
   };
@@ -6531,8 +6589,6 @@ namespace VULKAN_HPP_NAMESPACE
     static VULKAN_HPP_CONST_OR_CONSTEXPR DebugUtilsMessengerCallbackDataFlagsEXT allFlags  = {};
   };
 
-  // wrapper class for enum VkDebugUtilsMessengerCreateFlagBitsEXT, see
-  // https://registry.khronos.org/vulkan/specs/latest/man/html/VkDebugUtilsMessengerCreateFlagBitsEXT.html
   enum class DebugUtilsMessengerCreateFlagBitsEXT : VkDebugUtilsMessengerCreateFlagsEXT
   {
   };
@@ -6560,8 +6616,6 @@ namespace VULKAN_HPP_NAMESPACE
 
   //=== VK_NV_fragment_coverage_to_color ===
 
-  // wrapper class for enum VkPipelineCoverageToColorStateCreateFlagBitsNV, see
-  // https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineCoverageToColorStateCreateFlagBitsNV.html
   enum class PipelineCoverageToColorStateCreateFlagBitsNV : VkPipelineCoverageToColorStateCreateFlagsNV
   {
   };
@@ -6614,6 +6668,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<GeometryFlagBitsKHR>
   {
+    using WrappedType                                               = VkGeometryFlagBitsKHR;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool             isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR GeometryFlagsKHR allFlags  = GeometryFlagBitsKHR::eOpaque | GeometryFlagBitsKHR::eNoDuplicateAnyHitInvocation;
   };
@@ -6640,6 +6695,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<GeometryInstanceFlagBitsKHR>
   {
+    using WrappedType                                                       = VkGeometryInstanceFlagBitsKHR;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                     isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR GeometryInstanceFlagsKHR allFlags =
       GeometryInstanceFlagBitsKHR::eTriangleFacingCullDisable | GeometryInstanceFlagBitsKHR::eTriangleFlipFacing | GeometryInstanceFlagBitsKHR::eForceOpaque |
@@ -6676,6 +6732,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<BuildAccelerationStructureFlagBitsKHR>
   {
+    using WrappedType                                                                 = VkBuildAccelerationStructureFlagBitsKHR;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                               isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR BuildAccelerationStructureFlagsKHR allFlags =
       BuildAccelerationStructureFlagBitsKHR::eAllowUpdate | BuildAccelerationStructureFlagBitsKHR::eAllowCompaction |
@@ -6737,6 +6794,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<AccelerationStructureCreateFlagBitsKHR>
   {
+    using WrappedType                                                                  = VkAccelerationStructureCreateFlagBitsKHR;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                                isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR AccelerationStructureCreateFlagsKHR allFlags =
       AccelerationStructureCreateFlagBitsKHR::eDeviceAddressCaptureReplay | AccelerationStructureCreateFlagBitsKHR::eDescriptorBufferCaptureReplayEXT |
@@ -6783,8 +6841,6 @@ namespace VULKAN_HPP_NAMESPACE
     eRgba  = VK_COVERAGE_MODULATION_MODE_RGBA_NV
   };
 
-  // wrapper class for enum VkPipelineCoverageModulationStateCreateFlagBitsNV, see
-  // https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineCoverageModulationStateCreateFlagBitsNV.html
   enum class PipelineCoverageModulationStateCreateFlagBitsNV : VkPipelineCoverageModulationStateCreateFlagsNV
   {
   };
@@ -6809,8 +6865,6 @@ namespace VULKAN_HPP_NAMESPACE
     eOne = VK_VALIDATION_CACHE_HEADER_VERSION_ONE_EXT
   };
 
-  // wrapper class for enum VkValidationCacheCreateFlagBitsEXT, see
-  // https://registry.khronos.org/vulkan/specs/latest/man/html/VkValidationCacheCreateFlagBitsEXT.html
   enum class ValidationCacheCreateFlagBitsEXT : VkValidationCacheCreateFlagsEXT
   {
   };
@@ -6867,8 +6921,6 @@ namespace VULKAN_HPP_NAMESPACE
 
   //=== VK_AMD_pipeline_compiler_control ===
 
-  // wrapper class for enum VkPipelineCompilerControlFlagBitsAMD, see
-  // https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineCompilerControlFlagBitsAMD.html
   enum class PipelineCompilerControlFlagBitsAMD : VkPipelineCompilerControlFlagsAMD
   {
   };
@@ -6937,8 +6989,6 @@ namespace VULKAN_HPP_NAMESPACE
 #if defined( VK_USE_PLATFORM_FUCHSIA )
   //=== VK_FUCHSIA_imagepipe_surface ===
 
-  // wrapper class for enum VkImagePipeSurfaceCreateFlagBitsFUCHSIA, see
-  // https://registry.khronos.org/vulkan/specs/latest/man/html/VkImagePipeSurfaceCreateFlagBitsFUCHSIA.html
   enum class ImagePipeSurfaceCreateFlagBitsFUCHSIA : VkImagePipeSurfaceCreateFlagsFUCHSIA
   {
   };
@@ -6958,7 +7008,6 @@ namespace VULKAN_HPP_NAMESPACE
 #if defined( VK_USE_PLATFORM_METAL_EXT )
   //=== VK_EXT_metal_surface ===
 
-  // wrapper class for enum VkMetalSurfaceCreateFlagBitsEXT, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkMetalSurfaceCreateFlagBitsEXT.html
   enum class MetalSurfaceCreateFlagBitsEXT : VkMetalSurfaceCreateFlagsEXT
   {
   };
@@ -6989,8 +7038,6 @@ namespace VULKAN_HPP_NAMESPACE
 
   //=== VK_AMD_shader_core_properties2 ===
 
-  // wrapper class for enum VkShaderCorePropertiesFlagBitsAMD, see
-  // https://registry.khronos.org/vulkan/specs/latest/man/html/VkShaderCorePropertiesFlagBitsAMD.html
   enum class ShaderCorePropertiesFlagBitsAMD : VkShaderCorePropertiesFlagsAMD
   {
   };
@@ -7039,8 +7086,6 @@ namespace VULKAN_HPP_NAMESPACE
     eTruncate = VK_COVERAGE_REDUCTION_MODE_TRUNCATE_NV
   };
 
-  // wrapper class for enum VkPipelineCoverageReductionStateCreateFlagBitsNV, see
-  // https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineCoverageReductionStateCreateFlagBitsNV.html
   enum class PipelineCoverageReductionStateCreateFlagBitsNV : VkPipelineCoverageReductionStateCreateFlagsNV
   {
   };
@@ -7081,8 +7126,6 @@ namespace VULKAN_HPP_NAMESPACE
 
   //=== VK_EXT_headless_surface ===
 
-  // wrapper class for enum VkHeadlessSurfaceCreateFlagBitsEXT, see
-  // https://registry.khronos.org/vulkan/specs/latest/man/html/VkHeadlessSurfaceCreateFlagBitsEXT.html
   enum class HeadlessSurfaceCreateFlagBitsEXT : VkHeadlessSurfaceCreateFlagsEXT
   {
   };
@@ -7126,6 +7169,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<PresentScalingFlagBitsEXT>
   {
+    using WrappedType                                                     = VkPresentScalingFlagBitsEXT;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                   isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR PresentScalingFlagsEXT allFlags =
       PresentScalingFlagBitsEXT::eOneToOne | PresentScalingFlagBitsEXT::eAspectRatioStretch | PresentScalingFlagBitsEXT::eStretch;
@@ -7145,6 +7189,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<PresentGravityFlagBitsEXT>
   {
+    using WrappedType                                                     = VkPresentGravityFlagBitsEXT;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                   isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR PresentGravityFlagsEXT allFlags =
       PresentGravityFlagBitsEXT::eMin | PresentGravityFlagBitsEXT::eMax | PresentGravityFlagBitsEXT::eCentered;
@@ -7164,6 +7209,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<IndirectStateFlagBitsNV>
   {
+    using WrappedType                                                   = VkIndirectStateFlagBitsNV;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                 isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR IndirectStateFlagsNV allFlags  = IndirectStateFlagBitsNV::eFlagFrontface;
   };
@@ -7200,6 +7246,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<IndirectCommandsLayoutUsageFlagBitsNV>
   {
+    using WrappedType                                                                 = VkIndirectCommandsLayoutUsageFlagBitsNV;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                               isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR IndirectCommandsLayoutUsageFlagsNV allFlags  = IndirectCommandsLayoutUsageFlagBitsNV::eExplicitPreprocess |
                                                                                        IndirectCommandsLayoutUsageFlagBitsNV::eIndexedSequences |
@@ -7229,7 +7276,6 @@ namespace VULKAN_HPP_NAMESPACE
     eAllocationFailed = VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_ALLOCATION_FAILED_EXT
   };
 
-  // wrapper class for enum VkDeviceMemoryReportFlagBitsEXT, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkDeviceMemoryReportFlagBitsEXT.html
   enum class DeviceMemoryReportFlagBitsEXT : VkDeviceMemoryReportFlagsEXT
   {
   };
@@ -7263,6 +7309,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<VideoEncodeCapabilityFlagBitsKHR>
   {
+    using WrappedType                                                            = VkVideoEncodeCapabilityFlagBitsKHR;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                          isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR VideoEncodeCapabilityFlagsKHR allFlags =
       VideoEncodeCapabilityFlagBitsKHR::ePrecedingExternallyEncodedBytes | VideoEncodeCapabilityFlagBitsKHR::eInsufficientBitstreamBufferRangeDetection |
@@ -7284,6 +7331,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<VideoEncodeFeedbackFlagBitsKHR>
   {
+    using WrappedType                                                          = VkVideoEncodeFeedbackFlagBitsKHR;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                        isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR VideoEncodeFeedbackFlagsKHR allFlags  = VideoEncodeFeedbackFlagBitsKHR::eBitstreamBufferOffset |
                                                                                 VideoEncodeFeedbackFlagBitsKHR::eBitstreamBytesWritten |
@@ -7306,6 +7354,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<VideoEncodeUsageFlagBitsKHR>
   {
+    using WrappedType                                                       = VkVideoEncodeUsageFlagBitsKHR;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                     isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR VideoEncodeUsageFlagsKHR allFlags = VideoEncodeUsageFlagBitsKHR::eDefault | VideoEncodeUsageFlagBitsKHR::eTranscoding |
                                                                              VideoEncodeUsageFlagBitsKHR::eStreaming | VideoEncodeUsageFlagBitsKHR::eRecording |
@@ -7327,6 +7376,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<VideoEncodeContentFlagBitsKHR>
   {
+    using WrappedType                                                         = VkVideoEncodeContentFlagBitsKHR;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                       isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR VideoEncodeContentFlagsKHR allFlags =
       VideoEncodeContentFlagBitsKHR::eDefault | VideoEncodeContentFlagBitsKHR::eCamera | VideoEncodeContentFlagBitsKHR::eDesktop |
@@ -7360,6 +7410,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<VideoEncodeRateControlModeFlagBitsKHR>
   {
+    using WrappedType                                                                 = VkVideoEncodeRateControlModeFlagBitsKHR;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                               isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR VideoEncodeRateControlModeFlagsKHR allFlags =
       VideoEncodeRateControlModeFlagBitsKHR::eDefault | VideoEncodeRateControlModeFlagBitsKHR::eDisabled | VideoEncodeRateControlModeFlagBitsKHR::eCbr |
@@ -7379,13 +7430,12 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<VideoEncodeFlagBitsKHR>
   {
+    using WrappedType                                                  = VkVideoEncodeFlagBitsKHR;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR VideoEncodeFlagsKHR allFlags =
       VideoEncodeFlagBitsKHR::eWithQuantizationDeltaMap | VideoEncodeFlagBitsKHR::eWithEmphasisMap;
   };
 
-  // wrapper class for enum VkVideoEncodeRateControlFlagBitsKHR, see
-  // https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeRateControlFlagBitsKHR.html
   enum class VideoEncodeRateControlFlagBitsKHR : VkVideoEncodeRateControlFlagsKHR
   {
   };
@@ -7420,6 +7470,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<DeviceDiagnosticsConfigFlagBitsNV>
   {
+    using WrappedType                                                             = VkDeviceDiagnosticsConfigFlagBitsNV;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                           isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR DeviceDiagnosticsConfigFlagsNV allFlags =
       DeviceDiagnosticsConfigFlagBitsNV::eEnableShaderDebugInfo | DeviceDiagnosticsConfigFlagBitsNV::eEnableResourceTracking |
@@ -7443,6 +7494,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<TileShadingRenderPassFlagBitsQCOM>
   {
+    using WrappedType                                                             = VkTileShadingRenderPassFlagBitsQCOM;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                           isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR TileShadingRenderPassFlagsQCOM allFlags =
       TileShadingRenderPassFlagBitsQCOM::eEnable | TileShadingRenderPassFlagBitsQCOM::ePerTileExecution;
@@ -7470,6 +7522,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<ExportMetalObjectTypeFlagBitsEXT>
   {
+    using WrappedType                                                            = VkExportMetalObjectTypeFlagBitsEXT;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                          isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR ExportMetalObjectTypeFlagsEXT allFlags =
       ExportMetalObjectTypeFlagBitsEXT::eMetalDevice | ExportMetalObjectTypeFlagBitsEXT::eMetalCommandQueue | ExportMetalObjectTypeFlagBitsEXT::eMetalBuffer |
@@ -7496,6 +7549,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<GraphicsPipelineLibraryFlagBitsEXT>
   {
+    using WrappedType                                                              = VkGraphicsPipelineLibraryFlagBitsEXT;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                            isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR GraphicsPipelineLibraryFlagsEXT allFlags =
       GraphicsPipelineLibraryFlagBitsEXT::eVertexInputInterface | GraphicsPipelineLibraryFlagBitsEXT::ePreRasterizationShaders |
@@ -7539,8 +7593,6 @@ namespace VULKAN_HPP_NAMESPACE
     eSrtMotion    = VK_ACCELERATION_STRUCTURE_MOTION_INSTANCE_TYPE_SRT_MOTION_NV
   };
 
-  // wrapper class for enum VkAccelerationStructureMotionInfoFlagBitsNV, see
-  // https://registry.khronos.org/vulkan/specs/latest/man/html/VkAccelerationStructureMotionInfoFlagBitsNV.html
   enum class AccelerationStructureMotionInfoFlagBitsNV : VkAccelerationStructureMotionInfoFlagsNV
   {
   };
@@ -7556,8 +7608,6 @@ namespace VULKAN_HPP_NAMESPACE
     static VULKAN_HPP_CONST_OR_CONSTEXPR AccelerationStructureMotionInfoFlagsNV allFlags  = {};
   };
 
-  // wrapper class for enum VkAccelerationStructureMotionInstanceFlagBitsNV, see
-  // https://registry.khronos.org/vulkan/specs/latest/man/html/VkAccelerationStructureMotionInstanceFlagBitsNV.html
   enum class AccelerationStructureMotionInstanceFlagBitsNV : VkAccelerationStructureMotionInstanceFlagsNV
   {
   };
@@ -7590,6 +7640,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<ImageCompressionFlagBitsEXT>
   {
+    using WrappedType                                                       = VkImageCompressionFlagBitsEXT;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                     isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR ImageCompressionFlagsEXT allFlags =
       ImageCompressionFlagBitsEXT::eDefault | ImageCompressionFlagBitsEXT::eFixedRateDefault | ImageCompressionFlagBitsEXT::eFixedRateExplicit |
@@ -7634,6 +7685,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<ImageCompressionFixedRateFlagBitsEXT>
   {
+    using WrappedType                                                                = VkImageCompressionFixedRateFlagBitsEXT;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                              isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR ImageCompressionFixedRateFlagsEXT allFlags =
       ImageCompressionFixedRateFlagBitsEXT::eNone | ImageCompressionFixedRateFlagBitsEXT::e1Bpc | ImageCompressionFixedRateFlagBitsEXT::e2Bpc |
@@ -7671,8 +7723,6 @@ namespace VULKAN_HPP_NAMESPACE
 #if defined( VK_USE_PLATFORM_DIRECTFB_EXT )
   //=== VK_EXT_directfb_surface ===
 
-  // wrapper class for enum VkDirectFBSurfaceCreateFlagBitsEXT, see
-  // https://registry.khronos.org/vulkan/specs/latest/man/html/VkDirectFBSurfaceCreateFlagBitsEXT.html
   enum class DirectFBSurfaceCreateFlagBitsEXT : VkDirectFBSurfaceCreateFlagsEXT
   {
   };
@@ -7704,6 +7754,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<DeviceAddressBindingFlagBitsEXT>
   {
+    using WrappedType                                                           = VkDeviceAddressBindingFlagBitsEXT;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                         isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR DeviceAddressBindingFlagsEXT allFlags  = DeviceAddressBindingFlagBitsEXT::eInternalObject;
   };
@@ -7736,6 +7787,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<ImageConstraintsInfoFlagBitsFUCHSIA>
   {
+    using WrappedType                                                               = VkImageConstraintsInfoFlagBitsFUCHSIA;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                             isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR ImageConstraintsInfoFlagsFUCHSIA allFlags =
       ImageConstraintsInfoFlagBitsFUCHSIA::eCpuReadRarely | ImageConstraintsInfoFlagBitsFUCHSIA::eCpuReadOften |
@@ -7743,8 +7795,6 @@ namespace VULKAN_HPP_NAMESPACE
       ImageConstraintsInfoFlagBitsFUCHSIA::eProtectedOptional;
   };
 
-  // wrapper class for enum VkImageFormatConstraintsFlagBitsFUCHSIA, see
-  // https://registry.khronos.org/vulkan/specs/latest/man/html/VkImageFormatConstraintsFlagBitsFUCHSIA.html
   enum class ImageFormatConstraintsFlagBitsFUCHSIA : VkImageFormatConstraintsFlagsFUCHSIA
   {
   };
@@ -7775,6 +7825,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<FrameBoundaryFlagBitsEXT>
   {
+    using WrappedType                                                    = VkFrameBoundaryFlagBitsEXT;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                  isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR FrameBoundaryFlagsEXT allFlags  = FrameBoundaryFlagBitsEXT::eFrameEnd;
   };
@@ -7782,8 +7833,6 @@ namespace VULKAN_HPP_NAMESPACE
 #if defined( VK_USE_PLATFORM_SCREEN_QNX )
   //=== VK_QNX_screen_surface ===
 
-  // wrapper class for enum VkScreenSurfaceCreateFlagBitsQNX, see
-  // https://registry.khronos.org/vulkan/specs/latest/man/html/VkScreenSurfaceCreateFlagBitsQNX.html
   enum class ScreenSurfaceCreateFlagBitsQNX : VkScreenSurfaceCreateFlagsQNX
   {
   };
@@ -7824,6 +7873,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<BuildMicromapFlagBitsEXT>
   {
+    using WrappedType                                                    = VkBuildMicromapFlagBitsEXT;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                  isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR BuildMicromapFlagsEXT allFlags =
       BuildMicromapFlagBitsEXT::ePreferFastTrace | BuildMicromapFlagBitsEXT::ePreferFastBuild | BuildMicromapFlagBitsEXT::eAllowCompaction;
@@ -7850,6 +7900,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<MicromapCreateFlagBitsEXT>
   {
+    using WrappedType                                                     = VkMicromapCreateFlagBitsEXT;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                   isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR MicromapCreateFlagsEXT allFlags  = MicromapCreateFlagBitsEXT::eDeviceAddressCaptureReplay;
   };
@@ -7907,6 +7958,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<PhysicalDeviceSchedulingControlsFlagBitsARM>
   {
+    using WrappedType                                                                       = VkPhysicalDeviceSchedulingControlsFlagBitsARM;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                                     isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR PhysicalDeviceSchedulingControlsFlagsARM allFlags  = PhysicalDeviceSchedulingControlsFlagBitsARM::eShaderCoreCount;
   };
@@ -7927,6 +7979,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<MemoryDecompressionMethodFlagBitsNV>
   {
+    using WrappedType                                                               = VkMemoryDecompressionMethodFlagBitsNV;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                             isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR MemoryDecompressionMethodFlagsNV allFlags  = MemoryDecompressionMethodFlagBitsNV::eGdeflate10;
   };
@@ -7978,8 +8031,6 @@ namespace VULKAN_HPP_NAMESPACE
     eInclusive = VK_DIRECT_DRIVER_LOADING_MODE_INCLUSIVE_LUNARG
   };
 
-  // wrapper class for enum VkDirectDriverLoadingFlagBitsLUNARG, see
-  // https://registry.khronos.org/vulkan/specs/latest/man/html/VkDirectDriverLoadingFlagBitsLUNARG.html
   enum class DirectDriverLoadingFlagBitsLUNARG : VkDirectDriverLoadingFlagsLUNARG
   {
   };
@@ -8014,6 +8065,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<OpticalFlowUsageFlagBitsNV>
   {
+    using WrappedType                                                      = VkOpticalFlowUsageFlagBitsNV;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                    isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR OpticalFlowUsageFlagsNV allFlags  = OpticalFlowUsageFlagBitsNV::eUnknown | OpticalFlowUsageFlagBitsNV::eInput |
                                                                             OpticalFlowUsageFlagBitsNV::eOutput | OpticalFlowUsageFlagBitsNV::eHint |
@@ -8036,6 +8088,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<OpticalFlowGridSizeFlagBitsNV>
   {
+    using WrappedType                                                         = VkOpticalFlowGridSizeFlagBitsNV;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                       isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR OpticalFlowGridSizeFlagsNV allFlags  = OpticalFlowGridSizeFlagBitsNV::eUnknown | OpticalFlowGridSizeFlagBitsNV::e1X1 |
                                                                                OpticalFlowGridSizeFlagBitsNV::e2X2 | OpticalFlowGridSizeFlagBitsNV::e4X4 |
@@ -8084,6 +8137,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<OpticalFlowSessionCreateFlagBitsNV>
   {
+    using WrappedType                                                              = VkOpticalFlowSessionCreateFlagBitsNV;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                            isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR OpticalFlowSessionCreateFlagsNV allFlags =
       OpticalFlowSessionCreateFlagBitsNV::eEnableHint | OpticalFlowSessionCreateFlagBitsNV::eEnableCost |
@@ -8103,6 +8157,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<OpticalFlowExecuteFlagBitsNV>
   {
+    using WrappedType                                                        = VkOpticalFlowExecuteFlagBitsNV;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                      isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR OpticalFlowExecuteFlagsNV allFlags  = OpticalFlowExecuteFlagBitsNV::eDisableTemporalHints;
   };
@@ -8145,6 +8200,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<ShaderCreateFlagBitsEXT>
   {
+    using WrappedType                                                   = VkShaderCreateFlagBitsEXT;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                 isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR ShaderCreateFlagsEXT allFlags =
       ShaderCreateFlagBitsEXT::eLinkStage | ShaderCreateFlagBitsEXT::eAllowVaryingSubgroupSize | ShaderCreateFlagBitsEXT::eRequireFullSubgroups |
@@ -8366,6 +8422,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<VideoEncodeAV1CapabilityFlagBitsKHR>
   {
+    using WrappedType                                                               = VkVideoEncodeAV1CapabilityFlagBitsKHR;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                             isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR VideoEncodeAV1CapabilityFlagsKHR allFlags =
       VideoEncodeAV1CapabilityFlagBitsKHR::ePerRateControlGroupMinMaxQIndex | VideoEncodeAV1CapabilityFlagBitsKHR::eGenerateObuExtensionHeader |
@@ -8388,6 +8445,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<VideoEncodeAV1StdFlagBitsKHR>
   {
+    using WrappedType                                                        = VkVideoEncodeAV1StdFlagBitsKHR;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                      isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR VideoEncodeAV1StdFlagsKHR allFlags =
       VideoEncodeAV1StdFlagBitsKHR::eUniformTileSpacingFlagSet | VideoEncodeAV1StdFlagBitsKHR::eSkipModePresentUnset |
@@ -8409,6 +8467,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<VideoEncodeAV1SuperblockSizeFlagBitsKHR>
   {
+    using WrappedType                                                                   = VkVideoEncodeAV1SuperblockSizeFlagBitsKHR;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                                 isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR VideoEncodeAV1SuperblockSizeFlagsKHR allFlags =
       VideoEncodeAV1SuperblockSizeFlagBitsKHR::e64 | VideoEncodeAV1SuperblockSizeFlagBitsKHR::e128;
@@ -8431,6 +8490,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<VideoEncodeAV1RateControlFlagBitsKHR>
   {
+    using WrappedType                                                                = VkVideoEncodeAV1RateControlFlagBitsKHR;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                              isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR VideoEncodeAV1RateControlFlagsKHR allFlags =
       VideoEncodeAV1RateControlFlagBitsKHR::eRegularGop | VideoEncodeAV1RateControlFlagBitsKHR::eTemporalLayerPatternDyadic |
@@ -8520,6 +8580,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<ClusterAccelerationStructureClusterFlagBitsNV>
   {
+    using WrappedType                                                                         = VkClusterAccelerationStructureClusterFlagBitsNV;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                                       isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR ClusterAccelerationStructureClusterFlagsNV allFlags =
       ClusterAccelerationStructureClusterFlagBitsNV::eAllowDisableOpacityMicromaps;
@@ -8541,6 +8602,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<ClusterAccelerationStructureGeometryFlagBitsNV>
   {
+    using WrappedType                                                                          = VkClusterAccelerationStructureGeometryFlagBitsNV;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                                        isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR ClusterAccelerationStructureGeometryFlagsNV allFlags =
       ClusterAccelerationStructureGeometryFlagBitsNV::eCullDisable | ClusterAccelerationStructureGeometryFlagBitsNV::eNoDuplicateAnyhitInvocation |
@@ -8566,6 +8628,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<ClusterAccelerationStructureAddressResolutionFlagBitsNV>
   {
+    using WrappedType = VkClusterAccelerationStructureAddressResolutionFlagBitsNV;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                                                 isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR ClusterAccelerationStructureAddressResolutionFlagsNV allFlags =
       ClusterAccelerationStructureAddressResolutionFlagBitsNV::eIndirectedDstImplicitData |
@@ -8592,6 +8655,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<ClusterAccelerationStructureIndexFormatFlagBitsNV>
   {
+    using WrappedType                                                                             = VkClusterAccelerationStructureIndexFormatFlagBitsNV;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                                           isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR ClusterAccelerationStructureIndexFormatFlagsNV allFlags  = ClusterAccelerationStructureIndexFormatFlagBitsNV::e8 |
                                                                                                    ClusterAccelerationStructureIndexFormatFlagBitsNV::e16 |
@@ -8656,6 +8720,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<PartitionedAccelerationStructureInstanceFlagBitsNV>
   {
+    using WrappedType                                                                              = VkPartitionedAccelerationStructureInstanceFlagBitsNV;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                                            isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR PartitionedAccelerationStructureInstanceFlagsNV allFlags =
       PartitionedAccelerationStructureInstanceFlagBitsNV::eFlagTriangleFacingCullDisable |
@@ -8709,6 +8774,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<IndirectCommandsLayoutUsageFlagBitsEXT>
   {
+    using WrappedType                                                                  = VkIndirectCommandsLayoutUsageFlagBitsEXT;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                                isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR IndirectCommandsLayoutUsageFlagsEXT allFlags =
       IndirectCommandsLayoutUsageFlagBitsEXT::eExplicitPreprocess | IndirectCommandsLayoutUsageFlagBitsEXT::eUnorderedSequences;
@@ -8729,6 +8795,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<IndirectCommandsInputModeFlagBitsEXT>
   {
+    using WrappedType                                                                = VkIndirectCommandsInputModeFlagBitsEXT;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                              isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR IndirectCommandsInputModeFlagsEXT allFlags =
       IndirectCommandsInputModeFlagBitsEXT::eVulkanIndexBuffer | IndirectCommandsInputModeFlagBitsEXT::eDxgiIndexBuffer;
@@ -8748,6 +8815,7 @@ namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<AccessFlagBits3KHR>
   {
+    using WrappedType                                              = VkAccessFlagBits3KHR;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool            isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR AccessFlags3KHR allFlags  = AccessFlagBits3KHR::eNone;
   };
