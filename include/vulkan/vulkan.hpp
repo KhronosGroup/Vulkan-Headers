@@ -15,29 +15,29 @@
 import VULKAN_HPP_STD_MODULE;
 #else
 #  include <algorithm>
-#  include <array>     // ArrayWrapperND
+#  include <array>  // ArrayWrapperND
+#  include <cassert>
 #  include <string.h>  // strnlen
 #  include <string>    // std::string
 #  include <utility>   // std::exchange
+#  if 17 <= VULKAN_HPP_CPP_VERSION
+#    include <string_view>
+#  endif
+#  if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )
+#    include <tuple>   // std::tie
+#    include <vector>  // std::vector
+#  endif
+#  if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
+#    include <compare>
+#  endif
+#  if !defined( VULKAN_HPP_NO_EXCEPTIONS )
+#    include <system_error>  // std::is_error_code_enum
+#  endif
+#  if defined( VULKAN_HPP_SUPPORT_SPAN )
+#    include <span>
+#  endif
 #endif
 #include <vulkan/vulkan.h>
-
-#if 17 <= VULKAN_HPP_CPP_VERSION && !( defined( VULKAN_HPP_ENABLE_STD_MODULE ) && defined( VULKAN_HPP_STD_MODULE ) )
-#  include <string_view>
-#endif
-
-#if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE ) && !( defined( VULKAN_HPP_ENABLE_STD_MODULE ) && defined( VULKAN_HPP_STD_MODULE ) )
-#  include <tuple>   // std::tie
-#  include <vector>  // std::vector
-#endif
-
-#if !defined( VULKAN_HPP_NO_EXCEPTIONS ) && !( defined( VULKAN_HPP_ENABLE_STD_MODULE ) && defined( VULKAN_HPP_STD_MODULE ) )
-#  include <system_error>  // std::is_error_code_enum
-#endif
-
-#if ( VULKAN_HPP_ASSERT == assert )
-#  include <cassert>
-#endif
 
 #if VULKAN_HPP_ENABLE_DYNAMIC_LOADER_TOOL == 1
 #  if defined( __unix__ ) || defined( __APPLE__ ) || defined( __QNX__ ) || defined( __Fuchsia__ )
@@ -55,15 +55,7 @@ extern "C" __declspec( dllimport ) FARPROC __stdcall GetProcAddress( HINSTANCE h
 #  endif
 #endif
 
-#if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR ) && !( defined( VULKAN_HPP_ENABLE_STD_MODULE ) && defined( VULKAN_HPP_STD_MODULE ) )
-#  include <compare>
-#endif
-
-#if defined( VULKAN_HPP_SUPPORT_SPAN ) && !( defined( VULKAN_HPP_ENABLE_STD_MODULE ) && defined( VULKAN_HPP_STD_MODULE ) )
-#  include <span>
-#endif
-
-static_assert( VK_HEADER_VERSION == 312, "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION == 313, "Wrong VK_HEADER_VERSION!" );
 
 // <tuple> includes <sys/sysmacros.h> through some other header
 // this results in major(x) being resolved to gnu_dev_major(x)
@@ -6112,6 +6104,13 @@ namespace VULKAN_HPP_NAMESPACE
         return ::vkCmdBindDescriptorBufferEmbeddedSamplers2EXT( commandBuffer, pBindDescriptorBufferEmbeddedSamplersInfo );
       }
 
+      //=== VK_QCOM_tile_memory_heap ===
+
+      void vkCmdBindTileMemoryQCOM( VkCommandBuffer commandBuffer, const VkTileMemoryBindInfoQCOM * pTileMemoryBindInfo ) const VULKAN_HPP_NOEXCEPT
+      {
+        return ::vkCmdBindTileMemoryQCOM( commandBuffer, pTileMemoryBindInfo );
+      }
+
       //=== VK_NV_external_compute_queue ===
 
       VkResult vkCreateExternalComputeQueueNV( VkDevice                                   device,
@@ -8625,8 +8624,10 @@ namespace VULKAN_HPP_NAMESPACE
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
   //=== VK_NV_displacement_micromap ===
+  VULKAN_HPP_DEPRECATED( "The VK_NV_displacement_micromap extension has been deprecated by VK_NV_cluster_acceleration_structure." )
   VULKAN_HPP_CONSTEXPR_INLINE auto NVDisplacementMicromapExtensionName = VK_NV_DISPLACEMENT_MICROMAP_EXTENSION_NAME;
-  VULKAN_HPP_CONSTEXPR_INLINE auto NVDisplacementMicromapSpecVersion   = VK_NV_DISPLACEMENT_MICROMAP_SPEC_VERSION;
+  VULKAN_HPP_DEPRECATED( "The VK_NV_displacement_micromap extension has been deprecated by VK_NV_cluster_acceleration_structure." )
+  VULKAN_HPP_CONSTEXPR_INLINE auto NVDisplacementMicromapSpecVersion = VK_NV_DISPLACEMENT_MICROMAP_SPEC_VERSION;
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
   //=== VK_EXT_load_store_op_none ===
@@ -8932,6 +8933,10 @@ namespace VULKAN_HPP_NAMESPACE
   //=== VK_NV_descriptor_pool_overallocation ===
   VULKAN_HPP_CONSTEXPR_INLINE auto NVDescriptorPoolOverallocationExtensionName = VK_NV_DESCRIPTOR_POOL_OVERALLOCATION_EXTENSION_NAME;
   VULKAN_HPP_CONSTEXPR_INLINE auto NVDescriptorPoolOverallocationSpecVersion   = VK_NV_DESCRIPTOR_POOL_OVERALLOCATION_SPEC_VERSION;
+
+  //=== VK_QCOM_tile_memory_heap ===
+  VULKAN_HPP_CONSTEXPR_INLINE auto QCOMTileMemoryHeapExtensionName = VK_QCOM_TILE_MEMORY_HEAP_EXTENSION_NAME;
+  VULKAN_HPP_CONSTEXPR_INLINE auto QCOMTileMemoryHeapSpecVersion   = VK_QCOM_TILE_MEMORY_HEAP_SPEC_VERSION;
 
   //=== VK_NV_display_stereo ===
   VULKAN_HPP_CONSTEXPR_INLINE auto NVDisplayStereoExtensionName = VK_NV_DISPLAY_STEREO_EXTENSION_NAME;
@@ -17376,6 +17381,79 @@ namespace VULKAN_HPP_NAMESPACE
     };
   };
 
+  //=== VK_QCOM_tile_memory_heap ===
+  template <>
+  struct StructExtends<PhysicalDeviceTileMemoryHeapFeaturesQCOM, PhysicalDeviceFeatures2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<PhysicalDeviceTileMemoryHeapFeaturesQCOM, DeviceCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<PhysicalDeviceTileMemoryHeapPropertiesQCOM, PhysicalDeviceProperties2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<TileMemoryRequirementsQCOM, MemoryRequirements2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<TileMemoryBindInfoQCOM, CommandBufferInheritanceInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<TileMemorySizeInfoQCOM, RenderPassCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<TileMemorySizeInfoQCOM, RenderPassCreateInfo2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<TileMemorySizeInfoQCOM, RenderingInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
   //=== VK_NV_display_stereo ===
   template <>
   struct StructExtends<DisplaySurfaceStereoCreateInfoNV, DisplaySurfaceCreateInfoKHR>
@@ -19484,6 +19562,9 @@ namespace VULKAN_HPP_NAMESPACE
       PFN_vkCmdSetDescriptorBufferOffsets2EXT           vkCmdSetDescriptorBufferOffsets2EXT           = 0;
       PFN_vkCmdBindDescriptorBufferEmbeddedSamplers2EXT vkCmdBindDescriptorBufferEmbeddedSamplers2EXT = 0;
 
+      //=== VK_QCOM_tile_memory_heap ===
+      PFN_vkCmdBindTileMemoryQCOM vkCmdBindTileMemoryQCOM = 0;
+
       //=== VK_NV_external_compute_queue ===
       PFN_vkCreateExternalComputeQueueNV  vkCreateExternalComputeQueueNV  = 0;
       PFN_vkDestroyExternalComputeQueueNV vkDestroyExternalComputeQueueNV = 0;
@@ -21033,6 +21114,9 @@ namespace VULKAN_HPP_NAMESPACE
         vkCmdBindDescriptorBufferEmbeddedSamplers2EXT =
           PFN_vkCmdBindDescriptorBufferEmbeddedSamplers2EXT( vkGetInstanceProcAddr( instance, "vkCmdBindDescriptorBufferEmbeddedSamplers2EXT" ) );
 
+        //=== VK_QCOM_tile_memory_heap ===
+        vkCmdBindTileMemoryQCOM = PFN_vkCmdBindTileMemoryQCOM( vkGetInstanceProcAddr( instance, "vkCmdBindTileMemoryQCOM" ) );
+
         //=== VK_NV_external_compute_queue ===
         vkCreateExternalComputeQueueNV  = PFN_vkCreateExternalComputeQueueNV( vkGetInstanceProcAddr( instance, "vkCreateExternalComputeQueueNV" ) );
         vkDestroyExternalComputeQueueNV = PFN_vkDestroyExternalComputeQueueNV( vkGetInstanceProcAddr( instance, "vkDestroyExternalComputeQueueNV" ) );
@@ -22218,6 +22302,9 @@ namespace VULKAN_HPP_NAMESPACE
         vkCmdSetDescriptorBufferOffsets2EXT = PFN_vkCmdSetDescriptorBufferOffsets2EXT( vkGetDeviceProcAddr( device, "vkCmdSetDescriptorBufferOffsets2EXT" ) );
         vkCmdBindDescriptorBufferEmbeddedSamplers2EXT =
           PFN_vkCmdBindDescriptorBufferEmbeddedSamplers2EXT( vkGetDeviceProcAddr( device, "vkCmdBindDescriptorBufferEmbeddedSamplers2EXT" ) );
+
+        //=== VK_QCOM_tile_memory_heap ===
+        vkCmdBindTileMemoryQCOM = PFN_vkCmdBindTileMemoryQCOM( vkGetDeviceProcAddr( device, "vkCmdBindTileMemoryQCOM" ) );
 
         //=== VK_NV_external_compute_queue ===
         vkCreateExternalComputeQueueNV  = PFN_vkCreateExternalComputeQueueNV( vkGetDeviceProcAddr( device, "vkCreateExternalComputeQueueNV" ) );
