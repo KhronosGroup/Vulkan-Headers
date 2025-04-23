@@ -67,7 +67,7 @@ if (VULKAN_HEADERS_ENABLE_MODULE)
         endif()
         
         # set up Vulkan-HppModule
-        add_library(Vulkan-HppModule)
+        add_library(Vulkan-HppModule OBJECT)
         add_library(Vulkan::HppModule ALIAS Vulkan-HppModule)
         target_sources(Vulkan-HppModule
             PUBLIC
