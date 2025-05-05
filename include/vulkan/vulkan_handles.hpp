@@ -1303,10 +1303,6 @@ namespace VULKAN_HPP_NAMESPACE
   struct DeviceDeviceMemoryReportCreateInfoEXT;
   struct DeviceMemoryReportCallbackDataEXT;
 
-  //=== VK_EXT_robustness2 ===
-  struct PhysicalDeviceRobustness2FeaturesEXT;
-  struct PhysicalDeviceRobustness2PropertiesEXT;
-
   //=== VK_EXT_custom_border_color ===
   struct SamplerCustomBorderColorCreateInfoEXT;
   struct PhysicalDeviceCustomBorderColorPropertiesEXT;
@@ -2058,6 +2054,12 @@ namespace VULKAN_HPP_NAMESPACE
 
   //=== VK_EXT_vertex_attribute_robustness ===
   struct PhysicalDeviceVertexAttributeRobustnessFeaturesEXT;
+
+  //=== VK_KHR_robustness2 ===
+  struct PhysicalDeviceRobustness2FeaturesKHR;
+  using PhysicalDeviceRobustness2FeaturesEXT = PhysicalDeviceRobustness2FeaturesKHR;
+  struct PhysicalDeviceRobustness2PropertiesKHR;
+  using PhysicalDeviceRobustness2PropertiesEXT = PhysicalDeviceRobustness2PropertiesKHR;
 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
   //=== VK_NV_present_metering ===
@@ -16057,12 +16059,8 @@ namespace VULKAN_HPP_NAMESPACE
 #  ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
     // wrapper function for command vkExportMetalObjectsEXT, see https://registry.khronos.org/vulkan/specs/latest/man/html/vkExportMetalObjectsEXT.html
     template <typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    VULKAN_HPP_NODISCARD VULKAN_HPP_NAMESPACE::ExportMetalObjectsInfoEXT
-                         exportMetalObjectsEXT( Dispatch const & d VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const VULKAN_HPP_NOEXCEPT;
-    // wrapper function for command vkExportMetalObjectsEXT, see https://registry.khronos.org/vulkan/specs/latest/man/html/vkExportMetalObjectsEXT.html
-    template <typename X, typename Y, typename... Z, typename Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-    VULKAN_HPP_NODISCARD VULKAN_HPP_NAMESPACE::StructureChain<X, Y, Z...>
-                         exportMetalObjectsEXT( Dispatch const & d VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const VULKAN_HPP_NOEXCEPT;
+    void exportMetalObjectsEXT( VULKAN_HPP_NAMESPACE::ExportMetalObjectsInfoEXT & metalObjectsInfo,
+                                Dispatch const & d                                VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) const VULKAN_HPP_NOEXCEPT;
 #  endif /* VULKAN_HPP_DISABLE_ENHANCED_MODE */
 #endif   /*VK_USE_PLATFORM_METAL_EXT*/
 

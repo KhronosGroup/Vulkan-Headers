@@ -2885,11 +2885,17 @@ namespace VULKAN_HPP_NAMESPACE
     class CuModuleNVX;
     class CuFunctionNVX;
 
+    //=== VK_KHR_descriptor_update_template ===
+    using DescriptorUpdateTemplateKHR = DescriptorUpdateTemplate;
+
     //=== VK_EXT_debug_utils ===
     class DebugUtilsMessengerEXT;
 
     //=== VK_KHR_acceleration_structure ===
     class AccelerationStructureKHR;
+
+    //=== VK_KHR_sampler_ycbcr_conversion ===
+    using SamplerYcbcrConversionKHR = SamplerYcbcrConversion;
 
     //=== VK_EXT_validation_cache ===
     class ValidationCacheEXT;
@@ -2905,6 +2911,9 @@ namespace VULKAN_HPP_NAMESPACE
 
     //=== VK_NV_device_generated_commands ===
     class IndirectCommandsLayoutNV;
+
+    //=== VK_EXT_private_data ===
+    using PrivateDataSlotEXT = PrivateDataSlot;
 
 #  if defined( VK_ENABLE_BETA_EXTENSIONS )
     //=== VK_NV_cuda_kernel_launch ===
@@ -5199,11 +5208,7 @@ namespace VULKAN_HPP_NAMESPACE
       //=== VK_EXT_metal_objects ===
 
       // wrapper function for command vkExportMetalObjectsEXT, see https://registry.khronos.org/vulkan/specs/latest/man/html/vkExportMetalObjectsEXT.html
-      VULKAN_HPP_NODISCARD VULKAN_HPP_NAMESPACE::ExportMetalObjectsInfoEXT exportMetalObjectsEXT() const VULKAN_HPP_NOEXCEPT;
-
-      // wrapper function for command vkExportMetalObjectsEXT, see https://registry.khronos.org/vulkan/specs/latest/man/html/vkExportMetalObjectsEXT.html
-      template <typename X, typename Y, typename... Z>
-      VULKAN_HPP_NODISCARD VULKAN_HPP_NAMESPACE::StructureChain<X, Y, Z...> exportMetalObjectsEXT() const VULKAN_HPP_NOEXCEPT;
+      void exportMetalObjectsEXT( VULKAN_HPP_NAMESPACE::ExportMetalObjectsInfoEXT & metalObjectsInfo ) const VULKAN_HPP_NOEXCEPT;
 #  endif /*VK_USE_PLATFORM_METAL_EXT*/
 
       //=== VK_EXT_descriptor_buffer ===
@@ -24503,27 +24508,11 @@ namespace VULKAN_HPP_NAMESPACE
     //=== VK_EXT_metal_objects ===
 
     // wrapper function for command vkExportMetalObjectsEXT, see https://registry.khronos.org/vulkan/specs/latest/man/html/vkExportMetalObjectsEXT.html
-    VULKAN_HPP_NODISCARD VULKAN_HPP_INLINE VULKAN_HPP_NAMESPACE::ExportMetalObjectsInfoEXT Device::exportMetalObjectsEXT() const VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_INLINE void Device::exportMetalObjectsEXT( VULKAN_HPP_NAMESPACE::ExportMetalObjectsInfoEXT & metalObjectsInfo ) const VULKAN_HPP_NOEXCEPT
     {
       VULKAN_HPP_ASSERT( getDispatcher()->vkExportMetalObjectsEXT && "Function <vkExportMetalObjectsEXT> requires <VK_EXT_metal_objects>" );
 
-      VULKAN_HPP_NAMESPACE::ExportMetalObjectsInfoEXT metalObjectsInfo;
       getDispatcher()->vkExportMetalObjectsEXT( static_cast<VkDevice>( m_device ), reinterpret_cast<VkExportMetalObjectsInfoEXT *>( &metalObjectsInfo ) );
-
-      return metalObjectsInfo;
-    }
-
-    // wrapper function for command vkExportMetalObjectsEXT, see https://registry.khronos.org/vulkan/specs/latest/man/html/vkExportMetalObjectsEXT.html
-    template <typename X, typename Y, typename... Z>
-    VULKAN_HPP_NODISCARD VULKAN_HPP_INLINE VULKAN_HPP_NAMESPACE::StructureChain<X, Y, Z...> Device::exportMetalObjectsEXT() const VULKAN_HPP_NOEXCEPT
-    {
-      VULKAN_HPP_ASSERT( getDispatcher()->vkExportMetalObjectsEXT && "Function <vkExportMetalObjectsEXT> requires <VK_EXT_metal_objects>" );
-
-      VULKAN_HPP_NAMESPACE::StructureChain<X, Y, Z...>  structureChain;
-      VULKAN_HPP_NAMESPACE::ExportMetalObjectsInfoEXT & metalObjectsInfo = structureChain.template get<VULKAN_HPP_NAMESPACE::ExportMetalObjectsInfoEXT>();
-      getDispatcher()->vkExportMetalObjectsEXT( static_cast<VkDevice>( m_device ), reinterpret_cast<VkExportMetalObjectsInfoEXT *>( &metalObjectsInfo ) );
-
-      return structureChain;
     }
 #  endif /*VK_USE_PLATFORM_METAL_EXT*/
 
