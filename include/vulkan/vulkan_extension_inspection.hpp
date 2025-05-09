@@ -481,7 +481,8 @@ namespace VULKAN_HPP_NAMESPACE
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
       "VK_NV_present_metering",
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
-      "VK_EXT_fragment_density_map_offset"
+      "VK_EXT_fragment_density_map_offset",
+      "VK_EXT_zero_initialize_device_memory"
     };
     return deviceExtensions;
   }
@@ -2608,7 +2609,13 @@ namespace VULKAN_HPP_NAMESPACE
           { "VK_VERSION_1_3",
             { {
               "VK_EXT_fragment_density_map",
-            } } } } }
+            } } } } },
+      { "VK_EXT_zero_initialize_device_memory",
+        { { "VK_VERSION_1_0",
+            { {
+              "VK_KHR_get_physical_device_properties2",
+            } } },
+          { "VK_VERSION_1_1", { {} } } } }
     };
     auto depIt = dependencies.find( extension );
     return ( depIt != dependencies.end() ) ? depIt->second : noDependencies;
@@ -3507,7 +3514,7 @@ namespace VULKAN_HPP_NAMESPACE
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
         || ( extension == "VK_NV_present_metering" )
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
-        || ( extension == "VK_EXT_fragment_density_map_offset" );
+        || ( extension == "VK_EXT_fragment_density_map_offset" ) || ( extension == "VK_EXT_zero_initialize_device_memory" );
   }
 
   VULKAN_HPP_INLINE VULKAN_HPP_CONSTEXPR_20 bool isInstanceExtension( std::string const & extension )

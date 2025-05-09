@@ -6840,7 +6840,6 @@ namespace VULKAN_HPP_NAMESPACE
       case VULKAN_HPP_NAMESPACE::Format::eD16UnormS8Uint:
       case VULKAN_HPP_NAMESPACE::Format::eD24UnormS8Uint:
       case VULKAN_HPP_NAMESPACE::Format::eD32SfloatS8Uint: return true;
-
       default: return false;
     }
   }
@@ -6854,7 +6853,6 @@ namespace VULKAN_HPP_NAMESPACE
       case VULKAN_HPP_NAMESPACE::Format::eD16UnormS8Uint:
       case VULKAN_HPP_NAMESPACE::Format::eD24UnormS8Uint:
       case VULKAN_HPP_NAMESPACE::Format::eD32SfloatS8Uint: return true;
-
       default: return false;
     }
   }
