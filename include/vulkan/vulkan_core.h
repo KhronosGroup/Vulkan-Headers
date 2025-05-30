@@ -69,7 +69,7 @@ extern "C" {
 #define VK_API_VERSION_1_0 VK_MAKE_API_VERSION(0, 1, 0, 0)// Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 315
+#define VK_HEADER_VERSION 316
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 4, VK_HEADER_VERSION)
@@ -1248,6 +1248,7 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_MEMORY_GET_METAL_HANDLE_INFO_EXT = 1000602002,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_KHR = 1000421000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_ROBUSTNESS_FEATURES_EXT = 1000608000,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FORMAT_PACK_FEATURES_ARM = 1000609000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_KHR = 1000286000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_PROPERTIES_KHR = 1000286001,
 #ifdef VK_ENABLE_BETA_EXTENSIONS
@@ -1898,6 +1899,20 @@ typedef enum VkFormat {
     VK_FORMAT_PVRTC2_2BPP_SRGB_BLOCK_IMG = 1000054006,
     VK_FORMAT_PVRTC2_4BPP_SRGB_BLOCK_IMG = 1000054007,
     VK_FORMAT_R16G16_SFIXED5_NV = 1000464000,
+    VK_FORMAT_R10X6_UINT_PACK16_ARM = 1000609000,
+    VK_FORMAT_R10X6G10X6_UINT_2PACK16_ARM = 1000609001,
+    VK_FORMAT_R10X6G10X6B10X6A10X6_UINT_4PACK16_ARM = 1000609002,
+    VK_FORMAT_R12X4_UINT_PACK16_ARM = 1000609003,
+    VK_FORMAT_R12X4G12X4_UINT_2PACK16_ARM = 1000609004,
+    VK_FORMAT_R12X4G12X4B12X4A12X4_UINT_4PACK16_ARM = 1000609005,
+    VK_FORMAT_R14X2_UINT_PACK16_ARM = 1000609006,
+    VK_FORMAT_R14X2G14X2_UINT_2PACK16_ARM = 1000609007,
+    VK_FORMAT_R14X2G14X2B14X2A14X2_UINT_4PACK16_ARM = 1000609008,
+    VK_FORMAT_R14X2_UNORM_PACK16_ARM = 1000609009,
+    VK_FORMAT_R14X2G14X2_UNORM_2PACK16_ARM = 1000609010,
+    VK_FORMAT_R14X2G14X2B14X2A14X2_UNORM_4PACK16_ARM = 1000609011,
+    VK_FORMAT_G14X2_B14X2R14X2_2PLANE_420_UNORM_3PACK16_ARM = 1000609012,
+    VK_FORMAT_G14X2_B14X2R14X2_2PLANE_422_UNORM_3PACK16_ARM = 1000609013,
     VK_FORMAT_ASTC_4x4_SFLOAT_BLOCK_EXT = VK_FORMAT_ASTC_4x4_SFLOAT_BLOCK,
     VK_FORMAT_ASTC_5x4_SFLOAT_BLOCK_EXT = VK_FORMAT_ASTC_5x4_SFLOAT_BLOCK,
     VK_FORMAT_ASTC_5x5_SFLOAT_BLOCK_EXT = VK_FORMAT_ASTC_5x5_SFLOAT_BLOCK,
@@ -17121,98 +17136,6 @@ typedef struct VkDeviceDiagnosticsConfigCreateInfoNV {
 #define VK_QCOM_RENDER_PASS_STORE_OPS_EXTENSION_NAME "VK_QCOM_render_pass_store_ops"
 
 
-// VK_NV_cuda_kernel_launch is a preprocessor guard. Do not pass it to API calls.
-#define VK_NV_cuda_kernel_launch 1
-VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkCudaModuleNV)
-VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkCudaFunctionNV)
-#define VK_NV_CUDA_KERNEL_LAUNCH_SPEC_VERSION 2
-#define VK_NV_CUDA_KERNEL_LAUNCH_EXTENSION_NAME "VK_NV_cuda_kernel_launch"
-typedef struct VkCudaModuleCreateInfoNV {
-    VkStructureType    sType;
-    const void*        pNext;
-    size_t             dataSize;
-    const void*        pData;
-} VkCudaModuleCreateInfoNV;
-
-typedef struct VkCudaFunctionCreateInfoNV {
-    VkStructureType    sType;
-    const void*        pNext;
-    VkCudaModuleNV     module;
-    const char*        pName;
-} VkCudaFunctionCreateInfoNV;
-
-typedef struct VkCudaLaunchInfoNV {
-    VkStructureType        sType;
-    const void*            pNext;
-    VkCudaFunctionNV       function;
-    uint32_t               gridDimX;
-    uint32_t               gridDimY;
-    uint32_t               gridDimZ;
-    uint32_t               blockDimX;
-    uint32_t               blockDimY;
-    uint32_t               blockDimZ;
-    uint32_t               sharedMemBytes;
-    size_t                 paramCount;
-    const void* const *    pParams;
-    size_t                 extraCount;
-    const void* const *    pExtras;
-} VkCudaLaunchInfoNV;
-
-typedef struct VkPhysicalDeviceCudaKernelLaunchFeaturesNV {
-    VkStructureType    sType;
-    void*              pNext;
-    VkBool32           cudaKernelLaunchFeatures;
-} VkPhysicalDeviceCudaKernelLaunchFeaturesNV;
-
-typedef struct VkPhysicalDeviceCudaKernelLaunchPropertiesNV {
-    VkStructureType    sType;
-    void*              pNext;
-    uint32_t           computeCapabilityMinor;
-    uint32_t           computeCapabilityMajor;
-} VkPhysicalDeviceCudaKernelLaunchPropertiesNV;
-
-typedef VkResult (VKAPI_PTR *PFN_vkCreateCudaModuleNV)(VkDevice device, const VkCudaModuleCreateInfoNV* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkCudaModuleNV* pModule);
-typedef VkResult (VKAPI_PTR *PFN_vkGetCudaModuleCacheNV)(VkDevice device, VkCudaModuleNV module, size_t* pCacheSize, void* pCacheData);
-typedef VkResult (VKAPI_PTR *PFN_vkCreateCudaFunctionNV)(VkDevice device, const VkCudaFunctionCreateInfoNV* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkCudaFunctionNV* pFunction);
-typedef void (VKAPI_PTR *PFN_vkDestroyCudaModuleNV)(VkDevice device, VkCudaModuleNV module, const VkAllocationCallbacks* pAllocator);
-typedef void (VKAPI_PTR *PFN_vkDestroyCudaFunctionNV)(VkDevice device, VkCudaFunctionNV function, const VkAllocationCallbacks* pAllocator);
-typedef void (VKAPI_PTR *PFN_vkCmdCudaLaunchKernelNV)(VkCommandBuffer commandBuffer, const VkCudaLaunchInfoNV* pLaunchInfo);
-
-#ifndef VK_NO_PROTOTYPES
-VKAPI_ATTR VkResult VKAPI_CALL vkCreateCudaModuleNV(
-    VkDevice                                    device,
-    const VkCudaModuleCreateInfoNV*             pCreateInfo,
-    const VkAllocationCallbacks*                pAllocator,
-    VkCudaModuleNV*                             pModule);
-
-VKAPI_ATTR VkResult VKAPI_CALL vkGetCudaModuleCacheNV(
-    VkDevice                                    device,
-    VkCudaModuleNV                              module,
-    size_t*                                     pCacheSize,
-    void*                                       pCacheData);
-
-VKAPI_ATTR VkResult VKAPI_CALL vkCreateCudaFunctionNV(
-    VkDevice                                    device,
-    const VkCudaFunctionCreateInfoNV*           pCreateInfo,
-    const VkAllocationCallbacks*                pAllocator,
-    VkCudaFunctionNV*                           pFunction);
-
-VKAPI_ATTR void VKAPI_CALL vkDestroyCudaModuleNV(
-    VkDevice                                    device,
-    VkCudaModuleNV                              module,
-    const VkAllocationCallbacks*                pAllocator);
-
-VKAPI_ATTR void VKAPI_CALL vkDestroyCudaFunctionNV(
-    VkDevice                                    device,
-    VkCudaFunctionNV                            function,
-    const VkAllocationCallbacks*                pAllocator);
-
-VKAPI_ATTR void VKAPI_CALL vkCmdCudaLaunchKernelNV(
-    VkCommandBuffer                             commandBuffer,
-    const VkCudaLaunchInfoNV*                   pLaunchInfo);
-#endif
-
-
 // VK_QCOM_tile_shading is a preprocessor guard. Do not pass it to API calls.
 #define VK_QCOM_tile_shading 1
 #define VK_QCOM_TILE_SHADING_SPEC_VERSION 1
@@ -17274,13 +17197,14 @@ typedef struct VkDispatchTileInfoQCOM {
     const void*        pNext;
 } VkDispatchTileInfoQCOM;
 
-typedef void (VKAPI_PTR *PFN_vkCmdDispatchTileQCOM)(VkCommandBuffer commandBuffer);
+typedef void (VKAPI_PTR *PFN_vkCmdDispatchTileQCOM)(VkCommandBuffer commandBuffer, const VkDispatchTileInfoQCOM* pDispatchTileInfo);
 typedef void (VKAPI_PTR *PFN_vkCmdBeginPerTileExecutionQCOM)(VkCommandBuffer commandBuffer, const VkPerTileBeginInfoQCOM* pPerTileBeginInfo);
 typedef void (VKAPI_PTR *PFN_vkCmdEndPerTileExecutionQCOM)(VkCommandBuffer commandBuffer, const VkPerTileEndInfoQCOM* pPerTileEndInfo);
 
 #ifndef VK_NO_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkCmdDispatchTileQCOM(
-    VkCommandBuffer                             commandBuffer);
+    VkCommandBuffer                             commandBuffer,
+    const VkDispatchTileInfoQCOM*               pDispatchTileInfo);
 
 VKAPI_ATTR void VKAPI_CALL vkCmdBeginPerTileExecutionQCOM(
     VkCommandBuffer                             commandBuffer,
@@ -21606,6 +21530,18 @@ typedef struct VkPhysicalDeviceVertexAttributeRobustnessFeaturesEXT {
     void*              pNext;
     VkBool32           vertexAttributeRobustness;
 } VkPhysicalDeviceVertexAttributeRobustnessFeaturesEXT;
+
+
+
+// VK_ARM_format_pack is a preprocessor guard. Do not pass it to API calls.
+#define VK_ARM_format_pack 1
+#define VK_ARM_FORMAT_PACK_SPEC_VERSION   1
+#define VK_ARM_FORMAT_PACK_EXTENSION_NAME "VK_ARM_format_pack"
+typedef struct VkPhysicalDeviceFormatPackFeaturesARM {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           formatPack;
+} VkPhysicalDeviceFormatPackFeaturesARM;
 
 
 
