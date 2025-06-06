@@ -57,7 +57,7 @@ extern "C" __declspec( dllimport ) FARPROC __stdcall GetProcAddress( HINSTANCE h
 #endif
 
 
-static_assert( VK_HEADER_VERSION ==  316, "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION ==  317, "Wrong VK_HEADER_VERSION!" );
 
 // <tuple> includes <sys/sysmacros.h> through some other header
 // this results in major(x) being resolved to gnu_dev_major(x)
@@ -5320,6 +5320,74 @@ VULKAN_HPP_INLINE void swap( UniqueHandle<Type, Dispatch> & lhs, UniqueHandle<Ty
       return ::vkCmdSetCoverageReductionModeNV( commandBuffer, coverageReductionMode );
     }
 
+  //=== VK_ARM_tensors ===
+
+
+    VkResult vkCreateTensorARM( VkDevice device, const VkTensorCreateInfoARM * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkTensorARM * pTensor ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkCreateTensorARM( device, pCreateInfo, pAllocator, pTensor );
+    }
+
+
+    void vkDestroyTensorARM( VkDevice device, VkTensorARM tensor, const VkAllocationCallbacks * pAllocator ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkDestroyTensorARM( device, tensor, pAllocator );
+    }
+
+
+    VkResult vkCreateTensorViewARM( VkDevice device, const VkTensorViewCreateInfoARM * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkTensorViewARM * pView ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkCreateTensorViewARM( device, pCreateInfo, pAllocator, pView );
+    }
+
+
+    void vkDestroyTensorViewARM( VkDevice device, VkTensorViewARM tensorView, const VkAllocationCallbacks * pAllocator ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkDestroyTensorViewARM( device, tensorView, pAllocator );
+    }
+
+
+    void vkGetTensorMemoryRequirementsARM( VkDevice device, const VkTensorMemoryRequirementsInfoARM * pInfo, VkMemoryRequirements2 * pMemoryRequirements ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkGetTensorMemoryRequirementsARM( device, pInfo, pMemoryRequirements );
+    }
+
+
+    VkResult vkBindTensorMemoryARM( VkDevice device, uint32_t bindInfoCount, const VkBindTensorMemoryInfoARM * pBindInfos ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkBindTensorMemoryARM( device, bindInfoCount, pBindInfos );
+    }
+
+
+    void vkGetDeviceTensorMemoryRequirementsARM( VkDevice device, const VkDeviceTensorMemoryRequirementsARM * pInfo, VkMemoryRequirements2 * pMemoryRequirements ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkGetDeviceTensorMemoryRequirementsARM( device, pInfo, pMemoryRequirements );
+    }
+
+
+    void vkCmdCopyTensorARM( VkCommandBuffer commandBuffer, const VkCopyTensorInfoARM * pCopyTensorInfo ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkCmdCopyTensorARM( commandBuffer, pCopyTensorInfo );
+    }
+
+
+    void vkGetPhysicalDeviceExternalTensorPropertiesARM( VkPhysicalDevice physicalDevice, const VkPhysicalDeviceExternalTensorInfoARM * pExternalTensorInfo, VkExternalTensorPropertiesARM * pExternalTensorProperties ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkGetPhysicalDeviceExternalTensorPropertiesARM( physicalDevice, pExternalTensorInfo, pExternalTensorProperties );
+    }
+
+
+    VkResult vkGetTensorOpaqueCaptureDescriptorDataARM( VkDevice device, const VkTensorCaptureDescriptorDataInfoARM * pInfo, void * pData ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkGetTensorOpaqueCaptureDescriptorDataARM( device, pInfo, pData );
+    }
+
+
+    VkResult vkGetTensorViewOpaqueCaptureDescriptorDataARM( VkDevice device, const VkTensorViewCaptureDescriptorDataInfoARM * pInfo, void * pData ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkGetTensorViewOpaqueCaptureDescriptorDataARM( device, pInfo, pData );
+    }
+
   //=== VK_EXT_shader_module_identifier ===
 
 
@@ -5398,6 +5466,14 @@ VULKAN_HPP_INLINE void swap( UniqueHandle<Type, Dispatch> & lhs, UniqueHandle<Ty
     void vkAntiLagUpdateAMD( VkDevice device, const VkAntiLagDataAMD * pData ) const VULKAN_HPP_NOEXCEPT
     {
       return ::vkAntiLagUpdateAMD( device, pData );
+    }
+
+  //=== VK_KHR_present_wait2 ===
+
+
+    VkResult vkWaitForPresent2KHR( VkDevice device, VkSwapchainKHR swapchain, const VkPresentWait2InfoKHR * pPresentWait2Info ) const VULKAN_HPP_NOEXCEPT
+    {
+      return ::vkWaitForPresent2KHR( device, swapchain, pPresentWait2Info );
     }
 
   //=== VK_EXT_shader_object ===
@@ -6712,6 +6788,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   //=== VK_KHR_video_decode_av1 ===
   VULKAN_HPP_CONSTEXPR_INLINE uint32_t MaxVideoAv1ReferencesPerFrameKHR = VK_MAX_VIDEO_AV1_REFERENCES_PER_FRAME_KHR;
+
+  //=== VK_KHR_video_decode_vp9 ===
+  VULKAN_HPP_CONSTEXPR_INLINE uint32_t MaxVideoVp9ReferencesPerFrameKHR = VK_MAX_VIDEO_VP9_REFERENCES_PER_FRAME_KHR;
 
   //=== VK_NV_partitioned_acceleration_structure ===
   VULKAN_HPP_CONSTEXPR_INLINE uint32_t PartitionedAccelerationStructurePartitionIndexGlobalNV = VK_PARTITIONED_ACCELERATION_STRUCTURE_PARTITION_INDEX_GLOBAL_NV;
@@ -8171,6 +8250,10 @@ VULKAN_HPP_CONSTEXPR_INLINE auto EXTSubpassMergeFeedbackSpecVersion = VK_EXT_SUB
 VULKAN_HPP_CONSTEXPR_INLINE auto LUNARGDirectDriverLoadingExtensionName = VK_LUNARG_DIRECT_DRIVER_LOADING_EXTENSION_NAME;
 VULKAN_HPP_CONSTEXPR_INLINE auto LUNARGDirectDriverLoadingSpecVersion = VK_LUNARG_DIRECT_DRIVER_LOADING_SPEC_VERSION;
 
+  //=== VK_ARM_tensors ===
+VULKAN_HPP_CONSTEXPR_INLINE auto ARMTensorsExtensionName = VK_ARM_TENSORS_EXTENSION_NAME;
+VULKAN_HPP_CONSTEXPR_INLINE auto ARMTensorsSpecVersion = VK_ARM_TENSORS_SPEC_VERSION;
+
   //=== VK_EXT_shader_module_identifier ===
 VULKAN_HPP_CONSTEXPR_INLINE auto EXTShaderModuleIdentifierExtensionName = VK_EXT_SHADER_MODULE_IDENTIFIER_EXTENSION_NAME;
 VULKAN_HPP_CONSTEXPR_INLINE auto EXTShaderModuleIdentifierSpecVersion = VK_EXT_SHADER_MODULE_IDENTIFIER_SPEC_VERSION;
@@ -8204,6 +8287,14 @@ VULKAN_HPP_CONSTEXPR_INLINE auto KHRMaintenance5SpecVersion = VK_KHR_MAINTENANCE
   //=== VK_AMD_anti_lag ===
 VULKAN_HPP_CONSTEXPR_INLINE auto AMDAntiLagExtensionName = VK_AMD_ANTI_LAG_EXTENSION_NAME;
 VULKAN_HPP_CONSTEXPR_INLINE auto AMDAntiLagSpecVersion = VK_AMD_ANTI_LAG_SPEC_VERSION;
+
+  //=== VK_KHR_present_id2 ===
+VULKAN_HPP_CONSTEXPR_INLINE auto KHRPresentId2ExtensionName = VK_KHR_PRESENT_ID_2_EXTENSION_NAME;
+VULKAN_HPP_CONSTEXPR_INLINE auto KHRPresentId2SpecVersion = VK_KHR_PRESENT_ID_2_SPEC_VERSION;
+
+  //=== VK_KHR_present_wait2 ===
+VULKAN_HPP_CONSTEXPR_INLINE auto KHRPresentWait2ExtensionName = VK_KHR_PRESENT_WAIT_2_EXTENSION_NAME;
+VULKAN_HPP_CONSTEXPR_INLINE auto KHRPresentWait2SpecVersion = VK_KHR_PRESENT_WAIT_2_SPEC_VERSION;
 
   //=== VK_KHR_ray_tracing_position_fetch ===
 VULKAN_HPP_CONSTEXPR_INLINE auto KHRRayTracingPositionFetchExtensionName = VK_KHR_RAY_TRACING_POSITION_FETCH_EXTENSION_NAME;
@@ -8289,6 +8380,10 @@ VULKAN_HPP_CONSTEXPR_INLINE auto KHRVideoDecodeAv1SpecVersion = VK_KHR_VIDEO_DEC
 VULKAN_HPP_CONSTEXPR_INLINE auto KHRVideoEncodeAv1ExtensionName = VK_KHR_VIDEO_ENCODE_AV1_EXTENSION_NAME;
 VULKAN_HPP_CONSTEXPR_INLINE auto KHRVideoEncodeAv1SpecVersion = VK_KHR_VIDEO_ENCODE_AV1_SPEC_VERSION;
 
+  //=== VK_KHR_video_decode_vp9 ===
+VULKAN_HPP_CONSTEXPR_INLINE auto KHRVideoDecodeVp9ExtensionName = VK_KHR_VIDEO_DECODE_VP9_EXTENSION_NAME;
+VULKAN_HPP_CONSTEXPR_INLINE auto KHRVideoDecodeVp9SpecVersion = VK_KHR_VIDEO_DECODE_VP9_SPEC_VERSION;
+
   //=== VK_KHR_video_maintenance1 ===
 VULKAN_HPP_CONSTEXPR_INLINE auto KHRVideoMaintenance1ExtensionName = VK_KHR_VIDEO_MAINTENANCE_1_EXTENSION_NAME;
 VULKAN_HPP_CONSTEXPR_INLINE auto KHRVideoMaintenance1SpecVersion = VK_KHR_VIDEO_MAINTENANCE_1_SPEC_VERSION;
@@ -8324,6 +8419,10 @@ VULKAN_HPP_CONSTEXPR_INLINE auto KHRVertexAttributeDivisorSpecVersion = VK_KHR_V
   //=== VK_KHR_load_store_op_none ===
 VULKAN_HPP_CONSTEXPR_INLINE auto KHRLoadStoreOpNoneExtensionName = VK_KHR_LOAD_STORE_OP_NONE_EXTENSION_NAME;
 VULKAN_HPP_CONSTEXPR_INLINE auto KHRLoadStoreOpNoneSpecVersion = VK_KHR_LOAD_STORE_OP_NONE_SPEC_VERSION;
+
+  //=== VK_KHR_unified_image_layouts ===
+VULKAN_HPP_CONSTEXPR_INLINE auto KHRUnifiedImageLayoutsExtensionName = VK_KHR_UNIFIED_IMAGE_LAYOUTS_EXTENSION_NAME;
+VULKAN_HPP_CONSTEXPR_INLINE auto KHRUnifiedImageLayoutsSpecVersion = VK_KHR_UNIFIED_IMAGE_LAYOUTS_SPEC_VERSION;
 
   //=== VK_KHR_shader_float_controls2 ===
 VULKAN_HPP_CONSTEXPR_INLINE auto KHRShaderFloatControls2ExtensionName = VK_KHR_SHADER_FLOAT_CONTROLS_2_EXTENSION_NAME;
@@ -8403,6 +8502,10 @@ VULKAN_HPP_CONSTEXPR_INLINE auto NVShaderAtomicFloat16VectorSpecVersion = VK_NV_
 VULKAN_HPP_CONSTEXPR_INLINE auto EXTShaderReplicatedCompositesExtensionName = VK_EXT_SHADER_REPLICATED_COMPOSITES_EXTENSION_NAME;
 VULKAN_HPP_CONSTEXPR_INLINE auto EXTShaderReplicatedCompositesSpecVersion = VK_EXT_SHADER_REPLICATED_COMPOSITES_SPEC_VERSION;
 
+  //=== VK_EXT_shader_float8 ===
+VULKAN_HPP_CONSTEXPR_INLINE auto EXTShaderFloat8ExtensionName = VK_EXT_SHADER_FLOAT8_EXTENSION_NAME;
+VULKAN_HPP_CONSTEXPR_INLINE auto EXTShaderFloat8SpecVersion = VK_EXT_SHADER_FLOAT8_SPEC_VERSION;
+
   //=== VK_NV_ray_tracing_validation ===
 VULKAN_HPP_CONSTEXPR_INLINE auto NVRayTracingValidationExtensionName = VK_NV_RAY_TRACING_VALIDATION_EXTENSION_NAME;
 VULKAN_HPP_CONSTEXPR_INLINE auto NVRayTracingValidationSpecVersion = VK_NV_RAY_TRACING_VALIDATION_SPEC_VERSION;
@@ -8430,6 +8533,10 @@ VULKAN_HPP_CONSTEXPR_INLINE auto MESAImageAlignmentControlSpecVersion = VK_MESA_
   //=== VK_EXT_depth_clamp_control ===
 VULKAN_HPP_CONSTEXPR_INLINE auto EXTDepthClampControlExtensionName = VK_EXT_DEPTH_CLAMP_CONTROL_EXTENSION_NAME;
 VULKAN_HPP_CONSTEXPR_INLINE auto EXTDepthClampControlSpecVersion = VK_EXT_DEPTH_CLAMP_CONTROL_SPEC_VERSION;
+
+  //=== VK_KHR_maintenance9 ===
+VULKAN_HPP_CONSTEXPR_INLINE auto KHRMaintenance9ExtensionName = VK_KHR_MAINTENANCE_9_EXTENSION_NAME;
+VULKAN_HPP_CONSTEXPR_INLINE auto KHRMaintenance9SpecVersion = VK_KHR_MAINTENANCE_9_SPEC_VERSION;
 
   //=== VK_KHR_video_maintenance2 ===
 VULKAN_HPP_CONSTEXPR_INLINE auto KHRVideoMaintenance2ExtensionName = VK_KHR_VIDEO_MAINTENANCE_2_EXTENSION_NAME;
@@ -9358,6 +9465,8 @@ namespace VULKAN_HPP_NAMESPACE
   template <> struct StructExtends<OpaqueCaptureDescriptorDataCreateInfoEXT, SamplerCreateInfo>{ enum { value = true }; };
   template <> struct StructExtends<OpaqueCaptureDescriptorDataCreateInfoEXT, AccelerationStructureCreateInfoKHR>{ enum { value = true }; };
   template <> struct StructExtends<OpaqueCaptureDescriptorDataCreateInfoEXT, AccelerationStructureCreateInfoNV>{ enum { value = true }; };
+  template <> struct StructExtends<OpaqueCaptureDescriptorDataCreateInfoEXT, TensorCreateInfoARM>{ enum { value = true }; };
+  template <> struct StructExtends<OpaqueCaptureDescriptorDataCreateInfoEXT, TensorViewCreateInfoARM>{ enum { value = true }; };
 
   //=== VK_EXT_graphics_pipeline_library ===
   template <> struct StructExtends<PhysicalDeviceGraphicsPipelineLibraryFeaturesEXT, PhysicalDeviceFeatures2>{ enum { value = true }; };
@@ -9670,6 +9779,25 @@ namespace VULKAN_HPP_NAMESPACE
   //=== VK_LUNARG_direct_driver_loading ===
   template <> struct StructExtends<DirectDriverLoadingListLUNARG, InstanceCreateInfo>{ enum { value = true }; };
 
+  //=== VK_ARM_tensors ===
+  template <> struct StructExtends<WriteDescriptorSetTensorARM, WriteDescriptorSet>{ enum { value = true }; };
+  template <> struct StructExtends<TensorFormatPropertiesARM, FormatProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceTensorPropertiesARM, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<TensorMemoryBarrierARM, DependencyInfo>{ enum { value = true }; };
+  template <> struct StructExtends<TensorDependencyInfoARM, DependencyInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceTensorFeaturesARM, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceTensorFeaturesARM, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<MemoryDedicatedAllocateInfoTensorARM, MemoryAllocateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<ExternalMemoryTensorCreateInfoARM, TensorCreateInfoARM>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceDescriptorBufferTensorFeaturesARM, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceDescriptorBufferTensorFeaturesARM, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceDescriptorBufferTensorPropertiesARM, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<DescriptorGetTensorInfoARM, DescriptorGetInfoEXT>{ enum { value = true }; };
+  template <> struct StructExtends<FrameBoundaryTensorsARM, SubmitInfo>{ enum { value = true }; };
+  template <> struct StructExtends<FrameBoundaryTensorsARM, SubmitInfo2>{ enum { value = true }; };
+  template <> struct StructExtends<FrameBoundaryTensorsARM, PresentInfoKHR>{ enum { value = true }; };
+  template <> struct StructExtends<FrameBoundaryTensorsARM, BindSparseInfo>{ enum { value = true }; };
+
   //=== VK_EXT_shader_module_identifier ===
   template <> struct StructExtends<PhysicalDeviceShaderModuleIdentifierFeaturesEXT, PhysicalDeviceFeatures2>{ enum { value = true }; };
   template <> struct StructExtends<PhysicalDeviceShaderModuleIdentifierFeaturesEXT, DeviceCreateInfo>{ enum { value = true }; };
@@ -9703,6 +9831,17 @@ namespace VULKAN_HPP_NAMESPACE
   //=== VK_AMD_anti_lag ===
   template <> struct StructExtends<PhysicalDeviceAntiLagFeaturesAMD, PhysicalDeviceFeatures2>{ enum { value = true }; };
   template <> struct StructExtends<PhysicalDeviceAntiLagFeaturesAMD, DeviceCreateInfo>{ enum { value = true }; };
+
+  //=== VK_KHR_present_id2 ===
+  template <> struct StructExtends<SurfaceCapabilitiesPresentId2KHR, SurfaceCapabilities2KHR>{ enum { value = true }; };
+  template <> struct StructExtends<PresentId2KHR, PresentInfoKHR>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDevicePresentId2FeaturesKHR, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDevicePresentId2FeaturesKHR, DeviceCreateInfo>{ enum { value = true }; };
+
+  //=== VK_KHR_present_wait2 ===
+  template <> struct StructExtends<SurfaceCapabilitiesPresentWait2KHR, SurfaceCapabilities2KHR>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDevicePresentWait2FeaturesKHR, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDevicePresentWait2FeaturesKHR, DeviceCreateInfo>{ enum { value = true }; };
 
   //=== VK_KHR_ray_tracing_position_fetch ===
   template <> struct StructExtends<PhysicalDeviceRayTracingPositionFetchFeaturesKHR, PhysicalDeviceFeatures2>{ enum { value = true }; };
@@ -9823,6 +9962,14 @@ namespace VULKAN_HPP_NAMESPACE
   template <> struct StructExtends<VideoEncodeAV1RateControlInfoKHR, VideoBeginCodingInfoKHR>{ enum { value = true }; };
   template <> struct StructExtends<VideoEncodeAV1RateControlLayerInfoKHR, VideoEncodeRateControlLayerInfoKHR>{ enum { value = true }; };
 
+  //=== VK_KHR_video_decode_vp9 ===
+  template <> struct StructExtends<PhysicalDeviceVideoDecodeVP9FeaturesKHR, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceVideoDecodeVP9FeaturesKHR, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<VideoDecodeVP9ProfileInfoKHR, VideoProfileInfoKHR>{ enum { value = true }; };
+  template <> struct StructExtends<VideoDecodeVP9ProfileInfoKHR, QueryPoolCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<VideoDecodeVP9CapabilitiesKHR, VideoCapabilitiesKHR>{ enum { value = true }; };
+  template <> struct StructExtends<VideoDecodeVP9PictureInfoKHR, VideoDecodeInfoKHR>{ enum { value = true }; };
+
   //=== VK_KHR_video_maintenance1 ===
   template <> struct StructExtends<PhysicalDeviceVideoMaintenance1FeaturesKHR, PhysicalDeviceFeatures2>{ enum { value = true }; };
   template <> struct StructExtends<PhysicalDeviceVideoMaintenance1FeaturesKHR, DeviceCreateInfo>{ enum { value = true }; };
@@ -9857,6 +10004,11 @@ namespace VULKAN_HPP_NAMESPACE
   //=== VK_EXT_attachment_feedback_loop_dynamic_state ===
   template <> struct StructExtends<PhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT, PhysicalDeviceFeatures2>{ enum { value = true }; };
   template <> struct StructExtends<PhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT, DeviceCreateInfo>{ enum { value = true }; };
+
+  //=== VK_KHR_unified_image_layouts ===
+  template <> struct StructExtends<PhysicalDeviceUnifiedImageLayoutsFeaturesKHR, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceUnifiedImageLayoutsFeaturesKHR, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<AttachmentFeedbackLoopInfoEXT, RenderingAttachmentInfo>{ enum { value = true }; };
 
 #if defined( VK_USE_PLATFORM_SCREEN_QNX )
   //=== VK_QNX_external_memory_screen_buffer ===
@@ -9933,6 +10085,10 @@ namespace VULKAN_HPP_NAMESPACE
   template <> struct StructExtends<PhysicalDeviceShaderReplicatedCompositesFeaturesEXT, PhysicalDeviceFeatures2>{ enum { value = true }; };
   template <> struct StructExtends<PhysicalDeviceShaderReplicatedCompositesFeaturesEXT, DeviceCreateInfo>{ enum { value = true }; };
 
+  //=== VK_EXT_shader_float8 ===
+  template <> struct StructExtends<PhysicalDeviceShaderFloat8FeaturesEXT, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceShaderFloat8FeaturesEXT, DeviceCreateInfo>{ enum { value = true }; };
+
   //=== VK_NV_ray_tracing_validation ===
   template <> struct StructExtends<PhysicalDeviceRayTracingValidationFeaturesNV, PhysicalDeviceFeatures2>{ enum { value = true }; };
   template <> struct StructExtends<PhysicalDeviceRayTracingValidationFeaturesNV, DeviceCreateInfo>{ enum { value = true }; };
@@ -9976,6 +10132,12 @@ namespace VULKAN_HPP_NAMESPACE
   template <> struct StructExtends<PhysicalDeviceDepthClampControlFeaturesEXT, PhysicalDeviceFeatures2>{ enum { value = true }; };
   template <> struct StructExtends<PhysicalDeviceDepthClampControlFeaturesEXT, DeviceCreateInfo>{ enum { value = true }; };
   template <> struct StructExtends<PipelineViewportDepthClampControlCreateInfoEXT, PipelineViewportStateCreateInfo>{ enum { value = true }; };
+
+  //=== VK_KHR_maintenance9 ===
+  template <> struct StructExtends<PhysicalDeviceMaintenance9FeaturesKHR, PhysicalDeviceFeatures2>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceMaintenance9FeaturesKHR, DeviceCreateInfo>{ enum { value = true }; };
+  template <> struct StructExtends<PhysicalDeviceMaintenance9PropertiesKHR, PhysicalDeviceProperties2>{ enum { value = true }; };
+  template <> struct StructExtends<QueueFamilyOwnershipTransferPropertiesKHR, QueueFamilyProperties2>{ enum { value = true }; };
 
   //=== VK_KHR_video_maintenance2 ===
   template <> struct StructExtends<PhysicalDeviceVideoMaintenance2FeaturesKHR, PhysicalDeviceFeatures2>{ enum { value = true }; };
@@ -11264,6 +11426,19 @@ namespace VULKAN_HPP_NAMESPACE
     PFN_vkCmdSetRepresentativeFragmentTestEnableNV vkCmdSetRepresentativeFragmentTestEnableNV = 0;
     PFN_vkCmdSetCoverageReductionModeNV vkCmdSetCoverageReductionModeNV = 0;
 
+  //=== VK_ARM_tensors ===
+    PFN_vkCreateTensorARM vkCreateTensorARM = 0;
+    PFN_vkDestroyTensorARM vkDestroyTensorARM = 0;
+    PFN_vkCreateTensorViewARM vkCreateTensorViewARM = 0;
+    PFN_vkDestroyTensorViewARM vkDestroyTensorViewARM = 0;
+    PFN_vkGetTensorMemoryRequirementsARM vkGetTensorMemoryRequirementsARM = 0;
+    PFN_vkBindTensorMemoryARM vkBindTensorMemoryARM = 0;
+    PFN_vkGetDeviceTensorMemoryRequirementsARM vkGetDeviceTensorMemoryRequirementsARM = 0;
+    PFN_vkCmdCopyTensorARM vkCmdCopyTensorARM = 0;
+    PFN_vkGetPhysicalDeviceExternalTensorPropertiesARM vkGetPhysicalDeviceExternalTensorPropertiesARM = 0;
+    PFN_vkGetTensorOpaqueCaptureDescriptorDataARM vkGetTensorOpaqueCaptureDescriptorDataARM = 0;
+    PFN_vkGetTensorViewOpaqueCaptureDescriptorDataARM vkGetTensorViewOpaqueCaptureDescriptorDataARM = 0;
+
   //=== VK_EXT_shader_module_identifier ===
     PFN_vkGetShaderModuleIdentifierEXT vkGetShaderModuleIdentifierEXT = 0;
     PFN_vkGetShaderModuleCreateInfoIdentifierEXT vkGetShaderModuleCreateInfoIdentifierEXT = 0;
@@ -11283,6 +11458,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   //=== VK_AMD_anti_lag ===
     PFN_vkAntiLagUpdateAMD vkAntiLagUpdateAMD = 0;
+
+  //=== VK_KHR_present_wait2 ===
+    PFN_vkWaitForPresent2KHR vkWaitForPresent2KHR = 0;
 
   //=== VK_EXT_shader_object ===
     PFN_vkCreateShadersEXT vkCreateShadersEXT = 0;
@@ -12552,6 +12730,19 @@ namespace VULKAN_HPP_NAMESPACE
       vkCmdSetRepresentativeFragmentTestEnableNV = PFN_vkCmdSetRepresentativeFragmentTestEnableNV( vkGetInstanceProcAddr( instance, "vkCmdSetRepresentativeFragmentTestEnableNV" ) );
       vkCmdSetCoverageReductionModeNV = PFN_vkCmdSetCoverageReductionModeNV( vkGetInstanceProcAddr( instance, "vkCmdSetCoverageReductionModeNV" ) );
 
+  //=== VK_ARM_tensors ===
+      vkCreateTensorARM = PFN_vkCreateTensorARM( vkGetInstanceProcAddr( instance, "vkCreateTensorARM" ) );
+      vkDestroyTensorARM = PFN_vkDestroyTensorARM( vkGetInstanceProcAddr( instance, "vkDestroyTensorARM" ) );
+      vkCreateTensorViewARM = PFN_vkCreateTensorViewARM( vkGetInstanceProcAddr( instance, "vkCreateTensorViewARM" ) );
+      vkDestroyTensorViewARM = PFN_vkDestroyTensorViewARM( vkGetInstanceProcAddr( instance, "vkDestroyTensorViewARM" ) );
+      vkGetTensorMemoryRequirementsARM = PFN_vkGetTensorMemoryRequirementsARM( vkGetInstanceProcAddr( instance, "vkGetTensorMemoryRequirementsARM" ) );
+      vkBindTensorMemoryARM = PFN_vkBindTensorMemoryARM( vkGetInstanceProcAddr( instance, "vkBindTensorMemoryARM" ) );
+      vkGetDeviceTensorMemoryRequirementsARM = PFN_vkGetDeviceTensorMemoryRequirementsARM( vkGetInstanceProcAddr( instance, "vkGetDeviceTensorMemoryRequirementsARM" ) );
+      vkCmdCopyTensorARM = PFN_vkCmdCopyTensorARM( vkGetInstanceProcAddr( instance, "vkCmdCopyTensorARM" ) );
+      vkGetPhysicalDeviceExternalTensorPropertiesARM = PFN_vkGetPhysicalDeviceExternalTensorPropertiesARM( vkGetInstanceProcAddr( instance, "vkGetPhysicalDeviceExternalTensorPropertiesARM" ) );
+      vkGetTensorOpaqueCaptureDescriptorDataARM = PFN_vkGetTensorOpaqueCaptureDescriptorDataARM( vkGetInstanceProcAddr( instance, "vkGetTensorOpaqueCaptureDescriptorDataARM" ) );
+      vkGetTensorViewOpaqueCaptureDescriptorDataARM = PFN_vkGetTensorViewOpaqueCaptureDescriptorDataARM( vkGetInstanceProcAddr( instance, "vkGetTensorViewOpaqueCaptureDescriptorDataARM" ) );
+
   //=== VK_EXT_shader_module_identifier ===
       vkGetShaderModuleIdentifierEXT = PFN_vkGetShaderModuleIdentifierEXT( vkGetInstanceProcAddr( instance, "vkGetShaderModuleIdentifierEXT" ) );
       vkGetShaderModuleCreateInfoIdentifierEXT = PFN_vkGetShaderModuleCreateInfoIdentifierEXT( vkGetInstanceProcAddr( instance, "vkGetShaderModuleCreateInfoIdentifierEXT" ) );
@@ -12575,6 +12766,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   //=== VK_AMD_anti_lag ===
       vkAntiLagUpdateAMD = PFN_vkAntiLagUpdateAMD( vkGetInstanceProcAddr( instance, "vkAntiLagUpdateAMD" ) );
+
+  //=== VK_KHR_present_wait2 ===
+      vkWaitForPresent2KHR = PFN_vkWaitForPresent2KHR( vkGetInstanceProcAddr( instance, "vkWaitForPresent2KHR" ) );
 
   //=== VK_EXT_shader_object ===
       vkCreateShadersEXT = PFN_vkCreateShadersEXT( vkGetInstanceProcAddr( instance, "vkCreateShadersEXT" ) );
@@ -13567,6 +13761,18 @@ namespace VULKAN_HPP_NAMESPACE
       vkCmdSetRepresentativeFragmentTestEnableNV = PFN_vkCmdSetRepresentativeFragmentTestEnableNV( vkGetDeviceProcAddr( device, "vkCmdSetRepresentativeFragmentTestEnableNV" ) );
       vkCmdSetCoverageReductionModeNV = PFN_vkCmdSetCoverageReductionModeNV( vkGetDeviceProcAddr( device, "vkCmdSetCoverageReductionModeNV" ) );
 
+  //=== VK_ARM_tensors ===
+      vkCreateTensorARM = PFN_vkCreateTensorARM( vkGetDeviceProcAddr( device, "vkCreateTensorARM" ) );
+      vkDestroyTensorARM = PFN_vkDestroyTensorARM( vkGetDeviceProcAddr( device, "vkDestroyTensorARM" ) );
+      vkCreateTensorViewARM = PFN_vkCreateTensorViewARM( vkGetDeviceProcAddr( device, "vkCreateTensorViewARM" ) );
+      vkDestroyTensorViewARM = PFN_vkDestroyTensorViewARM( vkGetDeviceProcAddr( device, "vkDestroyTensorViewARM" ) );
+      vkGetTensorMemoryRequirementsARM = PFN_vkGetTensorMemoryRequirementsARM( vkGetDeviceProcAddr( device, "vkGetTensorMemoryRequirementsARM" ) );
+      vkBindTensorMemoryARM = PFN_vkBindTensorMemoryARM( vkGetDeviceProcAddr( device, "vkBindTensorMemoryARM" ) );
+      vkGetDeviceTensorMemoryRequirementsARM = PFN_vkGetDeviceTensorMemoryRequirementsARM( vkGetDeviceProcAddr( device, "vkGetDeviceTensorMemoryRequirementsARM" ) );
+      vkCmdCopyTensorARM = PFN_vkCmdCopyTensorARM( vkGetDeviceProcAddr( device, "vkCmdCopyTensorARM" ) );
+      vkGetTensorOpaqueCaptureDescriptorDataARM = PFN_vkGetTensorOpaqueCaptureDescriptorDataARM( vkGetDeviceProcAddr( device, "vkGetTensorOpaqueCaptureDescriptorDataARM" ) );
+      vkGetTensorViewOpaqueCaptureDescriptorDataARM = PFN_vkGetTensorViewOpaqueCaptureDescriptorDataARM( vkGetDeviceProcAddr( device, "vkGetTensorViewOpaqueCaptureDescriptorDataARM" ) );
+
   //=== VK_EXT_shader_module_identifier ===
       vkGetShaderModuleIdentifierEXT = PFN_vkGetShaderModuleIdentifierEXT( vkGetDeviceProcAddr( device, "vkGetShaderModuleIdentifierEXT" ) );
       vkGetShaderModuleCreateInfoIdentifierEXT = PFN_vkGetShaderModuleCreateInfoIdentifierEXT( vkGetDeviceProcAddr( device, "vkGetShaderModuleCreateInfoIdentifierEXT" ) );
@@ -13589,6 +13795,9 @@ namespace VULKAN_HPP_NAMESPACE
 
   //=== VK_AMD_anti_lag ===
       vkAntiLagUpdateAMD = PFN_vkAntiLagUpdateAMD( vkGetDeviceProcAddr( device, "vkAntiLagUpdateAMD" ) );
+
+  //=== VK_KHR_present_wait2 ===
+      vkWaitForPresent2KHR = PFN_vkWaitForPresent2KHR( vkGetDeviceProcAddr( device, "vkWaitForPresent2KHR" ) );
 
   //=== VK_EXT_shader_object ===
       vkCreateShadersEXT = PFN_vkCreateShadersEXT( vkGetDeviceProcAddr( device, "vkCreateShadersEXT" ) );
