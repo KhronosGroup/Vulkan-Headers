@@ -486,6 +486,7 @@ namespace VULKAN_HPP_NAMESPACE
 "VK_KHR_depth_clamp_zero_one", 
 "VK_EXT_vertex_attribute_robustness", 
 "VK_ARM_format_pack", 
+"VK_VALVE_fragment_density_map_layered", 
 "VK_KHR_robustness2", 
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
 "VK_NV_present_metering", 
@@ -565,7 +566,11 @@ namespace VULKAN_HPP_NAMESPACE
 "VK_GOOGLE_surfaceless_query", 
 "VK_LUNARG_direct_driver_loading", 
 "VK_EXT_layer_settings", 
-"VK_NV_display_stereo" };
+"VK_NV_display_stereo", 
+#if defined( VK_USE_PLATFORM_OHOS )
+"VK_OHOS_surface"
+#endif /*VK_USE_PLATFORM_OHOS*/
+ };
     return instanceExtensions;
   }
 
@@ -937,6 +942,9 @@ namespace VULKAN_HPP_NAMESPACE
 { "VK_EXT_depth_clamp_control", { { "VK_VERSION_1_0", { { "VK_KHR_get_physical_device_properties2",  } } }, { "VK_VERSION_1_1", { {  } } } } }, 
 { "VK_KHR_maintenance9", { { "VK_VERSION_1_0", { { "VK_KHR_get_physical_device_properties2",  } } }, { "VK_VERSION_1_1", { {  } } } } }, 
 { "VK_KHR_video_maintenance2", { { "VK_VERSION_1_0", { { "VK_KHR_video_queue",  } } } } }, 
+#if defined( VK_USE_PLATFORM_OHOS )
+{ "VK_OHOS_surface", { { "VK_VERSION_1_0", { { "VK_KHR_surface",  } } } } }, 
+#endif /*VK_USE_PLATFORM_OHOS*/
 { "VK_HUAWEI_hdr_vivid", { { "VK_VERSION_1_0", { { "VK_EXT_hdr_metadata", "VK_KHR_get_physical_device_properties2", "VK_KHR_swapchain",  } } }, { "VK_VERSION_1_1", { { "VK_EXT_hdr_metadata", "VK_KHR_swapchain",  } } } } }, 
 { "VK_NV_cooperative_matrix2", { { "VK_VERSION_1_0", { { "VK_KHR_cooperative_matrix",  } } } } }, 
 { "VK_ARM_pipeline_opacity_micromap", { { "VK_VERSION_1_0", { { "VK_EXT_opacity_micromap",  } } } } }, 
@@ -945,6 +953,7 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VK_USE_PLATFORM_METAL_EXT*/
 { "VK_KHR_depth_clamp_zero_one", { { "VK_VERSION_1_0", { { "VK_KHR_get_physical_device_properties2",  } } }, { "VK_VERSION_1_1", { {  } } } } }, 
 { "VK_EXT_vertex_attribute_robustness", { { "VK_VERSION_1_0", { { "VK_KHR_get_physical_device_properties2",  } } }, { "VK_VERSION_1_1", { {  } } } } }, 
+{ "VK_VALVE_fragment_density_map_layered", { { "VK_VERSION_1_0", { { "VK_EXT_fragment_density_map", "VK_KHR_maintenance5",  } } }, { "VK_VERSION_1_4", { { "VK_EXT_fragment_density_map",  } } } } }, 
 { "VK_KHR_robustness2", { { "VK_VERSION_1_0", { { "VK_KHR_get_physical_device_properties2",  } } }, { "VK_VERSION_1_1", { {  } } } } }, 
 { "VK_EXT_fragment_density_map_offset", { { "VK_VERSION_1_0", { { "VK_EXT_fragment_density_map", "VK_KHR_create_renderpass2", "VK_KHR_dynamic_rendering", "VK_KHR_get_physical_device_properties2",  } } }, { "VK_VERSION_1_1", { { "VK_EXT_fragment_density_map", "VK_KHR_create_renderpass2", "VK_KHR_dynamic_rendering",  } } }, { "VK_VERSION_1_2", { { "VK_EXT_fragment_density_map", "VK_KHR_dynamic_rendering",  } } }, { "VK_VERSION_1_3", { { "VK_EXT_fragment_density_map",  } } } } }, 
 { "VK_EXT_zero_initialize_device_memory", { { "VK_VERSION_1_0", { { "VK_KHR_get_physical_device_properties2",  } } }, { "VK_VERSION_1_1", { {  } } } } } };
@@ -1695,6 +1704,7 @@ false;
  || ( extension == "VK_KHR_depth_clamp_zero_one" )
  || ( extension == "VK_EXT_vertex_attribute_robustness" )
  || ( extension == "VK_ARM_format_pack" )
+ || ( extension == "VK_VALVE_fragment_density_map_layered" )
  || ( extension == "VK_KHR_robustness2" )
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
  || ( extension == "VK_NV_present_metering" )
@@ -1773,7 +1783,11 @@ false;
  || ( extension == "VK_GOOGLE_surfaceless_query" )
  || ( extension == "VK_LUNARG_direct_driver_loading" )
  || ( extension == "VK_EXT_layer_settings" )
- || ( extension == "VK_NV_display_stereo" );
+ || ( extension == "VK_NV_display_stereo" )
+#if defined( VK_USE_PLATFORM_OHOS )
+ || ( extension == "VK_OHOS_surface" )
+#endif /*VK_USE_PLATFORM_OHOS*/
+;
   }
 
   VULKAN_HPP_INLINE VULKAN_HPP_CONSTEXPR_20 bool isObsoletedExtension( std::string const & extension )

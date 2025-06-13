@@ -975,6 +975,12 @@ using VULKAN_HPP_DEFAULT_DISPATCHER_TYPE;
   //=== VK_KHR_maintenance9 ===
   using VULKAN_HPP_NAMESPACE::DefaultVertexAttributeValueKHR;
 
+#if defined( VK_USE_PLATFORM_OHOS )
+  //=== VK_OHOS_surface ===
+  using VULKAN_HPP_NAMESPACE::SurfaceCreateFlagBitsOHOS;
+  using VULKAN_HPP_NAMESPACE::SurfaceCreateFlagsOHOS;
+#endif /*VK_USE_PLATFORM_OHOS*/
+
   //=========================
   //=== Index Type Traits ===
   //=========================
@@ -2771,6 +2777,12 @@ using VULKAN_HPP_DEFAULT_DISPATCHER_TYPE;
   using VULKAN_HPP_NAMESPACE::KHRVideoMaintenance2ExtensionName;
   using VULKAN_HPP_NAMESPACE::KHRVideoMaintenance2SpecVersion;
 
+#if defined( VK_USE_PLATFORM_OHOS )
+  //=== VK_OHOS_surface ===
+  using VULKAN_HPP_NAMESPACE::OHOSSurfaceExtensionName;
+  using VULKAN_HPP_NAMESPACE::OHOSSurfaceSpecVersion;
+#endif /*VK_USE_PLATFORM_OHOS*/
+
   //=== VK_HUAWEI_hdr_vivid ===
   using VULKAN_HPP_NAMESPACE::HUAWEIHdrVividExtensionName;
   using VULKAN_HPP_NAMESPACE::HUAWEIHdrVividSpecVersion;
@@ -2800,6 +2812,10 @@ using VULKAN_HPP_DEFAULT_DISPATCHER_TYPE;
   //=== VK_ARM_format_pack ===
   using VULKAN_HPP_NAMESPACE::ARMFormatPackExtensionName;
   using VULKAN_HPP_NAMESPACE::ARMFormatPackSpecVersion;
+
+  //=== VK_VALVE_fragment_density_map_layered ===
+  using VULKAN_HPP_NAMESPACE::VALVEFragmentDensityMapLayeredExtensionName;
+  using VULKAN_HPP_NAMESPACE::VALVEFragmentDensityMapLayeredSpecVersion;
 
   //=== VK_KHR_robustness2 ===
   using VULKAN_HPP_NAMESPACE::KHRRobustness2ExtensionName;
@@ -4943,6 +4959,12 @@ using VULKAN_HPP_DEFAULT_DISPATCHER_TYPE;
   using VULKAN_HPP_NAMESPACE::VideoDecodeH265InlineSessionParametersInfoKHR;
   using VULKAN_HPP_NAMESPACE::VideoDecodeAV1InlineSessionParametersInfoKHR;
 
+#if defined( VK_USE_PLATFORM_OHOS )
+  //=== VK_OHOS_surface ===
+  using VULKAN_HPP_NAMESPACE::OHSurfaceCreateInfoOHOS;
+  using VULKAN_HPP_NAMESPACE::SurfaceCreateInfoOHOS;
+#endif /*VK_USE_PLATFORM_OHOS*/
+
   //=== VK_HUAWEI_hdr_vivid ===
   using VULKAN_HPP_NAMESPACE::PhysicalDeviceHdrVividFeaturesHUAWEI;
   using VULKAN_HPP_NAMESPACE::HdrVividDynamicMetadataHUAWEI;
@@ -4971,6 +4993,11 @@ using VULKAN_HPP_DEFAULT_DISPATCHER_TYPE;
 
   //=== VK_ARM_format_pack ===
   using VULKAN_HPP_NAMESPACE::PhysicalDeviceFormatPackFeaturesARM;
+
+  //=== VK_VALVE_fragment_density_map_layered ===
+  using VULKAN_HPP_NAMESPACE::PhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE;
+  using VULKAN_HPP_NAMESPACE::PhysicalDeviceFragmentDensityMapLayeredPropertiesVALVE;
+  using VULKAN_HPP_NAMESPACE::PipelineFragmentDensityMapLayeredCreateInfoVALVE;
 
   //=== VK_KHR_robustness2 ===
   using VULKAN_HPP_NAMESPACE::PhysicalDeviceRobustness2FeaturesKHR;
@@ -7528,6 +7555,11 @@ export namespace std
   template <> struct hash<VULKAN_HPP_NAMESPACE::VideoDecodeH265InlineSessionParametersInfoKHR>;
   template <> struct hash<VULKAN_HPP_NAMESPACE::VideoDecodeAV1InlineSessionParametersInfoKHR>;
 
+#if defined( VK_USE_PLATFORM_OHOS )
+  //=== VK_OHOS_surface ===
+  template <> struct hash<VULKAN_HPP_NAMESPACE::OHSurfaceCreateInfoOHOS>;
+#endif /*VK_USE_PLATFORM_OHOS*/
+
   //=== VK_HUAWEI_hdr_vivid ===
   template <> struct hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceHdrVividFeaturesHUAWEI>;
   template <> struct hash<VULKAN_HPP_NAMESPACE::HdrVividDynamicMetadataHUAWEI>;
@@ -7555,6 +7587,11 @@ export namespace std
 
   //=== VK_ARM_format_pack ===
   template <> struct hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceFormatPackFeaturesARM>;
+
+  //=== VK_VALVE_fragment_density_map_layered ===
+  template <> struct hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE>;
+  template <> struct hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceFragmentDensityMapLayeredPropertiesVALVE>;
+  template <> struct hash<VULKAN_HPP_NAMESPACE::PipelineFragmentDensityMapLayeredCreateInfoVALVE>;
 
   //=== VK_KHR_robustness2 ===
   template <> struct hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceRobustness2FeaturesKHR>;
@@ -8720,6 +8757,11 @@ export using ::PFN_vkCreateIndirectExecutionSetEXT;
 export using ::PFN_vkDestroyIndirectExecutionSetEXT;
 export using ::PFN_vkUpdateIndirectExecutionSetPipelineEXT;
 export using ::PFN_vkUpdateIndirectExecutionSetShaderEXT;
+
+#if defined( VK_USE_PLATFORM_OHOS )
+  //=== VK_OHOS_surface ===
+export using ::PFN_vkCreateSurfaceOHOS;
+#endif /*VK_USE_PLATFORM_OHOS*/
 
   //=== VK_NV_cooperative_matrix2 ===
 export using ::PFN_vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV;
