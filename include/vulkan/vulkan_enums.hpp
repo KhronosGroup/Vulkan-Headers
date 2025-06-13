@@ -11,6 +11,8 @@
 // include-what-you-use: make sure, vulkan.hpp is used by code-completers
 // IWYU pragma: private; include "vulkan.hpp"
 
+#include <type_traits>    // for std::underlying_type
+
 namespace VULKAN_HPP_NAMESPACE
 {
   template <typename FlagBitsType>
@@ -1633,6 +1635,9 @@ namespace VULKAN_HPP_NAMESPACE
     eVideoDecodeH264InlineSessionParametersInfoKHR = VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_INLINE_SESSION_PARAMETERS_INFO_KHR,
     eVideoDecodeH265InlineSessionParametersInfoKHR = VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_INLINE_SESSION_PARAMETERS_INFO_KHR,
     eVideoDecodeAv1InlineSessionParametersInfoKHR = VK_STRUCTURE_TYPE_VIDEO_DECODE_AV1_INLINE_SESSION_PARAMETERS_INFO_KHR,
+#if defined( VK_USE_PLATFORM_OHOS )
+    eOhSurfaceCreateInfoOHOS = VK_STRUCTURE_TYPE_OH_SURFACE_CREATE_INFO_OHOS,
+#endif /*VK_USE_PLATFORM_OHOS*/
     ePhysicalDeviceHdrVividFeaturesHUAWEI = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HDR_VIVID_FEATURES_HUAWEI,
     eHdrVividDynamicMetadataHUAWEI = VK_STRUCTURE_TYPE_HDR_VIVID_DYNAMIC_METADATA_HUAWEI,
     ePhysicalDeviceCooperativeMatrix2FeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_FEATURES_NV,
@@ -1648,6 +1653,9 @@ namespace VULKAN_HPP_NAMESPACE
     ePhysicalDeviceDepthClampZeroOneFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_EXT,
     ePhysicalDeviceVertexAttributeRobustnessFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_ROBUSTNESS_FEATURES_EXT,
     ePhysicalDeviceFormatPackFeaturesARM = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FORMAT_PACK_FEATURES_ARM,
+    ePhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_LAYERED_FEATURES_VALVE,
+    ePhysicalDeviceFragmentDensityMapLayeredPropertiesVALVE = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_LAYERED_PROPERTIES_VALVE,
+    ePipelineFragmentDensityMapLayeredCreateInfoVALVE = VK_STRUCTURE_TYPE_PIPELINE_FRAGMENT_DENSITY_MAP_LAYERED_CREATE_INFO_VALVE,
     ePhysicalDeviceRobustness2FeaturesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_KHR,
     ePhysicalDeviceRobustness2FeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_EXT,
     ePhysicalDeviceRobustness2PropertiesKHR = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_PROPERTIES_KHR,
@@ -4196,7 +4204,8 @@ namespace VULKAN_HPP_NAMESPACE
   
   // wrapper class for enum VkRenderPassCreateFlagBits, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkRenderPassCreateFlagBits.html
   enum class RenderPassCreateFlagBits : VkRenderPassCreateFlags{
-    eTransformQCOM = VK_RENDER_PASS_CREATE_TRANSFORM_BIT_QCOM
+    eTransformQCOM = VK_RENDER_PASS_CREATE_TRANSFORM_BIT_QCOM,
+    ePerLayerFragmentDensityVALVE = VK_RENDER_PASS_CREATE_PER_LAYER_FRAGMENT_DENSITY_BIT_VALVE
   };
   
   
@@ -4210,7 +4219,8 @@ namespace VULKAN_HPP_NAMESPACE
     using WrappedType = VkRenderPassCreateFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR RenderPassCreateFlags allFlags = 
-          RenderPassCreateFlagBits::eTransformQCOM;
+          RenderPassCreateFlagBits::eTransformQCOM
+        | RenderPassCreateFlagBits::ePerLayerFragmentDensityVALVE;
   };
 
   // wrapper class for enum VkSubpassDescriptionFlagBits, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkSubpassDescriptionFlagBits.html
@@ -5370,7 +5380,8 @@ namespace VULKAN_HPP_NAMESPACE
     eResuming = VK_RENDERING_RESUMING_BIT,
     eEnableLegacyDitheringEXT = VK_RENDERING_ENABLE_LEGACY_DITHERING_BIT_EXT,
     eContentsInlineKHR = VK_RENDERING_CONTENTS_INLINE_BIT_KHR,
-    eContentsInlineEXT = VK_RENDERING_CONTENTS_INLINE_BIT_EXT
+    eContentsInlineEXT = VK_RENDERING_CONTENTS_INLINE_BIT_EXT,
+    ePerLayerFragmentDensityVALVE = VK_RENDERING_PER_LAYER_FRAGMENT_DENSITY_BIT_VALVE
   };
   
     using RenderingFlagBitsKHR = RenderingFlagBits;
@@ -5390,7 +5401,8 @@ namespace VULKAN_HPP_NAMESPACE
         | RenderingFlagBits::eSuspending
         | RenderingFlagBits::eResuming
         | RenderingFlagBits::eEnableLegacyDitheringEXT
-        | RenderingFlagBits::eContentsInlineKHR;
+        | RenderingFlagBits::eContentsInlineKHR
+        | RenderingFlagBits::ePerLayerFragmentDensityVALVE;
   };
 
   // wrapper class for enum VkFormatFeatureFlagBits2, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkFormatFeatureFlagBits2.html
@@ -5608,7 +5620,8 @@ namespace VULKAN_HPP_NAMESPACE
     eDescriptorBufferEXT = VK_PIPELINE_CREATE_2_DESCRIPTOR_BUFFER_BIT_EXT,
     eDisallowOpacityMicromapARM = VK_PIPELINE_CREATE_2_DISALLOW_OPACITY_MICROMAP_BIT_ARM,
     eCaptureDataKHR = VK_PIPELINE_CREATE_2_CAPTURE_DATA_BIT_KHR,
-    eIndirectBindableEXT = VK_PIPELINE_CREATE_2_INDIRECT_BINDABLE_BIT_EXT
+    eIndirectBindableEXT = VK_PIPELINE_CREATE_2_INDIRECT_BINDABLE_BIT_EXT,
+    ePerLayerFragmentDensityVALVE = VK_PIPELINE_CREATE_2_PER_LAYER_FRAGMENT_DENSITY_BIT_VALVE
   };
   
     using PipelineCreateFlagBits2KHR = PipelineCreateFlagBits2;
@@ -5662,7 +5675,8 @@ namespace VULKAN_HPP_NAMESPACE
         | PipelineCreateFlagBits2::eDescriptorBufferEXT
         | PipelineCreateFlagBits2::eDisallowOpacityMicromapARM
         | PipelineCreateFlagBits2::eCaptureDataKHR
-        | PipelineCreateFlagBits2::eIndirectBindableEXT;
+        | PipelineCreateFlagBits2::eIndirectBindableEXT
+        | PipelineCreateFlagBits2::ePerLayerFragmentDensityVALVE;
   };
 
   // wrapper class for enum VkBufferUsageFlagBits2, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkBufferUsageFlagBits2.html
@@ -9162,10 +9176,10 @@ namespace VULKAN_HPP_NAMESPACE
     eBfloat16 = VK_COMPONENT_TYPE_BFLOAT16_KHR,
     eSint8PackedNV = VK_COMPONENT_TYPE_SINT8_PACKED_NV,
     eUint8PackedNV = VK_COMPONENT_TYPE_UINT8_PACKED_NV,
-    eFloatE4M3NV = VK_COMPONENT_TYPE_FLOAT_E4M3_NV,
-    eFloatE5M2NV = VK_COMPONENT_TYPE_FLOAT_E5M2_NV,
     eFloat8E4M3EXT = VK_COMPONENT_TYPE_FLOAT8_E4M3_EXT,
-    eFloat8E5M2EXT = VK_COMPONENT_TYPE_FLOAT8_E5M2_EXT
+    eFloatE4M3 = VK_COMPONENT_TYPE_FLOAT_E4M3_NV,
+    eFloat8E5M2EXT = VK_COMPONENT_TYPE_FLOAT8_E5M2_EXT,
+    eFloatE5M2 = VK_COMPONENT_TYPE_FLOAT_E5M2_NV
   };
   
     using ComponentTypeNV = ComponentTypeKHR;
@@ -9763,6 +9777,26 @@ namespace VULKAN_HPP_NAMESPACE
   
   
   
+#if defined( VK_USE_PLATFORM_OHOS )
+  //=== VK_OHOS_surface ===
+
+  
+  enum class SurfaceCreateFlagBitsOHOS : VkSurfaceCreateFlagsOHOS{};
+  
+  
+  
+  // wrapper using for bitmask VkSurfaceCreateFlagsOHOS, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkSurfaceCreateFlagsOHOS.html
+  using SurfaceCreateFlagsOHOS = Flags<SurfaceCreateFlagBitsOHOS>;
+
+
+  template <> struct FlagTraits<SurfaceCreateFlagBitsOHOS>
+  {
+    
+    static VULKAN_HPP_CONST_OR_CONSTEXPR bool isBitmask = true;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR SurfaceCreateFlagsOHOS allFlags =  {};
+  };
+#endif /*VK_USE_PLATFORM_OHOS*/
+
 
 
   //===========================================================

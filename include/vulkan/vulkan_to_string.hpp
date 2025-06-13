@@ -845,6 +845,7 @@ namespace VULKAN_HPP_NAMESPACE
   {
     std::string result = "{";
     if ( value & RenderPassCreateFlagBits::eTransformQCOM ) result += " TransformQCOM |";
+    if ( value & RenderPassCreateFlagBits::ePerLayerFragmentDensityVALVE ) result += " PerLayerFragmentDensityVALVE |";
 
     if ( result.size() > 1 )
       result.back() = '}';
@@ -1362,6 +1363,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & RenderingFlagBits::eResuming ) result += " Resuming |";
     if ( value & RenderingFlagBits::eEnableLegacyDitheringEXT ) result += " EnableLegacyDitheringEXT |";
     if ( value & RenderingFlagBits::eContentsInlineKHR ) result += " ContentsInlineKHR |";
+    if ( value & RenderingFlagBits::ePerLayerFragmentDensityVALVE ) result += " PerLayerFragmentDensityVALVE |";
 
     if ( result.size() > 1 )
       result.back() = '}';
@@ -1485,6 +1487,7 @@ namespace VULKAN_HPP_NAMESPACE
     if ( value & PipelineCreateFlagBits2::eDisallowOpacityMicromapARM ) result += " DisallowOpacityMicromapARM |";
     if ( value & PipelineCreateFlagBits2::eCaptureDataKHR ) result += " CaptureDataKHR |";
     if ( value & PipelineCreateFlagBits2::eIndirectBindableEXT ) result += " IndirectBindableEXT |";
+    if ( value & PipelineCreateFlagBits2::ePerLayerFragmentDensityVALVE ) result += " PerLayerFragmentDensityVALVE |";
 
     if ( result.size() > 1 )
       result.back() = '}';
@@ -3093,6 +3096,15 @@ namespace VULKAN_HPP_NAMESPACE
     return "None";
   }
 
+#if defined( VK_USE_PLATFORM_OHOS )
+  //=== VK_OHOS_surface ===
+
+  VULKAN_HPP_INLINE VULKAN_HPP_CONSTEXPR_20 std::string to_string( SurfaceCreateFlagsOHOS )
+  {
+    return "{}";
+  }
+#endif /*VK_USE_PLATFORM_OHOS*/
+
 
 
   //=======================
@@ -4276,6 +4288,9 @@ namespace VULKAN_HPP_NAMESPACE
       case StructureType::eVideoDecodeH264InlineSessionParametersInfoKHR : return "VideoDecodeH264InlineSessionParametersInfoKHR";
       case StructureType::eVideoDecodeH265InlineSessionParametersInfoKHR : return "VideoDecodeH265InlineSessionParametersInfoKHR";
       case StructureType::eVideoDecodeAv1InlineSessionParametersInfoKHR : return "VideoDecodeAv1InlineSessionParametersInfoKHR";
+#if defined( VK_USE_PLATFORM_OHOS )
+      case StructureType::eOhSurfaceCreateInfoOHOS : return "OhSurfaceCreateInfoOHOS";
+#endif /*VK_USE_PLATFORM_OHOS*/
       case StructureType::ePhysicalDeviceHdrVividFeaturesHUAWEI : return "PhysicalDeviceHdrVividFeaturesHUAWEI";
       case StructureType::eHdrVividDynamicMetadataHUAWEI : return "HdrVividDynamicMetadataHUAWEI";
       case StructureType::ePhysicalDeviceCooperativeMatrix2FeaturesNV : return "PhysicalDeviceCooperativeMatrix2FeaturesNV";
@@ -4290,6 +4305,9 @@ namespace VULKAN_HPP_NAMESPACE
       case StructureType::ePhysicalDeviceDepthClampZeroOneFeaturesKHR : return "PhysicalDeviceDepthClampZeroOneFeaturesKHR";
       case StructureType::ePhysicalDeviceVertexAttributeRobustnessFeaturesEXT : return "PhysicalDeviceVertexAttributeRobustnessFeaturesEXT";
       case StructureType::ePhysicalDeviceFormatPackFeaturesARM : return "PhysicalDeviceFormatPackFeaturesARM";
+      case StructureType::ePhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE : return "PhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE";
+      case StructureType::ePhysicalDeviceFragmentDensityMapLayeredPropertiesVALVE : return "PhysicalDeviceFragmentDensityMapLayeredPropertiesVALVE";
+      case StructureType::ePipelineFragmentDensityMapLayeredCreateInfoVALVE : return "PipelineFragmentDensityMapLayeredCreateInfoVALVE";
       case StructureType::ePhysicalDeviceRobustness2FeaturesKHR : return "PhysicalDeviceRobustness2FeaturesKHR";
       case StructureType::ePhysicalDeviceRobustness2PropertiesKHR : return "PhysicalDeviceRobustness2PropertiesKHR";
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -6077,6 +6095,7 @@ namespace VULKAN_HPP_NAMESPACE
     switch ( value )
     {
       case RenderPassCreateFlagBits::eTransformQCOM : return "TransformQCOM";
+      case RenderPassCreateFlagBits::ePerLayerFragmentDensityVALVE : return "PerLayerFragmentDensityVALVE";
       default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
     }
 
@@ -6764,6 +6783,7 @@ namespace VULKAN_HPP_NAMESPACE
       case RenderingFlagBits::eResuming : return "Resuming";
       case RenderingFlagBits::eEnableLegacyDitheringEXT : return "EnableLegacyDitheringEXT";
       case RenderingFlagBits::eContentsInlineKHR : return "ContentsInlineKHR";
+      case RenderingFlagBits::ePerLayerFragmentDensityVALVE : return "PerLayerFragmentDensityVALVE";
       default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
     }
 
@@ -6912,6 +6932,7 @@ namespace VULKAN_HPP_NAMESPACE
       case PipelineCreateFlagBits2::eDisallowOpacityMicromapARM : return "DisallowOpacityMicromapARM";
       case PipelineCreateFlagBits2::eCaptureDataKHR : return "CaptureDataKHR";
       case PipelineCreateFlagBits2::eIndirectBindableEXT : return "IndirectBindableEXT";
+      case PipelineCreateFlagBits2::ePerLayerFragmentDensityVALVE : return "PerLayerFragmentDensityVALVE";
       default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
     }
 
@@ -9468,8 +9489,6 @@ namespace VULKAN_HPP_NAMESPACE
       case ComponentTypeKHR::eBfloat16 : return "Bfloat16";
       case ComponentTypeKHR::eSint8PackedNV : return "Sint8PackedNV";
       case ComponentTypeKHR::eUint8PackedNV : return "Uint8PackedNV";
-      case ComponentTypeKHR::eFloatE4M3NV : return "FloatE4M3NV";
-      case ComponentTypeKHR::eFloatE5M2NV : return "FloatE5M2NV";
       case ComponentTypeKHR::eFloat8E4M3EXT : return "Float8E4M3EXT";
       case ComponentTypeKHR::eFloat8E5M2EXT : return "Float8E5M2EXT";
       default: return "invalid ( " + VULKAN_HPP_NAMESPACE::toHexString( static_cast<uint32_t>( value ) ) + " )";
@@ -9955,6 +9974,16 @@ namespace VULKAN_HPP_NAMESPACE
     }
 
   }
+
+#if defined( VK_USE_PLATFORM_OHOS )
+  //=== VK_OHOS_surface ===
+
+
+  VULKAN_HPP_INLINE VULKAN_HPP_CONSTEXPR_20 std::string to_string( SurfaceCreateFlagBitsOHOS )
+  {
+    return "(void)";
+  }
+#endif /*VK_USE_PLATFORM_OHOS*/
 
 
 } // namespace VULKAN_HPP_NAMESPACE
