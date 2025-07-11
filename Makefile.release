@@ -15,13 +15,13 @@ SPEC	 = $(GIT)/Vulkan-Docs
 HPP	 = $(GIT)/Vulkan-Hpp
 REGISTRY = $(GIT)/registry/vulkan
 
-update: version-check create-branch update-files push-branch
+update: revision-check create-branch update-files push-branch
 
 # Working branch for the update, and a test if it exists
 BRANCH = update-$(REVISION)
 
 # Switch to new branch which will contain the update
-create-branch: version-check
+create-branch: revision-check
 	git switch -q main
 	git pull -q
 	# If branch already exists, do nothing
@@ -100,11 +100,12 @@ remove-files:
 
 # Once the branch is updated, push it to upstream
 # This does not actually push it for safety reasons
-push-branch:
+push-branch: revision-check
 	@echo Verify that all new files are 'git add'ed and obsolete files removed, then:
-	@echo git commit -m \"Update for Vulkan-Docs 1.3.$(REVISION)\"
-	@echo git push --set-upstream origin $(BRANCH)
-	@echo git switch main
+	@echo "    " git commit -m \"Update for Vulkan-Docs 1.4.$(REVISION)\"
+	@echo "    " git push --set-upstream origin $(BRANCH)
+	@echo "    " git switch main
+	@echo "    " git branch -d $(BRANCH)
 
-version-check:
+revision-check:
 	@if test $(REVISION) = 999 ; then echo "Must specify explicit REVISION= in make invocation" ; exit 1 ; fi
