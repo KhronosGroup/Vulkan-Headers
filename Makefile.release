@@ -1,4 +1,4 @@
-# Copyright 2024 The Khronos Group Inc.
+# Copyright 2024-2025 The Khronos Group Inc.
 # SPDX-License-Identifier: Apache-2.0
 
 # Makefile.release - update external files generated in Vulkan spec
@@ -12,7 +12,10 @@ REVISION = 999
 # Location of other repository clones
 GIT	 = ..
 SPEC	 = $(GIT)/Vulkan-Docs
-HPP	 = $(GIT)/Vulkan-Hpp
+# As of 1.4.322 spec update, the build process has been changed to use a
+# Vulkan-Hpp located underneath Vulkan-Docs (not a submodule).
+# If you are using one located elsewhere then override HPP.
+HPP	 = $(SPEC)/Vulkan-Hpp
 REGISTRY = $(GIT)/registry/vulkan
 
 update: revision-check create-branch update-files push-branch
