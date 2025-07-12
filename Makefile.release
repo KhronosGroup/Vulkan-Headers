@@ -19,6 +19,9 @@ HPP	 = $(SPEC)/Vulkan-Hpp
 REGISTRY = $(GIT)/registry/vulkan
 
 update: revision-check create-branch update-files push-branch
+	echo "Verify that Vulkan-Headers is on a branch with the new header updates."
+	echo "Then push them to github and create an MR there with:"
+	echo "    make -f Makefile.release REVISION=$REVISION push-branch"
 
 # Working branch for the update, and a test if it exists
 BRANCH = update-$(REVISION)
@@ -38,6 +41,19 @@ create-branch: revision-check
 
 # Update headers and scripts in the new branch
 update-files: remove-files update-headers update-scripts
+
+# To ensure updates are caught, old versions of installed files are
+# removed.
+# Files in include/ to keep
+HEADERS_KEEP = \
+    include/vulkan/vk_icd.h \
+    include/vulkan/vk_layer.h
+
+remove-files:
+	rm -rf $(filter-out $(HEADERS_KEEP), $(wildcard include/vulkan/*))
+	rm -rf include/vk_video
+	rm -rf registry
+	mkdir include/vk_video registry registry/profiles registry/spec_tools
 
 # Vulkan SC Vulkan-Hpp headers not published in the Vulkan-Headers repository
 SCHPPFILES = \
@@ -87,28 +103,22 @@ update-scripts:
 	cp $(PROFILES) registry/profiles/
 	cp $(SCRIPT_TOOLS) registry/spec_tools/
 
-# To ensure updates are caught, old versions of installed files are
-# removed.
-
-# Files in include/ to keep
-HEADERS_KEEP = \
-    include/vulkan/vk_icd.h \
-    include/vulkan/vk_layer.h
-
-remove-files:
-	rm -rf $(filter-out $(HEADERS_KEEP), $(wildcard include/vulkan/*))
-	rm -rf include/vk_video
-	rm -rf registry
-	mkdir include/vk_video registry registry/profiles registry/spec_tools
-
-# Once the branch is updated, push it to upstream
-# This does not actually push it for safety reasons
+# Once the branch is updated, push it to upstream and create an MR
+# This should be used cautiously after verifying the branch contents are
+# indeed correct and updates.
 push-branch: revision-check
-	@echo Verify that all new files are 'git add'ed and obsolete files removed, then:
-	@echo "    " git commit -m \"Update for Vulkan-Docs 1.4.$(REVISION)\"
-	@echo "    " git push --set-upstream origin $(BRANCH)
-	@echo "    " git switch main
-	@echo "    " git branch -d $(BRANCH)
+	git switch $(BRANCH)
+	git add -u
+	echo "Detect new files and add them. This may not always succeed."
+	echo "Adding new files:" `git diff --name-only main`
+	git add `git diff --name-only main`
+	git commit -m "Update for Vulkan-Docs 1.4.$(REVISION)"
+	git push --force --set-upstream origin $(BRANCH) \
+	    -o merge_request.create -o merge_request.target=main -o merge_request.remove_source_branch \
+	    -o merge_request.title="Update for Vulkan-Docs 1.4.$(REVISION)" \
+	    -o merge_request.assign=oddhack
+	git switch main
+	git branch -d $(BRANCH)
 
 revision-check:
 	@if test $(REVISION) = 999 ; then echo "Must specify explicit REVISION= in make invocation" ; exit 1 ; fi
