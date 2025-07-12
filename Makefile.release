@@ -113,12 +113,31 @@ push-branch: revision-check
 	echo "Adding new files:" `git diff --name-only main`
 	git add `git diff --name-only main`
 	git commit -m "Update for Vulkan-Docs 1.4.$(REVISION)"
-	git push --force --set-upstream origin $(BRANCH) \
-	    -o merge_request.create -o merge_request.target=main -o merge_request.remove_source_branch \
-	    -o merge_request.title="Update for Vulkan-Docs 1.4.$(REVISION)" \
-	    -o merge_request.assign=oddhack
+	# Ideally we could automatically create the github PR.
+	# This will require additional software, see e.g.
+	#   https://medium.com/@ravipatel.it/creating-a-git-pull-request-using-the-command-line-a-detailed-guide-4ef1ea017fe2
+	#   https://gist.github.com/devinschumacher/bc66c162d9c6c167952f1943d0e6419c
+	# Gitlab supports this via 'git push' options e.g.
+	#   -o merge_request.create -o merge_request.target=main -o merge_request.remove_source_branch \
+	#   -o merge_request.title="Update for Vulkan-Docs 1.4.$(REVISION)" \
+	#   -o merge_request.assign=oddhack
+	# But for github we must manually create a PR after pushing
+	git push --set-upstream origin $(BRANCH)
 	git switch main
 	git branch -d $(BRANCH)
+	echo "Now create a pull request by going to the URL:"
+	echo "  https://github.com/KhronosGroup/Vulkan-Headers/pull/new/$(BRANCH)"
+	echo "After accepting this PR, continue with:"
+	echo "    make -f Makefile.release REVISION=$REVISION tag-branch"
+
+# Tag main for the update after accepting the update PR
+TAG = v1.4.$(REVISION)
+tag-branch:
+	git switch main
+	git pull
+	git tag -a $(TAG) -m "Update for Vulkan-Docs 1.4.$(REVISION)"
+	git push origin $(TAG)
+	echo "Now continue with Step 12 of the process (update public registry) from the wiki, until more scripting is done"
 
 revision-check:
 	@if test $(REVISION) = 999 ; then echo "Must specify explicit REVISION= in make invocation" ; exit 1 ; fi
