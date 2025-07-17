@@ -463,10 +463,6 @@ class BaseGenerator(OutputGenerator):
                 handle.device = next_parent.name == 'VkDevice'
                 next_parent = next_parent.parent
 
-        # This use to be Queues.ALL, but there is no real concept of "all"
-        # Found this just needs to be something non-None
-        maxSyncSupport.queues = Queues.TRANSFER
-
         maxSyncSupport.stages = self.vk.bitmasks['VkPipelineStageFlagBits2'].flags
         maxSyncEquivalent.accesses = self.vk.bitmasks['VkAccessFlagBits2'].flags
         maxSyncEquivalent.stages = self.vk.bitmasks['VkPipelineStageFlagBits2'].flags
