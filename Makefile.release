@@ -21,7 +21,7 @@ REGISTRY = $(GIT)/registry/vulkan
 update: revision-check create-branch update-files push-branch
 	echo "Verify that Vulkan-Headers is on a branch with the new header updates."
 	echo "Then push them to github and create an MR there with:"
-	echo "    make -f Makefile.release REVISION=$REVISION push-branch"
+	echo "    make -f Makefile.release REVISION=$(REVISION) push-branch"
 
 # Working branch for the update, and a test if it exists
 BRANCH = update-$(REVISION)
@@ -128,7 +128,7 @@ push-branch: revision-check
 	echo "Now create a pull request by going to the URL:"
 	echo "  https://github.com/KhronosGroup/Vulkan-Headers/pull/new/$(BRANCH)"
 	echo "After accepting this PR, continue with:"
-	echo "    make -f Makefile.release REVISION=$REVISION tag-branch"
+	echo "    make -f Makefile.release REVISION=$(REVISION) tag-branch"
 
 # Tag main for the update after accepting the update PR
 TAG = v1.4.$(REVISION)
