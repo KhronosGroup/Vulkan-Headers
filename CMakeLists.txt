@@ -109,11 +109,18 @@ if (VULKAN_HEADERS_ENABLE_INSTALL)
     include(GNUInstallDirs)
     include(CMakePackageConfigHelpers)
 
-    install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/vk_video" DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-    install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/vulkan" DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-    # Preserve source permissions https://github.com/KhronosGroup/Vulkan-Headers/issues/336
-    install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/registry" DESTINATION "${CMAKE_INSTALL_DATADIR}/vulkan" USE_SOURCE_PERMISSIONS)
-
+    if(VULKAN_HEADERS_ENABLE_MODULE)
+        install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/vk_video" DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+	install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/vulkan" DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+        # Preserve source permissions https://github.com/KhronosGroup/Vulkan-Headers/issues/336
+        install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/registry" DESTINATION "${CMAKE_INSTALL_DATADIR}/vulkan" USE_SOURCE_PERMISSIONS)
+    else()
+	# Don't install C++ module files if modules aren't enabled
+        install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/vk_video" DESTINATION ${CMAKE_INSTALL_INCLUDEDIR} PATTERN "*.cppm" EXCLUDE)
+        install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/vulkan" DESTINATION ${CMAKE_INSTALL_INCLUDEDIR} PATTERN "*.cppm" EXCLUDE)
+        # Preserve source permissions https://github.com/KhronosGroup/Vulkan-Headers/issues/336
+        install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/registry" DESTINATION "${CMAKE_INSTALL_DATADIR}/vulkan" USE_SOURCE_PERMISSIONS PATTERN "*.cppm" EXCLUDE)
+    endif()
 
     set_target_properties(Vulkan-Headers PROPERTIES EXPORT_NAME "Headers")
     install(TARGETS Vulkan-Headers
