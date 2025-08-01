@@ -56,7 +56,7 @@ extern "C" __declspec( dllimport ) FARPROC __stdcall GetProcAddress( HINSTANCE h
 #  endif
 #endif
 
-static_assert( VK_HEADER_VERSION == 323, "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION == 324, "Wrong VK_HEADER_VERSION!" );
 
 // <tuple> includes <sys/sysmacros.h> through some other header
 // this results in major(x) being resolved to gnu_dev_major(x)
@@ -7243,6 +7243,36 @@ namespace VULKAN_HPP_NAMESPACE
     {
       return std::tuple<Result &, T &>( result, value );
     }
+
+    // std::expected-look alike
+    bool has_value() const VULKAN_HPP_NOEXCEPT
+    {
+      return result == vk::Result::eSuccess;
+    }
+
+    T const * operator->() const VULKAN_HPP_NOEXCEPT
+    {
+      assert( has_value() );
+      return &value;
+    }
+
+    T * operator->() VULKAN_HPP_NOEXCEPT
+    {
+      assert( has_value() );
+      return &value;
+    }
+
+    T const & operator*() const VULKAN_HPP_NOEXCEPT
+    {
+      assert( has_value() );
+      return value;
+    }
+
+    T & operator*() VULKAN_HPP_NOEXCEPT
+    {
+      assert( has_value() );
+      return value;
+    }
   };
 
 #if !defined( VULKAN_HPP_NO_SMART_HANDLE )
@@ -7330,8 +7360,9 @@ namespace VULKAN_HPP_NAMESPACE
   namespace detail
   {
     template <typename T>
-    void ignore( T const & ) VULKAN_HPP_NOEXCEPT
+    VULKAN_HPP_CONSTEXPR bool ignore( T const & ) VULKAN_HPP_NOEXCEPT
     {
+      return true;
     }
 
     VULKAN_HPP_INLINE typename ResultValueType<void>::type createResultValueType( Result result )
@@ -7469,6 +7500,12 @@ namespace VULKAN_HPP_NAMESPACE
 
   //=== VK_EXT_shader_module_identifier ===
   VULKAN_HPP_CONSTEXPR_INLINE uint32_t MaxShaderModuleIdentifierSizeEXT = VK_MAX_SHADER_MODULE_IDENTIFIER_SIZE_EXT;
+
+#if defined( VK_ENABLE_BETA_EXTENSIONS )
+  //=== VK_AMDX_dense_geometry_format ===
+  VULKAN_HPP_CONSTEXPR_INLINE uint32_t CompressedTriangleFormatDgf1ByteAlignmentAMDX = VK_COMPRESSED_TRIANGLE_FORMAT_DGF1_BYTE_ALIGNMENT_AMDX;
+  VULKAN_HPP_CONSTEXPR_INLINE uint32_t CompressedTriangleFormatDgf1ByteStrideAMDX    = VK_COMPRESSED_TRIANGLE_FORMAT_DGF1_BYTE_STRIDE_AMDX;
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
   //=== VK_KHR_pipeline_binary ===
   VULKAN_HPP_CONSTEXPR_INLINE uint32_t MaxPipelineBinaryKeySizeKHR = VK_MAX_PIPELINE_BINARY_KEY_SIZE_KHR;
@@ -9022,6 +9059,12 @@ namespace VULKAN_HPP_NAMESPACE
   //=== VK_AMD_anti_lag ===
   VULKAN_HPP_CONSTEXPR_INLINE auto AMDAntiLagExtensionName = VK_AMD_ANTI_LAG_EXTENSION_NAME;
   VULKAN_HPP_CONSTEXPR_INLINE auto AMDAntiLagSpecVersion   = VK_AMD_ANTI_LAG_SPEC_VERSION;
+
+#if defined( VK_ENABLE_BETA_EXTENSIONS )
+  //=== VK_AMDX_dense_geometry_format ===
+  VULKAN_HPP_CONSTEXPR_INLINE auto AMDXDenseGeometryFormatExtensionName = VK_AMDX_DENSE_GEOMETRY_FORMAT_EXTENSION_NAME;
+  VULKAN_HPP_CONSTEXPR_INLINE auto AMDXDenseGeometryFormatSpecVersion   = VK_AMDX_DENSE_GEOMETRY_FORMAT_SPEC_VERSION;
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
   //=== VK_KHR_present_id2 ===
   VULKAN_HPP_CONSTEXPR_INLINE auto KHRPresentId2ExtensionName = VK_KHR_PRESENT_ID_2_EXTENSION_NAME;
@@ -15745,6 +15788,16 @@ namespace VULKAN_HPP_NAMESPACE
       value = true
     };
   };
+#  if defined( VK_ENABLE_BETA_EXTENSIONS )
+  template <>
+  struct StructExtends<AccelerationStructureTrianglesOpacityMicromapEXT, AccelerationStructureDenseGeometryFormatTrianglesDataAMDX>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+#  endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
 #  if defined( VK_ENABLE_BETA_EXTENSIONS )
   //=== VK_NV_displacement_micromap ===
@@ -16778,6 +16831,36 @@ namespace VULKAN_HPP_NAMESPACE
       value = true
     };
   };
+
+#  if defined( VK_ENABLE_BETA_EXTENSIONS )
+  //=== VK_AMDX_dense_geometry_format ===
+  template <>
+  struct StructExtends<PhysicalDeviceDenseGeometryFormatFeaturesAMDX, PhysicalDeviceFeatures2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<PhysicalDeviceDenseGeometryFormatFeaturesAMDX, DeviceCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<AccelerationStructureDenseGeometryFormatTrianglesDataAMDX, AccelerationStructureGeometryKHR>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+#  endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
   //=== VK_KHR_present_id2 ===
   template <>
@@ -18682,24 +18765,6 @@ namespace VULKAN_HPP_NAMESPACE
 
   //=== VK_KHR_maintenance8 ===
   template <>
-  struct StructExtends<PhysicalDeviceMaintenance8FeaturesKHR, PhysicalDeviceFeatures2>
-  {
-    enum
-    {
-      value = true
-    };
-  };
-
-  template <>
-  struct StructExtends<PhysicalDeviceMaintenance8FeaturesKHR, DeviceCreateInfo>
-  {
-    enum
-    {
-      value = true
-    };
-  };
-
-  template <>
   struct StructExtends<MemoryBarrierAccessFlags3KHR, SubpassDependency2>
   {
     enum
@@ -18719,6 +18784,24 @@ namespace VULKAN_HPP_NAMESPACE
 
   template <>
   struct StructExtends<MemoryBarrierAccessFlags3KHR, ImageMemoryBarrier2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<PhysicalDeviceMaintenance8FeaturesKHR, PhysicalDeviceFeatures2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<PhysicalDeviceMaintenance8FeaturesKHR, DeviceCreateInfo>
   {
     enum
     {
@@ -19250,6 +19333,12 @@ namespace VULKAN_HPP_NAMESPACE
           {
             m_library = dlopen( "libvulkan.1.dylib", RTLD_NOW | RTLD_LOCAL );
           }
+          // modern versions of macOS don't search /usr/local/lib automatically contrary to what man dlopen says
+          // Vulkan SDK uses this as the system-wide installation location, so we're going to fallback to this if all else fails
+          if ( !m_library && ( getenv( "DYLD_FALLBACK_LIBRARY_PATH" ) == NULL ) )
+          {
+            m_library = dlopen( "/usr/local/lib/libvulkan.dylib", RTLD_NOW | RTLD_LOCAL );
+          }
           if ( !m_library )
           {
             m_library = dlopen( "libMoltenVK.dylib", RTLD_NOW | RTLD_LOCAL );
@@ -19263,12 +19352,6 @@ namespace VULKAN_HPP_NAMESPACE
           if ( !m_library )
           {
             m_library = dlopen( "MoltenVK.framework/MoltenVK", RTLD_NOW | RTLD_LOCAL );
-          }
-          // modern versions of macOS don't search /usr/local/lib automatically contrary to what man dlopen says
-          // Vulkan SDK uses this as the system-wide installation location, so we're going to fallback to this if all else fails
-          if ( !m_library && ( getenv( "DYLD_FALLBACK_LIBRARY_PATH" ) == NULL ) )
-          {
-            m_library = dlopen( "/usr/local/lib/libvulkan.dylib", RTLD_NOW | RTLD_LOCAL );
           }
 #  elif defined( __unix__ ) || defined( __QNX__ ) || defined( __Fuchsia__ )
           m_library = dlopen( "libvulkan.so", RTLD_NOW | RTLD_LOCAL );
