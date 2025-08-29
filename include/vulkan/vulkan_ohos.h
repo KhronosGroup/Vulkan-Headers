@@ -25,14 +25,12 @@ typedef struct NativeWindow OHNativeWindow;
 #define VK_OHOS_SURFACE_SPEC_VERSION      1
 #define VK_OHOS_SURFACE_EXTENSION_NAME    "VK_OHOS_surface"
 typedef VkFlags VkSurfaceCreateFlagsOHOS;
-typedef struct VkOHSurfaceCreateInfoOHOS {
+typedef struct VkSurfaceCreateInfoOHOS {
     VkStructureType             sType;
     const void*                 pNext;
     VkSurfaceCreateFlagsOHOS    flags;
     OHNativeWindow*             window;
-} VkOHSurfaceCreateInfoOHOS;
-
-typedef VkOHSurfaceCreateInfoOHOS VkSurfaceCreateInfoOHOS;
+} VkSurfaceCreateInfoOHOS;
 
 typedef VkResult (VKAPI_PTR *PFN_vkCreateSurfaceOHOS)(VkInstance instance, const VkSurfaceCreateInfoOHOS* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkSurfaceKHR* pSurface);
 
