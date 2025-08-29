@@ -17,7 +17,6 @@
 namespace VULKAN_HPP_NAMESPACE
 {
 #if !defined( VULKAN_HPP_NO_SMART_HANDLE )
-
   template <typename HandleType>
   class SharedHandleTraits;
 
@@ -310,7 +309,6 @@ namespace VULKAN_HPP_NAMESPACE
 
   namespace detail
   {
-
 // Silence the function cast warnings.
 #  if defined( __GNUC__ ) && !defined( __clang__ ) && !defined( __INTEL_COMPILER )
 #    pragma GCC diagnostic push
@@ -465,7 +463,6 @@ namespace VULKAN_HPP_NAMESPACE
 #  elif defined( __clang__ ) && ( __clang_major__ >= 13 ) && !defined( __INTEL_COMPILER )
 #    pragma clang diagnostic pop
 #  endif
-
   }  // namespace detail
 
   //======================
@@ -1045,6 +1042,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   using SharedIndirectExecutionSetEXT = SharedHandle<IndirectExecutionSetEXT>;
 
+  // a number of SharedHandle specializations
   enum class SwapchainOwns
   {
     no,
