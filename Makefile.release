@@ -126,7 +126,7 @@ push-branch: revision-check
 	echo "Now create a pull request by going to the URL:"
 	echo "  https://github.com/KhronosGroup/Vulkan-Headers/pull/new/$(BRANCH)"
 	echo "After accepting this PR, continue with:"
-	echo "    make -f Makefile.release REVISION=$(REVISION) tag-branch"
+	echo "    cd $(shell pwd) && make -f Makefile.release REVISION=$(REVISION) tag-branch"
 
 # Tag main for the update after accepting the update PR
 TAG = v1.4.$(REVISION)
