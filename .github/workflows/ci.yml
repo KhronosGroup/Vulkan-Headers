@@ -93,6 +93,7 @@ jobs:
           -D VULKAN_HEADERS_ENABLE_INSTALL=ON \
           -D VULKAN_HEADERS_ENABLE_MODULE=ON \
           -D VULKAN_HEADERS_ENABLE_MODULE_STD=OFF \
+          -D VULKAN_HEADERS_DISABLE_MODULE_STD=ON \
           -D CMAKE_CXX_COMPILER=${{ matrix.compiler }} \
       - run: cmake --build ./build
       - run: cmake --install build/ --prefix build/install
@@ -118,6 +119,7 @@ jobs:
           -D VULKAN_HEADERS_ENABLE_INSTALL=ON `
           -D VULKAN_HEADERS_ENABLE_MODULE=ON `
           -D VULKAN_HEADERS_ENABLE_MODULE_STD=OFF `
+          -D VULKAN_HEADERS_DISABLE_MODULE_STD=ON `
       - run: cmake --build ./build
       - run: cmake --install build/ --prefix build/install
       - run: ctest --output-on-failure
