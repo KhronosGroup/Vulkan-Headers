@@ -41,7 +41,7 @@ project(VULKAN_HEADERS LANGUAGES C CXX VERSION ${VK_VERSION_STRING})
 # options for Vulkan-Headers and the Vulkan-Hpp C++20 module
 option(VULKAN_HEADERS_ENABLE_TESTS "Test Vulkan-Headers" ${PROJECT_IS_TOP_LEVEL})
 option(VULKAN_HEADERS_ENABLE_INSTALL "Install Vulkan-Headers" ${PROJECT_IS_TOP_LEVEL})
-option(VULKAN_HEADERS_ENABLE_MODULE "Enables building of the Vulkan C++20 module; requires minimum CMake version 3.28" ON)
+option(VULKAN_HEADERS_ENABLE_MODULE "Enables building of the Vulkan C++20 module; requires minimum CMake version 3.28" OFF)
 option(VULKAN_HEADERS_ENABLE_MODULE_STD "Enables building of the Vulkan C++20 module with import std; requires minimum CMake version 3.30" OFF)
 option(VULKAN_HEADERS_DISABLE_MODULE_STD "Disable automatic use of import std; for the Vulkan C++20 module" OFF)
 
