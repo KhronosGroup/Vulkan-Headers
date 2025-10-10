@@ -8,7 +8,9 @@
 #ifndef VULKAN_TO_STRING_HPP
 #define VULKAN_TO_STRING_HPP
 
-#include <vulkan/vulkan.hpp>
+#if !defined( VULKAN_HPP_CXX_MODULE )
+#  include <vulkan/vulkan.hpp>
+#endif
 
 // ignore warnings on using deprecated enum values in this header
 #if defined( __clang__ ) || defined( __GNUC__ )
@@ -19,10 +21,8 @@
 #  pragma warning( disable : 4996 )
 #endif
 
-#if defined( VULKAN_HPP_ENABLE_STD_MODULE ) && defined( VULKAN_HPP_STD_MODULE )
-import VULKAN_HPP_STD_MODULE;
-#else
-#  if __cpp_lib_format
+#if !defined( VULKAN_HPP_CXX_MODULE )
+#  if defined( __cpp_lib_format )
 #    include <format>  // std::format
 #  else
 #    include <sstream>  // std::stringstream
@@ -5417,6 +5417,7 @@ namespace VULKAN_HPP_NAMESPACE
       case StructureType::ePhysicalDeviceImageAlignmentControlFeaturesMESA           : return "PhysicalDeviceImageAlignmentControlFeaturesMESA";
       case StructureType::ePhysicalDeviceImageAlignmentControlPropertiesMESA         : return "PhysicalDeviceImageAlignmentControlPropertiesMESA";
       case StructureType::eImageAlignmentControlCreateInfoMESA                       : return "ImageAlignmentControlCreateInfoMESA";
+      case StructureType::ePhysicalDeviceShaderFmaFeaturesKHR                        : return "PhysicalDeviceShaderFmaFeaturesKHR";
       case StructureType::ePhysicalDeviceDepthClampControlFeaturesEXT                : return "PhysicalDeviceDepthClampControlFeaturesEXT";
       case StructureType::ePipelineViewportDepthClampControlCreateInfoEXT            : return "PipelineViewportDepthClampControlCreateInfoEXT";
       case StructureType::ePhysicalDeviceMaintenance9FeaturesKHR                     : return "PhysicalDeviceMaintenance9FeaturesKHR";

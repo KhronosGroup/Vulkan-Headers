@@ -8,14 +8,10 @@
 #ifndef VULKAN_HPP
 #define VULKAN_HPP
 
-#include <vulkan/vulkan_hpp_macros.hpp>
-
-#if defined( VULKAN_HPP_ENABLE_STD_MODULE ) && defined( VULKAN_HPP_STD_MODULE )
-#  include <cassert>
-#  include <cstdlib>
-#  include <cstring>
-import VULKAN_HPP_STD_MODULE;
-#else
+#if !defined( VULKAN_HPP_CXX_MODULE )
+// clang-format off
+#  include <vulkan/vulkan_hpp_macros.hpp>
+// clang-format on
 #  include <algorithm>
 #  include <array>  // ArrayWrapperND
 #  include <cassert>
@@ -38,6 +34,11 @@ import VULKAN_HPP_STD_MODULE;
 #  if defined( VULKAN_HPP_SUPPORT_SPAN )
 #    include <span>
 #  endif
+#else
+#  include <cassert>
+#  include <cstdlib>
+#  include <cstring>
+import VULKAN_HPP_STD_MODULE;
 #endif
 #include <vulkan/vulkan.h>
 
@@ -57,7 +58,7 @@ extern "C" __declspec( dllimport ) FARPROC __stdcall GetProcAddress( HINSTANCE h
 #  endif
 #endif
 
-static_assert( VK_HEADER_VERSION == 328, "Wrong VK_HEADER_VERSION!" );
+static_assert( VK_HEADER_VERSION == 329, "Wrong VK_HEADER_VERSION!" );
 
 // <tuple> includes <sys/sysmacros.h> through some other header
 // this results in major(x) being resolved to gnu_dev_major(x)
@@ -9349,6 +9350,10 @@ namespace VULKAN_HPP_NAMESPACE
   //=== VK_MESA_image_alignment_control ===
   VULKAN_HPP_CONSTEXPR_INLINE auto MESAImageAlignmentControlExtensionName = VK_MESA_IMAGE_ALIGNMENT_CONTROL_EXTENSION_NAME;
   VULKAN_HPP_CONSTEXPR_INLINE auto MESAImageAlignmentControlSpecVersion   = VK_MESA_IMAGE_ALIGNMENT_CONTROL_SPEC_VERSION;
+
+  //=== VK_KHR_shader_fma ===
+  VULKAN_HPP_CONSTEXPR_INLINE auto KHRShaderFmaExtensionName = VK_KHR_SHADER_FMA_EXTENSION_NAME;
+  VULKAN_HPP_CONSTEXPR_INLINE auto KHRShaderFmaSpecVersion   = VK_KHR_SHADER_FMA_SPEC_VERSION;
 
   //=== VK_EXT_depth_clamp_control ===
   VULKAN_HPP_CONSTEXPR_INLINE auto EXTDepthClampControlExtensionName = VK_EXT_DEPTH_CLAMP_CONTROL_EXTENSION_NAME;
@@ -18949,6 +18954,25 @@ namespace VULKAN_HPP_NAMESPACE
 
   template <>
   struct StructExtends<ImageAlignmentControlCreateInfoMESA, ImageCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  //=== VK_KHR_shader_fma ===
+  template <>
+  struct StructExtends<PhysicalDeviceShaderFmaFeaturesKHR, PhysicalDeviceFeatures2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<PhysicalDeviceShaderFmaFeaturesKHR, DeviceCreateInfo>
   {
     enum
     {
