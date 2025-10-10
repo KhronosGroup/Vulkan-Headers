@@ -85,6 +85,8 @@ if (VULKAN_HEADERS_ENABLE_INSTALL)
     include(GNUInstallDirs)
     include(CMakePackageConfigHelpers)
 
+    # Remove the module interface files from the header target if the named module installation is ENABLED.
+    # This ensures that the module interface files are only installed once.
     if(VULKAN_HEADERS_ENABLE_MODULE)
         set(CPPM_PATTERN "*.cppm")
     else()
