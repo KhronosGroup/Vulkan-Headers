@@ -69,7 +69,7 @@ extern "C" {
 #define VK_API_VERSION_1_0 VK_MAKE_API_VERSION(0, 1, 0, 0)// Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 328
+#define VK_HEADER_VERSION 329
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 4, VK_HEADER_VERSION)
@@ -1303,6 +1303,7 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ALIGNMENT_CONTROL_FEATURES_MESA = 1000575000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ALIGNMENT_CONTROL_PROPERTIES_MESA = 1000575001,
     VK_STRUCTURE_TYPE_IMAGE_ALIGNMENT_CONTROL_CREATE_INFO_MESA = 1000575002,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FMA_FEATURES_KHR = 1000579000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_CONTROL_FEATURES_EXT = 1000582000,
     VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_DEPTH_CLAMP_CONTROL_CREATE_INFO_EXT = 1000582001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_9_FEATURES_KHR = 1000584000,
@@ -13744,6 +13745,20 @@ typedef struct VkPhysicalDeviceMaintenance8FeaturesKHR {
     void*              pNext;
     VkBool32           maintenance8;
 } VkPhysicalDeviceMaintenance8FeaturesKHR;
+
+
+
+// VK_KHR_shader_fma is a preprocessor guard. Do not pass it to API calls.
+#define VK_KHR_shader_fma 1
+#define VK_KHR_SHADER_FMA_SPEC_VERSION    1
+#define VK_KHR_SHADER_FMA_EXTENSION_NAME  "VK_KHR_shader_fma"
+typedef struct VkPhysicalDeviceShaderFmaFeaturesKHR {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           shaderFmaFloat16;
+    VkBool32           shaderFmaFloat32;
+    VkBool32           shaderFmaFloat64;
+} VkPhysicalDeviceShaderFmaFeaturesKHR;
 
 
 

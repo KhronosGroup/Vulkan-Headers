@@ -11,9 +11,7 @@
 // include-what-you-use: make sure, vulkan.hpp is used by code-completers
 // IWYU pragma: private, include "vulkan/vulkan.hpp"
 
-#if defined( VULKAN_HPP_ENABLE_STD_MODULE ) && defined( VULKAN_HPP_STD_MODULE )
-import VULKAN_HPP_STD_MODULE;
-#else
+#if !defined( VULKAN_HPP_CXX_MODULE )
 #  include <type_traits>  // for std::underlying_type
 #endif
 
@@ -1667,6 +1665,7 @@ namespace VULKAN_HPP_NAMESPACE
     ePhysicalDeviceImageAlignmentControlFeaturesMESA            = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ALIGNMENT_CONTROL_FEATURES_MESA,
     ePhysicalDeviceImageAlignmentControlPropertiesMESA          = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ALIGNMENT_CONTROL_PROPERTIES_MESA,
     eImageAlignmentControlCreateInfoMESA                        = VK_STRUCTURE_TYPE_IMAGE_ALIGNMENT_CONTROL_CREATE_INFO_MESA,
+    ePhysicalDeviceShaderFmaFeaturesKHR                         = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FMA_FEATURES_KHR,
     ePhysicalDeviceDepthClampControlFeaturesEXT                 = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_CONTROL_FEATURES_EXT,
     ePipelineViewportDepthClampControlCreateInfoEXT             = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_DEPTH_CLAMP_CONTROL_CREATE_INFO_EXT,
     ePhysicalDeviceMaintenance9FeaturesKHR                      = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_9_FEATURES_KHR,
