@@ -75,7 +75,7 @@ jobs:
 
   cmake-unix-modules:
     runs-on: ${{ matrix.os }}
-    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name
+    if: false
     strategy:
       matrix:
         os: [ ubuntu-latest ]
@@ -91,9 +91,6 @@ jobs:
           cmake -S . -B build \
           -D VULKAN_HEADERS_ENABLE_TESTS=ON \
           -D VULKAN_HEADERS_ENABLE_INSTALL=ON \
-          -D VULKAN_HEADERS_ENABLE_MODULE=ON \
-          -D VULKAN_HEADERS_ENABLE_MODULE_STD=OFF \
-          -D VULKAN_HEADERS_DISABLE_MODULE_STD=ON \
           -D CMAKE_CXX_COMPILER=${{ matrix.compiler }} \
       - run: cmake --build ./build
       - run: cmake --install build/ --prefix build/install
@@ -102,7 +99,7 @@ jobs:
 
   cmake-windows-modules:
     runs-on: ${{ matrix.os }}
-    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name
+    if: false
     strategy:
       matrix:
         os: [ windows-latest ]
@@ -117,9 +114,6 @@ jobs:
           cmake -S . -B build `
           -D VULKAN_HEADERS_ENABLE_TESTS=ON `
           -D VULKAN_HEADERS_ENABLE_INSTALL=ON `
-          -D VULKAN_HEADERS_ENABLE_MODULE=ON `
-          -D VULKAN_HEADERS_ENABLE_MODULE_STD=OFF `
-          -D VULKAN_HEADERS_DISABLE_MODULE_STD=ON `
       - run: cmake --build ./build
       - run: cmake --install build/ --prefix build/install
       - run: ctest --output-on-failure

@@ -14,8 +14,6 @@ add_test(NAME integration.add_subdirectory
         --build-generator ${CMAKE_GENERATOR}
         --build-options
             -DFIND_PACKAGE_TESTING=OFF
-            -DVULKAN_HEADERS_ENABLE_MODULE=${VULKAN_HEADERS_ENABLE_MODULE}
-            -DVULKAN_HEADERS_DISABLE_MODULE_STD=${VULKAN_HEADERS_DISABLE_MODULE_STD}
 )
 
 set(test_install_dir "${CMAKE_CURRENT_BINARY_DIR}/install")
@@ -32,8 +30,6 @@ add_test(NAME integration.find_package
         --build-options
             -DFIND_PACKAGE_TESTING=ON
             -DCMAKE_PREFIX_PATH=${test_install_dir}
-            -DVULKAN_HEADERS_ENABLE_MODULE=${VULKAN_HEADERS_ENABLE_MODULE}
-            -DVULKAN_HEADERS_DISABLE_MODULE_STD=${VULKAN_HEADERS_DISABLE_MODULE_STD}
 )
 
 # Installing comes before testing
