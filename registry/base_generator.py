@@ -9,7 +9,7 @@ import os
 import tempfile
 import copy
 from vulkan_object import (VulkanObject,
-    Extension, Version, Deprecate, Handle, Param, CommandScope, Command,
+    Extension, Version, Legacy, Handle, Param, CommandScope, Command,
     EnumField, Enum, Flag, Bitmask, ExternSync, Flags, Member, Struct,
     Constant, FormatComponent, FormatPlane, Format, FeatureRequirement,
     SyncSupport, SyncEquivalent, SyncStage, SyncAccess, SyncPipelineStage, SyncPipeline,
@@ -377,12 +377,12 @@ class BaseGenerator(OutputGenerator):
                 if member.type in self.structAliasMap:
                     member.type = self.dealias(member.type, self.structAliasMap)
             # Replace string with Version class now we have all version created
-            if command.deprecate and command.deprecate.version:
-                if command.deprecate.version not in self.vk.versions:
+            if command.legacy and command.legacy.version:
+                if command.legacy.version not in self.vk.versions:
                     # occurs if something like VK_VERSION_1_0, in which case we will always warn for deprecation
-                    command.deprecate.version = None
+                    command.legacy.version = None
                 else:
-                    command.deprecate.version = self.vk.versions[command.deprecate.version]
+                    command.legacy.version = self.vk.versions[command.legacy.version]
 
         # Could build up a reverse lookup map, but since these are not too large of list, just do here
         # (Need to be done after we have found all the aliases)
@@ -688,9 +688,9 @@ class BaseGenerator(OutputGenerator):
         cPrototype = decls[0]
         cFunctionPointer = decls[1]
 
-        deprecate = None
+        legacy = None
         if cmdinfo.deprecatedlink:
-            deprecate = Deprecate(cmdinfo.deprecatedlink,
+            legacy = Legacy(cmdinfo.deprecatedlink,
                                   cmdinfo.deprecatedbyversion, # is just the string, will update to class later
                                   cmdinfo.deprecatedbyextensions)
 
@@ -708,7 +708,7 @@ class BaseGenerator(OutputGenerator):
                                          returnType, params, instance, device,
                                          tasks, queues, allowNoQueues, successcodes, errorcodes,
                                          primary, secondary, renderpass, videocoding,
-                                         implicitExternSyncParams, deprecate, cPrototype, cFunctionPointer)
+                                         implicitExternSyncParams, legacy, cPrototype, cFunctionPointer)
 
     #
     # List the enum for the commands
@@ -860,6 +860,12 @@ class BaseGenerator(OutputGenerator):
                 # Handle C bit field members
                 bitFieldWidth = int(cdecl.split(':')[1]) if ':' in cdecl else None
 
+                selector = member.get('selector') if not union else None
+                selection = member.get('selection') if union else None
+                selections = []
+                if selection:
+                    selections = [s for s in selection.split(',')]
+
                 # if a pointer, this can be a something like:
                 #     optional="true,false" for ppGeometries
                 #     optional="false,true" for pPhysicalDeviceCount
@@ -872,7 +878,7 @@ class BaseGenerator(OutputGenerator):
                 members.append(Member(name, type, fullType, noautovalidity, limittype,
                                       const, length, nullTerminated, pointer, fixedSizeArray,
                                       optional, optionalPointer,
-                                      externSync, cdecl, bitFieldWidth))
+                                      externSync, cdecl, bitFieldWidth, selector, selections))
 
             self.vk.structs[typeName] = Struct(typeName, [], extension, self.currentVersion, protect, members,
                                                union, returnedOnly, sType, allowDuplicate, extends, extendedBy)
