@@ -66,7 +66,7 @@ extern "C" {
 //#define VK_API_VERSION VK_MAKE_API_VERSION(0, 1, 0, 0) // Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 330
+#define VK_HEADER_VERSION 331
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 4, VK_HEADER_VERSION)
@@ -1036,6 +1036,12 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_IMAGE_VIEW_SAMPLE_WEIGHT_CREATE_INFO_QCOM = 1000440002,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_NESTED_COMMAND_BUFFER_FEATURES_EXT = 1000451000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_NESTED_COMMAND_BUFFER_PROPERTIES_EXT = 1000451001,
+    VK_STRUCTURE_TYPE_NATIVE_BUFFER_USAGE_OHOS = 1000452000,
+    VK_STRUCTURE_TYPE_NATIVE_BUFFER_PROPERTIES_OHOS = 1000452001,
+    VK_STRUCTURE_TYPE_NATIVE_BUFFER_FORMAT_PROPERTIES_OHOS = 1000452002,
+    VK_STRUCTURE_TYPE_IMPORT_NATIVE_BUFFER_INFO_OHOS = 1000452003,
+    VK_STRUCTURE_TYPE_MEMORY_GET_NATIVE_BUFFER_INFO_OHOS = 1000452004,
+    VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_OHOS = 1000452005,
     VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_ACQUIRE_UNMODIFIED_EXT = 1000453000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_3_FEATURES_EXT = 1000455000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_3_PROPERTIES_EXT = 1000455001,
@@ -1328,6 +1334,11 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_MEMORY_METAL_HANDLE_PROPERTIES_EXT = 1000602001,
     VK_STRUCTURE_TYPE_MEMORY_GET_METAL_HANDLE_INFO_EXT = 1000602002,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_KHR = 1000421000,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_COUNTERS_BY_REGION_FEATURES_ARM = 1000605000,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_COUNTERS_BY_REGION_PROPERTIES_ARM = 1000605001,
+    VK_STRUCTURE_TYPE_PERFORMANCE_COUNTER_ARM = 1000605002,
+    VK_STRUCTURE_TYPE_PERFORMANCE_COUNTER_DESCRIPTION_ARM = 1000605003,
+    VK_STRUCTURE_TYPE_RENDER_PASS_PERFORMANCE_COUNTERS_BY_REGION_BEGIN_INFO_ARM = 1000605004,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_ROBUSTNESS_FEATURES_EXT = 1000608000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FORMAT_PACK_FEATURES_ARM = 1000609000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_LAYERED_FEATURES_VALVE = 1000611000,
@@ -5379,6 +5390,7 @@ typedef enum VkExternalMemoryHandleTypeFlagBits {
     VK_EXTERNAL_MEMORY_HANDLE_TYPE_HOST_MAPPED_FOREIGN_MEMORY_BIT_EXT = 0x00000100,
     VK_EXTERNAL_MEMORY_HANDLE_TYPE_ZIRCON_VMO_BIT_FUCHSIA = 0x00000800,
     VK_EXTERNAL_MEMORY_HANDLE_TYPE_RDMA_ADDRESS_BIT_NV = 0x00001000,
+    VK_EXTERNAL_MEMORY_HANDLE_TYPE_OH_NATIVE_BUFFER_BIT_OHOS = 0x00008000,
     VK_EXTERNAL_MEMORY_HANDLE_TYPE_SCREEN_BUFFER_BIT_QNX = 0x00004000,
     VK_EXTERNAL_MEMORY_HANDLE_TYPE_MTLBUFFER_BIT_EXT = 0x00010000,
     VK_EXTERNAL_MEMORY_HANDLE_TYPE_MTLTEXTURE_BIT_EXT = 0x00020000,
@@ -23710,6 +23722,64 @@ typedef struct VkPhysicalDevicePipelineOpacityMicromapFeaturesARM {
     VkBool32           pipelineOpacityMicromap;
 } VkPhysicalDevicePipelineOpacityMicromapFeaturesARM;
 
+
+
+// VK_ARM_performance_counters_by_region is a preprocessor guard. Do not pass it to API calls.
+#define VK_ARM_performance_counters_by_region 1
+#define VK_ARM_PERFORMANCE_COUNTERS_BY_REGION_SPEC_VERSION 1
+#define VK_ARM_PERFORMANCE_COUNTERS_BY_REGION_EXTENSION_NAME "VK_ARM_performance_counters_by_region"
+typedef VkFlags VkPerformanceCounterDescriptionFlagsARM;
+typedef struct VkPhysicalDevicePerformanceCountersByRegionFeaturesARM {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           performanceCountersByRegion;
+} VkPhysicalDevicePerformanceCountersByRegionFeaturesARM;
+
+typedef struct VkPhysicalDevicePerformanceCountersByRegionPropertiesARM {
+    VkStructureType    sType;
+    void*              pNext;
+    uint32_t           maxPerRegionPerformanceCounters;
+    VkExtent2D         performanceCounterRegionSize;
+    uint32_t           rowStrideAlignment;
+    uint32_t           regionAlignment;
+    VkBool32           identityTransformOrder;
+} VkPhysicalDevicePerformanceCountersByRegionPropertiesARM;
+
+typedef struct VkPerformanceCounterARM {
+    VkStructureType    sType;
+    void*              pNext;
+    uint32_t           counterID;
+} VkPerformanceCounterARM;
+
+typedef struct VkPerformanceCounterDescriptionARM {
+    VkStructureType                            sType;
+    void*                                      pNext;
+    VkPerformanceCounterDescriptionFlagsARM    flags;
+    char                                       name[VK_MAX_DESCRIPTION_SIZE];
+} VkPerformanceCounterDescriptionARM;
+
+typedef struct VkRenderPassPerformanceCountersByRegionBeginInfoARM {
+    VkStructureType           sType;
+    void*                     pNext;
+    uint32_t                  counterAddressCount;
+    const VkDeviceAddress*    pCounterAddresses;
+    VkBool32                  serializeRegions;
+    uint32_t                  counterIndexCount;
+    uint32_t*                 pCounterIndices;
+} VkRenderPassPerformanceCountersByRegionBeginInfoARM;
+
+typedef VkResult (VKAPI_PTR *PFN_vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM)(VkPhysicalDevice physicalDevice, uint32_t queueFamilyIndex, uint32_t* pCounterCount, VkPerformanceCounterARM* pCounters, VkPerformanceCounterDescriptionARM* pCounterDescriptions);
+
+#ifndef VK_NO_PROTOTYPES
+#ifndef VK_ONLY_EXPORTED_PROTOTYPES
+VKAPI_ATTR VkResult VKAPI_CALL vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM(
+    VkPhysicalDevice                            physicalDevice,
+    uint32_t                                    queueFamilyIndex,
+    uint32_t*                                   pCounterCount,
+    VkPerformanceCounterARM*                    pCounters,
+    VkPerformanceCounterDescriptionARM*         pCounterDescriptions);
+#endif
+#endif
 
 
 // VK_EXT_vertex_attribute_robustness is a preprocessor guard. Do not pass it to API calls.
