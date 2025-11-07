@@ -18,11 +18,7 @@ module;
   "To silence this warning, define the VULKAN_HPP_CXX_MODULE_EXPERIMENTAL_WARNING macro.\n\n" \
   "For feedback, go to: https://github.com/KhronosGroup/Vulkan-Hpp/issues"
 
-#  if defined( __clang__ ) || defined( __GNUC__ ) || defined( __GNUG__ )
-_Pragma( VULKAN_HPP_STRINGIFY( GCC warning VULKAN_HPP_CXX_MODULE_EXPERIMENTAL_WARNING ) )
-#  elif defined( _MSC_VER )
-_Pragma( VULKAN_HPP_STRINGIFY( message( __FILE__ "(" VULKAN_HPP_STRINGIFY( __LINE__ ) "): warning: " VULKAN_HPP_CXX_MODULE_EXPERIMENTAL_WARNING ) ) )
-#  endif
+VULKAN_HPP_COMPILE_WARNING( VULKAN_HPP_CXX_MODULE_EXPERIMENTAL_WARNING )
 #endif
 
 #include <vulkan/vulkan.hpp>
@@ -32,8 +28,8 @@ _Pragma( VULKAN_HPP_STRINGIFY( message( __FILE__ "(" VULKAN_HPP_STRINGIFY( __LIN
 #include <vulkan/vulkan_raii.hpp>
 #include <vulkan/vulkan_shared.hpp>
 
-  export module vulkan_hpp;
-export import VULKAN_HPP_STD_MODULE;
+export module vulkan_hpp;
+export import std.compat;
 
 export namespace VULKAN_HPP_NAMESPACE
 {
@@ -1051,6 +1047,9 @@ export namespace VULKAN_HPP_NAMESPACE
   //=== VK_ARM_performance_counters_by_region ===
   using VULKAN_HPP_NAMESPACE::PerformanceCounterDescriptionFlagBitsARM;
   using VULKAN_HPP_NAMESPACE::PerformanceCounterDescriptionFlagsARM;
+
+  //=== VK_QCOM_data_graph_model ===
+  using VULKAN_HPP_NAMESPACE::DataGraphModelCacheTypeQCOM;
 
   //=== VK_KHR_maintenance10 ===
   using VULKAN_HPP_NAMESPACE::RenderingAttachmentFlagBitsKHR;
@@ -2978,6 +2977,11 @@ export namespace VULKAN_HPP_NAMESPACE
   //=== VK_EXT_shader_64bit_indexing ===
   using VULKAN_HPP_NAMESPACE::EXTShader64BitIndexingExtensionName;
   using VULKAN_HPP_NAMESPACE::EXTShader64BitIndexingSpecVersion;
+
+  //=== VK_QCOM_data_graph_model ===
+  using VULKAN_HPP_NAMESPACE::DataGraphModelToolchainVersionLengthQCOM;
+  using VULKAN_HPP_NAMESPACE::QCOMDataGraphModelExtensionName;
+  using VULKAN_HPP_NAMESPACE::QCOMDataGraphModelSpecVersion;
 
   //=== VK_KHR_maintenance10 ===
   using VULKAN_HPP_NAMESPACE::KHRMaintenance10ExtensionName;
@@ -5277,6 +5281,11 @@ export namespace VULKAN_HPP_NAMESPACE
 
   //=== VK_EXT_shader_64bit_indexing ===
   using VULKAN_HPP_NAMESPACE::PhysicalDeviceShader64BitIndexingFeaturesEXT;
+
+  //=== VK_QCOM_data_graph_model ===
+  using VULKAN_HPP_NAMESPACE::DataGraphPipelineBuiltinModelCreateInfoQCOM;
+  using VULKAN_HPP_NAMESPACE::PhysicalDeviceDataGraphModelFeaturesQCOM;
+  using VULKAN_HPP_NAMESPACE::PipelineCacheHeaderVersionDataGraphQCOM;
 
   //=== VK_KHR_maintenance10 ===
   using VULKAN_HPP_NAMESPACE::PhysicalDeviceMaintenance10FeaturesKHR;
@@ -9338,6 +9347,14 @@ export namespace std
   //=== VK_EXT_shader_64bit_indexing ===
   template <>
   struct hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceShader64BitIndexingFeaturesEXT>;
+
+  //=== VK_QCOM_data_graph_model ===
+  template <>
+  struct hash<VULKAN_HPP_NAMESPACE::PipelineCacheHeaderVersionDataGraphQCOM>;
+  template <>
+  struct hash<VULKAN_HPP_NAMESPACE::DataGraphPipelineBuiltinModelCreateInfoQCOM>;
+  template <>
+  struct hash<VULKAN_HPP_NAMESPACE::PhysicalDeviceDataGraphModelFeaturesQCOM>;
 
   //=== VK_KHR_maintenance10 ===
   template <>
