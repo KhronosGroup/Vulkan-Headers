@@ -66,7 +66,7 @@ extern "C" {
 //#define VK_API_VERSION VK_MAKE_API_VERSION(0, 1, 0, 0) // Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 331
+#define VK_HEADER_VERSION 332
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 4, VK_HEADER_VERSION)
@@ -1358,6 +1358,8 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_DEVICE_MEMORY_FEATURES_EXT = 1000620000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_MODE_FIFO_LATEST_READY_FEATURES_KHR = 1000361000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_64_BIT_INDEXING_FEATURES_EXT = 1000627000,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DATA_GRAPH_MODEL_FEATURES_QCOM = 1000629000,
+    VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_BUILTIN_MODEL_CREATE_INFO_QCOM = 1000629001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_10_FEATURES_KHR = 1000630000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_10_PROPERTIES_KHR = 1000630001,
     VK_STRUCTURE_TYPE_RENDERING_ATTACHMENT_FLAGS_INFO_KHR = 1000630002,
@@ -2182,6 +2184,7 @@ typedef enum VkIndexType {
 
 typedef enum VkPipelineCacheHeaderVersion {
     VK_PIPELINE_CACHE_HEADER_VERSION_ONE = 1,
+    VK_PIPELINE_CACHE_HEADER_VERSION_DATA_GRAPH_QCOM = 1000629000,
     VK_PIPELINE_CACHE_HEADER_VERSION_MAX_ENUM = 0x7FFFFFFF
 } VkPipelineCacheHeaderVersion;
 
@@ -21260,7 +21263,7 @@ typedef void (VKAPI_PTR *PFN_vkDestroyTensorViewARM)(VkDevice device, VkTensorVi
 typedef void (VKAPI_PTR *PFN_vkGetTensorMemoryRequirementsARM)(VkDevice device, const VkTensorMemoryRequirementsInfoARM* pInfo, VkMemoryRequirements2* pMemoryRequirements);
 typedef VkResult (VKAPI_PTR *PFN_vkBindTensorMemoryARM)(VkDevice device, uint32_t bindInfoCount, const VkBindTensorMemoryInfoARM* pBindInfos);
 typedef void (VKAPI_PTR *PFN_vkGetDeviceTensorMemoryRequirementsARM)(VkDevice device, const VkDeviceTensorMemoryRequirementsARM* pInfo, VkMemoryRequirements2* pMemoryRequirements);
-typedef void (VKAPI_PTR *PFN_vkCmdCopyTensorARM)(VkCommandBuffer commandBuffer,  const VkCopyTensorInfoARM* pCopyTensorInfo);
+typedef void (VKAPI_PTR *PFN_vkCmdCopyTensorARM)(VkCommandBuffer commandBuffer, const VkCopyTensorInfoARM* pCopyTensorInfo);
 typedef void (VKAPI_PTR *PFN_vkGetPhysicalDeviceExternalTensorPropertiesARM)(VkPhysicalDevice                             physicalDevice, const VkPhysicalDeviceExternalTensorInfoARM* pExternalTensorInfo, VkExternalTensorPropertiesARM*               pExternalTensorProperties);
 typedef VkResult (VKAPI_PTR *PFN_vkGetTensorOpaqueCaptureDescriptorDataARM)(VkDevice                                    device, const VkTensorCaptureDescriptorDataInfoARM* pInfo, void*                                       pData);
 typedef VkResult (VKAPI_PTR *PFN_vkGetTensorViewOpaqueCaptureDescriptorDataARM)(VkDevice                                        device, const VkTensorViewCaptureDescriptorDataInfoARM* pInfo, void*                                           pData);
@@ -21320,7 +21323,7 @@ VKAPI_ATTR void VKAPI_CALL vkGetDeviceTensorMemoryRequirementsARM(
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkCmdCopyTensorARM(
     VkCommandBuffer                             commandBuffer,
-     const VkCopyTensorInfoARM*                 pCopyTensorInfo);
+    const VkCopyTensorInfoARM*                  pCopyTensorInfo);
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -22228,11 +22231,15 @@ typedef enum VkDataGraphPipelinePropertyARM {
 
 typedef enum VkPhysicalDeviceDataGraphProcessingEngineTypeARM {
     VK_PHYSICAL_DEVICE_DATA_GRAPH_PROCESSING_ENGINE_TYPE_DEFAULT_ARM = 0,
+    VK_PHYSICAL_DEVICE_DATA_GRAPH_PROCESSING_ENGINE_TYPE_NEURAL_QCOM = 1000629000,
+    VK_PHYSICAL_DEVICE_DATA_GRAPH_PROCESSING_ENGINE_TYPE_COMPUTE_QCOM = 1000629001,
     VK_PHYSICAL_DEVICE_DATA_GRAPH_PROCESSING_ENGINE_TYPE_MAX_ENUM_ARM = 0x7FFFFFFF
 } VkPhysicalDeviceDataGraphProcessingEngineTypeARM;
 
 typedef enum VkPhysicalDeviceDataGraphOperationTypeARM {
     VK_PHYSICAL_DEVICE_DATA_GRAPH_OPERATION_TYPE_SPIRV_EXTENDED_INSTRUCTION_SET_ARM = 0,
+    VK_PHYSICAL_DEVICE_DATA_GRAPH_OPERATION_TYPE_NEURAL_MODEL_QCOM = 1000629000,
+    VK_PHYSICAL_DEVICE_DATA_GRAPH_OPERATION_TYPE_BUILTIN_MODEL_QCOM = 1000629001,
     VK_PHYSICAL_DEVICE_DATA_GRAPH_OPERATION_TYPE_MAX_ENUM_ARM = 0x7FFFFFFF
 } VkPhysicalDeviceDataGraphOperationTypeARM;
 typedef VkFlags64 VkDataGraphPipelineSessionCreateFlagsARM;
@@ -23887,6 +23894,38 @@ typedef struct VkPhysicalDeviceShader64BitIndexingFeaturesEXT {
     void*              pNext;
     VkBool32           shader64BitIndexing;
 } VkPhysicalDeviceShader64BitIndexingFeaturesEXT;
+
+
+
+// VK_QCOM_data_graph_model is a preprocessor guard. Do not pass it to API calls.
+#define VK_QCOM_data_graph_model 1
+#define VK_DATA_GRAPH_MODEL_TOOLCHAIN_VERSION_LENGTH_QCOM 3U
+#define VK_QCOM_DATA_GRAPH_MODEL_SPEC_VERSION 1
+#define VK_QCOM_DATA_GRAPH_MODEL_EXTENSION_NAME "VK_QCOM_data_graph_model"
+
+typedef enum VkDataGraphModelCacheTypeQCOM {
+    VK_DATA_GRAPH_MODEL_CACHE_TYPE_GENERIC_BINARY_QCOM = 0,
+    VK_DATA_GRAPH_MODEL_CACHE_TYPE_MAX_ENUM_QCOM = 0x7FFFFFFF
+} VkDataGraphModelCacheTypeQCOM;
+typedef struct VkPipelineCacheHeaderVersionDataGraphQCOM {
+    uint32_t                         headerSize;
+    VkPipelineCacheHeaderVersion     headerVersion;
+    VkDataGraphModelCacheTypeQCOM    cacheType;
+    uint32_t                         cacheVersion;
+    uint32_t                         toolchainVersion[VK_DATA_GRAPH_MODEL_TOOLCHAIN_VERSION_LENGTH_QCOM];
+} VkPipelineCacheHeaderVersionDataGraphQCOM;
+
+typedef struct VkDataGraphPipelineBuiltinModelCreateInfoQCOM {
+    VkStructureType                                        sType;
+    const void*                                            pNext;
+    const VkPhysicalDeviceDataGraphOperationSupportARM*    pOperation;
+} VkDataGraphPipelineBuiltinModelCreateInfoQCOM;
+
+typedef struct VkPhysicalDeviceDataGraphModelFeaturesQCOM {
+    VkStructureType    sType;
+    const void*        pNext;
+    VkBool32           dataGraphModel;
+} VkPhysicalDeviceDataGraphModelFeaturesQCOM;
 
 
 
