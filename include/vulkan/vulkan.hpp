@@ -8,6 +8,7 @@
 #ifndef VULKAN_HPP
 #define VULKAN_HPP
 
+#include <vulkan/vulkan.h>
 #if !defined( VULKAN_HPP_CXX_MODULE )
 // clang-format off
 #  include <vulkan/vulkan_hpp_macros.hpp>
@@ -36,11 +37,9 @@
 #  endif
 #else
 #  include <cassert>
-#  include <cstdlib>
 #  include <cstring>
-import std.compat;
+import std;
 #endif
-#include <vulkan/vulkan.h>
 
 #if VULKAN_HPP_ENABLE_DYNAMIC_LOADER_TOOL == 1
 #  if defined( __unix__ ) || defined( __APPLE__ ) || defined( __QNX__ ) || defined( __Fuchsia__ )
@@ -58,7 +57,7 @@ extern "C" __declspec( dllimport ) FARPROC __stdcall GetProcAddress( HINSTANCE h
 #  endif
 #endif
 
-static_assert( VK_HEADER_VERSION == 332, "Wrong VK_HEADER_VERSION!" );
+VULKAN_HPP_STATIC_ASSERT( VK_HEADER_VERSION == 333, "Wrong VK_HEADER_VERSION!" );
 
 // <tuple> includes <sys/sysmacros.h> through some other header
 // this results in major(x) being resolved to gnu_dev_major(x)
@@ -663,13 +662,13 @@ namespace VULKAN_HPP_NAMESPACE
   public:
     StructureChain() VULKAN_HPP_NOEXCEPT
     {
-      static_assert( StructureChainValidation<sizeof...( ChainElements ) - 1, ChainElements...>::valid, "The structure chain is not valid!" );
+      VULKAN_HPP_STATIC_ASSERT( StructureChainValidation<sizeof...( ChainElements ) - 1, ChainElements...>::valid, "The structure chain is not valid!" );
       link<sizeof...( ChainElements ) - 1>();
     }
 
     StructureChain( StructureChain const & rhs ) VULKAN_HPP_NOEXCEPT : std::tuple<ChainElements...>( rhs )
     {
-      static_assert( StructureChainValidation<sizeof...( ChainElements ) - 1, ChainElements...>::valid, "The structure chain is not valid!" );
+      VULKAN_HPP_STATIC_ASSERT( StructureChainValidation<sizeof...( ChainElements ) - 1, ChainElements...>::valid, "The structure chain is not valid!" );
       link( &std::get<0>( *this ),
             &std::get<0>( rhs ),
             reinterpret_cast<VkBaseOutStructure *>( &std::get<0>( *this ) ),
@@ -678,7 +677,7 @@ namespace VULKAN_HPP_NAMESPACE
 
     StructureChain( ChainElements const &... elems ) VULKAN_HPP_NOEXCEPT : std::tuple<ChainElements...>( elems... )
     {
-      static_assert( StructureChainValidation<sizeof...( ChainElements ) - 1, ChainElements...>::valid, "The structure chain is not valid!" );
+      VULKAN_HPP_STATIC_ASSERT( StructureChainValidation<sizeof...( ChainElements ) - 1, ChainElements...>::valid, "The structure chain is not valid!" );
       link<sizeof...( ChainElements ) - 1>();
     }
 
@@ -738,7 +737,7 @@ namespace VULKAN_HPP_NAMESPACE
     typename std::enable_if<!std::is_same<ClassType, typename std::tuple_element<0, std::tuple<ChainElements...>>::type>::value || ( Which != 0 ), bool>::type
       isLinked() const VULKAN_HPP_NOEXCEPT
     {
-      static_assert( IsPartOfStructureChain<ClassType, ChainElements...>::valid, "Can't unlink Structure that's not part of this StructureChain!" );
+      VULKAN_HPP_STATIC_ASSERT( IsPartOfStructureChain<ClassType, ChainElements...>::valid, "Can't unlink Structure that's not part of this StructureChain!" );
       return isLinked( reinterpret_cast<VkBaseInStructure const *>( &get<ClassType, Which>() ) );
     }
 
@@ -746,7 +745,7 @@ namespace VULKAN_HPP_NAMESPACE
     typename std::enable_if<!std::is_same<ClassType, typename std::tuple_element<0, std::tuple<ChainElements...>>::type>::value || ( Which != 0 ), void>::type
       relink() VULKAN_HPP_NOEXCEPT
     {
-      static_assert( IsPartOfStructureChain<ClassType, ChainElements...>::valid, "Can't relink Structure that's not part of this StructureChain!" );
+      VULKAN_HPP_STATIC_ASSERT( IsPartOfStructureChain<ClassType, ChainElements...>::valid, "Can't relink Structure that's not part of this StructureChain!" );
       auto pNext = reinterpret_cast<VkBaseInStructure *>( &get<ClassType, Which>() );
       VULKAN_HPP_ASSERT( !isLinked( pNext ) );
       auto & headElement = std::get<0>( static_cast<std::tuple<ChainElements...> &>( *this ) );
@@ -758,7 +757,7 @@ namespace VULKAN_HPP_NAMESPACE
     typename std::enable_if<!std::is_same<ClassType, typename std::tuple_element<0, std::tuple<ChainElements...>>::type>::value || ( Which != 0 ), void>::type
       unlink() VULKAN_HPP_NOEXCEPT
     {
-      static_assert( IsPartOfStructureChain<ClassType, ChainElements...>::valid, "Can't unlink Structure that's not part of this StructureChain!" );
+      VULKAN_HPP_STATIC_ASSERT( IsPartOfStructureChain<ClassType, ChainElements...>::valid, "Can't unlink Structure that's not part of this StructureChain!" );
       unlink( reinterpret_cast<VkBaseOutStructure const *>( &get<ClassType, Which>() ) );
     }
 
@@ -1022,6 +1021,12 @@ namespace VULKAN_HPP_NAMESPACE
       size_t vkHeaderVersion = VK_HEADER_VERSION;
       bool   m_valid         = true;
 #endif
+    };
+
+    template <typename Type>
+    struct isDispatchLoader
+    {
+      static VULKAN_HPP_CONST_OR_CONSTEXPR bool value = false;
     };
 
 #if !defined( VK_NO_PROTOTYPES ) || ( defined( VULKAN_HPP_DISPATCH_LOADER_DYNAMIC ) && ( VULKAN_HPP_DISPATCH_LOADER_DYNAMIC == 0 ) )
@@ -6593,12 +6598,25 @@ namespace VULKAN_HPP_NAMESPACE
         return ::vkCmdEndRendering2EXT( commandBuffer, pRenderingEndInfo );
       }
 
+      //=== VK_EXT_custom_resolve ===
+
+      void vkCmdBeginCustomResolveEXT( VkCommandBuffer commandBuffer, const VkBeginCustomResolveInfoEXT * pBeginCustomResolveInfo ) const VULKAN_HPP_NOEXCEPT
+      {
+        return ::vkCmdBeginCustomResolveEXT( commandBuffer, pBeginCustomResolveInfo );
+      }
+
       //=== VK_KHR_maintenance10 ===
 
       void vkCmdEndRendering2KHR( VkCommandBuffer commandBuffer, const VkRenderingEndInfoKHR * pRenderingEndInfo ) const VULKAN_HPP_NOEXCEPT
       {
         return ::vkCmdEndRendering2KHR( commandBuffer, pRenderingEndInfo );
       }
+    };
+
+    template <>
+    struct isDispatchLoader<DispatchLoaderStatic>
+    {
+      static VULKAN_HPP_CONST_OR_CONSTEXPR bool value = true;
     };
 
     inline DispatchLoaderStatic & getDispatchLoaderStatic()
@@ -6632,9 +6650,9 @@ namespace VULKAN_HPP_NAMESPACE
     public:
       ObjectDestroy() = default;
 
-      ObjectDestroy( OwnerType                           owner,
-                     Optional<const AllocationCallbacks> allocationCallbacks = nullptr,
-                     Dispatch const & dispatch           VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) VULKAN_HPP_NOEXCEPT
+      ObjectDestroy( OwnerType                                               owner,
+                     Optional<const AllocationCallbacks> allocationCallbacks VULKAN_HPP_DEFAULT_ASSIGNMENT( nullptr ),
+                     Dispatch const & dispatch                               VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) VULKAN_HPP_NOEXCEPT
         : m_owner( owner )
         , m_allocationCallbacks( allocationCallbacks )
         , m_dispatch( &dispatch )
@@ -6714,9 +6732,9 @@ namespace VULKAN_HPP_NAMESPACE
     public:
       ObjectFree() = default;
 
-      ObjectFree( OwnerType                           owner,
-                  Optional<const AllocationCallbacks> allocationCallbacks = nullptr,
-                  Dispatch const & dispatch           VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) VULKAN_HPP_NOEXCEPT
+      ObjectFree( OwnerType                                               owner,
+                  Optional<const AllocationCallbacks> allocationCallbacks VULKAN_HPP_DEFAULT_ASSIGNMENT( nullptr ),
+                  Dispatch const & dispatch                               VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) VULKAN_HPP_NOEXCEPT
         : m_owner( owner )
         , m_allocationCallbacks( allocationCallbacks )
         , m_dispatch( &dispatch )
@@ -7344,25 +7362,25 @@ namespace VULKAN_HPP_NAMESPACE
 
     T const * operator->() const VULKAN_HPP_NOEXCEPT
     {
-      assert( has_value() );
+      VULKAN_HPP_ASSERT( has_value() );
       return &value;
     }
 
     T * operator->() VULKAN_HPP_NOEXCEPT
     {
-      assert( has_value() );
+      VULKAN_HPP_ASSERT( has_value() );
       return &value;
     }
 
     T const & operator*() const VULKAN_HPP_NOEXCEPT
     {
-      assert( has_value() );
+      VULKAN_HPP_ASSERT( has_value() );
       return value;
     }
 
     T & operator*() VULKAN_HPP_NOEXCEPT
     {
-      assert( has_value() );
+      VULKAN_HPP_ASSERT( has_value() );
       return value;
     }
   };
@@ -9445,6 +9463,10 @@ namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_CONSTEXPR_INLINE auto KHRShaderFmaExtensionName = VK_KHR_SHADER_FMA_EXTENSION_NAME;
   VULKAN_HPP_CONSTEXPR_INLINE auto KHRShaderFmaSpecVersion   = VK_KHR_SHADER_FMA_SPEC_VERSION;
 
+  //=== VK_EXT_ray_tracing_invocation_reorder ===
+  VULKAN_HPP_CONSTEXPR_INLINE auto EXTRayTracingInvocationReorderExtensionName = VK_EXT_RAY_TRACING_INVOCATION_REORDER_EXTENSION_NAME;
+  VULKAN_HPP_CONSTEXPR_INLINE auto EXTRayTracingInvocationReorderSpecVersion   = VK_EXT_RAY_TRACING_INVOCATION_REORDER_SPEC_VERSION;
+
   //=== VK_EXT_depth_clamp_control ===
   VULKAN_HPP_CONSTEXPR_INLINE auto EXTDepthClampControlExtensionName = VK_EXT_DEPTH_CLAMP_CONTROL_EXTENSION_NAME;
   VULKAN_HPP_CONSTEXPR_INLINE auto EXTDepthClampControlSpecVersion   = VK_EXT_DEPTH_CLAMP_CONTROL_SPEC_VERSION;
@@ -9532,6 +9554,10 @@ namespace VULKAN_HPP_NAMESPACE
   //=== VK_EXT_shader_64bit_indexing ===
   VULKAN_HPP_CONSTEXPR_INLINE auto EXTShader64BitIndexingExtensionName = VK_EXT_SHADER_64BIT_INDEXING_EXTENSION_NAME;
   VULKAN_HPP_CONSTEXPR_INLINE auto EXTShader64BitIndexingSpecVersion   = VK_EXT_SHADER_64BIT_INDEXING_SPEC_VERSION;
+
+  //=== VK_EXT_custom_resolve ===
+  VULKAN_HPP_CONSTEXPR_INLINE auto EXTCustomResolveExtensionName = VK_EXT_CUSTOM_RESOLVE_EXTENSION_NAME;
+  VULKAN_HPP_CONSTEXPR_INLINE auto EXTCustomResolveSpecVersion   = VK_EXT_CUSTOM_RESOLVE_SPEC_VERSION;
 
   //=== VK_QCOM_data_graph_model ===
   VULKAN_HPP_CONSTEXPR_INLINE auto QCOMDataGraphModelExtensionName = VK_QCOM_DATA_GRAPH_MODEL_EXTENSION_NAME;
@@ -17447,24 +17473,6 @@ namespace VULKAN_HPP_NAMESPACE
     };
   };
 
-  template <>
-  struct StructExtends<PhysicalDeviceRayTracingInvocationReorderFeaturesNV, PhysicalDeviceFeatures2>
-  {
-    enum
-    {
-      value = true
-    };
-  };
-
-  template <>
-  struct StructExtends<PhysicalDeviceRayTracingInvocationReorderFeaturesNV, DeviceCreateInfo>
-  {
-    enum
-    {
-      value = true
-    };
-  };
-
   //=== VK_NV_cooperative_vector ===
   template <>
   struct StructExtends<PhysicalDeviceCooperativeVectorPropertiesNV, PhysicalDeviceProperties2>
@@ -19171,6 +19179,34 @@ namespace VULKAN_HPP_NAMESPACE
     };
   };
 
+  //=== VK_EXT_ray_tracing_invocation_reorder ===
+  template <>
+  struct StructExtends<PhysicalDeviceRayTracingInvocationReorderPropertiesEXT, PhysicalDeviceProperties2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<PhysicalDeviceRayTracingInvocationReorderFeaturesEXT, PhysicalDeviceFeatures2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<PhysicalDeviceRayTracingInvocationReorderFeaturesEXT, DeviceCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
   //=== VK_EXT_depth_clamp_control ===
   template <>
   struct StructExtends<PhysicalDeviceDepthClampControlFeaturesEXT, PhysicalDeviceFeatures2>
@@ -19709,6 +19745,52 @@ namespace VULKAN_HPP_NAMESPACE
     };
   };
 
+  //=== VK_EXT_custom_resolve ===
+  template <>
+  struct StructExtends<PhysicalDeviceCustomResolveFeaturesEXT, PhysicalDeviceFeatures2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<PhysicalDeviceCustomResolveFeaturesEXT, DeviceCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<CustomResolveCreateInfoEXT, GraphicsPipelineCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<CustomResolveCreateInfoEXT, CommandBufferInheritanceInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<CustomResolveCreateInfoEXT, ShaderCreateInfoEXT>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
   //=== VK_QCOM_data_graph_model ===
   template <>
   struct StructExtends<DataGraphPipelineBuiltinModelCreateInfoQCOM, DataGraphPipelineCreateInfoARM>
@@ -19928,9 +20010,9 @@ namespace VULKAN_HPP_NAMESPACE
       T getProcAddress( const char * function ) const VULKAN_HPP_NOEXCEPT
       {
 #  if defined( __unix__ ) || defined( __APPLE__ ) || defined( __QNX__ ) || defined( __Fuchsia__ )
-        return (T)dlsym( m_library, function );
+        return (T)(void *)dlsym( m_library, function );
 #  elif defined( _WIN32 )
-        return ( T )::GetProcAddress( m_library, function );
+        return (T)(void *)::GetProcAddress( m_library, function );
 #  else
 #    error unsupported platform
 #  endif
@@ -21237,6 +21319,9 @@ namespace VULKAN_HPP_NAMESPACE
 
       //=== VK_EXT_fragment_density_map_offset ===
       PFN_vkCmdEndRendering2EXT vkCmdEndRendering2EXT = 0;
+
+      //=== VK_EXT_custom_resolve ===
+      PFN_vkCmdBeginCustomResolveEXT vkCmdBeginCustomResolveEXT = 0;
 
       //=== VK_KHR_maintenance10 ===
       PFN_vkCmdEndRendering2KHR vkCmdEndRendering2KHR = 0;
@@ -22880,6 +22965,9 @@ namespace VULKAN_HPP_NAMESPACE
         if ( !vkCmdEndRendering2KHR )
           vkCmdEndRendering2KHR = vkCmdEndRendering2EXT;
 
+        //=== VK_EXT_custom_resolve ===
+        vkCmdBeginCustomResolveEXT = PFN_vkCmdBeginCustomResolveEXT( vkGetInstanceProcAddr( instance, "vkCmdBeginCustomResolveEXT" ) );
+
         //=== VK_KHR_maintenance10 ===
         vkCmdEndRendering2KHR = PFN_vkCmdEndRendering2KHR( vkGetInstanceProcAddr( instance, "vkCmdEndRendering2KHR" ) );
       }
@@ -24129,6 +24217,9 @@ namespace VULKAN_HPP_NAMESPACE
         if ( !vkCmdEndRendering2KHR )
           vkCmdEndRendering2KHR = vkCmdEndRendering2EXT;
 
+        //=== VK_EXT_custom_resolve ===
+        vkCmdBeginCustomResolveEXT = PFN_vkCmdBeginCustomResolveEXT( vkGetDeviceProcAddr( device, "vkCmdBeginCustomResolveEXT" ) );
+
         //=== VK_KHR_maintenance10 ===
         vkCmdEndRendering2KHR = PFN_vkCmdEndRendering2KHR( vkGetDeviceProcAddr( device, "vkCmdEndRendering2KHR" ) );
       }
@@ -24152,6 +24243,13 @@ namespace VULKAN_HPP_NAMESPACE
         init( instance, device, dl );
       }
     };
+
+    template <>
+    struct isDispatchLoader<DispatchLoaderDynamic>
+    {
+      static VULKAN_HPP_CONST_OR_CONSTEXPR bool value = true;
+    };
+
   }  // namespace detail
 }  // namespace VULKAN_HPP_NAMESPACE
 #endif
