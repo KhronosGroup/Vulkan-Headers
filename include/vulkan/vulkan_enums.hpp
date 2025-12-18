@@ -1189,6 +1189,7 @@ namespace VULKAN_HPP_NAMESPACE
     eSamplerCustomBorderColorCreateInfoEXT                 = VK_STRUCTURE_TYPE_SAMPLER_CUSTOM_BORDER_COLOR_CREATE_INFO_EXT,
     ePhysicalDeviceCustomBorderColorPropertiesEXT          = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_PROPERTIES_EXT,
     ePhysicalDeviceCustomBorderColorFeaturesEXT            = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_FEATURES_EXT,
+    ePhysicalDeviceTextureCompressionAstc3DFeaturesEXT     = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_3D_FEATURES_EXT,
     ePipelineLibraryCreateInfoKHR                          = VK_STRUCTURE_TYPE_PIPELINE_LIBRARY_CREATE_INFO_KHR,
     ePhysicalDevicePresentBarrierFeaturesNV                = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_BARRIER_FEATURES_NV,
     eSurfaceCapabilitiesPresentBarrierNV                   = VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_PRESENT_BARRIER_NV,
@@ -1700,10 +1701,7 @@ namespace VULKAN_HPP_NAMESPACE
     eVideoDecodeH265InlineSessionParametersInfoKHR              = VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_INLINE_SESSION_PARAMETERS_INFO_KHR,
     eVideoDecodeAv1InlineSessionParametersInfoKHR               = VK_STRUCTURE_TYPE_VIDEO_DECODE_AV1_INLINE_SESSION_PARAMETERS_INFO_KHR,
 #if defined( VK_USE_PLATFORM_OHOS )
-    eSurfaceCreateInfoOHOS                    = VK_STRUCTURE_TYPE_SURFACE_CREATE_INFO_OHOS,
-    eNativeBufferOHOS                         = VK_STRUCTURE_TYPE_NATIVE_BUFFER_OHOS,
-    eSwapchainImageCreateInfoOHOS             = VK_STRUCTURE_TYPE_SWAPCHAIN_IMAGE_CREATE_INFO_OHOS,
-    ePhysicalDevicePresentationPropertiesOHOS = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENTATION_PROPERTIES_OHOS,
+    eSurfaceCreateInfoOHOS = VK_STRUCTURE_TYPE_SURFACE_CREATE_INFO_OHOS,
 #endif /*VK_USE_PLATFORM_OHOS*/
     ePhysicalDeviceHdrVividFeaturesHUAWEI             = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HDR_VIVID_FEATURES_HUAWEI,
     eHdrVividDynamicMetadataHUAWEI                    = VK_STRUCTURE_TYPE_HDR_VIVID_DYNAMIC_METADATA_HUAWEI,
@@ -1757,6 +1755,8 @@ namespace VULKAN_HPP_NAMESPACE
     eRenderingEndInfoKHR                                      = VK_STRUCTURE_TYPE_RENDERING_END_INFO_KHR,
     eRenderingEndInfoEXT                                      = VK_STRUCTURE_TYPE_RENDERING_END_INFO_EXT,
     eResolveImageModeInfoKHR                                  = VK_STRUCTURE_TYPE_RESOLVE_IMAGE_MODE_INFO_KHR,
+    ePhysicalDeviceShaderLongVectorFeaturesEXT                = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_LONG_VECTOR_FEATURES_EXT,
+    ePhysicalDeviceShaderLongVectorPropertiesEXT              = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_LONG_VECTOR_PROPERTIES_EXT,
     ePhysicalDevicePipelineCacheIncrementalModeFeaturesSEC    = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CACHE_INCREMENTAL_MODE_FEATURES_SEC,
     ePhysicalDeviceShaderUniformBufferUnsizedArrayFeaturesEXT = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_UNIFORM_BUFFER_UNSIZED_ARRAY_FEATURES_EXT,
     eComputeOccupancyPriorityParametersNV                     = VK_STRUCTURE_TYPE_COMPUTE_OCCUPANCY_PRIORITY_PARAMETERS_NV,
@@ -2154,6 +2154,36 @@ namespace VULKAN_HPP_NAMESPACE
     ePvrtc14BppSrgbBlockIMG                  = VK_FORMAT_PVRTC1_4BPP_SRGB_BLOCK_IMG,
     ePvrtc22BppSrgbBlockIMG                  = VK_FORMAT_PVRTC2_2BPP_SRGB_BLOCK_IMG,
     ePvrtc24BppSrgbBlockIMG                  = VK_FORMAT_PVRTC2_4BPP_SRGB_BLOCK_IMG,
+    eAstc3x3x3UnormBlockEXT                  = VK_FORMAT_ASTC_3x3x3_UNORM_BLOCK_EXT,
+    eAstc3x3x3SrgbBlockEXT                   = VK_FORMAT_ASTC_3x3x3_SRGB_BLOCK_EXT,
+    eAstc3x3x3SfloatBlockEXT                 = VK_FORMAT_ASTC_3x3x3_SFLOAT_BLOCK_EXT,
+    eAstc4x3x3UnormBlockEXT                  = VK_FORMAT_ASTC_4x3x3_UNORM_BLOCK_EXT,
+    eAstc4x3x3SrgbBlockEXT                   = VK_FORMAT_ASTC_4x3x3_SRGB_BLOCK_EXT,
+    eAstc4x3x3SfloatBlockEXT                 = VK_FORMAT_ASTC_4x3x3_SFLOAT_BLOCK_EXT,
+    eAstc4x4x3UnormBlockEXT                  = VK_FORMAT_ASTC_4x4x3_UNORM_BLOCK_EXT,
+    eAstc4x4x3SrgbBlockEXT                   = VK_FORMAT_ASTC_4x4x3_SRGB_BLOCK_EXT,
+    eAstc4x4x3SfloatBlockEXT                 = VK_FORMAT_ASTC_4x4x3_SFLOAT_BLOCK_EXT,
+    eAstc4x4x4UnormBlockEXT                  = VK_FORMAT_ASTC_4x4x4_UNORM_BLOCK_EXT,
+    eAstc4x4x4SrgbBlockEXT                   = VK_FORMAT_ASTC_4x4x4_SRGB_BLOCK_EXT,
+    eAstc4x4x4SfloatBlockEXT                 = VK_FORMAT_ASTC_4x4x4_SFLOAT_BLOCK_EXT,
+    eAstc5x4x4UnormBlockEXT                  = VK_FORMAT_ASTC_5x4x4_UNORM_BLOCK_EXT,
+    eAstc5x4x4SrgbBlockEXT                   = VK_FORMAT_ASTC_5x4x4_SRGB_BLOCK_EXT,
+    eAstc5x4x4SfloatBlockEXT                 = VK_FORMAT_ASTC_5x4x4_SFLOAT_BLOCK_EXT,
+    eAstc5x5x4UnormBlockEXT                  = VK_FORMAT_ASTC_5x5x4_UNORM_BLOCK_EXT,
+    eAstc5x5x4SrgbBlockEXT                   = VK_FORMAT_ASTC_5x5x4_SRGB_BLOCK_EXT,
+    eAstc5x5x4SfloatBlockEXT                 = VK_FORMAT_ASTC_5x5x4_SFLOAT_BLOCK_EXT,
+    eAstc5x5x5UnormBlockEXT                  = VK_FORMAT_ASTC_5x5x5_UNORM_BLOCK_EXT,
+    eAstc5x5x5SrgbBlockEXT                   = VK_FORMAT_ASTC_5x5x5_SRGB_BLOCK_EXT,
+    eAstc5x5x5SfloatBlockEXT                 = VK_FORMAT_ASTC_5x5x5_SFLOAT_BLOCK_EXT,
+    eAstc6x5x5UnormBlockEXT                  = VK_FORMAT_ASTC_6x5x5_UNORM_BLOCK_EXT,
+    eAstc6x5x5SrgbBlockEXT                   = VK_FORMAT_ASTC_6x5x5_SRGB_BLOCK_EXT,
+    eAstc6x5x5SfloatBlockEXT                 = VK_FORMAT_ASTC_6x5x5_SFLOAT_BLOCK_EXT,
+    eAstc6x6x5UnormBlockEXT                  = VK_FORMAT_ASTC_6x6x5_UNORM_BLOCK_EXT,
+    eAstc6x6x5SrgbBlockEXT                   = VK_FORMAT_ASTC_6x6x5_SRGB_BLOCK_EXT,
+    eAstc6x6x5SfloatBlockEXT                 = VK_FORMAT_ASTC_6x6x5_SFLOAT_BLOCK_EXT,
+    eAstc6x6x6UnormBlockEXT                  = VK_FORMAT_ASTC_6x6x6_UNORM_BLOCK_EXT,
+    eAstc6x6x6SrgbBlockEXT                   = VK_FORMAT_ASTC_6x6x6_SRGB_BLOCK_EXT,
+    eAstc6x6x6SfloatBlockEXT                 = VK_FORMAT_ASTC_6x6x6_SFLOAT_BLOCK_EXT,
     eR8BoolARM                               = VK_FORMAT_R8_BOOL_ARM,
     eR16G16Sfixed5NV                         = VK_FORMAT_R16G16_SFIXED5_NV,
     eR16G16S105NV                            = VK_FORMAT_R16G16_S10_5_NV,
@@ -9463,28 +9493,6 @@ namespace VULKAN_HPP_NAMESPACE
   {
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                   isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR SurfaceCreateFlagsOHOS allFlags  = {};
-  };
-#endif /*VK_USE_PLATFORM_OHOS*/
-
-#if defined( VK_USE_PLATFORM_OHOS )
-  //=== VK_OHOS_native_buffer ===
-
-  // wrapper class for enum VkSwapchainImageUsageFlagBitsOHOS, see
-  // https://registry.khronos.org/vulkan/specs/latest/man/html/VkSwapchainImageUsageFlagBitsOHOS.html
-  enum class SwapchainImageUsageFlagBitsOHOS : VkSwapchainImageUsageFlagsOHOS
-  {
-    eShared = VK_SWAPCHAIN_IMAGE_USAGE_SHARED_BIT_OHOS
-  };
-
-  // wrapper using for bitmask VkSwapchainImageUsageFlagsOHOS, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkSwapchainImageUsageFlagsOHOS.html
-  using SwapchainImageUsageFlagsOHOS = Flags<SwapchainImageUsageFlagBitsOHOS>;
-
-  template <>
-  struct FlagTraits<SwapchainImageUsageFlagBitsOHOS>
-  {
-    using WrappedType                                                           = VkSwapchainImageUsageFlagBitsOHOS;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR bool                         isBitmask = true;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR SwapchainImageUsageFlagsOHOS allFlags  = SwapchainImageUsageFlagBitsOHOS::eShared;
   };
 #endif /*VK_USE_PLATFORM_OHOS*/
 

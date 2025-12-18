@@ -298,6 +298,7 @@ namespace VULKAN_HPP_NAMESPACE
                                                             "VK_EXT_device_memory_report",
                                                             "VK_EXT_robustness2",
                                                             "VK_EXT_custom_border_color",
+                                                            "VK_EXT_texture_compression_astc_3d",
                                                             "VK_GOOGLE_user_type",
                                                             "VK_KHR_pipeline_library",
                                                             "VK_NV_present_barrier",
@@ -488,9 +489,6 @@ namespace VULKAN_HPP_NAMESPACE
                                                             "VK_EXT_depth_clamp_control",
                                                             "VK_KHR_maintenance9",
                                                             "VK_KHR_video_maintenance2",
-#if defined( VK_USE_PLATFORM_OHOS )
-                                                            "VK_OHOS_native_buffer",
-#endif /*VK_USE_PLATFORM_OHOS*/
                                                             "VK_HUAWEI_hdr_vivid",
                                                             "VK_NV_cooperative_matrix2",
                                                             "VK_ARM_pipeline_opacity_micromap",
@@ -513,6 +511,7 @@ namespace VULKAN_HPP_NAMESPACE
                                                             "VK_EXT_custom_resolve",
                                                             "VK_QCOM_data_graph_model",
                                                             "VK_KHR_maintenance10",
+                                                            "VK_EXT_shader_long_vector",
                                                             "VK_SEC_pipeline_cache_incremental_mode",
                                                             "VK_EXT_shader_uniform_buffer_unsized_array",
                                                             "VK_NV_compute_occupancy_priority" };
@@ -1742,6 +1741,12 @@ namespace VULKAN_HPP_NAMESPACE
             } } },
           { "VK_VERSION_1_1", { {} } } } },
       { "VK_EXT_custom_border_color",
+        { { "VK_VERSION_1_0",
+            { {
+              "VK_KHR_get_physical_device_properties2",
+            } } },
+          { "VK_VERSION_1_1", { {} } } } },
+      { "VK_EXT_texture_compression_astc_3d",
         { { "VK_VERSION_1_0",
             { {
               "VK_KHR_get_physical_device_properties2",
@@ -3019,6 +3024,7 @@ namespace VULKAN_HPP_NAMESPACE
               "VK_KHR_get_physical_device_properties2",
             } } },
           { "VK_VERSION_1_1", { {} } } } },
+      { "VK_EXT_shader_long_vector", { { "VK_VERSION_1_2", { {} } } } },
       { "VK_SEC_pipeline_cache_incremental_mode",
         { { "VK_VERSION_1_0",
             { {
@@ -3878,9 +3884,9 @@ namespace VULKAN_HPP_NAMESPACE
            ( extension == "VK_NV_inherited_viewport_scissor" ) || ( extension == "VK_KHR_shader_integer_dot_product" ) ||
            ( extension == "VK_EXT_texel_buffer_alignment" ) || ( extension == "VK_QCOM_render_pass_transform" ) ||
            ( extension == "VK_EXT_depth_bias_control" ) || ( extension == "VK_EXT_device_memory_report" ) || ( extension == "VK_EXT_robustness2" ) ||
-           ( extension == "VK_EXT_custom_border_color" ) || ( extension == "VK_GOOGLE_user_type" ) || ( extension == "VK_KHR_pipeline_library" ) ||
-           ( extension == "VK_NV_present_barrier" ) || ( extension == "VK_KHR_shader_non_semantic_info" ) || ( extension == "VK_KHR_present_id" ) ||
-           ( extension == "VK_EXT_private_data" ) || ( extension == "VK_EXT_pipeline_creation_cache_control" ) ||
+           ( extension == "VK_EXT_custom_border_color" ) || ( extension == "VK_EXT_texture_compression_astc_3d" ) || ( extension == "VK_GOOGLE_user_type" ) ||
+           ( extension == "VK_KHR_pipeline_library" ) || ( extension == "VK_NV_present_barrier" ) || ( extension == "VK_KHR_shader_non_semantic_info" ) ||
+           ( extension == "VK_KHR_present_id" ) || ( extension == "VK_EXT_private_data" ) || ( extension == "VK_EXT_pipeline_creation_cache_control" ) ||
            ( extension == "VK_KHR_video_encode_queue" ) || ( extension == "VK_NV_device_diagnostics_config" ) ||
            ( extension == "VK_QCOM_render_pass_store_ops" )
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
@@ -3977,11 +3983,8 @@ namespace VULKAN_HPP_NAMESPACE
            ( extension == "VK_NV_partitioned_acceleration_structure" ) || ( extension == "VK_EXT_device_generated_commands" ) ||
            ( extension == "VK_KHR_maintenance8" ) || ( extension == "VK_MESA_image_alignment_control" ) || ( extension == "VK_KHR_shader_fma" ) ||
            ( extension == "VK_EXT_ray_tracing_invocation_reorder" ) || ( extension == "VK_EXT_depth_clamp_control" ) ||
-           ( extension == "VK_KHR_maintenance9" ) || ( extension == "VK_KHR_video_maintenance2" )
-#if defined( VK_USE_PLATFORM_OHOS )
-        || ( extension == "VK_OHOS_native_buffer" )
-#endif /*VK_USE_PLATFORM_OHOS*/
-        || ( extension == "VK_HUAWEI_hdr_vivid" ) || ( extension == "VK_NV_cooperative_matrix2" ) || ( extension == "VK_ARM_pipeline_opacity_micromap" )
+           ( extension == "VK_KHR_maintenance9" ) || ( extension == "VK_KHR_video_maintenance2" ) || ( extension == "VK_HUAWEI_hdr_vivid" ) ||
+           ( extension == "VK_NV_cooperative_matrix2" ) || ( extension == "VK_ARM_pipeline_opacity_micromap" )
 #if defined( VK_USE_PLATFORM_METAL_EXT )
         || ( extension == "VK_EXT_external_memory_metal" )
 #endif /*VK_USE_PLATFORM_METAL_EXT*/
@@ -3994,8 +3997,8 @@ namespace VULKAN_HPP_NAMESPACE
         || ( extension == "VK_EXT_fragment_density_map_offset" ) || ( extension == "VK_EXT_zero_initialize_device_memory" ) ||
            ( extension == "VK_KHR_present_mode_fifo_latest_ready" ) || ( extension == "VK_EXT_shader_64bit_indexing" ) ||
            ( extension == "VK_EXT_custom_resolve" ) || ( extension == "VK_QCOM_data_graph_model" ) || ( extension == "VK_KHR_maintenance10" ) ||
-           ( extension == "VK_SEC_pipeline_cache_incremental_mode" ) || ( extension == "VK_EXT_shader_uniform_buffer_unsized_array" ) ||
-           ( extension == "VK_NV_compute_occupancy_priority" );
+           ( extension == "VK_EXT_shader_long_vector" ) || ( extension == "VK_SEC_pipeline_cache_incremental_mode" ) ||
+           ( extension == "VK_EXT_shader_uniform_buffer_unsized_array" ) || ( extension == "VK_NV_compute_occupancy_priority" );
   }
 
   VULKAN_HPP_INLINE VULKAN_HPP_CONSTEXPR_20 bool isInstanceExtension( std::string const & extension )
