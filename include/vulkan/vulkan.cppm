@@ -1,4 +1,4 @@
-// Copyright 2015-2025 The Khronos Group Inc.
+// Copyright 2015-2026 The Khronos Group Inc.
 //
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 //
@@ -53,7 +53,6 @@ export namespace VULKAN_HPP_NAMESPACE
     using VULKAN_HPP_NAMESPACE::detail::getDispatchLoaderStatic;
 #endif /*VK_NO_PROTOTYPES*/
     using VULKAN_HPP_NAMESPACE::detail::createResultValueType;
-    using VULKAN_HPP_NAMESPACE::detail::isDispatchLoader;
     using VULKAN_HPP_NAMESPACE::detail::resultCheck;
   }  // namespace detail
 #if !defined( VULKAN_HPP_DISABLE_ENHANCED_MODE )

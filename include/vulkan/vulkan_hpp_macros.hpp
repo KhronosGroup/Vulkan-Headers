@@ -1,4 +1,4 @@
-// Copyright 2015-2025 The Khronos Group Inc.
+// Copyright 2015-2026 The Khronos Group Inc.
 //
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 //
@@ -320,6 +320,14 @@ namespace VULKAN_HPP_NAMESPACE
 #  define VULKAN_HPP_DEFAULT_ASSIGNMENT( assignment ) = assignment
 #endif
 #define VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT VULKAN_HPP_DEFAULT_ASSIGNMENT( VULKAN_HPP_DEFAULT_DISPATCHER )
+
+#if !defined( VULKAN_HPP_EXPECTED ) && ( 23 <= VULKAN_HPP_CPP_VERSION ) && defined( __cpp_lib_expected ) && defined( VULKAN_HPP_USE_STD_EXPECTED )
+#  if !( defined( VULKAN_HPP_ENABLE_STD_MODULE ) && defined( VULKAN_HPP_STD_MODULE ) )
+#    include <expected>
+#  endif
+#  define VULKAN_HPP_EXPECTED   std::expected
+#  define VULKAN_HPP_UNEXPECTED std::unexpected
+#endif
 
 #if !defined( VULKAN_HPP_RAII_NAMESPACE )
 #  define VULKAN_HPP_RAII_NAMESPACE        raii
