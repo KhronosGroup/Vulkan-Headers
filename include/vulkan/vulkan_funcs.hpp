@@ -2568,7 +2568,7 @@ namespace VULKAN_HPP_NAMESPACE
     VULKAN_HPP_ASSERT( d.vkAllocateCommandBuffers && "Function <vkAllocateCommandBuffers> requires <VK_VERSION_1_0>" );
 #  endif
 
-    std::vector<CommandBuffer, CommandBufferAllocator> commandBuffers( allocateInfo.commandBufferCount, commandBufferAllocator );
+    std::vector<CommandBuffer, CommandBufferAllocator> commandBuffers( allocateInfo.commandBufferCount, {}, commandBufferAllocator );
     Result                                             result = static_cast<Result>( d.vkAllocateCommandBuffers(
       m_device, reinterpret_cast<const VkCommandBufferAllocateInfo *>( &allocateInfo ), reinterpret_cast<VkCommandBuffer *>( commandBuffers.data() ) ) );
     detail::resultCheck( result, VULKAN_HPP_NAMESPACE_STRING "::Device::allocateCommandBuffers" );
@@ -3796,7 +3796,7 @@ namespace VULKAN_HPP_NAMESPACE
     VULKAN_HPP_ASSERT( d.vkCreateComputePipelines && "Function <vkCreateComputePipelines> requires <VK_VERSION_1_0>" );
 #  endif
 
-    std::vector<Pipeline, PipelineAllocator> pipelines( createInfos.size(), pipelineAllocator );
+    std::vector<Pipeline, PipelineAllocator> pipelines( createInfos.size(), {}, pipelineAllocator );
     Result                                   result = static_cast<Result>( d.vkCreateComputePipelines( m_device,
                                                                      static_cast<VkPipelineCache>( pipelineCache ),
                                                                      createInfos.size(),
@@ -4503,7 +4503,7 @@ namespace VULKAN_HPP_NAMESPACE
     VULKAN_HPP_ASSERT( d.vkAllocateDescriptorSets && "Function <vkAllocateDescriptorSets> requires <VK_VERSION_1_0>" );
 #  endif
 
-    std::vector<DescriptorSet, DescriptorSetAllocator> descriptorSets( allocateInfo.descriptorSetCount, descriptorSetAllocator );
+    std::vector<DescriptorSet, DescriptorSetAllocator> descriptorSets( allocateInfo.descriptorSetCount, {}, descriptorSetAllocator );
     Result                                             result = static_cast<Result>( d.vkAllocateDescriptorSets(
       m_device, reinterpret_cast<const VkDescriptorSetAllocateInfo *>( &allocateInfo ), reinterpret_cast<VkDescriptorSet *>( descriptorSets.data() ) ) );
     detail::resultCheck( result, VULKAN_HPP_NAMESPACE_STRING "::Device::allocateDescriptorSets" );
@@ -4970,7 +4970,7 @@ namespace VULKAN_HPP_NAMESPACE
     VULKAN_HPP_ASSERT( d.vkCreateGraphicsPipelines && "Function <vkCreateGraphicsPipelines> requires <VK_VERSION_1_0>" );
 #  endif
 
-    std::vector<Pipeline, PipelineAllocator> pipelines( createInfos.size(), pipelineAllocator );
+    std::vector<Pipeline, PipelineAllocator> pipelines( createInfos.size(), {}, pipelineAllocator );
     Result                                   result = static_cast<Result>( d.vkCreateGraphicsPipelines( m_device,
                                                                       static_cast<VkPipelineCache>( pipelineCache ),
                                                                       createInfos.size(),
@@ -10401,7 +10401,7 @@ namespace VULKAN_HPP_NAMESPACE
     VULKAN_HPP_ASSERT( d.vkCreateSharedSwapchainsKHR && "Function <vkCreateSharedSwapchainsKHR> requires <VK_KHR_display_swapchain>" );
 #  endif
 
-    std::vector<SwapchainKHR, SwapchainKHRAllocator> swapchains( createInfos.size(), swapchainKHRAllocator );
+    std::vector<SwapchainKHR, SwapchainKHRAllocator> swapchains( createInfos.size(), {}, swapchainKHRAllocator );
     Result                                           result = static_cast<Result>( d.vkCreateSharedSwapchainsKHR( m_device,
                                                                         createInfos.size(),
                                                                         reinterpret_cast<const VkSwapchainCreateInfoKHR *>( createInfos.data() ),
@@ -16677,7 +16677,7 @@ namespace VULKAN_HPP_NAMESPACE
     VULKAN_HPP_ASSERT( d.vkCreateExecutionGraphPipelinesAMDX && "Function <vkCreateExecutionGraphPipelinesAMDX> requires <VK_AMDX_shader_enqueue>" );
 #    endif
 
-    std::vector<Pipeline, PipelineAllocator> pipelines( createInfos.size(), pipelineAllocator );
+    std::vector<Pipeline, PipelineAllocator> pipelines( createInfos.size(), {}, pipelineAllocator );
     Result                                   result =
       static_cast<Result>( d.vkCreateExecutionGraphPipelinesAMDX( m_device,
                                                                   static_cast<VkPipelineCache>( pipelineCache ),
@@ -18123,7 +18123,7 @@ namespace VULKAN_HPP_NAMESPACE
     VULKAN_HPP_ASSERT( d.vkCreateRayTracingPipelinesKHR && "Function <vkCreateRayTracingPipelinesKHR> requires <VK_KHR_ray_tracing_pipeline>" );
 #  endif
 
-    std::vector<Pipeline, PipelineAllocator> pipelines( createInfos.size(), pipelineAllocator );
+    std::vector<Pipeline, PipelineAllocator> pipelines( createInfos.size(), {}, pipelineAllocator );
     Result                                   result = static_cast<Result>( d.vkCreateRayTracingPipelinesKHR( m_device,
                                                                            static_cast<VkDeferredOperationKHR>( deferredOperation ),
                                                                            static_cast<VkPipelineCache>( pipelineCache ),
@@ -19376,7 +19376,7 @@ namespace VULKAN_HPP_NAMESPACE
     VULKAN_HPP_ASSERT( d.vkCreateRayTracingPipelinesNV && "Function <vkCreateRayTracingPipelinesNV> requires <VK_NV_ray_tracing>" );
 #  endif
 
-    std::vector<Pipeline, PipelineAllocator> pipelines( createInfos.size(), pipelineAllocator );
+    std::vector<Pipeline, PipelineAllocator> pipelines( createInfos.size(), {}, pipelineAllocator );
     Result                                   result = static_cast<Result>( d.vkCreateRayTracingPipelinesNV( m_device,
                                                                           static_cast<VkPipelineCache>( pipelineCache ),
                                                                           createInfos.size(),
@@ -28408,7 +28408,7 @@ namespace VULKAN_HPP_NAMESPACE
     VULKAN_HPP_ASSERT( d.vkCreateShadersEXT && "Function <vkCreateShadersEXT> requires <VK_EXT_shader_object>" );
 #  endif
 
-    std::vector<ShaderEXT, ShaderEXTAllocator> shaders( createInfos.size(), shaderEXTAllocator );
+    std::vector<ShaderEXT, ShaderEXTAllocator> shaders( createInfos.size(), {}, shaderEXTAllocator );
     Result                                     result = static_cast<Result>( d.vkCreateShadersEXT( m_device,
                                                                createInfos.size(),
                                                                reinterpret_cast<const VkShaderCreateInfoEXT *>( createInfos.data() ),
@@ -29832,7 +29832,7 @@ namespace VULKAN_HPP_NAMESPACE
     VULKAN_HPP_ASSERT( d.vkCreateDataGraphPipelinesARM && "Function <vkCreateDataGraphPipelinesARM> requires <VK_ARM_data_graph>" );
 #  endif
 
-    std::vector<Pipeline, PipelineAllocator> pipelines( createInfos.size(), pipelineAllocator );
+    std::vector<Pipeline, PipelineAllocator> pipelines( createInfos.size(), {}, pipelineAllocator );
     Result                                   result = static_cast<Result>( d.vkCreateDataGraphPipelinesARM( m_device,
                                                                           static_cast<VkDeferredOperationKHR>( deferredOperation ),
                                                                           static_cast<VkPipelineCache>( pipelineCache ),

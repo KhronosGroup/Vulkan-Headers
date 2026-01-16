@@ -1772,7 +1772,10 @@ namespace VULKAN_HPP_NAMESPACE
               "VK_KHR_get_physical_device_properties2",
               "VK_KHR_swapchain",
             } } },
-          { "VK_VERSION_1_1", { {} } } } },
+          { "VK_VERSION_1_1",
+            { {
+              "VK_KHR_swapchain",
+            } } } } },
       { "VK_EXT_private_data",
         { { "VK_VERSION_1_0",
             { {
