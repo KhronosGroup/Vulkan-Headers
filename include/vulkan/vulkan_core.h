@@ -66,7 +66,7 @@ extern "C" {
 //#define VK_API_VERSION VK_MAKE_API_VERSION(0, 1, 0, 0) // Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 340
+#define VK_HEADER_VERSION 341
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 4, VK_HEADER_VERSION)
