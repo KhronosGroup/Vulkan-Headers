@@ -67,6 +67,7 @@ namespace VULKAN_HPP_NAMESPACE
                                                                              { "VK_NV_ray_tracing", "VK_KHR_ray_tracing_pipeline" },
                                                                              { "VK_EXT_buffer_device_address", "VK_KHR_buffer_device_address" },
                                                                              { "VK_EXT_validation_features", "VK_EXT_layer_settings" },
+                                                                             { "VK_EXT_descriptor_buffer", "VK_EXT_descriptor_heap" },
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
                                                                              { "VK_NV_displacement_micromap", "VK_NV_cluster_acceleration_structure" }
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
@@ -210,6 +211,7 @@ namespace VULKAN_HPP_NAMESPACE
                                                             "VK_KHR_draw_indirect_count",
                                                             "VK_EXT_filter_cubic",
                                                             "VK_QCOM_render_pass_shader_resolve",
+                                                            "VK_QCOM_cooperative_matrix_conversion",
                                                             "VK_EXT_global_priority",
                                                             "VK_KHR_shader_subgroup_extended_types",
                                                             "VK_KHR_8bit_storage",
@@ -1240,6 +1242,11 @@ namespace VULKAN_HPP_NAMESPACE
               "VK_KHR_get_physical_device_properties2",
             } } },
           { "VK_VERSION_1_1", { {} } } } },
+      { "VK_QCOM_cooperative_matrix_conversion",
+        { { "VK_VERSION_1_0",
+            { {
+              "VK_KHR_cooperative_matrix",
+            } } } } },
       { "VK_KHR_shader_subgroup_extended_types", { { "VK_VERSION_1_1", { {} } } } },
       { "VK_KHR_8bit_storage",
         { { "VK_VERSION_1_0",
@@ -3299,6 +3306,10 @@ namespace VULKAN_HPP_NAMESPACE
     {
       return "VK_EXT_layer_settings";
     }
+    if ( extension == "VK_EXT_descriptor_buffer" )
+    {
+      return "VK_EXT_descriptor_heap";
+    }
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
     if ( extension == "VK_NV_displacement_micromap" )
     {
@@ -3789,7 +3800,7 @@ namespace VULKAN_HPP_NAMESPACE
         || ( extension == "VK_MVK_macos_surface" )
 #endif /*VK_USE_PLATFORM_MACOS_MVK*/
         || ( extension == "VK_AMD_gpu_shader_int16" ) || ( extension == "VK_NV_ray_tracing" ) || ( extension == "VK_EXT_buffer_device_address" ) ||
-           ( extension == "VK_EXT_validation_features" )
+           ( extension == "VK_EXT_validation_features" ) || ( extension == "VK_EXT_descriptor_buffer" )
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
         || ( extension == "VK_NV_displacement_micromap" )
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
@@ -3867,8 +3878,8 @@ namespace VULKAN_HPP_NAMESPACE
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
         || ( extension == "VK_NV_shading_rate_image" ) || ( extension == "VK_NV_ray_tracing" ) || ( extension == "VK_NV_representative_fragment_test" ) ||
            ( extension == "VK_KHR_maintenance3" ) || ( extension == "VK_KHR_draw_indirect_count" ) || ( extension == "VK_EXT_filter_cubic" ) ||
-           ( extension == "VK_QCOM_render_pass_shader_resolve" ) || ( extension == "VK_EXT_global_priority" ) ||
-           ( extension == "VK_KHR_shader_subgroup_extended_types" ) || ( extension == "VK_KHR_8bit_storage" ) ||
+           ( extension == "VK_QCOM_render_pass_shader_resolve" ) || ( extension == "VK_QCOM_cooperative_matrix_conversion" ) ||
+           ( extension == "VK_EXT_global_priority" ) || ( extension == "VK_KHR_shader_subgroup_extended_types" ) || ( extension == "VK_KHR_8bit_storage" ) ||
            ( extension == "VK_EXT_external_memory_host" ) || ( extension == "VK_AMD_buffer_marker" ) || ( extension == "VK_KHR_shader_atomic_int64" ) ||
            ( extension == "VK_KHR_shader_clock" ) || ( extension == "VK_AMD_pipeline_compiler_control" ) || ( extension == "VK_EXT_calibrated_timestamps" ) ||
            ( extension == "VK_AMD_shader_core_properties" ) || ( extension == "VK_KHR_video_decode_h265" ) || ( extension == "VK_KHR_global_priority" ) ||
