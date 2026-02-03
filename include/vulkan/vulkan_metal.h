@@ -31,8 +31,8 @@ typedef void CAMetalLayer;
 #define VK_EXT_METAL_SURFACE_EXTENSION_NAME "VK_EXT_metal_surface"
 typedef VkFlags VkMetalSurfaceCreateFlagsEXT;
 typedef struct VkMetalSurfaceCreateInfoEXT {
-    VkStructureType                 sType;
-    const void*                     pNext;
+    VkStructureType                 sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_METAL_SURFACE_CREATE_INFO_EXT);
+    const void*                     pNext VK_CPP11_DEFAULT(nullptr);
     VkMetalSurfaceCreateFlagsEXT    flags;
     const CAMetalLayer*             pLayer;
 } VkMetalSurfaceCreateInfoEXT;
@@ -102,45 +102,45 @@ typedef enum VkExportMetalObjectTypeFlagBitsEXT {
 } VkExportMetalObjectTypeFlagBitsEXT;
 typedef VkFlags VkExportMetalObjectTypeFlagsEXT;
 typedef struct VkExportMetalObjectCreateInfoEXT {
-    VkStructureType                       sType;
-    const void*                           pNext;
+    VkStructureType                       sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_EXPORT_METAL_OBJECT_CREATE_INFO_EXT);
+    const void*                           pNext VK_CPP11_DEFAULT(nullptr);
     VkExportMetalObjectTypeFlagBitsEXT    exportObjectType;
 } VkExportMetalObjectCreateInfoEXT;
 
 typedef struct VkExportMetalObjectsInfoEXT {
-    VkStructureType    sType;
-    const void*        pNext;
+    VkStructureType    sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_EXPORT_METAL_OBJECTS_INFO_EXT);
+    const void*        pNext VK_CPP11_DEFAULT(nullptr);
 } VkExportMetalObjectsInfoEXT;
 
 typedef struct VkExportMetalDeviceInfoEXT {
-    VkStructureType    sType;
-    const void*        pNext;
+    VkStructureType    sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_EXPORT_METAL_DEVICE_INFO_EXT);
+    const void*        pNext VK_CPP11_DEFAULT(nullptr);
     MTLDevice_id       mtlDevice;
 } VkExportMetalDeviceInfoEXT;
 
 typedef struct VkExportMetalCommandQueueInfoEXT {
-    VkStructureType       sType;
-    const void*           pNext;
+    VkStructureType       sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_EXPORT_METAL_COMMAND_QUEUE_INFO_EXT);
+    const void*           pNext VK_CPP11_DEFAULT(nullptr);
     VkQueue               queue;
     MTLCommandQueue_id    mtlCommandQueue;
 } VkExportMetalCommandQueueInfoEXT;
 
 typedef struct VkExportMetalBufferInfoEXT {
-    VkStructureType    sType;
-    const void*        pNext;
+    VkStructureType    sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_EXPORT_METAL_BUFFER_INFO_EXT);
+    const void*        pNext VK_CPP11_DEFAULT(nullptr);
     VkDeviceMemory     memory;
     MTLBuffer_id       mtlBuffer;
 } VkExportMetalBufferInfoEXT;
 
 typedef struct VkImportMetalBufferInfoEXT {
-    VkStructureType    sType;
-    const void*        pNext;
+    VkStructureType    sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_IMPORT_METAL_BUFFER_INFO_EXT);
+    const void*        pNext VK_CPP11_DEFAULT(nullptr);
     MTLBuffer_id       mtlBuffer;
 } VkImportMetalBufferInfoEXT;
 
 typedef struct VkExportMetalTextureInfoEXT {
-    VkStructureType          sType;
-    const void*              pNext;
+    VkStructureType          sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_EXPORT_METAL_TEXTURE_INFO_EXT);
+    const void*              pNext VK_CPP11_DEFAULT(nullptr);
     VkImage                  image;
     VkImageView              imageView;
     VkBufferView             bufferView;
@@ -149,36 +149,36 @@ typedef struct VkExportMetalTextureInfoEXT {
 } VkExportMetalTextureInfoEXT;
 
 typedef struct VkImportMetalTextureInfoEXT {
-    VkStructureType          sType;
-    const void*              pNext;
+    VkStructureType          sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_IMPORT_METAL_TEXTURE_INFO_EXT);
+    const void*              pNext VK_CPP11_DEFAULT(nullptr);
     VkImageAspectFlagBits    plane;
     MTLTexture_id            mtlTexture;
 } VkImportMetalTextureInfoEXT;
 
 typedef struct VkExportMetalIOSurfaceInfoEXT {
-    VkStructureType    sType;
-    const void*        pNext;
+    VkStructureType    sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_EXPORT_METAL_IO_SURFACE_INFO_EXT);
+    const void*        pNext VK_CPP11_DEFAULT(nullptr);
     VkImage            image;
     IOSurfaceRef       ioSurface;
 } VkExportMetalIOSurfaceInfoEXT;
 
 typedef struct VkImportMetalIOSurfaceInfoEXT {
-    VkStructureType    sType;
-    const void*        pNext;
+    VkStructureType    sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_IMPORT_METAL_IO_SURFACE_INFO_EXT);
+    const void*        pNext VK_CPP11_DEFAULT(nullptr);
     IOSurfaceRef       ioSurface;
 } VkImportMetalIOSurfaceInfoEXT;
 
 typedef struct VkExportMetalSharedEventInfoEXT {
-    VkStructureType      sType;
-    const void*          pNext;
+    VkStructureType      sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_EXPORT_METAL_SHARED_EVENT_INFO_EXT);
+    const void*          pNext VK_CPP11_DEFAULT(nullptr);
     VkSemaphore          semaphore;
     VkEvent              event;
     MTLSharedEvent_id    mtlSharedEvent;
 } VkExportMetalSharedEventInfoEXT;
 
 typedef struct VkImportMetalSharedEventInfoEXT {
-    VkStructureType      sType;
-    const void*          pNext;
+    VkStructureType      sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_IMPORT_METAL_SHARED_EVENT_INFO_EXT);
+    const void*          pNext VK_CPP11_DEFAULT(nullptr);
     MTLSharedEvent_id    mtlSharedEvent;
 } VkImportMetalSharedEventInfoEXT;
 
@@ -198,21 +198,21 @@ VKAPI_ATTR void VKAPI_CALL vkExportMetalObjectsEXT(
 #define VK_EXT_EXTERNAL_MEMORY_METAL_SPEC_VERSION 1
 #define VK_EXT_EXTERNAL_MEMORY_METAL_EXTENSION_NAME "VK_EXT_external_memory_metal"
 typedef struct VkImportMemoryMetalHandleInfoEXT {
-    VkStructureType                       sType;
-    const void*                           pNext;
+    VkStructureType                       sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_IMPORT_MEMORY_METAL_HANDLE_INFO_EXT);
+    const void*                           pNext VK_CPP11_DEFAULT(nullptr);
     VkExternalMemoryHandleTypeFlagBits    handleType;
     void*                                 handle;
 } VkImportMemoryMetalHandleInfoEXT;
 
 typedef struct VkMemoryMetalHandlePropertiesEXT {
-    VkStructureType    sType;
-    void*              pNext;
+    VkStructureType    sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_MEMORY_METAL_HANDLE_PROPERTIES_EXT);
+    void*              pNext VK_CPP11_DEFAULT(nullptr);
     uint32_t           memoryTypeBits;
 } VkMemoryMetalHandlePropertiesEXT;
 
 typedef struct VkMemoryGetMetalHandleInfoEXT {
-    VkStructureType                       sType;
-    const void*                           pNext;
+    VkStructureType                       sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_MEMORY_GET_METAL_HANDLE_INFO_EXT);
+    const void*                           pNext VK_CPP11_DEFAULT(nullptr);
     VkDeviceMemory                        memory;
     VkExternalMemoryHandleTypeFlagBits    handleType;
 } VkMemoryGetMetalHandleInfoEXT;

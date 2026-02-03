@@ -25,8 +25,8 @@ extern "C" {
 #define VK_MVK_IOS_SURFACE_EXTENSION_NAME "VK_MVK_ios_surface"
 typedef VkFlags VkIOSSurfaceCreateFlagsMVK;
 typedef struct VkIOSSurfaceCreateInfoMVK {
-    VkStructureType               sType;
-    const void*                   pNext;
+    VkStructureType               sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_IOS_SURFACE_CREATE_INFO_MVK);
+    const void*                   pNext VK_CPP11_DEFAULT(nullptr);
     VkIOSSurfaceCreateFlagsMVK    flags;
     const void*                   pView;
 } VkIOSSurfaceCreateInfoMVK;

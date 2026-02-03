@@ -25,8 +25,8 @@ extern "C" {
 #define VK_QNX_SCREEN_SURFACE_EXTENSION_NAME "VK_QNX_screen_surface"
 typedef VkFlags VkScreenSurfaceCreateFlagsQNX;
 typedef struct VkScreenSurfaceCreateInfoQNX {
-    VkStructureType                  sType;
-    const void*                      pNext;
+    VkStructureType                  sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_SCREEN_SURFACE_CREATE_INFO_QNX);
+    const void*                      pNext VK_CPP11_DEFAULT(nullptr);
     VkScreenSurfaceCreateFlagsQNX    flags;
     struct _screen_context*          context;
     struct _screen_window*           window;
@@ -58,15 +58,15 @@ VKAPI_ATTR VkBool32 VKAPI_CALL vkGetPhysicalDeviceScreenPresentationSupportQNX(
 #define VK_QNX_EXTERNAL_MEMORY_SCREEN_BUFFER_SPEC_VERSION 1
 #define VK_QNX_EXTERNAL_MEMORY_SCREEN_BUFFER_EXTENSION_NAME "VK_QNX_external_memory_screen_buffer"
 typedef struct VkScreenBufferPropertiesQNX {
-    VkStructureType    sType;
-    void*              pNext;
+    VkStructureType    sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_SCREEN_BUFFER_PROPERTIES_QNX);
+    void*              pNext VK_CPP11_DEFAULT(nullptr);
     VkDeviceSize       allocationSize;
     uint32_t           memoryTypeBits;
 } VkScreenBufferPropertiesQNX;
 
 typedef struct VkScreenBufferFormatPropertiesQNX {
-    VkStructureType                  sType;
-    void*                            pNext;
+    VkStructureType                  sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_SCREEN_BUFFER_FORMAT_PROPERTIES_QNX);
+    void*                            pNext VK_CPP11_DEFAULT(nullptr);
     VkFormat                         format;
     uint64_t                         externalFormat;
     uint64_t                         screenUsage;
@@ -79,20 +79,20 @@ typedef struct VkScreenBufferFormatPropertiesQNX {
 } VkScreenBufferFormatPropertiesQNX;
 
 typedef struct VkImportScreenBufferInfoQNX {
-    VkStructureType           sType;
-    const void*               pNext;
+    VkStructureType           sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_IMPORT_SCREEN_BUFFER_INFO_QNX);
+    const void*               pNext VK_CPP11_DEFAULT(nullptr);
     struct _screen_buffer*    buffer;
 } VkImportScreenBufferInfoQNX;
 
 typedef struct VkExternalFormatQNX {
-    VkStructureType    sType;
-    void*              pNext;
+    VkStructureType    sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_QNX);
+    void*              pNext VK_CPP11_DEFAULT(nullptr);
     uint64_t           externalFormat;
 } VkExternalFormatQNX;
 
 typedef struct VkPhysicalDeviceExternalMemoryScreenBufferFeaturesQNX {
-    VkStructureType    sType;
-    void*              pNext;
+    VkStructureType    sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_SCREEN_BUFFER_FEATURES_QNX);
+    void*              pNext VK_CPP11_DEFAULT(nullptr);
     VkBool32           screenBufferImport;
 } VkPhysicalDeviceExternalMemoryScreenBufferFeaturesQNX;
 
