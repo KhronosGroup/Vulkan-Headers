@@ -42,6 +42,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateXlibSurfaceKHR(
     const VkXlibSurfaceCreateInfoKHR*           pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkSurfaceKHR*                               pSurface);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateXlibSurfaceKHR(VkInstance instance, const VkXlibSurfaceCreateInfoKHR& pCreateInfo, VkSurfaceKHR* pSurface)
+{
+    return vkCreateXlibSurfaceKHR(instance, &pCreateInfo, nullptr, pSurface);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES

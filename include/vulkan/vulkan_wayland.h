@@ -42,6 +42,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateWaylandSurfaceKHR(
     const VkWaylandSurfaceCreateInfoKHR*        pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkSurfaceKHR*                               pSurface);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateWaylandSurfaceKHR(VkInstance instance, const VkWaylandSurfaceCreateInfoKHR& pCreateInfo, VkSurfaceKHR* pSurface)
+{
+    return vkCreateWaylandSurfaceKHR(instance, &pCreateInfo, nullptr, pSurface);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES

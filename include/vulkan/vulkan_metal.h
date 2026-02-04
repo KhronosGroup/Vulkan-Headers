@@ -46,6 +46,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateMetalSurfaceEXT(
     const VkMetalSurfaceCreateInfoEXT*          pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkSurfaceKHR*                               pSurface);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateMetalSurfaceEXT(VkInstance instance, const VkMetalSurfaceCreateInfoEXT& pCreateInfo, VkSurfaceKHR* pSurface)
+{
+    return vkCreateMetalSurfaceEXT(instance, &pCreateInfo, nullptr, pSurface);
+}
+#endif
 #endif
 #endif
 
@@ -226,6 +233,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetMemoryMetalHandleEXT(
     VkDevice                                    device,
     const VkMemoryGetMetalHandleInfoEXT*        pGetMetalHandleInfo,
     void**                                      pHandle);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetMemoryMetalHandleEXT(VkDevice device, const VkMemoryGetMetalHandleInfoEXT& pGetMetalHandleInfo, void** pHandle)
+{
+    return vkGetMemoryMetalHandleEXT(device, &pGetMetalHandleInfo, pHandle);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES

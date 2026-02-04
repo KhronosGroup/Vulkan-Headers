@@ -41,6 +41,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateAndroidSurfaceKHR(
     const VkAndroidSurfaceCreateInfoKHR*        pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkSurfaceKHR*                               pSurface);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateAndroidSurfaceKHR(VkInstance instance, const VkAndroidSurfaceCreateInfoKHR& pCreateInfo, VkSurfaceKHR* pSurface)
+{
+    return vkCreateAndroidSurfaceKHR(instance, &pCreateInfo, nullptr, pSurface);
+}
+#endif
 #endif
 #endif
 
@@ -123,6 +130,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetMemoryAndroidHardwareBufferANDROID(
     VkDevice                                    device,
     const VkMemoryGetAndroidHardwareBufferInfoANDROID* pInfo,
     struct AHardwareBuffer**                    pBuffer);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetMemoryAndroidHardwareBufferANDROID(VkDevice device, const VkMemoryGetAndroidHardwareBufferInfoANDROID& pInfo, struct AHardwareBuffer** pBuffer)
+{
+    return vkGetMemoryAndroidHardwareBufferANDROID(device, &pInfo, pBuffer);
+}
+#endif
 #endif
 #endif
 

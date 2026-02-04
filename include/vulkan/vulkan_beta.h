@@ -137,6 +137,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateExecutionGraphPipelinesAMDX(
     const VkExecutionGraphPipelineCreateInfoAMDX* pCreateInfos,
     const VkAllocationCallbacks*                pAllocator,
     VkPipeline*                                 pPipelines);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateExecutionGraphPipelinesAMDX(VkDevice                                        device, VkPipelineCache pipelineCache, const std::span<VkExecutionGraphPipelineCreateInfoAMDX>& pCreateInfos, VkPipeline*               pPipelines)
+{
+    return vkCreateExecutionGraphPipelinesAMDX(device, pipelineCache, uint32_t(pCreateInfos.size()), pCreateInfos.data(), nullptr, pPipelines);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -152,6 +159,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetExecutionGraphPipelineNodeIndexAMDX(
     VkPipeline                                  executionGraph,
     const VkPipelineShaderStageNodeCreateInfoAMDX* pNodeInfo,
     uint32_t*                                   pNodeIndex);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetExecutionGraphPipelineNodeIndexAMDX(VkDevice                                        device, VkPipeline                                      executionGraph, const VkPipelineShaderStageNodeCreateInfoAMDX& pNodeInfo, uint32_t*                                       pNodeIndex)
+{
+    return vkGetExecutionGraphPipelineNodeIndexAMDX(device, executionGraph, &pNodeInfo, pNodeIndex);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -168,6 +182,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdDispatchGraphAMDX(
     VkDeviceAddress                             scratch,
     VkDeviceSize                                scratchSize,
     const VkDispatchGraphCountInfoAMDX*         pCountInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdDispatchGraphAMDX(VkCommandBuffer                                 commandBuffer, VkDeviceAddress                                 scratch, VkDeviceSize                                    scratchSize, const VkDispatchGraphCountInfoAMDX& pCountInfo)
+{
+    return vkCmdDispatchGraphAMDX(commandBuffer, scratch, scratchSize, &pCountInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -176,6 +197,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdDispatchGraphIndirectAMDX(
     VkDeviceAddress                             scratch,
     VkDeviceSize                                scratchSize,
     const VkDispatchGraphCountInfoAMDX*         pCountInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdDispatchGraphIndirectAMDX(VkCommandBuffer                                 commandBuffer, VkDeviceAddress                                 scratch, VkDeviceSize                                    scratchSize, const VkDispatchGraphCountInfoAMDX& pCountInfo)
+{
+    return vkCmdDispatchGraphIndirectAMDX(commandBuffer, scratch, scratchSize, &pCountInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -252,6 +280,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateCudaModuleNV(
     const VkCudaModuleCreateInfoNV*             pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkCudaModuleNV*                             pModule);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateCudaModuleNV(VkDevice device, const VkCudaModuleCreateInfoNV& pCreateInfo, VkCudaModuleNV* pModule)
+{
+    return vkCreateCudaModuleNV(device, &pCreateInfo, nullptr, pModule);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -268,6 +303,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateCudaFunctionNV(
     const VkCudaFunctionCreateInfoNV*           pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkCudaFunctionNV*                           pFunction);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateCudaFunctionNV(VkDevice device, const VkCudaFunctionCreateInfoNV& pCreateInfo, VkCudaFunctionNV* pFunction)
+{
+    return vkCreateCudaFunctionNV(device, &pCreateInfo, nullptr, pFunction);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -275,6 +317,13 @@ VKAPI_ATTR void VKAPI_CALL vkDestroyCudaModuleNV(
     VkDevice                                    device,
     VkCudaModuleNV                              module,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyCudaModuleNV(VkDevice device, VkCudaModuleNV module)
+{
+    return vkDestroyCudaModuleNV(device, module, nullptr);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -282,12 +331,26 @@ VKAPI_ATTR void VKAPI_CALL vkDestroyCudaFunctionNV(
     VkDevice                                    device,
     VkCudaFunctionNV                            function,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyCudaFunctionNV(VkDevice device, VkCudaFunctionNV function)
+{
+    return vkDestroyCudaFunctionNV(device, function, nullptr);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkCmdCudaLaunchKernelNV(
     VkCommandBuffer                             commandBuffer,
     const VkCudaLaunchInfoNV*                   pLaunchInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdCudaLaunchKernelNV(VkCommandBuffer commandBuffer, const VkCudaLaunchInfoNV& pLaunchInfo)
+{
+    return vkCmdCudaLaunchKernelNV(commandBuffer, &pLaunchInfo);
+}
+#endif
 #endif
 #endif
 

@@ -40,6 +40,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateMacOSSurfaceMVK(
     const VkMacOSSurfaceCreateInfoMVK*          pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkSurfaceKHR*                               pSurface);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateMacOSSurfaceMVK(VkInstance instance, const VkMacOSSurfaceCreateInfoMVK& pCreateInfo, VkSurfaceKHR* pSurface)
+{
+    return vkCreateMacOSSurfaceMVK(instance, &pCreateInfo, nullptr, pSurface);
+}
+#endif
 #endif
 #endif
 

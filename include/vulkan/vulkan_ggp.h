@@ -40,6 +40,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateStreamDescriptorSurfaceGGP(
     const VkStreamDescriptorSurfaceCreateInfoGGP* pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkSurfaceKHR*                               pSurface);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateStreamDescriptorSurfaceGGP(VkInstance instance, const VkStreamDescriptorSurfaceCreateInfoGGP& pCreateInfo, VkSurfaceKHR* pSurface)
+{
+    return vkCreateStreamDescriptorSurfaceGGP(instance, &pCreateInfo, nullptr, pSurface);
+}
+#endif
 #endif
 #endif
 

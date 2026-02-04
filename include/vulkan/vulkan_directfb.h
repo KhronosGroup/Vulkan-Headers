@@ -42,6 +42,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateDirectFBSurfaceEXT(
     const VkDirectFBSurfaceCreateInfoEXT*       pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkSurfaceKHR*                               pSurface);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateDirectFBSurfaceEXT(VkInstance instance, const VkDirectFBSurfaceCreateInfoEXT& pCreateInfo, VkSurfaceKHR* pSurface)
+{
+    return vkCreateDirectFBSurfaceEXT(instance, &pCreateInfo, nullptr, pSurface);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES

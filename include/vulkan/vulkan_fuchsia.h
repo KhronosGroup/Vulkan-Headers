@@ -40,6 +40,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateImagePipeSurfaceFUCHSIA(
     const VkImagePipeSurfaceCreateInfoFUCHSIA*  pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkSurfaceKHR*                               pSurface);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateImagePipeSurfaceFUCHSIA(VkInstance instance, const VkImagePipeSurfaceCreateInfoFUCHSIA& pCreateInfo, VkSurfaceKHR* pSurface)
+{
+    return vkCreateImagePipeSurfaceFUCHSIA(instance, &pCreateInfo, nullptr, pSurface);
+}
+#endif
 #endif
 #endif
 
@@ -77,6 +84,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetMemoryZirconHandleFUCHSIA(
     VkDevice                                    device,
     const VkMemoryGetZirconHandleInfoFUCHSIA*   pGetZirconHandleInfo,
     zx_handle_t*                                pZirconHandle);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetMemoryZirconHandleFUCHSIA(VkDevice device, const VkMemoryGetZirconHandleInfoFUCHSIA& pGetZirconHandleInfo, zx_handle_t* pZirconHandle)
+{
+    return vkGetMemoryZirconHandleFUCHSIA(device, &pGetZirconHandleInfo, pZirconHandle);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -117,6 +131,13 @@ typedef VkResult (VKAPI_PTR *PFN_vkGetSemaphoreZirconHandleFUCHSIA)(VkDevice dev
 VKAPI_ATTR VkResult VKAPI_CALL vkImportSemaphoreZirconHandleFUCHSIA(
     VkDevice                                    device,
     const VkImportSemaphoreZirconHandleInfoFUCHSIA* pImportSemaphoreZirconHandleInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkImportSemaphoreZirconHandleFUCHSIA(VkDevice device, const VkImportSemaphoreZirconHandleInfoFUCHSIA& pImportSemaphoreZirconHandleInfo)
+{
+    return vkImportSemaphoreZirconHandleFUCHSIA(device, &pImportSemaphoreZirconHandleInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -124,6 +145,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetSemaphoreZirconHandleFUCHSIA(
     VkDevice                                    device,
     const VkSemaphoreGetZirconHandleInfoFUCHSIA* pGetZirconHandleInfo,
     zx_handle_t*                                pZirconHandle);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetSemaphoreZirconHandleFUCHSIA(VkDevice device, const VkSemaphoreGetZirconHandleInfoFUCHSIA& pGetZirconHandleInfo, zx_handle_t* pZirconHandle)
+{
+    return vkGetSemaphoreZirconHandleFUCHSIA(device, &pGetZirconHandleInfo, pZirconHandle);
+}
+#endif
 #endif
 #endif
 
@@ -244,6 +272,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateBufferCollectionFUCHSIA(
     const VkBufferCollectionCreateInfoFUCHSIA*  pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkBufferCollectionFUCHSIA*                  pCollection);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateBufferCollectionFUCHSIA(VkDevice device, const VkBufferCollectionCreateInfoFUCHSIA& pCreateInfo, VkBufferCollectionFUCHSIA* pCollection)
+{
+    return vkCreateBufferCollectionFUCHSIA(device, &pCreateInfo, nullptr, pCollection);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -251,6 +286,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkSetBufferCollectionImageConstraintsFUCHSIA(
     VkDevice                                    device,
     VkBufferCollectionFUCHSIA                   collection,
     const VkImageConstraintsInfoFUCHSIA*        pImageConstraintsInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkSetBufferCollectionImageConstraintsFUCHSIA(VkDevice device, VkBufferCollectionFUCHSIA collection, const VkImageConstraintsInfoFUCHSIA& pImageConstraintsInfo)
+{
+    return vkSetBufferCollectionImageConstraintsFUCHSIA(device, collection, &pImageConstraintsInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -258,6 +300,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkSetBufferCollectionBufferConstraintsFUCHSIA(
     VkDevice                                    device,
     VkBufferCollectionFUCHSIA                   collection,
     const VkBufferConstraintsInfoFUCHSIA*       pBufferConstraintsInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkSetBufferCollectionBufferConstraintsFUCHSIA(VkDevice device, VkBufferCollectionFUCHSIA collection, const VkBufferConstraintsInfoFUCHSIA& pBufferConstraintsInfo)
+{
+    return vkSetBufferCollectionBufferConstraintsFUCHSIA(device, collection, &pBufferConstraintsInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -265,6 +314,13 @@ VKAPI_ATTR void VKAPI_CALL vkDestroyBufferCollectionFUCHSIA(
     VkDevice                                    device,
     VkBufferCollectionFUCHSIA                   collection,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyBufferCollectionFUCHSIA(VkDevice device, VkBufferCollectionFUCHSIA collection)
+{
+    return vkDestroyBufferCollectionFUCHSIA(device, collection, nullptr);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES

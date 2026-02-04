@@ -84,6 +84,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetMemoryNativeBufferOHOS(
     VkDevice                                    device,
     const VkMemoryGetNativeBufferInfoOHOS*      pInfo,
     struct OH_NativeBuffer**                    pBuffer);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetMemoryNativeBufferOHOS(VkDevice device, const VkMemoryGetNativeBufferInfoOHOS& pInfo, struct OH_NativeBuffer** pBuffer)
+{
+    return vkGetMemoryNativeBufferOHOS(device, &pInfo, pBuffer);
+}
+#endif
 #endif
 #endif
 
@@ -110,6 +117,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateSurfaceOHOS(
     const VkSurfaceCreateInfoOHOS*              pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkSurfaceKHR*                               pSurface);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateSurfaceOHOS(VkInstance instance, const VkSurfaceCreateInfoOHOS& pCreateInfo, VkSurfaceKHR* pSurface)
+{
+    return vkCreateSurfaceOHOS(instance, &pCreateInfo, nullptr, pSurface);
+}
+#endif
 #endif
 #endif
 

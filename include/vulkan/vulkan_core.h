@@ -26,6 +26,24 @@ extern "C" {
 #define VK_DEFINE_HANDLE(object) typedef struct object##_T* object;
 
 
+#ifndef VK_CPP11_FEATURES
+    #if (defined(__cplusplus) && (__cplusplus >= 201103L)) || (defined(_MSVC_LANG) && (_MSVC_LANG >= 201103L))
+        #define VK_CPP11_FEATURES 1
+    #else
+        #define VK_CPP11_FEATURES 0
+    #endif
+#endif
+
+
+#ifndef VK_CPP20_FEATURES
+    #if (defined(__cplusplus) && (__cplusplus >= 202002L)) || (defined(_MSVC_LANG) && (_MSVC_LANG >= 202002L))
+        #define VK_CPP20_FEATURES 1
+    #else
+        #define VK_CPP20_FEATURES 0
+    #endif
+#endif
+
+
 #ifndef VK_USE_64_BIT_PTR_DEFINES
     #if defined(__LP64__) || defined(_WIN64) || (defined(__x86_64__) && !defined(__ILP32__) ) || defined(_M_X64) || defined(__ia64) || defined (_M_IA64) || defined(__aarch64__) || defined(__powerpc64__) || (defined(__riscv) && __riscv_xlen == 64)
         #define VK_USE_64_BIT_PTR_DEFINES 1
@@ -37,7 +55,7 @@ extern "C" {
 
 #ifndef VK_DEFINE_NON_DISPATCHABLE_HANDLE
     #if (VK_USE_64_BIT_PTR_DEFINES==1)
-        #if (defined(__cplusplus) && (__cplusplus >= 201103L)) || (defined(_MSVC_LANG) && (_MSVC_LANG >= 201103L))
+        #if VK_CPP11_FEATURES
             #define VK_NULL_HANDLE nullptr
         #else
             #define VK_NULL_HANDLE ((void*)0)
@@ -61,7 +79,7 @@ extern "C" {
 
 
 #ifndef VK_CPP11_DEFAULT
-    #if (defined(__cplusplus) && (__cplusplus >= 201103L)) || (defined(_MSVC_LANG) && (_MSVC_LANG >= 201103L))
+    #if VK_CPP11_FEATURES
         #define VK_CPP11_DEFAULT(value) { value }
     #else
         #define  VK_CPP11_DEFAULT(value)
@@ -4577,9 +4595,23 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateInstance(
     const VkAllocationCallbacks*                pAllocator,
     VkInstance*                                 pInstance);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateInstance(const VkInstanceCreateInfo& pCreateInfo, VkInstance* pInstance)
+{
+    return vkCreateInstance(&pCreateInfo, nullptr, pInstance);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkDestroyInstance(
     VkInstance                                  instance,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyInstance(VkInstance instance)
+{
+    return vkDestroyInstance(instance, nullptr);
+}
+#endif
 
 VKAPI_ATTR VkResult VKAPI_CALL vkEnumeratePhysicalDevices(
     VkInstance                                  instance,
@@ -4631,9 +4663,23 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateDevice(
     const VkAllocationCallbacks*                pAllocator,
     VkDevice*                                   pDevice);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateDevice(VkPhysicalDevice physicalDevice, const VkDeviceCreateInfo& pCreateInfo, VkDevice* pDevice)
+{
+    return vkCreateDevice(physicalDevice, &pCreateInfo, nullptr, pDevice);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkDestroyDevice(
     VkDevice                                    device,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyDevice(VkDevice device)
+{
+    return vkDestroyDevice(device, nullptr);
+}
+#endif
 
 VKAPI_ATTR VkResult VKAPI_CALL vkEnumerateInstanceExtensionProperties(
     const char*                                 pLayerName,
@@ -4667,6 +4713,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkQueueSubmit(
     const VkSubmitInfo*                         pSubmits,
     VkFence                                     fence);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkQueueSubmit(VkQueue queue, const std::span<VkSubmitInfo>& pSubmits, VkFence fence)
+{
+    return vkQueueSubmit(queue, uint32_t(pSubmits.size()), pSubmits.data(), fence);
+}
+#endif
+
 VKAPI_ATTR VkResult VKAPI_CALL vkQueueWaitIdle(
     VkQueue                                     queue);
 
@@ -4679,10 +4732,24 @@ VKAPI_ATTR VkResult VKAPI_CALL vkAllocateMemory(
     const VkAllocationCallbacks*                pAllocator,
     VkDeviceMemory*                             pMemory);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkAllocateMemory(VkDevice device, const VkMemoryAllocateInfo& pAllocateInfo, VkDeviceMemory* pMemory)
+{
+    return vkAllocateMemory(device, &pAllocateInfo, nullptr, pMemory);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkFreeMemory(
     VkDevice                                    device,
     VkDeviceMemory                              memory,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkFreeMemory(VkDevice device, VkDeviceMemory memory)
+{
+    return vkFreeMemory(device, memory, nullptr);
+}
+#endif
 
 VKAPI_ATTR VkResult VKAPI_CALL vkMapMemory(
     VkDevice                                    device,
@@ -4701,10 +4768,24 @@ VKAPI_ATTR VkResult VKAPI_CALL vkFlushMappedMemoryRanges(
     uint32_t                                    memoryRangeCount,
     const VkMappedMemoryRange*                  pMemoryRanges);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkFlushMappedMemoryRanges(VkDevice device, const std::span<VkMappedMemoryRange>& pMemoryRanges)
+{
+    return vkFlushMappedMemoryRanges(device, uint32_t(pMemoryRanges.size()), pMemoryRanges.data());
+}
+#endif
+
 VKAPI_ATTR VkResult VKAPI_CALL vkInvalidateMappedMemoryRanges(
     VkDevice                                    device,
     uint32_t                                    memoryRangeCount,
     const VkMappedMemoryRange*                  pMemoryRanges);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkInvalidateMappedMemoryRanges(VkDevice device, const std::span<VkMappedMemoryRange>& pMemoryRanges)
+{
+    return vkInvalidateMappedMemoryRanges(device, uint32_t(pMemoryRanges.size()), pMemoryRanges.data());
+}
+#endif
 
 VKAPI_ATTR void VKAPI_CALL vkGetDeviceMemoryCommitment(
     VkDevice                                    device,
@@ -4755,21 +4836,49 @@ VKAPI_ATTR VkResult VKAPI_CALL vkQueueBindSparse(
     const VkBindSparseInfo*                     pBindInfo,
     VkFence                                     fence);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkQueueBindSparse(VkQueue queue, const std::span<VkBindSparseInfo>& pBindInfo, VkFence fence)
+{
+    return vkQueueBindSparse(queue, uint32_t(pBindInfo.size()), pBindInfo.data(), fence);
+}
+#endif
+
 VKAPI_ATTR VkResult VKAPI_CALL vkCreateFence(
     VkDevice                                    device,
     const VkFenceCreateInfo*                    pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkFence*                                    pFence);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateFence(VkDevice device, const VkFenceCreateInfo& pCreateInfo, VkFence* pFence)
+{
+    return vkCreateFence(device, &pCreateInfo, nullptr, pFence);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkDestroyFence(
     VkDevice                                    device,
     VkFence                                     fence,
     const VkAllocationCallbacks*                pAllocator);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyFence(VkDevice device, VkFence fence)
+{
+    return vkDestroyFence(device, fence, nullptr);
+}
+#endif
+
 VKAPI_ATTR VkResult VKAPI_CALL vkResetFences(
     VkDevice                                    device,
     uint32_t                                    fenceCount,
     const VkFence*                              pFences);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkResetFences(VkDevice device, const std::span<VkFence>& pFences)
+{
+    return vkResetFences(device, uint32_t(pFences.size()), pFences.data());
+}
+#endif
 
 VKAPI_ATTR VkResult VKAPI_CALL vkGetFenceStatus(
     VkDevice                                    device,
@@ -4782,16 +4891,37 @@ VKAPI_ATTR VkResult VKAPI_CALL vkWaitForFences(
     VkBool32                                    waitAll,
     uint64_t                                    timeout);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkWaitForFences(VkDevice device, const std::span<VkFence>& pFences, VkBool32 waitAll, uint64_t timeout)
+{
+    return vkWaitForFences(device, uint32_t(pFences.size()), pFences.data(), waitAll, timeout);
+}
+#endif
+
 VKAPI_ATTR VkResult VKAPI_CALL vkCreateSemaphore(
     VkDevice                                    device,
     const VkSemaphoreCreateInfo*                pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkSemaphore*                                pSemaphore);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateSemaphore(VkDevice device, const VkSemaphoreCreateInfo& pCreateInfo, VkSemaphore* pSemaphore)
+{
+    return vkCreateSemaphore(device, &pCreateInfo, nullptr, pSemaphore);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkDestroySemaphore(
     VkDevice                                    device,
     VkSemaphore                                 semaphore,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroySemaphore(VkDevice device, VkSemaphore semaphore)
+{
+    return vkDestroySemaphore(device, semaphore, nullptr);
+}
+#endif
 
 VKAPI_ATTR VkResult VKAPI_CALL vkCreateQueryPool(
     VkDevice                                    device,
@@ -4799,10 +4929,24 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateQueryPool(
     const VkAllocationCallbacks*                pAllocator,
     VkQueryPool*                                pQueryPool);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateQueryPool(VkDevice device, const VkQueryPoolCreateInfo& pCreateInfo, VkQueryPool* pQueryPool)
+{
+    return vkCreateQueryPool(device, &pCreateInfo, nullptr, pQueryPool);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkDestroyQueryPool(
     VkDevice                                    device,
     VkQueryPool                                 queryPool,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyQueryPool(VkDevice device, VkQueryPool queryPool)
+{
+    return vkDestroyQueryPool(device, queryPool, nullptr);
+}
+#endif
 
 VKAPI_ATTR VkResult VKAPI_CALL vkGetQueryPoolResults(
     VkDevice                                    device,
@@ -4820,10 +4964,24 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateBuffer(
     const VkAllocationCallbacks*                pAllocator,
     VkBuffer*                                   pBuffer);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateBuffer(VkDevice device, const VkBufferCreateInfo& pCreateInfo, VkBuffer* pBuffer)
+{
+    return vkCreateBuffer(device, &pCreateInfo, nullptr, pBuffer);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkDestroyBuffer(
     VkDevice                                    device,
     VkBuffer                                    buffer,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyBuffer(VkDevice device, VkBuffer buffer)
+{
+    return vkDestroyBuffer(device, buffer, nullptr);
+}
+#endif
 
 VKAPI_ATTR VkResult VKAPI_CALL vkCreateImage(
     VkDevice                                    device,
@@ -4831,10 +4989,24 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateImage(
     const VkAllocationCallbacks*                pAllocator,
     VkImage*                                    pImage);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateImage(VkDevice device, const VkImageCreateInfo& pCreateInfo, VkImage* pImage)
+{
+    return vkCreateImage(device, &pCreateInfo, nullptr, pImage);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkDestroyImage(
     VkDevice                                    device,
     VkImage                                     image,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyImage(VkDevice device, VkImage image)
+{
+    return vkDestroyImage(device, image, nullptr);
+}
+#endif
 
 VKAPI_ATTR void VKAPI_CALL vkGetImageSubresourceLayout(
     VkDevice                                    device,
@@ -4842,16 +5014,37 @@ VKAPI_ATTR void VKAPI_CALL vkGetImageSubresourceLayout(
     const VkImageSubresource*                   pSubresource,
     VkSubresourceLayout*                        pLayout);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetImageSubresourceLayout(VkDevice device, VkImage image, const VkImageSubresource& pSubresource, VkSubresourceLayout* pLayout)
+{
+    return vkGetImageSubresourceLayout(device, image, &pSubresource, pLayout);
+}
+#endif
+
 VKAPI_ATTR VkResult VKAPI_CALL vkCreateImageView(
     VkDevice                                    device,
     const VkImageViewCreateInfo*                pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkImageView*                                pView);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateImageView(VkDevice device, const VkImageViewCreateInfo& pCreateInfo, VkImageView* pView)
+{
+    return vkCreateImageView(device, &pCreateInfo, nullptr, pView);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkDestroyImageView(
     VkDevice                                    device,
     VkImageView                                 imageView,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyImageView(VkDevice device, VkImageView imageView)
+{
+    return vkDestroyImageView(device, imageView, nullptr);
+}
+#endif
 
 VKAPI_ATTR VkResult VKAPI_CALL vkCreateCommandPool(
     VkDevice                                    device,
@@ -4859,10 +5052,24 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateCommandPool(
     const VkAllocationCallbacks*                pAllocator,
     VkCommandPool*                              pCommandPool);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateCommandPool(VkDevice device, const VkCommandPoolCreateInfo& pCreateInfo, VkCommandPool* pCommandPool)
+{
+    return vkCreateCommandPool(device, &pCreateInfo, nullptr, pCommandPool);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkDestroyCommandPool(
     VkDevice                                    device,
     VkCommandPool                               commandPool,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyCommandPool(VkDevice device, VkCommandPool commandPool)
+{
+    return vkDestroyCommandPool(device, commandPool, nullptr);
+}
+#endif
 
 VKAPI_ATTR VkResult VKAPI_CALL vkResetCommandPool(
     VkDevice                                    device,
@@ -4874,15 +5081,36 @@ VKAPI_ATTR VkResult VKAPI_CALL vkAllocateCommandBuffers(
     const VkCommandBufferAllocateInfo*          pAllocateInfo,
     VkCommandBuffer*                            pCommandBuffers);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkAllocateCommandBuffers(VkDevice device, const VkCommandBufferAllocateInfo& pAllocateInfo, VkCommandBuffer* pCommandBuffers)
+{
+    return vkAllocateCommandBuffers(device, &pAllocateInfo, pCommandBuffers);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkFreeCommandBuffers(
     VkDevice                                    device,
     VkCommandPool                               commandPool,
     uint32_t                                    commandBufferCount,
     const VkCommandBuffer*                      pCommandBuffers);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkFreeCommandBuffers(VkDevice device, VkCommandPool commandPool, const std::span<VkCommandBuffer>& pCommandBuffers)
+{
+    return vkFreeCommandBuffers(device, commandPool, uint32_t(pCommandBuffers.size()), pCommandBuffers.data());
+}
+#endif
+
 VKAPI_ATTR VkResult VKAPI_CALL vkBeginCommandBuffer(
     VkCommandBuffer                             commandBuffer,
     const VkCommandBufferBeginInfo*             pBeginInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkBeginCommandBuffer(VkCommandBuffer commandBuffer, const VkCommandBufferBeginInfo& pBeginInfo)
+{
+    return vkBeginCommandBuffer(commandBuffer, &pBeginInfo);
+}
+#endif
 
 VKAPI_ATTR VkResult VKAPI_CALL vkEndCommandBuffer(
     VkCommandBuffer                             commandBuffer);
@@ -4898,6 +5126,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdCopyBuffer(
     uint32_t                                    regionCount,
     const VkBufferCopy*                         pRegions);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdCopyBuffer(VkCommandBuffer commandBuffer, VkBuffer srcBuffer, VkBuffer dstBuffer, const std::span<VkBufferCopy>& pRegions)
+{
+    return vkCmdCopyBuffer(commandBuffer, srcBuffer, dstBuffer, uint32_t(pRegions.size()), pRegions.data());
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkCmdCopyImage(
     VkCommandBuffer                             commandBuffer,
     VkImage                                     srcImage,
@@ -4907,6 +5142,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdCopyImage(
     uint32_t                                    regionCount,
     const VkImageCopy*                          pRegions);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdCopyImage(VkCommandBuffer commandBuffer, VkImage srcImage, VkImageLayout srcImageLayout, VkImage dstImage, VkImageLayout dstImageLayout, const std::span<VkImageCopy>& pRegions)
+{
+    return vkCmdCopyImage(commandBuffer, srcImage, srcImageLayout, dstImage, dstImageLayout, uint32_t(pRegions.size()), pRegions.data());
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkCmdCopyBufferToImage(
     VkCommandBuffer                             commandBuffer,
     VkBuffer                                    srcBuffer,
@@ -4915,6 +5157,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdCopyBufferToImage(
     uint32_t                                    regionCount,
     const VkBufferImageCopy*                    pRegions);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdCopyBufferToImage(VkCommandBuffer commandBuffer, VkBuffer srcBuffer, VkImage dstImage, VkImageLayout dstImageLayout, const std::span<VkBufferImageCopy>& pRegions)
+{
+    return vkCmdCopyBufferToImage(commandBuffer, srcBuffer, dstImage, dstImageLayout, uint32_t(pRegions.size()), pRegions.data());
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkCmdCopyImageToBuffer(
     VkCommandBuffer                             commandBuffer,
     VkImage                                     srcImage,
@@ -4922,6 +5171,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdCopyImageToBuffer(
     VkBuffer                                    dstBuffer,
     uint32_t                                    regionCount,
     const VkBufferImageCopy*                    pRegions);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdCopyImageToBuffer(VkCommandBuffer commandBuffer, VkImage srcImage, VkImageLayout srcImageLayout, VkBuffer dstBuffer, const std::span<VkBufferImageCopy>& pRegions)
+{
+    return vkCmdCopyImageToBuffer(commandBuffer, srcImage, srcImageLayout, dstBuffer, uint32_t(pRegions.size()), pRegions.data());
+}
+#endif
 
 VKAPI_ATTR void VKAPI_CALL vkCmdUpdateBuffer(
     VkCommandBuffer                             commandBuffer,
@@ -4948,6 +5204,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdPipelineBarrier(
     const VkBufferMemoryBarrier*                pBufferMemoryBarriers,
     uint32_t                                    imageMemoryBarrierCount,
     const VkImageMemoryBarrier*                 pImageMemoryBarriers);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdPipelineBarrier(VkCommandBuffer commandBuffer, VkPipelineStageFlags srcStageMask, VkPipelineStageFlags dstStageMask, VkDependencyFlags dependencyFlags, const std::span<VkMemoryBarrier>& pMemoryBarriers, const std::span<VkBufferMemoryBarrier>& pBufferMemoryBarriers, const std::span<VkImageMemoryBarrier>& pImageMemoryBarriers)
+{
+    return vkCmdPipelineBarrier(commandBuffer, srcStageMask, dstStageMask, dependencyFlags, uint32_t(pMemoryBarriers.size()), pMemoryBarriers.data(), uint32_t(pBufferMemoryBarriers.size()), pBufferMemoryBarriers.data(), uint32_t(pImageMemoryBarriers.size()), pImageMemoryBarriers.data());
+}
+#endif
 
 VKAPI_ATTR void VKAPI_CALL vkCmdBeginQuery(
     VkCommandBuffer                             commandBuffer,
@@ -4987,16 +5250,37 @@ VKAPI_ATTR void VKAPI_CALL vkCmdExecuteCommands(
     uint32_t                                    commandBufferCount,
     const VkCommandBuffer*                      pCommandBuffers);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdExecuteCommands(VkCommandBuffer commandBuffer, const std::span<VkCommandBuffer>& pCommandBuffers)
+{
+    return vkCmdExecuteCommands(commandBuffer, uint32_t(pCommandBuffers.size()), pCommandBuffers.data());
+}
+#endif
+
 VKAPI_ATTR VkResult VKAPI_CALL vkCreateEvent(
     VkDevice                                    device,
     const VkEventCreateInfo*                    pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkEvent*                                    pEvent);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateEvent(VkDevice device, const VkEventCreateInfo& pCreateInfo, VkEvent* pEvent)
+{
+    return vkCreateEvent(device, &pCreateInfo, nullptr, pEvent);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkDestroyEvent(
     VkDevice                                    device,
     VkEvent                                     event,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyEvent(VkDevice device, VkEvent event)
+{
+    return vkDestroyEvent(device, event, nullptr);
+}
+#endif
 
 VKAPI_ATTR VkResult VKAPI_CALL vkGetEventStatus(
     VkDevice                                    device,
@@ -5016,10 +5300,24 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateBufferView(
     const VkAllocationCallbacks*                pAllocator,
     VkBufferView*                               pView);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateBufferView(VkDevice device, const VkBufferViewCreateInfo& pCreateInfo, VkBufferView* pView)
+{
+    return vkCreateBufferView(device, &pCreateInfo, nullptr, pView);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkDestroyBufferView(
     VkDevice                                    device,
     VkBufferView                                bufferView,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyBufferView(VkDevice device, VkBufferView bufferView)
+{
+    return vkDestroyBufferView(device, bufferView, nullptr);
+}
+#endif
 
 VKAPI_ATTR VkResult VKAPI_CALL vkCreateShaderModule(
     VkDevice                                    device,
@@ -5027,10 +5325,24 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateShaderModule(
     const VkAllocationCallbacks*                pAllocator,
     VkShaderModule*                             pShaderModule);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateShaderModule(VkDevice device, const VkShaderModuleCreateInfo& pCreateInfo, VkShaderModule* pShaderModule)
+{
+    return vkCreateShaderModule(device, &pCreateInfo, nullptr, pShaderModule);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkDestroyShaderModule(
     VkDevice                                    device,
     VkShaderModule                              shaderModule,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyShaderModule(VkDevice device, VkShaderModule shaderModule)
+{
+    return vkDestroyShaderModule(device, shaderModule, nullptr);
+}
+#endif
 
 VKAPI_ATTR VkResult VKAPI_CALL vkCreatePipelineCache(
     VkDevice                                    device,
@@ -5038,10 +5350,24 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreatePipelineCache(
     const VkAllocationCallbacks*                pAllocator,
     VkPipelineCache*                            pPipelineCache);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreatePipelineCache(VkDevice device, const VkPipelineCacheCreateInfo& pCreateInfo, VkPipelineCache* pPipelineCache)
+{
+    return vkCreatePipelineCache(device, &pCreateInfo, nullptr, pPipelineCache);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkDestroyPipelineCache(
     VkDevice                                    device,
     VkPipelineCache                             pipelineCache,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyPipelineCache(VkDevice device, VkPipelineCache pipelineCache)
+{
+    return vkDestroyPipelineCache(device, pipelineCache, nullptr);
+}
+#endif
 
 VKAPI_ATTR VkResult VKAPI_CALL vkGetPipelineCacheData(
     VkDevice                                    device,
@@ -5055,6 +5381,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkMergePipelineCaches(
     uint32_t                                    srcCacheCount,
     const VkPipelineCache*                      pSrcCaches);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkMergePipelineCaches(VkDevice device, VkPipelineCache dstCache, const std::span<VkPipelineCache>& pSrcCaches)
+{
+    return vkMergePipelineCaches(device, dstCache, uint32_t(pSrcCaches.size()), pSrcCaches.data());
+}
+#endif
+
 VKAPI_ATTR VkResult VKAPI_CALL vkCreateComputePipelines(
     VkDevice                                    device,
     VkPipelineCache                             pipelineCache,
@@ -5063,10 +5396,24 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateComputePipelines(
     const VkAllocationCallbacks*                pAllocator,
     VkPipeline*                                 pPipelines);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateComputePipelines(VkDevice device, VkPipelineCache pipelineCache, const std::span<VkComputePipelineCreateInfo>& pCreateInfos, VkPipeline* pPipelines)
+{
+    return vkCreateComputePipelines(device, pipelineCache, uint32_t(pCreateInfos.size()), pCreateInfos.data(), nullptr, pPipelines);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkDestroyPipeline(
     VkDevice                                    device,
     VkPipeline                                  pipeline,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyPipeline(VkDevice device, VkPipeline pipeline)
+{
+    return vkDestroyPipeline(device, pipeline, nullptr);
+}
+#endif
 
 VKAPI_ATTR VkResult VKAPI_CALL vkCreatePipelineLayout(
     VkDevice                                    device,
@@ -5074,10 +5421,24 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreatePipelineLayout(
     const VkAllocationCallbacks*                pAllocator,
     VkPipelineLayout*                           pPipelineLayout);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreatePipelineLayout(VkDevice device, const VkPipelineLayoutCreateInfo& pCreateInfo, VkPipelineLayout* pPipelineLayout)
+{
+    return vkCreatePipelineLayout(device, &pCreateInfo, nullptr, pPipelineLayout);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkDestroyPipelineLayout(
     VkDevice                                    device,
     VkPipelineLayout                            pipelineLayout,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyPipelineLayout(VkDevice device, VkPipelineLayout pipelineLayout)
+{
+    return vkDestroyPipelineLayout(device, pipelineLayout, nullptr);
+}
+#endif
 
 VKAPI_ATTR VkResult VKAPI_CALL vkCreateSampler(
     VkDevice                                    device,
@@ -5085,10 +5446,24 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateSampler(
     const VkAllocationCallbacks*                pAllocator,
     VkSampler*                                  pSampler);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateSampler(VkDevice device, const VkSamplerCreateInfo& pCreateInfo, VkSampler* pSampler)
+{
+    return vkCreateSampler(device, &pCreateInfo, nullptr, pSampler);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkDestroySampler(
     VkDevice                                    device,
     VkSampler                                   sampler,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroySampler(VkDevice device, VkSampler sampler)
+{
+    return vkDestroySampler(device, sampler, nullptr);
+}
+#endif
 
 VKAPI_ATTR VkResult VKAPI_CALL vkCreateDescriptorSetLayout(
     VkDevice                                    device,
@@ -5096,10 +5471,24 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateDescriptorSetLayout(
     const VkAllocationCallbacks*                pAllocator,
     VkDescriptorSetLayout*                      pSetLayout);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateDescriptorSetLayout(VkDevice device, const VkDescriptorSetLayoutCreateInfo& pCreateInfo, VkDescriptorSetLayout* pSetLayout)
+{
+    return vkCreateDescriptorSetLayout(device, &pCreateInfo, nullptr, pSetLayout);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkDestroyDescriptorSetLayout(
     VkDevice                                    device,
     VkDescriptorSetLayout                       descriptorSetLayout,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyDescriptorSetLayout(VkDevice device, VkDescriptorSetLayout descriptorSetLayout)
+{
+    return vkDestroyDescriptorSetLayout(device, descriptorSetLayout, nullptr);
+}
+#endif
 
 VKAPI_ATTR VkResult VKAPI_CALL vkCreateDescriptorPool(
     VkDevice                                    device,
@@ -5107,10 +5496,24 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateDescriptorPool(
     const VkAllocationCallbacks*                pAllocator,
     VkDescriptorPool*                           pDescriptorPool);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateDescriptorPool(VkDevice device, const VkDescriptorPoolCreateInfo& pCreateInfo, VkDescriptorPool* pDescriptorPool)
+{
+    return vkCreateDescriptorPool(device, &pCreateInfo, nullptr, pDescriptorPool);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkDestroyDescriptorPool(
     VkDevice                                    device,
     VkDescriptorPool                            descriptorPool,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyDescriptorPool(VkDevice device, VkDescriptorPool descriptorPool)
+{
+    return vkDestroyDescriptorPool(device, descriptorPool, nullptr);
+}
+#endif
 
 VKAPI_ATTR VkResult VKAPI_CALL vkResetDescriptorPool(
     VkDevice                                    device,
@@ -5122,11 +5525,25 @@ VKAPI_ATTR VkResult VKAPI_CALL vkAllocateDescriptorSets(
     const VkDescriptorSetAllocateInfo*          pAllocateInfo,
     VkDescriptorSet*                            pDescriptorSets);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkAllocateDescriptorSets(VkDevice device, const VkDescriptorSetAllocateInfo& pAllocateInfo, VkDescriptorSet* pDescriptorSets)
+{
+    return vkAllocateDescriptorSets(device, &pAllocateInfo, pDescriptorSets);
+}
+#endif
+
 VKAPI_ATTR VkResult VKAPI_CALL vkFreeDescriptorSets(
     VkDevice                                    device,
     VkDescriptorPool                            descriptorPool,
     uint32_t                                    descriptorSetCount,
     const VkDescriptorSet*                      pDescriptorSets);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkFreeDescriptorSets(VkDevice device, VkDescriptorPool descriptorPool, const std::span<VkDescriptorSet>& pDescriptorSets)
+{
+    return vkFreeDescriptorSets(device, descriptorPool, uint32_t(pDescriptorSets.size()), pDescriptorSets.data());
+}
+#endif
 
 VKAPI_ATTR void VKAPI_CALL vkUpdateDescriptorSets(
     VkDevice                                    device,
@@ -5134,6 +5551,13 @@ VKAPI_ATTR void VKAPI_CALL vkUpdateDescriptorSets(
     const VkWriteDescriptorSet*                 pDescriptorWrites,
     uint32_t                                    descriptorCopyCount,
     const VkCopyDescriptorSet*                  pDescriptorCopies);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkUpdateDescriptorSets(VkDevice device, const std::span<VkWriteDescriptorSet>& pDescriptorWrites, const std::span<VkCopyDescriptorSet>& pDescriptorCopies)
+{
+    return vkUpdateDescriptorSets(device, uint32_t(pDescriptorWrites.size()), pDescriptorWrites.data(), uint32_t(pDescriptorCopies.size()), pDescriptorCopies.data());
+}
+#endif
 
 VKAPI_ATTR void VKAPI_CALL vkCmdBindPipeline(
     VkCommandBuffer                             commandBuffer,
@@ -5150,6 +5574,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdBindDescriptorSets(
     uint32_t                                    dynamicOffsetCount,
     const uint32_t*                             pDynamicOffsets);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdBindDescriptorSets(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint32_t firstSet, const std::span<VkDescriptorSet>& pDescriptorSets, const std::span<uint32_t>& pDynamicOffsets)
+{
+    return vkCmdBindDescriptorSets(commandBuffer, pipelineBindPoint, layout, firstSet, uint32_t(pDescriptorSets.size()), pDescriptorSets.data(), uint32_t(pDynamicOffsets.size()), pDynamicOffsets.data());
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkCmdClearColorImage(
     VkCommandBuffer                             commandBuffer,
     VkImage                                     image,
@@ -5157,6 +5588,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdClearColorImage(
     const VkClearColorValue*                    pColor,
     uint32_t                                    rangeCount,
     const VkImageSubresourceRange*              pRanges);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdClearColorImage(VkCommandBuffer commandBuffer, VkImage image, VkImageLayout imageLayout, const VkClearColorValue& pColor, const std::span<VkImageSubresourceRange>& pRanges)
+{
+    return vkCmdClearColorImage(commandBuffer, image, imageLayout, &pColor, uint32_t(pRanges.size()), pRanges.data());
+}
+#endif
 
 VKAPI_ATTR void VKAPI_CALL vkCmdDispatch(
     VkCommandBuffer                             commandBuffer,
@@ -5192,6 +5630,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdWaitEvents(
     uint32_t                                    imageMemoryBarrierCount,
     const VkImageMemoryBarrier*                 pImageMemoryBarriers);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdWaitEvents(VkCommandBuffer commandBuffer, const std::span<VkEvent>& pEvents, VkPipelineStageFlags srcStageMask, VkPipelineStageFlags dstStageMask, const std::span<VkMemoryBarrier>& pMemoryBarriers, const std::span<VkBufferMemoryBarrier>& pBufferMemoryBarriers, const std::span<VkImageMemoryBarrier>& pImageMemoryBarriers)
+{
+    return vkCmdWaitEvents(commandBuffer, uint32_t(pEvents.size()), pEvents.data(), srcStageMask, dstStageMask, uint32_t(pMemoryBarriers.size()), pMemoryBarriers.data(), uint32_t(pBufferMemoryBarriers.size()), pBufferMemoryBarriers.data(), uint32_t(pImageMemoryBarriers.size()), pImageMemoryBarriers.data());
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkCmdPushConstants(
     VkCommandBuffer                             commandBuffer,
     VkPipelineLayout                            layout,
@@ -5208,16 +5653,37 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateGraphicsPipelines(
     const VkAllocationCallbacks*                pAllocator,
     VkPipeline*                                 pPipelines);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateGraphicsPipelines(VkDevice device, VkPipelineCache pipelineCache, const std::span<VkGraphicsPipelineCreateInfo>& pCreateInfos, VkPipeline* pPipelines)
+{
+    return vkCreateGraphicsPipelines(device, pipelineCache, uint32_t(pCreateInfos.size()), pCreateInfos.data(), nullptr, pPipelines);
+}
+#endif
+
 VKAPI_ATTR VkResult VKAPI_CALL vkCreateFramebuffer(
     VkDevice                                    device,
     const VkFramebufferCreateInfo*              pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkFramebuffer*                              pFramebuffer);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateFramebuffer(VkDevice device, const VkFramebufferCreateInfo& pCreateInfo, VkFramebuffer* pFramebuffer)
+{
+    return vkCreateFramebuffer(device, &pCreateInfo, nullptr, pFramebuffer);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkDestroyFramebuffer(
     VkDevice                                    device,
     VkFramebuffer                               framebuffer,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyFramebuffer(VkDevice device, VkFramebuffer framebuffer)
+{
+    return vkDestroyFramebuffer(device, framebuffer, nullptr);
+}
+#endif
 
 VKAPI_ATTR VkResult VKAPI_CALL vkCreateRenderPass(
     VkDevice                                    device,
@@ -5225,10 +5691,24 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateRenderPass(
     const VkAllocationCallbacks*                pAllocator,
     VkRenderPass*                               pRenderPass);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateRenderPass(VkDevice device, const VkRenderPassCreateInfo& pCreateInfo, VkRenderPass* pRenderPass)
+{
+    return vkCreateRenderPass(device, &pCreateInfo, nullptr, pRenderPass);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkDestroyRenderPass(
     VkDevice                                    device,
     VkRenderPass                                renderPass,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyRenderPass(VkDevice device, VkRenderPass renderPass)
+{
+    return vkDestroyRenderPass(device, renderPass, nullptr);
+}
+#endif
 
 VKAPI_ATTR void VKAPI_CALL vkGetRenderAreaGranularity(
     VkDevice                                    device,
@@ -5241,11 +5721,25 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetViewport(
     uint32_t                                    viewportCount,
     const VkViewport*                           pViewports);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdSetViewport(VkCommandBuffer commandBuffer, uint32_t firstViewport, const std::span<VkViewport>& pViewports)
+{
+    return vkCmdSetViewport(commandBuffer, firstViewport, uint32_t(pViewports.size()), pViewports.data());
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkCmdSetScissor(
     VkCommandBuffer                             commandBuffer,
     uint32_t                                    firstScissor,
     uint32_t                                    scissorCount,
     const VkRect2D*                             pScissors);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdSetScissor(VkCommandBuffer commandBuffer, uint32_t firstScissor, const std::span<VkRect2D>& pScissors)
+{
+    return vkCmdSetScissor(commandBuffer, firstScissor, uint32_t(pScissors.size()), pScissors.data());
+}
+#endif
 
 VKAPI_ATTR void VKAPI_CALL vkCmdSetLineWidth(
     VkCommandBuffer                             commandBuffer,
@@ -5294,6 +5788,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdBindVertexBuffers(
     const VkBuffer*                             pBuffers,
     const VkDeviceSize*                         pOffsets);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdBindVertexBuffers(VkCommandBuffer commandBuffer, uint32_t firstBinding, const std::span<VkBuffer>& pBuffers, const std::span<VkDeviceSize>& pOffsets)
+{
+    return vkCmdBindVertexBuffers(commandBuffer, firstBinding, uint32_t(pBuffers.size()), pBuffers.data(), pOffsets.data());
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkCmdDraw(
     VkCommandBuffer                             commandBuffer,
     uint32_t                                    vertexCount,
@@ -5333,6 +5834,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdBlitImage(
     const VkImageBlit*                          pRegions,
     VkFilter                                    filter);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdBlitImage(VkCommandBuffer commandBuffer, VkImage srcImage, VkImageLayout srcImageLayout, VkImage dstImage, VkImageLayout dstImageLayout, const std::span<VkImageBlit>& pRegions, VkFilter filter)
+{
+    return vkCmdBlitImage(commandBuffer, srcImage, srcImageLayout, dstImage, dstImageLayout, uint32_t(pRegions.size()), pRegions.data(), filter);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkCmdClearDepthStencilImage(
     VkCommandBuffer                             commandBuffer,
     VkImage                                     image,
@@ -5341,12 +5849,26 @@ VKAPI_ATTR void VKAPI_CALL vkCmdClearDepthStencilImage(
     uint32_t                                    rangeCount,
     const VkImageSubresourceRange*              pRanges);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdClearDepthStencilImage(VkCommandBuffer commandBuffer, VkImage image, VkImageLayout imageLayout, const VkClearDepthStencilValue& pDepthStencil, const std::span<VkImageSubresourceRange>& pRanges)
+{
+    return vkCmdClearDepthStencilImage(commandBuffer, image, imageLayout, &pDepthStencil, uint32_t(pRanges.size()), pRanges.data());
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkCmdClearAttachments(
     VkCommandBuffer                             commandBuffer,
     uint32_t                                    attachmentCount,
     const VkClearAttachment*                    pAttachments,
     uint32_t                                    rectCount,
     const VkClearRect*                          pRects);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdClearAttachments(VkCommandBuffer commandBuffer, const std::span<VkClearAttachment>& pAttachments, const std::span<VkClearRect>& pRects)
+{
+    return vkCmdClearAttachments(commandBuffer, uint32_t(pAttachments.size()), pAttachments.data(), uint32_t(pRects.size()), pRects.data());
+}
+#endif
 
 VKAPI_ATTR void VKAPI_CALL vkCmdResolveImage(
     VkCommandBuffer                             commandBuffer,
@@ -5357,10 +5879,24 @@ VKAPI_ATTR void VKAPI_CALL vkCmdResolveImage(
     uint32_t                                    regionCount,
     const VkImageResolve*                       pRegions);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdResolveImage(VkCommandBuffer commandBuffer, VkImage srcImage, VkImageLayout srcImageLayout, VkImage dstImage, VkImageLayout dstImageLayout, const std::span<VkImageResolve>& pRegions)
+{
+    return vkCmdResolveImage(commandBuffer, srcImage, srcImageLayout, dstImage, dstImageLayout, uint32_t(pRegions.size()), pRegions.data());
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkCmdBeginRenderPass(
     VkCommandBuffer                             commandBuffer,
     const VkRenderPassBeginInfo*                pRenderPassBegin,
     VkSubpassContents                           contents);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdBeginRenderPass(VkCommandBuffer commandBuffer, const VkRenderPassBeginInfo& pRenderPassBegin, VkSubpassContents contents)
+{
+    return vkCmdBeginRenderPass(commandBuffer, &pRenderPassBegin, contents);
+}
+#endif
 
 VKAPI_ATTR void VKAPI_CALL vkCmdNextSubpass(
     VkCommandBuffer                             commandBuffer,
@@ -6110,10 +6646,24 @@ VKAPI_ATTR VkResult VKAPI_CALL vkBindBufferMemory2(
     uint32_t                                    bindInfoCount,
     const VkBindBufferMemoryInfo*               pBindInfos);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkBindBufferMemory2(VkDevice device, const std::span<VkBindBufferMemoryInfo>& pBindInfos)
+{
+    return vkBindBufferMemory2(device, uint32_t(pBindInfos.size()), pBindInfos.data());
+}
+#endif
+
 VKAPI_ATTR VkResult VKAPI_CALL vkBindImageMemory2(
     VkDevice                                    device,
     uint32_t                                    bindInfoCount,
     const VkBindImageMemoryInfo*                pBindInfos);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkBindImageMemory2(VkDevice device, const std::span<VkBindImageMemoryInfo>& pBindInfos)
+{
+    return vkBindImageMemory2(device, uint32_t(pBindInfos.size()), pBindInfos.data());
+}
+#endif
 
 VKAPI_ATTR void VKAPI_CALL vkGetDeviceGroupPeerMemoryFeatures(
     VkDevice                                    device,
@@ -6136,16 +6686,37 @@ VKAPI_ATTR void VKAPI_CALL vkGetImageMemoryRequirements2(
     const VkImageMemoryRequirementsInfo2*       pInfo,
     VkMemoryRequirements2*                      pMemoryRequirements);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetImageMemoryRequirements2(VkDevice device, const VkImageMemoryRequirementsInfo2& pInfo, VkMemoryRequirements2* pMemoryRequirements)
+{
+    return vkGetImageMemoryRequirements2(device, &pInfo, pMemoryRequirements);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkGetBufferMemoryRequirements2(
     VkDevice                                    device,
     const VkBufferMemoryRequirementsInfo2*      pInfo,
     VkMemoryRequirements2*                      pMemoryRequirements);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetBufferMemoryRequirements2(VkDevice device, const VkBufferMemoryRequirementsInfo2& pInfo, VkMemoryRequirements2* pMemoryRequirements)
+{
+    return vkGetBufferMemoryRequirements2(device, &pInfo, pMemoryRequirements);
+}
+#endif
 
 VKAPI_ATTR void VKAPI_CALL vkGetImageSparseMemoryRequirements2(
     VkDevice                                    device,
     const VkImageSparseMemoryRequirementsInfo2* pInfo,
     uint32_t*                                   pSparseMemoryRequirementCount,
     VkSparseImageMemoryRequirements2*           pSparseMemoryRequirements);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetImageSparseMemoryRequirements2(VkDevice device, const VkImageSparseMemoryRequirementsInfo2& pInfo, uint32_t* pSparseMemoryRequirementCount, VkSparseImageMemoryRequirements2* pSparseMemoryRequirements)
+{
+    return vkGetImageSparseMemoryRequirements2(device, &pInfo, pSparseMemoryRequirementCount, pSparseMemoryRequirements);
+}
+#endif
 
 VKAPI_ATTR void VKAPI_CALL vkGetPhysicalDeviceFeatures2(
     VkPhysicalDevice                            physicalDevice,
@@ -6165,6 +6736,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetPhysicalDeviceImageFormatProperties2(
     const VkPhysicalDeviceImageFormatInfo2*     pImageFormatInfo,
     VkImageFormatProperties2*                   pImageFormatProperties);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetPhysicalDeviceImageFormatProperties2(VkPhysicalDevice physicalDevice, const VkPhysicalDeviceImageFormatInfo2& pImageFormatInfo, VkImageFormatProperties2* pImageFormatProperties)
+{
+    return vkGetPhysicalDeviceImageFormatProperties2(physicalDevice, &pImageFormatInfo, pImageFormatProperties);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkGetPhysicalDeviceQueueFamilyProperties2(
     VkPhysicalDevice                            physicalDevice,
     uint32_t*                                   pQueueFamilyPropertyCount,
@@ -6180,6 +6758,13 @@ VKAPI_ATTR void VKAPI_CALL vkGetPhysicalDeviceSparseImageFormatProperties2(
     uint32_t*                                   pPropertyCount,
     VkSparseImageFormatProperties2*             pProperties);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetPhysicalDeviceSparseImageFormatProperties2(VkPhysicalDevice physicalDevice, const VkPhysicalDeviceSparseImageFormatInfo2& pFormatInfo, uint32_t* pPropertyCount, VkSparseImageFormatProperties2* pProperties)
+{
+    return vkGetPhysicalDeviceSparseImageFormatProperties2(physicalDevice, &pFormatInfo, pPropertyCount, pProperties);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkTrimCommandPool(
     VkDevice                                    device,
     VkCommandPool                               commandPool,
@@ -6190,20 +6775,48 @@ VKAPI_ATTR void VKAPI_CALL vkGetDeviceQueue2(
     const VkDeviceQueueInfo2*                   pQueueInfo,
     VkQueue*                                    pQueue);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetDeviceQueue2(VkDevice device, const VkDeviceQueueInfo2& pQueueInfo, VkQueue* pQueue)
+{
+    return vkGetDeviceQueue2(device, &pQueueInfo, pQueue);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkGetPhysicalDeviceExternalBufferProperties(
     VkPhysicalDevice                            physicalDevice,
     const VkPhysicalDeviceExternalBufferInfo*   pExternalBufferInfo,
     VkExternalBufferProperties*                 pExternalBufferProperties);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetPhysicalDeviceExternalBufferProperties(VkPhysicalDevice physicalDevice, const VkPhysicalDeviceExternalBufferInfo& pExternalBufferInfo, VkExternalBufferProperties* pExternalBufferProperties)
+{
+    return vkGetPhysicalDeviceExternalBufferProperties(physicalDevice, &pExternalBufferInfo, pExternalBufferProperties);
+}
+#endif
 
 VKAPI_ATTR void VKAPI_CALL vkGetPhysicalDeviceExternalFenceProperties(
     VkPhysicalDevice                            physicalDevice,
     const VkPhysicalDeviceExternalFenceInfo*    pExternalFenceInfo,
     VkExternalFenceProperties*                  pExternalFenceProperties);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetPhysicalDeviceExternalFenceProperties(VkPhysicalDevice physicalDevice, const VkPhysicalDeviceExternalFenceInfo& pExternalFenceInfo, VkExternalFenceProperties* pExternalFenceProperties)
+{
+    return vkGetPhysicalDeviceExternalFenceProperties(physicalDevice, &pExternalFenceInfo, pExternalFenceProperties);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkGetPhysicalDeviceExternalSemaphoreProperties(
     VkPhysicalDevice                            physicalDevice,
     const VkPhysicalDeviceExternalSemaphoreInfo* pExternalSemaphoreInfo,
     VkExternalSemaphoreProperties*              pExternalSemaphoreProperties);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetPhysicalDeviceExternalSemaphoreProperties(VkPhysicalDevice physicalDevice, const VkPhysicalDeviceExternalSemaphoreInfo& pExternalSemaphoreInfo, VkExternalSemaphoreProperties* pExternalSemaphoreProperties)
+{
+    return vkGetPhysicalDeviceExternalSemaphoreProperties(physicalDevice, &pExternalSemaphoreInfo, pExternalSemaphoreProperties);
+}
+#endif
 
 VKAPI_ATTR void VKAPI_CALL vkCmdDispatchBase(
     VkCommandBuffer                             commandBuffer,
@@ -6220,10 +6833,24 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateDescriptorUpdateTemplate(
     const VkAllocationCallbacks*                pAllocator,
     VkDescriptorUpdateTemplate*                 pDescriptorUpdateTemplate);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateDescriptorUpdateTemplate(VkDevice device, const VkDescriptorUpdateTemplateCreateInfo& pCreateInfo, VkDescriptorUpdateTemplate* pDescriptorUpdateTemplate)
+{
+    return vkCreateDescriptorUpdateTemplate(device, &pCreateInfo, nullptr, pDescriptorUpdateTemplate);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkDestroyDescriptorUpdateTemplate(
     VkDevice                                    device,
     VkDescriptorUpdateTemplate                  descriptorUpdateTemplate,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyDescriptorUpdateTemplate(VkDevice device, VkDescriptorUpdateTemplate descriptorUpdateTemplate)
+{
+    return vkDestroyDescriptorUpdateTemplate(device, descriptorUpdateTemplate, nullptr);
+}
+#endif
 
 VKAPI_ATTR void VKAPI_CALL vkUpdateDescriptorSetWithTemplate(
     VkDevice                                    device,
@@ -6236,16 +6863,37 @@ VKAPI_ATTR void VKAPI_CALL vkGetDescriptorSetLayoutSupport(
     const VkDescriptorSetLayoutCreateInfo*      pCreateInfo,
     VkDescriptorSetLayoutSupport*               pSupport);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetDescriptorSetLayoutSupport(VkDevice device, const VkDescriptorSetLayoutCreateInfo& pCreateInfo, VkDescriptorSetLayoutSupport* pSupport)
+{
+    return vkGetDescriptorSetLayoutSupport(device, &pCreateInfo, pSupport);
+}
+#endif
+
 VKAPI_ATTR VkResult VKAPI_CALL vkCreateSamplerYcbcrConversion(
     VkDevice                                    device,
     const VkSamplerYcbcrConversionCreateInfo*   pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkSamplerYcbcrConversion*                   pYcbcrConversion);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateSamplerYcbcrConversion(VkDevice device, const VkSamplerYcbcrConversionCreateInfo& pCreateInfo, VkSamplerYcbcrConversion* pYcbcrConversion)
+{
+    return vkCreateSamplerYcbcrConversion(device, &pCreateInfo, nullptr, pYcbcrConversion);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkDestroySamplerYcbcrConversion(
     VkDevice                                    device,
     VkSamplerYcbcrConversion                    ycbcrConversion,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroySamplerYcbcrConversion(VkDevice device, VkSamplerYcbcrConversion ycbcrConversion)
+{
+    return vkDestroySamplerYcbcrConversion(device, ycbcrConversion, nullptr);
+}
+#endif
 #endif
 
 
@@ -6956,21 +7604,56 @@ VKAPI_ATTR VkResult VKAPI_CALL vkWaitSemaphores(
     const VkSemaphoreWaitInfo*                  pWaitInfo,
     uint64_t                                    timeout);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkWaitSemaphores(VkDevice device, const VkSemaphoreWaitInfo& pWaitInfo, uint64_t timeout)
+{
+    return vkWaitSemaphores(device, &pWaitInfo, timeout);
+}
+#endif
+
 VKAPI_ATTR VkResult VKAPI_CALL vkSignalSemaphore(
     VkDevice                                    device,
     const VkSemaphoreSignalInfo*                pSignalInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkSignalSemaphore(VkDevice device, const VkSemaphoreSignalInfo& pSignalInfo)
+{
+    return vkSignalSemaphore(device, &pSignalInfo);
+}
+#endif
 
 VKAPI_ATTR VkDeviceAddress VKAPI_CALL vkGetBufferDeviceAddress(
     VkDevice                                    device,
     const VkBufferDeviceAddressInfo*            pInfo);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline VkDeviceAddress vkGetBufferDeviceAddress(VkDevice device, const VkBufferDeviceAddressInfo& pInfo)
+{
+    return vkGetBufferDeviceAddress(device, &pInfo);
+}
+#endif
+
 VKAPI_ATTR uint64_t VKAPI_CALL vkGetBufferOpaqueCaptureAddress(
     VkDevice                                    device,
     const VkBufferDeviceAddressInfo*            pInfo);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline uint64_t vkGetBufferOpaqueCaptureAddress(VkDevice device, const VkBufferDeviceAddressInfo& pInfo)
+{
+    return vkGetBufferOpaqueCaptureAddress(device, &pInfo);
+}
+#endif
+
 VKAPI_ATTR uint64_t VKAPI_CALL vkGetDeviceMemoryOpaqueCaptureAddress(
     VkDevice                                    device,
     const VkDeviceMemoryOpaqueCaptureAddressInfo* pInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline uint64_t vkGetDeviceMemoryOpaqueCaptureAddress(VkDevice device, const VkDeviceMemoryOpaqueCaptureAddressInfo& pInfo)
+{
+    return vkGetDeviceMemoryOpaqueCaptureAddress(device, &pInfo);
+}
+#endif
 
 VKAPI_ATTR void VKAPI_CALL vkCmdDrawIndirectCount(
     VkCommandBuffer                             commandBuffer,
@@ -6996,19 +7679,47 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateRenderPass2(
     const VkAllocationCallbacks*                pAllocator,
     VkRenderPass*                               pRenderPass);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateRenderPass2(VkDevice device, const VkRenderPassCreateInfo2& pCreateInfo, VkRenderPass* pRenderPass)
+{
+    return vkCreateRenderPass2(device, &pCreateInfo, nullptr, pRenderPass);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkCmdBeginRenderPass2(
     VkCommandBuffer                             commandBuffer,
     const VkRenderPassBeginInfo*                pRenderPassBegin,
     const VkSubpassBeginInfo*                   pSubpassBeginInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdBeginRenderPass2(VkCommandBuffer commandBuffer, const VkRenderPassBeginInfo& pRenderPassBegin, const VkSubpassBeginInfo& pSubpassBeginInfo)
+{
+    return vkCmdBeginRenderPass2(commandBuffer, &pRenderPassBegin, &pSubpassBeginInfo);
+}
+#endif
 
 VKAPI_ATTR void VKAPI_CALL vkCmdNextSubpass2(
     VkCommandBuffer                             commandBuffer,
     const VkSubpassBeginInfo*                   pSubpassBeginInfo,
     const VkSubpassEndInfo*                     pSubpassEndInfo);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdNextSubpass2(VkCommandBuffer commandBuffer, const VkSubpassBeginInfo& pSubpassBeginInfo, const VkSubpassEndInfo& pSubpassEndInfo)
+{
+    return vkCmdNextSubpass2(commandBuffer, &pSubpassBeginInfo, &pSubpassEndInfo);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkCmdEndRenderPass2(
     VkCommandBuffer                             commandBuffer,
     const VkSubpassEndInfo*                     pSubpassEndInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdEndRenderPass2(VkCommandBuffer commandBuffer, const VkSubpassEndInfo& pSubpassEndInfo)
+{
+    return vkCmdEndRenderPass2(commandBuffer, &pSubpassEndInfo);
+}
+#endif
 #endif
 
 
@@ -7909,10 +8620,24 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreatePrivateDataSlot(
     const VkAllocationCallbacks*                pAllocator,
     VkPrivateDataSlot*                          pPrivateDataSlot);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreatePrivateDataSlot(VkDevice device, const VkPrivateDataSlotCreateInfo& pCreateInfo, VkPrivateDataSlot* pPrivateDataSlot)
+{
+    return vkCreatePrivateDataSlot(device, &pCreateInfo, nullptr, pPrivateDataSlot);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkDestroyPrivateDataSlot(
     VkDevice                                    device,
     VkPrivateDataSlot                           privateDataSlot,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyPrivateDataSlot(VkDevice device, VkPrivateDataSlot privateDataSlot)
+{
+    return vkDestroyPrivateDataSlot(device, privateDataSlot, nullptr);
+}
+#endif
 
 VKAPI_ATTR VkResult VKAPI_CALL vkSetPrivateData(
     VkDevice                                    device,
@@ -7932,6 +8657,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdPipelineBarrier2(
     VkCommandBuffer                             commandBuffer,
     const VkDependencyInfo*                     pDependencyInfo);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdPipelineBarrier2(VkCommandBuffer                   commandBuffer, const VkDependencyInfo& pDependencyInfo)
+{
+    return vkCmdPipelineBarrier2(commandBuffer, &pDependencyInfo);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkCmdWriteTimestamp2(
     VkCommandBuffer                             commandBuffer,
     VkPipelineStageFlags2                       stage,
@@ -7944,31 +8676,80 @@ VKAPI_ATTR VkResult VKAPI_CALL vkQueueSubmit2(
     const VkSubmitInfo2*                        pSubmits,
     VkFence                                     fence);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkQueueSubmit2(VkQueue                          queue, const std::span<VkSubmitInfo2>& pSubmits, VkFence           fence)
+{
+    return vkQueueSubmit2(queue, uint32_t(pSubmits.size()), pSubmits.data(), fence);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkCmdCopyBuffer2(
     VkCommandBuffer                             commandBuffer,
     const VkCopyBufferInfo2*                    pCopyBufferInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdCopyBuffer2(VkCommandBuffer commandBuffer, const VkCopyBufferInfo2& pCopyBufferInfo)
+{
+    return vkCmdCopyBuffer2(commandBuffer, &pCopyBufferInfo);
+}
+#endif
 
 VKAPI_ATTR void VKAPI_CALL vkCmdCopyImage2(
     VkCommandBuffer                             commandBuffer,
     const VkCopyImageInfo2*                     pCopyImageInfo);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdCopyImage2(VkCommandBuffer commandBuffer, const VkCopyImageInfo2& pCopyImageInfo)
+{
+    return vkCmdCopyImage2(commandBuffer, &pCopyImageInfo);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkCmdCopyBufferToImage2(
     VkCommandBuffer                             commandBuffer,
     const VkCopyBufferToImageInfo2*             pCopyBufferToImageInfo);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdCopyBufferToImage2(VkCommandBuffer commandBuffer, const VkCopyBufferToImageInfo2& pCopyBufferToImageInfo)
+{
+    return vkCmdCopyBufferToImage2(commandBuffer, &pCopyBufferToImageInfo);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkCmdCopyImageToBuffer2(
     VkCommandBuffer                             commandBuffer,
     const VkCopyImageToBufferInfo2*             pCopyImageToBufferInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdCopyImageToBuffer2(VkCommandBuffer commandBuffer, const VkCopyImageToBufferInfo2& pCopyImageToBufferInfo)
+{
+    return vkCmdCopyImageToBuffer2(commandBuffer, &pCopyImageToBufferInfo);
+}
+#endif
 
 VKAPI_ATTR void VKAPI_CALL vkGetDeviceBufferMemoryRequirements(
     VkDevice                                    device,
     const VkDeviceBufferMemoryRequirements*     pInfo,
     VkMemoryRequirements2*                      pMemoryRequirements);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetDeviceBufferMemoryRequirements(VkDevice device, const VkDeviceBufferMemoryRequirements& pInfo, VkMemoryRequirements2* pMemoryRequirements)
+{
+    return vkGetDeviceBufferMemoryRequirements(device, &pInfo, pMemoryRequirements);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkGetDeviceImageMemoryRequirements(
     VkDevice                                    device,
     const VkDeviceImageMemoryRequirements*      pInfo,
     VkMemoryRequirements2*                      pMemoryRequirements);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetDeviceImageMemoryRequirements(VkDevice device, const VkDeviceImageMemoryRequirements& pInfo, VkMemoryRequirements2* pMemoryRequirements)
+{
+    return vkGetDeviceImageMemoryRequirements(device, &pInfo, pMemoryRequirements);
+}
+#endif
 
 VKAPI_ATTR void VKAPI_CALL vkGetDeviceImageSparseMemoryRequirements(
     VkDevice                                    device,
@@ -7976,10 +8757,24 @@ VKAPI_ATTR void VKAPI_CALL vkGetDeviceImageSparseMemoryRequirements(
     uint32_t*                                   pSparseMemoryRequirementCount,
     VkSparseImageMemoryRequirements2*           pSparseMemoryRequirements);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetDeviceImageSparseMemoryRequirements(VkDevice device, const VkDeviceImageMemoryRequirements& pInfo, uint32_t* pSparseMemoryRequirementCount, VkSparseImageMemoryRequirements2* pSparseMemoryRequirements)
+{
+    return vkGetDeviceImageSparseMemoryRequirements(device, &pInfo, pSparseMemoryRequirementCount, pSparseMemoryRequirements);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkCmdSetEvent2(
     VkCommandBuffer                             commandBuffer,
     VkEvent                                     event,
     const VkDependencyInfo*                     pDependencyInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdSetEvent2(VkCommandBuffer                   commandBuffer, VkEvent                                             event, const VkDependencyInfo& pDependencyInfo)
+{
+    return vkCmdSetEvent2(commandBuffer, event, &pDependencyInfo);
+}
+#endif
 
 VKAPI_ATTR void VKAPI_CALL vkCmdResetEvent2(
     VkCommandBuffer                             commandBuffer,
@@ -7992,17 +8787,45 @@ VKAPI_ATTR void VKAPI_CALL vkCmdWaitEvents2(
     const VkEvent*                              pEvents,
     const VkDependencyInfo*                     pDependencyInfos);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdWaitEvents2(VkCommandBuffer                   commandBuffer, const std::span<VkEvent>& pEvents, const std::span<VkDependencyInfo>& pDependencyInfos)
+{
+    return vkCmdWaitEvents2(commandBuffer, uint32_t(pEvents.size()), pEvents.data(), pDependencyInfos.data());
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkCmdBlitImage2(
     VkCommandBuffer                             commandBuffer,
     const VkBlitImageInfo2*                     pBlitImageInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdBlitImage2(VkCommandBuffer commandBuffer, const VkBlitImageInfo2& pBlitImageInfo)
+{
+    return vkCmdBlitImage2(commandBuffer, &pBlitImageInfo);
+}
+#endif
 
 VKAPI_ATTR void VKAPI_CALL vkCmdResolveImage2(
     VkCommandBuffer                             commandBuffer,
     const VkResolveImageInfo2*                  pResolveImageInfo);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdResolveImage2(VkCommandBuffer commandBuffer, const VkResolveImageInfo2& pResolveImageInfo)
+{
+    return vkCmdResolveImage2(commandBuffer, &pResolveImageInfo);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkCmdBeginRendering(
     VkCommandBuffer                             commandBuffer,
     const VkRenderingInfo*                      pRenderingInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdBeginRendering(VkCommandBuffer                   commandBuffer, const VkRenderingInfo& pRenderingInfo)
+{
+    return vkCmdBeginRendering(commandBuffer, &pRenderingInfo);
+}
+#endif
 
 VKAPI_ATTR void VKAPI_CALL vkCmdEndRendering(
     VkCommandBuffer                             commandBuffer);
@@ -8024,10 +8847,24 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetViewportWithCount(
     uint32_t                                    viewportCount,
     const VkViewport*                           pViewports);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdSetViewportWithCount(VkCommandBuffer commandBuffer, const std::span<VkViewport>& pViewports)
+{
+    return vkCmdSetViewportWithCount(commandBuffer, uint32_t(pViewports.size()), pViewports.data());
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkCmdSetScissorWithCount(
     VkCommandBuffer                             commandBuffer,
     uint32_t                                    scissorCount,
     const VkRect2D*                             pScissors);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdSetScissorWithCount(VkCommandBuffer commandBuffer, const std::span<VkRect2D>& pScissors)
+{
+    return vkCmdSetScissorWithCount(commandBuffer, uint32_t(pScissors.size()), pScissors.data());
+}
+#endif
 
 VKAPI_ATTR void VKAPI_CALL vkCmdBindVertexBuffers2(
     VkCommandBuffer                             commandBuffer,
@@ -8037,6 +8874,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdBindVertexBuffers2(
     const VkDeviceSize*                         pOffsets,
     const VkDeviceSize*                         pSizes,
     const VkDeviceSize*                         pStrides);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdBindVertexBuffers2(VkCommandBuffer commandBuffer, uint32_t firstBinding, const std::span<VkBuffer>& pBuffers, const std::span<VkDeviceSize>& pOffsets, const VkDeviceSize* pSizes, const VkDeviceSize* pStrides)
+{
+    return vkCmdBindVertexBuffers2(commandBuffer, firstBinding, uint32_t(pBuffers.size()), pBuffers.data(), pOffsets.data(), pSizes, pStrides);
+}
+#endif
 
 VKAPI_ATTR void VKAPI_CALL vkCmdSetDepthTestEnable(
     VkCommandBuffer                             commandBuffer,
@@ -8732,14 +9576,35 @@ VKAPI_ATTR VkResult VKAPI_CALL vkMapMemory2(
     const VkMemoryMapInfo*                      pMemoryMapInfo,
     void**                                      ppData);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkMapMemory2(VkDevice device, const VkMemoryMapInfo& pMemoryMapInfo, void** ppData)
+{
+    return vkMapMemory2(device, &pMemoryMapInfo, ppData);
+}
+#endif
+
 VKAPI_ATTR VkResult VKAPI_CALL vkUnmapMemory2(
     VkDevice                                    device,
     const VkMemoryUnmapInfo*                    pMemoryUnmapInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkUnmapMemory2(VkDevice device, const VkMemoryUnmapInfo& pMemoryUnmapInfo)
+{
+    return vkUnmapMemory2(device, &pMemoryUnmapInfo);
+}
+#endif
 
 VKAPI_ATTR void VKAPI_CALL vkGetDeviceImageSubresourceLayout(
     VkDevice                                    device,
     const VkDeviceImageSubresourceInfo*         pInfo,
     VkSubresourceLayout2*                       pLayout);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetDeviceImageSubresourceLayout(VkDevice device, const VkDeviceImageSubresourceInfo& pInfo, VkSubresourceLayout2* pLayout)
+{
+    return vkGetDeviceImageSubresourceLayout(device, &pInfo, pLayout);
+}
+#endif
 
 VKAPI_ATTR void VKAPI_CALL vkGetImageSubresourceLayout2(
     VkDevice                                    device,
@@ -8747,22 +9612,57 @@ VKAPI_ATTR void VKAPI_CALL vkGetImageSubresourceLayout2(
     const VkImageSubresource2*                  pSubresource,
     VkSubresourceLayout2*                       pLayout);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetImageSubresourceLayout2(VkDevice device, VkImage image, const VkImageSubresource2& pSubresource, VkSubresourceLayout2* pLayout)
+{
+    return vkGetImageSubresourceLayout2(device, image, &pSubresource, pLayout);
+}
+#endif
+
 VKAPI_ATTR VkResult VKAPI_CALL vkCopyMemoryToImage(
     VkDevice                                    device,
     const VkCopyMemoryToImageInfo*              pCopyMemoryToImageInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCopyMemoryToImage(VkDevice device, const VkCopyMemoryToImageInfo& pCopyMemoryToImageInfo)
+{
+    return vkCopyMemoryToImage(device, &pCopyMemoryToImageInfo);
+}
+#endif
 
 VKAPI_ATTR VkResult VKAPI_CALL vkCopyImageToMemory(
     VkDevice                                    device,
     const VkCopyImageToMemoryInfo*              pCopyImageToMemoryInfo);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCopyImageToMemory(VkDevice device, const VkCopyImageToMemoryInfo& pCopyImageToMemoryInfo)
+{
+    return vkCopyImageToMemory(device, &pCopyImageToMemoryInfo);
+}
+#endif
+
 VKAPI_ATTR VkResult VKAPI_CALL vkCopyImageToImage(
     VkDevice                                    device,
     const VkCopyImageToImageInfo*               pCopyImageToImageInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCopyImageToImage(VkDevice device, const VkCopyImageToImageInfo& pCopyImageToImageInfo)
+{
+    return vkCopyImageToImage(device, &pCopyImageToImageInfo);
+}
+#endif
 
 VKAPI_ATTR VkResult VKAPI_CALL vkTransitionImageLayout(
     VkDevice                                    device,
     uint32_t                                    transitionCount,
     const VkHostImageLayoutTransitionInfo*      pTransitions);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkTransitionImageLayout(VkDevice device, const std::span<VkHostImageLayoutTransitionInfo>& pTransitions)
+{
+    return vkTransitionImageLayout(device, uint32_t(pTransitions.size()), pTransitions.data());
+}
+#endif
 
 VKAPI_ATTR void VKAPI_CALL vkCmdPushDescriptorSet(
     VkCommandBuffer                             commandBuffer,
@@ -8771,6 +9671,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdPushDescriptorSet(
     uint32_t                                    set,
     uint32_t                                    descriptorWriteCount,
     const VkWriteDescriptorSet*                 pDescriptorWrites);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdPushDescriptorSet(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint32_t set, const std::span<VkWriteDescriptorSet>& pDescriptorWrites)
+{
+    return vkCmdPushDescriptorSet(commandBuffer, pipelineBindPoint, layout, set, uint32_t(pDescriptorWrites.size()), pDescriptorWrites.data());
+}
+#endif
 
 VKAPI_ATTR void VKAPI_CALL vkCmdPushDescriptorSetWithTemplate(
     VkCommandBuffer                             commandBuffer,
@@ -8783,17 +9690,45 @@ VKAPI_ATTR void VKAPI_CALL vkCmdBindDescriptorSets2(
     VkCommandBuffer                             commandBuffer,
     const VkBindDescriptorSetsInfo*             pBindDescriptorSetsInfo);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdBindDescriptorSets2(VkCommandBuffer commandBuffer, const VkBindDescriptorSetsInfo& pBindDescriptorSetsInfo)
+{
+    return vkCmdBindDescriptorSets2(commandBuffer, &pBindDescriptorSetsInfo);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkCmdPushConstants2(
     VkCommandBuffer                             commandBuffer,
     const VkPushConstantsInfo*                  pPushConstantsInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdPushConstants2(VkCommandBuffer commandBuffer, const VkPushConstantsInfo& pPushConstantsInfo)
+{
+    return vkCmdPushConstants2(commandBuffer, &pPushConstantsInfo);
+}
+#endif
 
 VKAPI_ATTR void VKAPI_CALL vkCmdPushDescriptorSet2(
     VkCommandBuffer                             commandBuffer,
     const VkPushDescriptorSetInfo*              pPushDescriptorSetInfo);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdPushDescriptorSet2(VkCommandBuffer commandBuffer, const VkPushDescriptorSetInfo& pPushDescriptorSetInfo)
+{
+    return vkCmdPushDescriptorSet2(commandBuffer, &pPushDescriptorSetInfo);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkCmdPushDescriptorSetWithTemplate2(
     VkCommandBuffer                             commandBuffer,
     const VkPushDescriptorSetWithTemplateInfo*  pPushDescriptorSetWithTemplateInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdPushDescriptorSetWithTemplate2(VkCommandBuffer commandBuffer, const VkPushDescriptorSetWithTemplateInfo& pPushDescriptorSetWithTemplateInfo)
+{
+    return vkCmdPushDescriptorSetWithTemplate2(commandBuffer, &pPushDescriptorSetWithTemplateInfo);
+}
+#endif
 
 VKAPI_ATTR void VKAPI_CALL vkCmdSetLineStipple(
     VkCommandBuffer                             commandBuffer,
@@ -8812,13 +9747,34 @@ VKAPI_ATTR void VKAPI_CALL vkGetRenderingAreaGranularity(
     const VkRenderingAreaInfo*                  pRenderingAreaInfo,
     VkExtent2D*                                 pGranularity);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetRenderingAreaGranularity(VkDevice device, const VkRenderingAreaInfo& pRenderingAreaInfo, VkExtent2D* pGranularity)
+{
+    return vkGetRenderingAreaGranularity(device, &pRenderingAreaInfo, pGranularity);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkCmdSetRenderingAttachmentLocations(
     VkCommandBuffer                             commandBuffer,
     const VkRenderingAttachmentLocationInfo*    pLocationInfo);
 
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdSetRenderingAttachmentLocations(VkCommandBuffer commandBuffer, const VkRenderingAttachmentLocationInfo& pLocationInfo)
+{
+    return vkCmdSetRenderingAttachmentLocations(commandBuffer, &pLocationInfo);
+}
+#endif
+
 VKAPI_ATTR void VKAPI_CALL vkCmdSetRenderingInputAttachmentIndices(
     VkCommandBuffer                             commandBuffer,
     const VkRenderingInputAttachmentIndexInfo*  pInputAttachmentIndexInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdSetRenderingInputAttachmentIndices(VkCommandBuffer commandBuffer, const VkRenderingInputAttachmentIndexInfo& pInputAttachmentIndexInfo)
+{
+    return vkCmdSetRenderingInputAttachmentIndices(commandBuffer, &pInputAttachmentIndexInfo);
+}
+#endif
 #endif
 
 
@@ -8917,6 +9873,13 @@ VKAPI_ATTR void VKAPI_CALL vkDestroySurfaceKHR(
     VkInstance                                  instance,
     VkSurfaceKHR                                surface,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroySurfaceKHR(VkInstance instance, VkSurfaceKHR surface)
+{
+    return vkDestroySurfaceKHR(instance, surface, nullptr);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -9072,6 +10035,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateSwapchainKHR(
     const VkSwapchainCreateInfoKHR*             pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkSwapchainKHR*                             pSwapchain);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateSwapchainKHR(VkDevice device, const VkSwapchainCreateInfoKHR& pCreateInfo, VkSwapchainKHR* pSwapchain)
+{
+    return vkCreateSwapchainKHR(device, &pCreateInfo, nullptr, pSwapchain);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -9079,6 +10049,13 @@ VKAPI_ATTR void VKAPI_CALL vkDestroySwapchainKHR(
     VkDevice                                    device,
     VkSwapchainKHR                              swapchain,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroySwapchainKHR(VkDevice device, VkSwapchainKHR swapchain)
+{
+    return vkDestroySwapchainKHR(device, swapchain, nullptr);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -9103,6 +10080,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkAcquireNextImageKHR(
 VKAPI_ATTR VkResult VKAPI_CALL vkQueuePresentKHR(
     VkQueue                                     queue,
     const VkPresentInfoKHR*                     pPresentInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkQueuePresentKHR(VkQueue queue, const VkPresentInfoKHR& pPresentInfo)
+{
+    return vkQueuePresentKHR(queue, &pPresentInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -9131,6 +10115,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkAcquireNextImage2KHR(
     VkDevice                                    device,
     const VkAcquireNextImageInfoKHR*            pAcquireInfo,
     uint32_t*                                   pImageIndex);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkAcquireNextImage2KHR(VkDevice device, const VkAcquireNextImageInfoKHR& pAcquireInfo, uint32_t* pImageIndex)
+{
+    return vkAcquireNextImage2KHR(device, &pAcquireInfo, pImageIndex);
+}
+#endif
 #endif
 #endif
 
@@ -9255,6 +10246,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateDisplayModeKHR(
     const VkDisplayModeCreateInfoKHR*           pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkDisplayModeKHR*                           pMode);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateDisplayModeKHR(VkPhysicalDevice physicalDevice, VkDisplayKHR display, const VkDisplayModeCreateInfoKHR& pCreateInfo, VkDisplayModeKHR* pMode)
+{
+    return vkCreateDisplayModeKHR(physicalDevice, display, &pCreateInfo, nullptr, pMode);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -9271,6 +10269,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateDisplayPlaneSurfaceKHR(
     const VkDisplaySurfaceCreateInfoKHR*        pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkSurfaceKHR*                               pSurface);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateDisplayPlaneSurfaceKHR(VkInstance instance, const VkDisplaySurfaceCreateInfoKHR& pCreateInfo, VkSurfaceKHR* pSurface)
+{
+    return vkCreateDisplayPlaneSurfaceKHR(instance, &pCreateInfo, nullptr, pSurface);
+}
+#endif
 #endif
 #endif
 
@@ -9297,6 +10302,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateSharedSwapchainsKHR(
     const VkSwapchainCreateInfoKHR*             pCreateInfos,
     const VkAllocationCallbacks*                pAllocator,
     VkSwapchainKHR*                             pSwapchains);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateSharedSwapchainsKHR(VkDevice device, const std::span<VkSwapchainCreateInfoKHR>& pCreateInfos, VkSwapchainKHR* pSwapchains)
+{
+    return vkCreateSharedSwapchainsKHR(device, uint32_t(pCreateInfos.size()), pCreateInfos.data(), nullptr, pSwapchains);
+}
+#endif
 #endif
 #endif
 
@@ -9547,6 +10559,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetPhysicalDeviceVideoCapabilitiesKHR(
     VkPhysicalDevice                            physicalDevice,
     const VkVideoProfileInfoKHR*                pVideoProfile,
     VkVideoCapabilitiesKHR*                     pCapabilities);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetPhysicalDeviceVideoCapabilitiesKHR(VkPhysicalDevice physicalDevice, const VkVideoProfileInfoKHR& pVideoProfile, VkVideoCapabilitiesKHR* pCapabilities)
+{
+    return vkGetPhysicalDeviceVideoCapabilitiesKHR(physicalDevice, &pVideoProfile, pCapabilities);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -9555,6 +10574,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetPhysicalDeviceVideoFormatPropertiesKHR(
     const VkPhysicalDeviceVideoFormatInfoKHR*   pVideoFormatInfo,
     uint32_t*                                   pVideoFormatPropertyCount,
     VkVideoFormatPropertiesKHR*                 pVideoFormatProperties);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetPhysicalDeviceVideoFormatPropertiesKHR(VkPhysicalDevice physicalDevice, const VkPhysicalDeviceVideoFormatInfoKHR& pVideoFormatInfo, uint32_t* pVideoFormatPropertyCount, VkVideoFormatPropertiesKHR* pVideoFormatProperties)
+{
+    return vkGetPhysicalDeviceVideoFormatPropertiesKHR(physicalDevice, &pVideoFormatInfo, pVideoFormatPropertyCount, pVideoFormatProperties);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -9563,6 +10589,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateVideoSessionKHR(
     const VkVideoSessionCreateInfoKHR*          pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkVideoSessionKHR*                          pVideoSession);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateVideoSessionKHR(VkDevice device, const VkVideoSessionCreateInfoKHR& pCreateInfo, VkVideoSessionKHR* pVideoSession)
+{
+    return vkCreateVideoSessionKHR(device, &pCreateInfo, nullptr, pVideoSession);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -9570,6 +10603,13 @@ VKAPI_ATTR void VKAPI_CALL vkDestroyVideoSessionKHR(
     VkDevice                                    device,
     VkVideoSessionKHR                           videoSession,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyVideoSessionKHR(VkDevice device, VkVideoSessionKHR videoSession)
+{
+    return vkDestroyVideoSessionKHR(device, videoSession, nullptr);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -9586,6 +10626,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkBindVideoSessionMemoryKHR(
     VkVideoSessionKHR                           videoSession,
     uint32_t                                    bindSessionMemoryInfoCount,
     const VkBindVideoSessionMemoryInfoKHR*      pBindSessionMemoryInfos);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkBindVideoSessionMemoryKHR(VkDevice device, VkVideoSessionKHR videoSession, const std::span<VkBindVideoSessionMemoryInfoKHR>& pBindSessionMemoryInfos)
+{
+    return vkBindVideoSessionMemoryKHR(device, videoSession, uint32_t(pBindSessionMemoryInfos.size()), pBindSessionMemoryInfos.data());
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -9594,6 +10641,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateVideoSessionParametersKHR(
     const VkVideoSessionParametersCreateInfoKHR* pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkVideoSessionParametersKHR*                pVideoSessionParameters);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateVideoSessionParametersKHR(VkDevice device, const VkVideoSessionParametersCreateInfoKHR& pCreateInfo, VkVideoSessionParametersKHR* pVideoSessionParameters)
+{
+    return vkCreateVideoSessionParametersKHR(device, &pCreateInfo, nullptr, pVideoSessionParameters);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -9601,6 +10655,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkUpdateVideoSessionParametersKHR(
     VkDevice                                    device,
     VkVideoSessionParametersKHR                 videoSessionParameters,
     const VkVideoSessionParametersUpdateInfoKHR* pUpdateInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkUpdateVideoSessionParametersKHR(VkDevice device, VkVideoSessionParametersKHR videoSessionParameters, const VkVideoSessionParametersUpdateInfoKHR& pUpdateInfo)
+{
+    return vkUpdateVideoSessionParametersKHR(device, videoSessionParameters, &pUpdateInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -9608,24 +10669,52 @@ VKAPI_ATTR void VKAPI_CALL vkDestroyVideoSessionParametersKHR(
     VkDevice                                    device,
     VkVideoSessionParametersKHR                 videoSessionParameters,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyVideoSessionParametersKHR(VkDevice device, VkVideoSessionParametersKHR videoSessionParameters)
+{
+    return vkDestroyVideoSessionParametersKHR(device, videoSessionParameters, nullptr);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkCmdBeginVideoCodingKHR(
     VkCommandBuffer                             commandBuffer,
     const VkVideoBeginCodingInfoKHR*            pBeginInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdBeginVideoCodingKHR(VkCommandBuffer commandBuffer, const VkVideoBeginCodingInfoKHR& pBeginInfo)
+{
+    return vkCmdBeginVideoCodingKHR(commandBuffer, &pBeginInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkCmdEndVideoCodingKHR(
     VkCommandBuffer                             commandBuffer,
     const VkVideoEndCodingInfoKHR*              pEndCodingInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdEndVideoCodingKHR(VkCommandBuffer commandBuffer, const VkVideoEndCodingInfoKHR& pEndCodingInfo)
+{
+    return vkCmdEndVideoCodingKHR(commandBuffer, &pEndCodingInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkCmdControlVideoCodingKHR(
     VkCommandBuffer                             commandBuffer,
     const VkVideoCodingControlInfoKHR*          pCodingControlInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdControlVideoCodingKHR(VkCommandBuffer commandBuffer, const VkVideoCodingControlInfoKHR& pCodingControlInfo)
+{
+    return vkCmdControlVideoCodingKHR(commandBuffer, &pCodingControlInfo);
+}
+#endif
 #endif
 #endif
 
@@ -9683,6 +10772,13 @@ typedef void (VKAPI_PTR *PFN_vkCmdDecodeVideoKHR)(VkCommandBuffer commandBuffer,
 VKAPI_ATTR void VKAPI_CALL vkCmdDecodeVideoKHR(
     VkCommandBuffer                             commandBuffer,
     const VkVideoDecodeInfoKHR*                 pDecodeInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdDecodeVideoKHR(VkCommandBuffer commandBuffer, const VkVideoDecodeInfoKHR& pDecodeInfo)
+{
+    return vkCmdDecodeVideoKHR(commandBuffer, &pDecodeInfo);
+}
+#endif
 #endif
 #endif
 
@@ -10201,6 +11297,13 @@ typedef void (VKAPI_PTR *PFN_vkCmdEndRenderingKHR)(VkCommandBuffer              
 VKAPI_ATTR void VKAPI_CALL vkCmdBeginRenderingKHR(
     VkCommandBuffer                             commandBuffer,
     const VkRenderingInfo*                      pRenderingInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdBeginRenderingKHR(VkCommandBuffer                   commandBuffer, const VkRenderingInfo& pRenderingInfo)
+{
+    return vkCmdBeginRenderingKHR(commandBuffer, &pRenderingInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -10277,6 +11380,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetPhysicalDeviceImageFormatProperties2KHR(
     VkPhysicalDevice                            physicalDevice,
     const VkPhysicalDeviceImageFormatInfo2*     pImageFormatInfo,
     VkImageFormatProperties2*                   pImageFormatProperties);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetPhysicalDeviceImageFormatProperties2KHR(VkPhysicalDevice physicalDevice, const VkPhysicalDeviceImageFormatInfo2& pImageFormatInfo, VkImageFormatProperties2* pImageFormatProperties)
+{
+    return vkGetPhysicalDeviceImageFormatProperties2KHR(physicalDevice, &pImageFormatInfo, pImageFormatProperties);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -10298,6 +11408,13 @@ VKAPI_ATTR void VKAPI_CALL vkGetPhysicalDeviceSparseImageFormatProperties2KHR(
     const VkPhysicalDeviceSparseImageFormatInfo2* pFormatInfo,
     uint32_t*                                   pPropertyCount,
     VkSparseImageFormatProperties2*             pProperties);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetPhysicalDeviceSparseImageFormatProperties2KHR(VkPhysicalDevice physicalDevice, const VkPhysicalDeviceSparseImageFormatInfo2& pFormatInfo, uint32_t* pPropertyCount, VkSparseImageFormatProperties2* pProperties)
+{
+    return vkGetPhysicalDeviceSparseImageFormatProperties2KHR(physicalDevice, &pFormatInfo, pPropertyCount, pProperties);
+}
+#endif
 #endif
 #endif
 
@@ -10443,6 +11560,13 @@ VKAPI_ATTR void VKAPI_CALL vkGetPhysicalDeviceExternalBufferPropertiesKHR(
     VkPhysicalDevice                            physicalDevice,
     const VkPhysicalDeviceExternalBufferInfo*   pExternalBufferInfo,
     VkExternalBufferProperties*                 pExternalBufferProperties);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetPhysicalDeviceExternalBufferPropertiesKHR(VkPhysicalDevice physicalDevice, const VkPhysicalDeviceExternalBufferInfo& pExternalBufferInfo, VkExternalBufferProperties* pExternalBufferProperties)
+{
+    return vkGetPhysicalDeviceExternalBufferPropertiesKHR(physicalDevice, &pExternalBufferInfo, pExternalBufferProperties);
+}
+#endif
 #endif
 #endif
 
@@ -10493,6 +11617,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetMemoryFdKHR(
     VkDevice                                    device,
     const VkMemoryGetFdInfoKHR*                 pGetFdInfo,
     int*                                        pFd);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetMemoryFdKHR(VkDevice device, const VkMemoryGetFdInfoKHR& pGetFdInfo, int* pFd)
+{
+    return vkGetMemoryFdKHR(device, &pGetFdInfo, pFd);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -10529,6 +11660,13 @@ VKAPI_ATTR void VKAPI_CALL vkGetPhysicalDeviceExternalSemaphorePropertiesKHR(
     VkPhysicalDevice                            physicalDevice,
     const VkPhysicalDeviceExternalSemaphoreInfo* pExternalSemaphoreInfo,
     VkExternalSemaphoreProperties*              pExternalSemaphoreProperties);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetPhysicalDeviceExternalSemaphorePropertiesKHR(VkPhysicalDevice physicalDevice, const VkPhysicalDeviceExternalSemaphoreInfo& pExternalSemaphoreInfo, VkExternalSemaphoreProperties* pExternalSemaphoreProperties)
+{
+    return vkGetPhysicalDeviceExternalSemaphorePropertiesKHR(physicalDevice, &pExternalSemaphoreInfo, pExternalSemaphoreProperties);
+}
+#endif
 #endif
 #endif
 
@@ -10573,6 +11711,13 @@ typedef VkResult (VKAPI_PTR *PFN_vkGetSemaphoreFdKHR)(VkDevice device, const VkS
 VKAPI_ATTR VkResult VKAPI_CALL vkImportSemaphoreFdKHR(
     VkDevice                                    device,
     const VkImportSemaphoreFdInfoKHR*           pImportSemaphoreFdInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkImportSemaphoreFdKHR(VkDevice device, const VkImportSemaphoreFdInfoKHR& pImportSemaphoreFdInfo)
+{
+    return vkImportSemaphoreFdKHR(device, &pImportSemaphoreFdInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -10580,6 +11725,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetSemaphoreFdKHR(
     VkDevice                                    device,
     const VkSemaphoreGetFdInfoKHR*              pGetFdInfo,
     int*                                        pFd);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetSemaphoreFdKHR(VkDevice device, const VkSemaphoreGetFdInfoKHR& pGetFdInfo, int* pFd)
+{
+    return vkGetSemaphoreFdKHR(device, &pGetFdInfo, pFd);
+}
+#endif
 #endif
 #endif
 
@@ -10602,6 +11754,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdPushDescriptorSetKHR(
     uint32_t                                    set,
     uint32_t                                    descriptorWriteCount,
     const VkWriteDescriptorSet*                 pDescriptorWrites);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdPushDescriptorSetKHR(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint32_t set, const std::span<VkWriteDescriptorSet>& pDescriptorWrites)
+{
+    return vkCmdPushDescriptorSetKHR(commandBuffer, pipelineBindPoint, layout, set, uint32_t(pDescriptorWrites.size()), pDescriptorWrites.data());
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -10682,6 +11841,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateDescriptorUpdateTemplateKHR(
     const VkDescriptorUpdateTemplateCreateInfo* pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkDescriptorUpdateTemplate*                 pDescriptorUpdateTemplate);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateDescriptorUpdateTemplateKHR(VkDevice device, const VkDescriptorUpdateTemplateCreateInfo& pCreateInfo, VkDescriptorUpdateTemplate* pDescriptorUpdateTemplate)
+{
+    return vkCreateDescriptorUpdateTemplateKHR(device, &pCreateInfo, nullptr, pDescriptorUpdateTemplate);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -10689,6 +11855,13 @@ VKAPI_ATTR void VKAPI_CALL vkDestroyDescriptorUpdateTemplateKHR(
     VkDevice                                    device,
     VkDescriptorUpdateTemplate                  descriptorUpdateTemplate,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyDescriptorUpdateTemplateKHR(VkDevice device, VkDescriptorUpdateTemplate descriptorUpdateTemplate)
+{
+    return vkDestroyDescriptorUpdateTemplateKHR(device, descriptorUpdateTemplate, nullptr);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -10745,6 +11918,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateRenderPass2KHR(
     const VkRenderPassCreateInfo2*              pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkRenderPass*                               pRenderPass);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateRenderPass2KHR(VkDevice device, const VkRenderPassCreateInfo2& pCreateInfo, VkRenderPass* pRenderPass)
+{
+    return vkCreateRenderPass2KHR(device, &pCreateInfo, nullptr, pRenderPass);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -10752,6 +11932,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdBeginRenderPass2KHR(
     VkCommandBuffer                             commandBuffer,
     const VkRenderPassBeginInfo*                pRenderPassBegin,
     const VkSubpassBeginInfo*                   pSubpassBeginInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdBeginRenderPass2KHR(VkCommandBuffer commandBuffer, const VkRenderPassBeginInfo& pRenderPassBegin, const VkSubpassBeginInfo& pSubpassBeginInfo)
+{
+    return vkCmdBeginRenderPass2KHR(commandBuffer, &pRenderPassBegin, &pSubpassBeginInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -10759,12 +11946,26 @@ VKAPI_ATTR void VKAPI_CALL vkCmdNextSubpass2KHR(
     VkCommandBuffer                             commandBuffer,
     const VkSubpassBeginInfo*                   pSubpassBeginInfo,
     const VkSubpassEndInfo*                     pSubpassEndInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdNextSubpass2KHR(VkCommandBuffer commandBuffer, const VkSubpassBeginInfo& pSubpassBeginInfo, const VkSubpassEndInfo& pSubpassEndInfo)
+{
+    return vkCmdNextSubpass2KHR(commandBuffer, &pSubpassBeginInfo, &pSubpassEndInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkCmdEndRenderPass2KHR(
     VkCommandBuffer                             commandBuffer,
     const VkSubpassEndInfo*                     pSubpassEndInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdEndRenderPass2KHR(VkCommandBuffer commandBuffer, const VkSubpassEndInfo& pSubpassEndInfo)
+{
+    return vkCmdEndRenderPass2KHR(commandBuffer, &pSubpassEndInfo);
+}
+#endif
 #endif
 #endif
 
@@ -10814,6 +12015,13 @@ VKAPI_ATTR void VKAPI_CALL vkGetPhysicalDeviceExternalFencePropertiesKHR(
     VkPhysicalDevice                            physicalDevice,
     const VkPhysicalDeviceExternalFenceInfo*    pExternalFenceInfo,
     VkExternalFenceProperties*                  pExternalFenceProperties);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetPhysicalDeviceExternalFencePropertiesKHR(VkPhysicalDevice physicalDevice, const VkPhysicalDeviceExternalFenceInfo& pExternalFenceInfo, VkExternalFenceProperties* pExternalFenceProperties)
+{
+    return vkGetPhysicalDeviceExternalFencePropertiesKHR(physicalDevice, &pExternalFenceInfo, pExternalFenceProperties);
+}
+#endif
 #endif
 #endif
 
@@ -10858,6 +12066,13 @@ typedef VkResult (VKAPI_PTR *PFN_vkGetFenceFdKHR)(VkDevice device, const VkFence
 VKAPI_ATTR VkResult VKAPI_CALL vkImportFenceFdKHR(
     VkDevice                                    device,
     const VkImportFenceFdInfoKHR*               pImportFenceFdInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkImportFenceFdKHR(VkDevice device, const VkImportFenceFdInfoKHR& pImportFenceFdInfo)
+{
+    return vkImportFenceFdKHR(device, &pImportFenceFdInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -10865,6 +12080,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetFenceFdKHR(
     VkDevice                                    device,
     const VkFenceGetFdInfoKHR*                  pGetFdInfo,
     int*                                        pFd);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetFenceFdKHR(VkDevice device, const VkFenceGetFdInfoKHR& pGetFdInfo, int* pFd)
+{
+    return vkGetFenceFdKHR(device, &pGetFdInfo, pFd);
+}
+#endif
 #endif
 #endif
 
@@ -11008,12 +12230,26 @@ VKAPI_ATTR void VKAPI_CALL vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesK
     VkPhysicalDevice                            physicalDevice,
     const VkQueryPoolPerformanceCreateInfoKHR*  pPerformanceQueryCreateInfo,
     uint32_t*                                   pNumPasses);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR(VkPhysicalDevice physicalDevice, const VkQueryPoolPerformanceCreateInfoKHR& pPerformanceQueryCreateInfo, uint32_t* pNumPasses)
+{
+    return vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR(physicalDevice, &pPerformanceQueryCreateInfo, pNumPasses);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR VkResult VKAPI_CALL vkAcquireProfilingLockKHR(
     VkDevice                                    device,
     const VkAcquireProfilingLockInfoKHR*        pInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkAcquireProfilingLockKHR(VkDevice device, const VkAcquireProfilingLockInfoKHR& pInfo)
+{
+    return vkAcquireProfilingLockKHR(device, &pInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -11078,6 +12314,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetPhysicalDeviceSurfaceCapabilities2KHR(
     VkPhysicalDevice                            physicalDevice,
     const VkPhysicalDeviceSurfaceInfo2KHR*      pSurfaceInfo,
     VkSurfaceCapabilities2KHR*                  pSurfaceCapabilities);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetPhysicalDeviceSurfaceCapabilities2KHR(VkPhysicalDevice physicalDevice, const VkPhysicalDeviceSurfaceInfo2KHR& pSurfaceInfo, VkSurfaceCapabilities2KHR* pSurfaceCapabilities)
+{
+    return vkGetPhysicalDeviceSurfaceCapabilities2KHR(physicalDevice, &pSurfaceInfo, pSurfaceCapabilities);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -11086,6 +12329,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetPhysicalDeviceSurfaceFormats2KHR(
     const VkPhysicalDeviceSurfaceInfo2KHR*      pSurfaceInfo,
     uint32_t*                                   pSurfaceFormatCount,
     VkSurfaceFormat2KHR*                        pSurfaceFormats);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetPhysicalDeviceSurfaceFormats2KHR(VkPhysicalDevice physicalDevice, const VkPhysicalDeviceSurfaceInfo2KHR& pSurfaceInfo, uint32_t* pSurfaceFormatCount, VkSurfaceFormat2KHR* pSurfaceFormats)
+{
+    return vkGetPhysicalDeviceSurfaceFormats2KHR(physicalDevice, &pSurfaceInfo, pSurfaceFormatCount, pSurfaceFormats);
+}
+#endif
 #endif
 #endif
 
@@ -11168,6 +12418,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetDisplayPlaneCapabilities2KHR(
     VkPhysicalDevice                            physicalDevice,
     const VkDisplayPlaneInfo2KHR*               pDisplayPlaneInfo,
     VkDisplayPlaneCapabilities2KHR*             pCapabilities);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetDisplayPlaneCapabilities2KHR(VkPhysicalDevice physicalDevice, const VkDisplayPlaneInfo2KHR& pDisplayPlaneInfo, VkDisplayPlaneCapabilities2KHR* pCapabilities)
+{
+    return vkGetDisplayPlaneCapabilities2KHR(physicalDevice, &pDisplayPlaneInfo, pCapabilities);
+}
+#endif
 #endif
 #endif
 
@@ -11232,6 +12489,13 @@ VKAPI_ATTR void VKAPI_CALL vkGetImageMemoryRequirements2KHR(
     VkDevice                                    device,
     const VkImageMemoryRequirementsInfo2*       pInfo,
     VkMemoryRequirements2*                      pMemoryRequirements);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetImageMemoryRequirements2KHR(VkDevice device, const VkImageMemoryRequirementsInfo2& pInfo, VkMemoryRequirements2* pMemoryRequirements)
+{
+    return vkGetImageMemoryRequirements2KHR(device, &pInfo, pMemoryRequirements);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -11239,6 +12503,13 @@ VKAPI_ATTR void VKAPI_CALL vkGetBufferMemoryRequirements2KHR(
     VkDevice                                    device,
     const VkBufferMemoryRequirementsInfo2*      pInfo,
     VkMemoryRequirements2*                      pMemoryRequirements);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetBufferMemoryRequirements2KHR(VkDevice device, const VkBufferMemoryRequirementsInfo2& pInfo, VkMemoryRequirements2* pMemoryRequirements)
+{
+    return vkGetBufferMemoryRequirements2KHR(device, &pInfo, pMemoryRequirements);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -11247,6 +12518,13 @@ VKAPI_ATTR void VKAPI_CALL vkGetImageSparseMemoryRequirements2KHR(
     const VkImageSparseMemoryRequirementsInfo2* pInfo,
     uint32_t*                                   pSparseMemoryRequirementCount,
     VkSparseImageMemoryRequirements2*           pSparseMemoryRequirements);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetImageSparseMemoryRequirements2KHR(VkDevice device, const VkImageSparseMemoryRequirementsInfo2& pInfo, uint32_t* pSparseMemoryRequirementCount, VkSparseImageMemoryRequirements2* pSparseMemoryRequirements)
+{
+    return vkGetImageSparseMemoryRequirements2KHR(device, &pInfo, pSparseMemoryRequirementCount, pSparseMemoryRequirements);
+}
+#endif
 #endif
 #endif
 
@@ -11293,6 +12571,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateSamplerYcbcrConversionKHR(
     const VkSamplerYcbcrConversionCreateInfo*   pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkSamplerYcbcrConversion*                   pYcbcrConversion);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateSamplerYcbcrConversionKHR(VkDevice device, const VkSamplerYcbcrConversionCreateInfo& pCreateInfo, VkSamplerYcbcrConversion* pYcbcrConversion)
+{
+    return vkCreateSamplerYcbcrConversionKHR(device, &pCreateInfo, nullptr, pYcbcrConversion);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -11300,6 +12585,13 @@ VKAPI_ATTR void VKAPI_CALL vkDestroySamplerYcbcrConversionKHR(
     VkDevice                                    device,
     VkSamplerYcbcrConversion                    ycbcrConversion,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroySamplerYcbcrConversionKHR(VkDevice device, VkSamplerYcbcrConversion ycbcrConversion)
+{
+    return vkDestroySamplerYcbcrConversionKHR(device, ycbcrConversion, nullptr);
+}
+#endif
 #endif
 #endif
 
@@ -11321,6 +12613,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkBindBufferMemory2KHR(
     VkDevice                                    device,
     uint32_t                                    bindInfoCount,
     const VkBindBufferMemoryInfo*               pBindInfos);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkBindBufferMemory2KHR(VkDevice device, const std::span<VkBindBufferMemoryInfo>& pBindInfos)
+{
+    return vkBindBufferMemory2KHR(device, uint32_t(pBindInfos.size()), pBindInfos.data());
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -11328,6 +12627,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkBindImageMemory2KHR(
     VkDevice                                    device,
     uint32_t                                    bindInfoCount,
     const VkBindImageMemoryInfo*                pBindInfos);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkBindImageMemory2KHR(VkDevice device, const std::span<VkBindImageMemoryInfo>& pBindInfos)
+{
+    return vkBindImageMemory2KHR(device, uint32_t(pBindInfos.size()), pBindInfos.data());
+}
+#endif
 #endif
 #endif
 
@@ -11352,6 +12658,13 @@ VKAPI_ATTR void VKAPI_CALL vkGetDescriptorSetLayoutSupportKHR(
     VkDevice                                    device,
     const VkDescriptorSetLayoutCreateInfo*      pCreateInfo,
     VkDescriptorSetLayoutSupport*               pSupport);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetDescriptorSetLayoutSupportKHR(VkDevice device, const VkDescriptorSetLayoutCreateInfo& pCreateInfo, VkDescriptorSetLayoutSupport* pSupport)
+{
+    return vkGetDescriptorSetLayoutSupportKHR(device, &pCreateInfo, pSupport);
+}
+#endif
 #endif
 #endif
 
@@ -11576,12 +12889,26 @@ VKAPI_ATTR VkResult VKAPI_CALL vkWaitSemaphoresKHR(
     VkDevice                                    device,
     const VkSemaphoreWaitInfo*                  pWaitInfo,
     uint64_t                                    timeout);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkWaitSemaphoresKHR(VkDevice device, const VkSemaphoreWaitInfo& pWaitInfo, uint64_t timeout)
+{
+    return vkWaitSemaphoresKHR(device, &pWaitInfo, timeout);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR VkResult VKAPI_CALL vkSignalSemaphoreKHR(
     VkDevice                                    device,
     const VkSemaphoreSignalInfo*                pSignalInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkSignalSemaphoreKHR(VkDevice device, const VkSemaphoreSignalInfo& pSignalInfo)
+{
+    return vkSignalSemaphoreKHR(device, &pSignalInfo);
+}
+#endif
 #endif
 #endif
 
@@ -11690,6 +13017,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetFragmentShadingRateKHR(
     VkCommandBuffer                             commandBuffer,
     const VkExtent2D*                           pFragmentSize,
     const VkFragmentShadingRateCombinerOpKHR    combinerOps[2]);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdSetFragmentShadingRateKHR(VkCommandBuffer           commandBuffer, const VkExtent2D& pFragmentSize, const VkFragmentShadingRateCombinerOpKHR    combinerOps[2])
+{
+    return vkCmdSetFragmentShadingRateKHR(commandBuffer, &pFragmentSize, combinerOps);
+}
+#endif
 #endif
 #endif
 
@@ -11712,12 +13046,26 @@ typedef void (VKAPI_PTR *PFN_vkCmdSetRenderingInputAttachmentIndicesKHR)(VkComma
 VKAPI_ATTR void VKAPI_CALL vkCmdSetRenderingAttachmentLocationsKHR(
     VkCommandBuffer                             commandBuffer,
     const VkRenderingAttachmentLocationInfo*    pLocationInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdSetRenderingAttachmentLocationsKHR(VkCommandBuffer commandBuffer, const VkRenderingAttachmentLocationInfo& pLocationInfo)
+{
+    return vkCmdSetRenderingAttachmentLocationsKHR(commandBuffer, &pLocationInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkCmdSetRenderingInputAttachmentIndicesKHR(
     VkCommandBuffer                             commandBuffer,
     const VkRenderingInputAttachmentIndexInfo*  pInputAttachmentIndexInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdSetRenderingInputAttachmentIndicesKHR(VkCommandBuffer commandBuffer, const VkRenderingInputAttachmentIndexInfo& pInputAttachmentIndexInfo)
+{
+    return vkCmdSetRenderingInputAttachmentIndicesKHR(commandBuffer, &pInputAttachmentIndexInfo);
+}
+#endif
 #endif
 #endif
 
@@ -11818,18 +13166,39 @@ typedef uint64_t (VKAPI_PTR *PFN_vkGetDeviceMemoryOpaqueCaptureAddressKHR)(VkDev
 VKAPI_ATTR VkDeviceAddress VKAPI_CALL vkGetBufferDeviceAddressKHR(
     VkDevice                                    device,
     const VkBufferDeviceAddressInfo*            pInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkDeviceAddress vkGetBufferDeviceAddressKHR(VkDevice device, const VkBufferDeviceAddressInfo& pInfo)
+{
+    return vkGetBufferDeviceAddressKHR(device, &pInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR uint64_t VKAPI_CALL vkGetBufferOpaqueCaptureAddressKHR(
     VkDevice                                    device,
     const VkBufferDeviceAddressInfo*            pInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline uint64_t vkGetBufferOpaqueCaptureAddressKHR(VkDevice device, const VkBufferDeviceAddressInfo& pInfo)
+{
+    return vkGetBufferOpaqueCaptureAddressKHR(device, &pInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR uint64_t VKAPI_CALL vkGetDeviceMemoryOpaqueCaptureAddressKHR(
     VkDevice                                    device,
     const VkDeviceMemoryOpaqueCaptureAddressInfo* pInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline uint64_t vkGetDeviceMemoryOpaqueCaptureAddressKHR(VkDevice device, const VkDeviceMemoryOpaqueCaptureAddressInfo& pInfo)
+{
+    return vkGetDeviceMemoryOpaqueCaptureAddressKHR(device, &pInfo);
+}
+#endif
 #endif
 #endif
 
@@ -11851,6 +13220,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateDeferredOperationKHR(
     VkDevice                                    device,
     const VkAllocationCallbacks*                pAllocator,
     VkDeferredOperationKHR*                     pDeferredOperation);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateDeferredOperationKHR(VkDevice device, VkDeferredOperationKHR* pDeferredOperation)
+{
+    return vkCreateDeferredOperationKHR(device, nullptr, pDeferredOperation);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -11858,6 +13234,13 @@ VKAPI_ATTR void VKAPI_CALL vkDestroyDeferredOperationKHR(
     VkDevice                                    device,
     VkDeferredOperationKHR                      operation,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyDeferredOperationKHR(VkDevice device, VkDeferredOperationKHR operation)
+{
+    return vkDestroyDeferredOperationKHR(device, operation, nullptr);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -11957,6 +13340,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetPipelineExecutablePropertiesKHR(
     const VkPipelineInfoKHR*                    pPipelineInfo,
     uint32_t*                                   pExecutableCount,
     VkPipelineExecutablePropertiesKHR*          pProperties);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetPipelineExecutablePropertiesKHR(VkDevice                        device, const VkPipelineInfoKHR& pPipelineInfo, uint32_t* pExecutableCount, VkPipelineExecutablePropertiesKHR* pProperties)
+{
+    return vkGetPipelineExecutablePropertiesKHR(device, &pPipelineInfo, pExecutableCount, pProperties);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -11965,6 +13355,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetPipelineExecutableStatisticsKHR(
     const VkPipelineExecutableInfoKHR*          pExecutableInfo,
     uint32_t*                                   pStatisticCount,
     VkPipelineExecutableStatisticKHR*           pStatistics);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetPipelineExecutableStatisticsKHR(VkDevice                        device, const VkPipelineExecutableInfoKHR& pExecutableInfo, uint32_t* pStatisticCount, VkPipelineExecutableStatisticKHR* pStatistics)
+{
+    return vkGetPipelineExecutableStatisticsKHR(device, &pExecutableInfo, pStatisticCount, pStatistics);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -11973,6 +13370,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetPipelineExecutableInternalRepresentationsKHR
     const VkPipelineExecutableInfoKHR*          pExecutableInfo,
     uint32_t*                                   pInternalRepresentationCount,
     VkPipelineExecutableInternalRepresentationKHR* pInternalRepresentations);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetPipelineExecutableInternalRepresentationsKHR(VkDevice                        device, const VkPipelineExecutableInfoKHR& pExecutableInfo, uint32_t* pInternalRepresentationCount, VkPipelineExecutableInternalRepresentationKHR* pInternalRepresentations)
+{
+    return vkGetPipelineExecutableInternalRepresentationsKHR(device, &pExecutableInfo, pInternalRepresentationCount, pInternalRepresentations);
+}
+#endif
 #endif
 #endif
 
@@ -11998,12 +13402,26 @@ VKAPI_ATTR VkResult VKAPI_CALL vkMapMemory2KHR(
     VkDevice                                    device,
     const VkMemoryMapInfo*                      pMemoryMapInfo,
     void**                                      ppData);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkMapMemory2KHR(VkDevice device, const VkMemoryMapInfo& pMemoryMapInfo, void** ppData)
+{
+    return vkMapMemory2KHR(device, &pMemoryMapInfo, ppData);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR VkResult VKAPI_CALL vkUnmapMemory2KHR(
     VkDevice                                    device,
     const VkMemoryUnmapInfo*                    pMemoryUnmapInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkUnmapMemory2KHR(VkDevice device, const VkMemoryUnmapInfo& pMemoryUnmapInfo)
+{
+    return vkUnmapMemory2KHR(device, &pMemoryUnmapInfo);
+}
+#endif
 #endif
 #endif
 
@@ -12225,6 +13643,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetPhysicalDeviceVideoEncodeQualityLevelPropert
     VkPhysicalDevice                            physicalDevice,
     const VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR* pQualityLevelInfo,
     VkVideoEncodeQualityLevelPropertiesKHR*     pQualityLevelProperties);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR(VkPhysicalDevice physicalDevice, const VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR& pQualityLevelInfo, VkVideoEncodeQualityLevelPropertiesKHR* pQualityLevelProperties)
+{
+    return vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR(physicalDevice, &pQualityLevelInfo, pQualityLevelProperties);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -12234,12 +13659,26 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetEncodedVideoSessionParametersKHR(
     VkVideoEncodeSessionParametersFeedbackInfoKHR* pFeedbackInfo,
     size_t*                                     pDataSize,
     void*                                       pData);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetEncodedVideoSessionParametersKHR(VkDevice device, const VkVideoEncodeSessionParametersGetInfoKHR& pVideoSessionParametersInfo, VkVideoEncodeSessionParametersFeedbackInfoKHR* pFeedbackInfo, size_t* pDataSize, void* pData)
+{
+    return vkGetEncodedVideoSessionParametersKHR(device, &pVideoSessionParametersInfo, pFeedbackInfo, pDataSize, pData);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkCmdEncodeVideoKHR(
     VkCommandBuffer                             commandBuffer,
     const VkVideoEncodeInfoKHR*                 pEncodeInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdEncodeVideoKHR(VkCommandBuffer commandBuffer, const VkVideoEncodeInfoKHR& pEncodeInfo)
+{
+    return vkCmdEncodeVideoKHR(commandBuffer, &pEncodeInfo);
+}
+#endif
 #endif
 #endif
 
@@ -12289,6 +13728,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetEvent2KHR(
     VkCommandBuffer                             commandBuffer,
     VkEvent                                     event,
     const VkDependencyInfo*                     pDependencyInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdSetEvent2KHR(VkCommandBuffer                   commandBuffer, VkEvent                                             event, const VkDependencyInfo& pDependencyInfo)
+{
+    return vkCmdSetEvent2KHR(commandBuffer, event, &pDependencyInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -12304,12 +13750,26 @@ VKAPI_ATTR void VKAPI_CALL vkCmdWaitEvents2KHR(
     uint32_t                                    eventCount,
     const VkEvent*                              pEvents,
     const VkDependencyInfo*                     pDependencyInfos);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdWaitEvents2KHR(VkCommandBuffer                   commandBuffer, const std::span<VkEvent>& pEvents, const std::span<VkDependencyInfo>& pDependencyInfos)
+{
+    return vkCmdWaitEvents2KHR(commandBuffer, uint32_t(pEvents.size()), pEvents.data(), pDependencyInfos.data());
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkCmdPipelineBarrier2KHR(
     VkCommandBuffer                             commandBuffer,
     const VkDependencyInfo*                     pDependencyInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdPipelineBarrier2KHR(VkCommandBuffer                   commandBuffer, const VkDependencyInfo& pDependencyInfo)
+{
+    return vkCmdPipelineBarrier2KHR(commandBuffer, &pDependencyInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -12326,6 +13786,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkQueueSubmit2KHR(
     uint32_t                                    submitCount,
     const VkSubmitInfo2*                        pSubmits,
     VkFence                                     fence);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkQueueSubmit2KHR(VkQueue                          queue, const std::span<VkSubmitInfo2>& pSubmits, VkFence           fence)
+{
+    return vkQueueSubmit2KHR(queue, uint32_t(pSubmits.size()), pSubmits.data(), fence);
+}
+#endif
 #endif
 #endif
 
@@ -12421,36 +13888,78 @@ typedef void (VKAPI_PTR *PFN_vkCmdResolveImage2KHR)(VkCommandBuffer commandBuffe
 VKAPI_ATTR void VKAPI_CALL vkCmdCopyBuffer2KHR(
     VkCommandBuffer                             commandBuffer,
     const VkCopyBufferInfo2*                    pCopyBufferInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdCopyBuffer2KHR(VkCommandBuffer commandBuffer, const VkCopyBufferInfo2& pCopyBufferInfo)
+{
+    return vkCmdCopyBuffer2KHR(commandBuffer, &pCopyBufferInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkCmdCopyImage2KHR(
     VkCommandBuffer                             commandBuffer,
     const VkCopyImageInfo2*                     pCopyImageInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdCopyImage2KHR(VkCommandBuffer commandBuffer, const VkCopyImageInfo2& pCopyImageInfo)
+{
+    return vkCmdCopyImage2KHR(commandBuffer, &pCopyImageInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkCmdCopyBufferToImage2KHR(
     VkCommandBuffer                             commandBuffer,
     const VkCopyBufferToImageInfo2*             pCopyBufferToImageInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdCopyBufferToImage2KHR(VkCommandBuffer commandBuffer, const VkCopyBufferToImageInfo2& pCopyBufferToImageInfo)
+{
+    return vkCmdCopyBufferToImage2KHR(commandBuffer, &pCopyBufferToImageInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkCmdCopyImageToBuffer2KHR(
     VkCommandBuffer                             commandBuffer,
     const VkCopyImageToBufferInfo2*             pCopyImageToBufferInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdCopyImageToBuffer2KHR(VkCommandBuffer commandBuffer, const VkCopyImageToBufferInfo2& pCopyImageToBufferInfo)
+{
+    return vkCmdCopyImageToBuffer2KHR(commandBuffer, &pCopyImageToBufferInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkCmdBlitImage2KHR(
     VkCommandBuffer                             commandBuffer,
     const VkBlitImageInfo2*                     pBlitImageInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdBlitImage2KHR(VkCommandBuffer commandBuffer, const VkBlitImageInfo2& pBlitImageInfo)
+{
+    return vkCmdBlitImage2KHR(commandBuffer, &pBlitImageInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkCmdResolveImage2KHR(
     VkCommandBuffer                             commandBuffer,
     const VkResolveImageInfo2*                  pResolveImageInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdResolveImage2KHR(VkCommandBuffer commandBuffer, const VkResolveImageInfo2& pResolveImageInfo)
+{
+    return vkCmdResolveImage2KHR(commandBuffer, &pResolveImageInfo);
+}
+#endif
 #endif
 #endif
 
@@ -12546,6 +14055,13 @@ VKAPI_ATTR void VKAPI_CALL vkGetDeviceBufferMemoryRequirementsKHR(
     VkDevice                                    device,
     const VkDeviceBufferMemoryRequirements*     pInfo,
     VkMemoryRequirements2*                      pMemoryRequirements);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetDeviceBufferMemoryRequirementsKHR(VkDevice device, const VkDeviceBufferMemoryRequirements& pInfo, VkMemoryRequirements2* pMemoryRequirements)
+{
+    return vkGetDeviceBufferMemoryRequirementsKHR(device, &pInfo, pMemoryRequirements);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -12553,6 +14069,13 @@ VKAPI_ATTR void VKAPI_CALL vkGetDeviceImageMemoryRequirementsKHR(
     VkDevice                                    device,
     const VkDeviceImageMemoryRequirements*      pInfo,
     VkMemoryRequirements2*                      pMemoryRequirements);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetDeviceImageMemoryRequirementsKHR(VkDevice device, const VkDeviceImageMemoryRequirements& pInfo, VkMemoryRequirements2* pMemoryRequirements)
+{
+    return vkGetDeviceImageMemoryRequirementsKHR(device, &pInfo, pMemoryRequirements);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -12561,6 +14084,13 @@ VKAPI_ATTR void VKAPI_CALL vkGetDeviceImageSparseMemoryRequirementsKHR(
     const VkDeviceImageMemoryRequirements*      pInfo,
     uint32_t*                                   pSparseMemoryRequirementCount,
     VkSparseImageMemoryRequirements2*           pSparseMemoryRequirements);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetDeviceImageSparseMemoryRequirementsKHR(VkDevice device, const VkDeviceImageMemoryRequirements& pInfo, uint32_t* pSparseMemoryRequirementCount, VkSparseImageMemoryRequirements2* pSparseMemoryRequirements)
+{
+    return vkGetDeviceImageSparseMemoryRequirementsKHR(device, &pInfo, pSparseMemoryRequirementCount, pSparseMemoryRequirements);
+}
+#endif
 #endif
 #endif
 
@@ -12633,6 +14163,13 @@ VKAPI_ATTR void VKAPI_CALL vkGetRenderingAreaGranularityKHR(
     VkDevice                                    device,
     const VkRenderingAreaInfo*                  pRenderingAreaInfo,
     VkExtent2D*                                 pGranularity);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetRenderingAreaGranularityKHR(VkDevice device, const VkRenderingAreaInfo& pRenderingAreaInfo, VkExtent2D* pGranularity)
+{
+    return vkGetRenderingAreaGranularityKHR(device, &pRenderingAreaInfo, pGranularity);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -12640,6 +14177,13 @@ VKAPI_ATTR void VKAPI_CALL vkGetDeviceImageSubresourceLayoutKHR(
     VkDevice                                    device,
     const VkDeviceImageSubresourceInfo*         pInfo,
     VkSubresourceLayout2*                       pLayout);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetDeviceImageSubresourceLayoutKHR(VkDevice device, const VkDeviceImageSubresourceInfo& pInfo, VkSubresourceLayout2* pLayout)
+{
+    return vkGetDeviceImageSubresourceLayoutKHR(device, &pInfo, pLayout);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -12648,6 +14192,13 @@ VKAPI_ATTR void VKAPI_CALL vkGetImageSubresourceLayout2KHR(
     VkImage                                     image,
     const VkImageSubresource2*                  pSubresource,
     VkSubresourceLayout2*                       pLayout);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetImageSubresourceLayout2KHR(VkDevice device, VkImage image, const VkImageSubresource2& pSubresource, VkSubresourceLayout2* pLayout)
+{
+    return vkGetImageSubresourceLayout2KHR(device, image, &pSubresource, pLayout);
+}
+#endif
 #endif
 #endif
 
@@ -12708,6 +14259,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkWaitForPresent2KHR(
     VkDevice                                    device,
     VkSwapchainKHR                              swapchain,
     const VkPresentWait2InfoKHR*                pPresentWait2Info);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkWaitForPresent2KHR(VkDevice device, VkSwapchainKHR swapchain, const VkPresentWait2InfoKHR& pPresentWait2Info)
+{
+    return vkWaitForPresent2KHR(device, swapchain, &pPresentWait2Info);
+}
+#endif
 #endif
 #endif
 
@@ -12822,6 +14380,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreatePipelineBinariesKHR(
     const VkPipelineBinaryCreateInfoKHR*        pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkPipelineBinaryHandlesInfoKHR*             pBinaries);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreatePipelineBinariesKHR(VkDevice device, const VkPipelineBinaryCreateInfoKHR& pCreateInfo, VkPipelineBinaryHandlesInfoKHR* pBinaries)
+{
+    return vkCreatePipelineBinariesKHR(device, &pCreateInfo, nullptr, pBinaries);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -12829,6 +14394,13 @@ VKAPI_ATTR void VKAPI_CALL vkDestroyPipelineBinaryKHR(
     VkDevice                                    device,
     VkPipelineBinaryKHR                         pipelineBinary,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyPipelineBinaryKHR(VkDevice device, VkPipelineBinaryKHR pipelineBinary)
+{
+    return vkDestroyPipelineBinaryKHR(device, pipelineBinary, nullptr);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -12845,6 +14417,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetPipelineBinaryDataKHR(
     VkPipelineBinaryKeyKHR*                     pPipelineBinaryKey,
     size_t*                                     pPipelineBinaryDataSize,
     void*                                       pPipelineBinaryData);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetPipelineBinaryDataKHR(VkDevice device, const VkPipelineBinaryDataInfoKHR& pInfo, VkPipelineBinaryKeyKHR* pPipelineBinaryKey, size_t* pPipelineBinaryDataSize, void* pPipelineBinaryData)
+{
+    return vkGetPipelineBinaryDataKHR(device, &pInfo, pPipelineBinaryKey, pPipelineBinaryDataSize, pPipelineBinaryData);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -12852,6 +14431,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkReleaseCapturedPipelineDataKHR(
     VkDevice                                    device,
     const VkReleaseCapturedPipelineDataInfoKHR* pInfo,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkReleaseCapturedPipelineDataKHR(VkDevice device, const VkReleaseCapturedPipelineDataInfoKHR& pInfo)
+{
+    return vkReleaseCapturedPipelineDataKHR(device, &pInfo, nullptr);
+}
+#endif
 #endif
 #endif
 
@@ -12961,6 +14547,13 @@ typedef VkResult (VKAPI_PTR *PFN_vkReleaseSwapchainImagesKHR)(VkDevice device, c
 VKAPI_ATTR VkResult VKAPI_CALL vkReleaseSwapchainImagesKHR(
     VkDevice                                    device,
     const VkReleaseSwapchainImagesInfoKHR*      pReleaseInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkReleaseSwapchainImagesKHR(VkDevice device, const VkReleaseSwapchainImagesInfoKHR& pReleaseInfo)
+{
+    return vkReleaseSwapchainImagesKHR(device, &pReleaseInfo);
+}
+#endif
 #endif
 #endif
 
@@ -13502,6 +15095,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetCalibratedTimestampsKHR(
     const VkCalibratedTimestampInfoKHR*         pTimestampInfos,
     uint64_t*                                   pTimestamps,
     uint64_t*                                   pMaxDeviation);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetCalibratedTimestampsKHR(VkDevice device, const std::span<VkCalibratedTimestampInfoKHR>& pTimestampInfos, uint64_t* pTimestamps, uint64_t* pMaxDeviation)
+{
+    return vkGetCalibratedTimestampsKHR(device, uint32_t(pTimestampInfos.size()), pTimestampInfos.data(), pTimestamps, pMaxDeviation);
+}
+#endif
 #endif
 #endif
 
@@ -13563,36 +15163,78 @@ typedef void (VKAPI_PTR *PFN_vkCmdBindDescriptorBufferEmbeddedSamplers2EXT)(VkCo
 VKAPI_ATTR void VKAPI_CALL vkCmdBindDescriptorSets2KHR(
     VkCommandBuffer                             commandBuffer,
     const VkBindDescriptorSetsInfo*             pBindDescriptorSetsInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdBindDescriptorSets2KHR(VkCommandBuffer commandBuffer, const VkBindDescriptorSetsInfo& pBindDescriptorSetsInfo)
+{
+    return vkCmdBindDescriptorSets2KHR(commandBuffer, &pBindDescriptorSetsInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkCmdPushConstants2KHR(
     VkCommandBuffer                             commandBuffer,
     const VkPushConstantsInfo*                  pPushConstantsInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdPushConstants2KHR(VkCommandBuffer commandBuffer, const VkPushConstantsInfo& pPushConstantsInfo)
+{
+    return vkCmdPushConstants2KHR(commandBuffer, &pPushConstantsInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkCmdPushDescriptorSet2KHR(
     VkCommandBuffer                             commandBuffer,
     const VkPushDescriptorSetInfo*              pPushDescriptorSetInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdPushDescriptorSet2KHR(VkCommandBuffer commandBuffer, const VkPushDescriptorSetInfo& pPushDescriptorSetInfo)
+{
+    return vkCmdPushDescriptorSet2KHR(commandBuffer, &pPushDescriptorSetInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkCmdPushDescriptorSetWithTemplate2KHR(
     VkCommandBuffer                             commandBuffer,
     const VkPushDescriptorSetWithTemplateInfo*  pPushDescriptorSetWithTemplateInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdPushDescriptorSetWithTemplate2KHR(VkCommandBuffer commandBuffer, const VkPushDescriptorSetWithTemplateInfo& pPushDescriptorSetWithTemplateInfo)
+{
+    return vkCmdPushDescriptorSetWithTemplate2KHR(commandBuffer, &pPushDescriptorSetWithTemplateInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkCmdSetDescriptorBufferOffsets2EXT(
     VkCommandBuffer                             commandBuffer,
     const VkSetDescriptorBufferOffsetsInfoEXT*  pSetDescriptorBufferOffsetsInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdSetDescriptorBufferOffsets2EXT(VkCommandBuffer commandBuffer, const VkSetDescriptorBufferOffsetsInfoEXT& pSetDescriptorBufferOffsetsInfo)
+{
+    return vkCmdSetDescriptorBufferOffsets2EXT(commandBuffer, &pSetDescriptorBufferOffsetsInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkCmdBindDescriptorBufferEmbeddedSamplers2EXT(
     VkCommandBuffer                             commandBuffer,
     const VkBindDescriptorBufferEmbeddedSamplersInfoEXT* pBindDescriptorBufferEmbeddedSamplersInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdBindDescriptorBufferEmbeddedSamplers2EXT(VkCommandBuffer commandBuffer, const VkBindDescriptorBufferEmbeddedSamplersInfoEXT& pBindDescriptorBufferEmbeddedSamplersInfo)
+{
+    return vkCmdBindDescriptorBufferEmbeddedSamplers2EXT(commandBuffer, &pBindDescriptorBufferEmbeddedSamplersInfo);
+}
+#endif
 #endif
 #endif
 
@@ -13671,12 +15313,26 @@ typedef void (VKAPI_PTR *PFN_vkCmdCopyMemoryToImageIndirectKHR)(VkCommandBuffer 
 VKAPI_ATTR void VKAPI_CALL vkCmdCopyMemoryIndirectKHR(
     VkCommandBuffer                             commandBuffer,
     const VkCopyMemoryIndirectInfoKHR*          pCopyMemoryIndirectInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdCopyMemoryIndirectKHR(VkCommandBuffer commandBuffer, const VkCopyMemoryIndirectInfoKHR& pCopyMemoryIndirectInfo)
+{
+    return vkCmdCopyMemoryIndirectKHR(commandBuffer, &pCopyMemoryIndirectInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkCmdCopyMemoryToImageIndirectKHR(
     VkCommandBuffer                             commandBuffer,
     const VkCopyMemoryToImageIndirectInfoKHR*   pCopyMemoryToImageIndirectInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdCopyMemoryToImageIndirectKHR(VkCommandBuffer commandBuffer, const VkCopyMemoryToImageIndirectInfoKHR& pCopyMemoryToImageIndirectInfo)
+{
+    return vkCmdCopyMemoryToImageIndirectKHR(commandBuffer, &pCopyMemoryToImageIndirectInfo);
+}
+#endif
 #endif
 #endif
 
@@ -14176,6 +15832,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateDebugReportCallbackEXT(
     const VkDebugReportCallbackCreateInfoEXT*   pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkDebugReportCallbackEXT*                   pCallback);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateDebugReportCallbackEXT(VkInstance instance, const VkDebugReportCallbackCreateInfoEXT& pCreateInfo, VkDebugReportCallbackEXT* pCallback)
+{
+    return vkCreateDebugReportCallbackEXT(instance, &pCreateInfo, nullptr, pCallback);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -14183,6 +15846,13 @@ VKAPI_ATTR void VKAPI_CALL vkDestroyDebugReportCallbackEXT(
     VkInstance                                  instance,
     VkDebugReportCallbackEXT                    callback,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyDebugReportCallbackEXT(VkInstance instance, VkDebugReportCallbackEXT callback)
+{
+    return vkDestroyDebugReportCallbackEXT(instance, callback, nullptr);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -14287,18 +15957,39 @@ typedef void (VKAPI_PTR *PFN_vkCmdDebugMarkerInsertEXT)(VkCommandBuffer commandB
 VKAPI_ATTR VkResult VKAPI_CALL vkDebugMarkerSetObjectTagEXT(
     VkDevice                                    device,
     const VkDebugMarkerObjectTagInfoEXT*        pTagInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkDebugMarkerSetObjectTagEXT(VkDevice device, const VkDebugMarkerObjectTagInfoEXT& pTagInfo)
+{
+    return vkDebugMarkerSetObjectTagEXT(device, &pTagInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR VkResult VKAPI_CALL vkDebugMarkerSetObjectNameEXT(
     VkDevice                                    device,
     const VkDebugMarkerObjectNameInfoEXT*       pNameInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkDebugMarkerSetObjectNameEXT(VkDevice device, const VkDebugMarkerObjectNameInfoEXT& pNameInfo)
+{
+    return vkDebugMarkerSetObjectNameEXT(device, &pNameInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkCmdDebugMarkerBeginEXT(
     VkCommandBuffer                             commandBuffer,
     const VkDebugMarkerMarkerInfoEXT*           pMarkerInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdDebugMarkerBeginEXT(VkCommandBuffer commandBuffer, const VkDebugMarkerMarkerInfoEXT& pMarkerInfo)
+{
+    return vkCmdDebugMarkerBeginEXT(commandBuffer, &pMarkerInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -14310,6 +16001,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdDebugMarkerEndEXT(
 VKAPI_ATTR void VKAPI_CALL vkCmdDebugMarkerInsertEXT(
     VkCommandBuffer                             commandBuffer,
     const VkDebugMarkerMarkerInfoEXT*           pMarkerInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdDebugMarkerInsertEXT(VkCommandBuffer commandBuffer, const VkDebugMarkerMarkerInfoEXT& pMarkerInfo)
+{
+    return vkCmdDebugMarkerInsertEXT(commandBuffer, &pMarkerInfo);
+}
+#endif
 #endif
 #endif
 
@@ -14395,6 +16093,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdBindTransformFeedbackBuffersEXT(
     const VkBuffer*                             pBuffers,
     const VkDeviceSize*                         pOffsets,
     const VkDeviceSize*                         pSizes);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdBindTransformFeedbackBuffersEXT(VkCommandBuffer commandBuffer, uint32_t firstBinding, const std::span<VkBuffer>& pBuffers, const std::span<VkDeviceSize>& pOffsets, const VkDeviceSize* pSizes)
+{
+    return vkCmdBindTransformFeedbackBuffersEXT(commandBuffer, firstBinding, uint32_t(pBuffers.size()), pBuffers.data(), pOffsets.data(), pSizes);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -14404,6 +16109,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdBeginTransformFeedbackEXT(
     uint32_t                                    counterBufferCount,
     const VkBuffer*                             pCounterBuffers,
     const VkDeviceSize*                         pCounterBufferOffsets);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdBeginTransformFeedbackEXT(VkCommandBuffer commandBuffer, uint32_t firstCounterBuffer, const std::span<VkBuffer>& pCounterBuffers, const VkDeviceSize* pCounterBufferOffsets)
+{
+    return vkCmdBeginTransformFeedbackEXT(commandBuffer, firstCounterBuffer, uint32_t(pCounterBuffers.size()), pCounterBuffers.data(), pCounterBufferOffsets);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -14413,6 +16125,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdEndTransformFeedbackEXT(
     uint32_t                                    counterBufferCount,
     const VkBuffer*                             pCounterBuffers,
     const VkDeviceSize*                         pCounterBufferOffsets);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdEndTransformFeedbackEXT(VkCommandBuffer commandBuffer, uint32_t firstCounterBuffer, const std::span<VkBuffer>& pCounterBuffers, const VkDeviceSize* pCounterBufferOffsets)
+{
+    return vkCmdEndTransformFeedbackEXT(commandBuffer, firstCounterBuffer, uint32_t(pCounterBuffers.size()), pCounterBuffers.data(), pCounterBufferOffsets);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -14501,6 +16220,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateCuModuleNVX(
     const VkCuModuleCreateInfoNVX*              pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkCuModuleNVX*                              pModule);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateCuModuleNVX(VkDevice device, const VkCuModuleCreateInfoNVX& pCreateInfo, VkCuModuleNVX* pModule)
+{
+    return vkCreateCuModuleNVX(device, &pCreateInfo, nullptr, pModule);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -14509,6 +16235,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateCuFunctionNVX(
     const VkCuFunctionCreateInfoNVX*            pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkCuFunctionNVX*                            pFunction);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateCuFunctionNVX(VkDevice device, const VkCuFunctionCreateInfoNVX& pCreateInfo, VkCuFunctionNVX* pFunction)
+{
+    return vkCreateCuFunctionNVX(device, &pCreateInfo, nullptr, pFunction);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -14516,6 +16249,13 @@ VKAPI_ATTR void VKAPI_CALL vkDestroyCuModuleNVX(
     VkDevice                                    device,
     VkCuModuleNVX                               module,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyCuModuleNVX(VkDevice device, VkCuModuleNVX module)
+{
+    return vkDestroyCuModuleNVX(device, module, nullptr);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -14523,12 +16263,26 @@ VKAPI_ATTR void VKAPI_CALL vkDestroyCuFunctionNVX(
     VkDevice                                    device,
     VkCuFunctionNVX                             function,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyCuFunctionNVX(VkDevice device, VkCuFunctionNVX function)
+{
+    return vkDestroyCuFunctionNVX(device, function, nullptr);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkCmdCuLaunchKernelNVX(
     VkCommandBuffer                             commandBuffer,
     const VkCuLaunchInfoNVX*                    pLaunchInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdCuLaunchKernelNVX(VkCommandBuffer commandBuffer, const VkCuLaunchInfoNVX& pLaunchInfo)
+{
+    return vkCmdCuLaunchKernelNVX(commandBuffer, &pLaunchInfo);
+}
+#endif
 #endif
 #endif
 
@@ -14562,12 +16316,26 @@ typedef uint64_t (VKAPI_PTR *PFN_vkGetDeviceCombinedImageSamplerIndexNVX)(VkDevi
 VKAPI_ATTR uint32_t VKAPI_CALL vkGetImageViewHandleNVX(
     VkDevice                                    device,
     const VkImageViewHandleInfoNVX*             pInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline uint32_t vkGetImageViewHandleNVX(VkDevice device, const VkImageViewHandleInfoNVX& pInfo)
+{
+    return vkGetImageViewHandleNVX(device, &pInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR uint64_t VKAPI_CALL vkGetImageViewHandle64NVX(
     VkDevice                                    device,
     const VkImageViewHandleInfoNVX*             pInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline uint64_t vkGetImageViewHandle64NVX(VkDevice device, const VkImageViewHandleInfoNVX& pInfo)
+{
+    return vkGetImageViewHandle64NVX(device, &pInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -14891,6 +16659,13 @@ typedef void (VKAPI_PTR *PFN_vkCmdEndConditionalRenderingEXT)(VkCommandBuffer co
 VKAPI_ATTR void VKAPI_CALL vkCmdBeginConditionalRenderingEXT(
     VkCommandBuffer                             commandBuffer,
     const VkConditionalRenderingBeginInfoEXT*   pConditionalRenderingBegin);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdBeginConditionalRenderingEXT(VkCommandBuffer commandBuffer, const VkConditionalRenderingBeginInfoEXT& pConditionalRenderingBegin)
+{
+    return vkCmdBeginConditionalRenderingEXT(commandBuffer, &pConditionalRenderingBegin);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -14926,6 +16701,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetViewportWScalingNV(
     uint32_t                                    firstViewport,
     uint32_t                                    viewportCount,
     const VkViewportWScalingNV*                 pViewportWScalings);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdSetViewportWScalingNV(VkCommandBuffer commandBuffer, uint32_t firstViewport, const std::span<VkViewportWScalingNV>& pViewportWScalings)
+{
+    return vkCmdSetViewportWScalingNV(commandBuffer, firstViewport, uint32_t(pViewportWScalings.size()), pViewportWScalings.data());
+}
+#endif
 #endif
 #endif
 
@@ -15041,6 +16823,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkDisplayPowerControlEXT(
     VkDevice                                    device,
     VkDisplayKHR                                display,
     const VkDisplayPowerInfoEXT*                pDisplayPowerInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkDisplayPowerControlEXT(VkDevice device, VkDisplayKHR display, const VkDisplayPowerInfoEXT& pDisplayPowerInfo)
+{
+    return vkDisplayPowerControlEXT(device, display, &pDisplayPowerInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -15049,6 +16838,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkRegisterDeviceEventEXT(
     const VkDeviceEventInfoEXT*                 pDeviceEventInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkFence*                                    pFence);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkRegisterDeviceEventEXT(VkDevice device, const VkDeviceEventInfoEXT& pDeviceEventInfo, VkFence* pFence)
+{
+    return vkRegisterDeviceEventEXT(device, &pDeviceEventInfo, nullptr, pFence);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -15058,6 +16854,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkRegisterDisplayEventEXT(
     const VkDisplayEventInfoEXT*                pDisplayEventInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkFence*                                    pFence);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkRegisterDisplayEventEXT(VkDevice device, VkDisplayKHR display, const VkDisplayEventInfoEXT& pDisplayEventInfo, VkFence* pFence)
+{
+    return vkRegisterDisplayEventEXT(device, display, &pDisplayEventInfo, nullptr, pFence);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -15231,6 +17034,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetDiscardRectangleEXT(
     uint32_t                                    firstDiscardRectangle,
     uint32_t                                    discardRectangleCount,
     const VkRect2D*                             pDiscardRectangles);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdSetDiscardRectangleEXT(VkCommandBuffer commandBuffer, uint32_t firstDiscardRectangle, const std::span<VkRect2D>& pDiscardRectangles)
+{
+    return vkCmdSetDiscardRectangleEXT(commandBuffer, firstDiscardRectangle, uint32_t(pDiscardRectangles.size()), pDiscardRectangles.data());
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -15340,6 +17150,13 @@ VKAPI_ATTR void VKAPI_CALL vkSetHdrMetadataEXT(
     uint32_t                                    swapchainCount,
     const VkSwapchainKHR*                       pSwapchains,
     const VkHdrMetadataEXT*                     pMetadata);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkSetHdrMetadataEXT(VkDevice device, const std::span<VkSwapchainKHR>& pSwapchains, const std::span<VkHdrMetadataEXT>& pMetadata)
+{
+    return vkSetHdrMetadataEXT(device, uint32_t(pSwapchains.size()), pSwapchains.data(), pMetadata.data());
+}
+#endif
 #endif
 #endif
 
@@ -15467,18 +17284,39 @@ typedef void (VKAPI_PTR *PFN_vkSubmitDebugUtilsMessageEXT)(VkInstance instance, 
 VKAPI_ATTR VkResult VKAPI_CALL vkSetDebugUtilsObjectNameEXT(
     VkDevice                                    device,
     const VkDebugUtilsObjectNameInfoEXT*        pNameInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkSetDebugUtilsObjectNameEXT(VkDevice device, const VkDebugUtilsObjectNameInfoEXT& pNameInfo)
+{
+    return vkSetDebugUtilsObjectNameEXT(device, &pNameInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR VkResult VKAPI_CALL vkSetDebugUtilsObjectTagEXT(
     VkDevice                                    device,
     const VkDebugUtilsObjectTagInfoEXT*         pTagInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkSetDebugUtilsObjectTagEXT(VkDevice device, const VkDebugUtilsObjectTagInfoEXT& pTagInfo)
+{
+    return vkSetDebugUtilsObjectTagEXT(device, &pTagInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkQueueBeginDebugUtilsLabelEXT(
     VkQueue                                     queue,
     const VkDebugUtilsLabelEXT*                 pLabelInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkQueueBeginDebugUtilsLabelEXT(VkQueue queue, const VkDebugUtilsLabelEXT& pLabelInfo)
+{
+    return vkQueueBeginDebugUtilsLabelEXT(queue, &pLabelInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -15490,12 +17328,26 @@ VKAPI_ATTR void VKAPI_CALL vkQueueEndDebugUtilsLabelEXT(
 VKAPI_ATTR void VKAPI_CALL vkQueueInsertDebugUtilsLabelEXT(
     VkQueue                                     queue,
     const VkDebugUtilsLabelEXT*                 pLabelInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkQueueInsertDebugUtilsLabelEXT(VkQueue queue, const VkDebugUtilsLabelEXT& pLabelInfo)
+{
+    return vkQueueInsertDebugUtilsLabelEXT(queue, &pLabelInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkCmdBeginDebugUtilsLabelEXT(
     VkCommandBuffer                             commandBuffer,
     const VkDebugUtilsLabelEXT*                 pLabelInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdBeginDebugUtilsLabelEXT(VkCommandBuffer commandBuffer, const VkDebugUtilsLabelEXT& pLabelInfo)
+{
+    return vkCmdBeginDebugUtilsLabelEXT(commandBuffer, &pLabelInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -15507,6 +17359,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdEndDebugUtilsLabelEXT(
 VKAPI_ATTR void VKAPI_CALL vkCmdInsertDebugUtilsLabelEXT(
     VkCommandBuffer                             commandBuffer,
     const VkDebugUtilsLabelEXT*                 pLabelInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdInsertDebugUtilsLabelEXT(VkCommandBuffer commandBuffer, const VkDebugUtilsLabelEXT& pLabelInfo)
+{
+    return vkCmdInsertDebugUtilsLabelEXT(commandBuffer, &pLabelInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -15515,6 +17374,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateDebugUtilsMessengerEXT(
     const VkDebugUtilsMessengerCreateInfoEXT*   pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkDebugUtilsMessengerEXT*                   pMessenger);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateDebugUtilsMessengerEXT(VkInstance instance, const VkDebugUtilsMessengerCreateInfoEXT& pCreateInfo, VkDebugUtilsMessengerEXT* pMessenger)
+{
+    return vkCreateDebugUtilsMessengerEXT(instance, &pCreateInfo, nullptr, pMessenger);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -15522,6 +17388,13 @@ VKAPI_ATTR void VKAPI_CALL vkDestroyDebugUtilsMessengerEXT(
     VkInstance                                  instance,
     VkDebugUtilsMessengerEXT                    messenger,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT messenger)
+{
+    return vkDestroyDebugUtilsMessengerEXT(instance, messenger, nullptr);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -15530,6 +17403,13 @@ VKAPI_ATTR void VKAPI_CALL vkSubmitDebugUtilsMessageEXT(
     VkDebugUtilsMessageSeverityFlagBitsEXT      messageSeverity,
     VkDebugUtilsMessageTypeFlagsEXT             messageTypes,
     const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkSubmitDebugUtilsMessageEXT(VkInstance instance, VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity, VkDebugUtilsMessageTypeFlagsEXT messageTypes, const VkDebugUtilsMessengerCallbackDataEXT& pCallbackData)
+{
+    return vkSubmitDebugUtilsMessageEXT(instance, messageSeverity, messageTypes, &pCallbackData);
+}
+#endif
 #endif
 #endif
 
@@ -15860,6 +17740,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkWriteSamplerDescriptorsEXT(
     uint32_t                                    samplerCount,
     const VkSamplerCreateInfo*                  pSamplers,
     const VkHostAddressRangeEXT*                pDescriptors);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkWriteSamplerDescriptorsEXT(VkDevice                                            device, const std::span<VkSamplerCreateInfo>& pSamplers, const std::span<VkHostAddressRangeEXT>& pDescriptors)
+{
+    return vkWriteSamplerDescriptorsEXT(device, uint32_t(pSamplers.size()), pSamplers.data(), pDescriptors.data());
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -15868,24 +17755,52 @@ VKAPI_ATTR VkResult VKAPI_CALL vkWriteResourceDescriptorsEXT(
     uint32_t                                    resourceCount,
     const VkResourceDescriptorInfoEXT*          pResources,
     const VkHostAddressRangeEXT*                pDescriptors);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkWriteResourceDescriptorsEXT(VkDevice                                                device, const std::span<VkResourceDescriptorInfoEXT>& pResources, const std::span<VkHostAddressRangeEXT>& pDescriptors)
+{
+    return vkWriteResourceDescriptorsEXT(device, uint32_t(pResources.size()), pResources.data(), pDescriptors.data());
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkCmdBindSamplerHeapEXT(
     VkCommandBuffer                             commandBuffer,
     const VkBindHeapInfoEXT*                    pBindInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdBindSamplerHeapEXT(VkCommandBuffer                   commandBuffer, const VkBindHeapInfoEXT& pBindInfo)
+{
+    return vkCmdBindSamplerHeapEXT(commandBuffer, &pBindInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkCmdBindResourceHeapEXT(
     VkCommandBuffer                             commandBuffer,
     const VkBindHeapInfoEXT*                    pBindInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdBindResourceHeapEXT(VkCommandBuffer                   commandBuffer, const VkBindHeapInfoEXT& pBindInfo)
+{
+    return vkCmdBindResourceHeapEXT(commandBuffer, &pBindInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkCmdPushDataEXT(
     VkCommandBuffer                             commandBuffer,
     const VkPushDataInfoEXT*                    pPushDataInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdPushDataEXT(VkCommandBuffer                   commandBuffer, const VkPushDataInfoEXT& pPushDataInfo)
+{
+    return vkCmdPushDataEXT(commandBuffer, &pPushDataInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -15894,6 +17809,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetImageOpaqueCaptureDataEXT(
     uint32_t                                    imageCount,
     const VkImage*                              pImages,
     VkHostAddressRangeEXT*                      pDatas);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetImageOpaqueCaptureDataEXT(VkDevice                                            device, const std::span<VkImage>& pImages, VkHostAddressRangeEXT*             pDatas)
+{
+    return vkGetImageOpaqueCaptureDataEXT(device, uint32_t(pImages.size()), pImages.data(), pDatas);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -15908,6 +17830,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkRegisterCustomBorderColorEXT(
     const VkSamplerCustomBorderColorCreateInfoEXT* pBorderColor,
     VkBool32                                    requestIndex,
     uint32_t*                                   pIndex);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkRegisterCustomBorderColorEXT(VkDevice                                            device, const VkSamplerCustomBorderColorCreateInfoEXT& pBorderColor, VkBool32                                            requestIndex, uint32_t*                                           pIndex)
+{
+    return vkRegisterCustomBorderColorEXT(device, &pBorderColor, requestIndex, pIndex);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -15922,6 +17851,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetTensorOpaqueCaptureDataARM(
     uint32_t                                    tensorCount,
     const VkTensorARM*                          pTensors,
     VkHostAddressRangeEXT*                      pDatas);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetTensorOpaqueCaptureDataARM(VkDevice                                            device, const std::span<VkTensorARM>& pTensors, VkHostAddressRangeEXT*            pDatas)
+{
+    return vkGetTensorOpaqueCaptureDataARM(device, uint32_t(pTensors.size()), pTensors.data(), pDatas);
+}
+#endif
 #endif
 #endif
 
@@ -16034,6 +17970,13 @@ typedef void (VKAPI_PTR *PFN_vkGetPhysicalDeviceMultisamplePropertiesEXT)(VkPhys
 VKAPI_ATTR void VKAPI_CALL vkCmdSetSampleLocationsEXT(
     VkCommandBuffer                             commandBuffer,
     const VkSampleLocationsInfoEXT*             pSampleLocationsInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdSetSampleLocationsEXT(VkCommandBuffer commandBuffer, const VkSampleLocationsInfoEXT& pSampleLocationsInfo)
+{
+    return vkCmdSetSampleLocationsEXT(commandBuffer, &pSampleLocationsInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -16265,6 +18208,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateValidationCacheEXT(
     const VkValidationCacheCreateInfoEXT*       pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkValidationCacheEXT*                       pValidationCache);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateValidationCacheEXT(VkDevice device, const VkValidationCacheCreateInfoEXT& pCreateInfo, VkValidationCacheEXT* pValidationCache)
+{
+    return vkCreateValidationCacheEXT(device, &pCreateInfo, nullptr, pValidationCache);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -16272,6 +18222,13 @@ VKAPI_ATTR void VKAPI_CALL vkDestroyValidationCacheEXT(
     VkDevice                                    device,
     VkValidationCacheEXT                        validationCache,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyValidationCacheEXT(VkDevice device, VkValidationCacheEXT validationCache)
+{
+    return vkDestroyValidationCacheEXT(device, validationCache, nullptr);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -16280,6 +18237,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkMergeValidationCachesEXT(
     VkValidationCacheEXT                        dstCache,
     uint32_t                                    srcCacheCount,
     const VkValidationCacheEXT*                 pSrcCaches);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkMergeValidationCachesEXT(VkDevice device, VkValidationCacheEXT dstCache, const std::span<VkValidationCacheEXT>& pSrcCaches)
+{
+    return vkMergeValidationCachesEXT(device, dstCache, uint32_t(pSrcCaches.size()), pSrcCaches.data());
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -16413,6 +18377,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetViewportShadingRatePaletteNV(
     uint32_t                                    firstViewport,
     uint32_t                                    viewportCount,
     const VkShadingRatePaletteNV*               pShadingRatePalettes);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdSetViewportShadingRatePaletteNV(VkCommandBuffer commandBuffer, uint32_t firstViewport, const std::span<VkShadingRatePaletteNV>& pShadingRatePalettes)
+{
+    return vkCmdSetViewportShadingRatePaletteNV(commandBuffer, firstViewport, uint32_t(pShadingRatePalettes.size()), pShadingRatePalettes.data());
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -16421,6 +18392,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetCoarseSampleOrderNV(
     VkCoarseSampleOrderTypeNV                   sampleOrderType,
     uint32_t                                    customSampleOrderCount,
     const VkCoarseSampleOrderCustomNV*          pCustomSampleOrders);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdSetCoarseSampleOrderNV(VkCommandBuffer commandBuffer, VkCoarseSampleOrderTypeNV sampleOrderType, const std::span<VkCoarseSampleOrderCustomNV>& pCustomSampleOrders)
+{
+    return vkCmdSetCoarseSampleOrderNV(commandBuffer, sampleOrderType, uint32_t(pCustomSampleOrders.size()), pCustomSampleOrders.data());
+}
+#endif
 #endif
 #endif
 
@@ -16732,6 +18710,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateAccelerationStructureNV(
     const VkAccelerationStructureCreateInfoNV*  pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkAccelerationStructureNV*                  pAccelerationStructure);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateAccelerationStructureNV(VkDevice device, const VkAccelerationStructureCreateInfoNV& pCreateInfo, VkAccelerationStructureNV* pAccelerationStructure)
+{
+    return vkCreateAccelerationStructureNV(device, &pCreateInfo, nullptr, pAccelerationStructure);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -16739,6 +18724,13 @@ VKAPI_ATTR void VKAPI_CALL vkDestroyAccelerationStructureNV(
     VkDevice                                    device,
     VkAccelerationStructureNV                   accelerationStructure,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyAccelerationStructureNV(VkDevice device, VkAccelerationStructureNV accelerationStructure)
+{
+    return vkDestroyAccelerationStructureNV(device, accelerationStructure, nullptr);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -16746,6 +18738,13 @@ VKAPI_ATTR void VKAPI_CALL vkGetAccelerationStructureMemoryRequirementsNV(
     VkDevice                                    device,
     const VkAccelerationStructureMemoryRequirementsInfoNV* pInfo,
     VkMemoryRequirements2KHR*                   pMemoryRequirements);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetAccelerationStructureMemoryRequirementsNV(VkDevice device, const VkAccelerationStructureMemoryRequirementsInfoNV& pInfo, VkMemoryRequirements2KHR* pMemoryRequirements)
+{
+    return vkGetAccelerationStructureMemoryRequirementsNV(device, &pInfo, pMemoryRequirements);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -16753,6 +18752,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkBindAccelerationStructureMemoryNV(
     VkDevice                                    device,
     uint32_t                                    bindInfoCount,
     const VkBindAccelerationStructureMemoryInfoNV* pBindInfos);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkBindAccelerationStructureMemoryNV(VkDevice device, const std::span<VkBindAccelerationStructureMemoryInfoNV>& pBindInfos)
+{
+    return vkBindAccelerationStructureMemoryNV(device, uint32_t(pBindInfos.size()), pBindInfos.data());
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -16766,6 +18772,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdBuildAccelerationStructureNV(
     VkAccelerationStructureNV                   src,
     VkBuffer                                    scratch,
     VkDeviceSize                                scratchOffset);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdBuildAccelerationStructureNV(VkCommandBuffer commandBuffer, const VkAccelerationStructureInfoNV& pInfo, VkBuffer instanceData, VkDeviceSize instanceOffset, VkBool32 update, VkAccelerationStructureNV dst, VkAccelerationStructureNV src, VkBuffer scratch, VkDeviceSize scratchOffset)
+{
+    return vkCmdBuildAccelerationStructureNV(commandBuffer, &pInfo, instanceData, instanceOffset, update, dst, src, scratch, scratchOffset);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -16803,6 +18816,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateRayTracingPipelinesNV(
     const VkRayTracingPipelineCreateInfoNV*     pCreateInfos,
     const VkAllocationCallbacks*                pAllocator,
     VkPipeline*                                 pPipelines);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateRayTracingPipelinesNV(VkDevice device, VkPipelineCache pipelineCache, const std::span<VkRayTracingPipelineCreateInfoNV>& pCreateInfos, VkPipeline* pPipelines)
+{
+    return vkCreateRayTracingPipelinesNV(device, pipelineCache, uint32_t(pCreateInfos.size()), pCreateInfos.data(), nullptr, pPipelines);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -16841,6 +18861,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdWriteAccelerationStructuresPropertiesNV(
     VkQueryType                                 queryType,
     VkQueryPool                                 queryPool,
     uint32_t                                    firstQuery);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdWriteAccelerationStructuresPropertiesNV(VkCommandBuffer commandBuffer, const std::span<VkAccelerationStructureNV>& pAccelerationStructures, VkQueryType queryType, VkQueryPool queryPool, uint32_t firstQuery)
+{
+    return vkCmdWriteAccelerationStructuresPropertiesNV(commandBuffer, uint32_t(pAccelerationStructures.size()), pAccelerationStructures.data(), queryType, queryPool, firstQuery);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -17024,6 +19051,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetCalibratedTimestampsEXT(
     const VkCalibratedTimestampInfoKHR*         pTimestampInfos,
     uint64_t*                                   pTimestamps,
     uint64_t*                                   pMaxDeviation);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetCalibratedTimestampsEXT(VkDevice device, const std::span<VkCalibratedTimestampInfoKHR>& pTimestampInfos, uint64_t* pTimestamps, uint64_t* pMaxDeviation)
+{
+    return vkGetCalibratedTimestampsEXT(device, uint32_t(pTimestampInfos.size()), pTimestampInfos.data(), pTimestamps, pMaxDeviation);
+}
+#endif
 #endif
 #endif
 
@@ -17233,6 +19267,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetExclusiveScissorEnableNV(
     uint32_t                                    firstExclusiveScissor,
     uint32_t                                    exclusiveScissorCount,
     const VkBool32*                             pExclusiveScissorEnables);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdSetExclusiveScissorEnableNV(VkCommandBuffer commandBuffer, uint32_t firstExclusiveScissor, const std::span<VkBool32>& pExclusiveScissorEnables)
+{
+    return vkCmdSetExclusiveScissorEnableNV(commandBuffer, firstExclusiveScissor, uint32_t(pExclusiveScissorEnables.size()), pExclusiveScissorEnables.data());
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -17241,6 +19282,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetExclusiveScissorNV(
     uint32_t                                    firstExclusiveScissor,
     uint32_t                                    exclusiveScissorCount,
     const VkRect2D*                             pExclusiveScissors);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdSetExclusiveScissorNV(VkCommandBuffer commandBuffer, uint32_t firstExclusiveScissor, const std::span<VkRect2D>& pExclusiveScissors)
+{
+    return vkCmdSetExclusiveScissorNV(commandBuffer, firstExclusiveScissor, uint32_t(pExclusiveScissors.size()), pExclusiveScissors.data());
+}
+#endif
 #endif
 #endif
 
@@ -17453,6 +19501,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetPastPresentationTimingEXT(
     VkDevice                                    device,
     const VkPastPresentationTimingInfoEXT*      pPastPresentationTimingInfo,
     VkPastPresentationTimingPropertiesEXT*      pPastPresentationTimingProperties);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetPastPresentationTimingEXT(VkDevice device, const VkPastPresentationTimingInfoEXT& pPastPresentationTimingInfo, VkPastPresentationTimingPropertiesEXT* pPastPresentationTimingProperties)
+{
+    return vkGetPastPresentationTimingEXT(device, &pPastPresentationTimingInfo, pPastPresentationTimingProperties);
+}
+#endif
 #endif
 #endif
 
@@ -17573,6 +19628,13 @@ typedef VkResult (VKAPI_PTR *PFN_vkGetPerformanceParameterINTEL)(VkDevice device
 VKAPI_ATTR VkResult VKAPI_CALL vkInitializePerformanceApiINTEL(
     VkDevice                                    device,
     const VkInitializePerformanceApiInfoINTEL*  pInitializeInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkInitializePerformanceApiINTEL(VkDevice device, const VkInitializePerformanceApiInfoINTEL& pInitializeInfo)
+{
+    return vkInitializePerformanceApiINTEL(device, &pInitializeInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -17584,18 +19646,39 @@ VKAPI_ATTR void VKAPI_CALL vkUninitializePerformanceApiINTEL(
 VKAPI_ATTR VkResult VKAPI_CALL vkCmdSetPerformanceMarkerINTEL(
     VkCommandBuffer                             commandBuffer,
     const VkPerformanceMarkerInfoINTEL*         pMarkerInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCmdSetPerformanceMarkerINTEL(VkCommandBuffer commandBuffer, const VkPerformanceMarkerInfoINTEL& pMarkerInfo)
+{
+    return vkCmdSetPerformanceMarkerINTEL(commandBuffer, &pMarkerInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR VkResult VKAPI_CALL vkCmdSetPerformanceStreamMarkerINTEL(
     VkCommandBuffer                             commandBuffer,
     const VkPerformanceStreamMarkerInfoINTEL*   pMarkerInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCmdSetPerformanceStreamMarkerINTEL(VkCommandBuffer commandBuffer, const VkPerformanceStreamMarkerInfoINTEL& pMarkerInfo)
+{
+    return vkCmdSetPerformanceStreamMarkerINTEL(commandBuffer, &pMarkerInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR VkResult VKAPI_CALL vkCmdSetPerformanceOverrideINTEL(
     VkCommandBuffer                             commandBuffer,
     const VkPerformanceOverrideInfoINTEL*       pOverrideInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCmdSetPerformanceOverrideINTEL(VkCommandBuffer commandBuffer, const VkPerformanceOverrideInfoINTEL& pOverrideInfo)
+{
+    return vkCmdSetPerformanceOverrideINTEL(commandBuffer, &pOverrideInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -17603,6 +19686,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkAcquirePerformanceConfigurationINTEL(
     VkDevice                                    device,
     const VkPerformanceConfigurationAcquireInfoINTEL* pAcquireInfo,
     VkPerformanceConfigurationINTEL*            pConfiguration);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkAcquirePerformanceConfigurationINTEL(VkDevice device, const VkPerformanceConfigurationAcquireInfoINTEL& pAcquireInfo, VkPerformanceConfigurationINTEL* pConfiguration)
+{
+    return vkAcquirePerformanceConfigurationINTEL(device, &pAcquireInfo, pConfiguration);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -17855,6 +19945,13 @@ typedef VkDeviceAddress (VKAPI_PTR *PFN_vkGetBufferDeviceAddressEXT)(VkDevice de
 VKAPI_ATTR VkDeviceAddress VKAPI_CALL vkGetBufferDeviceAddressEXT(
     VkDevice                                    device,
     const VkBufferDeviceAddressInfo*            pInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkDeviceAddress vkGetBufferDeviceAddressEXT(VkDevice device, const VkBufferDeviceAddressInfo& pInfo)
+{
+    return vkGetBufferDeviceAddressEXT(device, &pInfo);
+}
+#endif
 #endif
 #endif
 
@@ -18094,6 +20191,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateHeadlessSurfaceEXT(
     const VkHeadlessSurfaceCreateInfoEXT*       pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkSurfaceKHR*                               pSurface);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateHeadlessSurfaceEXT(VkInstance instance, const VkHeadlessSurfaceCreateInfoEXT& pCreateInfo, VkSurfaceKHR* pSurface)
+{
+    return vkCreateHeadlessSurfaceEXT(instance, &pCreateInfo, nullptr, pSurface);
+}
+#endif
 #endif
 #endif
 
@@ -18219,6 +20323,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetViewportWithCountEXT(
     VkCommandBuffer                             commandBuffer,
     uint32_t                                    viewportCount,
     const VkViewport*                           pViewports);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdSetViewportWithCountEXT(VkCommandBuffer commandBuffer, const std::span<VkViewport>& pViewports)
+{
+    return vkCmdSetViewportWithCountEXT(commandBuffer, uint32_t(pViewports.size()), pViewports.data());
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -18226,6 +20337,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetScissorWithCountEXT(
     VkCommandBuffer                             commandBuffer,
     uint32_t                                    scissorCount,
     const VkRect2D*                             pScissors);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdSetScissorWithCountEXT(VkCommandBuffer commandBuffer, const std::span<VkRect2D>& pScissors)
+{
+    return vkCmdSetScissorWithCountEXT(commandBuffer, uint32_t(pScissors.size()), pScissors.data());
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -18237,6 +20355,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdBindVertexBuffers2EXT(
     const VkDeviceSize*                         pOffsets,
     const VkDeviceSize*                         pSizes,
     const VkDeviceSize*                         pStrides);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdBindVertexBuffers2EXT(VkCommandBuffer commandBuffer, uint32_t firstBinding, const std::span<VkBuffer>& pBuffers, const std::span<VkDeviceSize>& pOffsets, const VkDeviceSize* pSizes, const VkDeviceSize* pStrides)
+{
+    return vkCmdBindVertexBuffers2EXT(commandBuffer, firstBinding, uint32_t(pBuffers.size()), pBuffers.data(), pOffsets.data(), pSizes, pStrides);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -18324,18 +20449,39 @@ typedef void (VKAPI_PTR *PFN_vkGetImageSubresourceLayout2EXT)(VkDevice device, V
 VKAPI_ATTR VkResult VKAPI_CALL vkCopyMemoryToImageEXT(
     VkDevice                                    device,
     const VkCopyMemoryToImageInfo*              pCopyMemoryToImageInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCopyMemoryToImageEXT(VkDevice device, const VkCopyMemoryToImageInfo& pCopyMemoryToImageInfo)
+{
+    return vkCopyMemoryToImageEXT(device, &pCopyMemoryToImageInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR VkResult VKAPI_CALL vkCopyImageToMemoryEXT(
     VkDevice                                    device,
     const VkCopyImageToMemoryInfo*              pCopyImageToMemoryInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCopyImageToMemoryEXT(VkDevice device, const VkCopyImageToMemoryInfo& pCopyImageToMemoryInfo)
+{
+    return vkCopyImageToMemoryEXT(device, &pCopyImageToMemoryInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR VkResult VKAPI_CALL vkCopyImageToImageEXT(
     VkDevice                                    device,
     const VkCopyImageToImageInfo*               pCopyImageToImageInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCopyImageToImageEXT(VkDevice device, const VkCopyImageToImageInfo& pCopyImageToImageInfo)
+{
+    return vkCopyImageToImageEXT(device, &pCopyImageToImageInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -18343,6 +20489,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkTransitionImageLayoutEXT(
     VkDevice                                    device,
     uint32_t                                    transitionCount,
     const VkHostImageLayoutTransitionInfo*      pTransitions);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkTransitionImageLayoutEXT(VkDevice device, const std::span<VkHostImageLayoutTransitionInfo>& pTransitions)
+{
+    return vkTransitionImageLayoutEXT(device, uint32_t(pTransitions.size()), pTransitions.data());
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -18351,6 +20504,13 @@ VKAPI_ATTR void VKAPI_CALL vkGetImageSubresourceLayout2EXT(
     VkImage                                     image,
     const VkImageSubresource2*                  pSubresource,
     VkSubresourceLayout2*                       pLayout);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetImageSubresourceLayout2EXT(VkDevice device, VkImage image, const VkImageSubresource2& pSubresource, VkSubresourceLayout2* pLayout)
+{
+    return vkGetImageSubresourceLayout2EXT(device, image, &pSubresource, pLayout);
+}
+#endif
 #endif
 #endif
 
@@ -18447,6 +20607,13 @@ typedef VkResult (VKAPI_PTR *PFN_vkReleaseSwapchainImagesEXT)(VkDevice device, c
 VKAPI_ATTR VkResult VKAPI_CALL vkReleaseSwapchainImagesEXT(
     VkDevice                                    device,
     const VkReleaseSwapchainImagesInfoKHR*      pReleaseInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkReleaseSwapchainImagesEXT(VkDevice device, const VkReleaseSwapchainImagesInfoKHR& pReleaseInfo)
+{
+    return vkReleaseSwapchainImagesEXT(device, &pReleaseInfo);
+}
+#endif
 #endif
 #endif
 
@@ -18626,12 +20793,26 @@ VKAPI_ATTR void VKAPI_CALL vkGetGeneratedCommandsMemoryRequirementsNV(
     VkDevice                                    device,
     const VkGeneratedCommandsMemoryRequirementsInfoNV* pInfo,
     VkMemoryRequirements2*                      pMemoryRequirements);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetGeneratedCommandsMemoryRequirementsNV(VkDevice device, const VkGeneratedCommandsMemoryRequirementsInfoNV& pInfo, VkMemoryRequirements2* pMemoryRequirements)
+{
+    return vkGetGeneratedCommandsMemoryRequirementsNV(device, &pInfo, pMemoryRequirements);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkCmdPreprocessGeneratedCommandsNV(
     VkCommandBuffer                             commandBuffer,
     const VkGeneratedCommandsInfoNV*            pGeneratedCommandsInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdPreprocessGeneratedCommandsNV(VkCommandBuffer commandBuffer, const VkGeneratedCommandsInfoNV& pGeneratedCommandsInfo)
+{
+    return vkCmdPreprocessGeneratedCommandsNV(commandBuffer, &pGeneratedCommandsInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -18639,6 +20820,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdExecuteGeneratedCommandsNV(
     VkCommandBuffer                             commandBuffer,
     VkBool32                                    isPreprocessed,
     const VkGeneratedCommandsInfoNV*            pGeneratedCommandsInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdExecuteGeneratedCommandsNV(VkCommandBuffer commandBuffer, VkBool32 isPreprocessed, const VkGeneratedCommandsInfoNV& pGeneratedCommandsInfo)
+{
+    return vkCmdExecuteGeneratedCommandsNV(commandBuffer, isPreprocessed, &pGeneratedCommandsInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -18655,6 +20843,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateIndirectCommandsLayoutNV(
     const VkIndirectCommandsLayoutCreateInfoNV* pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkIndirectCommandsLayoutNV*                 pIndirectCommandsLayout);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateIndirectCommandsLayoutNV(VkDevice device, const VkIndirectCommandsLayoutCreateInfoNV& pCreateInfo, VkIndirectCommandsLayoutNV* pIndirectCommandsLayout)
+{
+    return vkCreateIndirectCommandsLayoutNV(device, &pCreateInfo, nullptr, pIndirectCommandsLayout);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -18662,6 +20857,13 @@ VKAPI_ATTR void VKAPI_CALL vkDestroyIndirectCommandsLayoutNV(
     VkDevice                                    device,
     VkIndirectCommandsLayoutNV                  indirectCommandsLayout,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyIndirectCommandsLayoutNV(VkDevice device, VkIndirectCommandsLayoutNV indirectCommandsLayout)
+{
+    return vkDestroyIndirectCommandsLayoutNV(device, indirectCommandsLayout, nullptr);
+}
+#endif
 #endif
 #endif
 
@@ -18761,6 +20963,13 @@ typedef void (VKAPI_PTR *PFN_vkCmdSetDepthBias2EXT)(VkCommandBuffer commandBuffe
 VKAPI_ATTR void VKAPI_CALL vkCmdSetDepthBias2EXT(
     VkCommandBuffer                             commandBuffer,
     const VkDepthBiasInfoEXT*                   pDepthBiasInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdSetDepthBias2EXT(VkCommandBuffer commandBuffer, const VkDepthBiasInfoEXT& pDepthBiasInfo)
+{
+    return vkCmdSetDepthBias2EXT(commandBuffer, &pDepthBiasInfo);
+}
+#endif
 #endif
 #endif
 
@@ -18933,6 +21142,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreatePrivateDataSlotEXT(
     const VkPrivateDataSlotCreateInfo*          pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkPrivateDataSlot*                          pPrivateDataSlot);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreatePrivateDataSlotEXT(VkDevice device, const VkPrivateDataSlotCreateInfo& pCreateInfo, VkPrivateDataSlot* pPrivateDataSlot)
+{
+    return vkCreatePrivateDataSlotEXT(device, &pCreateInfo, nullptr, pPrivateDataSlot);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -18940,6 +21156,13 @@ VKAPI_ATTR void VKAPI_CALL vkDestroyPrivateDataSlotEXT(
     VkDevice                                    device,
     VkPrivateDataSlot                           privateDataSlot,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyPrivateDataSlotEXT(VkDevice device, VkPrivateDataSlot privateDataSlot)
+{
+    return vkDestroyPrivateDataSlotEXT(device, privateDataSlot, nullptr);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -19073,18 +21296,39 @@ typedef void (VKAPI_PTR *PFN_vkCmdEndPerTileExecutionQCOM)(VkCommandBuffer comma
 VKAPI_ATTR void VKAPI_CALL vkCmdDispatchTileQCOM(
     VkCommandBuffer                             commandBuffer,
     const VkDispatchTileInfoQCOM*               pDispatchTileInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdDispatchTileQCOM(VkCommandBuffer commandBuffer, const VkDispatchTileInfoQCOM& pDispatchTileInfo)
+{
+    return vkCmdDispatchTileQCOM(commandBuffer, &pDispatchTileInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkCmdBeginPerTileExecutionQCOM(
     VkCommandBuffer                             commandBuffer,
     const VkPerTileBeginInfoQCOM*               pPerTileBeginInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdBeginPerTileExecutionQCOM(VkCommandBuffer commandBuffer, const VkPerTileBeginInfoQCOM& pPerTileBeginInfo)
+{
+    return vkCmdBeginPerTileExecutionQCOM(commandBuffer, &pPerTileBeginInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkCmdEndPerTileExecutionQCOM(
     VkCommandBuffer                             commandBuffer,
     const VkPerTileEndInfoQCOM*                 pPerTileEndInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdEndPerTileExecutionQCOM(VkCommandBuffer commandBuffer, const VkPerTileEndInfoQCOM& pPerTileEndInfo)
+{
+    return vkCmdEndPerTileExecutionQCOM(commandBuffer, &pPerTileEndInfo);
+}
+#endif
 #endif
 #endif
 
@@ -19271,6 +21515,13 @@ VKAPI_ATTR void VKAPI_CALL vkGetDescriptorEXT(
     const VkDescriptorGetInfoEXT*               pDescriptorInfo,
     size_t                                      dataSize,
     void*                                       pDescriptor);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetDescriptorEXT(VkDevice device, const VkDescriptorGetInfoEXT& pDescriptorInfo, size_t dataSize, void* pDescriptor)
+{
+    return vkGetDescriptorEXT(device, &pDescriptorInfo, dataSize, pDescriptor);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -19278,6 +21529,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdBindDescriptorBuffersEXT(
     VkCommandBuffer                             commandBuffer,
     uint32_t                                    bufferCount,
     const VkDescriptorBufferBindingInfoEXT*     pBindingInfos);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdBindDescriptorBuffersEXT(VkCommandBuffer commandBuffer, const std::span<VkDescriptorBufferBindingInfoEXT>& pBindingInfos)
+{
+    return vkCmdBindDescriptorBuffersEXT(commandBuffer, uint32_t(pBindingInfos.size()), pBindingInfos.data());
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -19289,6 +21547,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetDescriptorBufferOffsetsEXT(
     uint32_t                                    setCount,
     const uint32_t*                             pBufferIndices,
     const VkDeviceSize*                         pOffsets);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdSetDescriptorBufferOffsetsEXT(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint32_t firstSet, const std::span<uint32_t>& pBufferIndices, const std::span<VkDeviceSize>& pOffsets)
+{
+    return vkCmdSetDescriptorBufferOffsetsEXT(commandBuffer, pipelineBindPoint, layout, firstSet, uint32_t(pBufferIndices.size()), pBufferIndices.data(), pOffsets.data());
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -19304,6 +21569,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetBufferOpaqueCaptureDescriptorDataEXT(
     VkDevice                                    device,
     const VkBufferCaptureDescriptorDataInfoEXT* pInfo,
     void*                                       pData);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetBufferOpaqueCaptureDescriptorDataEXT(VkDevice device, const VkBufferCaptureDescriptorDataInfoEXT& pInfo, void* pData)
+{
+    return vkGetBufferOpaqueCaptureDescriptorDataEXT(device, &pInfo, pData);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -19311,6 +21583,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetImageOpaqueCaptureDescriptorDataEXT(
     VkDevice                                    device,
     const VkImageCaptureDescriptorDataInfoEXT*  pInfo,
     void*                                       pData);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetImageOpaqueCaptureDescriptorDataEXT(VkDevice device, const VkImageCaptureDescriptorDataInfoEXT& pInfo, void* pData)
+{
+    return vkGetImageOpaqueCaptureDescriptorDataEXT(device, &pInfo, pData);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -19318,6 +21597,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetImageViewOpaqueCaptureDescriptorDataEXT(
     VkDevice                                    device,
     const VkImageViewCaptureDescriptorDataInfoEXT* pInfo,
     void*                                       pData);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetImageViewOpaqueCaptureDescriptorDataEXT(VkDevice device, const VkImageViewCaptureDescriptorDataInfoEXT& pInfo, void* pData)
+{
+    return vkGetImageViewOpaqueCaptureDescriptorDataEXT(device, &pInfo, pData);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -19325,6 +21611,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetSamplerOpaqueCaptureDescriptorDataEXT(
     VkDevice                                    device,
     const VkSamplerCaptureDescriptorDataInfoEXT* pInfo,
     void*                                       pData);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetSamplerOpaqueCaptureDescriptorDataEXT(VkDevice device, const VkSamplerCaptureDescriptorDataInfoEXT& pInfo, void* pData)
+{
+    return vkGetSamplerOpaqueCaptureDescriptorDataEXT(device, &pInfo, pData);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -19332,6 +21625,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetAccelerationStructureOpaqueCaptureDescriptor
     VkDevice                                    device,
     const VkAccelerationStructureCaptureDescriptorDataInfoEXT* pInfo,
     void*                                       pData);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT(VkDevice device, const VkAccelerationStructureCaptureDescriptorDataInfoEXT& pInfo, void* pData)
+{
+    return vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT(device, &pInfo, pData);
+}
+#endif
 #endif
 #endif
 
@@ -19855,6 +22155,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetVertexInputEXT(
     const VkVertexInputBindingDescription2EXT*  pVertexBindingDescriptions,
     uint32_t                                    vertexAttributeDescriptionCount,
     const VkVertexInputAttributeDescription2EXT* pVertexAttributeDescriptions);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdSetVertexInputEXT(VkCommandBuffer commandBuffer, const std::span<VkVertexInputBindingDescription2EXT>& pVertexBindingDescriptions, const std::span<VkVertexInputAttributeDescription2EXT>& pVertexAttributeDescriptions)
+{
+    return vkCmdSetVertexInputEXT(commandBuffer, uint32_t(pVertexBindingDescriptions.size()), pVertexBindingDescriptions.data(), uint32_t(pVertexAttributeDescriptions.size()), pVertexAttributeDescriptions.data());
+}
+#endif
 #endif
 #endif
 
@@ -20037,6 +22344,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetMemoryRemoteAddressNV(
     VkDevice                                    device,
     const VkMemoryGetRemoteAddressInfoNV*       pMemoryGetRemoteAddressInfo,
     VkRemoteAddressNV*                          pAddress);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetMemoryRemoteAddressNV(VkDevice device, const VkMemoryGetRemoteAddressInfoNV& pMemoryGetRemoteAddressInfo, VkRemoteAddressNV* pAddress)
+{
+    return vkGetMemoryRemoteAddressNV(device, &pMemoryGetRemoteAddressInfo, pAddress);
+}
+#endif
 #endif
 #endif
 
@@ -20067,6 +22381,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetPipelinePropertiesEXT(
     VkDevice                                    device,
     const VkPipelineInfoEXT*                    pPipelineInfo,
     VkBaseOutStructure*                         pPipelineProperties);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetPipelinePropertiesEXT(VkDevice device, const VkPipelineInfoEXT& pPipelineInfo, VkBaseOutStructure* pPipelineProperties)
+{
+    return vkGetPipelinePropertiesEXT(device, &pPipelineInfo, pPipelineProperties);
+}
+#endif
 #endif
 #endif
 
@@ -20204,6 +22525,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetColorWriteEnableEXT(
     VkCommandBuffer                             commandBuffer,
     uint32_t                                    attachmentCount,
     const VkBool32*                             pColorWriteEnables);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdSetColorWriteEnableEXT(VkCommandBuffer       commandBuffer, const std::span<VkBool32>& pColorWriteEnables)
+{
+    return vkCmdSetColorWriteEnableEXT(commandBuffer, uint32_t(pColorWriteEnables.size()), pColorWriteEnables.data());
+}
+#endif
 #endif
 #endif
 
@@ -20350,6 +22678,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdDrawMultiEXT(
     uint32_t                                    instanceCount,
     uint32_t                                    firstInstance,
     uint32_t                                    stride);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdDrawMultiEXT(VkCommandBuffer commandBuffer, const std::span<VkMultiDrawInfoEXT>& pVertexInfo, uint32_t instanceCount, uint32_t firstInstance, uint32_t stride)
+{
+    return vkCmdDrawMultiEXT(commandBuffer, uint32_t(pVertexInfo.size()), pVertexInfo.data(), instanceCount, firstInstance, stride);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -20361,6 +22696,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdDrawMultiIndexedEXT(
     uint32_t                                    firstInstance,
     uint32_t                                    stride,
     const int32_t*                              pVertexOffset);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdDrawMultiIndexedEXT(VkCommandBuffer commandBuffer, const std::span<VkMultiDrawIndexedInfoEXT>& pIndexInfo, uint32_t instanceCount, uint32_t firstInstance, uint32_t stride, const int32_t* pVertexOffset)
+{
+    return vkCmdDrawMultiIndexedEXT(commandBuffer, uint32_t(pIndexInfo.size()), pIndexInfo.data(), instanceCount, firstInstance, stride, pVertexOffset);
+}
+#endif
 #endif
 #endif
 
@@ -20600,6 +22942,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateMicromapEXT(
     const VkMicromapCreateInfoEXT*              pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkMicromapEXT*                              pMicromap);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateMicromapEXT(VkDevice                                           device, const VkMicromapCreateInfoEXT& pCreateInfo, VkMicromapEXT*                        pMicromap)
+{
+    return vkCreateMicromapEXT(device, &pCreateInfo, nullptr, pMicromap);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -20607,6 +22956,13 @@ VKAPI_ATTR void VKAPI_CALL vkDestroyMicromapEXT(
     VkDevice                                    device,
     VkMicromapEXT                               micromap,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyMicromapEXT(VkDevice device, VkMicromapEXT micromap)
+{
+    return vkDestroyMicromapEXT(device, micromap, nullptr);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -20614,6 +22970,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdBuildMicromapsEXT(
     VkCommandBuffer                             commandBuffer,
     uint32_t                                    infoCount,
     const VkMicromapBuildInfoEXT*               pInfos);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdBuildMicromapsEXT(VkCommandBuffer                                    commandBuffer, const std::span<VkMicromapBuildInfoEXT>& pInfos)
+{
+    return vkCmdBuildMicromapsEXT(commandBuffer, uint32_t(pInfos.size()), pInfos.data());
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -20622,6 +22985,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkBuildMicromapsEXT(
     VkDeferredOperationKHR                      deferredOperation,
     uint32_t                                    infoCount,
     const VkMicromapBuildInfoEXT*               pInfos);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkBuildMicromapsEXT(VkDevice                                           device, VkDeferredOperationKHR deferredOperation, const std::span<VkMicromapBuildInfoEXT>& pInfos)
+{
+    return vkBuildMicromapsEXT(device, deferredOperation, uint32_t(pInfos.size()), pInfos.data());
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -20629,6 +22999,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCopyMicromapEXT(
     VkDevice                                    device,
     VkDeferredOperationKHR                      deferredOperation,
     const VkCopyMicromapInfoEXT*                pInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCopyMicromapEXT(VkDevice device, VkDeferredOperationKHR deferredOperation, const VkCopyMicromapInfoEXT& pInfo)
+{
+    return vkCopyMicromapEXT(device, deferredOperation, &pInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -20636,6 +23013,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCopyMicromapToMemoryEXT(
     VkDevice                                    device,
     VkDeferredOperationKHR                      deferredOperation,
     const VkCopyMicromapToMemoryInfoEXT*        pInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCopyMicromapToMemoryEXT(VkDevice device, VkDeferredOperationKHR deferredOperation, const VkCopyMicromapToMemoryInfoEXT& pInfo)
+{
+    return vkCopyMicromapToMemoryEXT(device, deferredOperation, &pInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -20643,6 +23027,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCopyMemoryToMicromapEXT(
     VkDevice                                    device,
     VkDeferredOperationKHR                      deferredOperation,
     const VkCopyMemoryToMicromapInfoEXT*        pInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCopyMemoryToMicromapEXT(VkDevice device, VkDeferredOperationKHR deferredOperation, const VkCopyMemoryToMicromapInfoEXT& pInfo)
+{
+    return vkCopyMemoryToMicromapEXT(device, deferredOperation, &pInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -20654,24 +23045,52 @@ VKAPI_ATTR VkResult VKAPI_CALL vkWriteMicromapsPropertiesEXT(
     size_t                                      dataSize,
     void*                                       pData,
     size_t                                      stride);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkWriteMicromapsPropertiesEXT(VkDevice device, const std::span<VkMicromapEXT>& pMicromaps, VkQueryType  queryType, size_t       dataSize, void* pData, size_t stride)
+{
+    return vkWriteMicromapsPropertiesEXT(device, uint32_t(pMicromaps.size()), pMicromaps.data(), queryType, dataSize, pData, stride);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkCmdCopyMicromapEXT(
     VkCommandBuffer                             commandBuffer,
     const VkCopyMicromapInfoEXT*                pInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdCopyMicromapEXT(VkCommandBuffer commandBuffer, const VkCopyMicromapInfoEXT& pInfo)
+{
+    return vkCmdCopyMicromapEXT(commandBuffer, &pInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkCmdCopyMicromapToMemoryEXT(
     VkCommandBuffer                             commandBuffer,
     const VkCopyMicromapToMemoryInfoEXT*        pInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdCopyMicromapToMemoryEXT(VkCommandBuffer commandBuffer, const VkCopyMicromapToMemoryInfoEXT& pInfo)
+{
+    return vkCmdCopyMicromapToMemoryEXT(commandBuffer, &pInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkCmdCopyMemoryToMicromapEXT(
     VkCommandBuffer                             commandBuffer,
     const VkCopyMemoryToMicromapInfoEXT*        pInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdCopyMemoryToMicromapEXT(VkCommandBuffer commandBuffer, const VkCopyMemoryToMicromapInfoEXT& pInfo)
+{
+    return vkCmdCopyMemoryToMicromapEXT(commandBuffer, &pInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -20682,6 +23101,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdWriteMicromapsPropertiesEXT(
     VkQueryType                                 queryType,
     VkQueryPool                                 queryPool,
     uint32_t                                    firstQuery);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdWriteMicromapsPropertiesEXT(VkCommandBuffer commandBuffer, const std::span<VkMicromapEXT>& pMicromaps, VkQueryType queryType, VkQueryPool queryPool, uint32_t firstQuery)
+{
+    return vkCmdWriteMicromapsPropertiesEXT(commandBuffer, uint32_t(pMicromaps.size()), pMicromaps.data(), queryType, queryPool, firstQuery);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -20689,6 +23115,13 @@ VKAPI_ATTR void VKAPI_CALL vkGetDeviceMicromapCompatibilityEXT(
     VkDevice                                    device,
     const VkMicromapVersionInfoEXT*             pVersionInfo,
     VkAccelerationStructureCompatibilityKHR*    pCompatibility);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetDeviceMicromapCompatibilityEXT(VkDevice device, const VkMicromapVersionInfoEXT& pVersionInfo, VkAccelerationStructureCompatibilityKHR* pCompatibility)
+{
+    return vkGetDeviceMicromapCompatibilityEXT(device, &pVersionInfo, pCompatibility);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -20697,6 +23130,13 @@ VKAPI_ATTR void VKAPI_CALL vkGetMicromapBuildSizesEXT(
     VkAccelerationStructureBuildTypeKHR         buildType,
     const VkMicromapBuildInfoEXT*               pBuildInfo,
     VkMicromapBuildSizesInfoEXT*                pSizeInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetMicromapBuildSizesEXT(VkDevice                                            device, VkAccelerationStructureBuildTypeKHR                 buildType, const VkMicromapBuildInfoEXT& pBuildInfo, VkMicromapBuildSizesInfoEXT*           pSizeInfo)
+{
+    return vkGetMicromapBuildSizesEXT(device, buildType, &pBuildInfo, pSizeInfo);
+}
+#endif
 #endif
 #endif
 
@@ -20893,6 +23333,13 @@ VKAPI_ATTR void VKAPI_CALL vkGetDescriptorSetLayoutHostMappingInfoVALVE(
     VkDevice                                    device,
     const VkDescriptorSetBindingReferenceVALVE* pBindingReference,
     VkDescriptorSetLayoutHostMappingInfoVALVE*  pHostMapping);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetDescriptorSetLayoutHostMappingInfoVALVE(VkDevice device, const VkDescriptorSetBindingReferenceVALVE& pBindingReference, VkDescriptorSetLayoutHostMappingInfoVALVE* pHostMapping)
+{
+    return vkGetDescriptorSetLayoutHostMappingInfoVALVE(device, &pBindingReference, pHostMapping);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -21084,6 +23531,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdDecompressMemoryNV(
     VkCommandBuffer                             commandBuffer,
     uint32_t                                    decompressRegionCount,
     const VkDecompressMemoryRegionNV*           pDecompressMemoryRegions);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdDecompressMemoryNV(VkCommandBuffer commandBuffer, const std::span<VkDecompressMemoryRegionNV>& pDecompressMemoryRegions)
+{
+    return vkCmdDecompressMemoryNV(commandBuffer, uint32_t(pDecompressMemoryRegions.size()), pDecompressMemoryRegions.data());
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -21137,6 +23591,13 @@ VKAPI_ATTR void VKAPI_CALL vkGetPipelineIndirectMemoryRequirementsNV(
     VkDevice                                    device,
     const VkComputePipelineCreateInfo*          pCreateInfo,
     VkMemoryRequirements2*                      pMemoryRequirements);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetPipelineIndirectMemoryRequirementsNV(VkDevice device, const VkComputePipelineCreateInfo& pCreateInfo, VkMemoryRequirements2* pMemoryRequirements)
+{
+    return vkGetPipelineIndirectMemoryRequirementsNV(device, &pCreateInfo, pMemoryRequirements);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -21150,6 +23611,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdUpdatePipelineIndirectBufferNV(
 VKAPI_ATTR VkDeviceAddress VKAPI_CALL vkGetPipelineIndirectDeviceAddressNV(
     VkDevice                                    device,
     const VkPipelineIndirectDeviceAddressInfoNV* pInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkDeviceAddress vkGetPipelineIndirectDeviceAddressNV(VkDevice device, const VkPipelineIndirectDeviceAddressInfoNV& pInfo)
+{
+    return vkGetPipelineIndirectDeviceAddressNV(device, &pInfo);
+}
+#endif
 #endif
 #endif
 
@@ -21447,6 +23915,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetColorBlendEnableEXT(
     uint32_t                                    firstAttachment,
     uint32_t                                    attachmentCount,
     const VkBool32*                             pColorBlendEnables);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdSetColorBlendEnableEXT(VkCommandBuffer commandBuffer, uint32_t firstAttachment, const std::span<VkBool32>& pColorBlendEnables)
+{
+    return vkCmdSetColorBlendEnableEXT(commandBuffer, firstAttachment, uint32_t(pColorBlendEnables.size()), pColorBlendEnables.data());
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -21455,6 +23930,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetColorBlendEquationEXT(
     uint32_t                                    firstAttachment,
     uint32_t                                    attachmentCount,
     const VkColorBlendEquationEXT*              pColorBlendEquations);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdSetColorBlendEquationEXT(VkCommandBuffer commandBuffer, uint32_t firstAttachment, const std::span<VkColorBlendEquationEXT>& pColorBlendEquations)
+{
+    return vkCmdSetColorBlendEquationEXT(commandBuffer, firstAttachment, uint32_t(pColorBlendEquations.size()), pColorBlendEquations.data());
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -21463,6 +23945,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetColorWriteMaskEXT(
     uint32_t                                    firstAttachment,
     uint32_t                                    attachmentCount,
     const VkColorComponentFlags*                pColorWriteMasks);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdSetColorWriteMaskEXT(VkCommandBuffer commandBuffer, uint32_t firstAttachment, const std::span<VkColorComponentFlags>& pColorWriteMasks)
+{
+    return vkCmdSetColorWriteMaskEXT(commandBuffer, firstAttachment, uint32_t(pColorWriteMasks.size()), pColorWriteMasks.data());
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -21507,6 +23996,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetColorBlendAdvancedEXT(
     uint32_t                                    firstAttachment,
     uint32_t                                    attachmentCount,
     const VkColorBlendAdvancedEXT*              pColorBlendAdvanced);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdSetColorBlendAdvancedEXT(VkCommandBuffer commandBuffer, uint32_t firstAttachment, const std::span<VkColorBlendAdvancedEXT>& pColorBlendAdvanced)
+{
+    return vkCmdSetColorBlendAdvancedEXT(commandBuffer, firstAttachment, uint32_t(pColorBlendAdvanced.size()), pColorBlendAdvanced.data());
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -21545,6 +24041,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetViewportSwizzleNV(
     uint32_t                                    firstViewport,
     uint32_t                                    viewportCount,
     const VkViewportSwizzleNV*                  pViewportSwizzles);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdSetViewportSwizzleNV(VkCommandBuffer commandBuffer, uint32_t firstViewport, const std::span<VkViewportSwizzleNV>& pViewportSwizzles)
+{
+    return vkCmdSetViewportSwizzleNV(commandBuffer, firstViewport, uint32_t(pViewportSwizzles.size()), pViewportSwizzles.data());
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -21576,6 +24079,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetCoverageModulationTableNV(
     VkCommandBuffer                             commandBuffer,
     uint32_t                                    coverageModulationTableCount,
     const float*                                pCoverageModulationTable);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdSetCoverageModulationTableNV(VkCommandBuffer commandBuffer, const std::span<float>& pCoverageModulationTable)
+{
+    return vkCmdSetCoverageModulationTableNV(commandBuffer, uint32_t(pCoverageModulationTable.size()), pCoverageModulationTable.data());
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -21923,6 +24433,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateTensorARM(
     const VkTensorCreateInfoARM*                pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkTensorARM*                                pTensor);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateTensorARM(VkDevice device, const VkTensorCreateInfoARM& pCreateInfo, VkTensorARM* pTensor)
+{
+    return vkCreateTensorARM(device, &pCreateInfo, nullptr, pTensor);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -21930,6 +24447,13 @@ VKAPI_ATTR void VKAPI_CALL vkDestroyTensorARM(
     VkDevice                                    device,
     VkTensorARM                                 tensor,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyTensorARM(VkDevice device, VkTensorARM tensor)
+{
+    return vkDestroyTensorARM(device, tensor, nullptr);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -21938,6 +24462,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateTensorViewARM(
     const VkTensorViewCreateInfoARM*            pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkTensorViewARM*                            pView);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateTensorViewARM(VkDevice device, const VkTensorViewCreateInfoARM& pCreateInfo, VkTensorViewARM* pView)
+{
+    return vkCreateTensorViewARM(device, &pCreateInfo, nullptr, pView);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -21945,6 +24476,13 @@ VKAPI_ATTR void VKAPI_CALL vkDestroyTensorViewARM(
     VkDevice                                    device,
     VkTensorViewARM                             tensorView,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyTensorViewARM(VkDevice device, VkTensorViewARM tensorView)
+{
+    return vkDestroyTensorViewARM(device, tensorView, nullptr);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -21952,6 +24490,13 @@ VKAPI_ATTR void VKAPI_CALL vkGetTensorMemoryRequirementsARM(
     VkDevice                                    device,
     const VkTensorMemoryRequirementsInfoARM*    pInfo,
     VkMemoryRequirements2*                      pMemoryRequirements);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetTensorMemoryRequirementsARM(VkDevice device, const VkTensorMemoryRequirementsInfoARM& pInfo, VkMemoryRequirements2* pMemoryRequirements)
+{
+    return vkGetTensorMemoryRequirementsARM(device, &pInfo, pMemoryRequirements);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -21959,6 +24504,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkBindTensorMemoryARM(
     VkDevice                                    device,
     uint32_t                                    bindInfoCount,
     const VkBindTensorMemoryInfoARM*            pBindInfos);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkBindTensorMemoryARM(VkDevice device, const std::span<VkBindTensorMemoryInfoARM>& pBindInfos)
+{
+    return vkBindTensorMemoryARM(device, uint32_t(pBindInfos.size()), pBindInfos.data());
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -21966,12 +24518,26 @@ VKAPI_ATTR void VKAPI_CALL vkGetDeviceTensorMemoryRequirementsARM(
     VkDevice                                    device,
     const VkDeviceTensorMemoryRequirementsARM*  pInfo,
     VkMemoryRequirements2*                      pMemoryRequirements);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetDeviceTensorMemoryRequirementsARM(VkDevice device, const VkDeviceTensorMemoryRequirementsARM& pInfo, VkMemoryRequirements2* pMemoryRequirements)
+{
+    return vkGetDeviceTensorMemoryRequirementsARM(device, &pInfo, pMemoryRequirements);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkCmdCopyTensorARM(
     VkCommandBuffer                             commandBuffer,
     const VkCopyTensorInfoARM*                  pCopyTensorInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdCopyTensorARM(VkCommandBuffer commandBuffer, const VkCopyTensorInfoARM& pCopyTensorInfo)
+{
+    return vkCmdCopyTensorARM(commandBuffer, &pCopyTensorInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -21979,6 +24545,13 @@ VKAPI_ATTR void VKAPI_CALL vkGetPhysicalDeviceExternalTensorPropertiesARM(
     VkPhysicalDevice                            physicalDevice,
     const VkPhysicalDeviceExternalTensorInfoARM* pExternalTensorInfo,
     VkExternalTensorPropertiesARM*              pExternalTensorProperties);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetPhysicalDeviceExternalTensorPropertiesARM(VkPhysicalDevice                             physicalDevice, const VkPhysicalDeviceExternalTensorInfoARM& pExternalTensorInfo, VkExternalTensorPropertiesARM*               pExternalTensorProperties)
+{
+    return vkGetPhysicalDeviceExternalTensorPropertiesARM(physicalDevice, &pExternalTensorInfo, pExternalTensorProperties);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -21986,6 +24559,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetTensorOpaqueCaptureDescriptorDataARM(
     VkDevice                                    device,
     const VkTensorCaptureDescriptorDataInfoARM* pInfo,
     void*                                       pData);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetTensorOpaqueCaptureDescriptorDataARM(VkDevice                                    device, const VkTensorCaptureDescriptorDataInfoARM& pInfo, void*                                       pData)
+{
+    return vkGetTensorOpaqueCaptureDescriptorDataARM(device, &pInfo, pData);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -21993,6 +24573,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetTensorViewOpaqueCaptureDescriptorDataARM(
     VkDevice                                    device,
     const VkTensorViewCaptureDescriptorDataInfoARM* pInfo,
     void*                                       pData);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetTensorViewOpaqueCaptureDescriptorDataARM(VkDevice                                        device, const VkTensorViewCaptureDescriptorDataInfoARM& pInfo, void*                                           pData)
+{
+    return vkGetTensorViewOpaqueCaptureDescriptorDataARM(device, &pInfo, pData);
+}
+#endif
 #endif
 #endif
 
@@ -22044,6 +24631,13 @@ VKAPI_ATTR void VKAPI_CALL vkGetShaderModuleCreateInfoIdentifierEXT(
     VkDevice                                    device,
     const VkShaderModuleCreateInfo*             pCreateInfo,
     VkShaderModuleIdentifierEXT*                pIdentifier);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetShaderModuleCreateInfoIdentifierEXT(VkDevice device, const VkShaderModuleCreateInfo& pCreateInfo, VkShaderModuleIdentifierEXT* pIdentifier)
+{
+    return vkGetShaderModuleCreateInfoIdentifierEXT(device, &pCreateInfo, pIdentifier);
+}
+#endif
 #endif
 #endif
 
@@ -22194,6 +24788,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetPhysicalDeviceOpticalFlowImageFormatsNV(
     const VkOpticalFlowImageFormatInfoNV*       pOpticalFlowImageFormatInfo,
     uint32_t*                                   pFormatCount,
     VkOpticalFlowImageFormatPropertiesNV*       pImageFormatProperties);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetPhysicalDeviceOpticalFlowImageFormatsNV(VkPhysicalDevice physicalDevice, const VkOpticalFlowImageFormatInfoNV& pOpticalFlowImageFormatInfo, uint32_t* pFormatCount, VkOpticalFlowImageFormatPropertiesNV* pImageFormatProperties)
+{
+    return vkGetPhysicalDeviceOpticalFlowImageFormatsNV(physicalDevice, &pOpticalFlowImageFormatInfo, pFormatCount, pImageFormatProperties);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -22202,6 +24803,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateOpticalFlowSessionNV(
     const VkOpticalFlowSessionCreateInfoNV*     pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkOpticalFlowSessionNV*                     pSession);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateOpticalFlowSessionNV(VkDevice device, const VkOpticalFlowSessionCreateInfoNV& pCreateInfo, VkOpticalFlowSessionNV* pSession)
+{
+    return vkCreateOpticalFlowSessionNV(device, &pCreateInfo, nullptr, pSession);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -22209,6 +24817,13 @@ VKAPI_ATTR void VKAPI_CALL vkDestroyOpticalFlowSessionNV(
     VkDevice                                    device,
     VkOpticalFlowSessionNV                      session,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyOpticalFlowSessionNV(VkDevice device, VkOpticalFlowSessionNV session)
+{
+    return vkDestroyOpticalFlowSessionNV(device, session, nullptr);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -22225,6 +24840,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdOpticalFlowExecuteNV(
     VkCommandBuffer                             commandBuffer,
     VkOpticalFlowSessionNV                      session,
     const VkOpticalFlowExecuteInfoNV*           pExecuteInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdOpticalFlowExecuteNV(VkCommandBuffer commandBuffer, VkOpticalFlowSessionNV session, const VkOpticalFlowExecuteInfoNV& pExecuteInfo)
+{
+    return vkCmdOpticalFlowExecuteNV(commandBuffer, session, &pExecuteInfo);
+}
+#endif
 #endif
 #endif
 
@@ -22294,6 +24916,13 @@ typedef void (VKAPI_PTR *PFN_vkAntiLagUpdateAMD)(VkDevice device, const VkAntiLa
 VKAPI_ATTR void VKAPI_CALL vkAntiLagUpdateAMD(
     VkDevice                                    device,
     const VkAntiLagDataAMD*                     pData);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkAntiLagUpdateAMD(VkDevice device, const VkAntiLagDataAMD& pData)
+{
+    return vkAntiLagUpdateAMD(device, &pData);
+}
+#endif
 #endif
 #endif
 
@@ -22381,6 +25010,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateShadersEXT(
     const VkShaderCreateInfoEXT*                pCreateInfos,
     const VkAllocationCallbacks*                pAllocator,
     VkShaderEXT*                                pShaders);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateShadersEXT(VkDevice device, const std::span<VkShaderCreateInfoEXT>& pCreateInfos, VkShaderEXT* pShaders)
+{
+    return vkCreateShadersEXT(device, uint32_t(pCreateInfos.size()), pCreateInfos.data(), nullptr, pShaders);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -22388,6 +25024,13 @@ VKAPI_ATTR void VKAPI_CALL vkDestroyShaderEXT(
     VkDevice                                    device,
     VkShaderEXT                                 shader,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyShaderEXT(VkDevice device, VkShaderEXT shader)
+{
+    return vkDestroyShaderEXT(device, shader, nullptr);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -22404,6 +25047,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdBindShadersEXT(
     uint32_t                                    stageCount,
     const VkShaderStageFlagBits*                pStages,
     const VkShaderEXT*                          pShaders);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdBindShadersEXT(VkCommandBuffer commandBuffer, const std::span<VkShaderStageFlagBits>& pStages, const std::span<VkShaderEXT>& pShaders)
+{
+    return vkCmdBindShadersEXT(commandBuffer, uint32_t(pStages.size()), pStages.data(), pShaders.data());
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -22450,6 +25100,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetDynamicRenderingTilePropertiesQCOM(
     VkDevice                                    device,
     const VkRenderingInfo*                      pRenderingInfo,
     VkTilePropertiesQCOM*                       pProperties);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetDynamicRenderingTilePropertiesQCOM(VkDevice device, const VkRenderingInfo& pRenderingInfo, VkTilePropertiesQCOM* pProperties)
+{
+    return vkGetDynamicRenderingTilePropertiesQCOM(device, &pRenderingInfo, pProperties);
+}
+#endif
 #endif
 #endif
 
@@ -22585,6 +25242,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetPhysicalDeviceCooperativeVectorPropertiesNV(
 VKAPI_ATTR VkResult VKAPI_CALL vkConvertCooperativeVectorMatrixNV(
     VkDevice                                    device,
     const VkConvertCooperativeVectorMatrixInfoNV* pInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkConvertCooperativeVectorMatrixNV(VkDevice device, const VkConvertCooperativeVectorMatrixInfoNV& pInfo)
+{
+    return vkConvertCooperativeVectorMatrixNV(device, &pInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -22592,6 +25256,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdConvertCooperativeVectorMatrixNV(
     VkCommandBuffer                             commandBuffer,
     uint32_t                                    infoCount,
     const VkConvertCooperativeVectorMatrixInfoNV* pInfos);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdConvertCooperativeVectorMatrixNV(VkCommandBuffer commandBuffer, const std::span<VkConvertCooperativeVectorMatrixInfoNV>& pInfos)
+{
+    return vkCmdConvertCooperativeVectorMatrixNV(commandBuffer, uint32_t(pInfos.size()), pInfos.data());
+}
+#endif
 #endif
 #endif
 
@@ -22828,6 +25499,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkSetLatencySleepModeNV(
     VkDevice                                    device,
     VkSwapchainKHR                              swapchain,
     const VkLatencySleepModeInfoNV*             pSleepModeInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkSetLatencySleepModeNV(VkDevice device, VkSwapchainKHR swapchain, const VkLatencySleepModeInfoNV& pSleepModeInfo)
+{
+    return vkSetLatencySleepModeNV(device, swapchain, &pSleepModeInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -22835,6 +25513,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkLatencySleepNV(
     VkDevice                                    device,
     VkSwapchainKHR                              swapchain,
     const VkLatencySleepInfoNV*                 pSleepInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkLatencySleepNV(VkDevice device, VkSwapchainKHR swapchain, const VkLatencySleepInfoNV& pSleepInfo)
+{
+    return vkLatencySleepNV(device, swapchain, &pSleepInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -22842,6 +25527,13 @@ VKAPI_ATTR void VKAPI_CALL vkSetLatencyMarkerNV(
     VkDevice                                    device,
     VkSwapchainKHR                              swapchain,
     const VkSetLatencyMarkerInfoNV*             pLatencyMarkerInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkSetLatencyMarkerNV(VkDevice device, VkSwapchainKHR swapchain, const VkSetLatencyMarkerInfoNV& pLatencyMarkerInfo)
+{
+    return vkSetLatencyMarkerNV(device, swapchain, &pLatencyMarkerInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -22855,6 +25547,13 @@ VKAPI_ATTR void VKAPI_CALL vkGetLatencyTimingsNV(
 VKAPI_ATTR void VKAPI_CALL vkQueueNotifyOutOfBandNV(
     VkQueue                                     queue,
     const VkOutOfBandQueueTypeInfoNV*           pQueueTypeInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkQueueNotifyOutOfBandNV(VkQueue queue, const VkOutOfBandQueueTypeInfoNV& pQueueTypeInfo)
+{
+    return vkQueueNotifyOutOfBandNV(queue, &pQueueTypeInfo);
+}
+#endif
 #endif
 #endif
 
@@ -23092,6 +25791,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateDataGraphPipelinesARM(
     const VkDataGraphPipelineCreateInfoARM*     pCreateInfos,
     const VkAllocationCallbacks*                pAllocator,
     VkPipeline*                                 pPipelines);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateDataGraphPipelinesARM(VkDevice               device, VkDeferredOperationKHR deferredOperation, VkPipelineCache        pipelineCache, const std::span<VkDataGraphPipelineCreateInfoARM>& pCreateInfos, VkPipeline*     pPipelines)
+{
+    return vkCreateDataGraphPipelinesARM(device, deferredOperation, pipelineCache, uint32_t(pCreateInfos.size()), pCreateInfos.data(), nullptr, pPipelines);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -23100,6 +25806,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateDataGraphPipelineSessionARM(
     const VkDataGraphPipelineSessionCreateInfoARM* pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkDataGraphPipelineSessionARM*              pSession);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateDataGraphPipelineSessionARM(VkDevice                                     device, const VkDataGraphPipelineSessionCreateInfoARM& pCreateInfo, VkDataGraphPipelineSessionARM*                   pSession)
+{
+    return vkCreateDataGraphPipelineSessionARM(device, &pCreateInfo, nullptr, pSession);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -23108,6 +25821,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetDataGraphPipelineSessionBindPointRequirement
     const VkDataGraphPipelineSessionBindPointRequirementsInfoARM* pInfo,
     uint32_t*                                   pBindPointRequirementCount,
     VkDataGraphPipelineSessionBindPointRequirementARM* pBindPointRequirements);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetDataGraphPipelineSessionBindPointRequirementsARM(VkDevice device, const VkDataGraphPipelineSessionBindPointRequirementsInfoARM& pInfo, uint32_t* pBindPointRequirementCount, VkDataGraphPipelineSessionBindPointRequirementARM* pBindPointRequirements)
+{
+    return vkGetDataGraphPipelineSessionBindPointRequirementsARM(device, &pInfo, pBindPointRequirementCount, pBindPointRequirements);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -23115,6 +25835,13 @@ VKAPI_ATTR void VKAPI_CALL vkGetDataGraphPipelineSessionMemoryRequirementsARM(
     VkDevice                                    device,
     const VkDataGraphPipelineSessionMemoryRequirementsInfoARM* pInfo,
     VkMemoryRequirements2*                      pMemoryRequirements);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetDataGraphPipelineSessionMemoryRequirementsARM(VkDevice device, const VkDataGraphPipelineSessionMemoryRequirementsInfoARM& pInfo, VkMemoryRequirements2* pMemoryRequirements)
+{
+    return vkGetDataGraphPipelineSessionMemoryRequirementsARM(device, &pInfo, pMemoryRequirements);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -23122,6 +25849,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkBindDataGraphPipelineSessionMemoryARM(
     VkDevice                                    device,
     uint32_t                                    bindInfoCount,
     const VkBindDataGraphPipelineSessionMemoryInfoARM* pBindInfos);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkBindDataGraphPipelineSessionMemoryARM(VkDevice device, const std::span<VkBindDataGraphPipelineSessionMemoryInfoARM>& pBindInfos)
+{
+    return vkBindDataGraphPipelineSessionMemoryARM(device, uint32_t(pBindInfos.size()), pBindInfos.data());
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -23129,6 +25863,13 @@ VKAPI_ATTR void VKAPI_CALL vkDestroyDataGraphPipelineSessionARM(
     VkDevice                                    device,
     VkDataGraphPipelineSessionARM               session,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyDataGraphPipelineSessionARM(VkDevice device, VkDataGraphPipelineSessionARM session)
+{
+    return vkDestroyDataGraphPipelineSessionARM(device, session, nullptr);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -23144,6 +25885,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetDataGraphPipelineAvailablePropertiesARM(
     const VkDataGraphPipelineInfoARM*           pPipelineInfo,
     uint32_t*                                   pPropertiesCount,
     VkDataGraphPipelinePropertyARM*             pProperties);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetDataGraphPipelineAvailablePropertiesARM(VkDevice device, const VkDataGraphPipelineInfoARM& pPipelineInfo, uint32_t* pPropertiesCount, VkDataGraphPipelinePropertyARM* pProperties)
+{
+    return vkGetDataGraphPipelineAvailablePropertiesARM(device, &pPipelineInfo, pPropertiesCount, pProperties);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -23152,6 +25900,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetDataGraphPipelinePropertiesARM(
     const VkDataGraphPipelineInfoARM*           pPipelineInfo,
     uint32_t                                    propertiesCount,
     VkDataGraphPipelinePropertyQueryResultARM*  pProperties);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetDataGraphPipelinePropertiesARM(VkDevice                          device, const VkDataGraphPipelineInfoARM& pPipelineInfo, uint32_t                          propertiesCount, VkDataGraphPipelinePropertyQueryResultARM* pProperties)
+{
+    return vkGetDataGraphPipelinePropertiesARM(device, &pPipelineInfo, propertiesCount, pProperties);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -23167,6 +25922,13 @@ VKAPI_ATTR void VKAPI_CALL vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEngi
     VkPhysicalDevice                            physicalDevice,
     const VkPhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM* pQueueFamilyDataGraphProcessingEngineInfo,
     VkQueueFamilyDataGraphProcessingEnginePropertiesARM* pQueueFamilyDataGraphProcessingEngineProperties);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM(VkPhysicalDevice                                 physicalDevice, const VkPhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM& pQueueFamilyDataGraphProcessingEngineInfo, VkQueueFamilyDataGraphProcessingEnginePropertiesARM*               pQueueFamilyDataGraphProcessingEngineProperties)
+{
+    return vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM(physicalDevice, &pQueueFamilyDataGraphProcessingEngineInfo, pQueueFamilyDataGraphProcessingEngineProperties);
+}
+#endif
 #endif
 #endif
 
@@ -23422,6 +26184,13 @@ typedef void (VKAPI_PTR *PFN_vkCmdDecompressMemoryIndirectCountEXT)(VkCommandBuf
 VKAPI_ATTR void VKAPI_CALL vkCmdDecompressMemoryEXT(
     VkCommandBuffer                             commandBuffer,
     const VkDecompressMemoryInfoEXT*            pDecompressMemoryInfoEXT);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdDecompressMemoryEXT(VkCommandBuffer commandBuffer, const VkDecompressMemoryInfoEXT& pDecompressMemoryInfoEXT)
+{
+    return vkCmdDecompressMemoryEXT(commandBuffer, &pDecompressMemoryInfoEXT);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -23515,6 +26284,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateExternalComputeQueueNV(
     const VkExternalComputeQueueCreateInfoNV*   pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkExternalComputeQueueNV*                   pExternalQueue);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateExternalComputeQueueNV(VkDevice device, const VkExternalComputeQueueCreateInfoNV& pCreateInfo, VkExternalComputeQueueNV* pExternalQueue)
+{
+    return vkCreateExternalComputeQueueNV(device, &pCreateInfo, nullptr, pExternalQueue);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -23522,6 +26298,13 @@ VKAPI_ATTR void VKAPI_CALL vkDestroyExternalComputeQueueNV(
     VkDevice                                    device,
     VkExternalComputeQueueNV                    externalQueue,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyExternalComputeQueueNV(VkDevice device, VkExternalComputeQueueNV externalQueue)
+{
+    return vkDestroyExternalComputeQueueNV(device, externalQueue, nullptr);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -23835,12 +26618,26 @@ VKAPI_ATTR void VKAPI_CALL vkGetClusterAccelerationStructureBuildSizesNV(
     VkDevice                                    device,
     const VkClusterAccelerationStructureInputInfoNV* pInfo,
     VkAccelerationStructureBuildSizesInfoKHR*   pSizeInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetClusterAccelerationStructureBuildSizesNV(VkDevice device, const VkClusterAccelerationStructureInputInfoNV& pInfo, VkAccelerationStructureBuildSizesInfoKHR* pSizeInfo)
+{
+    return vkGetClusterAccelerationStructureBuildSizesNV(device, &pInfo, pSizeInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkCmdBuildClusterAccelerationStructureIndirectNV(
     VkCommandBuffer                             commandBuffer,
     const VkClusterAccelerationStructureCommandsInfoNV* pCommandInfos);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdBuildClusterAccelerationStructureIndirectNV(VkCommandBuffer                     commandBuffer, const VkClusterAccelerationStructureCommandsInfoNV& pCommandInfos)
+{
+    return vkCmdBuildClusterAccelerationStructureIndirectNV(commandBuffer, &pCommandInfos);
+}
+#endif
 #endif
 #endif
 
@@ -23951,12 +26748,26 @@ VKAPI_ATTR void VKAPI_CALL vkGetPartitionedAccelerationStructuresBuildSizesNV(
     VkDevice                                    device,
     const VkPartitionedAccelerationStructureInstancesInputNV* pInfo,
     VkAccelerationStructureBuildSizesInfoKHR*   pSizeInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetPartitionedAccelerationStructuresBuildSizesNV(VkDevice device, const VkPartitionedAccelerationStructureInstancesInputNV& pInfo, VkAccelerationStructureBuildSizesInfoKHR*                  pSizeInfo)
+{
+    return vkGetPartitionedAccelerationStructuresBuildSizesNV(device, &pInfo, pSizeInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkCmdBuildPartitionedAccelerationStructuresNV(
     VkCommandBuffer                             commandBuffer,
     const VkBuildPartitionedAccelerationStructureInfoNV* pBuildInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdBuildPartitionedAccelerationStructuresNV(VkCommandBuffer                     commandBuffer, const VkBuildPartitionedAccelerationStructureInfoNV& pBuildInfo)
+{
+    return vkCmdBuildPartitionedAccelerationStructuresNV(commandBuffer, &pBuildInfo);
+}
+#endif
 #endif
 #endif
 
@@ -24197,6 +27008,13 @@ VKAPI_ATTR void VKAPI_CALL vkGetGeneratedCommandsMemoryRequirementsEXT(
     VkDevice                                    device,
     const VkGeneratedCommandsMemoryRequirementsInfoEXT* pInfo,
     VkMemoryRequirements2*                      pMemoryRequirements);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetGeneratedCommandsMemoryRequirementsEXT(VkDevice device, const VkGeneratedCommandsMemoryRequirementsInfoEXT& pInfo, VkMemoryRequirements2* pMemoryRequirements)
+{
+    return vkGetGeneratedCommandsMemoryRequirementsEXT(device, &pInfo, pMemoryRequirements);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -24204,6 +27022,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdPreprocessGeneratedCommandsEXT(
     VkCommandBuffer                             commandBuffer,
     const VkGeneratedCommandsInfoEXT*           pGeneratedCommandsInfo,
     VkCommandBuffer                             stateCommandBuffer);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdPreprocessGeneratedCommandsEXT(VkCommandBuffer commandBuffer, const VkGeneratedCommandsInfoEXT& pGeneratedCommandsInfo, VkCommandBuffer stateCommandBuffer)
+{
+    return vkCmdPreprocessGeneratedCommandsEXT(commandBuffer, &pGeneratedCommandsInfo, stateCommandBuffer);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -24211,6 +27036,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdExecuteGeneratedCommandsEXT(
     VkCommandBuffer                             commandBuffer,
     VkBool32                                    isPreprocessed,
     const VkGeneratedCommandsInfoEXT*           pGeneratedCommandsInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdExecuteGeneratedCommandsEXT(VkCommandBuffer commandBuffer, VkBool32 isPreprocessed, const VkGeneratedCommandsInfoEXT& pGeneratedCommandsInfo)
+{
+    return vkCmdExecuteGeneratedCommandsEXT(commandBuffer, isPreprocessed, &pGeneratedCommandsInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -24219,6 +27051,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateIndirectCommandsLayoutEXT(
     const VkIndirectCommandsLayoutCreateInfoEXT* pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkIndirectCommandsLayoutEXT*                pIndirectCommandsLayout);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateIndirectCommandsLayoutEXT(VkDevice device, const VkIndirectCommandsLayoutCreateInfoEXT& pCreateInfo, VkIndirectCommandsLayoutEXT* pIndirectCommandsLayout)
+{
+    return vkCreateIndirectCommandsLayoutEXT(device, &pCreateInfo, nullptr, pIndirectCommandsLayout);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -24226,6 +27065,13 @@ VKAPI_ATTR void VKAPI_CALL vkDestroyIndirectCommandsLayoutEXT(
     VkDevice                                    device,
     VkIndirectCommandsLayoutEXT                 indirectCommandsLayout,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyIndirectCommandsLayoutEXT(VkDevice device, VkIndirectCommandsLayoutEXT indirectCommandsLayout)
+{
+    return vkDestroyIndirectCommandsLayoutEXT(device, indirectCommandsLayout, nullptr);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -24234,6 +27080,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateIndirectExecutionSetEXT(
     const VkIndirectExecutionSetCreateInfoEXT*  pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkIndirectExecutionSetEXT*                  pIndirectExecutionSet);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateIndirectExecutionSetEXT(VkDevice device, const VkIndirectExecutionSetCreateInfoEXT& pCreateInfo, VkIndirectExecutionSetEXT* pIndirectExecutionSet)
+{
+    return vkCreateIndirectExecutionSetEXT(device, &pCreateInfo, nullptr, pIndirectExecutionSet);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -24241,6 +27094,13 @@ VKAPI_ATTR void VKAPI_CALL vkDestroyIndirectExecutionSetEXT(
     VkDevice                                    device,
     VkIndirectExecutionSetEXT                   indirectExecutionSet,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyIndirectExecutionSetEXT(VkDevice device, VkIndirectExecutionSetEXT indirectExecutionSet)
+{
+    return vkDestroyIndirectExecutionSetEXT(device, indirectExecutionSet, nullptr);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -24249,6 +27109,13 @@ VKAPI_ATTR void VKAPI_CALL vkUpdateIndirectExecutionSetPipelineEXT(
     VkIndirectExecutionSetEXT                   indirectExecutionSet,
     uint32_t                                    executionSetWriteCount,
     const VkWriteIndirectExecutionSetPipelineEXT* pExecutionSetWrites);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkUpdateIndirectExecutionSetPipelineEXT(VkDevice device, VkIndirectExecutionSetEXT indirectExecutionSet, const std::span<VkWriteIndirectExecutionSetPipelineEXT>& pExecutionSetWrites)
+{
+    return vkUpdateIndirectExecutionSetPipelineEXT(device, indirectExecutionSet, uint32_t(pExecutionSetWrites.size()), pExecutionSetWrites.data());
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -24257,6 +27124,13 @@ VKAPI_ATTR void VKAPI_CALL vkUpdateIndirectExecutionSetShaderEXT(
     VkIndirectExecutionSetEXT                   indirectExecutionSet,
     uint32_t                                    executionSetWriteCount,
     const VkWriteIndirectExecutionSetShaderEXT* pExecutionSetWrites);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkUpdateIndirectExecutionSetShaderEXT(VkDevice device, VkIndirectExecutionSetEXT indirectExecutionSet, const std::span<VkWriteIndirectExecutionSetShaderEXT>& pExecutionSetWrites)
+{
+    return vkUpdateIndirectExecutionSetShaderEXT(device, indirectExecutionSet, uint32_t(pExecutionSetWrites.size()), pExecutionSetWrites.data());
+}
+#endif
 #endif
 #endif
 
@@ -24716,6 +27590,13 @@ typedef void (VKAPI_PTR *PFN_vkCmdSetComputeOccupancyPriorityNV)(VkCommandBuffer
 VKAPI_ATTR void VKAPI_CALL vkCmdSetComputeOccupancyPriorityNV(
     VkCommandBuffer                             commandBuffer,
     const VkComputeOccupancyPriorityParametersNV* pParameters);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdSetComputeOccupancyPriorityNV(VkCommandBuffer commandBuffer, const VkComputeOccupancyPriorityParametersNV& pParameters)
+{
+    return vkCmdSetComputeOccupancyPriorityNV(commandBuffer, &pParameters);
+}
+#endif
 #endif
 #endif
 
@@ -24912,6 +27793,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateAccelerationStructureKHR(
     const VkAccelerationStructureCreateInfoKHR* pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkAccelerationStructureKHR*                 pAccelerationStructure);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateAccelerationStructureKHR(VkDevice                                           device, const VkAccelerationStructureCreateInfoKHR& pCreateInfo, VkAccelerationStructureKHR*                        pAccelerationStructure)
+{
+    return vkCreateAccelerationStructureKHR(device, &pCreateInfo, nullptr, pAccelerationStructure);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -24919,6 +27807,13 @@ VKAPI_ATTR void VKAPI_CALL vkDestroyAccelerationStructureKHR(
     VkDevice                                    device,
     VkAccelerationStructureKHR                  accelerationStructure,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyAccelerationStructureKHR(VkDevice device, VkAccelerationStructureKHR accelerationStructure)
+{
+    return vkDestroyAccelerationStructureKHR(device, accelerationStructure, nullptr);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -24927,6 +27822,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdBuildAccelerationStructuresKHR(
     uint32_t                                    infoCount,
     const VkAccelerationStructureBuildGeometryInfoKHR* pInfos,
     const VkAccelerationStructureBuildRangeInfoKHR* const* ppBuildRangeInfos);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdBuildAccelerationStructuresKHR(VkCommandBuffer                                    commandBuffer, const std::span<VkAccelerationStructureBuildGeometryInfoKHR>& pInfos, const VkAccelerationStructureBuildRangeInfoKHR* const* ppBuildRangeInfos)
+{
+    return vkCmdBuildAccelerationStructuresKHR(commandBuffer, uint32_t(pInfos.size()), pInfos.data(), ppBuildRangeInfos);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -24937,6 +27839,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdBuildAccelerationStructuresIndirectKHR(
     const VkDeviceAddress*                      pIndirectDeviceAddresses,
     const uint32_t*                             pIndirectStrides,
     const uint32_t* const*                      ppMaxPrimitiveCounts);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdBuildAccelerationStructuresIndirectKHR(VkCommandBuffer                  commandBuffer, const std::span<VkAccelerationStructureBuildGeometryInfoKHR>& pInfos, const std::span<VkDeviceAddress>& pIndirectDeviceAddresses, const std::span<uint32_t>& pIndirectStrides, const uint32_t* const*             ppMaxPrimitiveCounts)
+{
+    return vkCmdBuildAccelerationStructuresIndirectKHR(commandBuffer, uint32_t(pInfos.size()), pInfos.data(), pIndirectDeviceAddresses.data(), pIndirectStrides.data(), ppMaxPrimitiveCounts);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -24946,6 +27855,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkBuildAccelerationStructuresKHR(
     uint32_t                                    infoCount,
     const VkAccelerationStructureBuildGeometryInfoKHR* pInfos,
     const VkAccelerationStructureBuildRangeInfoKHR* const* ppBuildRangeInfos);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkBuildAccelerationStructuresKHR(VkDevice                                           device, VkDeferredOperationKHR deferredOperation, const std::span<VkAccelerationStructureBuildGeometryInfoKHR>& pInfos, const VkAccelerationStructureBuildRangeInfoKHR* const* ppBuildRangeInfos)
+{
+    return vkBuildAccelerationStructuresKHR(device, deferredOperation, uint32_t(pInfos.size()), pInfos.data(), ppBuildRangeInfos);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -24953,6 +27869,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCopyAccelerationStructureKHR(
     VkDevice                                    device,
     VkDeferredOperationKHR                      deferredOperation,
     const VkCopyAccelerationStructureInfoKHR*   pInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCopyAccelerationStructureKHR(VkDevice device, VkDeferredOperationKHR deferredOperation, const VkCopyAccelerationStructureInfoKHR& pInfo)
+{
+    return vkCopyAccelerationStructureKHR(device, deferredOperation, &pInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -24960,6 +27883,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCopyAccelerationStructureToMemoryKHR(
     VkDevice                                    device,
     VkDeferredOperationKHR                      deferredOperation,
     const VkCopyAccelerationStructureToMemoryInfoKHR* pInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCopyAccelerationStructureToMemoryKHR(VkDevice device, VkDeferredOperationKHR deferredOperation, const VkCopyAccelerationStructureToMemoryInfoKHR& pInfo)
+{
+    return vkCopyAccelerationStructureToMemoryKHR(device, deferredOperation, &pInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -24967,6 +27897,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCopyMemoryToAccelerationStructureKHR(
     VkDevice                                    device,
     VkDeferredOperationKHR                      deferredOperation,
     const VkCopyMemoryToAccelerationStructureInfoKHR* pInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCopyMemoryToAccelerationStructureKHR(VkDevice device, VkDeferredOperationKHR deferredOperation, const VkCopyMemoryToAccelerationStructureInfoKHR& pInfo)
+{
+    return vkCopyMemoryToAccelerationStructureKHR(device, deferredOperation, &pInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -24978,30 +27915,65 @@ VKAPI_ATTR VkResult VKAPI_CALL vkWriteAccelerationStructuresPropertiesKHR(
     size_t                                      dataSize,
     void*                                       pData,
     size_t                                      stride);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkWriteAccelerationStructuresPropertiesKHR(VkDevice device, const std::span<VkAccelerationStructureKHR>& pAccelerationStructures, VkQueryType  queryType, size_t       dataSize, void* pData, size_t stride)
+{
+    return vkWriteAccelerationStructuresPropertiesKHR(device, uint32_t(pAccelerationStructures.size()), pAccelerationStructures.data(), queryType, dataSize, pData, stride);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkCmdCopyAccelerationStructureKHR(
     VkCommandBuffer                             commandBuffer,
     const VkCopyAccelerationStructureInfoKHR*   pInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdCopyAccelerationStructureKHR(VkCommandBuffer commandBuffer, const VkCopyAccelerationStructureInfoKHR& pInfo)
+{
+    return vkCmdCopyAccelerationStructureKHR(commandBuffer, &pInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkCmdCopyAccelerationStructureToMemoryKHR(
     VkCommandBuffer                             commandBuffer,
     const VkCopyAccelerationStructureToMemoryInfoKHR* pInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdCopyAccelerationStructureToMemoryKHR(VkCommandBuffer commandBuffer, const VkCopyAccelerationStructureToMemoryInfoKHR& pInfo)
+{
+    return vkCmdCopyAccelerationStructureToMemoryKHR(commandBuffer, &pInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkCmdCopyMemoryToAccelerationStructureKHR(
     VkCommandBuffer                             commandBuffer,
     const VkCopyMemoryToAccelerationStructureInfoKHR* pInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdCopyMemoryToAccelerationStructureKHR(VkCommandBuffer commandBuffer, const VkCopyMemoryToAccelerationStructureInfoKHR& pInfo)
+{
+    return vkCmdCopyMemoryToAccelerationStructureKHR(commandBuffer, &pInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR VkDeviceAddress VKAPI_CALL vkGetAccelerationStructureDeviceAddressKHR(
     VkDevice                                    device,
     const VkAccelerationStructureDeviceAddressInfoKHR* pInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkDeviceAddress vkGetAccelerationStructureDeviceAddressKHR(VkDevice device, const VkAccelerationStructureDeviceAddressInfoKHR& pInfo)
+{
+    return vkGetAccelerationStructureDeviceAddressKHR(device, &pInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -25012,6 +27984,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdWriteAccelerationStructuresPropertiesKHR(
     VkQueryType                                 queryType,
     VkQueryPool                                 queryPool,
     uint32_t                                    firstQuery);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdWriteAccelerationStructuresPropertiesKHR(VkCommandBuffer commandBuffer, const std::span<VkAccelerationStructureKHR>& pAccelerationStructures, VkQueryType queryType, VkQueryPool queryPool, uint32_t firstQuery)
+{
+    return vkCmdWriteAccelerationStructuresPropertiesKHR(commandBuffer, uint32_t(pAccelerationStructures.size()), pAccelerationStructures.data(), queryType, queryPool, firstQuery);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -25019,6 +27998,13 @@ VKAPI_ATTR void VKAPI_CALL vkGetDeviceAccelerationStructureCompatibilityKHR(
     VkDevice                                    device,
     const VkAccelerationStructureVersionInfoKHR* pVersionInfo,
     VkAccelerationStructureCompatibilityKHR*    pCompatibility);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetDeviceAccelerationStructureCompatibilityKHR(VkDevice device, const VkAccelerationStructureVersionInfoKHR& pVersionInfo, VkAccelerationStructureCompatibilityKHR* pCompatibility)
+{
+    return vkGetDeviceAccelerationStructureCompatibilityKHR(device, &pVersionInfo, pCompatibility);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -25028,6 +28014,13 @@ VKAPI_ATTR void VKAPI_CALL vkGetAccelerationStructureBuildSizesKHR(
     const VkAccelerationStructureBuildGeometryInfoKHR* pBuildInfo,
     const uint32_t*                             pMaxPrimitiveCounts,
     VkAccelerationStructureBuildSizesInfoKHR*   pSizeInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkGetAccelerationStructureBuildSizesKHR(VkDevice                                            device, VkAccelerationStructureBuildTypeKHR                 buildType, const VkAccelerationStructureBuildGeometryInfoKHR& pBuildInfo, const uint32_t*  pMaxPrimitiveCounts, VkAccelerationStructureBuildSizesInfoKHR*           pSizeInfo)
+{
+    return vkGetAccelerationStructureBuildSizesKHR(device, buildType, &pBuildInfo, pMaxPrimitiveCounts, pSizeInfo);
+}
+#endif
 #endif
 #endif
 
@@ -25126,6 +28119,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdTraceRaysKHR(
     uint32_t                                    width,
     uint32_t                                    height,
     uint32_t                                    depth);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdTraceRaysKHR(VkCommandBuffer commandBuffer, const VkStridedDeviceAddressRegionKHR& pRaygenShaderBindingTable, const VkStridedDeviceAddressRegionKHR& pMissShaderBindingTable, const VkStridedDeviceAddressRegionKHR& pHitShaderBindingTable, const VkStridedDeviceAddressRegionKHR& pCallableShaderBindingTable, uint32_t width, uint32_t height, uint32_t depth)
+{
+    return vkCmdTraceRaysKHR(commandBuffer, &pRaygenShaderBindingTable, &pMissShaderBindingTable, &pHitShaderBindingTable, &pCallableShaderBindingTable, width, height, depth);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -25137,6 +28137,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateRayTracingPipelinesKHR(
     const VkRayTracingPipelineCreateInfoKHR*    pCreateInfos,
     const VkAllocationCallbacks*                pAllocator,
     VkPipeline*                                 pPipelines);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateRayTracingPipelinesKHR(VkDevice device, VkDeferredOperationKHR deferredOperation, VkPipelineCache pipelineCache, const std::span<VkRayTracingPipelineCreateInfoKHR>& pCreateInfos, VkPipeline* pPipelines)
+{
+    return vkCreateRayTracingPipelinesKHR(device, deferredOperation, pipelineCache, uint32_t(pCreateInfos.size()), pCreateInfos.data(), nullptr, pPipelines);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -25157,6 +28164,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdTraceRaysIndirectKHR(
     const VkStridedDeviceAddressRegionKHR*      pHitShaderBindingTable,
     const VkStridedDeviceAddressRegionKHR*      pCallableShaderBindingTable,
     VkDeviceAddress                             indirectDeviceAddress);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdTraceRaysIndirectKHR(VkCommandBuffer commandBuffer, const VkStridedDeviceAddressRegionKHR& pRaygenShaderBindingTable, const VkStridedDeviceAddressRegionKHR& pMissShaderBindingTable, const VkStridedDeviceAddressRegionKHR& pHitShaderBindingTable, const VkStridedDeviceAddressRegionKHR& pCallableShaderBindingTable, VkDeviceAddress indirectDeviceAddress)
+{
+    return vkCmdTraceRaysIndirectKHR(commandBuffer, &pRaygenShaderBindingTable, &pMissShaderBindingTable, &pHitShaderBindingTable, &pCallableShaderBindingTable, indirectDeviceAddress);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES

@@ -40,6 +40,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateIOSSurfaceMVK(
     const VkIOSSurfaceCreateInfoMVK*            pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkSurfaceKHR*                               pSurface);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateIOSSurfaceMVK(VkInstance instance, const VkIOSSurfaceCreateInfoMVK& pCreateInfo, VkSurfaceKHR* pSurface)
+{
+    return vkCreateIOSSurfaceMVK(instance, &pCreateInfo, nullptr, pSurface);
+}
+#endif
 #endif
 #endif
 

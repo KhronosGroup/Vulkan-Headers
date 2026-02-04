@@ -40,6 +40,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateViSurfaceNN(
     const VkViSurfaceCreateInfoNN*              pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkSurfaceKHR*                               pSurface);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateViSurfaceNN(VkInstance instance, const VkViSurfaceCreateInfoNN& pCreateInfo, VkSurfaceKHR* pSurface)
+{
+    return vkCreateViSurfaceNN(instance, &pCreateInfo, nullptr, pSurface);
+}
+#endif
 #endif
 #endif
 

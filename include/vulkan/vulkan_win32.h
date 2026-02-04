@@ -42,6 +42,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateWin32SurfaceKHR(
     const VkWin32SurfaceCreateInfoKHR*          pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkSurfaceKHR*                               pSurface);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateWin32SurfaceKHR(VkInstance instance, const VkWin32SurfaceCreateInfoKHR& pCreateInfo, VkSurfaceKHR* pSurface)
+{
+    return vkCreateWin32SurfaceKHR(instance, &pCreateInfo, nullptr, pSurface);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -94,6 +101,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetMemoryWin32HandleKHR(
     VkDevice                                    device,
     const VkMemoryGetWin32HandleInfoKHR*        pGetWin32HandleInfo,
     HANDLE*                                     pHandle);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetMemoryWin32HandleKHR(VkDevice device, const VkMemoryGetWin32HandleInfoKHR& pGetWin32HandleInfo, HANDLE* pHandle)
+{
+    return vkGetMemoryWin32HandleKHR(device, &pGetWin32HandleInfo, pHandle);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -170,6 +184,13 @@ typedef VkResult (VKAPI_PTR *PFN_vkGetSemaphoreWin32HandleKHR)(VkDevice device, 
 VKAPI_ATTR VkResult VKAPI_CALL vkImportSemaphoreWin32HandleKHR(
     VkDevice                                    device,
     const VkImportSemaphoreWin32HandleInfoKHR*  pImportSemaphoreWin32HandleInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkImportSemaphoreWin32HandleKHR(VkDevice device, const VkImportSemaphoreWin32HandleInfoKHR& pImportSemaphoreWin32HandleInfo)
+{
+    return vkImportSemaphoreWin32HandleKHR(device, &pImportSemaphoreWin32HandleInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -177,6 +198,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetSemaphoreWin32HandleKHR(
     VkDevice                                    device,
     const VkSemaphoreGetWin32HandleInfoKHR*     pGetWin32HandleInfo,
     HANDLE*                                     pHandle);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetSemaphoreWin32HandleKHR(VkDevice device, const VkSemaphoreGetWin32HandleInfoKHR& pGetWin32HandleInfo, HANDLE* pHandle)
+{
+    return vkGetSemaphoreWin32HandleKHR(device, &pGetWin32HandleInfo, pHandle);
+}
+#endif
 #endif
 #endif
 
@@ -218,6 +246,13 @@ typedef VkResult (VKAPI_PTR *PFN_vkGetFenceWin32HandleKHR)(VkDevice device, cons
 VKAPI_ATTR VkResult VKAPI_CALL vkImportFenceWin32HandleKHR(
     VkDevice                                    device,
     const VkImportFenceWin32HandleInfoKHR*      pImportFenceWin32HandleInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkImportFenceWin32HandleKHR(VkDevice device, const VkImportFenceWin32HandleInfoKHR& pImportFenceWin32HandleInfo)
+{
+    return vkImportFenceWin32HandleKHR(device, &pImportFenceWin32HandleInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -225,6 +260,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetFenceWin32HandleKHR(
     VkDevice                                    device,
     const VkFenceGetWin32HandleInfoKHR*         pGetWin32HandleInfo,
     HANDLE*                                     pHandle);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetFenceWin32HandleKHR(VkDevice device, const VkFenceGetWin32HandleInfoKHR& pGetWin32HandleInfo, HANDLE* pHandle)
+{
+    return vkGetFenceWin32HandleKHR(device, &pGetWin32HandleInfo, pHandle);
+}
+#endif
 #endif
 #endif
 
@@ -320,6 +362,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetPhysicalDeviceSurfacePresentModes2EXT(
     const VkPhysicalDeviceSurfaceInfo2KHR*      pSurfaceInfo,
     uint32_t*                                   pPresentModeCount,
     VkPresentModeKHR*                           pPresentModes);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetPhysicalDeviceSurfacePresentModes2EXT(VkPhysicalDevice physicalDevice, const VkPhysicalDeviceSurfaceInfo2KHR& pSurfaceInfo, uint32_t* pPresentModeCount, VkPresentModeKHR* pPresentModes)
+{
+    return vkGetPhysicalDeviceSurfacePresentModes2EXT(physicalDevice, &pSurfaceInfo, pPresentModeCount, pPresentModes);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -339,6 +388,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetDeviceGroupSurfacePresentModes2EXT(
     VkDevice                                    device,
     const VkPhysicalDeviceSurfaceInfo2KHR*      pSurfaceInfo,
     VkDeviceGroupPresentModeFlagsKHR*           pModes);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetDeviceGroupSurfacePresentModes2EXT(VkDevice device, const VkPhysicalDeviceSurfaceInfo2KHR& pSurfaceInfo, VkDeviceGroupPresentModeFlagsKHR* pModes)
+{
+    return vkGetDeviceGroupSurfacePresentModes2EXT(device, &pSurfaceInfo, pModes);
+}
+#endif
 #endif
 #endif
 

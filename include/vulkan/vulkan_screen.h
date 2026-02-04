@@ -42,6 +42,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateScreenSurfaceQNX(
     const VkScreenSurfaceCreateInfoQNX*         pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkSurfaceKHR*                               pSurface);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateScreenSurfaceQNX(VkInstance instance, const VkScreenSurfaceCreateInfoQNX& pCreateInfo, VkSurfaceKHR* pSurface)
+{
+    return vkCreateScreenSurfaceQNX(instance, &pCreateInfo, nullptr, pSurface);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
