@@ -4714,7 +4714,7 @@ VKAPI_ATTR VkResult VKAPI_CALL vkQueueSubmit(
     VkFence                                     fence);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline VkResult vkQueueSubmit(VkQueue queue, const std::span<VkSubmitInfo>& pSubmits, VkFence fence)
+extern "C++" inline VkResult vkQueueSubmit(VkQueue queue, std::span<const VkSubmitInfo> pSubmits, VkFence fence)
 {
     return vkQueueSubmit(queue, uint32_t(pSubmits.size()), pSubmits.data(), fence);
 }
@@ -4769,7 +4769,7 @@ VKAPI_ATTR VkResult VKAPI_CALL vkFlushMappedMemoryRanges(
     const VkMappedMemoryRange*                  pMemoryRanges);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline VkResult vkFlushMappedMemoryRanges(VkDevice device, const std::span<VkMappedMemoryRange>& pMemoryRanges)
+extern "C++" inline VkResult vkFlushMappedMemoryRanges(VkDevice device, std::span<const VkMappedMemoryRange> pMemoryRanges)
 {
     return vkFlushMappedMemoryRanges(device, uint32_t(pMemoryRanges.size()), pMemoryRanges.data());
 }
@@ -4781,7 +4781,7 @@ VKAPI_ATTR VkResult VKAPI_CALL vkInvalidateMappedMemoryRanges(
     const VkMappedMemoryRange*                  pMemoryRanges);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline VkResult vkInvalidateMappedMemoryRanges(VkDevice device, const std::span<VkMappedMemoryRange>& pMemoryRanges)
+extern "C++" inline VkResult vkInvalidateMappedMemoryRanges(VkDevice device, std::span<const VkMappedMemoryRange> pMemoryRanges)
 {
     return vkInvalidateMappedMemoryRanges(device, uint32_t(pMemoryRanges.size()), pMemoryRanges.data());
 }
@@ -4837,7 +4837,7 @@ VKAPI_ATTR VkResult VKAPI_CALL vkQueueBindSparse(
     VkFence                                     fence);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline VkResult vkQueueBindSparse(VkQueue queue, const std::span<VkBindSparseInfo>& pBindInfo, VkFence fence)
+extern "C++" inline VkResult vkQueueBindSparse(VkQueue queue, std::span<const VkBindSparseInfo> pBindInfo, VkFence fence)
 {
     return vkQueueBindSparse(queue, uint32_t(pBindInfo.size()), pBindInfo.data(), fence);
 }
@@ -4874,7 +4874,7 @@ VKAPI_ATTR VkResult VKAPI_CALL vkResetFences(
     const VkFence*                              pFences);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline VkResult vkResetFences(VkDevice device, const std::span<VkFence>& pFences)
+extern "C++" inline VkResult vkResetFences(VkDevice device, std::span<const VkFence> pFences)
 {
     return vkResetFences(device, uint32_t(pFences.size()), pFences.data());
 }
@@ -4892,7 +4892,7 @@ VKAPI_ATTR VkResult VKAPI_CALL vkWaitForFences(
     uint64_t                                    timeout);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline VkResult vkWaitForFences(VkDevice device, const std::span<VkFence>& pFences, VkBool32 waitAll, uint64_t timeout)
+extern "C++" inline VkResult vkWaitForFences(VkDevice device, std::span<const VkFence> pFences, VkBool32 waitAll, uint64_t timeout)
 {
     return vkWaitForFences(device, uint32_t(pFences.size()), pFences.data(), waitAll, timeout);
 }
@@ -5095,7 +5095,7 @@ VKAPI_ATTR void VKAPI_CALL vkFreeCommandBuffers(
     const VkCommandBuffer*                      pCommandBuffers);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkFreeCommandBuffers(VkDevice device, VkCommandPool commandPool, const std::span<VkCommandBuffer>& pCommandBuffers)
+extern "C++" inline void vkFreeCommandBuffers(VkDevice device, VkCommandPool commandPool, std::span<const VkCommandBuffer> pCommandBuffers)
 {
     return vkFreeCommandBuffers(device, commandPool, uint32_t(pCommandBuffers.size()), pCommandBuffers.data());
 }
@@ -5127,7 +5127,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdCopyBuffer(
     const VkBufferCopy*                         pRegions);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdCopyBuffer(VkCommandBuffer commandBuffer, VkBuffer srcBuffer, VkBuffer dstBuffer, const std::span<VkBufferCopy>& pRegions)
+extern "C++" inline void vkCmdCopyBuffer(VkCommandBuffer commandBuffer, VkBuffer srcBuffer, VkBuffer dstBuffer, std::span<const VkBufferCopy> pRegions)
 {
     return vkCmdCopyBuffer(commandBuffer, srcBuffer, dstBuffer, uint32_t(pRegions.size()), pRegions.data());
 }
@@ -5143,7 +5143,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdCopyImage(
     const VkImageCopy*                          pRegions);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdCopyImage(VkCommandBuffer commandBuffer, VkImage srcImage, VkImageLayout srcImageLayout, VkImage dstImage, VkImageLayout dstImageLayout, const std::span<VkImageCopy>& pRegions)
+extern "C++" inline void vkCmdCopyImage(VkCommandBuffer commandBuffer, VkImage srcImage, VkImageLayout srcImageLayout, VkImage dstImage, VkImageLayout dstImageLayout, std::span<const VkImageCopy> pRegions)
 {
     return vkCmdCopyImage(commandBuffer, srcImage, srcImageLayout, dstImage, dstImageLayout, uint32_t(pRegions.size()), pRegions.data());
 }
@@ -5158,7 +5158,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdCopyBufferToImage(
     const VkBufferImageCopy*                    pRegions);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdCopyBufferToImage(VkCommandBuffer commandBuffer, VkBuffer srcBuffer, VkImage dstImage, VkImageLayout dstImageLayout, const std::span<VkBufferImageCopy>& pRegions)
+extern "C++" inline void vkCmdCopyBufferToImage(VkCommandBuffer commandBuffer, VkBuffer srcBuffer, VkImage dstImage, VkImageLayout dstImageLayout, std::span<const VkBufferImageCopy> pRegions)
 {
     return vkCmdCopyBufferToImage(commandBuffer, srcBuffer, dstImage, dstImageLayout, uint32_t(pRegions.size()), pRegions.data());
 }
@@ -5173,7 +5173,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdCopyImageToBuffer(
     const VkBufferImageCopy*                    pRegions);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdCopyImageToBuffer(VkCommandBuffer commandBuffer, VkImage srcImage, VkImageLayout srcImageLayout, VkBuffer dstBuffer, const std::span<VkBufferImageCopy>& pRegions)
+extern "C++" inline void vkCmdCopyImageToBuffer(VkCommandBuffer commandBuffer, VkImage srcImage, VkImageLayout srcImageLayout, VkBuffer dstBuffer, std::span<const VkBufferImageCopy> pRegions)
 {
     return vkCmdCopyImageToBuffer(commandBuffer, srcImage, srcImageLayout, dstBuffer, uint32_t(pRegions.size()), pRegions.data());
 }
@@ -5206,7 +5206,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdPipelineBarrier(
     const VkImageMemoryBarrier*                 pImageMemoryBarriers);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdPipelineBarrier(VkCommandBuffer commandBuffer, VkPipelineStageFlags srcStageMask, VkPipelineStageFlags dstStageMask, VkDependencyFlags dependencyFlags, const std::span<VkMemoryBarrier>& pMemoryBarriers, const std::span<VkBufferMemoryBarrier>& pBufferMemoryBarriers, const std::span<VkImageMemoryBarrier>& pImageMemoryBarriers)
+extern "C++" inline void vkCmdPipelineBarrier(VkCommandBuffer commandBuffer, VkPipelineStageFlags srcStageMask, VkPipelineStageFlags dstStageMask, VkDependencyFlags dependencyFlags, std::span<const VkMemoryBarrier> pMemoryBarriers, std::span<const VkBufferMemoryBarrier> pBufferMemoryBarriers, std::span<const VkImageMemoryBarrier> pImageMemoryBarriers)
 {
     return vkCmdPipelineBarrier(commandBuffer, srcStageMask, dstStageMask, dependencyFlags, uint32_t(pMemoryBarriers.size()), pMemoryBarriers.data(), uint32_t(pBufferMemoryBarriers.size()), pBufferMemoryBarriers.data(), uint32_t(pImageMemoryBarriers.size()), pImageMemoryBarriers.data());
 }
@@ -5251,7 +5251,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdExecuteCommands(
     const VkCommandBuffer*                      pCommandBuffers);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdExecuteCommands(VkCommandBuffer commandBuffer, const std::span<VkCommandBuffer>& pCommandBuffers)
+extern "C++" inline void vkCmdExecuteCommands(VkCommandBuffer commandBuffer, std::span<const VkCommandBuffer> pCommandBuffers)
 {
     return vkCmdExecuteCommands(commandBuffer, uint32_t(pCommandBuffers.size()), pCommandBuffers.data());
 }
@@ -5382,7 +5382,7 @@ VKAPI_ATTR VkResult VKAPI_CALL vkMergePipelineCaches(
     const VkPipelineCache*                      pSrcCaches);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline VkResult vkMergePipelineCaches(VkDevice device, VkPipelineCache dstCache, const std::span<VkPipelineCache>& pSrcCaches)
+extern "C++" inline VkResult vkMergePipelineCaches(VkDevice device, VkPipelineCache dstCache, std::span<const VkPipelineCache> pSrcCaches)
 {
     return vkMergePipelineCaches(device, dstCache, uint32_t(pSrcCaches.size()), pSrcCaches.data());
 }
@@ -5397,7 +5397,7 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateComputePipelines(
     VkPipeline*                                 pPipelines);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline VkResult vkCreateComputePipelines(VkDevice device, VkPipelineCache pipelineCache, const std::span<VkComputePipelineCreateInfo>& pCreateInfos, VkPipeline* pPipelines)
+extern "C++" inline VkResult vkCreateComputePipelines(VkDevice device, VkPipelineCache pipelineCache, std::span<const VkComputePipelineCreateInfo> pCreateInfos, VkPipeline* pPipelines)
 {
     return vkCreateComputePipelines(device, pipelineCache, uint32_t(pCreateInfos.size()), pCreateInfos.data(), nullptr, pPipelines);
 }
@@ -5539,7 +5539,7 @@ VKAPI_ATTR VkResult VKAPI_CALL vkFreeDescriptorSets(
     const VkDescriptorSet*                      pDescriptorSets);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline VkResult vkFreeDescriptorSets(VkDevice device, VkDescriptorPool descriptorPool, const std::span<VkDescriptorSet>& pDescriptorSets)
+extern "C++" inline VkResult vkFreeDescriptorSets(VkDevice device, VkDescriptorPool descriptorPool, std::span<const VkDescriptorSet> pDescriptorSets)
 {
     return vkFreeDescriptorSets(device, descriptorPool, uint32_t(pDescriptorSets.size()), pDescriptorSets.data());
 }
@@ -5553,7 +5553,7 @@ VKAPI_ATTR void VKAPI_CALL vkUpdateDescriptorSets(
     const VkCopyDescriptorSet*                  pDescriptorCopies);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkUpdateDescriptorSets(VkDevice device, const std::span<VkWriteDescriptorSet>& pDescriptorWrites, const std::span<VkCopyDescriptorSet>& pDescriptorCopies)
+extern "C++" inline void vkUpdateDescriptorSets(VkDevice device, std::span<const VkWriteDescriptorSet> pDescriptorWrites, std::span<const VkCopyDescriptorSet> pDescriptorCopies)
 {
     return vkUpdateDescriptorSets(device, uint32_t(pDescriptorWrites.size()), pDescriptorWrites.data(), uint32_t(pDescriptorCopies.size()), pDescriptorCopies.data());
 }
@@ -5575,7 +5575,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdBindDescriptorSets(
     const uint32_t*                             pDynamicOffsets);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdBindDescriptorSets(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint32_t firstSet, const std::span<VkDescriptorSet>& pDescriptorSets, const std::span<uint32_t>& pDynamicOffsets)
+extern "C++" inline void vkCmdBindDescriptorSets(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint32_t firstSet, std::span<const VkDescriptorSet> pDescriptorSets, std::span<const uint32_t> pDynamicOffsets)
 {
     return vkCmdBindDescriptorSets(commandBuffer, pipelineBindPoint, layout, firstSet, uint32_t(pDescriptorSets.size()), pDescriptorSets.data(), uint32_t(pDynamicOffsets.size()), pDynamicOffsets.data());
 }
@@ -5590,7 +5590,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdClearColorImage(
     const VkImageSubresourceRange*              pRanges);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdClearColorImage(VkCommandBuffer commandBuffer, VkImage image, VkImageLayout imageLayout, const VkClearColorValue& pColor, const std::span<VkImageSubresourceRange>& pRanges)
+extern "C++" inline void vkCmdClearColorImage(VkCommandBuffer commandBuffer, VkImage image, VkImageLayout imageLayout, const VkClearColorValue& pColor, std::span<const VkImageSubresourceRange> pRanges)
 {
     return vkCmdClearColorImage(commandBuffer, image, imageLayout, &pColor, uint32_t(pRanges.size()), pRanges.data());
 }
@@ -5631,7 +5631,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdWaitEvents(
     const VkImageMemoryBarrier*                 pImageMemoryBarriers);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdWaitEvents(VkCommandBuffer commandBuffer, const std::span<VkEvent>& pEvents, VkPipelineStageFlags srcStageMask, VkPipelineStageFlags dstStageMask, const std::span<VkMemoryBarrier>& pMemoryBarriers, const std::span<VkBufferMemoryBarrier>& pBufferMemoryBarriers, const std::span<VkImageMemoryBarrier>& pImageMemoryBarriers)
+extern "C++" inline void vkCmdWaitEvents(VkCommandBuffer commandBuffer, std::span<const VkEvent> pEvents, VkPipelineStageFlags srcStageMask, VkPipelineStageFlags dstStageMask, std::span<const VkMemoryBarrier> pMemoryBarriers, std::span<const VkBufferMemoryBarrier> pBufferMemoryBarriers, std::span<const VkImageMemoryBarrier> pImageMemoryBarriers)
 {
     return vkCmdWaitEvents(commandBuffer, uint32_t(pEvents.size()), pEvents.data(), srcStageMask, dstStageMask, uint32_t(pMemoryBarriers.size()), pMemoryBarriers.data(), uint32_t(pBufferMemoryBarriers.size()), pBufferMemoryBarriers.data(), uint32_t(pImageMemoryBarriers.size()), pImageMemoryBarriers.data());
 }
@@ -5654,7 +5654,7 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateGraphicsPipelines(
     VkPipeline*                                 pPipelines);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline VkResult vkCreateGraphicsPipelines(VkDevice device, VkPipelineCache pipelineCache, const std::span<VkGraphicsPipelineCreateInfo>& pCreateInfos, VkPipeline* pPipelines)
+extern "C++" inline VkResult vkCreateGraphicsPipelines(VkDevice device, VkPipelineCache pipelineCache, std::span<const VkGraphicsPipelineCreateInfo> pCreateInfos, VkPipeline* pPipelines)
 {
     return vkCreateGraphicsPipelines(device, pipelineCache, uint32_t(pCreateInfos.size()), pCreateInfos.data(), nullptr, pPipelines);
 }
@@ -5722,7 +5722,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetViewport(
     const VkViewport*                           pViewports);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdSetViewport(VkCommandBuffer commandBuffer, uint32_t firstViewport, const std::span<VkViewport>& pViewports)
+extern "C++" inline void vkCmdSetViewport(VkCommandBuffer commandBuffer, uint32_t firstViewport, std::span<const VkViewport> pViewports)
 {
     return vkCmdSetViewport(commandBuffer, firstViewport, uint32_t(pViewports.size()), pViewports.data());
 }
@@ -5735,7 +5735,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetScissor(
     const VkRect2D*                             pScissors);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdSetScissor(VkCommandBuffer commandBuffer, uint32_t firstScissor, const std::span<VkRect2D>& pScissors)
+extern "C++" inline void vkCmdSetScissor(VkCommandBuffer commandBuffer, uint32_t firstScissor, std::span<const VkRect2D> pScissors)
 {
     return vkCmdSetScissor(commandBuffer, firstScissor, uint32_t(pScissors.size()), pScissors.data());
 }
@@ -5789,7 +5789,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdBindVertexBuffers(
     const VkDeviceSize*                         pOffsets);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdBindVertexBuffers(VkCommandBuffer commandBuffer, uint32_t firstBinding, const std::span<VkBuffer>& pBuffers, const std::span<VkDeviceSize>& pOffsets)
+extern "C++" inline void vkCmdBindVertexBuffers(VkCommandBuffer commandBuffer, uint32_t firstBinding, std::span<const VkBuffer> pBuffers, std::span<const VkDeviceSize> pOffsets)
 {
     return vkCmdBindVertexBuffers(commandBuffer, firstBinding, uint32_t(pBuffers.size()), pBuffers.data(), pOffsets.data());
 }
@@ -5835,7 +5835,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdBlitImage(
     VkFilter                                    filter);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdBlitImage(VkCommandBuffer commandBuffer, VkImage srcImage, VkImageLayout srcImageLayout, VkImage dstImage, VkImageLayout dstImageLayout, const std::span<VkImageBlit>& pRegions, VkFilter filter)
+extern "C++" inline void vkCmdBlitImage(VkCommandBuffer commandBuffer, VkImage srcImage, VkImageLayout srcImageLayout, VkImage dstImage, VkImageLayout dstImageLayout, std::span<const VkImageBlit> pRegions, VkFilter filter)
 {
     return vkCmdBlitImage(commandBuffer, srcImage, srcImageLayout, dstImage, dstImageLayout, uint32_t(pRegions.size()), pRegions.data(), filter);
 }
@@ -5850,7 +5850,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdClearDepthStencilImage(
     const VkImageSubresourceRange*              pRanges);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdClearDepthStencilImage(VkCommandBuffer commandBuffer, VkImage image, VkImageLayout imageLayout, const VkClearDepthStencilValue& pDepthStencil, const std::span<VkImageSubresourceRange>& pRanges)
+extern "C++" inline void vkCmdClearDepthStencilImage(VkCommandBuffer commandBuffer, VkImage image, VkImageLayout imageLayout, const VkClearDepthStencilValue& pDepthStencil, std::span<const VkImageSubresourceRange> pRanges)
 {
     return vkCmdClearDepthStencilImage(commandBuffer, image, imageLayout, &pDepthStencil, uint32_t(pRanges.size()), pRanges.data());
 }
@@ -5864,7 +5864,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdClearAttachments(
     const VkClearRect*                          pRects);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdClearAttachments(VkCommandBuffer commandBuffer, const std::span<VkClearAttachment>& pAttachments, const std::span<VkClearRect>& pRects)
+extern "C++" inline void vkCmdClearAttachments(VkCommandBuffer commandBuffer, std::span<const VkClearAttachment> pAttachments, std::span<const VkClearRect> pRects)
 {
     return vkCmdClearAttachments(commandBuffer, uint32_t(pAttachments.size()), pAttachments.data(), uint32_t(pRects.size()), pRects.data());
 }
@@ -5880,7 +5880,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdResolveImage(
     const VkImageResolve*                       pRegions);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdResolveImage(VkCommandBuffer commandBuffer, VkImage srcImage, VkImageLayout srcImageLayout, VkImage dstImage, VkImageLayout dstImageLayout, const std::span<VkImageResolve>& pRegions)
+extern "C++" inline void vkCmdResolveImage(VkCommandBuffer commandBuffer, VkImage srcImage, VkImageLayout srcImageLayout, VkImage dstImage, VkImageLayout dstImageLayout, std::span<const VkImageResolve> pRegions)
 {
     return vkCmdResolveImage(commandBuffer, srcImage, srcImageLayout, dstImage, dstImageLayout, uint32_t(pRegions.size()), pRegions.data());
 }
@@ -6647,7 +6647,7 @@ VKAPI_ATTR VkResult VKAPI_CALL vkBindBufferMemory2(
     const VkBindBufferMemoryInfo*               pBindInfos);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline VkResult vkBindBufferMemory2(VkDevice device, const std::span<VkBindBufferMemoryInfo>& pBindInfos)
+extern "C++" inline VkResult vkBindBufferMemory2(VkDevice device, std::span<const VkBindBufferMemoryInfo> pBindInfos)
 {
     return vkBindBufferMemory2(device, uint32_t(pBindInfos.size()), pBindInfos.data());
 }
@@ -6659,7 +6659,7 @@ VKAPI_ATTR VkResult VKAPI_CALL vkBindImageMemory2(
     const VkBindImageMemoryInfo*                pBindInfos);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline VkResult vkBindImageMemory2(VkDevice device, const std::span<VkBindImageMemoryInfo>& pBindInfos)
+extern "C++" inline VkResult vkBindImageMemory2(VkDevice device, std::span<const VkBindImageMemoryInfo> pBindInfos)
 {
     return vkBindImageMemory2(device, uint32_t(pBindInfos.size()), pBindInfos.data());
 }
@@ -8677,7 +8677,7 @@ VKAPI_ATTR VkResult VKAPI_CALL vkQueueSubmit2(
     VkFence                                     fence);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline VkResult vkQueueSubmit2(VkQueue                          queue, const std::span<VkSubmitInfo2>& pSubmits, VkFence           fence)
+extern "C++" inline VkResult vkQueueSubmit2(VkQueue                          queue, std::span<const VkSubmitInfo2> pSubmits, VkFence           fence)
 {
     return vkQueueSubmit2(queue, uint32_t(pSubmits.size()), pSubmits.data(), fence);
 }
@@ -8788,7 +8788,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdWaitEvents2(
     const VkDependencyInfo*                     pDependencyInfos);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdWaitEvents2(VkCommandBuffer                   commandBuffer, const std::span<VkEvent>& pEvents, const std::span<VkDependencyInfo>& pDependencyInfos)
+extern "C++" inline void vkCmdWaitEvents2(VkCommandBuffer                   commandBuffer, std::span<const VkEvent> pEvents, std::span<const VkDependencyInfo> pDependencyInfos)
 {
     return vkCmdWaitEvents2(commandBuffer, uint32_t(pEvents.size()), pEvents.data(), pDependencyInfos.data());
 }
@@ -8848,7 +8848,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetViewportWithCount(
     const VkViewport*                           pViewports);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdSetViewportWithCount(VkCommandBuffer commandBuffer, const std::span<VkViewport>& pViewports)
+extern "C++" inline void vkCmdSetViewportWithCount(VkCommandBuffer commandBuffer, std::span<const VkViewport> pViewports)
 {
     return vkCmdSetViewportWithCount(commandBuffer, uint32_t(pViewports.size()), pViewports.data());
 }
@@ -8860,7 +8860,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetScissorWithCount(
     const VkRect2D*                             pScissors);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdSetScissorWithCount(VkCommandBuffer commandBuffer, const std::span<VkRect2D>& pScissors)
+extern "C++" inline void vkCmdSetScissorWithCount(VkCommandBuffer commandBuffer, std::span<const VkRect2D> pScissors)
 {
     return vkCmdSetScissorWithCount(commandBuffer, uint32_t(pScissors.size()), pScissors.data());
 }
@@ -8876,7 +8876,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdBindVertexBuffers2(
     const VkDeviceSize*                         pStrides);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdBindVertexBuffers2(VkCommandBuffer commandBuffer, uint32_t firstBinding, const std::span<VkBuffer>& pBuffers, const std::span<VkDeviceSize>& pOffsets, const VkDeviceSize* pSizes, const VkDeviceSize* pStrides)
+extern "C++" inline void vkCmdBindVertexBuffers2(VkCommandBuffer commandBuffer, uint32_t firstBinding, std::span<const VkBuffer> pBuffers, std::span<const VkDeviceSize> pOffsets, const VkDeviceSize* pSizes, const VkDeviceSize* pStrides)
 {
     return vkCmdBindVertexBuffers2(commandBuffer, firstBinding, uint32_t(pBuffers.size()), pBuffers.data(), pOffsets.data(), pSizes, pStrides);
 }
@@ -9658,7 +9658,7 @@ VKAPI_ATTR VkResult VKAPI_CALL vkTransitionImageLayout(
     const VkHostImageLayoutTransitionInfo*      pTransitions);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline VkResult vkTransitionImageLayout(VkDevice device, const std::span<VkHostImageLayoutTransitionInfo>& pTransitions)
+extern "C++" inline VkResult vkTransitionImageLayout(VkDevice device, std::span<const VkHostImageLayoutTransitionInfo> pTransitions)
 {
     return vkTransitionImageLayout(device, uint32_t(pTransitions.size()), pTransitions.data());
 }
@@ -9673,7 +9673,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdPushDescriptorSet(
     const VkWriteDescriptorSet*                 pDescriptorWrites);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdPushDescriptorSet(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint32_t set, const std::span<VkWriteDescriptorSet>& pDescriptorWrites)
+extern "C++" inline void vkCmdPushDescriptorSet(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint32_t set, std::span<const VkWriteDescriptorSet> pDescriptorWrites)
 {
     return vkCmdPushDescriptorSet(commandBuffer, pipelineBindPoint, layout, set, uint32_t(pDescriptorWrites.size()), pDescriptorWrites.data());
 }
@@ -10304,7 +10304,7 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateSharedSwapchainsKHR(
     VkSwapchainKHR*                             pSwapchains);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline VkResult vkCreateSharedSwapchainsKHR(VkDevice device, const std::span<VkSwapchainCreateInfoKHR>& pCreateInfos, VkSwapchainKHR* pSwapchains)
+extern "C++" inline VkResult vkCreateSharedSwapchainsKHR(VkDevice device, std::span<const VkSwapchainCreateInfoKHR> pCreateInfos, VkSwapchainKHR* pSwapchains)
 {
     return vkCreateSharedSwapchainsKHR(device, uint32_t(pCreateInfos.size()), pCreateInfos.data(), nullptr, pSwapchains);
 }
@@ -10628,7 +10628,7 @@ VKAPI_ATTR VkResult VKAPI_CALL vkBindVideoSessionMemoryKHR(
     const VkBindVideoSessionMemoryInfoKHR*      pBindSessionMemoryInfos);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline VkResult vkBindVideoSessionMemoryKHR(VkDevice device, VkVideoSessionKHR videoSession, const std::span<VkBindVideoSessionMemoryInfoKHR>& pBindSessionMemoryInfos)
+extern "C++" inline VkResult vkBindVideoSessionMemoryKHR(VkDevice device, VkVideoSessionKHR videoSession, std::span<const VkBindVideoSessionMemoryInfoKHR> pBindSessionMemoryInfos)
 {
     return vkBindVideoSessionMemoryKHR(device, videoSession, uint32_t(pBindSessionMemoryInfos.size()), pBindSessionMemoryInfos.data());
 }
@@ -11756,7 +11756,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdPushDescriptorSetKHR(
     const VkWriteDescriptorSet*                 pDescriptorWrites);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdPushDescriptorSetKHR(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint32_t set, const std::span<VkWriteDescriptorSet>& pDescriptorWrites)
+extern "C++" inline void vkCmdPushDescriptorSetKHR(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint32_t set, std::span<const VkWriteDescriptorSet> pDescriptorWrites)
 {
     return vkCmdPushDescriptorSetKHR(commandBuffer, pipelineBindPoint, layout, set, uint32_t(pDescriptorWrites.size()), pDescriptorWrites.data());
 }
@@ -12615,7 +12615,7 @@ VKAPI_ATTR VkResult VKAPI_CALL vkBindBufferMemory2KHR(
     const VkBindBufferMemoryInfo*               pBindInfos);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline VkResult vkBindBufferMemory2KHR(VkDevice device, const std::span<VkBindBufferMemoryInfo>& pBindInfos)
+extern "C++" inline VkResult vkBindBufferMemory2KHR(VkDevice device, std::span<const VkBindBufferMemoryInfo> pBindInfos)
 {
     return vkBindBufferMemory2KHR(device, uint32_t(pBindInfos.size()), pBindInfos.data());
 }
@@ -12629,7 +12629,7 @@ VKAPI_ATTR VkResult VKAPI_CALL vkBindImageMemory2KHR(
     const VkBindImageMemoryInfo*                pBindInfos);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline VkResult vkBindImageMemory2KHR(VkDevice device, const std::span<VkBindImageMemoryInfo>& pBindInfos)
+extern "C++" inline VkResult vkBindImageMemory2KHR(VkDevice device, std::span<const VkBindImageMemoryInfo> pBindInfos)
 {
     return vkBindImageMemory2KHR(device, uint32_t(pBindInfos.size()), pBindInfos.data());
 }
@@ -13752,7 +13752,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdWaitEvents2KHR(
     const VkDependencyInfo*                     pDependencyInfos);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdWaitEvents2KHR(VkCommandBuffer                   commandBuffer, const std::span<VkEvent>& pEvents, const std::span<VkDependencyInfo>& pDependencyInfos)
+extern "C++" inline void vkCmdWaitEvents2KHR(VkCommandBuffer                   commandBuffer, std::span<const VkEvent> pEvents, std::span<const VkDependencyInfo> pDependencyInfos)
 {
     return vkCmdWaitEvents2KHR(commandBuffer, uint32_t(pEvents.size()), pEvents.data(), pDependencyInfos.data());
 }
@@ -13788,7 +13788,7 @@ VKAPI_ATTR VkResult VKAPI_CALL vkQueueSubmit2KHR(
     VkFence                                     fence);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline VkResult vkQueueSubmit2KHR(VkQueue                          queue, const std::span<VkSubmitInfo2>& pSubmits, VkFence           fence)
+extern "C++" inline VkResult vkQueueSubmit2KHR(VkQueue                          queue, std::span<const VkSubmitInfo2> pSubmits, VkFence           fence)
 {
     return vkQueueSubmit2KHR(queue, uint32_t(pSubmits.size()), pSubmits.data(), fence);
 }
@@ -15097,7 +15097,7 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetCalibratedTimestampsKHR(
     uint64_t*                                   pMaxDeviation);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline VkResult vkGetCalibratedTimestampsKHR(VkDevice device, const std::span<VkCalibratedTimestampInfoKHR>& pTimestampInfos, uint64_t* pTimestamps, uint64_t* pMaxDeviation)
+extern "C++" inline VkResult vkGetCalibratedTimestampsKHR(VkDevice device, std::span<const VkCalibratedTimestampInfoKHR> pTimestampInfos, uint64_t* pTimestamps, uint64_t* pMaxDeviation)
 {
     return vkGetCalibratedTimestampsKHR(device, uint32_t(pTimestampInfos.size()), pTimestampInfos.data(), pTimestamps, pMaxDeviation);
 }
@@ -16095,7 +16095,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdBindTransformFeedbackBuffersEXT(
     const VkDeviceSize*                         pSizes);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdBindTransformFeedbackBuffersEXT(VkCommandBuffer commandBuffer, uint32_t firstBinding, const std::span<VkBuffer>& pBuffers, const std::span<VkDeviceSize>& pOffsets, const VkDeviceSize* pSizes)
+extern "C++" inline void vkCmdBindTransformFeedbackBuffersEXT(VkCommandBuffer commandBuffer, uint32_t firstBinding, std::span<const VkBuffer> pBuffers, std::span<const VkDeviceSize> pOffsets, const VkDeviceSize* pSizes)
 {
     return vkCmdBindTransformFeedbackBuffersEXT(commandBuffer, firstBinding, uint32_t(pBuffers.size()), pBuffers.data(), pOffsets.data(), pSizes);
 }
@@ -16111,7 +16111,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdBeginTransformFeedbackEXT(
     const VkDeviceSize*                         pCounterBufferOffsets);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdBeginTransformFeedbackEXT(VkCommandBuffer commandBuffer, uint32_t firstCounterBuffer, const std::span<VkBuffer>& pCounterBuffers, const VkDeviceSize* pCounterBufferOffsets)
+extern "C++" inline void vkCmdBeginTransformFeedbackEXT(VkCommandBuffer commandBuffer, uint32_t firstCounterBuffer, std::span<const VkBuffer> pCounterBuffers, const VkDeviceSize* pCounterBufferOffsets)
 {
     return vkCmdBeginTransformFeedbackEXT(commandBuffer, firstCounterBuffer, uint32_t(pCounterBuffers.size()), pCounterBuffers.data(), pCounterBufferOffsets);
 }
@@ -16127,7 +16127,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdEndTransformFeedbackEXT(
     const VkDeviceSize*                         pCounterBufferOffsets);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdEndTransformFeedbackEXT(VkCommandBuffer commandBuffer, uint32_t firstCounterBuffer, const std::span<VkBuffer>& pCounterBuffers, const VkDeviceSize* pCounterBufferOffsets)
+extern "C++" inline void vkCmdEndTransformFeedbackEXT(VkCommandBuffer commandBuffer, uint32_t firstCounterBuffer, std::span<const VkBuffer> pCounterBuffers, const VkDeviceSize* pCounterBufferOffsets)
 {
     return vkCmdEndTransformFeedbackEXT(commandBuffer, firstCounterBuffer, uint32_t(pCounterBuffers.size()), pCounterBuffers.data(), pCounterBufferOffsets);
 }
@@ -16703,7 +16703,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetViewportWScalingNV(
     const VkViewportWScalingNV*                 pViewportWScalings);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdSetViewportWScalingNV(VkCommandBuffer commandBuffer, uint32_t firstViewport, const std::span<VkViewportWScalingNV>& pViewportWScalings)
+extern "C++" inline void vkCmdSetViewportWScalingNV(VkCommandBuffer commandBuffer, uint32_t firstViewport, std::span<const VkViewportWScalingNV> pViewportWScalings)
 {
     return vkCmdSetViewportWScalingNV(commandBuffer, firstViewport, uint32_t(pViewportWScalings.size()), pViewportWScalings.data());
 }
@@ -17036,7 +17036,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetDiscardRectangleEXT(
     const VkRect2D*                             pDiscardRectangles);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdSetDiscardRectangleEXT(VkCommandBuffer commandBuffer, uint32_t firstDiscardRectangle, const std::span<VkRect2D>& pDiscardRectangles)
+extern "C++" inline void vkCmdSetDiscardRectangleEXT(VkCommandBuffer commandBuffer, uint32_t firstDiscardRectangle, std::span<const VkRect2D> pDiscardRectangles)
 {
     return vkCmdSetDiscardRectangleEXT(commandBuffer, firstDiscardRectangle, uint32_t(pDiscardRectangles.size()), pDiscardRectangles.data());
 }
@@ -17152,7 +17152,7 @@ VKAPI_ATTR void VKAPI_CALL vkSetHdrMetadataEXT(
     const VkHdrMetadataEXT*                     pMetadata);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkSetHdrMetadataEXT(VkDevice device, const std::span<VkSwapchainKHR>& pSwapchains, const std::span<VkHdrMetadataEXT>& pMetadata)
+extern "C++" inline void vkSetHdrMetadataEXT(VkDevice device, std::span<const VkSwapchainKHR> pSwapchains, std::span<const VkHdrMetadataEXT> pMetadata)
 {
     return vkSetHdrMetadataEXT(device, uint32_t(pSwapchains.size()), pSwapchains.data(), pMetadata.data());
 }
@@ -17742,7 +17742,7 @@ VKAPI_ATTR VkResult VKAPI_CALL vkWriteSamplerDescriptorsEXT(
     const VkHostAddressRangeEXT*                pDescriptors);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline VkResult vkWriteSamplerDescriptorsEXT(VkDevice                                            device, const std::span<VkSamplerCreateInfo>& pSamplers, const std::span<VkHostAddressRangeEXT>& pDescriptors)
+extern "C++" inline VkResult vkWriteSamplerDescriptorsEXT(VkDevice                                            device, std::span<const VkSamplerCreateInfo> pSamplers, std::span<const VkHostAddressRangeEXT> pDescriptors)
 {
     return vkWriteSamplerDescriptorsEXT(device, uint32_t(pSamplers.size()), pSamplers.data(), pDescriptors.data());
 }
@@ -17757,7 +17757,7 @@ VKAPI_ATTR VkResult VKAPI_CALL vkWriteResourceDescriptorsEXT(
     const VkHostAddressRangeEXT*                pDescriptors);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline VkResult vkWriteResourceDescriptorsEXT(VkDevice                                                device, const std::span<VkResourceDescriptorInfoEXT>& pResources, const std::span<VkHostAddressRangeEXT>& pDescriptors)
+extern "C++" inline VkResult vkWriteResourceDescriptorsEXT(VkDevice                                                device, std::span<const VkResourceDescriptorInfoEXT> pResources, std::span<const VkHostAddressRangeEXT> pDescriptors)
 {
     return vkWriteResourceDescriptorsEXT(device, uint32_t(pResources.size()), pResources.data(), pDescriptors.data());
 }
@@ -17811,7 +17811,7 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetImageOpaqueCaptureDataEXT(
     VkHostAddressRangeEXT*                      pDatas);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline VkResult vkGetImageOpaqueCaptureDataEXT(VkDevice                                            device, const std::span<VkImage>& pImages, VkHostAddressRangeEXT*             pDatas)
+extern "C++" inline VkResult vkGetImageOpaqueCaptureDataEXT(VkDevice                                            device, std::span<const VkImage> pImages, VkHostAddressRangeEXT*             pDatas)
 {
     return vkGetImageOpaqueCaptureDataEXT(device, uint32_t(pImages.size()), pImages.data(), pDatas);
 }
@@ -17853,7 +17853,7 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetTensorOpaqueCaptureDataARM(
     VkHostAddressRangeEXT*                      pDatas);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline VkResult vkGetTensorOpaqueCaptureDataARM(VkDevice                                            device, const std::span<VkTensorARM>& pTensors, VkHostAddressRangeEXT*            pDatas)
+extern "C++" inline VkResult vkGetTensorOpaqueCaptureDataARM(VkDevice                                            device, std::span<const VkTensorARM> pTensors, VkHostAddressRangeEXT*            pDatas)
 {
     return vkGetTensorOpaqueCaptureDataARM(device, uint32_t(pTensors.size()), pTensors.data(), pDatas);
 }
@@ -18239,7 +18239,7 @@ VKAPI_ATTR VkResult VKAPI_CALL vkMergeValidationCachesEXT(
     const VkValidationCacheEXT*                 pSrcCaches);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline VkResult vkMergeValidationCachesEXT(VkDevice device, VkValidationCacheEXT dstCache, const std::span<VkValidationCacheEXT>& pSrcCaches)
+extern "C++" inline VkResult vkMergeValidationCachesEXT(VkDevice device, VkValidationCacheEXT dstCache, std::span<const VkValidationCacheEXT> pSrcCaches)
 {
     return vkMergeValidationCachesEXT(device, dstCache, uint32_t(pSrcCaches.size()), pSrcCaches.data());
 }
@@ -18379,7 +18379,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetViewportShadingRatePaletteNV(
     const VkShadingRatePaletteNV*               pShadingRatePalettes);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdSetViewportShadingRatePaletteNV(VkCommandBuffer commandBuffer, uint32_t firstViewport, const std::span<VkShadingRatePaletteNV>& pShadingRatePalettes)
+extern "C++" inline void vkCmdSetViewportShadingRatePaletteNV(VkCommandBuffer commandBuffer, uint32_t firstViewport, std::span<const VkShadingRatePaletteNV> pShadingRatePalettes)
 {
     return vkCmdSetViewportShadingRatePaletteNV(commandBuffer, firstViewport, uint32_t(pShadingRatePalettes.size()), pShadingRatePalettes.data());
 }
@@ -18394,7 +18394,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetCoarseSampleOrderNV(
     const VkCoarseSampleOrderCustomNV*          pCustomSampleOrders);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdSetCoarseSampleOrderNV(VkCommandBuffer commandBuffer, VkCoarseSampleOrderTypeNV sampleOrderType, const std::span<VkCoarseSampleOrderCustomNV>& pCustomSampleOrders)
+extern "C++" inline void vkCmdSetCoarseSampleOrderNV(VkCommandBuffer commandBuffer, VkCoarseSampleOrderTypeNV sampleOrderType, std::span<const VkCoarseSampleOrderCustomNV> pCustomSampleOrders)
 {
     return vkCmdSetCoarseSampleOrderNV(commandBuffer, sampleOrderType, uint32_t(pCustomSampleOrders.size()), pCustomSampleOrders.data());
 }
@@ -18754,7 +18754,7 @@ VKAPI_ATTR VkResult VKAPI_CALL vkBindAccelerationStructureMemoryNV(
     const VkBindAccelerationStructureMemoryInfoNV* pBindInfos);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline VkResult vkBindAccelerationStructureMemoryNV(VkDevice device, const std::span<VkBindAccelerationStructureMemoryInfoNV>& pBindInfos)
+extern "C++" inline VkResult vkBindAccelerationStructureMemoryNV(VkDevice device, std::span<const VkBindAccelerationStructureMemoryInfoNV> pBindInfos)
 {
     return vkBindAccelerationStructureMemoryNV(device, uint32_t(pBindInfos.size()), pBindInfos.data());
 }
@@ -18818,7 +18818,7 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateRayTracingPipelinesNV(
     VkPipeline*                                 pPipelines);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline VkResult vkCreateRayTracingPipelinesNV(VkDevice device, VkPipelineCache pipelineCache, const std::span<VkRayTracingPipelineCreateInfoNV>& pCreateInfos, VkPipeline* pPipelines)
+extern "C++" inline VkResult vkCreateRayTracingPipelinesNV(VkDevice device, VkPipelineCache pipelineCache, std::span<const VkRayTracingPipelineCreateInfoNV> pCreateInfos, VkPipeline* pPipelines)
 {
     return vkCreateRayTracingPipelinesNV(device, pipelineCache, uint32_t(pCreateInfos.size()), pCreateInfos.data(), nullptr, pPipelines);
 }
@@ -18863,7 +18863,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdWriteAccelerationStructuresPropertiesNV(
     uint32_t                                    firstQuery);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdWriteAccelerationStructuresPropertiesNV(VkCommandBuffer commandBuffer, const std::span<VkAccelerationStructureNV>& pAccelerationStructures, VkQueryType queryType, VkQueryPool queryPool, uint32_t firstQuery)
+extern "C++" inline void vkCmdWriteAccelerationStructuresPropertiesNV(VkCommandBuffer commandBuffer, std::span<const VkAccelerationStructureNV> pAccelerationStructures, VkQueryType queryType, VkQueryPool queryPool, uint32_t firstQuery)
 {
     return vkCmdWriteAccelerationStructuresPropertiesNV(commandBuffer, uint32_t(pAccelerationStructures.size()), pAccelerationStructures.data(), queryType, queryPool, firstQuery);
 }
@@ -19053,7 +19053,7 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetCalibratedTimestampsEXT(
     uint64_t*                                   pMaxDeviation);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline VkResult vkGetCalibratedTimestampsEXT(VkDevice device, const std::span<VkCalibratedTimestampInfoKHR>& pTimestampInfos, uint64_t* pTimestamps, uint64_t* pMaxDeviation)
+extern "C++" inline VkResult vkGetCalibratedTimestampsEXT(VkDevice device, std::span<const VkCalibratedTimestampInfoKHR> pTimestampInfos, uint64_t* pTimestamps, uint64_t* pMaxDeviation)
 {
     return vkGetCalibratedTimestampsEXT(device, uint32_t(pTimestampInfos.size()), pTimestampInfos.data(), pTimestamps, pMaxDeviation);
 }
@@ -19269,7 +19269,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetExclusiveScissorEnableNV(
     const VkBool32*                             pExclusiveScissorEnables);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdSetExclusiveScissorEnableNV(VkCommandBuffer commandBuffer, uint32_t firstExclusiveScissor, const std::span<VkBool32>& pExclusiveScissorEnables)
+extern "C++" inline void vkCmdSetExclusiveScissorEnableNV(VkCommandBuffer commandBuffer, uint32_t firstExclusiveScissor, std::span<const VkBool32> pExclusiveScissorEnables)
 {
     return vkCmdSetExclusiveScissorEnableNV(commandBuffer, firstExclusiveScissor, uint32_t(pExclusiveScissorEnables.size()), pExclusiveScissorEnables.data());
 }
@@ -19284,7 +19284,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetExclusiveScissorNV(
     const VkRect2D*                             pExclusiveScissors);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdSetExclusiveScissorNV(VkCommandBuffer commandBuffer, uint32_t firstExclusiveScissor, const std::span<VkRect2D>& pExclusiveScissors)
+extern "C++" inline void vkCmdSetExclusiveScissorNV(VkCommandBuffer commandBuffer, uint32_t firstExclusiveScissor, std::span<const VkRect2D> pExclusiveScissors)
 {
     return vkCmdSetExclusiveScissorNV(commandBuffer, firstExclusiveScissor, uint32_t(pExclusiveScissors.size()), pExclusiveScissors.data());
 }
@@ -20325,7 +20325,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetViewportWithCountEXT(
     const VkViewport*                           pViewports);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdSetViewportWithCountEXT(VkCommandBuffer commandBuffer, const std::span<VkViewport>& pViewports)
+extern "C++" inline void vkCmdSetViewportWithCountEXT(VkCommandBuffer commandBuffer, std::span<const VkViewport> pViewports)
 {
     return vkCmdSetViewportWithCountEXT(commandBuffer, uint32_t(pViewports.size()), pViewports.data());
 }
@@ -20339,7 +20339,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetScissorWithCountEXT(
     const VkRect2D*                             pScissors);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdSetScissorWithCountEXT(VkCommandBuffer commandBuffer, const std::span<VkRect2D>& pScissors)
+extern "C++" inline void vkCmdSetScissorWithCountEXT(VkCommandBuffer commandBuffer, std::span<const VkRect2D> pScissors)
 {
     return vkCmdSetScissorWithCountEXT(commandBuffer, uint32_t(pScissors.size()), pScissors.data());
 }
@@ -20357,7 +20357,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdBindVertexBuffers2EXT(
     const VkDeviceSize*                         pStrides);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdBindVertexBuffers2EXT(VkCommandBuffer commandBuffer, uint32_t firstBinding, const std::span<VkBuffer>& pBuffers, const std::span<VkDeviceSize>& pOffsets, const VkDeviceSize* pSizes, const VkDeviceSize* pStrides)
+extern "C++" inline void vkCmdBindVertexBuffers2EXT(VkCommandBuffer commandBuffer, uint32_t firstBinding, std::span<const VkBuffer> pBuffers, std::span<const VkDeviceSize> pOffsets, const VkDeviceSize* pSizes, const VkDeviceSize* pStrides)
 {
     return vkCmdBindVertexBuffers2EXT(commandBuffer, firstBinding, uint32_t(pBuffers.size()), pBuffers.data(), pOffsets.data(), pSizes, pStrides);
 }
@@ -20491,7 +20491,7 @@ VKAPI_ATTR VkResult VKAPI_CALL vkTransitionImageLayoutEXT(
     const VkHostImageLayoutTransitionInfo*      pTransitions);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline VkResult vkTransitionImageLayoutEXT(VkDevice device, const std::span<VkHostImageLayoutTransitionInfo>& pTransitions)
+extern "C++" inline VkResult vkTransitionImageLayoutEXT(VkDevice device, std::span<const VkHostImageLayoutTransitionInfo> pTransitions)
 {
     return vkTransitionImageLayoutEXT(device, uint32_t(pTransitions.size()), pTransitions.data());
 }
@@ -21531,7 +21531,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdBindDescriptorBuffersEXT(
     const VkDescriptorBufferBindingInfoEXT*     pBindingInfos);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdBindDescriptorBuffersEXT(VkCommandBuffer commandBuffer, const std::span<VkDescriptorBufferBindingInfoEXT>& pBindingInfos)
+extern "C++" inline void vkCmdBindDescriptorBuffersEXT(VkCommandBuffer commandBuffer, std::span<const VkDescriptorBufferBindingInfoEXT> pBindingInfos)
 {
     return vkCmdBindDescriptorBuffersEXT(commandBuffer, uint32_t(pBindingInfos.size()), pBindingInfos.data());
 }
@@ -21549,7 +21549,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetDescriptorBufferOffsetsEXT(
     const VkDeviceSize*                         pOffsets);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdSetDescriptorBufferOffsetsEXT(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint32_t firstSet, const std::span<uint32_t>& pBufferIndices, const std::span<VkDeviceSize>& pOffsets)
+extern "C++" inline void vkCmdSetDescriptorBufferOffsetsEXT(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint32_t firstSet, std::span<const uint32_t> pBufferIndices, std::span<const VkDeviceSize> pOffsets)
 {
     return vkCmdSetDescriptorBufferOffsetsEXT(commandBuffer, pipelineBindPoint, layout, firstSet, uint32_t(pBufferIndices.size()), pBufferIndices.data(), pOffsets.data());
 }
@@ -22157,7 +22157,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetVertexInputEXT(
     const VkVertexInputAttributeDescription2EXT* pVertexAttributeDescriptions);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdSetVertexInputEXT(VkCommandBuffer commandBuffer, const std::span<VkVertexInputBindingDescription2EXT>& pVertexBindingDescriptions, const std::span<VkVertexInputAttributeDescription2EXT>& pVertexAttributeDescriptions)
+extern "C++" inline void vkCmdSetVertexInputEXT(VkCommandBuffer commandBuffer, std::span<const VkVertexInputBindingDescription2EXT> pVertexBindingDescriptions, std::span<const VkVertexInputAttributeDescription2EXT> pVertexAttributeDescriptions)
 {
     return vkCmdSetVertexInputEXT(commandBuffer, uint32_t(pVertexBindingDescriptions.size()), pVertexBindingDescriptions.data(), uint32_t(pVertexAttributeDescriptions.size()), pVertexAttributeDescriptions.data());
 }
@@ -22527,7 +22527,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetColorWriteEnableEXT(
     const VkBool32*                             pColorWriteEnables);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdSetColorWriteEnableEXT(VkCommandBuffer       commandBuffer, const std::span<VkBool32>& pColorWriteEnables)
+extern "C++" inline void vkCmdSetColorWriteEnableEXT(VkCommandBuffer       commandBuffer, std::span<const VkBool32> pColorWriteEnables)
 {
     return vkCmdSetColorWriteEnableEXT(commandBuffer, uint32_t(pColorWriteEnables.size()), pColorWriteEnables.data());
 }
@@ -22680,7 +22680,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdDrawMultiEXT(
     uint32_t                                    stride);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdDrawMultiEXT(VkCommandBuffer commandBuffer, const std::span<VkMultiDrawInfoEXT>& pVertexInfo, uint32_t instanceCount, uint32_t firstInstance, uint32_t stride)
+extern "C++" inline void vkCmdDrawMultiEXT(VkCommandBuffer commandBuffer, std::span<const VkMultiDrawInfoEXT> pVertexInfo, uint32_t instanceCount, uint32_t firstInstance, uint32_t stride)
 {
     return vkCmdDrawMultiEXT(commandBuffer, uint32_t(pVertexInfo.size()), pVertexInfo.data(), instanceCount, firstInstance, stride);
 }
@@ -22698,7 +22698,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdDrawMultiIndexedEXT(
     const int32_t*                              pVertexOffset);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdDrawMultiIndexedEXT(VkCommandBuffer commandBuffer, const std::span<VkMultiDrawIndexedInfoEXT>& pIndexInfo, uint32_t instanceCount, uint32_t firstInstance, uint32_t stride, const int32_t* pVertexOffset)
+extern "C++" inline void vkCmdDrawMultiIndexedEXT(VkCommandBuffer commandBuffer, std::span<const VkMultiDrawIndexedInfoEXT> pIndexInfo, uint32_t instanceCount, uint32_t firstInstance, uint32_t stride, const int32_t* pVertexOffset)
 {
     return vkCmdDrawMultiIndexedEXT(commandBuffer, uint32_t(pIndexInfo.size()), pIndexInfo.data(), instanceCount, firstInstance, stride, pVertexOffset);
 }
@@ -22972,7 +22972,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdBuildMicromapsEXT(
     const VkMicromapBuildInfoEXT*               pInfos);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdBuildMicromapsEXT(VkCommandBuffer                                    commandBuffer, const std::span<VkMicromapBuildInfoEXT>& pInfos)
+extern "C++" inline void vkCmdBuildMicromapsEXT(VkCommandBuffer                                    commandBuffer, std::span<const VkMicromapBuildInfoEXT> pInfos)
 {
     return vkCmdBuildMicromapsEXT(commandBuffer, uint32_t(pInfos.size()), pInfos.data());
 }
@@ -22987,7 +22987,7 @@ VKAPI_ATTR VkResult VKAPI_CALL vkBuildMicromapsEXT(
     const VkMicromapBuildInfoEXT*               pInfos);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline VkResult vkBuildMicromapsEXT(VkDevice                                           device, VkDeferredOperationKHR deferredOperation, const std::span<VkMicromapBuildInfoEXT>& pInfos)
+extern "C++" inline VkResult vkBuildMicromapsEXT(VkDevice                                           device, VkDeferredOperationKHR deferredOperation, std::span<const VkMicromapBuildInfoEXT> pInfos)
 {
     return vkBuildMicromapsEXT(device, deferredOperation, uint32_t(pInfos.size()), pInfos.data());
 }
@@ -23047,7 +23047,7 @@ VKAPI_ATTR VkResult VKAPI_CALL vkWriteMicromapsPropertiesEXT(
     size_t                                      stride);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline VkResult vkWriteMicromapsPropertiesEXT(VkDevice device, const std::span<VkMicromapEXT>& pMicromaps, VkQueryType  queryType, size_t       dataSize, void* pData, size_t stride)
+extern "C++" inline VkResult vkWriteMicromapsPropertiesEXT(VkDevice device, std::span<const VkMicromapEXT> pMicromaps, VkQueryType  queryType, size_t       dataSize, void* pData, size_t stride)
 {
     return vkWriteMicromapsPropertiesEXT(device, uint32_t(pMicromaps.size()), pMicromaps.data(), queryType, dataSize, pData, stride);
 }
@@ -23103,7 +23103,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdWriteMicromapsPropertiesEXT(
     uint32_t                                    firstQuery);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdWriteMicromapsPropertiesEXT(VkCommandBuffer commandBuffer, const std::span<VkMicromapEXT>& pMicromaps, VkQueryType queryType, VkQueryPool queryPool, uint32_t firstQuery)
+extern "C++" inline void vkCmdWriteMicromapsPropertiesEXT(VkCommandBuffer commandBuffer, std::span<const VkMicromapEXT> pMicromaps, VkQueryType queryType, VkQueryPool queryPool, uint32_t firstQuery)
 {
     return vkCmdWriteMicromapsPropertiesEXT(commandBuffer, uint32_t(pMicromaps.size()), pMicromaps.data(), queryType, queryPool, firstQuery);
 }
@@ -23533,7 +23533,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdDecompressMemoryNV(
     const VkDecompressMemoryRegionNV*           pDecompressMemoryRegions);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdDecompressMemoryNV(VkCommandBuffer commandBuffer, const std::span<VkDecompressMemoryRegionNV>& pDecompressMemoryRegions)
+extern "C++" inline void vkCmdDecompressMemoryNV(VkCommandBuffer commandBuffer, std::span<const VkDecompressMemoryRegionNV> pDecompressMemoryRegions)
 {
     return vkCmdDecompressMemoryNV(commandBuffer, uint32_t(pDecompressMemoryRegions.size()), pDecompressMemoryRegions.data());
 }
@@ -23917,7 +23917,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetColorBlendEnableEXT(
     const VkBool32*                             pColorBlendEnables);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdSetColorBlendEnableEXT(VkCommandBuffer commandBuffer, uint32_t firstAttachment, const std::span<VkBool32>& pColorBlendEnables)
+extern "C++" inline void vkCmdSetColorBlendEnableEXT(VkCommandBuffer commandBuffer, uint32_t firstAttachment, std::span<const VkBool32> pColorBlendEnables)
 {
     return vkCmdSetColorBlendEnableEXT(commandBuffer, firstAttachment, uint32_t(pColorBlendEnables.size()), pColorBlendEnables.data());
 }
@@ -23932,7 +23932,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetColorBlendEquationEXT(
     const VkColorBlendEquationEXT*              pColorBlendEquations);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdSetColorBlendEquationEXT(VkCommandBuffer commandBuffer, uint32_t firstAttachment, const std::span<VkColorBlendEquationEXT>& pColorBlendEquations)
+extern "C++" inline void vkCmdSetColorBlendEquationEXT(VkCommandBuffer commandBuffer, uint32_t firstAttachment, std::span<const VkColorBlendEquationEXT> pColorBlendEquations)
 {
     return vkCmdSetColorBlendEquationEXT(commandBuffer, firstAttachment, uint32_t(pColorBlendEquations.size()), pColorBlendEquations.data());
 }
@@ -23947,7 +23947,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetColorWriteMaskEXT(
     const VkColorComponentFlags*                pColorWriteMasks);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdSetColorWriteMaskEXT(VkCommandBuffer commandBuffer, uint32_t firstAttachment, const std::span<VkColorComponentFlags>& pColorWriteMasks)
+extern "C++" inline void vkCmdSetColorWriteMaskEXT(VkCommandBuffer commandBuffer, uint32_t firstAttachment, std::span<const VkColorComponentFlags> pColorWriteMasks)
 {
     return vkCmdSetColorWriteMaskEXT(commandBuffer, firstAttachment, uint32_t(pColorWriteMasks.size()), pColorWriteMasks.data());
 }
@@ -23998,7 +23998,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetColorBlendAdvancedEXT(
     const VkColorBlendAdvancedEXT*              pColorBlendAdvanced);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdSetColorBlendAdvancedEXT(VkCommandBuffer commandBuffer, uint32_t firstAttachment, const std::span<VkColorBlendAdvancedEXT>& pColorBlendAdvanced)
+extern "C++" inline void vkCmdSetColorBlendAdvancedEXT(VkCommandBuffer commandBuffer, uint32_t firstAttachment, std::span<const VkColorBlendAdvancedEXT> pColorBlendAdvanced)
 {
     return vkCmdSetColorBlendAdvancedEXT(commandBuffer, firstAttachment, uint32_t(pColorBlendAdvanced.size()), pColorBlendAdvanced.data());
 }
@@ -24043,7 +24043,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetViewportSwizzleNV(
     const VkViewportSwizzleNV*                  pViewportSwizzles);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdSetViewportSwizzleNV(VkCommandBuffer commandBuffer, uint32_t firstViewport, const std::span<VkViewportSwizzleNV>& pViewportSwizzles)
+extern "C++" inline void vkCmdSetViewportSwizzleNV(VkCommandBuffer commandBuffer, uint32_t firstViewport, std::span<const VkViewportSwizzleNV> pViewportSwizzles)
 {
     return vkCmdSetViewportSwizzleNV(commandBuffer, firstViewport, uint32_t(pViewportSwizzles.size()), pViewportSwizzles.data());
 }
@@ -24081,7 +24081,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetCoverageModulationTableNV(
     const float*                                pCoverageModulationTable);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdSetCoverageModulationTableNV(VkCommandBuffer commandBuffer, const std::span<float>& pCoverageModulationTable)
+extern "C++" inline void vkCmdSetCoverageModulationTableNV(VkCommandBuffer commandBuffer, std::span<const float> pCoverageModulationTable)
 {
     return vkCmdSetCoverageModulationTableNV(commandBuffer, uint32_t(pCoverageModulationTable.size()), pCoverageModulationTable.data());
 }
@@ -24506,7 +24506,7 @@ VKAPI_ATTR VkResult VKAPI_CALL vkBindTensorMemoryARM(
     const VkBindTensorMemoryInfoARM*            pBindInfos);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline VkResult vkBindTensorMemoryARM(VkDevice device, const std::span<VkBindTensorMemoryInfoARM>& pBindInfos)
+extern "C++" inline VkResult vkBindTensorMemoryARM(VkDevice device, std::span<const VkBindTensorMemoryInfoARM> pBindInfos)
 {
     return vkBindTensorMemoryARM(device, uint32_t(pBindInfos.size()), pBindInfos.data());
 }
@@ -25012,7 +25012,7 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateShadersEXT(
     VkShaderEXT*                                pShaders);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline VkResult vkCreateShadersEXT(VkDevice device, const std::span<VkShaderCreateInfoEXT>& pCreateInfos, VkShaderEXT* pShaders)
+extern "C++" inline VkResult vkCreateShadersEXT(VkDevice device, std::span<const VkShaderCreateInfoEXT> pCreateInfos, VkShaderEXT* pShaders)
 {
     return vkCreateShadersEXT(device, uint32_t(pCreateInfos.size()), pCreateInfos.data(), nullptr, pShaders);
 }
@@ -25049,7 +25049,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdBindShadersEXT(
     const VkShaderEXT*                          pShaders);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdBindShadersEXT(VkCommandBuffer commandBuffer, const std::span<VkShaderStageFlagBits>& pStages, const std::span<VkShaderEXT>& pShaders)
+extern "C++" inline void vkCmdBindShadersEXT(VkCommandBuffer commandBuffer, std::span<const VkShaderStageFlagBits> pStages, std::span<const VkShaderEXT> pShaders)
 {
     return vkCmdBindShadersEXT(commandBuffer, uint32_t(pStages.size()), pStages.data(), pShaders.data());
 }
@@ -25258,7 +25258,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdConvertCooperativeVectorMatrixNV(
     const VkConvertCooperativeVectorMatrixInfoNV* pInfos);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdConvertCooperativeVectorMatrixNV(VkCommandBuffer commandBuffer, const std::span<VkConvertCooperativeVectorMatrixInfoNV>& pInfos)
+extern "C++" inline void vkCmdConvertCooperativeVectorMatrixNV(VkCommandBuffer commandBuffer, std::span<const VkConvertCooperativeVectorMatrixInfoNV> pInfos)
 {
     return vkCmdConvertCooperativeVectorMatrixNV(commandBuffer, uint32_t(pInfos.size()), pInfos.data());
 }
@@ -25793,7 +25793,7 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateDataGraphPipelinesARM(
     VkPipeline*                                 pPipelines);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline VkResult vkCreateDataGraphPipelinesARM(VkDevice               device, VkDeferredOperationKHR deferredOperation, VkPipelineCache        pipelineCache, const std::span<VkDataGraphPipelineCreateInfoARM>& pCreateInfos, VkPipeline*     pPipelines)
+extern "C++" inline VkResult vkCreateDataGraphPipelinesARM(VkDevice               device, VkDeferredOperationKHR deferredOperation, VkPipelineCache        pipelineCache, std::span<const VkDataGraphPipelineCreateInfoARM> pCreateInfos, VkPipeline*     pPipelines)
 {
     return vkCreateDataGraphPipelinesARM(device, deferredOperation, pipelineCache, uint32_t(pCreateInfos.size()), pCreateInfos.data(), nullptr, pPipelines);
 }
@@ -25851,7 +25851,7 @@ VKAPI_ATTR VkResult VKAPI_CALL vkBindDataGraphPipelineSessionMemoryARM(
     const VkBindDataGraphPipelineSessionMemoryInfoARM* pBindInfos);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline VkResult vkBindDataGraphPipelineSessionMemoryARM(VkDevice device, const std::span<VkBindDataGraphPipelineSessionMemoryInfoARM>& pBindInfos)
+extern "C++" inline VkResult vkBindDataGraphPipelineSessionMemoryARM(VkDevice device, std::span<const VkBindDataGraphPipelineSessionMemoryInfoARM> pBindInfos)
 {
     return vkBindDataGraphPipelineSessionMemoryARM(device, uint32_t(pBindInfos.size()), pBindInfos.data());
 }
@@ -27111,7 +27111,7 @@ VKAPI_ATTR void VKAPI_CALL vkUpdateIndirectExecutionSetPipelineEXT(
     const VkWriteIndirectExecutionSetPipelineEXT* pExecutionSetWrites);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkUpdateIndirectExecutionSetPipelineEXT(VkDevice device, VkIndirectExecutionSetEXT indirectExecutionSet, const std::span<VkWriteIndirectExecutionSetPipelineEXT>& pExecutionSetWrites)
+extern "C++" inline void vkUpdateIndirectExecutionSetPipelineEXT(VkDevice device, VkIndirectExecutionSetEXT indirectExecutionSet, std::span<const VkWriteIndirectExecutionSetPipelineEXT> pExecutionSetWrites)
 {
     return vkUpdateIndirectExecutionSetPipelineEXT(device, indirectExecutionSet, uint32_t(pExecutionSetWrites.size()), pExecutionSetWrites.data());
 }
@@ -27126,7 +27126,7 @@ VKAPI_ATTR void VKAPI_CALL vkUpdateIndirectExecutionSetShaderEXT(
     const VkWriteIndirectExecutionSetShaderEXT* pExecutionSetWrites);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkUpdateIndirectExecutionSetShaderEXT(VkDevice device, VkIndirectExecutionSetEXT indirectExecutionSet, const std::span<VkWriteIndirectExecutionSetShaderEXT>& pExecutionSetWrites)
+extern "C++" inline void vkUpdateIndirectExecutionSetShaderEXT(VkDevice device, VkIndirectExecutionSetEXT indirectExecutionSet, std::span<const VkWriteIndirectExecutionSetShaderEXT> pExecutionSetWrites)
 {
     return vkUpdateIndirectExecutionSetShaderEXT(device, indirectExecutionSet, uint32_t(pExecutionSetWrites.size()), pExecutionSetWrites.data());
 }
@@ -27824,7 +27824,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdBuildAccelerationStructuresKHR(
     const VkAccelerationStructureBuildRangeInfoKHR* const* ppBuildRangeInfos);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdBuildAccelerationStructuresKHR(VkCommandBuffer                                    commandBuffer, const std::span<VkAccelerationStructureBuildGeometryInfoKHR>& pInfos, const VkAccelerationStructureBuildRangeInfoKHR* const* ppBuildRangeInfos)
+extern "C++" inline void vkCmdBuildAccelerationStructuresKHR(VkCommandBuffer                                    commandBuffer, std::span<const VkAccelerationStructureBuildGeometryInfoKHR> pInfos, const VkAccelerationStructureBuildRangeInfoKHR* const* ppBuildRangeInfos)
 {
     return vkCmdBuildAccelerationStructuresKHR(commandBuffer, uint32_t(pInfos.size()), pInfos.data(), ppBuildRangeInfos);
 }
@@ -27841,7 +27841,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdBuildAccelerationStructuresIndirectKHR(
     const uint32_t* const*                      ppMaxPrimitiveCounts);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdBuildAccelerationStructuresIndirectKHR(VkCommandBuffer                  commandBuffer, const std::span<VkAccelerationStructureBuildGeometryInfoKHR>& pInfos, const std::span<VkDeviceAddress>& pIndirectDeviceAddresses, const std::span<uint32_t>& pIndirectStrides, const uint32_t* const*             ppMaxPrimitiveCounts)
+extern "C++" inline void vkCmdBuildAccelerationStructuresIndirectKHR(VkCommandBuffer                  commandBuffer, std::span<const VkAccelerationStructureBuildGeometryInfoKHR> pInfos, std::span<const VkDeviceAddress> pIndirectDeviceAddresses, std::span<const uint32_t> pIndirectStrides, const uint32_t* const*             ppMaxPrimitiveCounts)
 {
     return vkCmdBuildAccelerationStructuresIndirectKHR(commandBuffer, uint32_t(pInfos.size()), pInfos.data(), pIndirectDeviceAddresses.data(), pIndirectStrides.data(), ppMaxPrimitiveCounts);
 }
@@ -27857,7 +27857,7 @@ VKAPI_ATTR VkResult VKAPI_CALL vkBuildAccelerationStructuresKHR(
     const VkAccelerationStructureBuildRangeInfoKHR* const* ppBuildRangeInfos);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline VkResult vkBuildAccelerationStructuresKHR(VkDevice                                           device, VkDeferredOperationKHR deferredOperation, const std::span<VkAccelerationStructureBuildGeometryInfoKHR>& pInfos, const VkAccelerationStructureBuildRangeInfoKHR* const* ppBuildRangeInfos)
+extern "C++" inline VkResult vkBuildAccelerationStructuresKHR(VkDevice                                           device, VkDeferredOperationKHR deferredOperation, std::span<const VkAccelerationStructureBuildGeometryInfoKHR> pInfos, const VkAccelerationStructureBuildRangeInfoKHR* const* ppBuildRangeInfos)
 {
     return vkBuildAccelerationStructuresKHR(device, deferredOperation, uint32_t(pInfos.size()), pInfos.data(), ppBuildRangeInfos);
 }
@@ -27917,7 +27917,7 @@ VKAPI_ATTR VkResult VKAPI_CALL vkWriteAccelerationStructuresPropertiesKHR(
     size_t                                      stride);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline VkResult vkWriteAccelerationStructuresPropertiesKHR(VkDevice device, const std::span<VkAccelerationStructureKHR>& pAccelerationStructures, VkQueryType  queryType, size_t       dataSize, void* pData, size_t stride)
+extern "C++" inline VkResult vkWriteAccelerationStructuresPropertiesKHR(VkDevice device, std::span<const VkAccelerationStructureKHR> pAccelerationStructures, VkQueryType  queryType, size_t       dataSize, void* pData, size_t stride)
 {
     return vkWriteAccelerationStructuresPropertiesKHR(device, uint32_t(pAccelerationStructures.size()), pAccelerationStructures.data(), queryType, dataSize, pData, stride);
 }
@@ -27986,7 +27986,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdWriteAccelerationStructuresPropertiesKHR(
     uint32_t                                    firstQuery);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline void vkCmdWriteAccelerationStructuresPropertiesKHR(VkCommandBuffer commandBuffer, const std::span<VkAccelerationStructureKHR>& pAccelerationStructures, VkQueryType queryType, VkQueryPool queryPool, uint32_t firstQuery)
+extern "C++" inline void vkCmdWriteAccelerationStructuresPropertiesKHR(VkCommandBuffer commandBuffer, std::span<const VkAccelerationStructureKHR> pAccelerationStructures, VkQueryType queryType, VkQueryPool queryPool, uint32_t firstQuery)
 {
     return vkCmdWriteAccelerationStructuresPropertiesKHR(commandBuffer, uint32_t(pAccelerationStructures.size()), pAccelerationStructures.data(), queryType, queryPool, firstQuery);
 }
@@ -28139,7 +28139,7 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateRayTracingPipelinesKHR(
     VkPipeline*                                 pPipelines);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline VkResult vkCreateRayTracingPipelinesKHR(VkDevice device, VkDeferredOperationKHR deferredOperation, VkPipelineCache pipelineCache, const std::span<VkRayTracingPipelineCreateInfoKHR>& pCreateInfos, VkPipeline* pPipelines)
+extern "C++" inline VkResult vkCreateRayTracingPipelinesKHR(VkDevice device, VkDeferredOperationKHR deferredOperation, VkPipelineCache pipelineCache, std::span<const VkRayTracingPipelineCreateInfoKHR> pCreateInfos, VkPipeline* pPipelines)
 {
     return vkCreateRayTracingPipelinesKHR(device, deferredOperation, pipelineCache, uint32_t(pCreateInfos.size()), pCreateInfos.data(), nullptr, pPipelines);
 }

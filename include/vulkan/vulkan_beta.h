@@ -139,7 +139,7 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateExecutionGraphPipelinesAMDX(
     VkPipeline*                                 pPipelines);
 
 #if VK_CPP20_FEATURES
-extern "C++" inline VkResult vkCreateExecutionGraphPipelinesAMDX(VkDevice                                        device, VkPipelineCache pipelineCache, const std::span<VkExecutionGraphPipelineCreateInfoAMDX>& pCreateInfos, VkPipeline*               pPipelines)
+extern "C++" inline VkResult vkCreateExecutionGraphPipelinesAMDX(VkDevice                                        device, VkPipelineCache pipelineCache, std::span<const VkExecutionGraphPipelineCreateInfoAMDX> pCreateInfos, VkPipeline*               pPipelines)
 {
     return vkCreateExecutionGraphPipelinesAMDX(device, pipelineCache, uint32_t(pCreateInfos.size()), pCreateInfos.data(), nullptr, pPipelines);
 }
