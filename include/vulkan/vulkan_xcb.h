@@ -25,8 +25,8 @@ extern "C" {
 #define VK_KHR_XCB_SURFACE_EXTENSION_NAME "VK_KHR_xcb_surface"
 typedef VkFlags VkXcbSurfaceCreateFlagsKHR;
 typedef struct VkXcbSurfaceCreateInfoKHR {
-    VkStructureType               sType;
-    const void*                   pNext;
+    VkStructureType               sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_XCB_SURFACE_CREATE_INFO_KHR);
+    const void*                   pNext VK_CPP11_DEFAULT(nullptr);
     VkXcbSurfaceCreateFlagsKHR    flags;
     xcb_connection_t*             connection;
     xcb_window_t                  window;
@@ -42,6 +42,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateXcbSurfaceKHR(
     const VkXcbSurfaceCreateInfoKHR*            pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkSurfaceKHR*                               pSurface);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateXcbSurfaceKHR(VkInstance instance, const VkXcbSurfaceCreateInfoKHR& pCreateInfo, VkSurfaceKHR* pSurface)
+{
+    return vkCreateXcbSurfaceKHR(instance, &pCreateInfo, nullptr, pSurface);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES

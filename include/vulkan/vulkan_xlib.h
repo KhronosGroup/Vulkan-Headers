@@ -25,8 +25,8 @@ extern "C" {
 #define VK_KHR_XLIB_SURFACE_EXTENSION_NAME "VK_KHR_xlib_surface"
 typedef VkFlags VkXlibSurfaceCreateFlagsKHR;
 typedef struct VkXlibSurfaceCreateInfoKHR {
-    VkStructureType                sType;
-    const void*                    pNext;
+    VkStructureType                sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_XLIB_SURFACE_CREATE_INFO_KHR);
+    const void*                    pNext VK_CPP11_DEFAULT(nullptr);
     VkXlibSurfaceCreateFlagsKHR    flags;
     Display*                       dpy;
     Window                         window;
@@ -42,6 +42,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateXlibSurfaceKHR(
     const VkXlibSurfaceCreateInfoKHR*           pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkSurfaceKHR*                               pSurface);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateXlibSurfaceKHR(VkInstance instance, const VkXlibSurfaceCreateInfoKHR& pCreateInfo, VkSurfaceKHR* pSurface)
+{
+    return vkCreateXlibSurfaceKHR(instance, &pCreateInfo, nullptr, pSurface);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES

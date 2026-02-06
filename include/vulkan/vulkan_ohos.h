@@ -25,21 +25,21 @@ struct OH_NativeBuffer;
 #define VK_OHOS_EXTERNAL_MEMORY_SPEC_VERSION 1
 #define VK_OHOS_EXTERNAL_MEMORY_EXTENSION_NAME "VK_OHOS_external_memory"
 typedef struct VkNativeBufferUsageOHOS {
-    VkStructureType    sType;
-    void*              pNext;
+    VkStructureType    sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_NATIVE_BUFFER_USAGE_OHOS);
+    void*              pNext VK_CPP11_DEFAULT(nullptr);
     uint64_t           OHOSNativeBufferUsage;
 } VkNativeBufferUsageOHOS;
 
 typedef struct VkNativeBufferPropertiesOHOS {
-    VkStructureType    sType;
-    void*              pNext;
+    VkStructureType    sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_NATIVE_BUFFER_PROPERTIES_OHOS);
+    void*              pNext VK_CPP11_DEFAULT(nullptr);
     VkDeviceSize       allocationSize;
     uint32_t           memoryTypeBits;
 } VkNativeBufferPropertiesOHOS;
 
 typedef struct VkNativeBufferFormatPropertiesOHOS {
-    VkStructureType                  sType;
-    void*                            pNext;
+    VkStructureType                  sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_NATIVE_BUFFER_FORMAT_PROPERTIES_OHOS);
+    void*                            pNext VK_CPP11_DEFAULT(nullptr);
     VkFormat                         format;
     uint64_t                         externalFormat;
     VkFormatFeatureFlags             formatFeatures;
@@ -51,20 +51,20 @@ typedef struct VkNativeBufferFormatPropertiesOHOS {
 } VkNativeBufferFormatPropertiesOHOS;
 
 typedef struct VkImportNativeBufferInfoOHOS {
-    VkStructureType            sType;
-    const void*                pNext;
+    VkStructureType            sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_IMPORT_NATIVE_BUFFER_INFO_OHOS);
+    const void*                pNext VK_CPP11_DEFAULT(nullptr);
     struct OH_NativeBuffer*    buffer;
 } VkImportNativeBufferInfoOHOS;
 
 typedef struct VkMemoryGetNativeBufferInfoOHOS {
-    VkStructureType    sType;
-    const void*        pNext;
+    VkStructureType    sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_MEMORY_GET_NATIVE_BUFFER_INFO_OHOS);
+    const void*        pNext VK_CPP11_DEFAULT(nullptr);
     VkDeviceMemory     memory;
 } VkMemoryGetNativeBufferInfoOHOS;
 
 typedef struct VkExternalFormatOHOS {
-    VkStructureType    sType;
-    void*              pNext;
+    VkStructureType    sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_OHOS);
+    void*              pNext VK_CPP11_DEFAULT(nullptr);
     uint64_t           externalFormat;
 } VkExternalFormatOHOS;
 
@@ -84,6 +84,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetMemoryNativeBufferOHOS(
     VkDevice                                    device,
     const VkMemoryGetNativeBufferInfoOHOS*      pInfo,
     struct OH_NativeBuffer**                    pBuffer);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetMemoryNativeBufferOHOS(VkDevice device, const VkMemoryGetNativeBufferInfoOHOS& pInfo, struct OH_NativeBuffer** pBuffer)
+{
+    return vkGetMemoryNativeBufferOHOS(device, &pInfo, pBuffer);
+}
+#endif
 #endif
 #endif
 
@@ -95,8 +102,8 @@ typedef struct NativeWindow OHNativeWindow;
 #define VK_OHOS_SURFACE_EXTENSION_NAME    "VK_OHOS_surface"
 typedef VkFlags VkSurfaceCreateFlagsOHOS;
 typedef struct VkSurfaceCreateInfoOHOS {
-    VkStructureType             sType;
-    const void*                 pNext;
+    VkStructureType             sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_SURFACE_CREATE_INFO_OHOS);
+    const void*                 pNext VK_CPP11_DEFAULT(nullptr);
     VkSurfaceCreateFlagsOHOS    flags;
     OHNativeWindow*             window;
 } VkSurfaceCreateInfoOHOS;
@@ -110,6 +117,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateSurfaceOHOS(
     const VkSurfaceCreateInfoOHOS*              pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkSurfaceKHR*                               pSurface);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateSurfaceOHOS(VkInstance instance, const VkSurfaceCreateInfoOHOS& pCreateInfo, VkSurfaceKHR* pSurface)
+{
+    return vkCreateSurfaceOHOS(instance, &pCreateInfo, nullptr, pSurface);
+}
+#endif
 #endif
 #endif
 

@@ -25,8 +25,8 @@ extern "C" {
 #define VK_MVK_MACOS_SURFACE_EXTENSION_NAME "VK_MVK_macos_surface"
 typedef VkFlags VkMacOSSurfaceCreateFlagsMVK;
 typedef struct VkMacOSSurfaceCreateInfoMVK {
-    VkStructureType                 sType;
-    const void*                     pNext;
+    VkStructureType                 sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_MACOS_SURFACE_CREATE_INFO_MVK);
+    const void*                     pNext VK_CPP11_DEFAULT(nullptr);
     VkMacOSSurfaceCreateFlagsMVK    flags;
     const void*                     pView;
 } VkMacOSSurfaceCreateInfoMVK;
@@ -40,6 +40,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateMacOSSurfaceMVK(
     const VkMacOSSurfaceCreateInfoMVK*          pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkSurfaceKHR*                               pSurface);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateMacOSSurfaceMVK(VkInstance instance, const VkMacOSSurfaceCreateInfoMVK& pCreateInfo, VkSurfaceKHR* pSurface)
+{
+    return vkCreateMacOSSurfaceMVK(instance, &pCreateInfo, nullptr, pSurface);
+}
+#endif
 #endif
 #endif
 

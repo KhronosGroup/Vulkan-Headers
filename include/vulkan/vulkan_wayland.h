@@ -25,8 +25,8 @@ extern "C" {
 #define VK_KHR_WAYLAND_SURFACE_EXTENSION_NAME "VK_KHR_wayland_surface"
 typedef VkFlags VkWaylandSurfaceCreateFlagsKHR;
 typedef struct VkWaylandSurfaceCreateInfoKHR {
-    VkStructureType                   sType;
-    const void*                       pNext;
+    VkStructureType                   sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_WAYLAND_SURFACE_CREATE_INFO_KHR);
+    const void*                       pNext VK_CPP11_DEFAULT(nullptr);
     VkWaylandSurfaceCreateFlagsKHR    flags;
     struct wl_display*                display;
     struct wl_surface*                surface;
@@ -42,6 +42,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateWaylandSurfaceKHR(
     const VkWaylandSurfaceCreateInfoKHR*        pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkSurfaceKHR*                               pSurface);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateWaylandSurfaceKHR(VkInstance instance, const VkWaylandSurfaceCreateInfoKHR& pCreateInfo, VkSurfaceKHR* pSurface)
+{
+    return vkCreateWaylandSurfaceKHR(instance, &pCreateInfo, nullptr, pSurface);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES

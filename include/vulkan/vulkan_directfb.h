@@ -25,8 +25,8 @@ extern "C" {
 #define VK_EXT_DIRECTFB_SURFACE_EXTENSION_NAME "VK_EXT_directfb_surface"
 typedef VkFlags VkDirectFBSurfaceCreateFlagsEXT;
 typedef struct VkDirectFBSurfaceCreateInfoEXT {
-    VkStructureType                    sType;
-    const void*                        pNext;
+    VkStructureType                    sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_DIRECTFB_SURFACE_CREATE_INFO_EXT);
+    const void*                        pNext VK_CPP11_DEFAULT(nullptr);
     VkDirectFBSurfaceCreateFlagsEXT    flags;
     IDirectFB*                         dfb;
     IDirectFBSurface*                  surface;
@@ -42,6 +42,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateDirectFBSurfaceEXT(
     const VkDirectFBSurfaceCreateInfoEXT*       pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkSurfaceKHR*                               pSurface);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateDirectFBSurfaceEXT(VkInstance instance, const VkDirectFBSurfaceCreateInfoEXT& pCreateInfo, VkSurfaceKHR* pSurface)
+{
+    return vkCreateDirectFBSurfaceEXT(instance, &pCreateInfo, nullptr, pSurface);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES

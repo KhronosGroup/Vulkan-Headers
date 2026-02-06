@@ -25,8 +25,8 @@ extern "C" {
 #define VK_GGP_STREAM_DESCRIPTOR_SURFACE_EXTENSION_NAME "VK_GGP_stream_descriptor_surface"
 typedef VkFlags VkStreamDescriptorSurfaceCreateFlagsGGP;
 typedef struct VkStreamDescriptorSurfaceCreateInfoGGP {
-    VkStructureType                            sType;
-    const void*                                pNext;
+    VkStructureType                            sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_STREAM_DESCRIPTOR_SURFACE_CREATE_INFO_GGP);
+    const void*                                pNext VK_CPP11_DEFAULT(nullptr);
     VkStreamDescriptorSurfaceCreateFlagsGGP    flags;
     GgpStreamDescriptor                        streamDescriptor;
 } VkStreamDescriptorSurfaceCreateInfoGGP;
@@ -40,6 +40,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateStreamDescriptorSurfaceGGP(
     const VkStreamDescriptorSurfaceCreateInfoGGP* pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkSurfaceKHR*                               pSurface);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateStreamDescriptorSurfaceGGP(VkInstance instance, const VkStreamDescriptorSurfaceCreateInfoGGP& pCreateInfo, VkSurfaceKHR* pSurface)
+{
+    return vkCreateStreamDescriptorSurfaceGGP(instance, &pCreateInfo, nullptr, pSurface);
+}
+#endif
 #endif
 #endif
 
@@ -49,8 +56,8 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateStreamDescriptorSurfaceGGP(
 #define VK_GGP_FRAME_TOKEN_SPEC_VERSION   1
 #define VK_GGP_FRAME_TOKEN_EXTENSION_NAME "VK_GGP_frame_token"
 typedef struct VkPresentFrameTokenGGP {
-    VkStructureType    sType;
-    const void*        pNext;
+    VkStructureType    sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_PRESENT_FRAME_TOKEN_GGP);
+    const void*        pNext VK_CPP11_DEFAULT(nullptr);
     GgpFrameToken      frameToken;
 } VkPresentFrameTokenGGP;
 

@@ -25,8 +25,8 @@ extern "C" {
 #define VK_FUCHSIA_IMAGEPIPE_SURFACE_EXTENSION_NAME "VK_FUCHSIA_imagepipe_surface"
 typedef VkFlags VkImagePipeSurfaceCreateFlagsFUCHSIA;
 typedef struct VkImagePipeSurfaceCreateInfoFUCHSIA {
-    VkStructureType                         sType;
-    const void*                             pNext;
+    VkStructureType                         sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_IMAGEPIPE_SURFACE_CREATE_INFO_FUCHSIA);
+    const void*                             pNext VK_CPP11_DEFAULT(nullptr);
     VkImagePipeSurfaceCreateFlagsFUCHSIA    flags;
     zx_handle_t                             imagePipeHandle;
 } VkImagePipeSurfaceCreateInfoFUCHSIA;
@@ -40,6 +40,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateImagePipeSurfaceFUCHSIA(
     const VkImagePipeSurfaceCreateInfoFUCHSIA*  pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkSurfaceKHR*                               pSurface);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateImagePipeSurfaceFUCHSIA(VkInstance instance, const VkImagePipeSurfaceCreateInfoFUCHSIA& pCreateInfo, VkSurfaceKHR* pSurface)
+{
+    return vkCreateImagePipeSurfaceFUCHSIA(instance, &pCreateInfo, nullptr, pSurface);
+}
+#endif
 #endif
 #endif
 
@@ -49,21 +56,21 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateImagePipeSurfaceFUCHSIA(
 #define VK_FUCHSIA_EXTERNAL_MEMORY_SPEC_VERSION 1
 #define VK_FUCHSIA_EXTERNAL_MEMORY_EXTENSION_NAME "VK_FUCHSIA_external_memory"
 typedef struct VkImportMemoryZirconHandleInfoFUCHSIA {
-    VkStructureType                       sType;
-    const void*                           pNext;
+    VkStructureType                       sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_IMPORT_MEMORY_ZIRCON_HANDLE_INFO_FUCHSIA);
+    const void*                           pNext VK_CPP11_DEFAULT(nullptr);
     VkExternalMemoryHandleTypeFlagBits    handleType;
     zx_handle_t                           handle;
 } VkImportMemoryZirconHandleInfoFUCHSIA;
 
 typedef struct VkMemoryZirconHandlePropertiesFUCHSIA {
-    VkStructureType    sType;
-    void*              pNext;
+    VkStructureType    sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_MEMORY_ZIRCON_HANDLE_PROPERTIES_FUCHSIA);
+    void*              pNext VK_CPP11_DEFAULT(nullptr);
     uint32_t           memoryTypeBits;
 } VkMemoryZirconHandlePropertiesFUCHSIA;
 
 typedef struct VkMemoryGetZirconHandleInfoFUCHSIA {
-    VkStructureType                       sType;
-    const void*                           pNext;
+    VkStructureType                       sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_MEMORY_GET_ZIRCON_HANDLE_INFO_FUCHSIA);
+    const void*                           pNext VK_CPP11_DEFAULT(nullptr);
     VkDeviceMemory                        memory;
     VkExternalMemoryHandleTypeFlagBits    handleType;
 } VkMemoryGetZirconHandleInfoFUCHSIA;
@@ -77,6 +84,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetMemoryZirconHandleFUCHSIA(
     VkDevice                                    device,
     const VkMemoryGetZirconHandleInfoFUCHSIA*   pGetZirconHandleInfo,
     zx_handle_t*                                pZirconHandle);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetMemoryZirconHandleFUCHSIA(VkDevice device, const VkMemoryGetZirconHandleInfoFUCHSIA& pGetZirconHandleInfo, zx_handle_t* pZirconHandle)
+{
+    return vkGetMemoryZirconHandleFUCHSIA(device, &pGetZirconHandleInfo, pZirconHandle);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -94,8 +108,8 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetMemoryZirconHandlePropertiesFUCHSIA(
 #define VK_FUCHSIA_EXTERNAL_SEMAPHORE_SPEC_VERSION 1
 #define VK_FUCHSIA_EXTERNAL_SEMAPHORE_EXTENSION_NAME "VK_FUCHSIA_external_semaphore"
 typedef struct VkImportSemaphoreZirconHandleInfoFUCHSIA {
-    VkStructureType                          sType;
-    const void*                              pNext;
+    VkStructureType                          sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_ZIRCON_HANDLE_INFO_FUCHSIA);
+    const void*                              pNext VK_CPP11_DEFAULT(nullptr);
     VkSemaphore                              semaphore;
     VkSemaphoreImportFlags                   flags;
     VkExternalSemaphoreHandleTypeFlagBits    handleType;
@@ -103,8 +117,8 @@ typedef struct VkImportSemaphoreZirconHandleInfoFUCHSIA {
 } VkImportSemaphoreZirconHandleInfoFUCHSIA;
 
 typedef struct VkSemaphoreGetZirconHandleInfoFUCHSIA {
-    VkStructureType                          sType;
-    const void*                              pNext;
+    VkStructureType                          sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_SEMAPHORE_GET_ZIRCON_HANDLE_INFO_FUCHSIA);
+    const void*                              pNext VK_CPP11_DEFAULT(nullptr);
     VkSemaphore                              semaphore;
     VkExternalSemaphoreHandleTypeFlagBits    handleType;
 } VkSemaphoreGetZirconHandleInfoFUCHSIA;
@@ -117,6 +131,13 @@ typedef VkResult (VKAPI_PTR *PFN_vkGetSemaphoreZirconHandleFUCHSIA)(VkDevice dev
 VKAPI_ATTR VkResult VKAPI_CALL vkImportSemaphoreZirconHandleFUCHSIA(
     VkDevice                                    device,
     const VkImportSemaphoreZirconHandleInfoFUCHSIA* pImportSemaphoreZirconHandleInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkImportSemaphoreZirconHandleFUCHSIA(VkDevice device, const VkImportSemaphoreZirconHandleInfoFUCHSIA& pImportSemaphoreZirconHandleInfo)
+{
+    return vkImportSemaphoreZirconHandleFUCHSIA(device, &pImportSemaphoreZirconHandleInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -124,6 +145,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetSemaphoreZirconHandleFUCHSIA(
     VkDevice                                    device,
     const VkSemaphoreGetZirconHandleInfoFUCHSIA* pGetZirconHandleInfo,
     zx_handle_t*                                pZirconHandle);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetSemaphoreZirconHandleFUCHSIA(VkDevice device, const VkSemaphoreGetZirconHandleInfoFUCHSIA& pGetZirconHandleInfo, zx_handle_t* pZirconHandle)
+{
+    return vkGetSemaphoreZirconHandleFUCHSIA(device, &pGetZirconHandleInfo, pZirconHandle);
+}
+#endif
 #endif
 #endif
 
@@ -145,28 +173,28 @@ typedef enum VkImageConstraintsInfoFlagBitsFUCHSIA {
 } VkImageConstraintsInfoFlagBitsFUCHSIA;
 typedef VkFlags VkImageConstraintsInfoFlagsFUCHSIA;
 typedef struct VkBufferCollectionCreateInfoFUCHSIA {
-    VkStructureType    sType;
-    const void*        pNext;
+    VkStructureType    sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_BUFFER_COLLECTION_CREATE_INFO_FUCHSIA);
+    const void*        pNext VK_CPP11_DEFAULT(nullptr);
     zx_handle_t        collectionToken;
 } VkBufferCollectionCreateInfoFUCHSIA;
 
 typedef struct VkImportMemoryBufferCollectionFUCHSIA {
-    VkStructureType              sType;
-    const void*                  pNext;
+    VkStructureType              sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_IMPORT_MEMORY_BUFFER_COLLECTION_FUCHSIA);
+    const void*                  pNext VK_CPP11_DEFAULT(nullptr);
     VkBufferCollectionFUCHSIA    collection;
     uint32_t                     index;
 } VkImportMemoryBufferCollectionFUCHSIA;
 
 typedef struct VkBufferCollectionImageCreateInfoFUCHSIA {
-    VkStructureType              sType;
-    const void*                  pNext;
+    VkStructureType              sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_BUFFER_COLLECTION_IMAGE_CREATE_INFO_FUCHSIA);
+    const void*                  pNext VK_CPP11_DEFAULT(nullptr);
     VkBufferCollectionFUCHSIA    collection;
     uint32_t                     index;
 } VkBufferCollectionImageCreateInfoFUCHSIA;
 
 typedef struct VkBufferCollectionConstraintsInfoFUCHSIA {
-    VkStructureType    sType;
-    const void*        pNext;
+    VkStructureType    sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_BUFFER_COLLECTION_CONSTRAINTS_INFO_FUCHSIA);
+    const void*        pNext VK_CPP11_DEFAULT(nullptr);
     uint32_t           minBufferCount;
     uint32_t           maxBufferCount;
     uint32_t           minBufferCountForCamping;
@@ -175,29 +203,29 @@ typedef struct VkBufferCollectionConstraintsInfoFUCHSIA {
 } VkBufferCollectionConstraintsInfoFUCHSIA;
 
 typedef struct VkBufferConstraintsInfoFUCHSIA {
-    VkStructureType                             sType;
-    const void*                                 pNext;
+    VkStructureType                             sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_BUFFER_CONSTRAINTS_INFO_FUCHSIA);
+    const void*                                 pNext VK_CPP11_DEFAULT(nullptr);
     VkBufferCreateInfo                          createInfo;
     VkFormatFeatureFlags                        requiredFormatFeatures;
     VkBufferCollectionConstraintsInfoFUCHSIA    bufferCollectionConstraints;
 } VkBufferConstraintsInfoFUCHSIA;
 
 typedef struct VkBufferCollectionBufferCreateInfoFUCHSIA {
-    VkStructureType              sType;
-    const void*                  pNext;
+    VkStructureType              sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_BUFFER_COLLECTION_BUFFER_CREATE_INFO_FUCHSIA);
+    const void*                  pNext VK_CPP11_DEFAULT(nullptr);
     VkBufferCollectionFUCHSIA    collection;
     uint32_t                     index;
 } VkBufferCollectionBufferCreateInfoFUCHSIA;
 
 typedef struct VkSysmemColorSpaceFUCHSIA {
-    VkStructureType    sType;
-    const void*        pNext;
+    VkStructureType    sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_SYSMEM_COLOR_SPACE_FUCHSIA);
+    const void*        pNext VK_CPP11_DEFAULT(nullptr);
     uint32_t           colorSpace;
 } VkSysmemColorSpaceFUCHSIA;
 
 typedef struct VkBufferCollectionPropertiesFUCHSIA {
-    VkStructureType                  sType;
-    void*                            pNext;
+    VkStructureType                  sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_BUFFER_COLLECTION_PROPERTIES_FUCHSIA);
+    void*                            pNext VK_CPP11_DEFAULT(nullptr);
     uint32_t                         memoryTypeBits;
     uint32_t                         bufferCount;
     uint32_t                         createInfoIndex;
@@ -212,8 +240,8 @@ typedef struct VkBufferCollectionPropertiesFUCHSIA {
 } VkBufferCollectionPropertiesFUCHSIA;
 
 typedef struct VkImageFormatConstraintsInfoFUCHSIA {
-    VkStructureType                         sType;
-    const void*                             pNext;
+    VkStructureType                         sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_IMAGE_FORMAT_CONSTRAINTS_INFO_FUCHSIA);
+    const void*                             pNext VK_CPP11_DEFAULT(nullptr);
     VkImageCreateInfo                       imageCreateInfo;
     VkFormatFeatureFlags                    requiredFormatFeatures;
     VkImageFormatConstraintsFlagsFUCHSIA    flags;
@@ -223,8 +251,8 @@ typedef struct VkImageFormatConstraintsInfoFUCHSIA {
 } VkImageFormatConstraintsInfoFUCHSIA;
 
 typedef struct VkImageConstraintsInfoFUCHSIA {
-    VkStructureType                               sType;
-    const void*                                   pNext;
+    VkStructureType                               sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_IMAGE_CONSTRAINTS_INFO_FUCHSIA);
+    const void*                                   pNext VK_CPP11_DEFAULT(nullptr);
     uint32_t                                      formatConstraintsCount;
     const VkImageFormatConstraintsInfoFUCHSIA*    pFormatConstraints;
     VkBufferCollectionConstraintsInfoFUCHSIA      bufferCollectionConstraints;
@@ -244,6 +272,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateBufferCollectionFUCHSIA(
     const VkBufferCollectionCreateInfoFUCHSIA*  pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkBufferCollectionFUCHSIA*                  pCollection);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateBufferCollectionFUCHSIA(VkDevice device, const VkBufferCollectionCreateInfoFUCHSIA& pCreateInfo, VkBufferCollectionFUCHSIA* pCollection)
+{
+    return vkCreateBufferCollectionFUCHSIA(device, &pCreateInfo, nullptr, pCollection);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -251,6 +286,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkSetBufferCollectionImageConstraintsFUCHSIA(
     VkDevice                                    device,
     VkBufferCollectionFUCHSIA                   collection,
     const VkImageConstraintsInfoFUCHSIA*        pImageConstraintsInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkSetBufferCollectionImageConstraintsFUCHSIA(VkDevice device, VkBufferCollectionFUCHSIA collection, const VkImageConstraintsInfoFUCHSIA& pImageConstraintsInfo)
+{
+    return vkSetBufferCollectionImageConstraintsFUCHSIA(device, collection, &pImageConstraintsInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -258,6 +300,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkSetBufferCollectionBufferConstraintsFUCHSIA(
     VkDevice                                    device,
     VkBufferCollectionFUCHSIA                   collection,
     const VkBufferConstraintsInfoFUCHSIA*       pBufferConstraintsInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkSetBufferCollectionBufferConstraintsFUCHSIA(VkDevice device, VkBufferCollectionFUCHSIA collection, const VkBufferConstraintsInfoFUCHSIA& pBufferConstraintsInfo)
+{
+    return vkSetBufferCollectionBufferConstraintsFUCHSIA(device, collection, &pBufferConstraintsInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -265,6 +314,13 @@ VKAPI_ATTR void VKAPI_CALL vkDestroyBufferCollectionFUCHSIA(
     VkDevice                                    device,
     VkBufferCollectionFUCHSIA                   collection,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyBufferCollectionFUCHSIA(VkDevice device, VkBufferCollectionFUCHSIA collection)
+{
+    return vkDestroyBufferCollectionFUCHSIA(device, collection, nullptr);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES

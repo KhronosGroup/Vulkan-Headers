@@ -24,8 +24,8 @@ extern "C" {
 #define VK_KHR_PORTABILITY_SUBSET_SPEC_VERSION 1
 #define VK_KHR_PORTABILITY_SUBSET_EXTENSION_NAME "VK_KHR_portability_subset"
 typedef struct VkPhysicalDevicePortabilitySubsetFeaturesKHR {
-    VkStructureType    sType;
-    void*              pNext;
+    VkStructureType    sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PORTABILITY_SUBSET_FEATURES_KHR);
+    void*              pNext VK_CPP11_DEFAULT(nullptr);
     VkBool32           constantAlphaColorBlendFactors;
     VkBool32           events;
     VkBool32           imageViewFormatReinterpretation;
@@ -44,8 +44,8 @@ typedef struct VkPhysicalDevicePortabilitySubsetFeaturesKHR {
 } VkPhysicalDevicePortabilitySubsetFeaturesKHR;
 
 typedef struct VkPhysicalDevicePortabilitySubsetPropertiesKHR {
-    VkStructureType    sType;
-    void*              pNext;
+    VkStructureType    sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PORTABILITY_SUBSET_PROPERTIES_KHR);
+    void*              pNext VK_CPP11_DEFAULT(nullptr);
     uint32_t           minVertexInputBindingStrideAlignment;
 } VkPhysicalDevicePortabilitySubsetPropertiesKHR;
 
@@ -57,15 +57,15 @@ typedef struct VkPhysicalDevicePortabilitySubsetPropertiesKHR {
 #define VK_AMDX_SHADER_ENQUEUE_EXTENSION_NAME "VK_AMDX_shader_enqueue"
 #define VK_SHADER_INDEX_UNUSED_AMDX       (~0U)
 typedef struct VkPhysicalDeviceShaderEnqueueFeaturesAMDX {
-    VkStructureType    sType;
-    void*              pNext;
+    VkStructureType    sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ENQUEUE_FEATURES_AMDX);
+    void*              pNext VK_CPP11_DEFAULT(nullptr);
     VkBool32           shaderEnqueue;
     VkBool32           shaderMeshEnqueue;
 } VkPhysicalDeviceShaderEnqueueFeaturesAMDX;
 
 typedef struct VkPhysicalDeviceShaderEnqueuePropertiesAMDX {
-    VkStructureType    sType;
-    void*              pNext;
+    VkStructureType    sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ENQUEUE_PROPERTIES_AMDX);
+    void*              pNext VK_CPP11_DEFAULT(nullptr);
     uint32_t           maxExecutionGraphDepth;
     uint32_t           maxExecutionGraphShaderOutputNodes;
     uint32_t           maxExecutionGraphShaderPayloadSize;
@@ -76,16 +76,16 @@ typedef struct VkPhysicalDeviceShaderEnqueuePropertiesAMDX {
 } VkPhysicalDeviceShaderEnqueuePropertiesAMDX;
 
 typedef struct VkExecutionGraphPipelineScratchSizeAMDX {
-    VkStructureType    sType;
-    void*              pNext;
+    VkStructureType    sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_EXECUTION_GRAPH_PIPELINE_SCRATCH_SIZE_AMDX);
+    void*              pNext VK_CPP11_DEFAULT(nullptr);
     VkDeviceSize       minSize;
     VkDeviceSize       maxSize;
     VkDeviceSize       sizeGranularity;
 } VkExecutionGraphPipelineScratchSizeAMDX;
 
 typedef struct VkExecutionGraphPipelineCreateInfoAMDX {
-    VkStructureType                           sType;
-    const void*                               pNext;
+    VkStructureType                           sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_EXECUTION_GRAPH_PIPELINE_CREATE_INFO_AMDX);
+    const void*                               pNext VK_CPP11_DEFAULT(nullptr);
     VkPipelineCreateFlags                     flags;
     uint32_t                                  stageCount;
     const VkPipelineShaderStageCreateInfo*    pStages;
@@ -114,8 +114,8 @@ typedef struct VkDispatchGraphCountInfoAMDX {
 } VkDispatchGraphCountInfoAMDX;
 
 typedef struct VkPipelineShaderStageNodeCreateInfoAMDX {
-      VkStructureType    sType;
-    const void*          pNext;
+      VkStructureType    sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_NODE_CREATE_INFO_AMDX);
+    const void*          pNext VK_CPP11_DEFAULT(nullptr);
     const char*          pName;
     uint32_t             index;
 } VkPipelineShaderStageNodeCreateInfoAMDX;
@@ -137,6 +137,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateExecutionGraphPipelinesAMDX(
     const VkExecutionGraphPipelineCreateInfoAMDX* pCreateInfos,
     const VkAllocationCallbacks*                pAllocator,
     VkPipeline*                                 pPipelines);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateExecutionGraphPipelinesAMDX(VkDevice                                        device, VkPipelineCache pipelineCache, std::span<const VkExecutionGraphPipelineCreateInfoAMDX> pCreateInfos, VkPipeline*               pPipelines)
+{
+    return vkCreateExecutionGraphPipelinesAMDX(device, pipelineCache, uint32_t(pCreateInfos.size()), pCreateInfos.data(), nullptr, pPipelines);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -152,6 +159,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkGetExecutionGraphPipelineNodeIndexAMDX(
     VkPipeline                                  executionGraph,
     const VkPipelineShaderStageNodeCreateInfoAMDX* pNodeInfo,
     uint32_t*                                   pNodeIndex);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkGetExecutionGraphPipelineNodeIndexAMDX(VkDevice                                        device, VkPipeline                                      executionGraph, const VkPipelineShaderStageNodeCreateInfoAMDX& pNodeInfo, uint32_t*                                       pNodeIndex)
+{
+    return vkGetExecutionGraphPipelineNodeIndexAMDX(device, executionGraph, &pNodeInfo, pNodeIndex);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -168,6 +182,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdDispatchGraphAMDX(
     VkDeviceAddress                             scratch,
     VkDeviceSize                                scratchSize,
     const VkDispatchGraphCountInfoAMDX*         pCountInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdDispatchGraphAMDX(VkCommandBuffer                                 commandBuffer, VkDeviceAddress                                 scratch, VkDeviceSize                                    scratchSize, const VkDispatchGraphCountInfoAMDX& pCountInfo)
+{
+    return vkCmdDispatchGraphAMDX(commandBuffer, scratch, scratchSize, &pCountInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -176,6 +197,13 @@ VKAPI_ATTR void VKAPI_CALL vkCmdDispatchGraphIndirectAMDX(
     VkDeviceAddress                             scratch,
     VkDeviceSize                                scratchSize,
     const VkDispatchGraphCountInfoAMDX*         pCountInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdDispatchGraphIndirectAMDX(VkCommandBuffer                                 commandBuffer, VkDeviceAddress                                 scratch, VkDeviceSize                                    scratchSize, const VkDispatchGraphCountInfoAMDX& pCountInfo)
+{
+    return vkCmdDispatchGraphIndirectAMDX(commandBuffer, scratch, scratchSize, &pCountInfo);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -195,22 +223,22 @@ VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkCudaFunctionNV)
 #define VK_NV_CUDA_KERNEL_LAUNCH_SPEC_VERSION 2
 #define VK_NV_CUDA_KERNEL_LAUNCH_EXTENSION_NAME "VK_NV_cuda_kernel_launch"
 typedef struct VkCudaModuleCreateInfoNV {
-    VkStructureType    sType;
-    const void*        pNext;
+    VkStructureType    sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_CUDA_MODULE_CREATE_INFO_NV);
+    const void*        pNext VK_CPP11_DEFAULT(nullptr);
     size_t             dataSize;
     const void*        pData;
 } VkCudaModuleCreateInfoNV;
 
 typedef struct VkCudaFunctionCreateInfoNV {
-    VkStructureType    sType;
-    const void*        pNext;
+    VkStructureType    sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_CUDA_FUNCTION_CREATE_INFO_NV);
+    const void*        pNext VK_CPP11_DEFAULT(nullptr);
     VkCudaModuleNV     module;
     const char*        pName;
 } VkCudaFunctionCreateInfoNV;
 
 typedef struct VkCudaLaunchInfoNV {
-    VkStructureType        sType;
-    const void*            pNext;
+    VkStructureType        sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_CUDA_LAUNCH_INFO_NV);
+    const void*            pNext VK_CPP11_DEFAULT(nullptr);
     VkCudaFunctionNV       function;
     uint32_t               gridDimX;
     uint32_t               gridDimY;
@@ -226,14 +254,14 @@ typedef struct VkCudaLaunchInfoNV {
 } VkCudaLaunchInfoNV;
 
 typedef struct VkPhysicalDeviceCudaKernelLaunchFeaturesNV {
-    VkStructureType    sType;
-    void*              pNext;
+    VkStructureType    sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUDA_KERNEL_LAUNCH_FEATURES_NV);
+    void*              pNext VK_CPP11_DEFAULT(nullptr);
     VkBool32           cudaKernelLaunchFeatures;
 } VkPhysicalDeviceCudaKernelLaunchFeaturesNV;
 
 typedef struct VkPhysicalDeviceCudaKernelLaunchPropertiesNV {
-    VkStructureType    sType;
-    void*              pNext;
+    VkStructureType    sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUDA_KERNEL_LAUNCH_PROPERTIES_NV);
+    void*              pNext VK_CPP11_DEFAULT(nullptr);
     uint32_t           computeCapabilityMinor;
     uint32_t           computeCapabilityMajor;
 } VkPhysicalDeviceCudaKernelLaunchPropertiesNV;
@@ -252,6 +280,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateCudaModuleNV(
     const VkCudaModuleCreateInfoNV*             pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkCudaModuleNV*                             pModule);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateCudaModuleNV(VkDevice device, const VkCudaModuleCreateInfoNV& pCreateInfo, VkCudaModuleNV* pModule)
+{
+    return vkCreateCudaModuleNV(device, &pCreateInfo, nullptr, pModule);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -268,6 +303,13 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateCudaFunctionNV(
     const VkCudaFunctionCreateInfoNV*           pCreateInfo,
     const VkAllocationCallbacks*                pAllocator,
     VkCudaFunctionNV*                           pFunction);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline VkResult vkCreateCudaFunctionNV(VkDevice device, const VkCudaFunctionCreateInfoNV& pCreateInfo, VkCudaFunctionNV* pFunction)
+{
+    return vkCreateCudaFunctionNV(device, &pCreateInfo, nullptr, pFunction);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -275,6 +317,13 @@ VKAPI_ATTR void VKAPI_CALL vkDestroyCudaModuleNV(
     VkDevice                                    device,
     VkCudaModuleNV                              module,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyCudaModuleNV(VkDevice device, VkCudaModuleNV module)
+{
+    return vkDestroyCudaModuleNV(device, module, nullptr);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -282,12 +331,26 @@ VKAPI_ATTR void VKAPI_CALL vkDestroyCudaFunctionNV(
     VkDevice                                    device,
     VkCudaFunctionNV                            function,
     const VkAllocationCallbacks*                pAllocator);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkDestroyCudaFunctionNV(VkDevice device, VkCudaFunctionNV function)
+{
+    return vkDestroyCudaFunctionNV(device, function, nullptr);
+}
+#endif
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR void VKAPI_CALL vkCmdCudaLaunchKernelNV(
     VkCommandBuffer                             commandBuffer,
     const VkCudaLaunchInfoNV*                   pLaunchInfo);
+
+#if VK_CPP20_FEATURES
+extern "C++" inline void vkCmdCudaLaunchKernelNV(VkCommandBuffer commandBuffer, const VkCudaLaunchInfoNV& pLaunchInfo)
+{
+    return vkCmdCudaLaunchKernelNV(commandBuffer, &pLaunchInfo);
+}
+#endif
 #endif
 #endif
 
@@ -304,20 +367,20 @@ typedef enum VkDisplacementMicromapFormatNV {
     VK_DISPLACEMENT_MICROMAP_FORMAT_MAX_ENUM_NV = 0x7FFFFFFF
 } VkDisplacementMicromapFormatNV;
 typedef struct VkPhysicalDeviceDisplacementMicromapFeaturesNV {
-    VkStructureType    sType;
-    void*              pNext;
+    VkStructureType    sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISPLACEMENT_MICROMAP_FEATURES_NV);
+    void*              pNext VK_CPP11_DEFAULT(nullptr);
     VkBool32           displacementMicromap;
 } VkPhysicalDeviceDisplacementMicromapFeaturesNV;
 
 typedef struct VkPhysicalDeviceDisplacementMicromapPropertiesNV {
-    VkStructureType    sType;
-    void*              pNext;
+    VkStructureType    sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISPLACEMENT_MICROMAP_PROPERTIES_NV);
+    void*              pNext VK_CPP11_DEFAULT(nullptr);
     uint32_t           maxDisplacementMicromapSubdivisionLevel;
 } VkPhysicalDeviceDisplacementMicromapPropertiesNV;
 
 typedef struct VkAccelerationStructureTrianglesDisplacementMicromapNV {
-    VkStructureType                     sType;
-    void*                               pNext;
+    VkStructureType                     sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_TRIANGLES_DISPLACEMENT_MICROMAP_NV);
+    void*                               pNext VK_CPP11_DEFAULT(nullptr);
     VkFormat                            displacementBiasAndScaleFormat;
     VkFormat                            displacementVectorFormat;
     VkDeviceOrHostAddressConstKHR       displacementBiasAndScaleBuffer;
@@ -350,14 +413,14 @@ typedef enum VkCompressedTriangleFormatAMDX {
     VK_COMPRESSED_TRIANGLE_FORMAT_MAX_ENUM_AMDX = 0x7FFFFFFF
 } VkCompressedTriangleFormatAMDX;
 typedef struct VkPhysicalDeviceDenseGeometryFormatFeaturesAMDX {
-    VkStructureType    sType;
-    void*              pNext;
+    VkStructureType    sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DENSE_GEOMETRY_FORMAT_FEATURES_AMDX);
+    void*              pNext VK_CPP11_DEFAULT(nullptr);
     VkBool32           denseGeometryFormat;
 } VkPhysicalDeviceDenseGeometryFormatFeaturesAMDX;
 
 typedef struct VkAccelerationStructureDenseGeometryFormatTrianglesDataAMDX {
-    VkStructureType                   sType;
-    const void*                       pNext;
+    VkStructureType                   sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_DENSE_GEOMETRY_FORMAT_TRIANGLES_DATA_AMDX);
+    const void*                       pNext VK_CPP11_DEFAULT(nullptr);
     VkDeviceOrHostAddressConstKHR     compressedData;
     VkDeviceSize                      dataSize;
     uint32_t                          numTriangles;
@@ -366,6 +429,25 @@ typedef struct VkAccelerationStructureDenseGeometryFormatTrianglesDataAMDX {
     uint32_t                          maxGeometryIndex;
     VkCompressedTriangleFormatAMDX    format;
 } VkAccelerationStructureDenseGeometryFormatTrianglesDataAMDX;
+
+
+
+// VK_NV_present_metering is a preprocessor guard. Do not pass it to API calls.
+#define VK_NV_present_metering 1
+#define VK_NV_PRESENT_METERING_SPEC_VERSION 1
+#define VK_NV_PRESENT_METERING_EXTENSION_NAME "VK_NV_present_metering"
+typedef struct VkSetPresentConfigNV {
+    VkStructureType    sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_SET_PRESENT_CONFIG_NV);
+    const void*        pNext VK_CPP11_DEFAULT(nullptr);
+    uint32_t           numFramesPerBatch;
+    uint32_t           presentConfigFeedback;
+} VkSetPresentConfigNV;
+
+typedef struct VkPhysicalDevicePresentMeteringFeaturesNV {
+    VkStructureType    sType VK_CPP11_DEFAULT(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_METERING_FEATURES_NV);
+    void*              pNext VK_CPP11_DEFAULT(nullptr);
+    VkBool32           presentMetering;
+} VkPhysicalDevicePresentMeteringFeaturesNV;
 
 
 #ifdef __cplusplus
