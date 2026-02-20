@@ -16,7 +16,13 @@
 #  include <vulkan/vulkan.hpp>
 #endif
 
-namespace VULKAN_HPP_NAMESPACE
+#if defined( VULKAN_HPP_CXX_MODULE )
+#  define VULKAN_HPP_EXPORT export
+#else
+#  define VULKAN_HPP_EXPORT
+#endif
+
+VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
 {
   //======================================
   //=== Extension inspection functions ===
@@ -44,7 +50,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   VULKAN_HPP_INLINE std::map<std::string, std::string> const & getDeprecatedExtensions()
   {
-    static const std::map<std::string, std::string> deprecatedExtensions = { { "VK_EXT_debug_report", "VK_EXT_debug_utils" },
+    static std::map<std::string, std::string> const deprecatedExtensions = { { "VK_EXT_debug_report", "VK_EXT_debug_utils" },
                                                                              { "VK_NV_glsl_shader", "" },
                                                                              { "VK_NV_dedicated_allocation", "VK_KHR_dedicated_allocation" },
                                                                              { "VK_AMD_gpu_shader_half_float", "VK_KHR_shader_float16_int8" },
@@ -77,7 +83,7 @@ namespace VULKAN_HPP_NAMESPACE
 
   VULKAN_HPP_INLINE std::set<std::string> const & getDeviceExtensions()
   {
-    static const std::set<std::string> deviceExtensions = { "VK_KHR_swapchain",
+    static std::set<std::string> const deviceExtensions = { "VK_KHR_swapchain",
                                                             "VK_KHR_display_swapchain",
                                                             "VK_NV_glsl_shader",
                                                             "VK_EXT_depth_range_unrestricted",
@@ -520,13 +526,14 @@ namespace VULKAN_HPP_NAMESPACE
                                                             "VK_SEC_pipeline_cache_incremental_mode",
                                                             "VK_EXT_shader_uniform_buffer_unsized_array",
                                                             "VK_NV_compute_occupancy_priority",
-                                                            "VK_EXT_shader_subgroup_partitioned" };
+                                                            "VK_EXT_shader_subgroup_partitioned",
+                                                            "VK_VALVE_shader_mixed_float_dot_product" };
     return deviceExtensions;
   }
 
   VULKAN_HPP_INLINE std::set<std::string> const & getInstanceExtensions()
   {
-    static const std::set<std::string> instanceExtensions = { "VK_KHR_surface",
+    static std::set<std::string> const instanceExtensions = { "VK_KHR_surface",
                                                               "VK_KHR_display",
 #if defined( VK_USE_PLATFORM_XLIB_KHR )
                                                               "VK_KHR_xlib_surface",
@@ -607,8 +614,8 @@ namespace VULKAN_HPP_NAMESPACE
 
   VULKAN_HPP_INLINE std::map<std::string, std::vector<std::vector<std::string>>> const & getExtensionDepends( std::string const & extension )
   {
-    static const std::map<std::string, std::vector<std::vector<std::string>>>                        noDependencies;
-    static const std::map<std::string, std::map<std::string, std::vector<std::vector<std::string>>>> dependencies = {
+    static std::map<std::string, std::vector<std::vector<std::string>>> const                        noDependencies;
+    static std::map<std::string, std::map<std::string, std::vector<std::vector<std::string>>>> const dependencies = {
       { "VK_KHR_swapchain",
         { { "VK_VERSION_1_0",
             { {
@@ -3081,6 +3088,22 @@ namespace VULKAN_HPP_NAMESPACE
               "VK_KHR_surface",
             } } } } }
 #endif /*VK_USE_PLATFORM_UBM_SEC*/
+      ,
+      { "VK_VALVE_shader_mixed_float_dot_product",
+        { { "VK_VERSION_1_0",
+            { {
+              "VK_KHR_get_physical_device_properties2",
+              "VK_KHR_shader_float16_int8",
+            } } },
+          { "VK_VERSION_1_1",
+            { {
+                "VK_KHR_shader_float16_int8",
+              },
+              {} } },
+          { "VK_VERSION_1_2",
+            { {
+              "VK_KHR_get_physical_device_properties2",
+            } } } } }
     };
     auto depIt = dependencies.find( extension );
     return ( depIt != dependencies.end() ) ? depIt->second : noDependencies;
@@ -3117,13 +3140,13 @@ namespace VULKAN_HPP_NAMESPACE
 
   VULKAN_HPP_INLINE std::map<std::string, std::string> const & getObsoletedExtensions()
   {
-    static const std::map<std::string, std::string> obsoletedExtensions = { { "VK_AMD_negative_viewport_height", "VK_KHR_maintenance1" } };
+    static std::map<std::string, std::string> const obsoletedExtensions = { { "VK_AMD_negative_viewport_height", "VK_KHR_maintenance1" } };
     return obsoletedExtensions;
   }
 
   VULKAN_HPP_INLINE std::map<std::string, std::string> const & getPromotedExtensions()
   {
-    static const std::map<std::string, std::string> promotedExtensions = { { "VK_KHR_sampler_mirror_clamp_to_edge", "VK_VERSION_1_2" },
+    static std::map<std::string, std::string> const promotedExtensions = { { "VK_KHR_sampler_mirror_clamp_to_edge", "VK_VERSION_1_2" },
                                                                            { "VK_EXT_debug_marker", "VK_EXT_debug_utils" },
                                                                            { "VK_AMD_draw_indirect_count", "VK_KHR_draw_indirect_count" },
                                                                            { "VK_KHR_dynamic_rendering", "VK_VERSION_1_3" },
@@ -4046,7 +4069,7 @@ namespace VULKAN_HPP_NAMESPACE
            ( extension == "VK_EXT_custom_resolve" ) || ( extension == "VK_QCOM_data_graph_model" ) || ( extension == "VK_KHR_maintenance10" ) ||
            ( extension == "VK_EXT_shader_long_vector" ) || ( extension == "VK_SEC_pipeline_cache_incremental_mode" ) ||
            ( extension == "VK_EXT_shader_uniform_buffer_unsized_array" ) || ( extension == "VK_NV_compute_occupancy_priority" ) ||
-           ( extension == "VK_EXT_shader_subgroup_partitioned" );
+           ( extension == "VK_EXT_shader_subgroup_partitioned" ) || ( extension == "VK_VALVE_shader_mixed_float_dot_product" );
   }
 
   VULKAN_HPP_INLINE VULKAN_HPP_CONSTEXPR_20 bool isInstanceExtension( std::string const & extension )
