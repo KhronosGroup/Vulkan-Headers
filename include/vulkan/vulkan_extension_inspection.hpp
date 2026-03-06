@@ -508,13 +508,12 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
 #endif /*VK_USE_PLATFORM_METAL_EXT*/
                                                             "VK_KHR_depth_clamp_zero_one",
                                                             "VK_ARM_performance_counters_by_region",
+                                                            "VK_ARM_shader_instrumentation",
                                                             "VK_EXT_vertex_attribute_robustness",
                                                             "VK_ARM_format_pack",
                                                             "VK_VALVE_fragment_density_map_layered",
                                                             "VK_KHR_robustness2",
-#if defined( VK_ENABLE_BETA_EXTENSIONS )
                                                             "VK_NV_present_metering",
-#endif /*VK_ENABLE_BETA_EXTENSIONS*/
                                                             "VK_EXT_fragment_density_map_offset",
                                                             "VK_EXT_zero_initialize_device_memory",
                                                             "VK_KHR_present_mode_fifo_latest_ready",
@@ -2960,6 +2959,12 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
               "VK_KHR_get_physical_device_properties2",
             } } },
           { "VK_VERSION_1_1", { {} } } } },
+      { "VK_ARM_shader_instrumentation",
+        { { "VK_VERSION_1_0",
+            { {
+              "VK_KHR_get_physical_device_properties2",
+            } } },
+          { "VK_VERSION_1_1", { {} } } } },
       { "VK_EXT_vertex_attribute_robustness",
         { { "VK_VERSION_1_0",
             { {
@@ -2987,17 +2992,13 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
             { {
               "VK_KHR_get_physical_device_properties2",
             } } },
-          { "VK_VERSION_1_1", { {} } } } }
-#if defined( VK_ENABLE_BETA_EXTENSIONS )
-      ,
+          { "VK_VERSION_1_1", { {} } } } },
       { "VK_NV_present_metering",
         { { "VK_VERSION_1_0",
             { {
               "VK_KHR_get_physical_device_properties2",
             } } },
-          { "VK_VERSION_1_1", { {} } } } }
-#endif /*VK_ENABLE_BETA_EXTENSIONS*/
-      ,
+          { "VK_VERSION_1_1", { {} } } } },
       { "VK_EXT_fragment_density_map_offset",
         { { "VK_VERSION_1_0",
             { {
@@ -4059,12 +4060,9 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
         || ( extension == "VK_EXT_external_memory_metal" )
 #endif /*VK_USE_PLATFORM_METAL_EXT*/
         || ( extension == "VK_KHR_depth_clamp_zero_one" ) || ( extension == "VK_ARM_performance_counters_by_region" ) ||
-           ( extension == "VK_EXT_vertex_attribute_robustness" ) || ( extension == "VK_ARM_format_pack" ) ||
-           ( extension == "VK_VALVE_fragment_density_map_layered" ) || ( extension == "VK_KHR_robustness2" )
-#if defined( VK_ENABLE_BETA_EXTENSIONS )
-        || ( extension == "VK_NV_present_metering" )
-#endif /*VK_ENABLE_BETA_EXTENSIONS*/
-        || ( extension == "VK_EXT_fragment_density_map_offset" ) || ( extension == "VK_EXT_zero_initialize_device_memory" ) ||
+           ( extension == "VK_ARM_shader_instrumentation" ) || ( extension == "VK_EXT_vertex_attribute_robustness" ) || ( extension == "VK_ARM_format_pack" ) ||
+           ( extension == "VK_VALVE_fragment_density_map_layered" ) || ( extension == "VK_KHR_robustness2" ) || ( extension == "VK_NV_present_metering" ) ||
+           ( extension == "VK_EXT_fragment_density_map_offset" ) || ( extension == "VK_EXT_zero_initialize_device_memory" ) ||
            ( extension == "VK_KHR_present_mode_fifo_latest_ready" ) || ( extension == "VK_EXT_shader_64bit_indexing" ) ||
            ( extension == "VK_EXT_custom_resolve" ) || ( extension == "VK_QCOM_data_graph_model" ) || ( extension == "VK_KHR_maintenance10" ) ||
            ( extension == "VK_EXT_shader_long_vector" ) || ( extension == "VK_SEC_pipeline_cache_incremental_mode" ) ||

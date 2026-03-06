@@ -27,7 +27,7 @@ export module vulkan;
 
 export import std;
 
-VULKAN_HPP_STATIC_ASSERT( VK_HEADER_VERSION == 344, "Wrong VK_HEADER_VERSION!" );
+VULKAN_HPP_STATIC_ASSERT( VK_HEADER_VERSION == 345, "Wrong VK_HEADER_VERSION!" );
 
 #if defined( _MSC_VER )
 #  pragma warning( push )
@@ -1251,6 +1251,15 @@ export
 
   //=== VK_ARM_performance_counters_by_region ===
   using ::PFN_vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM;
+
+  //=== VK_ARM_shader_instrumentation ===
+  using ::PFN_vkClearShaderInstrumentationMetricsARM;
+  using ::PFN_vkCmdBeginShaderInstrumentationARM;
+  using ::PFN_vkCmdEndShaderInstrumentationARM;
+  using ::PFN_vkCreateShaderInstrumentationARM;
+  using ::PFN_vkDestroyShaderInstrumentationARM;
+  using ::PFN_vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM;
+  using ::PFN_vkGetShaderInstrumentationValuesARM;
 
   //=== VK_EXT_fragment_density_map_offset ===
   using ::PFN_vkCmdEndRendering2EXT;
