@@ -37,7 +37,7 @@
 #  endif
 #endif
 
-VULKAN_HPP_STATIC_ASSERT( VK_HEADER_VERSION == 344, "Wrong VK_HEADER_VERSION!" );
+VULKAN_HPP_STATIC_ASSERT( VK_HEADER_VERSION == 345, "Wrong VK_HEADER_VERSION!" );
 
 VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
 {
@@ -1101,6 +1101,7 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
     DECLARE_IS_DISPATCHED( vkBindVideoSessionMemoryKHR )
     DECLARE_IS_DISPATCHED( vkBuildAccelerationStructuresKHR )
     DECLARE_IS_DISPATCHED( vkBuildMicromapsEXT )
+    DECLARE_IS_DISPATCHED( vkClearShaderInstrumentationMetricsARM )
     DECLARE_IS_DISPATCHED( vkCmdBeginConditionalRenderingEXT )
     DECLARE_IS_DISPATCHED( vkCmdBeginCustomResolveEXT )
     DECLARE_IS_DISPATCHED( vkCmdBeginDebugUtilsLabelEXT )
@@ -1112,6 +1113,7 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
     DECLARE_IS_DISPATCHED( vkCmdBeginRenderPass2KHR )
     DECLARE_IS_DISPATCHED( vkCmdBeginRendering )
     DECLARE_IS_DISPATCHED( vkCmdBeginRenderingKHR )
+    DECLARE_IS_DISPATCHED( vkCmdBeginShaderInstrumentationARM )
     DECLARE_IS_DISPATCHED( vkCmdBeginTransformFeedbackEXT )
     DECLARE_IS_DISPATCHED( vkCmdBeginVideoCodingKHR )
     DECLARE_IS_DISPATCHED( vkCmdBindDescriptorBufferEmbeddedSamplers2EXT )
@@ -1227,6 +1229,7 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
     DECLARE_IS_DISPATCHED( vkCmdEndRenderingKHR )
     DECLARE_IS_DISPATCHED( vkCmdEndRendering2KHR )
     DECLARE_IS_DISPATCHED( vkCmdEndRendering2EXT )
+    DECLARE_IS_DISPATCHED( vkCmdEndShaderInstrumentationARM )
     DECLARE_IS_DISPATCHED( vkCmdEndTransformFeedbackEXT )
     DECLARE_IS_DISPATCHED( vkCmdEndVideoCodingKHR )
     DECLARE_IS_DISPATCHED( vkCmdExecuteCommands )
@@ -1463,6 +1466,7 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
     DECLARE_IS_DISPATCHED( vkCreateScreenSurfaceQNX )
     DECLARE_IS_DISPATCHED( vkCreateSemaphore )
     DECLARE_IS_DISPATCHED( vkCreateSemaphoreSciSyncPoolNV )
+    DECLARE_IS_DISPATCHED( vkCreateShaderInstrumentationARM )
     DECLARE_IS_DISPATCHED( vkCreateShaderModule )
     DECLARE_IS_DISPATCHED( vkCreateShadersEXT )
     DECLARE_IS_DISPATCHED( vkCreateSharedSwapchainsKHR )
@@ -1529,6 +1533,7 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
     DECLARE_IS_DISPATCHED( vkDestroySemaphore )
     DECLARE_IS_DISPATCHED( vkDestroySemaphoreSciSyncPoolNV )
     DECLARE_IS_DISPATCHED( vkDestroyShaderEXT )
+    DECLARE_IS_DISPATCHED( vkDestroyShaderInstrumentationARM )
     DECLARE_IS_DISPATCHED( vkDestroyShaderModule )
     DECLARE_IS_DISPATCHED( vkDestroySurfaceKHR )
     DECLARE_IS_DISPATCHED( vkDestroySwapchainKHR )
@@ -1549,6 +1554,7 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
     DECLARE_IS_DISPATCHED( vkEnumeratePhysicalDeviceGroupsKHR )
     DECLARE_IS_DISPATCHED( vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM )
     DECLARE_IS_DISPATCHED( vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR )
+    DECLARE_IS_DISPATCHED( vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM )
     DECLARE_IS_DISPATCHED( vkEnumeratePhysicalDevices )
     DECLARE_IS_DISPATCHED( vkExportMetalObjectsEXT )
     DECLARE_IS_DISPATCHED( vkFlushMappedMemoryRanges )
@@ -1779,6 +1785,7 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
     DECLARE_IS_DISPATCHED( vkGetSemaphoreZirconHandleFUCHSIA )
     DECLARE_IS_DISPATCHED( vkGetShaderBinaryDataEXT )
     DECLARE_IS_DISPATCHED( vkGetShaderInfoAMD )
+    DECLARE_IS_DISPATCHED( vkGetShaderInstrumentationValuesARM )
     DECLARE_IS_DISPATCHED( vkGetShaderModuleCreateInfoIdentifierEXT )
     DECLARE_IS_DISPATCHED( vkGetShaderModuleIdentifierEXT )
     DECLARE_IS_DISPATCHED( vkGetSwapchainCounterEXT )
@@ -4751,7 +4758,7 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
       //=== VK_ANDROID_external_memory_android_hardware_buffer ===
 
       VULKAN_HPP_INLINE VkResult vkGetAndroidHardwareBufferPropertiesANDROID( VkDevice                                   device,
-                                                                              const struct AHardwareBuffer *             buffer,
+                                                                              struct AHardwareBuffer const *             buffer,
                                                                               VkAndroidHardwareBufferPropertiesANDROID * pProperties ) const VULKAN_HPP_NOEXCEPT
       {
         return ::vkGetAndroidHardwareBufferPropertiesANDROID( device, buffer, pProperties );
@@ -6818,7 +6825,7 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
       //=== VK_OHOS_external_memory ===
 
       VULKAN_HPP_INLINE VkResult vkGetNativeBufferPropertiesOHOS( VkDevice                       device,
-                                                                  const struct OH_NativeBuffer * buffer,
+                                                                  struct OH_NativeBuffer const * buffer,
                                                                   VkNativeBufferPropertiesOHOS * pProperties ) const VULKAN_HPP_NOEXCEPT
       {
         return ::vkGetNativeBufferPropertiesOHOS( device, buffer, pProperties );
@@ -7462,7 +7469,7 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
       //=== VK_QNX_external_memory_screen_buffer ===
 
       VULKAN_HPP_INLINE VkResult vkGetScreenBufferPropertiesQNX( VkDevice                      device,
-                                                                 const struct _screen_buffer * buffer,
+                                                                 struct _screen_buffer const * buffer,
                                                                  VkScreenBufferPropertiesQNX * pProperties ) const VULKAN_HPP_NOEXCEPT
       {
         return ::vkGetScreenBufferPropertiesQNX( device, buffer, pProperties );
@@ -7757,6 +7764,54 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
           physicalDevice, queueFamilyIndex, pCounterCount, pCounters, pCounterDescriptions );
       }
 
+      //=== VK_ARM_shader_instrumentation ===
+
+      VULKAN_HPP_INLINE VkResult vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM(
+        VkPhysicalDevice physicalDevice, uint32_t * pDescriptionCount, VkShaderInstrumentationMetricDescriptionARM * pDescriptions ) const VULKAN_HPP_NOEXCEPT
+      {
+        return ::vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM( physicalDevice, pDescriptionCount, pDescriptions );
+      }
+
+      VULKAN_HPP_INLINE VkResult vkCreateShaderInstrumentationARM( VkDevice                                     device,
+                                                                   VkShaderInstrumentationCreateInfoARM const * pCreateInfo,
+                                                                   VkAllocationCallbacks const *                pAllocator,
+                                                                   VkShaderInstrumentationARM *                 pInstrumentation ) const VULKAN_HPP_NOEXCEPT
+      {
+        return ::vkCreateShaderInstrumentationARM( device, pCreateInfo, pAllocator, pInstrumentation );
+      }
+
+      VULKAN_HPP_INLINE void vkDestroyShaderInstrumentationARM( VkDevice                      device,
+                                                                VkShaderInstrumentationARM    instrumentation,
+                                                                VkAllocationCallbacks const * pAllocator ) const VULKAN_HPP_NOEXCEPT
+      {
+        return ::vkDestroyShaderInstrumentationARM( device, instrumentation, pAllocator );
+      }
+
+      VULKAN_HPP_INLINE void vkCmdBeginShaderInstrumentationARM( VkCommandBuffer            commandBuffer,
+                                                                 VkShaderInstrumentationARM instrumentation ) const VULKAN_HPP_NOEXCEPT
+      {
+        return ::vkCmdBeginShaderInstrumentationARM( commandBuffer, instrumentation );
+      }
+
+      VULKAN_HPP_INLINE void vkCmdEndShaderInstrumentationARM( VkCommandBuffer commandBuffer ) const VULKAN_HPP_NOEXCEPT
+      {
+        return ::vkCmdEndShaderInstrumentationARM( commandBuffer );
+      }
+
+      VULKAN_HPP_INLINE VkResult vkGetShaderInstrumentationValuesARM( VkDevice                              device,
+                                                                      VkShaderInstrumentationARM            instrumentation,
+                                                                      uint32_t *                            pMetricBlockCount,
+                                                                      void *                                pMetricValues,
+                                                                      VkShaderInstrumentationValuesFlagsARM flags ) const VULKAN_HPP_NOEXCEPT
+      {
+        return ::vkGetShaderInstrumentationValuesARM( device, instrumentation, pMetricBlockCount, pMetricValues, flags );
+      }
+
+      VULKAN_HPP_INLINE void vkClearShaderInstrumentationMetricsARM( VkDevice device, VkShaderInstrumentationARM instrumentation ) const VULKAN_HPP_NOEXCEPT
+      {
+        return ::vkClearShaderInstrumentationMetricsARM( device, instrumentation );
+      }
+
       //=== VK_EXT_fragment_density_map_offset ===
 
       VULKAN_HPP_INLINE void vkCmdEndRendering2EXT( VkCommandBuffer commandBuffer, VkRenderingEndInfoKHR const * pRenderingEndInfo ) const VULKAN_HPP_NOEXCEPT
@@ -7912,6 +7967,48 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
       }
 
     private:
+      Optional<AllocationCallbacks const> m_allocationCallbacks = nullptr;
+      Dispatch const *                    m_dispatch            = nullptr;
+    };
+
+    template <typename OwnerType, typename Dispatch>
+    class DummyDestroy
+    {
+    public:
+      DummyDestroy() = default;
+
+      DummyDestroy( OwnerType                                               owner,
+                    Optional<AllocationCallbacks const> allocationCallbacks VULKAN_HPP_DEFAULT_ASSIGNMENT( nullptr ),
+                    Dispatch const & dispatch                               VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT ) VULKAN_HPP_NOEXCEPT
+        : m_owner( owner )
+        , m_allocationCallbacks( allocationCallbacks )
+        , m_dispatch( &dispatch )
+      {
+      }
+
+      OwnerType getOwner() const VULKAN_HPP_NOEXCEPT
+      {
+        return m_owner;
+      }
+
+      Optional<AllocationCallbacks const> getAllocator() const VULKAN_HPP_NOEXCEPT
+      {
+        return m_allocationCallbacks;
+      }
+
+      Dispatch const & getDispatch() const VULKAN_HPP_NOEXCEPT
+      {
+        return *m_dispatch;
+      }
+
+    protected:
+      template <typename T>
+      void destroy( T /*t*/ ) VULKAN_HPP_NOEXCEPT
+      {
+      }
+
+    private:
+      OwnerType                           m_owner               = {};
       Optional<AllocationCallbacks const> m_allocationCallbacks = nullptr;
       Dispatch const *                    m_dispatch            = nullptr;
     };
@@ -8139,7 +8236,7 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
     }
   };
 
-  VULKAN_HPP_INLINE const std::error_category & errorCategory() VULKAN_HPP_NOEXCEPT
+  VULKAN_HPP_INLINE std::error_category const & errorCategory() VULKAN_HPP_NOEXCEPT
   {
     static ErrorCategoryImpl instance;
     return instance;
@@ -8553,6 +8650,11 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
       return std::tuple<Result &, T &>( result, value );
     }
 
+    std::tuple<Result, T> asTuple() &&
+    {
+      return std::make_tuple( result, std::move( value ) );
+    }
+
     // std::expected-look alike
     bool has_value() const VULKAN_HPP_NOEXCEPT
     {
@@ -8583,68 +8685,6 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
       return value;
     }
   };
-
-#if !defined( VULKAN_HPP_NO_SMART_HANDLE )
-  template <typename Type, typename Dispatch>
-  struct ResultValue<UniqueHandle<Type, Dispatch>>
-  {
-#  ifdef VULKAN_HPP_HAS_NOEXCEPT
-    ResultValue( Result r, UniqueHandle<Type, Dispatch> && v ) VULKAN_HPP_NOEXCEPT
-#  else
-    ResultValue( Result r, UniqueHandle<Type, Dispatch> && v )
-#  endif
-      : result( r )
-      , value( std::move( v ) )
-    {
-    }
-
-    VULKAN_HPP_DEPRECATED(
-      "asTuple() on an l-value is deprecated, as it implicitly moves the UniqueHandle out of the ResultValue. Use asTuple() on an r-value instead, requiring to explicitly move the UniqueHandle." )
-
-    std::tuple<Result, UniqueHandle<Type, Dispatch>> asTuple() &
-    {
-      return std::make_tuple( result, std::move( value ) );
-    }
-
-    std::tuple<Result, UniqueHandle<Type, Dispatch>> asTuple() &&
-    {
-      return std::make_tuple( result, std::move( value ) );
-    }
-
-    Result                       result;
-    UniqueHandle<Type, Dispatch> value;
-  };
-
-  template <typename Type, typename Dispatch>
-  struct ResultValue<std::vector<UniqueHandle<Type, Dispatch>>>
-  {
-#  ifdef VULKAN_HPP_HAS_NOEXCEPT
-    ResultValue( Result r, std::vector<UniqueHandle<Type, Dispatch>> && v ) VULKAN_HPP_NOEXCEPT
-#  else
-    ResultValue( Result r, std::vector<UniqueHandle<Type, Dispatch>> && v )
-#  endif
-      : result( r )
-      , value( std::move( v ) )
-    {
-    }
-
-    VULKAN_HPP_DEPRECATED(
-      "asTuple() on an l-value is deprecated, as it implicitly moves the UniqueHandle out of the ResultValue. Use asTuple() on an r-value instead, requiring to explicitly move the UniqueHandle." )
-
-    std::tuple<Result, std::vector<UniqueHandle<Type, Dispatch>>> asTuple() &
-    {
-      return std::make_tuple( result, std::move( value ) );
-    }
-
-    std::tuple<Result, std::vector<UniqueHandle<Type, Dispatch>>> asTuple() &&
-    {
-      return std::make_tuple( result, std::move( value ) );
-    }
-
-    Result                                    result;
-    std::vector<UniqueHandle<Type, Dispatch>> value;
-  };
-#endif
 
   template <typename T>
   struct ResultValueType
@@ -10795,6 +10835,10 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_CONSTEXPR_INLINE auto ARMPerformanceCountersByRegionSpecVersion   = VK_ARM_PERFORMANCE_COUNTERS_BY_REGION_SPEC_VERSION;
   VULKAN_HPP_CONSTEXPR_INLINE auto ARMPerformanceCountersByRegionExtensionName = VK_ARM_PERFORMANCE_COUNTERS_BY_REGION_EXTENSION_NAME;
 
+  //=== VK_ARM_shader_instrumentation ===
+  VULKAN_HPP_CONSTEXPR_INLINE auto ARMShaderInstrumentationSpecVersion   = VK_ARM_SHADER_INSTRUMENTATION_SPEC_VERSION;
+  VULKAN_HPP_CONSTEXPR_INLINE auto ARMShaderInstrumentationExtensionName = VK_ARM_SHADER_INSTRUMENTATION_EXTENSION_NAME;
+
   //=== VK_EXT_vertex_attribute_robustness ===
   VULKAN_HPP_CONSTEXPR_INLINE auto EXTVertexAttributeRobustnessSpecVersion   = VK_EXT_VERTEX_ATTRIBUTE_ROBUSTNESS_SPEC_VERSION;
   VULKAN_HPP_CONSTEXPR_INLINE auto EXTVertexAttributeRobustnessExtensionName = VK_EXT_VERTEX_ATTRIBUTE_ROBUSTNESS_EXTENSION_NAME;
@@ -10811,11 +10855,9 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_CONSTEXPR_INLINE auto KHRRobustness2SpecVersion   = VK_KHR_ROBUSTNESS_2_SPEC_VERSION;
   VULKAN_HPP_CONSTEXPR_INLINE auto KHRRobustness2ExtensionName = VK_KHR_ROBUSTNESS_2_EXTENSION_NAME;
 
-#if defined( VK_ENABLE_BETA_EXTENSIONS )
   //=== VK_NV_present_metering ===
   VULKAN_HPP_CONSTEXPR_INLINE auto NVPresentMeteringSpecVersion   = VK_NV_PRESENT_METERING_SPEC_VERSION;
   VULKAN_HPP_CONSTEXPR_INLINE auto NVPresentMeteringExtensionName = VK_NV_PRESENT_METERING_EXTENSION_NAME;
-#endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
   //=== VK_EXT_fragment_density_map_offset ===
   VULKAN_HPP_CONSTEXPR_INLINE auto EXTFragmentDensityMapOffsetSpecVersion   = VK_EXT_FRAGMENT_DENSITY_MAP_OFFSET_SPEC_VERSION;
@@ -21082,6 +21124,34 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
     };
   };
 
+  //=== VK_ARM_shader_instrumentation ===
+  template <>
+  struct StructExtends<PhysicalDeviceShaderInstrumentationFeaturesARM, PhysicalDeviceFeatures2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<PhysicalDeviceShaderInstrumentationFeaturesARM, DeviceCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<PhysicalDeviceShaderInstrumentationPropertiesARM, PhysicalDeviceProperties2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
   //=== VK_EXT_vertex_attribute_robustness ===
   template <>
   struct StructExtends<PhysicalDeviceVertexAttributeRobustnessFeaturesEXT, PhysicalDeviceFeatures2>
@@ -21185,7 +21255,6 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
     };
   };
 
-#  if defined( VK_ENABLE_BETA_EXTENSIONS )
   //=== VK_NV_present_metering ===
   template <>
   struct StructExtends<SetPresentConfigNV, PresentInfoKHR>
@@ -21213,7 +21282,6 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
       value = true
     };
   };
-#  endif /*VK_ENABLE_BETA_EXTENSIONS*/
 
   //=== VK_EXT_fragment_density_map_offset ===
   template <>
@@ -22988,6 +23056,15 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
       //=== VK_ARM_performance_counters_by_region ===
       PFN_vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM = 0;
 
+      //=== VK_ARM_shader_instrumentation ===
+      PFN_vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM = 0;
+      PFN_vkCreateShaderInstrumentationARM                         vkCreateShaderInstrumentationARM                         = 0;
+      PFN_vkDestroyShaderInstrumentationARM                        vkDestroyShaderInstrumentationARM                        = 0;
+      PFN_vkCmdBeginShaderInstrumentationARM                       vkCmdBeginShaderInstrumentationARM                       = 0;
+      PFN_vkCmdEndShaderInstrumentationARM                         vkCmdEndShaderInstrumentationARM                         = 0;
+      PFN_vkGetShaderInstrumentationValuesARM                      vkGetShaderInstrumentationValuesARM                      = 0;
+      PFN_vkClearShaderInstrumentationMetricsARM                   vkClearShaderInstrumentationMetricsARM                   = 0;
+
       //=== VK_EXT_fragment_density_map_offset ===
       PFN_vkCmdEndRendering2EXT vkCmdEndRendering2EXT = 0;
 
@@ -24659,6 +24736,18 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
         vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM = PFN_vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM(
           vkGetInstanceProcAddr( instance, "vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM" ) );
 
+        //=== VK_ARM_shader_instrumentation ===
+        vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM = PFN_vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM(
+          vkGetInstanceProcAddr( instance, "vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM" ) );
+        vkCreateShaderInstrumentationARM   = PFN_vkCreateShaderInstrumentationARM( vkGetInstanceProcAddr( instance, "vkCreateShaderInstrumentationARM" ) );
+        vkDestroyShaderInstrumentationARM  = PFN_vkDestroyShaderInstrumentationARM( vkGetInstanceProcAddr( instance, "vkDestroyShaderInstrumentationARM" ) );
+        vkCmdBeginShaderInstrumentationARM = PFN_vkCmdBeginShaderInstrumentationARM( vkGetInstanceProcAddr( instance, "vkCmdBeginShaderInstrumentationARM" ) );
+        vkCmdEndShaderInstrumentationARM   = PFN_vkCmdEndShaderInstrumentationARM( vkGetInstanceProcAddr( instance, "vkCmdEndShaderInstrumentationARM" ) );
+        vkGetShaderInstrumentationValuesARM =
+          PFN_vkGetShaderInstrumentationValuesARM( vkGetInstanceProcAddr( instance, "vkGetShaderInstrumentationValuesARM" ) );
+        vkClearShaderInstrumentationMetricsARM =
+          PFN_vkClearShaderInstrumentationMetricsARM( vkGetInstanceProcAddr( instance, "vkClearShaderInstrumentationMetricsARM" ) );
+
         //=== VK_EXT_fragment_density_map_offset ===
         vkCmdEndRendering2EXT = PFN_vkCmdEndRendering2EXT( vkGetInstanceProcAddr( instance, "vkCmdEndRendering2EXT" ) );
         if ( !vkCmdEndRendering2KHR )
@@ -25934,6 +26023,15 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
         vkGetMemoryMetalHandleEXT           = PFN_vkGetMemoryMetalHandleEXT( vkGetDeviceProcAddr( device, "vkGetMemoryMetalHandleEXT" ) );
         vkGetMemoryMetalHandlePropertiesEXT = PFN_vkGetMemoryMetalHandlePropertiesEXT( vkGetDeviceProcAddr( device, "vkGetMemoryMetalHandlePropertiesEXT" ) );
 #endif /*VK_USE_PLATFORM_METAL_EXT*/
+
+        //=== VK_ARM_shader_instrumentation ===
+        vkCreateShaderInstrumentationARM    = PFN_vkCreateShaderInstrumentationARM( vkGetDeviceProcAddr( device, "vkCreateShaderInstrumentationARM" ) );
+        vkDestroyShaderInstrumentationARM   = PFN_vkDestroyShaderInstrumentationARM( vkGetDeviceProcAddr( device, "vkDestroyShaderInstrumentationARM" ) );
+        vkCmdBeginShaderInstrumentationARM  = PFN_vkCmdBeginShaderInstrumentationARM( vkGetDeviceProcAddr( device, "vkCmdBeginShaderInstrumentationARM" ) );
+        vkCmdEndShaderInstrumentationARM    = PFN_vkCmdEndShaderInstrumentationARM( vkGetDeviceProcAddr( device, "vkCmdEndShaderInstrumentationARM" ) );
+        vkGetShaderInstrumentationValuesARM = PFN_vkGetShaderInstrumentationValuesARM( vkGetDeviceProcAddr( device, "vkGetShaderInstrumentationValuesARM" ) );
+        vkClearShaderInstrumentationMetricsARM =
+          PFN_vkClearShaderInstrumentationMetricsARM( vkGetDeviceProcAddr( device, "vkClearShaderInstrumentationMetricsARM" ) );
 
         //=== VK_EXT_fragment_density_map_offset ===
         vkCmdEndRendering2EXT = PFN_vkCmdEndRendering2EXT( vkGetDeviceProcAddr( device, "vkCmdEndRendering2EXT" ) );

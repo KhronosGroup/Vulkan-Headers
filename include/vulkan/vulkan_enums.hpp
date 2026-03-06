@@ -1734,26 +1734,28 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
     eMemoryMetalHandlePropertiesEXT = VK_STRUCTURE_TYPE_MEMORY_METAL_HANDLE_PROPERTIES_EXT,
     eMemoryGetMetalHandleInfoEXT    = VK_STRUCTURE_TYPE_MEMORY_GET_METAL_HANDLE_INFO_EXT,
 #endif /*VK_USE_PLATFORM_METAL_EXT*/
-    ePhysicalDeviceDepthClampZeroOneFeaturesKHR             = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_KHR,
-    ePhysicalDeviceDepthClampZeroOneFeaturesEXT             = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_EXT,
-    ePhysicalDevicePerformanceCountersByRegionFeaturesARM   = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_COUNTERS_BY_REGION_FEATURES_ARM,
-    ePhysicalDevicePerformanceCountersByRegionPropertiesARM = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_COUNTERS_BY_REGION_PROPERTIES_ARM,
-    ePerformanceCounterARM                                  = VK_STRUCTURE_TYPE_PERFORMANCE_COUNTER_ARM,
-    ePerformanceCounterDescriptionARM                       = VK_STRUCTURE_TYPE_PERFORMANCE_COUNTER_DESCRIPTION_ARM,
-    eRenderPassPerformanceCountersByRegionBeginInfoARM      = VK_STRUCTURE_TYPE_RENDER_PASS_PERFORMANCE_COUNTERS_BY_REGION_BEGIN_INFO_ARM,
-    ePhysicalDeviceVertexAttributeRobustnessFeaturesEXT     = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_ROBUSTNESS_FEATURES_EXT,
-    ePhysicalDeviceFormatPackFeaturesARM                    = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FORMAT_PACK_FEATURES_ARM,
-    ePhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE   = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_LAYERED_FEATURES_VALVE,
-    ePhysicalDeviceFragmentDensityMapLayeredPropertiesVALVE = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_LAYERED_PROPERTIES_VALVE,
-    ePipelineFragmentDensityMapLayeredCreateInfoVALVE       = VK_STRUCTURE_TYPE_PIPELINE_FRAGMENT_DENSITY_MAP_LAYERED_CREATE_INFO_VALVE,
-    ePhysicalDeviceRobustness2FeaturesKHR                   = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_KHR,
-    ePhysicalDeviceRobustness2FeaturesEXT                   = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_EXT,
-    ePhysicalDeviceRobustness2PropertiesKHR                 = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_PROPERTIES_KHR,
-    ePhysicalDeviceRobustness2PropertiesEXT                 = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_PROPERTIES_EXT,
-#if defined( VK_ENABLE_BETA_EXTENSIONS )
-    eSetPresentConfigNV                      = VK_STRUCTURE_TYPE_SET_PRESENT_CONFIG_NV,
-    ePhysicalDevicePresentMeteringFeaturesNV = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_METERING_FEATURES_NV,
-#endif /*VK_ENABLE_BETA_EXTENSIONS*/
+    ePhysicalDeviceDepthClampZeroOneFeaturesKHR               = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_KHR,
+    ePhysicalDeviceDepthClampZeroOneFeaturesEXT               = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_EXT,
+    ePhysicalDevicePerformanceCountersByRegionFeaturesARM     = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_COUNTERS_BY_REGION_FEATURES_ARM,
+    ePhysicalDevicePerformanceCountersByRegionPropertiesARM   = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_COUNTERS_BY_REGION_PROPERTIES_ARM,
+    ePerformanceCounterARM                                    = VK_STRUCTURE_TYPE_PERFORMANCE_COUNTER_ARM,
+    ePerformanceCounterDescriptionARM                         = VK_STRUCTURE_TYPE_PERFORMANCE_COUNTER_DESCRIPTION_ARM,
+    eRenderPassPerformanceCountersByRegionBeginInfoARM        = VK_STRUCTURE_TYPE_RENDER_PASS_PERFORMANCE_COUNTERS_BY_REGION_BEGIN_INFO_ARM,
+    ePhysicalDeviceShaderInstrumentationFeaturesARM           = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INSTRUMENTATION_FEATURES_ARM,
+    ePhysicalDeviceShaderInstrumentationPropertiesARM         = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INSTRUMENTATION_PROPERTIES_ARM,
+    eShaderInstrumentationCreateInfoARM                       = VK_STRUCTURE_TYPE_SHADER_INSTRUMENTATION_CREATE_INFO_ARM,
+    eShaderInstrumentationMetricDescriptionARM                = VK_STRUCTURE_TYPE_SHADER_INSTRUMENTATION_METRIC_DESCRIPTION_ARM,
+    ePhysicalDeviceVertexAttributeRobustnessFeaturesEXT       = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_ROBUSTNESS_FEATURES_EXT,
+    ePhysicalDeviceFormatPackFeaturesARM                      = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FORMAT_PACK_FEATURES_ARM,
+    ePhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE     = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_LAYERED_FEATURES_VALVE,
+    ePhysicalDeviceFragmentDensityMapLayeredPropertiesVALVE   = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_LAYERED_PROPERTIES_VALVE,
+    ePipelineFragmentDensityMapLayeredCreateInfoVALVE         = VK_STRUCTURE_TYPE_PIPELINE_FRAGMENT_DENSITY_MAP_LAYERED_CREATE_INFO_VALVE,
+    ePhysicalDeviceRobustness2FeaturesKHR                     = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_KHR,
+    ePhysicalDeviceRobustness2FeaturesEXT                     = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_EXT,
+    ePhysicalDeviceRobustness2PropertiesKHR                   = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_PROPERTIES_KHR,
+    ePhysicalDeviceRobustness2PropertiesEXT                   = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_PROPERTIES_EXT,
+    eSetPresentConfigNV                                       = VK_STRUCTURE_TYPE_SET_PRESENT_CONFIG_NV,
+    ePhysicalDevicePresentMeteringFeaturesNV                  = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_METERING_FEATURES_NV,
     ePhysicalDeviceFragmentDensityMapOffsetFeaturesEXT        = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_FEATURES_EXT,
     ePhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM       = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_FEATURES_QCOM,
     ePhysicalDeviceFragmentDensityMapOffsetPropertiesEXT      = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_PROPERTIES_EXT,
@@ -1855,7 +1857,8 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
     eDataGraphPipelineSessionARM = VK_OBJECT_TYPE_DATA_GRAPH_PIPELINE_SESSION_ARM,
     eExternalComputeQueueNV      = VK_OBJECT_TYPE_EXTERNAL_COMPUTE_QUEUE_NV,
     eIndirectCommandsLayoutEXT   = VK_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_EXT,
-    eIndirectExecutionSetEXT     = VK_OBJECT_TYPE_INDIRECT_EXECUTION_SET_EXT
+    eIndirectExecutionSetEXT     = VK_OBJECT_TYPE_INDIRECT_EXECUTION_SET_EXT,
+    eShaderInstrumentationARM    = VK_OBJECT_TYPE_SHADER_INSTRUMENTATION_ARM
   };
 
   // wrapper class for enum VkVendorId, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkVendorId.html
@@ -5666,13 +5669,16 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
     eRayTracingOpacityMicromapEXT                  = VK_PIPELINE_CREATE_2_RAY_TRACING_OPACITY_MICROMAP_BIT_EXT,
     eColorAttachmentFeedbackLoopEXT                = VK_PIPELINE_CREATE_2_COLOR_ATTACHMENT_FEEDBACK_LOOP_BIT_EXT,
     eDepthStencilAttachmentFeedbackLoopEXT         = VK_PIPELINE_CREATE_2_DEPTH_STENCIL_ATTACHMENT_FEEDBACK_LOOP_BIT_EXT,
-    eRayTracingDisplacementMicromapNV              = VK_PIPELINE_CREATE_2_RAY_TRACING_DISPLACEMENT_MICROMAP_BIT_NV,
-    eDescriptorBufferEXT                           = VK_PIPELINE_CREATE_2_DESCRIPTOR_BUFFER_BIT_EXT,
-    eDisallowOpacityMicromapARM                    = VK_PIPELINE_CREATE_2_DISALLOW_OPACITY_MICROMAP_BIT_ARM,
-    eCaptureDataKHR                                = VK_PIPELINE_CREATE_2_CAPTURE_DATA_BIT_KHR,
-    eIndirectBindableEXT                           = VK_PIPELINE_CREATE_2_INDIRECT_BINDABLE_BIT_EXT,
-    ePerLayerFragmentDensityVALVE                  = VK_PIPELINE_CREATE_2_PER_LAYER_FRAGMENT_DENSITY_BIT_VALVE,
-    e64BitIndexingEXT                              = VK_PIPELINE_CREATE_2_64_BIT_INDEXING_BIT_EXT
+#if defined( VK_ENABLE_BETA_EXTENSIONS )
+    eRayTracingDisplacementMicromapNV = VK_PIPELINE_CREATE_2_RAY_TRACING_DISPLACEMENT_MICROMAP_BIT_NV,
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
+    eDescriptorBufferEXT          = VK_PIPELINE_CREATE_2_DESCRIPTOR_BUFFER_BIT_EXT,
+    eDisallowOpacityMicromapARM   = VK_PIPELINE_CREATE_2_DISALLOW_OPACITY_MICROMAP_BIT_ARM,
+    eInstrumentShadersARM         = VK_PIPELINE_CREATE_2_INSTRUMENT_SHADERS_BIT_ARM,
+    eCaptureDataKHR               = VK_PIPELINE_CREATE_2_CAPTURE_DATA_BIT_KHR,
+    eIndirectBindableEXT          = VK_PIPELINE_CREATE_2_INDIRECT_BINDABLE_BIT_EXT,
+    ePerLayerFragmentDensityVALVE = VK_PIPELINE_CREATE_2_PER_LAYER_FRAGMENT_DENSITY_BIT_VALVE,
+    e64BitIndexingEXT             = VK_PIPELINE_CREATE_2_64_BIT_INDEXING_BIT_EXT
   };
 
   using PipelineCreateFlagBits2KHR = PipelineCreateFlagBits2;
@@ -5703,10 +5709,13 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
       PipelineCreateFlagBits2::eRayTracingShaderGroupHandleCaptureReplayKHR | PipelineCreateFlagBits2::eIndirectBindableNV |
       PipelineCreateFlagBits2::eRayTracingAllowMotionNV | PipelineCreateFlagBits2::eRenderingFragmentShadingRateAttachmentKHR |
       PipelineCreateFlagBits2::eRenderingFragmentDensityMapAttachmentEXT | PipelineCreateFlagBits2::eRayTracingOpacityMicromapEXT |
-      PipelineCreateFlagBits2::eColorAttachmentFeedbackLoopEXT | PipelineCreateFlagBits2::eDepthStencilAttachmentFeedbackLoopEXT |
-      PipelineCreateFlagBits2::eRayTracingDisplacementMicromapNV | PipelineCreateFlagBits2::eDescriptorBufferEXT |
-      PipelineCreateFlagBits2::eDisallowOpacityMicromapARM | PipelineCreateFlagBits2::eCaptureDataKHR | PipelineCreateFlagBits2::eIndirectBindableEXT |
-      PipelineCreateFlagBits2::ePerLayerFragmentDensityVALVE | PipelineCreateFlagBits2::e64BitIndexingEXT;
+      PipelineCreateFlagBits2::eColorAttachmentFeedbackLoopEXT | PipelineCreateFlagBits2::eDepthStencilAttachmentFeedbackLoopEXT
+#if defined( VK_ENABLE_BETA_EXTENSIONS )
+      | PipelineCreateFlagBits2::eRayTracingDisplacementMicromapNV
+#endif /*VK_ENABLE_BETA_EXTENSIONS*/
+      | PipelineCreateFlagBits2::eDescriptorBufferEXT | PipelineCreateFlagBits2::eDisallowOpacityMicromapARM | PipelineCreateFlagBits2::eInstrumentShadersARM |
+      PipelineCreateFlagBits2::eCaptureDataKHR | PipelineCreateFlagBits2::eIndirectBindableEXT | PipelineCreateFlagBits2::ePerLayerFragmentDensityVALVE |
+      PipelineCreateFlagBits2::e64BitIndexingEXT;
   };
 
   // wrapper class for enum VkLineRasterizationMode, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkLineRasterizationMode.html
@@ -8928,6 +8937,7 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
   {
     eLinkStage                     = VK_SHADER_CREATE_LINK_STAGE_BIT_EXT,
     eDescriptorHeap                = VK_SHADER_CREATE_DESCRIPTOR_HEAP_BIT_EXT,
+    eInstrumentShaderARM           = VK_SHADER_CREATE_INSTRUMENT_SHADER_BIT_ARM,
     eAllowVaryingSubgroupSize      = VK_SHADER_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT,
     eRequireFullSubgroups          = VK_SHADER_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT,
     eNoTaskShader                  = VK_SHADER_CREATE_NO_TASK_SHADER_BIT_EXT,
@@ -8947,10 +8957,10 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
     using WrappedType                                                   = VkShaderCreateFlagBitsEXT;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                 isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR ShaderCreateFlagsEXT allFlags =
-      ShaderCreateFlagBitsEXT::eLinkStage | ShaderCreateFlagBitsEXT::eDescriptorHeap | ShaderCreateFlagBitsEXT::eAllowVaryingSubgroupSize |
-      ShaderCreateFlagBitsEXT::eRequireFullSubgroups | ShaderCreateFlagBitsEXT::eNoTaskShader | ShaderCreateFlagBitsEXT::eDispatchBase |
-      ShaderCreateFlagBitsEXT::eFragmentShadingRateAttachment | ShaderCreateFlagBitsEXT::eFragmentDensityMapAttachment |
-      ShaderCreateFlagBitsEXT::eIndirectBindable | ShaderCreateFlagBitsEXT::e64BitIndexing;
+      ShaderCreateFlagBitsEXT::eLinkStage | ShaderCreateFlagBitsEXT::eDescriptorHeap | ShaderCreateFlagBitsEXT::eInstrumentShaderARM |
+      ShaderCreateFlagBitsEXT::eAllowVaryingSubgroupSize | ShaderCreateFlagBitsEXT::eRequireFullSubgroups | ShaderCreateFlagBitsEXT::eNoTaskShader |
+      ShaderCreateFlagBitsEXT::eDispatchBase | ShaderCreateFlagBitsEXT::eFragmentShadingRateAttachment |
+      ShaderCreateFlagBitsEXT::eFragmentDensityMapAttachment | ShaderCreateFlagBitsEXT::eIndirectBindable | ShaderCreateFlagBitsEXT::e64BitIndexing;
   };
 
   // wrapper class for enum VkShaderCodeTypeEXT, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkShaderCodeTypeEXT.html
@@ -9857,6 +9867,23 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
     static VULKAN_HPP_CONST_OR_CONSTEXPR PerformanceCounterDescriptionFlagsARM allFlags  = {};
   };
 
+  //=== VK_ARM_shader_instrumentation ===
+
+  enum class ShaderInstrumentationValuesFlagBitsARM : VkShaderInstrumentationValuesFlagsARM
+  {
+  };
+
+  // wrapper using for bitmask VkShaderInstrumentationValuesFlagsARM, see
+  // https://registry.khronos.org/vulkan/specs/latest/man/html/VkShaderInstrumentationValuesFlagsARM.html
+  using ShaderInstrumentationValuesFlagsARM = Flags<ShaderInstrumentationValuesFlagBitsARM>;
+
+  template <>
+  struct FlagTraits<ShaderInstrumentationValuesFlagBitsARM>
+  {
+    static VULKAN_HPP_CONST_OR_CONSTEXPR bool                                isBitmask = true;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR ShaderInstrumentationValuesFlagsARM allFlags  = {};
+  };
+
   //=== VK_QCOM_data_graph_model ===
 
   // wrapper class for enum VkDataGraphModelCacheTypeQCOM, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkDataGraphModelCacheTypeQCOM.html
@@ -10070,7 +10097,11 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
 
         //=== VK_EXT_device_generated_commands ===
       case ObjectType::eIndirectCommandsLayoutEXT: return DebugReportObjectTypeEXT::eUnknown;
-      case ObjectType::eIndirectExecutionSetEXT  : return DebugReportObjectTypeEXT::eUnknown;
+      case ObjectType::eIndirectExecutionSetEXT:
+        return DebugReportObjectTypeEXT::eUnknown;
+
+        //=== VK_ARM_shader_instrumentation ===
+      case ObjectType::eShaderInstrumentationARM: return DebugReportObjectTypeEXT::eUnknown;
 
       default: VULKAN_HPP_ASSERT( false && "unknown ObjectType" ); return DebugReportObjectTypeEXT::eUnknown;
     }
