@@ -328,6 +328,7 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
 #endif /*VK_USE_PLATFORM_METAL_EXT*/
                                                             "VK_KHR_synchronization2",
                                                             "VK_EXT_descriptor_buffer",
+                                                            "VK_KHR_device_address_commands",
                                                             "VK_EXT_graphics_pipeline_library",
                                                             "VK_AMD_shader_early_and_late_fragment_tests",
                                                             "VK_KHR_fragment_shader_barycentric",
@@ -1871,6 +1872,26 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
             } } },
           { "VK_VERSION_1_2",
             { {
+              "VK_KHR_synchronization2",
+            } } },
+          { "VK_VERSION_1_3", { {} } } } },
+      { "VK_KHR_device_address_commands",
+        { { "VK_VERSION_1_0",
+            { {
+              "VK_EXT_extended_dynamic_state",
+              "VK_KHR_buffer_device_address",
+              "VK_KHR_get_physical_device_properties2",
+              "VK_KHR_synchronization2",
+            } } },
+          { "VK_VERSION_1_1",
+            { {
+              "VK_EXT_extended_dynamic_state",
+              "VK_KHR_buffer_device_address",
+              "VK_KHR_synchronization2",
+            } } },
+          { "VK_VERSION_1_2",
+            { {
+              "VK_EXT_extended_dynamic_state",
               "VK_KHR_synchronization2",
             } } },
           { "VK_VERSION_1_3", { {} } } } },
@@ -3967,12 +3988,12 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
 #if defined( VK_USE_PLATFORM_METAL_EXT )
         || ( extension == "VK_EXT_metal_objects" )
 #endif /*VK_USE_PLATFORM_METAL_EXT*/
-        || ( extension == "VK_KHR_synchronization2" ) || ( extension == "VK_EXT_descriptor_buffer" ) || ( extension == "VK_EXT_graphics_pipeline_library" ) ||
-           ( extension == "VK_AMD_shader_early_and_late_fragment_tests" ) || ( extension == "VK_KHR_fragment_shader_barycentric" ) ||
-           ( extension == "VK_KHR_shader_subgroup_uniform_control_flow" ) || ( extension == "VK_KHR_zero_initialize_workgroup_memory" ) ||
-           ( extension == "VK_NV_fragment_shading_rate_enums" ) || ( extension == "VK_NV_ray_tracing_motion_blur" ) || ( extension == "VK_EXT_mesh_shader" ) ||
-           ( extension == "VK_EXT_ycbcr_2plane_444_formats" ) || ( extension == "VK_EXT_fragment_density_map2" ) ||
-           ( extension == "VK_QCOM_rotated_copy_commands" ) || ( extension == "VK_EXT_image_robustness" ) ||
+        || ( extension == "VK_KHR_synchronization2" ) || ( extension == "VK_EXT_descriptor_buffer" ) || ( extension == "VK_KHR_device_address_commands" ) ||
+           ( extension == "VK_EXT_graphics_pipeline_library" ) || ( extension == "VK_AMD_shader_early_and_late_fragment_tests" ) ||
+           ( extension == "VK_KHR_fragment_shader_barycentric" ) || ( extension == "VK_KHR_shader_subgroup_uniform_control_flow" ) ||
+           ( extension == "VK_KHR_zero_initialize_workgroup_memory" ) || ( extension == "VK_NV_fragment_shading_rate_enums" ) ||
+           ( extension == "VK_NV_ray_tracing_motion_blur" ) || ( extension == "VK_EXT_mesh_shader" ) || ( extension == "VK_EXT_ycbcr_2plane_444_formats" ) ||
+           ( extension == "VK_EXT_fragment_density_map2" ) || ( extension == "VK_QCOM_rotated_copy_commands" ) || ( extension == "VK_EXT_image_robustness" ) ||
            ( extension == "VK_KHR_workgroup_memory_explicit_layout" ) || ( extension == "VK_KHR_copy_commands2" ) ||
            ( extension == "VK_EXT_image_compression_control" ) || ( extension == "VK_EXT_attachment_feedback_loop_layout" ) ||
            ( extension == "VK_EXT_4444_formats" ) || ( extension == "VK_EXT_device_fault" ) ||
