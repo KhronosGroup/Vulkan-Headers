@@ -15905,9 +15905,13 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
     VULKAN_HPP_STATIC_ASSERT( VULKAN_HPP_NAMESPACE::isVulkanHandleType<HandleType>::value, "HandleType must be a Vulkan handle type" );
     // It might be, that neither constructors, nor setters, nor designated initializers are available... need to explicitly set member by member
     VULKAN_HPP_NAMESPACE::DebugUtilsObjectNameInfoEXT nameInfo;
-    nameInfo.objectType   = handle.objectType;
+    nameInfo.objectType = handle.objectType;
+#  if ( VK_USE_64_BIT_PTR_DEFINES == 1 )
     nameInfo.objectHandle = reinterpret_cast<uint64_t>( static_cast<typename HandleType::CType>( handle ) );
-    nameInfo.pObjectName  = name.c_str();
+#  else
+    nameInfo.objectHandle = static_cast<typename HandleType::CType>( handle );
+#  endif
+    nameInfo.pObjectName = name.c_str();
     return setDebugUtilsObjectNameEXT( nameInfo, d );
   }
 #endif /* VULKAN_HPP_DISABLE_ENHANCED_MODE */
@@ -15946,11 +15950,15 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
     VULKAN_HPP_STATIC_ASSERT( VULKAN_HPP_NAMESPACE::isVulkanHandleType<HandleType>::value, "HandleType must be a Vulkan handle type" );
     // It might be, that neither constructors, nor setters, nor designated initializers are available... need to explicitly set member by member
     VULKAN_HPP_NAMESPACE::DebugUtilsObjectTagInfoEXT tagInfo;
-    tagInfo.objectType   = handle.objectType;
+    tagInfo.objectType = handle.objectType;
+#  if ( VK_USE_64_BIT_PTR_DEFINES == 1 )
     tagInfo.objectHandle = reinterpret_cast<uint64_t>( static_cast<typename HandleType::CType>( handle ) );
-    tagInfo.tagName      = name;
-    tagInfo.tagSize      = sizeof( TagType );
-    tagInfo.pTag         = &tag;
+#  else
+    tagInfo.objectHandle = static_cast<typename HandleType::CType>( handle );
+#  endif
+    tagInfo.tagName = name;
+    tagInfo.tagSize = sizeof( TagType );
+    tagInfo.pTag    = &tag;
     return setDebugUtilsObjectTagEXT( tagInfo, d );
   }
 #endif /* VULKAN_HPP_DISABLE_ENHANCED_MODE */
@@ -24249,6 +24257,645 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
     return detail::createResultValueType( result, std::move( data ) );
   }
 #endif /* VULKAN_HPP_DISABLE_ENHANCED_MODE */
+
+  //=== VK_KHR_device_address_commands ===
+
+  // wrapper function for command vkCmdBindIndexBuffer3KHR, see https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindIndexBuffer3KHR.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdBindIndexBuffer3KHR ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::bindIndexBuffer3KHR( BindIndexBuffer3InfoKHR const * pInfo, Dispatch const & d ) const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+    d.vkCmdBindIndexBuffer3KHR( static_cast<VkCommandBuffer>( m_commandBuffer ), reinterpret_cast<VkBindIndexBuffer3InfoKHR const *>( pInfo ) );
+  }
+
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  // wrapper function for command vkCmdBindIndexBuffer3KHR, see https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindIndexBuffer3KHR.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdBindIndexBuffer3KHR ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::bindIndexBuffer3KHR( BindIndexBuffer3InfoKHR const & info, Dispatch const & d ) const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+#  if ( VULKAN_HPP_DISPATCH_LOADER_DYNAMIC == 1 )
+    VULKAN_HPP_ASSERT( d.vkCmdBindIndexBuffer3KHR && "Function <vkCmdBindIndexBuffer3KHR> requires <VK_KHR_device_address_commands>" );
+#  endif
+
+    d.vkCmdBindIndexBuffer3KHR( m_commandBuffer, reinterpret_cast<VkBindIndexBuffer3InfoKHR const *>( &info ) );
+  }
+#endif /* VULKAN_HPP_DISABLE_ENHANCED_MODE */
+
+  // wrapper function for command vkCmdBindVertexBuffers3KHR, see https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindVertexBuffers3KHR.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdBindVertexBuffers3KHR ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::bindVertexBuffers3KHR(
+    uint32_t firstBinding, uint32_t bindingCount, BindVertexBuffer3InfoKHR const * pBindingInfos, Dispatch const & d ) const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+    d.vkCmdBindVertexBuffers3KHR(
+      static_cast<VkCommandBuffer>( m_commandBuffer ), firstBinding, bindingCount, reinterpret_cast<VkBindVertexBuffer3InfoKHR const *>( pBindingInfos ) );
+  }
+
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  // wrapper function for command vkCmdBindVertexBuffers3KHR, see https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindVertexBuffers3KHR.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdBindVertexBuffers3KHR ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::bindVertexBuffers3KHR(
+    uint32_t firstBinding, ArrayProxy<BindVertexBuffer3InfoKHR const> const & bindingInfos, Dispatch const & d ) const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+#  if ( VULKAN_HPP_DISPATCH_LOADER_DYNAMIC == 1 )
+    VULKAN_HPP_ASSERT( d.vkCmdBindVertexBuffers3KHR && "Function <vkCmdBindVertexBuffers3KHR> requires <VK_KHR_device_address_commands>" );
+#  endif
+
+    d.vkCmdBindVertexBuffers3KHR(
+      m_commandBuffer, firstBinding, bindingInfos.size(), reinterpret_cast<VkBindVertexBuffer3InfoKHR const *>( bindingInfos.data() ) );
+  }
+#endif /* VULKAN_HPP_DISABLE_ENHANCED_MODE */
+
+  // wrapper function for command vkCmdDrawIndirect2KHR, see https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawIndirect2KHR.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdDrawIndirect2KHR ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::drawIndirect2KHR( DrawIndirect2InfoKHR const * pInfo, Dispatch const & d ) const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+    d.vkCmdDrawIndirect2KHR( static_cast<VkCommandBuffer>( m_commandBuffer ), reinterpret_cast<VkDrawIndirect2InfoKHR const *>( pInfo ) );
+  }
+
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  // wrapper function for command vkCmdDrawIndirect2KHR, see https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawIndirect2KHR.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdDrawIndirect2KHR ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::drawIndirect2KHR( DrawIndirect2InfoKHR const & info, Dispatch const & d ) const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+#  if ( VULKAN_HPP_DISPATCH_LOADER_DYNAMIC == 1 )
+    VULKAN_HPP_ASSERT( d.vkCmdDrawIndirect2KHR && "Function <vkCmdDrawIndirect2KHR> requires <VK_KHR_device_address_commands>" );
+#  endif
+
+    d.vkCmdDrawIndirect2KHR( m_commandBuffer, reinterpret_cast<VkDrawIndirect2InfoKHR const *>( &info ) );
+  }
+#endif /* VULKAN_HPP_DISABLE_ENHANCED_MODE */
+
+  // wrapper function for command vkCmdDrawIndexedIndirect2KHR, see https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawIndexedIndirect2KHR.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdDrawIndexedIndirect2KHR ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::drawIndexedIndirect2KHR( DrawIndirect2InfoKHR const * pInfo, Dispatch const & d ) const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+    d.vkCmdDrawIndexedIndirect2KHR( static_cast<VkCommandBuffer>( m_commandBuffer ), reinterpret_cast<VkDrawIndirect2InfoKHR const *>( pInfo ) );
+  }
+
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  // wrapper function for command vkCmdDrawIndexedIndirect2KHR, see https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawIndexedIndirect2KHR.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdDrawIndexedIndirect2KHR ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::drawIndexedIndirect2KHR( DrawIndirect2InfoKHR const & info, Dispatch const & d ) const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+#  if ( VULKAN_HPP_DISPATCH_LOADER_DYNAMIC == 1 )
+    VULKAN_HPP_ASSERT( d.vkCmdDrawIndexedIndirect2KHR && "Function <vkCmdDrawIndexedIndirect2KHR> requires <VK_KHR_device_address_commands>" );
+#  endif
+
+    d.vkCmdDrawIndexedIndirect2KHR( m_commandBuffer, reinterpret_cast<VkDrawIndirect2InfoKHR const *>( &info ) );
+  }
+#endif /* VULKAN_HPP_DISABLE_ENHANCED_MODE */
+
+  // wrapper function for command vkCmdDispatchIndirect2KHR, see https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDispatchIndirect2KHR.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdDispatchIndirect2KHR ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::dispatchIndirect2KHR( DispatchIndirect2InfoKHR const * pInfo, Dispatch const & d ) const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+    d.vkCmdDispatchIndirect2KHR( static_cast<VkCommandBuffer>( m_commandBuffer ), reinterpret_cast<VkDispatchIndirect2InfoKHR const *>( pInfo ) );
+  }
+
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  // wrapper function for command vkCmdDispatchIndirect2KHR, see https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDispatchIndirect2KHR.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdDispatchIndirect2KHR ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::dispatchIndirect2KHR( DispatchIndirect2InfoKHR const & info, Dispatch const & d ) const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+#  if ( VULKAN_HPP_DISPATCH_LOADER_DYNAMIC == 1 )
+    VULKAN_HPP_ASSERT( d.vkCmdDispatchIndirect2KHR && "Function <vkCmdDispatchIndirect2KHR> requires <VK_KHR_device_address_commands>" );
+#  endif
+
+    d.vkCmdDispatchIndirect2KHR( m_commandBuffer, reinterpret_cast<VkDispatchIndirect2InfoKHR const *>( &info ) );
+  }
+#endif /* VULKAN_HPP_DISABLE_ENHANCED_MODE */
+
+  // wrapper function for command vkCmdCopyMemoryKHR, see https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyMemoryKHR.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdCopyMemoryKHR ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::copyMemoryKHR( CopyDeviceMemoryInfoKHR const * pCopyMemoryInfo, Dispatch const & d ) const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+    d.vkCmdCopyMemoryKHR( static_cast<VkCommandBuffer>( m_commandBuffer ), reinterpret_cast<VkCopyDeviceMemoryInfoKHR const *>( pCopyMemoryInfo ) );
+  }
+
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  // wrapper function for command vkCmdCopyMemoryKHR, see https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyMemoryKHR.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdCopyMemoryKHR ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::copyMemoryKHR( Optional<CopyDeviceMemoryInfoKHR const> copyMemoryInfo, Dispatch const & d ) const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+#  if ( VULKAN_HPP_DISPATCH_LOADER_DYNAMIC == 1 )
+    VULKAN_HPP_ASSERT( d.vkCmdCopyMemoryKHR && "Function <vkCmdCopyMemoryKHR> requires <VK_KHR_device_address_commands>" );
+#  endif
+
+    d.vkCmdCopyMemoryKHR( m_commandBuffer, reinterpret_cast<VkCopyDeviceMemoryInfoKHR const *>( copyMemoryInfo.get() ) );
+  }
+#endif /* VULKAN_HPP_DISABLE_ENHANCED_MODE */
+
+  // wrapper function for command vkCmdCopyMemoryToImageKHR, see https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyMemoryToImageKHR.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdCopyMemoryToImageKHR ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::copyMemoryToImageKHR( CopyDeviceMemoryImageInfoKHR const * pCopyMemoryInfo, Dispatch const & d )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+    d.vkCmdCopyMemoryToImageKHR( static_cast<VkCommandBuffer>( m_commandBuffer ), reinterpret_cast<VkCopyDeviceMemoryImageInfoKHR const *>( pCopyMemoryInfo ) );
+  }
+
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  // wrapper function for command vkCmdCopyMemoryToImageKHR, see https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyMemoryToImageKHR.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdCopyMemoryToImageKHR ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::copyMemoryToImageKHR( Optional<CopyDeviceMemoryImageInfoKHR const> copyMemoryInfo, Dispatch const & d )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+#  if ( VULKAN_HPP_DISPATCH_LOADER_DYNAMIC == 1 )
+    VULKAN_HPP_ASSERT( d.vkCmdCopyMemoryToImageKHR && "Function <vkCmdCopyMemoryToImageKHR> requires <VK_KHR_device_address_commands>" );
+#  endif
+
+    d.vkCmdCopyMemoryToImageKHR( m_commandBuffer, reinterpret_cast<VkCopyDeviceMemoryImageInfoKHR const *>( copyMemoryInfo.get() ) );
+  }
+#endif /* VULKAN_HPP_DISABLE_ENHANCED_MODE */
+
+  // wrapper function for command vkCmdCopyImageToMemoryKHR, see https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyImageToMemoryKHR.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdCopyImageToMemoryKHR ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::copyImageToMemoryKHR( CopyDeviceMemoryImageInfoKHR const * pCopyMemoryInfo, Dispatch const & d )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+    d.vkCmdCopyImageToMemoryKHR( static_cast<VkCommandBuffer>( m_commandBuffer ), reinterpret_cast<VkCopyDeviceMemoryImageInfoKHR const *>( pCopyMemoryInfo ) );
+  }
+
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  // wrapper function for command vkCmdCopyImageToMemoryKHR, see https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyImageToMemoryKHR.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdCopyImageToMemoryKHR ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::copyImageToMemoryKHR( Optional<CopyDeviceMemoryImageInfoKHR const> copyMemoryInfo, Dispatch const & d )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+#  if ( VULKAN_HPP_DISPATCH_LOADER_DYNAMIC == 1 )
+    VULKAN_HPP_ASSERT( d.vkCmdCopyImageToMemoryKHR && "Function <vkCmdCopyImageToMemoryKHR> requires <VK_KHR_device_address_commands>" );
+#  endif
+
+    d.vkCmdCopyImageToMemoryKHR( m_commandBuffer, reinterpret_cast<VkCopyDeviceMemoryImageInfoKHR const *>( copyMemoryInfo.get() ) );
+  }
+#endif /* VULKAN_HPP_DISABLE_ENHANCED_MODE */
+
+  // wrapper function for command vkCmdUpdateMemoryKHR, see https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdUpdateMemoryKHR.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdUpdateMemoryKHR ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::updateMemoryKHR(
+    DeviceAddressRangeKHR const * pDstRange, AddressCommandFlagsKHR dstFlags, DeviceSize dataSize, void const * pData, Dispatch const & d )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+    d.vkCmdUpdateMemoryKHR( static_cast<VkCommandBuffer>( m_commandBuffer ),
+                            reinterpret_cast<VkDeviceAddressRangeKHR const *>( pDstRange ),
+                            static_cast<VkAddressCommandFlagsKHR>( dstFlags ),
+                            static_cast<VkDeviceSize>( dataSize ),
+                            pData );
+  }
+
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  // wrapper function for command vkCmdUpdateMemoryKHR, see https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdUpdateMemoryKHR.html
+  template <typename DataType, typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdUpdateMemoryKHR ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::updateMemoryKHR(
+    DeviceAddressRangeKHR const & dstRange, AddressCommandFlagsKHR dstFlags, ArrayProxy<DataType const> const & data, Dispatch const & d )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+#  if ( VULKAN_HPP_DISPATCH_LOADER_DYNAMIC == 1 )
+    VULKAN_HPP_ASSERT( d.vkCmdUpdateMemoryKHR && "Function <vkCmdUpdateMemoryKHR> requires <VK_KHR_device_address_commands>" );
+#  endif
+
+    d.vkCmdUpdateMemoryKHR( m_commandBuffer,
+                            reinterpret_cast<VkDeviceAddressRangeKHR const *>( &dstRange ),
+                            static_cast<VkAddressCommandFlagsKHR>( dstFlags ),
+                            data.size() * sizeof( DataType ),
+                            reinterpret_cast<void const *>( data.data() ) );
+  }
+#endif /* VULKAN_HPP_DISABLE_ENHANCED_MODE */
+
+  // wrapper function for command vkCmdFillMemoryKHR, see https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdFillMemoryKHR.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdFillMemoryKHR ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::fillMemoryKHR(
+    DeviceAddressRangeKHR const * pDstRange, AddressCommandFlagsKHR dstFlags, uint32_t data, Dispatch const & d ) const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+    d.vkCmdFillMemoryKHR( static_cast<VkCommandBuffer>( m_commandBuffer ),
+                          reinterpret_cast<VkDeviceAddressRangeKHR const *>( pDstRange ),
+                          static_cast<VkAddressCommandFlagsKHR>( dstFlags ),
+                          data );
+  }
+
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  // wrapper function for command vkCmdFillMemoryKHR, see https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdFillMemoryKHR.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdFillMemoryKHR ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::fillMemoryKHR(
+    DeviceAddressRangeKHR const & dstRange, AddressCommandFlagsKHR dstFlags, uint32_t data, Dispatch const & d ) const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+#  if ( VULKAN_HPP_DISPATCH_LOADER_DYNAMIC == 1 )
+    VULKAN_HPP_ASSERT( d.vkCmdFillMemoryKHR && "Function <vkCmdFillMemoryKHR> requires <VK_KHR_device_address_commands>" );
+#  endif
+
+    d.vkCmdFillMemoryKHR(
+      m_commandBuffer, reinterpret_cast<VkDeviceAddressRangeKHR const *>( &dstRange ), static_cast<VkAddressCommandFlagsKHR>( dstFlags ), data );
+  }
+#endif /* VULKAN_HPP_DISABLE_ENHANCED_MODE */
+
+  // wrapper function for command vkCmdCopyQueryPoolResultsToMemoryKHR, see
+  // https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyQueryPoolResultsToMemoryKHR.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdCopyQueryPoolResultsToMemoryKHR ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::copyQueryPoolResultsToMemoryKHR( QueryPool                            queryPool,
+                                                                         uint32_t                             firstQuery,
+                                                                         uint32_t                             queryCount,
+                                                                         StridedDeviceAddressRangeKHR const * pDstRange,
+                                                                         AddressCommandFlagsKHR               dstFlags,
+                                                                         QueryResultFlags                     queryResultFlags,
+                                                                         Dispatch const &                     d ) const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+    d.vkCmdCopyQueryPoolResultsToMemoryKHR( static_cast<VkCommandBuffer>( m_commandBuffer ),
+                                            static_cast<VkQueryPool>( queryPool ),
+                                            firstQuery,
+                                            queryCount,
+                                            reinterpret_cast<VkStridedDeviceAddressRangeKHR const *>( pDstRange ),
+                                            static_cast<VkAddressCommandFlagsKHR>( dstFlags ),
+                                            static_cast<VkQueryResultFlags>( queryResultFlags ) );
+  }
+
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  // wrapper function for command vkCmdCopyQueryPoolResultsToMemoryKHR, see
+  // https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyQueryPoolResultsToMemoryKHR.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdCopyQueryPoolResultsToMemoryKHR ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::copyQueryPoolResultsToMemoryKHR( QueryPool                            queryPool,
+                                                                         uint32_t                             firstQuery,
+                                                                         uint32_t                             queryCount,
+                                                                         StridedDeviceAddressRangeKHR const & dstRange,
+                                                                         AddressCommandFlagsKHR               dstFlags,
+                                                                         QueryResultFlags                     queryResultFlags,
+                                                                         Dispatch const &                     d ) const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+#  if ( VULKAN_HPP_DISPATCH_LOADER_DYNAMIC == 1 )
+    VULKAN_HPP_ASSERT( d.vkCmdCopyQueryPoolResultsToMemoryKHR && "Function <vkCmdCopyQueryPoolResultsToMemoryKHR> requires <VK_KHR_device_address_commands>" );
+#  endif
+
+    d.vkCmdCopyQueryPoolResultsToMemoryKHR( m_commandBuffer,
+                                            static_cast<VkQueryPool>( queryPool ),
+                                            firstQuery,
+                                            queryCount,
+                                            reinterpret_cast<VkStridedDeviceAddressRangeKHR const *>( &dstRange ),
+                                            static_cast<VkAddressCommandFlagsKHR>( dstFlags ),
+                                            static_cast<VkQueryResultFlags>( queryResultFlags ) );
+  }
+#endif /* VULKAN_HPP_DISABLE_ENHANCED_MODE */
+
+  // wrapper function for command vkCmdDrawIndirectCount2KHR, see https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawIndirectCount2KHR.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdDrawIndirectCount2KHR ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::drawIndirectCount2KHR( DrawIndirectCount2InfoKHR const * pInfo, Dispatch const & d ) const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+    d.vkCmdDrawIndirectCount2KHR( static_cast<VkCommandBuffer>( m_commandBuffer ), reinterpret_cast<VkDrawIndirectCount2InfoKHR const *>( pInfo ) );
+  }
+
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  // wrapper function for command vkCmdDrawIndirectCount2KHR, see https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawIndirectCount2KHR.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdDrawIndirectCount2KHR ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::drawIndirectCount2KHR( DrawIndirectCount2InfoKHR const & info, Dispatch const & d ) const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+#  if ( VULKAN_HPP_DISPATCH_LOADER_DYNAMIC == 1 )
+    VULKAN_HPP_ASSERT( d.vkCmdDrawIndirectCount2KHR && "Function <vkCmdDrawIndirectCount2KHR> requires <VK_KHR_device_address_commands>" );
+#  endif
+
+    d.vkCmdDrawIndirectCount2KHR( m_commandBuffer, reinterpret_cast<VkDrawIndirectCount2InfoKHR const *>( &info ) );
+  }
+#endif /* VULKAN_HPP_DISABLE_ENHANCED_MODE */
+
+  // wrapper function for command vkCmdDrawIndexedIndirectCount2KHR, see
+  // https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawIndexedIndirectCount2KHR.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdDrawIndexedIndirectCount2KHR ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::drawIndexedIndirectCount2KHR( DrawIndirectCount2InfoKHR const * pInfo, Dispatch const & d ) const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+    d.vkCmdDrawIndexedIndirectCount2KHR( static_cast<VkCommandBuffer>( m_commandBuffer ), reinterpret_cast<VkDrawIndirectCount2InfoKHR const *>( pInfo ) );
+  }
+
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  // wrapper function for command vkCmdDrawIndexedIndirectCount2KHR, see
+  // https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawIndexedIndirectCount2KHR.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdDrawIndexedIndirectCount2KHR ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::drawIndexedIndirectCount2KHR( DrawIndirectCount2InfoKHR const & info, Dispatch const & d ) const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+#  if ( VULKAN_HPP_DISPATCH_LOADER_DYNAMIC == 1 )
+    VULKAN_HPP_ASSERT( d.vkCmdDrawIndexedIndirectCount2KHR && "Function <vkCmdDrawIndexedIndirectCount2KHR> requires <VK_KHR_device_address_commands>" );
+#  endif
+
+    d.vkCmdDrawIndexedIndirectCount2KHR( m_commandBuffer, reinterpret_cast<VkDrawIndirectCount2InfoKHR const *>( &info ) );
+  }
+#endif /* VULKAN_HPP_DISABLE_ENHANCED_MODE */
+
+  // wrapper function for command vkCmdBeginConditionalRendering2EXT, see
+  // https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBeginConditionalRendering2EXT.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdBeginConditionalRendering2EXT ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::beginConditionalRendering2EXT( ConditionalRenderingBeginInfo2EXT const * pConditionalRenderingBegin,
+                                                                       Dispatch const &                          d ) const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+    d.vkCmdBeginConditionalRendering2EXT( static_cast<VkCommandBuffer>( m_commandBuffer ),
+                                          reinterpret_cast<VkConditionalRenderingBeginInfo2EXT const *>( pConditionalRenderingBegin ) );
+  }
+
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  // wrapper function for command vkCmdBeginConditionalRendering2EXT, see
+  // https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBeginConditionalRendering2EXT.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdBeginConditionalRendering2EXT ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::beginConditionalRendering2EXT( ConditionalRenderingBeginInfo2EXT const & conditionalRenderingBegin, Dispatch const & d )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+#  if ( VULKAN_HPP_DISPATCH_LOADER_DYNAMIC == 1 )
+    VULKAN_HPP_ASSERT( d.vkCmdBeginConditionalRendering2EXT && "Function <vkCmdBeginConditionalRendering2EXT> requires <VK_KHR_device_address_commands>" );
+#  endif
+
+    d.vkCmdBeginConditionalRendering2EXT( m_commandBuffer, reinterpret_cast<VkConditionalRenderingBeginInfo2EXT const *>( &conditionalRenderingBegin ) );
+  }
+#endif /* VULKAN_HPP_DISABLE_ENHANCED_MODE */
+
+  // wrapper function for command vkCmdBindTransformFeedbackBuffers2EXT, see
+  // https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindTransformFeedbackBuffers2EXT.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdBindTransformFeedbackBuffers2EXT ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::bindTransformFeedbackBuffers2EXT(
+    uint32_t firstBinding, uint32_t bindingCount, BindTransformFeedbackBuffer2InfoEXT const * pBindingInfos, Dispatch const & d ) const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+    d.vkCmdBindTransformFeedbackBuffers2EXT( static_cast<VkCommandBuffer>( m_commandBuffer ),
+                                             firstBinding,
+                                             bindingCount,
+                                             reinterpret_cast<VkBindTransformFeedbackBuffer2InfoEXT const *>( pBindingInfos ) );
+  }
+
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  // wrapper function for command vkCmdBindTransformFeedbackBuffers2EXT, see
+  // https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindTransformFeedbackBuffers2EXT.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdBindTransformFeedbackBuffers2EXT ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::bindTransformFeedbackBuffers2EXT(
+    uint32_t firstBinding, ArrayProxy<BindTransformFeedbackBuffer2InfoEXT const> const & bindingInfos, Dispatch const & d ) const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+#  if ( VULKAN_HPP_DISPATCH_LOADER_DYNAMIC == 1 )
+    VULKAN_HPP_ASSERT( d.vkCmdBindTransformFeedbackBuffers2EXT &&
+                       "Function <vkCmdBindTransformFeedbackBuffers2EXT> requires <VK_KHR_device_address_commands>" );
+#  endif
+
+    d.vkCmdBindTransformFeedbackBuffers2EXT(
+      m_commandBuffer, firstBinding, bindingInfos.size(), reinterpret_cast<VkBindTransformFeedbackBuffer2InfoEXT const *>( bindingInfos.data() ) );
+  }
+#endif /* VULKAN_HPP_DISABLE_ENHANCED_MODE */
+
+  // wrapper function for command vkCmdBeginTransformFeedback2EXT, see
+  // https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBeginTransformFeedback2EXT.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdBeginTransformFeedback2EXT ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::beginTransformFeedback2EXT(
+    uint32_t firstCounterRange, uint32_t counterRangeCount, BindTransformFeedbackBuffer2InfoEXT const * pCounterInfos, Dispatch const & d )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+    d.vkCmdBeginTransformFeedback2EXT( static_cast<VkCommandBuffer>( m_commandBuffer ),
+                                       firstCounterRange,
+                                       counterRangeCount,
+                                       reinterpret_cast<VkBindTransformFeedbackBuffer2InfoEXT const *>( pCounterInfos ) );
+  }
+
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  // wrapper function for command vkCmdBeginTransformFeedback2EXT, see
+  // https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBeginTransformFeedback2EXT.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdBeginTransformFeedback2EXT ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::beginTransformFeedback2EXT(
+    uint32_t firstCounterRange, ArrayProxy<BindTransformFeedbackBuffer2InfoEXT const> const & counterInfos, Dispatch const & d ) const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+#  if ( VULKAN_HPP_DISPATCH_LOADER_DYNAMIC == 1 )
+    VULKAN_HPP_ASSERT( d.vkCmdBeginTransformFeedback2EXT && "Function <vkCmdBeginTransformFeedback2EXT> requires <VK_KHR_device_address_commands>" );
+#  endif
+
+    d.vkCmdBeginTransformFeedback2EXT(
+      m_commandBuffer, firstCounterRange, counterInfos.size(), reinterpret_cast<VkBindTransformFeedbackBuffer2InfoEXT const *>( counterInfos.data() ) );
+  }
+#endif /* VULKAN_HPP_DISABLE_ENHANCED_MODE */
+
+  // wrapper function for command vkCmdEndTransformFeedback2EXT, see
+  // https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdEndTransformFeedback2EXT.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdEndTransformFeedback2EXT ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::endTransformFeedback2EXT(
+    uint32_t firstCounterRange, uint32_t counterRangeCount, BindTransformFeedbackBuffer2InfoEXT const * pCounterInfos, Dispatch const & d )
+    const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+    d.vkCmdEndTransformFeedback2EXT( static_cast<VkCommandBuffer>( m_commandBuffer ),
+                                     firstCounterRange,
+                                     counterRangeCount,
+                                     reinterpret_cast<VkBindTransformFeedbackBuffer2InfoEXT const *>( pCounterInfos ) );
+  }
+
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  // wrapper function for command vkCmdEndTransformFeedback2EXT, see
+  // https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdEndTransformFeedback2EXT.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdEndTransformFeedback2EXT ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::endTransformFeedback2EXT(
+    uint32_t firstCounterRange, ArrayProxy<BindTransformFeedbackBuffer2InfoEXT const> const & counterInfos, Dispatch const & d ) const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+#  if ( VULKAN_HPP_DISPATCH_LOADER_DYNAMIC == 1 )
+    VULKAN_HPP_ASSERT( d.vkCmdEndTransformFeedback2EXT && "Function <vkCmdEndTransformFeedback2EXT> requires <VK_KHR_device_address_commands>" );
+#  endif
+
+    d.vkCmdEndTransformFeedback2EXT(
+      m_commandBuffer, firstCounterRange, counterInfos.size(), reinterpret_cast<VkBindTransformFeedbackBuffer2InfoEXT const *>( counterInfos.data() ) );
+  }
+#endif /* VULKAN_HPP_DISABLE_ENHANCED_MODE */
+
+  // wrapper function for command vkCmdDrawIndirectByteCount2EXT, see
+  // https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawIndirectByteCount2EXT.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdDrawIndirectByteCount2EXT ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::drawIndirectByteCount2EXT( uint32_t                                    instanceCount,
+                                                                   uint32_t                                    firstInstance,
+                                                                   BindTransformFeedbackBuffer2InfoEXT const * pCounterInfo,
+                                                                   uint32_t                                    counterOffset,
+                                                                   uint32_t                                    vertexStride,
+                                                                   Dispatch const &                            d ) const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+    d.vkCmdDrawIndirectByteCount2EXT( static_cast<VkCommandBuffer>( m_commandBuffer ),
+                                      instanceCount,
+                                      firstInstance,
+                                      reinterpret_cast<VkBindTransformFeedbackBuffer2InfoEXT const *>( pCounterInfo ),
+                                      counterOffset,
+                                      vertexStride );
+  }
+
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  // wrapper function for command vkCmdDrawIndirectByteCount2EXT, see
+  // https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawIndirectByteCount2EXT.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdDrawIndirectByteCount2EXT ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::drawIndirectByteCount2EXT( uint32_t                                    instanceCount,
+                                                                   uint32_t                                    firstInstance,
+                                                                   BindTransformFeedbackBuffer2InfoEXT const & counterInfo,
+                                                                   uint32_t                                    counterOffset,
+                                                                   uint32_t                                    vertexStride,
+                                                                   Dispatch const &                            d ) const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+#  if ( VULKAN_HPP_DISPATCH_LOADER_DYNAMIC == 1 )
+    VULKAN_HPP_ASSERT( d.vkCmdDrawIndirectByteCount2EXT && "Function <vkCmdDrawIndirectByteCount2EXT> requires <VK_KHR_device_address_commands>" );
+#  endif
+
+    d.vkCmdDrawIndirectByteCount2EXT( m_commandBuffer,
+                                      instanceCount,
+                                      firstInstance,
+                                      reinterpret_cast<VkBindTransformFeedbackBuffer2InfoEXT const *>( &counterInfo ),
+                                      counterOffset,
+                                      vertexStride );
+  }
+#endif /* VULKAN_HPP_DISABLE_ENHANCED_MODE */
+
+  // wrapper function for command vkCmdDrawMeshTasksIndirect2EXT, see
+  // https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawMeshTasksIndirect2EXT.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdDrawMeshTasksIndirect2EXT ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::drawMeshTasksIndirect2EXT( DrawIndirect2InfoKHR const * pInfo, Dispatch const & d ) const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+    d.vkCmdDrawMeshTasksIndirect2EXT( static_cast<VkCommandBuffer>( m_commandBuffer ), reinterpret_cast<VkDrawIndirect2InfoKHR const *>( pInfo ) );
+  }
+
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  // wrapper function for command vkCmdDrawMeshTasksIndirect2EXT, see
+  // https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawMeshTasksIndirect2EXT.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdDrawMeshTasksIndirect2EXT ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::drawMeshTasksIndirect2EXT( DrawIndirect2InfoKHR const & info, Dispatch const & d ) const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+#  if ( VULKAN_HPP_DISPATCH_LOADER_DYNAMIC == 1 )
+    VULKAN_HPP_ASSERT( d.vkCmdDrawMeshTasksIndirect2EXT && "Function <vkCmdDrawMeshTasksIndirect2EXT> requires <VK_KHR_device_address_commands>" );
+#  endif
+
+    d.vkCmdDrawMeshTasksIndirect2EXT( m_commandBuffer, reinterpret_cast<VkDrawIndirect2InfoKHR const *>( &info ) );
+  }
+#endif /* VULKAN_HPP_DISABLE_ENHANCED_MODE */
+
+  // wrapper function for command vkCmdDrawMeshTasksIndirectCount2EXT, see
+  // https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawMeshTasksIndirectCount2EXT.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdDrawMeshTasksIndirectCount2EXT ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::drawMeshTasksIndirectCount2EXT( DrawIndirectCount2InfoKHR const * pInfo, Dispatch const & d ) const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+    d.vkCmdDrawMeshTasksIndirectCount2EXT( static_cast<VkCommandBuffer>( m_commandBuffer ), reinterpret_cast<VkDrawIndirectCount2InfoKHR const *>( pInfo ) );
+  }
+
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  // wrapper function for command vkCmdDrawMeshTasksIndirectCount2EXT, see
+  // https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawMeshTasksIndirectCount2EXT.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdDrawMeshTasksIndirectCount2EXT ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::drawMeshTasksIndirectCount2EXT( DrawIndirectCount2InfoKHR const & info, Dispatch const & d ) const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+#  if ( VULKAN_HPP_DISPATCH_LOADER_DYNAMIC == 1 )
+    VULKAN_HPP_ASSERT( d.vkCmdDrawMeshTasksIndirectCount2EXT && "Function <vkCmdDrawMeshTasksIndirectCount2EXT> requires <VK_KHR_device_address_commands>" );
+#  endif
+
+    d.vkCmdDrawMeshTasksIndirectCount2EXT( m_commandBuffer, reinterpret_cast<VkDrawIndirectCount2InfoKHR const *>( &info ) );
+  }
+#endif /* VULKAN_HPP_DISABLE_ENHANCED_MODE */
+
+  // wrapper function for command vkCmdWriteMarkerToMemoryAMD, see https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdWriteMarkerToMemoryAMD.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdWriteMarkerToMemoryAMD ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::writeMarkerToMemoryAMD( MemoryMarkerInfoAMD const * pInfo, Dispatch const & d ) const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+    d.vkCmdWriteMarkerToMemoryAMD( static_cast<VkCommandBuffer>( m_commandBuffer ), reinterpret_cast<VkMemoryMarkerInfoAMD const *>( pInfo ) );
+  }
+
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  // wrapper function for command vkCmdWriteMarkerToMemoryAMD, see https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdWriteMarkerToMemoryAMD.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCmdWriteMarkerToMemoryAMD ), bool>::type>
+  VULKAN_HPP_INLINE void CommandBuffer::writeMarkerToMemoryAMD( MemoryMarkerInfoAMD const & info, Dispatch const & d ) const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+#  if ( VULKAN_HPP_DISPATCH_LOADER_DYNAMIC == 1 )
+    VULKAN_HPP_ASSERT( d.vkCmdWriteMarkerToMemoryAMD && "Function <vkCmdWriteMarkerToMemoryAMD> requires <VK_KHR_device_address_commands>" );
+#  endif
+
+    d.vkCmdWriteMarkerToMemoryAMD( m_commandBuffer, reinterpret_cast<VkMemoryMarkerInfoAMD const *>( &info ) );
+  }
+#endif /* VULKAN_HPP_DISABLE_ENHANCED_MODE */
+
+  // wrapper function for command vkCreateAccelerationStructure2KHR, see
+  // https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateAccelerationStructure2KHR.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCreateAccelerationStructure2KHR ), bool>::type>
+  VULKAN_HPP_NODISCARD VULKAN_HPP_INLINE Result Device::createAccelerationStructure2KHR( AccelerationStructureCreateInfo2KHR const * pCreateInfo,
+                                                                                         AllocationCallbacks const *                 pAllocator,
+                                                                                         AccelerationStructureKHR *                  pAccelerationStructure,
+                                                                                         Dispatch const & d ) const VULKAN_HPP_NOEXCEPT
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+    return static_cast<Result>( d.vkCreateAccelerationStructure2KHR( static_cast<VkDevice>( m_device ),
+                                                                     reinterpret_cast<VkAccelerationStructureCreateInfo2KHR const *>( pCreateInfo ),
+                                                                     reinterpret_cast<VkAllocationCallbacks const *>( pAllocator ),
+                                                                     reinterpret_cast<VkAccelerationStructureKHR *>( pAccelerationStructure ) ) );
+  }
+
+#ifndef VULKAN_HPP_DISABLE_ENHANCED_MODE
+  // wrapper function for command vkCreateAccelerationStructure2KHR, see
+  // https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateAccelerationStructure2KHR.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCreateAccelerationStructure2KHR ), bool>::type>
+  VULKAN_HPP_NODISCARD VULKAN_HPP_INLINE typename ResultValueType<AccelerationStructureKHR>::type Device::createAccelerationStructure2KHR(
+    AccelerationStructureCreateInfo2KHR const & createInfo, Optional<AllocationCallbacks const> allocator, Dispatch const & d ) const
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+#  if ( VULKAN_HPP_DISPATCH_LOADER_DYNAMIC == 1 )
+    VULKAN_HPP_ASSERT( d.vkCreateAccelerationStructure2KHR && "Function <vkCreateAccelerationStructure2KHR> requires <VK_KHR_device_address_commands>" );
+#  endif
+
+    AccelerationStructureKHR accelerationStructure;
+    Result                   result = static_cast<Result>( d.vkCreateAccelerationStructure2KHR( m_device,
+                                                                              reinterpret_cast<VkAccelerationStructureCreateInfo2KHR const *>( &createInfo ),
+                                                                              reinterpret_cast<VkAllocationCallbacks const *>( allocator.get() ),
+                                                                              reinterpret_cast<VkAccelerationStructureKHR *>( &accelerationStructure ) ) );
+    detail::resultCheck( result, VULKAN_HPP_NAMESPACE_STRING "::Device::createAccelerationStructure2KHR" );
+
+    return detail::createResultValueType( result, std::move( accelerationStructure ) );
+  }
+
+#  ifndef VULKAN_HPP_NO_SMART_HANDLE
+  // wrapper function for command vkCreateAccelerationStructure2KHR, see
+  // https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateAccelerationStructure2KHR.html
+  template <typename Dispatch, typename std::enable_if<IS_DISPATCHED( vkCreateAccelerationStructure2KHR ), bool>::type>
+  VULKAN_HPP_NODISCARD VULKAN_HPP_INLINE typename ResultValueType<UniqueHandle<AccelerationStructureKHR, Dispatch>>::type
+                       Device::createAccelerationStructure2KHRUnique(
+      AccelerationStructureCreateInfo2KHR const & createInfo, Optional<AllocationCallbacks const> allocator, Dispatch const & d ) const
+  {
+    VULKAN_HPP_ASSERT( d.getVkHeaderVersion() == VK_HEADER_VERSION );
+#    if ( VULKAN_HPP_DISPATCH_LOADER_DYNAMIC == 1 )
+    VULKAN_HPP_ASSERT( d.vkCreateAccelerationStructure2KHR && "Function <vkCreateAccelerationStructure2KHR> requires <VK_KHR_device_address_commands>" );
+#    endif
+
+    AccelerationStructureKHR accelerationStructure;
+    Result                   result = static_cast<Result>( d.vkCreateAccelerationStructure2KHR( m_device,
+                                                                              reinterpret_cast<VkAccelerationStructureCreateInfo2KHR const *>( &createInfo ),
+                                                                              reinterpret_cast<VkAllocationCallbacks const *>( allocator.get() ),
+                                                                              reinterpret_cast<VkAccelerationStructureKHR *>( &accelerationStructure ) ) );
+    detail::resultCheck( result, VULKAN_HPP_NAMESPACE_STRING "::Device::createAccelerationStructure2KHRUnique" );
+
+    return detail::createResultValueType(
+      result, UniqueHandle<AccelerationStructureKHR, Dispatch>( accelerationStructure, detail::ObjectDestroy<Device, Dispatch>( *this, allocator, d ) ) );
+  }
+#  endif /* VULKAN_HPP_NO_SMART_HANDLE */
+#endif   /* VULKAN_HPP_DISABLE_ENHANCED_MODE */
 
   //=== VK_NV_fragment_shading_rate_enums ===
 

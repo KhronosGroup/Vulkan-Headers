@@ -1266,6 +1266,22 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
     eDescriptorBufferBindingInfoEXT                            = VK_STRUCTURE_TYPE_DESCRIPTOR_BUFFER_BINDING_INFO_EXT,
     eDescriptorBufferBindingPushDescriptorBufferHandleEXT      = VK_STRUCTURE_TYPE_DESCRIPTOR_BUFFER_BINDING_PUSH_DESCRIPTOR_BUFFER_HANDLE_EXT,
     eAccelerationStructureCaptureDescriptorDataInfoEXT         = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CAPTURE_DESCRIPTOR_DATA_INFO_EXT,
+    eDeviceMemoryCopyKHR                                       = VK_STRUCTURE_TYPE_DEVICE_MEMORY_COPY_KHR,
+    eCopyDeviceMemoryInfoKHR                                   = VK_STRUCTURE_TYPE_COPY_DEVICE_MEMORY_INFO_KHR,
+    eDeviceMemoryImageCopyKHR                                  = VK_STRUCTURE_TYPE_DEVICE_MEMORY_IMAGE_COPY_KHR,
+    eCopyDeviceMemoryImageInfoKHR                              = VK_STRUCTURE_TYPE_COPY_DEVICE_MEMORY_IMAGE_INFO_KHR,
+    eMemoryRangeBarriersInfoKHR                                = VK_STRUCTURE_TYPE_MEMORY_RANGE_BARRIERS_INFO_KHR,
+    eMemoryRangeBarrierKHR                                     = VK_STRUCTURE_TYPE_MEMORY_RANGE_BARRIER_KHR,
+    ePhysicalDeviceDeviceAddressCommandsFeaturesKHR            = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_ADDRESS_COMMANDS_FEATURES_KHR,
+    eBindIndexBuffer3InfoKHR                                   = VK_STRUCTURE_TYPE_BIND_INDEX_BUFFER_3_INFO_KHR,
+    eBindVertexBuffer3InfoKHR                                  = VK_STRUCTURE_TYPE_BIND_VERTEX_BUFFER_3_INFO_KHR,
+    eDrawIndirect2InfoKHR                                      = VK_STRUCTURE_TYPE_DRAW_INDIRECT_2_INFO_KHR,
+    eDrawIndirectCount2InfoKHR                                 = VK_STRUCTURE_TYPE_DRAW_INDIRECT_COUNT_2_INFO_KHR,
+    eDispatchIndirect2InfoKHR                                  = VK_STRUCTURE_TYPE_DISPATCH_INDIRECT_2_INFO_KHR,
+    eConditionalRenderingBeginInfo2EXT                         = VK_STRUCTURE_TYPE_CONDITIONAL_RENDERING_BEGIN_INFO_2_EXT,
+    eBindTransformFeedbackBuffer2InfoEXT                       = VK_STRUCTURE_TYPE_BIND_TRANSFORM_FEEDBACK_BUFFER_2_INFO_EXT,
+    eMemoryMarkerInfoAMD                                       = VK_STRUCTURE_TYPE_MEMORY_MARKER_INFO_AMD,
+    eAccelerationStructureCreateInfo2KHR                       = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_2_KHR,
     ePhysicalDeviceGraphicsPipelineLibraryFeaturesEXT          = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GRAPHICS_PIPELINE_LIBRARY_FEATURES_EXT,
     ePhysicalDeviceGraphicsPipelineLibraryPropertiesEXT        = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GRAPHICS_PIPELINE_LIBRARY_PROPERTIES_EXT,
     eGraphicsPipelineLibraryCreateInfoEXT                      = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_LIBRARY_CREATE_INFO_EXT,
@@ -3505,6 +3521,23 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
       ;
   };
 
+  // wrapper class for enum VkPipelineLayoutCreateFlagBits, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineLayoutCreateFlagBits.html
+  enum class PipelineLayoutCreateFlagBits : VkPipelineLayoutCreateFlags
+  {
+    eIndependentSetsEXT = VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT
+  };
+
+  // wrapper using for bitmask VkPipelineLayoutCreateFlags, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineLayoutCreateFlags.html
+  using PipelineLayoutCreateFlags = Flags<PipelineLayoutCreateFlagBits>;
+
+  template <>
+  struct FlagTraits<PipelineLayoutCreateFlagBits>
+  {
+    using WrappedType                                                        = VkPipelineLayoutCreateFlagBits;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR bool                      isBitmask = true;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR PipelineLayoutCreateFlags allFlags  = PipelineLayoutCreateFlagBits::eIndependentSetsEXT;
+  };
+
   // wrapper class for enum VkPipelineShaderStageCreateFlagBits, see
   // https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineShaderStageCreateFlagBits.html
   enum class PipelineShaderStageCreateFlagBits : VkPipelineShaderStageCreateFlags
@@ -3526,23 +3559,6 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                           isBitmask = true;
     static VULKAN_HPP_CONST_OR_CONSTEXPR PipelineShaderStageCreateFlags allFlags =
       PipelineShaderStageCreateFlagBits::eAllowVaryingSubgroupSize | PipelineShaderStageCreateFlagBits::eRequireFullSubgroups;
-  };
-
-  // wrapper class for enum VkPipelineLayoutCreateFlagBits, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineLayoutCreateFlagBits.html
-  enum class PipelineLayoutCreateFlagBits : VkPipelineLayoutCreateFlags
-  {
-    eIndependentSetsEXT = VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT
-  };
-
-  // wrapper using for bitmask VkPipelineLayoutCreateFlags, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineLayoutCreateFlags.html
-  using PipelineLayoutCreateFlags = Flags<PipelineLayoutCreateFlagBits>;
-
-  template <>
-  struct FlagTraits<PipelineLayoutCreateFlagBits>
-  {
-    using WrappedType                                                        = VkPipelineLayoutCreateFlagBits;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR bool                      isBitmask = true;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR PipelineLayoutCreateFlags allFlags  = PipelineLayoutCreateFlagBits::eIndependentSetsEXT;
   };
 
   // wrapper class for enum VkBorderColor, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkBorderColor.html
@@ -3997,31 +4013,6 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
     eInstance = VK_VERTEX_INPUT_RATE_INSTANCE
   };
 
-  // wrapper class for enum VkPolygonMode, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkPolygonMode.html
-  enum class PolygonMode
-  {
-    eFill            = VK_POLYGON_MODE_FILL,
-    eLine            = VK_POLYGON_MODE_LINE,
-    ePoint           = VK_POLYGON_MODE_POINT,
-    eFillRectangleNV = VK_POLYGON_MODE_FILL_RECTANGLE_NV
-  };
-
-  // wrapper class for enum VkPrimitiveTopology, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkPrimitiveTopology.html
-  enum class PrimitiveTopology
-  {
-    ePointList                  = VK_PRIMITIVE_TOPOLOGY_POINT_LIST,
-    eLineList                   = VK_PRIMITIVE_TOPOLOGY_LINE_LIST,
-    eLineStrip                  = VK_PRIMITIVE_TOPOLOGY_LINE_STRIP,
-    eTriangleList               = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST,
-    eTriangleStrip              = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP,
-    eTriangleFan                = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_FAN,
-    eLineListWithAdjacency      = VK_PRIMITIVE_TOPOLOGY_LINE_LIST_WITH_ADJACENCY,
-    eLineStripWithAdjacency     = VK_PRIMITIVE_TOPOLOGY_LINE_STRIP_WITH_ADJACENCY,
-    eTriangleListWithAdjacency  = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST_WITH_ADJACENCY,
-    eTriangleStripWithAdjacency = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP_WITH_ADJACENCY,
-    ePatchList                  = VK_PRIMITIVE_TOPOLOGY_PATCH_LIST
-  };
-
   // wrapper class for enum VkPipelineColorBlendStateCreateFlagBits, see
   // https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineColorBlendStateCreateFlagBits.html
   enum class PipelineColorBlendStateCreateFlagBits : VkPipelineColorBlendStateCreateFlags
@@ -4065,6 +4056,31 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
     static VULKAN_HPP_CONST_OR_CONSTEXPR PipelineDepthStencilStateCreateFlags allFlags =
       PipelineDepthStencilStateCreateFlagBits::eRasterizationOrderAttachmentDepthAccessEXT |
       PipelineDepthStencilStateCreateFlagBits::eRasterizationOrderAttachmentStencilAccessEXT;
+  };
+
+  // wrapper class for enum VkPolygonMode, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkPolygonMode.html
+  enum class PolygonMode
+  {
+    eFill            = VK_POLYGON_MODE_FILL,
+    eLine            = VK_POLYGON_MODE_LINE,
+    ePoint           = VK_POLYGON_MODE_POINT,
+    eFillRectangleNV = VK_POLYGON_MODE_FILL_RECTANGLE_NV
+  };
+
+  // wrapper class for enum VkPrimitiveTopology, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkPrimitiveTopology.html
+  enum class PrimitiveTopology
+  {
+    ePointList                  = VK_PRIMITIVE_TOPOLOGY_POINT_LIST,
+    eLineList                   = VK_PRIMITIVE_TOPOLOGY_LINE_LIST,
+    eLineStrip                  = VK_PRIMITIVE_TOPOLOGY_LINE_STRIP,
+    eTriangleList               = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST,
+    eTriangleStrip              = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP,
+    eTriangleFan                = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_FAN,
+    eLineListWithAdjacency      = VK_PRIMITIVE_TOPOLOGY_LINE_LIST_WITH_ADJACENCY,
+    eLineStripWithAdjacency     = VK_PRIMITIVE_TOPOLOGY_LINE_STRIP_WITH_ADJACENCY,
+    eTriangleListWithAdjacency  = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST_WITH_ADJACENCY,
+    eTriangleStripWithAdjacency = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP_WITH_ADJACENCY,
+    ePatchList                  = VK_PRIMITIVE_TOPOLOGY_PATCH_LIST
   };
 
   enum class PipelineDynamicStateCreateFlagBits : VkPipelineDynamicStateCreateFlags
@@ -8166,6 +8182,33 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
       ExportMetalObjectTypeFlagBitsEXT::eMetalTexture | ExportMetalObjectTypeFlagBitsEXT::eMetalIosurface | ExportMetalObjectTypeFlagBitsEXT::eMetalSharedEvent;
   };
 #endif /*VK_USE_PLATFORM_METAL_EXT*/
+
+  //=== VK_KHR_device_address_commands ===
+
+  // wrapper class for enum VkAddressCommandFlagBitsKHR, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkAddressCommandFlagBitsKHR.html
+  enum class AddressCommandFlagBitsKHR : VkAddressCommandFlagsKHR
+  {
+    eProtected                           = VK_ADDRESS_COMMAND_PROTECTED_BIT_KHR,
+    eFullyBound                          = VK_ADDRESS_COMMAND_FULLY_BOUND_BIT_KHR,
+    eStorageBufferUsage                  = VK_ADDRESS_COMMAND_STORAGE_BUFFER_USAGE_BIT_KHR,
+    eUnknownStorageBufferUsage           = VK_ADDRESS_COMMAND_UNKNOWN_STORAGE_BUFFER_USAGE_BIT_KHR,
+    eTransformFeedbackBufferUsage        = VK_ADDRESS_COMMAND_TRANSFORM_FEEDBACK_BUFFER_USAGE_BIT_KHR,
+    eUnknownTransformFeedbackBufferUsage = VK_ADDRESS_COMMAND_UNKNOWN_TRANSFORM_FEEDBACK_BUFFER_USAGE_BIT_KHR
+  };
+
+  // wrapper using for bitmask VkAddressCommandFlagsKHR, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkAddressCommandFlagsKHR.html
+  using AddressCommandFlagsKHR = Flags<AddressCommandFlagBitsKHR>;
+
+  template <>
+  struct FlagTraits<AddressCommandFlagBitsKHR>
+  {
+    using WrappedType                                                     = VkAddressCommandFlagBitsKHR;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR bool                   isBitmask = true;
+    static VULKAN_HPP_CONST_OR_CONSTEXPR AddressCommandFlagsKHR allFlags =
+      AddressCommandFlagBitsKHR::eProtected | AddressCommandFlagBitsKHR::eFullyBound | AddressCommandFlagBitsKHR::eStorageBufferUsage |
+      AddressCommandFlagBitsKHR::eUnknownStorageBufferUsage | AddressCommandFlagBitsKHR::eTransformFeedbackBufferUsage |
+      AddressCommandFlagBitsKHR::eUnknownTransformFeedbackBufferUsage;
+  };
 
   //=== VK_EXT_graphics_pipeline_library ===
 
