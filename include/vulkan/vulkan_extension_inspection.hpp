@@ -75,9 +75,9 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
                                                                              { "VK_EXT_validation_features", "VK_EXT_layer_settings" },
                                                                              { "VK_EXT_descriptor_buffer", "VK_EXT_descriptor_heap" },
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
-                                                                             { "VK_NV_displacement_micromap", "VK_NV_cluster_acceleration_structure" }
+                                                                             { "VK_NV_displacement_micromap", "VK_NV_cluster_acceleration_structure" },
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
-    };
+                                                                             { "VK_NV_per_stage_descriptor_set", "VK_EXT_descriptor_heap" } };
     return deprecatedExtensions;
   }
 
@@ -527,6 +527,7 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
                                                             "VK_EXT_custom_resolve",
                                                             "VK_QCOM_data_graph_model",
                                                             "VK_KHR_maintenance10",
+                                                            "VK_ARM_data_graph_optical_flow",
                                                             "VK_EXT_shader_long_vector",
                                                             "VK_SEC_pipeline_cache_incremental_mode",
                                                             "VK_EXT_shader_uniform_buffer_unsized_array",
@@ -3106,6 +3107,11 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
               "VK_KHR_get_physical_device_properties2",
             } } },
           { "VK_VERSION_1_1", { {} } } } },
+      { "VK_ARM_data_graph_optical_flow",
+        { { "VK_VERSION_1_0",
+            { {
+              "VK_ARM_data_graph",
+            } } } } },
       { "VK_EXT_shader_long_vector", { { "VK_VERSION_1_2", { {} } } } },
       { "VK_SEC_pipeline_cache_incremental_mode",
         { { "VK_VERSION_1_0",
@@ -3408,7 +3414,10 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
       return "VK_NV_cluster_acceleration_structure";
     }
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
-
+    if ( extension == "VK_NV_per_stage_descriptor_set" )
+    {
+      return "VK_EXT_descriptor_heap";
+    }
     return "";
   }
 
@@ -3900,7 +3909,7 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
 #if defined( VK_ENABLE_BETA_EXTENSIONS )
         || ( extension == "VK_NV_displacement_micromap" )
 #endif /*VK_ENABLE_BETA_EXTENSIONS*/
-        || false;
+        || ( extension == "VK_NV_per_stage_descriptor_set" );
   }
 
   VULKAN_HPP_INLINE VULKAN_HPP_CONSTEXPR_20 bool isDeviceExtension( std::string const & extension )
@@ -4127,10 +4136,10 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
            ( extension == "VK_EXT_fragment_density_map_offset" ) || ( extension == "VK_EXT_zero_initialize_device_memory" ) ||
            ( extension == "VK_KHR_present_mode_fifo_latest_ready" ) || ( extension == "VK_EXT_shader_64bit_indexing" ) ||
            ( extension == "VK_EXT_custom_resolve" ) || ( extension == "VK_QCOM_data_graph_model" ) || ( extension == "VK_KHR_maintenance10" ) ||
-           ( extension == "VK_EXT_shader_long_vector" ) || ( extension == "VK_SEC_pipeline_cache_incremental_mode" ) ||
-           ( extension == "VK_EXT_shader_uniform_buffer_unsized_array" ) || ( extension == "VK_NV_compute_occupancy_priority" ) ||
-           ( extension == "VK_EXT_shader_subgroup_partitioned" ) || ( extension == "VK_VALVE_shader_mixed_float_dot_product" ) ||
-           ( extension == "VK_EXT_primitive_restart_index" );
+           ( extension == "VK_ARM_data_graph_optical_flow" ) || ( extension == "VK_EXT_shader_long_vector" ) ||
+           ( extension == "VK_SEC_pipeline_cache_incremental_mode" ) || ( extension == "VK_EXT_shader_uniform_buffer_unsized_array" ) ||
+           ( extension == "VK_NV_compute_occupancy_priority" ) || ( extension == "VK_EXT_shader_subgroup_partitioned" ) ||
+           ( extension == "VK_VALVE_shader_mixed_float_dot_product" ) || ( extension == "VK_EXT_primitive_restart_index" );
   }
 
   VULKAN_HPP_INLINE VULKAN_HPP_CONSTEXPR_20 bool isInstanceExtension( std::string const & extension )

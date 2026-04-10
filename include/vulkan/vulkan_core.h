@@ -66,7 +66,7 @@ extern "C" {
 //#define VK_API_VERSION VK_MAKE_API_VERSION(0, 1, 0, 0) // Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 348
+#define VK_HEADER_VERSION 349
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 4, VK_HEADER_VERSION)
@@ -1429,6 +1429,15 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_RENDERING_ATTACHMENT_FLAGS_INFO_KHR = 1000630002,
     VK_STRUCTURE_TYPE_RENDERING_END_INFO_KHR = 1000619003,
     VK_STRUCTURE_TYPE_RESOLVE_IMAGE_MODE_INFO_KHR = 1000630004,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DATA_GRAPH_OPTICAL_FLOW_FEATURES_ARM = 1000631000,
+    VK_STRUCTURE_TYPE_QUEUE_FAMILY_DATA_GRAPH_OPTICAL_FLOW_PROPERTIES_ARM = 1000631001,
+    VK_STRUCTURE_TYPE_DATA_GRAPH_OPTICAL_FLOW_IMAGE_FORMAT_INFO_ARM = 1000631003,
+    VK_STRUCTURE_TYPE_DATA_GRAPH_OPTICAL_FLOW_IMAGE_FORMAT_PROPERTIES_ARM = 1000631004,
+    VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_OPTICAL_FLOW_DISPATCH_INFO_ARM = 1000631005,
+    VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_OPTICAL_FLOW_CREATE_INFO_ARM = 1000631002,
+    VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_RESOURCE_INFO_IMAGE_LAYOUT_ARM = 1000631006,
+    VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_SINGLE_NODE_CREATE_INFO_ARM = 1000631007,
+    VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_SINGLE_NODE_CONNECTION_ARM = 1000631008,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_LONG_VECTOR_FEATURES_EXT = 1000635000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_LONG_VECTOR_PROPERTIES_EXT = 1000635001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CACHE_INCREMENTAL_MODE_FEATURES_SEC = 1000637000,
@@ -7326,6 +7335,9 @@ static const VkFormatFeatureFlagBits2 VK_FORMAT_FEATURE_2_DEPTH_COPY_ON_COMPUTE_
 static const VkFormatFeatureFlagBits2 VK_FORMAT_FEATURE_2_DEPTH_COPY_ON_TRANSFER_QUEUE_BIT_KHR = 0x20000000000000ULL;
 static const VkFormatFeatureFlagBits2 VK_FORMAT_FEATURE_2_STENCIL_COPY_ON_COMPUTE_QUEUE_BIT_KHR = 0x40000000000000ULL;
 static const VkFormatFeatureFlagBits2 VK_FORMAT_FEATURE_2_STENCIL_COPY_ON_TRANSFER_QUEUE_BIT_KHR = 0x80000000000000ULL;
+static const VkFormatFeatureFlagBits2 VK_FORMAT_FEATURE_2_DATA_GRAPH_OPTICAL_FLOW_IMAGE_BIT_ARM = 0x100000000000000ULL;
+static const VkFormatFeatureFlagBits2 VK_FORMAT_FEATURE_2_DATA_GRAPH_OPTICAL_FLOW_VECTOR_BIT_ARM = 0x200000000000000ULL;
+static const VkFormatFeatureFlagBits2 VK_FORMAT_FEATURE_2_DATA_GRAPH_OPTICAL_FLOW_COST_BIT_ARM = 0x400000000000000ULL;
 
 
 typedef enum VkPipelineCreationFeedbackFlagBits {
@@ -23435,6 +23447,7 @@ VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkDataGraphPipelineSessionARM)
 
 typedef enum VkDataGraphPipelineSessionBindPointARM {
     VK_DATA_GRAPH_PIPELINE_SESSION_BIND_POINT_TRANSIENT_ARM = 0,
+    VK_DATA_GRAPH_PIPELINE_SESSION_BIND_POINT_OPTICAL_FLOW_CACHE_ARM = 1000631001,
     VK_DATA_GRAPH_PIPELINE_SESSION_BIND_POINT_MAX_ENUM_ARM = 0x7FFFFFFF
 } VkDataGraphPipelineSessionBindPointARM;
 
@@ -23460,6 +23473,7 @@ typedef enum VkPhysicalDeviceDataGraphOperationTypeARM {
     VK_PHYSICAL_DEVICE_DATA_GRAPH_OPERATION_TYPE_SPIRV_EXTENDED_INSTRUCTION_SET_ARM = 0,
     VK_PHYSICAL_DEVICE_DATA_GRAPH_OPERATION_TYPE_NEURAL_MODEL_QCOM = 1000629000,
     VK_PHYSICAL_DEVICE_DATA_GRAPH_OPERATION_TYPE_BUILTIN_MODEL_QCOM = 1000629001,
+    VK_PHYSICAL_DEVICE_DATA_GRAPH_OPERATION_TYPE_OPTICAL_FLOW_ARM = 1000631000,
     VK_PHYSICAL_DEVICE_DATA_GRAPH_OPERATION_TYPE_MAX_ENUM_ARM = 0x7FFFFFFF
 } VkPhysicalDeviceDataGraphOperationTypeARM;
 typedef VkFlags64 VkDataGraphPipelineSessionCreateFlagsARM;
@@ -23467,6 +23481,7 @@ typedef VkFlags64 VkDataGraphPipelineSessionCreateFlagsARM;
 // Flag bits for VkDataGraphPipelineSessionCreateFlagBitsARM
 typedef VkFlags64 VkDataGraphPipelineSessionCreateFlagBitsARM;
 static const VkDataGraphPipelineSessionCreateFlagBitsARM VK_DATA_GRAPH_PIPELINE_SESSION_CREATE_PROTECTED_BIT_ARM = 0x00000001ULL;
+static const VkDataGraphPipelineSessionCreateFlagBitsARM VK_DATA_GRAPH_PIPELINE_SESSION_CREATE_OPTICAL_FLOW_CACHE_BIT_ARM = 0x00000002ULL;
 
 typedef VkFlags64 VkDataGraphPipelineDispatchFlagsARM;
 
@@ -25376,6 +25391,159 @@ typedef struct VkPhysicalDeviceDataGraphModelFeaturesQCOM {
     VkBool32           dataGraphModel;
 } VkPhysicalDeviceDataGraphModelFeaturesQCOM;
 
+
+
+// VK_ARM_data_graph_optical_flow is a preprocessor guard. Do not pass it to API calls.
+#define VK_ARM_data_graph_optical_flow 1
+#define VK_ARM_DATA_GRAPH_OPTICAL_FLOW_SPEC_VERSION 1
+#define VK_ARM_DATA_GRAPH_OPTICAL_FLOW_EXTENSION_NAME "VK_ARM_data_graph_optical_flow"
+
+typedef enum VkDataGraphOpticalFlowPerformanceLevelARM {
+    VK_DATA_GRAPH_OPTICAL_FLOW_PERFORMANCE_LEVEL_UNKNOWN_ARM = 0,
+    VK_DATA_GRAPH_OPTICAL_FLOW_PERFORMANCE_LEVEL_SLOW_ARM = 1,
+    VK_DATA_GRAPH_OPTICAL_FLOW_PERFORMANCE_LEVEL_MEDIUM_ARM = 2,
+    VK_DATA_GRAPH_OPTICAL_FLOW_PERFORMANCE_LEVEL_FAST_ARM = 3,
+    VK_DATA_GRAPH_OPTICAL_FLOW_PERFORMANCE_LEVEL_MAX_ENUM_ARM = 0x7FFFFFFF
+} VkDataGraphOpticalFlowPerformanceLevelARM;
+
+typedef enum VkDataGraphPipelineNodeTypeARM {
+    VK_DATA_GRAPH_PIPELINE_NODE_TYPE_OPTICAL_FLOW_ARM = 1000631000,
+    VK_DATA_GRAPH_PIPELINE_NODE_TYPE_MAX_ENUM_ARM = 0x7FFFFFFF
+} VkDataGraphPipelineNodeTypeARM;
+
+typedef enum VkDataGraphPipelineNodeConnectionTypeARM {
+    VK_DATA_GRAPH_PIPELINE_NODE_CONNECTION_TYPE_OPTICAL_FLOW_INPUT_ARM = 1000631000,
+    VK_DATA_GRAPH_PIPELINE_NODE_CONNECTION_TYPE_OPTICAL_FLOW_REFERENCE_ARM = 1000631001,
+    VK_DATA_GRAPH_PIPELINE_NODE_CONNECTION_TYPE_OPTICAL_FLOW_HINT_ARM = 1000631002,
+    VK_DATA_GRAPH_PIPELINE_NODE_CONNECTION_TYPE_OPTICAL_FLOW_FLOW_VECTOR_ARM = 1000631003,
+    VK_DATA_GRAPH_PIPELINE_NODE_CONNECTION_TYPE_OPTICAL_FLOW_COST_ARM = 1000631004,
+    VK_DATA_GRAPH_PIPELINE_NODE_CONNECTION_TYPE_MAX_ENUM_ARM = 0x7FFFFFFF
+} VkDataGraphPipelineNodeConnectionTypeARM;
+
+typedef enum VkDataGraphOpticalFlowGridSizeFlagBitsARM {
+    VK_DATA_GRAPH_OPTICAL_FLOW_GRID_SIZE_UNKNOWN_ARM = 0,
+    VK_DATA_GRAPH_OPTICAL_FLOW_GRID_SIZE_1X1_BIT_ARM = 0x00000001,
+    VK_DATA_GRAPH_OPTICAL_FLOW_GRID_SIZE_2X2_BIT_ARM = 0x00000002,
+    VK_DATA_GRAPH_OPTICAL_FLOW_GRID_SIZE_4X4_BIT_ARM = 0x00000004,
+    VK_DATA_GRAPH_OPTICAL_FLOW_GRID_SIZE_8X8_BIT_ARM = 0x00000008,
+    VK_DATA_GRAPH_OPTICAL_FLOW_GRID_SIZE_FLAG_BITS_MAX_ENUM_ARM = 0x7FFFFFFF
+} VkDataGraphOpticalFlowGridSizeFlagBitsARM;
+typedef VkFlags   VkDataGraphOpticalFlowGridSizeFlagsARM;
+
+typedef enum VkDataGraphOpticalFlowCreateFlagBitsARM {
+    VK_DATA_GRAPH_OPTICAL_FLOW_CREATE_ENABLE_HINT_BIT_ARM = 0x00000001,
+    VK_DATA_GRAPH_OPTICAL_FLOW_CREATE_ENABLE_COST_BIT_ARM = 0x00000002,
+    VK_DATA_GRAPH_OPTICAL_FLOW_CREATE_RESERVED_30_BIT_ARM = 0x40000000,
+    VK_DATA_GRAPH_OPTICAL_FLOW_CREATE_FLAG_BITS_MAX_ENUM_ARM = 0x7FFFFFFF
+} VkDataGraphOpticalFlowCreateFlagBitsARM;
+typedef VkFlags   VkDataGraphOpticalFlowCreateFlagsARM;
+
+typedef enum VkDataGraphOpticalFlowImageUsageFlagBitsARM {
+    VK_DATA_GRAPH_OPTICAL_FLOW_IMAGE_USAGE_UNKNOWN_ARM = 0,
+    VK_DATA_GRAPH_OPTICAL_FLOW_IMAGE_USAGE_INPUT_BIT_ARM = 0x00000001,
+    VK_DATA_GRAPH_OPTICAL_FLOW_IMAGE_USAGE_OUTPUT_BIT_ARM = 0x00000002,
+    VK_DATA_GRAPH_OPTICAL_FLOW_IMAGE_USAGE_HINT_BIT_ARM = 0x00000004,
+    VK_DATA_GRAPH_OPTICAL_FLOW_IMAGE_USAGE_COST_BIT_ARM = 0x00000008,
+    VK_DATA_GRAPH_OPTICAL_FLOW_IMAGE_USAGE_FLAG_BITS_MAX_ENUM_ARM = 0x7FFFFFFF
+} VkDataGraphOpticalFlowImageUsageFlagBitsARM;
+typedef VkFlags   VkDataGraphOpticalFlowImageUsageFlagsARM;
+
+typedef enum VkDataGraphOpticalFlowExecuteFlagBitsARM {
+    VK_DATA_GRAPH_OPTICAL_FLOW_EXECUTE_DISABLE_TEMPORAL_HINTS_BIT_ARM = 0x00000001,
+    VK_DATA_GRAPH_OPTICAL_FLOW_EXECUTE_INPUT_UNCHANGED_BIT_ARM = 0x00000002,
+    VK_DATA_GRAPH_OPTICAL_FLOW_EXECUTE_REFERENCE_UNCHANGED_BIT_ARM = 0x00000004,
+    VK_DATA_GRAPH_OPTICAL_FLOW_EXECUTE_INPUT_IS_PREVIOUS_REFERENCE_BIT_ARM = 0x00000008,
+    VK_DATA_GRAPH_OPTICAL_FLOW_EXECUTE_REFERENCE_IS_PREVIOUS_INPUT_BIT_ARM = 0x00000010,
+    VK_DATA_GRAPH_OPTICAL_FLOW_EXECUTE_FLAG_BITS_MAX_ENUM_ARM = 0x7FFFFFFF
+} VkDataGraphOpticalFlowExecuteFlagBitsARM;
+typedef VkFlags   VkDataGraphOpticalFlowExecuteFlagsARM;
+typedef struct VkPhysicalDeviceDataGraphOpticalFlowFeaturesARM {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           dataGraphOpticalFlow;
+} VkPhysicalDeviceDataGraphOpticalFlowFeaturesARM;
+
+typedef struct VkQueueFamilyDataGraphOpticalFlowPropertiesARM {
+    VkStructureType                           sType;
+    void*                                     pNext;
+    VkDataGraphOpticalFlowGridSizeFlagsARM    supportedOutputGridSizes;
+    VkDataGraphOpticalFlowGridSizeFlagsARM    supportedHintGridSizes;
+    VkBool32                                  hintSupported;
+    VkBool32                                  costSupported;
+    uint32_t                                  minWidth;
+    uint32_t                                  minHeight;
+    uint32_t                                  maxWidth;
+    uint32_t                                  maxHeight;
+} VkQueueFamilyDataGraphOpticalFlowPropertiesARM;
+
+typedef struct VkDataGraphPipelineOpticalFlowCreateInfoARM {
+    VkStructureType                              sType;
+    void*                                        pNext;
+    uint32_t                                     width;
+    uint32_t                                     height;
+    VkFormat                                     imageFormat;
+    VkFormat                                     flowVectorFormat;
+    VkFormat                                     costFormat;
+    VkDataGraphOpticalFlowGridSizeFlagsARM       outputGridSize;
+    VkDataGraphOpticalFlowGridSizeFlagsARM       hintGridSize;
+    VkDataGraphOpticalFlowPerformanceLevelARM    performanceLevel;
+    VkDataGraphOpticalFlowCreateFlagsARM         flags;
+} VkDataGraphPipelineOpticalFlowCreateInfoARM;
+
+typedef struct VkDataGraphOpticalFlowImageFormatPropertiesARM {
+    VkStructureType    sType;
+    void*              pNext;
+    VkFormat           format;
+} VkDataGraphOpticalFlowImageFormatPropertiesARM;
+
+typedef struct VkDataGraphOpticalFlowImageFormatInfoARM {
+    VkStructureType                             sType;
+    const void*                                 pNext;
+    VkDataGraphOpticalFlowImageUsageFlagsARM    usage;
+} VkDataGraphOpticalFlowImageFormatInfoARM;
+
+typedef struct VkDataGraphPipelineOpticalFlowDispatchInfoARM {
+    VkStructureType                          sType;
+    void*                                    pNext;
+    VkDataGraphOpticalFlowExecuteFlagsARM    flags;
+    uint32_t                                 meanFlowL1NormHint;
+} VkDataGraphPipelineOpticalFlowDispatchInfoARM;
+
+typedef struct VkDataGraphPipelineResourceInfoImageLayoutARM {
+    VkStructureType    sType;
+    const void*        pNext;
+    VkImageLayout      layout;
+} VkDataGraphPipelineResourceInfoImageLayoutARM;
+
+typedef struct VkDataGraphPipelineSingleNodeConnectionARM {
+    VkStructureType                             sType;
+    void*                                       pNext;
+    uint32_t                                    set;
+    uint32_t                                    binding;
+    VkDataGraphPipelineNodeConnectionTypeARM    connection;
+} VkDataGraphPipelineSingleNodeConnectionARM;
+
+typedef struct VkDataGraphPipelineSingleNodeCreateInfoARM {
+    VkStructureType                                      sType;
+    void*                                                pNext;
+    VkDataGraphPipelineNodeTypeARM                       nodeType;
+    uint32_t                                             connectionCount;
+    const VkDataGraphPipelineSingleNodeConnectionARM*    pConnections;
+} VkDataGraphPipelineSingleNodeCreateInfoARM;
+
+typedef VkResult (VKAPI_PTR *PFN_vkGetPhysicalDeviceQueueFamilyDataGraphOpticalFlowImageFormatsARM)(VkPhysicalDevice                                physicalDevice, uint32_t                                        queueFamilyIndex, const VkQueueFamilyDataGraphPropertiesARM*      pQueueFamilyDataGraphProperties, const VkDataGraphOpticalFlowImageFormatInfoARM* pOpticalFlowImageFormatInfo, uint32_t*                 pFormatCount, VkDataGraphOpticalFlowImageFormatPropertiesARM* pImageFormatProperties);
+
+#ifndef VK_NO_PROTOTYPES
+#ifndef VK_ONLY_EXPORTED_PROTOTYPES
+VKAPI_ATTR VkResult VKAPI_CALL vkGetPhysicalDeviceQueueFamilyDataGraphOpticalFlowImageFormatsARM(
+    VkPhysicalDevice                            physicalDevice,
+    uint32_t                                    queueFamilyIndex,
+    const VkQueueFamilyDataGraphPropertiesARM*  pQueueFamilyDataGraphProperties,
+    const VkDataGraphOpticalFlowImageFormatInfoARM* pOpticalFlowImageFormatInfo,
+    uint32_t*                                   pFormatCount,
+    VkDataGraphOpticalFlowImageFormatPropertiesARM* pImageFormatProperties);
+#endif
+#endif
 
 
 // VK_EXT_shader_long_vector is a preprocessor guard. Do not pass it to API calls.
