@@ -44,7 +44,7 @@ repository.
 You will be prompted with a one-time "click-through" CLA dialog as part of submitting your pull request
 or other contribution to GitHub.
 
-== **AI-Assisted Contributions**
+### **AI-Assisted Contributions**
 
 By submitting a Contribution to this repository, you additionally represent 
 that, to the extent any of Your Contributions were developed with the 
