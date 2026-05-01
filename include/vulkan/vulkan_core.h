@@ -66,7 +66,7 @@ extern "C" {
 //#define VK_API_VERSION VK_MAKE_API_VERSION(0, 1, 0, 0) // Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 349
+#define VK_HEADER_VERSION 350
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 4, VK_HEADER_VERSION)
@@ -1444,9 +1444,16 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_UNIFORM_BUFFER_UNSIZED_ARRAY_FEATURES_EXT = 1000642000,
     VK_STRUCTURE_TYPE_COMPUTE_OCCUPANCY_PRIORITY_PARAMETERS_NV = 1000645000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_OCCUPANCY_PRIORITY_FEATURES_NV = 1000645001,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_11_FEATURES_KHR = 1000657000,
+    VK_STRUCTURE_TYPE_QUEUE_FAMILY_OPTIMAL_IMAGE_TRANSFER_GRANULARITY_PROPERTIES_KHR = 1000657001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_PARTITIONED_FEATURES_EXT = 1000662000,
     VK_STRUCTURE_TYPE_UBM_SURFACE_CREATE_INFO_SEC = 1000664000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MIXED_FLOAT_DOT_PRODUCT_FEATURES_VALVE = 1000673000,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_THROTTLE_HINT_FEATURES_SEC = 1000674000,
+    VK_STRUCTURE_TYPE_THROTTLE_HINT_SUBMIT_INFO_SEC = 1000674001,
+    VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_NEURAL_STATISTICS_CREATE_INFO_ARM = 1000676000,
+    VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_SESSION_NEURAL_STATISTICS_CREATE_INFO_ARM = 1000676001,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DATA_GRAPH_NEURAL_ACCELERATOR_STATISTICS_FEATURES_ARM = 1000676002,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIMITIVE_RESTART_INDEX_FEATURES_EXT = 1000678000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETER_FEATURES = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES,
@@ -2725,6 +2732,7 @@ typedef enum VkImageCreateFlagBits {
     VK_IMAGE_CREATE_2D_VIEW_COMPATIBLE_BIT_EXT = 0x00020000,
     VK_IMAGE_CREATE_VIDEO_PROFILE_INDEPENDENT_BIT_KHR = 0x00100000,
     VK_IMAGE_CREATE_FRAGMENT_DENSITY_MAP_OFFSET_BIT_EXT = 0x00008000,
+    VK_IMAGE_CREATE_ALIAS_SINGLE_LAYER_DESCRIPTOR_BIT_KHR = 0x00400000,
     VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT_KHR = VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT,
     VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT_KHR = VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT,
     VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT_KHR = VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT,
@@ -3203,6 +3211,7 @@ typedef VkFlags VkPipelineCreateFlags;
 
 typedef enum VkPipelineLayoutCreateFlagBits {
     VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT = 0x00000002,
+    VK_PIPELINE_LAYOUT_CREATE_NO_TASK_SHADER_BIT_KHR = 0x00000004,
     VK_PIPELINE_LAYOUT_CREATE_FLAG_BITS_MAX_ENUM = 0x7FFFFFFF
 } VkPipelineLayoutCreateFlagBits;
 typedef VkFlags VkPipelineLayoutCreateFlags;
@@ -14642,6 +14651,24 @@ VKAPI_ATTR void VKAPI_CALL vkCmdEndRendering2KHR(
 #endif
 
 
+// VK_KHR_maintenance11 is a preprocessor guard. Do not pass it to API calls.
+#define VK_KHR_maintenance11 1
+#define VK_KHR_MAINTENANCE_11_SPEC_VERSION 1
+#define VK_KHR_MAINTENANCE_11_EXTENSION_NAME "VK_KHR_maintenance11"
+typedef struct VkPhysicalDeviceMaintenance11FeaturesKHR {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           maintenance11;
+} VkPhysicalDeviceMaintenance11FeaturesKHR;
+
+typedef struct VkQueueFamilyOptimalImageTransferGranularityPropertiesKHR {
+    VkStructureType    sType;
+    void*              pNext;
+    VkExtent3D         optimalImageTransferGranularity;
+} VkQueueFamilyOptimalImageTransferGranularityPropertiesKHR;
+
+
+
 // VK_EXT_debug_report is a preprocessor guard. Do not pass it to API calls.
 #define VK_EXT_debug_report 1
 VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkDebugReportCallbackEXT)
@@ -22906,6 +22933,7 @@ typedef enum VkShaderCreateFlagBitsEXT {
     VK_SHADER_CREATE_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT = 0x00000040,
     VK_SHADER_CREATE_INDIRECT_BINDABLE_BIT_EXT = 0x00000080,
     VK_SHADER_CREATE_64_BIT_INDEXING_BIT_EXT = 0x00008000,
+    VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR = 0x00040000,
     VK_SHADER_CREATE_FLAG_BITS_MAX_ENUM_EXT = 0x7FFFFFFF
 } VkShaderCreateFlagBitsEXT;
 typedef VkFlags VkShaderCreateFlagsEXT;
@@ -23448,6 +23476,7 @@ VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkDataGraphPipelineSessionARM)
 typedef enum VkDataGraphPipelineSessionBindPointARM {
     VK_DATA_GRAPH_PIPELINE_SESSION_BIND_POINT_TRANSIENT_ARM = 0,
     VK_DATA_GRAPH_PIPELINE_SESSION_BIND_POINT_OPTICAL_FLOW_CACHE_ARM = 1000631001,
+    VK_DATA_GRAPH_PIPELINE_SESSION_BIND_POINT_NEURAL_ACCELERATOR_STATISTICS_ARM = 1000676000,
     VK_DATA_GRAPH_PIPELINE_SESSION_BIND_POINT_MAX_ENUM_ARM = 0x7FFFFFFF
 } VkDataGraphPipelineSessionBindPointARM;
 
@@ -23459,6 +23488,8 @@ typedef enum VkDataGraphPipelineSessionBindPointTypeARM {
 typedef enum VkDataGraphPipelinePropertyARM {
     VK_DATA_GRAPH_PIPELINE_PROPERTY_CREATION_LOG_ARM = 0,
     VK_DATA_GRAPH_PIPELINE_PROPERTY_IDENTIFIER_ARM = 1,
+    VK_DATA_GRAPH_PIPELINE_PROPERTY_NEURAL_ACCELERATOR_DEBUG_DATABASE_ARM = 1000676000,
+    VK_DATA_GRAPH_PIPELINE_PROPERTY_NEURAL_ACCELERATOR_STATISTICS_INFO_ARM = 1000676001,
     VK_DATA_GRAPH_PIPELINE_PROPERTY_MAX_ENUM_ARM = 0x7FFFFFFF
 } VkDataGraphPipelinePropertyARM;
 
@@ -24944,7 +24975,7 @@ typedef struct VkPhysicalDevicePushConstantBankPropertiesNV {
 
 // VK_EXT_ray_tracing_invocation_reorder is a preprocessor guard. Do not pass it to API calls.
 #define VK_EXT_ray_tracing_invocation_reorder 1
-#define VK_EXT_RAY_TRACING_INVOCATION_REORDER_SPEC_VERSION 1
+#define VK_EXT_RAY_TRACING_INVOCATION_REORDER_SPEC_VERSION 2
 #define VK_EXT_RAY_TRACING_INVOCATION_REORDER_EXTENSION_NAME "VK_EXT_ray_tracing_invocation_reorder"
 typedef struct VkPhysicalDeviceRayTracingInvocationReorderPropertiesEXT {
     VkStructureType                         sType;
@@ -25643,6 +25674,62 @@ typedef struct VkPhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE {
     VkBool32           shaderMixedFloatDotProductBFloat16Acc;
     VkBool32           shaderMixedFloatDotProductFloat8AccFloat32;
 } VkPhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE;
+
+
+
+// VK_SEC_throttle_hint is a preprocessor guard. Do not pass it to API calls.
+#define VK_SEC_throttle_hint 1
+#define VK_SEC_THROTTLE_HINT_SPEC_VERSION 1
+#define VK_SEC_THROTTLE_HINT_EXTENSION_NAME "VK_SEC_throttle_hint"
+
+typedef enum VkThrottleHintTypeSEC {
+    VK_THROTTLE_HINT_TYPE_DEFAULT_SEC = 0,
+    VK_THROTTLE_HINT_TYPE_LOW_SEC = 1,
+    VK_THROTTLE_HINT_TYPE_HIGH_SEC = 2,
+    VK_THROTTLE_HINT_TYPE_MAX_ENUM_SEC = 0x7FFFFFFF
+} VkThrottleHintTypeSEC;
+typedef struct VkThrottleHintSubmitInfoSEC {
+    VkStructureType          sType;
+    const void*              pNext;
+    VkThrottleHintTypeSEC    throttleHint;
+} VkThrottleHintSubmitInfoSEC;
+
+typedef struct VkPhysicalDeviceThrottleHintFeaturesSEC {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           throttleHint;
+} VkPhysicalDeviceThrottleHintFeaturesSEC;
+
+
+
+// VK_ARM_data_graph_neural_accelerator_statistics is a preprocessor guard. Do not pass it to API calls.
+#define VK_ARM_data_graph_neural_accelerator_statistics 1
+#define VK_ARM_DATA_GRAPH_NEURAL_ACCELERATOR_STATISTICS_SPEC_VERSION 1
+#define VK_ARM_DATA_GRAPH_NEURAL_ACCELERATOR_STATISTICS_EXTENSION_NAME "VK_ARM_data_graph_neural_accelerator_statistics"
+
+typedef enum VkNeuralAcceleratorStatisticsModeARM {
+    VK_NEURAL_ACCELERATOR_STATISTICS_MODE_DISABLED_ARM = 0,
+    VK_NEURAL_ACCELERATOR_STATISTICS_MODE_STATISTICS0_ARM = 1,
+    VK_NEURAL_ACCELERATOR_STATISTICS_MODE_STATISTICS1_ARM = 2,
+    VK_NEURAL_ACCELERATOR_STATISTICS_MODE_MAX_ENUM_ARM = 0x7FFFFFFF
+} VkNeuralAcceleratorStatisticsModeARM;
+typedef struct VkPhysicalDeviceDataGraphNeuralAcceleratorStatisticsFeaturesARM {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           dataGraphNeuralAcceleratorStatistics;
+} VkPhysicalDeviceDataGraphNeuralAcceleratorStatisticsFeaturesARM;
+
+typedef struct VkDataGraphPipelineNeuralStatisticsCreateInfoARM {
+    VkStructureType    sType;
+    const void*        pNext;
+    VkBool32           allowNeuralStatistics;
+} VkDataGraphPipelineNeuralStatisticsCreateInfoARM;
+
+typedef struct VkDataGraphPipelineSessionNeuralStatisticsCreateInfoARM {
+    VkStructureType                         sType;
+    const void*                             pNext;
+    VkNeuralAcceleratorStatisticsModeARM    mode;
+} VkDataGraphPipelineSessionNeuralStatisticsCreateInfoARM;
 
 
 
