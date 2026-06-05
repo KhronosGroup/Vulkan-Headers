@@ -1,5 +1,4 @@
 // Copyright 2015-2026 The Khronos Group Inc.
-//
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 //
 
@@ -37,7 +36,7 @@
 #  endif
 #endif
 
-VULKAN_HPP_STATIC_ASSERT( VK_HEADER_VERSION == 352, "Wrong VK_HEADER_VERSION!" );
+VULKAN_HPP_STATIC_ASSERT( VK_HEADER_VERSION == 353, "Wrong VK_HEADER_VERSION!" );
 
 VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
 {
@@ -11195,6 +11194,10 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_CONSTEXPR_INLINE auto ARMPipelineOpacityMicromapSpecVersion   = VK_ARM_PIPELINE_OPACITY_MICROMAP_SPEC_VERSION;
   VULKAN_HPP_CONSTEXPR_INLINE auto ARMPipelineOpacityMicromapExtensionName = VK_ARM_PIPELINE_OPACITY_MICROMAP_EXTENSION_NAME;
 
+  //=== VK_KHR_video_encode_feedback2 ===
+  VULKAN_HPP_CONSTEXPR_INLINE auto KHRVideoEncodeFeedback2SpecVersion   = VK_KHR_VIDEO_ENCODE_FEEDBACK_2_SPEC_VERSION;
+  VULKAN_HPP_CONSTEXPR_INLINE auto KHRVideoEncodeFeedback2ExtensionName = VK_KHR_VIDEO_ENCODE_FEEDBACK_2_EXTENSION_NAME;
+
 #if defined( VK_USE_PLATFORM_METAL_EXT )
   //=== VK_EXT_external_memory_metal ===
   VULKAN_HPP_CONSTEXPR_INLINE auto EXTExternalMemoryMetalSpecVersion   = VK_EXT_EXTERNAL_MEMORY_METAL_SPEC_VERSION;
@@ -11232,6 +11235,10 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
   //=== VK_NV_present_metering ===
   VULKAN_HPP_CONSTEXPR_INLINE auto NVPresentMeteringSpecVersion   = VK_NV_PRESENT_METERING_SPEC_VERSION;
   VULKAN_HPP_CONSTEXPR_INLINE auto NVPresentMeteringExtensionName = VK_NV_PRESENT_METERING_EXTENSION_NAME;
+
+  //=== VK_EXT_multisampled_render_to_swapchain ===
+  VULKAN_HPP_CONSTEXPR_INLINE auto EXTMultisampledRenderToSwapchainSpecVersion   = VK_EXT_MULTISAMPLED_RENDER_TO_SWAPCHAIN_SPEC_VERSION;
+  VULKAN_HPP_CONSTEXPR_INLINE auto EXTMultisampledRenderToSwapchainExtensionName = VK_EXT_MULTISAMPLED_RENDER_TO_SWAPCHAIN_EXTENSION_NAME;
 
   //=== VK_EXT_fragment_density_map_offset ===
   VULKAN_HPP_CONSTEXPR_INLINE auto EXTFragmentDensityMapOffsetSpecVersion   = VK_EXT_FRAGMENT_DENSITY_MAP_OFFSET_SPEC_VERSION;
@@ -11298,6 +11305,10 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
   VULKAN_HPP_CONSTEXPR_INLINE auto SECUbmSurfaceSpecVersion   = VK_SEC_UBM_SURFACE_SPEC_VERSION;
   VULKAN_HPP_CONSTEXPR_INLINE auto SECUbmSurfaceExtensionName = VK_SEC_UBM_SURFACE_EXTENSION_NAME;
 #endif /*VK_USE_PLATFORM_UBM_SEC*/
+
+  //=== VK_KHR_extended_flags ===
+  VULKAN_HPP_CONSTEXPR_INLINE auto KHRExtendedFlagsSpecVersion   = VK_KHR_EXTENDED_FLAGS_SPEC_VERSION;
+  VULKAN_HPP_CONSTEXPR_INLINE auto KHRExtendedFlagsExtensionName = VK_KHR_EXTENDED_FLAGS_EXTENSION_NAME;
 
   //=== VK_VALVE_shader_mixed_float_dot_product ===
   VULKAN_HPP_CONSTEXPR_INLINE auto VALVEShaderMixedFloatDotProductSpecVersion   = VK_VALVE_SHADER_MIXED_FLOAT_DOT_PRODUCT_SPEC_VERSION;
@@ -21756,6 +21767,43 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
     };
   };
 
+  //=== VK_KHR_video_encode_feedback2 ===
+  template <>
+  struct StructExtends<PhysicalDeviceVideoEncodeFeedback2FeaturesKHR, PhysicalDeviceFeatures2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<PhysicalDeviceVideoEncodeFeedback2FeaturesKHR, DeviceCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<VideoEncodeFeedback2CapabilitiesKHR, VideoCapabilitiesKHR>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<QueryPoolVideoEncodePerPartitionFeedbackCreateInfoKHR, QueryPoolCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
 #  if defined( VK_USE_PLATFORM_METAL_EXT )
   //=== VK_EXT_external_memory_metal ===
   template <>
@@ -21985,6 +22033,34 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
 
   template <>
   struct StructExtends<PhysicalDevicePresentMeteringFeaturesNV, DeviceCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  //=== VK_EXT_multisampled_render_to_swapchain ===
+  template <>
+  struct StructExtends<PhysicalDeviceMultisampledRenderToSwapchainFeaturesEXT, PhysicalDeviceFeatures2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<PhysicalDeviceMultisampledRenderToSwapchainFeaturesEXT, DeviceCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<SwapchainFlagsSurfaceCapabilitiesEXT, SurfaceCapabilities2KHR>
   {
     enum
     {
@@ -22469,6 +22545,178 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
 
   template <>
   struct StructExtends<PhysicalDeviceShaderSubgroupPartitionedFeaturesEXT, DeviceCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  //=== VK_KHR_extended_flags ===
+  template <>
+  struct StructExtends<FormatProperties4KHR, FormatProperties2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<ImageUsageFlags2CreateInfoKHR, FramebufferAttachmentImageInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<ImageUsageFlags2CreateInfoKHR, ImageCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<ImageUsageFlags2CreateInfoKHR, PhysicalDeviceImageFormatInfo2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<ImageUsageFlags2CreateInfoKHR, PhysicalDeviceSparseImageFormatInfo2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<ImageUsageFlags2CreateInfoKHR, PhysicalDeviceVideoFormatInfoKHR>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<ImageUsageFlags2CreateInfoKHR, SurfaceCapabilities2KHR>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<ImageUsageFlags2CreateInfoKHR, SwapchainCreateInfoKHR>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<ImageUsageFlags2CreateInfoKHR, VideoFormatPropertiesKHR>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<ImageCreateFlags2CreateInfoKHR, ImageCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<ImageCreateFlags2CreateInfoKHR, PhysicalDeviceImageFormatInfo2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<ImageCreateFlags2CreateInfoKHR, FramebufferAttachmentImageInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<ImageCreateFlags2CreateInfoKHR, VideoFormatPropertiesKHR>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<ImageViewUsage2CreateInfoKHR, ImageViewCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<PhysicalDeviceExtendedFlagsFeaturesKHR, PhysicalDeviceFeatures2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<PhysicalDeviceExtendedFlagsFeaturesKHR, DeviceCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<ImageStencilUsage2CreateInfoKHR, ImageCreateInfo>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<ImageStencilUsage2CreateInfoKHR, PhysicalDeviceImageFormatInfo2>
+  {
+    enum
+    {
+      value = true
+    };
+  };
+
+  template <>
+  struct StructExtends<SharedPresentSurfaceCapabilities2KHR, SurfaceCapabilities2KHR>
   {
     enum
     {
