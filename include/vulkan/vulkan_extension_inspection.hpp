@@ -514,6 +514,7 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
                                                             "VK_NV_cooperative_matrix2",
                                                             "VK_ARM_pipeline_opacity_micromap",
                                                             "VK_KHR_video_encode_feedback2",
+                                                            "VK_IMG_filter_linear_2d",
 #if defined( VK_USE_PLATFORM_METAL_EXT )
                                                             "VK_EXT_external_memory_metal",
 #endif /*VK_USE_PLATFORM_METAL_EXT*/
@@ -3066,7 +3067,13 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
         { { "VK_VERSION_1_0",
             { {
               "VK_KHR_video_encode_queue",
-            } } } } }
+            } } } } },
+      { "VK_IMG_filter_linear_2d",
+        { { "VK_VERSION_1_0",
+            { {
+              "VK_KHR_format_feature_flags2",
+            } } },
+          { "VK_VERSION_1_3", { {} } } } }
 #if defined( VK_USE_PLATFORM_METAL_EXT )
       ,
       { "VK_EXT_external_memory_metal",
@@ -4246,7 +4253,7 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
            ( extension == "VK_KHR_shader_fma" ) || ( extension == "VK_NV_push_constant_bank" ) || ( extension == "VK_EXT_ray_tracing_invocation_reorder" ) ||
            ( extension == "VK_EXT_depth_clamp_control" ) || ( extension == "VK_KHR_maintenance9" ) || ( extension == "VK_KHR_video_maintenance2" ) ||
            ( extension == "VK_HUAWEI_hdr_vivid" ) || ( extension == "VK_NV_cooperative_matrix2" ) || ( extension == "VK_ARM_pipeline_opacity_micromap" ) ||
-           ( extension == "VK_KHR_video_encode_feedback2" )
+           ( extension == "VK_KHR_video_encode_feedback2" ) || ( extension == "VK_IMG_filter_linear_2d" )
 #if defined( VK_USE_PLATFORM_METAL_EXT )
         || ( extension == "VK_EXT_external_memory_metal" )
 #endif /*VK_USE_PLATFORM_METAL_EXT*/

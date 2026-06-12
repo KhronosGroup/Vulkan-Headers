@@ -1948,7 +1948,8 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
     eCodeplay = VK_VENDOR_ID_CODEPLAY,
     eMESA     = VK_VENDOR_ID_MESA,
     ePocl     = VK_VENDOR_ID_POCL,
-    eMobileye = VK_VENDOR_ID_MOBILEYE
+    eMobileye = VK_VENDOR_ID_MOBILEYE,
+    eApe      = VK_VENDOR_ID_APE
   };
 
   // wrapper class for enum VkFormat, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkFormat.html
@@ -4900,7 +4901,8 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
     eMesaHoneykrisp             = VK_DRIVER_ID_MESA_HONEYKRISP,
     eVulkanScEmulationOnVulkan  = VK_DRIVER_ID_VULKAN_SC_EMULATION_ON_VULKAN,
     eMesaKosmickrisp            = VK_DRIVER_ID_MESA_KOSMICKRISP,
-    eMesaGfxstream              = VK_DRIVER_ID_MESA_GFXSTREAM
+    eMesaGfxstream              = VK_DRIVER_ID_MESA_GFXSTREAM,
+    eApeSoft                    = VK_DRIVER_ID_APE_SOFT
   };
 
   using DriverIdKHR = DriverId;
@@ -5415,6 +5417,7 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
     eCopyImageIndirectDstKHR              = VK_FORMAT_FEATURE_2_COPY_IMAGE_INDIRECT_DST_BIT_KHR,
     eVideoEncodeQuantizationDeltaMapKHR   = VK_FORMAT_FEATURE_2_VIDEO_ENCODE_QUANTIZATION_DELTA_MAP_BIT_KHR,
     eVideoEncodeEmphasisMapKHR            = VK_FORMAT_FEATURE_2_VIDEO_ENCODE_EMPHASIS_MAP_BIT_KHR,
+    eSampledImageFilterLinear2DIMG        = VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_FILTER_LINEAR_2D_BIT_IMG,
     eDepthCopyOnComputeQueueKHR           = VK_FORMAT_FEATURE_2_DEPTH_COPY_ON_COMPUTE_QUEUE_BIT_KHR,
     eDepthCopyOnTransferQueueKHR          = VK_FORMAT_FEATURE_2_DEPTH_COPY_ON_TRANSFER_QUEUE_BIT_KHR,
     eStencilCopyOnComputeQueueKHR         = VK_FORMAT_FEATURE_2_STENCIL_COPY_ON_COMPUTE_QUEUE_BIT_KHR,
@@ -5456,10 +5459,10 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
       FormatFeatureFlagBits2::eTensorImageAliasingARM | FormatFeatureFlagBits2::eOpticalFlowImageNV | FormatFeatureFlagBits2::eOpticalFlowVectorNV |
       FormatFeatureFlagBits2::eOpticalFlowCostNV | FormatFeatureFlagBits2::eTensorDataGraphARM | FormatFeatureFlagBits2::eCopyImageIndirectDstKHR |
       FormatFeatureFlagBits2::eVideoEncodeQuantizationDeltaMapKHR | FormatFeatureFlagBits2::eVideoEncodeEmphasisMapKHR |
-      FormatFeatureFlagBits2::eDepthCopyOnComputeQueueKHR | FormatFeatureFlagBits2::eDepthCopyOnTransferQueueKHR |
-      FormatFeatureFlagBits2::eStencilCopyOnComputeQueueKHR | FormatFeatureFlagBits2::eStencilCopyOnTransferQueueKHR |
-      FormatFeatureFlagBits2::eDataGraphOpticalFlowImageARM | FormatFeatureFlagBits2::eDataGraphOpticalFlowVectorARM |
-      FormatFeatureFlagBits2::eDataGraphOpticalFlowCostARM;
+      FormatFeatureFlagBits2::eSampledImageFilterLinear2DIMG | FormatFeatureFlagBits2::eDepthCopyOnComputeQueueKHR |
+      FormatFeatureFlagBits2::eDepthCopyOnTransferQueueKHR | FormatFeatureFlagBits2::eStencilCopyOnComputeQueueKHR |
+      FormatFeatureFlagBits2::eStencilCopyOnTransferQueueKHR | FormatFeatureFlagBits2::eDataGraphOpticalFlowImageARM |
+      FormatFeatureFlagBits2::eDataGraphOpticalFlowVectorARM | FormatFeatureFlagBits2::eDataGraphOpticalFlowCostARM;
   };
 
   // wrapper class for enum VkPipelineCreationFeedbackFlagBits, see

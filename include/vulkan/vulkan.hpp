@@ -36,7 +36,7 @@
 #  endif
 #endif
 
-VULKAN_HPP_STATIC_ASSERT( VK_HEADER_VERSION == 353, "Wrong VK_HEADER_VERSION!" );
+VULKAN_HPP_STATIC_ASSERT( VK_HEADER_VERSION == 354, "Wrong VK_HEADER_VERSION!" );
 
 VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
 {
@@ -11197,6 +11197,10 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
   //=== VK_KHR_video_encode_feedback2 ===
   VULKAN_HPP_CONSTEXPR_INLINE auto KHRVideoEncodeFeedback2SpecVersion   = VK_KHR_VIDEO_ENCODE_FEEDBACK_2_SPEC_VERSION;
   VULKAN_HPP_CONSTEXPR_INLINE auto KHRVideoEncodeFeedback2ExtensionName = VK_KHR_VIDEO_ENCODE_FEEDBACK_2_EXTENSION_NAME;
+
+  //=== VK_IMG_filter_linear_2d ===
+  VULKAN_HPP_CONSTEXPR_INLINE auto IMGFilterLinear2DSpecVersion   = VK_IMG_FILTER_LINEAR_2D_SPEC_VERSION;
+  VULKAN_HPP_CONSTEXPR_INLINE auto IMGFilterLinear2DExtensionName = VK_IMG_FILTER_LINEAR_2D_EXTENSION_NAME;
 
 #if defined( VK_USE_PLATFORM_METAL_EXT )
   //=== VK_EXT_external_memory_metal ===
@@ -24413,18 +24417,21 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
       }
 
       // This interface does not require a linked vulkan library.
-      void init( VkInstance                instance,
-                 PFN_vkGetInstanceProcAddr getInstanceProcAddr,
-                 VkDevice                  device              = {},
-                 PFN_vkGetDeviceProcAddr /*getDeviceProcAddr*/ = nullptr ) VULKAN_HPP_NOEXCEPT
+      void init( VkInstance instance, PFN_vkGetInstanceProcAddr getInstanceProcAddr ) VULKAN_HPP_NOEXCEPT
       {
         VULKAN_HPP_ASSERT( instance && getInstanceProcAddr );
         vkGetInstanceProcAddr = getInstanceProcAddr;
         init( Instance( instance ) );
-        if ( device )
-        {
-          init( Device( device ) );
-        }
+      }
+
+      // This interface does not require a linked vulkan library.
+      void init( VkInstance instance, PFN_vkGetInstanceProcAddr getInstanceProcAddr, VkDevice device, PFN_vkGetDeviceProcAddr getDeviceProcAddr )
+        VULKAN_HPP_NOEXCEPT
+      {
+        init( instance, getInstanceProcAddr );
+        VULKAN_HPP_ASSERT( device && getDeviceProcAddr );
+        vkGetDeviceProcAddr = getDeviceProcAddr;
+        init( Device( device ) );
       }
 
       void init( Instance instanceCpp ) VULKAN_HPP_NOEXCEPT
@@ -26111,7 +26118,6 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
         VkDevice device = static_cast<VkDevice>( deviceCpp );
 
         //=== VK_VERSION_1_0 ===
-        vkGetDeviceProcAddr                = PFN_vkGetDeviceProcAddr( vkGetDeviceProcAddr( device, "vkGetDeviceProcAddr" ) );
         vkDestroyDevice                    = PFN_vkDestroyDevice( vkGetDeviceProcAddr( device, "vkDestroyDevice" ) );
         vkGetDeviceQueue                   = PFN_vkGetDeviceQueue( vkGetDeviceProcAddr( device, "vkGetDeviceQueue" ) );
         vkQueueSubmit                      = PFN_vkQueueSubmit( vkGetDeviceProcAddr( device, "vkQueueSubmit" ) );
@@ -27456,7 +27462,6 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
         init( instance, device, dl );
       }
     };
-
 #if defined( VULKAN_HPP_CXX_MODULE ) && !defined( VULKAN_HPP_DEFAULT_DISPATCHER_HANDLED ) && VULKAN_HPP_DISPATCH_LOADER_DYNAMIC == 1
     VULKAN_HPP_STORAGE_API DispatchLoaderDynamic defaultDispatchLoaderDynamic;
 #endif
