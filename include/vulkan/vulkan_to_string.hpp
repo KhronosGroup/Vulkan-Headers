@@ -6030,6 +6030,8 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
       case StructureType::ePhysicalDeviceLayeredApiVulkanPropertiesKHR               : return "PhysicalDeviceLayeredApiVulkanPropertiesKHR";
       case StructureType::ePhysicalDeviceShaderAtomicFloat16VectorFeaturesNV         : return "PhysicalDeviceShaderAtomicFloat16VectorFeaturesNV";
       case StructureType::ePhysicalDeviceShaderReplicatedCompositesFeaturesEXT       : return "PhysicalDeviceShaderReplicatedCompositesFeaturesEXT";
+      case StructureType::eTensorExplicitTilingFormatPropertiesARM                   : return "TensorExplicitTilingFormatPropertiesARM";
+      case StructureType::eTensorRollingBackingCreateInfoARM                         : return "TensorRollingBackingCreateInfoARM";
       case StructureType::ePhysicalDeviceShaderFloat8FeaturesEXT                     : return "PhysicalDeviceShaderFloat8FeaturesEXT";
       case StructureType::ePhysicalDeviceRayTracingValidationFeaturesNV              : return "PhysicalDeviceRayTracingValidationFeaturesNV";
       case StructureType::ePhysicalDeviceClusterAccelerationStructureFeaturesNV      : return "PhysicalDeviceClusterAccelerationStructureFeaturesNV";
@@ -10884,9 +10886,14 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
   {
     switch ( value )
     {
-      case TensorTilingARM::eOptimal: return "Optimal";
-      case TensorTilingARM::eLinear : return "Linear";
-      default                       : return "invalid ( " + toHexString( static_cast<uint32_t>( value ) ) + " )";
+      case TensorTilingARM::eOptimal             : return "Optimal";
+      case TensorTilingARM::eLinear              : return "Linear";
+      case TensorTilingARM::eBrick16Wide         : return "Brick16Wide";
+      case TensorTilingARM::eBrick8Wide          : return "Brick8Wide";
+      case TensorTilingARM::eBrick4Wide          : return "Brick4Wide";
+      case TensorTilingARM::eBlockUInterleaved   : return "BlockUInterleaved";
+      case TensorTilingARM::eBlockUInterleaved64K: return "BlockUInterleaved64K";
+      default                                    : return "invalid ( " + toHexString( static_cast<uint32_t>( value ) ) + " )";
     }
   }
 

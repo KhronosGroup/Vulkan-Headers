@@ -1708,6 +1708,8 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
     ePhysicalDeviceLayeredApiVulkanPropertiesKHR                = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_VULKAN_PROPERTIES_KHR,
     ePhysicalDeviceShaderAtomicFloat16VectorFeaturesNV          = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT16_VECTOR_FEATURES_NV,
     ePhysicalDeviceShaderReplicatedCompositesFeaturesEXT        = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_REPLICATED_COMPOSITES_FEATURES_EXT,
+    eTensorExplicitTilingFormatPropertiesARM                    = VK_STRUCTURE_TYPE_TENSOR_EXPLICIT_TILING_FORMAT_PROPERTIES_ARM,
+    eTensorRollingBackingCreateInfoARM                          = VK_STRUCTURE_TYPE_TENSOR_ROLLING_BACKING_CREATE_INFO_ARM,
     ePhysicalDeviceShaderFloat8FeaturesEXT                      = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT8_FEATURES_EXT,
     ePhysicalDeviceRayTracingValidationFeaturesNV               = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_VALIDATION_FEATURES_NV,
     ePhysicalDeviceClusterAccelerationStructureFeaturesNV       = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CLUSTER_ACCELERATION_STRUCTURE_FEATURES_NV,
@@ -9028,8 +9030,13 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
   // wrapper class for enum VkTensorTilingARM, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkTensorTilingARM.html
   enum class TensorTilingARM
   {
-    eOptimal = VK_TENSOR_TILING_OPTIMAL_ARM,
-    eLinear  = VK_TENSOR_TILING_LINEAR_ARM
+    eOptimal              = VK_TENSOR_TILING_OPTIMAL_ARM,
+    eLinear               = VK_TENSOR_TILING_LINEAR_ARM,
+    eBrick16Wide          = VK_TENSOR_TILING_BRICK_16_WIDE_ARM,
+    eBrick8Wide           = VK_TENSOR_TILING_BRICK_8_WIDE_ARM,
+    eBrick4Wide           = VK_TENSOR_TILING_BRICK_4_WIDE_ARM,
+    eBlockUInterleaved    = VK_TENSOR_TILING_BLOCK_U_INTERLEAVED_ARM,
+    eBlockUInterleaved64K = VK_TENSOR_TILING_BLOCK_U_INTERLEAVED_64K_ARM
   };
 
   //=== VK_NV_optical_flow ===

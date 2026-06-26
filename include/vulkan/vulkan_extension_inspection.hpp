@@ -496,6 +496,7 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
                                                             "VK_KHR_maintenance7",
                                                             "VK_NV_shader_atomic_float16_vector",
                                                             "VK_EXT_shader_replicated_composites",
+                                                            "VK_ARM_tensor_controls",
                                                             "VK_EXT_shader_float8",
                                                             "VK_NV_ray_tracing_validation",
                                                             "VK_NV_cluster_acceleration_structure",
@@ -2951,6 +2952,11 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
               "VK_KHR_get_physical_device_properties2",
             } } },
           { "VK_VERSION_1_1", { {} } } } },
+      { "VK_ARM_tensor_controls",
+        { { "VK_VERSION_1_0",
+            { {
+              "VK_ARM_tensors",
+            } } } } },
       { "VK_EXT_shader_float8",
         { { "VK_VERSION_1_0",
             { {
@@ -4246,7 +4252,7 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
            ( extension == "VK_NV_raw_access_chains" ) || ( extension == "VK_NV_external_compute_queue" ) ||
            ( extension == "VK_KHR_shader_relaxed_extended_instruction" ) || ( extension == "VK_NV_command_buffer_inheritance" ) ||
            ( extension == "VK_KHR_maintenance7" ) || ( extension == "VK_NV_shader_atomic_float16_vector" ) ||
-           ( extension == "VK_EXT_shader_replicated_composites" ) || ( extension == "VK_EXT_shader_float8" ) ||
+           ( extension == "VK_EXT_shader_replicated_composites" ) || ( extension == "VK_ARM_tensor_controls" ) || ( extension == "VK_EXT_shader_float8" ) ||
            ( extension == "VK_NV_ray_tracing_validation" ) || ( extension == "VK_NV_cluster_acceleration_structure" ) ||
            ( extension == "VK_NV_partitioned_acceleration_structure" ) || ( extension == "VK_EXT_device_generated_commands" ) ||
            ( extension == "VK_KHR_device_fault" ) || ( extension == "VK_KHR_maintenance8" ) || ( extension == "VK_MESA_image_alignment_control" ) ||

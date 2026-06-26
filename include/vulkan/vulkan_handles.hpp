@@ -2182,6 +2182,10 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
   //=== VK_EXT_shader_replicated_composites ===
   struct PhysicalDeviceShaderReplicatedCompositesFeaturesEXT;
 
+  //=== VK_ARM_tensor_controls ===
+  struct TensorRollingBackingCreateInfoARM;
+  struct TensorExplicitTilingFormatPropertiesARM;
+
   //=== VK_EXT_shader_float8 ===
   struct PhysicalDeviceShaderFloat8FeaturesEXT;
 
