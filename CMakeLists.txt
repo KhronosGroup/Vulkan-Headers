@@ -5,16 +5,17 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ~~~
-cmake_minimum_required(VERSION 3.22.1)
+cmake_minimum_required(VERSION 3.28.3)
 
 include(CMakeDependentOption)
-
 
 # NOTE: Parsing the version like this is suboptimal but neccessary due to our release process:
 # https://github.com/KhronosGroup/Vulkan-Headers/pull/346
 #
-# As shown a more robust approach would be just to add basic test code to check the project version.
-function(vlk_get_header_version)
+# A better approach would be just to add basic test code to check the project version.
+# IE set the version in the CMakeLists.txt and then check that the version is correct in a test.
+# Avoids file parsing on every single configuration and is more robust to changes in the header file.
+block(PROPAGATE VK_VERSION_STRING)
     set(vulkan_core_header_file "${CMAKE_CURRENT_SOURCE_DIR}/include/vulkan/vulkan_core.h")
     if (NOT EXISTS ${vulkan_core_header_file})
         message(FATAL_ERROR "Couldn't find vulkan_core.h!")
@@ -35,9 +36,8 @@ function(vlk_get_header_version)
         message(FATAL_ERROR "Couldn't get the patch version")
     endif()
 
-    set(VK_VERSION_STRING "${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}" PARENT_SCOPE)
-endfunction()
-vlk_get_header_version()
+    set(VK_VERSION_STRING "${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}")
+endblock()
 
 project(VULKAN_HEADERS LANGUAGES C CXX VERSION ${VK_VERSION_STRING})
 
