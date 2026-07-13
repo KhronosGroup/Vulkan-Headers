@@ -79,17 +79,27 @@ set(vk_headers_verify_platform_headers
     vulkan_xlib_xrandr.h
 )
 
-# These files cannot be included on their own.
+# vulkan_beta.h cannot be included on its own: it relies on types (VkStructureType,
+# VkBool32, ...) that are defined in vulkan_core.h, which vulkan.h includes first.
 set(vk_headers_verify_detail_headers
     vulkan_beta.h
+)
+
+# None of the *.hpp headers below are designed to be included on their own either:
+# they're pulled in automatically by including vulkan.hpp (vulkan_hpp_macros.hpp,
+# vulkan_enums.hpp, vulkan_to_string.hpp, vulkan_handles.hpp, vulkan_structs.hpp, and
+# vulkan_funcs.hpp, alongside vulkan.h), so verifying vulkan.hpp standalone already
+# covers them and there's no need to verify them individually.
+set(vk_headers_verify_hpp_headers
     vulkan_enums.hpp
     vulkan_funcs.hpp
     vulkan_handles.hpp
+    vulkan_hpp_macros.hpp
     vulkan_structs.hpp
     vulkan_to_string.hpp
 )
 
-foreach(header IN LISTS vk_headers_verify_platform_headers vk_headers_verify_detail_headers)
+foreach(header IN LISTS vk_headers_verify_platform_headers vk_headers_verify_detail_headers vk_headers_verify_hpp_headers)
     set_source_files_properties("${VULKAN_HEADERS_SOURCE_DIR}/include/vulkan/${header}" PROPERTIES SKIP_LINTING ON)
 endforeach()
 
