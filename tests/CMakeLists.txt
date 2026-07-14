@@ -38,23 +38,31 @@ set_tests_properties(integration.find_package PROPERTIES DEPENDS integration.ins
 # Verify that every public header compiles standalone (i.e. that each one includes
 # everything it needs and doesn't just rely on being pulled in after some other header).
 #
-# The header list is globbed so newly added headers are picked up automatically. Headers
-# that are known not to be self-contained are excluded from compilation individually via
-# SKIP_LINTING below, rather than omitted from the FILE_SET, so they still show up here
-# and don't silently fall out of the verification as the headers evolve.
-file(GLOB_RECURSE vk_headers_verify_headers CONFIGURE_DEPENDS LIST_DIRECTORIES false
-    "${VULKAN_HEADERS_SOURCE_DIR}/include/vulkan/*.h"
-    "${VULKAN_HEADERS_SOURCE_DIR}/include/vulkan/*.hpp"
-    "${VULKAN_HEADERS_SOURCE_DIR}/include/vk_video/*.h"
+# The header list is globbed so newly added headers are picked up automatically, in any
+# subdirectory of include/. Headers that are known not to be self-contained are excluded
+# from compilation individually via SKIP_LINTING below, rather than omitted from the
+# FILE_SET, so they still show up here and don't silently fall out of the verification as
+# the headers evolve.
+file(GLOB_RECURSE vk_headers_verify_c_headers CONFIGURE_DEPENDS LIST_DIRECTORIES false
+    "${VULKAN_HEADERS_SOURCE_DIR}/include/*.h"
 )
-list(SORT vk_headers_verify_headers)
+file(GLOB_RECURSE vk_headers_verify_cxx_headers CONFIGURE_DEPENDS LIST_DIRECTORIES false
+    "${VULKAN_HEADERS_SOURCE_DIR}/include/*.hpp"
+)
+list(SORT vk_headers_verify_c_headers)
+list(SORT vk_headers_verify_cxx_headers)
+
+# Set LANGUAGE explicitly per header instead of leaving it for CMake to deduce: .h is an
+# extension both C and CXX claim, so an undeduced .h header could silently end up compiled
+# as C++ instead of being checked against a C compiler.
+set_source_files_properties(${vk_headers_verify_c_headers} PROPERTIES LANGUAGE C)
+set_source_files_properties(${vk_headers_verify_cxx_headers} PROPERTIES LANGUAGE CXX)
 
 add_library(vk_headers_verify INTERFACE)
-set_target_properties(vk_headers_verify PROPERTIES LINKER_LANGUAGE C)
 target_sources(vk_headers_verify INTERFACE
     FILE_SET HEADERS
     BASE_DIRS "${VULKAN_HEADERS_SOURCE_DIR}/include"
-    FILES ${vk_headers_verify_headers}
+    FILES ${vk_headers_verify_c_headers} ${vk_headers_verify_cxx_headers}
 )
 
 # WSI headers (vulkan_win32.h, vulkan_xcb.h, vulkan_wayland.h, ...) are deliberately

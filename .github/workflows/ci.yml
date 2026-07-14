@@ -58,8 +58,12 @@ jobs:
     strategy:
       matrix:
           compiler: [ clang, clang-cl ]
+          cmake-version: [ '3.28.3', 'latest' ]
     steps:
         - uses: actions/checkout@v7
+        - uses: lukka/get-cmake@latest
+          with:
+            cmakeVersion: ${{ matrix.cmake-version }}
         - uses: ilammy/msvc-dev-cmd@v1
         - run: |
             cmake -S . -B build `
