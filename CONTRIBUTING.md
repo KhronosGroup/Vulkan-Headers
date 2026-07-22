@@ -26,6 +26,7 @@ The majority for the Vulkan headers come from [Vulkan-Docs](https://github.com/K
 ### Specification repository (https://github.com/KhronosGroup/Vulkan-Docs)
 
 * registry/*.py
+* registry/*.xml
 * registry/spec_tools/*.py
 * registry/profiles/*.json
 * All files under include/vulkan/ which are *not* listed explicitly as originating from another repository.
