@@ -1,9 +1,9 @@
 {
   "version info": {
     "schema version": 2,
-    "api version": "1.4.359",
-    "comment": "from git branch: github-main commit: 7227da108bb407f1404edc5026ab4c0a9409c6a5",
-    "date": "2026-08-07 01:36:25Z"
+    "api version": "1.4.360",
+    "comment": "from git branch: github-main commit: 090f1b190d60ced4a1d198fd3747d071cc271b1c",
+    "date": "2026-08-14 00:44:48Z"
   },
   "validation": {
     "VkDeviceAddress": {
@@ -5487,12 +5487,12 @@
         },
         {
           "vuid": "VUID-vkCmdResetEvent2-event-03831",
-          "text": "There <strong class=\"purple\">must</strong> be an execution dependency between <code>vkCmdResetEvent2</code> and the execution of any <a href=\"#vkCmdWaitEvents\">vkCmdWaitEvents</a> that includes <code>event</code> in its <code>pEvents</code> parameter",
+          "text": "There <strong class=\"purple\">must</strong> be an execution dependency between <code>vkCmdResetEvent2</code> and the execution of any earlier <a href=\"#vkCmdWaitEvents\">vkCmdWaitEvents</a> in <a href=\"#synchronization-submission-order\">submission order</a> that includes <code>event</code> in its <code>pEvents</code> parameter",
           "page": "chapters/synchronization.html"
         },
         {
           "vuid": "VUID-vkCmdResetEvent2-event-03832",
-          "text": "There <strong class=\"purple\">must</strong> be an execution dependency between <code>vkCmdResetEvent2</code> and the execution of any <a href=\"#vkCmdWaitEvents2\">vkCmdWaitEvents2</a> that includes <code>event</code> in its <code>pEvents</code> parameter",
+          "text": "There <strong class=\"purple\">must</strong> be an execution dependency between <code>vkCmdResetEvent2</code> and the execution of any earlier <a href=\"#vkCmdWaitEvents2\">vkCmdWaitEvents2</a> in <a href=\"#synchronization-submission-order\">submission order</a> that includes <code>event</code> in its <code>pEvents</code> parameter",
           "page": "chapters/synchronization.html"
         },
         {
@@ -5611,12 +5611,12 @@
         },
         {
           "vuid": "VUID-vkCmdResetEvent-event-03834",
-          "text": "There <strong class=\"purple\">must</strong> be an execution dependency between <code>vkCmdResetEvent</code> and the execution of any <a href=\"#vkCmdWaitEvents\">vkCmdWaitEvents</a> that includes <code>event</code> in its <code>pEvents</code> parameter",
+          "text": "There <strong class=\"purple\">must</strong> be an execution dependency between <code>vkCmdResetEvent</code> and the execution of any earlier <a href=\"#vkCmdWaitEvents\">vkCmdWaitEvents</a> in <a href=\"#synchronization-submission-order\">submission order</a> that includes <code>event</code> in its <code>pEvents</code> parameter",
           "page": "chapters/synchronization.html"
         },
         {
           "vuid": "VUID-vkCmdResetEvent-event-03835",
-          "text": "There <strong class=\"purple\">must</strong> be an execution dependency between <code>vkCmdResetEvent</code> and the execution of any <a href=\"#vkCmdWaitEvents2\">vkCmdWaitEvents2</a> that includes <code>event</code> in its <code>pEvents</code> parameter",
+          "text": "There <strong class=\"purple\">must</strong> be an execution dependency between <code>vkCmdResetEvent</code> and the execution of any earlier <a href=\"#vkCmdWaitEvents2\">vkCmdWaitEvents2</a> in <a href=\"#synchronization-submission-order\">submission order</a> that includes <code>event</code> in its <code>pEvents</code> parameter",
           "page": "chapters/synchronization.html"
         },
         {
@@ -16536,6 +16536,11 @@
           "page": "chapters/shaders.html"
         },
         {
+          "vuid": "VUID-VkShaderCreateInfoEXT-flags-12490",
+          "text": "If <code>flags</code> includes <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_DESCRIPTOR_HEAP_BIT_EXT</a>, it <strong class=\"purple\">must</strong> not include <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a>",
+          "page": "chapters/shaders.html"
+        },
+        {
           "vuid": "VUID-VkShaderCreateInfoEXT-codeType-10386",
           "text": "If <code>codeType</code> is <a href=\"#VkShaderCodeTypeEXT\">VK_SHADER_CODE_TYPE_SPIRV_EXT</a>, <code>flags</code> does not include <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_DESCRIPTOR_HEAP_BIT_EXT</a> and a <a href=\"#interfaces-resources\">resource variable</a> is declared in a shader as an array of descriptors, then the descriptor type of that variable <strong class=\"purple\">must</strong> not be <a href=\"#VkDescriptorType\">VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK</a>",
           "page": "chapters/shaders.html"
@@ -18121,11 +18126,6 @@
           "page": "chapters/shaders.html"
         },
         {
-          "vuid": "VUID-vkGetShaderInstrumentationValuesARM-pMetricValues-parameter",
-          "text": "<code>pMetricValues</code> <strong class=\"purple\">must</strong> be a pointer value",
-          "page": "chapters/shaders.html"
-        },
-        {
           "vuid": "VUID-vkGetShaderInstrumentationValuesARM-flags-zerobitmask",
           "text": "<code>flags</code> <strong class=\"purple\">must</strong> be <code>0</code>",
           "page": "chapters/shaders.html"
@@ -18813,7 +18813,7 @@
         },
         {
           "vuid": "VUID-vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI-pMaxWorkgroupSize-parameter",
-          "text": "<code>pMaxWorkgroupSize</code> <strong class=\"purple\">must</strong> be a valid pointer to <a href=\"#VkExtent2D\">VkExtent2D</a> structures",
+          "text": "<code>pMaxWorkgroupSize</code> <strong class=\"purple\">must</strong> be a valid pointer to a <a href=\"#VkExtent2D\">VkExtent2D</a> structure",
           "page": "chapters/pipelines.html"
         },
         {
@@ -28879,6 +28879,11 @@
           "page": "chapters/resources.html"
         },
         {
+          "vuid": "VUID-VkImageViewCreateInfo-usage-12488",
+          "text": "If <code>usage</code> contains <a href=\"#VkImageUsageFlagBits\">VK_IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT</a>, then the image view&#8217;s <a href=\"#resources-image-view-format-features\">format features</a> <strong class=\"purple\">must</strong> contain <a href=\"#VkFormatFeatureFlagBits2KHR\">VK_FORMAT_FEATURE_2_FRAGMENT_DENSITY_MAP_BIT_EXT</a>",
+          "page": "chapters/resources.html"
+        },
+        {
           "vuid": "VUID-VkImageViewCreateInfo-image-02571",
           "text": "If <code>image</code> was created with the <a href=\"#VkImageUsageFlagBits\">VK_IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT</a> usage flag set, <code>subresourceRange.levelCount</code> <strong class=\"purple\">must</strong> be <code>1</code>",
           "page": "chapters/resources.html"
@@ -28929,6 +28934,11 @@
           "page": "chapters/resources.html"
         },
         {
+          "vuid": "VUID-VkImageViewCreateInfo-image-12397",
+          "text": "If <code>image</code> was not created with the <a href=\"#VkImageCreateFlagBits\">VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT</a> flag <code>format</code> <strong class=\"purple\">must</strong> be identical to the <code>format</code> used to create <code>image</code>",
+          "page": "chapters/resources.html"
+        },
+        {
           "vuid": "VUID-VkImageViewCreateInfo-image-01586",
           "text": "If <code>image</code> was created with the <a href=\"#VkImageCreateFlagBits\">VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT</a> flag, if the <code>format</code> of the <code>image</code> is a <a href=\"#formats-multiplanar\">multi-planar format</a>, and if <code>subresourceRange.aspectMask</code> is one of the <a href=\"#formats-multiplanar-image-aspect\">multi-planar aspect mask</a> bits, then <code>format</code> <strong class=\"purple\">must</strong> be compatible with the <a href=\"#VkFormat\">VkFormat</a> for the plane of the <code>image</code> <code>format</code> indicated by <code>subresourceRange.aspectMask</code>, as defined in <a href=\"#formats-compatible-planes\">Compatible Formats of Planes of Multi-Planar Formats</a>",
           "page": "chapters/resources.html"
@@ -28936,11 +28946,6 @@
         {
           "vuid": "VUID-VkImageViewCreateInfo-subresourceRange-07818",
           "text": "<code>subresourceRange.aspectMask</code> <strong class=\"purple\">must</strong> only have at most 1 valid <a href=\"#formats-multiplanar-image-aspect\">multi-planar aspect mask</a> bit",
-          "page": "chapters/resources.html"
-        },
-        {
-          "vuid": "VUID-VkImageViewCreateInfo-image-12397",
-          "text": "If <code>image</code> was not created with the <a href=\"#VkImageCreateFlagBits\">VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT</a> flag <code>format</code> <strong class=\"purple\">must</strong> be identical to the <code>format</code> used to create <code>image</code>",
           "page": "chapters/resources.html"
         },
         {
@@ -31252,8 +31257,8 @@
           "page": "chapters/resources.html"
         },
         {
-          "vuid": "VUID-VkDeviceImageMemoryRequirements-pCreateInfo-06776",
-          "text": "The <code>pCreateInfo-&gt;pNext</code> chain <strong class=\"purple\">must</strong> not contain a <a href=\"#VkImageDrmFormatModifierExplicitCreateInfoEXT\">VkImageDrmFormatModifierExplicitCreateInfoEXT</a> structure",
+          "vuid": "VUID-VkDeviceImageMemoryRequirements-pCreateInfo-12489",
+          "text": "<code>pCreateInfo-&gt;tiling</code> <strong class=\"purple\">must</strong> not be <a href=\"#VkImageTiling\">VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT</a>.",
           "page": "chapters/resources.html"
         },
         {
@@ -31274,11 +31279,6 @@
         {
           "vuid": "VUID-VkDeviceImageMemoryRequirements-pCreateInfo-06419",
           "text": "If <code>pCreateInfo-&gt;flags</code> has <a href=\"#VkImageCreateFlagBits\">VK_IMAGE_CREATE_DISJOINT_BIT</a> set and if the <code>pCreateInfo-&gt;tiling</code> is <a href=\"#VkImageTiling\">VK_IMAGE_TILING_LINEAR</a> or <a href=\"#VkImageTiling\">VK_IMAGE_TILING_OPTIMAL</a>, then <code>planeAspect</code> <strong class=\"purple\">must</strong> be a single valid <a href=\"#formats-multiplanar-image-aspect\">multi-planar aspect mask</a> bit",
-          "page": "chapters/resources.html"
-        },
-        {
-          "vuid": "VUID-VkDeviceImageMemoryRequirements-pCreateInfo-06420",
-          "text": "If <code>pCreateInfo-&gt;tiling</code> is <a href=\"#VkImageTiling\">VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT</a>, then <code>planeAspect</code> <strong class=\"purple\">must</strong> be a single valid <em>memory plane</em> for the image (that is, <code>aspectMask</code> <strong class=\"purple\">must</strong> specify a plane index that is less than the <a href=\"#VkDrmFormatModifierPropertiesEXT\">VkDrmFormatModifierPropertiesEXT</a>::<code>drmFormatModifierPlaneCount</code> associated with the image&#8217;s <code>format</code> and <a href=\"#VkImageDrmFormatModifierPropertiesEXT\">VkImageDrmFormatModifierPropertiesEXT</a>::<code>drmFormatModifier</code>)",
           "page": "chapters/resources.html"
         },
         {
@@ -46070,12 +46070,12 @@
         },
         {
           "vuid": "VUID-vkCmdCopyBuffer-pRegions-00117",
-          "text": "The union of the source regions, and the union of the destination regions, specified by the elements of <code>pRegions</code>, <strong class=\"purple\">must</strong> not overlap in memory",
+          "text": "Each memory location accessed by this command <strong class=\"purple\">must</strong> not be accessed by both a source region and a destination region",
           "page": "chapters/copies.html"
         },
         {
           "vuid": "VUID-vkCmdCopyBuffer-pRegions-12482",
-          "text": "All destination regions specified by <code>pRegions</code> <strong class=\"purple\">must</strong> not overlap with any other destination region",
+          "text": "Each memory location accessed by this command <strong class=\"purple\">must</strong> not be accessed by more than one destination region",
           "page": "chapters/copies.html"
         },
         {
@@ -46242,12 +46242,12 @@
         },
         {
           "vuid": "VUID-VkCopyBufferInfo2-pRegions-00117",
-          "text": "The union of the source regions, and the union of the destination regions, specified by the elements of <code>pRegions</code>, <strong class=\"purple\">must</strong> not overlap in memory",
+          "text": "Each memory location accessed by this command <strong class=\"purple\">must</strong> not be accessed by both a source region and a destination region",
           "page": "chapters/copies.html"
         },
         {
           "vuid": "VUID-VkCopyBufferInfo2-pRegions-12482",
-          "text": "All destination regions specified by <code>pRegions</code> <strong class=\"purple\">must</strong> not overlap with any other destination region",
+          "text": "Each memory location accessed by this command <strong class=\"purple\">must</strong> not be accessed by more than one destination region",
           "page": "chapters/copies.html"
         },
         {
@@ -54633,7 +54633,7 @@
         },
         {
           "vuid": "VUID-vkCmdDraw-VkPipelineVieportCreateInfo-04141",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
+          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV not enabled, and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
         },
         {
@@ -55237,11 +55237,6 @@
           "page": "chapters/drawing.html"
         },
         {
-          "vuid": "VUID-vkCmdDraw-viewportCount-07492",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, but not the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
-          "page": "chapters/drawing.html"
-        },
-        {
           "vuid": "VUID-vkCmdDraw-viewportCount-07493",
           "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> and <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportSwizzleNV\">vkCmdSetViewportSwizzleNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
@@ -55543,7 +55538,12 @@
         },
         {
           "vuid": "VUID-vkCmdDraw-flags-13362",
-          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>setLayoutCount</code> not equal to 0, and with <code>pSetLayouts</code> not equal to <code>NULL</code>, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "page": "chapters/drawing.html"
+        },
+        {
+          "vuid": "VUID-vkCmdDraw-flags-12491",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>pushConstantRangeCount</code> not equal to 0, and with <code>pPushConstantRanges</code> not equal to <code>NULL</code>, then the pipeline layout of the bound push constants <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
           "page": "chapters/drawing.html"
         },
         {
@@ -56537,7 +56537,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexed-VkPipelineVieportCreateInfo-04141",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
+          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV not enabled, and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
         },
         {
@@ -57141,11 +57141,6 @@
           "page": "chapters/drawing.html"
         },
         {
-          "vuid": "VUID-vkCmdDrawIndexed-viewportCount-07492",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, but not the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
-          "page": "chapters/drawing.html"
-        },
-        {
           "vuid": "VUID-vkCmdDrawIndexed-viewportCount-07493",
           "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> and <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportSwizzleNV\">vkCmdSetViewportSwizzleNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
@@ -57447,7 +57442,12 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexed-flags-13362",
-          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>setLayoutCount</code> not equal to 0, and with <code>pSetLayouts</code> not equal to <code>NULL</code>, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "page": "chapters/drawing.html"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexed-flags-12491",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>pushConstantRangeCount</code> not equal to 0, and with <code>pPushConstantRanges</code> not equal to <code>NULL</code>, then the pipeline layout of the bound push constants <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
           "page": "chapters/drawing.html"
         },
         {
@@ -58456,7 +58456,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMultiEXT-VkPipelineVieportCreateInfo-04141",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
+          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV not enabled, and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
         },
         {
@@ -59060,11 +59060,6 @@
           "page": "chapters/drawing.html"
         },
         {
-          "vuid": "VUID-vkCmdDrawMultiEXT-viewportCount-07492",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, but not the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
-          "page": "chapters/drawing.html"
-        },
-        {
           "vuid": "VUID-vkCmdDrawMultiEXT-viewportCount-07493",
           "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> and <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportSwizzleNV\">vkCmdSetViewportSwizzleNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
@@ -59366,7 +59361,12 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMultiEXT-flags-13362",
-          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>setLayoutCount</code> not equal to 0, and with <code>pSetLayouts</code> not equal to <code>NULL</code>, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "page": "chapters/drawing.html"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMultiEXT-flags-12491",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>pushConstantRangeCount</code> not equal to 0, and with <code>pPushConstantRanges</code> not equal to <code>NULL</code>, then the pipeline layout of the bound push constants <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
           "page": "chapters/drawing.html"
         },
         {
@@ -60380,7 +60380,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMultiIndexedEXT-VkPipelineVieportCreateInfo-04141",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
+          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV not enabled, and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
         },
         {
@@ -60984,11 +60984,6 @@
           "page": "chapters/drawing.html"
         },
         {
-          "vuid": "VUID-vkCmdDrawMultiIndexedEXT-viewportCount-07492",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, but not the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
-          "page": "chapters/drawing.html"
-        },
-        {
           "vuid": "VUID-vkCmdDrawMultiIndexedEXT-viewportCount-07493",
           "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> and <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportSwizzleNV\">vkCmdSetViewportSwizzleNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
@@ -61290,7 +61285,12 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMultiIndexedEXT-flags-13362",
-          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>setLayoutCount</code> not equal to 0, and with <code>pSetLayouts</code> not equal to <code>NULL</code>, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "page": "chapters/drawing.html"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMultiIndexedEXT-flags-12491",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>pushConstantRangeCount</code> not equal to 0, and with <code>pPushConstantRanges</code> not equal to <code>NULL</code>, then the pipeline layout of the bound push constants <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
           "page": "chapters/drawing.html"
         },
         {
@@ -62413,7 +62413,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirect2KHR-VkPipelineVieportCreateInfo-04141",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
+          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV not enabled, and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
         },
         {
@@ -63017,11 +63017,6 @@
           "page": "chapters/drawing.html"
         },
         {
-          "vuid": "VUID-vkCmdDrawIndirect2KHR-viewportCount-07492",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, but not the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
-          "page": "chapters/drawing.html"
-        },
-        {
           "vuid": "VUID-vkCmdDrawIndirect2KHR-viewportCount-07493",
           "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> and <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportSwizzleNV\">vkCmdSetViewportSwizzleNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
@@ -63323,7 +63318,12 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirect2KHR-flags-13362",
-          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>setLayoutCount</code> not equal to 0, and with <code>pSetLayouts</code> not equal to <code>NULL</code>, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "page": "chapters/drawing.html"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirect2KHR-flags-12491",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>pushConstantRangeCount</code> not equal to 0, and with <code>pPushConstantRanges</code> not equal to <code>NULL</code>, then the pipeline layout of the bound push constants <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
           "page": "chapters/drawing.html"
         },
         {
@@ -64322,7 +64322,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirect-VkPipelineVieportCreateInfo-04141",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
+          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV not enabled, and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
         },
         {
@@ -64926,11 +64926,6 @@
           "page": "chapters/drawing.html"
         },
         {
-          "vuid": "VUID-vkCmdDrawIndirect-viewportCount-07492",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, but not the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
-          "page": "chapters/drawing.html"
-        },
-        {
           "vuid": "VUID-vkCmdDrawIndirect-viewportCount-07493",
           "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> and <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportSwizzleNV\">vkCmdSetViewportSwizzleNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
@@ -65232,7 +65227,12 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirect-flags-13362",
-          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>setLayoutCount</code> not equal to 0, and with <code>pSetLayouts</code> not equal to <code>NULL</code>, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "page": "chapters/drawing.html"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirect-flags-12491",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>pushConstantRangeCount</code> not equal to 0, and with <code>pPushConstantRanges</code> not equal to <code>NULL</code>, then the pipeline layout of the bound push constants <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
           "page": "chapters/drawing.html"
         },
         {
@@ -66424,7 +66424,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCount2KHR-VkPipelineVieportCreateInfo-04141",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
+          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV not enabled, and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
         },
         {
@@ -67028,11 +67028,6 @@
           "page": "chapters/drawing.html"
         },
         {
-          "vuid": "VUID-vkCmdDrawIndirectCount2KHR-viewportCount-07492",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, but not the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
-          "page": "chapters/drawing.html"
-        },
-        {
           "vuid": "VUID-vkCmdDrawIndirectCount2KHR-viewportCount-07493",
           "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> and <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportSwizzleNV\">vkCmdSetViewportSwizzleNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
@@ -67334,7 +67329,12 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCount2KHR-flags-13362",
-          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>setLayoutCount</code> not equal to 0, and with <code>pSetLayouts</code> not equal to <code>NULL</code>, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "page": "chapters/drawing.html"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCount2KHR-flags-12491",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>pushConstantRangeCount</code> not equal to 0, and with <code>pPushConstantRanges</code> not equal to <code>NULL</code>, then the pipeline layout of the bound push constants <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
           "page": "chapters/drawing.html"
         },
         {
@@ -68338,7 +68338,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCount-VkPipelineVieportCreateInfo-04141",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
+          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV not enabled, and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
         },
         {
@@ -68942,11 +68942,6 @@
           "page": "chapters/drawing.html"
         },
         {
-          "vuid": "VUID-vkCmdDrawIndirectCount-viewportCount-07492",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, but not the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
-          "page": "chapters/drawing.html"
-        },
-        {
           "vuid": "VUID-vkCmdDrawIndirectCount-viewportCount-07493",
           "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> and <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportSwizzleNV\">vkCmdSetViewportSwizzleNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
@@ -69248,7 +69243,12 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectCount-flags-13362",
-          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>setLayoutCount</code> not equal to 0, and with <code>pSetLayouts</code> not equal to <code>NULL</code>, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "page": "chapters/drawing.html"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectCount-flags-12491",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>pushConstantRangeCount</code> not equal to 0, and with <code>pPushConstantRanges</code> not equal to <code>NULL</code>, then the pipeline layout of the bound push constants <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
           "page": "chapters/drawing.html"
         },
         {
@@ -70292,7 +70292,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect2KHR-VkPipelineVieportCreateInfo-04141",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
+          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV not enabled, and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
         },
         {
@@ -70896,11 +70896,6 @@
           "page": "chapters/drawing.html"
         },
         {
-          "vuid": "VUID-vkCmdDrawIndexedIndirect2KHR-viewportCount-07492",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, but not the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
-          "page": "chapters/drawing.html"
-        },
-        {
           "vuid": "VUID-vkCmdDrawIndexedIndirect2KHR-viewportCount-07493",
           "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> and <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportSwizzleNV\">vkCmdSetViewportSwizzleNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
@@ -71202,7 +71197,12 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect2KHR-flags-13362",
-          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>setLayoutCount</code> not equal to 0, and with <code>pSetLayouts</code> not equal to <code>NULL</code>, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "page": "chapters/drawing.html"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirect2KHR-flags-12491",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>pushConstantRangeCount</code> not equal to 0, and with <code>pPushConstantRanges</code> not equal to <code>NULL</code>, then the pipeline layout of the bound push constants <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
           "page": "chapters/drawing.html"
         },
         {
@@ -72211,7 +72211,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-VkPipelineVieportCreateInfo-04141",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
+          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV not enabled, and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
         },
         {
@@ -72815,11 +72815,6 @@
           "page": "chapters/drawing.html"
         },
         {
-          "vuid": "VUID-vkCmdDrawIndexedIndirect-viewportCount-07492",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, but not the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
-          "page": "chapters/drawing.html"
-        },
-        {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-viewportCount-07493",
           "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> and <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportSwizzleNV\">vkCmdSetViewportSwizzleNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
@@ -73121,7 +73116,12 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirect-flags-13362",
-          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>setLayoutCount</code> not equal to 0, and with <code>pSetLayouts</code> not equal to <code>NULL</code>, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "page": "chapters/drawing.html"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirect-flags-12491",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>pushConstantRangeCount</code> not equal to 0, and with <code>pPushConstantRanges</code> not equal to <code>NULL</code>, then the pipeline layout of the bound push constants <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
           "page": "chapters/drawing.html"
         },
         {
@@ -74179,7 +74179,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount2KHR-VkPipelineVieportCreateInfo-04141",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
+          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV not enabled, and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
         },
         {
@@ -74783,11 +74783,6 @@
           "page": "chapters/drawing.html"
         },
         {
-          "vuid": "VUID-vkCmdDrawIndexedIndirectCount2KHR-viewportCount-07492",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, but not the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
-          "page": "chapters/drawing.html"
-        },
-        {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount2KHR-viewportCount-07493",
           "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> and <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportSwizzleNV\">vkCmdSetViewportSwizzleNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
@@ -75089,7 +75084,12 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount2KHR-flags-13362",
-          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>setLayoutCount</code> not equal to 0, and with <code>pSetLayouts</code> not equal to <code>NULL</code>, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "page": "chapters/drawing.html"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCount2KHR-flags-12491",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>pushConstantRangeCount</code> not equal to 0, and with <code>pPushConstantRanges</code> not equal to <code>NULL</code>, then the pipeline layout of the bound push constants <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
           "page": "chapters/drawing.html"
         },
         {
@@ -76103,7 +76103,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount-VkPipelineVieportCreateInfo-04141",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
+          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV not enabled, and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
         },
         {
@@ -76707,11 +76707,6 @@
           "page": "chapters/drawing.html"
         },
         {
-          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-viewportCount-07492",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, but not the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
-          "page": "chapters/drawing.html"
-        },
-        {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount-viewportCount-07493",
           "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> and <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportSwizzleNV\">vkCmdSetViewportSwizzleNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
@@ -77013,7 +77008,12 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndexedIndirectCount-flags-13362",
-          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>setLayoutCount</code> not equal to 0, and with <code>pSetLayouts</code> not equal to <code>NULL</code>, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "page": "chapters/drawing.html"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndexedIndirectCount-flags-12491",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>pushConstantRangeCount</code> not equal to 0, and with <code>pPushConstantRanges</code> not equal to <code>NULL</code>, then the pipeline layout of the bound push constants <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
           "page": "chapters/drawing.html"
         },
         {
@@ -78067,7 +78067,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCount2EXT-VkPipelineVieportCreateInfo-04141",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
+          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV not enabled, and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
         },
         {
@@ -78671,11 +78671,6 @@
           "page": "chapters/drawing.html"
         },
         {
-          "vuid": "VUID-vkCmdDrawIndirectByteCount2EXT-viewportCount-07492",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, but not the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
-          "page": "chapters/drawing.html"
-        },
-        {
           "vuid": "VUID-vkCmdDrawIndirectByteCount2EXT-viewportCount-07493",
           "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> and <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportSwizzleNV\">vkCmdSetViewportSwizzleNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
@@ -78977,7 +78972,12 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCount2EXT-flags-13362",
-          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>setLayoutCount</code> not equal to 0, and with <code>pSetLayouts</code> not equal to <code>NULL</code>, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "page": "chapters/drawing.html"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectByteCount2EXT-flags-12491",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>pushConstantRangeCount</code> not equal to 0, and with <code>pPushConstantRanges</code> not equal to <code>NULL</code>, then the pipeline layout of the bound push constants <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
           "page": "chapters/drawing.html"
         },
         {
@@ -80001,7 +80001,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-VkPipelineVieportCreateInfo-04141",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
+          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV not enabled, and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
         },
         {
@@ -80605,11 +80605,6 @@
           "page": "chapters/drawing.html"
         },
         {
-          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-viewportCount-07492",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, but not the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
-          "page": "chapters/drawing.html"
-        },
-        {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-viewportCount-07493",
           "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> and <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportSwizzleNV\">vkCmdSetViewportSwizzleNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
@@ -80911,7 +80906,12 @@
         },
         {
           "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-flags-13362",
-          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>setLayoutCount</code> not equal to 0, and with <code>pSetLayouts</code> not equal to <code>NULL</code>, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "page": "chapters/drawing.html"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawIndirectByteCountEXT-flags-12491",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>pushConstantRangeCount</code> not equal to 0, and with <code>pPushConstantRanges</code> not equal to <code>NULL</code>, then the pipeline layout of the bound push constants <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
           "page": "chapters/drawing.html"
         },
         {
@@ -82195,7 +82195,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksNV-VkPipelineVieportCreateInfo-04141",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
+          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV not enabled, and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
         },
         {
@@ -82799,11 +82799,6 @@
           "page": "chapters/drawing.html"
         },
         {
-          "vuid": "VUID-vkCmdDrawMeshTasksNV-viewportCount-07492",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, but not the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
-          "page": "chapters/drawing.html"
-        },
-        {
           "vuid": "VUID-vkCmdDrawMeshTasksNV-viewportCount-07493",
           "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> and <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportSwizzleNV\">vkCmdSetViewportSwizzleNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
@@ -83105,7 +83100,12 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksNV-flags-13362",
-          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>setLayoutCount</code> not equal to 0, and with <code>pSetLayouts</code> not equal to <code>NULL</code>, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "page": "chapters/drawing.html"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksNV-flags-12491",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>pushConstantRangeCount</code> not equal to 0, and with <code>pPushConstantRanges</code> not equal to <code>NULL</code>, then the pipeline layout of the bound push constants <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
           "page": "chapters/drawing.html"
         },
         {
@@ -83974,7 +83974,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-VkPipelineVieportCreateInfo-04141",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
+          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV not enabled, and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
         },
         {
@@ -84578,11 +84578,6 @@
           "page": "chapters/drawing.html"
         },
         {
-          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-viewportCount-07492",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, but not the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
-          "page": "chapters/drawing.html"
-        },
-        {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-viewportCount-07493",
           "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> and <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportSwizzleNV\">vkCmdSetViewportSwizzleNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
@@ -84884,7 +84879,12 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-flags-13362",
-          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>setLayoutCount</code> not equal to 0, and with <code>pSetLayouts</code> not equal to <code>NULL</code>, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "page": "chapters/drawing.html"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectNV-flags-12491",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>pushConstantRangeCount</code> not equal to 0, and with <code>pPushConstantRanges</code> not equal to <code>NULL</code>, then the pipeline layout of the bound push constants <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
           "page": "chapters/drawing.html"
         },
         {
@@ -85812,7 +85812,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-VkPipelineVieportCreateInfo-04141",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
+          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV not enabled, and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
         },
         {
@@ -86416,11 +86416,6 @@
           "page": "chapters/drawing.html"
         },
         {
-          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-viewportCount-07492",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, but not the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
-          "page": "chapters/drawing.html"
-        },
-        {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-viewportCount-07493",
           "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> and <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportSwizzleNV\">vkCmdSetViewportSwizzleNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
@@ -86722,7 +86717,12 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-flags-13362",
-          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>setLayoutCount</code> not equal to 0, and with <code>pSetLayouts</code> not equal to <code>NULL</code>, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "page": "chapters/drawing.html"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountNV-flags-12491",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>pushConstantRangeCount</code> not equal to 0, and with <code>pPushConstantRanges</code> not equal to <code>NULL</code>, then the pipeline layout of the bound push constants <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
           "page": "chapters/drawing.html"
         },
         {
@@ -87661,7 +87661,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksEXT-VkPipelineVieportCreateInfo-04141",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
+          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV not enabled, and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
         },
         {
@@ -88265,11 +88265,6 @@
           "page": "chapters/drawing.html"
         },
         {
-          "vuid": "VUID-vkCmdDrawMeshTasksEXT-viewportCount-07492",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, but not the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
-          "page": "chapters/drawing.html"
-        },
-        {
           "vuid": "VUID-vkCmdDrawMeshTasksEXT-viewportCount-07493",
           "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> and <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportSwizzleNV\">vkCmdSetViewportSwizzleNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
@@ -88571,7 +88566,12 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksEXT-flags-13362",
-          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>setLayoutCount</code> not equal to 0, and with <code>pSetLayouts</code> not equal to <code>NULL</code>, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "page": "chapters/drawing.html"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksEXT-flags-12491",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>pushConstantRangeCount</code> not equal to 0, and with <code>pPushConstantRanges</code> not equal to <code>NULL</code>, then the pipeline layout of the bound push constants <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
           "page": "chapters/drawing.html"
         },
         {
@@ -89475,7 +89475,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirect2EXT-VkPipelineVieportCreateInfo-04141",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
+          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV not enabled, and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
         },
         {
@@ -90079,11 +90079,6 @@
           "page": "chapters/drawing.html"
         },
         {
-          "vuid": "VUID-vkCmdDrawMeshTasksIndirect2EXT-viewportCount-07492",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, but not the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
-          "page": "chapters/drawing.html"
-        },
-        {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirect2EXT-viewportCount-07493",
           "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> and <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportSwizzleNV\">vkCmdSetViewportSwizzleNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
@@ -90385,7 +90380,12 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirect2EXT-flags-13362",
-          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>setLayoutCount</code> not equal to 0, and with <code>pSetLayouts</code> not equal to <code>NULL</code>, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "page": "chapters/drawing.html"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirect2EXT-flags-12491",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>pushConstantRangeCount</code> not equal to 0, and with <code>pPushConstantRanges</code> not equal to <code>NULL</code>, then the pipeline layout of the bound push constants <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
           "page": "chapters/drawing.html"
         },
         {
@@ -91254,7 +91254,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectEXT-VkPipelineVieportCreateInfo-04141",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
+          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV not enabled, and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
         },
         {
@@ -91858,11 +91858,6 @@
           "page": "chapters/drawing.html"
         },
         {
-          "vuid": "VUID-vkCmdDrawMeshTasksIndirectEXT-viewportCount-07492",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, but not the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
-          "page": "chapters/drawing.html"
-        },
-        {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectEXT-viewportCount-07493",
           "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> and <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportSwizzleNV\">vkCmdSetViewportSwizzleNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
@@ -92164,7 +92159,12 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectEXT-flags-13362",
-          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>setLayoutCount</code> not equal to 0, and with <code>pSetLayouts</code> not equal to <code>NULL</code>, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "page": "chapters/drawing.html"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectEXT-flags-12491",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>pushConstantRangeCount</code> not equal to 0, and with <code>pPushConstantRanges</code> not equal to <code>NULL</code>, then the pipeline layout of the bound push constants <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
           "page": "chapters/drawing.html"
         },
         {
@@ -93127,7 +93127,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCount2EXT-VkPipelineVieportCreateInfo-04141",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
+          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV not enabled, and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
         },
         {
@@ -93731,11 +93731,6 @@
           "page": "chapters/drawing.html"
         },
         {
-          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCount2EXT-viewportCount-07492",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, but not the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
-          "page": "chapters/drawing.html"
-        },
-        {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCount2EXT-viewportCount-07493",
           "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> and <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportSwizzleNV\">vkCmdSetViewportSwizzleNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
@@ -94037,7 +94032,12 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCount2EXT-flags-13362",
-          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>setLayoutCount</code> not equal to 0, and with <code>pSetLayouts</code> not equal to <code>NULL</code>, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "page": "chapters/drawing.html"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCount2EXT-flags-12491",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>pushConstantRangeCount</code> not equal to 0, and with <code>pPushConstantRanges</code> not equal to <code>NULL</code>, then the pipeline layout of the bound push constants <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
           "page": "chapters/drawing.html"
         },
         {
@@ -94911,7 +94911,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountEXT-VkPipelineVieportCreateInfo-04141",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
+          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV not enabled, and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
         },
         {
@@ -95515,11 +95515,6 @@
           "page": "chapters/drawing.html"
         },
         {
-          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountEXT-viewportCount-07492",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, but not the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
-          "page": "chapters/drawing.html"
-        },
-        {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountEXT-viewportCount-07493",
           "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> and <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportSwizzleNV\">vkCmdSetViewportSwizzleNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
@@ -95821,7 +95816,12 @@
         },
         {
           "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountEXT-flags-13362",
-          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>setLayoutCount</code> not equal to 0, and with <code>pSetLayouts</code> not equal to <code>NULL</code>, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "page": "chapters/drawing.html"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawMeshTasksIndirectCountEXT-flags-12491",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>pushConstantRangeCount</code> not equal to 0, and with <code>pPushConstantRanges</code> not equal to <code>NULL</code>, then the pipeline layout of the bound push constants <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
           "page": "chapters/drawing.html"
         },
         {
@@ -96760,7 +96760,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawClusterHUAWEI-VkPipelineVieportCreateInfo-04141",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
+          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV not enabled, and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
         },
         {
@@ -97364,11 +97364,6 @@
           "page": "chapters/drawing.html"
         },
         {
-          "vuid": "VUID-vkCmdDrawClusterHUAWEI-viewportCount-07492",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, but not the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
-          "page": "chapters/drawing.html"
-        },
-        {
           "vuid": "VUID-vkCmdDrawClusterHUAWEI-viewportCount-07493",
           "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> and <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportSwizzleNV\">vkCmdSetViewportSwizzleNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
@@ -97670,7 +97665,12 @@
         },
         {
           "vuid": "VUID-vkCmdDrawClusterHUAWEI-flags-13362",
-          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>setLayoutCount</code> not equal to 0, and with <code>pSetLayouts</code> not equal to <code>NULL</code>, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "page": "chapters/drawing.html"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawClusterHUAWEI-flags-12491",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>pushConstantRangeCount</code> not equal to 0, and with <code>pPushConstantRanges</code> not equal to <code>NULL</code>, then the pipeline layout of the bound push constants <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
           "page": "chapters/drawing.html"
         },
         {
@@ -98554,7 +98554,7 @@
         },
         {
           "vuid": "VUID-vkCmdDrawClusterIndirectHUAWEI-VkPipelineVieportCreateInfo-04141",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
+          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV not enabled, and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
         },
         {
@@ -99158,11 +99158,6 @@
           "page": "chapters/drawing.html"
         },
         {
-          "vuid": "VUID-vkCmdDrawClusterIndirectHUAWEI-viewportCount-07492",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, but not the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
-          "page": "chapters/drawing.html"
-        },
-        {
           "vuid": "VUID-vkCmdDrawClusterIndirectHUAWEI-viewportCount-07493",
           "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> and <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportSwizzleNV\">vkCmdSetViewportSwizzleNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/drawing.html"
@@ -99464,7 +99459,12 @@
         },
         {
           "vuid": "VUID-vkCmdDrawClusterIndirectHUAWEI-flags-13362",
-          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>setLayoutCount</code> not equal to 0, and with <code>pSetLayouts</code> not equal to <code>NULL</code>, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "page": "chapters/drawing.html"
+        },
+        {
+          "vuid": "VUID-vkCmdDrawClusterIndirectHUAWEI-flags-12491",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>pushConstantRangeCount</code> not equal to 0, and with <code>pPushConstantRanges</code> not equal to <code>NULL</code>, then the pipeline layout of the bound push constants <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
           "page": "chapters/drawing.html"
         },
         {
@@ -111292,7 +111292,7 @@
         },
         {
           "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-VkPipelineVieportCreateInfo-04141",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
+          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV not enabled, and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/device_generated_commands/generatedcommands.html"
         },
         {
@@ -111896,11 +111896,6 @@
           "page": "chapters/device_generated_commands/generatedcommands.html"
         },
         {
-          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-viewportCount-07492",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, but not the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
-          "page": "chapters/device_generated_commands/generatedcommands.html"
-        },
-        {
           "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-viewportCount-07493",
           "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> and <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportSwizzleNV\">vkCmdSetViewportSwizzleNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/device_generated_commands/generatedcommands.html"
@@ -112202,7 +112197,12 @@
         },
         {
           "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-flags-13362",
-          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>setLayoutCount</code> not equal to 0, and with <code>pSetLayouts</code> not equal to <code>NULL</code>, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "page": "chapters/device_generated_commands/generatedcommands.html"
+        },
+        {
+          "vuid": "VUID-vkCmdExecuteGeneratedCommandsNV-flags-12491",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>pushConstantRangeCount</code> not equal to 0, and with <code>pPushConstantRanges</code> not equal to <code>NULL</code>, then the pipeline layout of the bound push constants <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
           "page": "chapters/device_generated_commands/generatedcommands.html"
         },
         {
@@ -113434,7 +113434,7 @@
         },
         {
           "vuid": "VUID-vkCmdExecuteGeneratedCommandsEXT-VkPipelineVieportCreateInfo-04141",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
+          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV not enabled, and a <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a> structure chained from <a href=\"#VkPipelineViewportStateCreateInfo\">VkPipelineViewportStateCreateInfo</a>, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/device_generated_commands/generatedcommands.html"
         },
         {
@@ -114038,11 +114038,6 @@
           "page": "chapters/device_generated_commands/generatedcommands.html"
         },
         {
-          "vuid": "VUID-vkCmdExecuteGeneratedCommandsEXT-viewportCount-07492",
-          "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> dynamic state enabled, but not the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic state enabled, then the bound graphics pipeline <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineViewportSwizzleStateCreateInfoNV\">VkPipelineViewportSwizzleStateCreateInfoNV</a>::<code>viewportCount</code> greater or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
-          "page": "chapters/device_generated_commands/generatedcommands.html"
-        },
-        {
           "vuid": "VUID-vkCmdExecuteGeneratedCommandsEXT-viewportCount-07493",
           "text": "If the bound graphics pipeline state was created with the <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT</a> and <a href=\"#VkDynamicState\">VK_DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV</a> dynamic states enabled then the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportSwizzleNV\">vkCmdSetViewportSwizzleNV</a> <strong class=\"purple\">must</strong> be greater than or equal to the <code>viewportCount</code> parameter in the last call to <a href=\"#vkCmdSetViewportWithCount\">vkCmdSetViewportWithCount</a>",
           "page": "chapters/device_generated_commands/generatedcommands.html"
@@ -114344,7 +114339,12 @@
         },
         {
           "vuid": "VUID-vkCmdExecuteGeneratedCommandsEXT-flags-13362",
-          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>setLayoutCount</code> not equal to 0, and with <code>pSetLayouts</code> not equal to <code>NULL</code>, then the pipeline layout of the bound descriptor sets <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
+          "page": "chapters/device_generated_commands/generatedcommands.html"
+        },
+        {
+          "vuid": "VUID-vkCmdExecuteGeneratedCommandsEXT-flags-12491",
+          "text": "If there are any shader objects bound that were created with <code>flags</code> that includes the <a href=\"#VkShaderCreateFlagBitsEXT\">VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR</a> bit, with a <code>pushConstantRangeCount</code> not equal to 0, and with <code>pPushConstantRanges</code> not equal to <code>NULL</code>, then the pipeline layout of the bound push constants <strong class=\"purple\">must</strong> have been created with <a href=\"#VkPipelineLayoutCreateFlagBits\">VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT</a> set",
           "page": "chapters/device_generated_commands/generatedcommands.html"
         },
         {

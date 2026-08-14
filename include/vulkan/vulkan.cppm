@@ -24,9 +24,9 @@ VULKAN_HPP_COMPILE_WARNING( VULKAN_HPP_CXX_MODULE_EXPERIMENTAL_WARNING )
 
 export module vulkan;
 
-export import std;
+import std;
 
-VULKAN_HPP_STATIC_ASSERT( VK_HEADER_VERSION == 359, "Wrong VK_HEADER_VERSION!" );
+VULKAN_HPP_STATIC_ASSERT( VK_HEADER_VERSION == 360, "Wrong VK_HEADER_VERSION!" );
 
 #if defined( __clang__ )
 #  pragma clang diagnostic push
