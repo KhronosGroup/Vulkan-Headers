@@ -22,6 +22,11 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool isBitmask = false;
   };
 
+#if 20 <= VULKAN_HPP_CPP_VERSION
+  template <typename T>
+  concept Bitmask = FlagTraits<T>::isBitmask;
+#endif
+
   template <typename BitType>
   class Flags
   {
@@ -142,85 +147,101 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
 
 #if !defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
   // relational operators only needed for pre C++20
-  template <typename BitType>
-  VULKAN_HPP_CONSTEXPR bool operator<( BitType bit, Flags<BitType> const & flags ) VULKAN_HPP_NOEXCEPT
+  template <typename T>
+  VULKAN_HPP_CONSTEXPR bool operator<( T bit, Flags<T> const & flags ) VULKAN_HPP_NOEXCEPT
   {
     return flags.operator>( bit );
   }
 
-  template <typename BitType>
-  VULKAN_HPP_CONSTEXPR bool operator<=( BitType bit, Flags<BitType> const & flags ) VULKAN_HPP_NOEXCEPT
+  template <typename T>
+  VULKAN_HPP_CONSTEXPR bool operator<=( T bit, Flags<T> const & flags ) VULKAN_HPP_NOEXCEPT
   {
     return flags.operator>=( bit );
   }
 
-  template <typename BitType>
-  VULKAN_HPP_CONSTEXPR bool operator>( BitType bit, Flags<BitType> const & flags ) VULKAN_HPP_NOEXCEPT
+  template <typename T>
+  VULKAN_HPP_CONSTEXPR bool operator>( T bit, Flags<T> const & flags ) VULKAN_HPP_NOEXCEPT
   {
     return flags.operator<( bit );
   }
 
-  template <typename BitType>
-  VULKAN_HPP_CONSTEXPR bool operator>=( BitType bit, Flags<BitType> const & flags ) VULKAN_HPP_NOEXCEPT
+  template <typename T>
+  VULKAN_HPP_CONSTEXPR bool operator>=( T bit, Flags<T> const & flags ) VULKAN_HPP_NOEXCEPT
   {
     return flags.operator<=( bit );
   }
 
-  template <typename BitType>
-  VULKAN_HPP_CONSTEXPR bool operator==( BitType bit, Flags<BitType> const & flags ) VULKAN_HPP_NOEXCEPT
+  template <typename T>
+  VULKAN_HPP_CONSTEXPR bool operator==( T bit, Flags<T> const & flags ) VULKAN_HPP_NOEXCEPT
   {
     return flags.operator==( bit );
   }
 
-  template <typename BitType>
-  VULKAN_HPP_CONSTEXPR bool operator!=( BitType bit, Flags<BitType> const & flags ) VULKAN_HPP_NOEXCEPT
+  template <typename T>
+  VULKAN_HPP_CONSTEXPR bool operator!=( T bit, Flags<T> const & flags ) VULKAN_HPP_NOEXCEPT
   {
     return flags.operator!=( bit );
   }
 #endif
 
   // bitwise operators
-  template <typename BitType>
-  VULKAN_HPP_CONSTEXPR Flags<BitType> operator&( BitType bit, Flags<BitType> const & flags ) VULKAN_HPP_NOEXCEPT
+  template <typename T>
+  VULKAN_HPP_CONSTEXPR Flags<T> operator&( T bit, Flags<T> const & flags ) VULKAN_HPP_NOEXCEPT
   {
     return flags.operator&( bit );
   }
 
-  template <typename BitType>
-  VULKAN_HPP_CONSTEXPR Flags<BitType> operator|( BitType bit, Flags<BitType> const & flags ) VULKAN_HPP_NOEXCEPT
+  template <typename T>
+  VULKAN_HPP_CONSTEXPR Flags<T> operator|( T bit, Flags<T> const & flags ) VULKAN_HPP_NOEXCEPT
   {
     return flags.operator|( bit );
   }
 
-  template <typename BitType>
-  VULKAN_HPP_CONSTEXPR Flags<BitType> operator^( BitType bit, Flags<BitType> const & flags ) VULKAN_HPP_NOEXCEPT
+  template <typename T>
+  VULKAN_HPP_CONSTEXPR Flags<T> operator^( T bit, Flags<T> const & flags ) VULKAN_HPP_NOEXCEPT
   {
     return flags.operator^( bit );
   }
 
-  // bitwise operators on BitType
-  template <typename BitType, typename std::enable_if<FlagTraits<BitType>::isBitmask, bool>::type = true>
-  VULKAN_HPP_INLINE VULKAN_HPP_CONSTEXPR Flags<BitType> operator&( BitType lhs, BitType rhs ) VULKAN_HPP_NOEXCEPT
+// bitwise operators on BitType T
+#if VULKAN_HPP_CPP_VERSION < 20
+  template <typename T, typename std::enable_if<FlagTraits<T>::isBitmask, bool>::type = true>
+#else
+  template <Bitmask T>
+#endif
+  VULKAN_HPP_INLINE VULKAN_HPP_CONSTEXPR Flags<T> operator&( T lhs, T rhs ) VULKAN_HPP_NOEXCEPT
   {
-    return Flags<BitType>( lhs ) & rhs;
+    return Flags<T>( lhs ) & rhs;
   }
 
-  template <typename BitType, typename std::enable_if<FlagTraits<BitType>::isBitmask, bool>::type = true>
-  VULKAN_HPP_INLINE VULKAN_HPP_CONSTEXPR Flags<BitType> operator|( BitType lhs, BitType rhs ) VULKAN_HPP_NOEXCEPT
+#if VULKAN_HPP_CPP_VERSION < 20
+  template <typename T, typename std::enable_if<FlagTraits<T>::isBitmask, bool>::type = true>
+#else
+  template <Bitmask T>
+#endif
+  VULKAN_HPP_INLINE VULKAN_HPP_CONSTEXPR Flags<T> operator|( T lhs, T rhs ) VULKAN_HPP_NOEXCEPT
   {
-    return Flags<BitType>( lhs ) | rhs;
+    return Flags<T>( lhs ) | rhs;
   }
 
-  template <typename BitType, typename std::enable_if<FlagTraits<BitType>::isBitmask, bool>::type = true>
-  VULKAN_HPP_INLINE VULKAN_HPP_CONSTEXPR Flags<BitType> operator^( BitType lhs, BitType rhs ) VULKAN_HPP_NOEXCEPT
+#if VULKAN_HPP_CPP_VERSION < 20
+  template <typename T, typename std::enable_if<FlagTraits<T>::isBitmask, bool>::type = true>
+#else
+  template <Bitmask T>
+#endif
+  VULKAN_HPP_INLINE VULKAN_HPP_CONSTEXPR Flags<T> operator^( T lhs, T rhs ) VULKAN_HPP_NOEXCEPT
   {
-    return Flags<BitType>( lhs ) ^ rhs;
+    return Flags<T>( lhs ) ^ rhs;
   }
 
-  template <typename BitType, typename std::enable_if<FlagTraits<BitType>::isBitmask, bool>::type = true>
-  VULKAN_HPP_INLINE VULKAN_HPP_CONSTEXPR Flags<BitType> operator~( BitType bit ) VULKAN_HPP_NOEXCEPT
+#if VULKAN_HPP_CPP_VERSION < 20
+  template <typename T, typename std::enable_if<FlagTraits<T>::isBitmask, bool>::type = true>
+#else
+  template <Bitmask T>
+#endif
+  VULKAN_HPP_INLINE VULKAN_HPP_CONSTEXPR Flags<T> operator~( T bit ) VULKAN_HPP_NOEXCEPT
   {
-    return ~( Flags<BitType>( bit ) );
+    return ~( Flags<T>( bit ) );
   }
 
   //=============
@@ -1871,7 +1892,8 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
     ePhysicalDevicePrimitiveRestartIndexFeaturesEXT                = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIMITIVE_RESTART_INDEX_FEATURES_EXT,
     ePhysicalDeviceImageTilingControlFeaturesEXT                   = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_TILING_CONTROL_FEATURES_EXT,
     eImageTilingControlCreateInfoEXT                               = VK_STRUCTURE_TYPE_IMAGE_TILING_CONTROL_CREATE_INFO_EXT,
-    ePhysicalDeviceCooperativeMatrixDecodeVectorFeaturesNV         = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_DECODE_VECTOR_FEATURES_NV
+    ePhysicalDeviceCooperativeMatrixDecodeVectorFeaturesNV         = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_DECODE_VECTOR_FEATURES_NV,
+    ePhysicalDevicePrivateDataBaseHandleFeaturesNV                 = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIVATE_DATA_BASE_HANDLE_FEATURES_NV
   };
 
   // wrapper class for enum VkObjectType, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkObjectType.html
@@ -5078,8 +5100,10 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
       ToolPurposeFlagBits::eModifyingFeatures | ToolPurposeFlagBits::eDebugReportingEXT | ToolPurposeFlagBits::eDebugMarkersEXT;
   };
 
+  // wrapper class for enum VkPrivateDataSlotCreateFlagBits, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkPrivateDataSlotCreateFlagBits.html
   enum class PrivateDataSlotCreateFlagBits : VkPrivateDataSlotCreateFlags
   {
+    eBaseObjectHandleNV = VK_PRIVATE_DATA_SLOT_CREATE_BASE_OBJECT_HANDLE_BIT_NV
   };
 
   using PrivateDataSlotCreateFlagBitsEXT = PrivateDataSlotCreateFlagBits;
@@ -5091,8 +5115,9 @@ VULKAN_HPP_EXPORT namespace VULKAN_HPP_NAMESPACE
   template <>
   struct FlagTraits<PrivateDataSlotCreateFlagBits>
   {
+    using WrappedType                                                         = VkPrivateDataSlotCreateFlagBits;
     static VULKAN_HPP_CONST_OR_CONSTEXPR bool                       isBitmask = true;
-    static VULKAN_HPP_CONST_OR_CONSTEXPR PrivateDataSlotCreateFlags allFlags  = {};
+    static VULKAN_HPP_CONST_OR_CONSTEXPR PrivateDataSlotCreateFlags allFlags  = PrivateDataSlotCreateFlagBits::eBaseObjectHandleNV;
   };
 
   // wrapper class for enum VkPipelineStageFlagBits2, see https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineStageFlagBits2.html
