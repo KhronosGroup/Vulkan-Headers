@@ -66,7 +66,7 @@ extern "C" {
 //#define VK_API_VERSION VK_MAKE_API_VERSION(0, 1, 0, 0) // Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 362
+#define VK_HEADER_VERSION 363
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 4, VK_HEADER_VERSION)
@@ -1494,6 +1494,7 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_IMAGE_TILING_CONTROL_CREATE_INFO_EXT = 1000687001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_DECODE_VECTOR_FEATURES_NV = 1000689000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIVATE_DATA_BASE_HANDLE_FEATURES_NV = 1000707000,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INFO_PROPERTIES_INTEL = 1000708000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_ALLOCATION_ALIGNMENT_FEATURES_VALVE = 1000709000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_ALLOCATION_ALIGNMENT_PROPERTIES_VALVE = 1000709001,
     VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_ALIGNMENT_ALLOCATE_INFO_VALVE = 1000709002,
@@ -26617,6 +26618,20 @@ typedef struct VkPhysicalDevicePrivateDataBaseHandleFeaturesNV {
     void*              pNext;
     VkBool32           privateDataBaseHandle;
 } VkPhysicalDevicePrivateDataBaseHandleFeaturesNV;
+
+
+
+// VK_INTEL_device_info is a preprocessor guard. Do not pass it to API calls.
+#define VK_INTEL_device_info 1
+#define VK_INTEL_DEVICE_INFO_SPEC_VERSION 1
+#define VK_INTEL_DEVICE_INFO_EXTENSION_NAME "VK_INTEL_device_info"
+typedef struct VkPhysicalDeviceInfoPropertiesINTEL {
+    VkStructureType    sType;
+    void*              pNext;
+    uint32_t           deviceIpVersionArch;
+    uint32_t           deviceIpVersionRelease;
+    uint32_t           deviceIpVersionRevision;
+} VkPhysicalDeviceInfoPropertiesINTEL;
 
 
 
