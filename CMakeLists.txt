@@ -44,9 +44,13 @@ project(VULKAN_HEADERS LANGUAGES C CXX VERSION ${VK_VERSION_STRING})
 # options for Vulkan-Headers and the Vulkan-Hpp C++20 module
 option(VULKAN_HEADERS_ENABLE_TESTS "Test Vulkan-Headers" ${PROJECT_IS_TOP_LEVEL})
 option(VULKAN_HEADERS_ENABLE_INSTALL "Install Vulkan-Headers" ${PROJECT_IS_TOP_LEVEL})
-cmake_dependent_option(VULKAN_HEADERS_ENABLE_MODULE "Build and install the Vulkan-Hpp C++ named modules" ON [[ 23 IN_LIST CMAKE_CXX_COMPILER_IMPORT_STD ]] OFF)
-# This CMake target is only available when the entire stack (CMake, compiler, standard library) supports C++20 modules and supports importing the standard library as a module.
-# See https://gitlab.kitware.com/ben.boeckel/cmake/-/blob/cxxmodules-docs/Help/manual/cmake-cxxmodules.7.rst?ref_type=heads&plain=1#L398
+# The Vulkan-Hpp C++ named modules import the C++ standard library module (`import std;`), which requires CMake 4.5 or later.
+# They are only available when CMake finds that the generator, compiler, and standard library support `import std`,
+# in which case it sets CMAKE_CXX_STDLIB_MODULES_JSON.
+# When available, the modules are enabled by default, and may be disabled with -D VULKAN_HEADERS_ENABLE_MODULE=OFF.
+# See https://cmake.org/cmake/help/latest/manual/cmake-cxxmodules.7.html
+cmake_dependent_option(VULKAN_HEADERS_ENABLE_MODULE "Build and install the Vulkan-Hpp C++ named modules" ON
+    [[ CMAKE_CXX_STDLIB_MODULES_JSON ]] OFF)
 
 # set up Vulkan-Headers
 add_library(Vulkan-Headers INTERFACE)
@@ -64,7 +68,7 @@ if (VULKAN_HEADERS_ENABLE_MODULE)
             "${CMAKE_CURRENT_SOURCE_DIR}/include/vulkan/vulkan_video.cppm")
 
     target_compile_features(Vulkan-HppModule PUBLIC cxx_std_23) # C++23 is required for both the standard library module, and other details of Vulkan-Hpp such as std::expected
-    set_target_properties(Vulkan-HppModule PROPERTIES CXX_MODULE_STD ON)
+    set_target_properties(Vulkan-HppModule PROPERTIES CXX_SCAN_FOR_MODULES ON)
     target_link_libraries(Vulkan-HppModule PUBLIC Vulkan::Headers)
 
     # set up fallback targets to notify about name deprecation
