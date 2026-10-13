@@ -68,7 +68,8 @@ if (VULKAN_HEADERS_ENABLE_MODULE)
             "${CMAKE_CURRENT_SOURCE_DIR}/include/vulkan/vulkan_video.cppm")
 
     target_compile_features(Vulkan-HppModule PUBLIC cxx_std_20) # C++20 is required for named modules and `import std`
-    set_target_properties(Vulkan-HppModule PROPERTIES CXX_SCAN_FOR_MODULES ON)
+    # The module's object files are linked directly into consumers, which may be shared libraries.
+    set_target_properties(Vulkan-HppModule PROPERTIES CXX_SCAN_FOR_MODULES ON POSITION_INDEPENDENT_CODE ON)
     target_link_libraries(Vulkan-HppModule PUBLIC Vulkan::Headers)
 
     # set up fallback targets to notify about name deprecation
