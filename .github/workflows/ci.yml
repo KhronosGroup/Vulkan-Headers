@@ -78,34 +78,45 @@ jobs:
 
   cmake-unix-modules:
     runs-on: ${{ matrix.os }}
-    if: false
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name
     strategy:
+      fail-fast: false
       matrix:
-        os: [ ubuntu-latest ]
-        cmake-version: [ 'latest' ]
-        compiler: [ clang++-18 ]
+        os: [ ubuntu-24.04, macos-26 ]
+        cmake-version: [ 'latest' ] # `import std` requires CMake 4.5
     steps:
       - uses: actions/checkout@v7
       - uses: lukka/get-cmake@latest
         with:
           cmakeVersion: ${{ matrix.cmake-version }}
-      - run: |
-          cmake -S . -B build \
-          -D VULKAN_HEADERS_ENABLE_TESTS=ON \
-          -D VULKAN_HEADERS_ENABLE_INSTALL=ON \
-          -D CMAKE_CXX_COMPILER=${{ matrix.compiler }} \
+      - name: Setup Ubuntu
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update && sudo apt-get install -y lsb-release gpg software-properties-common wget
+          wget https://apt.llvm.org/llvm.sh
+          chmod +x llvm.sh
+          sudo ./llvm.sh 23 all
+          sudo ln -s /lib/llvm-23/share /lib/share
+          echo "CMAKE_FLAGS=-D CMAKE_C_COMPILER=clang-23 -D CMAKE_CXX_COMPILER=clang++-23 -D CMAKE_CXX_FLAGS=-stdlib=libc++" >> "$GITHUB_ENV"
+      - name: Setup macOS
+        if: runner.os == 'macOS'
+        run: |
+          brew update && brew install llvm
+          LLVM_PREFIX="$(brew --prefix llvm)"
+          echo "CMAKE_FLAGS=-D CMAKE_C_COMPILER=$LLVM_PREFIX/bin/clang -D CMAKE_CXX_COMPILER=$LLVM_PREFIX/bin/clang++ -D CMAKE_CXX_STDLIB_MODULES_JSON=$LLVM_PREFIX/lib/c++/libc++.modules.json" >> "$GITHUB_ENV"
+      - run: cmake -S . -B build -D VULKAN_HEADERS_ENABLE_TESTS=ON -D VULKAN_HEADERS_ENABLE_INSTALL=ON $CMAKE_FLAGS
       - run: cmake --build ./build
       - run: cmake --install build/ --prefix build/install
-      - run: CXX=${{ matrix.compiler }} ctest --output-on-failure
+      - run: ctest --output-on-failure
         working-directory: build
 
   cmake-windows-modules:
     runs-on: ${{ matrix.os }}
-    if: false
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name
     strategy:
       matrix:
         os: [ windows-latest ]
-        cmake-version: [ 'latest' ]
+        cmake-version: [ 'latest' ] # `import std` requires CMake 4.5
     steps:
       - uses: actions/checkout@v7
       - uses: lukka/get-cmake@latest
@@ -114,10 +125,7 @@ jobs:
       - uses: TheMrMilchmann/setup-msvc-dev@v4
         with:
           arch: x64
-      - run: |
-          cmake -S . -B build `
-          -D VULKAN_HEADERS_ENABLE_TESTS=ON `
-          -D VULKAN_HEADERS_ENABLE_INSTALL=ON `
+      - run: cmake -S . -B build -D VULKAN_HEADERS_ENABLE_TESTS=ON -D VULKAN_HEADERS_ENABLE_INSTALL=ON
       - run: cmake --build ./build
       - run: cmake --install build/ --prefix build/install
       - run: ctest --output-on-failure
