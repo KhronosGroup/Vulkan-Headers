@@ -67,7 +67,7 @@ if (VULKAN_HEADERS_ENABLE_MODULE)
             "${CMAKE_CURRENT_SOURCE_DIR}/include/vulkan/vulkan.cppm"
             "${CMAKE_CURRENT_SOURCE_DIR}/include/vulkan/vulkan_video.cppm")
 
-    target_compile_features(Vulkan-HppModule PUBLIC cxx_std_23) # C++23 is required for both the standard library module, and other details of Vulkan-Hpp such as std::expected
+    target_compile_features(Vulkan-HppModule PUBLIC cxx_std_20) # C++20 is required for named modules and `import std`
     set_target_properties(Vulkan-HppModule PROPERTIES CXX_SCAN_FOR_MODULES ON)
     target_link_libraries(Vulkan-HppModule PUBLIC Vulkan::Headers)
 
