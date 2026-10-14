@@ -27,7 +27,6 @@ jobs:
       - uses: lukka/get-cmake@latest
         with:
           cmakeVersion: ${{ matrix.cmake-version }}
-      - uses: ilammy/msvc-dev-cmd@v1
       - run: cmake -S . -B build -D VULKAN_HEADERS_ENABLE_TESTS=ON -D VULKAN_HEADERS_ENABLE_INSTALL=ON
       - run: cmake --build ./build
       - run: cmake --install build/ --prefix build/install
@@ -45,7 +44,9 @@ jobs:
       - uses: lukka/get-cmake@latest
         with:
           cmakeVersion: ${{ matrix.cmake-version }}
-      - uses: ilammy/msvc-dev-cmd@v1
+      - uses: TheMrMilchmann/setup-msvc-dev@v4
+        with:
+          arch: x64
       - run: cmake -S . -B build -D VULKAN_HEADERS_ENABLE_TESTS=ON -D VULKAN_HEADERS_ENABLE_INSTALL=ON
       - run: cmake --build ./build
       - run: cmake --install build/ --prefix build/install
@@ -60,7 +61,9 @@ jobs:
           compiler: [ clang, clang-cl ]
     steps:
         - uses: actions/checkout@v7
-        - uses: ilammy/msvc-dev-cmd@v1
+        - uses: TheMrMilchmann/setup-msvc-dev@v4
+          with:
+            arch: x64
         - run: |
             cmake -S . -B build `
             -D CMAKE_C_COMPILER=${{matrix.compiler}} `
@@ -86,7 +89,6 @@ jobs:
       - uses: lukka/get-cmake@latest
         with:
           cmakeVersion: ${{ matrix.cmake-version }}
-      - uses: ilammy/msvc-dev-cmd@v1
       - run: |
           cmake -S . -B build \
           -D VULKAN_HEADERS_ENABLE_TESTS=ON \
@@ -109,7 +111,9 @@ jobs:
       - uses: lukka/get-cmake@latest
         with:
           cmakeVersion: ${{ matrix.cmake-version }}
-      - uses: ilammy/msvc-dev-cmd@v1
+      - uses: TheMrMilchmann/setup-msvc-dev@v4
+        with:
+          arch: x64
       - run: |
           cmake -S . -B build `
           -D VULKAN_HEADERS_ENABLE_TESTS=ON `
