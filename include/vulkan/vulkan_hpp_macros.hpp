@@ -87,7 +87,7 @@
 #endif
 
 #if VULKAN_HPP_ENABLE_DYNAMIC_LOADER_TOOL == 1
-#  if defined( __unix__ ) || defined( __APPLE__ ) || defined( __QNX__ ) || defined( __Fuchsia__ ) && !defined( VULKAN_HPP_CXX_MODULE )
+#  if defined( __unix__ ) || defined( __APPLE__ ) || defined( __QNX__ ) || defined( __Fuchsia__ )
 #    include <dlfcn.h>
 #  elif defined( _WIN32 ) && !defined( VULKAN_HPP_NO_WIN32_PROTOTYPES )
 using HINSTANCE = struct HINSTANCE__ *;
@@ -340,9 +340,6 @@ VULKAN_HPP_COMPILE_WARNING( "This is a non-conforming implementation of C++ name
 #define VULKAN_HPP_DEFAULT_DISPATCHER_ASSIGNMENT VULKAN_HPP_DEFAULT_ASSIGNMENT( VULKAN_HPP_DEFAULT_DISPATCHER )
 
 #if !defined( VULKAN_HPP_EXPECTED ) && ( 23 <= VULKAN_HPP_CPP_VERSION ) && defined( __cpp_lib_expected ) && defined( VULKAN_HPP_USE_STD_EXPECTED )
-#  if !( defined( VULKAN_HPP_ENABLE_STD_MODULE ) && defined( VULKAN_HPP_STD_MODULE ) )
-#    include <expected>
-#  endif
 #  define VULKAN_HPP_EXPECTED   std::expected
 #  define VULKAN_HPP_UNEXPECTED std::unexpected
 #endif
