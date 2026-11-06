@@ -61,7 +61,7 @@ extern "C" {
 
 //#define VK_API_VERSION VK_MAKE_API_VERSION(0, 1, 0, 0) // Patch version should always be set to 0
 // Version of this file
-#define VK_HEADER_VERSION 367
+#define VK_HEADER_VERSION 368
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 4, VK_HEADER_VERSION)
 
@@ -1482,6 +1482,7 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_SESSION_NEURAL_STATISTICS_CREATE_INFO_ARM = 1000676001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DATA_GRAPH_NEURAL_ACCELERATOR_STATISTICS_FEATURES_ARM = 1000676002,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIMITIVE_RESTART_INDEX_FEATURES_EXT = 1000678000,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ADDRESS_BINDING_UNRESTRICTED_FEATURES_EXT = 1000679000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_12_FEATURES_KHR = 1000680000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_12_PROPERTIES_KHR = 1000680001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_TILING_CONTROL_FEATURES_EXT = 1000687000,
@@ -26981,6 +26982,44 @@ typedef struct VkPhysicalDeviceShaderSubgroupPartitionedFeaturesEXT {
 
 
 
+// VK_NV_internal_handle is a preprocessor guard. Do not pass it to API calls.
+#define VK_NV_internal_handle 1
+
+typedef struct VkInternalObjectNV* VkInternalHandleNV;
+
+#define VK_NV_INTERNAL_HANDLE_SPEC_VERSION 1
+#define VK_NV_INTERNAL_HANDLE_EXTENSION_NAME "VK_NV_internal_handle"
+
+typedef void (VKAPI_PTR *PFN_vkGetPhysicalDeviceInternalHandleNV)(VkPhysicalDevice physicalDevice, VkInternalHandleNV* pHandle);
+typedef void (VKAPI_PTR *PFN_vkGetDeviceInternalHandleNV)(VkDevice device, VkInternalHandleNV* pHandle);
+typedef void (VKAPI_PTR *PFN_vkGetQueueInternalHandleNV)(VkQueue queue, VkInternalHandleNV* pHandle);
+typedef void (VKAPI_PTR *PFN_vkGetCommandBufferInternalHandleNV)(VkCommandBuffer commandBuffer, VkInternalHandleNV* pHandle);
+
+#ifndef VK_NO_PROTOTYPES
+
+#ifndef VK_ONLY_EXPORTED_PROTOTYPES
+VKAPI_ATTR void VKAPI_CALL vkGetPhysicalDeviceInternalHandleNV(
+    VkPhysicalDevice                            physicalDevice,
+    VkInternalHandleNV*                         pHandle);
+#endif
+#ifndef VK_ONLY_EXPORTED_PROTOTYPES
+VKAPI_ATTR void VKAPI_CALL vkGetDeviceInternalHandleNV(
+    VkDevice                                    device,
+    VkInternalHandleNV*                         pHandle);
+#endif
+#ifndef VK_ONLY_EXPORTED_PROTOTYPES
+VKAPI_ATTR void VKAPI_CALL vkGetQueueInternalHandleNV(
+    VkQueue                                     queue,
+    VkInternalHandleNV*                         pHandle);
+#endif
+#ifndef VK_ONLY_EXPORTED_PROTOTYPES
+VKAPI_ATTR void VKAPI_CALL vkGetCommandBufferInternalHandleNV(
+    VkCommandBuffer                             commandBuffer,
+    VkInternalHandleNV*                         pHandle);
+#endif
+#endif
+
+
 // VK_ARM_cooperative_matrix_layouts is a preprocessor guard. Do not pass it to API calls.
 #define VK_ARM_cooperative_matrix_layouts 1
 
@@ -27112,6 +27151,20 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetPrimitiveRestartIndexEXT(
     uint32_t                                    primitiveRestartIndex);
 #endif
 #endif
+
+
+// VK_EXT_vertex_address_binding_unrestricted is a preprocessor guard. Do not pass it to API calls.
+#define VK_EXT_vertex_address_binding_unrestricted 1
+
+#define VK_EXT_VERTEX_ADDRESS_BINDING_UNRESTRICTED_SPEC_VERSION 1
+#define VK_EXT_VERTEX_ADDRESS_BINDING_UNRESTRICTED_EXTENSION_NAME "VK_EXT_vertex_address_binding_unrestricted"
+
+typedef struct VkPhysicalDeviceVertexAddressBindingUnrestrictedFeaturesEXT {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           vertexAddressBindingUnrestricted;
+} VkPhysicalDeviceVertexAddressBindingUnrestrictedFeaturesEXT;
+
 
 
 // VK_EXT_image_tiling_control is a preprocessor guard. Do not pass it to API calls.

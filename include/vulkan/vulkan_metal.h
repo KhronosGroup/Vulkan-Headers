@@ -37,7 +37,7 @@ typedef struct VkMetalSurfaceCreateInfoEXT {
     VkStructureType                 sType;
     const void*                     pNext;
     VkMetalSurfaceCreateFlagsEXT    flags;
-    const CAMetalLayer*             pLayer;
+    CAMetalLayer*                   pLayer;
 } VkMetalSurfaceCreateInfoEXT;
 
 
