@@ -10,7 +10,7 @@ cmake_minimum_required(VERSION 3.22.1)
 include(CMakeDependentOption)
 
 
-# NOTE: Parsing the version like this is suboptimal but neccessary due to our release process:
+# NOTE: Parsing the version like this is suboptimal but necessary due to our release process:
 # https://github.com/KhronosGroup/Vulkan-Headers/pull/346
 #
 # As shown a more robust approach would be just to add basic test code to check the project version.
