@@ -6,7 +6,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # ~~~
 
-# Test add_subdirectory suppport
+# Test add_subdirectory support
 add_test(NAME integration.add_subdirectory
     COMMAND ${CMAKE_CTEST_COMMAND}
         --build-and-test ${CMAKE_CURRENT_LIST_DIR}/integration
@@ -21,7 +21,7 @@ add_test(NAME integration.install
     COMMAND ${CMAKE_COMMAND} --install ${VULKAN_HEADERS_BINARY_DIR} --prefix ${test_install_dir} --config $<CONFIG>
 )
 
-# Test find_package suppport
+# Test find_package support
 add_test(NAME integration.find_package
     COMMAND ${CMAKE_CTEST_COMMAND}
         --build-and-test ${CMAKE_CURRENT_LIST_DIR}/integration
