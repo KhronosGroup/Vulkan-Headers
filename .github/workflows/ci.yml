@@ -16,18 +16,35 @@ permissions:
 
 jobs:
   cmake-unix:
+    name: cmake-unix (${{ matrix.os }}, ${{ matrix.cmake-version }}${{ matrix.toolchain != 'default' && format(', {0}', matrix.toolchain) || '' }})
     runs-on: ${{ matrix.os }}
     if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name
     strategy:
       matrix:
         os: [ ubuntu-latest, macos-latest ]
         cmake-version: [ '3.22.1', 'latest']
+        toolchain: [ default ]
+        include: # The C++ named modules are tested with the latest CMake, as `import std` requires CMake 4.5
+          - { os: ubuntu-latest, cmake-version: 'latest', toolchain: clang }
+          - { os: ubuntu-latest, cmake-version: 'latest', toolchain: clang-libc++ }
     steps:
       - uses: actions/checkout@v7
       - uses: lukka/get-cmake@latest
         with:
           cmakeVersion: ${{ matrix.cmake-version }}
-      - run: cmake -S . -B build -D VULKAN_HEADERS_ENABLE_TESTS=ON -D VULKAN_HEADERS_ENABLE_INSTALL=ON
+      - name: Setup Clang
+        if: startsWith(matrix.toolchain, 'clang')
+        run: |
+          sudo apt-get update && sudo apt-get install -y clang-tools-22
+          echo "CMAKE_FLAGS=-D CMAKE_C_COMPILER=clang-22 -D CMAKE_CXX_COMPILER=clang++-22" >> "$GITHUB_ENV"
+      - name: Setup libc++
+        if: matrix.toolchain == 'clang-libc++'
+        run: |
+          sudo apt-get install -y libc++-22-dev libc++abi-22-dev
+          # Clang reports the multiarch libc++.modules.json, whose relative paths to the std module sources only resolve from /usr/lib/llvm-22/lib:
+          # https://github.com/llvm/llvm-project/issues/172497
+          echo "CMAKE_FLAGS=$CMAKE_FLAGS -D CMAKE_CXX_FLAGS=-stdlib=libc++ -D CMAKE_CXX_STDLIB_MODULES_JSON=/usr/lib/llvm-22/lib/libc++.modules.json" >> "$GITHUB_ENV"
+      - run: cmake -S . -B build -D VULKAN_HEADERS_ENABLE_TESTS=ON -D VULKAN_HEADERS_ENABLE_INSTALL=ON $CMAKE_FLAGS
       - run: cmake --build ./build
       - run: cmake --install build/ --prefix build/install
       - run: ctest --output-on-failure
@@ -78,46 +95,22 @@ jobs:
 
   cmake-unix-modules:
     runs-on: ${{ matrix.os }}
-    if: false
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name
     strategy:
       matrix:
-        os: [ ubuntu-latest ]
-        cmake-version: [ 'latest' ]
-        compiler: [ clang++-18 ]
+        os: [ macos-latest ]
+        cmake-version: [ 'latest' ] # `import std` requires CMake 4.5
     steps:
       - uses: actions/checkout@v7
       - uses: lukka/get-cmake@latest
         with:
           cmakeVersion: ${{ matrix.cmake-version }}
-      - run: |
-          cmake -S . -B build \
-          -D VULKAN_HEADERS_ENABLE_TESTS=ON \
-          -D VULKAN_HEADERS_ENABLE_INSTALL=ON \
-          -D CMAKE_CXX_COMPILER=${{ matrix.compiler }} \
-      - run: cmake --build ./build
-      - run: cmake --install build/ --prefix build/install
-      - run: CXX=${{ matrix.compiler }} ctest --output-on-failure
-        working-directory: build
-
-  cmake-windows-modules:
-    runs-on: ${{ matrix.os }}
-    if: false
-    strategy:
-      matrix:
-        os: [ windows-latest ]
-        cmake-version: [ 'latest' ]
-    steps:
-      - uses: actions/checkout@v7
-      - uses: lukka/get-cmake@latest
-        with:
-          cmakeVersion: ${{ matrix.cmake-version }}
-      - uses: TheMrMilchmann/setup-msvc-dev@v4
-        with:
-          arch: x64
-      - run: |
-          cmake -S . -B build `
-          -D VULKAN_HEADERS_ENABLE_TESTS=ON `
-          -D VULKAN_HEADERS_ENABLE_INSTALL=ON `
+      - name: Setup LLVM # Apple Clang does not support `import std`
+        run: |
+          brew update && brew install llvm
+          LLVM_PREFIX="$(brew --prefix llvm)"
+          echo "CMAKE_FLAGS=-D CMAKE_C_COMPILER=$LLVM_PREFIX/bin/clang -D CMAKE_CXX_COMPILER=$LLVM_PREFIX/bin/clang++ -D CMAKE_CXX_STDLIB_MODULES_JSON=$LLVM_PREFIX/lib/c++/libc++.modules.json" >> "$GITHUB_ENV"
+      - run: cmake -S . -B build -D VULKAN_HEADERS_ENABLE_TESTS=ON -D VULKAN_HEADERS_ENABLE_INSTALL=ON $CMAKE_FLAGS
       - run: cmake --build ./build
       - run: cmake --install build/ --prefix build/install
       - run: ctest --output-on-failure

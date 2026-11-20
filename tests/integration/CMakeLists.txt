@@ -54,6 +54,11 @@ if(${CMAKE_C_COMPILER_ID} MATCHES "(GNU|Clang)")
         -Wextra
         -Werror
     )
+    # CMake builds the standard library module (libc++'s std.cppm) with these directory options,
+    # and Clang warns about its `export module std;` because the name is reserved for the implementation.
+    if (VULKAN_HEADERS_ENABLE_MODULE AND CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+        add_compile_options($<$<COMPILE_LANGUAGE:CXX>:-Wno-reserved-module-identifier>)
+    endif()
 endif()
 
 if (MSVC)
