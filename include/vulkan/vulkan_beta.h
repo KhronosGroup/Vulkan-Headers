@@ -372,6 +372,20 @@ typedef struct VkAccelerationStructureDenseGeometryFormatTrianglesDataAMDX {
 } VkAccelerationStructureDenseGeometryFormatTrianglesDataAMDX;
 
 
+
+// VK_AMDX_multi_level_acceleration_structure is a preprocessor guard. Do not pass it to API calls.
+#define VK_AMDX_multi_level_acceleration_structure 1
+
+#define VK_AMDX_MULTI_LEVEL_ACCELERATION_STRUCTURE_SPEC_VERSION 1
+#define VK_AMDX_MULTI_LEVEL_ACCELERATION_STRUCTURE_EXTENSION_NAME "VK_AMDX_multi_level_acceleration_structure"
+
+typedef struct VkPhysicalDeviceMultiLevelAccelerationStructureFeaturesAMDX {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           multiLevelAccelerationStructure;
+} VkPhysicalDeviceMultiLevelAccelerationStructureFeaturesAMDX;
+
+
 #ifdef __cplusplus
 }
 #endif
